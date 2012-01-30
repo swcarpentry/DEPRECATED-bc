@@ -1,0 +1,9 @@
+# 
+Reported: Mon Sep 12 16:22:47 2011
+Subject: poshBeatle303
+Year/month of birth: 1996/01
+Sex: F
+CI type: 21
+Volume: 7
+Range: 4
+Discrimination: 7
