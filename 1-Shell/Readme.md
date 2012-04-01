@@ -189,27 +189,126 @@ directory.
 ## Arguments
 
 Most programs take additional arguments that control their exact
-behavior. For example, `-F` is an argument to `ls`.  The `ls` program,
-like many programs, take a lot of arguments. But how do we know what
-the options are to particular commands?
+behavior. For example, `-F` and `-l` are arguments to `ls`.  The `ls`
+program, like many programs, take a lot of arguments. But how do we
+know what the options are to particular commands?
 
 Most commonly used shell programs have a manual. You can access the
 manual using the `man` program. Try entering:
 
     man ls
 
-This will open the manual page for `ls`. Use the arrow keys to go up
-and down. When you are done reading, just hit `q` to exit.
+This will open the manual page for `ls`. Use the space key to go
+forward and b to go backwards. When you are done reading, just hit `q`
+to exit.
 
 Programs that are run from the shell can get extremely complicated. To
-see an example, open up the manual page for the `gcc` program, which
-is an open source C compiler and see just how complicated programs can
-get! No one can possibly learn all of these arguments, of course. So
-you will probably find yourself referring back to the manual page
-frequently.
+see an example, open up the manual page for the `mplayer` program,
+which is command line driven video player. There are about 300
+arguments to the mplayer command. No one can possibly learn all of
+these arguments, of course. So you will probably find yourself
+referring back to the manual page frequently.
+
+**Examining the contents of other directories**
+
+By default, the `ls` commands lists the contents of the working
+directory (i.e. the directory you are in). You can always find the
+directory you are in using the `pwd` command. However, you can also
+give `ls` the names of other directories to view. Navigate to the
+home directory if you are not already there. Then enter the
+command:
+
+    ls UofCSCBC2012
+
+This will list the contents of the `UofCSCBC2012` directory without
+you having to navigate there. Now enter:
+
+    ls UofCSCBC2012/1-Shell
+
+This prints the contents of `1-Shell`. The `cd` command works in a
+similar way. Try entering:
+
+    cd UofCSCBC2012/1-Shell
+
+and you will jump directly to `1-Shell` without having to go through
+the intermediate directory.
+
+## Full vs. Relative Paths
+
+The `cd` command takes an argument which is the directory
+name. Directories can be specified using either a *relative* path a
+full *path*. The directories on the computer are arranged into a
+hierarchy. The full path tells you where a directory is in that
+hierarchy. Navigate to the home directory. Now, enter the `pwd`
+command and you should see:
+
+    /home/thw
+
+which is the full name of your home directory. This tells you that you
+are in a directory called `thw`, which sits inside a directory called
+`home` which sits inside the very top directory in the hierarchy. The
+very top of the hierarchy is a directory called `/` which is usually
+referred to as the *root directory*. So, to summarize: `thw` is a
+directory in `home` which is a directory in `/`.
+
+Now enter the following command:
+
+    cd /home/thw/UofCSCBC2012/1-Shell
+
+This jumps to `1-Shell`. Now go back to the home directory. We saw
+earlier that the command:
+
+    cd UofCSCBC2012/1-Shell
+
+had the same effect - it took us to the `1-Shell` directory. But,
+instead of specifying the full path
+(`/home/thw/UofCSCBC2012/1-Shell`), we specified a *relative path*. In
+other words, we specified the path relative to our current
+directory. A full path always starts with a `/`. A relative path does
+not. You can usually use either a full path or a relative path
+depending on what is most convenient. If we are in the home directory,
+it is more convenient to just enter the relative path since it
+involves less typing.
+
+Now, list the contents of the /bin directory. Do you see anything
+familiar in there?
 
 
-## Examining Files ##
+## Saving time with shortcuts and wild cards
+
+**Shortcuts**
+There are some shortcuts which you should know about. Dealing with the
+home directory is very common. So, in the shell the tilde character,
+`~`, is a shortcut for your home directory. Navigate to the `1-Shell`
+directory, then enter the command:
+
+    ls ~
+
+This prints the contents of your home directory, without you having to
+type the full path. The shortcut `..` always refers to the directory
+above your current directory. Thus: 
+
+    ls ..
+
+prints the contents of the `/home/thw/UofCSCBC2012`. You can chain
+these together, so:
+
+    ls ../../
+
+prints the contents of `/home/thw` which is your home
+directory. Finally, the special directory `.` always refers to your
+current directory. So, `ls`, `ls .`, and `ls ././././.` all do the
+same thing, they print the contents of the current directory. This may
+seem like a useless shortcut right now, but we'll see when it is
+needed in a little while.
+
+To summarize, the commands `ls ~`, `ls ~/.`, `ls ../../`, and `ls
+/home/thw` all do exactly the same thing. These shortcuts are not
+necessary, they are provided for your convenience.
+
+
+
+## Examining Files
 
 The easiest way to examine a file ...
 
