@@ -274,9 +274,10 @@ Now, list the contents of the /bin directory. Do you see anything
 familiar in there?
 
 
-## Saving time with shortcuts and wild cards
+## Saving time with shortcuts, wild cards, and tab completion
 
 **Shortcuts**
+
 There are some shortcuts which you should know about. Dealing with the
 home directory is very common. So, in the shell the tilde character,
 `~`, is a shortcut for your home directory. Navigate to the `1-Shell`
@@ -306,6 +307,137 @@ To summarize, the commands `ls ~`, `ls ~/.`, `ls ../../`, and `ls
 /home/thw` all do exactly the same thing. These shortcuts are not
 necessary, they are provided for your convenience.
 
+**Wild cards**
+
+Navigate to the `~/UofCSCBC2012/Shell-1/data/THOMAS` directory. This
+directory contains our hearing test data for THOMAS. If we type `ls`,
+we will see that there are a bunch of files which are just four digit
+numbers. By default, `ls` lists all of the files in a given
+directory. The `*` character is a shortcut for "everything". Thus, if
+you enter `ls *`, you will see all of the contents of a given
+directory. Now try this command:
+
+    ls *1
+
+This lists every file that ends with a `1`. This command:
+
+    ls /usr/bin/*.sh
+
+Lists every file in `/usr/bin` that ends in the characters `.sh`. And
+this command:
+
+    ls *4*1
+
+lists every file in the current directory which contains the number
+`4`, and ends with the number `1`. There are four such files: `0241`,
+`0341`, `0431`, and `0481`. 
+
+So how does this actually work? Well...when the shell (bash) sees a
+word that contains the `*` character, it automatically looks for files
+that match the given pattern. In this case, it identified four such
+files. Then, it replaced the `*4*1` with the list of files, separated
+by spaces. In other the two commands:
+
+    ls *4*1
+    ls 0241 0341 0431 0481
+
+are exactly identical. The `ls` command cannot tell the difference
+between these two things.
+
+* * * *
+**Short Exercise**
+
+Do each of the following using a single `ls` command without
+navigating to a different directory.
+
+1.  List all of the files in `/bin` that contain the letter `a`
+2.  List all of the files in `/bin` that contain the letter `a` or the letter `b`
+3.  List all of the files in `/bin` that contain the letter `a` AND the letter `b`
+* * * *
+
+**Tab Completion**
+
+Navigate to the home directory. Typing out directory names can waste a
+lot of time. When you start typing out the name of a directory, then
+hit the tab key, the shell will try to fill in the rest of the
+directory name. For example, enter:
+
+    ls U<tab>
+
+The shell will fill in the rest of the directory name for
+`UofCSCBC2012`. Now enter:
+
+    ls D<tab><tab>
+
+When you hit the first tab, nothing happens. The reason is that there
+are multiple directories in the home directory which start with
+D. Thus, the shell does not know which one to fill in. When you hit
+tab again, the shell will list the possible choices. 
+
+Tab completion can also fill in the names of programs. For example,
+enter `e<tab><tab>`. You will see the name of every program that
+starts with an `e`. One of those is `echo`. If you enter `ec<tab>` you
+will see that tab completion works.
+
+## Which program? ##
+
+Commands like `ls`, `rm`, `echo`, and `cd` are just ordinary programs
+on the computer. A program is just a file that you can *execute*. The
+program `which` tells you the location of a particular program. For
+example:
+
+    which ls
+
+Will return "/bin/ls". Thus, we can see that `ls` is a program that
+sits inside of the `/bin` directory. Now enter:
+
+    which mplayer
+
+You will see that `mplayer` is a program that sits inside of the
+`/usr/bin` directory.
+
+So ... when we enter a program name, like `ls`, and hit enter, how
+does the shell know where to look for that program? How does it know
+to run `/bin/ls` when we enter `ls`. The answer is that when we enter
+a program name and hit enter, there are a few standard places that the
+shell automatically looks. If it can't find the program in any of
+those places, it will print an error saying "command not found". Enter
+the command:
+
+    echo $PATH
+
+This will print out the value of the `PATH` environment variable. More
+on environment variables later. Notice that a list of directories,
+separated by colon characters, is listed. These are the places the
+shell looks for programs to run. If your program is not in this list,
+then an error is printed. The shell ONLY checks in the places listed
+in the `PATH` environment variable. 
+
+Navigate to the `1-Shell` directory and list the contents. You will
+notice that there is a program (executable file) called `hello` in
+this directory. Now, try to run the program by entering:
+
+    hello
+
+You should get an error saying that hello cannot be found. That is
+because the directory `/home/thw/UofCSCBC2012/1-Shell` is not in the
+`PATH`. You can run the `hello` program by entering:
+
+    ./hello
+
+Remember that `.` is a shortcut for the current working
+directory. This tells the shell to run the `hello` program which is
+located right here. So, you can run any program by entering the path
+to that program. You can run `hello` equally well by specifying:
+
+    /home/thw/UofCSCBC2012/1-Shell/hello
+
+Or by entering:
+
+    ../1-Shell/hello
+
+When there are no `/` characters, the shell assumes you want to look
+in one of the default places for the program.
 
 
 ## Examining Files
