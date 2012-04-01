@@ -18,8 +18,7 @@ with a keyboard instead of controlling graphical user interfaces
 
 A *terminal* is a program you run that gives you access to the
 shell. There are many different terminal programs that vary across
-operating systems. To open the default terminal in Ubuntu, just
-click... or just use CTRL+ALT+t
+operating systems.
 	 
 There are many reasons to learn about the shell. In my opinion, the
 most important reasons are that: 
@@ -38,14 +37,24 @@ The shell is just a program and there are many different shell
 programs that have been developed. The most common shell (and the one
 we will use) is called the Bourne-Again SHell (bash). Even if bash is
 not the default shell, it usually installed on most systems and can be
-started by typing "bash" in the terminal. Many commands, especially a
+started by typing `bash` in the terminal. Many commands, especially a
 lot of the basic ones, work across the various shells but many things
 are different. I recommend sticking with bash and learning it well.
+
+To open a terminal, just double click on the "Konsole" icon on the
+Desktop.
 
 # The Example: Manipulating Experimental Data Files
 
 We will spend most of our time learning about the basics of the shell
-by manipulating some experimental data from a hearing tests. 
+by manipulating some experimental data from a hearing tests. To get
+the data for this test, you will need internet access. Just enter the
+command:
+
+    git clone git://github.com/thehackerwithin/UofCSCBC2012.git
+
+This will grab all of the data needed for this workshop from the
+internet.
 
 **Cochlear Implants**
 
@@ -108,18 +117,74 @@ directory. Directories are often called "folders" because of how they
 are represented in GUIs. Directories are just listings of files. They
 can contain other files or directories.
 
-[[[START AT HOME - Slide 28]]]
+Whenever you start up a terminal, you will start in a special
+directory called the *home* directory. Every user has their own home
+directory where they have full access to do whatever they want. In
+this case, the `pwd` command tells us that we are in the `/home/thw`
+directory. This is the home directory for the `thw` user. That is our
+user name. You can always find out your user name by entering the
+command `whoami`. 
 
 **File Types**
 
-[[[FILE TYPES - Slide 29]]]
+When you enter the `ls` command lists the contents of the current
+directory. There are several items in the home directory, notice that
+they are all colored blue. This tells us that all of these items are
+directories as opposed to files.
 
-Directories can contain other files or directories. In Ubuntu, and
-many operating systems, 
+Lets create an empty file using the `touch` command. Enter the
+command:
+
+    touch testfile
+
+Then list the contents of the directory again. You should see that a
+new entry, called `testfile`, exists. It is colored white meaning that
+it is a file, as opposed to a directory. The `touch` command just
+creates an empty file. 
+
+Some terminals will not color the directory entries in this very
+convenient way. In those terminals, use `ls -F` instead of `ls`. The
+`-F` argument modifies the results so that a slash is placed at the
+end of directories. If the file is *executable* meaning that it can be
+run like a program, then a star fill be placed of the file name.
+
+You can also use the command `ls -l` to see whether items in a
+directory are files or directories. `ls -l` gives a lot more
+information too, such as the size of the file and information about
+the owner. If the entry is a directory, then the first letter will be
+a "d". The fifth column shows you the size of the entries in
+bytes. Notice that `testfile` has a size of zero.
+
+Now, let's get rid of `testfile`. To remove a file, just enter the
+command:
+
+    rm testfile
+
+The `rm` command can be used to remove files. If you enter `ls` again,
+you will see that `testfile` is gone.
+
 
 **Changing Directories**
 
-[[[CHANGING DIRECTORIES - Slide 30]]]
+Now, let's move to a different directory. The command `cd` (change
+directory) is used to move around. Let's move into the `UofCSCBC2012`
+directory. Enter the following command:
+
+    cd UofCSCBC2012
+
+Now use the `ls` command to see what is inside this directory. You
+will see that there is an entry which is green. This means that this
+is an executable. If you use `ls -F` you will see that this file ends
+with a star.
+
+This directory contains all of the material for this boot camp. Now
+move to the directory containing the data for the shell tutorial:
+
+    cd 1-Shell
+
+If you enter the `cd` command by itself, you will return to the home
+directory. Try this, and then navigate back to the `1-Shell`
+directory.
 
 ## Arguments
 
@@ -165,6 +230,10 @@ argument for `gcc` does.
 
 **alias**
 
+**touch**
+
+**du**
+
 ## .bashrc
 
 ## ssh and scp
@@ -179,6 +248,10 @@ Introduce less early - go over searching.
 
 # Background, Foreground, control-Z, control-C
 
-# Not everything is a file or a directory...
+## Not everything is a file or a directory...
 - Symbolic links
 - /dev
+
+## Permissions
+
+## Variables
