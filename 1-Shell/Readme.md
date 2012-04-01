@@ -84,6 +84,78 @@ commands to get this data into shape. By the end we would like to:
 If we can get through this example in the available time, we will move
 onto more advanced shell topics...
 
-# Basic Commands
+# Let's get started
 
-One very basic command is `echo`. 
+One very basic command is `echo`. This command is just prints text to
+the terminal. Try entering the command:
+
+    echo Hello, World
+
+Then press enter. You should see the text "Hello, World" printed back
+to you. The echo command is useful for 
+
+## Moving around the file system
+
+Let's learn how to move around the file system using command line
+programs. This is really easy to do using a GUI (just click on
+things). Once you learn the basic commands, you'll see that it is
+really easy to do in the shell too. 
+
+First we have to know where we are. The program `pwd` (print working
+directory) tells you where you are sitting in the directory tree. The
+command `ls` will list the files in files in the current
+directory. Directories are often called "folders" because of how they
+are represented in GUIs. Directories are just listings of files. They
+can contain other files or directories.
+
+[[[START AT HOME - Slide 28]]]
+
+**File Types**
+
+[[[FILE TYPES - Slide 29]]]
+
+Directories can contain other files or directories. In Ubuntu, and
+many operating systems, 
+
+**Changing Directories**
+
+[[[CHANGING DIRECTORIES - Slide 30]]]
+
+## Command Arguments
+
+Most programs take additional arguments that control their exact
+behavior. For example, `-F` is an argument to `ls`.  The `ls` program,
+like many programs, take a lot of arguments. But how do we know what
+the options are to particular commands?
+
+Most commonly used shell programs have a manual. You can access the
+manual using the `man` program. Try entering:
+
+    man ls
+
+This will open the manual page for `ls`. Use the arrow keys to go up
+and down. When you are done reading, just hit `q` to exit.
+
+
+
+# Extra Commands
+
+## The backtick
+
+## Some more common commands
+
+**which**
+
+**alias**
+
+## .bashrc
+
+## ssh and scp
+
+## Regular Expressions
+
+# Milad's Notes:
+
+Don't we have to clone the repo?
+
+Introduce less early - go over searching. 
