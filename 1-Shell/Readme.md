@@ -84,3 +84,6 @@ commands to get this data into shape. By the end we would like to:
 If we can get through this example in the available time, we will move
 onto more advanced shell topics...
 
+# Basic Commands
+
+One very basic command is `echo`. 
