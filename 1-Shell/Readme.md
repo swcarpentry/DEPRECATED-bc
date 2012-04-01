@@ -121,7 +121,7 @@ many operating systems,
 
 [[[CHANGING DIRECTORIES - Slide 30]]]
 
-## Command Arguments
+## Arguments
 
 Most programs take additional arguments that control their exact
 behavior. For example, `-F` is an argument to `ls`.  The `ls` program,
@@ -136,11 +136,28 @@ manual using the `man` program. Try entering:
 This will open the manual page for `ls`. Use the arrow keys to go up
 and down. When you are done reading, just hit `q` to exit.
 
+Programs that are run from the shell can get extremely complicated. To
+see an example, open up the manual page for the `gcc` program, which
+is an open source C compiler and see just how complicated programs can
+get! No one can possibly learn all of these arguments, of course. So
+you will probably find yourself referring back to the manual page
+frequently.
 
+
+## Examining Files ##
+
+The easiest way to examine a file ...
+
+* * * *
+**Short Exercise**
+
+Use the commands we've learned so far to figure out what the `-Wall`
+argument for `gcc` does.
+* * * *
 
 # Extra Commands
 
-## The backtick
+## The backtick, xargs
 
 ## Some more common commands
 
@@ -159,3 +176,9 @@ and down. When you are done reading, just hit `q` to exit.
 Don't we have to clone the repo?
 
 Introduce less early - go over searching. 
+
+# Background, Foreground, control-Z, control-C
+
+# Not everything is a file or a directory...
+- Symbolic links
+- /dev
