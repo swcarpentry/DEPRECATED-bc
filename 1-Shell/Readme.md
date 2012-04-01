@@ -442,14 +442,85 @@ in one of the default places for the program.
 
 ## Examining Files
 
-The easiest way to examine a file ...
+We now know how to switch directories, run programs, and look at the
+contents of directories, but how do we look at the contents of files?
+
+The easiest way to examine a file is to just print out all of the
+contents using the program `cat`. Enter the following command:
+
+    cat ex_data.txt
+
+This prints out the contents of the `ex_data.txt` file. If you enter:
+
+    cat ex_data.txt ex_data.txt
+
+It will print out the contents of `ex_data.txt` twice. `cat` just
+takes a list of file names and writes them out one after another (this
+is where the name comes from, `cat` is short for concatenate). 
+
+* * * *
+**Short Exercises**
+
+1.  Print out the contents of the `/usr/share/dict/american-english`
+    file. What does this file contain?
+
+2.  Without changing directories, (you should still be in `1-Shell`),
+    use one short command to print the contents of all of the files in
+    the /home/milad/UofCSCBC2012/1-Shell/data/THOMAS directory.
+* * * *
+
+`cat` is a terrific program, but when the file is really big, it can
+be annoying to use. The program, `less`, is useful for this
+case. Enter the following command:
+
+    less /usr/share/dict/american-english
+
+`less` opens the file, and lets you navigate through it. The commands
+are identical to the `man` program. Use "space" to go forward and hit
+the "b" key to go backwards. The "g" key goes to the beginning of the
+file and "G" goes to the end. Finally, hit "q" to quit.
+
+`less` also gives you a way of searching through files. Just hit the
+"/" key to begin a search. Enter the name of the word you would like
+to search for and hit enter. It will jump to the next location where
+that word is found. Try searching the `american-english` file for the
+word "copper". If you hit "/" then "enter", `less` will just repeat
+the previous search. `less` searches from the current location and
+works its way forward. If you are at the end of the file and search
+for the word "copper", `less` will not find it. You need to go to the
+beginning of the file and search.
+
+Remember, the `man` program uses the same commands, so you can search
+documentation using "/" as well!
 
 * * * *
 **Short Exercise**
 
-Use the commands we've learned so far to figure out what the `-Wall`
-argument for `gcc` does.
-* * * *
+Use the commands we've learned so far to figure out what the `-fs`
+argument for the program `mplayer` does. `mplayer` video playing program.
+ * * * * 
+
+
+## Redirection
+
+We now know a lot of the basic shell commands. Let's turn to the
+experimental data from the hearing tests that we began with. This data
+is located in the `~/UofCSCBC2012/1-Shell/data` directory. Each
+subdirectory corresponds to a particular participant in the
+study. Navigate to the `Bert` subdirectory in `data`.  There are a
+bunch of text files which contain experimental data results. Lets
+print them all:
+
+    cat au*
+
+Now enter the following command:
+
+    cat au* > ../all_data
+
+This tells the shell to take the output from the `cat au*` command and
+dump it into a new file called `../all_data`. To verify that this
+worked, examine the `all_data` file. If `all_data` had already
+existed, we would overwritten it. So the `>`
 
 # Extra Commands
 
