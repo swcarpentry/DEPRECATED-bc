@@ -353,6 +353,7 @@ navigating to a different directory.
 1.  List all of the files in `/bin` that contain the letter `a`
 2.  List all of the files in `/bin` that contain the letter `a` or the letter `b`
 3.  List all of the files in `/bin` that contain the letter `a` AND the letter `b`
+
 * * * *
 
 **Tab Completion**
@@ -467,6 +468,7 @@ is where the name comes from, `cat` is short for concatenate).
 2.  Without changing directories, (you should still be in `1-Shell`),
     use one short command to print the contents of all of the files in
     the /home/milad/UofCSCBC2012/1-Shell/data/THOMAS directory.
+
 * * * *
 
 `cat` is a terrific program, but when the file is really big, it can
@@ -498,18 +500,18 @@ documentation using "/" as well!
 
 Use the commands we've learned so far to figure out what the `-fs`
 argument for the program `mplayer` does. `mplayer` video playing program.
- * * * * 
+
+* * * * 
 
 
 ## Redirection
 
-We now know a lot of the basic shell commands. Let's turn to the
-experimental data from the hearing tests that we began with. This data
-is located in the `~/UofCSCBC2012/1-Shell/data` directory. Each
-subdirectory corresponds to a particular participant in the
-study. Navigate to the `Bert` subdirectory in `data`.  There are a
-bunch of text files which contain experimental data results. Lets
-print them all:
+Let's turn to the experimental data from the hearing tests that we
+began with. This data is located in the `~/UofCSCBC2012/1-Shell/data`
+directory. Each subdirectory corresponds to a particular participant
+in the study. Navigate to the `Bert` subdirectory in `data`.  There
+are a bunch of text files which contain experimental data
+results. Lets print them all:
 
     cat au*
 
@@ -520,7 +522,180 @@ Now enter the following command:
 This tells the shell to take the output from the `cat au*` command and
 dump it into a new file called `../all_data`. To verify that this
 worked, examine the `all_data` file. If `all_data` had already
-existed, we would overwritten it. So the `>`
+existed, we would overwritten it. So the `>` character tells the shell
+to take the output from what ever is on the left and dump it into the
+file on the right. The `>>` characters do almost the same thing,
+except that they will append the output to the file if it already
+exists.
+
+* * * *
+**Short Exercise**
+
+Use `>>`, to append the contents of all of the files which contain the
+number 4 in the directory:
+
+    /home/thw/UofCSCBC2012/1-Shell/data/gerdal
+
+to the existing `all_data` file. Thus, when you are done `all_data`
+should contain all of the experiment data from Bert and any
+experimental data file from gerdal that contains the number 4.
+
+* * * *
+
+
+## Creating, moving, copying, and removing
+
+We've created a file called `all_data` using the redirection operator
+`>`. This is critical file so we have to make copies so that the data
+is backed up. Lets copy the file using the `cp` command. The `cp`
+command backs up the file. Navigate to the `data` directory and enter:
+
+    cp all_data all_data_backup
+
+Now `all_data_backup` has been created as a copy of `all_data`. We can
+move files around using the command `mv`. Enter this command:
+
+    mv all_data_backup /tmp/
+
+This moves `all_data_backup` into the directory `/tmp`. The directory
+`/tmp` is a special directory that all users can write to. It is a
+temporary place for storing files. Data stored in `/tmp` is
+automatically deleted when the computer shuts down.
+
+The `mv` command is also how you rename files. Since this file is so
+important, let's rename it:
+
+    mv all_data all_data_IMPORTANT
+
+Now the file name has been changed to all_data_IMPORTANT. Let's delete
+the backup file now:
+
+    rm /tmp/all_data_backup
+
+The `mkdir` command is used to create a directory. Just enter `mkdir`
+followed by a space, then the directory name. 
+
+* * * *
+**Short Exercise**
+
+Do the following:
+
+1.  Create a directory in the `data` directory called `foo`
+2.  Then, copy the `all_data` file into `foo`
+
+* * * *
+
+By default, `rm`, will NOT delete directories. You can tell `rm` to
+delete a directory using the `-r` option. Enter the following command:
+
+    rm -r foo
+
+
+## Count the words
+
+The `wc` program (word count) counts the number of lines, words, and
+characters in one or more files. Make sure you are in the `data`
+directory, then enter the following command:
+
+    wc Bert/* gerdal/Data0559
+
+For each of the files indicated, `wc` has printed a line with three
+numbers. The first is the number of lines in that file. The second is
+the number of words. Finally, the total number of characters is
+indicated. The final line contains this information summed over all of
+the files. Thus, there were 7062 characters in total. 
+
+Remember that the `Bert/*` and `gerdal/Data0559` files were merged
+into the `all_data` file. So, we should see that `all_data` contains
+the same number of characters:
+
+    wc all_data
+
+Every character in the file takes up one byte of disk space. Thus, the
+size of the file in bytes should also be 7062. Let's confirm this:
+
+    ls -l all_data
+
+Remember that `ls -l` prints out detailed information about a file and
+that the fifth column is the size of the file in bytes.
+
+* * * *
+**Short Exercise**
+
+Figure out how to get `wc` to print the length of the longest line in
+`all_data`.
+
+* * * *
+
+## The awesome power of the Pipe
+
+Suppose I wanted to only see the total number of character, words, and
+lines across the files `Bert/*` and `gerdal/Data0559`. I don't want to
+see the individual counts, just the total. Of course, I could just do:
+
+    wc all_data
+
+Since this file is a concatenation of the smaller files. Sure, this
+works, but I had to create the `all_data` file to do this. Thus, I
+have wasted a precious 7062 bytes of hard disk space. We can do this
+*without* creating a temporary file, but first I have to show you two
+more commands: `head` and `tail`. These commands print the first few,
+or last few, lines of a file, respectively. Try them out on
+`all_data`:
+
+    head all_data
+    tail all_data
+
+The `-n` option to either of these commands can be used to print the
+first or last `n` lines of a file. To print the first/last line of the
+file use:
+
+    head -n 1 all_data
+    tail -n 1 all_data
+
+Let's turn back to the problem of printing only the total number of
+lines in a set of files without creating any temporary files. To do
+this, we want to tell the shell to take the output of the `wc Bert/*
+gerdal/Data0559` and send it into the `tail -n 1` command. The `|`
+character (called pipe) is used for this purpose. Enter the following
+command:
+
+    wc Bert/* gerdal/Data0559 | tail -n 1
+
+This will print only the total number of lines, characters, and words
+across all of these files. What is happening here? Well, `tail`, like
+many command line programs will read from the *standard input* when it
+is not given any files to operate on. In this case, it will just sit
+there waiting for input. That input can come from the user's keyboard
+*or from another program*. Try this:
+
+    tail -n 2
+
+Notice that your cursor just sits there blinking. Tail is waiting for
+data to come in. Now type:
+
+    Milad
+    is
+    good
+
+then CONTROL+d. You should is the lines:
+
+    is
+    good
+
+printed back at you. The CONTROL+d keyboard shortcut inserts an
+*end-of-file* character. It is sort of the standard way of telling the
+program "I'm done entering data". The `|` character is replaces the
+data from the keyboard with data from another command. You can string
+all sorts of commands together using the pipe. 
+
+The philosophy behind these command line programs is that none of them
+really do anything all that impressive. BUT when you start chaining
+them together, you can do some really powerful things really
+efficiently. If you want to be proficient at using the shell, you must
+learn to become proficient with the pipe and redirection operators:
+`|`, `>`, `>>`.
+
 
 # Extra Commands
 
@@ -528,11 +703,7 @@ existed, we would overwritten it. So the `>`
 
 ## Some more common commands
 
-**which**
-
 **alias**
-
-**touch**
 
 **du**
 
@@ -543,10 +714,6 @@ existed, we would overwritten it. So the `>`
 ## Regular Expressions
 
 # Milad's Notes:
-
-Don't we have to clone the repo?
-
-Introduce less early - go over searching. 
 
 # Background, Foreground, control-Z, control-C
 
