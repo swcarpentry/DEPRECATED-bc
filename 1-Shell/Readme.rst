@@ -14,12 +14,13 @@ ________________________
 
 # What is the shell how do I access the shell?
 
-The shell presents a command line interface that allows you to control
-your computer using commands entered with a keyboard instead of
-controlling graphical user interfaces (GUIs) with a mouse/keyboard
-combination.
+The *shell* is a program that presents a command line interface which
+allows you to control your computer using commands entered with a
+keyboard instead of controlling graphical user interfaces (GUIs) with
+a mouse/keyboard combination.
 
-To open the shell in Ubuntu, just click...
-
-or just type <ctrl><alt>t
+A *terminal* is a program you run that gives you access to the
+shell. There are many different terminal programs that vary across
+operating systems. To open the default terminal in Ubuntu, just
+click... or just type <ctrl><alt>t
 
