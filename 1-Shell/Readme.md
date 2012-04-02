@@ -697,6 +697,133 @@ learn to become proficient with the pipe and redirection operators:
 `|`, `>`, `>>`.
 
 
+**A sorting example**
+
+Let's create a file with some words to sort for the next example. We
+want to create a file which contains the following names:
+
+    Katy
+    Milad
+    Anthony
+    Joshua
+
+To do this, we need a program which allows us to create text
+files. There are many such programs, the easiest one which is
+installed on almost all systems is called `nano`. Navigate to `/tmp`
+and enter the following command:
+
+    nano toBeSorted
+
+Now enter the four names as shown above. When you are done, press
+CONTROL+O to write out the file. Press enter to use the file name
+`toBeSorted`. Then press CONTROL+x to exit `nano`.
+
+When you are back to the command line, enter the command:
+
+    sort toBeSorted
+
+Notice that the names are now printed in alphabetical order.
+
+* * * *
+**Short Exercise**
+
+Use the `echo` command and the append operator, `>>`, to append your
+name to the file, then sort it.
+
+* * * *
+
+Let's navigate back to `~/UofCSCBC2012/1-Shell/data`. You should still
+have the `all_data` file hanging around here. Enter the following command:
+
+    wc Bert/* | sort -n -k 3
+
+We are already familiar with what the first of these two commands
+does: it creates a list containing the number of characters, words,
+and lines in each file in the `Bert` directory. This list is then
+piped into the `sort` command, so that it can be sorted. Notice there
+are two options given to sort:
+
+1.  `-n`: Sort in numerical order as opposed to alphabetical order
+2.  `-k 3`: Sort based on the numbers in the third column
+
+Notice that the files are sorted by the number of characters.
+
+* * * *
+**Short Exercise**
+
+Use the `man` command to find out how to sort the output from `wc` in
+reverse order.
+
+* * * *
+
+* * * * 
+**Short Exercise**
+
+Combine the `wc`, `sort`, `head` and `tail` commands so that only the
+`wc` information for the largest file is listed
+
+Hint: To print the smallest file, use:
+
+    wc Bert/* | sort -n -k 3 | head -n 1
+
+* * * * 
+
+Printing the smallest file seems pretty useful. We don't want to type
+out that long command often. Let's create a simple script, a simple
+program, to run this command. The program will look at all of the
+files in the current directory and print the information about the
+smallest one. Let's call the script `smallest`. We'll use `nano` to
+create this file. Navigate to the `data` directory, then:
+
+    nano smallest
+
+Then enter the following text:
+
+    #!/bin/bash
+    wc * | sort -n -k 3 | head -n 1
+
+Now, `cd` into the `Bert` directory and enter the command
+`../smallest`. Notice that it says permission denied. This happens
+because we haven't told the shell that this is an executable
+file. Enter the following commands:
+
+    chmod a+x ../smallest
+    ../smallest
+
+The `chmod` command is used to modify the permissions of a file. This
+particular command modifies the file `../smallest` by giving all users
+(notice the `a`) permission to execute (notice the `x`) the file. If
+you enter:
+
+    ls ../smallest
+
+You will see that the file name is green. Congratulations, you just
+created your first shell script!
+
+# Finding and searching files
+
+You can search the contents of a file using the command `grep`. The
+`grep` program is very powerful and useful especially when combined
+with other commands by using the pipe. Navigate to the `Bert`
+directory. Every data file in this directory has a line which says
+"Range". The range represents the smallest frequency range that can be
+discriminated. Lets list all of the ranges from the tests that Bert
+conducted:
+
+    grep Range *
+
+* * * * 
+**Short Exercise**
+
+Create an executable script called `smallestrange` in the `data`
+directory, that is similar to the `smallest` script, but prints the
+file containing the file with the smallest Range. Use the commands
+`grep`, `sort`, and `tail` to do this.
+
+* * * * 
+
+
+
 # Extra Commands
 
 ## The backtick, xargs
@@ -706,6 +833,8 @@ learn to become proficient with the pipe and redirection operators:
 **alias**
 
 **du**
+
+**ln**
 
 ## .bashrc
 
@@ -718,7 +847,6 @@ learn to become proficient with the pipe and redirection operators:
 # Background, Foreground, control-Z, control-C
 
 ## Not everything is a file or a directory...
-- Symbolic links
 - /dev
 
 ## Permissions
