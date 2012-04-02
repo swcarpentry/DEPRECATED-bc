@@ -800,7 +800,7 @@ you enter:
 You will see that the file name is green. Congratulations, you just
 created your first shell script!
 
-# Finding and searching files
+# Searching files
 
 You can search the contents of a file using the command `grep`. The
 `grep` program is very powerful and useful especially when combined
@@ -823,32 +823,89 @@ file containing the file with the smallest Range. Use the commands
 * * * * 
 
 
+# Finding files
 
-# Extra Commands
+The `find` program can be used to find files based on arbitrary
+criteria. Navigate to the `data` directory and enter the following
+command:
 
-## The backtick, xargs
+    find .
 
-## Some more common commands
+This prints the name of every file or directory, recursively, starting
+from the current directory. Let's exclude all of the directories:
 
-**alias**
+    find . -type f
+
+This tells `find` to locate only files. Now try these commands:
+
+    find . -type f -name "*1*"
+    find . -type f -name "*1*" -or -name "*2*"
+    find . -type f -name "*1*" -and -name "*2*"
+
+The `find` command can acquire a list of files and perform some
+operation on each file. Try this command out:
+
+    find . -type f -exec grep Volume {} \;
+
+This command finds every file starting from `.`. Then it searches each
+file for a line which contains the word "Volume". The `{}` refers to
+the name of each file. The trailing `\;` is used to terminate the
+command.
+
+* * * * 
+**Short Exercise**
+
+Navigate to the `data` directory. Use one find command to perform each
+of the operations listed below (except number 2, which does not
+require a find command):
+
+1.  Find any file whose name is "NOTES" within `data` and delete it 
+
+2.  Create a new directory called `cleaneddata`
+
+3.  Move all of the files within `data` to the `cleaneddata` directory
+
+4.  Rename all of the files to ensure that they end in `.txt` (note:
+    it is ok for the file name to end in `.txt.txt`
+
+Hint: If you make a mistake and need to start over just do the
+following:
+
+1.  Navigate to the `1-Shell` directory
+
+2.  Delete the `data` directory
+
+3.  Enter the command: `git checkout -- data` You should see that the
+    data directory has reappeared in its original state
+
+**BONUS**
+
+Redo exercise 4, except rename only the files which do not already end
+in `.txt`. You will have to use the `man` command to figure out how to
+search for files which do not match a certain name. 
+
+* * * * 
+
+
+
+## Bonus:
+
+**backtick, xargs**: Example find all files with certain text
+
+**alias** -> rm -i
+
+**variables** -> use a path example
+
+**.bashrc**
 
 **du**
 
 **ln**
 
-## .bashrc
+**ssh and scp**
 
-## ssh and scp
+**Regular Expressions**
 
-## Regular Expressions
+**Permissions**
 
-# Milad's Notes:
-
-# Background, Foreground, control-Z, control-C
-
-## Not everything is a file or a directory...
-- /dev
-
-## Permissions
-
-## Variables
+**Chaining commands together**
