@@ -1,7 +1,7 @@
 # The Shell
 
-[Back To The Menu](http://github.com/thehackerwithin/UofCSCBC2012/)
-- [Forward to Python Variables](http://github.com/thehackerwithin/UofCSCBC2012/tree/master/2a-PythonVariables/)
+[Back To The Menu](http://github.com/JHU-SWC-2012/SWC-bootcamp/)
+- [Forward to Python Variables](http://github.com/JHU-SWC-2012/SWC-bootcamp/tree/master/2a-PythonVariables/)
 
 * * * * *
 
@@ -51,7 +51,7 @@ by manipulating some experimental data from a hearing tests. To get
 the data for this test, you will need internet access. Just enter the
 command:
 
-    git clone git://github.com/thehackerwithin/UofCSCBC2012.git
+    git://github.com/JHU-SWC-2012/SWC-bootcamp.git
 
 This will grab all of the data needed for this workshop from the
 internet.
@@ -120,8 +120,8 @@ can contain other files or directories.
 Whenever you start up a terminal, you will start in a special
 directory called the *home* directory. Every user has their own home
 directory where they have full access to do whatever they want. In
-this case, the `pwd` command tells us that we are in the `/home/thw`
-directory. This is the home directory for the `thw` user. That is our
+this case, the `pwd` command tells us that we are in the `/home/swc`
+directory. This is the home directory for the `swc` user. That is our
 user name. You can always find out your user name by entering the
 command `whoami`. 
 
@@ -167,10 +167,10 @@ you will see that `testfile` is gone.
 **Changing Directories**
 
 Now, let's move to a different directory. The command `cd` (change
-directory) is used to move around. Let's move into the `UofCSCBC2012`
+directory) is used to move around. Let's move into the `SWC-bootcamp`
 directory. Enter the following command:
 
-    cd UofCSCBC2012
+    cd SWC-bootcamp
 
 Now use the `ls` command to see what is inside this directory. You
 will see that there is an entry which is green. This means that this
@@ -218,17 +218,17 @@ give `ls` the names of other directories to view. Navigate to the
 home directory if you are not already there. Then enter the
 command:
 
-    ls UofCSCBC2012
+    ls SWC-bootcamp
 
-This will list the contents of the `UofCSCBC2012` directory without
+This will list the contents of the `SWC-bootcamp` directory without
 you having to navigate there. Now enter:
 
-    ls UofCSCBC2012/1-Shell
+    ls SWC-bootcamp/1-Shell
 
 This prints the contents of `1-Shell`. The `cd` command works in a
 similar way. Try entering:
 
-    cd UofCSCBC2012/1-Shell
+    cd SWC-bootcamp/1-Shell
 
 and you will jump directly to `1-Shell` without having to go through
 the intermediate directory.
@@ -242,27 +242,27 @@ hierarchy. The full path tells you where a directory is in that
 hierarchy. Navigate to the home directory. Now, enter the `pwd`
 command and you should see:
 
-    /home/thw
+    /home/swc
 
 which is the full name of your home directory. This tells you that you
-are in a directory called `thw`, which sits inside a directory called
+are in a directory called `swc`, which sits inside a directory called
 `home` which sits inside the very top directory in the hierarchy. The
 very top of the hierarchy is a directory called `/` which is usually
-referred to as the *root directory*. So, to summarize: `thw` is a
+referred to as the *root directory*. So, to summarize: `swc` is a
 directory in `home` which is a directory in `/`.
 
 Now enter the following command:
 
-    cd /home/thw/UofCSCBC2012/1-Shell
+    cd /home/swc/SWC-bootcamp/1-Shell
 
 This jumps to `1-Shell`. Now go back to the home directory. We saw
 earlier that the command:
 
-    cd UofCSCBC2012/1-Shell
+    cd SWC-bootcamp/1-Shell
 
 had the same effect - it took us to the `1-Shell` directory. But,
 instead of specifying the full path
-(`/home/thw/UofCSCBC2012/1-Shell`), we specified a *relative path*. In
+(`/home/swc/SWC-bootcamp/1-Shell`), we specified a *relative path*. In
 other words, we specified the path relative to our current
 directory. A full path always starts with a `/`. A relative path does
 not. You can usually use either a full path or a relative path
@@ -291,12 +291,12 @@ above your current directory. Thus:
 
     ls ..
 
-prints the contents of the `/home/thw/UofCSCBC2012`. You can chain
+prints the contents of the `/home/swc/SWC-bootcamp`. You can chain
 these together, so:
 
     ls ../../
 
-prints the contents of `/home/thw` which is your home
+prints the contents of `/home/swsc` which is your home
 directory. Finally, the special directory `.` always refers to your
 current directory. So, `ls`, `ls .`, and `ls ././././.` all do the
 same thing, they print the contents of the current directory. This may
@@ -304,12 +304,12 @@ seem like a useless shortcut right now, but we'll see when it is
 needed in a little while.
 
 To summarize, the commands `ls ~`, `ls ~/.`, `ls ../../`, and `ls
-/home/thw` all do exactly the same thing. These shortcuts are not
+/home/swc` all do exactly the same thing. These shortcuts are not
 necessary, they are provided for your convenience.
 
 **Wild cards**
 
-Navigate to the `~/UofCSCBC2012/Shell-1/data/THOMAS` directory. This
+Navigate to the `~/SWC-bootcamp/Shell-1/data/THOMAS` directory. This
 directory contains our hearing test data for THOMAS. If we type `ls`,
 we will see that there are a bunch of files which are just four digit
 numbers. By default, `ls` lists all of the files in a given
@@ -366,7 +366,7 @@ directory name. For example, enter:
     ls U<tab>
 
 The shell will fill in the rest of the directory name for
-`UofCSCBC2012`. Now enter:
+`SWC-bootcamp`. Now enter:
 
     ls D<tab><tab>
 
@@ -421,7 +421,7 @@ this directory. Now, try to run the program by entering:
     hello
 
 You should get an error saying that hello cannot be found. That is
-because the directory `/home/thw/UofCSCBC2012/1-Shell` is not in the
+because the directory `/home/swc/SWC-bootcamp/1-Shell` is not in the
 `PATH`. You can run the `hello` program by entering:
 
     ./hello
@@ -431,7 +431,7 @@ directory. This tells the shell to run the `hello` program which is
 located right here. So, you can run any program by entering the path
 to that program. You can run `hello` equally well by specifying:
 
-    /home/thw/UofCSCBC2012/1-Shell/hello
+    /home/swc/SWC-bootcamp/1-Shell/hello
 
 Or by entering:
 
@@ -467,7 +467,7 @@ is where the name comes from, `cat` is short for concatenate).
 
 2.  Without changing directories, (you should still be in `1-Shell`),
     use one short command to print the contents of all of the files in
-    the /home/milad/UofCSCBC2012/1-Shell/data/THOMAS directory.
+    the /home/swc/SWC-bootcamp/1-Shell/data/THOMAS directory.
 
 * * * *
 
@@ -507,7 +507,7 @@ argument for the program `mplayer` does. `mplayer` video playing program.
 ## Redirection
 
 Let's turn to the experimental data from the hearing tests that we
-began with. This data is located in the `~/UofCSCBC2012/1-Shell/data`
+began with. This data is located in the `~/SWC-bootcamp/1-Shell/data`
 directory. Each subdirectory corresponds to a particular participant
 in the study. Navigate to the `Bert` subdirectory in `data`.  There
 are a bunch of text files which contain experimental data
@@ -534,7 +534,7 @@ exists.
 Use `>>`, to append the contents of all of the files which contain the
 number 4 in the directory:
 
-    /home/thw/UofCSCBC2012/1-Shell/data/gerdal
+    /home/swc/SWC-bootcamp/1-Shell/data/gerdal
 
 to the existing `all_data` file. Thus, when you are done `all_data`
 should contain all of the experiment data from Bert and any
@@ -674,13 +674,13 @@ there waiting for input. That input can come from the user's keyboard
 Notice that your cursor just sits there blinking. Tail is waiting for
 data to come in. Now type:
 
-    Milad
-    is
+    French fries
+    are
     good
 
 then CONTROL+d. You should is the lines:
 
-    is
+    are
     good
 
 printed back at you. The CONTROL+d keyboard shortcut inserts an
@@ -702,10 +702,10 @@ learn to become proficient with the pipe and redirection operators:
 Let's create a file with some words to sort for the next example. We
 want to create a file which contains the following names:
 
-    Katy
-    Milad
-    Anthony
-    Joshua
+    Bob
+    Alice
+    Diane
+    Charles
 
 To do this, we need a program which allows us to create text
 files. There are many such programs, the easiest one which is
@@ -732,7 +732,7 @@ name to the file, then sort it.
 
 * * * *
 
-Let's navigate back to `~/UofCSCBC2012/1-Shell/data`. You should still
+Let's navigate back to `~/SWC-bootcamp/1-Shell/data`. You should still
 have the `all_data` file hanging around here. Enter the following command:
 
     wc Bert/* | sort -n -k 3
