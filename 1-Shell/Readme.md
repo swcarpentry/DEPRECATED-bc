@@ -5,9 +5,9 @@
 
 * * * * *
 
-**Presented By : Milad Fatenejad**
+**Presented By : Sasha Wood**
 
-**Most of this material came from a presentation by: ??????**
+**This presentation originally developed by: Milad Fatenejad**
 
 # What is the shell how do I access the shell?
 
