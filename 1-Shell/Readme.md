@@ -5,7 +5,7 @@
 
 * * * * *
 
-**Presented By : Sasha Wood**
+**Updated and presented by : Sasha Wood**
 
 **This presentation originally developed by: Milad Fatenejad**
 
@@ -15,6 +15,11 @@ The *shell* is a program that presents a command line interface
 which allows you to control your computer using commands entered
 with a keyboard instead of controlling graphical user interfaces
 (GUIs) with a mouse/keyboard combination.
+
+Use the GUI to open the tutorial on github.  Single click on the "Firefox 
+Web Browser".  Type in the URL:
+    github.com/JHU-SWC-2012/SWC-bootcamp
+Click on the directory named `1-Shell`.
 
 A *terminal* is a program you run that gives you access to the
 shell. There are many different terminal programs that vary across
@@ -41,7 +46,7 @@ started by typing `bash` in the terminal. Many commands, especially a
 lot of the basic ones, work across the various shells but many things
 are different. I recommend sticking with bash and learning it well.
 
-To open a terminal, just double click on the "Konsole" icon on the
+To open a terminal, just single click on the "Terminal" icon on the
 Desktop.
 
 # The Example: Manipulating Experimental Data Files
@@ -56,43 +61,6 @@ command:
 This will grab all of the data needed for this workshop from the
 internet.
 
-**Cochlear Implants**
-
-A cochlear implant is a small electronic device that is surgically
-implanted in the inner ear to give deaf people a sense of
-hearing. More than a quarter of a million people have them, but there
-is still no widely-accepted benchmark to measure their effectiveness.
-In order to establish a baseline for such a benchmark, our supervisor
-got teenagers with CIs to listen to audio files on their computer and
-report:
-
-1.  the quietest sound they could hear
-2.  the lowest and highest tones they could hear
-3.  the narrowest range of frequencies they could discriminate
-
-To participate, subjects attended our laboratory and one of our lab
-techs played an audio sample, and recorded their data - when they
-first heard the sound, or first heard a difference in the sound.  Each
-set of test results were written out to a text file, one set per file.
-Each participant has a unique subject ID, and a made-up subject name.
-Each experiment has a unique experiment ID. The experiment has
-collected 351 files so far.
-
-The data is a bit of a mess! There are inconsistent file names, there
-are extraneous "NOTES" files that we'd like to get rid of, and the
-data is spread across many directories. We are going to use shell
-commands to get this data into shape. By the end we would like to:
-
-1.  Put all of the data into one directory called "alldata"
-
-2.  Have all of the data files in there, and ensure that every file
-    has a ".txt" extension
-
-3.  Get rid of the extraneous "NOTES" files
-
-If we can get through this example in the available time, we will move
-onto more advanced shell topics...
-
 # Let's get started
 
 One very basic command is `echo`. This command is just prints text to
@@ -101,7 +69,9 @@ the terminal. Try entering the command:
     echo Hello, World
 
 Then press enter. You should see the text "Hello, World" printed back
-to you. The echo command is useful for 
+to you. The echo command is useful for printing from a shell script,
+for displaying variables, and for generating known values to pass
+to other programs.
 
 ## Moving around the file system
 
@@ -203,9 +173,8 @@ forward and b to go backwards. When you are done reading, just hit `q`
 to exit.
 
 Programs that are run from the shell can get extremely complicated. To
-see an example, open up the manual page for the `mplayer` program,
-which is command line driven video player. There are about 300
-arguments to the mplayer command. No one can possibly learn all of
+see an example, open up the manual page for the `find` program,
+which we will use later this session. No one can possibly learn all of
 these arguments, of course. So you will probably find yourself
 referring back to the manual page frequently.
 
@@ -307,6 +276,43 @@ To summarize, the commands `ls ~`, `ls ~/.`, `ls ../../`, and `ls
 /home/swc` all do exactly the same thing. These shortcuts are not
 necessary, they are provided for your convenience.
 
+**Our data set: Cochlear Implants**
+
+A cochlear implant is a small electronic device that is surgically
+implanted in the inner ear to give deaf people a sense of
+hearing. More than a quarter of a million people have them, but there
+is still no widely-accepted benchmark to measure their effectiveness.
+In order to establish a baseline for such a benchmark, our supervisor
+got teenagers with CIs to listen to audio files on their computer and
+report:
+
+1.  the quietest sound they could hear
+2.  the lowest and highest tones they could hear
+3.  the narrowest range of frequencies they could discriminate
+
+To participate, subjects attended our laboratory and one of our lab
+techs played an audio sample, and recorded their data - when they
+first heard the sound, or first heard a difference in the sound.  Each
+set of test results were written out to a text file, one set per file.
+Each participant has a unique subject ID, and a made-up subject name.
+Each experiment has a unique experiment ID. The experiment has
+collected 351 files so far.
+
+The data is a bit of a mess! There are inconsistent file names, there
+are extraneous "NOTES" files that we'd like to get rid of, and the
+data is spread across many directories. We are going to use shell
+commands to get this data into shape. By the end we would like to:
+
+1.  Put all of the data into one directory called "alldata"
+
+2.  Have all of the data files in there, and ensure that every file
+    has a ".txt" extension
+
+3.  Get rid of the extraneous "NOTES" files
+
+If we can get through this example in the available time, we will move
+onto more advanced shell topics...
+
 **Wild cards**
 
 Navigate to the `~/SWC-bootcamp/Shell-1/data/THOMAS` directory. This
@@ -363,22 +369,33 @@ lot of time. When you start typing out the name of a directory, then
 hit the tab key, the shell will try to fill in the rest of the
 directory name. For example, enter:
 
-    ls U<tab>
+    cd S<tab>
 
 The shell will fill in the rest of the directory name for
 `SWC-bootcamp`. Now enter:
 
-    ls D<tab><tab>
+    ls 3<tab><tab>
 
 When you hit the first tab, nothing happens. The reason is that there
 are multiple directories in the home directory which start with
-D. Thus, the shell does not know which one to fill in. When you hit
+3. Thus, the shell does not know which one to fill in. When you hit
 tab again, the shell will list the possible choices. 
 
 Tab completion can also fill in the names of programs. For example,
 enter `e<tab><tab>`. You will see the name of every program that
 starts with an `e`. One of those is `echo`. If you enter `ec<tab>` you
 will see that tab completion works.
+
+** Command History**
+
+You can easily access previous commands.  Hit the up arrow.  
+Hit it again.  You can step backwards through your command history. 
+The down arrow takes your forwards in the command history.  
+
+^-C will cancel the command you are writing, and give you a fresh prompt.
+
+^-R will do a reverse-search through your command history.  This
+is very useful.
 
 ## Which program? ##
 
@@ -392,9 +409,9 @@ example:
 Will return "/bin/ls". Thus, we can see that `ls` is a program that
 sits inside of the `/bin` directory. Now enter:
 
-    which mplayer
+    which find
 
-You will see that `mplayer` is a program that sits inside of the
+You will see that `find` is a program that sits inside of the
 `/usr/bin` directory.
 
 So ... when we enter a program name, like `ls`, and hit enter, how
@@ -462,7 +479,7 @@ is where the name comes from, `cat` is short for concatenate).
 * * * *
 **Short Exercises**
 
-1.  Print out the contents of the `/usr/share/dict/american-english`
+1.  Print out the contents of the `~/SWC-bootcamp/1-Shell/dictionary.txt`
     file. What does this file contain?
 
 2.  Without changing directories, (you should still be in `1-Shell`),
@@ -475,7 +492,7 @@ is where the name comes from, `cat` is short for concatenate).
 be annoying to use. The program, `less`, is useful for this
 case. Enter the following command:
 
-    less /usr/share/dict/american-english
+    less ~/SWC-bootcamp/1-Shell/dictionary.txt
 
 `less` opens the file, and lets you navigate through it. The commands
 are identical to the `man` program. Use "space" to go forward and hit
@@ -485,11 +502,11 @@ file and "G" goes to the end. Finally, hit "q" to quit.
 `less` also gives you a way of searching through files. Just hit the
 "/" key to begin a search. Enter the name of the word you would like
 to search for and hit enter. It will jump to the next location where
-that word is found. Try searching the `american-english` file for the
-word "copper". If you hit "/" then "enter", `less` will just repeat
+that word is found. Try searching the `dictionary.txt` file for the
+word "cat". If you hit "/" then "enter", `less` will just repeat
 the previous search. `less` searches from the current location and
 works its way forward. If you are at the end of the file and search
-for the word "copper", `less` will not find it. You need to go to the
+for the word "cat", `less` will not find it. You need to go to the
 beginning of the file and search.
 
 Remember, the `man` program uses the same commands, so you can search
@@ -498,8 +515,8 @@ documentation using "/" as well!
 * * * *
 **Short Exercise**
 
-Use the commands we've learned so far to figure out what the `-fs`
-argument for the program `mplayer` does. `mplayer` video playing program.
+Use the commands we've learned so far to figure out how to search
+in reverse while using `less`.
 
 * * * * 
 
@@ -580,8 +597,9 @@ followed by a space, then the directory name.
 
 Do the following:
 
-1.  Create a directory in the `data` directory called `foo`
-2.  Then, copy the `all_data` file into `foo`
+1.  Rename the `all_data_IMPORTANT` file to `all_data`.
+2.  Create a directory in the `data` directory called `foo`
+3.  Then, copy the `all_data` file into `foo`
 
 * * * *
 
@@ -597,22 +615,22 @@ The `wc` program (word count) counts the number of lines, words, and
 characters in one or more files. Make sure you are in the `data`
 directory, then enter the following command:
 
-    wc Bert/* gerdal/Data0559
+    wc Bert/* gerdal/*4*
 
 For each of the files indicated, `wc` has printed a line with three
 numbers. The first is the number of lines in that file. The second is
 the number of words. Finally, the total number of characters is
 indicated. The final line contains this information summed over all of
-the files. Thus, there were 7062 characters in total. 
+the files. Thus, there were 10445 characters in total. 
 
-Remember that the `Bert/*` and `gerdal/Data0559` files were merged
+Remember that the `Bert/*` and `gerdal/*4*` files were merged
 into the `all_data` file. So, we should see that `all_data` contains
 the same number of characters:
 
     wc all_data
 
 Every character in the file takes up one byte of disk space. Thus, the
-size of the file in bytes should also be 7062. Let's confirm this:
+size of the file in bytes should also be 10445. Let's confirm this:
 
     ls -l all_data
 
@@ -630,7 +648,7 @@ Figure out how to get `wc` to print the length of the longest line in
 ## The awesome power of the Pipe
 
 Suppose I wanted to only see the total number of character, words, and
-lines across the files `Bert/*` and `gerdal/Data0559`. I don't want to
+lines across the files `Bert/*` and `gerdal/*4*`. I don't want to
 see the individual counts, just the total. Of course, I could just do:
 
     wc all_data
@@ -656,7 +674,7 @@ file use:
 Let's turn back to the problem of printing only the total number of
 lines in a set of files without creating any temporary files. To do
 this, we want to tell the shell to take the output of the `wc Bert/*
-gerdal/Data0559` and send it into the `tail -n 1` command. The `|`
+gerdal/*4*` and send it into the `tail -n 1` command. The `|`
 character (called pipe) is used for this purpose. Enter the following
 command:
 
@@ -674,7 +692,8 @@ there waiting for input. That input can come from the user's keyboard
 Notice that your cursor just sits there blinking. Tail is waiting for
 data to come in. Now type:
 
-    French fries
+    French
+    fries
     are
     good
 
@@ -735,7 +754,7 @@ name to the file, then sort it.
 Let's navigate back to `~/SWC-bootcamp/1-Shell/data`. You should still
 have the `all_data` file hanging around here. Enter the following command:
 
-    wc Bert/* | sort -n -k 3
+    wc Bert/* | sort -k 3 -n
 
 We are already familiar with what the first of these two commands
 does: it creates a list containing the number of characters, words,
@@ -743,8 +762,8 @@ and lines in each file in the `Bert` directory. This list is then
 piped into the `sort` command, so that it can be sorted. Notice there
 are two options given to sort:
 
-1.  `-n`: Sort in numerical order as opposed to alphabetical order
-2.  `-k 3`: Sort based on the numbers in the third column
+1.  `-k 3`: Sort based on the third column
+2.  `-n`: Sort in numerical order as opposed to alphabetical order
 
 Notice that the files are sorted by the number of characters.
 
@@ -764,7 +783,7 @@ Combine the `wc`, `sort`, `head` and `tail` commands so that only the
 
 Hint: To print the smallest file, use:
 
-    wc Bert/* | sort -n -k 3 | head -n 1
+    wc Bert/* | sort -k 3 -n | head -n 1
 
 * * * * 
 
@@ -780,7 +799,7 @@ create this file. Navigate to the `data` directory, then:
 Then enter the following text:
 
     #!/bin/bash
-    wc * | sort -n -k 3 | head -n 1
+    wc * | sort -k 3 -n | head -n 1
 
 Now, `cd` into the `Bert` directory and enter the command
 `../smallest`. Notice that it says permission denied. This happens
@@ -829,18 +848,18 @@ The `find` program can be used to find files based on arbitrary
 criteria. Navigate to the `data` directory and enter the following
 command:
 
-    find .
+    find . -print
 
 This prints the name of every file or directory, recursively, starting
 from the current directory. Let's exclude all of the directories:
 
-    find . -type f
+    find . -type f -print
 
 This tells `find` to locate only files. Now try these commands:
 
     find . -type f -name "*1*"
-    find . -type f -name "*1*" -or -name "*2*"
-    find . -type f -name "*1*" -and -name "*2*"
+    find . -type f -name "*1*" -or -name "*2*" -print
+    find . -type f -name "*1*" -and -name "*2*" -print
 
 The `find` command can acquire a list of files and perform some
 operation on each file. Try this command out:
@@ -850,7 +869,17 @@ operation on each file. Try this command out:
 This command finds every file starting from `.`. Then it searches each
 file for a line which contains the word "Volume". The `{}` refers to
 the name of each file. The trailing `\;` is used to terminate the
-command.
+command.  This command is slow, because it is calling a new instance
+of `grep` for each item the `find` returns.
+
+A faster way to do this is to use the `xargs` command:
+
+    find . -type f -print | xargs grep Volume
+
+`find` generates a list of all the files we are interested in, 
+then we pipe them to `xargs`.  `xargs` takes the items given to it 
+and passes them as arguments to `grep`.  `xargs` generally only creates
+a single instance of `grep` (or whatever program it is running).
 
 * * * * 
 **Short Exercise**
