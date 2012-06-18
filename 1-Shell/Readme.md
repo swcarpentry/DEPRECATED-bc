@@ -56,7 +56,7 @@ by manipulating some experimental data from a hearing tests. To get
 the data for this test, you will need internet access. Just enter the
 command:
 
-    git clone git://github.com/JHU-SWC-2012/SWC-bootcamp.git
+    git clone https://github.com/JHU-SWC-2012/SWC-bootcamp.git
 
 This will grab all of the data needed for this workshop from the
 internet.
