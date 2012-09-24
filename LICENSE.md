@@ -1,3 +1,5 @@
+This collection of material is licensed under a Creative Commons - Attribution license.
+
 You are free:
 
 - to **Share**—to copy, distribute and transmit the work
