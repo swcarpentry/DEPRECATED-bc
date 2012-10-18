@@ -11,7 +11,7 @@ with a keyboard instead of controlling graphical user interfaces
 
 Use the GUI to open the tutorial on github.  Single click on the "Firefox 
 Web Browser".  Type in the URL:
-    github.com/USERNAME/boot-camps/tree/YYYY-MM-PLACE
+    https://github.com/USERNAME/boot-camps/tree/YYYY-MM-PLACE
 
 Click on the directory named `shell`.
 
