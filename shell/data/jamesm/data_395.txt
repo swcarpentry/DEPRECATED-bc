@@ -1,0 +1,9 @@
+# 
+Reported: Wed Jun 29 15:46:50 2011
+Subject: madonnaBroccoli319
+Year/month of birth: 1999/06
+Sex: F
+CI type: 10
+Volume: 7
+Range: 8
+Discrimination: 7

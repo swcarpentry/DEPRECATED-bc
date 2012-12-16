@@ -1,0 +1,9 @@
+# 
+Reported: Thu May 26 14:56:52 2011
+Subject: beyonceJonas304
+Year/month of birth: 1995/11
+Sex: F
+CI type: 16
+Volume: 5
+Range: 4
+Discrimination: 5
