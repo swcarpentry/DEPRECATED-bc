@@ -1,6 +1,6 @@
 boot-camps
 ==========
-![SWC logo](http://software-carpentry.org/software-carpentry-logo-285x58.png)
+![SWC logo](http://software-carpentry.org/img/software-carpentry-banner.png)
 
 # University of Chicago - January 12-13, 2013
 Software Carpentry boot camp material
