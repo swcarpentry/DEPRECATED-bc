@@ -287,6 +287,10 @@ class PythonPackageDependency (Dependency):
     def __init__(self, package, **kwargs):
         if 'name' not in kwargs:
             kwargs['name'] = package
+        if 'and_dependencies' not in kwargs:
+            kwargs['and_dependencies'] = []
+        if 'python' not in kwargs['and_dependencies']:
+            kwargs['and_dependencies'].append('python')
         super(PythonPackageDependency, self).__init__(**kwargs)
         self.package = package
 
