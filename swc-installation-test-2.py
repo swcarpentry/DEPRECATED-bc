@@ -97,9 +97,12 @@ def check(checks=None):
             _sys.stdout.write('pass\n')
     if failures:
         print('\nFailures:')
+        printed = []
         for failure in failures:
-            print()
-            print(failure)
+            if failure not in printed:
+                print()
+                print(failure)
+                printed.append(failure)
         return False
     return True
 
