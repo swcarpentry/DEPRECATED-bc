@@ -188,7 +188,7 @@ class Dependency (object):
     def _check_version(self, version, parsed_version=None):
         if not parsed_version:
             parsed_version = self._parse_version(version=version)
-        if parsed_version < self.minimum_version:
+        if not parsed_version or parsed_version < self.minimum_version:
             raise DependencyError(
                 checker=self,
                 message='outdated version of {0}: {1} (need >= {2})'.format(
@@ -197,6 +197,8 @@ class Dependency (object):
                         str(part) for part in self.minimum_version)))
 
     def _parse_version(self, version):
+        if not version:
+            return None
         parsed_version = []
         for part in version.split(self.version_delimiter):
             try:
@@ -328,7 +330,7 @@ class PythonPackageDependency (Dependency):
         try:
             version = package.__version__
         except AttributeError:
-            version = 'unknown'
+            version = None
         return version
 
 
