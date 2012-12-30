@@ -200,7 +200,7 @@ class Dependency (object):
             try:
                 parsed_version.append(int(part))
             except ValueError as e:
-                raise NotImplementedError((version, part)) from e
+                raise NotImplementedError((version, part))# from e
         return tuple(parsed_version)
 
 
@@ -248,7 +248,7 @@ class CommandDependency (Dependency):
             raise DependencyError(
                 checker=self,
                 message="could not find '{0}' executable".format(command),
-                ) from e
+                )# from e
         stdout,stderr = p.communicate()
         status = p.wait()
         if status:
@@ -322,7 +322,7 @@ class PythonPackageDependency (Dependency):
                 checker=self,
                 message="could not import the '{0}' package".format(
                     self.package),
-                ) from e
+                )# from e
         try:
             version = package.__version__
         except AttributeError:
