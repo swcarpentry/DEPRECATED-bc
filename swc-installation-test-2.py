@@ -353,8 +353,6 @@ class PythonPackageDependency (Dependency):
 
 
 for package,name,long_name,minimum_version in [
-        ('mercurial', None, 'Mercurial Python package',
-         CHECKER['hg'].minimum_version),
         ('nose', None, 'Nose Python package',
          CHECKER['nosetests'].minimum_version),
         ('sqlite3', 'sqlite3-python', 'SQLite Python package',
@@ -377,6 +375,23 @@ for package,name,long_name,minimum_version in [
         package=package, name=name, long_name=long_name,
         minimum_version=minimum_version)
 del package, name, long_name, minimum_version  # cleanup namespace
+
+
+class MercurialPythonPackage (PythonPackageDependency):
+    def _get_version(self):
+        try:  # mercurial >= 1.2
+            package = _importlib.import_module('mercurial.util')
+        except ImportError as e:  # mercurial <= 1.1.2
+            package = self._get_package('mercurial.version')
+            return package.get_version()
+        else:
+            return package.version()
+
+
+CHECKER['mercurial'] = MercurialPythonPackage(
+    package='mercurial.util', name='mercurial',
+    long_name='Mercurial Python package',
+    minimum_version=CHECKER['hg'].minimum_version)
 
 
 class VirtualDependency (Dependency):
