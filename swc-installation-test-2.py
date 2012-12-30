@@ -355,8 +355,6 @@ class PythonPackageDependency (Dependency):
 for package,name,long_name,minimum_version in [
         ('nose', None, 'Nose Python package',
          CHECKER['nosetests'].minimum_version),
-        ('sqlite3', 'sqlite3-python', 'SQLite Python package',
-         CHECKER['sqlite3'].minimum_version),
         ('IPython', None, None, None),
         ('numpy', None, 'NumPy', None),
         ('scipy', None, 'SciPy', None),
@@ -392,6 +390,20 @@ CHECKER['mercurial'] = MercurialPythonPackage(
     package='mercurial.util', name='mercurial',
     long_name='Mercurial Python package',
     minimum_version=CHECKER['hg'].minimum_version)
+
+
+class SQLitePythonPackage (PythonPackageDependency):
+    def _get_version_from_package(self, package):
+        return _sys.version
+
+    def _get_parsed_version(self):
+        return _sys.version_info
+
+
+CHECKER['sqlite3-python'] = SQLitePythonPackage(
+    package='sqlite3', name='sqlite3-python',
+    long_name='SQLite Python package',
+    minimum_version=CHECKER['sqlite3'].minimum_version)
 
 
 class VirtualDependency (Dependency):
