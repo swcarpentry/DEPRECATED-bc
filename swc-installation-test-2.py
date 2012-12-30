@@ -35,17 +35,24 @@ __version__ = '0.1'
 
 # Comment out any entries you don't need
 CHECKS = [
-    'python',
+# Shell
     'bash',
-    'easy_install',
+# Version control
     'git',
     'hg',              # Command line tool
     'mercurial',       # Python package
+# Build tools and packaging
     'make',
+    'easy_install',
+    'setuptools',
+# Testing
     'nosetests',       # Command line tool
     'nose',            # Python package
+# SQL
     'sqlite3',         # Command line tool
     'sqlite3-python',  # Python package
+# Python
+    'python',
     'IPython',
     'numpy',
     'scipy',
@@ -54,7 +61,6 @@ CHECKS = [
     'Cython',
     'networkx',
     'mayavi.mlab',
-    'setuptools',
     ]
 
 CHECKER = {}
