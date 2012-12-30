@@ -25,7 +25,19 @@ of Python that you have installed with 'swc-installation-test-1.py'.
 from __future__ import print_function  # for Python 2.6 compatibility
 
 import distutils.ccompiler as _distutils_ccompiler
-import importlib as _importlib
+try:  # Python 2.7 and 3.x
+    import importlib as _importlib
+except ImportError:  # Python 2.6 and earlier
+    class _Importlib (object):
+        """Minimal workarounds for functions we need
+        """
+        @staticmethod
+        def import_module(name):
+            module = __import__(name)
+            for n in name.split('.')[1:]:
+                module = getattr(module, n)
+            return module
+    _importlib = _Importlib()
 import logging as _logging
 import os as _os
 import platform as _platform
