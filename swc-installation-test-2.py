@@ -22,6 +22,7 @@ This script requires at least Python 2.6.  You can check the version
 of Python that you have installed with 'swc-installation-test-1.py'.
 """
 
+import distutils.ccompiler as _distutils_ccompiler
 import importlib as _importlib
 import logging as _logging
 import os as _os
@@ -201,6 +202,8 @@ CHECKER['python'] = PythonDependency()
 
 
 class CommandDependency (Dependency):
+    exe_extension = _distutils_ccompiler.new_compiler().exe_extension
+
     def __init__(self, command, version_option='--version',
                  version_regexp=None, version_stream='stdout', **kwargs):
         if 'name' not in kwargs:
@@ -215,22 +218,23 @@ class CommandDependency (Dependency):
         self.version_stream = version_stream
 
     def _get_version_stream(self):
+        command = self.command + (self.exe_extension or '')
         try:
             p = _subprocess.Popen(
-                [self.command, self.version_option],
+                [command, self.version_option],
                 stdout=_subprocess.PIPE, stderr=_subprocess.PIPE,
                 close_fds=True, shell=False, universal_newlines=True)
         except OSError as e:
             raise DependencyError(
                 checker=self,
-                message="could not find '{0}' executable".format(self.command),
+                message="could not find '{0}' executable".format(command),
                 ) from e
         stdout,stderr = p.communicate()
         status = p.wait()
         if status:
             lines = [
                 "failed to execute '{0} {1}':".format(
-                    self.command, self.version_option),
+                    command, self.version_option),
                 'status: {0}'.format(status),
                 ]
             for name,string in [('stdout', stdout), ('stderr', stderr)]:
