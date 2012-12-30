@@ -82,6 +82,7 @@ class DependencyError (Exception):
 
 
 def check(checks=None):
+    successes = []
     failures = []
     if not checks:
         checks = CHECKS
@@ -89,12 +90,19 @@ def check(checks=None):
         checker = CHECKER[check]
         _sys.stdout.write('check {0}...\t'.format(checker.full_name()))
         try:
-            checker.check()
+            version = checker.check()
         except DependencyError as e:
             failures.append(e)
             _sys.stdout.write('fail\n')
         else:
             _sys.stdout.write('pass\n')
+            successes.append((checker, version))
+    if successes:
+        print('\nSuccesses:\n')
+        for checker,version in successes:
+            print('{0} {1}'.format(
+                    checker.full_name(),
+                    version or 'unknown'))
     if failures:
         print('\nFailures:')
         printed = []
@@ -137,7 +145,7 @@ class Dependency (object):
             raise self._check_error
         try:
             self._check_dependencies()
-            self._check()
+            return self._check()
         except DependencyError as e:
             self._check_error = e  # cache for future calls
             raise
@@ -147,19 +155,20 @@ class Dependency (object):
             if not hasattr(dependency, 'check'):
                 dependency = CHECKER[dependency]
             dependency.check()
-        or_pass = not bool(self.or_dependencies)
-        or_error = None
+        self.or_pass = or_error = None
         for dependency in self.or_dependencies:
             if not hasattr(dependency, 'check'):
                 dependency = CHECKER[dependency]
             try:
-                dependency.check()
+                version = dependency.check()
             except DependencyError as e:
                 or_error = e
             else:
-                or_pass = True
-        if not or_pass:
-            print(or_error)
+                self.or_pass = {
+                    'dependency': dependency,
+                    'version': version,
+                    }
+        if self.or_dependencies and not self.or_pass:
             raise or_error
 
     def _check(self):
@@ -169,6 +178,7 @@ class Dependency (object):
             parsed_version = self._get_parsed_version()
         if self.minimum_version:
             self._check_version(version=version, parsed_version=parsed_version)
+        return version
 
     def _get_version(self):
         raise NotImplementedError(self)
@@ -349,7 +359,9 @@ del package, name, long_name, minimum_version  # cleanup namespace
 
 class VirtualDependency (Dependency):
     def _check(self):
-        pass
+        return '{0} {1}'.format(
+            self.or_pass['dependency'].full_name(),
+            self.or_pass['version'])
 
 
 for name,dependencies in [
