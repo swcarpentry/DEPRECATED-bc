@@ -331,14 +331,20 @@ class PythonPackageDependency (Dependency):
         self.package = package
 
     def _get_version(self):
+        package = self._get_package(self.package)
+        return self._get_version_from_package(package)
+
+    def _get_package(self, package):
         try:
-            package = _importlib.import_module(self.package)
+            return _importlib.import_module(package)
         except ImportError as e:
             raise DependencyError(
                 checker=self,
-                message="could not import the '{0}' package".format(
-                    self.package),
+                message="could not import the '{0}' package for {1}".format(
+                    package, self.full_name()),
                 )# from e
+
+    def _get_version_from_package(self, package):
         try:
             version = package.__version__
         except AttributeError:
