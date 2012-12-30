@@ -118,6 +118,7 @@ class Dependency (object):
         if not or_dependencies:
             or_dependencies = []
         self.or_dependencies = or_dependencies
+        self._check_error = None
 
     def __str__(self):
         return '<{0} {1}>'.format(type(self).__name__, self.name)
@@ -129,8 +130,14 @@ class Dependency (object):
             return '{0} ({1})'.format(self.long_name, self.name)
 
     def check(self):
-        self._check_dependencies()
-        self._check()
+        if self._check_error:
+            raise self._check_error
+        try:
+            self._check_dependencies()
+            self._check()
+        except DependencyError as e:
+            self._check_error = e  # cache for future calls
+            raise
 
     def _check_dependencies(self):
         for dependency in self.and_dependencies:
