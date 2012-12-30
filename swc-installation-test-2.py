@@ -22,6 +22,8 @@ This script requires at least Python 2.6.  You can check the version
 of Python that you have installed with 'swc-installation-test-1.py'.
 """
 
+from __future__ import print_function  # for Python 2.6 compatibility
+
 import distutils.ccompiler as _distutils_ccompiler
 import importlib as _importlib
 import logging as _logging
