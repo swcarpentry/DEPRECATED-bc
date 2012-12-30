@@ -37,6 +37,10 @@ __version__ = '0.1'
 CHECKS = [
 # Shell
     'bash',
+# Editors
+    'virtual-editor',
+# Browsers
+    'virtual-browser',
 # Version control
     'git',
     'hg',              # Command line tool
@@ -101,11 +105,18 @@ def check(checks=None):
 
 class Dependency (object):
     def __init__(self, name, long_name=None, minimum_version=None,
-                 version_delimiter='.'):
+                 version_delimiter='.', and_dependencies=None,
+                 or_dependencies=None):
         self.name = name
         self.long_name = long_name or name
         self.minimum_version = minimum_version
         self.version_delimiter = version_delimiter
+        if not and_dependencies:
+            and_dependencies = []
+        self.and_dependencies = and_dependencies
+        if not or_dependencies:
+            or_dependencies = []
+        self.or_dependencies = or_dependencies
 
     def __str__(self):
         return '<{0} {1}>'.format(type(self).__name__, self.name)
@@ -117,6 +128,30 @@ class Dependency (object):
             return '{0} ({1})'.format(self.long_name, self.name)
 
     def check(self):
+        self._check_dependencies()
+        self._check()
+
+    def _check_dependencies(self):
+        for dependency in self.and_dependencies:
+            if not hasattr(dependency, 'check'):
+                dependency = CHECKER[dependency]
+            dependency.check()
+        or_pass = not bool(self.or_dependencies)
+        or_error = None
+        for dependency in self.or_dependencies:
+            if not hasattr(dependency, 'check'):
+                dependency = CHECKER[dependency]
+            try:
+                dependency.check()
+            except DependencyError as e:
+                or_error = e
+            else:
+                or_pass = True
+        if not or_pass:
+            print(or_error)
+            raise or_error
+
+    def _check(self):
         version = self._get_version()
         parsed_version = None
         if hasattr(self, '_get_parsed_version'):
@@ -292,6 +327,32 @@ for package,name,long_name,minimum_version in [
         package=package, name=name, long_name=long_name,
         minimum_version=minimum_version)
 del package, name, long_name, minimum_version  # cleanup namespace
+
+
+class VirtualDependency (Dependency):
+    def _check(self):
+        pass
+
+
+for name,dependencies in [
+        ('virtual-editor', (
+            'emacs',
+            'xemacs',
+            'vim',
+            'vi',
+            'nano',
+            'kate',
+            'notepad++',
+            )),
+        ('virtual-browser', (
+            'firefox',
+            'google-chrome',
+            'chromium',
+            )),
+        ]:
+    CHECKER[name] = VirtualDependency(
+        name=name, long_name=name, or_dependencies=dependencies)
+del name, dependencies  # cleanup namespace
 
 
 def print_system_info():
