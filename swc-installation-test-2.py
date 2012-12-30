@@ -226,6 +226,16 @@ for command,long_name,minimum_version in [
         ('make', None, None),
         ('sqlite3', 'SQLite 3', None),
         ('nosetests', 'Nose', (1, 0, 0)),
+        ('emacs', 'Emacs', None),
+        ('xemacs', 'XEmacs', None),
+        ('vim', 'Vim', None),
+        ('vi', None, None),
+        ('nano', 'Nano', None),
+        ('kate', 'Kate', None),
+        ('notepad++', 'Notepad++', None),
+        ('firefox', 'Firefox', None),
+        ('google-chrome', 'Google Chrome', None),
+        ('chromium', 'Chromium', None),
         ]:
     if not long_name:
         long_name = command
