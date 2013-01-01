@@ -471,6 +471,9 @@ for name,dependencies in [
 del name, dependencies  # cleanup namespace
 
 
+def _print_info(key, value, indent=13):
+    print('{0}{1}: {2}'.format(key, ' '*(indent-len(key)), value))
+
 def print_system_info():
     print("If you do not understand why the above failures occurred,")
     print("copy and send the *entire* output (all info above and summary")
@@ -479,19 +482,19 @@ def print_system_info():
     print('==================')
     print('System information')
     print('==================')
-    print('os.name      : {0}'.format(_os.name))
+    _print_info('os.name', _os.name)
     try:
-        print('os.uname     : {0}'.format(_os.uname()))
+        _print_info('os.uname', _os.uname())
     except:
         pass
-    print('platform     : {0}'.format(_sys.platform))
-    print('platform+    : {0}'.format(_platform.platform()))
-    print('prefix       : {0}'.format(_sys.prefix))
-    print('exec_prefix  : {0}'.format(_sys.exec_prefix))
-    print('executable   : {0}'.format(_sys.executable))
-    print('version_info : {0}'.format(_sys.version_info))
-    print('version      : {0}'.format(_sys.version))
-    print('environment  :')
+    _print_info('platform', _sys.platform)
+    _print_info('platform+', _platform.platform())
+    _print_info('prefix', _sys.prefix)
+    _print_info('exec_prefix', _sys.exec_prefix)
+    _print_info('executable', _sys.executable)
+    _print_info('version_info', _sys.version_info)
+    _print_info('version', _sys.version)
+    _print_info('environment', '')
     for key,value in sorted(_os.environ.items()):
         print('  {0}={1}'.format(key, value))
     print('==================')
