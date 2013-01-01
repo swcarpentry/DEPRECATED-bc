@@ -10,6 +10,16 @@ Run the script and follow the instructions it prints at the end.
 
 This script requires at least Python 2.6.  You can check the version
 of Python that you have installed with 'swc-installation-test-1.py'.
+
+By default, this script will test for all the dependencies your
+instructor thinks you need.  If you want to test for a different set
+of packages, you can list them on the command line.  For example:
+
+  python swc-installation-test-2.py git virtual-editor
+
+This is useful if the original test told you to install a more recent
+version of a particular dependency, and you just want to re-test that
+dependency.
 """
 
 from __future__ import print_function  # for Python 2.6 compatibility
