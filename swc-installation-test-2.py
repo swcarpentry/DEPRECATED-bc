@@ -606,3 +606,4 @@ if __name__ == '__main__':
         print()
         print_system_info()
         print_suggestions(instructor_fallback=True)
+        _sys.exit(1)
