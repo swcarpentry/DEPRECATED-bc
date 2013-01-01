@@ -253,7 +253,7 @@ class CommandDependency (Dependency):
         self.version_regexp = version_regexp
         self.version_stream = version_stream
 
-    def _get_version_stream(self):
+    def _get_version_stream(self, expect=(0,)):
         command = self.command + (self.exe_extension or '')
         try:
             p = _subprocess.Popen(
@@ -267,7 +267,7 @@ class CommandDependency (Dependency):
                 )# from e
         stdout,stderr = p.communicate()
         status = p.wait()
-        if status:
+        if status not in expect:
             lines = [
                 "failed to execute '{0} {1}':".format(
                     command, self.version_option),
@@ -302,7 +302,6 @@ for command,long_name,minimum_version in [
         ('dash', 'Debian Almquist Shell', None),
         ('tcsh', 'TENEX C Shell', None),
         ('zsh', 'Z Shell', None),
-        ('easy_install', 'Setuptools easy_install', None),
         ('git', 'Git', (1, 8, 0)),
         ('hg', 'Mercurial', (2, 0, 0)),
         ('make', None, None),
@@ -324,6 +323,26 @@ for command,long_name,minimum_version in [
     CHECKER[command] = CommandDependency(
         command=command, long_name=long_name, minimum_version=minimum_version)
 del command, long_name, minimum_version  # cleanup namespace
+
+
+class EasyInstallDependency (CommandDependency):
+    def _get_version(self):
+        try:
+            return super(EasyInstallDependency, self)._get_version()
+        except DependencyError as e:
+            version_stream = self.version_stream
+            try:
+                self.version_stream = 'stderr'
+                stream = self._get_version_stream(expect=(1,))
+                if 'option --version not recognized' in stream:
+                    return 'unknown (possibly Setuptools?)'
+            finally:
+                self.version_stream = version_stream
+
+
+CHECKER['easy_install'] = EasyInstallDependency(
+    command='easy_install', long_name='Setuptools easy_install',
+    minimum_version=None)
 
 
 class PythonPackageDependency (Dependency):
