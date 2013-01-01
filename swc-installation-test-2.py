@@ -302,7 +302,7 @@ for command,long_name,minimum_version in [
         ('dash', 'Debian Almquist Shell', None),
         ('tcsh', 'TENEX C Shell', None),
         ('zsh', 'Z Shell', None),
-        ('git', 'Git', (1, 8, 0)),
+        ('git', 'Git', (1, 7, 0)),
         ('hg', 'Mercurial', (2, 0, 0)),
         ('make', None, None),
         ('sqlite3', 'SQLite 3', None),
