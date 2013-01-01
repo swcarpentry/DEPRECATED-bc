@@ -248,24 +248,31 @@ CHECKER['python'] = PythonDependency()
 class CommandDependency (Dependency):
     exe_extension = _distutils_ccompiler.new_compiler().exe_extension
 
-    def __init__(self, command, version_options=('--version',),
+    def __init__(self, command, version_options=('--version',), stdin=None,
                  version_regexp=None, version_stream='stdout', **kwargs):
         if 'name' not in kwargs:
             kwargs['name'] = command
         super(CommandDependency, self).__init__(**kwargs)
         self.command = command
         self.version_options = version_options
+        self.stdin = None
         if not version_regexp:
             regexp = r'([\d][\d{0}]*[\d])'.format(self.version_delimiter)
             version_regexp = _re.compile(regexp)
         self.version_regexp = version_regexp
         self.version_stream = version_stream
 
-    def _get_version_stream(self, expect=(0,)):
+    def _get_version_stream(self, stdin=None, expect=(0,)):
+        if not stdin:
+            stdin = self.stdin
+        if stdin:
+            popen_stdin = _subprocess.PIPE
+        else:
+            popen_stdin = None
         command = self.command + (self.exe_extension or '')
         try:
             p = _subprocess.Popen(
-                [command] + list(self.version_options),
+                [command] + list(self.version_options), stdin=popen_stdin,
                 stdout=_subprocess.PIPE, stderr=_subprocess.PIPE,
                 close_fds=True, shell=False, universal_newlines=True)
         except OSError as e:
@@ -273,7 +280,7 @@ class CommandDependency (Dependency):
                 checker=self,
                 message="could not find '{0}' executable".format(command),
                 )# from e
-        stdout,stderr = p.communicate()
+        stdout,stderr = p.communicate(stdin)
         status = p.wait()
         if status not in expect:
             lines = [
