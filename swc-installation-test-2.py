@@ -321,7 +321,6 @@ for command,long_name,minimum_version in [
         ('zsh', 'Z Shell', None),
         ('git', 'Git', (1, 7, 0)),
         ('hg', 'Mercurial', (2, 0, 0)),
-        ('make', None, None),
         ('sqlite3', 'SQLite 3', None),
         ('nosetests', 'Nose', (1, 0, 0)),
         ('emacs', 'Emacs', None),
@@ -340,6 +339,41 @@ for command,long_name,minimum_version in [
     CHECKER[command] = CommandDependency(
         command=command, long_name=long_name, minimum_version=minimum_version)
 del command, long_name, minimum_version  # cleanup namespace
+
+
+class MakeDependency (CommandDependency):
+    makefile = '\n'.join([
+            'all:',
+            '\t@echo "MAKE_VERSION=$(MAKE_VERSION)"',
+            '\t@echo "MAKE=$(MAKE)"',
+            '',
+            ])
+
+    def _get_version(self):
+        try:
+            return super(MakeDependency, self)._get_version()
+        except DependencyError as e:
+            version_options = self.version_options
+            self.version_options = ['-f', '-']
+            try:
+                stream = self._get_version_stream(stdin=self.makefile)
+                info = {}
+                for line in stream.splitlines():
+                    try:
+                        key,value = line.split('=', 1)
+                    except ValueError as ve:
+                        raise e# from NotImplementedError(stream)
+                    info[key] = value
+                if info.get('MAKE_VERSION', None):
+                    return info['MAKE_VERSION']
+                elif info.get('MAKE', None):
+                    return None
+                raise e
+            finally:
+                self.version_options = version_options
+
+
+CHECKER['make'] = MakeDependency(command='make', minimum_version=None)
 
 
 class EasyInstallDependency (CommandDependency):
