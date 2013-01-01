@@ -16,9 +16,15 @@ How to get a command line:
 - On Linux, either use your login shell directly, or run one of a
   number of graphical terminals (e.g. 'xterm', 'gnome-terminal', ...).
 
-Run the script and follow the instructions it prints at the end.
+Run the script and follow the instructions it prints at the end.  If
+you see an error saying that the 'python' command was not found, than
+you may not have any version of Python installed.  See:
 
-This test is separate to avoid syntax errors parsing the more
+  http://www.python.org/download/releases/2.7.3/#download
+
+for installation instructions.
+
+This test is separate to avoid Python syntax errors parsing the more
 elaborate `swc-installation-test-2.py`.
 """
 
