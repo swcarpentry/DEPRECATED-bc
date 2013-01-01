@@ -182,6 +182,7 @@ class Dependency (object):
                     'dependency': dependency,
                     'version': version,
                     }
+                break  # no need to test other dependencies
         if self.or_dependencies and not self.or_pass:
             raise or_error
 
