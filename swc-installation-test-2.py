@@ -6,16 +6,6 @@ Execute this code at the command line by typing:
 
   python swc-installation-test-2.py
 
-How to get a command line:
-
-- On OSX run this with the Terminal application.
-
-- On Windows, go to the Start menu, select 'Run' and type 'cmd'
-(without the quotes) to run the 'cmd.exe' Windows Command Prompt.
-
-- On Linux, either use your login shell directly, or run one of a
-  number of graphical terminals (e.g. 'xterm', 'gnome-terminal', ...).
-
 Run the script and follow the instructions it prints at the end.
 
 This script requires at least Python 2.6.  You can check the version
