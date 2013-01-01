@@ -471,7 +471,7 @@ for name,dependencies in [
 del name, dependencies  # cleanup namespace
 
 
-def _print_info(key, value, indent=13):
+def _print_info(key, value, indent=19):
     print('{0}{1}: {2}'.format(key, ' '*(indent-len(key)), value))
 
 def print_system_info():
@@ -486,6 +486,14 @@ def print_system_info():
     _print_info('os.uname', _platform.uname())
     _print_info('platform', _sys.platform)
     _print_info('platform+', _platform.platform())
+    for pversion in (
+            'linux_distribution',
+            'mac_ver',
+            'win32_ver',
+            ):
+        value = getattr(_platform, pversion)()
+        if value[0]:
+            _print_info(pversion, value)
     _print_info('prefix', _sys.prefix)
     _print_info('exec_prefix', _sys.exec_prefix)
     _print_info('executable', _sys.executable)
