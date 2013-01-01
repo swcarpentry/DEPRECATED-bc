@@ -51,7 +51,7 @@ __version__ = '0.1'
 # Comment out any entries you don't need
 CHECKS = [
 # Shell
-    'bash',
+    'virtual-shell',
 # Editors
     'virtual-editor',
 # Browsers
@@ -294,7 +294,14 @@ class CommandDependency (Dependency):
 
 
 for command,long_name,minimum_version in [
+        ('sh', 'Bourne Shell', None),
+        ('ash', 'Almquist Shell', None),
         ('bash', 'Bourne Again Shell', None),
+        ('csh', 'C Shell', None),
+        ('ksh', 'KornShell', None),
+        ('dash', 'Debian Almquist Shell', None),
+        ('tcsh', 'TENEX C Shell', None),
+        ('zsh', 'Z Shell', None),
         ('easy_install', 'Setuptools easy_install', None),
         ('git', 'Git', (1, 8, 0)),
         ('hg', 'Mercurial', (2, 0, 0)),
@@ -414,6 +421,16 @@ class VirtualDependency (Dependency):
 
 
 for name,dependencies in [
+        ('virtual-shell', (
+            'sh',
+            'ash',
+            'bash',
+            'csh',
+            'ksh',
+            'dash',
+            'tcsh',
+            'zsh',
+            )),
         ('virtual-editor', (
             'emacs',
             'xemacs',
