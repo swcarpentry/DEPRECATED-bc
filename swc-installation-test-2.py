@@ -88,8 +88,11 @@ class DependencyError (Exception):
         self.message = message
 
     def __str__(self):
-        return 'check for {0} failed:\n{1}'.format(
-            self.checker.full_name(), self.message)
+        url = 'http://software-carpentry.org/setup/'  # TODO: per-package URL
+        return 'check for {0} failed:\n{1}\n{2}\n{3}'.format(
+            self.checker.full_name(), self.message,
+            'For instructions on installing an up-to-date version, see',
+            url)
 
 
 def check(checks=None):
@@ -492,8 +495,21 @@ def print_system_info():
         print('  {0}={1}'.format(key, value))
     print('==================')
 
+def print_suggestions(instructor_fallback=True):
+    print()
+    print('For suggestions on installing missing packages, see')
+    print('http://software-carpentry.org/setup/')
+    print('')
+    print('For instructings on installing a particular package,')
+    print('see the failure message for that package printed above.')
+    if instructor_fallback:
+        print('')
+        print('For help, email the *entire* output of this script to')
+        print('your instructor.')
+
 
 if __name__ == '__main__':
     if not check(_sys.argv[1:]):
         print()
         print_system_info()
+        print_suggestions(instructor_fallback=True)
