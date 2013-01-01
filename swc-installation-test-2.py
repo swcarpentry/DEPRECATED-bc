@@ -294,7 +294,7 @@ class CommandDependency (Dependency):
 
 
 for command,long_name,minimum_version in [
-        ('bash', 'Bourne Again Shell', (4, 0)),
+        ('bash', 'Bourne Again Shell', None),
         ('easy_install', 'Setuptools easy_install', None),
         ('git', 'Git', (1, 8, 0)),
         ('hg', 'Mercurial', (2, 0, 0)),
