@@ -41,3 +41,5 @@ if __name__ == '__main__':
         print('Passed')
     else:
         print('Failed')
+        print('Install a current version of Python!')
+        print('http://www.python.org/download/releases/2.7.3/#download')
