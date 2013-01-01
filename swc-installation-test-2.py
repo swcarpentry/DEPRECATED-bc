@@ -442,14 +442,14 @@ class VirtualDependency (Dependency):
 
 for name,dependencies in [
         ('virtual-shell', (
-            'sh',
-            'ash',
             'bash',
-            'csh',
-            'ksh',
             'dash',
-            'tcsh',
+            'ash',
             'zsh',
+            'ksh',
+            'csh',
+            'tcsh',
+            'sh',
             )),
         ('virtual-editor', (
             'emacs',
