@@ -483,10 +483,7 @@ def print_system_info():
     print('System information')
     print('==================')
     _print_info('os.name', _os.name)
-    try:
-        _print_info('os.uname', _os.uname())
-    except:
-        pass
+    _print_info('os.uname', _platform.uname())
     _print_info('platform', _sys.platform)
     _print_info('platform+', _platform.platform())
     _print_info('prefix', _sys.prefix)
