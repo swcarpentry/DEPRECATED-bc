@@ -32,8 +32,15 @@ import logging as _logging
 import os as _os
 import platform as _platform
 import re as _re
+import shlex as _shlex
 import subprocess as _subprocess
 import sys as _sys
+
+
+if not hasattr(_shlex, 'quote'):  # Python versions older than 3.3
+    # Use the undocumented pipes.quote()
+    import pipes as _pipes
+    _shlex.quote = _pipes.quote
 
 
 __version__ = '0.1'
@@ -241,13 +248,13 @@ CHECKER['python'] = PythonDependency()
 class CommandDependency (Dependency):
     exe_extension = _distutils_ccompiler.new_compiler().exe_extension
 
-    def __init__(self, command, version_option='--version',
+    def __init__(self, command, version_options=('--version',),
                  version_regexp=None, version_stream='stdout', **kwargs):
         if 'name' not in kwargs:
             kwargs['name'] = command
         super(CommandDependency, self).__init__(**kwargs)
         self.command = command
-        self.version_option = version_option
+        self.version_options = version_options
         if not version_regexp:
             regexp = r'([\d][\d{0}]*[\d])'.format(self.version_delimiter)
             version_regexp = _re.compile(regexp)
@@ -258,7 +265,7 @@ class CommandDependency (Dependency):
         command = self.command + (self.exe_extension or '')
         try:
             p = _subprocess.Popen(
-                [command, self.version_option],
+                [command] + list(self.version_options),
                 stdout=_subprocess.PIPE, stderr=_subprocess.PIPE,
                 close_fds=True, shell=False, universal_newlines=True)
         except OSError as e:
@@ -270,8 +277,10 @@ class CommandDependency (Dependency):
         status = p.wait()
         if status not in expect:
             lines = [
-                "failed to execute '{0} {1}':".format(
-                    command, self.version_option),
+                "failed to execute: {0} {1}".format(
+                    command,
+                    ' '.join(_shlex.quote(arg)
+                             for arg in self.version_options)),
                 'status: {0}'.format(status),
                 ]
             for name,string in [('stdout', stdout), ('stderr', stderr)]:
