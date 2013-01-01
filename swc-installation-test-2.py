@@ -69,7 +69,7 @@ CHECKS = [
     'mercurial',       # Python package
 # Build tools and packaging
     'make',
-    'easy_install',
+    'virtual-pypi-installer',
     'setuptools',
 # Testing
     'nosetests',       # Command line tool
@@ -343,6 +343,7 @@ for command,long_name,minimum_version in [
         ('zsh', 'Z Shell', None),
         ('git', 'Git', (1, 7, 0)),
         ('hg', 'Mercurial', (2, 0, 0)),
+        ('pip', None, None),
         ('sqlite3', 'SQLite 3', None),
         ('nosetests', 'Nose', (1, 0, 0)),
         ('emacs', 'Emacs', None),
@@ -536,6 +537,10 @@ for name,dependencies in [
             'firefox',
             'google-chrome',
             'chromium',
+            )),
+        ('virtual-pypi-installer', (
+            'easy_install',
+            'pip',
             )),
         ]:
     CHECKER[name] = VirtualDependency(
