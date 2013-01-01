@@ -92,6 +92,15 @@ CHECKS = [
 CHECKER = {}
 
 
+class InvalidCheck (KeyError):
+    def __init__(self, check):
+        super(InvalidCheck, self).__init__(check)
+        self.check = check
+
+    def __str__(self):
+        return self.check
+
+
 class DependencyError (Exception):
     def _get_message(self):
         return self._message
@@ -118,7 +127,10 @@ def check(checks=None):
     if not checks:
         checks = CHECKS
     for check in checks:
-        checker = CHECKER[check]
+        try:
+            checker = CHECKER[check]
+        except KeyError as e:
+            raise InvalidCheck(check)# from e
         _sys.stdout.write('check {0}...\t'.format(checker.full_name()))
         try:
             version = checker.check()
@@ -578,7 +590,19 @@ def print_suggestions(instructor_fallback=True):
 
 
 if __name__ == '__main__':
-    if not check(_sys.argv[1:]):
+    try:
+        passed = check(_sys.argv[1:])
+    except InvalidCheck as e:
+        print("I don't know how to check for {0!r}".format(e.check))
+        print('I do know how to check for:')
+        for key,checker in sorted(CHECKER.items()):
+            if checker.long_name != checker.name:
+                print('  {0} {1}({2})'.format(
+                        key, ' '*(20-len(key)), checker.long_name))
+            else:
+                print('  {0}'.format(key))
+        _sys.exit(1)
+    if not passed:
         print()
         print_system_info()
         print_suggestions(instructor_fallback=True)
