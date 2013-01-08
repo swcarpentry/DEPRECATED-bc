@@ -6,7 +6,9 @@
 * * * * *
 
 **Updated and presented by : Radhika Khetani**
+
 **Modified by : Sasha Wood**
+
 **This presentation originally developed by: Milad Fatenejad**
 
 # What is the shell how do I access the shell?
@@ -18,8 +20,8 @@ with a keyboard instead of controlling graphical user interfaces
 
 Use the GUI to open the tutorial on github.  Single click on the "Firefox 
 Web Browser".  Type in the URL:
-    github.com/JHU-SWC-2012/SWC-bootcamp
-Click on the directory named `1-Shell`.
+    github.com/thehackerwithin/boot-camps/tree/2013-01-chicago
+Click on the directory named `Shell`.
 
 A *terminal* is a program you run that gives you access to the
 shell. There are many different terminal programs that vary across
@@ -45,7 +47,7 @@ not the default shell, it is usually installed on most systems and can be
 started by typing `bash` in the terminal. Many commands, especially a
 lot of the basic ones, work across the various shells but many things
 are different. I recommend sticking with bash and learning it well.
-[Here is a link for more information](http://en.wikipedia.org/wiki/Bash_(Unix_shell))
+([Here is a link for more information](http://en.wikipedia.org/wiki/Bash_(Unix_shell))
 
 To open a terminal, just single click on the "Terminal" icon on the
 Desktop.
