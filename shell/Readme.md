@@ -22,7 +22,7 @@ Use the GUI to open the tutorial on github.  Single click on the "Firefox
 Web Browser".  Type in the URL:
     github.com/thehackerwithin/boot-camps/tree/2013-01-chicago
 
-Click on the directory named `Shell`.
+Click on the directory named `shell`.
 
 A *terminal* is a program you run that gives you access to the
 shell. There are many different terminal programs that vary across
