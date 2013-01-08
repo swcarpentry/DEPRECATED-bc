@@ -21,6 +21,7 @@ with a keyboard instead of controlling graphical user interfaces
 Use the GUI to open the tutorial on github.  Single click on the "Firefox 
 Web Browser".  Type in the URL:
     github.com/thehackerwithin/boot-camps/tree/2013-01-chicago
+
 Click on the directory named `Shell`.
 
 A *terminal* is a program you run that gives you access to the
