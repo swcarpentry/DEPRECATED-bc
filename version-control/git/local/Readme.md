@@ -1,9 +1,7 @@
 # Local Version Control
 ----
-[Back To Python Functions and
-Modules](http://github.com/thehackerwithin/UofCSCBC2012/tree/master/2d-PythonFunctionsAndModules/)
-- [Forward To Remote Version
-Control](http://github.com/thehackerwithin/UofCSCBC2012/tree/master/3b-VersionControlRemote/)
+[Back To Python](https://github.com/rkhetani/boot-camps/tree/2013-01-chicago/python/intro)
+- [Forward To Remote Version Control](https://github.com/rkhetani/boot-camps/tree/2013-01-chicago/version-control/git/remote)
 
 ----
 
