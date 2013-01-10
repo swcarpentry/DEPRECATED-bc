@@ -2,9 +2,9 @@ Version Control Collaboratively
 
 ----
 
-[Back To Local Version Control](https://github.com/rkhetani/boot-camps/tree/2013-01-chicago/version-control/git/local)
+[Back To Local Version Control](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/version-control/git/local)
 - [Forward To
-Debugging](https://github.com/rkhetani/boot-camps/tree/2013-01-chicago/debugging)
+Debugging](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/debugging)
 
 ----
 

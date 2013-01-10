@@ -1,7 +1,7 @@
 # Local Version Control
 ----
-[Back To Python](https://github.com/rkhetani/boot-camps/tree/2013-01-chicago/python/intro)
-- [Forward To Remote Version Control](https://github.com/rkhetani/boot-camps/tree/2013-01-chicago/version-control/git/remote)
+[Back To Python](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/python/intro)
+- [Forward To Remote Version Control](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/version-control/git/remote)
 
 ----
 
