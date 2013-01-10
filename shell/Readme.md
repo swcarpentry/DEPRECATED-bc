@@ -1,7 +1,7 @@
 # The Shell
 
 [Back To The Menu](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/)
-- [Forward to Python Variables](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/python/intro)
+- [Forward to Python](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/python/intro)
 
 * * * * *
 
