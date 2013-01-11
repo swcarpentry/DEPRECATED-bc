@@ -7,12 +7,12 @@ Control](http://github.com/thehackerwithin/UofCSCBC2012/tree/master/3b-VersionCo
 
 ----
 
-**Presented By Joshua Ryan Smith**
+**Presented By Sri Hari Krishna Narayanan**
 **Based on material by Katy Huff**
 
 ## Example: A Slide Deck for a Presentation
 
-Imagine you have two computers: the first is a big, powerful deesktop machine with a big, dual monitor setup. The second is a tiny lightweight netbook you take with you when you travel. Imagine also that you have a presentation at a conference overseas. You know that no matter how "finished" you think you are with your slide deck, inevitably you will realize you need to add an exta figure or recalculate some data AFTER leaving the country and your main desktop workstation. How can you be sure your slide deck, data, and the programs you've written are synchronized between your two machines? How can you be sure that every little change you've made on your netbook is reflected on your desktop? What happens if you start making changes on your slide deck, only to realize you need to drop back to the slide deck you had five days ago?
+Imagine you have two computers: the first is a big, powerful desktop machine with a big, dual monitor setup. The second is a tiny lightweight netbook you take with you when you travel. Imagine also that you have a presentation at a conference overseas. You know that no matter how "finished" you think you are with your slide deck, inevitably you will realize you need to add an exta figure or recalculate some data AFTER leaving the country and your main desktop workstation. How can you be sure your slide deck, data, and the programs you've written are synchronized between your two machines? How can you be sure that every little change you've made on your netbook is reflected on your desktop? What happens if you start making changes on your slide deck, only to realize you need to drop back to the slide deck you had five days ago?
 
 ## git : What is Version Control ?
 
