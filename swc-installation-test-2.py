@@ -66,7 +66,7 @@ CHECKS = [
 # Version control
     'git',
     'hg',              # Command line tool
-    'mercurial',       # Python package
+    #'mercurial',       # Python package
 # Build tools and packaging
     'make',
     'virtual-pypi-installer',
