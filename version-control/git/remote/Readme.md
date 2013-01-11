@@ -2,10 +2,9 @@ Version Control Collaboratively
 
 ----
 
-[Back To Local Version
-Control](http://github.com/thehackerwithin/SWC-bootcamp/tree/master/3a-VersionControlLocal/)
+[Back To Local Version Control](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/version-control/git/local)
 - [Forward To
-Debugging](http://github.com/thehackerwithin/SWC-bootcamp/tree/master/4-Debugging/)
+Debugging](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/debugging)
 
 ----
 
