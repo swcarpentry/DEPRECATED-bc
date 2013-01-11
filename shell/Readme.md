@@ -1,6 +1,6 @@
 # The Shell
 
-[Back To The Menu](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/)
+[Back To The Setup](http://swcarpentry.github.com/boot-camps/2013-01-12-chicago/)
 - [Forward to Python](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/python/intro)
 
 * * * * *
