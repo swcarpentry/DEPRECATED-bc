@@ -1,4 +1,4 @@
-2c- Python Flow Control
+Python Flow Control
 -----------------------
 
 In this lesson we will cover how to write code that will execute only if specified conditions are met and also how to automate repetitive tasks using loops.
