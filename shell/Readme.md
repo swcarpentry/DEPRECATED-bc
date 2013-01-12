@@ -1,11 +1,13 @@
 # The Shell
 
-[Back To The Menu](http://github.com/JHU-SWC-2012/SWC-bootcamp/)
-- [Forward to Python Variables](http://github.com/JHU-SWC-2012/SWC-bootcamp/tree/master/2a-PythonVariables/)
+[Back To The Setup](http://swcarpentry.github.com/boot-camps/2013-01-12-chicago/)
+- [Forward to Python](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/python/intro)
 
 * * * * *
 
-**Updated and presented by : Sasha Wood**
+**Updated and presented by : Radhika Khetani**
+
+**Modified by : Sasha Wood**
 
 **This presentation originally developed by: Milad Fatenejad**
 
@@ -18,8 +20,9 @@ with a keyboard instead of controlling graphical user interfaces
 
 Use the GUI to open the tutorial on github.  Single click on the "Firefox 
 Web Browser".  Type in the URL:
-    github.com/JHU-SWC-2012/SWC-bootcamp
-Click on the directory named `1-Shell`.
+    github.com/thehackerwithin/boot-camps/tree/2013-01-chicago
+
+Click on the directory named `shell`.
 
 A *terminal* is a program you run that gives you access to the
 shell. There are many different terminal programs that vary across
@@ -41,10 +44,11 @@ most important reasons are that:
 The shell is just a program and there are many different shell
 programs that have been developed. The most common shell (and the one
 we will use) is called the Bourne-Again SHell (bash). Even if bash is
-not the default shell, it usually installed on most systems and can be
+not the default shell, it is usually installed on most systems and can be
 started by typing `bash` in the terminal. Many commands, especially a
 lot of the basic ones, work across the various shells but many things
 are different. I recommend sticking with bash and learning it well.
+([Here is a link for more information](http://en.wikipedia.org/wiki/Bash_(Unix_shell))
 
 To open a terminal, just single click on the "Terminal" icon on the
 Desktop.
@@ -52,19 +56,23 @@ Desktop.
 # The Example: Manipulating Experimental Data Files
 
 We will spend most of our time learning about the basics of the shell
-by manipulating some experimental data from a hearing tests. To get
+by manipulating some experimental data from a hearing test. To get
 the data for this test, you will need internet access. Just enter the
 command:
 
-    git clone https://github.com/JHU-SWC-2012/SWC-bootcamp.git
+    git clone https://github.com/thehackerwithin/boot-camps.git
 
-This will grab all of the data needed for this workshop from the
+Followed by:
+
+    git checkout 2013-01-chicago
+
+These 2 commands will grab all of the data needed for this workshop from the
 internet.
 
 # Let's get started
 
-One very basic command is `echo`. This command is just prints text to
-the terminal. Try entering the command:
+One very basic command is `echo`. This command just prints text to
+the terminal. Try the command:
 
     echo Hello, World
 
@@ -747,12 +755,11 @@ Notice that the names are now printed in alphabetical order.
 **Short Exercise**
 
 Use the `echo` command and the append operator, `>>`, to append your
-name to the file, then sort it.
+name to the file, then sort it and make a new file called Sorted.
 
 * * * *
 
-Let's navigate back to `~/SWC-bootcamp/1-Shell/data`. You should still
-have the `all_data` file hanging around here. Enter the following command:
+Let's navigate back to `~/SWC-bootcamp/1-Shell/data`. Enter the following command:
 
     wc Bert/* | sort -k 3 -n
 
@@ -804,7 +811,10 @@ Then enter the following text:
 Now, `cd` into the `Bert` directory and enter the command
 `../smallest`. Notice that it says permission denied. This happens
 because we haven't told the shell that this is an executable
-file. Enter the following commands:
+file. If you do `ls -l ../smallest`, it will show you the permissions on 
+the left of the listing.
+
+Enter the following commands:
 
     chmod a+x ../smallest
     ../smallest
@@ -814,10 +824,10 @@ particular command modifies the file `../smallest` by giving all users
 (notice the `a`) permission to execute (notice the `x`) the file. If
 you enter:
 
-    ls ../smallest
+    ls -l ../smallest
 
-You will see that the file name is green. Congratulations, you just
-created your first shell script!
+You will see that the file name is green and the permissions have changed. 
+Congratulations, you just created your first shell script!
 
 # Searching files
 
