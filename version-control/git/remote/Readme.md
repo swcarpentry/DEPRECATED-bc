@@ -8,7 +8,7 @@ Debugging](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/de
 
 ----
 
-**Presented By Joshua Ryan Smith**
+**Presented By Sri Hari Krishna Narayanan**
 **Based on material by Katy Huff**
 
 ## github.com?
@@ -107,8 +107,8 @@ directory that's called **.gitconfig** . It's contents should look like
 :
 
     [user]
-          name = Joshua Smith
-          email = joshua.r.smith@gmail.com
+          name = Sri Hari Krishna Narayanan
+          email = sriharikrishna@gmail.com
 
 This configuration step allows github to properly credit the authorship
 of changes you make in your repository. For projects with numerous
@@ -139,23 +139,23 @@ GitHub doesn't know about it yet. You'll need to tell github you want to
 have an official fork of this repository.
 
 Step 1 : Go to our 
-[repository](https://github.com/JHU-SWC-2012/SWC-bootcamp) from your browser, and
+[repository](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago) from your browser, and
 click on the Fork button. Choose to fork it to your username rather than
 any organizations.
 
 Step 2 : Clone it. From your terminal :
 
-    $ git clone git@github.com:username/SWC-bootcamp.git
-    $ cd SWC-bootcamp
+    $ git clone https://github.com/YOU/boot-camps.git
+    $ cd boot-camps
 
-Step 3 :
+Step 3 : 
 
-    $ git remote add upstream git://github.com:JHU-SWC-2012/SWC-bootcamp.git
+    $ git remote add upstream https://github.com/thehackerwithin/boot-camps.git
     $ git remote -v
-    origin  git@github.com:username/SWC-bootcamp.git (fetch)
-    origin  git@github.com:username/SWC-bootcamp.git (push)
-    upstream        git://github.com/JHU-SWC-2012/SWC-bootcamp.git (fetch)
-    upstream        git://github.com/JHU-SWC-2012/SWC-bootcamp.git (push)
+    origin  https://github.com/YOU/boot-camps.git (fetch)
+    origin  https://github.com/YOU/boot-camps.git (push)
+    upstream        https://github.com/thehackerwithin/boot-camps.git (fetch)
+    upstream        https://github.com/thehackerwithin/boot-camps.git (push)
 
 All repositories that are clones begin with a remote called origin.
 
@@ -187,11 +187,11 @@ Step 1 : Fetch the recent remote repository history
 
     $ git fetch upstream
 
-Step 2 : Make certain you are in the master branch and merge the
-upstreeam master branch into your master branch
+Step 2 : Make certain you are in the 2013-01-chicago branch and merge the
+upstreeam 2013-01-chicago branch into your 2013-01-chicago branch
 
-    $ git checkout master
-    $ git merge upstream\master
+    $ git checkout 2013-01-chicago
+    $ git merge upstream\2013-01-chicago
 
 Step 3 : Check out what happened by browsing the directory.
 
@@ -230,7 +230,7 @@ commits to that remote is exactly analagous.
 
     $ git push upstream master
 
-In the case of the SWC-bootcamp code, new developer accounts will not allow
+In the case of the 2013-01-chicago code, new developer accounts will not allow
 this push to succeed. You're welcome to try it though.
 
 ## git merge : Conflicts
@@ -238,21 +238,21 @@ this push to succeed. You're welcome to try it though.
 This is the trickiest part of version control, so let's take it very
 carefully.
 
-In the SWC-bootcamp code, you'll find a file called Readme.md. This is a
+In the 2013-01-chicago code, you'll find a file called Readme.md. This is a
 standard documentation file that appears rendered on the landing page
 for the repository in github. To see the rendered version, visit your
-fork on github, (https://github.com/username/SWC-bootcamp/).
+fork on github, (https://github.com/YOU/boot-camps).
 
 For illustration, let's imagine that, suddenly, each of the developers
-on the SWC-bootcamp code would like to welcome visitors in a language other
+on the 2013-01-chicago code would like to welcome visitors in a language other
 than English. Since we're all from so many different places and speak
 so many languages, there will certainly be disagreements about what to
 say instead of "Welcome."
 
-I, for example, am from North Carolina, so I'll push (to the upstream repository) my own version of Welcome on line 2 of Readme.md.
+I, for example, am from Tamil Nadu, India, so I'll push (to the upstream repository) my own version of Welcome on line 2 of Readme.md.
 
-You may speak another language, however, and may want to replace the 
-english word Welcome with an equivalent word that you prefer (willkommen, 
+You may speak another language, perhaps even English, however, and may want to replace the 
+Tamil word 'vanakkam' with an equivalent word that you prefer (welcome, willkommen, 
 bienvenido, benvenuti, etc.).
 
 You'll want to start a new branch for development. It's a good

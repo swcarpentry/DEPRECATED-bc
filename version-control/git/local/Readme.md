@@ -5,12 +5,12 @@
 
 ----
 
-**Presented By Joshua Ryan Smith**
+**Presented By Sri Hari Krishna Narayanan**
 **Based on material by Katy Huff**
 
 ## Example: A Slide Deck for a Presentation
 
-Imagine you have two computers: the first is a big, powerful deesktop machine with a big, dual monitor setup. The second is a tiny lightweight netbook you take with you when you travel. Imagine also that you have a presentation at a conference overseas. You know that no matter how "finished" you think you are with your slide deck, inevitably you will realize you need to add an exta figure or recalculate some data AFTER leaving the country and your main desktop workstation. How can you be sure your slide deck, data, and the programs you've written are synchronized between your two machines? How can you be sure that every little change you've made on your netbook is reflected on your desktop? What happens if you start making changes on your slide deck, only to realize you need to drop back to the slide deck you had five days ago?
+Imagine you have two computers: the first is a big, powerful desktop machine with a big, dual monitor setup. The second is a tiny lightweight netbook you take with you when you travel. Imagine also that you have a presentation at a conference overseas. You know that no matter how "finished" you think you are with your slide deck, inevitably you will realize you need to add an exta figure or recalculate some data AFTER leaving the country and your main desktop workstation. How can you be sure your slide deck, data, and the programs you've written are synchronized between your two machines? How can you be sure that every little change you've made on your netbook is reflected on your desktop? What happens if you start making changes on your slide deck, only to realize you need to drop back to the slide deck you had five days ago?
 
 ## git : What is Version Control ?
 
@@ -132,6 +132,18 @@ called "Reproducible Science". You may call yours anything you like.
 
     $ kate description &
 
+Step 4 : Applications sometimes create files that are not needed. For
+example, kate creates a temporary file called 'filename~' when you edit
+the file 'filename'. You can ask git to ignore such files by editing
+the file '.git/info/exclude'. Edit the file to ignore files the end with '~'.
+
+     git ls-files --others --exclude-from=.git/info/exclude
+    # Lines that start with '#' are comments.
+    # For a project mostly in C, the following would be a good set of
+    # exclude patterns (uncomment them if you want to use them):
+    # *.[oa]
+    # *~
+    
 ## git add : Adding a File To Version Control
 
 For the git repository to know which files within this directory you
@@ -270,12 +282,13 @@ There are some useful flags for this command, such as
     --stat
     --oneline
     --graph
-    --short
-    --full 
-    --pretty
-    --since
-    --until
-    --author
+    --pretty=short/full/fuller/oneline
+    --since=X.minutes/hours/days/weeks/months/years or YY-MM-DD-HH:MM
+    --until=X.minutes/hours/days/weeks/months/years or YY-MM-DD-HH:MM
+    --author=<pattern>
+
+### Exercise : Make 5 changes and commits to your repository. Generate a log 
+of commits starting from 5 hours back up to 2 minutes back with each commit in one line.
 
 ## git branch : Listing, Creating, and Deleting Branches
 
@@ -294,7 +307,7 @@ The master branch is created when the repository is initialized. With an
 argument, the **branch** command creates a new branch with the given
 name.
 
-    $ git branch experimental
+    $ git branch experimentals
     $ git branch
     * master
       experimental
@@ -373,7 +386,7 @@ Step 3 : Merge the two branches into the core
 ## git clone : Copying a Repository
 
 Today, we'll check out a git type repository at
-https://github.com/JHU-SWC-2012/SWC-bootcamp
+https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago
 
 When you clone the Original repository, the one that is created on your
 local machine is a copy, and will behave as a fully fledged local
