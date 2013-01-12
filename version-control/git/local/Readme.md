@@ -282,12 +282,13 @@ There are some useful flags for this command, such as
     --stat
     --oneline
     --graph
-    --short
-    --full 
-    --pretty
-    --since
-    --until
-    --author
+    --pretty=short/full/fuller/oneline
+    --since=X.minutes/hours/days/weeks/months/years or YY-MM-DD-HH:MM
+    --until=X.minutes/hours/days/weeks/months/years or YY-MM-DD-HH:MM
+    --author=<pattern>
+
+### Exercise : Make 5 changes and commits to your repository. Generate a log 
+of commits starting from 5 hours back up to 2 minutes back with each commit in one line.
 
 ## git branch : Listing, Creating, and Deleting Branches
 
@@ -306,7 +307,7 @@ The master branch is created when the repository is initialized. With an
 argument, the **branch** command creates a new branch with the given
 name.
 
-    $ git branch experimental
+    $ git branch experimentals
     $ git branch
     * master
       experimental
