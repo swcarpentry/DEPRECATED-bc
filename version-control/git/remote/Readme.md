@@ -35,91 +35,12 @@ provides :
 
 **NOTE** Public repos have public licences **by default**. If you don't want to share (in the most liberal sense) your stuff with the world, pay github money for private repos, or host your own.
 
-### Digression: SSH
-
-ssh is a protocol for securely sending data across an insecure network. An important feature of ssh is the ability to perform public key cryptography. We are about to take a little digression, but it is important because ssh is built in to git at a very low level.
-
-Public key cryptography consists of a public key, a private key, and an algorithm called a cypher. Information can be combined with the public key using hte cypher in such a way that it appears like nonsense to anyone not holding the private key. The only way to recover the originial information is to use the cypher and the private key; using the cypher and the public key only generates more nonsense-looking data. In this way, a person can use a public key, encrypt data using the cypher + public key, and send the encrypted data over the network without fear that someone will intercept the information.
-
-In addition to secure communication, public key cryptography gives authentication: you can know that a message sent by someone hasn't been altered. A person uses their private key and the cypher on some data to create a hash, then sends the data and the resulting hash to someone holding the public key. The person on the other end can take the public key + hash and verify the data wasn't changed in transit.
-
-In this way people can be certain who made commits to a git repository. Furthermore, a git server can be certain that the person who is pushing changes to a particular repository actually has commit access to that repo.
-
 ## github pasword 
 
 Setting up github at first requires a github user name and password. 
 Please take a moment to [create a free one](https://github.com/signup/free)
 (if you want to start paying, you can add that to your account some 
 other day). 
-
-## github ssh keys
-
-It will help you to set up automatic authorization, so that github can handshake
-with your computer (in this case, your virtual machine).
-There are [some setup instructions](http://help.github.com/set-up-git-redirect)  
-on the website, but I'll do this along with you at the front of the room as 
-well. 
-
-    $ cd ~/.ssh
-
-It will likely say "no such file or directory."
-
-    $ ssh-keygen -t rsa -C "your_email@youremail.com"
-    Generating public/private rsa key pair.
-    Enter file in which to save the key (/home/swc/.ssh/id_rsa):  <press enter>
-
-The path that it provides will be to this home directory. This is okay. **Press 
-enter.** You may enter a passphrase. You'll see something like this :
-
-    Created directory '/home/swc/.ssh'.
-    Enter passphrase (empty for no passphrase): 
-    Enter same passphrase again: 
-    Your identification has been saved in /home/swc/.ssh/id_rsa.
-    Your public key has been saved in /home/swc/.ssh/id_rsa.pub.
-    The key fingerprint is:
-    09:06:c6:0f:24:b7:84:ef:22:74:de:95:f0:99:64:5d your_email@youremail.com
-    The key's randomart image is:
-    +--[ RSA 2048]----+
-    |  .+*   . .E     |
-    |  .=o+ o .       |
-    |   ..oB +        |
-    | . ....B .       |
-    |. o.. . S        |
-    |. ....           |
-    | . .             |
-    |                 |
-    |                 |
-    +-----------------+
-
-## git config : Configuring your git environment
-
-Once you've set up your rsa keys, you need to tell github who you are.
-Crack open a terminal.
-
-    $ git config --global user.name "Firstname Lastname"
-    $ git config --global user.email "your_email@youremail.com"
-
-Unless your name is Firstname Lastname, please don't copy the above
-lines verbatim. Make the appropriate substitutions.
-
-If you did this properly, you'll have a file in your home **(\~)**
-directory that's called **.gitconfig** . It's contents should look like
-:
-
-    [user]
-          name = Sri Hari Krishna Narayanan
-          email = sriharikrishna@gmail.com
-
-This configuration step allows github to properly credit the authorship
-of changes you make in your repository. For projects with numerous
-authors, this is essential.
-
-Another configuration step for some will be to set their favorite text
-editor as git's text editor of choice. This is optional, since vi is
-usually the default, but can be done with the following command (if you
-like **nano** for example):
-
-    $ git config --global core.editor nano
 
 ## git remote : Steps for Forking a Repository
 
@@ -322,7 +243,7 @@ you'll see something like this at the beginning of the file.
     =====================
 
 The intent is for you to edit the file, knowing now that I wanted the
-Welcome to say Howdy. If you want it to say Willkommen, you should
+Welcome to say Vanakkam. If you want it to say Willkommen, you should
 delete the other lines. However, if you want to be inclusive, you may
 want to change it to read Howdy and Willkommen. Decisions such as this
 one must be made by a human, and why conflict resolution is not handled
