@@ -2,6 +2,8 @@ boot-camps
 ==========
 ![SWC logo](http://software-carpentry.org/img/software-carpentry-banner.png)
 
+Vanakkam!
+
 # University of Chicago - January 12-13, 2013
 Software Carpentry boot camp material
 for the January 12-13, 2013 boot camp at the University of Chicago. 

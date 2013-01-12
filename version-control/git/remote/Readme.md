@@ -315,7 +315,7 @@ you'll see something like this at the beginning of the file.
 
     =====================
     <<<<<<< HEAD
-    Howdy
+    Vanakkam
     =======
     Willkommen
     >>>>>>> development
