@@ -324,7 +324,7 @@ onto more advanced shell topics...
 
 **Wild cards**
 
-Navigate to the `~/boot-camps/Shell-1/data/THOMAS` directory. This
+Navigate to the `~/boot-camps/shell/data/THOMAS` directory. This
 directory contains our hearing test data for THOMAS. If we type `ls`,
 we will see that there are a bunch of files which are just four digit
 numbers. By default, `ls` lists all of the files in a given
