@@ -386,7 +386,7 @@ Step 3 : Merge the two branches into the core
 ## git clone : Copying a Repository
 
 Today, we'll check out a git type repository at
-https://github.com/JHU-SWC-2012/SWC-bootcamp
+https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago
 
 When you clone the Original repository, the one that is created on your
 local machine is a copy, and will behave as a fully fledged local
