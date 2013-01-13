@@ -91,6 +91,11 @@ as their descriptions.
 
     See 'git help <command>' for more information on a specific command.
 
+## git config : Controls the behavior of git
+
+     $ git config --global user.name "YOUR NAME"
+     $ git config --global user.email "YOUR EMAIL"
+     
 ## git init : Creating a Local Repository
 
 To keep track of numerous versions of your work without saving numerous
@@ -161,7 +166,7 @@ in this file.
 
     $ git add readme.rst
 
-## Checking The Status of Your Local Copy
+## git status : Checking the Status of Your Local Copy
 
 The files you've created on your machine are your local "working" copy.
 The changes your make in this local copy aren't backed up online
@@ -206,7 +211,7 @@ More frequent commits increase the granularity of your **undo** button.
 
 There are no hard and fast rules, but good commits are atomic: they are the smallest change that remain meaningful. A good commit message usually contains a one-line description followed by a longer explanation if necessary.
 
-[This guy's repo](https://github.com/jonspeicher/Pathfinder/commits/master) has some good commit messages.
+[Our repo](https://github.com/thehackerwithin/boot-camps/commits/2013-01-chicago) has some good commit messages.
 
 ### Exercise : Commit Your Changes
 
@@ -287,9 +292,22 @@ There are some useful flags for this command, such as
     --until=X.minutes/hours/days/weeks/months/years or YY-MM-DD-HH:MM
     --author=<pattern>
 
-### Exercise : Make 5 changes and commits to your repository. Generate a log 
-of commits starting from 5 hours back up to 2 minutes back with each commit in one line.
+## git reset : Unstaging a staged file
+    git reset filename     (opposite of 'git add filename')
 
+## git checkout : Discardind unstaged modifications (git checkout has other purposes)
+    git checkout -- filename     
+    
+## git rm : Removing s file
+   git rm filename   (Removes a file from the repository)
+   
+### Exercise : 
+    1) Create 5 files in your directory with one line of content in each file.
+    2) Commit the files to the repository.
+    3) Change 2 of the 5 files and commit them.
+    4) Undo the changes in step 3)
+    5) Print out the last entry in the log.
+    
 ## git branch : Listing, Creating, and Deleting Branches
 
 Branches are parallel instances of a repository that can be edited and
@@ -385,7 +403,7 @@ Step 3 : Merge the two branches into the core
 
 ## git clone : Copying a Repository
 
-Today, we'll check out a git type repository at
+Yesterday, you checked out a git type repository at
 https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago
 
 When you clone the Original repository, the one that is created on your

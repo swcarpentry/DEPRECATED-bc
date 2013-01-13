@@ -1,10 +1,9 @@
-[Back To Debugging](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/debugging)
-- [Forward To
+[Back To Debugging](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/debugging) - [Forward To
 Documentation](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/documentation)
 
 * * * * *
 
-**Presented By Anthony Scopatz**
+**Presented By Katy Huff**
 
 **Based on materials by Katy Huff, Rachel Slaybaugh, and Anthony
 Scopatz**
@@ -16,23 +15,23 @@ Software testing is a process by which one or more expected behaviors
 and results from a piece of software are exercised and confirmed. Well
 chosen tests will confirm expected code behavior for the extreme
 boundaries of the input domains, output ranges, parametric combinations,
-and other behavioral edge cases.
+and other behavioral **edge cases**.
 
 # Why test software?
 
 Unless you write flawless, bug-free, perfectly accurate, fully precise,
-and predictable code every time, you must test your code in order to
+and predictable code **every time**, you must test your code in order to
 trust it enough to answer in the affirmative to at least a few of the
 following questions:
 
 -   Does your code work?
--   Always?
--   Does it do what you think it does?
+-   **Always?**
+-   Does it do what you think it does? ([Patriot Missile Failure](http://www.ima.umn.edu/~arnold/disasters/patriot.html))
 -   Does it continue to work after changes are made?
 -   Does it continue to work after system configurations or libraries
     are upgraded?
 -   Does it respond properly for a full range of input parameters?
--   What about edge or corner cases?
+-   What about **edge or corner cases**?
 -   What's the limit on that input parameter?
 -   How will it affect your
     [publications](http://www.nature.com/news/2010/101013/full/467775a.html)?
@@ -67,7 +66,7 @@ def mean(numlist):
     return total/length
 ```
 
-Tests could be implemented as runtime exceptions in the function:
+Tests could be implemented as runtime **exceptions in the function**:
 
 ```python
 def mean(numlist):
@@ -348,7 +347,7 @@ list of strings?
 # Test Driven Development
 
 Test driven development (TDD) is a philosophy whereby the developer
-creates code by **writing the tests fist**. That is to say you write the
+creates code by **writing the tests first**. That is to say you write the
 tests *before* writing the associated code!
 
 This is an iterative process whereby you write a test then write the

@@ -6,7 +6,7 @@ Version Control Collaboratively
 - [Forward To
 Debugging](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/debugging)
 
-----
+----s
 
 **Presented By Sri Hari Krishna Narayanan**
 **Based on material by Katy Huff**
@@ -35,91 +35,12 @@ provides :
 
 **NOTE** Public repos have public licences **by default**. If you don't want to share (in the most liberal sense) your stuff with the world, pay github money for private repos, or host your own.
 
-### Digression: SSH
-
-ssh is a protocol for securely sending data across an insecure network. An important feature of ssh is the ability to perform public key cryptography. We are about to take a little digression, but it is important because ssh is built in to git at a very low level.
-
-Public key cryptography consists of a public key, a private key, and an algorithm called a cypher. Information can be combined with the public key using hte cypher in such a way that it appears like nonsense to anyone not holding the private key. The only way to recover the originial information is to use the cypher and the private key; using the cypher and the public key only generates more nonsense-looking data. In this way, a person can use a public key, encrypt data using the cypher + public key, and send the encrypted data over the network without fear that someone will intercept the information.
-
-In addition to secure communication, public key cryptography gives authentication: you can know that a message sent by someone hasn't been altered. A person uses their private key and the cypher on some data to create a hash, then sends the data and the resulting hash to someone holding the public key. The person on the other end can take the public key + hash and verify the data wasn't changed in transit.
-
-In this way people can be certain who made commits to a git repository. Furthermore, a git server can be certain that the person who is pushing changes to a particular repository actually has commit access to that repo.
-
 ## github pasword 
 
 Setting up github at first requires a github user name and password. 
 Please take a moment to [create a free one](https://github.com/signup/free)
 (if you want to start paying, you can add that to your account some 
 other day). 
-
-## github ssh keys
-
-It will help you to set up automatic authorization, so that github can handshake
-with your computer (in this case, your virtual machine).
-There are [some setup instructions](http://help.github.com/set-up-git-redirect)  
-on the website, but I'll do this along with you at the front of the room as 
-well. 
-
-    $ cd ~/.ssh
-
-It will likely say "no such file or directory."
-
-    $ ssh-keygen -t rsa -C "your_email@youremail.com"
-    Generating public/private rsa key pair.
-    Enter file in which to save the key (/home/swc/.ssh/id_rsa):  <press enter>
-
-The path that it provides will be to this home directory. This is okay. **Press 
-enter.** You may enter a passphrase. You'll see something like this :
-
-    Created directory '/home/swc/.ssh'.
-    Enter passphrase (empty for no passphrase): 
-    Enter same passphrase again: 
-    Your identification has been saved in /home/swc/.ssh/id_rsa.
-    Your public key has been saved in /home/swc/.ssh/id_rsa.pub.
-    The key fingerprint is:
-    09:06:c6:0f:24:b7:84:ef:22:74:de:95:f0:99:64:5d your_email@youremail.com
-    The key's randomart image is:
-    +--[ RSA 2048]----+
-    |  .+*   . .E     |
-    |  .=o+ o .       |
-    |   ..oB +        |
-    | . ....B .       |
-    |. o.. . S        |
-    |. ....           |
-    | . .             |
-    |                 |
-    |                 |
-    +-----------------+
-
-## git config : Configuring your git environment
-
-Once you've set up your rsa keys, you need to tell github who you are.
-Crack open a terminal.
-
-    $ git config --global user.name "Firstname Lastname"
-    $ git config --global user.email "your_email@youremail.com"
-
-Unless your name is Firstname Lastname, please don't copy the above
-lines verbatim. Make the appropriate substitutions.
-
-If you did this properly, you'll have a file in your home **(\~)**
-directory that's called **.gitconfig** . It's contents should look like
-:
-
-    [user]
-          name = Sri Hari Krishna Narayanan
-          email = sriharikrishna@gmail.com
-
-This configuration step allows github to properly credit the authorship
-of changes you make in your repository. For projects with numerous
-authors, this is essential.
-
-Another configuration step for some will be to set their favorite text
-editor as git's text editor of choice. This is optional, since vi is
-usually the default, but can be done with the following command (if you
-like **nano** for example):
-
-    $ git config --global core.editor nano
 
 ## git remote : Steps for Forking a Repository
 
@@ -176,7 +97,7 @@ repository, it is necessary to also merge.
 ## git merge : Merging the contents of a remote
 
 To incorporate upstream changes from the original master repository (in
-this case JHU-SWC-2012/SWC-bootcamp) into your local working copy, you
+this case thehackerwithin/boot-camps) into your local working copy, you
 must both fetch and merge. The process of merging may result in
 conflicts, so pay attention. This is where version control is both at
 its most powerful and its most complicated.
@@ -219,16 +140,17 @@ Before pushing, a developer should always pull (or fetch + merge), so
 that there is an opportunity to resolve conflicts before pushing to the
 remote.
 
+### Exercise : Push a change to github
 We'll talk about conflicts later, but first, since we have no conflicts
 and are up to date, we can make a minor change and send our changes to
 your fork, the "origin."
 
-    $ git push origin master
+    $ git push origin 2013-01-chicago
 
 If you have permission to push to the upstream repository, sending
 commits to that remote is exactly analagous.
 
-    $ git push upstream master
+    $ git push upstream 2013-01-chicago
 
 In the case of the 2013-01-chicago code, new developer accounts will not allow
 this push to succeed. You're welcome to try it though.
@@ -241,7 +163,7 @@ carefully.
 In the 2013-01-chicago code, you'll find a file called Readme.md. This is a
 standard documentation file that appears rendered on the landing page
 for the repository in github. To see the rendered version, visit your
-fork on github, (https://github.com/YOU/boot-camps).
+fork on github, (https://github.com/YOU/boot-camps/tree/2013-01-chicago/README.md).
 
 For illustration, let's imagine that, suddenly, each of the developers
 on the 2013-01-chicago code would like to welcome visitors in a language other
@@ -249,15 +171,15 @@ than English. Since we're all from so many different places and speak
 so many languages, there will certainly be disagreements about what to
 say instead of "Welcome."
 
-I, for example, am from Tamil Nadu, India, so I'll push (to the upstream repository) my own version of Welcome on line 2 of Readme.md.
+I, for example, am from Tamil Nadu, India, so I'll push (to the upstream repository) my own version of Welcome on line 5 of Readme.md.
 
 You may speak another language, perhaps even English, however, and may want to replace the 
 Tamil word 'vanakkam' with an equivalent word that you prefer (welcome, willkommen, 
 bienvenido, benvenuti, etc.).
 
 You'll want to start a new branch for development. It's a good
-convention to think of your master branch as the "production branch,"
-typically by keeping that branch clean of your local edits until they
+convention to think of your master branch (in this case your 2013-01-chicago
+branch) as the "production branch," typically by keeping that branch clean of your local edits until they
 are ready for release. Developers typically use the master branch of
 their local fork to track other developers changes in the remote
 repository until their own local development branch changes are ready
@@ -275,13 +197,13 @@ commit your changes.
     <edit the readme file and exit kate>
     $ git commit -am "Changed the welcome message to ... "
 
-Step 2 : Mirror the remote upstream repository in your master branch by
-pulling down my changes
+Step 2 : Mirror the remote upstream repository in your master branch (in this case your 
+2013-01-chicago branch) by pulling down my changes
 
-    $ git checkout master
-    Switched to branch 'master'
+    $ git checkout 2013-01-chicago
+    Switched to branch '2013-01-chicago'
     $ git fetch upstream
-    $ git merge upstream/master
+    $ git merge upstream/2013-01-chicago
     Updating 43844ea..3b36a87
     Fast-forward
      README.rst |   2 +-
@@ -302,7 +224,7 @@ Now what?
 Git has paused the merge. You can see this with the **git status**
 command.
 
-    # On branch master
+    # On branch 2013-01-chicago
     # Unmerged paths:
     #   (use "git add/rm <file>..." as appropriate to mark resolution)
     #
@@ -315,22 +237,20 @@ you'll see something like this at the beginning of the file.
 
     =====================
     <<<<<<< HEAD
-    Howdy
+    Vanakkam
     =======
     Willkommen
     >>>>>>> development
     =====================
 
 The intent is for you to edit the file, knowing now that I wanted the
-Welcome to say Howdy. If you want it to say Willkommen, you should
+Welcome to say Vanakkam. If you want it to say Willkommen, you should
 delete the other lines. However, if you want to be inclusive, you may
-want to change it to read Howdy and Willkommen. Decisions such as this
+want to change it to read Vanakkam and Willkommen. Decisions such as this
 one must be made by a human, and why conflict resolution is not handled
 more automatically by the version control system.
 
-    =====================
-    Howdy and Willkommen
-    =====================
+    Vanakkam and Willkommen
 
 This results in a status To alert git that you have made appropriate
 alterations,
@@ -347,13 +267,13 @@ alterations,
     # .git/MERGE_HEAD
     # and try again.
     #
-    $ git push origin master
+    $ git push origin 2013-01-chicago
     Counting objects: 10, done.
     Delta compression using up to 2 threads.
     Compressing objects: 100% (6/6), done.
     Writing objects: 100% (6/6), 762 bytes, done.
     Total 6 (delta 2), reused 0 (delta 0)
-    To git@github.com:username/SWC-bootcamp.git
+    To git@github.com:username/boot-camps.git
 
 ## gitolite
 
