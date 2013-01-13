@@ -64,6 +64,7 @@ command:
 
 Followed by:
 
+    cd boot-camps
     git checkout 2013-01-chicago
 
 These 2 commands will grab all of the data needed for this workshop from the
@@ -145,10 +146,10 @@ you will see that `testfile` is gone.
 **Changing Directories**
 
 Now, let's move to a different directory. The command `cd` (change
-directory) is used to move around. Let's move into the `SWC-bootcamp`
+directory) is used to move around. Let's move into the `boot-camps`
 directory. Enter the following command:
 
-    cd SWC-bootcamp
+    cd boot-camps
 
 Now use the `ls` command to see what is inside this directory. You
 will see that there is an entry which is green. This means that this
@@ -158,10 +159,10 @@ with a star.
 This directory contains all of the material for this boot camp. Now
 move to the directory containing the data for the shell tutorial:
 
-    cd 1-Shell
+    cd shell
 
 If you enter the `cd` command by itself, you will return to the home
-directory. Try this, and then navigate back to the `1-Shell`
+directory. Try this, and then navigate back to the `shell`
 directory.
 
 ## Arguments
@@ -195,19 +196,19 @@ give `ls` the names of other directories to view. Navigate to the
 home directory if you are not already there. Then enter the
 command:
 
-    ls SWC-bootcamp
+    ls boot-camps
 
-This will list the contents of the `SWC-bootcamp` directory without
+This will list the contents of the `boot-camps` directory without
 you having to navigate there. Now enter:
 
-    ls SWC-bootcamp/1-Shell
+    ls boot-camps/shell
 
-This prints the contents of `1-Shell`. The `cd` command works in a
+This prints the contents of `shell`. The `cd` command works in a
 similar way. Try entering:
 
-    cd SWC-bootcamp/1-Shell
+    cd boot-camps/shell
 
-and you will jump directly to `1-Shell` without having to go through
+and you will jump directly to `shell` without having to go through
 the intermediate directory.
 
 ## Full vs. Relative Paths
@@ -230,16 +231,16 @@ directory in `home` which is a directory in `/`.
 
 Now enter the following command:
 
-    cd /home/swc/SWC-bootcamp/1-Shell
+    cd /home/swc/boot-camps/shell
 
-This jumps to `1-Shell`. Now go back to the home directory. We saw
+This jumps to `shell`. Now go back to the home directory. We saw
 earlier that the command:
 
-    cd SWC-bootcamp/1-Shell
+    cd boot-camps/shell
 
-had the same effect - it took us to the `1-Shell` directory. But,
+had the same effect - it took us to the `shell` directory. But,
 instead of specifying the full path
-(`/home/swc/SWC-bootcamp/1-Shell`), we specified a *relative path*. In
+(`/home/swc/boot-camps/shell`), we specified a *relative path*. In
 other words, we specified the path relative to our current
 directory. A full path always starts with a `/`. A relative path does
 not. You can usually use either a full path or a relative path
@@ -257,7 +258,7 @@ familiar in there?
 
 There are some shortcuts which you should know about. Dealing with the
 home directory is very common. So, in the shell the tilde character,
-`~`, is a shortcut for your home directory. Navigate to the `1-Shell`
+`~`, is a shortcut for your home directory. Navigate to the `shell`
 directory, then enter the command:
 
     ls ~
@@ -268,7 +269,7 @@ above your current directory. Thus:
 
     ls ..
 
-prints the contents of the `/home/swc/SWC-bootcamp`. You can chain
+prints the contents of the `/home/swc/boot-camps`. You can chain
 these together, so:
 
     ls ../../
@@ -323,7 +324,7 @@ onto more advanced shell topics...
 
 **Wild cards**
 
-Navigate to the `~/SWC-bootcamp/Shell-1/data/THOMAS` directory. This
+Navigate to the `~/boot-camps/shell/data/THOMAS` directory. This
 directory contains our hearing test data for THOMAS. If we type `ls`,
 we will see that there are a bunch of files which are just four digit
 numbers. By default, `ls` lists all of the files in a given
@@ -380,7 +381,7 @@ directory name. For example, enter:
     cd S<tab>
 
 The shell will fill in the rest of the directory name for
-`SWC-bootcamp`. Now enter:
+`boot-camps`. Now enter:
 
     ls 3<tab><tab>
 
@@ -439,14 +440,14 @@ shell looks for programs to run. If your program is not in this list,
 then an error is printed. The shell ONLY checks in the places listed
 in the `PATH` environment variable. 
 
-Navigate to the `1-Shell` directory and list the contents. You will
+Navigate to the `shell` directory and list the contents. You will
 notice that there is a program (executable file) called `hello` in
 this directory. Now, try to run the program by entering:
 
     hello
 
 You should get an error saying that hello cannot be found. That is
-because the directory `/home/swc/SWC-bootcamp/1-Shell` is not in the
+because the directory `/home/swc/boot-camps/shell` is not in the
 `PATH`. You can run the `hello` program by entering:
 
     ./hello
@@ -456,11 +457,11 @@ directory. This tells the shell to run the `hello` program which is
 located right here. So, you can run any program by entering the path
 to that program. You can run `hello` equally well by specifying:
 
-    /home/swc/SWC-bootcamp/1-Shell/hello
+    /home/swc/boot-camps/shell/hello
 
 Or by entering:
 
-    ../1-Shell/hello
+    ../shell/hello
 
 When there are no `/` characters, the shell assumes you want to look
 in one of the default places for the program.
@@ -487,12 +488,12 @@ is where the name comes from, `cat` is short for concatenate).
 * * * *
 **Short Exercises**
 
-1.  Print out the contents of the `~/SWC-bootcamp/1-Shell/dictionary.txt`
+1.  Print out the contents of the `~/boot-camps/shell/dictionary.txt`
     file. What does this file contain?
 
-2.  Without changing directories, (you should still be in `1-Shell`),
+2.  Without changing directories, (you should still be in `shell`),
     use one short command to print the contents of all of the files in
-    the /home/swc/SWC-bootcamp/1-Shell/data/THOMAS directory.
+    the `/home/swc/boot-camps/shell/data/THOMAS` directory.
 
 * * * *
 
@@ -500,7 +501,7 @@ is where the name comes from, `cat` is short for concatenate).
 be annoying to use. The program, `less`, is useful for this
 case. Enter the following command:
 
-    less ~/SWC-bootcamp/1-Shell/dictionary.txt
+    less ~/boot-camps/shell/dictionary.txt
 
 `less` opens the file, and lets you navigate through it. The commands
 are identical to the `man` program. Use "space" to go forward and hit
@@ -532,7 +533,7 @@ in reverse while using `less`.
 ## Redirection
 
 Let's turn to the experimental data from the hearing tests that we
-began with. This data is located in the `~/SWC-bootcamp/1-Shell/data`
+began with. This data is located in the `~/boot-camps/shell/data`
 directory. Each subdirectory corresponds to a particular participant
 in the study. Navigate to the `Bert` subdirectory in `data`.  There
 are a bunch of text files which contain experimental data
@@ -559,7 +560,7 @@ exists.
 Use `>>`, to append the contents of all of the files which contain the
 number 4 in the directory:
 
-    /home/swc/SWC-bootcamp/1-Shell/data/gerdal
+    /home/swc/boot-camps/shell/data/gerdal
 
 to the existing `all_data` file. Thus, when you are done `all_data`
 should contain all of the experiment data from Bert and any
@@ -759,7 +760,7 @@ name to the file, then sort it and make a new file called Sorted.
 
 * * * *
 
-Let's navigate back to `~/SWC-bootcamp/1-Shell/data`. Enter the following command:
+Let's navigate back to `~/boot-camps/shell/data`. Enter the following command:
 
     wc Bert/* | sort -k 3 -n
 
@@ -910,7 +911,7 @@ require a find command):
 Hint: If you make a mistake and need to start over just do the
 following:
 
-1.  Navigate to the `1-Shell` directory
+1.  Navigate to the `shell` directory
 
 2.  Delete the `data` directory
 
