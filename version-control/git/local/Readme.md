@@ -91,6 +91,11 @@ as their descriptions.
 
     See 'git help <command>' for more information on a specific command.
 
+## git config : Controls the behavior of git
+
+     $ git config --global user.name "YOUR NAME"
+     $ git config --global user.email "YOUR EMAIL"
+     
 ## git init : Creating a Local Repository
 
 To keep track of numerous versions of your work without saving numerous
