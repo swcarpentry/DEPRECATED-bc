@@ -6,7 +6,7 @@ Version Control Collaboratively
 - [Forward To
 Debugging](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/debugging)
 
-----
+----s
 
 **Presented By Sri Hari Krishna Narayanan**
 **Based on material by Katy Huff**
@@ -140,16 +140,17 @@ Before pushing, a developer should always pull (or fetch + merge), so
 that there is an opportunity to resolve conflicts before pushing to the
 remote.
 
+### Exercise : Push a change to github
 We'll talk about conflicts later, but first, since we have no conflicts
 and are up to date, we can make a minor change and send our changes to
 your fork, the "origin."
 
-    $ git push origin master
+    $ git push origin 2013-01-chicago
 
 If you have permission to push to the upstream repository, sending
 commits to that remote is exactly analagous.
 
-    $ git push upstream master
+    $ git push upstream 2013-01-chicago
 
 In the case of the 2013-01-chicago code, new developer accounts will not allow
 this push to succeed. You're welcome to try it though.
@@ -170,15 +171,15 @@ than English. Since we're all from so many different places and speak
 so many languages, there will certainly be disagreements about what to
 say instead of "Welcome."
 
-I, for example, am from Tamil Nadu, India, so I'll push (to the upstream repository) my own version of Welcome on line 2 of Readme.md.
+I, for example, am from Tamil Nadu, India, so I'll push (to the upstream repository) my own version of Welcome on line 5 of Readme.md.
 
 You may speak another language, perhaps even English, however, and may want to replace the 
 Tamil word 'vanakkam' with an equivalent word that you prefer (welcome, willkommen, 
 bienvenido, benvenuti, etc.).
 
 You'll want to start a new branch for development. It's a good
-convention to think of your master branch as the "production branch,"
-typically by keeping that branch clean of your local edits until they
+convention to think of your master branch (in this case your 2013-01-chicago
+branch) as the "production branch," typically by keeping that branch clean of your local edits until they
 are ready for release. Developers typically use the master branch of
 their local fork to track other developers changes in the remote
 repository until their own local development branch changes are ready
@@ -196,13 +197,13 @@ commit your changes.
     <edit the readme file and exit kate>
     $ git commit -am "Changed the welcome message to ... "
 
-Step 2 : Mirror the remote upstream repository in your master branch by
-pulling down my changes
+Step 2 : Mirror the remote upstream repository in your master branch (in this case your 
+2013-01-chicago branch) by pulling down my changes
 
-    $ git checkout master
-    Switched to branch 'master'
+    $ git checkout 2013-01-chicago
+    Switched to branch '2013-01-chicago'
     $ git fetch upstream
-    $ git merge upstream/master
+    $ git merge upstream/2013-01-chicago
     Updating 43844ea..3b36a87
     Fast-forward
      README.rst |   2 +-
@@ -223,7 +224,7 @@ Now what?
 Git has paused the merge. You can see this with the **git status**
 command.
 
-    # On branch master
+    # On branch 2013-01-chicago
     # Unmerged paths:
     #   (use "git add/rm <file>..." as appropriate to mark resolution)
     #
@@ -245,13 +246,11 @@ you'll see something like this at the beginning of the file.
 The intent is for you to edit the file, knowing now that I wanted the
 Welcome to say Vanakkam. If you want it to say Willkommen, you should
 delete the other lines. However, if you want to be inclusive, you may
-want to change it to read Howdy and Willkommen. Decisions such as this
+want to change it to read Vanakkam and Willkommen. Decisions such as this
 one must be made by a human, and why conflict resolution is not handled
 more automatically by the version control system.
 
-    =====================
-    Howdy and Willkommen
-    =====================
+    Vanakkam and Willkommen
 
 This results in a status To alert git that you have made appropriate
 alterations,
@@ -268,13 +267,13 @@ alterations,
     # .git/MERGE_HEAD
     # and try again.
     #
-    $ git push origin master
+    $ git push origin 2013-01-chicago
     Counting objects: 10, done.
     Delta compression using up to 2 threads.
     Compressing objects: 100% (6/6), done.
     Writing objects: 100% (6/6), 762 bytes, done.
     Total 6 (delta 2), reused 0 (delta 0)
-    To git@github.com:username/SWC-bootcamp.git
+    To git@github.com:username/boot-camps.git
 
 ## gitolite
 
