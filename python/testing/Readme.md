@@ -366,7 +366,7 @@ Fibonacci sequence of given indexes. You would - of course - start by
 writing the test, possibly testing a single value:
 
 ```python
-from nose import assert_equal
+from nose.tools import assert_equal
 
 from pisa import fib
 
