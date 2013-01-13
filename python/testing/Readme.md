@@ -512,6 +512,14 @@ def fib(n):
         return fib(n - 1) + fib(n - 2)
 ```
 
+# Quality Assurance Exercise
+
+Can you think of other tests to make for the fibonacci function? I promise there 
+are at least two. 
+
+Implement one new test in test_fib.py, run nosetests, and if it fails, implement 
+a more robust function for that case.
+
 And thus - finally - we have a robust function together with working
 tests!
 
