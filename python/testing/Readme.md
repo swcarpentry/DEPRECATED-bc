@@ -1,5 +1,4 @@
-[Back To Debugging](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/debugging) - [Forward To
-Documentation](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/documentation)
+[Back To Debugging](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/debugging) - [Forward To Documentation](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/documentation)
 
 * * * * *
 
