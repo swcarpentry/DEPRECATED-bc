@@ -97,7 +97,7 @@ repository, it is necessary to also merge.
 ## git merge : Merging the contents of a remote
 
 To incorporate upstream changes from the original master repository (in
-this case JHU-SWC-2012/SWC-bootcamp) into your local working copy, you
+this case thehackerwithin/boot-camps) into your local working copy, you
 must both fetch and merge. The process of merging may result in
 conflicts, so pay attention. This is where version control is both at
 its most powerful and its most complicated.
@@ -162,7 +162,7 @@ carefully.
 In the 2013-01-chicago code, you'll find a file called Readme.md. This is a
 standard documentation file that appears rendered on the landing page
 for the repository in github. To see the rendered version, visit your
-fork on github, (https://github.com/YOU/boot-camps).
+fork on github, (https://github.com/YOU/boot-camps/tree/2013-01-chicago/README.md).
 
 For illustration, let's imagine that, suddenly, each of the developers
 on the 2013-01-chicago code would like to welcome visitors in a language other
