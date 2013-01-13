@@ -347,7 +347,7 @@ list of strings?
 # Test Driven Development
 
 Test driven development (TDD) is a philosophy whereby the developer
-creates code by **writing the tests fist**. That is to say you write the
+creates code by **writing the tests first**. That is to say you write the
 tests *before* writing the associated code!
 
 This is an iterative process whereby you write a test then write the
