@@ -292,14 +292,13 @@ There are some useful flags for this command, such as
     --until=X.minutes/hours/days/weeks/months/years or YY-MM-DD-HH:MM
     --author=<pattern>
 
-## git reset : Undoing changes
-    git reset <commit> filename     (resets filename to the status in commit <commit>)
-    git reset HEAD filename     (opposite of 'git add filename')
-    git reset --soft <commit>   (reset the 'HEAD' to commit)
-    git reset --mixed <commit>  (reset the 'HEAD' to commit. lose index, preserve the working tree)
-    git reset HEAD filename     (reset the 'HEAD' to commit. lose index,lose changes in the working tree)
+## git reset : Unstaging a staged file
+    git reset filename     (opposite of 'git add filename')
 
-## git rm : Removing changes
+## git checkout : Discardind unstaged modifications (git checkout has other purposes)
+    git checkout -- filename     
+    
+## git rm : Removing s file
    git rm filename   (Removes a file from the repository)
    
 ### Exercise : 
