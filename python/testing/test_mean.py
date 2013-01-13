@@ -20,9 +20,9 @@ def test_mean1():
     exp = 0
     assert_equal(obs, exp)
 
-
 def test_floating_mean1():
     obs = mean([1, 2])
     exp = 1.5
     assert_equal(obs, exp)
+
 
