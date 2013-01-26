@@ -228,6 +228,10 @@ class Dependency (object):
     def _get_version(self):
         raise NotImplementedError(self)
 
+    def _minimum_version_string(self):
+        return self.version_delimiter.join(
+            str(part) for part in self.minimum_version)
+
     def _check_version(self, version, parsed_version=None):
         if not parsed_version:
             parsed_version = self._parse_version(version=version)
@@ -235,9 +239,7 @@ class Dependency (object):
             raise DependencyError(
                 checker=self,
                 message='outdated version of {0}: {1} (need >= {2})'.format(
-                    self.full_name(), version,
-                    self.version_delimiter.join(
-                        str(part) for part in self.minimum_version)))
+                    self.full_name(), version, self._minimum_version_string()))
 
     def _parse_version(self, version):
         if not version:
@@ -247,7 +249,13 @@ class Dependency (object):
             try:
                 parsed_version.append(int(part))
             except ValueError as e:
-                raise NotImplementedError((version, part))# from e
+                raise DependencyError(
+                    checker=self,
+                    message=(
+                        'unparsable {0!r} in version {1} of {2}, (need >= {3})'
+                        ).format(
+                        part, version, self.full_name(),
+                        self._minimum_version_string()))# from e
         return tuple(parsed_version)
 
 
