@@ -79,7 +79,8 @@ CHECKS = [
     'sqlite3-python',  # Python package
 # Python
     'python',
-    'IPython',
+    'ipython',         # Command line tool
+    'IPython',         # Python package
     'numpy',
     'scipy',
     'matplotlib',
@@ -346,6 +347,7 @@ for command,long_name,minimum_version in [
         ('pip', None, None),
         ('sqlite3', 'SQLite 3', None),
         ('nosetests', 'Nose', (1, 0, 0)),
+        ('ipython', 'IPython script', (0, 13)),
         ('emacs', 'Emacs', None),
         ('xemacs', 'XEmacs', None),
         ('vim', 'Vim', None),
@@ -455,7 +457,8 @@ class PythonPackageDependency (Dependency):
 for package,name,long_name,minimum_version in [
         ('nose', None, 'Nose Python package',
          CHECKER['nosetests'].minimum_version),
-        ('IPython', None, None, None),
+        ('IPython', None, 'IPython Python package',
+         CHECKER['ipython'].minimum_version),
         ('numpy', None, 'NumPy', None),
         ('scipy', None, 'SciPy', None),
         ('matplotlib', None, 'Matplotlib', None),
