@@ -110,11 +110,13 @@ class DependencyError (Exception):
         self._message = message
     message = property(_get_message, _set_message)
 
-    def __init__(self, checker, message, cause=None):
+    def __init__(self, checker, message, causes=None):
         super(DependencyError, self).__init__(message)
         self.checker = checker
         self.message = message
-        self.cause = cause
+        if causes is None:
+            causes = []
+        self.causes = causes
 
     def __str__(self):
         url = 'http://software-carpentry.org/setup/'  # TODO: per-package URL
@@ -124,9 +126,10 @@ class DependencyError (Exception):
             '  For instructions on installing an up-to-date version, see',
             '  ' + url,
             ]
-        if self.cause:
-            lines.append('  cause:')
-            lines.extend('  ' + line for line in str(self.cause).splitlines())
+        if self.causes:
+            lines.append('  causes:')
+            for cause in self.causes:
+                lines.extend('  ' + line for line in str(cause).splitlines())
         return '\n'.join(lines)
 
 
@@ -211,17 +214,19 @@ class Dependency (object):
             except DependencyError as e:
                 raise DependencyError(
                     checker=self,
-                    message='and-dependency not satisfied for {0}'.format(
-                        self.full_name()),
-                    cause=e)
-        self.or_pass = or_error = None
+                    message=(
+                        'some dependencies for {0} were not satisfied'
+                        ).format(self.full_name()),
+                    causes=[e])
+        self.or_pass = None
+        or_errors = []
         for dependency in self.or_dependencies:
             if not hasattr(dependency, 'check'):
                 dependency = CHECKER[dependency]
             try:
                 version = dependency.check()
             except DependencyError as e:
-                or_error = e
+                or_errors.append(e)
             else:
                 self.or_pass = {
                     'dependency': dependency,
@@ -231,9 +236,10 @@ class Dependency (object):
         if self.or_dependencies and not self.or_pass:
             raise DependencyError(
                 checker=self,
-                message='or-dependency not satisfied for {0}'.format(
-                    self.full_name()),
-                    cause=or_error)
+                message=(
+                    '{0} requires at least one of the following dependencies'
+                    ).format(self.full_name()),
+                    causes=or_errors)
 
     def _check(self):
         version = self._get_version()
