@@ -26,11 +26,11 @@ Filtering
 
 Select only the data meeting certain criteria:
 
-    SELECT * FROM table_name WHERE column_name = "Hello World";
+    SELECT * FROM table_name WHERE column_name = 'Hello World';
 
 Combine conditions:
 
-    SELECT * FROM table_name WHERE (column_name_1 >= 1000) AND (column_name_2 = "A" OR column_name_2 = "B");
+    SELECT * FROM table_name WHERE (column_name_1 >= 1000) AND (column_name_2 = 'A' OR column_name_2 = 'B');
 
 
 Sorting
