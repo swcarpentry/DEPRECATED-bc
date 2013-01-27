@@ -110,17 +110,24 @@ class DependencyError (Exception):
         self._message = message
     message = property(_get_message, _set_message)
 
-    def __init__(self, checker, message):
+    def __init__(self, checker, message, cause=None):
         super(DependencyError, self).__init__(message)
         self.checker = checker
         self.message = message
+        self.cause = cause
 
     def __str__(self):
         url = 'http://software-carpentry.org/setup/'  # TODO: per-package URL
-        return 'check for {0} failed:\n{1}\n{2}\n{3}'.format(
-            self.checker.full_name(), self.message,
-            'For instructions on installing an up-to-date version, see',
-            url)
+        lines = [
+            'check for {0} failed:'.format(self.checker.full_name()),
+            '  ' + self.message,
+            '  For instructions on installing an up-to-date version, see',
+            '  ' + url,
+            ]
+        if self.cause:
+            lines.append('  cause:')
+            lines.extend('  ' + line for line in str(self.cause).splitlines())
+        return '\n'.join(lines)
 
 
 def check(checks=None):
@@ -199,7 +206,14 @@ class Dependency (object):
         for dependency in self.and_dependencies:
             if not hasattr(dependency, 'check'):
                 dependency = CHECKER[dependency]
-            dependency.check()
+            try:
+                dependency.check()
+            except DependencyError as e:
+                raise DependencyError(
+                    checker=self,
+                    message='and-dependency not satisfied for {0}'.format(
+                        self.full_name()),
+                    cause=e)
         self.or_pass = or_error = None
         for dependency in self.or_dependencies:
             if not hasattr(dependency, 'check'):
@@ -215,7 +229,11 @@ class Dependency (object):
                     }
                 break  # no need to test other dependencies
         if self.or_dependencies and not self.or_pass:
-            raise or_error
+            raise DependencyError(
+                checker=self,
+                message='or-dependency not satisfied for {0}'.format(
+                    self.full_name()),
+                    cause=or_error)
 
     def _check(self):
         version = self._get_version()
