@@ -464,29 +464,33 @@ class PythonPackageDependency (Dependency):
         return version
 
 
-for package,name,long_name,minimum_version in [
+for package,name,long_name,minimum_version,and_dependencies in [
         ('nose', None, 'Nose Python package',
-         CHECKER['nosetests'].minimum_version),
+         CHECKER['nosetests'].minimum_version, None),
         ('IPython', None, 'IPython Python package',
-         CHECKER['ipython'].minimum_version),
-        ('numpy', None, 'NumPy', None),
-        ('scipy', None, 'SciPy', None),
-        ('matplotlib', None, 'Matplotlib', None),
-        ('pandas', None, 'Pandas', (0, 8)),
-        ('sympy', None, 'SymPy', None),
-        ('Cython', None, None, None),
-        ('networkx', None, 'NetworkX', None),
-        ('mayavi.mlab', None, 'MayaVi', None),
-        ('setuptools', None, 'Setuptools', None),
+         CHECKER['ipython'].minimum_version, None),
+        ('numpy', None, 'NumPy', None, None),
+        ('scipy', None, 'SciPy', None, None),
+        ('matplotlib', None, 'Matplotlib', None, None),
+        ('pandas', None, 'Pandas', (0, 8), None),
+        ('sympy', None, 'SymPy', None, None),
+        ('Cython', None, None, None, None),
+        ('networkx', None, 'NetworkX', None, None),
+        ('mayavi.mlab', None, 'MayaVi', None, None),
+        ('setuptools', None, 'Setuptools', None, None),
         ]:
     if not name:
         name = package
     if not long_name:
         long_name = name
+    kwargs = {}
+    if and_dependencies:
+        kwargs['and_dependencies'] = and_dependencies
     CHECKER[name] = PythonPackageDependency(
         package=package, name=name, long_name=long_name,
-        minimum_version=minimum_version)
-del package, name, long_name, minimum_version  # cleanup namespace
+        minimum_version=minimum_version, **kwargs)
+# cleanup namespace
+del package, name, long_name, minimum_version, and_dependencies, kwargs
 
 
 class MercurialPythonPackage (PythonPackageDependency):
