@@ -485,8 +485,11 @@ class PythonPackageDependency (Dependency):
 for package,name,long_name,minimum_version,and_dependencies in [
         ('nose', None, 'Nose Python package',
          CHECKER['nosetests'].minimum_version, None),
+        ('jinja2', 'jinja', 'Jinja', (2, 6), None),
+        ('tornado', None, 'Tornado', (2, 0), None),
+        ('zmq', 'pyzmq', 'PyZMQ', (2, 1, 4), None),
         ('IPython', None, 'IPython Python package',
-         CHECKER['ipython'].minimum_version, None),
+         CHECKER['ipython'].minimum_version, ['jinja', 'tornado', 'pyzmq']),
         ('numpy', None, 'NumPy', None, None),
         ('scipy', None, 'SciPy', None, None),
         ('matplotlib', None, 'Matplotlib', None, None),
