@@ -614,6 +614,61 @@ CHECKER['sqlite3-python'] = SQLitePythonPackage(
     minimum_version=CHECKER['sqlite3'].minimum_version)
 
 
+class UserTaskDependency (Dependency):
+    "Prompt the user to complete a task and check for success"
+    def __init__(self, prompt, **kwargs):
+        super(UserTaskDependency, self).__init__(**kwargs)
+        self.prompt = prompt
+
+    def _check(self):
+        if _sys.version_info >= (3, ):
+            result = input(self.prompt)
+        else:  # Python 2.x
+            result = raw_input(self.prompt)
+        return self._check_result(result)
+
+    def _check_result(self, result):
+        raise NotImplementedError()
+
+
+class EditorTaskDependency (UserTaskDependency):
+    def __init__(self, **kwargs):
+        self.path = _os.path.expanduser(_os.path.join(
+                '~', 'swc-installation-test.txt'))
+        self.contents = 'Hello, world!'
+        super(EditorTaskDependency, self).__init__(
+            prompt=(
+                'Open your favorite text editor and create the file\n'
+                '  {0}\n'
+                'containing the line:\n'
+                '  {1}\n'
+                'Press enter here after you have done this.\n'
+                'You may remove the file after you have finished testing.'
+                ).format(self.path, self.contents),
+            **kwargs)
+
+    def _check_result(self, result):
+        message = None
+        try:
+            with open(self.path, 'r') as f:
+                contents = f.read()
+        except IOError as e:
+            raise DependencyError(
+                checker=self,
+                message='could not open {0!r}: {1}'.format(self.path, e)
+                )# from e
+        if contents.strip() != self.contents:
+            raise DependencyError(
+                checker=self,
+                message=(
+                    'file contents ({0!r}) did not match the expected {1!r}'
+                    ).format(contents, self.contents))
+
+
+CHECKER['other-editor'] = EditorTaskDependency(
+    name='other-editor', long_name='')
+
+
 class VirtualDependency (Dependency):
     def _check(self):
         return '{0} {1}'.format(
@@ -644,6 +699,7 @@ for name,long_name,dependencies in [
             'sublime-text',
             'textmate',
             'textwrangler',
+            'other-editor',  # last because it requires user interaction
             )),
         ('virtual-browser', 'web browser', (
             'firefox',
