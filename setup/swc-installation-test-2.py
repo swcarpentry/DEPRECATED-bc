@@ -558,8 +558,8 @@ class VirtualDependency (Dependency):
             self.or_pass['version'])
 
 
-for name,dependencies in [
-        ('virtual-shell', (
+for name,long_name,dependencies in [
+        ('virtual-shell', 'command line shell', (
             'bash',
             'dash',
             'ash',
@@ -569,7 +569,7 @@ for name,dependencies in [
             'tcsh',
             'sh',
             )),
-        ('virtual-editor', (
+        ('virtual-editor', 'text/code editor', (
             'emacs',
             'xemacs',
             'vim',
@@ -579,19 +579,19 @@ for name,dependencies in [
             'kate',
             'notepad++',
             )),
-        ('virtual-browser', (
+        ('virtual-browser', 'web browser', (
             'firefox',
             'google-chrome',
             'chromium',
             )),
-        ('virtual-pypi-installer', (
+        ('virtual-pypi-installer', 'PyPI installer', (
             'easy_install',
             'pip',
             )),
         ]:
     CHECKER[name] = VirtualDependency(
-        name=name, long_name=name, or_dependencies=dependencies)
-del name, dependencies  # cleanup namespace
+        name=name, long_name=long_name, or_dependencies=dependencies)
+del name, long_name, dependencies  # cleanup namespace
 
 
 def _print_info(key, value, indent=19):
