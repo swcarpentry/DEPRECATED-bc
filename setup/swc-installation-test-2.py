@@ -492,7 +492,6 @@ for package,name,long_name,minimum_version,and_dependencies in [
         ('nose', None, 'Nose Python package',
          CHECKER['nosetests'].minimum_version, None),
         ('jinja2', 'jinja', 'Jinja', (2, 6), None),
-        ('tornado', None, 'Tornado', (2, 0), None),
         ('zmq', 'pyzmq', 'PyZMQ', (2, 1, 4), None),
         ('IPython', None, 'IPython Python package',
          CHECKER['ipython'].minimum_version, ['jinja', 'tornado', 'pyzmq']),
@@ -535,6 +534,19 @@ CHECKER['mercurial'] = MercurialPythonPackage(
     package='mercurial.util', name='mercurial',
     long_name='Mercurial Python package',
     minimum_version=CHECKER['hg'].minimum_version)
+
+
+class TornadoPythonPackage (PythonPackageDependency):
+    def _get_version_from_package(self, package):
+        return package.version
+
+    def _get_parsed_version(self):
+        package = self._get_package(self.package)
+        return package.version_info
+
+
+CHECKER['tornado'] = TornadoPythonPackage(
+    package='tornado', name='tornado', long_name='Tornado', minimum_version=(2, 0))
 
 
 class SQLitePythonPackage (PythonPackageDependency):
