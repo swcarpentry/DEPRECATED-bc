@@ -71,6 +71,7 @@ CHECKS = [
     'make',
     'virtual-pypi-installer',
     'setuptools',
+    #'xcode',
 # Testing
     'nosetests',       # Command line tool
     'nose',            # Python package
@@ -455,6 +456,56 @@ CHECKER['easy_install'] = EasyInstallDependency(
     minimum_version=None)
 
 
+class PathCommandDependency (CommandDependency):
+    """A command that doesn't support --version or equivalent options
+
+    On some operating systems (e.g. OS X), a command's executable may
+    be hard to find, or not exist in the PATH.  Work around that by
+    just checking for the existence of a characteristic file or
+    directory.  Since the characteristic path may depend on OS,
+    installed version, etc., take a list of paths, and succeed if any
+    of them exists.
+    """
+    def __init__(self, paths, **kwargs):
+        super(PathCommandDependency, self).__init__(self, **kwargs)
+        self.paths = paths
+
+    def _get_version_stream(self, *args, **kwargs):
+        raise NotImplementedError()
+
+    def _get_version(self):
+        for path in self.paths:
+            if _os.path.exists(path):
+                return None
+        raise DependencyError(
+            checker=self,
+            message=(
+                'nothing exists at any of the expected paths for {0}:\n    {1}'
+                ).format(
+                self.full_name(),
+                '\n    '.join(p for p in self.paths)))
+
+
+for paths,name,long_name in [
+        ([_os.path.join(_os.sep, 'Applications', 'Sublime Text 2.app')],
+         'sublime-text', 'Sublime Text'),
+        ([_os.path.join(_os.sep, 'Applications', 'TextMate.app')],
+         'textmate', 'TextMate'),
+        ([_os.path.join(_os.sep, 'Applications', 'TextWrangler.app')],
+         'textwrangler', 'TextWrangler'),
+        ([_os.path.join(_os.sep, 'Applications', 'Xcode.app'),  # OS X >=1.7
+          _os.path.join(_os.sep, 'Developer', 'Applications', 'Xcode.app'
+                        )  # OS X 1.6,
+          ],
+         'xcode', 'Xcode'),
+        ]:
+    if not long_name:
+        long_name = name
+    CHECKER[name] = PathCommandDependency(
+        paths=paths, name=name, long_name=long_name)
+del paths, name, long_name  # cleanup namespace
+
+
 class PythonPackageDependency (Dependency):
     def __init__(self, package, **kwargs):
         if 'name' not in kwargs:
@@ -590,6 +641,9 @@ for name,long_name,dependencies in [
             'gedit',
             'kate',
             'notepad++',
+            'sublime-text',
+            'textmate',
+            'textwrangler',
             )),
         ('virtual-browser', 'web browser', (
             'firefox',
