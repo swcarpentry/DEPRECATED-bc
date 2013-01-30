@@ -24,22 +24,3 @@ def test_floating_mean1():
     obs = mean([1, 2])
     exp = 1.5
     assert_equal(obs, exp)
-
-def test_string():
-    assert_raises(TypeError, mean, ["one", "two", "fortyeight"])
-
-def test_inf() : 
-    obs = mean([1,2,float("inf")])
-    exp = float("inf")
-    assert_equal(obs, exp)
-
-def test_zero_elems() :
-    empty_list = []
-    assert_raises(ZeroDivisionError, mean, empty_list)
-    
-
-
-
-
-
-
