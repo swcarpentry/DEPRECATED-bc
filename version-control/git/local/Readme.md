@@ -1,16 +1,22 @@
 # Local Version Control
 ----
-[Back To Python](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/python/intro)
-- [Forward To Remote Version Control](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/version-control/git/remote)
 
-----
-
-**Presented By Sri Hari Krishna Narayanan**
-**Based on material by Katy Huff**
+**Based on materials by Katy Huff, Anthony Scopatz, Joshua R. Smith, and Sri 
+Hari Krishna Narayanan**
 
 ## Example: A Slide Deck for a Presentation
 
-Imagine you have two computers: the first is a big, powerful desktop machine with a big, dual monitor setup. The second is a tiny lightweight netbook you take with you when you travel. Imagine also that you have a presentation at a conference overseas. You know that no matter how "finished" you think you are with your slide deck, inevitably you will realize you need to add an exta figure or recalculate some data AFTER leaving the country and your main desktop workstation. How can you be sure your slide deck, data, and the programs you've written are synchronized between your two machines? How can you be sure that every little change you've made on your netbook is reflected on your desktop? What happens if you start making changes on your slide deck, only to realize you need to drop back to the slide deck you had five days ago?
+Imagine you have two computers: the first is a big, powerful desktop machine 
+with a big, dual monitor setup. The second is a tiny lightweight netbook you 
+take with you when you travel. Imagine also that you have a presentation at a 
+conference overseas. You know that no matter how "finished" you think you are 
+with your slide deck, inevitably you will realize you need to add an exta figure 
+or recalculate some data AFTER leaving the country and your main desktop 
+workstation. How can you be sure your slide deck, data, and the programs you've 
+written are synchronized between your two machines? How can you be sure that 
+every little change you've made on your netbook is reflected on your desktop? 
+What happens if you start making changes on your slide deck, only to realize you 
+need to drop back to the slide deck you had five days ago?
 
 ## git : What is Version Control ?
 
@@ -211,7 +217,7 @@ More frequent commits increase the granularity of your **undo** button.
 
 There are no hard and fast rules, but good commits are atomic: they are the smallest change that remain meaningful. A good commit message usually contains a one-line description followed by a longer explanation if necessary.
 
-[Our repo](https://github.com/thehackerwithin/boot-camps/commits/2013-01-chicago) has some good commit messages.
+[Our repo](https://github.com/USERNAME/boot-camps/commits/YYYY-MM-PLACE) has some good commit messages.
 
 ### Exercise : Commit Your Changes
 
@@ -404,7 +410,7 @@ Step 3 : Merge the two branches into the core
 ## git clone : Copying a Repository
 
 Yesterday, you checked out a git type repository at
-https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago
+https://github.com/USERNAME/boot-camps/tree/YYYY-MM-PLACE
 
 When you clone the Original repository, the one that is created on your
 local machine is a copy, and will behave as a fully fledged local
