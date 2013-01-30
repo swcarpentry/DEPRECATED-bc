@@ -11,7 +11,7 @@ with a keyboard instead of controlling graphical user interfaces
 
 Use the GUI to open the tutorial on github.  Single click on the "Firefox 
 Web Browser".  Type in the URL:
-    github.com/thehackerwithin/boot-camps/tree/2013-01-chicago
+    github.com/USERNAME/boot-camps/tree/YYYY-MM-PLACE
 
 Click on the directory named `shell`.
 
@@ -56,7 +56,7 @@ command:
 Followed by:
 
     cd boot-camps
-    git checkout 2013-01-chicago
+    git checkout YYYY-MM-PLACE
 
 These 2 commands will grab all of the data needed for this workshop from the
 internet.
