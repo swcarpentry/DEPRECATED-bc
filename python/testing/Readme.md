@@ -1,8 +1,6 @@
-[Back To Debugging](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/debugging) - [Forward To Documentation](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/documentation)
+# Testing
 
 * * * * *
-
-**Presented By Katy Huff**
 
 **Based on materials by Katy Huff, Rachel Slaybaugh, and Anthony
 Scopatz**
