@@ -1,15 +1,8 @@
 # Compound Data Types: Lists, Dictionaries, Sets, Tuples, and Reading Files
 
-[Back To Python
-Variables](http://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/2a-PythonVariables)
-- [Forward to Python Flow
-Control](http://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/2c-PythonFlowControl/)
-
 * * * * *
 
-**Presented By : Will Trimble**
-
-**Based on lecture materials by Milad Fatenejad and Joshua R. Smith**
+**Based on lecture materials by Milad Fatenejad, Joshua R. Smith, and Will Trimble**
 
 Python would be a farily useless language if it weren't for the compound data types. The main two are lists and dictionaries, but I'll mention sets and tuples as well. I'll also go over reading text data from files. 
 

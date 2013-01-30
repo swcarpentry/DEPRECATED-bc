@@ -1,15 +1,6 @@
 # The Shell
 
-[Back To The Setup](http://swcarpentry.github.com/boot-camps/2013-01-12-chicago/)
-- [Forward to Python](https://github.com/thehackerwithin/boot-camps/tree/2013-01-chicago/python/intro)
-
-* * * * *
-
-**Updated and presented by : Radhika Khetani**
-
-**Modified by : Sasha Wood**
-
-**This presentation originally developed by: Milad Fatenejad**
+**Material by Milad Fatenejad, Sasha Wood, and Radhika Khetani**
 
 # What is the shell how do I access the shell?
 
