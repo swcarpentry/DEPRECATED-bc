@@ -50,7 +50,7 @@ by manipulating some experimental data from a hearing test. To get
 the data for this test, you will need internet access. Just enter the
 command:
 
-    git clone https://github.com/thehackerwithin/boot-camps.git
+    git clone -b YYYY-MM-PLACE https://github.com/USERNAME/boot-camps.git
 
 Followed by:
 
