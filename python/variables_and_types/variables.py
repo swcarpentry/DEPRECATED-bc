@@ -5,14 +5,9 @@
 
 # ## Python, iPython, and the basics
 # 
-# [Back To The Shell](http://github.com/thehackerwithin/UofCSCBC2012/tree/master/1-Shell/)
-# [Forward to Lists, dictionaries, sets, and tuples](http://github.com/thehackerwithin/UofCSCBC2012/tree/master/2b-PythonDataStructures/)
-# 
 # * * * * *
 # 
-# **Presented By: Will Trimble**
-# 
-# **Forked from lecture by Joshua R. Smith, based on Lecture Materials By: Milad Fatenejad with contributions from Katy Huff, Tommy Guy and Many More**
+# **Based on Lecture Materials By: Milad Fatenejad, Katy Huff, Tommy Guy, Joshua R. Smith, Will Trimble, and Many More**
 # 
 # <markdowncell>
 # ## Introduction
