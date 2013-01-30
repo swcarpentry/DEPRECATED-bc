@@ -1,10 +1,11 @@
 def mean(numlist):
-    try:
+    try :
         total = sum(numlist)
         length = len(numlist)
-    except TypeError:
-        raise TypeError("The number list was not a list of numbers.")
-    except:
-        print "There was a problem evaluating the number list."
-    return total/length
-
+    except TypeError :
+        raise TypeError("The list was not numbers.")
+    except ZeroDivisionError :
+        raise ZeroDivisionError("Does your list have elements in it?")
+    except :
+        print "Something unknown happened with the list."
+    return float(total)/float(length)
