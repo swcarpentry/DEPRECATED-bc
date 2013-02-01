@@ -386,7 +386,7 @@ enter `e<tab><tab>`. You will see the name of every program that
 starts with an `e`. One of those is `echo`. If you enter `ec<tab>` you
 will see that tab completion works.
 
-** Command History**
+**Command History**
 
 You can easily access previous commands.  Hit the up arrow.  
 Hit it again.  You can step backwards through your command history. 
