@@ -2,19 +2,19 @@ Version Control WITH KATY!!!
 
 ----
 
-**Based on material by Katy Huff, Anthony Scopatz, and Sri Hari Krishna Narayanan**
+**Based on material by Katy Huff, Anthony Scopatz, and Sri Hari Krishna
+Narayanan**
 
 ## github.com?
 
 GitHub is a site where many people store their open (and closed) source
 code repositories. It provides tools for browsing, collaborating on and
-documenting code. Your home institution may have a repository hosting system
-of it's own. To find out, ask your system administrator.
-GitHub, much like other forge hosting services 
-( [launchpad](https://launchpad.net),
-[bitbucket](https://bitbucket.org), [googlecode](http://code.google.com), 
-[sourceforge](http://sourceforge.net) etc.)
-provides :
+documenting code. Your home institution may have a repository hosting
+system of it's own. To find out, ask your system administrator.  GitHub,
+much like other forge hosting services (
+[launchpad](https://launchpad.net), [bitbucket](https://bitbucket.org),
+[googlecode](http://code.google.com), [sourceforge](http://sourceforge.net)
+etc.) provides :
 
 -   landing page support 
 -   wiki support
@@ -26,14 +26,16 @@ provides :
 -   commit triggered mailing lists
 -   other service hooks (twitter, etc.)
 
-**NOTE** Public repos have public licences **by default**. If you don't want to share (in the most liberal sense) your stuff with the world, pay github money for private repos, or host your own.
+**NOTE** Public repos have public licences **by default**. If you don't
+want to share (in the most liberal sense) your stuff with the world, pay
+github money for private repos, or host your own.
 
 ## github pasword 
 
-Setting up github at first requires a github user name and password. 
+Setting up github at first requires a github user name and password.
 Please take a moment to [create a free one](https://github.com/signup/free)
-(if you want to start paying, you can add that to your account some 
-other day). 
+(if you want to start paying, you can add that to your account some other
+day). 
 
 ## git remote : Steps for Forking a Repository
 
@@ -52,10 +54,10 @@ While you probably already have a copy of the SWC-bootcamp repository,
 GitHub doesn't know about it yet. You'll need to tell github you want to
 have an official fork of this repository.
 
-Step 1 : Go to our 
-[repository](https://github.com/USERNAME/boot-camps/tree/YYYY-MM-PLACE) from your browser, and
-click on the Fork button. Choose to fork it to your username rather than
-any organizations.
+Step 1 : Go to our
+[repository](https://github.com/USERNAME/boot-camps/tree/YYYY-MM-PLACE)
+from your browser, and click on the Fork button. Choose to fork it to your
+username rather than any organizations.
 
 Step 2 : Clone it. From your terminal :
 
@@ -164,19 +166,20 @@ than English. Since we're all from so many different places and speak
 so many languages, there will certainly be disagreements about what to
 say instead of "Welcome."
 
-I, for example, am from Tamil Nadu, India, so I'll push (to the upstream repository) my own version of Welcome on line 5 of Readme.md.
+I, for example, am from Tamil Nadu, India, so I'll push (to the upstream
+repository) my own version of Welcome on line 5 of Readme.md.
 
-You may speak another language, perhaps even English, however, and may want to replace the 
-Tamil word 'vanakkam' with an equivalent word that you prefer (welcome, willkommen, 
-bienvenido, benvenuti, etc.).
+You may speak another language, perhaps even English, however, and may want
+to replace the Tamil word 'vanakkam' with an equivalent word that you
+prefer (welcome, willkommen, bienvenido, benvenuti, etc.).
 
-You'll want to start a new branch for development. It's a good
-convention to think of your master branch (in this case your YYYY-MM-PLACE
-branch) as the "production branch," typically by keeping that branch clean of your local edits until they
-are ready for release. Developers typically use the master branch of
-their local fork to track other developers changes in the remote
-repository until their own local development branch changes are ready
-for production.
+You'll want to start a new branch for development. It's a good convention
+to think of your master branch (in this case your YYYY-MM-PLACE branch) as
+the "production branch," typically by keeping that branch clean of your
+local edits until they are ready for release. Developers typically use the
+master branch of their local fork to track other developers changes in the
+remote repository until their own local development branch changes are
+ready for production.
 
 ### Exercise : Experience a Conflict
 
@@ -190,8 +193,8 @@ commit your changes.
     <edit the readme file and exit kate>
     $ git commit -am "Changed the welcome message to ... "
 
-Step 2 : Mirror the remote upstream repository in your master branch (in this case your 
-YYYY-MM-PLACE branch) by pulling down my changes
+Step 2 : Mirror the remote upstream repository in your master branch (in
+this case your YYYY-MM-PLACE branch) by pulling down my changes
 
     $ git checkout YYYY-MM-PLACE
     Switched to branch 'YYYY-MM-PLACE'
@@ -270,4 +273,11 @@ alterations,
 
 ## gitolite
 
-[Gitolite](https://github.com/sitaramc/gitolite) is a way for you to host your own multi-user git repositories. I'm not going to go into details here, but all you need is a machine with some drive space and network access. You can install [minimal ubuntu](https://help.ubuntu.com/community/Installation/MinimalCD), then sudo apt-get install gitolite will pull in everything you need. At that point, your collaborators will only need to send you their public ssh keys for you to configure pull and push access to the repos.
+[Gitolite](https://github.com/sitaramc/gitolite) is a way for you to host
+your own multi-user git repositories. I'm not going to go into details
+here, but all you need is a machine with some drive space and network
+access. You can install [minimal
+ubuntu](https://help.ubuntu.com/community/Installation/MinimalCD), then
+sudo apt-get install gitolite will pull in everything you need. At that
+point, your collaborators will only need to send you their public ssh keys
+for you to configure pull and push access to the repos.

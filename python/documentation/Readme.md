@@ -40,26 +40,26 @@ Readme files are so common that GitHub will render and display the
 readme file for all directories whenever you are browsing a source tree.
 Even Linux itself has a readme:
 
-    Linux kernel release 3.x <http://kernel.org/>
-
+> Linux kernel release 3.x <http://kernel.org/>
+>
 > These are the release notes for Linux version 3. Read them carefully,
 > as they tell you what this is all about, explain how to install the
 > kernel, and what to do if something goes wrong.
 >
 > WHAT IS LINUX?
 >
-> > Linux is a clone of the operating system Unix, written from scratch
-> > by Linus Torvalds with assistance from a loosely-knit team of
-> > hackers across the Net. It aims towards POSIX and Single UNIX
-> > Specification compliance.
-> >
-> > It has all the features you would expect in a modern fully-fledged
-> > Unix, including true multitasking, virtual memory, shared libraries,
-> > demand loading, shared copy-on-write executables, proper memory
-> > management, and multistack networking including IPv4 and IPv6.
-> >
-> > It is distributed under the GNU General Public License - see the
-> > accompanying COPYING file for more details.
+> Linux is a clone of the operating system Unix, written from scratch
+> by Linus Torvalds with assistance from a loosely-knit team of
+> hackers across the Net. It aims towards POSIX and Single UNIX
+> Specification compliance.
+> 
+> It has all the features you would expect in a modern fully-fledged
+> Unix, including true multitasking, virtual memory, shared libraries,
+> demand loading, shared copy-on-write executables, proper memory
+> management, and multistack networking including IPv4 and IPv6.
+> 
+> It is distributed under the GNU General Public License - see the
+> accompanying COPYING file for more details.
 >
 > ...
 
@@ -287,4 +287,3 @@ LaTeX.
 
 Add docstrings to the functions in the `close_line.py` module. Then,
 using sphinx, generate a website which auto-documents this module.
-
