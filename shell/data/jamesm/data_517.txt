@@ -1,0 +1,9 @@
+# 
+Reported: Sat Sep 3 14:40:34 2011
+Subject: gingerBeatle409
+Year/month of birth: 1999/02
+Sex: F
+CI type: 21
+Volume: 6
+Range: 10
+Discrimination: 8

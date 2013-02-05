@@ -1,0 +1,9 @@
+# 
+Reported: Wed Sep 28 08:03:15 2011
+Subject: robynLennon383
+Year/month of birth: 1998/03
+Sex: N
+CI type: 4
+Volume: 6
+Range: 7
+Discrimination: 4
