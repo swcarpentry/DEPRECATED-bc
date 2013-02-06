@@ -104,7 +104,7 @@ Step 1 : Fetch the recent remote repository history
     $ git fetch upstream
 
 Step 2 : Make certain you are in the YYYY-MM-PLACE branch and merge the
-upstreeam YYYY-MM-PLACE branch into your YYYY-MM-PLACE branch
+upstream YYYY-MM-PLACE branch into your YYYY-MM-PLACE branch
 
     $ git checkout YYYY-MM-PLACE
     $ git merge upstream\YYYY-MM-PLACE

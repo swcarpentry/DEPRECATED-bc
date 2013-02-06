@@ -9,9 +9,8 @@ which allows you to control your computer using commands entered
 with a keyboard instead of controlling graphical user interfaces
 (GUIs) with a mouse/keyboard combination.
 
-Use the GUI to open the tutorial on github.  Single click on the "Firefox 
-Web Browser".  Type in the URL:
-    github.com/USERNAME/boot-camps/tree/YYYY-MM-PLACE
+Use a browser to open the tutorial on github, located at:
+    https://github.com/USERNAME/boot-camps/tree/YYYY-MM-PLACE
 
 Click on the directory named `shell`.
 
@@ -51,7 +50,7 @@ by manipulating some experimental data from a hearing test. To get
 the data for this test, you will need internet access. Just enter the
 command:
 
-    git clone https://github.com/thehackerwithin/boot-camps.git
+    git clone -b YYYY-MM-PLACE https://github.com/USERNAME/boot-camps.git
 
 Followed by:
 
