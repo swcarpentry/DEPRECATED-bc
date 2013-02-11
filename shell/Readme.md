@@ -264,7 +264,7 @@ these together, so:
 
     ls ../../
 
-prints the contents of `/home/swsc` which is your home
+prints the contents of `/home/swc` which is your home
 directory. Finally, the special directory `.` always refers to your
 current directory. So, `ls`, `ls .`, and `ls ././././.` all do the
 same thing, they print the contents of the current directory. This may
