@@ -115,7 +115,8 @@ Some terminals will not color the directory entries in this very
 convenient way. In those terminals, use `ls -F` instead of `ls`. The
 `-F` argument modifies the results so that a slash is placed at the
 end of directories. If the file is *executable* meaning that it can be
-run like a program, then a star fill be placed of the file name.
+run like a program, then a star will be placed at the end of of the
+file name.
 
 You can also use the command `ls -l` to see whether items in a
 directory are files or directories. `ls -l` gives a lot more
