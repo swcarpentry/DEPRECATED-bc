@@ -887,9 +887,9 @@ a single instance of `grep` (or whatever program it is running).
 * * * * 
 **Short Exercise**
 
-Navigate to the `data` directory. Use one find command to perform each
+Navigate to the `data` directory. Use one `find` command to perform each
 of the operations listed below (except number 2, which does not
-require a find command):
+require a `find` command):
 
 1.  Find any file whose name is "NOTES" within `data` and delete it 
 
