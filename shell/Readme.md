@@ -563,8 +563,9 @@ experimental data file from gerdal that contains the number 4.
 ## Creating, moving, copying, and removing
 
 We've created a file called `all_data` using the redirection operator
-`>`. This is critical file so we have to make copies so that the data
-is backed up. Lets copy the file using the `cp` command. The `cp`
+`>`. This file is critical - it's our analysis results - so we want to
+make copies so that the data is backed up.
+Lets copy the file using the `cp` command. The `cp`
 command backs up the file. Navigate to the `data` directory and enter:
 
     cp all_data all_data_backup
