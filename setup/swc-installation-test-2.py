@@ -67,6 +67,7 @@ CHECKS = [
     'git',
     'hg',              # Command line tool
     #'mercurial',       # Python package
+    'EasyMercurial',
 # Build tools and packaging
     'make',
     'virtual-pypi-installer',
@@ -378,6 +379,7 @@ for command,long_name,minimum_version in [
         ('zsh', 'Z Shell', None),
         ('git', 'Git', (1, 7, 0)),
         ('hg', 'Mercurial', (2, 0, 0)),
+        ('EasyMercurial', None, (1, 3)),
         ('pip', None, None),
         ('sqlite3', 'SQLite 3', None),
         ('nosetests', 'Nose', (1, 0, 0)),
