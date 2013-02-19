@@ -83,6 +83,7 @@ CHECKS = [
     'python',
     'ipython',         # Command line tool
     'IPython',         # Python package
+    'argparse',        # Useful for utility scripts
     'numpy',
     'scipy',
     'matplotlib',
@@ -548,6 +549,7 @@ for package,name,long_name,minimum_version,and_dependencies in [
         ('zmq', 'pyzmq', 'PyZMQ', (2, 1, 4), None),
         ('IPython', None, 'IPython Python package',
          CHECKER['ipython'].minimum_version, ['jinja', 'tornado', 'pyzmq']),
+        ('argparse', None, 'Argparse', None, None),
         ('numpy', None, 'NumPy', None, None),
         ('scipy', None, 'SciPy', None, None),
         ('matplotlib', None, 'Matplotlib', None, None),
