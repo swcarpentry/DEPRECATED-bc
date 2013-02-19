@@ -7,9 +7,12 @@ import socket as _socket
 
 
 def get_my_ip(host, port=80):
-    with _socket.socket(_socket.AF_INET, _socket.SOCK_DGRAM) as s:
+    s = _socket.socket(_socket.AF_INET, _socket.SOCK_DGRAM)
+    try:
         s.connect((host, port))
         return s.getsockname()[0]
+    finally:
+        s.close()
 
 
 if __name__ == '__main__':
