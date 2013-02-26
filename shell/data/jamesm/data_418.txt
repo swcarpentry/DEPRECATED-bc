@@ -1,0 +1,9 @@
+# 
+Reported: Tue Aug 30 08:22:33 2011
+Subject: princeSpice335
+Year/month of birth: 1991/04
+Sex: F
+CI type: 7
+Volume: 1
+Range: 6
+Discrimination: 6
