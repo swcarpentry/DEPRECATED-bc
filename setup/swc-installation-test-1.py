@@ -16,6 +16,10 @@ How to get a command line:
 - On Linux, either use your login shell directly, or run one of a
   number of graphical terminals (e.g. 'xterm', 'gnome-terminal', ...).
 
+For some screen shots, see:
+
+  http://software-carpentry.org/setup/terminal.html
+
 Run the script and follow the instructions it prints at the end.  If
 you see an error saying that the 'python' command was not found, than
 you may not have any version of Python installed.  See:
