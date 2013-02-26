@@ -45,6 +45,10 @@ import re as _re
 import shlex as _shlex
 import subprocess as _subprocess
 import sys as _sys
+try:  # Python 3.x
+    import urllib.parse as _urllib_parse
+except ImportError:  # Python 2.x
+    import urllib as _urllib_parse  # for quote()
 
 
 if not hasattr(_shlex, 'quote'):  # Python versions older than 3.3
@@ -107,6 +111,12 @@ class InvalidCheck (KeyError):
 
 
 class DependencyError (Exception):
+    _system_map = {  # map long system names to shorter forms
+        'Gentoo Base System': 'Gentoo',
+        }
+    _supported = [  # (system, package) pairs with specific instructions
+        ]
+
     def _get_message(self):
         return self._message
     def _set_message(self, message):
@@ -121,8 +131,22 @@ class DependencyError (Exception):
             causes = []
         self.causes = causes
 
+    def get_url(self):
+        url = 'http://software-carpentry.org/setup/'
+        system = _platform.system()
+        if system == 'Linux':
+            system = _platform.linux_distribution()[0] or system
+        system = self._system_map.get(system, system)
+        package = self.checker.name
+        if (system, package) in self._supported:
+            url = '{0}{1}.html#{2}'.format(
+                url,
+                _urllib_parse.quote(system.lower()),
+                _urllib_parse.quote(package))
+        return url
+
     def __str__(self):
-        url = 'http://software-carpentry.org/setup/'  # TODO: per-package URL
+        url = self.get_url()
         lines = [
             'check for {0} failed:'.format(self.checker.full_name()),
             '  ' + self.message,
