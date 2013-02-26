@@ -799,8 +799,18 @@ def print_suggestions(instructor_fallback=True):
 
 
 if __name__ == '__main__':
+    import optparse as _optparse
+
+    parser = _optparse.OptionParser(usage='%prog [options] [check...]')
+    epilog = __doc__
+    parser.format_epilog = lambda formatter: '\n' + epilog
+    parser.add_option(
+        '-v', '--verbose', action='store_true',
+        help=('print additional information to help troubleshoot '
+              'installation issues'))
+    options,args = parser.parse_args()
     try:
-        passed = check(_sys.argv[1:])
+        passed = check(args)
     except InvalidCheck as e:
         print("I don't know how to check for {0!r}".format(e.check))
         print('I do know how to check for:')
@@ -812,7 +822,8 @@ if __name__ == '__main__':
                 print('  {0}'.format(key))
         _sys.exit(1)
     if not passed:
-        print()
-        print_system_info()
-        print_suggestions(instructor_fallback=True)
+        if options.verbose:
+            print()
+            print_system_info()
+            print_suggestions(instructor_fallback=True)
         _sys.exit(1)
