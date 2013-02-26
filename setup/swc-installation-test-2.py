@@ -25,6 +25,7 @@ dependency.
 from __future__ import print_function  # for Python 2.6 compatibility
 
 import distutils.ccompiler as _distutils_ccompiler
+import fnmatch as _fnmatch
 try:  # Python 2.7 and 3.x
     import importlib as _importlib
 except ImportError:  # Python 2.6 and earlier
@@ -111,19 +112,63 @@ class InvalidCheck (KeyError):
 
 
 class DependencyError (Exception):
-    _system_map = {  # map long system names to shorter forms
-        'Gentoo Base System': 'Gentoo',
+    _default_url = 'http://software-carpentry.org/setup/'
+    _setup_urls = {  # (system, version, package) glob pairs
+        ('*', '*', 'Cython'): 'http://docs.cython.org/src/quickstart/install.html',
+        ('Linux', '*', 'EasyMercurial'): 'http://easyhg.org/download.html#download-linux',
+        ('Darwin', '*', 'EasyMercurial'): 'http://easyhg.org/download.html#download-mac',
+        ('Windows', '*', 'EasyMercurial'): 'http://easyhg.org/download.html#download-windows',
+        ('*', '*', 'EasyMercurial'): 'http://easyhg.org/download.html',
+        ('*', '*', 'argparse'): 'https://pypi.python.org/pypi/argparse#installation',
+        ('*', '*', 'ash'): 'http://www.in-ulm.de/~mascheck/various/ash/',
+        ('*', '*', 'bash'): 'http://www.gnu.org/software/bash/manual/html_node/Basic-Installation.html#Basic-Installation',
+        ('Linux', '*', 'chromium'): 'http://code.google.com/p/chromium/wiki/LinuxBuildInstructions',
+        ('Darwin', '*', 'chromium'): 'http://code.google.com/p/chromium/wiki/MacBuildInstructions',
+        ('Windows', '*', 'chromium'): 'http://www.chromium.org/developers/how-tos/build-instructions-windows',
+        ('*', '*', 'chromium'): 'http://www.chromium.org/developers/how-tos',
+        ('Windows', '*', 'emacs'): 'http://www.gnu.org/software/emacs/windows/Installing-Emacs.html',
+        ('*', '*', 'emacs'): 'http://www.gnu.org/software/emacs/#Obtaining',
+        ('*', '*', 'firefox'): 'http://www.mozilla.org/en-US/firefox/new/',
+        ('Linux', '*', 'gedit'): 'http://www.linuxfromscratch.org/blfs/view/svn/gnome/gedit.html',
+        ('*', '*', 'git'): 'http://git-scm.com/downloads',
+        ('*', '*', 'google-chrome'): 'https://www.google.com/intl/en/chrome/browser/',
+        ('*', '*', 'hg'): 'http://mercurial.selenic.com/',
+        ('*', '*', 'mercurial'): 'http://mercurial.selenic.com/',
+        ('*', '*', 'IPython'): 'http://ipython.org/install.html',
+        ('*', '*', 'ipython'): 'http://ipython.org/install.html',
+        ('*', '*', 'jinja'): 'http://jinja.pocoo.org/docs/intro/#installation',
+        ('*', '*', 'kate'): 'http://kate-editor.org/get-it/',
+        ('*', '*', 'make'): 'http://www.gnu.org/software/make/',
+        ('Darwin', '*', 'matplotlib'): 'http://matplotlib.org/users/installing.html#building-on-osx',
+        ('Windows', '*', 'matplotlib'): 'http://matplotlib.org/users/installing.html#installing-on-windows',
+        ('*', '*', 'matplotlib'): 'http://matplotlib.org/users/installing.html#installing',
+        ('*', '*', 'mayavi.mlab'): 'http://docs.enthought.com/mayavi/mayavi/installation.html',
+        ('*', '*', 'nano'): 'http://www.nano-editor.org/dist/latest/faq.html#3',
+        ('*', '*', 'networkx'): 'http://networkx.github.com/documentation/latest/install.html#installing',
+        ('*', '*', 'nose'): 'https://nose.readthedocs.org/en/latest/#installation-and-quick-start',
+        ('*', '*', 'nosetests'): 'https://nose.readthedocs.org/en/latest/#installation-and-quick-start',
+        ('*', '*', 'notepad++'): 'http://notepad-plus-plus.org/download/v6.3.html',
+        ('*', '*', 'numpy'): 'http://docs.scipy.org/doc/numpy/user/install.html',
+        ('*', '*', 'pandas'): 'http://pandas.pydata.org/pandas-docs/stable/install.html',
+        ('*', '*', 'pip'): 'http://www.pip-installer.org/en/latest/installing.html',
+        ('*', '*', 'python'): 'http://www.python.org/download/releases/2.7.3/#download',
+        ('*', '*', 'pyzmq'): 'https://github.com/zeromq/pyzmq/wiki/Building-and-Installing-PyZMQ',
+        ('Linux', '*', 'scipy'): 'http://www.scipy.org/Installing_SciPy/Linux',
+        ('Darwin', '*', 'scipy'): 'http://www.scipy.org/Installing_SciPy/Mac_OS_X',
+        ('Windows', '*', 'scipy'): 'http://www.scipy.org/Installing_SciPy/Windows',
+        ('*', '*', 'scipy'): 'http://www.scipy.org/Installing_SciPy',
+        ('*', '*', 'setuptools'): 'https://pypi.python.org/pypi/setuptools#installation-instructions',
+        ('*', '*', 'sqlite3'): 'http://www.sqlite.org/download.html',
+        ('*', '*', 'sublime-text'): 'http://www.sublimetext.com/2',
+        ('*', '*', 'sympy'): 'http://docs.sympy.org/dev/install.html',
+        ('Darwin', '*', 'textmate'): 'http://macromates.com/',
+        ('Darwin', '*', 'textwrangler'): 'http://www.barebones.com/products/textwrangler/download.html',
+        ('*', '*', 'tornado'): 'http://www.tornadoweb.org/',
+        ('*', '*', 'vim'): 'http://www.vim.org/download.php',
+        ('Darwin', '*', 'xcode'): 'https://developer.apple.com/xcode/',
+        ('*', '*', 'xemacs'): 'http://www.us.xemacs.org/Install/',
+        ('*', '*', 'zsh'): 'http://www.zsh.org/',
         }
-    _supported = [  # (system, package) pairs with specific instructions
-        ('Ubuntu', 'emacs'),
-        ('Ubuntu', 'xemacs'),
-        ('Ubuntu', 'setuptools'),
-        ('Ubuntu', 'nose'),
-        ('Ubuntu', 'nosetests'),
-        ('Ubuntu', 'hg'),
-        ('Ubuntu', 'EasyMercurial'),
-        ('Ubuntu', 'sqlite3'),
-        ]
 
     def _get_message(self):
         return self._message
@@ -140,18 +185,24 @@ class DependencyError (Exception):
         self.causes = causes
 
     def get_url(self):
-        url = 'http://software-carpentry.org/setup/'
         system = _platform.system()
-        if system == 'Linux':
-            system = _platform.linux_distribution()[0] or system
-        system = self._system_map.get(system, system)
+        version = None
+        for pversion in (
+            'linux_distribution',
+            'mac_ver',
+            'win32_ver',
+            ):
+            value = getattr(_platform, pversion)()
+            if value[0]:
+                version = value[0]
+                break
         package = self.checker.name
-        if (system, package) in self._supported:
-            url = '{0}{1}.html#{2}'.format(
-                url,
-                _urllib_parse.quote(system.lower()),
-                _urllib_parse.quote(package))
-        return url
+        for (s,v,p),url in self._setup_urls.items():
+            if (_fnmatch.fnmatch(system, s) and
+                    _fnmatch.fnmatch(version, v) and
+                    _fnmatch.fnmatch(package, p)):
+                return url
+        return self._default_url
 
     def __str__(self):
         url = self.get_url()
