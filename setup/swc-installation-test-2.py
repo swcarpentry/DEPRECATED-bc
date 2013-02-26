@@ -115,6 +115,14 @@ class DependencyError (Exception):
         'Gentoo Base System': 'Gentoo',
         }
     _supported = [  # (system, package) pairs with specific instructions
+        ('Ubuntu', 'emacs'),
+        ('Ubuntu', 'xemacs'),
+        ('Ubuntu', 'setuptools'),
+        ('Ubuntu', 'nose'),
+        ('Ubuntu', 'nosetests'),
+        ('Ubuntu', 'hg'),
+        ('Ubuntu', 'EasyMercurial'),
+        ('Ubuntu', 'sqlite3'),
         ]
 
     def _get_message(self):
