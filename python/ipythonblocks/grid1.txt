@@ -1,0 +1,8 @@
+# width height
+3 3
+# block size
+20
+# initial color
+0 0 0
+# row column red green blue
+1 1 255 255 255
