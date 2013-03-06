@@ -579,6 +579,8 @@ for paths,name,long_name in [
          'textmate', 'TextMate'),
         ([_os.path.join(_os.sep, 'Applications', 'TextWrangler.app')],
          'textwrangler', 'TextWrangler'),
+        ([_os.path.join(_os.sep, 'Applications', 'Safari.app')],
+         'safari', 'Safari'),
         ([_os.path.join(_os.sep, 'Applications', 'Xcode.app'),  # OS X >=1.7
           _os.path.join(_os.sep, 'Developer', 'Applications', 'Xcode.app'
                         )  # OS X 1.6,
@@ -792,6 +794,7 @@ for name,long_name,dependencies in [
             'firefox',
             'google-chrome',
             'chromium',
+            'safari',
             )),
         ('virtual-pypi-installer', 'PyPI installer', (
             'easy_install',
