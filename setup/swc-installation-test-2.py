@@ -101,6 +101,10 @@ CHECKS = [
 
 CHECKER = {}
 
+_ROOT_PATH = _os.sep
+if _platform.system() == 'win32':
+    _ROOT_PATH = 'c:\\'
+
 
 class InvalidCheck (KeyError):
     def __init__(self, check):
@@ -578,16 +582,16 @@ class PathCommandDependency (CommandDependency):
 
 
 for paths,name,long_name in [
-        ([_os.path.join(_os.sep, 'Applications', 'Sublime Text 2.app')],
+        ([_os.path.join(_ROOT_PATH, 'Applications', 'Sublime Text 2.app')],
          'sublime-text', 'Sublime Text'),
-        ([_os.path.join(_os.sep, 'Applications', 'TextMate.app')],
+        ([_os.path.join(_ROOT_PATH, 'Applications', 'TextMate.app')],
          'textmate', 'TextMate'),
-        ([_os.path.join(_os.sep, 'Applications', 'TextWrangler.app')],
+        ([_os.path.join(_ROOT_PATH, 'Applications', 'TextWrangler.app')],
          'textwrangler', 'TextWrangler'),
-        ([_os.path.join(_os.sep, 'Applications', 'Safari.app')],
+        ([_os.path.join(_ROOT_PATH, 'Applications', 'Safari.app')],
          'safari', 'Safari'),
-        ([_os.path.join(_os.sep, 'Applications', 'Xcode.app'),  # OS X >=1.7
-          _os.path.join(_os.sep, 'Developer', 'Applications', 'Xcode.app'
+        ([_os.path.join(_ROOT_PATH, 'Applications', 'Xcode.app'),  # OS X >=1.7
+          _os.path.join(_ROOT_PATH, 'Developer', 'Applications', 'Xcode.app'
                         )  # OS X 1.6,
           ],
          'xcode', 'Xcode'),
