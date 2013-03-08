@@ -394,12 +394,14 @@ CHECKER['python'] = PythonDependency()
 class CommandDependency (Dependency):
     exe_extension = _distutils_ccompiler.new_compiler().exe_extension
 
-    def __init__(self, command, version_options=('--version',), stdin=None,
-                 version_regexp=None, version_stream='stdout', **kwargs):
+    def __init__(self, command, paths=None, version_options=('--version',),
+                 stdin=None, version_regexp=None, version_stream='stdout',
+                 **kwargs):
         if 'name' not in kwargs:
             kwargs['name'] = command
         super(CommandDependency, self).__init__(**kwargs)
         self.command = command
+        self.paths = paths
         self.version_options = version_options
         self.stdin = None
         if not version_regexp:
@@ -408,14 +410,16 @@ class CommandDependency (Dependency):
         self.version_regexp = version_regexp
         self.version_stream = version_stream
 
-    def _get_version_stream(self, stdin=None, expect=(0,)):
+    def _get_command_version_stream(self, command=None, stdin=None,
+                                    expect=(0,)):
+        if command is None:
+            command = self.command + (self.exe_extension or '')
         if not stdin:
             stdin = self.stdin
         if stdin:
             popen_stdin = _subprocess.PIPE
         else:
             popen_stdin = None
-        command = self.command + (self.exe_extension or '')
         try:
             p = _subprocess.Popen(
                 [command] + list(self.version_options), stdin=popen_stdin,
@@ -450,6 +454,27 @@ class CommandDependency (Dependency):
                 return string
         raise NotImplementedError(self.version_stream)
 
+    def _get_version_stream(self, **kwargs):
+        try:
+            return self._get_command_version_stream(**kwargs)
+        except DependencyError as e:
+            if self.paths:
+                or_errors = [e]
+                for path in self.paths:
+                    try:
+                        return self._get_command_version_stream(
+                            command=path, **kwargs)
+                    except DependencyError as e:
+                        print('a')
+                        or_errors.append(e)
+                raise DependencyError(
+                    checker=self,
+                    message='errors finding {0} version'.format(
+                        self.full_name()),
+                    causes=or_errors)
+            else:
+                raise
+
     def _get_version(self):
         version_stream = self._get_version_stream()
         match = self.version_regexp.search(version_stream)
@@ -461,39 +486,50 @@ class CommandDependency (Dependency):
         return match.group(1)
 
 
-for command,long_name,minimum_version in [
-        ('sh', 'Bourne Shell', None),
-        ('ash', 'Almquist Shell', None),
-        ('bash', 'Bourne Again Shell', None),
-        ('csh', 'C Shell', None),
-        ('ksh', 'KornShell', None),
-        ('dash', 'Debian Almquist Shell', None),
-        ('tcsh', 'TENEX C Shell', None),
-        ('zsh', 'Z Shell', None),
-        ('git', 'Git', (1, 7, 0)),
-        ('hg', 'Mercurial', (2, 0, 0)),
-        ('EasyMercurial', None, (1, 3)),
-        ('pip', None, None),
-        ('sqlite3', 'SQLite 3', None),
-        ('nosetests', 'Nose', (1, 0, 0)),
-        ('ipython', 'IPython script', (0, 13)),
-        ('emacs', 'Emacs', None),
-        ('xemacs', 'XEmacs', None),
-        ('vim', 'Vim', None),
-        ('vi', None, None),
-        ('nano', 'Nano', None),
-        ('gedit', None, None),
-        ('kate', 'Kate', None),
-        ('notepad++', 'Notepad++', None),
-        ('firefox', 'Firefox', None),
-        ('google-chrome', 'Google Chrome', None),
-        ('chromium', 'Chromium', None),
+for command,long_name,minimum_version,paths in [
+        ('sh', 'Bourne Shell', None, None),
+        ('ash', 'Almquist Shell', None, None),
+        ('bash', 'Bourne Again Shell', None, None),
+        ('csh', 'C Shell', None, None),
+        ('ksh', 'KornShell', None, None),
+        ('dash', 'Debian Almquist Shell', None, None),
+        ('tcsh', 'TENEX C Shell', None, None),
+        ('zsh', 'Z Shell', None, None),
+        ('git', 'Git', (1, 7, 0), None),
+        ('hg', 'Mercurial', (2, 0, 0), None),
+        ('EasyMercurial', None, (1, 3), None),
+        ('pip', None, None, None),
+        ('sqlite3', 'SQLite 3', None, None),
+        ('nosetests', 'Nose', (1, 0, 0), None),
+        ('ipython', 'IPython script', (0, 13), None),
+        ('emacs', 'Emacs', None, None),
+        ('xemacs', 'XEmacs', None, None),
+        ('vim', 'Vim', None, None),
+        ('vi', None, None, None),
+        ('nano', 'Nano', None, None),
+        ('gedit', None, None, None),
+        ('kate', 'Kate', None, None),
+        ('notepad++', 'Notepad++', None, [
+            _os.path.join(
+                _ROOT_PATH, 'Program Files', 'Notepad++', 'notepad++.exe'),
+            ]),
+        ('firefox', 'Firefox', None, [
+            _os.path.join(
+                _ROOT_PATH, 'Program Files', 'Mozilla Firefox', 'firefox.exe'),
+            ]),
+        ('google-chrome', 'Google Chrome', None, [
+            _os.path.join(
+                _ROOT_PATH, 'Program Files', 'Google', 'Chrome', 'Application',
+                'chrome.exe'),
+            ]),
+        ('chromium', 'Chromium', None, None),
         ]:
     if not long_name:
         long_name = command
     CHECKER[command] = CommandDependency(
-        command=command, long_name=long_name, minimum_version=minimum_version)
-del command, long_name, minimum_version  # cleanup namespace
+        command=command, paths=paths, long_name=long_name,
+        minimum_version=minimum_version)
+del command, long_name, minimum_version, paths  # cleanup namespace
 
 
 class MakeDependency (CommandDependency):
@@ -561,9 +597,8 @@ class PathCommandDependency (CommandDependency):
     installed version, etc., take a list of paths, and succeed if any
     of them exists.
     """
-    def __init__(self, paths, **kwargs):
-        super(PathCommandDependency, self).__init__(self, **kwargs)
-        self.paths = paths
+    def _get_command_version_stream(self, *args, **kwargs):
+        raise NotImplementedError()
 
     def _get_version_stream(self, *args, **kwargs):
         raise NotImplementedError()
@@ -599,7 +634,7 @@ for paths,name,long_name in [
     if not long_name:
         long_name = name
     CHECKER[name] = PathCommandDependency(
-        paths=paths, name=name, long_name=long_name)
+        command=None, paths=paths, name=name, long_name=long_name)
 del paths, name, long_name  # cleanup namespace
 
 
