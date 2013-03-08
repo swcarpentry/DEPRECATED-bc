@@ -61,8 +61,8 @@ Before your boot camp, you should go through
 `swc-installation-test-2.py` and comment any dependencies you don't
 need out of the `CHECKS` list.  You might also want to skim through
 the minimum version numbers listed where particular dependencies are
-defined (e.g. `('git', 'Git', (1, 7, 0))`).  For the most part, fairly
-conservative values have been selected, so students with modern
+defined (e.g. `('git', 'Git', (1, 7, 0), None)`).  For the most part,
+fairly conservative values have been selected, so students with modern
 machines should be fine.  If your boot camp has stricter version
 requirements, feel free to bump them accordingly.
 
