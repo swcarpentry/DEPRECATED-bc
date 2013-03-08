@@ -438,6 +438,11 @@ class CommandDependency (Dependency):
             raise DependencyError(checker=self, message='\n'.join(lines))
         for name,string in [('stdout', stdout), ('stderr', stderr)]:
             if name == self.version_stream:
+                if not string:
+                    raise DependencyError(
+                        checker=self,
+                        message='empty version stream on {0} for {1}'.format(
+                            self.version_stream, command))
                 return string
         raise NotImplementedError(self.version_stream)
 
