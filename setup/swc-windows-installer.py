@@ -23,14 +23,13 @@ try:  # Python 3
     from io import BytesIO as _BytesIO
 except ImportError:  # Python 2
     from StringIO import StringIO as _BytesIO
-import shutil
 import os.path
 import zipfile
 
 import requests
 
 
-def install_nano(python_scripts_directory):
+def install_nano(install_directory):
     """Download and install the nano text editor"""
     url = "http://www.nano-editor.org/dist/v2.2/NT/nano-2.2.6.zip"
     r = requests.get(url)
@@ -39,8 +38,7 @@ def install_nano(python_scripts_directory):
     nano_files = ['nano.exe', 'cygwin1.dll', 'cygintl-8.dll',
                   'cygiconv-2.dll', 'cyggcc_s-1.dll']
     for file_name in nano_files:
-        nano_zip.extract(file_name, '.')
-        shutil.move(file_name, python_scripts_directory)
+        nano_zip.extract(file_name, install_directory)
 
 def create_ipython_entry_point(python_scripts_directory):
     """Creates a terminal-based IPython entry point for msysgit"""
