@@ -19,9 +19,13 @@ To use:
    You should be able to simply double click the file in Windows
 """
 
+try:  # Python 3
+    from io import BytesIO as _BytesIO
+except ImportError:  # Python 2
+    from StringIO import StringIO as _BytesIO
 import shutil
+import os.path
 import zipfile
-import os
 
 import requests
 
@@ -30,16 +34,13 @@ def install_nano(python_scripts_directory):
     """Download and install the nano text editor"""
     url = "http://www.nano-editor.org/dist/v2.2/NT/nano-2.2.6.zip"
     r = requests.get(url)
-    output_file = open('nano.zip', 'wb')
-    output_file.write(r.content)
-    output_file.close()
-    nano_zip = zipfile.ZipFile('nano.zip')
+    nano_zip_content = _BytesIO(r.content)
+    nano_zip = zipfile.ZipFile(nano_zip_content)
     nano_files = ['nano.exe', 'cygwin1.dll', 'cygintl-8.dll',
                   'cygiconv-2.dll', 'cyggcc_s-1.dll']
     for file_name in nano_files:
         nano_zip.extract(file_name, '.')
         shutil.move(file_name, python_scripts_directory)
-    os.remove('nano.zip')
 
 def create_ipython_entry_point(python_scripts_directory):
     """Creates a terminal-based IPython entry point for msysgit"""
