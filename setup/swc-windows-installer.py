@@ -24,16 +24,18 @@ try:  # Python 3
 except ImportError:  # Python 2
     from StringIO import StringIO as _BytesIO
 import os.path
+try:  # Python 3
+    from urllib.request import urlopen as _urlopen
+except ImportError:  # Python 2
+    from urllib2 import urlopen as _urlopen
 import zipfile
-
-import requests
 
 
 def install_nano(install_directory):
     """Download and install the nano text editor"""
     url = "http://www.nano-editor.org/dist/v2.2/NT/nano-2.2.6.zip"
-    r = requests.get(url)
-    nano_zip_content = _BytesIO(r.content)
+    r = _urlopen(url)
+    nano_zip_content = _BytesIO(r.read())
     nano_zip = zipfile.ZipFile(nano_zip_content)
     nano_files = ['nano.exe', 'cygwin1.dll', 'cygintl-8.dll',
                   'cygiconv-2.dll', 'cyggcc_s-1.dll']
