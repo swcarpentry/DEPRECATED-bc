@@ -19,10 +19,12 @@ To use:
    You should be able to simply double click the file in Windows
 """
 
-import requests
 import shutil
 import zipfile
 import os
+
+import requests
+
 
 def install_nano(python_scripts_directory):
     """Download and install the nano text editor"""
