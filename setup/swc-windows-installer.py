@@ -44,18 +44,8 @@ def create_ipython_entry_point(python_scripts_directory):
     """Creates a terminal-based IPython entry point for msysgit"""
     output_file = open(python_scripts_directory + 'ipython', 'w')
     file_contents = """#!/usr/bin/env python
-import sys
-from IPython.frontend.html.notebook.notebookapp import launch_new_instance as launch_notebook
-from IPython.frontend.terminal.ipapp import launch_new_instance as launch_ipython
-
-def main():
-    if len(sys.argv) > 1 and sys.argv[1] == 'notebook':
-        sys.exit(launch_notebook())
-    else:
-        sys.exit(launch_ipython())
-
-if __name__ == '__main__':
-    main()
+from IPython.frontend.terminal.ipapp import launch_new_instance
+launch_new_instance()
 """
 
     output_file.write(file_contents)
