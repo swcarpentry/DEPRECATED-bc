@@ -17,7 +17,6 @@ To use:
    http://code.google.com/p/msysgit/downloads/list?q=full+installer+official+git
 3. Run swc_windows_installer.py
    You should be able to simply double click the file in Windows
-
 """
 
 import requests
@@ -78,6 +77,7 @@ def main():
     create_ipython_entry_point(python_scripts_directory)
     create_nosetests_entry_point(python_scripts_directory)
     install_nano(python_scripts_directory)
-    
+
+
 if __name__ == '__main__':
     main()
