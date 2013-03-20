@@ -42,22 +42,25 @@ def install_nano(install_directory):
 
 def create_ipython_entry_point(python_scripts_directory):
     """Creates a terminal-based IPython entry point for msysgit"""
-    contents = """#!/usr/bin/env python
-from IPython.frontend.terminal.ipapp import launch_new_instance
-launch_new_instance()
-"""
+    contents = '\n'.join([
+            '#!/usr/bin/env python',
+            'from IPython.frontend.terminal.ipapp import launch_new_instance',
+            'launch_new_instance()',
+            '',
+            ])
     with open(os.path.join(python_scripts_directory, 'ipython'), 'w') as f:
         f.write(contents)
 
 def create_nosetests_entry_point(python_scripts_directory):
     """Creates a terminal-based nosetests entry point for msysgit"""
-    contents = """#!/usr/bin/env/ python
-import sys
-import nose
-
-if __name__ == '__main__':
-    sys.exit(nose.core.main())
-"""
+    contents = '\n'.join([
+            '#!/usr/bin/env/ python',
+            'import sys',
+            'import nose',
+            "if __name__ == '__main__':",
+            '    sys.exit(nose.core.main())',
+            '',
+            ])
     with open(os.path.join(python_scripts_directory, 'nosetests'), 'w') as f:
         f.write(contents)
 
