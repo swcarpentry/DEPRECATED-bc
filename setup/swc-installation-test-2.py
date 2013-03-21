@@ -455,25 +455,22 @@ class CommandDependency (Dependency):
         raise NotImplementedError(self.version_stream)
 
     def _get_version_stream(self, **kwargs):
-        try:
-            return self._get_command_version_stream(**kwargs)
-        except DependencyError as e:
-            if self.paths:
-                or_errors = [e]
-                for path in self.paths:
-                    try:
-                        return self._get_command_version_stream(
-                            command=path, **kwargs)
-                    except DependencyError as e:
-                        print('a')
-                        or_errors.append(e)
-                raise DependencyError(
-                    checker=self,
-                    message='errors finding {0} version'.format(
-                        self.full_name()),
-                    causes=or_errors)
-            else:
-                raise
+        paths = [self.command + (self.exe_extension or '')]
+        if self.exe_extension:
+            paths.append(self.command)  # also look at the extension-less path
+        if self.paths:
+            paths.extend(self.paths)
+        or_errors = []
+        for path in paths:
+            try:
+                return self._get_command_version_stream(command=path, **kwargs)
+            except DependencyError as e:
+                or_errors.append(e)
+        raise DependencyError(
+            checker=self,
+            message='errors finding {0} version'.format(
+                self.full_name()),
+            causes=or_errors)
 
     def _get_version(self):
         version_stream = self._get_version_stream()
