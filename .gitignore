@@ -6,3 +6,6 @@ _site
 
 # Python
 *.pyc
+
+# Mac:
+.DS_Store
