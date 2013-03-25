@@ -30,12 +30,11 @@ etc.) provides :
 want to share (in the most liberal sense) your stuff with the world, pay
 github money for private repos, or host your own.
 
-## github pasword 
+## github password 
 
-Setting up github at first requires a github user name and password.
-Please take a moment to [create a free one](https://github.com/signup/free)
-(if you want to start paying, you can add that to your account some other
-day). 
+Setting up github requires a github user name and password.  Please take a
+moment to [create a free github account](https://github.com/signup/free) (if you
+want to start paying, you can add that to your account some other day).
 
 ## git remote : Steps for Forking a Repository
 
