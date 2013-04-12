@@ -70,11 +70,11 @@ Nose provides a range of assertions that can be used when a test is not just che
         expected = [2, 3]
         assert_items_equal(observed, expected) # order of factors is not guaranteed
 
-* assertTrue, assertFalse
-* assertIn, assertNotIn
-* assertIs, assertIsNot
-* assertRaises
-* (what else?)
+To see the available assertions, and get help with them:
+
+    import nose.tools
+    dir(nose.tools)                   # list assertions and other classes/functions
+    help(nose.tools.assert_set_equal) # get information about one of them
 
 ### Floating point tests
 
