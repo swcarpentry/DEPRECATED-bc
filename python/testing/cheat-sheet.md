@@ -60,12 +60,6 @@ There are some additional rules, and you can configure your own, but this should
 ### Other assertions
 
 Nose provides a range of assertions that can be used when a test is not just checking a simple equality, e.g.
-* assertTrue, assertFalse
-* assertIn, assertNotIn
-* assertIs, assertIsNot
-* assertRaises
-* (what else?)
-
 
     from nose.tools import assert_items_equal
 
@@ -75,6 +69,12 @@ Nose provides a range of assertions that can be used when a test is not just che
         observed = find_factors(6)
         expected = [2, 3]
         assert_items_equal(observed, expected) # order of factors is not guaranteed
+
+* assertTrue, assertFalse
+* assertIn, assertNotIn
+* assertIs, assertIsNot
+* assertRaises
+* (what else?)
 
 ### Floating point tests
 
