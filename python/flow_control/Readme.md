@@ -315,8 +315,8 @@ Final Example
 We've seen a lot so far. Lets work through a slightly lengthier example
 together. I'll use some of the concepts we already saw and introduce a
 few new concepts. To run the example, you'll need to locate a short file
-containing phone numbers. The file can be found in your PyTrieste
-repository within the phonenums directory and is called phonenums.txt.
+containing phone numbers. The file can be found in your 
+repository within the phonenums directory and is called phonenums.txt. 
 Now we have to move ipython to that directory so it can find the
 phonenums.txt file. You navigate within ipython in the same way that you
 navigate in the shell, by entering "cd [path]" .
