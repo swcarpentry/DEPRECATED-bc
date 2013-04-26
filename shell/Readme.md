@@ -516,6 +516,7 @@ case. Enter the following command:
 are identical to the `man` program. 
 
 | "space" | to go forward |
+| ------- | ---------- | 
 |  "b"    | to go backwarsd |
 |  "g"    | to go to the beginning |
 |  "G"    | to go to the end |
