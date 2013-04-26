@@ -166,7 +166,7 @@ manual using the `man` program. Try entering:
 
 This will open the manual page for `ls`. Use the space key to go
 forward and b to go backwards. When you are done reading, just hit `q`
-to exit.
+to quit.
 
 Programs that are run from the shell can get extremely complicated. To
 see an example, open up the manual page for the `find` program,
@@ -352,15 +352,15 @@ this command:
 
     ls *4*1
 
-lists every file in the current directory which contains the number
-`4`, and ends with the number `1`. There are four such files: `0241`,
-`0341`, `0431`, and `0481`. 
+lists every file in the current directory whose name contains the
+number `4`, and ends with the number `1`. There are four such files:
+`0241`, `0341`, `0431`, and `0481`.
 
 So how does this actually work? Well...when the shell (bash) sees a
-word that contains the `*` character, it automatically looks for files
+word that contains the `*` character, it automatically looks for filenames
 that match the given pattern. In this case, it identified four such
 files. Then, it replaced the `*4*1` with the list of files, separated
-by spaces. In other the two commands:
+by spaces. In other words, the two commands:
 
     ls *4*1
     ls 0241 0341 0431 0481
@@ -387,16 +387,16 @@ lot of time. When you start typing out the name of a directory, then
 hit the tab key, the shell will try to fill in the rest of the
 directory name. For example, enter:
 
-    cd S<tab>
+    cd b<tab>
 
 The shell will fill in the rest of the directory name for
 `boot-camps`. Now enter:
 
-    ls 3<tab><tab>
+    ls s<tab><tab>
 
 When you hit the first tab, nothing happens. The reason is that there
 are multiple directories in the home directory which start with
-3. Thus, the shell does not know which one to fill in. When you hit
+`s`. Thus, the shell does not know which one to fill in. When you hit
 tab again, the shell will list the possible choices. 
 
 Tab completion can also fill in the names of programs. For example,
@@ -520,6 +520,8 @@ are identical to the `man` program.
 | key     | action |
 | ------- | ---------- | 
 | "space" | to go forward |
+| ------- | ---------- | 
+| "space" | to go forward |
 |  "b"    | to go backwarsd |
 |  "g"    | to go to the beginning |
 |  "G"    | to go to the end |
@@ -535,8 +537,9 @@ works its way forward. If you are at the end of the file and search
 for the word "cat", `less` will not find it. You need to go to the
 beginning of the file and search.
 
-Remember, the `man` program uses the same commands, so you can search
-documentation using "/" as well!
+Remember, the `man` program actually uses `less` internally and
+therefore uses the same commands, so you can search documentation
+using "/" as well!
 
 * * * *
 **Short Exercise**
@@ -574,14 +577,15 @@ exists.
 * * * *
 **Short Exercise**
 
-Use `>>`, to append the contents of all of the files which contain the
-number 4 in the directory:
+Use `>>`, to append the contents of all of the files whose names
+contain the number 4 in the directory:
 
     /home/swc/boot-camps/shell/data/gerdal
 
 to the existing `all_data` file. Thus, when you are done `all_data`
 should contain all of the experiment data from Bert and any
-experimental data file from gerdal that contains the number 4.
+experimental data file from gerdal with filenames that contain the
+number 4.
 
 * * * *
 
@@ -616,7 +620,7 @@ the backup file now:
 
     rm /tmp/all_data_backup
 
-The `mkdir` command is used to create a directory. Just enter `mkdir`
+The `mkdir` command is used to make a directory. Just enter `mkdir`
 followed by a space, then the directory name. 
 
 * * * *
@@ -796,15 +800,10 @@ Notice that the files are sorted by the number of characters.
 * * * *
 **Short Exercise**
 
-Use the `man` command to find out how to sort the output from `wc` in
+1. Use the `man` command to find out how to sort the output from `wc` in
 reverse order.
 
-* * * *
-
-* * * * 
-**Short Exercise**
-
-Combine the `wc`, `sort`, `head` and `tail` commands so that only the
+2. Combine the `wc`, `sort`, `head` and `tail` commands so that only the
 `wc` information for the largest file is listed
 
 Hint: To print the smallest file, use:
