@@ -515,7 +515,7 @@ case. Enter the following command:
 `less` opens the file, and lets you navigate through it. The commands
 are identical to the `man` program. 
 
-** Some commands in `less` **
+**Some commands in `less`**
 
 | key     | action |
 | ------- | ---------- | 
