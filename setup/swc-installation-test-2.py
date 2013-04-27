@@ -483,6 +483,16 @@ class CommandDependency (Dependency):
         return match.group(1)
 
 
+def _program_files_paths(*args):
+    "Utility for generating MS Windows search paths"
+    pf = _os.environ.get('ProgramFiles', '/usr/bin')
+    pfx86 = _os.environ.get('ProgramFiles(x86)', pf)
+    paths = [_os.path.join(pf, *args)]
+    if pfx86 != pf:
+        paths.append(_os.path.join(pfx86, *args))
+    return paths
+
+
 for command,long_name,minimum_version,paths in [
         ('sh', 'Bourne Shell', None, None),
         ('ash', 'Almquist Shell', None, None),
@@ -506,19 +516,13 @@ for command,long_name,minimum_version,paths in [
         ('nano', 'Nano', None, None),
         ('gedit', None, None, None),
         ('kate', 'Kate', None, None),
-        ('notepad++', 'Notepad++', None, [
-            _os.path.join(
-                _ROOT_PATH, 'Program Files', 'Notepad++', 'notepad++.exe'),
-            ]),
-        ('firefox', 'Firefox', None, [
-            _os.path.join(
-                _ROOT_PATH, 'Program Files', 'Mozilla Firefox', 'firefox.exe'),
-            ]),
-        ('google-chrome', 'Google Chrome', None, [
-            _os.path.join(
-                _ROOT_PATH, 'Program Files', 'Google', 'Chrome', 'Application',
-                'chrome.exe'),
-            ]),
+        ('notepad++', 'Notepad++', None,
+         _program_files_paths('Notepad++', 'notepad++.exe')),
+        ('firefox', 'Firefox', None,
+         _program_files_paths('Mozilla Firefox', 'firefox.exe')),
+        ('google-chrome', 'Google Chrome', None,
+         _program_files_paths('Google', 'Chrome', 'Application', 'chrome.exe')
+         ),
         ('chromium', 'Chromium', None, None),
         ]:
     if not long_name:
