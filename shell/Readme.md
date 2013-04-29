@@ -687,7 +687,7 @@ see the individual counts, just the total. Of course, I could just do:
 
 Since this file is a concatenation of the smaller files. Sure, this
 works, but I had to create the `all_data` file to do this. Thus, I
-have wasted a precious 7062 bytes of hard disk space. We can do this
+have wasted a precious 10445 bytes of hard disk space. We can do this
 *without* creating a temporary file, but first I have to show you two
 more commands: `head` and `tail`. These commands print the first few,
 or last few, lines of a file, respectively. Try them out on
