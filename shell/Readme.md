@@ -353,12 +353,12 @@ this command:
 
     ls *4*1
 
-lists every file in the current directory which contains the number
-`4`, and ends with the number `1`. There are four such files: `0241`,
-`0341`, `0431`, and `0481`. 
+lists every file in the current directory whose name contains the
+number `4`, and ends with the number `1`. There are four such files:
+`0241`, `0341`, `0431`, and `0481`.
 
 So how does this actually work? Well...when the shell (bash) sees a
-word that contains the `*` character, it automatically looks for files
+word that contains the `*` character, it automatically looks for filenames
 that match the given pattern. In this case, it identified four such
 files. Then, it replaced the `*4*1` with the list of files, separated
 by spaces. In other words, the two commands:
