@@ -13,7 +13,7 @@ iPython :
 
 1.  select text from the wiki
 2.  copy with **ctrl+c**
-3.  in iPython, type **%paste**
+3.  in iPython, type `%paste`
 
 The code should paste and execute in iPython.
 
@@ -51,7 +51,33 @@ unique to python. To check whether an object is contained in a list :
   print "Katy" not in beatles # this is also TRUE. 
 ```
 
-Conditionals (if statements) are also really easy to use in python. Take
+There is also a comparison to determine if two variables reference the same object. Two different objects can have the same value, so return true for an equality comparison:
+
+```python
+a = 1234
+b = 1234
+a == b # True, they have the same value
+a is b # False, are different objects
+```
+
+However, `is` should generally not be used for comparisons between integers. Python does treat some small valued integers differently, for example:
+
+```python
+a = 1
+b = 1
+a is b # True - special case for 1
+```
+
+A better use of `is` would be to compare objects like lists, for example the same list could be inserted into two different dictionaries. A comparison with `is` would reveal this:
+
+```python
+number_list = [1,2,4,8]
+dict1 = {"thing_widths":number_list}
+dict2 = {"item_costs":number_list}
+dict1["thing_widths"] is dict2["item_costs"]  # True - this is the same list
+```
+
+Conditionals (`if` statements) are also really easy to use in python. Take
 a look at the following example:
 
 ```python
@@ -72,16 +98,16 @@ The behavior of this code snippet should be pretty clear, but there is
 something peculiar. How does Python know where the if-statement ends?
 Other languages, like FORTRAN, MatLab, and C/C++ all have some way of
 delimiting blocks of code. For example, in MatLab you begin an if
-statement with the word "if" and you end it with "end if". In C/C++ you
-delimit blocks with curly braces. Python uses ''indentation'' to delimit
+statement with the word `if` and you end it with `end if`. In C/C++ you
+delimit blocks with curly braces. Python uses **indentation** to delimit
 code blocks. The **indentation** above is NOT just to make things look
-pretty - it tells Python what the body of the if-statement is. This is
+pretty - it tells Python what the body of the `if`-statement is. This is
 true when ever we create any code blocks, such as the bodies of loops,
 functions or classes.
 
 **Aside: Compact if-statement:**
 
-Python has an easy to use if-syntax for setting the value of a variable.
+Python has an easy to use `if`-syntax for setting the value of a variable.
 Try entering this into IPython:
 
 ```python
@@ -103,7 +129,7 @@ conditional that defines it is no longer true.
 ```python
   mult = 1
   sequence = [1, 5, 7, 9, 3, -1, 5, 3]
-  while sequence[0] is not -1:
+  while sequence[0] != -1:
       mult = mult * sequence[0]
       del sequence[0]
 
@@ -112,16 +138,10 @@ conditional that defines it is no longer true.
 
 Some new syntax has been introduced in this example.
 
--   On line 3 We begin the while loop. Notice that instead of using the
-    not-equals symbol, !=, we can simply enter "is not" which is easier
-    to read. This while loop will execute until sequence[0]= -1 . That
-    is, until deletes all of the entries of the sequence that come
-    before -1.
-
 -   On line 4, we compute the product of the elements just to make this
     more interesting.
 
--   On line 5, we use the \`del\` keyword to remove the first element of
+-   On line 5, we use the `del` keyword to remove the first element of
     the list, shifting every element down one.
 
 **Watch Out**
@@ -132,13 +152,13 @@ true, a **poorly formed** while loop might repeat forever. For example :
 ```python
   i=1
   print "Well, there's egg and bacon, egg and spam, egg bacon and"
-  while i is 1:
+  while i == 1:
     print "spam "
   print "or Lobster Thermidor a Crevette with a mornay sauce served in a Provencale manner with shallots..." 
 ```
 
-Since the variable **i** never changes within the while loop, we can
-expect that the conditional, **i=1** will remain true forever and the
+Since the variable `i` never changes within the while loop, we can
+expect that the conditional, `i=1` will remain true forever and the
 while loop will just go round and round, as if this restaurant offered
 nothing but spam. (If you try this at home, please note that one way to
 interrupt a non-terminating process is **ctrl+c** or **ctrl+z**.
@@ -192,13 +212,13 @@ what the range function does.
         These are exactly the valid indices for a list of 4 elements.
 
 Range is a function that returns a list containing a sequence of
-integers. So, range(10) returns the list [0,1,2,3,4,5,6,7,8,9]. The for
+integers. So, `range(10)` returns the list [0,1,2,3,4,5,6,7,8,9]. The for
 loop then simply iterates over that list, setting i to each value.
 
 For Loops with Lists and Dictionaries
 =====================================
 
-With range, we learned that **for** loops in python are really used to
+With range, we learned that `for` loops in python are really used to
 iterate over sequences of things (they can be used for much more, but
 for now this definition will do). Try entering the following to see what
 happens:
@@ -218,7 +238,7 @@ this is equivalent to:
       print c[i]
 ```
 
-With a list, then, it's clear that we can use the **in** keyword to
+With a list, then, it's clear that we can use the `in` keyword to
 indicate a list of things. What about a nested loops around a list of
 lists?
 
@@ -263,13 +283,13 @@ this clever syntax.
 break, continue, and else
 =========================
 
-A break statement cuts off a loop from within an inner loop. It helps
+A `break` statement cuts off a loop from within an inner loop. It helps
 avoid infinite loops by cutting off loops when they're clearly going
 nowhere.
 
 ```python
-  reasonable = 10
-  for n in range(1,2000):
+  reasonable = 5
+  for n in range(1,10):
       if n == reasonable :
           break
       print n
@@ -279,8 +299,8 @@ Something you might want to do instead of breaking is to continue to the
 next iteration of a loop, giving up on the current one..
 
 ```python
-  reasonable = 10
-  for n in range(1,2000):
+  reasonable = 5
+  for n in range(1,10):
       if n == reasonable :
         continue
       print n
@@ -288,7 +308,7 @@ next iteration of a loop, giving up on the current one..
 
 What is the difference between the output of these two?
 
-Importantly, Python allows you to use an else statement in a for loop.
+Importantly, Python allows you to use an `else` statement in a for loop.
 
 That is :
 
@@ -307,6 +327,36 @@ That is :
       else:
           string += title + ", but not quite so brave as Sir Lancelot." 
       print string
+```
+
+Other useful python functions
+=============================
+
+###enumerate###
+
+Python lists and dictionaries can easily be iterated through in a for loop by using `in`. As we saw above, this is clearer than writing a for loop over the integers up to the length of the list (or dictionary, or other iterable). However, sometimes you may need the index value at the same time, for example for some calculation. The `enumerate` function generates the integer index for you, which can be used instead of the `range` function. The following two loops are equivalent:
+
+```python
+data_list = [23,45,67]
+
+for i in range(len(data_list)):
+    print data_list[i], ' is item number ', i, ' in the list'
+
+for i,d in enumerate(data_list):
+    print d, ' is item number ', i, ' in the list'
+```
+
+###zip###
+
+For iterating through multiple sequences, `zip` can be used to group them together to simultaneous pass through each sequence:
+
+```python
+run_numbers = [1,2,3,4]
+run_times = [12.1, 33.0, 15.1, 22.9]
+directions = ['North', 'South', 'East', 'NorthEast']
+
+for n, t, d in zip(run_numbers, run_times, directions):
+    print n, t, d
 ```
 
 Final Example
