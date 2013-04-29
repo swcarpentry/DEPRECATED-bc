@@ -31,24 +31,24 @@ Many equivalence test statements exist in Python that are similar in
 other languages:
 
 ```python
-  i=1
-  j=2
-  i==j # i is equal to j : FALSE
-  i<j  # i is less than j
-  i<=j # i is less than or equal to j : TRUE
-  i>j  # i is greater than j
-  i>=j # i is greater than or equal to j : FALSE
-  i!=j # i is not equal to j : TRUE
+i=1
+j=2
+i==j # i is equal to j : FALSE
+i<j  # i is less than j
+i<=j # i is less than or equal to j : TRUE
+i>j  # i is greater than j
+i>=j # i is greater than or equal to j : FALSE
+i!=j # i is not equal to j : TRUE
 ```
 
 However, python has other equivalence test statements that are fairly
 unique to python. To check whether an object is contained in a list :
 
 ```python
-  beatle="John"
-  beatles=["George", "Ringo","John", "Paul"]
-  print beatle in beatles # is John one of the beatles? : TRUE
-  print "Katy" not in beatles # this is also TRUE. 
+beatle="John"
+beatles=["George", "Ringo","John", "Paul"]
+print beatle in beatles # is John one of the beatles? : TRUE
+print "Katy" not in beatles # this is also TRUE. 
 ```
 
 There is also a comparison to determine if two variables reference the same object. Two different objects can have the same value, so return true for an equality comparison:
@@ -81,17 +81,16 @@ Conditionals (`if` statements) are also really easy to use in python. Take
 a look at the following example:
 
 ```python
-
-  i = 4
-  sign = "zero"
-  if i < 0:
-    sign = "negative"
-  elif i > 0:
-    sign = "positive"
-  else:
-    print "Sign must be zero"
-    print "Have a nice day"
-  print sign
+i = 4
+sign = "zero"
+if i < 0:
+  sign = "negative"
+elif i > 0:
+  sign = "positive"
+else:
+  print "Sign must be zero"
+  print "Have a nice day"
+print sign
 ```
 
 The behavior of this code snippet should be pretty clear, but there is
@@ -111,8 +110,8 @@ Python has an easy to use `if`-syntax for setting the value of a variable.
 Try entering this into IPython:
 
 ```python
-  i = 5
-  sign = "positive" if i > 0 else "negative"
+i = 5
+sign = "positive" if i > 0 else "negative"
 ```
 
 While Loops
@@ -127,13 +126,13 @@ A while loop will repeat the instructions within itself until the
 conditional that defines it is no longer true.
 
 ```python
-  mult = 1
-  sequence = [1, 5, 7, 9, 3, -1, 5, 3]
-  while sequence[0] != -1:
-      mult = mult * sequence[0]
-      del sequence[0]
+mult = 1
+sequence = [1, 5, 7, 9, 3, -1, 5, 3]
+while sequence[0] != -1:
+  mult = mult * sequence[0]
+  del sequence[0]
 
-  print mult
+print mult
 ```
 
 Some new syntax has been introduced in this example.
@@ -150,11 +149,11 @@ Since a while loop will continue until its conditional is no longer
 true, a **poorly formed** while loop might repeat forever. For example :
 
 ```python
-  i=1
-  print "Well, there's egg and bacon, egg and spam, egg bacon and"
-  while i == 1:
-    print "spam "
-  print "or Lobster Thermidor a Crevette with a mornay sauce served in a Provencale manner with shallots..." 
+i=1
+print "Well, there's egg and bacon, egg and spam, egg bacon and"
+while i == 1:
+  print "spam "
+print "or Lobster Thermidor a Crevette with a mornay sauce served in a Provencale manner with shallots..." 
 ```
 
 Since the variable `i` never changes within the while loop, we can
@@ -167,21 +166,21 @@ To create nested if loops, the indentation (preferably two or four
 spaces) should increase for each looping level.
 
 ```python
-  weapons=["surprise","fear","ruthless efficiency","an almost fanatical devotion..."]
-  tries=0
-  script=""
-  while tries < len(weapons) :
-      i=0
-      while i<tries :
-          script += weapons[i]
-          script += " and "
-          i+=1
-      script += weapons[tries]
-      script += ". "
-      if tries == len(weapons) - 1 :
-          script += " and nice red uniforms. Oh damn!"
-      tries +=1
-  print script
+weapons=["surprise","fear","ruthless efficiency","an almost fanatical devotion..."]
+tries=0
+script=""
+while tries < len(weapons) :
+  i=0
+  while i<tries :
+    script += weapons[i]
+    script += " and "
+    i+=1
+  script += weapons[tries]
+  script += ". "
+  if tries == len(weapons) - 1 :
+    script += " and nice red uniforms. Oh damn!"
+  tries +=1
+print script
 ```
 
 For Loops
@@ -192,9 +191,8 @@ Lets start with a simple example which prints all of the numbers from 0
 to 9:
 
 ```python
-
-  for i in range(10):
-      print i
+for i in range(10):
+  print i
 ```
 
 You may be wondering how this works. Start by using help(range) to see
@@ -224,18 +222,16 @@ for now this definition will do). Try entering the following to see what
 happens:
 
 ```python
-
-  for c in ["one", 2, "three", 4, "five"]:
-      print c
+for c in ["one", 2, "three", 4, "five"]:
+    print c
 ```
 
 this is equivalent to:
 
 ```python
-
-  c = ["one", 2, "three", 4, "five"]
-  for i in range(len(c)):
-      print c[i]
+c = ["one", 2, "three", 4, "five"]
+for i in range(len(c)):
+    print c[i]
 ```
 
 With a list, then, it's clear that we can use the `in` keyword to
@@ -243,16 +239,16 @@ indicate a list of things. What about a nested loops around a list of
 lists?
 
 ```python
-  italy = ["Rome", "Pisa", "Florence", "Venice", "Trieste"]
-  argentina = ["Mendoza", "Buenos Aires", "Patagonia"]
-  india = ["Ahmedabad","Kolkata", "Chennai", "Jaipur", "Surat"]
-  us = ["Chicago", "Austin", "New York", "San Fran"]
-  nations = [italy, argentina, india, us]
-  nationnames = ["italy","argentina", "india", "us"]
-  for nation in nations :
-      print nationnames[nations.index(nation)] + ": "
-      for city in nation :
-          print "  " + city 
+italy = ["Rome", "Pisa", "Florence", "Venice", "Trieste"]
+argentina = ["Mendoza", "Buenos Aires", "Patagonia"]
+india = ["Ahmedabad","Kolkata", "Chennai", "Jaipur", "Surat"]
+us = ["Chicago", "Austin", "New York", "San Fran"]
+nations = [italy, argentina, india, us]
+nationnames = ["italy","argentina", "india", "us"]
+for nation in nations :
+    print nationnames[nations.index(nation)] + ": "
+    for city in nation :
+        print "  " + city 
 ```
 
 Of course, this information is better stored in a dictionary, isn't it?
@@ -269,15 +265,15 @@ what will fill those variables. Here, we rewrite the previous loop using
 this clever syntax.
 
 ```python
-  italy = ["Rome", "Pisa", "Florence", "Venice", "Trieste"]
-  argentina = ["Mendoza", "Buenos Aires", "Patagonia"]
-  india = ["Ahmedabad","Kolkata", "Chennai", "Jaipur", "Surat"]
-  us = ["Chicago", "Austin", "New York", "San Fran"]
-  nations = {"italy":italy, "argentina":argentina, "india":india, "us":us}
-  for nation, cities in nations.iteritems() :
-      print nation + " : "
-      for city in cities :
-          print "  " + city 
+italy = ["Rome", "Pisa", "Florence", "Venice", "Trieste"]
+argentina = ["Mendoza", "Buenos Aires", "Patagonia"]
+india = ["Ahmedabad","Kolkata", "Chennai", "Jaipur", "Surat"]
+us = ["Chicago", "Austin", "New York", "San Fran"]
+nations = {"italy":italy, "argentina":argentina, "india":india, "us":us}
+for nation, cities in nations.iteritems() :
+    print nation + " : "
+    for city in cities :
+        print "  " + city 
 ```
 
 break, continue, and else
@@ -288,22 +284,22 @@ avoid infinite loops by cutting off loops when they're clearly going
 nowhere.
 
 ```python
-  reasonable = 5
-  for n in range(1,10):
-      if n == reasonable :
-          break
-      print n
+reasonable = 5
+for n in range(1,10):
+    if n == reasonable :
+        break
+    print n
 ```
 
 Something you might want to do instead of breaking is to continue to the
 next iteration of a loop, giving up on the current one..
 
 ```python
-  reasonable = 5
-  for n in range(1,10):
-      if n == reasonable :
+reasonable = 5
+for n in range(1,10):
+    if n == reasonable :
         continue
-      print n
+    print n
 ```
 
 What is the difference between the output of these two?
@@ -313,20 +309,20 @@ Importantly, Python allows you to use an `else` statement in a for loop.
 That is :
 
 ```python
-  knights={"Sir Belvedere":"the Wise", "Sir Lancelot":"the Brave", \
-          "Sir Galahad":"the Pure", "Sir Robin":"the Brave", "The Black Knight":"John Clease"} 
+knights={"Sir Belvedere":"the Wise", "Sir Lancelot":"the Brave", \
+         "Sir Galahad":"the Pure", "Sir Robin":"the Brave", "The Black Knight":"John Clease"} 
 
-  favorites=knights.keys()
-  favorites.remove("Sir Robin")
-  for name, title in knights.iteritems() : 
-      string = name + ", "
-      for fav in favorites :
-          if fav == name :
-              string += title
-              break
-      else:
-          string += title + ", but not quite so brave as Sir Lancelot." 
-      print string
+favorites=knights.keys()
+favorites.remove("Sir Robin")
+for name, title in knights.iteritems() : 
+    string = name + ", "
+    for fav in favorites :
+        if fav == name :
+            string += title
+            break
+    else:
+        string += title + ", but not quite so brave as Sir Lancelot." 
+    print string
 ```
 
 Other useful python functions
@@ -380,16 +376,16 @@ occurs is the value.
 
 ```python
 
-  areacodes = {} # Create an empty dictionary
-  f = open("phonenums.txt") # Open the text file
-  for line in f: # iterate through the text file, one line at a time (think of the file as a list of lines)
-      ac = line.split('-')[0] # Split phone number, first element is the area code
-      if not ac in areacodes: # Check if it is already in the dictionary
+areacodes = {} # Create an empty dictionary
+f = open("phonenums.txt") # Open the text file
+for line in f: # iterate through the text file, one line at a time (think of the file as a list of lines)
+    ac = line.split('-')[0] # Split phone number, first element is the area code
+    if not ac in areacodes: # Check if it is already in the dictionary
         areacodes[ac] = 1 # If not, add it to the dictionary
-      else:
+    else:
         areacodes[ac] += 1 # Add one to the dictionary entry
   
-  print areacodes # Print the answer
+print areacodes # Print the answer
 ```
 
 Example : Iteritems
