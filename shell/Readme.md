@@ -416,6 +416,34 @@ The down arrow takes your forwards in the command history.
 ^-R will do a reverse-search through your command history.  This
 is very useful.
 
+You can also review your recent commands with the `history` command.  Just enter:
+
+    history
+
+to see a numbered list of recent commands, including this just issues
+`history` command.  You can reuse one of these commands directly by
+referring to the number of that command.
+
+If your history looked like this:
+
+    259  ls *!
+    260  ls /usr/bin/*.sh
+    261  ls *4*1
+
+then you could repeat command #260 by simply entering:
+
+    !260
+
+(that's an exclamation mark).
+
+* * * * 
+**Short Exercise**
+
+1. Find the line number in your history for the last exercise (listing
+files in /bin) and reissue that command.
+
+* * * * 
+
 ## Which program?
 
 Commands like `ls`, `rm`, `echo`, and `cd` are just ordinary programs
