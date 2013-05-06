@@ -1,4 +1,4 @@
-Version Control WITH KATY!!!
+Version Control
 
 ----
 
@@ -25,10 +25,6 @@ etc.) provides :
 -   varying permissions for various groups of users
 -   commit triggered mailing lists
 -   other service hooks (twitter, etc.)
-
-**NOTE** Public repos have public licences **by default**. If you don't
-want to share (in the most liberal sense) your stuff with the world, pay
-github money for private repos, or host your own.
 
 ## github password 
 
