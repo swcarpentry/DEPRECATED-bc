@@ -1,8 +1,8 @@
- The Shell
+# The Shell
 
 **Material by Paul Wilson, Milad Fatenejad, Sasha Wood, and Radhika Khetani**
 
-# What is the shell how do I access the shell?
+# What is the shell? How do I access the shell?
 
 The *shell* is a program that presents a command line interface
 which allows you to control your computer using commands entered
