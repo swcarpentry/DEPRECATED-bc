@@ -549,8 +549,6 @@ are identical to the `man` program.
 | key     | action |
 | ------- | ---------- | 
 | "space" | to go forward |
-| ------- | ---------- | 
-| "space" | to go forward |
 |  "b"    | to go backwarsd |
 |  "g"    | to go to the beginning |
 |  "G"    | to go to the end |
