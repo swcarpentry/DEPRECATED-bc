@@ -51,7 +51,7 @@ print beatle in beatles # is John one of the beatles? : TRUE
 print "Katy" not in beatles # this is also TRUE. 
 ```
 
-There is also a comparison to determine if two variables reference the same object. Two different objects can have the same value, so return true for an equality comparison:
+The `is` keyword tests if two variables refer to the same object. For example:
 
 ```python
 a = 1234
@@ -60,7 +60,7 @@ a == b # True, they have the same value
 a is b # False, are different objects
 ```
 
-However, `is` should generally not be used for comparisons between integers. Python does treat some small valued integers differently, for example:
+It is a common mistake to use `is` to test for equality between two objects, see the code below.  This only works for a small range of integers and strings in CPython, and is a side effect of the implementation that should **not** be relied upon.
 
 ```python
 a = 1
@@ -68,7 +68,7 @@ b = 1
 a is b # True - special case for 1
 ```
 
-A better use of `is` would be to compare objects like lists, for example the same list could be inserted into two different dictionaries. A comparison with `is` would reveal this:
+A correct use of `is` would be to compare objects like lists, for example the same list could be inserted into two different dictionaries. A comparison with `is` would reveal this:
 
 ```python
 number_list = [1,2,4,8]
@@ -76,6 +76,15 @@ dict1 = {"thing_widths":number_list}
 dict2 = {"item_costs":number_list}
 dict1["thing_widths"] is dict2["item_costs"]  # True - this is the same list
 ```
+
+Note that since the two dictionary values are actually the same object, modifying the list in one of the dictionaries will mean that the values in both dictionaries will change:
+
+```python
+print dict1, dict2
+dict1["thing_widths"][0] = 222
+print dict1, dict2
+```
+
 
 Conditionals (`if` statements) are also really easy to use in python. Take
 a look at the following example:
@@ -157,7 +166,7 @@ print "or Lobster Thermidor a Crevette with a mornay sauce served in a Provencal
 ```
 
 Since the variable `i` never changes within the while loop, we can
-expect that the conditional, `i=1` will remain true forever and the
+expect that the conditional, `i==1` will remain true forever and the
 while loop will just go round and round, as if this restaurant offered
 nothing but spam. (If you try this at home, please note that one way to
 interrupt a non-terminating process is **ctrl+c** or **ctrl+z**.
