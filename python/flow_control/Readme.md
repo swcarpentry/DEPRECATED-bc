@@ -85,7 +85,6 @@ dict1["thing_widths"][0] = 222
 print dict1, dict2
 ```
 
-
 Conditionals (`if` statements) are also really easy to use in python. Take
 a look at the following example:
 
@@ -169,7 +168,7 @@ Since the variable `i` never changes within the while loop, we can
 expect that the conditional, `i==1` will remain true forever and the
 while loop will just go round and round, as if this restaurant offered
 nothing but spam. (If you try this at home, please note that one way to
-interrupt a non-terminating process is **ctrl+c** or **ctrl+z**.
+interrupt a non-terminating process is **ctrl+c** or **ctrl+z**).
 
 To create nested if loops, the indentation (preferably two or four
 spaces) should increase for each looping level.
@@ -301,7 +300,7 @@ for n in range(1,10):
 ```
 
 Something you might want to do instead of breaking is to continue to the
-next iteration of a loop, giving up on the current one..
+next iteration of a loop, giving up on the current one.
 
 ```python
 reasonable = 5
