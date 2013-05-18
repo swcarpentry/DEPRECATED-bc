@@ -48,7 +48,7 @@ unique to python. To check whether an object is contained in a list :
 beatle="John"
 beatles=["George", "Ringo","John", "Paul"]
 print beatle in beatles # is John one of the beatles? : TRUE
-print "Katy" not in beatles # this is also TRUE. 
+print "Katy" not in beatles # this is also TRUE.
 ```
 
 The `is` keyword tests if two variables refer to the same object. For example:
@@ -161,7 +161,7 @@ i=1
 print "Well, there's egg and bacon, egg and spam, egg bacon and"
 while i == 1:
   print "spam "
-print "or Lobster Thermidor a Crevette with a mornay sauce served in a Provencale manner with shallots..." 
+print "or Lobster Thermidor a Crevette with a mornay sauce served in a Provencale manner with shallots..."
 ```
 
 Since the variable `i` never changes within the while loop, we can
@@ -256,7 +256,7 @@ nationnames = ["italy","argentina", "india", "us"]
 for nation in nations :
     print nationnames[nations.index(nation)] + ": "
     for city in nation :
-        print "  " + city 
+        print "  " + city
 ```
 
 Of course, this information is better stored in a dictionary, isn't it?
@@ -281,7 +281,7 @@ nations = {"italy":italy, "argentina":argentina, "india":india, "us":us}
 for nation, cities in nations.iteritems() :
     print nation + " : "
     for city in cities :
-        print "  " + city 
+        print "  " + city
 ```
 
 break, continue, and else
@@ -318,18 +318,18 @@ That is :
 
 ```python
 knights={"Sir Belvedere":"the Wise", "Sir Lancelot":"the Brave", \
-         "Sir Galahad":"the Pure", "Sir Robin":"the Brave", "The Black Knight":"John Clease"} 
+         "Sir Galahad":"the Pure", "Sir Robin":"the Brave", "The Black Knight":"John Clease"}
 
 favorites=knights.keys()
 favorites.remove("Sir Robin")
-for name, title in knights.iteritems() : 
+for name, title in knights.iteritems() :
     string = name + ", "
     for fav in favorites :
         if fav == name :
             string += title
             break
     else:
-        string += title + ", but not quite so brave as Sir Lancelot." 
+        string += title + ", but not quite so brave as Sir Lancelot."
     print string
 ```
 
@@ -369,8 +369,8 @@ Final Example
 We've seen a lot so far. Lets work through a slightly lengthier example
 together. I'll use some of the concepts we already saw and introduce a
 few new concepts. To run the example, you'll need to locate a short file
-containing phone numbers. The file can be found in your 
-repository within the phonenums directory and is called phonenums.txt. 
+containing phone numbers. The file can be found in your
+repository within the phonenums directory and is called phonenums.txt.
 Now we have to move IPython to that directory so it can find the
 phonenums.txt file. You navigate within IPython in the same way that you
 navigate in the shell, by entering "cd [path]" .
@@ -392,7 +392,7 @@ for line in f: # iterate through the text file, one line at a time (think of the
         areacodes[ac] = 1 # If not, add it to the dictionary
     else:
         areacodes[ac] += 1 # Add one to the dictionary entry
-  
+
 print areacodes # Print the answer
 ```
 
