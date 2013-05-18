@@ -2,20 +2,20 @@
 
 **Based on Lecture Materials By: Milad Fatenejad and Katy Huff**
 
-Pasting into iPython
+Pasting into IPython
 ====================
 
 This part of the lesson includes a lot of text, but it will be useful to
-run it yourself in iPython.
+run it yourself in IPython.
 
 To paste text from another application (i.e. these lecture notes) into
-iPython :
+IPython :
 
 1.  select text from the wiki
 2.  copy with **ctrl+c**
-3.  in iPython, type `%paste`
+3.  in IPython, type `%paste`
 
-The code should paste and execute in iPython.
+The code should paste and execute in IPython.
 
 If you also type %autocall to turn autocall OFF, you may be able to
 paste with **ctrl+v** though this won't work with all ipython builds.
