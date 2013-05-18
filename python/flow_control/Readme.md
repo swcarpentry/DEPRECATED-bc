@@ -18,7 +18,7 @@ IPython :
 The code should paste and execute in IPython.
 
 If you also type %autocall to turn autocall OFF, you may be able to
-paste with **ctrl+v** though this won't work with all ipython builds.
+paste with **ctrl+v** though this won't work with all IPython builds.
 
 Conditionals
 ============
@@ -371,8 +371,8 @@ together. I'll use some of the concepts we already saw and introduce a
 few new concepts. To run the example, you'll need to locate a short file
 containing phone numbers. The file can be found in your 
 repository within the phonenums directory and is called phonenums.txt. 
-Now we have to move ipython to that directory so it can find the
-phonenums.txt file. You navigate within ipython in the same way that you
+Now we have to move IPython to that directory so it can find the
+phonenums.txt file. You navigate within IPython in the same way that you
 navigate in the shell, by entering "cd [path]" .
 
 This example opens a text file containing a list of phone numbers. The
