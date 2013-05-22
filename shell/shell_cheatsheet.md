@@ -105,15 +105,15 @@ For loops loop through variables in a list
 
     for varname in list
     do
-        command 1
-        command 2
+        command1 $varname
+        command2 $varname
     done
 
 where,
 
 *  `for`, `in`, `do`, and `done` are keywords
 *  `list` contains a list of values separated by spaces. e.g. `list` can be replaced by `1 2 3 4 5 6` or by `Bob Mary Sue Greg`. `list` can also be a variable:
-
+*  `varname` is assigned a value without using a `$` and the value is retrieved using `$varname`
 --
 
     list[0]=Sam
@@ -129,8 +129,8 @@ which is referenced in the loop by:
 
     for varname in ${list[@]}
     do
-        command 1
-        command 2
+        command1 $varname
+        command2 $varname
     done
 
 
