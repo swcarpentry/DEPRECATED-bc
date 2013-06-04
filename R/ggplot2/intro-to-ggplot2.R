@@ -1,14 +1,15 @@
 # John Blischak
 # 2013-06-03
+# jdblischak at gmail dot com
 ############################################################
 rm(list = ls())
 library(ggplot2)
 data(mpg)
 
 # Motivation: 
-# Graphics are imprortant not only to concisely convey the 
+# Graphics are important not only to concisely convey the 
 # results of an analysis, but also as diagnostic tools to 
-# inform the statistcaal analyses being performed. ggplot2 
+# inform the statistical analyses being performed. ggplot2 
 # is an R package that allows you to create high-quality,
 # informative graphics in a flexible, intuitive fashion.
 
@@ -56,7 +57,6 @@ str(base1)
 
 base2 <- ggplot(data = mpg, 
                 mapping = aes(x = cty, fill = factor(drv)))
-base2
 str(base2)
 
 # Geometric objects
@@ -71,10 +71,10 @@ base1 + geom_path()
 base2 + geom_histogram()
 base2 + geom_density(alpha = .5)
 
-# Statistical transformations A stat performs a statistical
-# operation on the data and then graphs the statistical
-# summary as the output. This is especially useful for
-# adding fitted lines.
+# Statistical transformations 
+# A stat performs a statistical operation on the data and
+# then graphs the statistical summary as the output. This is
+# especially useful for adding fitted lines.
 base1 + stat_smooth()
 base1 + stat_smooth(method = 'lm')
 
@@ -101,6 +101,10 @@ base1 + geom_point() + facet_grid(. ~ year)
 
 base2 + geom_histogram() + facet_grid(drv ~ .)
 
+# Challenge:
+# Facet the histogram of city fuel economy with the rows
+# as the number of cylinders and the columns as the year.
+
 # Scales
 # Scale arguments control how the data is converted into
 # aesthetics, e.g. change the limits of the x and y axes or
@@ -124,29 +128,29 @@ base1 + geom_point() +
 base2 + geom_histogram() + theme(legend.position = 'left')
 
 # Challenge:
-# For the scatter plot, change the major and minor grid line
-# to red.
+# For the scatter plot, change the major and minor grid
+# lines to red.
 
 # Convenience functions: 
 # I have purposely been verbose in order to explain the
-# grammer of graphics behind ggplot2. However, once you are
+# grammar of graphics behind ggplot2. However, once you are
 # comfortable with the basics you will want to start using
 # the available convenience functions, e.g. qplot, 
 # last_plot(), xlim, and ylim.
 
-# Other useful packages:
-# ggplot2 was started by Hadley Wickham. He has also started packages for 
-# high-level data manipulation called plyr and reshape2. These complement
-# ggplot2 by facilitating the manipulation of your data into a data.frame.
+# Other useful packages: ggplot2 was started by Hadley
+# Wickham. He has also started packages for high-level data
+# manipulation called plyr and reshape2. These complement 
+# ggplot2 by facilitating the manipulation of your data into
+# a data.frame.
 
 
 # Final Exercise: 
-# Plot city mpg (cty) versus engine
-# displacement (displ). Map the number of cylinders (cyl) to
-# the size of the points. Limit the y-axis to 15-25 mpg.
-# Move the legend to the bottom of the plot. Use the labs
-# function to add a title and better describe the x and y
-# axis labels.
+# Plot city mpg (cty) versus engine displacement (displ).
+# Map the number of cylinders (cyl) to the size of the
+# points. Limit the y-axis to 15-25 mpg. Move the legend to
+# the bottom of the plot. Use the labs function to add a
+# title and better describe the x and y axis labels.
 
 
 
