@@ -81,6 +81,8 @@ CHECKS = [
 # Testing
     'nosetests',       # Command line tool
     'nose',            # Python package
+    'py.test',         # Command line tool
+    'pytest',          # Python package
 # SQL
     'sqlite3',         # Command line tool
     'sqlite3-python',  # Python package
@@ -155,8 +157,10 @@ class DependencyError (Exception):
         ('*', '*', 'numpy'): 'http://docs.scipy.org/doc/numpy/user/install.html',
         ('*', '*', 'pandas'): 'http://pandas.pydata.org/pandas-docs/stable/install.html',
         ('*', '*', 'pip'): 'http://www.pip-installer.org/en/latest/installing.html',
+        ('*', '*', 'pytest'): 'http://pytest.org/latest/getting-started.html',
         ('*', '*', 'python'): 'http://www.python.org/download/releases/2.7.3/#download',
         ('*', '*', 'pyzmq'): 'https://github.com/zeromq/pyzmq/wiki/Building-and-Installing-PyZMQ',
+        ('*', '*', 'py.test'): 'http://pytest.org/latest/getting-started.html',
         ('Linux', '*', 'scipy'): 'http://www.scipy.org/Installing_SciPy/Linux',
         ('Darwin', '*', 'scipy'): 'http://www.scipy.org/Installing_SciPy/Mac_OS_X',
         ('Windows', '*', 'scipy'): 'http://www.scipy.org/Installing_SciPy/Windows',
@@ -588,6 +592,11 @@ CHECKER['easy_install'] = EasyInstallDependency(
     minimum_version=None)
 
 
+CHECKER['py.test'] = CommandDependency(
+    command='py.test', version_stream='stderr',
+    minimum_version=None)
+
+
 class PathCommandDependency (CommandDependency):
     """A command that doesn't support --version or equivalent options
 
@@ -675,6 +684,8 @@ class PythonPackageDependency (Dependency):
 for package,name,long_name,minimum_version,and_dependencies in [
         ('nose', None, 'Nose Python package',
          CHECKER['nosetests'].minimum_version, None),
+        ('pytest', None, 'pytest Python package',
+         CHECKER['py.test'].minimum_version, None),
         ('jinja2', 'jinja', 'Jinja', (2, 6), None),
         ('zmq', 'pyzmq', 'PyZMQ', (2, 1, 4), None),
         ('IPython', None, 'IPython Python package',
