@@ -1,29 +1,23 @@
+---
+---
+<!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="{{page.shared}}/css/bootstrap/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="{{page.shared}}/css/lesson.css" />
-    <title>{{page.title}}</title>
+    {% include header.html %}
   </head>
   <body>
     <div class="container">
+      {% include banner.html %}
 
-      {% include navbar.html %}
-
-      <!-- banner -->
-      <div class="banner">
-        <img src="{{page.shared}}/img/software-carpentry-banner.png" alt="Software Carpentry banner" />
-	<h1>{{page.title}}</h1>
-      </div>
-
-      <!-- page content -->
       <div class="row-fluid">
         <div class="span10 offset1">
+          <h1>{{page.title}}</h1>
           {{content}}
 	</div>
       </div>
 
       {% include footer.html %}
-
     </div>
+    {% include javascript.html %}
   </body>
 </html>

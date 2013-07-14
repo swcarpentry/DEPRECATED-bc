@@ -1,7 +1,8 @@
 ---
 layout: bootcamp
-shared: ..
+root: .
 venue: Euphoric State University
+address: 123 College Street, Euphoria
 humandate: June 17-18, 2020
 humantime: 9:00 am - 4:30 pm
 startdate: 2020-06-17
@@ -17,3 +18,53 @@ contact: random@software-carpentry.org
 {% include bootcamps/requirements.html %}
 {% include bootcamps/python.html %}
 {% include bootcamps/contact.html %}
+
+<hr/>
+
+<h2>Setup</h2>
+
+<div class="row-fluid">
+  <div class="span6">
+    {% include setup/overview-bash.html %}
+    {% include setup/overview-editor.html %}
+  </div>
+  <div class="span6">
+    {% include setup/overview-git.html %}
+    {% include setup/overview-python.html %}
+  </div>
+</div>
+
+<hr/>
+
+<h2>Topics</h2>
+
+<div class="row-fluid">
+  <div class="span6">
+    <h3><a href="lessons/shell.html">The Unix Shell</a></h3>
+    <ul>
+      <li>{% include shell/filedir/title.md %}</li>
+      <li>{% include shell/create/title.md %}</li>
+      <li>{% include shell/pipefilter/title.md %}</li>
+      <li>{% include shell/loop/title.md %}</li>
+      <li>{% include shell/scripts/title.md %}</li>
+      <li>{% include shell/find/title.md %}</li>
+    </ul>
+  </div>
+  <div class="span6">
+    <h3><a href="lessons/db.html">Databases</a></h3>
+    <ul>
+      <li>{% include db/select/title.md %}</li>
+      <li>{% include db/distinct/title.md %}</li>
+      <li>{% include db/filter/title.md %}</li>
+      <li>{% include db/calc/title.md %}</li>
+      <li>{% include db/sort/title.md %}</li>
+      <li>{% include db/null/title.md %}</li>
+      <li>{% include db/aggregate/title.md %}</li>
+      <li>{% include db/grouping/title.md %}</li>
+      <li>{% include db/join/title.md %}</li>
+      <li>{% include db/create/title.md %}</li>
+      <li>{% include db/transactions/title.md %}</li>
+      <li>{% include db/programming/title.md %}</li>
+    </ul>
+  </div>
+</div>
