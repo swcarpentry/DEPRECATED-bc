@@ -1,0 +1,17 @@
+<p>
+  If you run the command:
+</p>
+
+<pre>
+history | tail -5 &gt; recent.sh
+</pre>
+
+<p>
+  the last command in the file is the <code>history</code> command itself,
+  i.e.,
+  the shell has added <code>history</code> to the command log
+  before actually running it.
+  In fact,
+  the shell <em>always</em> adds commands to the log before running them.
+  Why do you think it does this?
+</p>

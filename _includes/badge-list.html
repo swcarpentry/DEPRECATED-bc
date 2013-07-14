@@ -1,0 +1,23 @@
+<div class="badges-section">
+  <div class="media">
+    <img class="media-object pull-left" 
+	 src="{{page.root}}/img/badges/{{badge_slug}}.png" 
+	 alt="Software Carpentry '{{badge_name}}' Badge" />
+    <div class="media-body">
+      <h1 id="{{badge_slug}}-badge" class="badge-title">{{badge_name}} Badge</h1>
+      <h4>{{badge_reason}}</h4>
+    </div>
+  </div>
+</div>
+<div style="clear:both; bottom-margin:30px;">
+  <ul>
+    {% for badge in site.badges[badge_slug] %}
+    <div class="pull-left" style="width:175px;">
+      <li>
+        <a badge-kind="{{badge_slug}}" badge-user="{{badge.user}}" href="{{page.root}}/team.html#{{badge.user}}">{{badge.name}}</a>
+      </li>
+    </div>
+    {% endfor %}
+  </ul>
+</div>
+<div style="clear:both;"></div>

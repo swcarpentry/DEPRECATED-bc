@@ -1,0 +1,49 @@
+<p>
+  Suppose that <code>ls</code> initially displays:
+</p>
+
+<pre>
+<span class="out">fructose.dat    glucose.dat   sucrose.dat</span>
+</pre>
+
+<p>
+  What is the output of:
+</p>
+
+<pre>
+for datafile in *.dat
+do
+    ls *.dat
+done
+</pre>
+
+<p>
+  In the same directory,
+  what is the effect of this loop?
+</p>
+
+<pre>
+for sugar in *.dat
+do
+    echo $sugar
+    cat $sugar &gt; xylose.dat
+done
+</pre>
+
+<ol>
+  <li>
+    Prints <code>fructose.dat</code>, <code>glucose.dat</code>, and <code>sucrose.dat</code>,
+    and copies <code>sucrose.dat</code> to create <code>xylose.dat</code>.
+  </li>
+  <li>
+    Prints <code>fructose.dat</code>, <code>glucose.dat</code>, and <code>sucrose.dat</code>,
+    and concatenates all three files to create <code>xylose.dat</code>.
+  </li>
+  <li>
+    Prints <code>fructose.dat</code>, <code>glucose.dat</code>, <code>sucrose.dat</code>, and <code>xylose.dat</code>,
+    and copies <code>sucrose.dat</code> to create <code>xylose.dat</code>.
+  </li>
+  <li>
+    None of the above.
+  </li>
+</ol>

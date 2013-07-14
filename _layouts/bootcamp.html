@@ -1,0 +1,71 @@
+<html>
+  <head>
+    <link href="{{page.shared}}/css/bootstrap/bootstrap.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="{{page.shared}}/css/bootstrap/bootstrap-responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{{page.shared}}/css/swc.css" />
+    <link rel="stylesheet" type="text/css" href="{{page.shared}}/css/swc-bootstrap.css" />
+    <link rel="alternate" type="application/rss+xml" title="The Software Carpentry Blog" href="{{site.site}}/feed.xml"/>
+    <meta http-equiv="last-modified" content="{{site.timestamp}}" />
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="venue" content="{{page.venue}}" />
+    <meta name="date" content="{{page.humandate}}" />
+    <meta name="startdate" content="{{page.startdate}}" />
+    <meta name="enddate" content="{{page.enddate}}" />
+  </head>
+  <body>
+    <div class="container">
+
+      <div class="span10 offset1">
+
+        <div class="banner">
+          <a href="{{page.root}}/index.html" title="Software Carpentry Home">
+            <img src="{{page.shared}}/img/software-carpentry-banner.png" alt="Software Carpentry banner" />
+          </a>
+        </div>
+
+        {% include navbar.html %}
+        <script type="text/javascript">
+          var nav = document.getElementById('nav-bootcamps');
+          if (nav.className) {
+            nav.className = nav.className + ' active';
+          } else {
+            nav.className = 'active';
+          }
+        </script>
+
+        <div class="hero-unit">
+
+          <div class="row-fluid">
+
+            <div class="span5">
+              <h2>{{page.venue}}</h2>
+            </div>
+
+            <div class="span5">
+              {% if page.subtitle %}
+                <h3>{{page.subtitle}}</h3>
+              {% endif %}
+              <p>
+                {% if page.address %}{{page.address}}<br/>{% endif %}
+                {{page.humandate}}
+                {% if page.humantime %}<br/>{{page.humantime}}{% endif %}
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+        {{content}}
+
+        {% include footer.html %}
+
+      </div>
+
+    </div>
+  </body>
+</html>

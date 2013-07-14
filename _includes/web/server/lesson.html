@@ -1,0 +1,396 @@
+<div id="s:web:server:lesson" class="lesson">
+
+  <p>
+    The next logical step is to provide data to others
+    by writing some kind of server application.
+    The basic idea is simple
+    (<a href="#f:web_application">Figure XXX</a>):
+  </p>
+
+  <ol>
+    <li>
+      wait for someone to connect to your server and send you an HTTP request;
+    </li>
+    <li>
+      parse that request;
+    </li>
+    <li>
+      figure out what it's asking for;
+    </li>
+    <li>
+      fetch that data (or run a program to generate some data dynamically);
+    </li>
+    <li>
+      format the data as HTML or XML; and
+    </li>
+    <li>
+      send it back.
+    </li>
+  </ol>
+
+  <figure id="f:web_application">
+    <img src="web/web_application.png" alt="Web Application Lifecycle"/>
+    <figcaption>Web Application Lifecycle</figcaption>
+  </figure>
+
+  <p>
+    As simple as this is,
+    we're not going to show you how to do it,
+    because experience has shown that
+    all we can actually do in a short lecture
+    is show you how to create security problems.
+    Here's just one example.
+    Suppose you want to write a web application that accepts URLs of the form
+    <code>http://my.site/data?species=homo.sapiens</code>
+    and fetches a database record
+    containing information about that species.
+    One way to do it in Python might look like this:
+  </p>
+
+<pre>
+def get_species(url):
+    '''Get data for a species given a URL with the species name as a query parameter.'''
+    params = url.split('?')[1]                                # Get everything after the '?'.
+    pairs = params.split('&amp;')                                 # Get the name1=value1&amp;name2=value2 pairs.
+    pairs = [pairs.split('=') for p in pairs]                 # Split the name=value pairs.
+    pairs = dict(pairs)                                       # Convert to a {name : value} dictionary.
+    species = pairs['species']                                # Get the species we want to look up.
+    sql = '''SELECT * FROM Species WHERE Name = "%s";'''      # Template for SQL query.
+    sql = sql % species                                       # Insert the species name.
+    cursor.execute(sql)                                       # Send query to database.
+    results = cursor.fetchall()                               # Get all the results.
+    return results[0]
+</pre>
+
+  <p>
+    We've taken out all the error-checking&mdash;for example,
+    this code will fail if there aren't actually any query parameters,
+    or if the species' name isn't in the database&mdash;but
+    that's not the problem.
+    The problem is what happens if someone sends us this URL:
+  </p>
+
+<pre>
+http://my.site/data?species=homo.sapiens&quot;;DROP TABLE Species&quot;--
+</pre>
+
+  <p class="continue">
+    Why?
+    Because the dictionary of query parameters produced by
+    the first five lines of the function
+    will be:
+  </p>
+
+<pre>
+{'species' : 'homo.sapiens&quot;;DROP TABLE Species;--'}
+</pre>
+
+  <p class="continue">
+    which means that the SQL query will be:
+  </p>
+
+<pre>
+SELECT * FROM Species WHERE Name = "homo.sapiens&quot;;DROP TABLE Species;--";
+</pre>
+
+  <p class="continue">
+    which is the same as:
+  </p>
+
+<pre>
+SELECT * FROM Species WHERE Name = "homo.sapiens";
+DROP TABLE Species;
+</pre>
+
+  <p class="continue">
+    In other words,
+    this query selects something from the database,
+    then deletes the entire <code>Species</code> table.
+  </p>
+
+  <p>
+    This is called an <a href="glossary.html#sql-injection">SQL injection attack</a>,
+    because the user is injecting SQL into our database query.
+    It's just one of hundreds of different ways that
+    evil-doers can try to compromise a web application.
+    Built properly,
+    web sites can withstand such attacks,
+    but learning what "properly" is and how to implement it
+    takes more time than we have.
+  </p>
+
+  <p>
+    Instead,
+    we will look at how to write programs that create static HTML pages
+    that can then be given to clients by a standard web server.
+    Using the ratios of average annual temperatures as our example,
+    we'll create pages whose names look like
+    <code>http://my.site/tempratio/AUS-CAN.html</code>,
+    and which contain data formatted like this:
+  </p>
+
+<pre>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta name="revised" content="2013-09-15" /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Ratio of Average Annual Temperatures for AUS and CAN&lt;/h1&gt;
+    &lt;table class="data"&gt;
+      &lt;tr&gt;
+        &lt;td class="year"&gt;1901&lt;/td&gt;
+        &lt;td class="data"&gt;1.10934799048&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="year"&gt;1902&lt;/td&gt;
+        &lt;td class="data"&gt;1.11023963325&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="year"&gt;1903&lt;/td&gt;
+        &lt;td class="data"&gt;1.10876094164&lt;/td&gt;
+      &lt;/tr&gt;
+      ...
+      &lt;tr&gt;
+        &lt;td class="year"&gt;2007&lt;/td&gt;
+        &lt;td class="data"&gt;1.10725265753&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="year"&gt;2008&lt;/td&gt;
+        &lt;td class="data"&gt;1.10793365185&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="year"&gt;2009&lt;/td&gt;
+        &lt;td class="data"&gt;1.10865537105&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <p>
+    The first step is to calculate ratios,
+    which we did in the <a href="#s:client">previous section</a>.
+    The main function of our program is:
+  </p>
+
+<pre>
+def main(args):
+    '''Create web page showing temperature ratios for two countries.'''
+
+    assert len(args) == 4, \
+           'Usage: make_data_page template_filename output_filename country_1 country_2'
+    template_filename = args[0]
+    output_filename = args[1]
+    country_1 = args[2]
+    country_2 = args[3]
+
+    page = make_page(template_filename, country_1, country_2)
+
+    writer = open(output_filename, 'w')
+    writer.write(page)
+    writer.close()
+
+if __name__ == '__main__':
+    main(sys.argv[1:])
+</pre>
+
+  <p>
+    Most of the work is done by <code>make_page</code>,
+    which gets temperature data for two countries,
+    calculates ratios,
+    and fills in a Jinja2 template.
+    Using the <code>get_temps</code> function we wrote earlier,
+    it is:
+  </p>
+
+<pre>
+def make_page(template_filename, output_filename, country_1, country_2):
+    '''Create page showing temperature ratios.'''
+
+    data_1 = get_temps(country_1)
+    data_2 = get_temps(country_2)
+    years = data_1.keys()
+    years.sort()
+    the_date = date.isoformat(date.today())  <span class="comment"># Format today's date</span>
+
+    loader = jinja2.FileSystemLoader(['.'])
+    environment = jinja2.Environment(loader=loader)
+    template = environment.get_template(template_filename)
+
+    result = template.render(country_1=country_1, data_1=data_1,
+                             country_2=country_2, data_2=data_2,
+                             years=years, the_date=the_date)
+    return result
+</pre>
+
+  <p class="continue">
+    The only new thing here is the use of
+    <code>date.isoformat</code> and <code>date.today</code>
+    to format today's date as something like "2013-09-15".
+  </p>
+
+  <p>
+    To finish,
+    we need a Jinja2 template for the pages we want to create:
+  </p>
+
+{% raw %}
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Temperature Ratios of {{country_1}} and {{country_2}} as of {{the_date}}&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Temperature Ratios of {{country_1}} and {{country_2}}&lt;/h1&gt;
+    &lt;h2&gt;Calculated {{the_date}}&lt;/h2&gt;
+    &lt;table&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Year&lt;/td&gt;
+        &lt;td&gt;{{country_1}}&lt;/td&gt;
+        &lt;td&gt;{{country_2}}&lt;/td&gt;
+        &lt;td&gt;Ratio&lt;/td&gt;
+      &lt;/tr&gt;
+      {% for year in years %}
+      &lt;tr&gt;
+        &lt;td&gt;{{year}}&lt;/td&gt;
+        &lt;td&gt;{{data_1[year]}}&lt;/td&gt;
+        &lt;td&gt;{{data_2[year]}}&lt;/td&gt;
+        &lt;td&gt;{{data_1[year] / data_2[year]}}&lt;/td&gt;
+      &lt;/tr&gt;
+      {% endfor %}
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+{% endraw %}
+
+  <p>
+    Let's run it for Australia and Canada:
+  </p>
+
+<pre>
+$ <span class="in">python make_data_page.py temp_ratio.html /tmp/aus-can.html AUS CAN</span>
+</pre>
+
+  <p class="continue">
+    Sure enough,
+    the file <code>/tmp/aus-can.html</code>contains:
+  </p>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Temperature Ratios of AUS and CAN as of 2013-02-10&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Temperature Ratios of AUS and CAN&lt;/h1&gt;
+    &lt;h2&gt;Calculated 2013-02-10&lt;/h2&gt;
+    &lt;table&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Year&lt;/td&gt;
+        &lt;td&gt;AUS&lt;/td&gt;
+        &lt;td&gt;CAN&lt;/td&gt;
+        &lt;td&gt;Ratio&lt;/td&gt;
+      &lt;/tr&gt;
+      
+      &lt;tr&gt;
+        &lt;td&gt;1901&lt;/td&gt;
+        &lt;td&gt;294.507021&lt;/td&gt;
+        &lt;td&gt;265.477581&lt;/td&gt;
+        &lt;td&gt;1.10934799048&lt;/td&gt;
+      &lt;/tr&gt;
+      
+      &lt;tr&gt;
+        &lt;td&gt;1902&lt;/td&gt;
+        &lt;td&gt;294.532462&lt;/td&gt;
+        &lt;td&gt;265.2872886&lt;/td&gt;
+        &lt;td&gt;1.11023963325&lt;/td&gt;
+      &lt;/tr&gt;
+
+      ...
+      
+      &lt;tr&gt;
+        &lt;td&gt;2009&lt;/td&gt;
+        &lt;td&gt;295.07194&lt;/td&gt;
+        &lt;td&gt;266.1529883&lt;/td&gt;
+        &lt;td&gt;1.10865537105&lt;/td&gt;
+      &lt;/tr&gt;
+      
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <p>
+    This looks right,
+    but most experienced programmers would ask us to make one improvement.
+    Our program doesn't actually calculate temperature ratios;
+    that's done by this line in the template:
+  </p>
+
+{% raw %}
+<pre>
+        &lt;td&gt;{{data_1[year] / data_2[year]}}&lt;/td&gt;
+</pre>
+{% endraw %}
+
+  <p>
+    Experience shows that the more calculations we do in our views
+    (i.e., our information displays),
+    the harder they are to maintain.
+    What we should do is:
+  </p>
+
+  <ol>
+    <li>
+      create another dictionary called <code>ratios</code>
+      in the Python program
+      and pass it into the template,
+      and
+    </li>
+    <li>
+      have the template display those values
+      rather than calculating ratios itself.
+    </li>
+  </ol>
+
+  <p>
+    Splitting things this way is extra work in this small case,
+    but it's the best way to manage information
+    as our displays become more complex.
+  </p>
+
+  <div class="box">
+    <h3>Running a Local Server</h3>
+
+    <p>
+      The HTTP servers taht come in the standard Python library are useful
+      for practicing these things in class.
+      To start serving files,
+      we go into the directory that contains them and run:
+    </p>
+
+<pre>
+$ <span class="in">python -m SimpleHTTPServer 8080</span>
+</pre>
+
+    <p>
+      <code>-m SimpleHTTPServer</code> tells Python
+      to find the <code>SimpleHTTPServer</code> library
+      and run it as a program;
+      the parameter <code>8080</code> tells it what port to use.
+      (It's normal to run HTTP servers on port 80,
+      but your system may forbid you from doing that
+      if you don't have administrator privileges.)
+      To get files,
+      we use <code>localhost</code> as the site,
+      and include the appropriate port number,
+      so the URL is <code>http://localhost:80/index.html</code>,
+      or more simply,
+      <code>http://localhost:80/</code>.
+    </p>
+  </div>
+
+</div>
