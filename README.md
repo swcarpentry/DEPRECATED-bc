@@ -87,10 +87,22 @@ that can be included in boot camp pages using `{% raw %}{% include name.html %}{
 *   `requirements.html`: what people need to bring.
 *   `contact.html`: how to reach the organizers.
 
+Instructors and Sponsors
+------------------------
+
+The `_includes` directory contains directories called `people` and `orgs`
+which hold short descriptions of people involved in Software Carpentry
+and our financial sponsors respectively.
+You can use {% raw %}{% include dir/file.html %}{% endraw %} to include these in your bootcamp home page;
+they refer to head shots and logos in `img/people` and `img/orgs`,
+and these should be included automatically.
+Please send additions to the Software Carpentry administrators.
+
 Lesson Material
 ---------------
 
-The `_includes` directory also contains lesson material
+Finally,
+the `_includes` directory contains lesson material
 that you can incorporate into your pages using `{% raw %}{% include ... %}{% endraw %}`.
 Each lesson's material is in its own subdirectory;
 different lesson directories are structured differently
