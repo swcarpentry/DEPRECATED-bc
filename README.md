@@ -30,9 +30,12 @@ Previewing the Site
 To preview your boot camp's page(s),
 go into its root directory and run:
 
-    jekyll
+    make check
 
-This will create the directory `./_site` with your rendered pages.
+This will run `jekyll` to create the directory `./_site` with your rendered pages.
+The `./_site/README.html` file this produces will not have any CSS styling applied:
+GitHub will do that when the page is uploaded.
+The `./_site/index.html` page, on the other hand, should have the Software Carpentry look and feel.
 
 Layout and Variables
 --------------------
@@ -90,7 +93,7 @@ that can be included in boot camp pages using `{% raw %}{% include name.html %}{
 Instructors and Sponsors
 ------------------------
 
-The `_includes` directory contains directories called `people` and `orgs`
+The `_includes` directory also contains directories called `people` and `orgs`
 which hold short descriptions of people involved in Software Carpentry
 and our financial sponsors respectively.
 You can use {% raw %}{% include dir/file.html %}{% endraw %} to include these in your bootcamp home page;
@@ -102,20 +105,23 @@ Lesson Material
 ---------------
 
 Finally,
-the `_includes` directory contains lesson material
+`_includes` contains lesson material
 that you can incorporate into your pages using `{% raw %}{% include ... %}{% endraw %}`.
-Each lesson's material is in its own subdirectory;
-different lesson directories are structured differently
-but the `db`, `shell`, and `web` directories contain the following files:
+Each lesson's material is in its own subdirectory,
+and the file `lessons/index.html` describes each.
+For example,
+the `guide-shell`, `guide-db`, and `guide-web` lessons are
+the instructors' guide to the Unix shell, databases, and web programming respectively.
+Each contains:
 
-*   `instructors.html`: instructors' guide.
+*   `instructors.html`: instructors' notes.
 *   `opening.html`: opening motivational story.
 *   `prereq.html`: discussion of pre-requisites.
 *   `reference.html`: a cheat sheet for the subject.
 *   `summary.html`: closing summary of the entire lesson.
 
 They also contain subdirectories for various topics,
-each of which has the following:
+each of which has:
 
 *   `title.md`: the topic title
 *   `objectives.html`: the topic's learning objectives
