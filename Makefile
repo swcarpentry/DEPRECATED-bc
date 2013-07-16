@@ -6,7 +6,7 @@ commands :
 
 ## check    : build locally into _site directory for checking
 check :
-	jekyll
+	jekyll build -d _site
 
 ## clean    : clean up
 clean :
