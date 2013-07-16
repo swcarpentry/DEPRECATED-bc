@@ -1,5 +1,3 @@
----
----
 Software Carpentry Boot Camps
 =============================
 
