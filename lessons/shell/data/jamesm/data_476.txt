@@ -1,0 +1,9 @@
+# 
+Reported: Fri Sep 2 09:48:10 2011
+Subject: babyBeet384
+Year/month of birth: 1996/04
+Sex: N
+CI type: 21
+Volume: 8
+Range: 8
+Discrimination: 9

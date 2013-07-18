@@ -1,0 +1,9 @@
+# 
+Reported: Tue Sep 20 12:29:04 2011
+Subject: beyonceLennon396
+Year/month of birth: 1997/11
+Sex: N
+CI type: 25
+Volume: 5
+Range: 8
+Discrimination: 5
