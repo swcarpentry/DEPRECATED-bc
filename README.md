@@ -10,15 +10,29 @@ Getting Started
 
 To create a website for a new boot camp:
 
-1.  Create a new repository on GitHub with a name like YYYY-MM-DD-site, e.g., `2014-03-31-ehu`.
+1.  Create a [new repository on GitHub](https://github.com/new)
+    with a name like YYYY-MM-DD-site, e.g., `2014-03-31-ehu`.
     This repository must *not* be a fork of an existing repository.
-2.  Clone this repository to your desktop.
+2.  Clone this new repository to your desktop.
 3.  Add the template repository `git@github.com:swcarpentry/bc.git` as a remote called `upstream`.
+
+        git remote add upstream git@github.com:swcarpentry/bc.git
+
 4.  Create a new branch in the desktop clone called `gh-pages`.
+
+        git checkout -b gh-pages
+
 5.  Pull content from the GitHub template repository using `git pull upstream gh-pages`.
 6.  Edit `index.html` to create the boot camp home page (see below).
+    Please double-check the information in the page's header (described below),
+    as it is used to update the main website.
 7.  Preview your changes (see below).
 8.  Push content to your YYYY-MM-DD-site repository using `git push origin gh-pages`.
+
+As soon as your repo has been pushed to GitHub, GitHub will render your pages
+at the url:
+
+    http://{your-github-username}.github.io/YYYY-MM-DD-site/
 
 You may update your boot camp's website whenever you want.
 
