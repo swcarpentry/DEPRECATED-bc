@@ -1,7 +1,7 @@
 clear
 
 ncond=5; % number of conditions
-ncondobs=50000; % number of observations in each condition (n)
+ncondobs=5000; % number of observations in each condition (n)
 nobs=ncond*ncondobs; % total number of observations (N)
 
 
@@ -51,20 +51,20 @@ RT=normrnd(300,140,nobs);
 
 % Now create a variable for age (need some variability in the data.
 Age=nan(nobs,1);
-Age(1:50000,1)=normrnd(42.25,16,ncondobs);
-Age(50001:100000,1)=normrnd(42,16,ncondobs);
-Age(100001:150000,1)=normrnd(41.75,17,ncondobs);
-Age(150001:200000,1)=normrnd(41.5,15,ncondobs);
-Age(200001:250000,1)=normrnd(41.25,18,ncondobs);
+Age(1:ncondobs,1)=normrnd(42.25,16,ncondobs);
+Age(ncondobs+1:ncondobs*2,1)=normrnd(42,16,ncondobs);
+Age(ncondobs*2+1:ncondobs*3,1)=normrnd(41.75,17,ncondobs);
+Age(ncondobs*3+1:ncondobs*4,1)=normrnd(41.5,15,ncondobs);
+Age(ncondobs*4+1:ncondobs*5,1)=normrnd(41.25,18,ncondobs);
 Age=round(Age);
 
 % Now create a variable for IQ
 IQ=nan(nobs,1);
-IQ(1:50000,1)=normrnd(100.5,16,ncondobs);
-IQ(50001:100000,1)=normrnd(100,15,ncondobs);
-IQ(100001:150000,1)=normrnd(99.8,14,ncondobs);
-IQ(150001:200000,1)=normrnd(99,16,ncondobs);
-IQ(200001:250000,1)=normrnd(100.5,14,ncondobs);
+IQ(1:ncondobs,1)=normrnd(100.5,16,ncondobs);
+IQ(ncondobs+1:ncondobs*2,1)=normrnd(100,15,ncondobs);
+IQ(ncondobs*2+1:ncondobs*3,1)=normrnd(99.8,14,ncondobs);
+IQ(ncondobs*3+1:ncondobs*4,1)=normrnd(99,16,ncondobs);
+IQ(ncondobs*4+1:ncondobs*5,1)=normrnd(100.5,14,ncondobs);
 IQ=round(IQ);
 
 % Create a vector of participant numbers
@@ -90,12 +90,12 @@ k=k+1; colnames{k}='IQ';
 k=k+1; colnames{k}='Estimated Speed (mph)';
 k=k+1; colnames{k}='Reaction Time (ms)';
 
-R2=[colnames;R2];
+%R2=[colnames;R2];
 
 % write line-by-line to csv file
 fid = fopen('loftus.csv','wt');
 for i=1:size(R2,1)
-    fprintf(fid, '%s,%d,%d\n', R2{i,:});
+    fprintf(fid, '%6.0f,%s,%6.0f,%6.8f,%6.8f,%6.8f,%6.8f\n', R2{i,:});
 end
 fclose(fid);
 
