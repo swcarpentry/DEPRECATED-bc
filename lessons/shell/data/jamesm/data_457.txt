@@ -1,0 +1,9 @@
+# 
+Reported: Wed Sep 14 09:18:41 2011
+Subject: beyonceBeatle366
+Year/month of birth: 1999/10
+Sex: N
+CI type: 12
+Volume: 6
+Range: 7
+Discrimination: 6
