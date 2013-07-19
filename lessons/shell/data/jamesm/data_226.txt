@@ -1,0 +1,9 @@
+# 
+Reported: Mon Jul 25 11:10:05 2011
+Subject: madonnaMcCartney188
+Year/month of birth: 1992/03
+Sex: N
+CI type: 14
+Volume: 2
+Range: 1
+Discrimination: 4
