@@ -50,7 +50,7 @@ answers we are interested in, data we want, etc.
 *Uncertainty Quantification* is the process of asking, "Given that our
 algorithm may not be deterministic, was our execution within acceptable
 error bounds?" This is particularly important for anything which uses
-random numbers, eg Monte Carlo methods.
+random numbers, for example,  Monte Carlo methods.
 
 # Where are tests?
 
@@ -512,7 +512,7 @@ def fib(n):
 
 # Quality Assurance Exercise
 
-Can you think of other tests to make for the fibonacci function? I promise there 
+Can you think of other tests to make for the Fibonacci function? I promise there 
 are at least two. 
 
 Implement one new test in test_fib.py, run nosetests, and if it fails, implement 

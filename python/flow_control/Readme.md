@@ -318,7 +318,7 @@ That is :
 
 ```python
 knights={"Sir Belvedere":"the Wise", "Sir Lancelot":"the Brave", \
-         "Sir Galahad":"the Pure", "Sir Robin":"the Brave", "The Black Knight":"John Clease"}
+         "Sir Galahad":"the Pure", "Sir Robin":"the Brave", "The Black Knight":"John Cleese"}
 
 favorites=knights.keys()
 favorites.remove("Sir Robin")

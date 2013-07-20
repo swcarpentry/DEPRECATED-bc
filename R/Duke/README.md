@@ -6,7 +6,7 @@ Here are pages with set-up instructions, etc.:
 
 Day 1 was essentially all R, using RStudio. Main instructor Jenny Bryan. At the end of the day, we had some input data (an excerpt from the Gapminder data), several R scripts, and various outputs that these scripts left behind, e.g. figures, numerical results, analytical reports. The first commit to this repo is a snapshot of where we are at the end of Day 1. The README.md associated with the `code` subdirectory explains what each file does.
 
-Our goal was to introduce students to data analysis in R, so focus was not on progamming *per se*. Coverage of writing functions, control structures, package development etc. is essentially non-existent. That was intentional. Had to do some visualization, which we did with `lattice`, since that's what Jenny knows. More graphics would be good -- but how to fit in? Also `ggplot2` is perhaps more the way of the future?
+Our goal was to introduce students to data analysis in R, so focus was not on programming *per se*. Coverage of writing functions, control structures, package development etc. is essentially non-existent. That was intentional. Had to do some visualization, which we did with `lattice`, since that's what Jenny knows. More graphics would be good -- but how to fit in? Also `ggplot2` is perhaps more the way of the future?
 
 Day 2 was mostly led by Ben Morris and Elliot Hauser. They went over the shell and version control, in particular git and github. We kept operating on our R work from Day 1. Ben also presented `make` and we continued to use our R work to demonstrate its power.
 

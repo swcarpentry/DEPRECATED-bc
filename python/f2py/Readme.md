@@ -79,7 +79,7 @@ C END FILE FIB1.F
 ```
 
 The purpose of this simple file is to fill the array you provide with a
-fibonacci series.
+Fibonacci series.
 
 In order to Pythonize this code, try:
 
@@ -102,7 +102,7 @@ within it , we can view the docstrings created by f2py.
 ```
 
 So, now we know that in order to use the fib code, we need to provide a
-numpy (Numeric) array to fill with fibonacci numbers.
+numpy (Numeric) array to fill with Fibonacci numbers.
 
 ```python
   import numpy as np
