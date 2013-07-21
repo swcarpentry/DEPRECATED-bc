@@ -1,8 +1,6 @@
 # Using Python and FORTRAN with F2py 
 
-**Presented by Katy Huff**
-
-**Based on Lecture Material by The Hacker Within**
+**Based on Lecture Material by The Hacker Within and Katy Huff**
 
 Motivation: Why use `f2py`?
 =============================

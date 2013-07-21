@@ -1,9 +1,7 @@
 Python 7 : Graphing with MatPlotLib
 ===================================
 
-**Presented By : Katy Huff**
-
-**Based On Lecture Material By Anthony Scopatz**
+**Based On Lecture Material By Anthony Scopatz and Katy Huff**
 
 Plotting in python
 ==================
