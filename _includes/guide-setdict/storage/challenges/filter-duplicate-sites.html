@@ -1,0 +1,13 @@
+<p>
+  Nelle has a function that extracts the latitudes and longitudes of data collection sites from a file:
+</p>
+<pre>
+&gt;&gt;&gt; sites = extract_sites('north-pacific.dat')
+&gt;&gt;&gt; print sites[:3]
+[[52.097, -173.505], [52.071, -173.510], [51.985, -173.507]]
+</pre>
+<p>
+  Write another function called <code>filter_duplicate_sites</code>
+  that takes a list of this kind as its only input,
+  and returns a set (not a list) containing only the unique latitude/longitude pairs.
+</p>

@@ -128,7 +128,7 @@ changes.
 ## git push : Sending Your Commits to Remote Repositories
 
 The **git push** command pushes commits in a local working copy to a
-remote repository. The syntax is git push [remote] [local branch].
+remote repository. The syntax is git push \[remote\] \[local branch\].
 Before pushing, a developer should always pull (or fetch + merge), so
 that there is an opportunity to resolve conflicts before pushing to the
 remote.
@@ -274,8 +274,9 @@ alterations,
 [Gitolite](https://github.com/sitaramc/gitolite) is a way for you to host
 your own multi-user git repositories. I'm not going to go into details
 here, but all you need is a machine with some drive space and network
-access. You can install [minimal
-ubuntu](https://help.ubuntu.com/community/Installation/MinimalCD), then
-sudo apt-get install gitolite will pull in everything you need. At that
-point, your collaborators will only need to send you their public ssh keys
-for you to configure pull and push access to the repos.
+access. You can install
+[minimal ubuntu](https://help.ubuntu.com/community/Installation/MinimalCD),
+then `sudo apt-get install gitolite` will pull in everything you
+need. At that point, your collaborators will only need to send you
+their public SSH keys for you to configure pull and push access to the
+repos.

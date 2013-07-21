@@ -1,4 +1,10 @@
-<div id="s:db:calc:lesson" class="lesson">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC
+    "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"
+    "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
+<html xml:lang='en' xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/1999/xhtml'>
+<head><meta content='application/xhtml+xml;charset=utf-8' http-equiv='Content-type' /><title></title></head>
+<body><div class='lesson' id='s:db:calc:lesson'>
 
   <p>
     After carefully reading the expedition logs,
@@ -9,9 +15,9 @@
     as part of her query:
   </p>
 
-  <table class="db">
+  <table class='db'>
     <tr>
-      <td colspan="1">
+      <td colspan='1'>
 <pre>select 1.05 * reading from Survey where quant='rad';</pre>
       </td>
     </tr>
@@ -37,9 +43,9 @@
     and round to two decimal places as follows:
   </p>
 
-  <table class="db">
+  <table class='db'>
     <tr>
-      <td colspan="2">
+      <td colspan='2'>
 <pre>select taken, round(5*(reading-32)/9, 2) from Survey where quant='temp';</pre>
       </td>
     </tr>
@@ -54,9 +60,9 @@
     for example by using the string concatenation operator <code>||</code>:
   </p>
 
-  <table class="db">
+  <table class='db'>
     <tr>
-      <td colspan="1">
+      <td colspan='1'>
 <pre>select personal || ' ' || family from Person;</pre>
       </td>
     </tr>
@@ -67,7 +73,7 @@
     <tr><td>Frank Danforth</td></tr>
   </table>
 
-  <div class="box">
+  <div class='box'>
     <h3>A Note on Names</h3>
 
     <p>
@@ -131,11 +137,11 @@
       </tr>
     </table>
 
-    <p class="continue">
+    <p class='continue'>
       Clearly,
       even a two-part division into "personal" and "family"
       isn't enough...
     </p>
   </div>
 
-</div>
+</div></body></html>
