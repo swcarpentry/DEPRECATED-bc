@@ -122,9 +122,8 @@ that you can incorporate into your pages using `{% raw %}{% include ... %}{% end
 Each lesson's material is in its own subdirectory,
 and the file `lessons/index.html` describes each.
 For example,
-the `guide-shell`, `guide-db`, and `guide-web` lessons are
-the instructors' guide to the Unix shell, databases, and web programming respectively.
-Each contains:
+the `guide-shell`lesson is the instructors' guide to the Unix shell,
+and contains:
 
 *   `instructors.html`: instructors' notes.
 *   `opening.html`: opening motivational story.
@@ -132,7 +131,7 @@ Each contains:
 *   `reference.html`: a cheat sheet for the subject.
 *   `summary.html`: closing summary of the entire lesson.
 
-They also contain subdirectories for various topics,
+It also contain subdirectories for various topics,
 each of which has:
 
 *   `title.md`: the topic title
