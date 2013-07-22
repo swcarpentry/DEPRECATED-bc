@@ -125,7 +125,7 @@ Step 1 : Initialize your repository.
     $ mkdir good_science
     $ cd good_science
     $ git init
-    Initialized empty Git repository in /Users/swc/good_science/.git/
+    Initialized empty Git repository in /home/swc/good_science/.git/
 
 Step 2 : Browse the directory's hidden files to see what happened here.
 Open directories, browse file contents. Learn what you can in a minute.
@@ -217,7 +217,7 @@ More frequent commits increase the granularity of your **undo** button.
 
 There are no hard and fast rules, but good commits are atomic: they are the smallest change that remain meaningful. A good commit message usually contains a one-line description followed by a longer explanation if necessary.
 
-[Our repo](https://github.com/USERNAME/boot-camps/commits/YYYY-MM-PLACE) has some good commit messages.
+[Our repo](https://github.com/swcarpentry/boot-camps/commits/YYYY-MM-PLACE) has some good commit messages.
 
 ### Exercise : Commit Your Changes
 
@@ -410,7 +410,7 @@ Step 3 : Merge the two branches into the core
 ## git clone : Copying a Repository
 
 Yesterday, you checked out a git type repository at
-https://github.com/USERNAME/boot-camps/tree/YYYY-MM-PLACE
+https://github.com/swcarpentry/boot-camps/tree/YYYY-MM-PLACE
 
 When you clone the Original repository, the one that is created on your
 local machine is a copy, and will behave as a fully fledged local
