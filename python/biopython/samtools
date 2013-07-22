@@ -1,0 +1,25 @@
+bwa index NC_001422
+bwa aln NC_001422.fna SRR036919.fastq  > aln.sai
+head -n 100000 SRR036919.fastq > sample.fastq
+bwa aln NC_001422.fna sample.fastq > sample.sai
+
+bwa samse NC_001422.fna sample.sai sample.fastq > sample.sam 
+
+samtools mpileup -ugf NC_001422.fna  sample.sorted.bam | bcftools view -bvcg - > var.raw.bcf 
+
+samtools view -bt NC_001433.fna.fai sample.sam > sample.bam 
+
+
+samtools sort sample.bam sample.sorted
+
+
+samtools mpileup -uf NC_001422.fna sample.sorted.bam | bcftools view -cg - | ./vcfutils.pl vcf2fq > cns.fq  
+
+
+samtools mpileup -vcf NC_001422.fna sample.sorted.bam > raw.pileup  
+
+samtools.pl varFilter raw.pileup | awk '$6>=20' > final.pileup  
+
+samtools index sample.sorted.bam
+samtools tview sample.sorted.bam NC_001422.fna
+
