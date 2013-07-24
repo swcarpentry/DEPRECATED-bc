@@ -184,12 +184,3 @@ FAQ
     <br/>
     Use subdirectories like `2013-07-01-euphoric/beginners`,
     so that main directory names always follow our four-part convention.
-
-*   *How should boot camp instructor lists refer to instructors?*
-    <br/>
-    Use personal identifiers from the `people` dictionary in `_config.yml`,
-    such as `wilson.g`.
-    When the boot camp page is expanded by Jekyll on GitHub,
-    our template will use this information
-    to include names HTML in a standard way.
-    A future template will include photos and information about instructors instead.
