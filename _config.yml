@@ -1,3 +1,4 @@
+markdown        : redcarpet
 pygments        : true
 contact         : "info@software-carpentry.org"
 facebook_url    : "https://www.facebook.com/SoftwareCarpentry"
