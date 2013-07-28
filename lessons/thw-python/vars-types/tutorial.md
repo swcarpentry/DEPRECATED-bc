@@ -1,6 +1,6 @@
 ---
 layout: lesson
-root: ../..
+root: ../../..
 title: The Basics of Python
 ---
 **Based on materials by: Milad Fatenejad, Katy Huff, Tommy Guy, Joshua R. Smith, Will Trimble, and many more**
@@ -8,7 +8,7 @@ title: The Basics of Python
 ## Introduction
 
 This lecture is on basic programming in python. In order to do the
-examples, we are going to use an environment called iPython notebook.
+examples, we are going to use an environment called IPython notebook.
 I expect this lecture to be interactive, so stop me at any point if
 you have questions. The correct power dynamic is that people are the
 masters and the machines are servants. The computer is a hammer; it
@@ -92,12 +92,12 @@ Once we briefly deal with ipython, I'll cover python in the following order:
 * methods
 * modules
 
-## iPython
+## IPython
 
 You can run python commands in a handful of ways; you can create
 executable scripts, you can run the python interpreter, you can run
-iPython, or you can run iPython notebook.  iPython is an alternative
-to the built-in Python interpreter with some nice features.  iPython
+IPython, or you can run IPython notebook.  IPython is an alternative
+to the built-in Python interpreter with some nice features.  IPython
 notebook gives you interactive access to the python interpreter from
 within a browser window, and it allows you to save your commands as a
 "notebook".  Lets give the built-in interpreter a spin just this once.
@@ -121,7 +121,7 @@ line
 swc@swc:~$ python hello.py
 ```
 
-iPython has more useful features for interactive use than the standard
+IPython has more useful features for interactive use than the standard
 python interpreter, so we'll use it from here on out.
 
 ```python
@@ -149,22 +149,22 @@ In [3]:
 ### Pasting
 
 You can paste things into the ipython console by copying text from
-your machine with **ctrl+c** and typing **%paste** at the iPython
+your machine with **ctrl+c** and typing **%paste** at the IPython
 prompt.
 
 ### History
 
-iPython has a history. If you press the up and down keys, you can
+IPython has a history. If you press the up and down keys, you can
 access the history.
 
 ### Tab Completion
 
-iPython also has tab completion of previous commands. Try typing
+IPython also has tab completion of previous commands. Try typing
 "print" and then hit the tab key.
 
 ### Getting Help
 
-iPython has some nice help features. Lets say we want to know more
+IPython has some nice help features. Lets say we want to know more
 about the integer data type. There are at least two ways to do this
 task:
 
@@ -187,16 +187,16 @@ In [1] dir(str)
 
 ### Executing code in files
 
-If your code is in a file, you can execute it from the iPython shell
+If your code is in a file, you can execute it from the IPython shell
 with the **%run** command. Execute hello.py like so
 
 ```python
 In [1] %run hello.py
 ```
 
-### Clearing iPython
+### Clearing IPython
 
-To clear everything from iPython, use the reset command.
+To clear everything from IPython, use the reset command.
 
 ```python
 In [1] reset
@@ -523,6 +523,6 @@ Out[66]: 'JOHANN GAMBOLPUTTY'
 
 What do you think should happen when you take upper of an int?  What about a string representation of an int?
 
-That wraps up this lesson. We tried out the iPython shell and got some
+That wraps up this lesson. We tried out the IPython shell and got some
 experience with ints, floats, and strings. Along the way we talked
 about some philosophy and how programming is about people.

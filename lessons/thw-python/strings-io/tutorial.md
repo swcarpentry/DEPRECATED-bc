@@ -1,9 +1,9 @@
 ---
 layout: lesson
-root: ../..
+root: ../../..
 title: Strings and File I/O in Python
 ---
-**Presented By : Tommy Guy**
+**Prepared by Tommy Guy**
 
 Lesson goals:
 

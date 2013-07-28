@@ -1,6 +1,6 @@
 ---
 layout: lesson
-root: ../..
+root: ../../..
 title: Data Types in Python
 ---
 **Based on lecture materials by Milad Fatenejad, Joshua R. Smith, and Will Trimble**
