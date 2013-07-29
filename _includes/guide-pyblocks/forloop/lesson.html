@@ -164,7 +164,7 @@ grid = ImageGrid(10, 5)
 for i in range(10):
     grid[i, 0] = (255, 0, 0)
 grid.show()</span>
-{% include guide-pyblocks/forloop/red-bottom-row.html %}
+{% include guide-pyblocks/forloop/blocks-red-bottom-row.html %}
 </pre>
 
   <p>
@@ -256,7 +256,7 @@ IndexError: list index out of range</span>
   </p>
 
 <pre>
-{% include guide-pyblocks/forloop/after-out-of-bounds.html %}
+{% include guide-pyblocks/forloop/blocks-after-out-of-bounds.html %}
 </pre>
 
   <p class="continue">
@@ -335,7 +335,7 @@ for i in range(3):
     grid[<span class="highlight">1</span>, i] = (0, 0, 255)
 for i in range(3):
     grid[<span class="highlight">2</span>, i] = (0, 0, 255)</span>
-{% include guide-pyblocks/forloop/manual-blue-lower-left.html %}
+{% include guide-pyblocks/forloop/blocks-manual-blue-lower-left.html %}
 </pre>
 
   <p>
@@ -383,7 +383,7 @@ for x in range(4):
     for y in range(x):
         grid[x, y] = (0, 255, 0)
 grid.show()</span>
-{% include guide-pyblocks/forloop/lower-triangle-green.html %}
+{% include guide-pyblocks/forloop/blocks-lower-triangle-green.html %}
 </pre>
 
   <p class="continue">
@@ -412,7 +412,7 @@ grid.show()</span>
     for x in range(y):
         grid[x, y] = (0, 0, 255)
 grid.show()</span>
-{% include guide-pyblocks/forloop/upper-triangle-blue.html %}
+{% include guide-pyblocks/forloop/blocks-upper-triangle-blue.html %}
 </pre>
 
   <p class="continue">
@@ -426,7 +426,7 @@ grid.show()</span>
 <span class="in">for i in range(4):
     grid[i, i] = (0, 255, 255)
 grid.show()</span>
-{% include guide-pyblocks/forloop/diagonal-aqua.html %}
+{% include guide-pyblocks/forloop/blocks-diagonal-aqua.html %}
 </pre>
 
   <p>
@@ -452,7 +452,7 @@ for y in range(grid.height):
 for i in range(grid.height):
     grid[i, i] = colors['Aqua']
 grid.show()</span>
-{% include guide-pyblocks/forloop/the-right-way.html %}
+{% include guide-pyblocks/forloop/blocks-the-right-way.html %}
 </pre>
 
   <p>
