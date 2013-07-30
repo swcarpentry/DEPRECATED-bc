@@ -1,0 +1,25 @@
+<p>
+  We have frequently used the idiom:
+</p>
+<pre>
+if key in data:
+    data[key] = data[key] + 1
+else:
+    data[key] = 1
+</pre>
+<p>
+  to either update the value associated with a key,
+  or insert a value if the key isn't present.
+  We can instead write this as:
+</p>
+<pre>
+data[key] = data.get(key, 0) + 1
+</pre>
+<p>
+  Rewrite the <code>least_common_birds</code> function in our final example
+  to use this idiom wherever possible,
+  and explain why we <em>can't</em> simplify it even further by writing:
+</p>
+<pre>
+data.get(key, 0) += 1
+</pre>

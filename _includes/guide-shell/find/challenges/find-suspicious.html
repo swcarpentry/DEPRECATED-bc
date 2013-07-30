@@ -1,0 +1,52 @@
+<p>
+  Nelle has saved the IDs of some suspicious observations
+  in a file called <code>maybe-faked.txt</code>:
+</p>
+
+<pre>
+NENE01909C
+NEMA04220A
+NEMA04301A
+</pre>
+
+<p>
+  Which of the following scripts will search all of the <code>.txt</code> files
+  whose names begin with <code>NE</code>
+  for references to these records?
+</p>
+
+<table>
+  <tr>
+    <td valign="top">1.</td>
+    <td valign="top">
+<pre>
+for pat in maybe-faked.txt
+do
+    find . -name 'NE*.txt' -print | grep $pat
+done
+</pre>
+    </td>
+    <td valign="top">2.</td>
+    <td valign="top">
+<pre>
+for pat in $(cat maybe-faked.txt)
+do
+    grep $pat $(find . -name 'NE*.txt' -print)
+done
+</pre>
+    </td>
+    <td valign="top">3.</td>
+    <td valign="top">
+<pre>
+for pat in $(cat maybe-faked.txt)
+do
+    find . -name 'NE*.txt' -print | grep $pat
+done
+</pre>
+    </td>
+    <td valign="top">4..</td>
+    <td valign="top">
+      None of the above.
+    </td>
+  </tr>
+</table>

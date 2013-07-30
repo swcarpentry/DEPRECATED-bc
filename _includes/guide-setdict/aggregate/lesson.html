@@ -1,0 +1,376 @@
+<div id="s:setdict:aggregate:lesson" class="lesson">
+
+  <p>
+    To see how useful dictionaries can be,
+    let's switch tracks and do some birdwatching.
+    We'll start by asking how early in the day we saw each kind of bird?
+    Our data consists of the date and time of the observation, the bird's name, and an optional comment:
+  </p>
+
+<pre>
+2010-07-03    05:38    loon
+2010-07-03    06:02    goose
+2010-07-03    06:07    loon
+2010-07-04    05:09    ostrich   # hallucinating?
+2010-07-04    05:29    loon
+     &hellip;           &hellip;        &hellip;
+</pre>
+
+  <p>
+    Rephrasing our problem,
+    we want the minimum of all the times associated with each bird name.
+    If our data was stored in memory like this:
+  </p>
+
+<pre>
+loon = ['05:38', '06:07', '05:20', ...]
+</pre>
+
+  <p class="continue">
+    the solution would simply be <code>min(loon)</code>,
+    and similarly for the other birds.
+    However,
+    we have to work with the data we have,
+    so let's start by reading our data file and creating a list of tuples,
+    each of which contains a date, time, and bird name as strings:
+  </p>
+
+<pre src="setdict/early_bird.py">
+def read_observations(filename):
+    '''Read data, returning [(date, time, bird)...].'''
+
+    reader = open(filename, 'r')
+    result = []
+
+    for line in reader:
+        fields = line.split('#')[0].strip().split()
+        assert len(fields) == 3, 'Bad line "%s"' % line
+        result.append(fields)
+
+    return result
+</pre>
+
+  <p class="continue">
+    This function follows the pattern we've seen many times before.
+    We set up by opening the input file and creating an empty list that we'll append records to.
+    We then process each line of the file in turn.
+    Splitting the line on the <code>'#'</code> character and taking the first part of the result
+    gets rid of any comment that might be present;
+    stripping off whitespace and then splitting breaks the remainder into fields.
+  </p>
+
+  <p>
+    To prevent trouble later on, we check that there actually are three fields before going on.
+    (An industrial-strength version of this function
+    would also check that the date and time were properly formatted,
+    but we'll skip that for now.)
+    Once we've done our check,
+    we append the triple containing the date,
+    time, and bird name to the list we're going to return.
+  </p>
+
+  <p>
+    Here's the function that turns that list of tuples into a dictionary:
+  </p>
+
+<pre src="setdict/early_bird.py">
+def earliest_observation(data):
+    '''How early did we see each bird?'''
+
+    result = {}
+    for (date, time, bird) in data:
+        if bird not in result:
+            result[bird] = time
+        else:
+            result[bird] = min(result[bird], time)
+
+    return result
+</pre>
+
+  <p class="continue">
+    Once again,
+    the pattern should by now be familiar.
+    We start by creating an empty dictionary,
+    then use a loop to inspect each tuple in turn.
+    The loop explodes the tuple into separate variables for the date, time and bird.
+    If the bird's name is not already a key in our dictionary,
+    this must be the first time we've seen it,
+    so we store the time we saw it in the dictionary.
+    If the bird's name is already there,
+    on the other hand,
+    we keep the minimum of the stored time and the new time.
+    This is almost exactly the same as our earlier counting example,
+    but instead of either storing 1 or adding 1 to the count so far,
+    we're either storing the time or taking the minimum of it and the least time so far.
+  </p>
+
+  <p>
+    Now,
+    what if we want to find out which birds were seen on particular days?
+    Once again,
+    we are <a href="glossary.html#aggregation">aggregating</a> values,
+    i.e.,
+    combining many separate values to create one new one.
+    However,
+    since we probably saw more than one kind of bird each day,
+    that "new value" needs to be a collection of some kind.
+    We're only interested in which birds we saw,
+    so the right kind of collection is a set.
+    Here's our function:
+  </p>
+
+<pre src="setdict/birds_by_date.py">
+def birds_by_date(data):
+    '''Which birds were seen on each day?'''
+
+    result = {}
+    for (date, time, bird) in data:
+        if date not in result:
+            result[date] = {bird}
+        else:
+            result[date].add(bird)
+
+    return result
+</pre>
+
+  <p class="continue">
+    Again,
+    we start by creating an empty dictionary,
+    and then process each tuple in turn.
+    Since we're recording birds by date,
+    the keys in our dictionary are dates rather than bird names.
+    If the current date isn't already a key in the dictionary,
+    we create a set containing only this bird,
+    and store it in the dictionary with the date as the key.
+    Otherwise,
+    we add this bird to the set associated with the date.
+    (As always,
+    we don't need to check whether the bird is already in that set,
+    since the set will automatically eliminate any duplication.)
+  </p>
+
+  <p>
+    Let's watch this function in action
+    for the first few records from our data:
+  </p>
+
+  <table>
+    <tr>
+      <th>Input</th>
+      <th>Dictionary</th>
+    </tr>
+    <tr>
+      <td><em>start</em></td>
+      <td><code>{}</code></td>
+    </tr>
+    <tr>
+      <td><code>2010-07-03&nbsp;&nbsp;05:38&nbsp;&nbsp;loon</code></td>
+      <td><code>{'2010-07-03' : {'loon'}}</code></td>
+    </tr>
+    <tr>
+      <td><code>2010-07-03&nbsp;&nbsp;06:02&nbsp;&nbsp;goose</code></td>
+      <td><code>{'2010-07-03' : {'goose', 'loon'}}</code></td>
+    </tr>
+    <tr>
+      <td><code>2010-07-03&nbsp;&nbsp;06:07&nbsp;&nbsp;loon</code></td>
+      <td><code>{'2010-07-03' : {'goose', 'loon'}}</code></td>
+    </tr>
+    <tr>
+      <td><code>2010-07-04&nbsp;&nbsp;05:09&nbsp;&nbsp;ostrich</code></td>
+      <td><code>{'2010-07-03' : {'goose', 'loon'}, '2010-07-04' : {'ostrich'}}</code></td>
+    </tr>
+    <tr>
+      <td><code>2010-07-04&nbsp;&nbsp;05:29&nbsp;&nbsp;loon</code></td>
+      <td><code>{'2010-07-03' : {'goose', 'loon'}, '2010-07-04' : {'ostrich', 'loon'}}</code></td>
+    </tr>
+  </table>
+
+  <p>
+    For our last example,
+    we'll figure out which bird we saw least frequently&mdash;or rather,
+    which <em>birds</em>,
+    since two or more may be tied for the low score.
+    Forgetting that values may not be unique
+    is a common mistake in data crunching,
+    and often a hard one to track down.
+  </p>
+
+  <p>
+    One way to solve this problem is to do two passes over our data.
+    Assuming we have already built a dictionary with bird names as keys and counts as values,
+    we can then loop over the entries to find the one(s) with the minimum count:
+  </p>
+
+<pre>
+for bird in counts:
+    if counts[bird] &lt; least:
+        least = counts[bird]
+</pre>
+
+  <p class="continue">
+    and then use another loop to build the set of bird names that share that minimum value:
+  </p>
+
+<pre>
+result = set()
+for bird in counts:
+    if counts[bird] == least:
+        result.add(bird)
+</pre>
+
+  <p>
+    There's a flaw in this code, though:
+    we have not initialized <code>least</code>.
+    It's not safe to set it to an arbitrary "large" value like 1000
+    because we might actually have seen some kind of bird more than 1000 times.
+  </p>
+
+  <p>
+    Another choice that <em>will</em> work is to initialize it to
+    the largest integer the computer can represent,
+    which Python stores in <code>sys.maxint</code>.
+    While it's still possible that we'll have seen everything more often than this
+    (imagine, for example, that we were counting atoms instead of counting birds),
+    there's no way we could get those observations into our program.
+  </p>
+
+  <p>
+    The best choice is to initialize <code>least</code> from the data itself.
+    We'll start by setting it to the special value <code>None</code>,
+    and then check for this value inside our loop.
+    If <code>least</code> is <code>None</code>,
+    it means we haven't processed any data yet,
+    so we'll assign whatever value we're looking at to <code>least</code>.
+    After that,
+    all the less-than comparisons will do the right thing.
+    The resulting code looks like this:
+  </p>
+
+<pre>
+least = None
+for bird in counts:
+    if least is None:
+        least = counts[bird]
+    elif counts[bird] &lt; least:
+        least = counts[bird]
+</pre>
+
+  <p class="continue">
+    This is another common design pattern:
+    if we don't know what range of values our data might take on,
+    we initialize variables with a "don't know" marker (such as <code>None</code>),
+    then replace those markers with actual values as quickly as possible.
+  </p>
+
+  <p>
+    Looping over the data three times&mdash;one to build the dictionary of names and counts,
+    a second time to find the minimum count,
+    and a third time to find all the birds we've seen that often&mdash;is unnecessarily slow.
+    We can actually solve the problem by reading the data just once.
+    The idea is to keep a dictionary whose keys are counts
+    and whose values are sets of birds.
+    Every time we see a bird,
+    we take it out of its current set
+    and move it to the set associated with the next larger count.
+    If that set doesn't exist yet,
+    we simply create it.
+    Here's a trace of how our dictionary-of-sets would change
+    as we read our sample data:
+  </p>
+
+  <table>
+    <tr>
+      <th>Input</th>
+      <th>Dictionary</th>
+    </tr>
+    <tr>
+      <td><em>start</em></td>
+      <td><code>{}</code></td>
+    </tr>
+    <tr>
+      <td><code>2010-07-03&nbsp;&nbsp;05:38&nbsp;&nbsp;loon</code></td>
+      <td><code>{1 : {'loon'}}</code></td>
+    </tr>
+    <tr>
+      <td><code>2010-07-03&nbsp;&nbsp;06:02&nbsp;&nbsp;goose</code></td>
+      <td><code>{1 : {'goose', 'loon'}}</code></td>
+    </tr>
+    <tr>
+      <td><code>2010-07-03&nbsp;&nbsp;06:07&nbsp;&nbsp;loon</code></td>
+      <td><code>{1 : {'goose'}, 2 : {'loon'}}</code></td>
+    </tr>
+    <tr>
+      <td><code>2010-07-04&nbsp;&nbsp;05:09&nbsp;&nbsp;ostrich</code></td>
+      <td><code>{1 : {'goose', 'ostrich'}, 2 : {'loon'}}</code></td>
+    </tr>
+    <tr>
+      <td><code>2010-07-04&nbsp;&nbsp;05:29&nbsp;&nbsp;loon</code></td>
+      <td><code>{1 : {'goose', 'ostrich'}, 2 : set(), 3 : {'loon'}}</code></td>
+    </tr>
+  </table>
+
+  <p>
+    The last step is the tricky one:
+    when we read our final record,
+    and move <code>'loon'</code> from the set associated with 2
+    to a new set associated with 3,
+    there aren't any birds left that have been seen twice.
+    We could remove the empty set associated with the number 2,
+    but it's simpler to leave it there
+    (and probably more efficient, too,
+    since we're likely to promote either <code>'goose'</code> or <code>'ostrich'</code>
+    shortly thereafter).
+  </p>
+
+  <p>
+    But wait a second:
+    how do we know which set a particular bird is currently in?
+    We can't look it up in our dictionary of sets,
+    because the sets holding birds' names are the values in that dictionary,
+    and we can only look up dictionary entries by key.
+    The solution is to use another dictionary storing the current count for each bird,
+    just as we did before:
+  </p>
+
+<pre>
+def least_common_birds(data):
+    '''Which birds have been seen least frequently?'''
+
+    count_by_bird = {}
+    bird_by_count = {}
+    for (date, time, bird) in data:
+
+        <span class="comment"># Record how often each bird has been seen.</span>
+        if bird in count_by_bird:
+            old_count = count_by_bird[bird]
+            count_by_bird[bird] = old_count + 1
+        else:
+            old_count = 0
+            count_by_bird[bird] = 1
+
+        <span class="comment"># Update the birds stored by count.</span>
+        if count_by_bird[bird] == 1:
+            if 1 in bird_by_count:
+                bird_by_count[1].add(bird)
+            else:
+                bird_by_count[1] = {bird}
+        else:
+            bird_by_count[old_count].remove(bird)
+            bird_by_count[old_count + 1].add(bird)
+
+    <span class="comment"># Return the set associated with the least key.</span>
+    <span class="comment"># Note that there are (at least) two bugs in this block of code.</span>
+    keys = count_by_bird.keys()
+    keys.sort()
+    least = keys[0]
+    return by_bird[least]
+</pre>
+
+  <p>
+    As the comment says,
+    there are at least two bugs in the final block of code
+    responsible for return the set of birds seen least frequently.
+    We will tackle them in the challenges.
+  </p>
+
+</div>

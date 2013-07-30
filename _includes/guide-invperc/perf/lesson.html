@@ -1,0 +1,211 @@
+<div id="s:invperc:perf:lesson" class="lesson">
+
+  <blockquote>
+    Machine-independent code has machine-independent performance.
+    <br/>
+    &mdash; anonymous
+  </blockquote>
+
+  <p>
+    Now that it's easy to write tests,
+    we can start worrying about our program's performance.
+    When people use that phrase,
+    they almost always mean the program's speed.
+    In fact,
+    speed is why computers were invented:
+    until networks and fancy graphics came along,
+    the whole reason computers existed was
+    to do in minutes or hours what would take human beings weeks or years.
+  </p>
+
+  <p>
+    Scientists usually want programs to go faster for three reasons.
+    First, they want a solution to a single large problem,
+    such as, "What's the lift of this wing?"
+    Second, they have many problems to solve,
+    and need answers to all of them&mdash;a typical example is,
+    "Compare this DNA sequences to every one in the database and tell me what the closest matches are."
+    Finally, scientists may have a deadline and a fixed set of resources
+    and want to solve as big a problem as possible within the constraints.
+    Weather prediction falls into this category:
+    given more computing power,
+    scientists use more accurate (and more computationally demanding) models,
+    rather than solving the old models faster.
+  </p>
+
+  <p>
+    Before trying to make a program go faster,
+    there are two questions we should always ask ourselves.
+    First, does our program actually need to go faster?
+    If we only use it once a day,
+    and it only takes a minute to run,
+    speeding it up by a factor of 10 is probably not worth
+    a week of our time.
+  </p>
+
+  <p>
+    Second, is our program correct?
+    There's no point making a buggy program faster:
+    more wrong answers per unit time doesn't move science forward
+    (although it may help us track down a bug).
+    Just as importantly,
+    almost everything we do to make programs faster also makes them more complicated,
+    and therefore harder to debug.
+    If our starting point is correct,
+    we can use its output to check the output of our optimized version.
+    If it isn't, we've probably made our life more difficult.
+  </p>
+
+  <p>
+    Let's go back to invasion percolation.
+    To find out how fast our program is,
+    let's add a few lines to the program's main body:
+  </p>
+
+<pre>
+if __name__ == '__main__':
+
+    ...get simulation parameters from command-line arguments...
+
+    # Run simulation.
+<span class="highlight">    start_time = time.time()</span>
+    random.seed(random_seed)
+    grid = create_random_grid(grid_size, value_range)
+    mark_filled(grid, grid_size/2, grid_size/2)
+    num_filled = fill_grid(grid) + 1
+<span class="highlight">    elapsed_time = time.time() - start_time</span>
+<span class="highlight">    print 'program=%s size=%d range=%d seed=%d filled=%d time=%f' % \</span>
+<span class="highlight">          (sys.argv[0], grid_size, value_range, random_seed, num_filled, elapsed_time)</span>
+    if graphics:
+        show_grid(grid)
+</pre>
+
+  <p class="continue">
+    The first new line records the time when the program starts running.
+    The other new lines use that to calculate how long the simulation took,
+    and then display the program's parameters and running time.
+  </p>
+
+  <p>
+    We need to make one more change
+    before we start running lots of simulation.
+    We were seeding the random number generator using the computer's clock time:
+  </p>
+
+<pre>
+    start_time = time.time()
+    ...
+    random_seed = int(start_time)
+</pre>
+
+  <p class="continue">
+    But what if a simulation runs very quickly?
+    <code>time.time()</code> returns a floating point number;
+    <code>int</code> truncates this by throwing away the fractional part,
+    so if our simulation runs in less than a second,
+    two (or more) might wind up with the same seed,
+    which in turn will mean they have the same "random" values in their grids.
+    (This isn't a theoretical problem&mdash;we actually tripped over it while writing this lesson.)
+  </p>
+
+  <p>
+    One way to fix this is to to shift those numbers up.
+    For now let's guess that every simulation will take at least a tenth of a millisecond to run,
+    so we'll multiply the start time by ten thousand,
+    then truncate it so that it is less than a million:
+  </p>
+
+<pre>
+RAND_SCALE = 10000    # Try to make sure random seeds are distinct.
+RAND_RANGE = 1000000  # Range of random seeds.
+...
+    random_seed = int(start_time * RAND_SCALE) % RAND_RANGE
+</pre>
+
+  <p>
+    The final step is to write a shell script that runs the program multiple times
+    for various grid sizes:
+  </p>
+
+<pre>
+for size in {11..81..10}
+do
+  for counter in {1..20}
+  do
+    python invperc.py -g -n $size -v 100
+  done
+done
+</pre>
+
+  <p class="continue">
+    (We could equally well have added a few more lines to the program itself
+    to run a specified number of simulations
+    instead of just one.)
+    If we average the 20 values for each grid size, we get the following:
+  </p>
+
+  <table class="outlined">
+    <tr> <td></td> <td>11</td> <td>21</td> <td>31</td> <td>41</td> <td>51</td> <td>61</td> </tr>
+    <tr> <td>cells&nbsp;filled</td> <td>16.60</td> <td>45.75</td> <td>95.85</td> <td>157.90</td> <td>270.50</td> <td>305.75</td> </tr>
+    <tr> <td>time&nbsp;taken</td> <td>0.003971</td> <td>0.035381</td> <td>0.155885</td> <td>0.444160</td> <td>1.157350</td> <td>1.909516</td> </tr>
+    <tr> <td>time/cell</td> <td>0.000239</td> <td>0.000773</td> <td>0.001626</td> <td>0.002813</td> <td>0.004279</td> <td>0.006245</td> </tr>
+  </table>
+
+  <p>
+    Is that good enough?
+    Let's fit a couple of fourth-order polynomials to our data:
+  </p>
+
+  <table class="outlined">
+    <tr> <td></td> <td><em> x<sup>4</sup> </em></td> <td><em> x<sup>3</sup> </em></td> <td><em> x<sup>2</sup> </em></td><td><em>x<sup>1</sup></em></td><td><em>x<sup>0</sup></em></td></tr>
+    <tr> <td>time&nbsp;taken</td> <td>2.678&times;10<sup> -07</sup></td> <td>-2.692&times;10<sup> -05</sup></td> <td>1.760&times;10<sup> -03</sup></td> <td>-3.983&times;10<sup> -02</sup></td> <td>2.681&times;10<sup>-01</sup></td></tr>
+    <tr> <td>time/cell</td> <td>-1.112&times;10<sup> -10</sup></td> <td>1.996&times;10<sup> -08</sup></td> <td>4.796&times;10<sup> -07</sup></td> <td>2.566&times;10<sup> -05</sup></td> <td>-1.295&times;10<sup>-04</sup></td></tr>
+  </table>
+
+  <p>
+    According to the first polynomial,
+    a single run on a 1001&times;1001 grid will take almost 68 hours.
+    What can we do to make it faster?
+    The <em>wrong</em> answer is,
+    "Guess why it's slow, start tweaking the code, and hope for the best."
+    The right answer is to ask the computer where the time is going.
+  </p>
+
+  <p>
+    Before we do that,
+    though,
+    we really ought to justify our decision to model the program's performance
+    using a fourth-order polynomial.
+    Suppose our grid is N&times;N.
+    Each time it wants to find the next cell to fill,
+    our program examines each of the N<sup>2</sup> cells.
+    In the best case,
+    it has to fill about N/2 cells to reach the boundary
+    (basically, by racing straight for the edge of the grid).
+    In the worst case,
+    it has to fill all of the interior cells
+    before "breaking out" to the boundary,
+    which means it has to fill (N-2)&times;(N-2) cells.
+    That worst case therefore has a runtime of N<sup>2</sup>(N-2)<sup>2</sup> steps,
+    which,
+    for large N,
+    is approximately N<sup>4</sup>.
+    (For example,
+    when N is 71,
+    the difference between the two values is only about 5%.)
+  </p>
+
+  <p>
+    This kind of analysis is computing's equivalent of engineers' back-of-the-envelope calculations.
+    In technical terms,
+    we would say that our algorithm is O(N<sup>4</sup>).
+    In reality,
+    because we're creating a fractal,
+    we're actually going to fill about N<sup>1.5</sup> cells on average,
+    so our running time is actually O(N<sup>3.5</sup>).
+    That's still too big for practical simulations,
+    though,
+    so it's time to figure out what we can do about it.
+  </p>
+
+</div>

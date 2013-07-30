@@ -1,0 +1,109 @@
+<div id="s:invperc:lazy:lesson" class="lesson">
+
+  <p>
+    If checking whether cells are candidates is the slowest step,
+    let's try to reduce the number of times we have to do that.
+    Instead of re-examining every cell in the grid each time we want to fill one,
+    let's keep track of which cells are currently on the boundary in some kind of auxiliary data structure,
+    then choose randomly from all the cells in that set that share the current lowest value.
+    When we fill in a cell,
+    we add its neighbors to the "pool" of neighbors (unless they're already there).
+  </p>
+
+  <p>
+    Here's the modified <code>fill_grid</code> function:
+  </p>
+
+<pre>
+def fill_grid(grid):
+    '''Fill an NxN grid until filled region hits boundary.'''
+
+    x, y = grid.size/2, grid.size/2
+    pool = set()
+    pool.add((grid[x][y], x, y))
+    num_filled = 0
+    on_edge = False
+
+    while not on_edge:
+        x, y = get_next(pool)
+        grid.mark_filled(x, y)
+        num_filled += 1
+        if (x == 0) or (x == grid.size-1) or (y == 0) or (y == grid.size-1):
+            on_edge = True
+        else:
+            if x &gt; 0:
+                make_candidate(grid, pool, x-1, y)
+            if x &lt; grid.size-1:
+                make_candidate(grid, pool, x+1, y)
+            if y &gt; 0:
+                make_candidate(grid, pool, x,   y-1)
+            if y &lt; grid.size-1:
+                make_candidate(grid, pool, x,   y+1)
+
+    return num_filled
+</pre>
+
+  <p class="continue">
+    This function creates a set called <code>pool</code>
+    that keeps track of the cells currently on the edge of the filled region.
+    Each loop iteration gets the next cell out of this pool,
+    fills it in,
+    and (potentially) adds its neighbors to the set.
+  </p>
+
+  <p>
+    This function is 21 lines long,
+    compared to 15 for our original <code>fill_grid</code> function,
+    but four of those six lines are the calls to <code>make_candidate</code>,
+    which adds a neighbor to the pool if it isn't already there.
+    Let's have a look at <code>get_next</code> and <code>make_candidate</code>:
+  </p>
+
+<pre>
+def get_next(pool):
+    '''Take a cell randomly from the equal-valued front section.'''
+
+    temp = list(pool)
+    temp.sort()
+    v = temp[0][0]
+    i = 1
+    while (i &lt; len(temp)) and (temp[i][0] == v):
+        i += 1
+    i = random.randint(0, i-1)
+    v, x, y = temp[i]
+    pool.discard((v, x, y))
+    return x, y
+
+def make_candidate(grid, pool, x, y):
+    '''Ensure that (x, y, v) is a candidate.'''
+
+    v = grid_get(grid, x, y)
+    if v == FILLED:
+        return
+    pool.add((v, x, y))
+</pre>
+
+  <p>
+    This is definitely more complicated that what we started with:
+    we now have to keep a second data structure (the pool) up to date,
+    and in sync with the grid.
+    But look at the payoff:
+  </p>
+
+  <table class="outlined">
+    <tr> <td></td> <td>11</td> <td>21</td> <td>31</td> <td>41</td> <td>51</td> <td>61</td> </tr>
+    <tr> <td>list&nbsp;of&nbsp;lists</td> <td>0.000333</td> <td>0.025667</td> <td>0.088833</td> <td>0.227167</td> <td>0.455000</td> <td>1.362667</td> </tr>
+    <tr> <td>set&nbsp;pool</td> <td>0.000050</td> <td>0.003000</td> <td>0.009100</td> <td>0.016130</td> <td>0.012000</td> <td>0.027050</td> </tr>
+    <tr> <td>ratio</td> <td>6.66</td> <td>8.56</td> <td>9.76</td> <td>14.1</td> <td>37.9</td> <td>50.4</td> </tr>
+  </table>
+
+  <p>
+    Now <em>that</em> is a speedup.
+    If we assume that we fill about N<sup>1.5</sup> cells in an N&times;N grid,
+    the running time of our algorithm is about N<sup>1.5</sup> instead of N<sup>3.5</sup>,
+    because we only need to inspect four new cells in every iteration
+    instead of checking all N<sup>2</sup> each time.
+    As a result, the bigger our grids get, the bigger our savings are.
+  </p>
+
+</div>

@@ -1,0 +1,25 @@
+<p>
+  The <code>expr</code> does simple arithmetic using command-line parameters:
+</p>
+
+<pre>
+$ <span class="in">expr 3 + 5</span>
+<span class="out">8</span>
+$ <span class="in">expr 30 / 5 - 2</span>
+<span class="out">4</span>
+</pre>
+
+<p>
+  Given this,
+  what is the output of:
+</p>
+
+<pre>
+for left in 2 3
+do
+    for right in $left
+    do
+        expr $left + $right
+    done
+done
+</pre>

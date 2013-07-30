@@ -1,0 +1,105 @@
+<div id="s:invperc:bugs:lesson" class="lesson">
+
+  <p>
+    Let's run the program that we created in the previous section:
+  </p>
+
+<pre>
+$ <span class="in">python invperc.py 3 10 17983</span>
+<span class="out">2 cells filled</span>
+</pre>
+
+  <p class="continue">
+    The program tells us that 2 cells have been filled,
+    which is what we'd expect:
+    in a 3&times;3 grid,
+    we fill always the center cell and one other,
+    then we hit the boundary.
+    Let's try a larger grid:
+  </p>
+
+<pre>
+$ <span class="in">python invperc.py 5 10 27187</span>
+...a minute passes...
+<span class="in">Ctrl-C</span>
+</pre>
+
+  <p class="continue">
+    After a minute,
+    we use Control-C to halt the program.
+    It's time to fire up the debugger&hellip;
+  </p>
+
+  <figure id="f:debugger">
+    <img src="dev/debugger.png" alt="Debugging the Grid" />
+    <figcaption>Figure 12: Debugging the Grid</figcaption>
+  </figure>
+
+  <p>
+    The initial grid looks OK:
+    it is a 3-element list,
+    each of whose entries is another 3-element list with values in the range 1 to 10.
+    There's even a -1 in the right place
+    (remember, we're using -1 to mark filled cells).
+  </p>
+
+  <p>
+    The next cell gets chosen and filled correctly,
+    and then the program goes into an infinite loop in <code>find_candidates</code>.
+    Inside this loop,
+    <code>min_set</code> contains the points (2,2) and (1,2),
+    and <code>min_val</code> is -1.
+    That's our problem:
+    our marker value, -1,
+    is less than any of the actual values in the grid.
+    Once we have marked two cells,
+    each of those marked cells is adjacent to another marked cell,
+    so we are repeatedly re-marking cells that have already been marked
+    without ever growing the marked region.
+  </p>
+
+  <p>
+    This is easy to fix.
+    The code that caused the problem is:
+  </p>
+
+<pre>
+def find_candidates(grid):
+    N = len(grid)
+    min_val = sys.maxint
+    min_set = set()
+    for x in range(N):
+        for y in range(N):
+            if is_candidate(grid, x, y):
+                ...handle == min_val and &lt; min_val cases...
+</pre>
+
+  <p class="continue">
+    All we have to do is insert a check to say,
+    "If this cell is already filled,
+    continue to the next iteration of the loop."
+    The code is:
+  </p>
+
+<pre>
+def find_candidates(grid):
+    N = len(grid)
+    min_val = sys.maxint
+    min_set = set()
+    for x in range(N):
+        for y in range(N):
+<span class="highlight">            if grid[x][y] == FILLED:
+                pass
+            elif</span> is_candidate(grid, x, y):
+            ...handle == min_val and &lt; min_val cases...
+</pre>
+
+  <p class="continue">
+    With this change,
+    our program now runs for several different values of N.
+    But that doesn't prove that it's correct;
+    in order to convince ourselves of that,
+    we're going to have to do a bit more work.
+  </p>
+
+</div>

@@ -1,0 +1,32 @@
+<p>
+  The command <code>uniq</code> removes adjacent duplicated lines from its input.
+  For example,
+  if a file <code>salmon.txt</code> contains:
+</p>
+
+<pre>
+coho
+coho
+steelhead
+coho
+steelhead
+steelhead
+</pre>
+
+<p>
+  then <code>uniq salmon.txt</code> produces:
+</p>
+
+<pre>
+coho
+steelhead
+coho
+steelhead
+</pre>
+
+<p>
+  Why do you think <code>uniq</code> only removes <em>adjacent</em> duplicated lines?
+  (Hint: think about very large data sets.)
+  What other command could you combine with it in a pipe
+  to remove all duplicated lines?
+</p>

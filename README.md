@@ -122,9 +122,8 @@ that you can incorporate into your pages using `{% raw %}{% include ... %}{% end
 Each lesson's material is in its own subdirectory,
 and the file `lessons/index.html` describes each.
 For example,
-the `guide-shell`, `guide-db`, and `guide-web` lessons are
-the instructors' guide to the Unix shell, databases, and web programming respectively.
-Each contains:
+the `guide-shell`lesson is the instructors' guide to the Unix shell,
+and contains:
 
 *   `instructors.html`: instructors' notes.
 *   `opening.html`: opening motivational story.
@@ -132,7 +131,7 @@ Each contains:
 *   `reference.html`: a cheat sheet for the subject.
 *   `summary.html`: closing summary of the entire lesson.
 
-They also contain subdirectories for various topics,
+It also contain subdirectories for various topics,
 each of which has:
 
 *   `title.md`: the topic title
@@ -185,12 +184,3 @@ FAQ
     <br/>
     Use subdirectories like `2013-07-01-euphoric/beginners`,
     so that main directory names always follow our four-part convention.
-
-*   *How should boot camp instructor lists refer to instructors?*
-    <br/>
-    Use personal identifiers from the `people` dictionary in `_config.yml`,
-    such as `wilson.g`.
-    When the boot camp page is expanded by Jekyll on GitHub,
-    our template will use this information
-    to include names HTML in a standard way.
-    A future template will include photos and information about instructors instead.

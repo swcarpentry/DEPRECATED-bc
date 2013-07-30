@@ -1,0 +1,20 @@
+<p>
+  Before sets were added to Python,
+  people frequently imitated them using dictionaries;
+  the dictionary's keys were the set's elements,
+  and the dictionary's values were all <code>None</code>.
+  This function calculates the intersection of two such "sets":
+</p>
+<pre>
+def setdict_intersect(left, right):
+    '''Return new dictionary with intersection of keys from left and right.'''
+    result = {}
+    for key in left:
+        if key in right:
+            result[key] = None
+    return result
+</pre>
+<p>
+  Write a function <code>setdict_union</code> that calculates
+  the union of two sets represented in this way.
+</p>

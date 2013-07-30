@@ -1,0 +1,115 @@
+<div id="s:web:history:lesson" class="lesson">
+
+  <p>
+    To start,
+    let's have another look at the hearing tests from
+    <a href="python.html">our chapter on Python programming</a>.
+    Most people would probably store these results in a plain text file
+    with one row for each test:
+  </p>
+
+<pre>
+Date         Experimenter        Subject          Test       Score
+----------   ------------        -------          -----      -----
+2011-05-02   A. Binet            H. Ebbinghaus    DL-11      88%
+2011-05-07   A. Binet            H. Ebbinghaus    DL-12      71%
+2011-05-02   A. Binet            W. Wundt         DL-11      29%
+2011-05-02   C. S. Pierce        W. Wundt         DL-11      45%
+</pre>
+
+  <p>
+    This is pretty much what a conscientious researcher would write in a lab notebook,
+    and is easy for a human being to read.
+    It's a lot harder for a computer to understand, though.
+    Any program that wanted to load this data
+    would have to know that the first line of the file contains column titles,
+    that the second can be ignored,
+    that the first field of each row thereafter should be translated from text into a date,
+    that the fields after that start in particular columns
+    (since the number of spaces between them is variable,
+    and the number of spaces inside names can also vary&mdash;compare
+    "A.&nbsp;Binet" with "C.&nbsp;S.&nbsp;Pierce"),
+    and so on.
+    Such a program would not be hard to write,
+    but having to write, debug, and maintain a separate program for each data set
+    would be tedious.
+  </p>
+
+  <p>
+    Now consider something like this quotation
+    from Richard Feynman's 1965 Nobel Prize acceptance speech:
+  </p>
+
+  <blockquote>
+    As a by-product of this same view,
+    I received a telephone call one day at the graduate college at Princeton from Professor Wheeler,
+    in which he said,
+    "Feynman, I know why all electrons have the same charge and the same mass."
+    "Why?"
+    "Because, they are all the same electron!"
+  </blockquote>
+
+  <p>
+    A lot of information is implicit in these four sentences,
+    like the fact that "Wheeler" and "Feynman" are particular people,
+    that "Princeton" is a place,
+    that the speakers are alternating (with Wheeler speaking first),
+    and so on.
+    None of that is "visible" to a computer program,
+    so if we had a database containing millions of documents
+    and wanted to see which ones mentioned both John Wheeler
+    (the physicist, not the geologist)
+    and Princeton (the university, not the glacier),
+    we might have to wade through a lot of false matches.
+    What we need is some way to explicitly tell a computer
+    all the things that human beings are able to infer.
+  </p>
+
+  <p>
+    An early effort to tackle this problem dates back to 1969,
+    when Charles Goldfarb and others at IBM created
+    the <a href="glossary.html#sgml">Standard Generalized Markup Language</a>, or SGML.
+    It was designed as a way of adding extra data
+    to medical and legal documents
+    so that programs could search them more accurately.
+    SGML was very complex (the specification is over 500 pages long),
+    and unless you were a specialist,
+    you probably didn't even know it existed:
+    all you saw were the programs that used it.
+  </p>
+
+  <p>
+    But in 1989 Tim Berners-Lee borrowed the syntax of SGML
+    to create the <a href="glossary.html#html">HyperText Markup Language</a>, or HTML,
+    for his new "World Wide Web".
+    HTML looked superficially the same as SGML, but it was much (much) simpler:
+    almost anyone could write it, so almost everyone did.
+  </p>
+
+  <p>
+    However, HTML only had a small vocabulary,
+    which users could not change or extend.
+    They could say, "This is a paragraph," or, "This is a table,"
+    but not, "This is a chemical formula," or, "This is a person's name."
+    Instead of adding thousands of new terms for different application domains,
+    a new standard for <em>defining</em> terms was created in 1998.
+    This standard was called the
+    <a href="glossary.html#xml">Extensible Markup Language</a> (XML);
+    it was much more complex than HTML,
+    but hundreds of specialized vocabularies have now been defined in terms of it,
+    such as the <a href="http://www.xml-cml.org/">Chemical Markup Language</a>
+    for describing chemical compounds and related concepts.
+  </p>
+
+  <p>
+    More recently,
+    a new version of HTML called HTML5 has been created.
+    Web programmers are very excited about it,
+    primarily because its new features allow them to create
+    sophisticated user interfaces that run on smart phones and tablets as well as conventional computers.
+    In what follows,
+    though,
+    we'll focus on some basics that haven't changed (much) in 20 years.
+  </p>
+
+</div>

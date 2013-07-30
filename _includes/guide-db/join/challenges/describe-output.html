@@ -1,0 +1,8 @@
+<p>
+  Describe in your own words what the following query produces:
+</p>
+
+<pre>
+select Site.name from Site join Visited
+on Site.lat&lt;-49.0 and Site.name=Visited.site and Visited.dated&gt;='1932-00-00';
+</pre>

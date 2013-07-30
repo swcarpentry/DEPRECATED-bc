@@ -1,0 +1,215 @@
+<div id="s:pyblocks:index:lesson" class="lesson">
+  <p>
+    A <code>for</code> loop is one way to tell the computer to do something many times.
+    Another is to tell it where to do things,
+    and let it figure out how best to take action.
+  </p>
+
+  <p>
+    To see how this works,
+    let's first revisit indexing.
+    We have seen that <code>grid[0, 1]</code> refers to a single block in a grid.
+    Many other things in Python can be indexed as well,
+    like strings:
+  </p>
+
+<pre>
+<span class="in">print "Darwin"[2]</span>
+<span class="out">r</span>
+</pre>
+
+  <p>
+    Here's something that <em>doesn't</em> work:
+  </p>
+
+<pre>
+<span class="in">print "Darwin"[999]</span>
+<span class="err">---------------------------------------------------------------------------
+IndexError                                Traceback (most recent call last)
+<ipython-input-2-473773823293> in <module>()
+----> 1 print "Darwin"[999]
+
+IndexError: string index out of range</span>
+</pre>
+
+  <p>
+    The string <code>"Darwin"</code> only has six characters,
+    so <code>"Darwin"[999]</code> doesn't exist.
+    Rather than giving us some default value such as a blank or the empty string,
+    Python considers this an error.
+    The reasoning is the same as that given <a href="#a:creating-variables">earlier</a>:
+    if we haven't defined a value,
+    our program shouldn't guess what we might have wanted.
+  </p>
+
+  <p>
+    Given that,
+    you might be surprised to learn that
+    Python actually lets use use negative indices:
+  </p>
+
+<pre>
+<span class="in">print "Darwin"[-1]</span>
+<span class="out">n</span>
+</pre>
+
+  <p>
+    As <a href="#f:negative_indexing">Figure XXX</a> shows,
+    these count backwards from the end of the string.
+    They're not actually necessary:
+    if we want to get the last element of
+    the string referred to by the variable <code>thing</code>,
+    we can always write:
+  </p>
+
+<pre>
+thing[len(thing) - 1]
+</pre>
+
+  <p class="continue">
+    However,
+    this is harder both to type and to read.
+  </p>
+
+  <figure id="f:negative_indexing">
+    <img src="pymedia/negative_indexing.png" alt="Negative Indexing" />
+    <figcaption>Figure XXX: Negative Indexing</figcaption>
+  </figure>
+
+  <p>
+    All of the indices we have seen so far have specified single items,
+    such as a single cell in an image grid or a single character,
+    but that doesn't have to be the case.
+    We can instead specify ranges of values,
+    also called a <a href="glossary.html#slice">slice</a>:
+  </p>
+
+<pre>
+<span class="in">name = "Alan Turing"
+print name[3:8]</span>
+<span class="out">Tur</span>
+<span class="in">print name[5:5]</span>
+<span class="out"></span>
+<span class="in">print name[5:2]</span>
+<span class="out"></span>
+<span class="in">print name[5:999]</span>
+<span class="out">Turing</span>
+<span class="in">print name[5:-1]</span>
+<span class="out">Turin</span>
+<span class="in">print name[1:-1]</span>
+<span class="out">lan Turin</span>
+<span class="in">print name[:6]</span>
+<span class="out">Alan T</span>
+<span class="in">print name[6:]</span>
+<span class="out">uring</span>
+<span class="in">print name[:]</span>
+<span class="out">Alan Turing</span>
+</pre>
+
+  <p>
+    Slices are written as <code>[<em>lower</em>:<em>upper</em>]</code>.
+    Python interprets them according to the following rules:
+  </p>
+
+  <ul>
+    <li>
+      A slice runs from its lower bound up to, but not including, its upper bound,
+      so that the total number of elements selected is upper-lower.
+      (In mathematical terms,
+      a slice is either "half open" or "half closed".)
+    </li>
+    <li>
+      This means that a slice whose lower and upper bounds are the same,
+      like <code>[5:5]</code>,
+      selects nothing.
+      It also means that if the upper bound is less than the lower bound,
+      as in <code>[5:2]</code>,
+      nothing is selected as well.
+    </li>
+    <li>
+      Slices are more lenient than single indices:
+      if one of the bounds is out of range,
+      it is treated as being 0 or the length of the object,
+      so that <code>name[5:999]</code> is legal
+      even when there are only 11 characters in <code>name</code>.
+      Some of us think this inconsistency is a bug;
+      others think it is a useful feature.
+    </li>
+    <li>
+      Negative indices count backward as always,
+      so <code>name[5:-1]</code> goes from the fifth character
+      up to, but not including,
+      the last character.
+    </li>
+    <li>
+      As a result,
+      <code>thing[1:-1]</code> is everything in <code>thing</code>
+      except the first and last element.
+      This is often useful in scientific programming
+      when we want to select the interior of a range of values.
+    </li>
+    <li>
+      If we omit the lower bound, it defaults to 0;
+      if we omit the upper, it defaults to the length of the thing we're slicing.
+      Thus,
+      <code>name[:6]</code> is the same as <code>name[0:6]</code>
+      and <code>name[6:]</code> is the same as <code>name[6:len(name)]</code>.
+    </li>
+    <li>
+      So by extension,
+      if we omit both bounds,
+      we simply select the entire thing.
+    </li>
+  </ul>
+
+  <p>
+    Slices work in two dimensions as well as one.
+    To see this,
+    let's create a grid and then change the color of the upper left corner:
+  </p>
+
+<pre>
+<span class="in">grid = ImageGrid(5, 5)
+grid[0:3, 0:3] = (255, 0, 128)
+grid.show()</span>
+{% include guide-pyblocks/index/blocks-pink-corner.html %}
+</pre>
+
+  <p class="continue">
+    As this example shows,
+    the slices in each dimension are combined to select a range of elements.
+    Assigning to that range then changes the color of all those elements at once.
+  </p>
+
+  <p>
+    By default,
+    a slice selects every value between its bounds.
+    We can optionally provide a <a href="glossary.html#stride">stride</a>
+    to select regularly-spaced elements instead:
+  </p>
+
+<pre>
+<span class="in">grid = ImageGrid(8, 5, fill = (255, 128, 0))
+grid[0:8:3, :] = (0, 128, 255) <span class="comment"># Turn every third row blue.
+grid.show()</span>
+{% include guide-pyblocks/index/blocks-blue-orange-stripes.html %}
+grid[:, ::2] = (255, 0, 128) <span class="comment"># Then turn every second column pink.</span>
+grid.show()</span>
+{% include guide-pyblocks/index/blocks-blue-orange-pink-stripes.html %}
+</pre>
+
+  <p>
+    Slicing is an example of <a href="glossary.html#declarative-programming">declarative programming</a>.
+    Instead of telling the computer <em>how</em> to do something,
+    we tell it <em>what</em> to do,
+    and let it figure out what steps to take to achieve that goal.
+    Behind the scenes,
+    the computer might use a <code>for</code> loop to re-color each block in the grid.
+    It might also use some of the advanced features of the CPU
+    to change several blocks simultaneously,
+    or distribute the work between different CPUs if we have a powerful enough machine.
+    We don't need to know:
+    we just need to know that the right thing will happen,
+    and that we can spend our time worrying about more important things.
+  </p>
+</div>

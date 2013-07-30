@@ -1,0 +1,267 @@
+<div id="s:web:formatting:lesson" class="lesson">
+
+  <p>
+    A basic HTML <a href="glossary.html#document">document</a>
+    contains <a href="glossary.html#text">text</a>
+    and <a href="glossary.html#element">elements</a>.
+    (The full specification allows for many other things
+    with names like "external entity references" and "processing instructions",
+    but we'll ignore them.)
+    The text in a document is just characters,
+    and as far as HTML is concerned,
+    it has no intrinsic meaning:
+    "Feynman" is just seven characters,
+    not a person.
+  </p>
+
+  <p>
+    Elements are <a href="glossary.html#metadata">metadata</a>
+    that describe the meaning of the document's content.
+    For example,
+    one element might signal a heading,
+    while another might indicate that something is a cross-reference.
+  </p>
+
+  <p>
+    Elements are written using <a href="glossary.html#tag-xml">tags</a>,
+    which must be enclosed in angle brackets <code>&lt;&hellip;&gt;</code>.
+    For example, <code>&lt;cite&gt;</code> is used to mark the start of a citation,
+    and <code>&lt;/cite&gt;</code> is used to mark its end.
+    Elements must be properly nested:
+    if an element called <code>inner</code> begins inside an element called <code>outer</code>,
+    <code>inner</code> must end before <code>outer</code> ends.
+    This means that <code>&lt;outer&gt;&hellip;&lt;inner&gt;&hellip;&lt;/inner&gt;&lt;/outer&gt;</code> is legal HTML,
+    but <code>&lt;outer&gt;&hellip;&lt;inner&gt;&hellip;&lt;/outer&gt;&lt;/inner&gt;</code> is not.
+  </p>
+
+  <p>
+    Here are some commonly-used HTML tags:
+  </p>
+
+  <table>
+    <tr>
+      <th>Tag</th>
+      <th>Usage</th>
+    </tr>
+    <tr>
+      <td><code>html</code></td>
+      <td>Root element of entire HTML document.</td>
+    </tr>
+    <tr>
+      <td><code>body</code></td>
+      <td>Body of page (i.e., visible content).</td>
+    </tr>
+    <tr>
+      <td><code>h1</code></td>
+      <td>Top-level heading.  Use <code>h2</code>, <code>h3</code>, etc. for second- and third-level headings.</td>
+    </tr>
+    <tr>
+      <td><code>p</code></td>
+      <td>Paragraph.</td>
+    </tr>
+    <tr>
+      <td><code>em</code></td>
+      <td>Emphasized text.</td>
+    </tr>
+  </table>
+
+  <p>
+    Finally,
+    every well-formed document started with a <code>DOCTYPE</code> declaration,
+    which looks like:
+  </p>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+</pre>
+
+  <p class="continue">
+    This tells programs what kind of elements are allowed to appear in the document:
+    'html' (by far the most common case),
+    'math' for MathML,
+    and so on.
+    Here is a simple HTML document that uses everything we've seen so far:
+  </p>
+  
+<pre>
+&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Dimorphism&lt;/h1&gt;&lt;p&gt;Occurring or existing in two different &lt;em&gt;forms&lt;/em&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+</pre>
+
+  <p>
+    A web browser like Firefox might present this document
+    as shown in <a href="#f:very_simple">Figure XXX</a>.
+    Other devices will display it differently.
+    A phone,
+    for example,
+    might use a different background color for the heading,
+    while a screen reader for people with visual disabilities
+    would read the text aloud.
+  </p>
+
+  <figure id="f:very_simple">
+    <img src="web/very_simple.png" alt="A Very Simple Web Page" />
+    <figcaption>Figure XXX: A Very Simple Web Page</figcaption>
+  </figure>
+
+  <p>
+    These different presentations are possible because
+    HTML separates content from presentation,
+    or in computer science jargon,
+    separates <a href="glossary.html#model">models</a> from <a href="glossary.html#view">views</a>.
+    The model is the data itself;
+    the view is how that data is displayed,
+    such as a particular pattern of pixels on our screen
+    or a particular sequence of sounds on our headphones.
+    A given model may be viewed in many different ways,
+    just as what files are on your hard drive
+    can be viewed as a list,
+    as snapshots,
+    or as a hierarchical tree
+    (<a href="#f:filesystem_views">Figure XXX</a>).
+  </p>
+
+  <figure id="f:filesystem_views">
+    <img src="web/filesystem_views.png" alt="Different Views of a File System" />
+    <figcaption>Figure XXX: Different Views of a File System</figcaption>
+  </figure>
+
+  <p>
+    People can construct models from views almost effortlessly&mdash;if you are able to read,
+    it's almost impossible <em>not</em> to see the letters "HTML"
+    in the following block of text:
+  </p>
+
+<pre>
+*   *  *****  *   *  *
+*   *    *    ** **  *
+*****    *    * * *  *
+*   *    *    *   *  *
+*   *    *    *   *  ****
+</pre>
+
+  <p class="continue">
+    Computers,
+    on the other hand,
+    are very bad at reconstructing models from views.
+    In fact,
+    many of the things we do without apparent effort,
+    like understanding sentences,
+    are still open research problems in computer science.
+    That's why markup languages were invented:
+    they are how we explicitly specify the "what" that we infer so easily
+    for computers' benefit.
+  </p>
+
+  <p>
+    There are a couple of other formatting rules we need to know
+    in order to create and understand documents.
+    If we are writing HTML by hand
+    instead of using a <a href="glossary.html#wysiwyg">WYSIWYG</a> editor
+    like LibreOffice or Microsoft Word,
+    we might lay it out like this to make it easier to read:
+  </p>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+<span class="highlight">  </span>&lt;body&gt;
+<span class="highlight">    </span>&lt;h1&gt;Dimorphism&lt;/h1&gt;
+<span class="highlight">    </span>&lt;p&gt;Occurring or existing in two different &lt;em&gt;forms&lt;/em&gt;.&lt;/p&gt;
+<span class="highlight">  </span>&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <p class="continue">
+    Doing this doesn't change how most browsers render the document,
+    since they usually ignore "extra" whitespace
+    (highlighted above).
+    As we'll see when we start writing programs of our own, though,
+    that whitespace doesn't magically disappear when a program reads the document.
+  </p>
+
+  <p>
+    Second,
+    we must use <a href="glossary.html#escape-sequence">escape sequences</a>
+    to represent the special characters <code>&lt;</code> and <code>&gt;</code>
+    for the same reason that we have to use <code>\&quot;</code>
+    inside a double-quoted string in a program.
+    <span class="fixme">where do we explain escape sequences?</span>
+    In HTML and XML,
+    an escape sequence is an ampersand '&amp;'
+    followed by the abbreviated name of the character
+    (such as 'amp' for "ampersand")
+    and a semi-colon.
+    The four most common escape sequences are:
+  </p>
+
+  <table>
+    <tr>
+      <th>Sequence</th>
+      <th>Character</th>
+    </tr>
+    <tr>
+      <td><code>&amp;lt;</code></td>
+      <td><code>&lt;</code></td>
+    </tr>
+    <tr>
+      <td><code>&amp;gt;</code></td>
+      <td><code>&gt;</code></td>
+    </tr>
+    <tr>
+      <td><code>&amp;quot;</code></td>
+      <td><code>&quot;</code></td>
+    </tr>
+    <tr>
+      <td><code>&amp;amp;</code></td>
+      <td><code>&amp;</code></td>
+    </tr>
+  </table>
+
+  <p>
+    One final formatting rule is that
+    every document must have a single <a href="glossary.html#root-element">root element</a>,
+    i.e., a single element must enclose everything else.
+    When combined with the rule that elements must be properly nested,
+    this means that every document can be thought of as a <a href="glossary.html#tree">tree</a>.
+    For example,
+    we could draw the logical structure of our little document
+    as shown in <a href="#f:very_simple_tree">Figure XXX</a>.
+  </p>
+
+  <figure id="f:very_simple_tree">
+    <img src="web/very_simple_tree.png" alt="Tree View of a Very Simple Web Page" />
+    <figcaption>Figure XXX: Tree View of a Very Simple Web Page</figcaption>
+  </figure>
+
+  <p>
+    A document like this, on the other hand, is not strictly legal:
+  </p>
+
+<pre>
+&lt;h1&gt;Dimorphism&lt;/h1&gt;
+&lt;p&gt;Occurring or existing in two different &lt;em&gt;forms&lt;/em&gt;.&lt;/p&gt;
+</pre>
+
+  <p class="continue">
+    because it has two top-level elements
+    (the <code>h1</code> and the <code>p</code>).
+    Most browsers will render it correctly,
+    since they're designed to accommodate improperly-formatted HTML,
+    but most programs won't,
+    because they're not.
+  </p>
+
+  <div class="box" id="a:beautiful-soup">
+    <h3>Beautiful Soup</h3>
+    <p>
+      There are a lot of incorrectly-formatted HTML pages out there.
+      To deal with them,
+      people have written libraries like <a href="http://www.crummy.com/software/BeautifulSoup/">Beautiful Soup</a>,
+      which does its best to turn real-world HTML into something that
+      a run-of-the-mill program can handle.
+      It almost always gets things right,
+      but sticking to the standard makes life a lot easier for everyone.
+    </p>
+  </div>
+
+</div>
