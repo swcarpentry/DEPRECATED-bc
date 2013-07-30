@@ -11,7 +11,7 @@ with a keyboard instead of controlling graphical user interfaces
 
 Use a browser to open the tutorial on github, located at:
 
-    https://github.com/USERNAME/boot-camps/tree/YYYY-MM-PLACE
+    https://github.com/swcarpentry/boot-camps/tree/YYYY-MM-PLACE
 
 Click on the directory named `shell`.
 
@@ -699,8 +699,9 @@ that the fifth column is the size of the file in bytes.
 * * * *
 **Short Exercise**
 
-Figure out how to get `wc` to print the length of the longest line in
-`all_data`.
+Suppose you are running low on hard drive space.  Examine the man 
+page and figure out how to get `ls` to sort the directory listing 
+by size, putting the largest file last. 
 
 * * * *
 
