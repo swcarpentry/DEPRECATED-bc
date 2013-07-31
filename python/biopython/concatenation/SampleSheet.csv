@@ -1,0 +1,17 @@
+FCID,Lane,SampleID,SampleRef,Index,Description,Control,Recipe,Operator,SampleProject
+C0LTRACXX,1,M.Mouse.control,,CTTGTA,,N,0.66,Areej,Cartoonbiopsies
+C0LTRACXX,2,M.Mouse.biopsy,,ATCACG,,N,0.66,Areej,Cartoonbiopsies
+C0LTRACXX,1,D.Duck.control,,TTAGGC,,N,0.33,Areej,Cartoonbiopsies
+C0LTRACXX,2,D.Duck.biopsy,,CAGATC,,N,0.33,Areej,Cartoonbiopsies
+C0LTRACXX,3,D.Duck.control,,TTAGGC,,N,0.66,Areej,Cartoonbiopsies
+C0LTRACXX,4,D.Duck.biopsy,,CAGATC,,N,0.66,Areej,Cartoonbiopsies
+C0LTRACXX,3,G.Goof.control,,CGATCA,,N,0.33,Areej,Cartoonbiopsies
+C0LTRACXX,4,G.Goof.biopsy,,ACAGTG,,N,0.33,Areej,Cartoonbiopsies
+C0LTRACXX,5,G.Goof.control,,CGATCA,,N,0.66,Areej,Cartoonbiopsies
+C0LTRACXX,6,G.Goof.biopsy,,ACAGTG,,N,0.66,Areej,Cartoonbiopsies
+C0LTRACXX,5,D.Duck.control,,TTAGGC,,N,0.33,Areej,Cartoonbiopsies
+C0LTRACXX,6,D.Duck.biopsy,,CAGATC,,N,0.33,Areej,Cartoonbiopsies
+C0LTRACXX,7,M.Mouse.control,,CTTGTA,,N,0.66,Areej,Cartoonbiopsies
+C0LTRACXX,8,M.Mouse.biopsy,,ATCACG,,N,0.66,Areej,Cartoonbiopsies
+C0LTRACXX,7,G.Goof.control,,CGATCA,,N,0.33,Areej,Cartoonbiopsies
+C0LTRACXX,8,G.Goof.biopsy,,ACAGTG,,N,0.33,Areej,Cartoonbiopsies
