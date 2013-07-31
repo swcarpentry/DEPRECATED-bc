@@ -1,7 +1,5 @@
 # Python 1 : The Shell, Variables, and Basic Data Types 
 
-**Presented By: Katy Huff**
-
 **Based on Lecture Materials By: Milad Fatenejad** 
 **With help from Tommy Guy and Many More**
 

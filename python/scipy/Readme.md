@@ -1,8 +1,6 @@
 Python 8 : Using Scipy
 ======================
 
-**Presented By: Katy Huff**
-
 **Based on Lecture Materials By Anthony Scopatz**
 
 Scientific Python (SciPy) is a very robust package. It encompasses

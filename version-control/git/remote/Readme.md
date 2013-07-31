@@ -102,7 +102,7 @@ Step 2 : Make certain you are in the YYYY-MM-PLACE branch and merge the
 upstream YYYY-MM-PLACE branch into your YYYY-MM-PLACE branch
 
     $ git checkout YYYY-MM-PLACE
-    $ git merge upstream\YYYY-MM-PLACE
+    $ git merge upstream/YYYY-MM-PLACE
 
 Step 3 : Check out what happened by browsing the directory.
 

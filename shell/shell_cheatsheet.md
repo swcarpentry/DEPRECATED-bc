@@ -63,7 +63,7 @@ text strings as arguments.
 See the cheatsheet on regular expressions for more "wildcard" shortcuts.
 
 ### b) How to redirect to a file and get input from a file ...
-Redirection operators can be used to redirect the ouput from a program from the display screen to a file where it is saved (or many other places too, like your printer or to another program where it can be used as input).
+Redirection operators can be used to redirect the output from a program from the display screen to a file where it is saved (or many other places too, like your printer or to another program where it can be used as input).
 
 
 | Command | Description                                                                                                                     |  

@@ -7,8 +7,6 @@ tuples](http://github.com/thehackerwithin/UofCSCBC2012/tree/master/2b-PythonData
 
 * * * * *
 
-**Presented By: Joshua R. Smith**
-
 **Based on Lecture Materials By: Milad Fatenejad with contributions from Katy Huff, Tommy Guy and Many More**
 
 # What is Python ?

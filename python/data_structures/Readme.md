@@ -5,7 +5,7 @@
 **Based on lecture materials by Milad Fatenejad, Joshua R. Smith, and Will
 Trimble**
 
-Python would be a farily useless language if it weren't for the compound
+Python would be a fairly useless language if it weren't for the compound
 data types. The main two are lists and dictionaries, but I'll mention sets
 and tuples as well. I'll also go over reading text data from files. 
 
@@ -238,7 +238,7 @@ dictionary, whereas a list cannot as we will see in a moment.
 
 ## Sets
 
-Most introductary python courses do not go over sets this early (or at
+Most introductory python courses do not go over sets this early (or at
 all), but I've found this data type to be useful. The python set type is
 similar to the idea of a mathematical set: it is an unordered collection of
 unique things. Consider:
@@ -270,7 +270,7 @@ sets, but its good for you to know they exist.
 
 Recall our file data.dat which contained our current-voltage data and also
 some metadata. We were able to import the data as a list, but clearly the
-list type is not the optial choice for a data model. The dictionary is a
+list type is not the optimal choice for a data model. The dictionary is a
 much better choice. A python dictionary is a collection of key, value
 pairs. The key is a way to name the data, and the value is the data itself.
 Here's a way to create a dictionary that contains all the data in our

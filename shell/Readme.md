@@ -550,7 +550,7 @@ are identical to the `man` program.
 | key     | action |
 | ------- | ---------- |
 | "space" | to go forward |
-|  "b"    | to go backwarsd |
+|  "b"    | to go backwards |
 |  "g"    | to go to the beginning |
 |  "G"    | to go to the end |
 |  "q"    | to quit |
@@ -757,7 +757,7 @@ data to come in. Now type:
     are
     good
 
-then CONTROL+d. You should is the lines:
+then CONTROL+d. You should see the lines:
 
     are
     good
@@ -839,7 +839,7 @@ Hint: To print the smallest file, use:
 
     wc Bert/* | sort -k 3 -n | head -n 1
 
-* * * *
+# Writing a shell script
 
 Printing the smallest file seems pretty useful. We don't want to type
 out that long command often. Let's create a simple script, a simple

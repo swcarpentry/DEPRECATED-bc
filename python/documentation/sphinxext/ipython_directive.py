@@ -48,7 +48,7 @@ ToDo
 Authors
 -------
 
-- John D Hunter: orignal author.
+- John D Hunter: original author.
 - Fernando Perez: refactoring, documentation, cleanups, port to 0.11.
 - VáclavŠmilauer <eudoxos-AT-arcig.cz>: Prompt generalizations.
 """
@@ -103,7 +103,7 @@ fmtout = 'Out[%d]:'
 def block_parser(part):
     """
     part is a string of ipython text, comprised of at most one
-    input, one ouput, comments, and blank lines.  The block parser
+    input, one output, comments, and blank lines.  The block parser
     parses the text into a list of::
 
       blocks = [ (TOKEN0, data0), (TOKEN1, data1), ...]

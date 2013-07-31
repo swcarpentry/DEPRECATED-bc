@@ -105,7 +105,7 @@ as their descriptions.
 ## git init : Creating a Local Repository
 
 To keep track of numerous versions of your work without saving numerous
-copies, you can make a local repoitory for it on your computer. What git
+copies, you can make a local repository for it on your computer. What git
 does is to save the first version, then for each subsequent version it
 saves only the changes. That is, git only records the difference between
 the new version and the one before it. With this compact information,
@@ -213,7 +213,7 @@ In the same way that it is wise to often save a document that you are
 working on, so too is it wise to save numerous revisions of your code.
 More frequent commits increase the granularity of your **undo** button.
 
-**ADVICE: Good commit messages**
+**ADVICE: Write good commit messages**
 
 There are no hard and fast rules, but good commits are atomic: they are the smallest change that remain meaningful. A good commit message usually contains a one-line description followed by a longer explanation if necessary.
 
@@ -301,10 +301,10 @@ There are some useful flags for this command, such as
 ## git reset : Unstaging a staged file
     git reset filename     (opposite of 'git add filename')
 
-## git checkout : Discardind unstaged modifications (git checkout has other purposes)
+## git checkout : Discarding unstaged modifications (git checkout has other purposes)
     git checkout -- filename     
     
-## git rm : Removing s file
+## git rm : Removing a file
    git rm filename   (Removes a file from the repository)
    
 ### Exercise : 
@@ -331,7 +331,7 @@ The master branch is created when the repository is initialized. With an
 argument, the **branch** command creates a new branch with the given
 name.
 
-    $ git branch experimentals
+    $ git branch experimental
     $ git branch
     * master
       experimental
