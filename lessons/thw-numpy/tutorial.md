@@ -3,7 +3,7 @@ layout: lesson
 root: ../..
 title: NumPy
 ---
-**Based on Lecture Materials By Matthew Terry**
+**Based on Lecture Materials By Matthew Terry and Katy Huff**
 
 This class will cover a broad overview of NumPy with brief illustrative
 examples geared towards getting people familiar with the basic use

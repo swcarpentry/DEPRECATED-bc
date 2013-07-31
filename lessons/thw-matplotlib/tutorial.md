@@ -3,7 +3,7 @@ layout: lesson
 root: ../..
 title: Plotting in Python with matplotlib
 ---
-**Based on Lecture Material by Anthony Scopatz**
+**Based on Lecture Material by Anthony Scopatz and Katy Huff**
 
 Plotting in Python
 ==================
