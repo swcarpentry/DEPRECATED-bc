@@ -13,21 +13,33 @@ To create a website for a new boot camp:
 1.  Create a [new repository on GitHub](https://github.com/new)
     with a name like YYYY-MM-DD-site, e.g., `2014-03-31-ehu`.
     This repository must *not* be a fork of an existing repository.
-2.  Clone this new repository to your desktop.
-3.  Add the template repository `git@github.com:swcarpentry/bc.git` as a remote called `upstream`.
+2.  Clone this new repository to your local machine and `cd` into it. You can
+    ignore the warning about cloning an empty repository, it won't stay empty
+    long.
 
-        git remote add upstream git@github.com:swcarpentry/bc.git
+![Alt text](img/readme/step1.png)
 
-4.  Create a new branch in the desktop clone called `gh-pages`.
+3.  Add the template repository `git@github.com:swcarpentry/bc.git` as a remote named `swcarpentry`.
+
+        git remote add swcarpentry git@github.com:swcarpentry/bc.git
+
+![Alt text](img/readme/step2.png)
+
+4.  Create a new branch in the local clone named `gh-pages`.
 
         git checkout -b gh-pages
 
-5.  Pull content from the GitHub template repository using `git pull upstream gh-pages`.
+5.  Pull content from the GitHub template repository:
+
+        git pull swcarpentry gh-pages
+
 6.  Edit `index.html` to create the boot camp home page (see below).
     Please double-check the information in the page's header (described below),
     as it is used to update the main website.
 7.  Preview your changes (see below).
-8.  Push content to your YYYY-MM-DD-site repository using `git push origin gh-pages`.
+8.  Push content to your YYYY-MM-DD-site repository:
+
+        git push origin gh-pages
 
 As soon as your repo has been pushed to GitHub, GitHub will render your pages
 at the url:
@@ -146,14 +158,31 @@ The images that these files refer to have not yet been created.
 Improving This Material
 -----------------------
 
-We welcome improvements to the master copy of the boot camp template repository,
-particularly new lesson material.
+We welcome improvements to the master copy of the boot camp template
+repository, particularly new lesson material. It will be easiest if you make
+improvements you intend to share in their own commits, separate from commits
+specific to your bootcamp.
+
 To send them to us:
 
 1.  Fork the `bc` repository on GitHub.
-2.  Make that a remote of your desktop copy of your YYYY-MM-DD-site repository.
-3.  Push your changes from your desktop to your fork of `bc` on GitHub.
-4.  Send a pull request (PR) to the master repository.
+2.  Make that a remote named "upstream" of your local YYYY-MM-DD-site repository.
+
+        git remote add upstream git@github.com:<me>/bc.git
+
+(replace 'me' with your GitHub username)
+
+![Alt text](img/readme/step3.png)
+
+3.  Isolate the changes you want to share in a branch and push them
+    to GitHub.
+
+        git fetch swcarpentry
+        git checkout -t swcarpentry/gh-pages -b improvements
+        git cherry-pick <commits related to improvements on your gh-pages branch>
+        git push upstream improvements
+
+4.  Send a pull request (PR) to the master repository on GitHub.
 
 FAQ
 ---
