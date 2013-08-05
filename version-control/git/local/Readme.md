@@ -54,7 +54,7 @@ Version Control System Tool Options
 ## git clone : we've seen git already
 Yesterday morning, after installing git, we asked everyone to run
 ```
-git clone http://github.com/swcarpentry/boot-camps -b 2013-07-notredame --single-branch
+git clone http://github.com/swcarpentry/boot-camps -b YYYY-MM-PLACE --single-branch
 ```
 This created a copy of the software carpentry repository materials on
 each of your hard drives yesterday morning.   If you did this yesterday,
