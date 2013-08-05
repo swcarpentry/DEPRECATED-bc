@@ -50,7 +50,7 @@ answers we are interested in, data we want, etc.
 *Uncertainty Quantification* is the process of asking, "Given that our
 algorithm may not be deterministic, was our execution within acceptable
 error bounds?" This is particularly important for anything which uses
-random numbers, for example,  Monte Carlo methods.
+random numbers, for example, Monte Carlo methods.
 
 # Where are tests?
 
@@ -277,7 +277,7 @@ teardown()
 # Nose: A Python Testing Framework
 
 The testing framework we'll discuss today is called nose. However, there
-are several other testing frameworks available in most language. Most
+are several other testing frameworks available in most languages. Most
 notably there is [JUnit](http://www.junit.org/) in Java which can
 arguably attributed to inventing the testing framework.
 
@@ -286,7 +286,7 @@ arguably attributed to inventing the testing framework.
 Nose tests are files that begin with `Test-`, `Test_`, `test-`, or
 `test_`. Specifically, these satisfy the testMatch regular expression
 `[Tt]est[-_]`. (You can also teach nose to find tests by declaring them
-in the unittest.TestCase subclasses chat you create in your code. You
+in the unittest.TestCase subclasses that you create in your code. You
 can also create test functions which are not unittest.TestCase
 subclasses if they are named with the configured testMatch regular
 expression.)
@@ -337,9 +337,9 @@ do to handle it. Also, think about the type of the elements in the list.
 What should be done if you pass a list of integers? What if you pass a
 list of strings?
 
-**Example**:
+**To run the tests**:
 
-    nosetests test_mean.py
+    nosetests -v test_mean.py
 
 # Test Driven Development
 
