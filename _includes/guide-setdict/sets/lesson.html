@@ -366,21 +366,19 @@ def another_atom(seen, atom):
     Here's how simple that code is:
   </p>
 
-<pre src="setdict/unique_atoms.py">
-import sys
-filename = sys.argv[1]
-source = open(filename, 'r')
-atoms = set()
-for line in source:
-    name = line.strip()
-    atoms.add(name)
-source.close()
-print atoms
+<pre>
+def unique_atoms(filename):
+    atoms = set()
+    with open(filename, 'r') as source:
+        for line in source:
+            name = line.strip()
+            atoms.add(name)
+    return atoms
 </pre>
 
   <p>
-    We start by opening the file
-    and creating an empty set which we will fill with atomic symbols.
+    We start by creating an empty set which we will fill with atomic symbols
+    and opening the file containing our data.
     As we read the lines in the file,
     we strip off any whitespace (such as the newline character at the end of the line)
     and put the resulting strings in the set.
@@ -390,12 +388,12 @@ print atoms
   </p>
 
 <pre>
-    Na
-    Fe
-    Na
-    Si
-    Pd
-    Na
+Na
+Fe
+Na
+Si
+Pd
+Na
 </pre>
 
   <p class="continue">
@@ -403,7 +401,7 @@ print atoms
   </p>
 
 <pre>
-set(['Fe', 'Si', 'Na'])
+set(['Na', 'Fe', 'Si', 'Pd'])
 </pre>
 
   <p>
@@ -417,7 +415,7 @@ set(['Fe', 'Si', 'Na'])
   </p>
 
 <pre>
-set('Na', 'Fe', 'Fl')
+set('Na', 'Fe', 'Si', 'Pd')
 </pre>
 
   <p class="continue">
