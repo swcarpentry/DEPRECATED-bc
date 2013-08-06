@@ -169,22 +169,17 @@ Darwin 1809</span>
     The main body of our program looks like this:
   </p>
 
-<pre src="setdict/count_atoms.py">
-import sys
-
-if __name__ == '__main__':
-    reader = open(sys.argv[1], 'r')
-    lines = reader.readlines()
-    reader.close()
-    count = count_atoms(lines)
-    for atom in count:
-        print atom, count[atom]
+<pre>
+def main(filename):
+    counts = count_atoms(filename)
+    for atom in counts:
+        print atom, counts[atom]
 </pre>
 
   <p class="continue">
-    The first three lines read the input file into a list of strings.
-    We then call a function <code>count_atoms</code> to turn that list into
-    a dictionary of atomic symbols and counts.
+    <code>count_atoms</code> reads atomic symbols from a file,
+    one per line,
+    and creates a dictionary of atomic symbols and counts.
     Once we have that dictionary,
     we use a loop like the one we just saw to print out its contents.
   </p>
@@ -193,18 +188,18 @@ if __name__ == '__main__':
     Here's the function that does the counting:
   </p>
 
-<pre src="setdict/count_atoms.py">
-def count_atoms(lines):
-  '''Count unique atoms, returning a dictionary.'''
+<pre>
+def count_atoms(filename):
+    '''Count unique atoms, returning a dictionary.'''
 
     result = {}
-    for atom in lines:
-        atom = atom.strip()
-        if atom not in result:
-            result[atom] = 1
-        else:
-            result[atom] = result[atom] + 1
-
+    with open(filename, 'r') as reader:
+        for line in reader:
+            atom = line.strip()
+            if atom not in result:
+                result[atom] = 1
+            else:
+                result[atom] = result[atom] + 1
     return result
 </pre>
 
@@ -302,7 +297,7 @@ birthdays = {
 all_keys = birthdays.keys()
 print all_keys
 <span class="out">[('Isaac', 'Newton'), ('Alan', 'Mathison', 'Turing'), ('Charles', 'Robert', 'Darwin')]</span>
-all_values = birthday.values()
+all_values = birthdays.values()
 print all_values
 <span class="out">[1642, 1912, 1809]</span>
 </pre>
