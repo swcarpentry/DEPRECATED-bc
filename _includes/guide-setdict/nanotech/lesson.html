@@ -91,14 +91,10 @@ O 3
     and prints the result:
   </p>
 
-<pre src="setdict/nanotech.py">
-'''Calculate how many molecules of each type can be made with the atoms on hand.'''
-
-import sys
-
-if __name__ == '__main__':
-    inventory = read_inventory(sys.argv[1])
-    formulas = read_formulas(sys.argv[2])
+<pre>
+def main(inventory_file, formula_file):
+    inventory = read_inventory(inventory_file)
+    formulas = read_formulas(formula_file)
     counts = calculate_counts(inventory, formulas)
     show_counts(counts)
 </pre>
@@ -110,78 +106,108 @@ if __name__ == '__main__':
     and store them together in a dictionary:
   </p>
 
-<pre src="setdict/nanotech.py">
-def read_inventory(filename):
-    '''Read inventory of available atoms.'''
-
+<pre>
+def read_inventory(inventory_file):
     result = {}
-    for line in read_lines(filename):
-        name, count = line.split(' ')
-        result[name] = int(count)
+    with open(inventory_file, 'r') as reader:
+        for line in reader:
+            name, count = line.strip().split()
+            result[name] = int(count)
+    return result
+</pre>
+
+  <p>
+    Let's test it:
+  </p>
+
+<pre>
+print read_inventory('inventory-03.txt')
+<span class="err">ValueError                                Traceback (most recent call last)
+<ipython-input-9-c05b7b912bfb> in <module>()
+----> 1 print read_inventory('inventory-03.txt')
+
+<ipython-input-8-d5dd028eb45b> in read_inventory(inventory_file)
+      3     with open(inventory_file, 'r') as reader:
+      4         for line in reader:
+----> 5             name, count = line.strip().split()
+      6             result[name] = int(count)
+      7     return result
+
+ValueError: too many values to unpack</span>
+</pre>
+
+  <p>
+    Our mistake was to forget that files can contain blank lines and comments.
+    It's easy enough to modify the function to handle them,
+    though it complicates the logic:
+  </p>
+
+<pre>
+def read_inventory(inventory_file):
+    result = {}
+    with open(inventory_file, 'r') as reader:
+        for line in reader:
+            line = line.strip()
+            if (not line) or line.startswith('#'):
+                continue
+            name, count = line.split()
+            result[name] = int(count)
+    return result
+
+print read_inventory('inventory-03.txt')
+<span class="out">{'H': 4, 'O': 3, 'He': 1}</span>
+</pre>
+
+  <p>
+    The next step is to read the files containing formulas.
+    Since the file format is more complicated,
+    the function is as well.
+    In fact,
+    it's complicated enough that we'll come back later and simplify it.
+  </p>
+
+<pre>
+def read_formulas(formula_file):
+    result = {}
+    with open(formula_file, 'r') as reader:
+        for line in reader:
+            line = line.strip()
+            if (not line) or line.startswith('#'):
+                continue
+            name, atoms = line.split(':')
+            name = name.strip()
+            atoms = atoms.strip().split()
+    
+            formula = {}
+            for i in range(0, len(atoms), 2):
+                symbol = atoms[i].strip()
+                count = int(atoms[i+1])
+                formula[symbol] = count
+            result[name] = formula
 
     return result
 </pre>
 
   <p class="continue">
-    For clarity's sake, we have used a helper function called <code>read_lines</code>
-    to remove blank lines and comments from our input:
-  </p>
-
-<pre src="setdict/nanotech.py">
-def read_lines(filename):
-    '''Read lines from file, stripping out blank lines and comments.'''
-
-    reader = open(filename, 'r')
-    lines = []
-    for line in reader:
-        line = line.split('#')[0].strip()
-        if line:
-            lines.append(line)
-    reader.close()
-
-    return lines
-</pre>
-
-  <p>
-    Using that same function,
-    the function that reads in a file of molecular formulas is only slightly more complex
-    than the one that reads in inventory:
-  </p>
-
-<pre src="setdict/nanotech.py">
-def read_formulas(filename):
-    '''Read molecular formulas from file.'''
-
-    result = {}                                        <span class="comment"># 1</span>
-    for line in read_lines(filename):
-
-        name, atoms = line.split(':')                  <span class="comment"># 2</span>
-        name = name.strip()
-
-        atoms = atoms.strip().split(' ')               <span class="comment"># 3</span>
-        formula = {}
-        for i in range(0, len(atoms), 2):              <span class="comment"># 4</span>
-            formula[atoms[i]] = int(atoms[i+1])        <span class="comment"># 5</span>
-
-        result[name] = formula                         <span class="comment"># 6</span>
-
-    return result                                      <span class="comment"># 7</span>
-</pre>
-
-  <p class="continue">
-    We start by creating a dictionary to hold our results (#1).
+    We start by creating a dictionary to hold our results.
     We then split each interesting line in the data file on the colon ':'
-    to separate the molecule's name (which may contain spaces) from its formula (#2).
-    We then split the formulas into a list of strings (#3).
+    to separate the molecule's name (which may contain spaces) from its formula.
+    We then split the formulas into a list of strings.
     These alternate between atomic symbols and numbers,
-    so in the inner loop (#4),
+    so in the inner loop,
     we move forward through those values two elements at a time,
-    storing the atomic symbol and count in a dictionary (#5).
+    storing the atomic symbol and count in a dictionary.
     Once we're done,
-    we store that dictionary as the value for the molecule name in the main dictionary (#6).
+    we store that dictionary as the value for the molecule name in the main dictionary.
     When we've processed all the lines,
-    we return the final result (#7).
+    we return the final result.
+    Here's a simple test:
   </p>
+
+<pre>
+print read_formulas('formulas-03.txt')
+<span class="out">{'water': {'H': 2, 'O': 1}, 'hydrogen': {'H': 2}, 'helium': {'He': 1}}</span>
+</pre>
 
   <p>
     Now that we have all our data,
@@ -192,7 +218,7 @@ def read_formulas(filename):
     and "divide" the inventory by each one:
   </p>
 
-<pre src="setdict/nanotech.py">
+<pre>
 def calculate_counts(inventory, formulas):
     '''Calculate how many of each molecule can be made with inventory.'''
 
@@ -213,10 +239,8 @@ def calculate_counts(inventory, formulas):
     The function that does the division is:
   </p>
 
-<pre src="setdict/nanotech.py">
+<pre>
 def dict_divide(inventory, molecule):
-    '''Calculate how much of a single molecule can be made with inventory.'''
-
     number = None
     for atom in molecule:
         required = molecule[atom]
@@ -275,10 +299,8 @@ def dict_divide(inventory, molecule):
     to make it easier to read:
   </p>
 
-<pre src="setdict/nanotech.py">
+<pre>
 def show_counts(counts):
-    '''Show how many of each kind of molecule we can make.'''
-
     names = counts.keys()
     names.sort()
     for name in names:
@@ -310,8 +332,7 @@ def show_counts(counts):
       </td>
       <td>
 <pre>
-# formulas-01.txt
-helium : He 1
+# formulas-00.txt
 </pre>
       </td>
       <td>
@@ -323,7 +344,43 @@ helium : He 1
 
   <p class="continue">
     There's no output, which is what we expect.
-    Let's add one atom of helium to our inventory:
+    Let's add a formula but no atoms:
+  </p>
+
+  <table>
+    <tr>
+      <th>
+        Inventory
+      </th>
+      <th>
+        Formulas
+      </th>
+      <th>
+        Output
+      </th>
+    </tr>
+    <tr>
+      <td>
+<pre>
+# inventory-00.txt
+</pre>
+      </td>
+      <td>
+<pre>
+# formulas-01.txt
+helium : He 1
+</pre>
+      </td>
+      <td>
+<pre>
+helium 0
+</pre>
+      </td>
+    </tr>
+  </table>
+
+  <p class="continue">
+    and now an atom:
   </p>
 
   <table>
@@ -361,7 +418,7 @@ helium 1
 
   <p class="continue">
     That seems right as well.
-    Let's add some hydrogen, but don't give the program any formulas that use hydrogen:
+    Let's add some hydrogen and another formula:
   </p>
 
   <table>
@@ -388,11 +445,13 @@ H 4
 <pre>
 # formulas-01.txt
 helium : He 1
+water : H 2 O 1
 </pre>
       </td>
       <td>
 <pre>
 helium 1
+water 0
 </pre>
       </td>
     </tr>
@@ -400,93 +459,7 @@ helium 1
 
   <p class="continue">
     The output doesn't change, which is correct.
-    Let's try adding the formula for water,
-    which does use hydrogen,
-    but not providing any oxygen:
-  </p>
-
-  <table>
-    <tr>
-      <th>
-        Inventory
-      </th>
-      <th>
-        Formulas
-      </th>
-      <th>
-        Output
-      </th>
-    </tr>
-    <tr>
-      <td>
-<pre>
-# inventory-02.txt
-He 1
-H 4
-</pre>
-      </td>
-      <td>
-<pre>
-# formulas-02.txt
-helium : He 1
-water: H 2 O 1
-</pre>
-      </td>
-      <td>
-<pre>
-helium 1
-</pre>
-      </td>
-    </tr>
-  </table>
-
-  <p class="continue">
-    As we hoped, there's no water in the output, but helium is still appearing as it should.
-    Let's add the formula for molecular hydrogen:
-  </p>
-
-  <table>
-    <tr>
-      <th>
-        Inventory
-      </th>
-      <th>
-        Formulas
-      </th>
-      <th>
-        Output
-      </th>
-    </tr>
-    <tr>
-      <td>
-<pre>
-# inventory-02.txt
-He 1
-H 4
-</pre>
-      </td>
-      <td>
-<pre>
-# formulas-03.txt
-helium : He 1
-water: H 2 O 1
-hydrogen: H 2
-</pre>
-      </td>
-      <td>
-<pre>
-helium 1
-hydrogen 2
-</pre>
-      </td>
-    </tr>
-  </table>
-
-  <p class="continue">
-    Sure enough, we can make two molecules of hydrogen
-    (each of which uses two atoms).
-    Finally,
-    let's put some oxygen in the warehouse:
+    Our final test adds some oxygen:
   </p>
 
   <table>
@@ -515,13 +488,12 @@ O 3
 # formulas-03.txt
 helium : He 1
 water: H 2 O 1
-hydrogen: H 2
+hydrogen : H 2
 </pre>
       </td>
       <td>
 <pre>
 helium 1
-hydrogen 2
 water 2
 </pre>
       </td>
@@ -532,9 +504,102 @@ water 2
     That's right too:
     we can make two water molecules
     (because we don't have enough hydrogen to pair with our three oxygen atoms).
-    There are quite a few other interesting tests still to run,
-    but before we do that,
-    we should take another look at how we're storing our data on disk.
   </p>
+
+  <div class="box">
+    <h3>Refactoring</h3>
+
+    <p>
+      There are quite a few other interesting tests still to run,
+      but before we do that,
+      we should clean up our code.
+      Both of our input functions handle comments and blank lines the same way;
+      let's put that code in a helper function:
+    </p>
+
+<pre>
+def readlines(filename):
+    result = []
+    with open(filename, 'r') as reader:
+        for line in reader:
+            line = line.strip()
+            if line and (not line.startswith('#')):
+                result.append(line)
+    return result
+</pre>
+
+    <p>
+      If we convert <code>read_inventory</code> to use it,
+      the result is six lines long instead of ten.
+      More importantly,
+      the logic of what we're doing is much clearer:
+    </p>
+
+<pre>
+def read_inventory(inventory_file):
+    result = {}
+    for line in readlines(inventory_file):
+        name, count = line.split()
+        result[name] = int(count)
+    return result
+</pre>
+
+    <p>
+      The converted version of <code>read_formulas</code>
+      is 15 lines instead of 19:
+    </p>
+
+<pre>
+def read_formulas(formula_file):
+    result = {}
+    for line in readlines(formula_file):
+        name, atoms = line.split(':')
+        name = name.strip()
+        atoms = atoms.strip().split()
+
+        formula = {}
+        for i in range(0, len(atoms), 2):
+            symbol = atoms[i].strip()
+            count = int(atoms[i+1])
+            formula[symbol] = count
+        result[name] = formula
+
+    return result
+</pre>
+
+    <p class="continue">
+      but we can do better still
+      by putting the code that handles atom/count pairs
+      in a helper function of its own:
+    </p>
+
+<pre>
+def read_formulas(formula_file):
+    result = {}
+    for line in readlines(formula_file):
+        name, atoms = line.split(':')
+        name = name.strip()
+        result[name] = make_formula(atoms)
+    return result
+
+def make_formula(atoms):
+    formula = {}
+    atoms = atoms.strip().split()
+    for i in range(0, len(atoms), 2):
+        symbol = atoms[i].strip()
+        count = int(atoms[i+1])
+        formula[symbol] = count
+    return formula
+</pre>
+
+    <p>
+      This change has actually made the code slightly longer,
+      but each function now does one small job,
+      and as a bonus,
+      the code in <code>make_formula</code>
+      (which is moderately complex)
+      can now be tested on its own.
+    </p>
+  </div>
 
 </div>
