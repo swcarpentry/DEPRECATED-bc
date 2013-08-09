@@ -47,23 +47,22 @@
 
 <pre src="setdict/json_second.py">
 &gt;&gt;&gt; import json
-&gt;&gt;&gt; original = {'Curie' : 1867, 'Hopper' : 1906, 'Franklin' : 1920}
 &gt;&gt;&gt;
 &gt;&gt;&gt; writer = open('/tmp/example.json', 'w')
-&gt;&gt;&gt; json.dump(original, writer)
+&gt;&gt;&gt; json.dump(birthdays, writer)
 &gt;&gt;&gt; writer.close()
 &gt;&gt;&gt;
 &gt;&gt;&gt; reader = open('/tmp/example.json', 'r')
 &gt;&gt;&gt; duplicate = json.load(reader)
 &gt;&gt;&gt; reader.close()
 &gt;&gt;&gt;
-&gt;&gt;&gt; print 'original:', original
+&gt;&gt;&gt; print 'original:', birthdays
 <span class="out">original: {'Curie': 1867, 'Hopper': 1906, 'Franklin': 1920}</span>
 &gt;&gt;&gt; print 'duplicate:', duplicate
 <span class="out">duplicate: {u'Curie': 1867, u'Hopper': 1906, u'Franklin': 1920}</span>
-&gt;&gt;&gt; print 'original == duplicate:', original == duplicate
+&gt;&gt;&gt; print 'original == duplicate:', birthdays == duplicate
 <span class="out">original == duplicate: True</span>
-&gt;&gt;&gt; print 'original is duplicate:', original is duplicate
+&gt;&gt;&gt; print 'original is duplicate:', birthdays is duplicate
 <span class="out">original is duplicate: False</span>
 </pre>
 
@@ -123,23 +122,16 @@ $ <span class="in">cat /tmp/example.json</span>
 
 <pre src="setdict/nanotech_json.py">
 '''Calculate how many molecules of each type can be made with the atoms on hand.'''
-
-import sys
 import json
 
-def main(argv):
+def main(inventory_file, formulas_file):
     '''Main driver for program.'''
-    inventory = <span class="highlight">read_data(argv[1])</span>
-    formulas = <span class="highlight">read_data(argv[2])</span>
+<span class="highlight">    with open(inventory_file, 'r') as reader:
+        inventory = json.load(reader)
+    with open(formulas_file, 'r') as reader:
+        formulas = json.load(reader)</span>
     counts = calculate_counts(inventory, formulas)
     show_counts(counts)
-
-<span class="highlight">def read_data(filename):
-    '''Read a JSON-formatted data file.'''
-    reader = open(filename, 'r')
-    result = json.load(reader)
-    reader.close()
-    return result</span>
 
 def calculate_counts(inventory, formulas):
     <em>...as before...</em>
@@ -149,9 +141,6 @@ def dict_divide(inventory, molecule):
 
 def show_counts(counts):
     <em>...as before...</em>
-
-if __name__ == '__main__':
-    main(sys.argv)
 </pre>
 
   <p class="continue">
