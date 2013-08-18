@@ -1,0 +1,208 @@
+---
+layout: lesson
+root: ../..
+title: Shell Reference
+---
+<div class="row-fluid">
+  <div class="span6">
+    <h2>Basics</h2>
+    <table class="table table-striped">
+      <tr>
+	<td><code>.</code></td>
+	<td>a single period refers to the current directory</td>
+      </tr>
+      <tr>
+	<td><code>..</code></td>
+	<td>a double period refers to the directory immediately above the current directory</td>
+      </tr>
+      <tr>
+	<td><code>~</code></td>
+	<td>refers to your home directory. <em>Note:</em> this command does NOT work on Windows machines (Mac and Linux are okay)</td>
+      </tr>
+      <tr>
+	<td><code>cd ./dirname</code></td>
+	<td>changes the current directory to the directory <code>dirname</code></td>
+      </tr>
+      <tr>
+	<td><code>ls -F</code></td>
+	<td>tells you what files and directories are in the current directory</td>
+      </tr>
+      <tr>
+	<td><code>pwd</code></td>
+	<td>tells you what directory you are in (<code>pwd</code> stands for <em>p</em>rint <em>w</em>orking <em>d</em>irectory)</td>
+      </tr>
+      <tr>
+	<td><code>history</code></td>
+	<td>lists previous commands you have entered. <code>history | less</code> lets you page through the list.</td>
+      </tr>
+      <tr>
+	<td><code>man</code> <em>cmd</em></td>
+	<td>displays the <em>man</em>ual page for a command.</td>
+      </tr>
+    </table>
+  </div>
+  <div class="span6">
+    <h2>Creating and Deleting</h2>
+    <table class="table table-striped">
+      <tr>
+	<td><code>mkdir ./dirname</code></td>
+	<td>makes a new directory called dirname below the current directory. <em>Note:</em> Windows users will need to use <code>\</code> instead of <code>/</code> for the path separator</td>
+      </tr>
+      <tr>
+	<td><code>rm ./filename</code></td>
+	<td>deletes a file called <code>filename</code> from the current directory</td>
+      </tr>
+      <tr>
+	<td><code>rmdir ./dirname</code></td>
+	<td>deletes the directory <code>dirname</code> from the current directory. <em>Note:</em> <code>dirname</code> must be empty for <code>rmdir</code> to run.</td>
+      </tr>
+	<tr>
+	  <td><code>mv tmp/filename .</code></td>
+	  <td>moves the file <code>filename</code> from the directory <code>tmp</code> to the current directory. <em>Note:</em> <em>(i)</em> the original <code>filename</code> in <code>tmp</code> is deleted. <em>(ii)</em> <code>mv</code> can also be used to rename files (e.g., <code>mv filename newname</code></td>
+	</tr>
+	<tr>
+	  <td><code>cp tmp/filename .</code></td>
+	  <td>copies the file <code>filename</code> from the directory <code>tmp</code> to the current directory. <em>Note:</em> <em>(i)</em> the original file is still there</td>
+	</tr>
+    </table>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span6">
+    <h2>Wildcards</h2>
+    <table class="table table-striped">
+      <tr>
+	<td><code>*</code></td>
+	<td>zero or more characters</td>
+      </tr>
+      <tr>
+	<td><code>?</code></td>
+	<td>exactly one character</td>
+      </tr>
+      <tr>
+	<td><code>[abcde]</code></td>
+	<td>exactly one of the characters listed</td>
+      </tr>
+      <tr>
+	<td><code>[a-e]</code></td>
+	<td>exactly one character in the given range</td>
+      </tr>
+      <tr>
+	<td><code>[!abcde]</code></td>
+	<td>any character not listed</td>
+      </tr>
+      <tr>
+	<td><code>[!a-e]</code></td>
+	<td>any character that is not in the given range</td>
+      </tr>
+      <tr>
+	<td><code>{software,carpentry}</code></td>
+	<td>exactly one entire word from the options given</td>
+      </tr>
+    </table>
+  </div>
+  <div class="span6">
+    <h2>Pipes and Redirection</h2>
+    <table class="table table-striped">
+      <tr>
+	<td><code>&gt;</code></td>
+	<td>write <code>stdout</code> to a new file; overwrites any file with that name (e.g., <code>ls *.md &gt; mardkownfiles.txt</code>)</td>
+      </tr>
+      <tr>
+	<td><code>&gt;&gt;</code></td>
+	<td>append <code>stdout</code> to a previously existing file; if the file does not exist, it is created (e.g., <code>ls *.md &gt;&gt; markdownfiles.txt</code>)</td>
+      </tr>
+      <tr>
+	<td><code>&lt;</code></td>
+	<td>assigns the information in a file to a variable, loop, etc (e.g., <code>n &lt; markdownfiles.md</code>)</td>
+      </tr>
+      <tr>
+	<td>|</td>
+	<td>Output from one command line program can be used as input to another one (e.g. ls *.md | head gives you the first 5 <code>*.md</code> files in your directory)</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span6">
+    <h2>Matching Lines</h2>
+    <table class="table table-striped">
+      <tr>
+	<td><code>grep [options] day haiku.txt</code></td>
+	<td>finds every instance of the string <code>day</code> in the file haiku.txt and pipes it to standard output</td>
+      </tr>
+      <tr>
+	<td><code>-E</code></td>
+	<td>tells grep you will be using a regular expression. Enclose the regular expression in quotes.</td>
+      </tr>
+      <tr>
+	<td><code>-i</code></td>
+	<td>makes matching case-insensitive</td>
+      </tr>
+      <tr>
+	<td><code>-n</code></td>
+	<td>limits the number of lines that match to the first n matches</td>
+      </tr>
+      <tr>
+	<td><code>-v</code></td>
+	<td>shows lines that do not match the pattern (inverts the match)</td>
+      </tr>
+      <tr>
+	<td><code>-w</code></td>
+	<td>outputs instances where the pattern is a whole word</td>
+      </tr>
+    </table>
+  </div>
+  <div class="span6">
+    <h2>Finding Files</h2>
+    <table class="table table-striped">
+      <tr>
+	<td><code>find start [options] [commands]</code></td>
+	<td>look for files or directories with specified properties and take specified actions</td>
+      </tr>
+      <tr>
+	<td><code>-type d</code></td>
+	<td>match directories</td>
+      </tr>
+      <tr>
+	<td><code>-type f</code></td>
+	<td>match files</td>
+      </tr>
+      <tr>
+	<td><code>-name 'pattern'</code></td>
+	<td>match things with specific names</td>
+      </tr>
+      <tr>
+	<td><code>-maxdepth n</code></td>
+	<td>maximum search depth</td>
+      </tr>
+      <tr>
+	<td><code>-mindepth n</code></td>
+	<td>minimum search depth</td>
+      </tr>
+      <tr>
+	<td><code>-print</code></td>
+	<td>print matches</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span6">
+    <h2>Repeat Operations</h2>
+<pre>
+for filename in *.txt
+do
+    head -5 $(filename) | sort | uniq -c
+done
+</pre>
+  </div>
+  <div class="span6">
+    <h2>Save Recent Commands</h2>
+<pre>
+history | tail -20 &gt; recent-commands.sh
+</pre>
+  </div>
+</div>
