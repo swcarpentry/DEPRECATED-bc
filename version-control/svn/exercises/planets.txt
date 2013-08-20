@@ -1,0 +1,7 @@
+Planet       Mean Distance From Sun 
+Mercury      36.0
+Venus        67.1
+Earth        92.9
+Marz         140.9
+Jupiter      483.4
+

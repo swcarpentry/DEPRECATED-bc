@@ -1,4 +1,4 @@
-**Presented By Katy Huff**
+SWIG
 
 **Based on Lecture Material by Kurt Smith**
 

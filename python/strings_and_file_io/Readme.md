@@ -1,7 +1,7 @@
 Python 5: Strings and File I/O
 ==============================
 
-**Presented By : Tommy Guy**
+**Materials originaly by Tommy Guy**
 
 Lesson goals:
 

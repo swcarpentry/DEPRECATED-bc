@@ -1,0 +1,17 @@
+City               January Low      January High
+Winnipeg, MB       -22.8 	        -12.7 	        
+Saskatoon, SK      -22.3 	        -11.8 	
+Regina, SK         -21.6 	        -10.7
+Quebec City, QC    -17.6 	        -7.9
+Edmonton, AB       -16.0 	        -7.3
+Ottawa, ON         -15.3 	        -6.1
+Calgary, AB        -15.1 	        -2.8
+Montreal, QC       -14.7 	        -5.7
+Halifax, NS        -10.7 	        -1.2
+St. John's, NL     -8.6 	        -0.9
+Toronto, ON        -7.3 	        -1.1
+Vancouver, BC      +0.5 	        +6.1
+Yellowknife, NT    -32.0 	        -24.0
+Iqaluit, NU 	   -30.6 	        -22.5
+Moncton, NB        -14.3 	        -3.6
+

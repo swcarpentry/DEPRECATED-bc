@@ -1,7 +1,7 @@
 Python 6: Classes and Objects
 =============================
 
-**Presented By : Tommy Guy**
+**Materials orignially by Tommy Guy**
 
 Basic Classes
 -------------
