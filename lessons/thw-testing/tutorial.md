@@ -5,545 +5,418 @@ title: Testing Software
 ---
 **Based on materials by Katy Huff, Rachel Slaybaugh, and Anthony Scopatz**
 
-![image](https://github.com/thehackerwithin/UofCSCBC2012/raw/scopz/5-Testing/test_prod.jpg)
-# What is testing?
-
-Software testing is a process by which one or more expected behaviors
-and results from a piece of software are exercised and confirmed. Well
-chosen tests will confirm expected code behavior for the extreme
-boundaries of the input domains, output ranges, parametric combinations,
-and other behavioral **edge cases**.
-
-# Why test software?
-
-Unless you write flawless, bug-free, perfectly accurate, fully precise,
-and predictable code **every time**, you must test your code in order to
-trust it enough to answer in the affirmative to at least a few of the
-following questions:
-
--   Does your code work?
--   **Always?**
--   Does it do what you think it does? ([Patriot Missile Failure](http://www.ima.umn.edu/~arnold/disasters/patriot.html))
--   Does it continue to work after changes are made?
--   Does it continue to work after system configurations or libraries
-    are upgraded?
--   Does it respond properly for a full range of input parameters?
--   What about **edge or corner cases**?
--   What's the limit on that input parameter?
--   How will it affect your
-    [publications](http://www.nature.com/news/2010/101013/full/467775a.html)?
-
-## Verification
-
-*Verification* is the process of asking, "Have we built the software
-correctly?" That is, is the code bug free, precise, accurate, and
-repeatable?
-
-## Validation
-
-*Validation* is the process of asking, "Have we built the right
-software?" That is, is the code designed in such a way as to produce the
-answers we are interested in, data we want, etc.
-
-## Uncertainty Quantification
-
-*Uncertainty Quantification* is the process of asking, "Given that our
-algorithm may not be deterministic, was our execution within acceptable
-error bounds?" This is particularly important for anything which uses
-random numbers, for example Monte Carlo methods.
-
-# Where are tests?
-
-Say we have an averaging function:
-
-```python
-def mean(numlist):
-    total = sum(numlist)
-    length = len(numlist)
-    return total/length
-```
-
-Tests could be implemented as runtime **exceptions in the function**:
-
-```python
-def mean(numlist):
-    try:
-        total = sum(numlist)
-        length = len(numlist)
-    except TypeError:
-        raise TypeError("The number list was not a list of numbers.")
-    except:
-        print "There was a problem evaluating the number list."
-    return total/length
-```
-
-Sometimes tests they are functions alongside the function definitions
-they are testing.
-
-```python
-def mean(numlist):
-    try:
-        total = sum(numlist)
-        length = len(numlist)
-    except TypeError:
-        raise TypeError("The number list was not a list of numbers.")
-    except:
-        print "There was a problem evaluating the number list."
-    return total/length
-
-
-def test_mean():
-    assert mean([0, 0, 0, 0]) == 0
-    assert mean([0, 200]) == 100
-    assert mean([0, -200]) == -100
-    assert mean([0]) == 0
-
-
-def test_floating_mean():
-    assert mean([1, 2]) == 1.5
-```
-
-Sometimes they are in an executable independent of the main executable.
-
-```python
-def mean(numlist):
-    try:
-        total = sum(numlist)
-        length = len(numlist)
-    except TypeError:
-        raise TypeError("The number list was not a list of numbers.")
-    except:
-        print "There was a problem evaluating the number list."
-    return total/length
-```
-
-Where, in a different file exists a test module:
-
-```python
-import mean
-
-def test_mean():
-    assert mean([0, 0, 0, 0]) == 0
-    assert mean([0, 200]) == 100
-    assert mean([0, -200]) == -100
-    assert mean([0]) == 0
-
-
-def test_floating_mean():
-    assert mean([1, 2]) == 1.5
-```
-
-# When should we test?
-
-The three right answers are:
-
--   **ALWAYS!**
--   **EARLY!**
--   **OFTEN!**
-
-The longer answer is that testing either before or after your software
-is written will improve your code, but testing after your program is
-used for something important is too late.
-
-If we have a robust set of tests, we can run them before adding
-something new and after adding something new. If the tests give the same
-results (as appropriate), we can have some assurance that we didn't
-wreak anything. The same idea applies to making changes in your system
-configuration, updating support codes, etc.
-
-Another important feature of testing is that it helps you remember what
-all the parts of your code do. If you are working on a large project
-over three years and you end up with 200 classes, it may be hard to
-remember what the widget class does in detail. If you have a test that
-checks all of the widget's functionality, you can look at the test to
-remember what it's supposed to do.
-
-# Who should test?
-
-In a collaborative coding environment, where many developers contribute
-to the same code base, developers should be responsible individually for
-testing the functions they create and collectively for testing the code
-as a whole.
-
-Professionals often test their code, and take pride in test coverage,
-the percent of their functions that they feel confident are
-comprehensively tested.
-
-# How are tests written?
-
-The type of tests that are written is determined by the testing
-framework you adopt. Don't worry, there are a lot of choices.
-
-## Types of Tests
-
-**Exceptions:** Exceptions can be thought of as type of runtime test.
-They alert the user to exceptional behavior in the code. Often,
-exceptions are related to functions that depend on input that is unknown
-at compile time. Checks that occur within the code to handle exceptional
-behavior that results from this type of input are called Exceptions.
-
-**Unit Tests:** Unit tests are a type of test which test the fundamental
-units of a program's functionality. Often, this is on the class or
-function level of detail. However what defines a *code unit* is not
-formally defined.
-
-To test functions and classes, the interfaces (API) - rather than the
-implementation - should be tested. Treating the implementation as a
-black box, we can probe the expected behavior with boundary cases for
-the inputs.
-
-**System Tests:** System level tests are intended to test the code as a
-whole. As opposed to unit tests, system tests ask for the behavior as a
-whole. This sort of testing involves comparison with other validated
-codes, analytical solutions, etc.
-
-**Regression Tests:** A regression test ensures that new code does
-change anything. If you change the default answer, for example, or add a
-new question, you'll need to make sure that missing entries are still
-found and fixed.
-
-**Integration Tests:** Integration tests query the ability of the code
-to integrate well with the system configuration and third party
-libraries and modules. This type of test is essential for codes that
-depend on libraries which might be updated independently of your code or
-when your code might be used by a number of users who may have various
-versions of libraries.
-
-**Test Suites:** Putting a series of unit tests into a collection of
-modules creates, a test suite. Typically the suite as a whole is
-executed (rather than each test individually) when verifying that the
-code base still functions after changes have been made.
-
-# Elements of a Test
-
-**Behavior:** The behavior you want to test. For example, you might want
-to test the fun() function.
-
-**Expected Result:** This might be a single number, a range of numbers,
-a new fully defined object, a system state, an exception, etc. When we
-run the fun() function, we expect to generate some fun. If we don't
-generate any fun, the fun() function should fail its test.
-Alternatively, if it does create some fun, the fun() function should
-pass this test. The the expected result should known *a priori*. For
-numerical functions, this is result is ideally analytically determined
-even if the function being tested isn't.
-
-**Assertions:** Require that some conditional be true. If the
-conditional is false, the test fails.
-
-**Fixtures:** Sometimes you have to do some legwork to create the
-objects that are necessary to run one or many tests. These objects are
-called fixtures as they are not really part of the test themselves but
-rather involve getting the computer into the appropriate state.
-
-For example, since fun varies a lot between people, the fun() function
-is a method of the Person class. In order to check the fun function,
-then, we need to create an appropriate Person object on which to run
-fun().
-
-**Setup and teardown:** Creating fixtures is often done in a call to a
-setup function. Deleting them and other cleanup is done in a teardown
-function.
-
-**The Big Picture:** Putting all this together, the testing algorithm is
-often:
-
-```python
-setup()
-test()
-teardown()
-```
-
-But, sometimes it's the case that your tests change the fixtures. If so,
-it's better for the setup() and teardown() functions to occur on either
-side of each test. In that case, the testing algorithm should be:
-
-```python
-setup()
-test1()
-teardown()
-
-setup()
-test2()
-teardown()
-
-setup()
-test3()
-teardown()
-```
-
-* * * * *
-
-# Nose: A Python Testing Framework
-
-The testing framework we'll discuss today is called nose. However, there
-are several other testing frameworks available in most language. Most
-notably there is [JUnit](http://www.junit.org/) in Java which can
-arguably attributed to inventing the testing framework.
-
-## Where do nose tests live?
-
-Nose tests are files that begin with `Test-`, `Test_`, `test-`, or
-`test_`. Specifically, these satisfy the testMatch regular expression
-`[Tt]est[-_]`. (You can also teach nose to find tests by declaring them
-in the unittest.TestCase subclasses chat you create in your code. You
-can also create test functions which are not unittest.TestCase
-subclasses if they are named with the configured testMatch regular
-expression.)
-
-## Nose Test Syntax
-
-To write a nose test, we make assertions.
-
-```python
-assert should_be_true()
-assert not should_not_be_true()
-```
-
-Additionally, nose itself defines number of assert functions which can
-be used to test more specific aspects of the code base.
-
-```python
-from nose.tools import *
-
-assert_equal(a, b)
-assert_almost_equal(a, b)
-assert_true(a)
-assert_false(a)
-assert_raises(exception, func, *args, **kwargs)
-assert_is_instance(a, b)
-# and many more!
-```
-
-Moreover, numpy offers similar testing functions for arrays:
-
-```python
-from numpy.testing import *
-
-assert_array_equal(a, b)
-assert_array_almost_equal(a, b)
-# etc.
-```
-
-## Exercise: Writing tests for mean()
-
-There are a few tests for the mean() function that we listed in this
-lesson. What are some tests that should fail? Add at least three test
-cases to this set. Edit the `test_mean.py` file which tests the mean()
-function in `mean.py`.
-
-*Hint:* Think about what form your input could take and what you should
-do to handle it. Also, think about the type of the elements in the list.
-What should be done if you pass a list of integers? What if you pass a
-list of strings?
-
-**Example**:
-
-    nosetests test_mean.py
-
-# Test Driven Development
-
-Test driven development (TDD) is a philosophy whereby the developer
-creates code by **writing the tests first**. That is to say you write the
-tests *before* writing the associated code!
-
-This is an iterative process whereby you write a test then write the
-minimum amount code to make the test pass. If a new feature is needed,
-another test is written and the code is expanded to meet this new use
-case. This continues until the code does what is needed.
-
-TDD operates on the YAGNI principle (You Ain't Gonna Need It). People
-who diligently follow TDD swear by its effectiveness. This development
-style was put forth most strongly by [Kent Beck in
-2002](http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530).
-
-## A TDD Example
-
-Say you want to write a fib() function which generates values of the
-Fibonacci sequence of given indexes. You would - of course - start by
-writing the test, possibly testing a single value:
-
-```python
-from nose.tools import assert_equal
-
-from pisa import fib
-
-def test_fib1():
-    obs = fib(2)
-    exp = 1
-    assert_equal(obs, exp)
-```
-
-You would *then* go ahead and write the actual function:
-
-```python
-def fib(n):
-    # you snarky so-and-so
-    return 1
-```
-
-And that is it right?! Well, not quite. This implementation fails for
-most other values. Adding tests we see that:
-
-```python
-def test_fib1():
-    obs = fib(2)
-    exp = 1
-    assert_equal(obs, exp)
-
-
-def test_fib2():
-    obs = fib(0)
-    exp = 0
-    assert_equal(obs, exp)
-
-    obs = fib(1)
-    exp = 1
-    assert_equal(obs, exp)
-```
-
-This extra test now requires that we bother to implement at least the
-initial values:
-
-```python
-def fib(n):
-    # a little better
-    if n == 0 or n == 1:
-        return n
-    return 1
-```
-
-However, this function still falls over for `2 < n`. Time for more
-tests!
-
-```python
-def test_fib1():
-    obs = fib(2)
-    exp = 1
-    assert_equal(obs, exp)
-
-
-def test_fib2():
-    obs = fib(0)
-    exp = 0
-    assert_equal(obs, exp)
-
-    obs = fib(1)
-    exp = 1
-    assert_equal(obs, exp)
-
-
-def test_fib3():
-    obs = fib(3)
-    exp = 2
-    assert_equal(obs, exp)
-
-    obs = fib(6)
-    exp = 8
-    assert_equal(obs, exp)
-```
-
-At this point, we had better go ahead and try do the right thing...
-
-```python
-def fib(n):
-    # finally, some math
-    if n == 0 or n == 1:
-        return n
-    else:
-        return fib(n - 1) + fib(n - 2)
-```
-
-Here it becomes very tempting to take an extended coffee break or
-possibly a power lunch. But then you remember those pesky negative
-numbers and floats. Perhaps the right thing to do here is to just be
-undefined.
-
-```python
-def test_fib1():
-    obs = fib(2)
-    exp = 1
-    assert_equal(obs, exp)
-
-
-def test_fib2():
-    obs = fib(0)
-    exp = 0
-    assert_equal(obs, exp)
-
-    obs = fib(1)
-    exp = 1
-    assert_equal(obs, exp)
-
-
-def test_fib3():
-    obs = fib(3)
-    exp = 2
-    assert_equal(obs, exp)
-
-    obs = fib(6)
-    exp = 8
-    assert_equal(obs, exp)
-
-
-def test_fib3():
-    obs = fib(13.37)
-    exp = NotImplemented
-    assert_equal(obs, exp)
-
-    obs = fib(-9000)
-    exp = NotImplemented
-    assert_equal(obs, exp)
-```
-
-This means that it is time to add the appropriate case to the function
-itself:
-
-```python
-def fib(n):
-    # sequence and you shall find
-    if n < 0 or int(n) != n:
-        return NotImplemented
-    elif n == 0 or n == 1:
-        return n
-    else:
-        return fib(n - 1) + fib(n - 2)
-```
-
-# Quality Assurance Exercise
-
-Can you think of other tests to make for the Fibonacci function? I promise there 
-are at least two. 
-
-Implement one new test in test_fib.py, run nosetests, and if it fails, implement 
-a more robust function for that case.
-
-And thus - finally - we have a robust function together with working
-tests!
-
-# Exercise
-
-**The Problem:** In 2D or 3D, we have two points (p1 and p2) which
-define a line segment. Additionally there exists experimental data which
-can be anywhere in the domain. Find the data point which is closest to
-the line segment.
-
-In the `close_line.py` file there are four different implementations
-which all solve this problem. [You can read more about them
-here.](http://inscight.org/2012/03/31/evolution_of_a_solution/) However,
-there are no tests! Please write from scratch a `test_close_line.py`
-file which tests the closest\_data\_to\_line() functions.
-
-*Hint:* you can use one implementation function to test another. Below
-is some sample data to help you get started.
-
-![image](https://github.com/thehackerwithin/UofCSCBC2012/raw/scopz/5-Testing/evo_sol1.png)
-
-```python
-import numpy as np
-
-p1 = np.array([0.0, 0.0])
-p2 = np.array([1.0, 1.0])
-data = np.array([[0.3, 0.6], [0.25, 0.5], [1.0, 0.75]])
-```
-
+Introduction
+------------
+
+Now that you understand the basics of programming in Python, we'll move on to 
+discuss two topics in "software engineering", which are how to test your code 
+for accuracy and how to turn your code into stand alone scripts, or programs, 
+that you can run from the command line.
+
+Unit Testing Concepts
+---------------------
+
+As practicing scientists, we would never trust a lab measurement that we made 
+with uncalibrated instruments. Similarly, as computational scientists, we 
+shouldn't trust the results that our code gives us until we have tested it. 
+Without calibration/testing, how do we know that our code is giving us the 
+right answers?
+
+In this lesson, we'll focus on unit tests, perhaps the most basic type of 
+testing that we can run. Unit tests focus on a single "unit" of code, which in 
+our case will be functions that we've written. We'll write tests to ensure that 
+when our function is given a certain set of arguments as input, it generates 
+output that we know to be correct. Once we have a complete test suite for a 
+function, we can run the entire suite to make sure that all the tests pass (ie, 
+that our function gives the correct output for all the combinations of input 
+that we have decided to test).
+
+For example, let's say that we have a function that reads in a data file, does 
+some processing, and returns a result. We can test the function by giving it a 
+small data file, for which we can calculate the correct result by hand, and 
+making sure that the function gives the correct answer for this small file. 
+This gives us more confidence that if we run the function on a different data 
+set, perhaps a huge one for which we can't verify the results by hand, that 
+we'll get an accurate result.
+
+Even better, if we make changes to the internals of our function, we can run 
+our tests again to make sure that we haven't accidentally broken anything (this 
+is known as a "regression"). This makes us more free to continue to improve the 
+performance of our code over time, and avoids the dreaded "it's working, don't 
+touch it" phenomena.
+
+In this lesson, we're going to use the simple and very popular `nose` package 
+to write and run our tests.
+
+A Unit Testing Example
+----------------------
+
+We'll practice unit testing using a function that we've already written to 
+extract the mean number of animals seen per sighting from a csv file. First, 
+let's place this function in an external module. To do this, copy the code 
+below into a text file in this directory, and name it `mean_sightings.py`.
+
+	import matplotlib.mlab as ml
+	import numpy as np
+	
+	def get_sightings(filename, focusanimal):
+	
+		# Load table
+		tab = ml.csv2rec(filename)
+	
+		# Find number of records and total count of animals seen
+		isfocus = (tab['animal'] == focusanimal)
+		totalrecs = np.sum(isfocus)
+		meancount = np.mean(tab['count'][isfocus])
+	
+		# Return num of records and animals seen
+		return totalrecs, meancount
+	
+This function uses boolean arrays to calculate the total number of records and 
+mean number of animals per sighting for the focus animal.
+
+To confirm that everything's working correctly, open up a new IPython notebook 
+(in this same directory) and run the following in a cell:
+
+	from mean_sightings import get_sightings
+	print get_sightings('sightings_tab_sm.csv', 'Owl')
+
+This should give you the correct answer for the Owl (check to make sure by 
+looking at the raw data file and counting by hand).
+
+Now that we have the function in a module, let's write some unit tests to make 
+sure that the function is giving us the correct answers. Create a new text file 
+called `test_mean_sightings.py`, which will hold our unit tests. At the top of 
+this file, type (or copy) in the following code, which will import the function 
+that we wish to test and set the filename that we want to use for the testing.
+
+	from mean_sightings import get_sightings
+
+	filename = 'sightings_tab_sm.csv'
+
+Note that we are using a small, "toy" data set for testing so that we can 
+calculate correct answers by hand.
+
+Now, let's write our first test function, which will simply test to make sure 
+that our function gives the correct answer when called using this small data 
+set and the Owl as arguments. Test functions (written for the `nose` testing 
+package) can contain any type of Python code, like regular functions, but have 
+a few key features. First, they don't take any arguments. Second, they contain 
+at least one `assert` statement - the test will pass if the condition following 
+the `assert` statement is True, and the test will fail if it's False.
+
+An example will make this more clear. Here's a test that checks whether the 
+function returns the correct answers for the small data set and the Owl. Copy 
+and paste this at the end of the `test_mean_sightings.py` file.
+
+	def test_owl_is_correct():
+	    owlrec, owlmean = get_sightings(filename, 'Owl')
+		assert owlrec == 2, 'Number of records for owl is wrong'
+	    assert owlmean == 17, 'Mean sightings for owl is wrong'
+
+Note that we calculated the correct values of `owlrec` and `owlmean` by hand. 
+Make sure that you get these right!
+
+Now we're ready to run our suite of tests (so far, just this one test). Open a 
+command line window, and `cd` to the directory containing your new Python 
+files. Type `nosetests`, and examine the output. It should look something like 
+this:
+
+	.
+	----------------------------------------------------------------------
+	Ran 1 test in 0.160s
+	
+	OK
+
+The dot on the first line shows that we had one test, and that it passed. There 
+is one character printed for each test. A '.' means the test passed, a 'F' 
+means the test failed, and an 'E' means there was an error in the test function 
+itself.
+
+Just for fun, try changing your test so that it fails (for example, assert that 
+the number of Owl records should be 3). What output do you see now? Don't 
+forget to change the test back so that it passes after you're done.
+
+>### Exercise 1 - Test the Muskox results
+>
+>Add an additional test to your test file to make sure that your function also 
+>gives the right answer when the animal is a Muskox. Run `nosetests` and make 
+>sure both tests pass.
+
+Great, now we have two tests that pass. However, both of these tests were 
+fairly straightforward, in that they tested the expected behavior of the 
+function under "normal" inputs. What about corner or boundary cases? For 
+example, what should our function do if the animal is not found anywhere in the 
+data set?
+
+Let's say that we decide that our function should return 0 for the number of 
+records and 0 for the mean animals per record if the animal is not found in the 
+data set. Let's write a test to see if our function does this already:
+
+	def test_animal_not_present():
+	    animrec, animmean = get_sightings(filename, 'NotPresent')
+		assert animrec == 0, 'Animal missing should return zero records'
+	    assert animmean == 0, 'Animal missing should return zero mean'
+
+If we run our test suite now, we see that this test fails. The output doesn't 
+give us much of a hint as to what went wrong though - we know that animmean was 
+not equal to zero, but what was it?
+
+To find out, add the line `print animrec, animmean` right above the first 
+assert statement, run the test suite again, and look at the output. Now we can 
+see that the animmean was 'nan', which stands for "not a number". This is 
+because when an animal is not found, our current function returns 0 for the 
+number of records and 0 for the total count. To calculate the mean, it tries to 
+divide 0/0, and gets 'nan'.
+
+>### Exercise 2 - Fixing our function for a boundary case
+>
+>Modify the function `get_sightings` so that if the animal is not present, both 
+>totalrecs and meancount are 0. HINT: Check if totalrecs is zero before 
+>calculating meancount - if totalrecs is zero, meancount must also be zero.
+>
+>Run your test suite again to make sure all three tests now pass.
+
+Here's another special case - all of the animal names in the data sets are 
+capitalized, with the first letter in uppercase and the rest of the letters in 
+lowercase. What if someone enters the name of the animal using the wrong case. 
+For example, they might call the function with the argument 'oWl' for the 
+animal name.
+
+>### Exercise 3 - Fixing our function for bad input
+>
+>Write a test function that will pass only if your function returns the correct
+>answer for owls if the input argument focusanimal is set to 'oWl'. Run this 
+>test, and see that it currently fails.
+>
+>Then, modify the function so that this test passes. HINT: You can use the 
+>method 'capitalize' on any string to correct its capitalization.
+>
+>Run your test suite again to make sure all four tests now pass.
+>
+>__Bonus__
+>
+>Determine what your function should return if a user gives the function a file 
+>that does not exist. Write a test that checks that this value is indeed 
+>returned for the case of a missing file, and modify your function to return it 
+>as desired.
+
+You can imagine adding more test functions as you think of more unusual cases 
+that you want your function to correctly address. It is not unusual for the 
+file containing test cases to be several times longer than the file containing 
+the actual functions!
+
+Now we're in a great position - we now have more confidence that our code is 
+doing what we expect it to do.
+
+Now let's say that we are planning to share our code with a colleague who is 
+less experienced with programming, and we think that he/she might not 
+understand the neat boolean indexing tricks that we've been using. For clarity, 
+we decide that we'll replace the guts of our `get_sightings` function with code 
+that calculates the same thing but uses a for loop instead. We've already 
+written this code in the previous lesson, so we can simply erase our existing 
+`get_sightings` function and replace it with this code instead:
+
+
+	def get_sightings(filename, focusanimal):
+	
+	    # Load table
+	    tab = ml.csv2rec(filename)
+		
+		# Standardize capitalization of focusanimal
+		focusanimal = focusanimal.capitalize()
+
+	    # Loop through all records, countings recs and animals
+	    totalrecs = 0
+	    totalcount = 0
+	    for rec in tab:
+			if rec['animal'] == focusanimal:
+	            totalrecs += 1
+	            totalcount += rec['count']
+	
+	    meancount = totalcount/totalrecs
+	
+	    # Return num of records and animals seen
+	    return totalrecs, meancount
+
+Thinking ahead, we made sure to add a line to fix the capitalization problem 
+right away so that our fourth unit test should pass. Since this code worked 
+before, we're confident that it will work now. Just to be sure, though we run 
+our test suite again.
+
+>### Exercise 4 - Examining and fixing regressions
+>
+>You are shocked to discover that two of the four tests now fail! How can this 
+>be? We were sure that the new for loop code was correct, and we looked at its 
+>output before to convince ourselves that it was correct...
+>
+>Try to uncover the causes of this regression. One failure should have a fairly 
+>obvious cause (it relates to the issue of an animal not being present, which 
+>we check with the third test). The second failure has a more subtle cause - 
+>try to figure out the problem, and correct the function to give the right 
+>answer.
+
+### Test Driven Development - the joy of Red/Green/Refactor
+
+Instead of fixing the above code, we're going to delete get_sightings, and do a very simple run through TDD.
+
+The big idea here is that you think about your problem and write your unit tests *before* 
+you write a single line of code. 
+- This forces you to think about what your problem in terms of different modes of 
+  success/failure and various edge cases, rather than just the basic functionality. 
+- It means that you implement the right amount of functionality without overbuilding.
+- It also gives you a ready-made specification for your design
+
+We have already written our first 4 test cases. 
+- Run ``nosetests``. You will see everything fail (Red)
+
+Now we're going to write a bare minimum ``get_sightings`` that passes the first test case. The code will be 
+really stupid
+
+    def get_sightings(filename, focusanimal):
+		return (2, 17)
+	
+This is clearly wrong BUT it passes a couple of test cases. It has also forced you to think about the structure of your function. 
+
+Now that you have a couple of Greens you would refactor the code to be a little smarter. 
+
+Continue to repeat this process of turning Red to Green; then refactoring and cleaning up.
+
+Hopefully, this actually helps you write better code that has fewer bugs, and gives you deeper insight into the structure of your 
+program.
+
+Example:
+
+    def get_sightings(filename, focusanimal):
+    
+    	# Load table
+    	tab = ml.csv2rec(filename)
+    
+    	# Standardize capitalization of focusanimal
+    	focusanimal = focusanimal.capitalize()
+    
+    	# Loop through all records, countings recs and animals
+        totalrecs = 0.
+        totalcount = 0.
+    	for rec in tab:
+            if rec['animal'] == focusanimal:
+            	totalrecs += 1
+            	totalcount += rec['count']
+    
+    	if totalrecs==0:
+            meancount = 0
+    	else:
+        	meancount = totalcount/totalrecs
+    
+    	# Return num of records and animals seen
+    	return totalrecs, meancount
+
+__BONUS__ If there is time, write some tests that will pass for a different csv file.
+
+Making a Standalone Script
+--------------------------
+
+Now that our module has been tested, lets turn this program into a standalone 
+script that we can run from the command line. This takes very little additional 
+work, now that we have our function in a module.
+
+At the bottom of the `mean_sightings.py`, add the following lines:
+
+	filename = 'sightings_tab_sm.csv'
+	focusanimal = 'Owl'
+	print get_sightings(filename, focusanimal)
+
+Now, head over to the command line and make sure that you're in the directory 
+containing the `mean_sightings.py` file. Type the statement below then hit 
+return.
+
+	python mean_sightings.py
+
+You should see the output `(2, 17)` printed to the screen, which is the correct 
+number of records and the mean number of animals per record for the Owl in the 
+`sightings_tab_sm.csv` file.
+
+This is interesting, but it would be much more useful if we could give our 
+command line program arguments, in the same way that we would type `cat 
+myfile.txt`. For example, we may want to type `python mean_sightings.py 
+sightings_tab_sm.csv Owl` instead of having to make a change in the file itself 
+each time we want to use a different file and focal animal.
+
+This is actually pretty easy to do using a Python module called `sys`. At the 
+top of the `mean_sightings.py` file, add the line
+
+	import sys
+
+then at the bottom of the file, change your code to read
+
+	filename = sys.argv[1]
+	focusanimal = sys.argv[2]
+	print get_sightings(filename, focusanimal)
+
+The variable `sys.argv` is a list of all of the arguments given on the command 
+line when this file is called (you can see this by putting `print sys.argv` a 
+the bottom of the script as well. The first argument, `sys.argv[0]`, is always 
+the name of the file that was run - in this case, it's `mean_sightings.py`. The 
+second and third arguments are stored in `sys.argv[1]` and `sys.argv[2]`, and 
+we've chosen to use these as the filename and focusanimal.
+
+Now you can simply type
+
+	python mean_sightings.py sightings_tab_sm.csv Owl
+
+and you'll get what you were expecting. Try this out with different animals and 
+with the large table. Make sure it works for our special cases that we 
+addressed before, like the capitalization of the animal name being incorrect.
+
+Two more small changes will make our command line script extra professional.
+
+First, we have now changed our file `mean_sightings.py` so that it runs from 
+the command line, but what if we want to also be able to import functions from 
+it as a module from other Python programs (such as in notebooks when we run 
+`import mean_sightings`)? The best way to do this is to wrap all of the lines 
+at the bottom of our file (the ones that produce the command line output, not 
+the functions themselves) into a special if statement like so:
+
+	if __name__ == '__main__':
+		filename = sys.argv[1]
+		focusanimal = sys.argv[2]
+		print get_sightings(filename, focusanimal)
+
+When a Python script is run from the command line, a special hidden variable 
+called `__name__` is set to equal the string `__main__`. This special if 
+statement thus encloses code that we only want to run when the file is run from 
+the command line, not when it's imported by another file. You'll see this 
+special statement in many Python scripts.
+
+Second, we can set up our file so that it can be executed directly like any 
+other shell script (so that we can run `mean_sightings` from the command line 
+instead of `python mean_sightings`). To do this, we have to first tell our 
+shell that when this file is executed directly, it should be run using the 
+python interpreter. To do this, make the very first line of the file
+
+	#!/usr/bin/env python
+
+Then, we need to give the file `mean_animals.py` permission to execute on its 
+own. From the command line, in the directory containing the file 
+`mean_animals.py`, run the line
+
+	chmod 755 mean_sightings.py
+
+Now we can run our file as a standalone script simply by executing the 
+statement
+
+	./mean_sightings.py sightings_tab_sm.csv Owl
+
+That annoying little `./` at the front is because the shell, by default, 
+doesn't look inside your current directory for executable programs - it only 
+looks for executables within directories specified by the PATH shell variable. 
+We'll leave it as an exercise to you to look up how to add a directory to your 
+PATH. If you have certain scripts that you run very often, a common trick is to 
+create a single directory, such as `~/bin/`, add this to your PATH permanently 
+by modifying your `.bashrc` or `.bash_profile`, and put all of your commonly 
+executed scripts in that directory. Then you will be able to call them from the 
+command line as `scriptname`, just like all of the built in shell commands.
+
+As a side note, you are free to remove the extension from your script file 
+names if you'd like. For example, you are free to rename `mean_sightings.py` to 
+`mean_sightings` - everything will still work as expected.
