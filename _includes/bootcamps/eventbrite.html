@@ -1,11 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC
-    "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"
-    "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
-<html xml:lang='en' xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/1999/xhtml'>
-<head><meta content='application/xhtml+xml;charset=utf-8' http-equiv='Content-type' /><title></title></head>
-<body>
-<p>{% if page.eventbrite and page.venue and page.humandate %} <div style='width: 100%; text-align: left;'>
+{% if page.eventbrite and page.venue and page.humandate %}
+<div style='width: 100%; text-align: left;'>
   <p><iframe frameborder='0' height='192' marginheight='5' marginwidth='5' scrolling='auto' src='http://www.eventbrite.com/tickets-external?eid={{page.eventbrite}}&amp;ref=etckt' width='100%' /></p>
   <div style='font-family: Helvetica, Arial; font-size: 10px; padding: 5px 0 5px; margin: 2px; width: 100%; text-align: left;'>
     <a href='http://www.eventbrite.com/r/etckt' style='color: #ddd; text-decoration: none;' target='_blank'>Event Registration Online</a>
@@ -15,5 +9,8 @@
     </a>
     <span style='color: #ddd;'> powered by </span>
     <a href='http://www.eventbrite.com?ref=etckt' style='color: #ddd; text-decoration: none;' target='_blank'>Eventbrite</a></div>
-  </div> {% else %} <p><strong>Error: EventBrite key, venue, and/or human-readaable date not defined.</strong></p> {% endif %}</p>
-</body></html>
+  </div>
+{% else %}
+<p><strong>Error: EventBrite key, venue, and/or human-readaable date not defined.</strong></p>
+{% endif %}
+

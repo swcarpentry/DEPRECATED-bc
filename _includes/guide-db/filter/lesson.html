@@ -1,14 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC
-    "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"
-    "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
-<html xml:lang='en' xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/1999/xhtml'>
-<head><meta content='application/xhtml+xml;charset=utf-8' http-equiv='Content-type' /><title></title></head>
-<body><div class='lesson' id='s:db:filter:lesson'>
+<div class="lesson" id="s:db:filter:lesson">
 
   <p>
     One of the most powerful features of a database is
-    the ability to <a href='glossary.html#filter'>filter</a> data,
+    the ability to <a href="glossary.html#filter">filter</a> data,
     i.e.,
     to select only those records that match certain criteria.
     For example,
@@ -17,9 +11,9 @@
     by using a <code>where</code> clause in our query:
   </p>
 
-  <table class='db'>
+  <table class="db">
     <tr>
-      <td colspan='3'>
+      <td colspan="3">
 <pre>select * from Visited where site='DR-1';</pre>
       </td>
     </tr>
@@ -30,7 +24,7 @@
 
   <p>
     The database manager executes this query in two stages
-    (<a href='#f:pipeline_where'>Figure 4</a>).
+    (<a href="#f:pipeline_where">Figure 4</a>).
     First,
     it checks at each row in the <code>Visited</code> table
     to see which ones satisfy the <code>where</code>.
@@ -38,8 +32,8 @@
     to determine what columns to display.
   </p>
 
-  <figure id='f:pipeline_where'>
-    <img alt='Two-Stage Query Processing Pipeline' src='db/pipeline_where.png' />
+  <figure id="f:pipeline_where">
+    <img alt="Two-Stage Query Processing Pipeline" src="db/pipeline_where.png" />
     <figcaption>Figure 4: Two-Stage Query Processing Pipeline</figcaption>
   </figure>
 
@@ -49,9 +43,9 @@
     based on values in columns that aren't then displayed:
   </p>
 
-  <table class='db'>
+  <table class="db">
     <tr>
-      <td colspan='1'>
+      <td colspan="1">
 <pre>select ident from Visited where site='DR-1';</pre>
       </td>
     </tr>
@@ -66,21 +60,21 @@
     we can ask for all information from the DR-1 site collected since 1930:
   </p>
 
-  <table class='db'>
+  <table class="db">
     <tr>
-      <td colspan='3'>
+      <td colspan="3">
 <pre>select * from Visited where (site='DR-1') and (dated>='1930-00-00');</pre>
       </td>
     </tr>
     <tr><td>844</td><td>DR-1</td><td>1932-03-22</td></tr>
   </table>
 
-  <p class='continue'>
+  <p class="continue">
     (The parentheses around the individual tests aren't strictly required,
     but they help make the query easier to read.)
   </p>
 
-  <div class='box' id='a:dates'>
+  <div class="box" id="a:dates">
     <h3>Working With Dates</h3>
 
     <p>
@@ -101,7 +95,7 @@
       If this sounds complicated,
       it is,
       but not nearly as complicated as figuring out
-      <a href='http://en.wikipedia.org/wiki/Swedish_calendar'>historical dates in Sweden</a>.
+      <a href="http://en.wikipedia.org/wiki/Swedish_calendar">historical dates in Sweden</a>.
     </p>
 
   </div>
@@ -111,9 +105,9 @@
     we can combine the tests on their names using <code>or</code>:
   </p>
 
-  <table class='db'>
+  <table class="db">
     <tr>
-      <td colspan='4'>
+      <td colspan="4">
 <pre>select * from Survey where person='lake' or person='roe';</pre>
       </td>
     </tr>
@@ -134,9 +128,9 @@
     we can use <code>in</code> to see if a value is in a specific set:
   </p>
 
-  <table class='db'>
+  <table class="db">
     <tr>
-      <td colspan='4'>
+      <td colspan="4">
 <pre>select * from Survey where person in ('lake', 'roe');</pre>
       </td>
     </tr>
@@ -159,9 +153,9 @@
     we get this:
   </p>
 
-  <table class='db'>
+  <table class="db">
     <tr>
-      <td colspan='4'>
+      <td colspan="4">
 <pre>select * from Survey where quant='sal' and person='lake' or person='roe';</pre>
       </td>
     </tr>
@@ -174,16 +168,16 @@
     <tr><td>844</td><td>roe</td><td>rad</td><td>11.25</td></tr>
   </table>
 
-  <p class='continue'>
+  <p class="continue">
     which is salinity measurements by Lake,
     and <em>any</em> measurement by Roerich.
     We probably want this instead:
   </p>
 
-  <table class='db'>
+  <table class="db">
     <tr>
-      <td colspan='4'>
-<pre>select * from Survey where quant='sal' and <span class='highlight'>(</span>person='lake' or person='roe'<span class='highlight'>)</span>;</pre>
+      <td colspan="4">
+<pre>select * from Survey where quant='sal' and <span class="highlight">(</span>person='lake' or person='roe'<span class="highlight">)</span>;</pre>
       </td>
     </tr>
     <tr><td>734</td><td>lake</td><td>sal</td><td>0.05</td></tr>
@@ -200,9 +194,9 @@
     to give a second level of filtering:
   </p>
 
-  <table class='db'>
+  <table class="db">
     <tr>
-      <td colspan='2'>
+      <td colspan="2">
 <pre>select distinct person, quant from Survey where person='lake' or person='roe';</pre>
       </td>
     </tr>
@@ -213,13 +207,13 @@
     <tr><td>roe</td><td>rad</td></tr>
   </table>
 
-  <p class='continue'>
+  <p class="continue">
     But remember:
     <code>distinct</code> is applied to the values displayed in the chosen columns,
     not to the entire rows as they are being processed.
   </p>
 
-  <div class='box'>
+  <div class="box">
     <h3>Growing Queries</h3>
 
     <p>
@@ -247,4 +241,4 @@
 
   </div>
 
-</div></body></html>
+</div>

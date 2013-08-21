@@ -1,19 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC
-    "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"
-    "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
-<html xml:lang='en' xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/1999/xhtml'>
-<head><meta content='application/xhtml+xml;charset=utf-8' http-equiv='Content-type' /><title></title></head>
-<body><div class='lesson' id='s:db:aggregate:lesson'>
+<div class="lesson" id="s:db:aggregate:lesson">
 
   <p>
     Gina now wants to calculate ranges and averages for her data.
     She knows how to select all of the dates from the <code>Visited</code> table:
   </p>
 
-  <table class='db'>
+  <table class="db">
     <tr>
-      <td colspan='1'>
+      <td colspan="1">
 <pre>select dated from Visited;</pre>
       </td>
     </tr>
@@ -27,23 +21,23 @@
     <tr><td>1932-03-22</td></tr>
   </table>
 
-  <p class='continue'>
+  <p class="continue">
     but to combine them,
-    she must use an <a href='glossary.html#aggregation-function'>aggregation function</a>
+    she must use an <a href="glossary.html#aggregation-function">aggregation function</a>
     such as <code>min</code> or <code>max</code>.
     Each of these functions takes a set of records as input,
     and produces a single record as output:
   </p>
 
-  <table class='db'>
+  <table class="db">
     <tr>
-      <td colspan='1'>
+      <td colspan="1">
 <pre>select min(dated) from Visited;</pre>
       </td>
     </tr>
     <tr><td>1927-02-08</td></tr>
     <tr>
-      <td colspan='1'>
+      <td colspan="1">
 <pre>select max(dated) from Visited;</pre>
       </td>
     </tr>
@@ -58,21 +52,21 @@
     and <code>sum</code>:
   </p>
 
-  <table class='db'>
+  <table class="db">
     <tr>
-      <td colspan='1'>
+      <td colspan="1">
 <pre>select avg(reading) from Survey where quant='sal';</pre>
       </td>
     </tr>
     <tr><td>7.20333333333</td></tr>
     <tr>
-      <td colspan='1'>
+      <td colspan="1">
 <pre>select count(reading) from Survey where quant='sal';</pre>
       </td>
     </tr>
     <tr><td>9</td></tr>
     <tr>
-      <td colspan='1'>
+      <td colspan="1">
 <pre>select sum(reading) from Survey where quant='sal';</pre>
       </td>
     </tr>
@@ -95,9 +89,9 @@
     find the range of sensible salinity measurements:
   </p>
 
-  <table class='db'>
+  <table class="db">
     <tr>
-      <td colspan='2'>
+      <td colspan="2">
 <pre>select min(reading), max(reading) from Survey where quant='sal' and reading&lt;=1.0;</pre>
       </td>
     </tr>
@@ -109,9 +103,9 @@
     although the output might surprise you:
   </p>
 
-  <table class='db'>
+  <table class="db">
     <tr>
-      <td colspan='2'>
+      <td colspan="2">
 <pre>select person, count(*) from Survey where quant='sal' and reading&lt;=1.0;</pre>
       </td>
     </tr>
@@ -134,9 +128,9 @@
     rather than zero or some other arbitrary value:
   </p>
 
-  <table class='db'>
+  <table class="db">
     <tr>
-      <td colspan='3'>
+      <td colspan="3">
 <pre>select person, max(reading), sum(reading) from Survey where quant='missing';</pre>
       </td>
     </tr>
@@ -160,26 +154,26 @@
     This behavior lets us write our queries as:
   </p>
 
-  <table class='db'>
+  <table class="db">
     <tr>
-      <td colspan='1'>
+      <td colspan="1">
 <pre>select min(dated) from Visited;</pre>
       </td>
     </tr>
     <tr><td>1927-02-08</td></tr>
   </table>
 
-  <p class='continue'>
+  <p class="continue">
     instead of always having to filter explicitly:
   </p>
 
-  <table class='db'>
+  <table class="db">
     <tr>
-      <td colspan='1'>
-<pre>select min(dated) from Visited <span class='highlight'>where dated is not null</span>;</pre>
+      <td colspan="1">
+<pre>select min(dated) from Visited <span class="highlight">where dated is not null</span>;</pre>
       </td>
     </tr>
     <tr><td>1927-02-08</td></tr>
   </table>
 
-</div></body></html>
+</div>

@@ -1,10 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC
-    "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"
-    "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
-<html xml:lang='en' xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/1999/xhtml'>
-<head><meta content='application/xhtml+xml;charset=utf-8' http-equiv='Content-type' /><title></title></head>
-<body><div class='lesson' id='s:db:create:lesson'>
+<div class="lesson" id="s:db:create:lesson">
 
   <p>
     So far we have only looked at how to get information out of a database,
@@ -40,7 +34,7 @@ create table Survey(taken integer, person text, quant real, reading real);
 drop table Survey;
 </pre>
 
-  <p class='continue'>
+  <p class="continue">
     Be very careful when doing this:
     most databases have some support for undoing changes,
     but it's better not to have to rely on it.
@@ -90,7 +84,7 @@ drop table Survey;
   <p>
     most databases also support Booleans and date/time values;
     SQLite uses the integers 0 and 1 for the former,
-    and represents the latter as discussed <a href='#a:dates'>earlier</a>.
+    and represents the latter as discussed <a href="#a:dates">earlier</a>.
     An increasing number of databases also support geographic data types,
     such as latitude and longitude.
     Keeping track of what particular systems do or do not offer,
@@ -107,17 +101,17 @@ drop table Survey;
 
 <pre>
 create table Survey(
-        taken   integer not null, <span class='comment'>-- where reading taken</span>
-        person  text,             <span class='comment'>-- may not know who took it</span>
-        quant   real not null,    <span class='comment'>-- the quantity measured</span>
-        reading real not null,    <span class='comment'>-- the actual reading</span>
+        taken   integer not null, <span class="comment">-- where reading taken</span>
+        person  text,             <span class="comment">-- may not know who took it</span>
+        quant   real not null,    <span class="comment">-- the quantity measured</span>
+        reading real not null,    <span class="comment">-- the actual reading</span>
         primary key(taken, quant),
         foreign key(taken) references Visited(ident),
         foreign key(person) references Person(ident)
 );
 </pre>
 
-  <p class='continue'>
+  <p class="continue">
     Once again,
     exactly what constraints are avialable
     and what they're called
@@ -167,9 +161,9 @@ delete from Person where ident = "danforth";
     of measurements he'd taken:
   </p>
 
-  <table class='db'>
+  <table class="db">
     <tr>
-      <td colspan='1'>
+      <td colspan="1">
 <pre>select count(*) from Survey where person='lake';</pre>
       </td>
     </tr>
@@ -184,19 +178,19 @@ delete from Person where ident = "danforth";
   </p>
 
   <p>
-    This problem is called <a href='glossary.html#referential-integrity'>referential integrity</a>:
+    This problem is called <a href="glossary.html#referential-integrity">referential integrity</a>:
     we need to ensure that all references between tables can always be resolved correctly.
     One way to do this is to delete all the records
     that use <code>'lake'</code> as a foreign key
     before deleting the record that uses it as a primary key.
     If our database manager supports it,
     we can automate this
-    using <a href='glossary.html#cascading-delete'>cascading delete</a>.
+    using <a href="glossary.html#cascading-delete">cascading delete</a>.
     However,
     this technique is outside the scope of this chapter.
   </p>
 
-  <div class='box' id='a:hybrid'>
+  <div class="box" id="a:hybrid">
     <h3>Other Ways to Do It</h3>
 
     <p>
@@ -214,4 +208,4 @@ delete from Person where ident = "danforth";
     </p>
   </div>
 
-</div></body></html>
+</div>

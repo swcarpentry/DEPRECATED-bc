@@ -1,22 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC
-    "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"
-    "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
-<html xml:lang='en' xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/1999/xhtml'>
-<head><meta content='application/xhtml+xml;charset=utf-8' http-equiv='Content-type' /><title></title></head>
-<body><p>
+<p>
   The site identifiers in the <code>Visited</code> table have two parts
   separated by a '-':
-</p><table class='db'>
+</p>
+<table class="db">
   <tr>
-    <td colspan='1'>
+    <td colspan="1">
 <pre>select distinct site from Visited;</pre>
     </td>
   </tr>
   <tr><td>DR-1</td></tr>
   <tr><td>DR-3</td></tr>
   <tr><td>MSK-4</td></tr>
-</table><p>
+</table>
+<p>
   Some major site identifiers are two letters long and some are three.
   The "in string" function <code>instr(X, Y)</code>
   returns the 1-based index of the first occurrence of string Y in string X,
@@ -26,4 +22,4 @@
   Use these two functions to produce a list of unique major site identifiers.
   (For this data,
   the list should contain only "DR" and "MSK").
-</p></body></html>
+</p>

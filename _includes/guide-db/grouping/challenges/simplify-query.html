@@ -1,14 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC
-    "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"
-    "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
-<html xml:lang='en' xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/1999/xhtml'>
-<head><meta content='application/xhtml+xml;charset=utf-8' http-equiv='Content-type' /><title></title></head>
-<body><p>
+<p>
   How can the query below be simplified without changing its result?
-</p><pre>
+</p>
+<pre>
 select   min(reading), max(reading) from Survey
 where    taken in (734, 735)
 and      quant='temp'
 group by taken, quant;
-</pre></body></html>
+</pre>

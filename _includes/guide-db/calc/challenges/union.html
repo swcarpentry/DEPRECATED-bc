@@ -1,25 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC
-    "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"
-    "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
-<html xml:lang='en' xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/1999/xhtml'>
-<head><meta content='application/xhtml+xml;charset=utf-8' http-equiv='Content-type' /><title></title></head>
-<body><p>
+<p>
   The <code>union</code> operator combines the results of two queries:
-</p><table class='db'>
+</p>
+<table class="db">
   <tr>
-    <td colspan='3'>
+    <td colspan="3">
       <pre>select * from Person where ident='dyer' union select * from Person where ident='roe';</pre>
     </td>
   </tr>
   <tr><td>dyer</td><td>William</td><td>Dyer</td></tr>
   <tr><td>roe</td><td>Valentina</td><td>Roerich</td></tr>
-</table><p>
+</table>
+<p>
   Use <code>union</code> to create a consolidated list of salinity measurements
   in which Roerich's, and only Roerich's,
   have been corrected as described in the previous challenge.
   The output should be something like:
-</p><table class='db'>
+</p>
+<table class="db">
   <tr><td>619</td><td>0.13</td></tr>
   <tr><td>622</td><td>0.09</td></tr>
   <tr><td>734</td><td>0.05</td></tr>
@@ -28,4 +25,4 @@
   <tr><td>752</td><td>0.416</td></tr>
   <tr><td>837</td><td>0.21</td></tr>
   <tr><td>837</td><td>0.225</td></tr>
-</table></body></html>
+</table>
