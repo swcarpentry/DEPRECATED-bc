@@ -81,6 +81,9 @@ must define the following values in its YAML header:
     set `root` accordingly.
 *   `venue` is the name of the institution or group hosting the bootcamp.
 *   `address` is the bootcamp venue's street address.
+*   `country` must be a hyphenated country name like 'United-States'.  See
+    the `assets/flags` directory in the `site` repo for a full list of
+    valid names.
 *   `latlng` is the latitude and longitude of the bootcamp site
     (so we can put a pin on our map).
 *   `humandate` is the human-friendly dates for the bootcamp (e.g., July 3-4, 2015).
