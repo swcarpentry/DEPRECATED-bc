@@ -1050,78 +1050,266 @@ Since we had already resolved the conflicts between
 the copies of `moons.txt` in the `master` and `moons` branches,
 Git brings the result over on its own.
 
-----------------------------------------
-
-## Cloning
-
-```
-echo "### Set up master copy."
-mkdir alpha
-pushd alpha
-git init --bare
-popd
-```
-
-```
-echo "### Create clones."
-git clone alpha beta
-git clone alpha gamma
-```
-
-```
-echo "### Push some content."
-pushd beta
-git config push.default simple
-git status
-git remote -v
-echo "First line" > first.txt
-git add first.txt
-git commit -m "Adding first file"
-git status
-git push origin
-popd
-```
-
-```
-echo "### Pull content."
-pushd gamma
-git config push.default simple
-git remote -v
-git pull origin
-ls
-cat first.txt
-popd
-```
-
-```
-echo "### Show conflicts."
-pushd beta
-echo "Second line from beta" >> first.txt
-git add -A
-git commit -m "Beta's copy of first"
-git push origin
-popd
-pushd gamma
-echo "Second line from gamma" >> first.txt
-git add -A
-git commit -m "Gamma's copy of first"
-git pull origin
-echo "First line" > first.txt
-echo "Second line from beta" >> first.txt
-echo "Second line from gamma" >> first.txt
-cat first.txt
-git commit -a -m "Resolving merge conflict"
-git log
-git push origin
-popd
-pushd beta
-git pull origin
-cat first.txt
-popd
-```
-
-----------------------------------------
-
 ## Collaborating
 
-FIXME
+Version control really comes into its own
+when we begin to collaborate with other people.
+We already have most of the machinery we need to do this:
+repositories,
+branches,
+and the `commit` and `merge` commands.
+The last trick is to merge from branches that are in other repositories,
+not our own.
+
+Systems like Git and Mercurial allow us to merge changes
+between any two repositories.
+In practice,
+though,
+it's easiest to use a definitive master copy as a central hub,
+and for that master copy to be on the web rather than on someone's laptop
+(so that it's accessible even when that "someone" is off the network).
+Most programmers use hosting services like [GitHub](http://github.com) or [BitBucket](http://bitbucket.org)
+to hold those master copies;
+we'll explore the pros and cons of this in the final section of this lesson,
+but will use GitHub until then.
+
+Let's start by sharing the changes we've made to our current project with the world.
+Log in to GitHub,
+then create a new repository called `planets`.
+This effectively does the following on GitHub's servers:
+
+```
+$ mkdir planets
+$ cd planets
+$ git init
+```
+
+We're now in the situation shown in the figure below:
+
+FIXME: diagram
+
+Our local repository still has two branches called `master` and `moons`,
+with the same contents as before.
+The remote repository on GitHub only has a single branch,
+`master`,
+and doesn't contain any files yet.
+
+The next, crucial step is to connect the two repositories.
+We do this by making the GitHub repository a [remote](glossary.html#remote_repository)
+for the local repository.
+The home page of the repository on GitHub includes
+the string we need to identify it:
+
+FIXME: screenshot
+
+For now,
+we'll use the 'http' identifier,
+since it requires the least setup.
+Copy that string,
+then go into the local `planets` repository
+and run this command:
+
+```
+$ git remote add origin https://github.com/yourname/planets
+```
+
+(using your GitHub ID instead of `yourname`).
+We can check that the command has worked by running `git remote -v`:
+
+```
+$ git remote -v
+origin   https://github.com/yourname/planets.git (push)
+origin   https://github.com/yourname/planets.git (fetch)
+```
+
+There's nothing special about the name `origin`:
+we can use almost anything,
+but we'll see in a moment why `origin` is a sensible choice.
+Once this is set up,
+the following command will push the changes from our local repository's `master` branch
+to the corresponding branch in the repository on GitHub:
+
+```
+$ git push origin master
+FIXME: output
+```
+
+This command does what `git merge` does,
+except it moves changes between repositories
+rather than just between branches.
+Once it has completed,
+our two repositories are in this state:
+
+FIXME: diagram
+
+As you might expect,
+we can pull changes from the remote repository to the local one as well:
+
+```
+$ git pull origin master
+FIXME: output
+```
+
+Pulling has no effect in this case
+because the two repositories are already synchronized.
+If someone else had pushed some changes,
+though,
+this command would download them to our local repository:
+
+FIXME: diagram
+
+The model shown above,
+in which everyone pushes and pulls from a single repository,
+is perfectly usable,
+but there's one thing it *doesn't* let us do,
+and that's [code review](glossary.html#code_review).
+Suppose Dracula wants to be able to look at Wolfman's changes
+before merging them into the master copy on GitHub,
+just as he would review Wolfman's paper before publishing it
+(or perhaps even before submitting it for publication).
+We need to arrange things so that Wolfman can commit his changes
+and Dracula can compare them with the master copy;
+in fact,
+we want Wolfman to be able to commit many times,
+so that he can incorporate Dracula's feedback
+and get further review
+as often as necessary.
+
+Rather than the model shown above,
+most programmers therefore use a slightly more complex model shown below:
+
+FIXME: diagram
+
+There are 2N repositories in play here for N people
+instead of the N+1 in the previous model.
+When the project first starts,
+Wolfman creates a repository on GitHub
+in exactly the same way as we created the `planets` repository a few moments ago,
+and the [clones](glossary.html#repository_clone) it to his desktop:
+
+```
+$ git clone https://github.com/vlad/undersea.git
+FIXME: output
+```
+
+`git clone` automatically adds the original repository on GitHub
+as a remote of the local repository called `origin`---this
+is why we chose `origin` as a remote name in our previous example.
+Dracula can now push and pull changes just as before.
+
+Wolfman,
+on the other hand,
+isn't going to clone Dracula's GitHub repository directly.
+Instead,
+he's going to [fork](glossary.html#fork_repository) it,
+i.e.,
+clone it on GitHub.
+He does this using the GitHub web interface:
+
+FIXME: screenshot
+
+Once the repository has been created,
+the world looks like this:
+
+FIXME: diagram
+
+Wolfman now clones his GitHub repository,
+not Dracula's,
+to give himself a desktop copy:
+
+FIXME: diagram
+
+This seems like a lot of extra work,
+but it allows Wolfman and Dracula to collaborate much more effectively.
+Suppose Wolfman makes a change to the project.
+He commits it to his local repository,
+then uses `git push` to copy those changes to GitHub:
+
+FIXME: diagram
+
+He then creates a [pull request](glossary.html#pull_request),
+which notifies Dracula that Wolfman would like to submit some changes
+to be merged into Dracula's repository:
+
+FIXME: screenshot
+
+A pull request is a merge waiting to happen.
+When Dracula views it online,
+he can see and comment on the changes Wolfman wants to make:
+
+FIXME: screenshot
+
+Commenting is the crucial step here,
+and half the reason Wolfman went to the trouble of forking the repository on GitHub.
+Dracula,
+or anyone else involved in the project,
+can give Wolfman on what he is trying to do:
+this function is too long,
+that one contains a bug,
+there's a special case that isn't being handled anywhere,
+and so on.
+Wolfman can then update his code,
+commit locally,
+and push those changes to GitHub
+in order to update the pull request:
+
+FIXME: diagram
+
+In large open source projects like Firefox,
+it's very common for a pull request to be updated several times
+before finally being accepted and merged.
+This review process helps maintain the quality of the code,
+and is also a very effective way to transfer knowledge.
+
+What happens if Wolfman wants to start making more changes
+while he's waiting for Dracula to review his first modification?
+Simple:
+Wolfman creates a new branch in his local repository,
+pushes it to GitHub,
+and then issues a pull request from that:
+
+FIXME: diagram
+
+We can now see why Git, Mercurial, and other modern version control systems
+use branching so much:
+it's useful for managing concurrent work by one person,
+but vital for managing concurrent work by many people.
+It might take Dracula several days to get around to reviewing Wolfman's changes.
+Rather than being stalled until then,
+he can just switch to another branch and work on something else,
+then switch back when Dracula's review finally comes in.
+Once the changes in a particular branch have been accepted,
+Wolfman can delete it;
+provided it has been merged into `master` (or some other branch),
+the only thing that will be lost is the pointer with the branch name,
+not the changes themselves.
+
+We said above that code review is
+half the reason every developer should have their own repository on GitHub
+(or whatever service is being used).
+The other reason is that working this way allows people to explore ideas
+without needing permission from any central authority.
+If you want to change this tutorial,
+you can fork the Software Carpentry repository on GitHub
+and start rewriting things.
+If you think we might prefer your version to ours,
+you can send us a pull request,
+but you don't have to.
+If other people like your version better than ours,
+they can start forking your repository
+and sending pull requests to you instead of to us.
+
+If this sounds familiar,
+it's because it is the way science itself works.
+When someone publishes a new method or result,
+other scientists can immediately start building on top of it---essentially,
+they can create their own fork of the work
+and start committing changes to it.
+If the first scientist likes the second's work,
+she can incorporate those findings into her next paper,
+which is analogous to merging a pull request.
+If she doesn't,
+then it's up to other scientists to decide whose work to build on,
+or whether to try to combine both approaches.
+
+## Who Owns What?
