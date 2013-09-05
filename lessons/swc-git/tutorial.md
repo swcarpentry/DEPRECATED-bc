@@ -1,7 +1,7 @@
 ---
 layout: lesson
 root: ../..
-title: Instructor's Guide for Version Control with Git
+title: Version Control with Git
 ---
 
 ## Opening
