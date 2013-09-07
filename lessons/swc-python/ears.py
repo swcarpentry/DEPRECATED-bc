@@ -21,14 +21,14 @@ import sys
 import inspect
 import traceback
 
-def run():
+def run(prefix='test_'):
     """
     Look for test functions defined by caller, execute, and report.
     """
     # Collect functions defined in calling context.
     caller_defs = inspect.stack()[1][0].f_globals
     test_functions = dict([(n, caller_defs[n]) for n in caller_defs
-                           if n.startswith('test_') and callable(caller_defs[n])])
+                           if n.startswith(prefix) and callable(caller_defs[n])])
     setup = caller_defs.get('setup', None)
     teardown = caller_defs.get('teardown', None)
 
