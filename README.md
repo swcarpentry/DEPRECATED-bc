@@ -236,6 +236,9 @@ must define the following values in its YAML header:
 *   `enddate` is the bootcamp's ending date in the same format.
 *   `registration` is `open` (if anyone is allowed to sign up)
     or `restricted` (if only some people are allowed to take part).
+    Please do *not* put HTML or links in here to explain
+    who's allowed to enrol or how to go about doing it;
+    that should go in the main body of your page.
 *   `instructor` is a comma-separated list of instructor names.
     This *must* be enclosed in square brackets, as in
     `["Alan Turing","Grace Hopper"]`,
