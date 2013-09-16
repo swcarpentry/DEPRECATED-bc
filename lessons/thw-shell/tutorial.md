@@ -59,7 +59,7 @@ command:
 
 Followed by:
 
-    cd {{page.slug}}
+    cd {{page.bootcamp_slug}}
 
 These 2 commands will grab all of the data needed for this workshop from the
 internet.
