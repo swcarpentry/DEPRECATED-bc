@@ -48,12 +48,13 @@ def make_bash_profile(home_dir, nano_dir):
     """
 
     nano_path = make_posix_path(nano_dir)
-    contents = '\n'.join([
-        'export PATH=$PATH:%s' % nano_path,
-        'export EDITOR=nano',
-            '',
-            ])
-    with open(os.path.join(home_dir, '.bash_profile'), 'w') as f:
+    contents = '\n'.join(['',
+                          '# Add nano to path and set as default editor',
+                          '# Added by the Software Carpentry nano installer',
+                          'export PATH=$PATH:%s' % nano_path,
+                          'export EDITOR=nano',
+                          ''])
+    with open(os.path.join(home_dir, '.bash_profile'), 'a') as f:
         f.write(contents)
 
 def make_posix_path(windows_path):
