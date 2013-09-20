@@ -64,7 +64,6 @@ def make_posix_path(windows_path):
 def main():
     home_dir = os.path.expanduser("~")
     nano_dir = os.path.join(home_dir, '.nano')
-    #home_dir = "/home/ethan/swc-nano-test"
     if not os.path.exists(nano_dir):
         os.makedirs(nano_dir)
     install_nano(nano_dir)
