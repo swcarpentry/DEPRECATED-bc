@@ -40,8 +40,8 @@ def install_nano(install_dir):
     for file_name in nano_files:
         nano_zip.extract(file_name, install_dir)
 
-def make_bashrc(home_dir, nano_dir):
-    """Creates a .bashrc file for nano setup
+def make_bash_profile(home_dir, nano_dir):
+    """Creates a .bash_profile file for nano setup
 
     Adds nano to the path and sets the default editor to nano
 
@@ -53,7 +53,7 @@ def make_bashrc(home_dir, nano_dir):
         'export EDITOR=nano',
             '',
             ])
-    with open(os.path.join(home_dir, '.bashrc'), 'w') as f:
+    with open(os.path.join(home_dir, '.bash_profile'), 'w') as f:
         f.write(contents)
 
 def make_posix_path(windows_path):
@@ -67,7 +67,7 @@ def main():
     if not os.path.exists(nano_dir):
         os.makedirs(nano_dir)
     install_nano(nano_dir)
-    make_bashrc(home_dir, nano_dir)
+    make_bash_profile(home_dir, nano_dir)
 
 if __name__ == '__main__':
     main()
