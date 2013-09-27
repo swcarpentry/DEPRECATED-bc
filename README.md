@@ -199,10 +199,17 @@ this *should* be as simple as:
 
     gem install jekyll
 
-However,
-some people have reported problems getting the right version of Jekyll installed on Mac.
-If you run into problems,
-please contact us for help.
+We try to use the same MarkDown interpreters as GitHub does for
+consistency.  On OS X, we suggest you use a recent Ruby to get access
+to these.  If you don't have Homebrew or MacPorts installed, here's a
+quick recipe to get started using HomeBrew.
+
+```
+ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+brew install ruby
+gem install jekyll
+gem install redcarpet 
+```
 
 Layout and Variables
 --------------------
