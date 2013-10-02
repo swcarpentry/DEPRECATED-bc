@@ -400,6 +400,15 @@ FAQ
     we should teach them to use it as it is,
     not as we wish it was.
 
+*   *What can I do when `make check`, it says, `invalid byte sequence in GBK`*
+    *or other encoding name than `GBK`?*
+    <br/>
+    Solved the problem by declaring the following locale in your shell, 
+    and `make check` again:
+
+        export LC_ALL=en_US.UTF-8
+        export LANG=en_US.UTF-8
+
 *   *Where should pages go if multiple boot camps are running at a site simultaneously?*
     <br/>
     Use subdirectories like `2013-07-01-esu/beginners`,
