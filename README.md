@@ -199,7 +199,8 @@ on the other hand,
 should have the Software Carpentry look and feel
 and the information about your bootcamp.
 
-You can also "preview" your pages by committing them to your repo
+You can also "preview" your pages by committing them to your repo 
+(you need `git add -f _site` or remove `_site` line in `.gitignore`)
 and then pushing to GitHub
 so that GitHub does the translation.
 If you do this,
