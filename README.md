@@ -226,6 +226,14 @@ gem install jekyll
 gem install redcarpet 
 ```
 
+If you don't have `make` in your machine (You are using Windows). You can
+type: 
+
+    jekyll -t build -d _site
+    
+To do the check. `make check` is just a wrapper of `jekyll` command. You can
+dig `Makefile` by yourself.
+
 Layout and Variables
 --------------------
 
