@@ -5,8 +5,6 @@ def main():
     script, flags, filenames = handle_args(sys.argv)
     if flags.merge:
         process('all', filenames)
-    elif not filenames:
-        process('stdin', [])
     else:
         for f in filenames:
             process(f, [f])
@@ -14,42 +12,17 @@ def main():
 def handle_args(args):
     script, rest = args[0], args[1:]
     parser = OptionParser()
-    parser.add_option('-m', '--merge', dest='merge', help='Merge data from all files', default=False, action='store_true')
+    parser.add_option('-m', '--merge', dest='merge', help='Merge data from all files',
+                      default=False, action='store_true')
     options, args = parser.parse_args(args=rest)
     return script, options, args
 
-def process(name, filenames):
-    if len(filenames) == 0:
-        number = 1
-        width, counts = count_cells(sys.stdin)
-    else:
-        number = len(filenames)
-        with open(filenames[0], 'r') as source:
-            width, counts = count_cells(source)
-        for f in filenames[1:]:
-            with open(f, 'r') as source:
-                new_width, new_counts = count_cells(source)
-            counts = combine(counts, new_counts)
-    report(name, counts, number * width)
-
-def count_cells(source):
-    count = []
-    for line in source:
-        line = line.strip()
-        width = len(line)
-        count.append(line.count('1'))
-    return width, count
-
-def combine(left, right):
-    result = []
-    for i in range(len(left)):
-        result.append(left[i] + right[i])
-    return result
-
-def report(name, totals, scale):
-    print name
-    for num in totals:
-        print float(num) / scale
+def process(title, filenames):
+    print title
+    print 'files:',
+    for f in filenames:
+        print f, # eventually replace this with real code
+    print # make sure there's a newline at the end
 
 # Run the program.
 main()

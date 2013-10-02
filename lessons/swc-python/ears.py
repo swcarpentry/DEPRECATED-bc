@@ -21,7 +21,7 @@ import sys
 import inspect
 import traceback
 
-def run(prefix='test_'):
+def run(prefix='test_', verbose=False):
     """
     Look for test functions defined by caller, execute, and report.
     """
@@ -37,6 +37,8 @@ def run(prefix='test_'):
     fails = []
     errors = []
     for (name, test) in test_functions.iteritems():
+        if verbose:
+            print name
         if setup is not None:
             setup()
         try:

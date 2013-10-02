@@ -28,9 +28,10 @@ def process(title, filenames):
         with open(filenames[0], 'r') as source:
             width, filled = count(source)
         for f in filenames[1:]:
-            new_width, new_filled = count(source)
-            assert new_width == width, 'File widths are not the same'
-            filled = combine(filled, new_filled)
+            with open(f, 'r') as source:
+                new_width, new_filled = count(source)
+                assert new_width == width, 'File widths are not the same'
+                filled = combine(filled, new_filled)
     display(title, filled, number * width)
 
 def count(source):
