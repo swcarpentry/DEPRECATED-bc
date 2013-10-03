@@ -121,23 +121,28 @@ our email address,
 and that we want it to colorize output.
 
 There are a few more configuration variables to set depending on your OS. First, 
-choose a text editor. This might be textedit on the Mac, or Notepad on windows. The default
+choose a text editor. This might be textedit on the Mac, gedit on GNU/Linux or Notepad on Windows. The default
 is probably vi, which frightens people. If they've installed a better editor for the workshop, use that instead. 
 Make sure the editor runs from the command line as configured; use a full path if necessary. 
 The second OS-specific option deals with the different handling of line endings. If they ever collaborate 
 with a computer on another OS, this configuration will prevent headaches.
 
-On Windows:
-```
-$ git config --global core.editor "notepad"
-$ git config --global core.autocrlf "true"
-```
+On Mac:
 
-On Mac or Linux:
-```
-$ git config --global core.editor "textedit"
-$ git config --global core.autocrlf "input"
-```
+    $ git config --global core.editor "textedit"
+    $ git config --global core.autocrlf "input"
+
+
+On GNU/Linux:
+
+    $ git config --global core.editor "gedit"
+    $ git config --global core.autocrlf "input"
+
+
+On Windows:
+
+    $ git config --global core.editor "notepad"
+    $ git config --global core.autocrlf "true"
 
 
 We can now start actually using Git.
