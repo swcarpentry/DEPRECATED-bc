@@ -22,30 +22,21 @@ def handle_args(args):
 
 def process(title, filenames):
     if filenames is None:
-        width, filled = count(sys.stdin)
-        display(title, filled, width)
+        data = np.loadtxt(sys.stdin, delimiter=',')
+        display(title, data, 1)
     else:
-        results = [count(f) for f in filenames]
-        width, filled = results[0]
-        assert all([r[0] == width for r in results]), 'File widths unequal'
-        for a in results[1:]:
-            filled += a[1]
-        display(title, filled, len(filenames) * width)
+        results = [np.loadtxt(f, delimiter=',') for f in filenames]
+        assert all([x.shape == results[0].shape for x in results]), 'File sizes differ'
+        for r in results[1:]:
+            results[0] += r
+        display(title, results[0], len(results))
 
-def count(source):
-    if type(source) is str:
-        reader = open(source, 'r')
-    else:
-        reader = source
-    cells = np.array([list(x.strip()) for x in reader.readlines()], np.int32)
-    if reader is not source:
-        reader.close()
-    return cells.shape[1], cells.sum(1)
-
-def display(title, counts, scaling):
+def display(title, data, number):
     print title
-    for c in counts:
-        print float(c) / scaling
+    scaling = float(number * data.shape[1])
+    densities = data.sum(1) / scaling
+    for d in densities:
+        print d
 
 # Run the program.
 main()
