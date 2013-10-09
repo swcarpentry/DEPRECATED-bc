@@ -140,6 +140,58 @@ $ <span class="in">ls</span>
 $
 </pre>
 
+  <div class="box">
+    <h3>Quickly create and modify</h3>
+
+    <p>
+      For the purposes of quickly creating and modifying files, we can
+      use the command <code>touch</code>.  The <code>touch</code>
+      command changes a file timestamp, file access time, and/or
+      modification time for specified files.  If the file does not
+      exist, it will create a file with no content. 
+    </p>
+
+    <p>
+      Similar to text editors like nano, touch will use your current
+      working directory to create the default location for your file. 
+    </p>
+
+  </div>
+
+<pre>
+$ <span class="in">touch draft.txt</span>
+</pre>
+
+
+  <p>
+    <code>touch</code> allows you to create empty files without
+    leaving the command line. <code>ls -l</code> will give a long list
+    of the files in your current directory, including information
+    about the date and time of last modification.  We can
+    use <code>touch</code> to change the modification time
+    of <code>draft.txt</code>, and to create a new
+    file <code>draft_2.txt:
+  </p>
+
+<pre>
+$ <span class="in">touch draft2.txt</span>
+</pre>
+
+  <p>
+    Note how the modification time changes <code>ls</code> with
+    the <code>-l</code> flag (for "long") before and after using
+    the <code>touch</code> command:
+  </p>
+
+
+<pre>
+$ <span class="in">ls -l draft.txt</span>
+<span class="out">-rw-r--r-- 1 username username 0 Oct  9 15:46 draft.txt</span>
+$ <span class="in">touch draft.txt</span>
+$ <span class="in">ls -l draft.txt</span>
+<span class="out">-rw-r--r-- 1 username username 0 Oct  9 15:48 draft.txt</span>
+</pre>
+
   <p>
     We can run <code>ls</code> with the <code>-s</code> flag
     (for "size")
