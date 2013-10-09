@@ -134,6 +134,43 @@ $ <span class="in">nano draft.txt</span>
     But <code>ls</code> now shows that we have created a file called <code>draft.txt</code>:
   </p>
 
+  <div class="box">
+    <h3>Quickly create and modify</h3>
+
+    <p>
+      For the purposes of quickly creating and modifying files, we can
+      use the command <code>touch</code>.  The <code>touch</code>
+      command changes a file timestamp, file access time, and/or
+      modification time for specified files.  If the file does not
+      exist, it will create a file with no content. 
+    </p>
+
+    <p>
+      No matter what editor you use,
+      you will need to know where it searches for and saves files.
+      If you start it from the shell,
+      it will (probably) use your current working directory as its default location.
+      If you use your computer's start menu,
+      it may want to save files in your desktop or documents directory instead.
+      You can change this by navigating to another directory
+      the first time you "Save As..."
+    </p>
+
+  </div>
+
+<pre>
+$ <span class="in">touch</span>
+<span class="out">draft.txt</span>
+$
+</pre>
+
+
+  <p>
+    <code>touch</code> allows you to create empty files without
+    leaving the command line. <code>ls</code> now shows that we have
+    created a file called <code>draft.txt</code>:
+  </p>
+
 <pre>
 $ <span class="in">ls</span>
 <span class="out">draft.txt</span>
