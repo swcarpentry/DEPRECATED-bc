@@ -146,35 +146,44 @@ $ <span class="in">nano draft.txt</span>
     </p>
 
     <p>
-      No matter what editor you use,
-      you will need to know where it searches for and saves files.
-      If you start it from the shell,
-      it will (probably) use your current working directory as its default location.
-      If you use your computer's start menu,
-      it may want to save files in your desktop or documents directory instead.
-      You can change this by navigating to another directory
-      the first time you "Save As..."
+      Similar to text editors like nano, touch will use your current
+      working directory to create the default location for your file. 
     </p>
 
   </div>
 
 <pre>
-$ <span class="in">touch</span>
-<span class="out">draft.txt</span>
-$
+$ <span class="in">touch draft.txt</span>
 </pre>
 
 
   <p>
     <code>touch</code> allows you to create empty files without
-    leaving the command line. <code>ls</code> now shows that we have
-    created a file called <code>draft.txt</code>:
+    leaving the command line. <code>ls -l</code> will give a long list
+    of the files in your current directory, including information
+    about the date and time of last modification.  We can
+    use <code>touch</code> to change the modification time
+    of <code>draft.txt</code>, and to create a new
+    file <code>draft_2.txt:
   </p>
 
 <pre>
-$ <span class="in">ls</span>
-<span class="out">draft.txt</span>
-$
+$ <span class="in">touch draft2.txt</span>
+</pre>
+
+  <p>
+    Note how the modification time changes <code>ls</code> with
+    the <code>-l</code> flag (for "long") before and after using
+    the <code>touch</code> command:
+  </p>
+
+
+<pre>
+$ <span class="in">ls -l draft.txt</span>
+<span class="out">-rw-r--r-- 1 username username 0 Oct  9 15:46 draft.txt</span>
+$ <span class="in">touch draft.txt</span>
+$ <span class="in">ls -l draft.txt</span>
+<span class="out">-rw-r--r-- 1 username username 0 Oct  9 15:48 draft.txt</span>
 </pre>
 
   <p>
