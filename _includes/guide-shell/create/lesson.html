@@ -227,9 +227,28 @@ $
 
   <p class="continue">
     This command removes files ("rm" is short for "remove").
-    If we now run <code>ls</code> again,
-    its output is empty once more,
-    which tells us that our file is gone:
+    If we run <code>ls</code>, only the <code>draft_empty.txt</code>
+    file remains:
+  </p>
+
+<pre>
+$ <span class="in">ls</span>
+<span class="out">draft_empty.txt</span>
+$
+</pre>
+
+  <p>
+    Now we'll finish cleaning up by running <code>rm draft_empty.txt</code>:
+  </p>
+
+<pre>
+$ <span class="in">rm draft_empty.txt</span>
+$
+</pre>
+
+  <p>
+    If we now run <code>ls</code> again, its output is empty once more,
+    which tells us that both of our files are gone:
   </p>
 
 <pre>
