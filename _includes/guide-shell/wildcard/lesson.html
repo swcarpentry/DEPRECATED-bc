@@ -1,11 +1,18 @@
 <div id="s:shell:wildcard:lesson" class="lesson">
 
-  <p>
-    ...
-  </p>
-
+  <p>Let us use the basic commands we already know to explore wildcard
+    characters.  We will start in our current directory, and create
+    two files:</p>
 <pre>
 $ <span class="in">touch file1.txt file2.txt</span>
+$
+</pre>
+  <p>The asterisk wildcard <code>*</code> matches zero or more
+  characters.  When we ask the shell to list files in a directory by
+  matching a wildcard pattern, like <code>ls *</code>, the shell
+  carries out a process called “globbing”, or matching a pattern to
+  filenames:</p>
+<pre>
 $ <span class="in">ls file*</span>
 <span class="out">file1.txt   file2.txt</span>
 $
