@@ -206,18 +206,18 @@ $
 
 <pre>
 $ <span class="in">ls -s -h</span>
-<span class="out"> 512  draft.txt</span>
+<span class="out"> 512  draft.txt        0  draft_empty.txt</span>
 $
 </pre>
 
   <p class="continue">
-    Here, 512 is the number of bytes in the file.
+    Here, 512 is the number of bytes in the <code>draft.txt</code> file.
     This is more than we actually typed in because
     the smallest unit of storage on the disk is typically a block of 512 bytes.
   </p>
 
   <p>
-    Let's tidy up by running <code>rm draft.txt</code>:
+    Let's start tidying up by running <code>rm draft.txt</code>:
   </p>
 
 <pre>
