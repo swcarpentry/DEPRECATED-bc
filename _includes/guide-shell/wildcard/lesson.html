@@ -70,6 +70,61 @@ $ <span class="in">ls file??.txt</span>
 $
 </pre>
 
+  <p>
+    We can use the <code>!</code> character with square brackets to mean 
+    negation of the following characters inside the square brackets.  For 
+    example, <code>file[!46]*</code> would match everything beginning with 
+    "file", <em>unless</em> the next character is a 4 or a 6.  Thus, 
+    continuing with our example, if we do <code>rm file[!46]*</code>, we 
+    will delete everything except <code>file4.txt</code> and 
+    <code>file6.txt</code>:
+  </p>
 
+<pre>
+$ <span class="in">ls</span>
+<span class="out">file4.txt   file7.txt    file_b.txt   file_d.txt</span>
+<span class="out">file6.txt   file_a.txt   file_c.txt   file_e.txt</span>
+$ <span class="in">rm file[!46]*</span>
+$ <span class="in">ls</span>
+<span class="out">file4.txt   file6.txt</span>
+$
+</pre>
+
+  <p>
+    It's also possible to combine and nest wildcards.  For example, 
+    <code>file{4,_?}.txt</code> would match <code>file4.txt</code> 
+    and <code>file_?.txt</code>, where <code>?</code> matches any 
+    single character. To demonstrate this, let's re-create all of 
+    our files:
+  </p>
+
+<pre>
+$ <span class="in">touch file{4,6,7}.txt file_{a..e}.txt</span>
+$ <span class="in">ls</span>
+<span class="out">file4.txt   file7.txt    file_b.txt   file_d.txt</span>
+<span class="out">file6.txt   file_a.txt   file_c.txt   file_e.txt</span>
+$ 
+</pre>
+
+  <p>
+    Now let's <code>ls file{4,_?}.txt</code>:
+  </p>
+
+<pre>
+$ <span class="in">ls file{4,_?}.txt</span>
+<span class="out">file4.txt   file_b.txt   file_d.txt</span>
+<span class="out">file_a.txt   file_c.txt   file_e.txt</span>
+$
+</pre>
+
+  <p>
+    Finally, it is important to understand what happens if a 
+    wildcard expression doesn't match any files.  In this case, 
+    the wildcard characters are interpreted literally.  For 
+    example, if we were to enter <code>ls file[AB].txt</code>,
+    the system will first try to find <code>fileA.txt</code> or
+    <code>fileB.txt</code>, but when it fails to find either of
+    those, it will try to find a file named <code>file[AB].txt</code>.
+  </p>
 
 </div>
