@@ -159,41 +159,30 @@ $
     your current working directory.
   </p>
 
-
-<!--   <p> -->
-<!--     The <code>touch</code> -->
-<!--     command changes a file timestamp, file access time, and/or -->
-<!--     modification time for specified files.  If the file does not -->
-<!--     exist, it will create a file with no content.  -->
-<!--   </p> -->
-
   <p>
-    <code>ls -l</code> will give a long list
-    of the files in your current directory, including information
-    about the date and time of last modification.  We can
-    use <code>touch</code> to change the modification time
-    of <code>draft.txt</code>, and to create a new
-    file <code>draft_2.txt</code>:
+    If we <code>touch</code> a file that already exists, the time of
+    last modification for the file is updated to the present time,
+    but the file is otherwise unaltered.  We can demonstrate this by
+    running <code>ls</code> with the <code>-l</code> flag to give a
+    long listing of files in the
+    current directory which includes information about the date and
+    time of last modification.
   </p>
 
 <pre>
-$ <span class="in">touch draft2.txt</span>
-</pre>
-
-  <p>
-    Note how the modification time changes <code>ls</code> with
-    the <code>-l</code> flag (for "long") before and after using
-    the <code>touch</code> command:
-  </p>
-
-
-<pre>
-$ <span class="in">ls -l draft.txt</span>
+$ <span class="in">ls -l</span>
 <span class="out">-rw-r--r-- 1 username username 0 Oct  9 15:46 draft.txt</span>
+<span class="out">-rw-r--r-- 1 username username 0 Oct  9 15:47 draft_empty.txt</span>
 $ <span class="in">touch draft.txt</span>
-$ <span class="in">ls -l draft.txt</span>
+$ <span class="in">ls -l</span>
 <span class="out">-rw-r--r-- 1 username username 0 Oct  9 15:48 draft.txt</span>
+<span class="out">-rw-r--r-- 1 username username 0 Oct  9 15:47 draft_empty.txt</span>
 </pre>
+
+  <p>
+    Note how the modification time of <code>draft.txt</code> changes
+    after we <code>touch</code> it.
+  </p>
 
   <p>
     We can run <code>ls</code> with the <code>-s</code> flag
@@ -203,7 +192,7 @@ $ <span class="in">ls -l draft.txt</span>
 
 <pre>
 $ <span class="in">ls -s</span>
-<span class="out">   1  draft.txt</span>
+<span class="out">   1  draft.txt        0  draft_empty.txt</span>
 $
 </pre>
 
