@@ -272,14 +272,14 @@ $
   </div>
 
   <p>
-    Let's re-create that file
+    Let's re-create the <code>draft.txt</code> file as an empty file,
     and then move up one directory to <code>/users/vlad</code> using <code>cd&nbsp;..</code>:
   </p>
 
 <pre>
 $ <span class="in">pwd</span>
 <span class="out">/users/vlad/thesis</span>
-$ <span class="in">nano draft.txt</span>
+$ <span class="in">touch draft.txt</span>
 $ <span class="in">ls</span>
 <span class="out">draft.txt</span>
 $ <span class="in">cd ..</span>
@@ -363,16 +363,16 @@ $
 
   <p>
     Let's create that directory and file one more time.
-    (Note that this time we're running <code>nano</code> with the path <code>thesis/draft.txt</code>,
+    (Note that this time we're running <code>touch</code> with the path <code>thesis/draft.txt</code>,
     rather than going into the <code>thesis</code> directory
-    and running <code>nano</code> on <code>draft.txt</code> there.)
+    and running <code>touch</code> on <code>draft.txt</code> there.)
   </p>
 
 <pre>
 $ <span class="in">pwd</span>
 <span class="out">/users/vlad/thesis</span>
 $ <span class="in">mkdir thesis</span>
-$ <span class="in">nano thesis/draft.txt</span>
+$ <span class="in">touch thesis/draft.txt</span>
 $ <span class="in">ls thesis</span>
 <span class="out">draft.txt</span>
 $
