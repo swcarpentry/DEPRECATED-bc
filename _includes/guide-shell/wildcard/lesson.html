@@ -23,19 +23,48 @@ $
   brackets, <code>[]</code>, which specifies either a natural sequence
   (i.e. text[1-6].txt would match text1.txt, text2.txt, ...,
   text6.txt), or a logical or between characters (i.e. text[135].txt
-  would match text1.txt text3.txt and text5.txt).</p>
+  would match text1.txt text3.txt and text5.txt). (3) The curly
+  braces, <code>{}</code>, which expands comma delimited items and
+  matches to each expanded item (i.e. text{1,5}.txt expands to
+  text1.txt text5.txt, so the glob would match either of
+  these). Note, we can also shorthand any natural sequence in the
+  curly braces, i.e. text{1..5}.txt would expand to everything
+  between text1.txt text2.txt ... text5.txt.  Let us begin by
+  creating empty files using the touch command and the curly braces:</p>
+
 <pre>
-$ <span class="in">touch file{4,6,7}.txt</span>
-$ <span class="in">touch file_{a..e}.txt</span>
+$ <span class="in">touch file{4,6,7}.txt file_{a..e}.txt</span>
+$ 
+</pre>
+
+<p>Recall, that the curly braces expand the second token into three
+  separate file names, and the third token expands into 5 separate
+  file names.  So, now if we list files using the asterisk wildcard,
+  we get:</p>
+
+<pre>
 $ <span class="in">ls file*</span>
 <span class="out">file4.txt   file7.txt    file_b.txt   file_d.txt</span>
 <span class="out">file6.txt   file_a.txt   file_c.txt   file_e.txt</span>
 $
 </pre>
 
+<p>We have matched all files in our current directory that begin
+with <code>file</code>.  Now, let us list a subset of those files using
+the question mark:</p>
+
 <pre>
 $ <span class="in">ls file?.txt</span>
 <span class="out">file4.txt   file6.txt    file7.txt</span>
+$
+</pre>
+
+<p> Note, how this glob pattern matched only the numbered files.  That
+  is because only the numbered files have a single character
+  between <code>file</code> and <code>.txt</code>.  The lettered files
+  have two characters:</p>
+
+<pre>
 $ <span class="in">ls file??.txt</span>
 <span class="out">file_a.txt   file_b.txt    file_c.txt   file_d.txt   file_e.txt</span>
 $
