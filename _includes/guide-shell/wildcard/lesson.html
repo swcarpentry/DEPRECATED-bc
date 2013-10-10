@@ -141,7 +141,7 @@ $
     <code>fileA.txt</code> or <code>fileB.txt</code>.  Still not
     convinced?  Let's actually create a file named <code>file[AB].txt</code>.
     To do this, we need some way of telling the computer that we
-    actually want the "[" and "]" characters to be in the file, and
+    actually want the "[" and "]" characters to be in the filename, and
     that we don't mean them as wildcards.
   </p>
 
@@ -162,7 +162,19 @@ $
       before the square brackets, i.e. <code>touch file\[AB\].txt</code>.
     </p>
   </div>
+
+  <p>
+    Now we can create the file <code>file[AB].txt</code>:
+  </p>
   
+<pre>
+$ <span class="in">touch "file[AB].txt"</span>
+$ <span class="in">ls</span>
+<span class="out">file4.txt   file7.txt      file_a.txt   file_c.txt   file_e.txt</span>
+<span class="out">file6.txt   file[AB].txt   file_b.txt   file_d.txt</span>
+$
+</pre>
+
     
 
 </div>
