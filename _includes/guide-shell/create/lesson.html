@@ -140,27 +140,32 @@ $ <span class="in">ls</span>
 $
 </pre>
 
-  <div class="box">
-    <h3>Quickly create and modify</h3>
-
-    <p>
-      For the purposes of quickly creating and modifying files, we can
-      use the command <code>touch</code>.  The <code>touch</code>
-      command changes a file timestamp, file access time, and/or
-      modification time for specified files.  If the file does not
-      exist, it will create a file with no content. 
-    </p>
-
-    <p>
-      Similar to text editors like nano, touch will use your current
-      working directory to create the default location for your file. 
-    </p>
-
-  </div>
+  <p>
+    If we just want to quickly create a file with no content, we
+    can use the command <code>touch</code>.
+  </p>
 
 <pre>
-$ <span class="in">touch draft.txt</span>
+$ <span class="in">touch draft_empty.txt</span>
+$ <span class="in">ls</span>
+<span class="out">draft.txt</span>
+<span class="out">draft_empty.txt</span>
+$
 </pre>
+
+
+  <p>
+    The <code>touch</code>
+    command changes a file timestamp, file access time, and/or
+    modification time for specified files.  If the file does not
+    exist, it will create a file with no content. 
+  </p>
+  
+  <p>
+    Similar to text editors like nano, touch will use your current
+    working directory to create the default location for your file. 
+  </p>
+  
 
 
   <p>
