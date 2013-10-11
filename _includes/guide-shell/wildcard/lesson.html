@@ -256,14 +256,30 @@ $
     <h3>Escaping Special Characters</h3>
 
     <p>
-      Explain about single and double quotes, and backslash
-      escaping of characters.  Explain the difference between
-      single and double quotes.
-      You can refer back to the example above of creating 
+      Wildcard characters, like <code>*</code>, <code>[]</code>,
+      and <code>{}</code> are all special characters in bash.  When we
+      escape a character, we toggle on a special meaning for that
+      character.  We can toggle on a single character using the
+      forwardslash, <code>\</code>.  The <code>\</code> preceding a
+      wildcard character tells the shell to interpret the character
+      literally. Note, that the backslash is also a special character
+      in bash, delimiting directory levels.  Likewise, <code>\/</code>
+      tells bash to interpret the backslash literally. We can escape
+      more than one character by enclosing the grouped characters in
+      either single or double quotes. Single quotes preserve the
+      literal value of each character enclosed.  Double quotes
+      preserve the literal value of each character enclosed with the
+      exception of '<code>$</code>', '<code>`</code>', or
+      '<code>\</code>', which all retain their special meaning. Inside
+      double quotes, backslashes <code>\</code> preceding special
+      characters will be removed.  If the backslash precedes a
+      character with no special meaning, the backslash will remain.
+      You can refer back to the example above of creating
       <code>file[AB].txt</code> by either doing
       <code>touch "file[AB].txt"</code>,
-      <code>touch 'file[AB].txt'</code>, or
-      <code>touch file\[AB\].txt</code>.
+      <code>touch 'file[AB].txt'</code>, 
+      <code>touch file\[AB\].txt</code>, or
+      <code>touch "file\[AB\].txt"</code>.
     </p>
   </div>
 
