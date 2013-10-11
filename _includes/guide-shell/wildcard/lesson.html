@@ -57,34 +57,6 @@ $
 
   </div>
 
-
-  <div class="box" id="a:question_mark">
-    <h3>Question Mark (?) Wildcard</h3>
-
-    <p>
-      <code>?</code> is also a wildcard,
-      but it only matches a single character.
-      This means that <code>p?.pdb</code> matches <code>pi.pdb</code> or <code>p5.pdb</code>,
-      but not <code>propane.pdb</code>.
-      We can use any number of wildcards at a time:
-      for example,
-      <code>p*.p?*</code> matches anything that starts with a 'p'
-      and ends with '.', 'p', and at least one more character
-      (since the '?' has to match one character,
-      and the final '*' can match any number of characters).
-      Thus,
-      <code>p*.p?*</code> would match
-      <code>preferred.practice</code>,
-      and even <code>p.pi</code>
-      (since the first '*' can match no characters at all),
-      but not <code>quality.practice</code> (doesn't start with 'p')
-      or <code>preferred.p</code> (there isn't at least one character after the '.p').
-    </p>
-
-  </div>
-
-
-
   <p>
     There are four other basic wildcard characters we will explore:
   </p>
@@ -130,6 +102,22 @@ $
       <code>text1.txt text2.txt text3.txt text4.txt text5.txt</code>.</li>
   </ul>
 
+  <p>
+    We can use any number of wildcards at a time:
+    for example,
+    <code>p*.p?*</code> matches anything that starts with a 'p'
+    and ends with '.', 'p', and at least one more character
+    (since the '?' has to match one character,
+    and the final '*' can match any number of characters).
+    Thus,
+    <code>p*.p?*</code> would match
+    <code>preferred.practice</code>,
+    and even <code>p.pi</code>
+    (since the first '*' can match no characters at all),
+    but not <code>quality.practice</code> (doesn't start with 'p')
+    or <code>preferred.p</code> (there isn't at least one character after the '.p').
+  </p>
+  
   <p>
     Let us begin by
     creating empty files using the touch command and the curly braces:
