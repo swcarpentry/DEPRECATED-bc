@@ -119,8 +119,19 @@ $
   </p>
   
   <p>
-    Let us begin by
-    creating empty files using the touch command and the curly braces:
+    Let's see some more examples of wildcards in action.  First we will
+    remove everything in the current directory:
+  </p>
+  
+<pre>
+$ <span class="in">rm *</span>
+$ <span class="in">ls</span>
+$
+</pre>
+
+  <p>
+    Now that our working directory is empty, let's create some
+    empty files using the touch command and the curly braces:
   </p>
 
 <pre>
@@ -128,10 +139,12 @@ $ <span class="in">touch file{4,6,7}.txt file_{a..e}.txt</span>
 $ 
 </pre>
 
-<p>Recall, that the curly braces expand the second token into three
-  separate file names, and the third token expands into 5 separate
-  file names.  So, now if we list files using the asterisk wildcard,
-  we get:</p>
+  <p>
+    The curly braces expand the second token into three
+    separate file names, and the third token expands into five separate
+    file names.  So, now if we list files using the asterisk wildcard,
+    we get:
+  </p>
 
 <pre>
 $ <span class="in">ls file*</span>
@@ -140,9 +153,11 @@ $ <span class="in">ls file*</span>
 $
 </pre>
 
-<p>We have matched all files in our current directory that begin
-with <code>file</code>.  Now, let us list a subset of those files using
-the question mark:</p>
+  <p>
+    We have matched all files in our current directory that begin
+    with <code>file</code>.  Now, let us list a subset of those files using
+    the question mark:
+  </p>
 
 <pre>
 $ <span class="in">ls file?.txt</span>
@@ -150,10 +165,12 @@ $ <span class="in">ls file?.txt</span>
 $
 </pre>
 
-<p> Note, how this glob pattern matched only the numbered files.  That
-  is because only the numbered files have a single character
-  between <code>file</code> and <code>.txt</code>.  The lettered files
-  have two characters:</p>
+  <p>
+    Note, how this glob pattern matched only the numbered files.  That
+    is because only the numbered files have a single character
+    between <code>file</code> and <code>.txt</code>.  The lettered files
+    have two characters:
+  </p>
 
 <pre>
 $ <span class="in">ls file??.txt</span>
@@ -162,9 +179,8 @@ $
 </pre>
 
   <p>
-    We can use the <code>!</code> character with square brackets to mean 
-    negation of the following characters inside the square brackets.  For 
-    example, <code>file[!46]*</code> would match everything beginning with 
+    Let's try out using the <code>!</code> character with square brackets. 
+    The pattern <code>file[!46]*</code> would match everything beginning with 
     "file", <em>unless</em> the next character is a 4 or a 6.  Thus, 
     continuing with our example, if we do <code>rm file[!46]*</code>, we 
     will delete everything except <code>file4.txt</code> and 
@@ -198,7 +214,7 @@ $
 </pre>
 
   <p>
-    Now let's <code>ls file{4,_?}.txt</code>:
+    Now let's run <code>ls file{4,_?}.txt</code>:
   </p>
 
 <pre>
