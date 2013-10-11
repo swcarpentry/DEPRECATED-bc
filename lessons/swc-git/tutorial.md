@@ -62,7 +62,7 @@ Here's some guidance for teaching this material:
 - Give learners a ten-minute overview of what version control does for them
   before diving into the watch-and-do practicals.
   Most of them will have tried to co-author papers by emailing files back and forth
-  (or in most recently years using any cloud storage with file synchronization,
+  (or in more recent years using cloud storage with file synchronization,
   e.g. Dropbox, Google Drive, ...),
   or will have biked into the office
   only to realize that the USB key with last night's work
