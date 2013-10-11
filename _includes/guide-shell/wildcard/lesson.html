@@ -17,6 +17,26 @@ $
 </pre>
 
   <p>
+    If we want to see all filenames that start with "file", we can run the
+    command <code>ls file*</code>:
+  </p>
+
+<pre>
+$ <span class="in">ls file*</span>
+<span class="out">file1.txt   file2.txt</span>
+$
+</pre>
+
+  <p>
+    The asterisk wildcard <code>*</code> in <code>file*</code> matches zero
+    or more characters of any kind.  Thus the expression <code>file*</code>
+    matches anything that starts with "file".  On the other hand, the 
+    expression <code>*file*</code> would match all of the files currently
+    in the directory because they all have the word "file" somewhere in
+    their filename.
+  </p>
+
+  <p>
     <em>The <code>*</code> in <code>*.pdb</code> matches zero or more characters,
     so the shell turns <code>*.pdb</code> into a complete list of <code>.pdb</code> files: </em>
   </p>
@@ -26,11 +46,6 @@ $
   matching a wildcard pattern, like <code>ls *</code>, the shell
   carries out a process called globbing, or matching a pattern to
   filenames:</p>
-<pre>
-$ <span class="in">ls file*</span>
-<span class="out">file1.txt   file2.txt</span>
-$
-</pre>
 
   <div class="box" id="a:wildcard">
     <h3>Wildcards</h3>
