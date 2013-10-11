@@ -91,7 +91,10 @@ $
 
   <ul>
     <li>The question mark, <code>?</code>, matches any single character,
-  so text?.txt would match text1.txt or textz.txt.</li>
+  so <code>text?.txt</code> would match 
+      <code>text1.txt</code> or 
+      <code>textz.txt</code>,
+      but not <code>text_1.txt</code>.</li>
     <li>The square brackets, <code>[</code> and <code>]</code>, 
       which can be used to specify a set of possible characters.
       For example, <code>text[135].txt</code> would match 
@@ -111,13 +114,20 @@ $
       <code>text1.txt</code>,
       <code>text3.txt</code>, and
       <code>text5.txt</code>.</li>
-    <li>The curly
-      braces, <code>{}</code>, which expands comma delimited items and
-      matches to each expanded item (i.e. text{1,5}.txt expands to
-      text1.txt text5.txt, so the glob would match either of
-      these). Note, we can also shorthand any natural sequence in the
-      curly braces, i.e. text{1..5}.txt would expand to everything
-      between text1.txt text2.txt ... text5.txt.</li>
+    <li>The curly braces, <code>{}</code>, are similar to the square
+      brackets, except that they take a list of items separated by
+      commas, and that they always expand all elements of the list,
+      whether or not the corresponding filenames exist.
+      For example, <code>text{1,5}.txt</code> would expand to
+      <code>text1.txt text5.txt</code> whether or not
+      <code>text1.txt</code> and <code>text5.txt</code> actually
+      exist.
+      The elements of the list need not be single characters, so
+      <code>text{12,5}.txt</code> expands to
+      <code>text12.txt text5.txt</code>.
+      Natural sequences can be specified using <code>..</code>, i.e.
+      <code>text{1..5}.txt</code> would expand to
+      <code>text1.txt text2.txt text3.txt text4.txt text5.txt</code>.</li>
   </ul>
 
   <p>
