@@ -400,29 +400,28 @@ FAQ
     we should teach them to use it as it is,
     not as we wish it was.
 
-*   *What can I do when `make check`, it says, `invalid byte sequence in GBK`*
-    *or other encoding name than `GBK`?*
+*   *What do I do if I see a `invalid byte sequence in ...` error when I run `make check`?*
     <br/>
-    Solved the problem by declaring the following locale in your shell, 
-    and `make check` again:
+    Declare the `en_US.UTF-8` locale in your shell:
 
         export LC_ALL=en_US.UTF-8
         export LANG=en_US.UTF-8
-        
-*   *What can I do about `Conversion error` when `make check`?*
+
+*   *What do I do if I see a `Conversion error` when I run `make check`?*
     <br/>
-    The error message is something like this:
+    The error message may look something like this:
 
         Configuration file: d:/OpenCourses/swc/2013-10-17-round6.4/_config.yml
                 Source: d:/OpenCourses/swc/2013-10-17-round6.4
            Destination: _site
           Generating... c:/Ruby193/lib/ruby/gems/1.9.1/gems/posix-spawn-0.3.6/lib/posix/spawn.rb:162: wa
         rning: cannot close fd before spawn
-        [31m  Conversion error: There was an error converting 'lessons/misc-biopython/fastq.md'.[0m
+        Conversion error: There was an error converting 'lessons/misc-biopython/fastq.md'.
         done.
         
-    This is the problem of Pygments.rb, [explaination here.](http://stackoverflow.com/questions/17364028/jekyll-on-windows-pygments-not-working)
-    What you need to do is uninstall pygments.rb 0.5.1 or 0.5.2, and install 0.5.0, and then `make check` again.
+    This is a [problem in Pygments.rb](http://stackoverflow.com/questions/17364028/jekyll-on-windows-pygments-not-working)
+    Uninstall pygments.rb 0.5.1 or 0.5.2, install 0.5.0.  For example, here's how you would
+    uninstall pygments 0.5.2 and restore version 0.5.0:
     
         gem uninstall pygments.rb --version "=0.5.2"
         gem install pygments.rb --version "=0.5.0"
