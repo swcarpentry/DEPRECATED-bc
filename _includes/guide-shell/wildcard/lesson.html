@@ -92,11 +92,18 @@ $
   <ul>
     <li>The question mark, <code>?</code>, matches any single character,
   so text?.txt would match text1.txt or textz.txt.</li>
-    <li>The square
-      brackets, <code>[]</code>, which specifies either a natural sequence
-      (i.e. text[1-6].txt would match text1.txt, text2.txt, ...,
-      text6.txt), or a logical or between characters (i.e. text[135].txt
-      would match text1.txt text3.txt and text5.txt).</li>
+    <li>The square brackets, <code>[</code> and <code>]</code>, 
+      which can be used to specify a set of possible characters.
+      For example, <code>text[135].txt</code> would match 
+      <code>text1.txt</code>,
+      <code>text3.txt</code>,
+      and <code>text5.txt</code>.
+      You can also specify a natural sequence of characters using
+      a dash.  For example,
+      <code>text[1-6].txt</code> would match 
+      <code>text1.txt</code>, 
+      <code>text2.txt</code>, ...,
+      <code>text6.txt</code>)</li>
     <li>The exclamation mark, <code>!</code>, which can be used with
       square brackets to negate characters.</li>
     <li>The curly
