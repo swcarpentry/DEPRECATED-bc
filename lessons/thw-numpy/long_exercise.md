@@ -14,7 +14,7 @@ First, we will take a list of previous ratings and store them in a NumPy
 array.
 
 Second, we will introduce two measures of the similarity between two
-papers or between two people’s ratings.
+papers or between two people's ratings.
 
 Third, we will use those measures to generate recommendations for a
 user.
