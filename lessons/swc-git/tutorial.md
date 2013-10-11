@@ -121,27 +121,31 @@ our email address,
 and that we want it to colorize output.
 
 There are a few more configuration variables to set depending on your OS. First, 
-choose a text editor. This might be textedit on the Mac, gedit on GNU/Linux or Notepad on Windows. The default
-is probably vi, which frightens people. If they've installed a better editor for the workshop, use that instead. 
+choose a text editor. We recommend to novices use [GNU
+nano](http://en.wikipedia.org/wiki/GNU_nano) because it will won't create a new
+window, is easy to use and work in all operation systems. Some other options
+might be TextEdit on the Mac, gedit on GNU/Linux or Notepad on Windows. The
+default on many systems is vi, which is not a friendly text editor for beginners.
+If they've installed a better editor for the workshop, use that instead.
 Make sure the editor runs from the command line as configured; use a full path if necessary. 
+
+    $ git config --global core.editor "nano"
+
 The second OS-specific option deals with the different handling of line endings. If they ever collaborate 
 with a computer on another OS, this configuration will prevent headaches.
 
 On Mac:
 
-    $ git config --global core.editor "textedit"
     $ git config --global core.autocrlf "input"
 
 
 On GNU/Linux:
 
-    $ git config --global core.editor "gedit"
     $ git config --global core.autocrlf "input"
 
 
 On Windows:
 
-    $ git config --global core.editor "notepad"
     $ git config --global core.autocrlf "true"
 
 
