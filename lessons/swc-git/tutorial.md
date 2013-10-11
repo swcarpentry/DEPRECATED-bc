@@ -121,9 +121,9 @@ our email address,
 and that we want it to colorize output.
 
 There are a few more configuration variables to set depending on your OS. First, 
-choose a text editor. We recommend to novices use [GNU
-nano](http://en.wikipedia.org/wiki/GNU_nano) because it will won't create a new
-window, is easy to use and work in all operation systems. Some other options
+choose a text editor. We recommend that novices use [GNU
+nano](http://en.wikipedia.org/wiki/GNU_nano) because it's easy to use and
+work in most operating systems. Some other options
 might be TextEdit on the Mac, gedit on GNU/Linux or Notepad on Windows. The
 default on many systems is vi, which is not a friendly text editor for beginners.
 If they've installed a better editor for the workshop, use that instead.
