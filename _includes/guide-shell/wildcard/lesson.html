@@ -184,11 +184,21 @@ $
 $ <span class="in">ls file[AB].txt</span>
 <span class="out">file[AB].txt</span>
 $
-<pre>
+</pre>
 
   <p>
-    
+    But if we create a file named <code>fileA.txt</code>,
+    this will be found first by the <code>ls</code> command,
+    since it first looks for <code>fileA.txt</code> and
+    <code>fileB.txt</code>:
   </p>
+
+<pre>
+$ <span class="in">touch fileA.txt</span>
+$ <span class="in">ls file[AB].txt</span>
+<span class="out">fileA.txt</span>
+$
+</pre>
     
 
 </div>
