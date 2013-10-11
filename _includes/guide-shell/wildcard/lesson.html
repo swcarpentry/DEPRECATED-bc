@@ -105,7 +105,12 @@ $
       <code>text2.txt</code>, ...,
       <code>text6.txt</code>)</li>
     <li>The exclamation mark, <code>!</code>, which can be used with
-      square brackets to negate characters.</li>
+      square brackets to negate characters.  For example,
+      <code>text[!135].txt</code> would match anything of the form
+      <code>text?.txt</code> <em>except</em> for
+      <code>text1.txt</code>,
+      <code>text3.txt</code>, and
+      <code>text5.txt</code>.</li>
     <li>The curly
       braces, <code>{}</code>, which expands comma delimited items and
       matches to each expanded item (i.e. text{1,5}.txt expands to
