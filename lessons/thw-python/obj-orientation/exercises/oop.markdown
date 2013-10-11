@@ -89,7 +89,7 @@ a constructor that accepts a list of `Ingredient` objects.
 ## 5
 
 
-Next, add a `__str__(self)` method. This method must return a string. Â The
+Next, add a `__str__(self)` method. This method must return a string.  The
 string should contain the Japanese representation of all the ingredients, but
 the string itself should be in proper English so, for example, "buri", "buri and
 tsubugai", and "buri, tsubugai, and kanpachi" are the correct way to print one,
