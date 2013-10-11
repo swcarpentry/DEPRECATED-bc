@@ -200,5 +200,31 @@ $ <span class="in">ls file[AB].txt</span>
 $
 </pre>
     
+  <p>
+    If we really do want to look for something called
+    <code>file[AB].txt</code>, and not <code>fileA.txt</code>
+    or <code>fileB.txt</code>, then we have to escape the special
+    characters "[" and "]".  We can do this:
+  </p>
+
+<pre>
+$ <span class="in">ls file\[AB\].txt</span>
+<span class="out">file[AB].txt</span>
+$
+</pre>
+
+  <p>
+    or this:
+  </p>
+
+<pre>
+$ <span class="in">ls "file[AB].txt"</span>
+<span class="out">file[AB].txt</span>
+$
+</pre>
+
+  <p>
+    Single quotes would work as well in this case.
+  </p>
 
 </div>
