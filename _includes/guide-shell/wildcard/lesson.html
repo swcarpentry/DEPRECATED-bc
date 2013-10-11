@@ -40,32 +40,26 @@ $
       <code>file2.txt</code>, <code>otherfile1.txt</code>, and
       <code>otherfile2.txt</code>.
     </p>
-  </div>
-
-  <p>
-    <em>The <code>*</code> in <code>*.pdb</code> matches zero or more characters,
-    so the shell turns <code>*.pdb</code> into a complete list of <code>.pdb</code> files: </em>
-  </p>
-
-  <p>The asterisk wildcard <code>*</code> matches zero or more
-  characters.  When we ask the shell to list files in a directory by
-  matching a wildcard pattern, like <code>ls *</code>, the shell
-  carries out a process called globbing, or matching a pattern to
-  filenames:</p>
-
-  <div class="box" id="a:wildcard">
-    <h3>Wildcards</h3>
 
     <p>
-      <code>*</code> is a <a href="glossary.html#wildcard">wildcard</a>.
-      It matches zero or more characters,
-      so <code>*.pdb</code> matches <code>ethane.pdb</code>,
-      <code>propane.pdb</code>,
-      and so on.
-      On the other hand,
-      <code>p*.pdb</code> only matches <code>pentane.pdb</code> and <code>propane.pdb</code>,
-      because the 'p' at the front only matches itself.
+      When the shell sees a wildcard, it expands it to create a list of
+      matching filenames <em>before</em> passing those names to whatever
+      command is being run.  This means that when you execute
+      <code>ls file*</code>, the shell first expands it to 
+      <code>ls file1.txt file2.txt</code> in the above example, 
+      and then runs that command.  This process of expansion is
+      called <a href="glossary.html#glob">globbing</a>.
+      Therefore commands like <code>ls</code> and
+      <code>rm</code> never see the wildcard characters, just what
+      those wildcards matched.  This is another example of orthogonal
+      design.
     </p>
+
+  </div>
+
+
+  <div class="box" id="a:question_mark">
+    <h3>Question Mark (?) Wildcard</h3>
 
     <p>
       <code>?</code> is also a wildcard,
@@ -85,15 +79,6 @@ $
       (since the first '*' can match no characters at all),
       but not <code>quality.practice</code> (doesn't start with 'p')
       or <code>preferred.p</code> (there isn't at least one character after the '.p').
-    </p>
-
-    <p>
-      When the shell sees a wildcard,
-      it expands it to create a list of filenames
-      <em>before</em> passing those names to whatever command is being run.
-      This means that commands like <code>wc</code> and <code>ls</code> never see the wildcard characters,
-      just what those wildcards matched.
-      This is another example of orthogonal design.
     </p>
 
   </div>
