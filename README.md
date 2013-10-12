@@ -24,6 +24,22 @@ You should not try to use the same repo for both purposes because:
 2.  you really don't want a learner accidentally overwriting your lessons
     while you're trying to teach.
 
+
+**Table of Contents**
+
+- [Software Carpentry Bootcamps](#software-carpentry-bootcamps)
+	- [Background](#background)
+	- [Getting Started](#getting-started)
+	- [Previewing the Site](#previewing-the-site)
+	- [Layout and Variables](#layout-and-variables)
+	- [Include Files](#include-files)
+	- [Instructors and Sponsors](#instructors-and-sponsors)
+	- [Lesson Material](#lesson-material)
+	- [Other Lesson Material](#other-lesson-material)
+	- [Improving This Material](#improving-this-material)
+	- [FAQ](#faq)
+
+
 Background
 ----------
 
