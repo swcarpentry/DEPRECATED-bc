@@ -281,6 +281,29 @@ list of strings and writes them in order. *Caution!* writelines does not
 append newlines. If you really want to write a newline at the end of
 each string in the list, add it yourself.
 
+Context manager
+---------------
+
+Closing a file is something often neglected in Python, due to the fact that
+it is done automatically at the end of a script (garbage collection).
+
+In less trivial scenarios a file should be closed after using it to prevent
+data corruption. To be sure of that, you can use a special language construct
+called a context manager (available since almost ancient Python 2.5).
+
+```python
+   with open('outfile.txt','w') as f:
+       f.write("Message of a Great Importance")
+
+   #other instructions, file is already closed at that point
+```
+
+Also called "with statements", context managers are responsible for
+opening a file, creating a file handle called, in the example `f`, and after
+a block of instructions, for closing the file.
+
+
+
 Aside: The first exercise
 =========================
 
