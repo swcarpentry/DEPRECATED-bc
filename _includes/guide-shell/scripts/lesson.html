@@ -28,6 +28,31 @@ head -20 cholesterol.pdb | tail -5
     we are putting the commands in a file.
   </p>
 
+  <div class="box">
+    <h3>Text vs. Whatever</h3>
+
+    <p>
+      We usually call programs like Microsoft Word or LibreOffice Writer "text editors"
+      (a more correct name is <a href="http://en.wikipedia.org/wiki/Word_processor">word processor</a>),
+      but we need to be a bit more careful when it comes to programming.
+      By default,
+      Microsoft Word uses <code>.doc</code> (and LibreOffice Writer uses
+      <code>.odt</code>) files to store not only text,
+      but also formatting information about fonts,
+      headings,
+      and so on.
+      This extra information isn't stored as characters,
+      and doesn't mean anything to the shell interpreter:
+      it expects input files to contain nothing but the letters, digits, and punctuation
+      on a standard computer keyboard.
+      When editing programs,
+      therefore,
+      you must either use a plain text editor,
+      or be careful to save files as plain text.
+    </p>
+
+  </div>
+
   <p>
     Once we have saved the file,
     we can ask the shell to execute the commands it contains.
@@ -48,29 +73,6 @@ ATOM     18  C           1      -4.705   2.108  -0.396  1.00  0.00</span>
     Sure enough, our script's output is exactly what we would get
     if we ran that pipeline directly.
   </p>
-
-  <div class="box">
-    <h3>Text vs. Whatever</h3>
-
-    <p>
-      We usually call programs like Microsoft Word or LibreOffice Writer "text editors",
-      but we need to be a bit more careful when it comes to programming.
-      By default,
-      Microsoft Word uses <code>.doc</code> files to store not only text,
-      but also formatting information about fonts,
-      headings,
-      and so on.
-      This extra information isn't stored as characters,
-      and doesn't mean anything to the Python interpreter:
-      it expects input files to contain nothing but the letters, digits, and punctuation
-      on a standard computer keyboard.
-      When editing programs,
-      therefore,
-      you must either use a plain text editor,
-      or be careful to save files as plain text.
-    </p>
-
-  </div>
 
   <div class="box">
     <h3>Running Scripts Without Calling Bash</h3>
