@@ -4,6 +4,7 @@ root: ../../..
 title: Strings and File I/O in Python
 ---
 **Prepared by Tommy Guy**
+# Edited by Jin
 
 Lesson goals:
 
@@ -91,7 +92,10 @@ rest of the line breaks the language standard.
 Characters in literal strings must come from the ASCII character set,
 which is a set of 127 character codes that is used by all modern
 programming languages and computers. Unfortunately, ASCII does not have
-room for non-Roman characters like accents or Eastern scripts. Unicode
+room for non-Roman characters like accents or Eastern scripts. 
+
+# Define what a unicode string is - the fact that it's another character set which is somewhat similar to ASCII
+Unicode
 strings in Python are specified with a leading u:
 
 ```python
@@ -105,7 +109,10 @@ Working with Strings
 --------------------
 
 Strings are iterables, which means many of the ideas from lists can also
-be applied directly to string manipulation. For instance, characters can
+be applied directly to string manipulation. 
+# As iterable is a big concept here, perhaps even put loops?
+
+For instance, characters can
 be accessed individually or in sequences:
 
 ```python
@@ -119,6 +126,7 @@ be accessed individually or in sequences:
 ```
 
 They can also be compared using sort and equals.
+# Where's sort in the comments below?
 
 ```python
     > 'str1' == 'str2'
@@ -182,6 +190,7 @@ the file. open returns a file object, acts like a pointer into the file.
 An example will make this clear. In the code below, I've opened a file
 that contains one line:
 
+# File seems to have two lines?
     (unix shell) $ cat testFile.txt
     abcde
     fghij
@@ -195,6 +204,9 @@ Now let's open this file in Python:
 The second input, 'r' means I want to open the file for reading only. I
 can not write to this handle. The read() command will read a specified
 number of bytes:
+# Specify that read() is a function for the file object created by open
+# Also clarify later that using read will move along the file buffer and mark its position on the buffer
+# so that, the next time it calls read, it reads the next byte rather than going all over (clarify!)
 
 ```python
     > s = fileHandle.read(3)
@@ -203,7 +215,7 @@ number of bytes:
 ```
 
 We read the first three characters, where each character is a byte long.
-We can see that the file handle points to the 4th byte (index number 3)
+We can see that the file handle points to the 4th byte (index number 3) # Specify that this is part of the tell function
 in the file:
 
 ```python
@@ -226,8 +238,10 @@ file. The first is to use the readlines() method:
     > lineArr
     ['abcde\n', 'fghij\n']
 ```
+# readline() and readlines() do very different things. BE CLEAR
+A very important point about the readline method 
 
-A very important point about the readline method is that it *keeps* the
+is that it *keeps* the
 newline character at the end of each line. You can use the strip()
 method to get rid of the string.
 
@@ -262,7 +276,8 @@ program to a file or use "|" to pipe it to another program.
 
 Sometimes, you need to direct your output directly to a file handle. For
 instance, if your program produces two output streams, you may want to
-assign two open file handles. Opening a file for reading simply requires
+assign two open file handles. Opening a file for reading # writing?
+simply requires
 changing the second option from 'r' to 'w' or 'a'.
 
 *Caution!* Opening a file with the 'w' option means start writing *at
@@ -276,19 +291,30 @@ Writing to a file uses the write() command, which accepts a string.
     > outFile.write('This is the first line!')
 ```
 
+# This kind of seems irrelevant.
 Another way to write to a file is to use writelines(), which accepts a
 list of strings and writes them in order. *Caution!* writelines does not
 append newlines. If you really want to write a newline at the end of
 each string in the list, add it yourself.
 
+
 Aside: The first exercise
 =========================
 
 Yesterday, we asked you to edit a file in place. Many of you asked how
-this was possible. The answer is that it is not. You can use f.seek()
+this was possible. The answer is that it is not. # Not true in Python but can do this with sed -i in shell
+
+You can use f.seek()
 and f.tell() to verify that even if your file handle is pointing to the
 middle of a file, write commands go to the end of the file in append
 mode. The best way to change a file is to open a temporary file in
 /tmp/, fill it, and then move it to overwrite the original. On large
 clusters, /tmp/ is often local to each node, which means it reduces I/O
-bottlenecks associated with writing large amounts of data.
+bottlenecks associated with writing large amounts of data. 
+# Even more efficient methods exist, you can loop and write to a new file
+# This saves the hassle of making a new folder, etc.
+# e.g.
+# f1 = open(newfile, 'w')
+# for lines in oldfile:
+#     lines.dosomething()
+#     f1.write(lines)
