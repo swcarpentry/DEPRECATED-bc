@@ -48,11 +48,15 @@ fork, others that may be **parallel** to your fork, and so on.
 
 ### Exercise : Fork Our GitHub Repository
 
-In step 1, you will make a copy "fork" of our test repository TESTREPO on github.  This gives you a copy of this repository that you control.
+In step 1, you will make a copy "fork" of our test repository TESTREPO 
+on github.  This gives you a copy of this repository that you control.
 
-In step 2, you will make a copy of **your** fork of the repository on your hard drive.
+In step 2, you will make a copy of **your** fork of the repository on your 
+hard drive.
 
-In step 3, you will let git know that in addition to your local copy and your fork on github, there is another github repository (called "upstream") that you might want to get updates from.
+In step 3, you will let git know that in addition to your local copy and 
+your fork on github, there is another github repository (called "upstream") 
+that you might want to get updates from.
 
 Step 1 : Go to our
 [repository](https://github.com/USERNAME/TESTREPO)
@@ -63,7 +67,9 @@ Step 2 : Clone it. From your terminal :
 
     $ git clone https://github.com/YOU/TESTREPO.git
     $ cd TESTREPO
-Note: YOU is a placeholder for YOUR github username.  If git asks you for a password here, it probably means there isn't any repository at the url that you provided.
+Note: YOU is a placeholder for YOUR github username.  If git asks you for 
+a password here, it probably means you have mis-typed the url for the 
+repository. 
 
 Step 3 : 
 
@@ -78,7 +84,10 @@ Step 3 :
 All repositories that are clones begin with a remote called origin.
 
 ### What's going on here?
-The **git remote add** merely defines a nickname and a location that git will be able to communicate with for making copies of your repository.  "origin" and "upstream" are nicknames for your fork of TESTREPO and the "original" TESTREPO, respectively.
+The **git remote add** merely defines a nickname and a location that 
+git will be able to communicate with for making copies of your 
+repository.  "origin" and "upstream" are nicknames for your fork of 
+TESTREPO and the "original" TESTREPO, respectively.
 
 ## git fetch : Fetching the contents of a remote
 
@@ -147,10 +156,10 @@ your fork, the "origin."
 
 1. Create a file in the `messages` directory whose filename is your github
 id.  (This is to ensure no conflicts just yet!)  Add a line of text, perhaps a
-description of how you use / how you expect to use programming in your
+description of how you use, or expect to use, programming in your
 work.
 
-2.  commit your change with `git add YOU` and `git commit -m "commit message"`
+2.  commit your change with `git add YOU` and `git commit -m "Commit message"`
 
 3.  Update your fork ("origin") with your new changes:
 
@@ -176,11 +185,11 @@ that you have updated, and there is the local copy on your hard drive.
 In the TESTREPO code, you'll find a file called Readme.md. This is a
 standard documentation file that appears rendered on the landing page
 for the repository in github. To see the rendered version, visit your
-fork on github, (https://github.com/YOU/TESTREPO/README.md).
+fork on github, (https://github.com/YOU/TESTREPO/Readme.md).
 
 ## github pull requests 
 
-One protocol for updating repositories that we use at software carpentry
+One protocol for updating repositories that we use at Software Carpentry
 is the "pull request."   This is a bundle of updates to the repository
 that can be accepted and merged into the upstream repository or rejected
 and not merged.  If you would like to share your changes with the
@@ -234,7 +243,7 @@ by pulling down my changes
     $ git merge upstream/master
     Updating 43844ea..3b36a87
     Fast-forward
-     README.rst |   2 +-
+     Readme.md |   2 +-
      1 files changed, 1 insertions(+), 1 deletions(-)
 
 Step 3 : You want to push it to the internet eventually, so you pull
@@ -272,8 +281,8 @@ you'll see something like this at the beginning of the file.
     =====================
 
 The intent is for you to edit the file and determine how to combine 
-the variants from the two branches before commiting the result.
-Decisions such as this
+the variants from the two branches before committing the result.
+Decisions like this
 must be made by a human.  Differences that can be automatically merged
 usually are, so humans are involved only when different edits touch
 the same piece of the repository. 

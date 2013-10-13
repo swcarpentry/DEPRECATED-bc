@@ -28,10 +28,10 @@ popular version control systems and their equivalent commands.
 
 What problems does version control solve?
 * undo mistakes by rolling back to earlier versions
-* run and test with older versions for debugging (when DID it break?)
+* run and test with older versions for debugging (when did it break?)
 * allows you to keep and switch between multiple verisons of code
 * automatic merging of edits by different people
-* can distrubute/publish analysis code and workflows
+* can distribute/publish analysis code and workflows
 * archive or back up your thesis so when your laptop goes away, your thesis doesn't
 
 Today, we'll be using git. Git is an example of a distributed version
@@ -176,7 +176,7 @@ called "Reproducible Science". You may call yours anything you like.
     $ nano description &
 
 Step 4 : Applications sometimes create files that are not needed. For
-example, some applicaitons create backup or temporary files with names like'filename.bak' and 
+example, some applications create backup or temporary files with names like'filename.bak' and 
 'filename.aux' that don't really need to be watched by version control. 
 You can ask git to ignore such files by editing
 the file '.git/info/exclude'. Edit the file to ignore files the end with '.bak'.
@@ -249,7 +249,7 @@ More frequent commits increase the granularity of your **undo** button.
 **ADVICE: Write good commit messages**
 
 There are no hard and fast rules, but good commits are atomic:
-they are the smallest change that remain meaningful. A good 
+they are the smallest meaningful change. A good 
 commit message usually contains a one-line description followed 
 by a longer explanation if necessary.  Remember, you will be writing
 commit messages for yourself as much as for anyone else.
@@ -466,7 +466,7 @@ hosted on github. Take a few minutes here, and pick a piece of code.
 Step 2 : Clone it. If you didn't find anything cool, you can chose the
 "instructional" Spoon-Knife repository:
     
-   $ cd
+    $ cd
     $ git clone git@github.com/octocat/Spoon-Knife.git
     Cloning into Spoon-Knife...
     remote: Counting objects: 24, done.
