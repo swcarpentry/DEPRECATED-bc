@@ -1,3 +1,5 @@
+.PHONY: all commands check clean
+
 all : commands
 
 ## commands : show all commands
