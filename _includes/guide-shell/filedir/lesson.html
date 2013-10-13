@@ -58,6 +58,8 @@ $
     <li>displays a new prompt to tell us that it's ready for more commands.</li>
   </ol>
 
+  <h3>Getting Around</h3>
+
   <p>
     Next,
     let's find out where we are
@@ -321,24 +323,6 @@ $
     it lists the contents of <code>/users/vlad/data</code>,
     because that's where we now are:
   </p>
-  
-  <div class="box">
-    <h3>No Output = OK</h3>
-
-    <p>
-      In general, shell programs do not output anything,
-      if no errors occurred. The principle behind this is
-      "If there is nothing to report, shut up.", i. e. if
-      there is output, either you specifically requested the
-      program to do so or something bad happened.
-    </p>
-    <p>
-      This does not apply to programs like <code>ls</code> or 
-      <code>pwd</code>, since the purpose of such programs is
-      to output something.
-    </p>
-
-  </div>
 
 <pre>
 $ <span class="in">pwd</span>
@@ -375,6 +359,27 @@ $ <span class="in">cd ..</span>
     or,
     more succinctly,
     the <a href="glossary.html#parent-directory">parent</a> of the current directory.
+  </p>
+  
+  <div class="box">
+    <h3>No Output = OK</h3>
+
+    <p>
+      In general, shell programs do not output anything,
+      if no errors occurred. The principle behind this is
+      "If there is nothing to report, shut up.", i. e. if
+      there is output, either you specifically requested the
+      program to do so or something bad happened.
+    </p>
+    <p>
+      This does not apply to programs like <code>ls</code> or 
+      <code>pwd</code>, since the purpose of such programs is
+      to output something.
+    </p>
+
+  </div>
+
+  <p class="continue">
     Sure enough,
     if we run <code>pwd</code> after running <code>cd&nbsp;..</code>,
     we're back in <code>/users/vlad</code>:
