@@ -239,7 +239,7 @@ Now let's open this file in Python:
     > fileHandle = open('testFile.txt','r')
 ```
 
-The second input, 'r' means I want to open the file for reading only. Once we
+The second input, `'r'` means I want to open the file for reading only. Once we
 open the file handle, we can `read()` the file for a specified number of bytes:
 
 ```python
@@ -290,7 +290,7 @@ method to get rid of the newline character.
 
 Example:
 
-    (unix shell) $ cat testFile.txt
+  $ cat testFile.txt
     abcde
     fghij
 
@@ -308,21 +308,23 @@ Example:
 
 ```
 
-Notice that when we called `readline()` the second time for sameFile, it outputs the second line of the file?
+Notice that when we called `readline()` the second time for `sameFile`, it outputs the second line of the file?
 
-File handles are also iterable, which means we can use them in for loops or list extensions:
+File handles are also iterable, which means we can use them in for loops or list extensions. It is also good practice
+to close files after handling them by using the `close()` function.
 
 ```python
     > f = open('testFile.txt','r')
     > l = [s.strip() for s in f]
     > l
     ['abcde', 'fghij']
-    > f.close()
+		> f.close()
     
     > l = []
     > f = open('testFile.txt','r')
     > for s in f:
          l.append(s.strip())
+		> f.close()
 ```
 
 These are equivalent operations. It's often best to handle a file one
@@ -341,21 +343,20 @@ program to a file or use "|" to pipe it to another program.
 
 Sometimes, you need to direct your output directly to a file handle. For
 instance, if your program produces two output streams, you may want to
-assign two open file handles. Opening a file for reading # writing?
-simply requires
-changing the second option from 'r' to 'w' or 'a'.
+assign two open file handles. Opening a file for reading / writing / appending (to the end of file)
+simply requires changing the second option from `'r'` to `'w'` or `'a'`.
 
-*Caution!* Opening a file with the 'w' option means start writing *at
+*Caution!* Opening a file with the `'w'` option means start writing *at
 the beginning*, which may overwrite old material. If you want to append
-to the file without losing what is already there, open it with 'a'. Writing to
+to the file without losing what is already there, open it with `'a'`. Writing to
 a file uses the `write()` command, which accepts a string. Suppose that we have our
-friendly file, testFile.txt:
+friendly file, `testFile.txt`:
 
-    (unix shell) $ cat testFile.txt
+    $ cat testFile.txt
       abcde
       fghij
 
-If we open this file using the 'w' mode, then it will overwrite from the beginning!
+If we open this file using the `'w'` mode, then it will overwrite from the beginning!
 
 ```python
     > outFile = open('testFile.txt','w')
@@ -366,21 +367,23 @@ If we open this file using the 'w' mode, then it will overwrite from the beginni
 
 So if we read this file now, it'd be...
 
-    (unix shell) $ cat testFile.txt
+    $ cat testFile.txt
       This is the first line!
 
-Now let's open the file in 'a' mode this time.
+Now let's open the file in 'a' mode this time to append to the end of file; note that we write to it in the same way
+as `'w'` mode, but instead of over-writing the file, we just attach it to the end of the file.
 ```python
     > outFile = open('testFile.txt','a')
     > outFile.write('This is the second line!\n')
     > outFile.close()
     
 ```
-Because we wrote to this file in append mode, we get:
+Implementing the append mode via `'a'` returns the following:
 
-    (unix shell) $ cat testFile.txt
+    $ cat testFile.txt
       This is the first line!
       This is the second line!
+
 
 Aside: The first exercise
 =========================
@@ -404,7 +407,7 @@ Example:
 First, count the number of lines in a unix shell by using `wc -l <FILENAME>`. `wc` is a word-count command in unix,
 and the `-l` option specifies line counting.
 
-    (unix shell) $ wc -l bigFile.txt
+    $ wc -l bigFile.txt
       10000 bigFile.txt
   
 bigFile.txt has 10000 lines! But we want to make some changes on the fly and keep a copy of bigFile.txt. An easy
