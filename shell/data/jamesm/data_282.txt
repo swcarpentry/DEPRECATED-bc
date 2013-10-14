@@ -1,9 +1,0 @@
-# 
-Reported: Fri May 13 15:16:27 2011
-Subject: georgeBackstreet233
-Year/month of birth: 1991/01
-Sex: F
-CI type: 8
-Volume: 3
-Range: 6
-Discrimination: 5

@@ -1,9 +1,0 @@
-# 
-Reported: Wed Jul 6 10:39:52 2011
-Subject: robynStarr251
-Year/month of birth: 1996/04
-Sex: F
-CI type: 24
-Volume: 5
-Range: 4
-Discrimination: 3
