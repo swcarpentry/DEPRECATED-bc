@@ -33,7 +33,51 @@
   </p>
 
   <figure id="f:pipeline_where">
-    <img alt="Two-Stage Query Processing Pipeline" src="db/pipeline_where.png" />
+    	<table >
+	<tr>
+		<td> <code>select * from Visited <span class="highlight">where site='DR-1'</span>;</code>
+		</td>
+		<td>
+		</td>
+		<td> <code><span class="highlight">select * </span>from Visited where site='DR-1';</code>
+		</td>
+		</tr>
+	<tr valign="top">
+		<td >
+			
+		
+          <table border="1" cellspacing="0" cellpadding="2" class="db">
+            <tr><th colspan="3">Visited</th></tr>
+            <tr><td><i><u>ident</i></u></td><td><i><u>site</i></u></td><td><i><u>dated</i></u></td></tr>
+            <tr bgcolor="#FFFF00"><td>619</td><td>DR-1</td><td>1927-02-08</td></tr>
+            <tr bgcolor="#FFFF00"><td>622</td><td>DR-1</td><td>1927-02-10</td></tr>
+            <tr><td>734</td><td>DR-3</td><td>1939-01-07</td></tr>
+            <tr><td>735</td><td>DR-3</td><td>1930-01-12</td></tr>
+            <tr><td>751</td><td>DR-3</td><td>1930-02-26</td></tr>
+            <tr><td>752</td><td>DR-3</td><td>NULL</td></tr>
+            <tr><td>837</td><td>MSK-4</td><td>1932-01-14</td></tr>
+            <tr bgcolor="#FFFF00"><td>844</td><td>DR-1</td><td>1932-03-22</td></tr>
+          </table>
+		</td>
+		<td cellpadding="20">
+			&#8594;
+		</td>
+		<td >
+			
+		
+			<table border="1" cellspacing="0" cellpadding="2" class="db">
+            <tr><th colspan="3">Visited</th></tr>
+            <tr><td><i><u>ident</i></u></td><td><i><u>site</i></u></td><td><i><u>dated</i></u></td></tr>
+            <tr bgcolor="#FFFF00"><td>619</td><td>DR-1</td><td>1927-02-08</td></tr>
+            <tr bgcolor="#FFFF00"><td>622</td><td>DR-1</td><td>1927-02-10</td></tr>
+            <tr bgcolor="#FFFF00"><td>844</td><td>DR-1</td><td>1932-03-22</td></tr>
+          </table>
+		
+		</td>
+    </tr>
+	</table>    
+	
+	
     <figcaption>Figure 4: Two-Stage Query Processing Pipeline</figcaption>
   </figure>
 
