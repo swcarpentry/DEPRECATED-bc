@@ -1,6 +1,9 @@
 ---
-title: Strings and File I/O in Python
+ 	  	-layout: lesson
+ 	  	-root: ../../..
+ 	   	 title: Strings and File I/O in Python
 ---
+**Prepared by Tommy Guy**
 # Edited by Jin
 
 Lesson goals:
@@ -98,8 +101,10 @@ Unicode strings in Python are specified with a leading u:
 ```
 
 *Tip: Unicode and ASCII are different types of character sets that can be handled by programs.
-*     For all intents and purposes, we will assume that strings are in ASCII (as per Python standard)
-*     unless otherwise stated. Moreover, most scientific data is stored in ASCII format as well!
+*     For all intents and purposes, we will assume that strings are in ASCII (as per Python's default coding)
+*     unless otherwise stated. Moreover, a large amount scientific data is stored in ASCII format as well. 
+*     Bear in mind that images, which also comprise a significant amount of scientific data, are stored in
+*     a binary format.
 
 
 Working with Strings
@@ -107,7 +112,7 @@ Working with Strings
 
 Strings are iterables, which means many of the ideas from lists can also
 be applied directly to string manipulation. In essence, being 'iterable' allows strings
-to be handled like the way lists are handled.
+to be handled the same way lists are handled.
 
 
 For instance, characters can be accessed individually or in sequences:
@@ -122,7 +127,7 @@ For instance, characters can be accessed individually or in sequences:
     'bcd'
 ```
 
-They can also be compared using equals and sorted.
+They can also be compared using equals, and sorted in the same way as lists:
 
 ```python
     > 'str1' == 'str2'
@@ -145,9 +150,9 @@ Since strings are iterables, you can loop through strings!
           e...
 ```
 
-Like lists, we can also see if a character, or sequence of characters, is within our string.
+Like lists, we can also see if a character, or sequence of characters, is within a string.
 In a list, we can test to see if a value exists: Python iterates through all elements of the list
-and checks to see if our query is within the list. For instance,
+until it verifies that our query is within the list. For instance,
 ```python
     > my_list = ['a', 1, 3]
     > 'a' in my_list
@@ -234,16 +239,15 @@ Now let's open this file in Python:
     > fileHandle = open('testFile.txt','r')
 ```
 
-The second input, 'r' means I want to open the file for reading only. I
-can not write to this handle. The `read()` command, associated to this fileHandle object, 
-will read a specified number of bytes and output, interestingly, a string!
+The second input, 'r' means I want to open the file for reading only. Once we
+open the file handle, we can `read()` the file for a specified number of bytes:
 
 ```python
     > s = fileHandle.read(3)
     > print s
     abc
 ```
-By calling `read()` from the fileHandle object, we read the first three characters, where each character is a byte long.
+By calling `read()` from the `fileHandle` object, we read the first three characters, where each character is a byte long.
 The `read()` function iterates through each character and churns out a string from the file to screen.
 
 *Caution*: Note that using read() will move along the file stream and the next time we call read(), we'd point to the
@@ -260,6 +264,8 @@ remember that iterables start at index 0?)
     'd'
 ```
 
+Using `tell()` will return the ith byte to which we are pointing at within `fileHandle`.
+
 The file we are using is a long series of characters, but two of the
 characters are new line characters. If we looked at the file in
 sequence, it would look like "abcde\nfghij\n". Separating a file into
@@ -273,13 +279,14 @@ file. The first is to use the `readlines()` method:
     > lineArr
     ['abcde\n', 'fghij\n']
 ```
-A very important point about the readlines method is that it *keeps* the
+A very important point about the `readlines()` method is that it *keeps* the
 newline character, `\n`, at the end of each line. You can use the `strip()`
 method to get rid of the newline character.
 
-*Caution*: confusingly enough, Python has both a readline() and readlines() function. Readlines(), as shown above,
+*Caution*: confusingly enough, Python has both a `readline()` and `readlines()` function. `readlines()`, as shown above,
            will read the entire file and separate each line to an individual element of a list. On the other hand,
-           readline() will read one line at a time, and like the command read(), it will keep a pointer to the next line.
+           `readline()` will read one line at a time, and like the command `read()`, it will keep a pointer to the
+           next line.
 
 Example:
 
@@ -387,9 +394,6 @@ and I'll put a short piece of code on how to use sed at the bottom.
 
 *For the super keen*
 
-
-
-
 You can use `seek()` and `tell()` to verify that even if your file handle is pointing to the
 middle of a file, write commands go to the end of the file in append mode. Sometimes, if space is
 not an issue, I would suggest making a copy of the file on-the-fly in Python. However, if it's a big
@@ -421,8 +425,8 @@ I'll show you the on-the-fly method where we add the string " NOW EDITED " at th
 
 ```
 
-Aside: The sed method
-=======================
+Aside: The sed method *Not Python* 
+========================================
 
 `sed` is a built-in unix command for manipulating text files.
 If we wanted to change a file in-place, then we can use substitute:
@@ -458,13 +462,3 @@ new pattern of interest. Once we submit, we close with a closing quotation mark,
       fghij
       HELLO WORLD!!
       klmnop
-
-        
-
-
-
-
-
-
-
-
