@@ -1,0 +1,315 @@
+<div id="s:setdict:phylotree:lesson" class="lesson">
+
+  <p>
+    As Theodosius Dobzhansky said almost a century ago,
+    nothing in biology makes sense except in the light of evolution.
+    Since mutations usually occur one at a time,
+    the more similarities there are between the DNA of two species,
+    the more recently they had a common ancestor.
+    We can use this idea to reconstruct the evolutionary tree for a group of organisms
+    using a hierarchical clustering algorithm.
+  </p>
+
+  <p>
+    We don't have to look at the natural world very hard
+    to realize that some organisms are more alike than others.
+    For example, if we look at the appearance, anatomy, and lifecycles
+    of the seven fish shown in <a href="#f:species_pairs">Figure 10</a>,
+    we can see that three pairs are closely related.
+    But where does the seventh fit in?
+    And how do the pairs relate to each other?
+  </p>
+
+  <figure id="f:species_pairs">
+    <table>
+      <tr>
+        <td><img src="setdict/species_pairs_1.png" alt="Pairing Up Species" /></td>
+        <td><img src="setdict/species_pairs_2.png" alt="Pairing Up Species" /></td>
+      </tr>
+    </table>
+    <figcaption>Figure 10: Pairing Up Species</figcaption>
+  </figure>
+
+  <p>
+    The first step is to find the two species that are most similar,
+    and construct their plausible common ancestor.
+    We then pair two more, and two more,
+    and start joining pairs to individuals,
+    or pairs with other pairs.
+    Eventually, all the organisms are connected.
+    We can redraw those connections as a tree,
+    using the heights of branches to show the number of differences between the species we're joining up
+    (<a href="#f:species_tree">Figure 11</a>).
+  </p>
+
+  <figure id="f:species_tree">
+    <img src="setdict/species_pairs_3.png" alt="Pairing Up Species" />
+    <figcaption>Figure 11: Tree of Life</figcaption>
+  </figure>
+
+  <p>
+    Let's turn this into an algorithm:
+  </p>
+
+<pre>
+S = {all organisms}
+while S != {}:
+  a, b = two closest entries in U
+  p = common parent of {a, b}
+  S = S - {a, b}
+  S = S + {p}
+</pre>
+
+  <p class="continue">
+    Initially, the set S contains all the species we're interested in.
+    Each time through the loop,
+    we find the two that are closest,
+    create their common parent,
+    remove the two we just paired up from the set,
+    and insert the newly-created parent.
+    Since the set shrinks by one element each time
+    (two out, one in),
+    we can be sure this algorithm eventually terminates.
+  </p>
+
+  <p>
+    But how do we calculate the distance between an inferred parent and other species?
+    One simple rule is to use the average distance between that other species
+    and the two species that were combined to create that parent.
+    Let's illustrate it by calculating a phylogenetic tree for humans, vampires, werewolves, and mermaids.
+    The distances between each pair of species is shown in
+    <a href="#f:species_tree">Figure 12</a>
+    and in the table below.
+    (We only show the lower triangle because it's symmetric.)
+  </p>
+
+  <figure id="f:species_tree">
+    <table>
+      <tr>
+        <td><img src="setdict/species_distance_1.png" alt="Distances Between Species" /></td>
+        <td><img src="setdict/species_distance_2.png" alt="Distances Between Species" /></td>
+        <td><img src="setdict/species_distance_3.png" alt="Distances Between Species" /></td>
+        <td><img src="setdict/species_distance_4.png" alt="Distances Between Species" /></td>
+      </tr>
+    </table>
+    <figcaption>Figure 12: Distances Between Species</figcaption>
+  </figure>
+
+  <table border="1">
+    <tr> <td>&nbsp;</td>   <td>human</td>  <td>vampire</td> <td>werewolf</td> <td>mermaid</td> </tr>
+    <tr> <td>human</td>    <td>&nbsp;</td> <td>&nbsp;</td>  <td>&nbsp;</td>   <td>&nbsp;</td> </tr>
+    <tr> <td>vampire</td>  <td>13</td>     <td>&nbsp;</td>  <td>&nbsp;</td>   <td>&nbsp;</td> </tr>
+    <tr> <td>werewolf</td> <td>5</td>      <td>6</td>       <td>&nbsp;</td>   <td>&nbsp;</td> </tr>
+    <tr> <td>mermaid</td>  <td>12</td>     <td>15</td>      <td>29</td>       <td>&nbsp;</td> </tr>
+  </table>
+
+  <p>
+    The closest entries&mdash;i.e., the pair with minimum distance&mdash;are human and werewolf.
+    We replace this with a common ancestor,
+    which we will call HW,
+    then set the distance between it and each other species X
+    to be (HX + WX)/2,
+    i.e.,
+    the average of the human-to-X and werewolf-to-X distances.
+    This gives us a new table:
+  </p>
+
+  <table border="1">
+    <tr> <td>&nbsp;</td>   <td>HW</td>     <td>vampire</td> <td>mermaid</td> </tr>
+    <tr> <td>HW</td>       <td>&nbsp;</td> <td>&nbsp;</td>  <td>&nbsp;</td> </tr>
+    <tr> <td>vampire</td>  <td>9.5</td>    <td>&nbsp;</td>  <td>&nbsp;</td> </tr>
+    <tr> <td>mermaid</td>  <td>20.5</td>   <td>15</td>      <td>&nbsp;</td> </tr>
+  </table>
+
+  <p>
+    Repeating this step, we combine HW with V:
+  </p>
+
+  <table border="1">
+    <tr> <td>&nbsp;</td>   <td>HWV</td>    <td>mermaid</td> </tr>
+    <tr> <td>HWV</td>      <td>&nbsp;</td> <td>&nbsp;</td> </tr>
+    <tr> <td>mermaid</td>  <td>17.75</td>  <td>&nbsp;</td> </tr>
+  </table>
+
+  <p class="continue">
+    and finally HWV with M.
+  </p>
+
+  <p>
+    We illustrated our algorithm with a triangular matrix,
+    but the order of the rows and columns is arbitrary.
+    The matrix is really just a lookup table mapping species to distances,
+    and as soon as we think of lookup tables,
+    we should think of dictionaries.
+    The keys are species&mdash;either the ones we started with,
+    or the ones we created&mdash;and
+    the values are the distances between them,
+    so our original table becomes:
+  </p>
+
+<pre>
+{
+    ('human',   'mermaid')  : 12,
+    ('human',   'vampire')  : 13,
+    ('human',   'werewolf') :  5,
+    ('mermaid', 'vampire')  : 15,
+    ('mermaid', 'werewolf') : 29,
+    ('vampire', 'werewolf') :  6
+}
+</pre>
+
+  <p>
+    There is one trick here.
+    Whenever we have a distance,
+    such as that between mermaids and vampires,
+    we have to decide whether to use the key <code>('mermaid', 'vampire')</code>
+    or <code>('vampire', 'mermaid')</code>
+    (or to record the value twice,
+    once under each key).
+  </p>
+
+  <p>
+    Let's start by setting up our test case
+    and then calling a top-level function
+    to process our data:
+  </p>
+
+<pre src="setdict/phylogen.py">
+if __name__ == '__main__':
+
+    species = {'human', 'mermaid', 'werewolf', 'vampire'}
+
+    scores = {
+        ('human',   'mermaid')  : 12,
+        ('human',   'vampire')  : 13,
+        ('human',   'werewolf') :  5,
+        ('mermaid', 'vampire')  : 15,
+        ('mermaid', 'werewolf') : 29,
+        ('vampire', 'werewolf') :  6
+    }
+
+    order = main(species, scores)
+    print order
+</pre>
+
+  <p class="continue">
+    In a real program,
+    of course,
+    the data would be read in from a file,
+    and the set of actual species' names would be generated from it,
+    but this will do for now.
+  </p>
+
+  <p>
+    Next,
+    let's translate our algorithm into something that could be runnable Python:
+  </p>
+
+<pre src="setdict/phylogen.py">
+def main(species, scores):
+    result = []
+    while len(species) &gt; 1:
+        left, right = find_min_pair(species, scores)
+        result.append(make_pair(left, right))
+        species -= {left, right}
+        make_new_pairs(species, scores, left, right)
+        species.add(make_name(left, right))
+    return result
+</pre>
+
+  <p>
+    This is almost a direct translation of our starting point;
+    the only significant difference is that we're keeping
+    the set of "active" species in a set,
+    and the scores in a dictionary.
+    As species are combined,
+    we remove their names from the set and add a made-up name for their parent.
+    We never actually remove scores from the table;
+    once the name of a species is out of the set <code>species</code>,
+    we'll never try to look up anything associated with it
+    in <code>scores</code> again.
+  </p>
+
+  <p>
+    The next step is to write <code>find_min_pair</code>
+    to find the lowest score currently in the table:
+  </p>
+
+<pre>
+def find_min_pair(species, scores):
+    min_pair = None
+    min_val = None
+    for left in species:
+        for right in species:
+            if left &lt; right:
+                this_pair = make_pair(left, right)
+                if (min_val is None) or (scores[this_pair] &lt; min_val):
+                    min_pair = this_pair
+                    min_val = scores[this_pair]
+    return min_pair
+</pre>
+
+  <p class="continue">
+    This function loops over all possible combinations of species names,
+    but only actually <em>uses</em> the ones that pass our ordering test
+    (i.e., the ones for which the first species name
+    comes before the second species name).
+    If this is the first score we've looked at,
+    or if it's lower than a previously-seen score,
+    we record the pair of species and the associated score.
+    When we're done,
+    we return the pair of species.
+  </p>
+
+  <p>
+    The function that makes new entries for the table
+    is fairly straightforward as well.
+    It just loops over all the active species,
+    averages the distances between them and the two species being combined,
+    and puts a new score in the table:
+  </p>
+
+<pre>
+def make_new_pairs(species, scores, left, right):
+    for current in species:
+        left_score = scores[make_pair(current, left)]
+        right_score = scores[make_pair(current, right)]
+        new_score = (left_score + right_score) / 2.0
+        scores[make_pair(current, make_name(left, right))] = new_score
+</pre>
+
+  <p>
+    Finally,
+    the <code>make_pair</code> and <code>make_name</code> functions are simply:
+  </p>
+
+<pre>
+def make_pair(left, right):
+    if left &lt; right:
+        return (left, right)
+    else:
+        return (right, left)
+
+def make_name(left, right):
+    return '&lt;%s, %s&gt;' % make_pair(left, right)
+</pre>
+
+  <p>
+    Let's try running the program:
+  </p>
+
+<pre>
+$ python phylogen.py
+<span class="out">[('human', 'werewolf'), ('&lt;human, werewolf&gt;', 'vampire'), ('&lt;&lt;human, werewolf&gt;, vampire&gt;', 'mermaid')]</span>
+</pre>
+
+  <p>
+    This shows that humans and werewolves were combined first,
+    that their pairing was then combined with vampires,
+    and that mermaids were added to the cluster last.
+    We obviously should do a lot more testing,
+    but so far,
+    we seem to be on the right track.
+  </p>
+
+</div>

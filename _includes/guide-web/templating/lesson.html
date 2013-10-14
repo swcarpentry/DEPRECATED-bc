@@ -1,0 +1,325 @@
+<div id="s:web:templating:lesson" class="lesson">
+
+  <p>
+    Turning a Python list into an HTML <code>ol</code> or <code>ul</code> list
+    seems like a natural thing to do,
+    so you might expect that programmers would have created libraries to do it.
+    In fact,
+    they have gone one step further
+    and creating systems that allow people to put bits of code directly into HTML files.
+    Such a file is usually called a <a href="glossary.html#template">template</a>,
+    since it is the general pattern for any number of potential pages.
+  </p>
+
+  <p>
+    Here's a simple example.
+    Suppose we want to create a set of web pages
+    to display point-form biographies of famous scientists.
+    We want each page to look like this:
+  </p>
+
+<pre>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Biography of Beatrice Tinsley&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Beatrice Tinsley&lt;/h1&gt;
+    &lt;ol&gt;
+      &lt;li&gt;Born 1941&lt;/li&gt;
+      &lt;li&gt;Died 1981&lt;/li&gt;
+      &lt;li&gt;Studied stellar aging&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <p class="continue">
+    but since we expect to have hundreds of such pages,
+    we don't want to write each one by hand.
+    (We certainly don't want to have to <em>revise</em> each one by hand
+    when the university decides it wants them in a slightly different format...)
+    To make things easier on ourselves,
+    let's create a single template page called <code>biography.html</code>
+    that contains:
+  </p>
+
+{% raw %}
+<pre>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Biography of {{name}}&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;{{name}}&lt;/h1&gt;
+    &lt;ol&gt;
+      {% for f in facts %}
+      &lt;li&gt;{{f}}&lt;/li&gt;
+      {% endfor %}
+    &lt;/ol&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+{% endraw %}
+
+  <p>
+    This has the same general structure as a general biography,
+    but there are a few changes:
+    it uses <code>{{name}}</code> instead of the scientist's name,
+    and rather than listing each biographical detail,
+    it has something that looks a lot like a <code>for</code> loop
+    that iterates over something called <code>facts</code>.
+  </p>
+
+  <p>
+    What we need next is a program that can expand this template
+    using particular values for <code>name</code> and <code>facts</code>.
+    We will use a Python template library called Jinja2 to do this;
+    there are many others
+    but they all work in more or less the same way
+    (which means, "They each have their own slightly different rules
+    for what can go in a page and how it's expanded.").
+  </p>
+
+  <p>
+    First,
+    let's put all the values we want to customize the page with into variables:
+  </p>
+
+<pre>
+who = 'Beatrice Tinsley'
+what = ['Born 1941', 'Died 1981', 'Studied stellar aging']
+</pre>
+
+  <p>
+    Next,
+    we have to import the Jinja2 library
+    and do a bit of magic to load the template for our page:
+  </p>
+
+<pre>
+import jinja2
+
+loader = jinja2.FileSystemLoader(['.'])
+environment = jinja2.Environment(loader=loader)
+template = environment.get_template('biography.html')
+</pre>
+
+  <p class="continue">
+    We start by importing the <code>jinja2</code> library,
+    and then create an object called a "loader".
+    Its job is to find template files and load them into memory;
+    its argument is a list of the directories we want it to search (in order).
+    For now,
+    we are only looking in the current directory,
+    so the list is just <code>['.']</code>
+    (i.e., the current directory).
+  </p>
+
+  <p>
+    Once we have that loader,
+    we use it to create a Jinja2 "environment",
+    which&mdash;well, honestly,
+    we don't need two separate objects for what we're doing,
+    but more complicated applications might need several loaders,
+    or might be expanding different sets of templates in different ways,
+    and the <code>Environment</code> object is where all that is handled.
+  </p>
+
+  <p>
+    What we <em>really</em> want is the last line,
+    which asks the environment to load the template file <code>'biography.html'</code>
+    and give us an object that knows how to expand itself.
+    We're now ready to do the actual expansion:
+  </p>
+
+<pre>
+result = template.render(name=who, facts=what)
+print result
+</pre>
+
+{% raw %}
+  <p class="continue">
+    When we call <code>template.render</code>,
+    we pass it any number of name-value pairs.
+    (Remember,
+    the odd-looking expression <code>name=who</code> in the function call
+    <a href="python.html#a:default-value">means</a>,
+    "Assign the value of the variable <code>who</code> in the calling code
+    to the parameter called <code>name</code> inside the function.")
+    Those names are turned into variables,
+    and can be used inside the template,
+    so that <code>{{name}}</code> is given the string <code>'Beatrice Tinsley'</code>
+    and <code>facts</code> is given our list of facts about her.
+  </p>
+{% endraw %}
+
+  <p>
+    The method call <code>template.render</code> "runs" the template
+    as if it were a program,
+    and returns the string that's created.
+    When we print it out,
+    we get:
+  </p>
+
+<pre>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Biography of Beatrice Tinsley&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Beatrice Tinsley&lt;/h1&gt;
+    &lt;ol&gt;
+      
+      &lt;li&gt;Born 1941&lt;/li&gt;
+      
+      &lt;li&gt;Died 1981&lt;/li&gt;
+      
+      &lt;li&gt;Studied stellar aging&lt;/li&gt;
+      
+    &lt;/ol&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <p>
+    Why go to all of this trouble?
+    Because if we want to create another page with exactly the same format,
+    all we have to do is call:
+  </p>
+
+<pre>
+result = template.render(name='Helen Sawyer Hogg',
+                         facts=['Born 1905',
+                                'Died 1993',
+                                'Studied globular clusters',
+                                'Wrote a popular astronomy column for 30 years'])
+</pre>
+
+  <p class="continue">
+    and we will get:
+  </p>
+
+<pre>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Biography of Helen Sawyer Hogg&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Helen Sawyer Hogg&lt;/h1&gt;
+    &lt;ol&gt;
+      
+      &lt;li&gt;Born 1905&lt;/li&gt;
+      
+      &lt;li&gt;Died 1993&lt;/li&gt;
+      
+      &lt;li&gt;Studied globular clusters&lt;/li&gt;
+      
+      &lt;li&gt;Wrote a popular astronomy column for 30 years&lt;/li&gt;
+      
+    &lt;/ol&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <div class="box">
+    <h3>Pros and Cons of Templating</h3>
+
+    <p>
+      Putting code in HTML templates and then expanding that to create actual pages
+      has advantages and disadvantages.
+      The main advantage is that simple things are simple to do:
+      the biography template shown above is a lot easier to understand than either
+      a bunch of <code>print</code> statements,
+      or a set of functions that
+      <a href="extras.html#s:web:creating">construct a document in memory</a>
+      and then turn the result into a string.
+    </p>
+
+    <p>
+      The other big advantage of templating is that
+      all of the generated pages are guaranteed to have the same format.
+      If subsections are marked with an <code>h2</code> heading in one,
+      they'll be marked with an <code>h2</code> in all the others.
+      This makes it easier for programs to read and process those pages.
+    </p>
+
+    <p>
+      The biggest drawback of templating is the lack of support for debugging.
+      It's very common for template expansion to do what you said,
+      rather than what you meant,
+      and working backward from a page that has the wrong content
+      to the bits of template that weren't quite right
+      can be complicated.
+      One way to keep it manageable is
+      to keep the templates as simple as possible.
+      Any calculations more complicated than simple addition
+      should be done in the program,
+      and the result passed in as a variable.
+      Similarly,
+      while deeply-nested conditional statements in programs are hard to understand,
+      their equivalents in templates are even harder,
+      and so should be avoided.
+    </p>
+
+  </div>
+
+  <p>
+    Jinja2 templates support all the basic features of Python.
+    For example,
+    we can modify our template file to say:
+  </p>
+
+{% raw %}
+<pre>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Biography of {{name}}&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;{{name}}&lt;/h1&gt;
+    <span class="highlight">{% if facts %}</span>
+      &lt;ol&gt;
+        {% for f in facts %}
+        &lt;li&gt;{{f}}&lt;/li&gt;
+        {% endfor %}
+      &lt;/ol&gt;
+    <span class="highlight">{% else %}
+      &lt;p&gt;No facts available.&lt;p&gt;
+    {% endif %}</span>
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+{% endraw %}
+
+  <p class="continue">
+    so that if the list <code>facts</code> is empty,
+    the page displays a paragraph saying that,
+    rather than an empty ordered list.
+    We can also tell Jinja2 to include one template in another,
+    so that if we want every page to have the same logo and license statement,
+    we can use:
+  </p>
+
+{% raw %}
+<pre>
+{% include "logo.html" %}
+</pre>
+{% endraw %}
+
+  <p class="continue">
+    at the top,
+    and:
+  </p>
+
+{% raw %}
+<pre>
+{% include "license.html" %}
+</pre>
+{% endraw %}
+
+  <p class="continue">
+    at the bottom.
+  </p>
+
+</div>

@@ -1,0 +1,21 @@
+0 {
+Date: 2011-04-22
+Time: 15:16
+Animal: Wolverine
+Count: 5
+}
+
+1 {
+Date: 2011-04-22
+Time: 17:28
+Animal: Owl
+Count: 4
+}
+
+2 {
+Date: 2011-04-22
+Time: 01:06
+Animal: Owl
+Count: 27
+}
+

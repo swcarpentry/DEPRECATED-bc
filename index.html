@@ -1,0 +1,95 @@
+---
+layout: bootcamp
+root: .
+venue: Euphoric State University
+address: 123 College Street, Euphoria
+country: United-States
+humandate: June 17-18, 2020
+humantime: 9:00 am - 4:30 pm
+startdate: 2020-06-17
+enddate: 2020-06-18
+latlng: 41.7901128,-87.6007318
+registration: restricted
+instructor: ["Grace Hopper", "Alan Turing"]
+contact: random@software-carpentry.org
+---
+<div align="center">
+  <p><strong><em>
+      This page is a template for bootcamp home pages.
+      <br/>
+      Please see
+      <a href="https://github.com/swcarpentry/bc">https://github.com/swcarpentry/bc</a>
+      for instructions on how to create
+      a repository for your bootcamp.
+      <br/>
+      Please also see
+      the <a href="{{page.root}}/lessons/index.html">index to our lessons</a>
+      and the <a href="{{page.root}}/lessons/setup.html">index to setup instructions</a>.
+  </em></strong></p>
+</div>
+{% include bootcamps/instructors.html %}
+{% include bootcamps/what.html %}
+{% include bootcamps/who.html %}
+{% include bootcamps/requirements.html %}
+{% include bootcamps/python.html %}
+{% include bootcamps/contact.html %}
+
+<hr/>
+
+<h2>Setup</h2>
+
+<div class="row-fluid">
+  <div class="span6">
+    {% include setup/overview-bash.html %}
+    {% include setup/overview-editor.html %}
+  </div>
+  <div class="span6">
+    {% include setup/overview-git.html %}
+    {% include setup/overview-python.html %}
+  </div>
+</div>
+
+<hr/>
+
+<h2>Topics</h2>
+
+<div class="row-fluid">
+  <div class="span6">
+    <h3><a href="lessons/shell.html">The Unix Shell</a></h3>
+    <ul>
+      <li>{% include guide-shell/filedir/title.md %}</li>
+      <li>{% include guide-shell/create/title.md %}</li>
+      <li>{% include guide-shell/pipefilter/title.md %}</li>
+      <li>{% include guide-shell/loop/title.md %}</li>
+      <li>{% include guide-shell/scripts/title.md %}</li>
+      <li>{% include guide-shell/find/title.md %}</li>
+    </ul>
+  </div>
+  <div class="span6">
+    <h3><a href="lessons/db.html">Databases</a></h3>
+    <ul>
+      <li>{% include guide-db/select/title.md %}</li>
+      <li>{% include guide-db/distinct/title.md %}</li>
+      <li>{% include guide-db/filter/title.md %}</li>
+      <li>{% include guide-db/calc/title.md %}</li>
+      <li>{% include guide-db/sort/title.md %}</li>
+      <li>{% include guide-db/null/title.md %}</li>
+      <li>{% include guide-db/aggregate/title.md %}</li>
+      <li>{% include guide-db/grouping/title.md %}</li>
+      <li>{% include guide-db/join/title.md %}</li>
+      <li>{% include guide-db/create/title.md %}</li>
+      <li>{% include guide-db/transactions/title.md %}</li>
+      <li>{% include guide-db/programming/title.md %}</li>
+    </ul>
+  </div>
+</div>
+
+<hr/>
+
+<h2>Reference Guides</h2>
+
+<ul>
+  <li><a href="{{page.root}}/lessons/ref/shell.html">The Unix Shell</a></li>
+  <li><a href="{{page.root}}/lessons/ref/python.html">Python</a></li>
+  <li><a href="{{page.root}}/lessons/ref/sql.html">SQL</a></li>
+</ul>

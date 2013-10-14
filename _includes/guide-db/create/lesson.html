@@ -1,0 +1,211 @@
+<div class="lesson" id="s:db:create:lesson">
+
+  <p>
+    So far we have only looked at how to get information out of a database,
+    both because that is more frequent than adding information,
+    and because most other operations only make sense
+    once queries are understood.
+    If we want to create and modify data,
+    we need to know two other pairs of commands.
+  </p>
+
+  <p>
+    The first pair are <code>create&nbsp;table</code> and <code>drop&nbsp;table</code>.
+    While they are written as two words,
+    they are actually single commands.
+    The first one creates a new table;
+    its arguments are the names and types of the table's columns.
+    For example,
+    the following statements create the four tables in our survey database:
+  </p>
+
+<pre>
+create table Person(ident text, personal text, family text);
+create table Site(name text, lat real, long real);
+create table Visited(ident integer, site text, dated text);
+create table Survey(taken integer, person text, quant real, reading real);
+</pre>
+
+  <p>
+    We can get rid of one of our tables using:
+  </p>
+
+<pre>
+drop table Survey;
+</pre>
+
+  <p class="continue">
+    Be very careful when doing this:
+    most databases have some support for undoing changes,
+    but it's better not to have to rely on it.
+  </p>
+
+  <p>
+    Different database systems support different data types for table columns,
+    but most provide the following:
+  </p>
+
+  <table>
+    <tr>
+      <td>
+        <code>integer</code>
+      </td>
+      <td>
+        A signed integer.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>real</code>
+      </td>
+      <td>
+        A floating point value.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>text</code>
+      </td>
+      <td>
+        A string.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>blob</code>
+      </td>
+      <td>
+        Any "binary large object"
+        such as an image or audio file.
+      </td>
+    </tr>
+  </table>
+
+  <p>
+    most databases also support Booleans and date/time values;
+    SQLite uses the integers 0 and 1 for the former,
+    and represents the latter as discussed <a href="#a:dates">earlier</a>.
+    An increasing number of databases also support geographic data types,
+    such as latitude and longitude.
+    Keeping track of what particular systems do or do not offer,
+    and what names they give different data types,
+    is an unending portability headache.
+  </p>
+
+  <p>
+    When we create a table,
+    we can specify several kinds of constraints on its columns.
+    For example,
+    a better definition for the <code>Survey</code> table would be:
+  </p>
+
+<pre>
+create table Survey(
+        taken   integer not null, <span class="comment">-- where reading taken</span>
+        person  text,             <span class="comment">-- may not know who took it</span>
+        quant   real not null,    <span class="comment">-- the quantity measured</span>
+        reading real not null,    <span class="comment">-- the actual reading</span>
+        primary key(taken, quant),
+        foreign key(taken) references Visited(ident),
+        foreign key(person) references Person(ident)
+);
+</pre>
+
+  <p class="continue">
+    Once again,
+    exactly what constraints are avialable
+    and what they're called
+    depends on which database manager we are using.
+  </p>
+
+  <p>
+    Once tables have been created,
+    we can add and remove records using our other pair of commands,
+    <code>insert</code> and <code>delete</code>.
+    The simplest form of <code>insert</code> statement lists values in order:
+  </p>
+
+<pre>
+insert into Site values('DR-1', -49.85, -128.57);
+insert into Site values('DR-3', -47.15, -126.72);
+insert into Site values('MSK-4', -48.87, -123.40);
+</pre>
+
+  <p>
+    We can also insert values into one table directly from another:
+  </p>
+
+<pre>
+create table JustLatLong(lat text, long TEXT);
+insert into JustLatLong select lat, long from site;
+</pre>
+
+  <p>
+    Deleting records can be a bit trickier,
+    because we have to ensure that the database remains internally consistent.
+    If all we care about is a single table,
+    we can use the <code>DELETE</code> command with a <code>WHERE</code> clause
+    that matches the records we want to discard.
+    For example,
+    once we realize that Frank Danforth didn't take any measurements,
+    we can remove him from the <code>Person</code> table like this:
+  </p>
+
+<pre>
+delete from Person where ident = "danforth";
+</pre>
+
+  <p>
+    But what if we removed Anderson Lake instead?
+    Our <code>Survey</code> table would still contain seven records
+    of measurements he'd taken:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="1">
+<pre>select count(*) from Survey where person='lake';</pre>
+      </td>
+    </tr>
+    <tr><td>7</td></tr>
+  </table>
+
+  <p>
+    That's never supposed to happen:
+    <code>Survey.person</code> is a foreign key into the <code>Person</code> table,
+    and all our queries assume there will be a row in the latter
+    matching every value in the former.
+  </p>
+
+  <p>
+    This problem is called <a href="glossary.html#referential-integrity">referential integrity</a>:
+    we need to ensure that all references between tables can always be resolved correctly.
+    One way to do this is to delete all the records
+    that use <code>'lake'</code> as a foreign key
+    before deleting the record that uses it as a primary key.
+    If our database manager supports it,
+    we can automate this
+    using <a href="glossary.html#cascading-delete">cascading delete</a>.
+    However,
+    this technique is outside the scope of this chapter.
+  </p>
+
+  <div class="box" id="a:hybrid">
+    <h3>Other Ways to Do It</h3>
+
+    <p>
+      Many applications use a hybrid storage model
+      instead of putting everything into a database:
+      the actual data (such as astronomical images) is stored in files,
+      while the database stores the files' names,
+      their modification dates,
+      the region of the sky they cover,
+      their spectral characteristics,
+      and so on.
+      This is also how most music player software is built:
+      the database inside the application keeps track of the MP3 files,
+      but the files themselves live on disk.
+    </p>
+  </div>
+
+</div>

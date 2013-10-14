@@ -1,0 +1,316 @@
+<div id="s:web:index:lesson" class="lesson">
+
+  <p>
+    If Carla is calculating temperature ratios for many different countries,
+    how will other scientists know which ones she has done?
+    In other words,
+    how can she make her data findable?
+  </p>
+
+  <p>
+    The standard answer for hundreds of years has been,
+    "Create an index."
+    On the web,
+    we can do this by creating a file called <code>index.html</code>
+    and putting it in the directory that holds our data files.
+  </p>
+
+  <div class="box">
+    <h3>Indexing Conventions</h3>
+
+    <p>
+      We don't have to call our index file <code>index.html</code>,
+      but it's best to do so.
+      By default,
+      most web servers will give clients that file
+      when they're asked for the directory itself.
+      In other words,
+      if someone points a browser (or any other program)
+      at <code>http://my.site/tempratio/</code>,
+      the web server will look for <code>/tempratio</code>.
+      When it realizes that path is a directory rather than a file,
+      it will look inside that directory for a file called <code>index.html</code>
+      and return that.
+      This is <em>not</em> guaranteed&mdash;system administrators
+      can and do set up other default behaviors&mdash;but it is a common convention,
+      and we can always tell our colleagues to fetch
+      <code>http://my.site/tempratio/</code>
+      if they want the current index anyway.
+    </p>
+
+  </div>
+
+  <p>
+    What should be in <code>index.html</code>?
+    The answer is simple:
+    a table of some kind showing what files are available,
+    when they were created,
+    and where they are.
+    The first piece of information is the most important;
+    the second allows users to determine
+    what has been added since they last looked at our site
+    without having to download actual data files,
+    while the third tells them how to get what they want.
+    Our <code>index.html</code> will therefore be something like this:
+  </p>
+
+<pre>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Index of Average Annual Temperature Ratios&lt;/title&gt;
+    &lt;meta name="revised" content="2013-09-15" /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Index of Average Annual Temperature Ratios&lt;/h1&gt;
+    &lt;table class="data"&gt;
+      &lt;tr&gt;
+        &lt;td class="country"&gt;AUS&lt;/td&gt;
+        &lt;td class="country"&gt;CAN&lt;/td&gt;
+        &lt;td class="revised"&gt;2013-09-12&lt;/td&gt;
+        &lt;td class="revised"&gt;&lt;a href="http://my.site/tempratio/AUS-CAN.html"&gt;download&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      ...
+      &lt;tr&gt;
+        &lt;td class="country"&gt;MYS&lt;/td&gt;
+        &lt;td class="country"&gt;NOR&lt;/td&gt;
+        &lt;td class="revised"&gt;2013-09-15&lt;/td&gt;
+        &lt;td class="download"&gt;&lt;a href="http://my.site/tempratio/MYS-NOR.html"&gt;download&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <div class="box" id="b:index:explicit">
+    <h3>Why Explicit URLs?</h3>
+
+    <p>
+      Strictly speaking,
+      we don't need to store the URLs in the index file:
+      we could instead tell people that if they got the index from
+      <code>http://my.site/tempratio/index.html</code>,
+      then the data for AUS and CAN is in <code>http://my.site/tempratio/AUS-CAN.html</code>,
+      and let them construct the URL themselves.
+      However,
+      that puts more of a burden on the user both in the short term
+      (since more coding is required)
+      and in the long term
+      (since the rule for constructing the URL for a particular data set could well change).
+      It also effectively hides our data from search engines,
+      since there's no way for them to know what our URL construction rule is.
+    </p>
+
+  </div>
+
+  <p>
+    Now,
+    unlike our actual data files,
+    this index file is added to incrementally:
+    each time we generate a new version,
+    we have to include all the data that was in the old version as well.
+    We therefore need to remember what we've done.
+    The usual way to do this in a real application is to use a database,
+    but for our purposes,
+    a plain old text file will suffice.
+  </p>
+
+  <p>
+    We <em>could</em> make up a format to store the information we need,
+    such as:
+  </p>
+
+<pre>
+Updated 2013-05-09
+AUS CAN 2013-03-07
+AUS NOR 2013-03-09
+CAN NOR 2013-04-22
+CAN MDG 2013-05-09
+</pre>
+
+  <p class="continue">
+    but it's much simpler just to use JSON:
+  </p>
+
+<pre>
+{
+    'updated' : '2013-05-09',
+    'entries' : [
+        ['AUS', 'CAN', '2013-03-07'],
+        ['AUS', 'NOR', '2013-03-09'],
+        ['CAN', 'NOR', '2013-04-22'],
+        ['CAN', 'MDG', '2013-05-09']
+    ]
+}
+</pre>
+
+  <p>
+    Loading this data is as simple as:
+  </p>
+
+<pre>
+import json
+reader = open('index.json', 'r')
+check = json.load(reader)
+print check
+<span class="out">{u'updated': u'2013-05-09', u'entries': [[u'AUS', u'CAN', u'2013-03-07'], [u'AUS', u'NOR', u'2013-03-09'], [u'CAN', u'NOR', u'2013-04-22'], [u'CAN', u'MDG', u'2013-05-09']]}</span>
+</pre>
+
+  <p class="continue">
+    (Remember,
+    the 'u' in front of each string signals that these strings are actually stored as Unicode,
+    but we can safely ignore that for now.)
+    Let's rewrite the main function of our temperature ratio program
+    so that it creates the index as well as the individual page:
+  </p>
+
+<pre>
+import sys
+import os
+from datetime import date
+import jinja2
+import json
+from temperatures import get_temps
+
+INDIVIDUAL_PAGE = 'temp_ratio.html'
+INDEX_PAGE = 'index.html'
+INDEX_FILE = 'index.json'
+
+def main(args):
+    '''
+    Create web page showing temperature ratios for two countries,
+    and update the index.html page with the new entry.
+    '''
+
+    assert len(args) == 5, \
+           'Usage: make_indexed_page url_base template_dir output_dir country_1 country_2'
+    url_base, template_dir, output_dir, country_1, country_2 = args
+    the_date = date.isoformat(date.today())
+
+    loader = jinja2.FileSystemLoader([template_dir])
+    environment = jinja2.Environment(loader=loader)
+
+    page = make_page(environment, country_1, country_2, the_date)
+    save_page(output_dir, '%s-%s.html' % (country_1, country_2), page)
+
+    index_data = load_index(output_dir, INDEX_FILE)
+    index_data['entries'].append([country_1, country_2, the_date])
+    save_page(output_dir, INDEX_FILE, json.dumps(index_data))
+
+    page = make_index(environment, url_base, index_data)
+    save_page(output_dir, INDEX_PAGE, page)
+</pre>
+
+  <p class="continue">
+    Since we will be expanding templates in a couple of different functions,
+    we move the creation of the Jinja2 environment to the main program.
+    We then pass the environment into both <code>make_page</code>
+    and a new function called <code>update_index</code>,
+    and use another new function <code>save_page</code>
+    to save generated pages where they need to go.
+    (Note that we update the index data <em>before</em> rewriting the index HTML page,
+    so that the updates to the index appear in the HTML.
+    We did these two steps in the wrong order
+    in the first version of this program that we wrote,
+    and it was several hours before we noticed the error...)
+  </p>
+
+  <p>
+    <code>save_page</code> is the simplest function to write,
+    so let's do that:
+  </p>
+
+<pre>
+def save_page(output_dir, page_name, content):
+    '''Save text in a file output_dir/page_name.'''
+    path = os.path.join(output_dir, page_name)
+    writer = open(path, 'w')
+    writer.write(content)
+    writer.close()
+</pre>
+
+  <p>
+    Our revised <code>make_page</code> function is shorter than our original,
+    since the environment is now being created in <code>main</code>.
+    It is also now being passed the date
+    (since that is used to update the index as well),
+    and uses a fixed template specified by the global variable
+    <code>INDIVIDUAL_PAGE</code>.
+    The result is:
+  </p>
+
+<pre>
+def make_page(environment, country_1, country_2, the_date):
+    '''Create page showing temperature ratios.'''
+
+    data_1 = get_temps(country_1)
+    data_2 = get_temps(country_2)
+    years = data_1.keys()
+    years.sort()
+
+    template = environment.get_template(INDIVIDUAL_PAGE)
+    result = template.render(country_1=country_1, data_1=data_1,
+                             country_2=country_2, data_2=data_2,
+                             years=years, the_date=the_date)
+
+    return result
+</pre>
+
+  <p>
+    The function that loads existing index data is also pretty simple:
+  </p>
+
+<pre>
+def load_index(output_dir, filename):
+    '''Load index data from output_dir/filename.'''
+
+    path = os.path.join(output_dir, filename)
+    reader = open(path, 'r')
+    result = json.load(reader)
+    reader.close()
+    return result
+</pre>
+
+  <p>
+    All that's left are the function that regenerates the HTML version of the index:
+  </p>
+
+<pre>
+def make_index(environment, url_base, index_data):
+    '''Refresh the HTML index page.'''
+
+    template = environment.get_template(INDEX_PAGE)
+    return template.render(url_base=url_base,
+                           updated=index_data['updated'],
+                           entries=index_data['entries'])
+</pre>
+
+  <p class="continue">
+    and the HTML template it relies on:
+  </p>
+
+{% raw %}
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Index of Average Annual Temperature Ratios&lt;/title&gt;
+    &lt;meta name="revised" content="{{updated}}" /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Index of Average Annual Temperature Ratios&lt;/h1&gt;
+    &lt;table class="data"&gt;
+      {% for entry in entries %}
+      &lt;tr&gt;
+        &lt;td class="country"&gt;{{entry[0]}}&lt;/td&gt;
+        &lt;td class="country"&gt;{{entry[1]}}&lt;/td&gt;
+        &lt;td class="revised"&gt;{{entry[2]}}&lt;/td&gt;
+        &lt;td class="revised"&gt;&lt;a href="{{url_base}}/{{entry[0]}}-{{entry[1]}}.html"&gt;download&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      {% endfor %}
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+{% endraw %}
+
+</div>

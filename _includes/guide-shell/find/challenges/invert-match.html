@@ -1,0 +1,36 @@
+<p>
+  The <code>-v</code> flag to <code>grep</code> inverts pattern matching,
+  so that only lines which do <em>not</em> match the pattern are printed.
+  Given that,
+  which of the following commands will find all files in <code>/data</code>
+  whose names end in <code>ose.dat</code>
+  (e.g., <code>sucrose.dat</code> or <code>maltose.dat</code>),
+  but do <em>not</em> contain the word <code>temp</code>?
+</p>
+
+<table>
+  <tr>
+    <td valign="top">1.</td>
+    <td valign="top">
+<pre>
+find /data -name '*.dat' -print | grep ose | grep -v temp
+</pre>
+    </td>
+    <td valign="top">2.</td>
+    <td valign="top">
+<pre>
+find /data -name ose.dat -print | grep -v temp
+</pre>
+    </td>
+    <td valign="top">3.</td>
+    <td valign="top">
+<pre>
+grep -v temp $(find /data -name '*ose.dat' -print)
+</pre>
+    </td>
+    <td valign="top">4.</td>
+    <td valign="top">
+      None of the above.
+    </td>
+  </tr>
+</table>

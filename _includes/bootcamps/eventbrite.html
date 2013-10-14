@@ -1,0 +1,16 @@
+{% if page.eventbrite and page.venue and page.humandate %}
+<div style='width: 100%; text-align: left;'>
+  <p><iframe frameborder='0' height='192' marginheight='5' marginwidth='5' scrolling='auto' src='http://www.eventbrite.com/tickets-external?eid={{page.eventbrite}}&amp;ref=etckt' width='100%' /></p>
+  <div style='font-family: Helvetica, Arial; font-size: 10px; padding: 5px 0 5px; margin: 2px; width: 100%; text-align: left;'>
+    <a href='http://www.eventbrite.com/r/etckt' style='color: #ddd; text-decoration: none;' target='_blank'>Event Registration Online</a>
+    <span style='color: #ddd;'> for </span>
+    <a href='http://www.eventbrite.com/event/{{page.eventbrite}}?ref=etckt' style='color: #ddd; text-decoration: none;' target='_blank'>
+      Software Carpentry Boot Camp: {{page.venue}}/{{page.humandate}}
+    </a>
+    <span style='color: #ddd;'> powered by </span>
+    <a href='http://www.eventbrite.com?ref=etckt' style='color: #ddd; text-decoration: none;' target='_blank'>Eventbrite</a></div>
+  </div>
+{% else %}
+<p><strong>Error: EventBrite key, venue, and/or human-readaable date not defined.</strong></p>
+{% endif %}
+

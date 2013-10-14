@@ -1,0 +1,59 @@
+<div id="setup-rhsl-easymercurial" class="setup setup-rhsl setup-easymercurial">
+  <h3>Red Hat Scientific Linux / EasyMercurial</h3>
+
+  <p>
+    If your bootcamp is using the EasyMercurial GUI,
+    download the <a href="https://code.soundsoftware.ac.uk/projects/easyhg/files">EasyMercurial Debian/Ubuntu source package</a>.
+    This can be done at the command-line by copying the download link from the download page
+    (using right-click and <strong>Copy Shortcut</strong>)
+    then using <code>wget</code>,
+    e.g.:
+  </p>
+
+<pre>
+$ wget https://code.soundsoftware.ac.uk/attachments/download/489/EasyMercurial-1.2.2-src.tar.gz
+</pre>
+
+  <p>
+    (This link may have been updated since this page was written,
+    so check the download page above for the URL to use.)
+    Next,
+    unpack the distribution:
+  </p>
+
+<pre>
+$ gunzip EasyMercurial-1.2.2-src.tar.gz
+$ tar -xf EasyMercurial-1.2.2-src.tar
+$ cd EasyMercurial-1.2.2-src
+</pre>
+
+  <p>
+    Install dependencies:
+  </p>
+
+<pre>
+$ yum install qt4
+$ yum install qt4-devel
+$ yum install PyQt4
+</pre>
+
+  <p>
+    and then build
+    (the EasyMercurial <code>README</code> says to use <code>qmake</code>
+    but I used <code>qmake-qt4</code>):
+  </p>
+
+<pre>
+$ qmake-qt4
+$ make
+</pre>
+
+  <p>
+    Finally,
+    run:
+  </p>
+
+<pre>
+$ ./EasyMercurial
+</pre>
+</div>

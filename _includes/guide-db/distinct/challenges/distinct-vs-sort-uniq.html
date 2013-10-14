@@ -1,0 +1,24 @@
+<p>
+  If you are using SQLite from the command line,
+  you can run a single query by passing it to the interpreter
+  right after the path to the database file:
+</p>
+<pre>
+$ <span class="in">sqlite3 survey.db 'select * from Person;'</span>
+<span class="out">dyer|William|Dyer
+pb|Frank|Pabodie
+lake|Anderson|Lake
+roe|Valentina|Roerich
+danforth|Frank|Danforth</span>
+</pre>
+<p>
+  Fill in the missing commands in the pipeline below
+  so that the output contains no redundant values.
+</p>
+<pre>
+$ <span class="in">sqlite3 survey.db 'select person, quant from Survey;' | <em>command 1</em> | <em>command 2</em></span>
+</pre>
+<p>
+  Do you think this is less efficient, just as efficient, or more efficient
+  that using <code>distinct</code> for large data?
+</p>

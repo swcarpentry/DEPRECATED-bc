@@ -1,0 +1,106 @@
+<div id="s:web:attributes:lesson" class="lesson">
+
+  <p>
+    Elements can be customized by giving them <a href="glossary.html#attribute">attributes</a>.
+    These are name/value pairs enclosed in the opening tag like this:
+  </p>
+
+<pre>
+&lt;h1 align="center"&gt;A Centered Heading&lt;/h1&gt;
+</pre>
+
+  <p class="continue">
+    or:
+  </p>
+
+<pre>
+&lt;p class="disclaimer"&gt;This planet provided as-is.&lt;/p&gt;
+</pre>
+
+  <p>
+    Any particular attribute name may appear at most once in any element,
+    just like keys may be present at most once in a <a href="setdict.html#s:dict">dictionary</a>,
+    so <code>&lt;p align="left" align="right"&gt;&hellip;&lt;/p&gt;</code> is illegal.
+    Attributes' values <em>must</em> be in quotes in XML and older dialects of HTML;
+    HTML5 allows single-word values to be unquoted,
+    but quoting is still recommended.
+  </p>
+
+  <p>
+    Another similarity between attributes and dictionaries is that
+    attributes are unordered.
+    They have to be <em>written</em> in some order,
+    just as the keys and values in a dictionary have to be displayed in some order when they are printed,
+    but as far as the rules of HTML are concerned,
+    the elements:
+  </p>
+
+<pre>
+&lt;p align="center" class="disclaimer"&gt;This web page is made from 100% recycled pixels.&lt;/p&gt;
+</pre>
+
+  <p class="continue">
+    and:
+  </p>
+
+<pre>
+&lt;p class="disclaimer" align="center"&gt;This web page is made from 100% recycled pixels.&lt;/p&gt;
+</pre>
+
+  <p class="continue">
+    mean the same thing.
+  </p>
+
+  <div class="box">
+    <h3>HTML and Version Control</h3>
+    <p class="fixme">explain</p>
+  </div>
+
+  <p>
+    When should we use attributes, and when should we nest elements?
+    As a general rule,
+    we should use attributes when:
+  </p>
+
+  <ul>
+
+    <li>
+      each value can occur at most once for any element;
+    </li>
+
+    <li>
+      the order of the values doesn't matter; and
+    </li>
+
+    <li>
+      those values have no internal structure,
+      i.e.,
+      we will never need to parse an attribute's value
+      in order to understand it.
+    </li>
+
+  </ul>
+
+  <p class="continue">
+    In all other cases, we should use nested elements.
+    However, many widely-used XML formats break these rules
+    in order to make it easier for people to write XML by hand.
+    For example,
+    in the Scalable Vector Graphics (SVG) format used to describe images as XML,
+    we would define a rectangle as follows:
+  </p>
+
+<pre>
+&lt;rect width="300" height="100" style="fill:rgb(0,0,255); stroke-width:1; stroke:rgb(0,0,0)"/&gt;
+</pre>
+
+  <p class="continue">
+    In order to understand the <code>style</code> attribute,
+    a program has to somehow know to split it on semicolons,
+    and then to split each piece on colons.
+    This means that a generic program for reading XML
+    can't extract all the information that's in SVG,
+    which partly defeats the purpose of using XML in the first place.
+  </p>
+
+</div>

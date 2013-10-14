@@ -1,0 +1,44 @@
+<p>
+  The SQL test <code><em>column-name</em> like <em>pattern</em></code>
+  is true if the value in the named column
+  matches the pattern given;
+  the character '%' can be used any number of times in the pattern
+  to mean "match zero or more characters".
+</p>
+<table>
+  <tr>
+    <th>Expression</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td><code>'a' like 'a'</code></td>
+    <td><code>True</code></td>
+  </tr>
+  <tr>
+    <td><code>'a' like '%a'</code></td>
+    <td><code>True</code></td>
+  </tr>
+  <tr>
+    <td><code>'b' like '%a'</code></td>
+    <td><code>False</code></td>
+  </tr>
+  <tr>
+    <td><code>'alpha' like 'a%'</code></td>
+    <td><code>True</code></td>
+  </tr>
+  <tr>
+    <td><code>'alpha' like 'a%p%'</code></td>
+    <td><code>True</code></td>
+  </tr>
+  <tr>
+    <td><code>'beta' like 'a%p%'</code></td>
+    <td><code>False</code></td>
+  </tr>
+</table>
+<p>
+  The expression <code><em>column-name</em> not like <em>pattern</em></code>
+  inverts the test.
+  Using <code>like</code>,
+  write a query that finds all the records in <code>Visited</code>
+  that <em>aren't</em> from sites labelled 'DR-something'.
+</p>

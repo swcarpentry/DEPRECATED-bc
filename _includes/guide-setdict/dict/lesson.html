@@ -1,0 +1,322 @@
+<div id="s:setdict:dict:lesson" class="lesson">
+
+  <p>
+    Now that we know how to find out what kinds of atoms are in our inventory,
+    we want to find out how many of each we have.
+    Our input is a list of several thousand atomic symbols,
+    and the output we want is a list of names and counts.
+  </p>
+
+  <p>
+    Once again,
+    we could use a list to store names and counts,
+    but the right solution is
+    to use another new data strucure called a <a href="glossary.html#dictionary">dictionary</a>.
+    A dictionary is a unordered collection of key-value pairs
+    (<a href="#f:simple_dict">Fixture 5</a>).
+    The keys are immutable, unique, and unordered,
+    just like the elements of a set.
+    There are no restrictions on the values stored with those keys:
+    they don't have to be immutable or unique.
+    However,
+    we can only look up entries by their keys,
+    not by their values.
+  </p>
+
+  <figure id="f:simple_dict">
+    <img src="setdict/simple_dict.png" alt="A Simple Dictionary" />
+    <figcaption>Figure 5: A Simple Dictionary</figcaption>
+  </figure>
+
+  <p>
+    We create a new dictionary by putting key-value pairs inside curly braces
+    with a colon between the two parts of each pair:
+  </p>
+
+<pre>
+&gt;&gt;&gt; birthdays = {'Newton' : 1642, 'Darwin' : 1809}
+</pre>
+
+  <p class="continue">
+    The dictionary's keys are the strings <code>'Newton'</code> and <code>'Darwin'</code>.
+    The value associated with <code>'Newton'</code> is 1642,
+    while the value associated with <code>'Darwin'</code> is 1809.
+    We can think of this as a two-column table:
+  </p>
+
+  <table>
+    <tr>
+      <th>Key</th>
+      <th>Value</th>
+    </tr>
+    <tr>
+      <td><code>'Newton'</code></td>
+      <td>1642</td>
+    </tr>
+    <tr>
+      <td><code>'Darwin'</code></td>
+      <td>1809</td>
+    </tr>
+  </table>
+
+  <p class="continue">
+    but it's important to remember that the entries aren't necessarily stored in this order
+    (or any other specific order).
+  </p>
+
+  <p>
+    We can get the value associated with a key by putting the key in square brackets:
+  </p>
+
+<pre>
+&gt;&gt;&gt; print birthdays['Newton']
+<span class="out">1642</span>
+</pre>
+
+  <p class="continue">
+    This looks just like subscripting a string or list,
+    except dictionary keys don't have to be integers&mdash;they can be strings,
+    tuples, or any other immutable object.
+    It's just like using a phonebook or a real dictionary:
+    instead of looking things up by location using an integer index,
+    we look things up by name.
+  </p>
+
+  <p>
+    If we want to add another entry to a dictionary,
+    we just assign a value to the key,
+    just as we create a new variable in a program by assigning it a value:
+  </p>
+
+<pre>
+&gt;&gt;&gt; birthdays['Turing'] = 1612
+&gt;&gt;&gt; print birthdays
+<span class="out">{'Turing' : 1612, 'Newton' : 1642, 'Darwin' : 1809}</span>
+</pre>
+
+  <p>
+    If the key is already in the dictionary,
+    assignment replaces the value associated with it
+    rather than adding another entry
+    (since each key can appear at most once).
+    Let's fix Turing's birthday by replacing 1612 with 1912:
+  </p>
+
+<pre>
+&gt;&gt;&gt; birthdays['Turing'] = 1912
+&gt;&gt;&gt; print birthdays
+<span class="out">{'Turing' : 1912, 'Newton' : 1642, 'Darwin' : 1809}</span>
+</pre>
+
+  <p>
+    Trying to get the value associated with a key that <em>isn't</em> in the dictionary is an error,
+    just like trying to access a nonexistent variable
+    or get an out-of-bounds element from a list.
+    For example,
+    let's try to look up Florence Nightingale's birthday:
+  </p>
+
+<pre>
+&gt;&gt;&gt; print birthdays['Nightingale']
+<span class="err">KeyError: 'Nightingale'</span>
+</pre>
+
+  <p>
+    If we're not sure whether a key is in a dictionary or not,
+    we can test for it using <code>in</code>:
+  </p>
+
+<pre>
+&gt;&gt;&gt; print 'Nightingale' in birthdays
+<span class="out">False</span>
+&gt;&gt;&gt; print 'Darwin' in birthdays
+<span class="out">True</span>
+</pre>
+
+  <p class="continue">
+    And we can see how many entries are in the dictionary using <code>len</code>:
+  </p>
+
+<pre>
+&gt;&gt;&gt; print len(birthdays)
+<span class="out">3</span>
+</pre>
+
+  <p class="continue">
+    and loop over the keys in a dictionary using <code>for</code>:
+  </p>
+
+<pre>
+&gt;&gt;&gt; for name in birthdays:
+...     print name, birthdays[name]
+...
+<span class="out">Turing 1912
+Newton 1642
+Darwin 1809</span>
+</pre>
+
+  <p class="continue">
+    This is a little bit different from looping over a list.
+    When we loop over a list we get the values in the list.
+    When we loop over a dictionary,
+    on the other hand,
+    the loop gives us the keys,
+    which we can use to look up the values.
+  </p>
+
+  <p>
+    We're now ready to count atoms.
+    The main body of our program looks like this:
+  </p>
+
+<pre>
+def main(filename):
+    counts = count_atoms(filename)
+    for atom in counts:
+        print atom, counts[atom]
+</pre>
+
+  <p class="continue">
+    <code>count_atoms</code> reads atomic symbols from a file,
+    one per line,
+    and creates a dictionary of atomic symbols and counts.
+    Once we have that dictionary,
+    we use a loop like the one we just saw to print out its contents.
+  </p>
+
+  <p>
+    Here's the function that does the counting:
+  </p>
+
+<pre>
+def count_atoms(filename):
+    '''Count unique atoms, returning a dictionary.'''
+
+    result = {}
+    with open(filename, 'r') as reader:
+        for line in reader:
+            atom = line.strip()
+            if atom not in result:
+                result[atom] = 1
+            else:
+                result[atom] = result[atom] + 1
+    return result
+</pre>
+
+  <p>
+    We start with a docstring to explain the function's purpose to whoever has to read it next.
+    We then create an empty dictionary to fill with data,
+    and use a loop to process the lines from the input file one by one.
+    Notice that the empty dictionary is written <code>{}</code>:
+    this is the "<a href="#a:previous-use">previous use</a>"
+    we referred to when explaining why an empty set had to be written <code>set()</code>.
+  </p>
+
+  <p>
+    After stripping whitespace off the atom's symbol,
+    we check to see if we've seen it before.
+    If we haven't,
+    we set its count to 1,
+    because we've now seen that atom one time.
+    If we <em>have</em> seen it before,
+    we add one to the previous count
+    and store that new value back in the dictionary.
+    When the loop is done, we return the dictionary we have created.
+  </p>
+
+  <p>
+    Let's watch this function in action.
+    Before we read any data, our dictionary is empty.
+    After we see <code>'Na'</code> for the first time,
+    our dictionary has one entry:
+    its key is <code>'Na'</code>, and its value is 1.
+    When we see <code>'Fe'</code>,
+    we add another entry to the dictionary
+    with that string as a key and 1 as a value.
+    Finally, when we see <code>'Na'</code> for the second time,
+    we add one to its count.
+  </p>
+
+  <table>
+    <tr>
+      <th>Input</th>
+      <th>Dictionary</th>
+    </tr>
+    <tr>
+      <td><em>start</em></td>
+      <td><code>{}</code></td>
+    </tr>
+    <tr>
+      <td><code>Na</code></td>
+      <td><code>{'Na' : 1}</code></td>
+    </tr>
+    <tr>
+      <td><code>Fe</code></td>
+      <td><code>{'Na' : 1, 'Fe' : 1}</code></td>
+    </tr>
+    <tr>
+      <td><code>Na</code></td>
+      <td><code>{'Na' : 2, 'Fe' : 1}</code></td>
+    </tr>
+  </table>
+
+  <p>
+    Just as we use tuples for multi-part entries in sets,
+    we can use them for multi-part keys in dictionaries.
+    For example,
+    if we want to store the years in which scientists were born
+    using their full names,
+    we could do this:
+  </p>
+
+<pre>
+birthdays = {
+    ('Isaac', 'Newton') : 1642,
+    ('Charles', 'Robert', 'Darwin') : 1809,
+    ('Alan', 'Mathison', 'Turing') : 1912
+}
+</pre>
+
+  <p class="continue">
+    If we do this,
+    though,
+    we always have to look things up by the full key:
+    there is no way to ask for
+    all the entries whose keys contain the word <code>'Darwin'</code>,
+    because Python cannot match part of a tuple.
+  </p>
+
+  <p>
+    If we think of a dictionary as a two-column table,
+    it is occasionally useful to get one or the other column,
+    i.e.,
+    just the keys or just the values:
+  </p>
+
+<pre>
+all_keys = birthdays.keys()
+print all_keys
+<span class="out">[('Isaac', 'Newton'), ('Alan', 'Mathison', 'Turing'), ('Charles', 'Robert', 'Darwin')]</span>
+all_values = birthdays.values()
+print all_values
+<span class="out">[1642, 1912, 1809]</span>
+</pre>
+
+  <p>
+    These methods should be used sparingly:
+    the dictionary doesn't store the keys or values in a list,
+    these methods both actually create a new list as their result.
+    In particular,
+    we <em>shouldn't</em> loop over a dictionary's entries like this:
+  </p>
+
+<pre>
+for key in some_dict.keys():
+    ...do something with key and some_dict[key]
+</pre>
+
+  <p class="continue">
+    since "<code>for key in some_dict</code>" is shorter and much more efficient.
+  </p>
+
+</div>

@@ -1,0 +1,87 @@
+<div id="s:invperc:alias:lesson" class="lesson">
+
+  <p>
+    Before we go further with our list-of-lists implementation,
+    we need to revisit the issue of <a href="python.html#s:alias">aliasing</a>
+    and look at some bugs that can arise when your programs uses it.
+    Take another look at the list-of-lists in
+    <a href="#f:building_grid">Figure 3</a>.
+    A single list serves as the structure's spine,
+    while the sublists store the actual cell values.
+  </p>
+
+  <p>
+    Here's some code that tries to create such a structure
+    but gets it wrong:
+  </p>
+
+<pre>
+# Incorrect code
+assert N > 0, "Grid size must be positive"
+assert N%2 == 1, "Grid size must be odd"
+grid = []
+<span class="highlight">EMPTY = []</span>
+for x in range(N):
+  <span class="highlight">grid.append(EMPTY)</span>
+  for y in range(N):
+    grid[-1].append(1)
+</pre>
+
+  <p>
+    The only change we've made is to introduce a variable called <code>EMPTY</code>
+    so that we can say, "Append EMPTY to the grid" in our loop.
+    How can this be a bug?
+    Aren't meaningful variable names supposed to be a good thing?
+  </p>
+
+  <p>
+    To see what's wrong,
+    let's trace the execution of this program.
+    We start by assigning an empty list to the variable <code>grid</code>.
+    We then assign another empty list to the variable <code>EMPTY</code>.
+    In the first pass through our loop,
+    we append the empty list pointed to by <code>EMPTY</code> to the list pointed to by <code>grid</code>
+    to get the structure shown in <a href="#f:alias_bug">Figure 4</a>.
+    We then go into our inner loop and append a 1 to that sublist.
+    Going around the inner loop again,
+    we append another 1,
+    and another.
+    We then go back to the outer loop and append <code>EMPTY</code> again.
+  </p>
+
+  <figure id="f:alias_bug">
+    <img src="dev/alias_bug.png" alt="Aliasing Bug" />
+    <figcaption>Figure 4: Aliasing Bug</figcaption>
+  </figure>
+
+  <p>
+    The structure shown on the left is now broken:
+    both cells of the list pointed to by <code>grid</code> point to the same sublist,
+    because <code>EMPTY</code> is still pointing to that list,
+    even though we've changed it.
+    When we go into the inner loop the second time,
+    we're appending 1's to the same list that we used last time.
+  </p>
+
+  <div class="box">
+    <h3>Debugging With Pictures</h3>
+
+    <p>
+      Aliasing bugs are notoriously difficult to track down
+      because the program isn't doing anything illegal:
+      it's just not doing what we want in this particular case.
+      Many debugging tools have been built over the last thirty years
+      that draw pictures of data structures
+      to show programmers what they're actually creating,
+      but none has really caught on yet,
+      primarily because pictures of the objects and references in real programs
+      are too large and too cluttered to be comprehensible.
+      As a result,
+      many programmers wind up drawing diagrams like
+      <a href="#f:alias_bug">Figure 4</a>
+      by hand while they're debugging.
+    </p>
+
+  </div>
+
+</div>

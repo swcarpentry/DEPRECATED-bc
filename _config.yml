@@ -1,0 +1,11 @@
+markdown        : redcarpet
+pygments        : true
+contact         : "info@software-carpentry.org"
+facebook_url    : "https://www.facebook.com/SoftwareCarpentry"
+github_url      : "https://github.com/swcarpentry"
+google_plus_url : "https://plus.google.com/u/0/114244759874490019250/posts"
+rss_url         : "http://software-carpentry.org/feed.xml"
+swc_prefix      : "http://software-carpentry.org"
+twitter_name    : "@swcarpentry"
+twitter_url     : "https://twitter.com/swcarpentry"
+exclude         : [branding, data]

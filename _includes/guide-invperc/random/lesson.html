@@ -1,0 +1,148 @@
+<div id="s:invperc:random:lesson" class="lesson">
+
+  <p>
+    Now that we have a grid,
+    let's fill it with random numbers chosen uniformly from some range 1 to Z.
+    We should check the science on this,
+    as there was nothing in our original specification that said the values should be uniformly distributed,
+    but once again we'll do something simple,
+    make sure it's working,
+    and then change it later.
+    Our code looks like this:
+  </p>
+
+<pre>
+<span class="highlight">from random import seed, randint</span>
+assert N &gt; 0, "Grid size must be positive"
+assert N%2 == 1, "Grid size must be odd"
+<span class="highlight">assert Z &gt; 0, "Range must be positive"</span>
+<span class="highlight">seed(S)</span>
+grid = []
+for x in range(N):
+    grid.append([])
+    for y in range(N):
+        grid[-1].append(<span class="highlight">randint(1, Z)</span>)
+</pre>
+
+  <p class="continue">
+    The changes are pretty small:
+    we import a couple of functions from a library,
+    check that the upper bound on our random number range makes sense,
+    initialize the random number generator,
+    and then call <code>randint</code> to generate a random number
+    each time we need one.
+  </p>
+
+  <p>
+    To understand these changes,
+    let's step back and look at a small program
+    that does nothing but generate a few seemingly random numbers:
+  </p>
+
+<pre>
+from random import seed, randint
+seed(4713983)
+for i in range(5):
+    print randint(1, 10),
+<span class="out">7 2 6 6 5</span>
+</pre>
+
+  <p class="continue">
+    The first step is to import functions from the standard Python random number library
+    called (unsurprisingly) <code>random</code>.
+    We then initialize the sequence of "random" numbers we're going to generate&mdash;you'll
+    see in a moment why there are quotes around the word "random".
+    We can then call <code>randint</code>
+    to produce the next random number in the sequence as many times as we want.
+  </p>
+
+  <p>
+    Pseudo-random number generators like the one we're using have some important limitations,
+    and it's important that you understand them before you use them in your programs.
+    Consider this simple "random" number generator:
+  </p>
+
+<pre>
+base = 17  # a prime
+value = 4  # anything in 0..base-1
+for i in range(20):
+    value = (3 * value + 5) % base
+    print value,
+<span class="out">0 5 3 14 13 10 1 8 12 7 9 15 16 2 11 4 0 5 3 14</span>
+</pre>
+
+  <p class="continue">
+    It depends on two values:
+  </p>
+
+  <ol>
+
+    <li>
+      The <em>base</em>,
+      which is a prime number,
+      determines how many integers we'll get before the sequence starts to repeat itself.
+      Computers can only represent a finite range of numbers,
+      so sooner or later, any supposedly random sequence will start to repeat.
+      Once they do, values will appear in exactly the same order they did before.
+    </li>
+
+    <li>
+      The <em>seed</em> controls where the sequence starts.
+      With a seed of 4,
+      the sequence starts at the value 0.
+      Changing the seed to 9 shifts the sequence over:
+      we get the same numbers in the same order,
+      but starting from a different place.
+      We'll use this fact later one when it comes time to test our invasion percolation program.
+    </li>
+
+  </ol>
+
+  <p>
+    These numbers aren't actually very random at all.
+    For example,
+    did you notice that the number 6 never appeared anywhere in the sequence?
+    Its absence would probably bias our statistics in ways that would be very hard to detect.
+    But look at what happens if 6 <em>does</em> appear:
+  </p>
+
+<pre>
+base = 17
+value = 6
+for i in range(20):
+    value = (3 * value + 5) % base
+    print value,
+<span class="out">6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6</span>
+</pre>
+
+  <p class="continue">
+    3 times 6 plus 5 mod 17 is 6 again,
+    and so our sequence gets stuck.
+    How can we prove that this won't ever happen for an arbitrary seed in a random number generator?
+    And how can we prove that something subtler won't go wrong?
+  </p>
+
+  <p>
+    In fact,
+    computers can't generate real random numbers.
+    But if we're clever,
+    they <em>can</em> generate numbers with many of the same statistical properties as the real thing.
+    This is very hard to get right,
+    so you should <em>never</em> try to build your own random number generator.
+    Instead, you should always use a function from a good, well-tested library (like Python's).
+  </p>
+
+  <blockquote>
+    Any one who considers arithmetical methods of producing random digits is,
+    of course,
+    in a state of sin.
+    For,
+    as has been pointed out several times,
+    there is no such thing as a random number.
+    There are only methods to produce random numbers,
+    and a strict arithmetic procedure of course is not such a method.
+    <br/>
+    &mdash; John von Neumann
+  </blockquote>
+
+</div>

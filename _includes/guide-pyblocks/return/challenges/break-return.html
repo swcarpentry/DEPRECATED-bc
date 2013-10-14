@@ -1,0 +1,18 @@
+<p>
+  One alternative to returning from inside a loop
+  is to use the <code>break</code> statement
+  to end the loop immediately:
+</p>
+<pre>
+def first_negative(values):
+    for v in values:
+        if v &lt; 0:
+            break
+    return v
+print first_negative([1, 3, -1, 2])
+<span class="out">-1</span>
+</pre>
+<p>
+  When can this approach result in an error,
+  and what kind of error does it produce?
+</p>

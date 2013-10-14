@@ -1,0 +1,87 @@
+                          Distance   Period                                  
+Name       #       Orbits (000 km)   (days)    Incl Eccen
+---------  ----   ------- --------  --------  ----- -----
+Sun         -        -        -         -       -     -  
+
+Mercury    1      Sun        57910    87.97    7.00  0.21
+Venus      2      Sun       108200   224.70    3.39  0.01
+Earth      3      Sun       149600   365.26    0.00  0.02
+Mars       4      Sun       227940   686.98    1.85  0.09
+Jupiter    5      Sun       778330  4332.71    1.31  0.05
+Saturn     6      Sun      1429400 10759.50    2.49  0.06
+Uranus     7      Sun      2870990 30685.00    0.77  0.05
+Neptune    8      Sun      4504300 60190.00    1.77  0.01
+Pluto      9      Sun      5913520 90550      17.15  0.25
+
+Moon       1      Earth        384    27.32    5.14  0.05
+
+Phobos     1      Mars           9     0.32    1.00  0.02
+Deimos     2      Mars          23     1.26    1.80  0.00
+
+Metis      16     Jupiter      128     0.29    0.00  0.00
+Adrastea   15     Jupiter      129     0.30    0.00  0.00
+Amalthea   5      Jupiter      181     0.50    0.40  0.00
+Thebe      14     Jupiter      222     0.67    0.80  0.02
+Io         1      Jupiter      422     1.77    0.04  0.00
+Europa     2      Jupiter      671     3.55    0.47  0.01
+Ganymede   3      Jupiter     1070     7.15    0.19  0.00
+Callisto   4      Jupiter     1883    16.69    0.28  0.01
+Leda       13     Jupiter    11094   238.72   27.00  0.15
+Himalia    6      Jupiter    11480   250.57   28.00  0.16
+Lysithea   10     Jupiter    11720   259.22   29.00  0.11
+Elara      7      Jupiter    11737   259.65   28.00  0.21
+Ananke     12     Jupiter    21200  -631.00   147.00  0.17
+Carme      11     Jupiter    22600  -692.00   163.00  0.21
+Pasiphae   8      Jupiter    23500  -735.00   147.00  0.38
+Sinope     9      Jupiter    23700  -758.00   153.00  0.28
+
+Pan        18     Saturn       134     0.58    0.00  0.00
+Atlas      15     Saturn       138     0.60    0.00  0.00
+Prometheus 16     Saturn       139     0.61    0.00  0.00
+Pandora    17     Saturn       142     0.63    0.00  0.00
+Epimetheus 11     Saturn       151     0.69    0.34  0.01
+Janus      10     Saturn       151     0.69    0.14  0.01
+Mimas      1      Saturn       186     0.94    1.53  0.02
+Enceladus  2      Saturn       238     1.37    0.02  0.00
+Tethys     3      Saturn       295     1.89    1.09  0.00
+Telesto    13     Saturn       295     1.89    0.00  0.00
+Calypso    14     Saturn       295     1.89    0.00  0.00
+Dione      4      Saturn       377     2.74    0.02  0.00
+Helene     12     Saturn       377     2.74    0.20  0.01
+Rhea       5      Saturn       527     4.52    0.35  0.00
+Titan      6      Saturn      1222    15.95    0.33  0.03
+Hyperion   7      Saturn      1481    21.28    0.43  0.10
+Iapetus    8      Saturn      3561    79.33   14.72  0.03
+Phoebe     9      Saturn     12952  -550.48  175.30  0.16
+
+Cordelia   6      Uranus        50     0.34    0.14  0.00
+Ophelia    7      Uranus        54     0.38    0.09  0.00
+Bianca     8      Uranus        59     0.43    0.16  0.00
+Cressida   9      Uranus        62     0.46    0.04  0.00
+Desdemona  10     Uranus        63     0.47    0.16  0.00
+Juliet     11     Uranus        64     0.49    0.06  0.00
+Portia     12     Uranus        66     0.51    0.09  0.00
+Rosalind   13     Uranus        70     0.56    0.28  0.00
+Belinda    14     Uranus        75     0.62    0.03  0.00
+Puck       15     Uranus        86     0.76    0.31  0.00
+Miranda    5      Uranus       130     1.41    4.22  0.00
+Ariel      1      Uranus       191     2.52    0.00  0.00
+Umbriel    2      Uranus       266     4.14    0.00  0.00
+Titania    3      Uranus       436     8.71    0.00  0.00
+Oberon     4      Uranus       583    13.46    0.00  0.00
+Caliban    16     Uranus      7169  -580.00  140.00  0.08
+Stephano   20     Uranus      7948  -674.00  143.00  0.24
+Sycorax    17     Uranus     12213 -1289.00  153.00  0.51
+Prospero   18     Uranus     16568 -2019.00  152.00  0.44
+Setebos    19     Uranus     17681 -2239.00  158.00  0.57
+
+Naiad      3      Neptune       48     0.29    0.00  0.00
+Thalassa   4      Neptune       50     0.31    4.50  0.00
+Despina    5      Neptune       53     0.33    0.00  0.00
+Galatea    6      Neptune       62     0.43    0.00  0.00
+Larissa    7      Neptune       74     0.55    0.00  0.00
+Proteus    8      Neptune      118     1.12    0.00  0.00
+Triton     1      Neptune      355    -5.88  157.00  0.00
+Nereid     2      Neptune     5513   360.13   29.00  0.75
+
+Charon     1      Pluto         20     6.39   98.80  0.00

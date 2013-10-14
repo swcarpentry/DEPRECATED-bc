@@ -1,0 +1,36 @@
+---
+layout: lesson
+root: ../..
+title: SQL Reference
+---
+<div class="row-fluid">
+  <div class="span6">
+    <h2>Basic Queries</h2>
+    <p>Select one or more columns of data from a table:</p>
+    <pre>SELECT column_name_1, column_name_2 FROM table_name;</pre>
+    <p>Select all of the columns in a table:</p>
+    <pre>SELECT * FROM table_name;</pre>
+    <p>Get only unique lines in a query:</p>
+    <pre>SELECT DISTINCT column_name FROM table_name;</pre>
+    <p>Perform calculations in a query:</p>
+    <pre>SELECT column_name_1, ROUND(column_name_2 / 1000.0) FROM table_name;</pre>
+    <h2>Filtering</h2>
+    <p>Select only the data meeting certain criteria:</p>
+    <pre>SELECT * FROM table_name WHERE column_name = &#39;Hello World&#39;;</pre>
+    <p>Combine conditions:</p>
+    <pre>SELECT * FROM table_name WHERE (column_name_1 &gt;= 1000) AND (column_name_2 = &#39;A&#39; OR column_name_2 = &#39;B&#39;);</pre>
+  </div>
+  <div class="span6">
+    <h2>Sorting</h2>
+    <p>Sort results using <code>ASC</code> for ascending order or <code>DESC</code> for descending order:</p>
+    <pre>SELECT * FROM table_name ORDER BY column_name_1 ASC, column_name_2 DESC;</pre>
+    <h2>Aggregation</h2>
+    <p>Combine data into groups and calculate combined values in groups:</p>
+    <pre>SELECT column_name_1, SUM(column_name_2), COUNT(*) FROM table_name GROUP BY column_name_1;</pre>
+    <h2>Joins</h2>
+    <p>Join data from two tables:</p>
+    <pre>SELECT * FROM table_name_1 JOIN table_name_2 ON table_name_1.column_name = table_name_2.column_name;</pre>
+    <h2>Combining commands</h2>
+    <p>SQL commands can be combined in the following order: <code>SELECT</code>, <code>FROM</code>, <code>JOIN</code>, <code>ON</code>, <code>WHERE</code>, <code>GROUP BY</code>, <code>ORDER BY</code>.</p>
+  </div>
+</div>

@@ -1,0 +1,133 @@
+<div id="s:invperc:grid:lesson" class="lesson">
+
+  <p>
+    Let's start by looking at
+    how to represent a two-dimensional grid in Python.
+    By "two-dimensional",
+    we mean something that's indexed by X and Y coordinates.
+    Our grid is discrete:
+    we need to store values for locations (1, 1), (1, 2), and so on,
+    but not locations like (1.512, 7.243).
+  </p>
+
+  <div class="box">
+    <h3>Why Not Use a NumPy Array?</h3>
+
+    <p>
+      Because (a) we want to get some more practice manipulating lists
+      and dealing with aliasing,
+      and (b) because we need to leave something for learners to do as challenges.
+    </p>
+
+  </div>
+
+  <p>
+    Each cell in the grid stores a single random value
+    representing the permeability of the rock.
+    We also need a way to mark cells that have been filled with pollutant.
+    Once a cell has been filled,
+    we don't care about its value any longer,
+    so we can use any number that isn't going to appear in the grid otherwise
+    as a marker to show which cells have been filled.
+    For now,
+    we'll use -1.
+  </p>
+
+  <div class="box">
+    <h3>Overloading Meaning</h3>
+
+    <p>
+      Note that this means we're using integers in two ways.
+      The first is as actual data values;
+      the second is as flags to represent the state of a cell.
+      This is simple to do,
+      but if we ever get data values that happen to contain
+      the numbers that we're using to mark filled cells,
+      our program will misinterpret them.
+      Bugs like this can be very hard to track down.
+    </p>
+  </div>
+
+  <p>
+    Before we go any further,
+    we also have to make some decisions about the shapes of our grids.
+    First,
+    do grids always have to be square, i.e., N&times;N,
+    or can we have rectangular grids whose X and Y sizes are different?
+    Second,
+    do grids always have to be odd-sized,
+    so that there's a unique center square for us to fill at the start,
+    or can we have a grid that is even in size along one or both axes?
+  </p>
+
+  <p>
+    The real question is,
+    how general should we make the first version of this program&mdash;indeed,
+    of <em>any</em> program?
+    Some people say, "Don't build it until you need it,"
+    while others say, "A week of hard work can sometimes save you an hour of thought."
+    Both sayings are true,
+    but as in any other intellectually demanding field,
+    knowing what rules to apply when comes with experience,
+    and the only way to get experience is to work through many examples
+    (and make a few mistakes).
+    Again,
+    let's do the simple thing for now,
+    and assume that grids are always square and odd-sized.
+  </p>
+
+  <p>
+    Now, how are we going to store the grid?
+    One way is to use a <a href="python.html#g:nested-list">nested list</a>.
+    This lets us use double subscripts to refer to elements,
+    which is really what we mean by "two dimensional".
+    Here's a piece of code that builds a grid of 1's as a list of lists;
+    we'll come back later and show how to fill those cells with random values instead:
+  </p>
+
+<pre>
+# Create an NxN grid of random integers in 1..Z.
+assert N &gt; 0, "Grid size must be positive"
+assert N%2 == 1, "Grid size must be odd"
+grid = []
+for x in range(N):
+    grid.append([])
+    for y in range(N):
+        grid[-1].append(1) # FIXME: need a random value
+</pre>
+
+  <p>
+    The first thing we do is check that the grid size <code>N</code> is a sensible value.
+    We then assign an empty list to the variable <code>grid</code>.
+    The first time through the outer loop,
+    we append a new empty list to the outer list.
+    Each pass through the inner loop,
+    we append the value 1 to that inner list
+    (<a href="#f:building_grid">Figure 3</a>).
+    We go back through the outer loop to append another sub-list,
+    which we grow by adding more 1's,
+    and so on until we get the grid that we wanted.
+  </p>
+
+  <figure id="f:building_grid">
+    <img src="dev/building_grid.png" alt="Building the Grid" />
+    <figcaption>Figure 3: Building the Grid</figcaption>
+  </figure>
+
+  <div class="box">
+    <h3>FIXME</h3>
+
+    <p>
+      At any point when writing a program,
+      there may be half a dozen things that need to be done next.
+      The problem is,
+      we can only write one at a time.
+      It's therefore a common practice to add comments to the code
+      to remind ourselves of things we need to come back and fill in (or tidy up) later.
+      It's equally common to start such comments with a word like "FIXME" or "TODO"
+      to make them easier to find with tools like <a href="shell.html#s:find"><code>grep</code></a>.
+    </p>
+
+  </div>
+
+</div>
