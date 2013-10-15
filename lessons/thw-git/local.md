@@ -465,7 +465,7 @@ hosted on github. Take a few minutes here, and pick a piece of code.
 
 Step 2 : Clone it. If you didn't find anything cool, you can chose the
 "instructional" Spoon-Knife repository:
-    
+
     $ cd
     $ git clone git@github.com/octocat/Spoon-Knife.git
     Cloning into Spoon-Knife...
