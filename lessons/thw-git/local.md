@@ -9,7 +9,7 @@ Imagine you have two computers: the first is a big, powerful desktop machine
 with a big, dual monitor setup. The second is a tiny lightweight netbook you 
 take with you when you travel. Imagine also that you have a presentation at a 
 conference overseas. You know that no matter how "finished" you think you are 
-with your slide deck, inevitably you will realize you need to add an exta figure 
+with your slide deck, inevitably you will realize you need to add an extra figure 
 or recalculate some data AFTER leaving the country and your main desktop 
 workstation. How can you be sure your slide deck, data, and the programs you've 
 written are synchronized between your two machines? How can you be sure that 
@@ -19,15 +19,23 @@ need to drop back to the slide deck you had five days ago?
 
 ## git : What is Version Control ?
 
-Very briefly, version control is a way to keep a backup of changing
-files, to store a history of those changes, and most importantly to
-allow many people in a collaboration to make changes to the same files
-concurrently. There are a lot of verson control systems. Wikipedia
+Very briefly, version control is a way to *keep a backup of changing
+files*, to *store a history of those changes*, and most importantly to
+*allow many people in a collaboration to make changes* to the same files
+concurrently. There are a lot of version control systems. Wikipedia
 provides both a nice vocabulary list and a fairly complete table of some
 popular version control systems and their equivalent commands.
 
+What problems does version control solve?
+* undo mistakes by rolling back to earlier versions
+* run and test with older versions for debugging (when did it break?)
+* allows you to keep and switch between multiple verisons of code
+* automatic merging of edits by different people
+* can distribute/publish analysis code and workflows
+* archive or back up your thesis so when your laptop goes away, your thesis doesn't
+
 Today, we'll be using git. Git is an example of a distributed version
-control system, distinct from centralized verson control systems. I'll
+control system, distinct from centralized version control systems. I'll
 make the distinction clear later, but for now, the table below will
 suffice.
 
@@ -41,6 +49,27 @@ Version Control System Tool Options
 - **Centralized**
   - concurrent versions system (cvs)
   - subversion (svn)
+
+## git clone : we've seen git already
+Yesterday morning, after installing git, we asked everyone to run
+```
+git clone http://github.com/USERNAME/YYYY-MM-DD-PLACE 
+```
+This created a copy of the software carpentry repository materials on
+each of your hard drives yesterday morning.   If you did this yesterday,
+you don't need to to it again.
+
+*But*, last night, the instructors changed the content on github, so now
+the repositories on all our hard drives are out of date.
+
+```
+cd
+cd boot-camps
+git pull
+```
+will try to retrieve all of last night's changes and update your local
+copies.  Note: git commands work only when executed from within the directory
+that contains the repository.
 
 ## git --help : Getting Help
 
@@ -97,6 +126,10 @@ as their descriptions.
     See 'git help <command>' for more information on a specific command.
 
 ## git config : Controls the behavior of git
+Since we're going to be making commits, we need to perform
+a one-time per computer configuation of git so git knows
+who to credit for our contributions to the version control
+system.
 
      $ git config --global user.name "YOUR NAME"
      $ git config --global user.email "YOUR EMAIL"
@@ -113,7 +146,7 @@ the original in order up to the version of interest.
 
 To create your own local (on your own machine) repository, you must
 initialize the repository with the infrastructure git needs in order to
-keep a record of things within the repsitory that you're concerned
+keep a record of things within the repository that you're concerned
 about. The command to do this is **git init** .
 
 ### Exercise : Create a Local Repository
@@ -124,7 +157,7 @@ Step 1 : Initialize your repository.
     $ mkdir good_science
     $ cd good_science
     $ git init
-    Initialized empty Git repository in /Users/swc/good_science/.git/
+    Initialized empty Git repository in /home/swc/good_science/.git/
 
 Step 2 : Browse the directory's hidden files to see what happened here.
 Open directories, browse file contents. Learn what you can in a minute.
@@ -140,12 +173,13 @@ description. You can describe your repository by opening the description
 file and replacing the text with a name for the repository. Mine will be
 called "Reproducible Science". You may call yours anything you like.
 
-    $ kate description &
+    $ nano description &
 
 Step 4 : Applications sometimes create files that are not needed. For
-example, kate creates a temporary file called 'filename~' when you edit
-the file 'filename'. You can ask git to ignore such files by editing
-the file '.git/info/exclude'. Edit the file to ignore files the end with '~'.
+example, some applications create backup or temporary files with names like'filename.bak' and 
+'filename.aux' that don't really need to be watched by version control. 
+You can ask git to ignore such files by editing
+the file '.git/info/exclude'. Edit the file to ignore files the end with '.bak'.
 
      git ls-files --others --exclude-from=.git/info/exclude
     # Lines that start with '#' are comments.
@@ -164,7 +198,7 @@ create one, then we'll learn the **git add** command.
 
 Step 1 : Create a file to add to your repository.
 
-    $ kate readme.rst &
+    $ nano readme.rst &
 
 Step 2 : Inform git that you would like to keep track of future changes
 in this file.
@@ -215,12 +249,12 @@ More frequent commits increase the granularity of your **undo** button.
 **ADVICE: Write good commit messages**
 
 There are no hard and fast rules, but good commits are atomic:
-they are the smallest change that remain meaningful.
-A good commit message usually contains a one-line description
-followed by a longer explanation if necessary.
+they are the smallest meaningful change. A good 
+commit message usually contains a one-line description followed 
+by a longer explanation if necessary.  Remember, you will be writing
+commit messages for yourself as much as for anyone else.
 
-[Our repo](https://github.com/USERNAME/boot-camps/commits/YYYY-MM-PLACE)
-has some good commit messages.
+[Our repo](https://github.com/swcarpentry/bc/) should have some good commit messages.
 
 ### Exercise : Commit Your Changes
 
@@ -319,7 +353,7 @@ There are some useful flags for this command, such as
     
 ## git branch : Listing, Creating, and Deleting Branches
 
-Branches are parallel instances of a repository that can be edited and
+Branches are pointers to a version of a repository that can be edited and
 version controlled in parallel. They are useful for pursuing various
 implementations experimentally or maintaining a stable core while
 developing separate sections of a code base.
@@ -413,16 +447,18 @@ Step 3 : Merge the two branches into the core
 ## git clone : Copying a Repository
 
 Yesterday, you checked out a git type repository at
-https://github.com/USERNAME/boot-camps/tree/YYYY-MM-PLACE
+https://github.com/USERNAME/YYYY-MM-DD-PLACE
 
 When you clone the Original repository, the one that is created on your
-local machine is a copy, and will behave as a fully fledged local
-repository locally. However, with the right configuration, it will be
-able to pull changes from collaborators to your local machine and push
-your changes to the Original repository. We'll get to that soon, but for
-now, let's **fork** the repository from GitHub.
+local machine is a copy, and contains both the contents and the history.
+With the right configuration, you can share your changes with your
+collaborators and import changes that others made in their versions.  You
+can also update the original repository with your changes.
 
-### Exercise : Cloning a Repository from GitHub
+We'll get to that soon, but for now, let's move on to a fairly
+easy-to-use system for managing repositories.
+
+### Exercise : Cloning Another Repository from GitHub
 
 Step 1 : Pick any repository you like. There are many cool projects
 hosted on github. Take a few minutes here, and pick a piece of code.
@@ -430,6 +466,7 @@ hosted on github. Take a few minutes here, and pick a piece of code.
 Step 2 : Clone it. If you didn't find anything cool, you can chose the
 "instructional" Spoon-Knife repository:
 
+    $ cd
     $ git clone git@github.com/octocat/Spoon-Knife.git
     Cloning into Spoon-Knife...
     remote: Counting objects: 24, done.
