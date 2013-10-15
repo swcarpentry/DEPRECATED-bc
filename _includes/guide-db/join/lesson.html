@@ -62,13 +62,18 @@
     <tr><td>MS-4</td><td>-48.87</td><td>-123.4</td><td>844</td><td>DR-1</td><td>1932-03-22</td></tr>
   </table>
 
+  <figure id="f:basicjoin">
+    <img src="db/basicjoin.png" alt="Basic Join" />
+    <figcaption>Figure 8: A Join of the Site and Visited Tables</figcaption>
+  </figure>
+
   <p>
     <code>join</code> creates
     the <a href="glossary.html#cross-product">cross product</a>
     of two tables,
     i.e.,
     it joins each record of one with each record of the other
-    to give all possible combinations.
+    to give all possible combinations (<a href="#f:basicjoin">Figure 8</a>).
     Since there are three records in <code>Site</code>
     and eight in <code>Visited</code>,
     the join's output has 24 records.
