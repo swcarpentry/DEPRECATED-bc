@@ -199,21 +199,13 @@ on the other hand,
 should have the Software Carpentry look and feel
 and the information about your bootcamp.
 
-You can also "preview" your pages by committing them to your repo 
-(you need `git add -f _site` or remove `_site` line in `.gitignore`)
-and then pushing to GitHub
-so that GitHub does the translation.
-If you do this,
-be aware that it may take GitHub a couple of minutes to regenerate your web site,
-and that you may need to clear your browser's cache
-in order to display that page correctly.
-
 **Note:**
 you will need to install Jekyll 1.0.3 or later in order to preview things locally.
 If you have Ruby installed on your computer,
 this *should* be as simple as:
 
     gem install jekyll
+    gem install redcarpet
 
 We try to use the same MarkDown interpreters as GitHub does for
 consistency.  On OS X, we suggest you use a recent Ruby to get access
@@ -227,13 +219,10 @@ gem install jekyll
 gem install redcarpet 
 ```
 
-If you don't have `make` in your machine (You are using Windows). You can
-type: 
+If you don't have `make` in your machine, you can build the preview with:
 
     jekyll -t build -d _site
-    
-To do the check. `make check` is just a wrapper of `jekyll` command. You can
-dig `Makefile` by yourself.
+
 
 Layout and Variables
 --------------------
