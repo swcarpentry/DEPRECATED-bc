@@ -6,8 +6,8 @@
     Mac OS with your mouse.  For example, we can create, delete
     and move individual files.  We will now learn about
     <a href="glossary.html#wildcard">wildcards</a>,
-    which will allow us to expand our toolkit so that we can do
-    things to multiple files with a single command.
+    which will allow us to expand our toolkit so that we can
+    perform operations on multiple files with a single command.
     We'll start in an empty directory and create four files:
   </p>
 
@@ -32,7 +32,8 @@ $
   <div class="box" id="a:asterisk">
     <h3>Asterisk (*) Wildcard</h3>
     <p>
-      The asterisk wildcard <code>*</code> in <code>file*</code> matches zero
+      The asterisk wildcard <code>*</code> in the expression 
+      <code>file*</code> matches zero
       or more characters of any kind.  Thus the expression <code>file*</code>
       matches anything that starts with "file".  On the other hand,
       <code>*file*</code> would match anything containing the word "file"
@@ -62,12 +63,13 @@ $
   </p>
 
   <ul>
-    <li>The question mark, <code>?</code>, matches any single character,
-  so <code>text?.txt</code> would match 
+    <li>The <b>question mark, <code>?</code></b>, matches 
+      any single character,
+      so <code>text?.txt</code> would match 
       <code>text1.txt</code> or 
       <code>textz.txt</code>,
       but not <code>text_1.txt</code>.</li>
-    <li>The square brackets, <code>[</code> and <code>]</code>, 
+    <li>The <b>square brackets, <code>[</code> and <code>]</code></b>, 
       which can be used to specify a set of possible characters.
       For example, <code>text[135].txt</code> would match 
       <code>text1.txt</code>,
@@ -78,15 +80,21 @@ $
       <code>text[1-6].txt</code> would match 
       <code>text1.txt</code>, 
       <code>text2.txt</code>, ...,
-      <code>text6.txt</code>)</li>
-    <li>The exclamation mark, <code>!</code>, which can be used with
-      square brackets to negate characters.  For example,
+      <code>text6.txt</code>.</li>
+    <li>The <b>exclamation mark, <code>!</code></b>, which can be used
+      with square brackets to negate characters.  For example,
       <code>text[!135].txt</code> would match anything of the form
       <code>text?.txt</code> <em>except</em> for
       <code>text1.txt</code>,
       <code>text3.txt</code>, and
-      <code>text5.txt</code>.</li>
-    <li>The curly braces, <code>{}</code>, are similar to the square
+      <code>text5.txt</code>.
+      (Note that the exclamation mark has to be used right after
+      the first square bracket as in the example.  An exclamation
+      mark outside of square brackets is not a wildcard, but
+      serves another function of
+      accessing previous commands from your history, as we will
+      later see.)</li>
+    <li>The <b>curly braces, <code>{}</code></b>, are similar to the square
       brackets, except that they take a list of items separated by
       commas, and that they always expand all elements of the list,
       whether or not the corresponding filenames exist.
@@ -140,8 +148,10 @@ $
 </pre>
 
   <p>
-    The curly braces expand the second token into three
-    separate file names, and the third token expands into five separate
+    The curly braces expand the second token <code>file{4,6,7}.txt</code>
+    into three
+    separate file names, and the third token <code>file_{a..e}.txt</code>
+    expands into five separate
     file names.  So, now if we list files using the asterisk wildcard,
     we get:
   </p>
@@ -166,10 +176,10 @@ $
 </pre>
 
   <p>
-    Note, how this glob pattern matched only the numbered files.  That
-    is because only the numbered files have a single character
+    Note how this glob pattern matched only the numbered files.  That's
+    because only the numbered files have a single character
     between <code>file</code> and <code>.txt</code>.  The lettered files
-    have two characters:
+    have two characters between <code>file</code> and <code>.txt</code>:
   </p>
 
 <pre>
@@ -179,7 +189,7 @@ $
 </pre>
 
   <p>
-    Let's try out using the <code>!</code> character with square brackets. 
+    Let's try out using the <code>!</code> wildcard with square brackets. 
     The pattern <code>file[!46]*</code> would match everything beginning with 
     "file", <em>unless</em> the next character is a 4 or a 6.  Thus, 
     continuing with our example, if we do <code>rm file[!46]*</code>, we 
@@ -230,9 +240,15 @@ $
     the wildcard characters are interpreted literally.  For 
     example, if we were to enter <code>ls file[AB].txt</code>,
     the system will first try to find <code>fileA.txt</code> or
-    <code>fileB.txt</code>, but when it fails to find either of
-    those, it will try to find a file named <code>file[AB].txt</code>.
-    We can see that this is the case if we try to 
+    <code>fileB.txt</code>.  If it found either of those, then
+    the wildcard expression would be expanded appropriately, 
+    but when it fails to find either of
+    them, the expression remains unevaluated as
+    <code>file[AB].txt</code>, and is then passed to <code>ls</code>.
+    At this point,
+    <code>ls</code> will try to find a single file that is
+    actually named <code>file[AB].txt</code>.
+    We can see that this is the case if we try
     <code>ls file[AB].txt</code>:
   </p>
 
@@ -244,11 +260,11 @@ $
 
   <p>
     The system tells us that <code>file[AB].txt</code> doesn't exist
-    since this was the file it was looking for after it didn't find
-    <code>fileA.txt</code> or <code>fileB.txt</code>.  Still not
+    since this was the file it was looking for after the wildcard
+    expression found no matches.  Still not
     convinced?  Let's actually create a file named <code>file[AB].txt</code>.
     To do this, we need some way of telling the computer that we
-    actually want the "[" and "]" characters to be in the filename, and
+    actually want the <code>[</code> and <code>]</code> characters to be in the filename, and
     that we don't mean them as wildcards.
   </p>
 
@@ -257,25 +273,29 @@ $
 
     <p>
       Wildcard characters, like <code>*</code>, <code>[]</code>,
-      and <code>{}</code> are all special characters in bash.  When we
-      escape a character, we toggle on a special meaning for that
-      character.  We can toggle on a single character using the
-      forwardslash, <code>\</code>.  The <code>\</code> preceding a
-      wildcard character tells the shell to interpret the character
-      literally. Note, that the backslash is also a special character
-      in bash, delimiting directory levels.  Likewise, <code>\/</code>
-      tells bash to interpret the backslash literally. We can escape
-      more than one character by enclosing the grouped characters in
+      and <code>{}</code> are all special characters in bash.  
+      Another example of a special character which we have already
+      encountered, and that is <em>not</em>
+      a wildcard character, is the forward slash <code>/</code>,
+      which is used to delimit directory levels.  It is possible to
+      <em>escape</em> special characters, i.e. turn off their
+      special meanings.
+      We can escape a single character by preceding it with a
+      backslash, <code>\</code>.  This tells the shell to interpret
+      that character literally.
+      For example, writing <code>\/</code>
+      tells bash to interpret the forward slash literally. We can escape
+      more than one character by enclosing a set of characters in
       either single or double quotes. Single quotes preserve the
       literal value of each character enclosed.  Double quotes
       preserve the literal value of each character enclosed with the
-      exception of '<code>$</code>', '<code>`</code>', or
-      '<code>\</code>', which all retain their special meaning. Inside
-      double quotes, backslashes <code>\</code> preceding special
-      characters will be removed.  If the backslash precedes a
-      character with no special meaning, the backslash will remain.
-      You can refer back to the example above of creating
-      <code>file[AB].txt</code> by either doing
+      exception of <code>$</code>, <code>`</code>, and
+      <code>\</code>, which all retain their special meanings. 
+      Therefore, inside double quotes, 
+      backslashes <code>\</code> preceding any of these three special
+      characters will be removed.  Otherwise, the backslash will remain.
+      For the example above of creating a file named
+      <code>file[AB].txt</code>, one can do any of the following:
       <code>touch "file[AB].txt"</code>,
       <code>touch 'file[AB].txt'</code>, 
       <code>touch file\[AB\].txt</code>, or
