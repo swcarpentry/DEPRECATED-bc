@@ -245,7 +245,8 @@ $
     but when it fails to find either of
     them, the expression remains unevaluated as
     <code>file[AB].txt</code>, and is then passed to <code>ls</code>.
-    Then <code>ls</code> will try to find a single file that is
+    At this point,
+    <code>ls</code> will try to find a single file that is
     actually named <code>file[AB].txt</code>.
     We can see that this is the case if we try to 
     <code>ls file[AB].txt</code>:
