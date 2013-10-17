@@ -240,8 +240,13 @@ $
     the wildcard characters are interpreted literally.  For 
     example, if we were to enter <code>ls file[AB].txt</code>,
     the system will first try to find <code>fileA.txt</code> or
-    <code>fileB.txt</code>, but when it fails to find either of
-    those, it will try to find a file named <code>file[AB].txt</code>.
+    <code>fileB.txt</code>.  If it found either of those, then
+    the wildcard expression would be expanded appropriately, 
+    but when it fails to find either of
+    them, the expression remains unevaluated as
+    <code>file[AB].txt</code>, and is passed to <code>ls</code>.
+    Then <code>ls</code> will try to find a single file that is
+    actually named <code>file[AB].txt</code>.
     We can see that this is the case if we try to 
     <code>ls file[AB].txt</code>:
   </p>
