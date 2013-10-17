@@ -148,8 +148,10 @@ $
 </pre>
 
   <p>
-    The curly braces expand the second token into three
-    separate file names, and the third token expands into five separate
+    The curly braces expand the second token <code>file{4,6,7}.txt</code>
+    into three
+    separate file names, and the third token <code>file_{a..e}.txt</code>
+    expands into five separate
     file names.  So, now if we list files using the asterisk wildcard,
     we get:
   </p>
