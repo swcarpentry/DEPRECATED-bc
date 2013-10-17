@@ -106,13 +106,25 @@
     A shell is a program like any other.
     What's special about it is that its job is to run other programs,
     rather than to do calculations itself.
-    The most popular Unix shell is Bash, the Bourne Again SHell
+    One popular Unix shell is Bash, the Bourne-Again Shell
     (so-called because it's derived from a shell written by Stephen Bourne&mdash;this
     is what passes for wit among programmers).
     Bash is the default shell on most modern implementations of Unix,
     and in most packages that provide Unix-like tools for Windows,
     such as <a href="http://www.cygwin.org">Cygwin</a>.
   </p>
+
+  <div class="box">
+    <h3>Bourne shell vs C shell</h3>
+
+    <p>
+      Bourne shell (<code>sh</code>) and C shell (<code>csh</code>) are the two
+      most popular shells and are incompatibles. There are some shells that are
+      compatible with one of the formers like the Bourne-Again shell
+      (<code>bash</code>).
+    </p>
+
+  </div>
 
   <p>
     Using Bash,
@@ -129,5 +141,71 @@
     As clusters and cloud computing become more popular for scientific data crunching,
     being able to drive them is becoming a necessary skill.
   </p>
+
+  <p>
+    To start exploring them,
+    let's log in to the computer by typing our user ID and password.
+    Most systems will print stars to obscure the password,
+    or nothing at all,
+    in case some evildoer is shoulder surfing behind us.
+  </p>
+
+<pre>
+login: <span class="in">vlad</span>
+password: <span class="in">********</span>
+$
+</pre>
+
+  <p>
+    Once we have logged in we'll see a <a href="glossary.html#prompt">prompt</a>,
+    which is how the shell tells us that it's waiting for input.
+    This is usually just a dollar sign,
+    but which may show extra information such as our user ID or the current time.
+    Type <code class="in">echo $SHELL</code>,
+    then press the <span class="keyboard">Enter</span> key
+    (sometimes marked <span class="keyboard">Return</span>)
+    to send the command to the shell.
+    The command's output is the name of the shell been used (the name are
+    stored in the environment variables named <span class="keyboard">SHELL</span>):
+  </p>
+
+<pre>
+$ <span class="in">echo $SHELL</span>
+<span class="out">/bin/bash</span>
+$
+</pre>
+
+  <p class="continue">
+    More specifically,
+    when we type <code>echo $SHELL</code>
+    the shell:
+  </p>
+
+  <ol>
+    <li>replace <code>$SHELL</code> with the value of this environment
+    variables,</li>
+    <li>finds a program called <code>echo</code>,</li>
+    <li>runs it,</li>
+    <li>waits for it to display its output, and</li>
+    <li>displays a new prompt to tell us that it's ready for more commands.</li>
+  </ol>
+
+  <p>
+    When using a graphic user interface we need to use a terminal emulator to
+    have access to a command-line user interface. Some of the popular terminal emulators
+    in the GNU/Linux distributions are xterm, gnome-terminal and konsole.
+    To find the name of the terminal emulator been used run
+    <code>echo $TERM</code> (similar to <span class="keyboard">SHELL</span> environment
+    variables the <span class="keyboard">TERM</span> environment variables store the
+    name of the terminal emulator being used):
+  </p>
+
+<pre>
+$ <span class="in">echo $SHELL</span>
+<span class="out">xterm</span>
+$
+</pre>
+
+</pre>
 
 </div>
