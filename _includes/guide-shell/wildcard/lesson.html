@@ -283,20 +283,19 @@ $
       We can escape a single character by preceding it with a
       backslash, <code>\</code>.  This tells the shell to interpret
       that character literally.
-      Note, that the backslash is also a special character
-      in bash, delimiting directory levels.  Likewise, <code>\/</code>
-      tells bash to interpret the backslash literally. We can escape
-      more than one character by enclosing the grouped characters in
+      For example, writing <code>\/</code>
+      tells bash to interpret the forward slash literally. We can escape
+      more than one character by enclosing a set of characters in
       either single or double quotes. Single quotes preserve the
       literal value of each character enclosed.  Double quotes
       preserve the literal value of each character enclosed with the
-      exception of '<code>$</code>', '<code>`</code>', or
-      '<code>\</code>', which all retain their special meaning. Inside
+      exception of <code>$</code>, <code>`</code>, and
+      <code>\</code>, which all retain their special meanings. Inside
       double quotes, backslashes <code>\</code> preceding special
       characters will be removed.  If the backslash precedes a
       character with no special meaning, the backslash will remain.
-      You can refer back to the example above of creating
-      <code>file[AB].txt</code> by either doing
+      For the example above of creating a file named
+      <code>file[AB].txt</code>, one can do any of the following:
       <code>touch "file[AB].txt"</code>,
       <code>touch 'file[AB].txt'</code>, 
       <code>touch file\[AB\].txt</code>, or
