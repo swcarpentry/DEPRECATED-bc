@@ -236,15 +236,15 @@ unicorn.dat
 </pre>
 
     <p>
-      The highlighted lands show the problem:
+      The highlighted lines show the problem:
       instead of getting one name <code>red&nbsp;dragon.dat</code>,
       the commands in the loop will get <code>red</code> and <code>dragon.dat</code> separately.
       To make matters worse,
       the file <code>red&nbsp;dragon.dat</code> won't be processed at all.
-      There are ways to get around this,
+      There are ways to get around this, the simplest of which is to put quote marks around <code>"$filename"</code>,
       but the safest thing is to use dashes,
       underscores,
-      or some other printable character instead.
+      or some other printable character instead of spaces in your file names.
     </p>
 
   </div>
