@@ -290,10 +290,10 @@ $
       literal value of each character enclosed.  Double quotes
       preserve the literal value of each character enclosed with the
       exception of <code>$</code>, <code>`</code>, and
-      <code>\</code>, which all retain their special meanings. Inside
-      double quotes, backslashes <code>\</code> preceding special
-      characters will be removed.  If the backslash precedes a
-      character with no special meaning, the backslash will remain.
+      <code>\</code>, which all retain their special meanings. 
+      Therefore, inside double quotes, 
+      backslashes <code>\</code> preceding any of these three special
+      characters will be removed.  Otherwise, the backslash will remain.
       For the example above of creating a file named
       <code>file[AB].txt</code>, one can do any of the following:
       <code>touch "file[AB].txt"</code>,
