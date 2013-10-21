@@ -67,6 +67,28 @@ def create_nosetests_entry_point(python_scripts_directory):
         f.write(contents)
 
 
+def make_bash_profile(home_dir, nano_dir):
+    """Creates a .bash_profile file for nano setup
+
+    Adds nano to the path and sets the default editor to nano
+
+    """
+
+    nano_path = make_posix_path(nano_dir)
+    contents = '\n'.join(['',
+                          '# Add nano to path and set as default editor',
+                          '# Added by the Software Carpentry nano installer',
+                          'export PATH=$PATH:%s' % nano_path,
+                          'export EDITOR=nano',
+                          ''])
+    with open(os.path.join(home_dir, '.bash_profile'), 'a') as f:
+        f.write(contents)
+
+def make_posix_path(windows_path):
+    """Convert a Windows path to a posix path"""
+    return windows_path.replace('\\', '/').replace('C:', '/c')
+
+
 def main():
     python_scripts_directory = "C:\\Anaconda\\Scripts\\"
     #python_scripts_directory = "./scripts/"
