@@ -67,22 +67,25 @@ def create_nosetests_entry_point(python_scripts_directory):
         f.write(contents)
 
 
-def make_bash_profile(home_dir, nano_dir):
-    """Creates a .bash_profile file for nano setup
+def update_bash_profile(extra_paths=()):
+    """Create or append to a .bash_profile for Software Carpentry
 
-    Adds nano to the path and sets the default editor to nano
-
+    Adds nano to the path, sets the default editor to nano, and adds
+    additional paths for other executables.
     """
-
-    nano_path = make_posix_path(nano_dir)
-    contents = '\n'.join(['',
-                          '# Add nano to path and set as default editor',
-                          '# Added by the Software Carpentry nano installer',
-                          'export PATH=$PATH:%s' % nano_path,
-                          'export EDITOR=nano',
-                          ''])
-    with open(os.path.join(home_dir, '.bash_profile'), 'a') as f:
-        f.write(contents)
+    lines = [
+        '',
+        '# Add paths for Software-Carpentry-installed scripts and executables',
+        'export PATH=$PATH:{}'.format(':'.join(
+            make_posix_path(path) for path in extra_paths),),
+        '',
+        '# Make nano the default editor',
+        'export EDITOR=nano',
+        '',
+        ]
+    config_path = os.path.join(os.path.expanduser('~'), '.bash_profile')
+    with open(config_path, 'a') as f:
+        f.write('\n'.join(lines))
 
 def make_posix_path(windows_path):
     """Convert a Windows path to a posix path"""
