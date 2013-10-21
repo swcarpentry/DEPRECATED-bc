@@ -11,12 +11,14 @@ The script:
 
 To use:
 
-1. Install Anaconda CE Python distribution
+1. Install Python, IPython, and Nose.  An easy way to do this is with
+   the Anaconda CE Python distribution
    http://continuum.io/anacondace.html
 2. Install msysgit
    http://code.google.com/p/msysgit/downloads/list?q=full+installer+official+git
 3. Run swc_windows_installer.py
    You should be able to simply double click the file in Windows
+
 """
 
 try:  # Python 3
