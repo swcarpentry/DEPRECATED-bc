@@ -23,7 +23,7 @@ try:  # Python 3
     from io import BytesIO as _BytesIO
 except ImportError:  # Python 2
     from StringIO import StringIO as _BytesIO
-import os.path
+import os
 try:  # Python 3
     from urllib.request import urlopen as _urlopen
 except ImportError:  # Python 2
@@ -39,6 +39,7 @@ def install_nano(install_directory):
     nano_zip = zipfile.ZipFile(nano_zip_content)
     nano_files = ['nano.exe', 'cygwin1.dll', 'cygintl-8.dll',
                   'cygiconv-2.dll', 'cyggcc_s-1.dll']
+    os.makedirs(install_directory)
     for file_name in nano_files:
         nano_zip.extract(file_name, install_directory)
 
@@ -69,11 +70,10 @@ def make_posix_path(windows_path):
 
 
 def main():
-    home_dir = os.path.expanduser('~')
-    nano_dir = os.path.join(home_dir, '.nano')
-    bin_dir = os.path.join(home_dir, '.swc-bin')
+    swc_dir = os.path.join(os.path.expanduser('~'), '.swc')
+    nano_dir = os.path.join(swc_dir, 'lib', 'nano')
     install_nano(installation_directory=nano_dir)
-    update_bash_profile(extra_paths=(bin_dir, nano_dir))
+    update_bash_profile(extra_paths=(nano_dir,))
 
 
 if __name__ == '__main__':
