@@ -93,11 +93,13 @@ def make_posix_path(windows_path):
 
 
 def main():
-    python_scripts_directory = "C:\\Anaconda\\Scripts\\"
-    #python_scripts_directory = "./scripts/"
-    create_ipython_entry_point(python_scripts_directory)
-    create_nosetests_entry_point(python_scripts_directory)
-    install_nano(python_scripts_directory)
+    home_dir = os.path.expanduser('~')
+    nano_dir = os.path.join(home_dir, '.nano')
+    bin_dir = os.path.join(home_dir, '.swc-bin')
+    create_ipython_entry_point(python_scripts_directory=bin_dir)
+    create_nosetests_entry_point(python_scripts_directory=bin_dir)
+    install_nano(installation_directory=nano_dir)
+    update_bash_profile(extra_paths=(bin_dir, nano_dir))
 
 
 if __name__ == '__main__':
