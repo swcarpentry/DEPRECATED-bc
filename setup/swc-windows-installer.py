@@ -5,8 +5,6 @@
 Helps mimic a *nix environment on Windows with as little work as possible.
 
 The script:
-* Provides standard ipython operation for msysgit
-* Provides standard nosetests behavior for msysgit
 * Installs nano and makes it accessible from msysgit
 
 To use:
@@ -44,30 +42,6 @@ def install_nano(install_directory):
     for file_name in nano_files:
         nano_zip.extract(file_name, install_directory)
 
-def create_ipython_entry_point(python_scripts_directory):
-    """Creates a terminal-based IPython entry point for msysgit"""
-    contents = '\n'.join([
-            '#!/usr/bin/env python',
-            'from IPython.frontend.terminal.ipapp import launch_new_instance',
-            'launch_new_instance()',
-            '',
-            ])
-    with open(os.path.join(python_scripts_directory, 'ipython'), 'w') as f:
-        f.write(contents)
-
-def create_nosetests_entry_point(python_scripts_directory):
-    """Creates a terminal-based nosetests entry point for msysgit"""
-    contents = '\n'.join([
-            '#!/usr/bin/env/ python',
-            'import sys',
-            'import nose',
-            "if __name__ == '__main__':",
-            '    sys.exit(nose.core.main())',
-            '',
-            ])
-    with open(os.path.join(python_scripts_directory, 'nosetests'), 'w') as f:
-        f.write(contents)
-
 
 def update_bash_profile(extra_paths=()):
     """Create or append to a .bash_profile for Software Carpentry
@@ -98,8 +72,6 @@ def main():
     home_dir = os.path.expanduser('~')
     nano_dir = os.path.join(home_dir, '.nano')
     bin_dir = os.path.join(home_dir, '.swc-bin')
-    create_ipython_entry_point(python_scripts_directory=bin_dir)
-    create_nosetests_entry_point(python_scripts_directory=bin_dir)
     install_nano(installation_directory=nano_dir)
     update_bash_profile(extra_paths=(bin_dir, nano_dir))
 
