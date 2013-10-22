@@ -51,6 +51,42 @@ The steps that plyr performed for us are typically very fragile pieces of code i
 
 In this way plyr is a building block for simplifying complex scientific analysis code.
 
+# Models across sites 
+
+Imagine we have 10 sites (labled a-j) where we're making observations of some variables x and y.  We'd like to generate linear models for each of the sites and look at some summary of the models (slope, intercept, rsquared).  For this example we'll just use some random normal data for illustration.
+
+```{r}
+x <- rnorm(150)
+y <- x + rnorm(150)
+site <- rep(c('a','b','c','d','e','f','g','h','i','j'), each=15)
+experiment <- data.frame(x=x,y=y,site=site)
+head(experiment)
+
+```
+We now have a 150-row data set with 10 unique sites labeled a-j.
+
+Now we write a function to perform modeling on each subdataset, and we use `dlply()` to take the `experiment` data frame and split it on site, before applying the function `model)` to each split.
+
+```{r}
+model <- function(df) { 
+    lm(y ~ x, data=df)
+}
+# Feed data into model one-by-one returining models to a list of models.
+models <- dlply(experiment, .(site), model)
+```
+
+Now we have a list of models, we want to write another plyr expression to operate on that list of models and return a data frame of the slope, intercept and R-squared values.
+
+```{r}
+coefs <- function(model) { 
+    c(coef(model), rsquare = summary(model)$r.squared)
+}
+ldply(models, coefs)
+```
+
+As we're working with random normal data, your results are going to be different than the results here.
+
+
 # A larger data set
 
 Using the ozone dataset that comes with plyr we can explore a more complicated and multi-dimensional example.  The ozone data set is a 3-dimensional array with the first two dimensions being latitude and longitude, while the third is a monthly time series over 6 years. 
