@@ -152,9 +152,9 @@ To create a website for a new bootcamp:
 
 ![Alt text](img/readme/step1.png)
 
-3.  Add the template repository `git@github.com:swcarpentry/bc.git` as a remote named `swcarpentry`:
+3.  Add the template repository `https://github.com/swcarpentry/bc.git` as a remote named `swcarpentry`:
 
-        git remote add swcarpentry git@github.com:swcarpentry/bc.git
+        git remote add https://github.com/swcarpentry/bc.git
 
 ![Alt text](img/readme/step2.png)
 
@@ -360,7 +360,7 @@ To send them to us as a pull request:
 1.  Fork the `bc` repository on GitHub.
 2.  Make that a remote named "upstream" of your local YYYY-MM-DD-site repository:
 
-        git remote add upstream git@github.com:<me>/bc.git
+        git remote add upstream https://github.com/<me>/bc.git
 
 (replacing 'me' with your GitHub username)
 
