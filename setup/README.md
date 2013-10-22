@@ -1,3 +1,9 @@
+---
+layout: lesson
+root: ../
+title: Setup Scripts
+---
+
 Students
 ========
 
