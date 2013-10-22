@@ -1,7 +1,7 @@
 plyr
 ========================================================
 
-plyr is an R Package for Split-Apply-Combine workflows.  It's functional programming model encourages writing reusable functions which can be called across varied datasets and frees the analyst/scientist from needing to manage for loop indecies.
+plyr is an R Package for Split-Apply-Combine workflows.  It's functional programming model encourages writing reusable functions which can be called across varied datasets and frees the analyst/scientist from needing to manage for loop indices.
 
 # plyr Functions
 
@@ -47,7 +47,7 @@ iris_mean
 3. In-turn fed those three subsets to our user defined function.
 4. Took the output and coaxed it back to a `data.frame` if it wasn't already.
 
-The steps that plyr performed for us are typically very fragile pieces of code in many scientific analysis workflows. plyr is able to give us an *abstraction layer* where we don't have to think about the mechanics of accounting for data types and specific loop indecies.
+The steps that plyr performed for us are typically very fragile pieces of code in many scientific analysis workflows. plyr is able to give us an *abstraction layer* where we don't have to think about the mechanics of accounting for data types and specific loop indices.
 
 In this way plyr is a building block for simplifying complex scientific analysis code.
 
@@ -74,9 +74,9 @@ head(overview_temporal)
 Notice how the output contains the output of summary with a cbind of the dimension that was used for splitting (lat,lon) and (time) respectively.  plyr is doing much of the heavy lifting and allowing you to simply write a function that operates on the splits in a generalized way.
 
 
-# Aditional capabilities
+# Additional capabilities
 
-## Multicore 
+## Parallel/Multi-core 
 
 All plyr functions also have a `.parallel` method which will parallelize the inner loops of plyr operations.  In order to use `.parallel` you must use a package like `doMC` which is appropriate for your operating system. 
 
