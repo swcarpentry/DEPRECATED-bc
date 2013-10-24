@@ -6,6 +6,13 @@
 **Prepared by Tommy Guy**
 # Edited by Jin
 
+Notice
+-------
+This lesson was written for a Unix system -- the Python commands will still work,
+but for Unix commands (noted by $, e.g. cat), they may not work on Windows. Please
+do not be alarmed, as the main aspect of this exercise revolves around string and
+file handling in Python.
+
 Lesson goals:
 
 1.  Examine the string class in greater detail.
@@ -229,7 +236,7 @@ the file. open returns a file object, acts like a pointer into the file.
 An example will make this clear. In the code below, I've opened a file
 that contains two lines:
 
-    (unix shell) $ cat testFile.txt
+    $ cat testFile.txt
     abcde
     fghij
 
@@ -290,7 +297,7 @@ method to get rid of the newline character.
 
 Example:
 
-  $ cat testFile.txt
+    $ cat testFile.txt
     abcde
     fghij
 
@@ -362,9 +369,7 @@ If we open this file using the `'w'` mode, then it will overwrite from the begin
     > outFile = open('testFile.txt','w')
     > outFile.write('This is the first line!\n')
     > outFile.close()
-    
 ```
-
 So if we read this file now, it'd be...
 
     $ cat testFile.txt
@@ -376,7 +381,6 @@ as `'w'` mode, but instead of over-writing the file, we just attach it to the en
     > outFile = open('testFile.txt','a')
     > outFile.write('This is the second line!\n')
     > outFile.close()
-    
 ```
 Implementing the append mode via `'a'` returns the following:
 
@@ -389,7 +393,7 @@ Aside: The first exercise
 =========================
 
 Yesterday, we asked you to edit a file in place. Many of you asked how
-this was possible. In a unix shell, this is possible by using the command `sed`, but
+this was possible. In a Unix shell, this is possible by using the command `sed`, but
 this is beyond the scope of our lesson - also, this is not a Python command!
 
 You can read more about `sed` [here](http://www.grymoire.com/Unix/Sed.html),
@@ -404,7 +408,7 @@ file (e.g. >1000 lines), you can read it line-by-line, making the file I/O very 
 
 Example: 
 
-First, count the number of lines in a unix shell by using `wc -l <FILENAME>`. `wc` is a word-count command in unix,
+First, count the number of lines in a Unix shell by using `wc -l <FILENAME>`. `wc` is a word-count command in Unix,
 and the `-l` option specifies line counting.
 
     $ wc -l bigFile.txt
@@ -425,43 +429,4 @@ I'll show you the on-the-fly method where we add the string " NOW EDITED " at th
     
     > fileHandle.close()
     > newFile.close()
-
 ```
-
-Aside: The sed method *Not Python* 
-========================================
-
-`sed` is a built-in unix command for manipulating text files.
-If we wanted to change a file in-place, then we can use substitute:
-
-    (unix shell) $ sed -i 's/hello/bye/g' file.txt
-  
-In this case, for every instance of the word 'hello' in file.txt, sed will replace it with 'bye'.
-By using `-i`, we invoke an in-place editing option, with `s/` asking for substitution. The syntax is:
-
-    (unix shell) $ sed -i 's/<Pattern to match>/<New pattern to use>/g' [FILENAME]
-
-With sed, we can also append lines. Note, for sed appending, we must put these commands as separate lines:
-
-    (unix shell) $ sed '/<Pattern to Match>/ a\
-                  <New Pattern>
-                  ' [FILENAME]
-
-So at first, we give sed the pattern to match, and the `a\` command to flag appending. Then in a new line, we put our
-new pattern of interest. Once we submit, we close with a closing quotation mark, and the filename to append to.
-
-    (unix shell) $ cat newFile.txt
-      abcde
-      fghij
-      klmnop
-      
-                   sed '/fghij/ a\
-                   HELLO WORLD!!
-                   ' newFile.txt
-                   
-                   
-                   cat newFile.txt
-      abcde
-      fghij
-      HELLO WORLD!!
-      klmnop
