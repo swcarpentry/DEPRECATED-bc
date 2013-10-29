@@ -11,7 +11,9 @@ The idea is to show how to setup Python for purposes of scientific computation a
 
 This overview is aimed at the scientists who are interested in Python but don't know how to start using it (this might be really confusing for a newcomer), or would like to learn more about possible Python applications. For those of you who already use Python there will be nothing really new.
 
-This notes will be helpful only if you know some programming language already (preferably Matlab). Notes are also avalible as webpages at [earthpy.org](http://earthpy.org/category/introduction-to-python.html).
+This material has been presented in 2-hour lecture format and is also suitable for half-day and full-day hands-on presentation.
+
+This notes will be helpful only if students already know some programming language (preferably Matlab). Notes are also avalible as webpages at [earthpy.org](http://earthpy.org/category/introduction-to-python.html).
 
 PRs with corrections are very welcomed.
 
