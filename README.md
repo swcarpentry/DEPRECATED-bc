@@ -154,7 +154,7 @@ To create a website for a new bootcamp:
 
 3.  Add the template repository `https://github.com/swcarpentry/bc.git` as a remote named `swcarpentry`:
 
-        git remote add https://github.com/swcarpentry/bc.git
+        git remote add swcarpentry https://github.com/swcarpentry/bc.git
 
 ![Alt text](img/readme/step2.png)
 
