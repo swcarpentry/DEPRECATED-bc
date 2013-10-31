@@ -1,18 +1,29 @@
 plyr
 ========================================================
 
-plyr is an R Package for Split-Apply-Combine workflows.  It's functional programming model encourages writing reusable functions which can be called across varied datasets and frees the analyst/scientist from needing to manage for loop indices.
+`plyr` is an R Package for Split-Apply-Combine workflows.  It's functional programming model encourages writing reusable functions which can be called across varied datasets and frees the analyst/scientist from needing to manage for loop indices.  If you are already a savy R user, many of the `*apply` functions can be used to cobble together similar functionality as `plyr`.  The advantage with `plyr` is that you have a common function naming convention and a common set of function parameters, so the functions behave similarly and interchangeably.
+
+# Expected background
+This lesson assumes basic R knowledge, especially a good understanding of `list`, `data.frame` and `array` data types in R.  An understanding of the `*apply` functions in base-R is helpful, but not required.
+
+# Lesson overview
+This lesson should take abour 30-45 minutes to go through.  When you're done you should have a better understanding of
+
+1. What is `plyr` and when to use it
+1. How to select an appropriate `plyr` function based on your input and output data types
+1. How to write functions for processing splits
+1. Work several examples using `list`, `data.frame` and `array` `plyr` functions. 
 
 # plyr Functions
 
-plyr has functions for operating on lists, data frames and arrays.  Each function performs:
+plyr has functions for operating on `lists`, `data.frames` and `arrays`.  Each function performs:
 
 1. A splitting operation
-2. An "apply" where a function is called on each split in turn.
+2. An `apply` where a function is called on each split in turn.
 3. A recombination of output data as a single data object.
 
 # Functions continued
-The functions are named based on which type of object they expect as input (array, list or data frame) and which type of data structure should be returned as output.
+The functions are named based on which type of object they expect as input ([a]rray, [l]ist or [d]ata frame) and which type of data structure should be returned as output.
 
 This gives us 9 core functions **ply.  There are an adittional three functions which will only perform the split and apply steps, and not any combine step.  They're named by their input data type and represent null output by a `_` (see table)
 
@@ -27,7 +38,7 @@ This gives us 9 core functions **ply.  There are an adittional three functions w
 ```{r}
 library(plyr)
 iris_mean <- ddply(iris, .(Species), function(df) { 
-    data.frame(mean.petal_length=mean(df$Petal.Length)) 
+    data.frame(mean.petal_length=mean(df$Petal.Length), max.petal_length=max(df$Petal.Length) 
     })
 iris_mean
 ```
@@ -46,10 +57,13 @@ iris_mean
 2. Performed subsetting operation on unique values of `Species`
 3. In-turn fed those three subsets to our user defined function.
 4. Took the output and coaxed it back to a `data.frame` if it wasn't already.
+5. Combined all rows from all splits into a single data frame.
 
 The steps that plyr performed for us are typically very fragile pieces of code in many scientific analysis workflows. plyr is able to give us an *abstraction layer* where we don't have to think about the mechanics of accounting for data types and specific loop indices.
 
 In this way plyr is a building block for simplifying complex scientific analysis code.
+
+If a plyr function d
 
 # Models across sites 
 
@@ -71,6 +85,7 @@ Now we write a function to perform modeling on each subdataset, and we use `dlpl
 model <- function(df) { 
     lm(y ~ x, data=df)
 }
+
 # Feed data into model one-by-one returining models to a list of models.
 models <- dlply(experiment, .(site), model)
 ```
@@ -108,6 +123,31 @@ head(overview_temporal)
 ```
 
 Notice how the output contains the output of summary with a cbind of the dimension that was used for splitting (lat,lon) and (time) respectively.  plyr is doing much of the heavy lifting and allowing you to simply write a function that operates on the splits in a generalized way.
+
+
+# Underscore Functions
+
+The functions `a_ply`, `d_ply` and `l_ply` are special case where the split funtion return values are discarded.  This can be useful in cases where your split function performs some operation which you persist to disk or a database.
+
+In the below example we use the plotting library `ggplot2` to plot a graph for each combination of `Treatment` and `Plant` in the R `CO2` example data set.
+
+```
+library(plyr)
+library(ggplot2)
+data(ethanol)
+makeplot <- function (df) { 
+    plant <- unique(df$Plant)
+    treatment <- unique(df$Treatment)
+    title <- paste("CO2 Concentration vs. uptake for ",plant, " with treatment: ", treatment, sep="")
+    ggplot(df, aes(x=conc, y=uptake)) + geom_point() + geom_line() + ggtitle(title)
+}
+pdf('outfile.pdf',width=11, height=8.5)
+d_ply(CO2, .(Treatment,Plant), makeplot, .print=TRUE)
+dev.off()
+
+``` 
+
+Notice that we open the PDF file before we run `d_ply` and we call .print=TRUE to force the `ggplot` statement to be printed to the PDF file.  Also note that we split the input data set on two dimensions, `Treatment` and `Plant`, this approach can be used to slice larger experiments across many dimensions for modeling, plotting or summarization.
 
 
 # Additional capabilities
