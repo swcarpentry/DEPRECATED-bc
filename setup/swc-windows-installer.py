@@ -6,6 +6,7 @@ Helps mimic a *nix environment on Windows with as little work as possible.
 
 The script:
 * Installs nano and makes it accessible from msysgit
+* Provides standard nosetests behavior for msysgit
 
 To use:
 
@@ -44,6 +45,20 @@ def install_nano(install_directory):
         nano_zip.extract(file_name, install_directory)
 
 
+def create_nosetests_entry_point(python_scripts_directory):
+    """Creates a terminal-based nosetests entry point for msysgit"""
+    contents = '\n'.join([
+            '#!/usr/bin/env/ python',
+            'import sys',
+            'import nose',
+            "if __name__ == '__main__':",
+            '    sys.exit(nose.core.main())',
+            '',
+            ])
+    with open(os.path.join(python_scripts_directory, 'nosetests'), 'w') as f:
+        f.write(contents)
+
+
 def update_bash_profile(extra_paths=()):
     """Create or append to a .bash_profile for Software Carpentry
 
@@ -71,9 +86,11 @@ def make_posix_path(windows_path):
 
 def main():
     swc_dir = os.path.join(os.path.expanduser('~'), '.swc')
+    bin_dir = os.path.join(swc_dir, 'bin')
+    create_nosetests_entry_point(python_scripts_directory=bin_dir)
     nano_dir = os.path.join(swc_dir, 'lib', 'nano')
     install_nano(installation_directory=nano_dir)
-    update_bash_profile(extra_paths=(nano_dir,))
+    update_bash_profile(extra_paths=(nano_dir, bin_dir))
 
 
 if __name__ == '__main__':
