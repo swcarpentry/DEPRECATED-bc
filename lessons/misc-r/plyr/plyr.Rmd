@@ -61,7 +61,7 @@ head(iris)
 iris_mean <- ddply(iris, .(Species), function(df) { 
     data.frame(mean.petal_length=mean(df$Petal.Length), 
               max.petal_length=max(df$Petal.Length)) 
-    })
+   })
 iris_mean
 ```
 
@@ -135,6 +135,8 @@ As we're working with random normal data, your results are going to be different
 than the results here.
 
 
+If a plyr function d
+
 # Models across sites 
 
 Imagine we have 10 sites (labled a-j) where we're making observations of some variables x and y.  We'd like to generate linear models for each of the sites and look at some summary of the models (slope, intercept, rsquared).  For this example we'll just use some random normal data for illustration.
@@ -155,6 +157,7 @@ Now we write a function to perform modeling on each subdataset, and we use `dlpl
 model <- function(df) { 
     lm(y ~ x, data=df)
 }
+
 # Feed data into model one-by-one returining models to a list of models.
 models <- dlply(experiment, .(site), model)
 ```
@@ -237,6 +240,31 @@ to force the `ggplot` statement to be printed to the PDF file.  Also note that
 we split the input data set on two dimensions, `Treatment` and `Plant`, this 
 approach can be used to slice larger experiments across many dimensions for 
 modeling, plotting or summarization.
+
+
+# Underscore Functions
+
+The functions `a_ply`, `d_ply` and `l_ply` are special case where the split funtion return values are discarded.  This can be useful in cases where your split function performs some operation which you persist to disk or a database.
+
+In the below example we use the plotting library `ggplot2` to plot a graph for each combination of `Treatment` and `Plant` in the R `CO2` example data set.
+
+```
+library(plyr)
+library(ggplot2)
+data(ethanol)
+makeplot <- function (df) { 
+    plant <- unique(df$Plant)
+    treatment <- unique(df$Treatment)
+    title <- paste("CO2 Concentration vs. uptake for ",plant, " with treatment: ", treatment, sep="")
+    ggplot(df, aes(x=conc, y=uptake)) + geom_point() + geom_line() + ggtitle(title)
+}
+pdf('outfile.pdf',width=11, height=8.5)
+d_ply(CO2, .(Treatment,Plant), makeplot, .print=TRUE)
+dev.off()
+
+``` 
+
+Notice that we open the PDF file before we run `d_ply` and we call .print=TRUE to force the `ggplot` statement to be printed to the PDF file.  Also note that we split the input data set on two dimensions, `Treatment` and `Plant`, this approach can be used to slice larger experiments across many dimensions for modeling, plotting or summarization.
 
 
 # Additional capabilities
