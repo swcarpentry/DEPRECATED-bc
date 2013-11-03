@@ -4,4 +4,20 @@ root: ../..
 title: Programming with Python
 level: novice
 ---
-FIXME: to be written.
+The best way to learn how to program is to do something useful,
+so this introduction to Python is built around a common scientific task:
+data analysis.
+
+Our real goal isn't to teach you Python,
+but to teach you the basic concepts that all programming depends on.
+We use Python in our lessons because:
+
+1.  we have to use *something* for examples;
+2.  it's free, well-documented, and runs almost everywhere;
+3.  it has a large (and growing) user base among scientists; and
+4.  experience shows that it's easier for novices to pick up than most other languages.
+
+Topics
+------
+
+*   [Analyzing Patient Data](01-numpy.html)
