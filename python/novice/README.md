@@ -21,3 +21,4 @@ Topics
 ------
 
 *   [Analyzing Patient Data](01-numpy.html)
+*   [Creating Functions](02-func.html)
