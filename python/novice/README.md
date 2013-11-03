@@ -23,3 +23,4 @@ Topics
 *   [Analyzing Patient Data](01-numpy.html)
 *   [Creating Functions](02-func.html)
 *   [Analyzing Multiple Data Sets](03-loop.html)
+*   [Making Choices](04-cond.html)
