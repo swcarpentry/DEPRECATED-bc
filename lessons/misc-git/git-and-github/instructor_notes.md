@@ -5,14 +5,14 @@ title: Git and GitHub
 ---
 **Written by [Matt Davis](mailto:jiffyclub@gmail.com)**
 
-# git/GitHub
+# Git/GitHub
 
-The goal of this lesson is to introduce the students to [git][] via
+The goal of this lesson is to introduce the students to [Git][git] via
 collaboration on [GitHub][].
 
 ## Introduction
 
-- Say some introductory stuff about version control in general, and git/GitHub
+- Say some introductory stuff about version control in general, and Git/GitHub
   in particular.
 
 *Note: The figures in the [Visual Git Reference][visual git] can be a good
@@ -20,7 +20,7 @@ stand-in if you have nowhere to draw.*
 
 ## Setup and Signup
 
-- Have everyone configure git:
+- Have everyone configure Git:
 
         $ git config --global user.name "User Name"
         $ git config --global user.email "user@email.com"
@@ -35,7 +35,7 @@ stand-in if you have nowhere to draw.*
 - Make a new demo repo on [GitHub][] explaining the process as you go
   (probably on your personal account).
     - Have [GitHub][] put in a README so it can be cloned.
-- Explain that much like a browser navigates to websites using a URL, git talks
+- Explain that much like a browser navigates to websites using a URL, Git talks
   to remote repositories using a URL.
 - Explain the different URL options:
     - Read/write `ssh` protocol requires [ssh keys][], which make it so you
@@ -62,7 +62,7 @@ collaboration.
   this is where you work and make changes.
 - Make a new file called `top-things-to-learn.md` and put the title
   "Top Things We Want to Learn" in it.
-- `git status` -- highlight the "Untracked files" section and that git tells
+- `git status` -- highlight the "Untracked files" section and that Git tells
   you how to add a file to the next commit.
 
 ### Composing the Snapshot
@@ -74,7 +74,7 @@ collaboration.
     - Connect the working area box and the staging box with `git add`.
 - Run `git add top-things-to-learn.md`.
 - `git status` -- highlight the "Changes to be committed" section
-  and git telling you how to unstage the new file.
+  and Git telling you how to unstage the new file.
 
 ### Taking the Snapshot
 
@@ -130,24 +130,24 @@ collaboration.
 
 ### Remotes
 
-- As we said back at the beginning, git uses URLs to point repositories on other
+- As we said back at the beginning, Git uses URLs to point repositories on other
   computers, in this case [GitHub's][GitHub] servers.
 - We can give these remote repositories names so that we don't have to type
-  in the full URL all the time, and in fact git has already set one up for us.
+  in the full URL all the time, and in fact Git has already set one up for us.
 - `git remote` -- there's a remote called "origin".
 - `git remote -v` -- we can see that it points to the same URL we cloned from,
-  git sets this up automatically.
+  Git sets this up automatically.
 
 ### Branches
 
 - On the [GitHub][] view of the repo highlight the branches pull-down -- right
-  now it only has one branch called "master", this is another thing git makes
+  now it only has one branch called "master", this is another thing Git makes
   for us by default.
 - What branch are we on locally? `git branch`.
 - Give a short explanation of branches and mention that we will come back to
   them later.
     - Isolated development environments.
-- When git communicates with a remote repository it needs to know what branch
+- When Git communicates with a remote repository it needs to know what branch
   is changing, in this case we'll just stick with "master".
 
 ### Pushing
@@ -179,7 +179,7 @@ which they will need to use `git reset --hard` to get back in sync with you.
 - Make a change to the README file before pulling.
 - Try to push.
 - On the white board draw the situation: my repo and the remote repo have
-  different development histories and git doesn't know how to pull things
+  different development histories and Git doesn't know how to pull things
   together.
 - It would be nice if I could move my local change after the remote change.
   (Draw picture.) There's a command for that!
@@ -197,7 +197,7 @@ which they will need to use `git reset --hard` to get back in sync with you.
 - Again, have a student add their thing and push.
 - Before pulling make a change in the same place in the same file.
 - Try to rebase as above.
-- Explain the conflict message git prints out.
+- Explain the conflict message Git prints out.
 - Show the conflict messages in the file and how to clean it up.
 - Continue the rebase and push the result.
 - Have everyone pull.
