@@ -1,3 +1,10 @@
+---
+layout: lesson
+root: ../../..
+title: Git and GitHub
+---
+**Written by [Matt Davis](mailto:jiffyclub@gmail.com)**
+
 # git/GitHub
 
 The goal of this lesson is to introduce the students to [git][] via
