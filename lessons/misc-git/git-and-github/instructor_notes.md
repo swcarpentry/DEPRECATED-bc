@@ -1,11 +1,13 @@
 ---
 layout: lesson
-root: ../..
+root: ../../..
 title: Git and GitHub
 ---
-**Based on materials by Katy Huff, Anthony Scopatz, Joshua R. Smith, and Sri Hari Krishna Narayanan**
+**Written by [Matt Davis](mailto:jiffyclub@gmail.com)**
 
-The goal of this lesson is to introduce the students to [Git][] via
+# Git/GitHub
+
+The goal of this lesson is to introduce the students to [Git][git] via
 collaboration on [GitHub][].
 
 ## Introduction
