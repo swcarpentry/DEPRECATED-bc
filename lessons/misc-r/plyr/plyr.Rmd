@@ -134,14 +134,15 @@ ldply(models, coefs)
 As we're working with random normal data, your results are going to be different
 than the results here.
 
+In this way plyr is a building block for simplifying complex analysis code.
 
-If a plyr function d
 
 # Models across sites 
 
 Imagine we have 10 sites (labled a-j) where we're making observations of some variables x and y.  We'd like to generate linear models for each of the sites and look at some summary of the models (slope, intercept, rsquared).  For this example we'll just use some random normal data for illustration.
 
 ```{r}
+set.seed(123) # Set random seed so instructor and students data are the same
 x <- rnorm(150)
 y <- x + rnorm(150)
 site <- rep(c('a','b','c','d','e','f','g','h','i','j'), each=15)
@@ -158,7 +159,7 @@ model <- function(df) {
     lm(y ~ x, data=df)
 }
 
-# Feed data into model one-by-one returining models to a list of models.
+# Feed data into model one-by-one returning models to a list of models.
 models <- dlply(experiment, .(site), model)
 ```
 
@@ -248,9 +249,10 @@ The functions `a_ply`, `d_ply` and `l_ply` are special case where the split funt
 
 In the below example we use the plotting library `ggplot2` to plot a graph for each combination of `Treatment` and `Plant` in the R `CO2` example data set.
 
-```
-library(plyr)
-library(ggplot2)
+```{r, eval = FALSE}
+library(plyr)    # for plyr functions
+library(ggplot2) # for plotting
+library(lattice) # for ethanol data
 data(ethanol)
 makeplot <- function (df) { 
     plant <- unique(df$Plant)
