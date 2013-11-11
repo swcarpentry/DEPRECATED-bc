@@ -4,7 +4,7 @@ plyr
 `plyr` is an R Package for Split-Apply-Combine workflows.  It's functional programming model encourages writing reusable functions which can be called across varied datasets and frees the analyst/scientist from needing to manage for loop indices.  If you are already a savy R user, many of the `*apply` functions can be used to cobble together similar functionality as `plyr`.  The advantage with `plyr` is that you have a common function naming convention and a common set of function parameters, so the functions behave similarly and interchangeably.
 
 # Expected background
-This lesson assumes basic R knowledge, especially a good understanding of `list`, `data.frame` and `array` data types in R.  An understanding of the `*apply` functions in base-R is helpful, but not required.
+This lesson assumes basic R knowledge, especially a good understanding of `list`, `data.frame` and `array` data types in R.  An understanding of the `*apply` functions in base-R is helpful, but not required.  Additionally, it will be helpful if you've worked with the base-R function `lm()` for simple linear modeling.
 
 # Lesson overview
 This lesson should take abour 30-45 minutes to go through.  When you're done you should have a better understanding of
@@ -37,8 +37,9 @@ This gives us 9 core functions **ply.  There are an adittional three functions w
 
 ```{r}
 library(plyr)
+head(iris)
 iris_mean <- ddply(iris, .(Species), function(df) { 
-    data.frame(mean.petal_length=mean(df$Petal.Length), max.petal_length=max(df$Petal.Length) 
+    data.frame(mean.petal_length=mean(df$Petal.Length), max.petal_length=max(df$Petal.Length)) 
     })
 iris_mean
 ```
@@ -61,15 +62,15 @@ iris_mean
 
 The steps that plyr performed for us are typically very fragile pieces of code in many scientific analysis workflows. plyr is able to give us an *abstraction layer* where we don't have to think about the mechanics of accounting for data types and specific loop indices.
 
-In this way plyr is a building block for simplifying complex scientific analysis code.
+In this way plyr is a building block for simplifying complex analysis code.
 
-If a plyr function d
 
 # Models across sites 
 
 Imagine we have 10 sites (labled a-j) where we're making observations of some variables x and y.  We'd like to generate linear models for each of the sites and look at some summary of the models (slope, intercept, rsquared).  For this example we'll just use some random normal data for illustration.
 
 ```{r}
+set.seed(123) # Set random seed so instructor and students data are the same
 x <- rnorm(150)
 y <- x + rnorm(150)
 site <- rep(c('a','b','c','d','e','f','g','h','i','j'), each=15)
@@ -86,7 +87,7 @@ model <- function(df) {
     lm(y ~ x, data=df)
 }
 
-# Feed data into model one-by-one returining models to a list of models.
+# Feed data into model one-by-one returning models to a list of models.
 models <- dlply(experiment, .(site), model)
 ```
 
@@ -131,9 +132,10 @@ The functions `a_ply`, `d_ply` and `l_ply` are special case where the split funt
 
 In the below example we use the plotting library `ggplot2` to plot a graph for each combination of `Treatment` and `Plant` in the R `CO2` example data set.
 
-```
-library(plyr)
-library(ggplot2)
+```{r, eval = FALSE}
+library(plyr)    # for plyr functions
+library(ggplot2) # for plotting
+library(lattice) # for ethanol data
 data(ethanol)
 makeplot <- function (df) { 
     plant <- unique(df$Plant)
