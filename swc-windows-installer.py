@@ -67,6 +67,8 @@ def create_nosetests_entry_point(python_scripts_directory):
             '    sys.exit(nose.core.main())',
             '',
             ])
+    if not os.path.isdir(python_scripts_directory):
+        os.makedirs(python_scripts_directory)
     with open(os.path.join(python_scripts_directory, 'nosetests'), 'w') as f:
         f.write(contents)
 
