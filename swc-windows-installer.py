@@ -20,6 +20,7 @@ To use:
 
 """
 
+import hashlib
 try:  # Python 3
     from io import BytesIO as _BytesIO
 except ImportError:  # Python 2
@@ -32,17 +33,28 @@ except ImportError:  # Python 2
 import zipfile
 
 
+def zip_install(url, sha1, install_directory):
+    """Download and install a zipped bundle of compiled software"""
+    r = _urlopen(url)
+    zip_bytes = r.read()
+    download_sha1 = hashlib.sha1(zip_bytes).hexdigest()
+    if download_sha1 != sha1:
+        raise ValueError(
+            'downloaded {!r} has the wrong SHA1 hash: {} != {}'.format(
+                url, downloaded_sha1, sha1))
+    zip_io = _BytesIO(zip_bytes)
+    zip_file = zipfile.ZipFile(zip_io)
+    if not os.path.isdir(install_directory):
+        os.makedirs(install_directory)
+        zip_file.extractall(install_directory)
+
+
 def install_nano(install_directory):
     """Download and install the nano text editor"""
-    url = "http://www.nano-editor.org/dist/v2.2/NT/nano-2.2.6.zip"
-    r = _urlopen(url)
-    nano_zip_content = _BytesIO(r.read())
-    nano_zip = zipfile.ZipFile(nano_zip_content)
-    nano_files = ['nano.exe', 'cygwin1.dll', 'cygintl-8.dll',
-                  'cygiconv-2.dll', 'cyggcc_s-1.dll']
-    os.makedirs(install_directory)
-    for file_name in nano_files:
-        nano_zip.extract(file_name, install_directory)
+    zip_install(
+        url='http://www.nano-editor.org/dist/v2.2/NT/nano-2.2.6.zip',
+        sha1='f5348208158157060de0a4df339401f36250fe5b',
+        install_directory=install_directory)
 
 
 def create_nosetests_entry_point(python_scripts_directory):
@@ -89,7 +101,7 @@ def main():
     bin_dir = os.path.join(swc_dir, 'bin')
     create_nosetests_entry_point(python_scripts_directory=bin_dir)
     nano_dir = os.path.join(swc_dir, 'lib', 'nano')
-    install_nano(installation_directory=nano_dir)
+    install_nano(install_directory=nano_dir)
     update_bash_profile(extra_paths=(nano_dir, bin_dir))
 
 
