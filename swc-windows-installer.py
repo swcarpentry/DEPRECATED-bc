@@ -26,6 +26,7 @@ try:  # Python 3
 except ImportError:  # Python 2
     from StringIO import StringIO as _BytesIO
 import os
+import re
 try:  # Python 3
     from urllib.request import urlopen as _urlopen
 except ImportError:  # Python 2
@@ -93,9 +94,15 @@ def update_bash_profile(extra_paths=()):
     with open(config_path, 'a') as f:
         f.write('\n'.join(lines))
 
+
 def make_posix_path(windows_path):
     """Convert a Windows path to a posix path"""
-    return windows_path.replace('\\', '/').replace('C:', '/c')
+    for regex, sub in [
+            (re.compile(r'\\'), '/'),
+            (re.compile('^[Cc]:'), '/c'),
+            ]:
+        windows_path = regex.sub(sub, windows_path)
+    return windows_path
 
 
 def main():
