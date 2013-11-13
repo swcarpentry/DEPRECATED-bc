@@ -1,2 +1,0 @@
-# `knitr` and `make` exercise
-
