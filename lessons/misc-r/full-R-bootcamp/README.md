@@ -4,3 +4,11 @@ This `master` set is based on material from a [2-day bootcamp](https://github.co
 
 I've left out shell and git from here since various sets of material already exist in other lesson plans. Revisions and updates most welcome.
 
+| Topic | Materials |
+| ------ | -------- |
+| 01 Basics | Introduction to R, data types, best practices, Using the RStudio IDE |
+| 02 Functions | ..... |
+| 03 Data Manipulation | ..... |
+| 04 Data Visualization | ..... |
+| 05 Testing | Documentation with `roxygen2`, Unit testing with `testthat`|
+| 06 Reproducible Research | knitr, make |
