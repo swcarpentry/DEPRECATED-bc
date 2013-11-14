@@ -1,7 +1,7 @@
 plyr
 ========================================================
 
-`plyr` is an R Package for Split-Apply-Combine workflows.  It's functional 
+`plyr` is an R Package for Split-Apply-Combine workflows.  Its functional 
 programming model encourages writing reusable functions which can be called 
 across varied datasets and frees the analyst/scientist from needing to manage 
 for loop indices.  If you are already a savy R user, many of the `*apply` 
@@ -131,9 +131,6 @@ coefs <- function(model) {
 ldply(models, coefs)
 ```
 
-As we're working with random normal data, your results are going to be different
-than the results here.
-
 
 # A larger data set
 
@@ -176,8 +173,8 @@ In the below example we use the plotting library `ggplot2` to plot a graph for
 each combination of `Treatment` and `Plant` in the R `CO2` example data set.
 
 ```{r, eval = FALSE}
-library(plyr)    # for plyr functions
-library(ggplot2) # for plotting
+library(plyr)   
+library(ggplot2) 
 library(lattice) # for ethanol data
 data(ethanol)
 makeplot <- function (df) { 
