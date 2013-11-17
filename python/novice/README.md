@@ -24,3 +24,5 @@ Topics
 *   [Creating Functions](02-func.html)
 *   [Analyzing Multiple Data Sets](03-loop.html)
 *   [Making Choices](04-cond.html)
+*   [Defensive Programming](05-defensive.html)
+*   [Command-Line Programs](06-cmdline.html)
