@@ -131,6 +131,7 @@ coefs <- function(model) {
 ldply(models, coefs)
 ```
 
+
 As we're working with random normal data, your results are going to be different
 than the results here.
 
@@ -181,6 +182,7 @@ ldply(models, coefs)
 
 As we're working with random normal data, your results are going to be different
 than the results here.
+
 
 
 # A larger data set
@@ -251,6 +253,7 @@ approach can be used to slice larger experiments across many dimensions for
 modeling, plotting or summarization.
 
 
+
 # Underscore Functions
 
 The functions `a_ply`, `d_ply` and `l_ply` are special case where the split 
@@ -286,6 +289,7 @@ to force the `ggplot` statement to be printed to the PDF file.  Also note that
 we split the input data set on two dimensions, `Treatment` and `Plant`, this 
 approach can be used to slice larger experiments across many dimensions for 
 modeling, plotting or summarization.
+
 
 
 # Additional capabilities
