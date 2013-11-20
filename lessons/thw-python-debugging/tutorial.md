@@ -135,7 +135,7 @@ autopep8 my_code.py > my_new_code.py
 
 These libraries won't always pick up everything, sadly. Furthermore, due to
 the desire to maintain backward compatibility, there is some wiggle room in PEP8 
-(see [this powerpoint](www.python.org/doc/essays/ppt/regrets/PythonRegrets.ppt) 
+(see [this powerpoint](http://www.python.org/doc/essays/ppt/regrets/PythonRegrets.ppt) 
 of Python regrets, made by the creator of the language). Here are some additional
 rules to remember:
 
