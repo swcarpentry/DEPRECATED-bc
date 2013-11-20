@@ -366,7 +366,8 @@ To send them to us as a pull request:
 
 ![Alt text](img/readme/step3.png)
 
-3.  Isolate the changes you want to share in a branch and push them to GitHub:
+3.  Isolate the changes you want to share in a branch and push them to GitHub
+    (you should have added `swcarpentry` as a remote in Step 3 of [Getting Started](#getting-started)):
 
         git fetch swcarpentry
         git checkout -t swcarpentry/gh-pages -b improvements
