@@ -160,7 +160,7 @@ But as a example let's focus on my favorites: the Bessel functions.
 
 These 20-ish lines of code should produce :
 
-![](/images/BesselFigure.png)
+![]({{page.root}}/lessons/thw-scipy/images/BesselFigure.png)
 
 Note that the figure that was created here is a reproduction of Figure
 6.5.1 in ''Numerical Recipes'' by W. H. Press, et al...
@@ -243,7 +243,7 @@ now we need to use the **dblquad( f(y,x), ...)** function instead of
 simply **quad( f(x), ...)**. Because a picture is worth 10\^3 words,
 SciPy computes the right-hand side of the following equation:
 
-![](/images/dblquad.png)
+![]({{page.root}}/lessons/thw-scipy/images/dblquad.png)
 
 More information on the justification of this integral may be found at
 http://en.wikipedia.org/wiki/Order\_of\_integration\_(calculus). For
@@ -289,7 +289,7 @@ integrate using **tplquad( f(z, y, x) )**. Moreover, **z** has limits of
 integration defined by surfaces give as functions **[q(x,y), r(x,y)]**.
 Thus, **tplquad(...)** integrates the right-hand side of :
 
-![](/images/trplquad.png)
+![]({{page.root}}/lessons/thw-scipy/images/trplquad.png)
 
 To continue with the previous example, let's try integrating the volume
 of a sphere. Take the radius here to be 3.5.
@@ -476,7 +476,7 @@ First let's take the case for where f(x) = e\^x.
 
 The above script, pade1.py, generates the following figure :
 
-![](/images/PadeFigure1.png)
+![]({{page.root}}/lessons/thw-scipy/images/PadeFigure1.png)
 
 Now the gains from using the Pade approximant for an exponential here seem
 slight. This is because the original exponential expansion is rather well
@@ -529,7 +529,7 @@ function. Let's try approximating a rougher function...
 ```
 
 The above script, pade2.py, generates the following figure
-![](/images/PadeFigure2.png)
+![]({{page.root}}/lessons/thw-scipy/images/PadeFigure2.png)
 
 Note, that this example is again taken from Section 5.12 in Numerical
 Recipes by W. H. Press, et
@@ -550,7 +550,7 @@ functionality is buried (again) within the ```miscellaneous``` module.
 First let's read in an image file. For now make it a JPEG. From
 Wikipedia. Of a bunny.  http://en.wikipedia.org/wiki/File:JumpingRabbit.JPG
 
-![](/images/image.jpg)
+![]({{page.root}}/lessons/thw-scipy/images/image.jpg)
 
 ```python
   import scipy.misc
@@ -632,7 +632,7 @@ And then, we can rewrite the array to an image file.
 
 These functions produce the following image:
 
-![](/images/image1.jpg)
+![]({{page.root}}/lessons/thw-scipy/images/image1.jpg)
 
 Because the array takes integer values from 0 - 255, we can easily
 define our own filters as well! For instance, you could write a two-line
@@ -651,7 +651,7 @@ function to inverse the image...
 Having this much fun, the rabbit becomes a twisted shade of its former
 self!
 
-![](/images/image2.jpg)
+![]({{page.root}}/lessons/thw-scipy/images/image2.jpg)
 
 Check out http://docs.scipy.org/doc/scipy/reference/misc.html for a complete
 listing of associated image functions.
