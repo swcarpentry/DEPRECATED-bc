@@ -1,9 +1,17 @@
 ---
-layout: lesson
-root: ../../..
-title: Strings and File I/O in Python
+ 	  	-layout: lesson
+ 	  	-root: ../../..
+ 	   	 title: Strings and File I/O in Python
 ---
 **Prepared by Tommy Guy**
+# Edited by Jin
+
+Notice
+-------
+This lesson was written for a Unix system -- the Python commands will still work,
+but for Unix commands (noted by $, e.g. cat), they may not work on Windows. Please
+do not be alarmed, as the main aspect of this exercise revolves around string and
+file handling in Python.
 
 Lesson goals:
 
@@ -91,22 +99,30 @@ rest of the line breaks the language standard.
 Characters in literal strings must come from the ASCII character set,
 which is a set of 127 character codes that is used by all modern
 programming languages and computers. Unfortunately, ASCII does not have
-room for non-Roman characters like accents or Eastern scripts. Unicode
-strings in Python are specified with a leading u:
+room for non-Roman characters like accents or Eastern scripts.
+
+Unicode strings in Python are specified with a leading u:
 
 ```python
     > u = u'abcdé'
 ```
 
-For the rest of this lecture, we will deal with ASCII strings, because
-most scientific data that is stored as text is stored with ASCII.
+*Tip: Unicode and ASCII are different types of character sets that can be handled by programs.
+*     For all intents and purposes, we will assume that strings are in ASCII (as per Python's default coding)
+*     unless otherwise stated. Moreover, a large amount scientific data is stored in ASCII format as well. 
+*     Bear in mind that images, which also comprise a significant amount of scientific data, are stored in
+*     a binary format.
+
 
 Working with Strings
 --------------------
 
 Strings are iterables, which means many of the ideas from lists can also
-be applied directly to string manipulation. For instance, characters can
-be accessed individually or in sequences:
+be applied directly to string manipulation. In essence, being 'iterable' allows strings
+to be handled the same way lists are handled.
+
+
+For instance, characters can be accessed individually or in sequences:
 
 ```python
     > s = 'abcdefghijklmnopqrstuvwxyz'
@@ -118,16 +134,54 @@ be accessed individually or in sequences:
     'bcd'
 ```
 
-They can also be compared using sort and equals.
+They can also be compared using equals, and sorted in the same way as lists:
 
 ```python
     > 'str1' == 'str2'
     False
     > 'str1' == 'str1'
     True
-    > 'str1' < 'str2'
-    True
+    > sorted('grenade')
+    ['a', 'd', 'e', 'e', 'g', 'n', 'r']
 ```
+
+Since strings are iterables, you can loop through strings!
+```python
+    > s = 'A piece of string'
+    > for characters in s:
+    >>    print characters
+          A
+          
+          p
+          i
+          e...
+```
+
+Like lists, we can also see if a character, or sequence of characters, is within a string.
+In a list, we can test to see if a value exists: Python iterates through all elements of the list
+until it verifies that our query is within the list. For instance,
+```python
+    > my_list = ['a', 1, 3]
+    > 'a' in my_list
+    True
+    > 4 in my_list
+    False
+```
+
+For strings, we rely on a very similar syntax to check if our character(s) are within the string:
+```python
+    > s = 'The cat in the hat'
+    > 'T' in s
+    True
+    > 'cat' in s
+    True
+    > 'Hat' in s 
+    False
+```
+*Caution*
+Note that in the last case, although the word 'hat' is clearly within the string, the searches are case-sensitive!
+When we use these methods, make sure to search through carefully.
+
 
 In the help screen, which we looked at above, there are lots of
 functions that look like this:
@@ -164,7 +218,7 @@ function do?
 File I/O
 --------
 
-Python has a built-in function called "open()" that can be used to
+Python has a built-in function called `open()` that can be used to
 manipulate files. The help information for open is below:
 
     > help(open)
@@ -180,9 +234,9 @@ The main two parameters we'll need to worry about are the name of the
 file and the mode, which determines whether we can read from or write to
 the file. open returns a file object, acts like a pointer into the file.
 An example will make this clear. In the code below, I've opened a file
-that contains one line:
+that contains two lines:
 
-    (unix shell) $ cat testFile.txt
+    $ cat testFile.txt
     abcde
     fghij
 
@@ -192,19 +246,23 @@ Now let's open this file in Python:
     > fileHandle = open('testFile.txt','r')
 ```
 
-The second input, 'r' means I want to open the file for reading only. I
-can not write to this handle. The read() command will read a specified
-number of bytes:
+The second input, `'r'` means I want to open the file for reading only. Once we
+open the file handle, we can `read()` the file for a specified number of bytes:
 
 ```python
     > s = fileHandle.read(3)
     > print s
     abc
 ```
+By calling `read()` from the `fileHandle` object, we read the first three characters, where each character is a byte long.
+The `read()` function iterates through each character and churns out a string from the file to screen.
 
-We read the first three characters, where each character is a byte long.
-We can see that the file handle points to the 4th byte (index number 3)
-in the file:
+*Caution*: Note that using read() will move along the file stream and the next time we call read(), we'd point to the
+           (n+1)th byte. For example, if we invoke read(3), we have read 3 bytes, and the next time we call read(), we
+           will read from the 4th byte and onward.
+
+In fact, we can see that the file handle points to the 4th byte (index number 3; 
+remember that iterables start at index 0?)
 
 ```python
     > fileHandle.tell()
@@ -213,11 +271,13 @@ in the file:
     'd'
 ```
 
+Using `tell()` will return the ith byte to which we are pointing at within `fileHandle`.
+
 The file we are using is a long series of characters, but two of the
 characters are new line characters. If we looked at the file in
-sequence, it would look like "abcdenfghijn". Separating a file into
+sequence, it would look like "abcde\nfghij\n". Separating a file into
 lines is popular enough that there are two ways to read whole lines in a
-file. The first is to use the readlines() method:
+file. The first is to use the `readlines()` method:
 
 ```python
     > fileHandle.close() # close the old handle
@@ -226,24 +286,52 @@ file. The first is to use the readlines() method:
     > lineArr
     ['abcde\n', 'fghij\n']
 ```
+A very important point about the `readlines()` method is that it *keeps* the
+newline character, `\n`, at the end of each line. You can use the `strip()`
+method to get rid of the newline character.
 
-A very important point about the readline method is that it *keeps* the
-newline character at the end of each line. You can use the strip()
-method to get rid of the string.
+*Caution*: confusingly enough, Python has both a `readline()` and `readlines()` function. `readlines()`, as shown above,
+           will read the entire file and separate each line to an individual element of a list. On the other hand,
+           `readline()` will read one line at a time, and like the command `read()`, it will keep a pointer to the
+           next line.
 
-File handles are also iterable, which means we can use them in for loops
-or list extensions:
+Example:
+
+    $ cat testFile.txt
+    abcde
+    fghij
+
+```python
+    > file = open('testFile.txt')
+    > file.readlines()
+    ['abcde\n', 'fghij\n']
+    > file.close()
+    
+    > sameFile = open('testFile.txt')
+    > sameFile.readline()
+    abcde
+    > sameFile.readline()
+    fghij
+
+```
+
+Notice that when we called `readline()` the second time for `sameFile`, it outputs the second line of the file?
+
+File handles are also iterable, which means we can use them in for loops or list extensions. It is also good practice
+to close files after handling them by using the `close()` function.
 
 ```python
     > f = open('testFile.txt','r')
     > l = [s.strip() for s in f]
     > l
     ['abcde', 'fghij']
-    > f.close()
+		> f.close()
+    
     > l = []
     > f = open('testFile.txt','r')
     > for s in f:
          l.append(s.strip())
+		> f.close()
 ```
 
 These are equivalent operations. It's often best to handle a file one
@@ -262,33 +350,83 @@ program to a file or use "|" to pipe it to another program.
 
 Sometimes, you need to direct your output directly to a file handle. For
 instance, if your program produces two output streams, you may want to
-assign two open file handles. Opening a file for reading simply requires
-changing the second option from 'r' to 'w' or 'a'.
+assign two open file handles. Opening a file for reading / writing / appending (to the end of file)
+simply requires changing the second option from `'r'` to `'w'` or `'a'`.
 
-*Caution!* Opening a file with the 'w' option means start writing *at
+*Caution!* Opening a file with the `'w'` option means start writing *at
 the beginning*, which may overwrite old material. If you want to append
-to the file without losing what is already there, open it with 'a'.
+to the file without losing what is already there, open it with `'a'`. Writing to
+a file uses the `write()` command, which accepts a string. Suppose that we have our
+friendly file, `testFile.txt`:
 
-Writing to a file uses the write() command, which accepts a string.
+    $ cat testFile.txt
+      abcde
+      fghij
+
+If we open this file using the `'w'` mode, then it will overwrite from the beginning!
 
 ```python
-    > outFile = open('outfile.txt','w')
-    > outFile.write('This is the first line!')
+    > outFile = open('testFile.txt','w')
+    > outFile.write('This is the first line!\n')
+    > outFile.close()
 ```
+So if we read this file now, it'd be...
 
-Another way to write to a file is to use writelines(), which accepts a
-list of strings and writes them in order. *Caution!* writelines does not
-append newlines. If you really want to write a newline at the end of
-each string in the list, add it yourself.
+    $ cat testFile.txt
+      This is the first line!
+
+Now let's open the file in 'a' mode this time to append to the end of file; note that we write to it in the same way
+as `'w'` mode, but instead of over-writing the file, we just attach it to the end of the file.
+```python
+    > outFile = open('testFile.txt','a')
+    > outFile.write('This is the second line!\n')
+    > outFile.close()
+```
+Implementing the append mode via `'a'` returns the following:
+
+    $ cat testFile.txt
+      This is the first line!
+      This is the second line!
+
 
 Aside: The first exercise
 =========================
 
 Yesterday, we asked you to edit a file in place. Many of you asked how
-this was possible. The answer is that it is not. You can use f.seek()
-and f.tell() to verify that even if your file handle is pointing to the
-middle of a file, write commands go to the end of the file in append
-mode. The best way to change a file is to open a temporary file in
-/tmp/, fill it, and then move it to overwrite the original. On large
-clusters, /tmp/ is often local to each node, which means it reduces I/O
-bottlenecks associated with writing large amounts of data.
+this was possible. In a Unix shell, this is possible by using the command `sed`, but
+this is beyond the scope of our lesson - also, this is not a Python command!
+
+You can read more about `sed` [here](http://www.grymoire.com/Unix/Sed.html),
+and I'll put a short piece of code on how to use sed at the bottom.
+
+*For the super keen*
+
+You can use `seek()` and `tell()` to verify that even if your file handle is pointing to the
+middle of a file, write commands go to the end of the file in append mode. Sometimes, if space is
+not an issue, I would suggest making a copy of the file on-the-fly in Python. However, if it's a big
+file (e.g. >1000 lines), you can read it line-by-line, making the file I/O very efficient.
+
+Example: 
+
+First, count the number of lines in a Unix shell by using `wc -l <FILENAME>`. `wc` is a word-count command in Unix,
+and the `-l` option specifies line counting.
+
+    $ wc -l bigFile.txt
+      10000 bigFile.txt
+  
+bigFile.txt has 10000 lines! But we want to make some changes on the fly and keep a copy of bigFile.txt. An easy
+way to do it is to keep one file handle for bigFile.txt but to create another file handle for the new file. Alternatively,
+to reduce the hold on memory, you can keep a temporary copy of the file in your disk. 
+
+I'll show you the on-the-fly method where we add the string " NOW EDITED " at the end of each line.
+
+```python
+    > fileHandle = open('bigFile.txt', 'r')
+    > newFile = open('bigFile_Copy.txt', 'w')
+    > for lines in fileHandle:
+        lines = lines + " NOW EDITED \n"
+        newFile.write(lines)
+    
+    > fileHandle.close()
+    > newFile.close()
+```
