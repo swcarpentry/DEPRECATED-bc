@@ -11,3 +11,8 @@ check :
 ## clean    : clean up
 clean :
 	rm -rf _site $$(find . -name '*~' -print)
+
+## links      : check links
+links :
+	@linklint -doc /tmp/linkdoc -root _site /@
+
