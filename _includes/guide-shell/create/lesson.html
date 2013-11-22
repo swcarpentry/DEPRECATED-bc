@@ -77,7 +77,7 @@ $ <span class="in">nano draft.txt</span>
   </p>
 
   <figure id="f:nano">
-    <img src="nano.png" alt="The Nano Editor" />
+    <img src="{{page.root}}/img/lessons/swc-shell/nano.png" alt="The Nano Editor" />
     <figcaption>Figure 9: The Nano Editor</figcaption>
   </figure>
 
@@ -90,7 +90,7 @@ $ <span class="in">nano draft.txt</span>
   </p>
 
   <figure id="f:nano_quotation">
-    <img src="nano_quotation.png" alt="Nano in Action" />
+    <img src="{{page.root}}/img/lessons/swc-shell/nano_quotation.png" alt="Nano in Action" />
     <figcaption>Figure 10: Nano in Action</figcaption>
   </figure>
 
@@ -141,6 +141,50 @@ $
 </pre>
 
   <p>
+    If we just want to quickly create a file with no content, we
+    can use the command <code>touch</code>.
+  </p>
+
+<pre>
+$ <span class="in">touch draft_empty.txt</span>
+$ <span class="in">ls</span>
+<span class="out">draft.txt   draft_empty.txt</span>
+$
+</pre>
+
+  <p>
+    The <code>touch</code> command has allowed us to create a file
+    without leaving the command line.  As with text editors like 
+    <code>nano</code>, <code>touch</code> will create the file in
+    your current working directory.
+  </p>
+
+  <p>
+    If we <code>touch</code> a file that already exists, the time of
+    last modification for the file is updated to the present time,
+    but the file is otherwise unaltered.  We can demonstrate this by
+    running <code>ls</code> with the <code>-l</code> flag to give a
+    long listing of files in the
+    current directory which includes information about the date and
+    time of last modification.
+  </p>
+
+<pre>
+$ <span class="in">ls -l</span>
+<span class="out">-rw-r--r-- 1 username username 512 Oct  9 15:46 draft.txt</span>
+<span class="out">-rw-r--r-- 1 username username   0 Oct  9 15:47 draft_empty.txt</span>
+$ <span class="in">touch draft.txt</span>
+$ <span class="in">ls -l</span>
+<span class="out">-rw-r--r-- 1 username username 512 Oct  9 15:48 draft.txt</span>
+<span class="out">-rw-r--r-- 1 username username   0 Oct  9 15:47 draft_empty.txt</span>
+</pre>
+
+  <p>
+    Note how the modification time of <code>draft.txt</code> changes
+    after we <code>touch</code> it.
+  </p>
+
+  <p>
     We can run <code>ls</code> with the <code>-s</code> flag
     (for "size")
     to show us how large <code>draft.txt</code> is:
@@ -148,7 +192,7 @@ $
 
 <pre>
 $ <span class="in">ls -s</span>
-<span class="out">   1  draft.txt</span>
+<span class="out">   1  draft.txt        0  draft_empty.txt</span>
 $
 </pre>
 
@@ -162,18 +206,18 @@ $
 
 <pre>
 $ <span class="in">ls -s -h</span>
-<span class="out"> 512  draft.txt</span>
+<span class="out"> 512  draft.txt        0  draft_empty.txt</span>
 $
 </pre>
 
   <p class="continue">
-    Here, 512 is the number of bytes in the file.
+    Here, 512 is the number of bytes in the <code>draft.txt</code> file.
     This is more than we actually typed in because
     the smallest unit of storage on the disk is typically a block of 512 bytes.
   </p>
 
   <p>
-    Let's tidy up by running <code>rm draft.txt</code>:
+    Let's start tidying up by running <code>rm draft.txt</code>:
   </p>
 
 <pre>
@@ -183,9 +227,28 @@ $
 
   <p class="continue">
     This command removes files ("rm" is short for "remove").
-    If we now run <code>ls</code> again,
-    its output is empty once more,
-    which tells us that our file is gone:
+    If we run <code>ls</code>, only the <code>draft_empty.txt</code>
+    file remains:
+  </p>
+
+<pre>
+$ <span class="in">ls</span>
+<span class="out">draft_empty.txt</span>
+$
+</pre>
+
+  <p>
+    Now we'll finish cleaning up by running <code>rm draft_empty.txt</code>:
+  </p>
+
+<pre>
+$ <span class="in">rm draft_empty.txt</span>
+$
+</pre>
+
+  <p>
+    If we run <code>ls</code> again, its output is empty,
+    which tells us that both of our files are gone:
   </p>
 
 <pre>
@@ -209,14 +272,14 @@ $
   </div>
 
   <p>
-    Let's re-create that file
+    Let's re-create <code>draft.txt</code> as an empty file,
     and then move up one directory to <code>/users/vlad</code> using <code>cd&nbsp;..</code>:
   </p>
 
 <pre>
 $ <span class="in">pwd</span>
 <span class="out">/users/vlad/thesis</span>
-$ <span class="in">nano draft.txt</span>
+$ <span class="in">touch draft.txt</span>
 $ <span class="in">ls</span>
 <span class="out">draft.txt</span>
 $ <span class="in">cd ..</span>
@@ -300,16 +363,16 @@ $
 
   <p>
     Let's create that directory and file one more time.
-    (Note that this time we're running <code>nano</code> with the path <code>thesis/draft.txt</code>,
+    (Note that this time we're running <code>touch</code> with the path <code>thesis/draft.txt</code>,
     rather than going into the <code>thesis</code> directory
-    and running <code>nano</code> on <code>draft.txt</code> there.)
+    and running <code>touch</code> on <code>draft.txt</code> there.)
   </p>
 
 <pre>
 $ <span class="in">pwd</span>
 <span class="out">/users/vlad/thesis</span>
 $ <span class="in">mkdir thesis</span>
-$ <span class="in">nano thesis/draft.txt</span>
+$ <span class="in">touch thesis/draft.txt</span>
 $ <span class="in">ls thesis</span>
 <span class="out">draft.txt</span>
 $
