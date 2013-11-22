@@ -1,0 +1,371 @@
+<div id="s:shell:wildcard:lesson" class="lesson">
+
+  <p>
+    At this point we have a basic toolkit which allows us to do
+    things in the shell that you can normally do in Windows,
+    Mac OS, or GNU/Linux with your mouse.  For example, 
+    we can create, delete
+    and move individual files.  We will now learn about
+    <a href="glossary.html#wildcard">wildcards</a>,
+    which will allow us to expand our toolkit so that we can
+    perform operations on multiple files with a single command.
+    We'll start in an empty directory and create four files:
+  </p>
+
+<pre>
+$ <span class="in">touch file1.txt file2.txt otherfile1.txt otherfile2.txt</span>
+$ <span class="in">ls</span>
+<span class="out">file1.txt   file2.txt   otherfile1.txt   otherfile2.txt</span>
+$
+</pre>
+
+  <p>
+    If we want to see all filenames that start with "file", we can run the
+    command <code>ls file*</code>:
+  </p>
+
+<pre>
+$ <span class="in">ls file*</span>
+<span class="out">file1.txt   file2.txt</span>
+$
+</pre>
+
+  <div class="box" id="a:asterisk">
+    <h3>Asterisk (*) Wildcard</h3>
+    <p>
+      The asterisk wildcard <code>*</code> in the expression 
+      <code>file*</code> matches zero
+      or more characters of any kind.  Thus the expression <code>file*</code>
+      matches anything that starts with "file".  On the other hand,
+      <code>*file*</code> would match anything containing the word "file"
+      at all, such as <code>file1.txt</code>, 
+      <code>file2.txt</code>, <code>otherfile1.txt</code>, and
+      <code>otherfile2.txt</code>.
+    </p>
+
+    <p>
+      When the shell sees a wildcard, it expands it to create a list of
+      matching filenames <em>before</em> passing those names to whatever
+      command is being run.  This means that when you execute
+      <code>ls file*</code>, the shell first expands it to 
+      <code>ls file1.txt file2.txt</code> in the above example, 
+      and then runs that command.  This process of expansion is
+      called <a href="glossary.html#glob">globbing</a>.
+      Therefore commands like <code>ls</code> and
+      <code>rm</code> never see the wildcard characters, just what
+      those wildcards matched.  This is another example of orthogonal
+      design.
+    </p>
+
+  </div>
+
+  <p>
+    There are four other basic wildcard characters we will explore:
+  </p>
+
+  <ul>
+    <li>The <b>question mark, <code>?</code></b>, matches 
+      any single character,
+      so <code>text?.txt</code> would match 
+      <code>text1.txt</code> or 
+      <code>textz.txt</code>,
+      but not <code>text_1.txt</code>.</li>
+    <li>The <b>square brackets, <code>[</code> and <code>]</code></b>, 
+      which can be used to specify a set of possible characters.
+      For example, <code>text[135].txt</code> would match 
+      <code>text1.txt</code>,
+      <code>text3.txt</code>,
+      and <code>text5.txt</code>.
+      You can also specify a natural sequence of characters using
+      a dash.  For example,
+      <code>text[1-6].txt</code> would match 
+      <code>text1.txt</code>, 
+      <code>text2.txt</code>, ...,
+      <code>text6.txt</code>.</li>
+    <li>The <b>exclamation mark, <code>!</code></b>, which can be used
+      with square brackets to negate characters.  For example,
+      <code>text[!135].txt</code> would match anything of the form
+      <code>text?.txt</code> <em>except</em> for
+      <code>text1.txt</code>,
+      <code>text3.txt</code>, and
+      <code>text5.txt</code>.
+      (Note that the exclamation mark has to be used right after
+      the first square bracket as in the example.  An exclamation
+      mark outside of square brackets is not a wildcard, but
+      serves another function of
+      accessing previous commands from your history, as we will
+      later see.)</li>
+    <li>The <b>curly braces, <code>{}</code></b>, are similar to the square
+      brackets, except that they take a list of items separated by
+      commas, and that they always expand all elements of the list,
+      whether or not the corresponding filenames exist.
+      For example, <code>text{1,5}.txt</code> would expand to
+      <code>text1.txt text5.txt</code> whether or not
+      <code>text1.txt</code> and <code>text5.txt</code> actually
+      exist.
+      The elements of the list need not be single characters, so
+      <code>text{12,5}.txt</code> expands to
+      <code>text12.txt text5.txt</code>.
+      Natural sequences can be specified using <code>..</code>, i.e.
+      <code>text{1..5}.txt</code> would expand to
+      <code>text1.txt text2.txt text3.txt text4.txt text5.txt</code>.</li>
+  </ul>
+
+  <p>
+    We can use any number of wildcards at a time:
+    for example,
+    <code>p*.p?*</code> matches anything that starts with a 'p'
+    and ends with '.', 'p', and at least one more character
+    (since the '?' has to match one character,
+    and the final '*' can match any number of characters).
+    Thus,
+    <code>p*.p?*</code> would match
+    <code>preferred.practice</code>,
+    and even <code>p.pi</code>
+    (since the first '*' can match no characters at all),
+    but not <code>quality.practice</code> (doesn't start with 'p')
+    or <code>preferred.p</code> (there isn't at least one character after the '.p').
+  </p>
+  
+  <p>
+    Let's see some more examples of wildcards in action.  First we will
+    remove everything in the current directory:
+  </p>
+  
+<pre>
+$ <span class="in">rm *</span>
+$ <span class="in">ls</span>
+$
+</pre>
+
+  <p>
+    Now that our working directory is empty, let's create some
+    empty files using the touch command and the curly braces:
+  </p>
+
+<pre>
+$ <span class="in">touch file{4,6,7}.txt file_{a..e}.txt</span>
+$ 
+</pre>
+
+  <p>
+    The curly braces expand the second token <code>file{4,6,7}.txt</code>
+    into three
+    separate file names, and the third token <code>file_{a..e}.txt</code>
+    expands into five separate
+    file names.  So, now if we list files using the asterisk wildcard,
+    we get:
+  </p>
+
+<pre>
+$ <span class="in">ls file*</span>
+<span class="out">file4.txt   file7.txt    file_b.txt   file_d.txt</span>
+<span class="out">file6.txt   file_a.txt   file_c.txt   file_e.txt</span>
+$
+</pre>
+
+  <p>
+    We have matched all files in our current directory that begin
+    with <code>file</code>.  Now, let us list a subset of those files using
+    the question mark:
+  </p>
+
+<pre>
+$ <span class="in">ls file?.txt</span>
+<span class="out">file4.txt   file6.txt    file7.txt</span>
+$
+</pre>
+
+  <p>
+    Note how this glob pattern matched only the numbered files.  That's
+    because only the numbered files have a single character
+    between <code>file</code> and <code>.txt</code>.  The lettered files
+    have two characters between <code>file</code> and <code>.txt</code>:
+  </p>
+
+<pre>
+$ <span class="in">ls file??.txt</span>
+<span class="out">file_a.txt   file_b.txt    file_c.txt   file_d.txt   file_e.txt</span>
+$
+</pre>
+
+  <p>
+    Let's try out using the <code>!</code> wildcard with square brackets. 
+    The pattern <code>file[!46]*</code> would match everything beginning with 
+    "file", <em>unless</em> the next character is a 4 or a 6.  Thus, 
+    continuing with our example, if we do <code>rm file[!46]*</code>, we 
+    will delete everything except <code>file4.txt</code> and 
+    <code>file6.txt</code>:
+  </p>
+
+<pre>
+$ <span class="in">ls</span>
+<span class="out">file4.txt   file7.txt    file_b.txt   file_d.txt</span>
+<span class="out">file6.txt   file_a.txt   file_c.txt   file_e.txt</span>
+$ <span class="in">rm file[!46]*</span>
+$ <span class="in">ls</span>
+<span class="out">file4.txt   file6.txt</span>
+$
+</pre>
+
+  <p>
+    It's also possible to combine and nest wildcards.  For example, 
+    <code>file{4,_?}.txt</code> would match <code>file4.txt</code> 
+    and <code>file_?.txt</code>, where <code>?</code> matches any 
+    single character. To demonstrate this, let's re-create all of 
+    our files:
+  </p>
+
+<pre>
+$ <span class="in">touch file{4,6,7}.txt file_{a..e}.txt</span>
+$ <span class="in">ls</span>
+<span class="out">file4.txt   file7.txt    file_b.txt   file_d.txt</span>
+<span class="out">file6.txt   file_a.txt   file_c.txt   file_e.txt</span>
+$ 
+</pre>
+
+  <p>
+    Now let's run <code>ls file{4,_?}.txt</code>:
+  </p>
+
+<pre>
+$ <span class="in">ls file{4,_?}.txt</span>
+<span class="out">file4.txt   file_b.txt   file_d.txt</span>
+<span class="out">file_a.txt   file_c.txt   file_e.txt</span>
+$
+</pre>
+
+  <p>
+    Finally, it is important to understand what happens if a 
+    wildcard expression doesn't match any files.  In this case, 
+    the wildcard characters are interpreted literally.  For 
+    example, if we were to enter <code>ls file[AB].txt</code>,
+    the system will first try to find <code>fileA.txt</code> or
+    <code>fileB.txt</code>.  If it found either of those, then
+    the wildcard expression would be expanded appropriately, 
+    but when it fails to find either of
+    them, the expression remains unevaluated as
+    <code>file[AB].txt</code>, and is then passed to <code>ls</code>.
+    At this point,
+    <code>ls</code> will try to find a single file that is
+    actually named <code>file[AB].txt</code>.
+    We can see that this is the case if we try
+    <code>ls file[AB].txt</code>:
+  </p>
+
+<pre>
+$ <span class="in">ls file[AB].txt</span>
+<span class="out">ls: file[AB].txt: No such file or directory</span>
+$
+</pre>
+
+  <p>
+    The system tells us that <code>file[AB].txt</code> doesn't exist
+    since this was the file it was looking for after the wildcard
+    expression found no matches.  Still not
+    convinced?  Let's actually create a file named <code>file[AB].txt</code>.
+    To do this, we need some way of telling the computer that we
+    actually want the <code>[</code> and <code>]</code> characters to be in the filename, and
+    that we don't mean them as wildcards.
+  </p>
+
+  <div class="box">
+    <h3>Escaping Special Characters</h3>
+
+    <p>
+      Wildcard characters, like <code>*</code>, <code>[]</code>,
+      and <code>{}</code> are all special characters in bash.  
+      Another example of a special character which we have already
+      encountered, and that is <em>not</em>
+      a wildcard character, is the forward slash <code>/</code>,
+      which is used to delimit directory levels.  It is possible to
+      <em>escape</em> special characters, i.e. turn off their
+      special meanings.
+      We can escape a single character by preceding it with a
+      backslash, <code>\</code>.  This tells the shell to interpret
+      that character literally.
+      For example, writing <code>\/</code>
+      tells bash to interpret the forward slash literally. We can escape
+      more than one character by enclosing a set of characters in
+      either single or double quotes. Single quotes preserve the
+      literal value of each character enclosed.  Double quotes
+      preserve the literal value of each character enclosed with the
+      exception of <code>$</code>, <code>`</code>, and
+      <code>\</code>, which all retain their special meanings. 
+      Therefore, inside double quotes, 
+      backslashes <code>\</code> preceding any of these three special
+      characters will be removed.  Otherwise, the backslash will remain.
+      For the example above of creating a file named
+      <code>file[AB].txt</code>, one can do any of the following:
+      <code>touch "file[AB].txt"</code>,
+      <code>touch 'file[AB].txt'</code>, 
+      <code>touch file\[AB\].txt</code>, or
+      <code>touch "file\[AB\].txt"</code>.
+    </p>
+  </div>
+
+  <p>
+    Now we can create the file <code>file[AB].txt</code>:
+  </p>
+  
+<pre>
+$ <span class="in">touch "file[AB].txt"</span>
+$ <span class="in">ls</span>
+<span class="out">file4.txt   file7.txt      file_a.txt   file_c.txt   file_e.txt</span>
+<span class="out">file6.txt   file[AB].txt   file_b.txt   file_d.txt</span>
+$
+</pre>
+
+  <p>
+    If we do <code>ls file[AB].txt</code>, it will find the
+    file we've just created:
+  </p>
+
+<pre>
+$ <span class="in">ls file[AB].txt</span>
+<span class="out">file[AB].txt</span>
+$
+</pre>
+
+  <p>
+    But if we create a file named <code>fileA.txt</code>,
+    this will be found first by the wildcard expansion,
+    since it first looks for <code>fileA.txt</code> and
+    <code>fileB.txt</code>:
+  </p>
+
+<pre>
+$ <span class="in">touch fileA.txt</span>
+$ <span class="in">ls file[AB].txt</span>
+<span class="out">fileA.txt</span>
+$
+</pre>
+    
+  <p>
+    If we really do want to look for something called
+    <code>file[AB].txt</code>, and not <code>fileA.txt</code>
+    or <code>fileB.txt</code>, then we have to escape the special
+    characters "[" and "]".  We can do this:
+  </p>
+
+<pre>
+$ <span class="in">ls file\[AB\].txt</span>
+<span class="out">file[AB].txt</span>
+$
+</pre>
+
+  <p>
+    or this:
+  </p>
+
+<pre>
+$ <span class="in">ls "file[AB].txt"</span>
+<span class="out">file[AB].txt</span>
+$
+</pre>
+
+  <p>
+    Single quotes would work as well in this case.
+  </p>
+
+</div>
