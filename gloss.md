@@ -20,7 +20,7 @@ In either case,
 output is sent to the shell window
 and the user is prompted to enter another command.
 
-**command-line user interface** (CLUI): <a name="clui"></a>
+**command-line interface** (CLI): <a name="cli"></a>
 FIXME
 
 **current working directory**: <a name="current-working-directory"></a>
