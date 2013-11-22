@@ -10,4 +10,4 @@ check :
 
 ## clean    : clean up
 clean :
-	rm -rf _site $$(find . -name '*~' -print)
+	rm -rf _site $$(find . -name '*~' -print) $$(find . -name '*.pyc' -print)
