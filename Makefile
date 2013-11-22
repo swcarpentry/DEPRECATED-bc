@@ -9,7 +9,7 @@ NOTEBOOK_SRC = \
 	$(wildcard python/novice/*.ipynb) \
 	$(wildcard sql/novice/*.ipynb)
 NOTEBOOK_DST = \
-	$(patsubst %.ipynb,$(OUT)/%.html,$(NOTEBOOK_SRC))
+	$(patsubst %,$(OUT)/%.html,$(NOTEBOOK_SRC))
 
 #-----------------------------------------------------------
 
@@ -19,9 +19,17 @@ all : commands
 commands :
 	@grep -E '^##' Makefile | sed -e 's/## //g'
 
-## check    : build locally into $(OUT) directory for checking
+## check    : build notebooks *after* Jekyll runs, because it wipes the output directory.
 check : $(NOTEBOOK_DST)
+
+$(NOTEBOOK_DST) : $(OUT)/README.md
+
+$(OUT)/README.md :
 	jekyll -t build -d $(OUT)
+
+$(OUT)/%.ipynb.html : %.ipynb
+	@mkdir -p $$(dirname $@)
+	ipython nbconvert --output="$(OUT)/$<" "$<"
 
 ## clean    : clean up
 clean :
@@ -31,10 +39,3 @@ clean :
 show :
 	@echo "NOTEBOOK_SRC" $(NOTEBOOK_SRC)
 	@echo "NOTEBOOK_DST" $(NOTEBOOK_DST)
-
-#-----------------------------------------------------------
-
-# rule to make HTML pages from notebook files.
-$(OUT)/%.html : %.ipynb
-	@mkdir -p $$(dirname $@)
-	ipython nbconvert --stdout $< > $@
