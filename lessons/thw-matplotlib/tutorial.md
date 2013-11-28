@@ -77,7 +77,7 @@ figures, subplots, and axes
 
 MatPlotLib plots are organized into figures, subplots and axes.
 
-![](/python/scipy/images/fig1.jpg)
+![]({{page.root}}/lessons/thw-scipy/images/fig1.jpg)
 
 -   figure = the whole window (Figure 1 above)
 -   subplot = the regular grid of four plots (One, Two, Three, and Four

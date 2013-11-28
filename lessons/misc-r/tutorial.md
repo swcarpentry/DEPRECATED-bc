@@ -3,12 +3,12 @@ layout: lesson
 root: ../..
 title: Introduction to R
 ---
-This repository gives the R content from Duke software Carpentry May 20 - 21 2013, which was very similar to the NESCent boot camp which ran May 17 - 18,2013.
+This repository gives the R content from Duke software Carpentry May 20 - 21 2013, which was very similar to the NESCent bootcamp which ran May 17 - 18,2013.
 
 Here are pages with set-up instructions, etc.:
 
-*   [NESCent boot camp](http://swcarpentry.github.io/bootcamps/2013-05-16-nescent/)
-*   [Duke boot camp](http://swcarpentry.github.io/bootcamps/2013-05-20-duke/)
+*   [NESCent bootcamp](http://swcarpentry.github.io/bootcamps/2013-05-16-nescent/)
+*   [Duke bootcamp](http://swcarpentry.github.io/bootcamps/2013-05-20-duke/)
 
 Day 1 was essentially all R, using RStudio. Main instructor Jenny Bryan. At the end of the day, we had some input data (an excerpt from the Gapminder data), several R scripts, and various outputs that these scripts left behind, e.g. figures, numerical results, analytical reports. The first commit to this repo is a snapshot of where we are at the end of Day 1. The README.md associated with the `code` subdirectory explains what each file does.
 
