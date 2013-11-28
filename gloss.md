@@ -130,6 +130,9 @@ Its name is "/" on Unix (including Linux and Mac OS X) and "\" on Microsoft Wind
 **shell script**: <a name="shell-script"></a>
 FIXME
 
+**shell quoting**: <a name="shell-quoting"></a>
+FIXME
+
 **standard input** (stdin): <a name="standard-input"></a>
 A process's default input stream.
 In interactive command-line applications,
