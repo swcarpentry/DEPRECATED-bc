@@ -9,7 +9,7 @@ NOTEBOOK_SRC = \
 	$(wildcard python/novice/*.ipynb) \
 	$(wildcard sql/novice/*.ipynb)
 NOTEBOOK_DST = \
-	$(patsubst %,$(OUT)/%.html,$(NOTEBOOK_SRC))
+	$(patsubst %.ipynb,$(OUT)/%.html,$(NOTEBOOK_SRC))
 
 #-----------------------------------------------------------
 
@@ -27,9 +27,9 @@ $(NOTEBOOK_DST) : $(OUT)/README.md
 $(OUT)/README.md :
 	jekyll -t build -d $(OUT)
 
-$(OUT)/%.ipynb.html : %.ipynb
+$(OUT)/%.html : %.ipynb
 	@mkdir -p $$(dirname $@)
-	ipython nbconvert --output="$(OUT)/$<" "$<"
+	ipython nbconvert --output="$(subst .html,,$@)" "$<"
 
 ## clean    : clean up
 clean :
