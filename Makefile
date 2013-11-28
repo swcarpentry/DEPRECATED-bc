@@ -11,3 +11,10 @@ check :
 ## clean    : clean up
 clean :
 	rm -rf _site $$(find . -name '*~' -print)
+
+## links      : check links
+# depends on linklint, an html-link-checking module from http://www.linklint.org/
+
+links :
+	@linklint -doc /tmp/linkdoc -root _site /@
+
