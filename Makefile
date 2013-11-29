@@ -18,6 +18,7 @@ LINK_OUT = /tmp/bc-links
 # Source and destination Markdown/HTML pages.
 MARKDOWN_SRC = \
 	LICENSE.md \
+	NEW_MATERIAL.md \
 	gloss.md \
 	rules.md \
 	$(wildcard bash/novice/*.md) \
