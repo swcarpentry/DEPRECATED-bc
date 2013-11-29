@@ -82,6 +82,10 @@ $(TMP)/%.html : %.ipynb
 links :
 	@bin/linklint -doc $(LINK_OUT) -textonly -root $(OUT) /@
 
+## fixme    : find places where fixes are needed.
+fixme :
+	grep -n FIXME $$(find -f bash git python sql -type f -print | grep -v .ipynb_checkpoints)
+
 ## clean    : clean up
 clean :
 	rm -rf $(OUT) $(TMP) $$(find . -name '*~' -print) $$(find . -name '*.pyc' -print)
