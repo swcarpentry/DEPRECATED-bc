@@ -20,6 +20,9 @@ NOTEBOOK_SRC = \
 NOTEBOOK_DST = \
 	$(patsubst %.ipynb,$(OUT)/%.html,$(NOTEBOOK_SRC))
 
+INDEX_SRC = index.html
+INDEX_DST = $(OUT)/index.html
+
 #-----------------------------------------------------------
 
 all : commands
@@ -28,15 +31,17 @@ all : commands
 commands :
 	@grep -E '^##' Makefile | sed -e 's/## //g'
 
-## check    : build site.  (Depend only on NOTEBOOK_DST because
-#             Jekyll blows away the output directory, so we have
-#             to ensure notebooks are compiled *after* Markdown
-#             files.)
+## check    : build site.
+# check depends only on notebooks, and notebooks depend only on the
+# output index.html, because Jekyll erases and re-creates the entire
+# output directory every time.  This set of dependencies ensures that
+# Jekyll is only run once, and that all notebooks are converted to
+# HTML *after* that run.
 check : $(NOTEBOOK_DST)
-$(NOTEBOOK_DST) : $(MARKDOWN_DST)
+$(NOTEBOOK_DST) : $(INDEX_DST)
 
 # Build HTML versions of Markdown source files.
-$(MARKDOWN_DST) : $(MARKDOWN_SRC)
+$(INDEX_DST) : $(MARKDOWN_SRC)
 	jekyll -t build -d $(OUT)
 
 # Build HTML versions of IPython Notebooks (slow).
@@ -45,8 +50,8 @@ $(OUT)/%.html : %.ipynb
 	ipython nbconvert --output="$(subst .html,,$@)" "$<"
 
 ## links    : check links
-# Depends on linklint, an HTML link-checking module from http://www.linklint.org/,
-# which has been put in bin/linklint.
+# Depends on linklint, an HTML link-checking module from
+# http://www.linklint.org/, which has been put in bin/linklint.
 links :
 	@bin/linklint -doc /tmp/bc-links -textonly -root _site /@
 
