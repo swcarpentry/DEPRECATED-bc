@@ -150,7 +150,7 @@ will see that there is an entry which is green. This means that this
 is an executable. If you use `ls -F` you will see that this file ends
 with a star.
 
-This directory contains all of the material for this boot camp. Now
+This directory contains all of the material for this bootcamp. Now
 move to the directory containing the data for the shell tutorial:
 
     cd shell

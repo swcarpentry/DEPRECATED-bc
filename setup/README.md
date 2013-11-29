@@ -8,7 +8,7 @@ Students
 ========
 
 This directory contains scripts for testing your machine to make sure
-you have the software you'll need for your boot camp installed.  See
+you have the software you'll need for your bootcamp installed.  See
 the comments at the head of each script for more details, but you'll
 basically want to see something like:
 
@@ -60,16 +60,16 @@ they'll be able to parse `swc-installation-test-2.py`.  The latter
 checks for a list of dependencies and prints error messages if a
 package is not installed, or if the installed version is not current
 enough.  By default, the script checks for pretty much anything that
-has ever been used at a Software Carpentry boot camp, which is
-probably not what you want for your particular boot camp.
+has ever been used at a Software Carpentry bootcamp, which is
+probably not what you want for your particular bootcamp.
 
-Before your boot camp, you should go through
+Before your bootcamp, you should go through
 `swc-installation-test-2.py` and comment any dependencies you don't
 need out of the `CHECKS` list.  You might also want to skim through
 the minimum version numbers listed where particular dependencies are
 defined (e.g. `('git', 'Git', (1, 7, 0), None)`).  For the most part,
 fairly conservative values have been selected, so students with modern
-machines should be fine.  If your boot camp has stricter version
+machines should be fine.  If your bootcamp has stricter version
 requirements, feel free to bump them accordingly.
 
 Similarly, the virtual dependencies can be satisfied by any of several
