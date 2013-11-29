@@ -1,6 +1,8 @@
 ---
 layout: lesson
 root: ../..
+testrepo: 2013-12-25-euphoric
+username: instructor
 title: "Version Control With Git: Using Remote Repositories"
 ---
 ## github.com?
@@ -48,7 +50,7 @@ fork, others that may be **parallel** to your fork, and so on.
 
 ### Exercise : Fork Our GitHub Repository
 
-In step 1, you will make a copy "fork" of our test repository TESTREPO 
+In step 1, you will make a copy "fork" of our test repository {{page.testrepo}} 
 on github.  This gives you a copy of this repository that you control.
 
 In step 2, you will make a copy of **your** fork of the repository on your 
@@ -59,26 +61,26 @@ your fork on github, there is another github repository (called "upstream")
 that you might want to get updates from.
 
 Step 1 : Go to our
-[repository](https://github.com/USERNAME/TESTREPO)
+[repository](https://github.com/{{page.username}}/{{page.testrepo}})
 from your browser, and click on the Fork button. Choose to fork it to your
 username rather than any organizations.
 
 Step 2 : Clone it. From your terminal :
 
-    $ git clone https://github.com/YOU/TESTREPO.git
-    $ cd TESTREPO
+    $ git clone https://github.com/YOU/{{page.testrepo}}.git
+    $ cd {{page.testrepo}}
 Note: YOU is a placeholder for YOUR github username.  If git asks you for 
 a password here, it probably means you have mis-typed the url for the 
 repository. 
 
 Step 3 : 
 
-    $ git remote add upstream https://github.com/USERNAME/TESTREPO.git
+    $ git remote add upstream https://github.com/{{page.username}}/{{page.testrepo}}.git
     $ git remote -v
-    origin  https://github.com/YOU/TESTREPO.git (fetch)
-    origin  https://github.com/YOU/TESTREPO.git (push)
-    upstream        https://github.com/USERNAME/TESTREPO.git (fetch)
-    upstream        https://github.com/USERNAME/TESTREPO.git (push)
+    origin  https://github.com/YOU/{{page.testrepo}}.git (fetch)
+    origin  https://github.com/YOU/{{page.testrepo}}.git (push)
+    upstream        https://github.com/{{page.username}}/{{page.testrepo}}.git (fetch)
+    upstream        https://github.com/{{page.username}}/{{page.testrepo}}.git (push)
     $
 
 All repositories that are clones begin with a remote called origin.
@@ -87,13 +89,13 @@ All repositories that are clones begin with a remote called origin.
 The **git remote add** merely defines a nickname and a location that 
 git will be able to communicate with for making copies of your 
 repository.  "origin" and "upstream" are nicknames for your fork of 
-TESTREPO and the "original" TESTREPO, respectively.
+{{page.testrepo}} and the "original" {{page.testrepo}}, respectively.
 
 ## git fetch : Fetching the contents of a remote
 
 Now that you have alerted your repository to the presence of others, it
 is able to pull in updates from those repositories. In this case, if you
-want your master branch to track updates in the original TESTREPO
+want your master branch to track updates in the original {{page.testrepo}}
 repository, you simply **git fetch** that repository into the master
 branch of your current repository.
 
@@ -106,7 +108,7 @@ repository, it is necessary to also merge.
 ## git merge : Merging the contents of a remote
 
 To incorporate upstream changes from the original master repository (in
-this case USERNAME/TESTREPO) into your local working copy, you
+this case {{page.username}}/{{page.testrepo}}) into your local working copy, you
 must both fetch and merge. The process of merging may result in
 conflicts, so pay attention. This is where version control is both at
 its most powerful and its most complicated.
@@ -182,10 +184,10 @@ There is now a hierarchy of git repositories.  There was the upstream
 repository that you can't write to, there is your fork of that repository
 that you have updated, and there is the local copy on your hard drive.
 
-In the TESTREPO code, you'll find a file called Readme.md. This is a
+In the {{page.testrepo}} code, you'll find a file called Readme.md. This is a
 standard documentation file that appears rendered on the landing page
 for the repository in github. To see the rendered version, visit your
-fork on github, (https://github.com/YOU/TESTREPO/Readme.md).
+fork on github, (https://github.com/YOU/{{page.testrepo}}/Readme.md).
 
 ## github pull requests 
 
@@ -310,7 +312,7 @@ alterations,
     Compressing objects: 100% (6/6), done.
     Writing objects: 100% (6/6), 762 bytes, done.
     Total 6 (delta 2), reused 0 (delta 0)
-    To git@github.com:username/TESTREPO.git
+    To git@github.com:username/{{page.testrepo}}.git
 
 ## synchronizing 
 Now that lots of us created files and put in pull requests,
