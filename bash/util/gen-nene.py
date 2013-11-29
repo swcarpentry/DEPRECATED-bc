@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+'''Generate random data for files in `filesystem/users/nelle/north-pacific-gyre/2012-07-03/NENE*.txt`.'''
+
 import sys
 import os
 import random
