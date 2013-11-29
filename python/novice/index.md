@@ -26,3 +26,7 @@ Topics
 *   [Making Choices](04-cond.html)
 *   [Defensive Programming](05-defensive.html)
 *   [Command-Line Programs](06-cmdline.html)
+
+See Also
+--------
+* [Instructor's Guide](guide.html)

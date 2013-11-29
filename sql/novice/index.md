@@ -32,3 +32,7 @@ Topics
 * [Combining Data](07-join.html)
 * [Creating and Modifying Data](08-create.html)
 * [Programming with Databases](09-prog.html)
+
+See Also
+--------
+* [Instructor's Guide](guide.html)
