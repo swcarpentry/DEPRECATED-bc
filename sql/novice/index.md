@@ -23,16 +23,21 @@ and why they insist on structuring data in certain ways.
 
 Topics
 ------
-* [Selecting Data](01-select.html)
-* [Sorting and Removing Duplicates](02-sort-dup.html)
-* [Filtering](03-filter.html)
-* [Calculating New Values](04-calc.html)
-* [Missing Data](05-null.html)
-* [Aggregation](06-agg.html)
-* [Combining Data](07-join.html)
-* [Creating and Modifying Data](08-create.html)
-* [Programming with Databases](09-prog.html)
+*   [Selecting Data](01-select.html)
+*   [Sorting and Removing Duplicates](02-sort-dup.html)
+*   [Filtering](03-filter.html)
+*   [Calculating New Values](04-calc.html)
+*   [Missing Data](05-null.html)
+*   [Aggregation](06-agg.html)
+*   [Combining Data](07-join.html)
+*   [Creating and Modifying Data](08-create.html)
+*   [Programming with Databases](09-prog.html)
 
 See Also
 --------
-* [Instructor's Guide](guide.html)
+*   [Instructor's Guide](guide.html)
+
+Resources
+---------
+*   `gen-survey-database.sql`: re-generate survey database used in examples.
+*   `sqlitemagic.py`: IPython Notebook plugin to support SQLite interaction.
