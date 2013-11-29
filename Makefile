@@ -5,6 +5,9 @@
 OUT = _site
 
 MARKDOWN_SRC = \
+	LICENSE.md \
+	gloss.md \
+	rules.md \
 	$(wildcard bash/novice/*.md) \
 	$(wildcard git/novice/*.md) \
 	$(wildcard python/novice/*.md) \
@@ -20,9 +23,6 @@ NOTEBOOK_SRC = \
 NOTEBOOK_DST = \
 	$(patsubst %.ipynb,$(OUT)/%.html,$(NOTEBOOK_SRC))
 
-INDEX_SRC = index.html
-INDEX_DST = $(OUT)/index.html
-
 #-----------------------------------------------------------
 
 all : commands
@@ -32,16 +32,11 @@ commands :
 	@grep -E '^##' Makefile | sed -e 's/## //g'
 
 ## check    : build site.
-# check depends only on notebooks, and notebooks depend only on the
-# output index.html, because Jekyll erases and re-creates the entire
-# output directory every time.  This set of dependencies ensures that
-# Jekyll is only run once, and that all notebooks are converted to
-# HTML *after* that run.
 check : $(NOTEBOOK_DST)
-$(NOTEBOOK_DST) : $(INDEX_DST)
+$(NOTEBOOK_DST) : $(OUT)
 
 # Build HTML versions of Markdown source files.
-$(INDEX_DST) : $(MARKDOWN_SRC)
+$(OUT) : $(MARKDOWN_SRC)
 	jekyll -t build -d $(OUT)
 
 # Build HTML versions of IPython Notebooks (slow).
