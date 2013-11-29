@@ -239,7 +239,7 @@ $ git status
 #
 ```
 
-Git now knows that it's supposed to keep tack of this file,
+Git now knows that it's supposed to keep track of this file,
 but it *hasn't* recorded our changes for posterity---not yet.
 To do that,
 we need to run one more command:
@@ -704,7 +704,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 ```
 
 Let's add and commit those changes
-(the `-A` flag to `git commit` means "add everything"):
+(the `-A` flag to `git add` means "add everything"):
 
 ```
 $ git add -A
@@ -956,6 +956,7 @@ FIXME: diagram
 Now let's switch to the `moons` branch and make a different change there:
 
 ```
+$ git checkout moons
 $ echo "This line added in the moons branch" >> moons.txt
 $ cat moons.txt
 Phobos is larger than Deimos
@@ -1075,7 +1076,7 @@ Phobos is larger than Deimos
 Lines added in the master and moons branches
 ```
 
-The key phrase here is "fast forward"
+The key phrase here is "fast-forward"
 (which appears in the output of the `git merge` command).
 Since we had already resolved the conflicts between
 the copies of `moons.txt` in the `master` and `moons` branches,
@@ -1407,6 +1408,7 @@ the process looks like this:
   which  makes it much easier for other scientists
   to use her work as starting point for their own research.
 
+<!-- SJE: Can you give a reference to support "Studies have shown"? -->
 Studies have shown that the more open model accelerates discovery,
 and that more open work is more widely cited.
 However,

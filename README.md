@@ -261,9 +261,7 @@ must define the following values in its YAML header:
     that should go in the main body of your page.
 *   `instructor` is a comma-separated list of instructor names.
     This *must* be enclosed in square brackets, as in
-    `["Alan Turing","Grace Hopper"]`,
-    and there must *not* be spaces after the commas
-    (really: believe it or not, they can cause translation to fail).
+    `["Alan Turing","Grace Hopper"]`
 *   `contact` is the contact email address to use for your bootcamp.
 
 Include Files

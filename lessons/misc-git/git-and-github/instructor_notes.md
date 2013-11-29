@@ -101,7 +101,7 @@ collaboration.
 ### Previewing Changes
 
 - The file we're making is going to be a list of the top things everyone wants
-  to learn in the boot camp. Add your item (e.g. everyone's names) and save.
+  to learn in the bootcamp. Add your item (e.g. everyone's names) and save.
 - `git status` -- point out that now we have a modified file instead of an
   untracked file, but the procedure for adding it to the next snapshot is
   the same.
