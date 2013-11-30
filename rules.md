@@ -3,24 +3,26 @@
 The Rules
 =========
 
-*   Fail early, fail often.** <a name="fail-early-fail-often"></a>
+*   A week of hard work can sometimes save you an hour of thought. <a name="week-hard-work-hour-thought"></a>
 
-*   Turn bugs into assertions or tests.** <a name="turn-bugs-into-assertions-or-tests"></a>
+*   Fail early, fail often. <a name="fail-early-fail-often"></a>
 
-*   Red, green, refactor.** <a name="red-green-refactor"></a>
+*   Turn bugs into assertions or tests. <a name="turn-bugs-into-assertions-or-tests"></a>
 
-*   Always initialize from data.** <a name="always-initialize-from-data"></a>
+*   Red, green, refactor. <a name="red-green-refactor"></a>
 
-*   Test the simple things first.** <a name="test-simple-first"></a>
+*   Always initialize from data. <a name="always-initialize-from-data"></a>
 
-*   Know what it's supposed to do.** <a name="know-what-its-supposed-to-do"></a>
+*   Test the simple things first. <a name="test-simple-first"></a>
 
-*   Make it fail every time.** <a name="make-it-fail-every-time"></a>
+*   Know what it's supposed to do. <a name="know-what-its-supposed-to-do"></a>
 
-*   Make it fail fast.** <a name="make-it-fail-fast"></a>
+*   Make it fail every time. <a name="make-it-fail-every-time"></a>
 
-*   Change on thing at a time, for a reason.** <a name="change-one-thing-at-a-time"></a>
+*   Make it fail fast. <a name="make-it-fail-fast"></a>
 
-*   Keep track of what you've done.** <a name="keep-track-of-what-youve-done"></a>
+*   Change on thing at a time, for a reason. <a name="change-one-thing-at-a-time"></a>
 
-*   Be humble.** <a name="be-humble"></a>
+*   Keep track of what you've done. <a name="keep-track-of-what-youve-done"></a>
+
+*   Be humble. <a name="be-humble"></a>
