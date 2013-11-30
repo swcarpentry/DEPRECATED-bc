@@ -19,6 +19,7 @@ LINK_OUT = /tmp/bc-links
 MARKDOWN_SRC = \
 	LICENSE.md \
 	NEW_MATERIAL.md \
+	bib.md \
 	gloss.md \
 	rules.md \
 	$(wildcard bash/novice/*.md) \
