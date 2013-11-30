@@ -26,3 +26,16 @@ Topics
 *   [Making Choices](04-cond.html)
 *   [Defensive Programming](05-defensive.html)
 *   [Command-Line Programs](06-cmdline.html)
+
+See Also
+--------
+*   [Instructor's Guide](guide.html)
+
+Resources
+---------
+*   `inflammation-*.csv`: data files used in notebooks.
+*   `readings-*.py`: successive versions of command-line script.
+*   `small-*.csv`: small data files used to test command-line script.
+*   `argv-list.py`: example command-line script.
+*   `count-stdin.py`: example command-line script.
+*   `sys-version.py`: example command-line script.
