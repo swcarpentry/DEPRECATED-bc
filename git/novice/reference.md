@@ -13,7 +13,7 @@ Set global configuration (only needs to be done once per machine):
 
 Initialize a directory as a repository:
 
-    git init .
+    git init
 
 Display the status of the repository:
 

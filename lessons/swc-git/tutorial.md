@@ -162,7 +162,7 @@ $ cd planets
 and tell Git to initialize it:
 
 ```
-$ git init .
+$ git init
 ```
 
 If we use `ls` to show the directory's contents,
