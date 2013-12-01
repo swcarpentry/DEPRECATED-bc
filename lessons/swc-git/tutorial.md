@@ -707,7 +707,7 @@ Let's add and commit those changes
 (the `-A` flag to `git add` means "add everything"):
 
 ```
-$ git add -A
+$ git add -A .
 $ git status
 # On branch moons
 # Changes to be committed:
