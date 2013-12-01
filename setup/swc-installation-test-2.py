@@ -853,8 +853,8 @@ for name,long_name,dependencies in [
             'safari',
             )),
         ('virtual-pypi-installer', 'PyPI installer', (
-            'easy_install',
             'pip',
+            'easy_install',
             )),
         ]:
     CHECKER[name] = VirtualDependency(
