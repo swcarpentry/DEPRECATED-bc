@@ -5,7 +5,7 @@ title: A Better Kind of Backup
 level: novice
 ---
 The first time we use Git on a new machine,
-we need to run a commands to configure a few things:
+we need to configure a few things:
 
 ```
 $ git config --global user.name "Vlad Dracula"
