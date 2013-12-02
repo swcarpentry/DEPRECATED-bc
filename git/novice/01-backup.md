@@ -104,7 +104,7 @@ nothing added to commit but untracked files present (use "git add" to track)
 
 The "untracked files" message means that there's a file in the directory
 that Git isn't keeping track of.
-We can tell it that it should like this:
+We can tell Git that it should track the file like this:
 
 ```
 $ git add mars.txt
