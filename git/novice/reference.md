@@ -76,13 +76,9 @@ Display a repository's remotes:
 
     git remote -v
 
-Push changes from a local repository to a remote (assuming `master` already exists in the remote):
+Push changes from a local repository to a remote:
 
     git push nickname master
-
-Push changes from a local repository to a remote (if `master` doesn't yet exist in the remote):
-
-    git push -u nickname master
 
 Pull changes from a remote repoisitory:
 

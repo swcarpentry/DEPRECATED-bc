@@ -5,7 +5,7 @@ title: A Better Kind of Backup
 level: novice
 ---
 The first time we use Git on a new machine,
-we need to run a commands to configure a few things:
+we need to configure a few things:
 
 ```
 $ git config --global user.name "Vlad Dracula"
@@ -102,9 +102,9 @@ $ git status
 nothing added to commit but untracked files present (use "git add" to track)
 ```
 
-The message "untracked files" means that there's a file in the directory
+The "untracked files" message means that there's a file in the directory
 that Git isn't keeping track of.
-We can tell it that it should like this:
+We can tell Git that it should track the file like this:
 
 ```
 $ git add mars.txt
@@ -125,7 +125,7 @@ $ git status
 #
 ```
 
-Git now knows that it's supposed to keep tack of this file,
+Git now knows that it's supposed to keep track of this file,
 but it hasn't yet recorded any changes for posterity.
 To get it to do that,
 we need to run one more command:
@@ -142,6 +142,10 @@ Git takes everything we have told it to save using `git add`
 and stores a copy permanently inside the special `.git` directory.
 We use the `-m` flag (for "message")
 to record a comment that will help us remember later on what we did and why.
+If you just run `git commit` (without the `-m` option),
+Git will spawn "nano" (the editor we configured at the start),
+and you can use the editor to compose your commit message.
+
 If we run `git status` now:
 
 ```
@@ -163,8 +167,7 @@ Date:   Thu Aug 22 09:51:46 2013 -0400
     Starting to think about Mars
 ```
 
-Now suppose Dracula adds more information to the file
-(remember, `>>` appends rather than overwriting):
+Now suppose Dracula adds more information to the file:
 
 ```
 $ nano mars.txt
@@ -210,7 +213,7 @@ index df0654a..315bf3a 100644
 +The two moons may be a problem for Wolfman
 ```
 
-The output is cryptic because it isn't really intended for human beings to read:
+The may seem a bit cryptic at first:
 it's a series of commands for tools like editors and `patch`
 telling them how to reconstruct one file given the other.
 If we can break it down into pieces:
@@ -218,12 +221,12 @@ If we can break it down into pieces:
 1.   The first line tells us that Git is using the Unix `diff` command
      to compare the old and new versions of the file.
 2.   The second line tells exactly which versions of the file it is comparing;
-     we'll look in a moment at what `df0654a` and `315bf3a` mean.
+     you don't have to worry about this.
 3.   The remaining lines show us the actual differences
      and the lines on which they occur.
-     The numbers between the `@@` markers tell editors which lines we're changing,
+     The numbers between the `@@` markers tell which lines we're changing,
      and if you look in the left margin below them,
-     you'll see the line we are adding marked with a '+'.
+     you'll see the line we are adding marked with a `+`.
 
 Let's commit our change:
 
@@ -503,12 +506,3 @@ A common mistake is to use the revision number of
 the commit in which we made the change we're trying to get rid of:
 
 FIXME: diagram
-
-The fact that files can be reverted one by one
-tends to change the way people organize their work.
-If everything is in one large document,
-it's hard (but not impossible) to undo changes to the introduction
-without also undoing changes made later to the conclusion.
-If the introduction and conclusion are stored in separate files,
-on the other hand,
-moving backward and forward in time becomes much easier.
