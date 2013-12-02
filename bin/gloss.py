@@ -9,8 +9,8 @@ Typically, bin/gloss.py ./gloss.md _site/*/novice/*.html
 import sys
 import re
 
-# glossary entries: first group is the text, second is the anchor
-GLOSS_ENTRY_PAT = re.compile(r'\*\*([^\*]+)\*\*:\s+<a\s+name="([^"]+)"></a>')
+# glossary entries: first group is the text, second the abbreviation, third the anchor
+GLOSS_ENTRY_PAT = re.compile(r'\*\*([^\*]+)\*\*(\s+\(.+\))?:\s+<a\s+name="([^"]+)"></a>')
 
 # glossary definition: first group is the key
 GLOSS_USE_PAT = re.compile(r'<a href="(\.\./)*gloss.html#([^"]+)">')
@@ -27,6 +27,7 @@ def get_gloss_entries(filename):
     duplicated.  Result is a dictionary of anchors to counts
     (initially all 0).'''
     result = {}
+    undone = 0
     last_seen = ''
     out_of_order = []
     with open(filename, 'r') as reader:
@@ -34,13 +35,18 @@ def get_gloss_entries(filename):
             m = GLOSS_ENTRY_PAT.search(line)
             if m:
                 text = m.group(1)
-                if text < last_seen:
-                    out_of_order.append(text)
-                last_seen = text
-                key = m.group(2)
+                if text == 'FIXME':
+                    undone += 1
+                else:
+                    if text < last_seen:
+                        out_of_order.append(text)
+                    last_seen = text
+                key = m.group(3)
                 if key in result:
                     print 'Duplicate key {0} in {1}'.format(key, filename)
                 result[key] = 0
+    if undone:
+        print '{0} UNDONE'.format(undone)
     if out_of_order:
         print 'OUT OF ORDER:'
         for term in out_of_order:
