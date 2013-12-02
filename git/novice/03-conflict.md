@@ -96,7 +96,7 @@ hint: before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 ```
 
-Git detects that the changes made in one copy overlap with those made in the other
+Git detects that we haven't integrated changes from the central copy
 and stops us from trampling on our previous work.
 What we have to do is pull the changes from GitHub,
 [merge](../gloss.html#repository-merge) them into the copy we're currently working in,
