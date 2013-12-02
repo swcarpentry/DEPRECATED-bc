@@ -506,12 +506,3 @@ A common mistake is to use the revision number of
 the commit in which we made the change we're trying to get rid of:
 
 FIXME: diagram
-
-The fact that files can be reverted one by one
-tends to change the way people organize their work.
-If everything is in one large document,
-it's hard (but not impossible) to undo changes to the introduction
-without also undoing changes made later to the conclusion.
-If the introduction and conclusion are stored in separate files,
-on the other hand,
-moving backward and forward in time becomes much easier.
