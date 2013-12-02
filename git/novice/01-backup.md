@@ -142,6 +142,10 @@ Git takes everything we have told it to save using `git add`
 and stores a copy permanently inside the special `.git` directory.
 We use the `-m` flag (for "message")
 to record a comment that will help us remember later on what we did and why.
+If you just run `git commit` (without the `-m` option),
+Git will spawn "nano" (the editor we configured at the start),
+and you can use the editor to compose your commit message.
+
 If we run `git status` now:
 
 ```
