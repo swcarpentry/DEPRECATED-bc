@@ -1,0 +1,34 @@
+# Introduction to data.table
+
+## Installation
+
+```{r install, eval=FALSE}
+install.packages("data.table")
+```
+
+```{r load}
+library(data.table)
+```
+
+## Read in a file
+
+`data.table` can read in files more efficiently thatn the standard functions in R, including `read.csv`, `read.table`, or `scan`. Let's take a look at the function `fread`. 
+
+```{r fread}
+"x"
+```
+
+## Combine data.frames in a list
+
+```{r rbindlist}
+DT1 = data.table(A=1:3,B=letters[1:3])
+DT2 = data.table(A=4:5,B=letters[4:5])
+l = list(DT1,DT2)
+rbindlist(l)
+```
+
+## Fast manipulation
+
+```{r}
+"x"
+```
