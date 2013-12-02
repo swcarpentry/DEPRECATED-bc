@@ -226,7 +226,7 @@ If we can break it down into pieces:
      and the lines on which they occur.
      The numbers between the `@@` markers tell which lines we're changing,
      and if you look in the left margin below them,
-     you'll see the line we are adding marked with a '+'.
+     you'll see the line we are adding marked with a `+`.
 
 Let's commit our change:
 
