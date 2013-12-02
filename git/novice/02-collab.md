@@ -9,14 +9,14 @@ when we begin to collaborate with other people.
 We already have most of the machinery we need to do this;
 the only thing missing is sharing changes between repositories.
 
-Systems like Git and Mercurial allow us to move work between any two repositories.
-In practice,
-though,
-it's easiest to use one copy as a central hub,
-and to keep it on the web rather than on someone's laptop.
-Most programmers use hosting services like [GitHub](http://github.com) or [BitBucket](http://bitbucket.org)
-to hold those master copies;
+There are [a number of ways][distributed-workflows]
+to organize repositories for sharing work.
+Many programmers use a single, centralized repository to share changes.
+There are a number of free hosting services like [GitHub](http://github.com) or [BitBucket](http://bitbucket.org)
+which will host the central repository for you;
 we'll explore the pros and cons of this in the final section of this lesson.
+
+[distributed-workflows]: http://git-scm.com/book/en/Distributed-Git-Distributed-Workflows
 
 Let's start by sharing the changes we've made to our current project with the world.
 Log in to GitHub,
