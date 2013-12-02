@@ -225,12 +225,14 @@ not least because it gives them fewer passwords to remember.
 However,
 all of these services place some constraints on people's work.
 In particular,
-they give users a choice:
+many give users a choice:
 if they're willing to share their work with others,
 it will be hosted for free,
 but if they want privacy,
-they have to pay.
+they have to pay ([Bitbucket][] provides free private repositories).
 Sharing might seem like the only valid choice for science,
 but many institutions may not allow researchers to do this,
 either because they want to protect future patent applications
 or simply because what's new is often also frightening.
+
+[Bitbucket]: https://bitbucket.org/
