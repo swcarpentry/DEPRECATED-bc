@@ -221,7 +221,7 @@ If we can break it down into pieces:
 1.   The first line tells us that Git is using the Unix `diff` command
      to compare the old and new versions of the file.
 2.   The second line tells exactly which versions of the file it is comparing;
-     we'll look in a moment at what `df0654a` and `315bf3a` mean.
+     you don't have to worry about this.
 3.   The remaining lines show us the actual differences
      and the lines on which they occur.
      The numbers between the `@@` markers tell which lines we're changing,
