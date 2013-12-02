@@ -47,7 +47,7 @@ the string we need to identify it:
 FIXME: screenshot
 
 For now,
-we'll use the 'http' identifier,
+we'll use the 'http' protocol,
 since it requires the least setup.
 Copy that string from the browser,
 go into the local `planets` repository,
