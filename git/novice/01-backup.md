@@ -167,8 +167,7 @@ Date:   Thu Aug 22 09:51:46 2013 -0400
     Starting to think about Mars
 ```
 
-Now suppose Dracula adds more information to the file
-(remember, `>>` appends rather than overwriting):
+Now suppose Dracula adds more information to the file:
 
 ```
 $ nano mars.txt
