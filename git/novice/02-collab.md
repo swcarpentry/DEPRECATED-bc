@@ -79,7 +79,7 @@ Delta compression using up to 4 threads.
 Compressing objects: 100% (6/6), done.
 Writing objects: 100% (9/9), 821 bytes, done.
 Total 9 (delta 2), reused 0 (delta 0)
-To https://github.com/gvwilson/planets
+To https://github.com/vlad/planets
  * [new branch]      master -> master
 ```
 
@@ -139,7 +139,7 @@ Delta compression using up to 4 threads.
 Compressing objects: 100% (2/2), done.
 Writing objects: 100% (3/3), 306 bytes, done.
 Total 3 (delta 0), reused 0 (delta 0)
-To https://github.com/gvwilson/planets.git
+To https://github.com/vlad/planets.git
    9272da5..29aba7c  master -> master
 ```
 
@@ -156,7 +156,7 @@ remote: Counting objects: 4, done.
 remote: Compressing objects: 100% (2/2), done.
 remote: Total 3 (delta 0), reused 3 (delta 0)
 Unpacking objects: 100% (3/3), done.
-From https://github.com/gvwilson/planets
+From https://github.com/vlad/planets
  * branch            master     -> FETCH_HEAD
 Updating 9272da5..29aba7c
 Fast-forward
