@@ -7,8 +7,7 @@ level: novice
 Version control really comes into its own
 when we begin to collaborate with other people.
 We already have most of the machinery we need to do this;
-the only thing missing is to move files
-from one repository to another.
+the only thing missing is sharing changes between repositories.
 
 Systems like Git and Mercurial allow us to move work between any two repositories.
 In practice,
@@ -34,7 +33,7 @@ $ cd planets
 $ git init
 ```
 
-Our local repository still contains the files `mars.txt` that we wrote earlier,
+Our local repository still contains our earlier work on `mars.txt`,
 but the remote repository on GitHub doesn't contain any files yet:
 
 FIXME: diagram
