@@ -102,7 +102,7 @@ $ git status
 nothing added to commit but untracked files present (use "git add" to track)
 ```
 
-The message "untracked files" means that there's a file in the directory
+The "untracked files" message means that there's a file in the directory
 that Git isn't keeping track of.
 We can tell it that it should like this:
 
