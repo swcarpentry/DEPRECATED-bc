@@ -227,11 +227,7 @@ We removed the conflict on this line
 
 We don't need to merge again because GitHub knows someone has already done that.
 
-Version control's ability to merge conflicting changes
-is another reason users tend to divide their programs and papers into multiple files
-instead of storing everything in one large file.
-There's another benefit too:
-whenever there are repeated conflicts in a particular file,
-the version control system is essentially trying to tell its users
-that they ought to clarify who's responsible for what,
-or find a way to divide the work up differently.
+It's good practice coordinate major changes with your collaborators
+before you dive in.
+The version control system will help you resolve conflicts,
+but you can avoid many conflicts entirely by communicating effectively.
