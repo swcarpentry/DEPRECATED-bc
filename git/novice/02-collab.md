@@ -49,7 +49,7 @@ FIXME: screenshot
 For now,
 we'll use the 'http' protocol,
 since it requires the least setup.
-Copy that string from the browser,
+Copy that URL from the browser,
 go into the local `planets` repository,
 and run this command:
 
