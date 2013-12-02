@@ -1,9 +1,13 @@
 ---
 layout: lesson
 root: ../..
-title: Introducing Version Control
+title: Introducing Distributed Version Control, and Introducing
+Yourself to Git
 level: intermediate
 ---
+
+## Introducing Distributed Version Control
+
 Barbara Biologist and Candace Cosmologist have been hired by Universal Missions
 (a space services spinoff from Euphoric State University)
 to figure out where the company should send its next planetary lander.
@@ -35,7 +39,7 @@ and that they might accidentally publish a chart,
 their code can't reproduce
 and that they can no longer explain.
 
-Barbara and Candace decide to use [ADDTHISDESCRIPTION][distributed version control](../gloss.html#version-control)
+Barbara and Candace decide to use distributed version control
 to manage their workflow.
 Distributed version control is better than mailing files back and forth or cloud-based syncing services because:
 
@@ -65,3 +69,61 @@ No matter which distributed version control system you use,
 the most important thing to learn is not the details of their more obscure commands,
 but the fundamentals of how they work,
 and the workflow that they encourage.
+
+## Introducing Yourself to Git
+
+The first time we use Git on a new machine,
+we need to run commands to configure a few things.
+
+First, you need to tell Git
+your preferred name and email address.
+We usually prefer a permanent email address
+so that our authorship
+is still asserted in the future.
+
+```
+$ git config --global user.name "Barbara Biologist"
+$ git config --global user.email "barbara@biologist.net"
+```
+
+Why does Git need your name and email?
+It turns out that email addresses
+are an excellent unique identifier and communication mechanism
+for distributed teams.
+Every change you make in the version control repository
+is automatically labeled with your name and email address.
+This helps others to keep track of your work,
+when you choose to share it with them.
+
+Next, you need to tell Git
+that you are using a modern terminal
+and prefer colored output.
+(UI stands for user interface).
+
+```
+$ git config --global color.ui "auto"
+```
+
+In newer versions of Git,
+this option has already been set for you.
+
+Finally, Git wants to know how you like to edit files.
+For now, we'll use `nano`,
+but feel free to change this
+if you prefer a different editor.
+
+$ git config --global core.editor "nano"
+
+Git commands are written `git verb`,
+where `verb` is a command you want Git to do.
+Using the `config` command, you have told Git:
+
+*   your name and email address,
+*   to colorize output,
+*   what your favorite text editor is, and
+*   that you want to use these settings globally (i.e., for every project),
+
+The four commands above only need to be run once:
+Git will remember the settings until you change them.
+Once Git is configured,
+you can start using Git.
