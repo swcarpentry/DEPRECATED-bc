@@ -125,7 +125,7 @@ $ git status
 #
 ```
 
-Git now knows that it's supposed to keep tack of this file,
+Git now knows that it's supposed to keep track of this file,
 but it hasn't yet recorded any changes for posterity.
 To get it to do that,
 we need to run one more command:
