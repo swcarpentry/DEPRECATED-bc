@@ -15,20 +15,42 @@ library(data.table)
 `data.table` can read in files more efficiently thatn the standard functions in R, including `read.csv`, `read.table`, or `scan`. Let's take a look at the function `fread`. 
 
 ```{r fread}
-"x"
+df <- data.frame(a = 1:10^4, b = 1:10^4)
+write.table(df, file="test.csv", sep=",", row.names=FALSE)
+fread("test.csv")
+
+system.time( read.csv("test.csv") )
+system.time( fread("test.csv") )
+identical(data.frame(fread("test.csv")), read.csv("test.csv"))
 ```
 
-## Combine data.frames in a list
+## Combine data.frames
 
 ```{r rbindlist}
-DT1 = data.table(A=1:3,B=letters[1:3])
-DT2 = data.table(A=4:5,B=letters[4:5])
-l = list(DT1,DT2)
+df1 <- data.frame(a = 1:4, b = letters[1:4])
+df2 <- data.frame(a = 5:8, b = letters[5:8])
+l <- list(df1, df2)
 rbindlist(l)
+do.call(rbind, l)
+```
+
+This is much faster than `rbind`
+
+```{r}
+df3 <- data.frame(a = 1:10^7, b = 1:10^7)
+df4 <- data.frame(a = 1:10^7, b = 1:10^7)
+l <- list(df3, df4)
+system.time( do.call(rbind, l) )
+system.time( rbindlist(l) )
 ```
 
 ## Fast manipulation
 
 ```{r}
-"x"
+DT <- data.table(x = rep(letters, 3847), v = rnorm(100022)) 
+DT[,sum(v)]
+DT[,sum(v),by=x]
+
+system.time( replicate(10, tapply(DT$v,DT$x,sum)) )
+system.time( replicate(10, DT[,sum(v),by=x]) )
 ```
