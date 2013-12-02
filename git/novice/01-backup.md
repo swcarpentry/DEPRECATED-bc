@@ -213,7 +213,7 @@ index df0654a..315bf3a 100644
 +The two moons may be a problem for Wolfman
 ```
 
-The output is cryptic because it isn't really intended for human beings to read:
+The may seem a bit cryptic at first:
 it's a series of commands for tools like editors and `patch`
 telling them how to reconstruct one file given the other.
 If we can break it down into pieces:
@@ -224,7 +224,7 @@ If we can break it down into pieces:
      we'll look in a moment at what `df0654a` and `315bf3a` mean.
 3.   The remaining lines show us the actual differences
      and the lines on which they occur.
-     The numbers between the `@@` markers tell editors which lines we're changing,
+     The numbers between the `@@` markers tell which lines we're changing,
      and if you look in the left margin below them,
      you'll see the line we are adding marked with a '+'.
 
