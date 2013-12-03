@@ -162,7 +162,7 @@ $ cd planets
 and tell Git to initialize it:
 
 ```
-$ git init .
+$ git init
 ```
 
 If we use `ls` to show the directory's contents,
@@ -707,7 +707,7 @@ Let's add and commit those changes
 (the `-A` flag to `git add` means "add everything"):
 
 ```
-$ git add -A
+$ git add -A .
 $ git status
 # On branch moons
 # Changes to be committed:
