@@ -23,15 +23,15 @@ and why they insist on structuring data in certain ways.
 
 Topics
 ------
-*   [Selecting Data](01-select.html)
-*   [Sorting and Removing Duplicates](02-sort-dup.html)
-*   [Filtering](03-filter.html)
-*   [Calculating New Values](04-calc.html)
-*   [Missing Data](05-null.html)
-*   [Aggregation](06-agg.html)
-*   [Combining Data](07-join.html)
-*   [Creating and Modifying Data](08-create.html)
-*   [Programming with Databases](09-prog.html)
+1.  [Selecting Data](01-select.html)
+2.  [Sorting and Removing Duplicates](02-sort-dup.html)
+3.  [Filtering](03-filter.html)
+4.  [Calculating New Values](04-calc.html)
+5.  [Missing Data](05-null.html)
+6.  [Aggregation](06-agg.html)
+7.  [Combining Data](07-join.html)
+8.  [Creating and Modifying Data](08-create.html)
+9.  [Programming with Databases](09-prog.html)
 
 See Also
 --------
