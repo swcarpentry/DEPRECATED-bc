@@ -86,7 +86,7 @@ links :
 
 ## fixme    : find places where fixes are needed.
 fixme :
-	grep -n FIXME $$(find -f bash git python sql -type f -print | grep -v .ipynb_checkpoints)
+	@grep -n FIXME $$(find -f bash git python sql -type f -print | grep -v .ipynb_checkpoints)
 
 ## clean    : clean up
 clean :
