@@ -204,25 +204,28 @@ you will need to install Jekyll 1.0.3 or later in order to preview things locall
 If you have Ruby installed on your computer,
 this *should* be as simple as:
 
-    gem install jekyll
-    gem install redcarpet
+    gem install github-pages
 
-We try to use the same MarkDown interpreters as GitHub does for
-consistency.  On OS X, we suggest you use a recent Ruby to get access
-to these.  If you don't have Homebrew or MacPorts installed, here's a
-quick recipe to get started using HomeBrew.
+or if that doesn't work:
+
+    gem install jekyll
+    gem install kramdown
+
+(We use Kramdown for translating Markdown instead of the default
+Redcarpet because Kramdown will handle Markdown inside HTML blocks).
+On OS X, we suggest you use a recent Ruby to get access to these.  If
+you don't have Homebrew or MacPorts installed, here's a quick recipe
+to get started using HomeBrew.
 
 ```
 ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 brew install ruby
-gem install jekyll
-gem install redcarpet 
 ```
 
-If you don't have `make` in your machine, you can build the preview with:
+and then `gem install` as above.  If you don't have `make` in your
+machine, you can build the preview with:
 
     jekyll -t build -d _site
-
 
 Layout and Variables
 --------------------
