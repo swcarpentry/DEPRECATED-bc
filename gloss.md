@@ -10,12 +10,15 @@ Absolute paths are usually written with respect to the file system's
 and begin with either "/" (on Unix) or "\" (on Microsoft Windows).
 See also: [relative path](#relative-path).
 
-**FIXME**: <a name="additive-color-model"></a>
+**additive color model**: <a name="additive-color-model"></a>
+A way to represent colors as the sum of contributions from primary colors
+such as [red, green, and blue](#rgb).
 
 **aggregation function**: <a name="aggregation-function"></a>
 A function such as `sum` or `max` that combines many values to produce a single result.
 
-**FIXME**: <a name="alias-library"></a>
+**alias** (a library): <a name="alias-library"></a>
+To give a library a nickname while importing it.
 
 **assertion**: <a name="assertion"></a>
 An expression which is supposed to be true at a particular point in a program.
@@ -24,7 +27,8 @@ if the assertion fails (i.e., if the expression evaluates as false),
 the program halts and produces an error message.
 See also: [invariant](#invariant), [precondition](#precondition), [postcondition](#postcondition),
 
-**FIXME**: <a name="assignment"></a>
+**assignment**: <a name="assignment"></a>
+To give a value a name by associating a variable with it.
 
 **atomic value**: <a name="atomic-value"></a>
 A value that cannot be decomposed into smaller pieces.
@@ -33,7 +37,11 @@ the number 12 is usually considered atomic
 (unless we are teaching addition to school children,
 in which case we might decompose it into tens and ones).
 
-**FIXME**: <a name="call-stack"></a>
+**call stack**: <a name="call-stack"></a>
+A data structure inside a running program that keeps track of active function calls.
+Each call's variables are stored in a [stack frame](#stack-frame);
+a new stack frame is put on top of the stack for each call,
+and discarded when the call is finished.
 
 **cascading delete**: <a name="cascading-delete"></a>
 The practice of automatically deleting things in a database
@@ -50,6 +58,9 @@ A group of changes to one or more files
 that are [committed](#commit) to a [version control](#version-control) [repository](#repository)
 in a single operation.
 
+**clone** (a repository): <a name="repository-clone"></a>
+To make a copy of a [version control repository](#repository).
+
 **comma-separated values** (CSV): <a name="csv"></a>
 A common textual representation for tables
 in which the values in each row are separated by commas.
@@ -59,11 +70,16 @@ An interface based on typing commands,
 usually at a [REPL](#repl).
 See also: (graphical user interface)[#gui].
 
-**FIXME**: <a name="comment"></a>
+**comment**: <a name="comment"></a>
+A remark in a program that is intended to help human readers understand what is going on,
+but is ignored by the computer.
+Comments in Python, R, and the Unix shell start with a `#` character and run to the end of the line;
+comments in SQL start with `--`,
+and other languages have other conventions.
 
-**FIXME**: <a name="conditional-statement"></a>
-
-**FIXME**: <a name="confirmation-bias"></a>
+**conditional statement**: <a name="conditional-statement"></a>
+A statement in a program that might or might not be executed
+depending on whether a test is true or false.
 
 **conflict**: <a name="conflict"></a>
 A change made by one user of a (version control system)[#version-control]
@@ -84,6 +100,10 @@ The current working directory is usually referred to using the shorthand notatio
 **cursor**: <a name="cursor"></a>
 A pointer into a database that keeps track of outstanding operations.
 
+**data type**: <a name="data-type"></a>
+A kind of data value,
+such as [integer](#integer) or [character string](#string).
+
 **database manager**: <a name="database-manager"></a>
 A program that manages a (relational database)[#relational-database].
 
@@ -97,7 +117,9 @@ The practice of writing programs that check their own operation to catch errors 
 A character or characters used to separate individual values,
 such as the commas between columns in a [CSV](#csv) file.
 
-**FIXME**: <a name="disk-block"></a>
+**disk block**: <a name="disk-block"></a>
+The smallest unit of storage that can be allocated on a computer disk.
+Disk blocks are typically 512 bytes in size.
 
 **docstring**: <a name="docstring"></a>
 Short for "documentation string",
@@ -106,9 +128,14 @@ Unlike comments,
 docstrings are preserved in the running program
 and can be examined in interactive sessions.
 
-**FIXME**: <a name="documentation"></a>
+**documentation**: <a name="documentation"></a>
+Human-language text written to explain what software does,
+how it works,
+or how to use it.
 
-**FIXME**: <a name="dotted-notation"></a>
+**dotted notation**: <a name="dotted-notation"></a>
+A two-part notation used in many programming languages
+in which `thing.component` refers to the `component` belonging to `thing`.
 
 **empty string**: <a name="empty-string"></a>
 A character string containing no characters,
@@ -169,7 +196,9 @@ See also: [while loop](#while-loop).
 One or more values in a (database table)[#table-database]
 that identify a (records)[#record-database] in another table.
 
-**FIXME**: <a name="function-composition"></a>
+**function composition**: <a name="function-composition"></a>
+The immediate application of one function to the result of another,
+such as `f(g(x))`.
 
 **graphical user interface** (GUI): <a name="gui"></a>
 A graphical user interface,
@@ -185,7 +214,8 @@ Unchangeable.
 The value of immutable data cannot be altered after it has been created.
 See also: (mutable)[#mutable].
 
-**FIXME**: <a name="import"></a>
+**import**: <a name="import"></a>
+To load a library into a program.
 
 **in-place operator**: <a name="in-place-operator"></a>
 An operator such as `+=` that provides a shorthand notation for
@@ -194,9 +224,14 @@ is also an operand on the right hand side of the assignment.
 For example,
 the statement `x += 3` means the same thing as `x = x + 3`.
 
-**FIXME**: <a name="index"></a>
+**index**: <a name="index"></a>
+A subscript that specifies the location of a single value in a collection,
+such as a single pixel in an image.
 
-**FIXME**: <a name="infective-license"></a>
+**infective license**: <a name="infective-license"></a>
+A license such as the [GPL](http://opensource.org/licenses/GPL-3.0)
+that compels people who incorporate material into their own work
+to place similar sharing requirements on it.
 
 **inner loop**: <a name="inner-loop"></a>
 A loop that is inside another loop.
@@ -211,12 +246,17 @@ An expression whose value doesn't change during the execution of a program,
 typically used in an [assertion](#assertion).
 See also: (precondition)[#precondition], (postcondition)[#postcondition].
 
-**FIXME**: <a name="loop-body"></a>
+**loop body**: <a name="loop-body"></a>
+The statements that are executed inside a loop.
 
-**FIXME**: <a name="loop-variable"></a>
+**loop variable**: <a name="loop-variable"></a>
+The variable that keeps track of the progress of the loop.
 
 **member**: <a name="member"></a>
 A variable contained within an [object](#object).
+
+**merge** (a repository): <a name="repository-merge"></a>
+To reconcile two sets of change to a [repository].
 
 **method**: <a name="method"></a>
 A function which is tied to a particular (object)[#object].
@@ -228,17 +268,25 @@ Changeable.
 The value of mutable data can be updated in place.
 See also: (immutable)[#immutable].
 
-**FIXME**: <a name="notional-machine"></a>
+**notional machine**: <a name="notional-machine"></a>
+An abstraction of a computer used to think about what it can and will do.
 
-**FIXME**: <a name="object"></a>
+**object**: <a name="object"></a>
+A particular "chunk" of data associated with specific operations called [methods](#method).
 
-**FIXME**: <a name="orthogonality"></a>
+**orthogonal**: <a name="orthogonal"></a>
+To have meanings or behaviors that are independent of each other.
+If a set of concepts or tools are orthogonal,
+they can be combined in any way.
 
 **outer loop**: <a name="outer-loop"></a>
 A loop that contains another loop.
 See also: (inner loop)[#inner-loop].
 
-**FIXME**: <a name="parameter"></a>
+**parameter**: <a name="parameter"></a>
+A value passed into a function,
+or a variable named in the functin's declaration
+that is used to hold such a value.
 
 **parent directory**: <a name="parent-directory"></a>
 The directory that "contains" the one in question.
@@ -254,11 +302,16 @@ A model of programming in which [filters](#filter) that process [streams](#strea
 are connected end-to-end.
 The pipe and filter model is used extensively in the Unix [shell](#shell).
 
-**FIXME**: <a name="postcondition"></a>
+**postcondition**: <a name="postcondition"></a>
+A condition that a function (or other block of code) guarantees is true
+once it has finished running.
+Postconditions are often represented using [assertions](#assertion).
 
-**FIXME**: <a name="precondition"></a>
+**precondition**: <a name="precondition"></a>
+A condition that must be true in order for a function (or other block of code) to run correctly.
 
-**FIXME**: <a name="prepared-statement"></a>
+**prepared statement**: <a name="prepared-statement"></a>
+A template for an [SQL](#sql) query in which some values can be filled in.
 
 **primary key**: <a name="primary-key"></a>
 One or more (fields)[#field-database] in a (database table)[#table-database]
@@ -276,13 +329,20 @@ Processes are the "actors" that the [operating system](#operating-system) manage
 it typically runs each process for a few milliseconds at a time
 to give the impression that they are executing simultaneously.
 
-**FIXME**: <a name="prompt"></a>
+**prompt**: <a name="prompt"></a>
+A character or characters display by a [REPL](#repl) to show that
+it is waiting for its next command.
 
 **query**: <a name="query"></a>
 A database operation that reads values but does not modify anything.
 Queries are expressed in a special-purpose language called (SQL)[#sql].
 
-**FIXME**: <a name="range"></a>
+**quoting** (in the shell): <a name="shell-quoting"></a>
+Using quotation marks of various kinds to prevent the shell from interpreting special characters.
+For example,
+to pass the string `*.txt` to a program,
+it is usually necessary to write it as `'*.txt'` (with single quotes)
+so that the shell will not try to expand the `*` wildcard.
 
 **read-eval-print loop** (REPL): <a name="repl"></a>
 a [command-line interface](#cli) that reads a command from the user,
@@ -295,7 +355,9 @@ A set of related values making up a single entry in a (database table)[#table-da
 typically shown as a row.
 See also: (field)[#field-database].
 
-**FIXME**: <a name="redirection"></a>
+**redirect**: <a name="redirect"></a>
+To send a command's output to a file rather than to the screen or another command,
+or equivalently to read a command's input from a file.
 
 **referential integrity**: <a name="referential-integrity"></a>
 The internal consistency of values in a database.
@@ -303,7 +365,8 @@ If an entry in one table contains a (foreign key)[#foreign-key],
 but the corresponding (records)[#record-database] don't exist,
 referential integrity has been violated.
 
-**FIXME**: <a name="regression"></a>
+**regression**: <a name="regression"></a>
+To re-introduce a bug that was once fixed.
 
 **regular expressions** (RE): <a name="regular-expression"></a>
 A pattern that specifies a set of character strings.
@@ -318,36 +381,47 @@ with respect to the [current working directory](#current-working-directory).
 Any path that does not begin with a separator character ("/" or "\") is a relative path.
 See also: [absolute path](#absolute-path).
 
+**remote repository**: <a name="repository-remote"></a>
+A version control [repository](#repository) other than the current one
+that the current one is somehow connected to or mirroring.
+
 **repository**: <a name="repository"></a>
 A central storage area where a (version control)[#version-control] system
 stores old (revisions)[#revision] of files
 and information about who changed what, when.
 
-**FIXME**: <a name="repository-clone"></a>
-
-**FIXME**: <a name="repository-merge"></a>
-
-**FIXME**: <a name="repository-remote"></a>
-
 **resolve**: <a name="resolve"></a>
 To eliminate the (conflicts)[#conflict] between two or more incompatible changes to a file or set of files
 being managed by a (version control)[#version-control] system.
 
-**FIXME**: <a name="return-statement"></a>
+**return statement**: <a name="return-statement"></a>
+A statement that causes a function to stop executing and return a value to its caller immediately.
 
-**FIXME**: <a name="revision"></a>
+**revision**: <a name="revision"></a>
+A recorded state of a [version control](#version-control) [repository](#repository).
 
-**FIXME**: <a name="rgb"></a>
+**RGB** (red-green-blue): <a name="rgb"></a>
+An [additive model](#additive-color-model)
+that represents colors as combinations of red, green, and blue.
+Each color's value is typically in the range 0..255
+(i.e., a one-byte integer).
 
 **root directory**: <a name="root-directory"></a>
 The top-most directory in a [filesystem](#filesystem).
 Its name is "/" on Unix (including Linux and Mac OS X) and "\" on Microsoft Windows.
 
-**FIXME**: <a name="sentinel-value"></a>
+**sentinel value**: <a name="sentinel-value"></a>
+A value in a collection that has a special meaning,
+such as 999 to mean "age unknown".
 
-**FIXME**: <a name="sequence"></a>
+**sequence**: <a name="sequence"></a>
+An ordered collection of values
+whose elements can be specified with a single integer index,
+such as a vector.
 
-**FIXME**: <a name="shape"></a>
+**shape** (of an array): <a name="shape"></a>
+An array's dimensions, represented as a vector.
+For example, a 5&times;3 array's shape is `(5,3)`.
 
 **shell**: <a name="shell"></a>
 A [command-line interface](#cli)
@@ -355,11 +429,14 @@ such as Bash (the Bourne-Again Shell)
 or the Microsoft Windows DOS shell
 that allows a user to interact with the [operating system](#operating-system).
 
-**FIXME**: <a name="shell-quoting"></a>
+**shell script**: <a name="shell-script"></a>
+A set of [shell](#shell) commands stored in a file for re-use.
+A shell script is a program executed by the shell;
+the name "script" is used for historical reasons.
 
-**FIXME**: <a name="shell-script"></a>
-
-**FIXME**: <a name="silent-failure"></a>
+**silent failure**: <a name="silent-failure"></a>
+Failing without producing any warning messages.
+Silent failures are hard to detect and debug.
 
 **slice**: <a name="slice"></a>
 A regular subsequence of a larger sequence,
@@ -368,7 +445,10 @@ such as the first five elements or every second element.
 **SQL** (Structured Query Language): <a name="sql"></a>
 A special-purpose language for describing operations on (relational databases)[#relational-database].
 
-**FIXME**: <a name="sql-injection"></a>
+**SQL injection attack**: <a name="sql-injection-attack"></a>
+An attack on a program in which the user's input contains malicious SQL statements.
+If this text is copied directly into an SQL statement,
+it will be executed in the database.
 
 **stack frame**: <a name="stack-frame"></a>
 A data structure that provides storage for a function's local variables.
@@ -392,28 +472,37 @@ data sent to standard output is displayed on the screen;
 in a [pipe](#pipe),
 it is passed to the [standard input](#standard-input) of the next process.
 
-**FIXME**: <a name="stride"></a>
+**stride**: <a name="stride"></a>
+The offset between successive elements of a [slice](#slice).
 
-**FIXME**: <a name="string"></a>
+**string**: <a name="string"></a>
+Short for "character string",
+a [sequence](#sequence) of zero or more characters.
 
-**FIXME**: <a name="sub-directory"></a>
+**sub-directory**: <a name="sub-directory"></a>
+A directory contained within another directory.
 
 **tab completion**: <a name="tab-completion"></a>
-FIXME
+A feature provided by many interactive systems in which
+pressing the Tab key triggers automatic completion of the current word or command.
 
-**FIXME**: <a name="table-database"></a>
+**table** (in a database): <a name="table-database"></a>
+A set of data in a [relational database](#relational-database)
+organized into a set of [records](#record-database),
+each having the same named [fields](#field-database).
+
+**test oracle**: <a name="test-oracle"></a>
+A program, device, data set, or human being
+against which the results of a test can be compared.
 
 **test-driven development** (TDD): <a name="test-driven-development"></a>
 The practice of writing unit tests *before* writing the code they test.
 
-**FIXME**: <a name="test-oracle"></a>
-
 **tuple**: <a name="tuple"></a>
 An [immutable](#immutable) (sequence)[#sequence] of values.
 
-**FIXME**: <a name="type"></a>
-
-**FIXME**: <a name="variable"></a>
+**variable**: <a name="variable"></a>
+A name in a program that is associated with a value or a collection of values.
 
 **version control**: <a name="version-control"></a>
 A tool for managing changes to a set of files.
