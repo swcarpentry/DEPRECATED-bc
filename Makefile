@@ -88,6 +88,7 @@ gloss :
 ## images   : create a temporary page to display images
 images :
 	@bin/make-image-page.py $(MARKDOWN_SRC) $(NOTEBOOK_SRC) > image-page.html
+	@echo "Open ./image-page.html to view images"
 
 ## links    : check links
 # Depends on linklint, an HTML link-checking module from
