@@ -77,9 +77,17 @@ $(TMP)/%.html : %.ipynb
 	@mkdir -p $$(dirname $@)
 	ipython nbconvert --output="$(subst .html,,$@)" "$<"
 
+## fixme    : find places where fixes are needed.
+fixme :
+	@grep -n FIXME $$(find -f bash git python sql -type f -print | grep -v .ipynb_checkpoints)
+
 ## gloss    : check glossary
 gloss :
 	@bin/gloss.py ./gloss.md $(MARKDOWN_DST) $(NOTEBOOK_DST)
+
+## images   : create a temporary page to display images
+images :
+	@bin/make-image-page.py $(MARKDOWN_SRC) $(NOTEBOOK_SRC) > image-page.html
 
 ## links    : check links
 # Depends on linklint, an HTML link-checking module from
@@ -87,10 +95,6 @@ gloss :
 # Look in output directory's 'error.txt' file for results.
 links :
 	@bin/linklint -doc $(LINK_OUT) -textonly -root $(OUT) /@
-
-## fixme    : find places where fixes are needed.
-fixme :
-	grep -n FIXME $$(find -f bash git python sql -type f -print | grep -v .ipynb_checkpoints)
 
 ## clean    : clean up
 clean :

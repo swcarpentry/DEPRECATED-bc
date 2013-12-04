@@ -39,3 +39,4 @@ Resources
 *   `argv-list.py`: example command-line script.
 *   `count-stdin.py`: example command-line script.
 *   `sys-version.py`: example command-line script.
+*   `img/*`: images used in notebooks
