@@ -77,6 +77,10 @@ $(TMP)/%.html : %.ipynb
 	@mkdir -p $$(dirname $@)
 	ipython nbconvert --output="$(subst .html,,$@)" "$<"
 
+## gloss    : check glossary
+gloss :
+	@bin/gloss.py ./gloss.md $(MARKDOWN_DST) $(NOTEBOOK_DST)
+
 ## links    : check links
 # Depends on linklint, an HTML link-checking module from
 # http://www.linklint.org/, which has been put in bin/linklint.
