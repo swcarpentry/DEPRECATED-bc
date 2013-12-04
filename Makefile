@@ -77,6 +77,10 @@ $(TMP)/%.html : %.ipynb
 	@mkdir -p $$(dirname $@)
 	ipython nbconvert --output="$(subst .html,,$@)" "$<"
 
+## images   : create a temporary page to display images
+images :
+	@bin/make-image-page.py $(MARKDOWN_SRC) $(NOTEBOOK_SRC) > image-page.html
+
 ## links    : check links
 # Depends on linklint, an HTML link-checking module from
 # http://www.linklint.org/, which has been put in bin/linklint.
