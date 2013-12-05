@@ -449,22 +449,22 @@ FAQ
         cp tmp/python/novice/01-numpy.html _site/python/novice/01-numpy.html
         cp: cannot stat ‘tmp/python/novice/01-numpy.html’: No such file or directory
     
-    This means you don't have a recent enough version of ipython (below 1.0) and you should install a newer version.
+    This means you don't have a recent enough version of IPython (below 1.0) and you should install a newer version.
     Installing a local version can be done with:
     
         pip install --upgrade --user ipython
 
-    You might need `pip` that can be installed with (under ubuntu and alike):
+    You might need `pip` that can be installed (under Ubuntu and alike) with:
     
         sudo apt-get install python-pip
 
 *   *What if I get some missing packages messages when I run `make check`?*
     <br/>
-    Some python packages are required. Here are some ubuntu (etc.) commands to install some of them:
+    Some additional packages are required. They can be installed (under Ubuntu and alike) with:
     
         sudo apt-get install pandoc jinja2
 
-    Installation using `pip` can also be used.
+    Installation of `jinja2` can also be carried on using `pip`.
 
 *   *Where should pages go if multiple boot camps are running at a site simultaneously?*
     <br/>
