@@ -441,6 +441,31 @@ FAQ
         gem uninstall pygments.rb --version "=0.5.2"
         gem install pygments.rb --version "=0.5.0"
 
+*   *What do I do if I see a `File not found: u'nbconvert'` when I run `make check`?*
+    <br/>
+    The output of `make check` looks like this:
+    
+        WARNING: Unrecognized alias: 'output', it will probably have no effect.[TerminalIPythonApp] File not found: u'nbconvert'
+        cp tmp/python/novice/01-numpy.html _site/python/novice/01-numpy.html
+        cp: cannot stat ‘tmp/python/novice/01-numpy.html’: No such file or directory
+    
+    This means you don't have a recent enough version of IPython (below 1.0) and you should install a newer version.
+    Installing a local version can be done with:
+    
+        pip install --upgrade --user ipython
+
+    You might need `pip` that can be installed (under Ubuntu and alike) with:
+    
+        sudo apt-get install python-pip
+
+*   *What if I get some missing packages messages when I run `make check`?*
+    <br/>
+    Some additional packages are required. They can be installed (under Ubuntu and alike) with:
+    
+        sudo apt-get install pandoc jinja2
+
+    Installation of `jinja2` can also be carried on using `pip`.
+
 *   *Where should pages go if multiple boot camps are running at a site simultaneously?*
     <br/>
     Use subdirectories like `2013-07-01-esu/beginners`,
