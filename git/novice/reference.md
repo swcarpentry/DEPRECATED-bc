@@ -13,7 +13,7 @@ Set global configuration (only needs to be done once per machine):
 
 Initialize a directory as a repository:
 
-    git init .
+    git init
 
 Display the status of the repository:
 
@@ -23,9 +23,10 @@ Add specific files to the staging area:
 
     git add filename_1 filename_2
 
-Add all modified files to the staging area:
+Add all modified files in the current directory and its subdirectories
+to the staging area:
 
-    git add -A
+    git add -A .
 
 Commit changes in the staging area to the repository's history:
 (Without `-m` and a message, this command runs a text editor.)
