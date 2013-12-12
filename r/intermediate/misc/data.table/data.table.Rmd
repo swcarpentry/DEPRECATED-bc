@@ -1,6 +1,6 @@
 # Introduction to data.table
 
-What is the `data.table` library for and why would you want to use it?  Doesn't base R come with data frames build in already? Turns out that there are some things that can be done MUCH faster and more easily with data.table. 
+What is the `data.table` package for and why would you want to use it?  Doesn't base R come with data frames build in already? Turns out that there are some things that can be done MUCH faster and more easily with data.table. 
 
 ## Installation
 
@@ -17,7 +17,7 @@ library(data.table)
 Almost every analysis project in R will require the loading of data. `data.table` can read in files more efficiently than the standard functions in R, including `read.csv()`, `read.table()`, or `scan()`. This means that large files load fast.  Let's take a look at the function `fread()`. 
 
 ```{r fread}
-# First we make a large data frame (10,000 rows long) and write it to a csv file, which we'll read in in the next step
+# First we make a large data frame (10,000 rows long; 1.78 GB) and write it to a csv file, which we'll read in in the next step
 df <- data.frame(a = 1:10^4, b = 1:10^4)
 write.table(df, file="test.csv", sep=",", row.names=FALSE)
 
@@ -32,6 +32,16 @@ system.time( fread("test.csv") )
 
 # and, just to prove they're identical once read in, we compare the two data sets to one another with identical()
 identical(data.frame(fread("test.csv")), read.csv("test.csv"))
+```
+
+If you did this with a larger dataset, say 10^8 rows long (ca. 1.8 GB), then the speed up becomes really meaningful (almost 60x faster):
+```
+> system.time( read.csv("test.csv") )
+   user  system elapsed 
+512.116   7.311 521.549 
+> system.time( fread("test.csv") )
+   user  system elapsed 
+  7.002   1.092   8.948
 ```
 
 ## Combine data.frames
@@ -49,7 +59,7 @@ l <- list(df1, df2)
 # first, the base R version:
 do.call(rbind, l)
 
-# then the data.frame version, rbindlist()
+# then the data.table version, rbindlist()
 rbindlist(l)
 
 ```
