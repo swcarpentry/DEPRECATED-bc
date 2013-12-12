@@ -17,7 +17,7 @@ library(data.table)
 Almost every analysis project in R will require the loading of data. `data.table` can read in files more efficiently than the standard functions in R, including `read.csv()`, `read.table()`, or `scan()`. This means that large files load fast.  Let's take a look at the function `fread()`. 
 
 ```{r fread}
-# First we make a large data frame (10,000 rows long; 1.78 GB) and write it to a csv file, which we'll read in in the next step
+# First we make a data frame (10,000 rows long) and write it to a csv file, which we'll read in in the next step
 df <- data.frame(a = 1:10^4, b = 1:10^4)
 write.table(df, file="test.csv", sep=",", row.names=FALSE)
 
