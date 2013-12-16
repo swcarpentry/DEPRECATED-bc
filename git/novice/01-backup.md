@@ -103,7 +103,7 @@ nothing added to commit but untracked files present (use "git add" to track)
 ```
 
 In order to understand what the "untracked files" message really means, we need to understand the basic model of how git groups your files.  There are essentially three places your work can reside:
-- As a 'revision'.  A revision is like a snapshot of your work which you can come back to at any time.  Revisions also have a relational tree-like structure; we'll get into the details of this later, but for now just imagine a very simple chain of revisions; every time you make a new revision, it has (for now) one parent revision.  
+- As a 'revision'.  A revision is like a snapshot of your work which you can come back to at any time.  Revisions also have a relational tree-like structure; we'll get into the details of this later, but for now just imagine a very simple chain of revisions; every time you make a new revision, it has (for now) one parent revision, which is just whatever revision came before it.
 - In the 'index'.  Git's index is like the staging area where you put your work to tell git 'these are the changes I'd like to package as my next revision'.
 - In the 'work tree'.  Git's work tree is just the new work you've done that hasn't been added to the index or committed; every time you save a change to a file in the way you're used to, you've put new stuff in the work tree.  
 
@@ -398,7 +398,7 @@ index df0654a..b36abfd 100644
 +But the Mummy will appreciate the lack of humidity
 ```
 
-Recall above we mentioned that revisions have a relational structure, for now just like a simple chain; in git, the word `HEAD` always refers to the most recent end of that chain, the last revision you tacked on.  In other words, `HEAD` means "the most recently saved version".  We can step backwards on the chain using the `~` notation;
+Recall above we mentioned that revisions have a relational structure, for now just like a simple chain; in git, the word `HEAD` always refers to the most recent end of that chain, the last revision you tacked on.  In other words, `HEAD` means "the most recently saved version".  Every time you do git commit, a new revision is tacked onto the end of that chain, and `HEAD` moves forward to point at that new latest revision.  We can step backwards on the chain using the `~` notation;
 `HEAD~1` (pronounced "head minus one")
 means "the previous revision", or `HEAD~12` means "12 revisions ago".
 We can also refer to revisions using
