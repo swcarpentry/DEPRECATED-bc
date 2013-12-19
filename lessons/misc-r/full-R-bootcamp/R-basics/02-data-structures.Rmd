@@ -7,7 +7,7 @@
 
 * Everything in `R` is an object. 
 
-`R` has 5 basic atomic classes
+`R` has 6 (although we will not discuss the raw class for this workshop) basic atomic classes
 
 * character
 * numeric (real or decimal)
