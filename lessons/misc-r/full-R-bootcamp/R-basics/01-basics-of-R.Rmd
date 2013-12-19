@@ -2,7 +2,7 @@
 
 R is a versatile, open source programming/scripting language that's useful both for statistics but also data science. Inspired by `S`.
 
-* Public domain software 
+* Open source software under GPL
 * Superior (if not just comparable) to commercial alternatives
 * Available on all platforms
 * Not just for statistics, but also general purpose programming
