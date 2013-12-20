@@ -3,3 +3,23 @@
 .DS_Store
 .ipynb_checkpoints
 _site
+
+# For the misc-r/full-R-bootcamp
+lessons/misc-r/full-R-bootcamp/R-basics/01-basics-of-R.Rmd
+lessons/misc-r/full-R-bootcamp/R-basics/02-data-structures.Rmd
+lessons/misc-r/full-R-bootcamp/R-basics/03-best-practices.Rmd
+lessons/misc-r/full-R-bootcamp/R-basics/04-seeking-help.Rmd
+lessons/misc-r/full-R-bootcamp/R-basics/05-subsetting.Rmd
+lessons/misc-r/full-R-bootcamp/R-basics/06-vectorization.Rmd
+lessons/misc-r/full-R-bootcamp/R-basics/best-practices.Rmd
+lessons/misc-r/full-R-bootcamp/functions/01-functions.Rmd
+lessons/misc-r/full-R-bootcamp/functions/02-control_structures.Rmd
+lessons/misc-r/full-R-bootcamp/functions/03-scoping_rules.Rmd
+lessons/misc-r/full-R-bootcamp/data-manipulation/00-messy_data.Rmd
+lessons/misc-r/full-R-bootcamp/data-manipulation/01-input-output.Rmd
+lessons/misc-r/full-R-bootcamp/data-manipulation/02-apply-family.Rmd
+lessons/misc-r/full-R-bootcamp/data-manipulation/03-split-apply.Rmd
+lessons/misc-r/full-R-bootcamp/testing-documentation/testing.Rmd
+lessons/misc-r/full-R-bootcamp/reproducible-research/knitr.Rmd
+
+
