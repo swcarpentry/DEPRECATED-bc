@@ -1,7 +1,5 @@
 
-# Functions practice.
-
-0. There's 
+# Functions exercise.
 
 1. Write a function which takes a numeric vector as argument and calculates the mean of the vector.
 
