@@ -1,4 +1,4 @@
-```{R, eval = FALSE}    
+ 
 # Some best practices for using R
 
 1. Manage all of your source files for a project in the same directory. Then use relative paths as necessary. For example, use
