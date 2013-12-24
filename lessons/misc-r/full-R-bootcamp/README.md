@@ -23,7 +23,7 @@ Please install the following packages:
 ```coffee
 install.packages("devtools")
 # You'll need other non-R dependencies before you can install devtools. Please see the additional_software.md page for more instructions.
-install.packages(c("reshape2", "plyr", "ggplot2", "knitr", "stringr", "pander"))
+install.packages(c("reshape2", "plyr", "ggplot2", "knitr", "testthat", "assertthat", stringr", "pander"))
 ```
 
 ## Notes for instructor teaching with this material.
