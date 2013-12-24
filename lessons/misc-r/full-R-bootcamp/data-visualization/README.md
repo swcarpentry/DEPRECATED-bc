@@ -5,12 +5,12 @@ Author: [Karthik Ram](mailto:karthik.ram+ggplot2@gmail.com), [Naupaka Zimmerman]
 These slides will cover the introductory material for the workshop. Please open the `ggplot.pdf` in this folder. All the R code in the slides are in the `ggplot.R` file. 
 
 
-[![slides](slides.png)](https://raw.github.com/karthikram/esa_data_viz/master/introduction/slides.png)
+[![slides](slides.png)](https://raw.github.com/karthik/esa_data_viz/master/introduction/slides.png)
 
 
 ----
 
-Slides based on a talk [originally run on Berkeley campus](https://github.com/karthikram/ggplot-lecture) on April 7th. If you'd like to generate this presentation locally, first install the lastest version of `knitr`
+Slides based on a talk [originally run on Berkeley campus](https://github.com/karthik/ggplot-lecture) on April 7th. If you'd like to generate this presentation locally, first install the lastest version of `knitr`
 
 ```coffee
 install.packages("knitr")
