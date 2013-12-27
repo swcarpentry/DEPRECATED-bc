@@ -40,22 +40,29 @@ contact: random@software-carpentry.org
 
 To participate in a Software Carpentry bootcamp, 
 you will need working copies of 
-<ul><li><i>bash</i>, a commonly-used shell. 
+<ul>
+<li><i>bash</i>, a commonly-used shell. 
 Using a shell gives you more power to do more tasks more quickly with your computer.</li>
-<li><i>git</i>, Git is a state-of-the-art version control system. 
+<li><i>git</i>, a state-of-the-art version control system. 
 It lets you track who made changes to what when and has options for easily 
 updating a shared or public version of your code on github.com.</li>
 <li>a text editor</li>
-<li><i>python</i>, Python is becoming more and more popular in scientific computing, 
-and it's a great language for teaching general programming concepts due to its 
+<li><i>python</i>, a programming language becoming more and more popular in scientific computing, 
+ it's a great language for teaching general programming concepts due to its 
 easy-to-read syntax. We will be using Python version 2.7. Installing all the 
 scientific packages for Python individually can be a bit difficult, so we 
-recommend using an all-in-one installer.</li></ul>
+recommend using an all-in-one installer.</li>
+<li><i>r</i>, is a programming language that specializes in statistical
+    computing. It is a powerful tool for exploratory data analysis. To
+    interact with R, we will
+    use <a href="http://www.rstudio.com/">RStudio</a>, an interactive
+    development environment (IDE).</li>
+</ul>
 
 The instructions for installing each of these components is organzed below by operating system.  
 
 <div class="row-fluid">
-  <div class="span6">
+  <div class="span6" bgcolor="#E0E0E0">
 
 <h3>MacOSX</h3>
 
@@ -70,6 +77,7 @@ The instructions for installing each of these components is organzed below by op
 
 <h3>Windows</h3>
 
+{% include setup/windows-swc.html %}
 {% include setup/windows-git.html %}
 {% include setup/windows-editor.html %}
 {% include setup/windows-anaconda.html %}
