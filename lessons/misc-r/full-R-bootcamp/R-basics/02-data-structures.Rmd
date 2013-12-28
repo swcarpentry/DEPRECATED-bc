@@ -419,7 +419,7 @@ Lists can also have names.
 
 ```{r, eval = TRUE}
 x <- as.list(1:10)
-names(x) <- letters[seq(x)]
+names(x) <- letters[seq(along = x)]
 x
 ```
 
