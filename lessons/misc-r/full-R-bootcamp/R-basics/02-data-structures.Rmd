@@ -124,7 +124,7 @@ More examples of vectors
 
 ```{r, eval = TRUE}
 x <- c(0.5, 0.7)
-x <-c (TRUE, FALSE)
+x <- c(TRUE, FALSE)
 x <- c(T, F)
 x <- c("a", "b", "c", "d", "e")
 x <- 9:100
