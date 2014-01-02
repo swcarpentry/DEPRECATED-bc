@@ -66,7 +66,7 @@ although the term "vector" most commonly refers to the atomic type not lists.
 
 A vector can be a vector of elements that are most commonly `character`, `logical`, `integer` or `numeric`.
 
-You can create an empty vector with `vector()` (By default the mode is `logical`. You can be more explicit as shown in the examples below.) It is more common to use direct constructors such as `character()`, `numeric()` etc.
+You can create an empty vector with `vector()` (By default the mode is `logical`. You can be more explicit as shown in the examples below.) It is more common to use direct constructors such as `character()`, `numeric()`, etc.
 
 ```{r, eval = TRUE}
 x <- vector()
@@ -84,7 +84,7 @@ x <- c(1, 2, 3)
 x
 length(x)
 ```
-`x` is a numeric vector. These are the most common kind. They are numeric objects and are treated as double precision real numbers. To explicitly create integers, add a `L` at the end.
+`x` is a numeric vector. These are the most common kind. They are numeric objects and are treated as double precision real numbers. To explicitly create integers, add an `L` at the end.
 
 ```{r, eval = TRUE}
 x1 <- c(1L, 2L, 3L)
@@ -130,7 +130,7 @@ x <- 9:100
 x <- c(1+0i, 2+4i)
 ```
 
-You can also create vectors as sequence of numbers
+You can also create vectors as a sequence of numbers
 
 ```{r, eval = TRUE}
 series <- 1:10
@@ -140,7 +140,7 @@ seq(1, 10, by = 0.1)
 
 **Other objects**
 
-`Inf` is infinity. You can have positive or negative infinity.
+`Inf` is infinity. You can have either positive or negative infinity.
 
 ```{r, eval = TRUE}
 1/0
@@ -162,7 +162,7 @@ Each object can have attributes. Attribues can be part of an object of R. These 
 * class
 * attributes (contain metadata)
 
-You can also glean other attribute like information such as length (works on vectors and lists) or number of characters (for character strings). 
+You can also glean other attribute-like information such as length (works on vectors and lists) or number of characters (for character strings). 
 
 ```{r, eval = TRUE}
 length(1:10)
@@ -274,7 +274,7 @@ mdat
 
 In R lists act as containers. Unlike atomic vectors, the contents of a list are not restricted to a single mode and can encompass any mixture of data types. Lists are sometimes called recursive vectors, because a list can contain other lists. This makes them fundamentally different from atomic vectors. 
 
-List is a special vector. Each element can be a different type.
+A list is a special type of vector. Each element can be a different type.
 
 
 
@@ -299,8 +299,8 @@ xlist <- list(a = "Karthik Ram", b = 1:10, data = head(iris))
 xlist
 ```
 
-what is the length of this object?
-what about its structure?
+What is the length of this object?
+What about its structure?
 
 A list can contain many lists nested inside.
 
@@ -347,7 +347,7 @@ x
 
 `unclass(x)` strips out the class information.
 
-In modeling functions, important to know what the baseline levels is.
+In modeling functions, it is important to know what the baseline level is.
 This is the first factor but by default the ordering is determined by alphabetical order of words entered. You can change this by speciying the levels (another option is to use the function `relevel`).
 
 ```{r}
@@ -402,7 +402,7 @@ class(iris)
 
 **Naming objects**
 
-Other R objects can also have names not just true for data frames. Adding names is helpful since it's useful for readable code and self describing objects.
+Other R objects can also have names. Adding names is helpful since it's useful for readable code and self describing objects.
 
 ```{r, eval = TRUE}
 x <- 1:3
