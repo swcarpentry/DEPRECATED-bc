@@ -316,7 +316,7 @@ is.recursive(temp)
 
 Lists are extremely useful inside functions. You can "staple" together lots of different kinds of results into a single object that a function can return.
 
-It doesn't print out like a vector. Prints a new line for each element.
+A list does not print to the console like a vector. Instead, each element of the list starts on a new line.
 
 Elements are indexed by double brackets. Single brackets will still return a(nother) list.
 
