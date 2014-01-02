@@ -342,7 +342,7 @@ Which is `male`? `1` or `2`? You wouldn't be able to tell with just integer data
 
 Factors can be created with `factor()`. Input is generally a character vector.
 
-```
+```{r}
 x <- factor(c("yes", "no", "no", "yes", "yes"))
 x
 ```
@@ -352,10 +352,11 @@ x
 `unclass(x)` strips out the class information.
 
 In modeling functions, important to know what the baseline levels is.
-This is the first factor but by default the ordering is determined by alphabetical order of words entered. You can change this by speciying the levels.
+This is the first factor but by default the ordering is determined by alphabetical order of words entered. You can change this by speciying the levels (another option is to use the function `relevel`).
 
-```
+```{r}
 x <- factor(c("yes", "no", "yes"), levels = c("yes", "no"))
+x
 ```
 
 ## Data frame
