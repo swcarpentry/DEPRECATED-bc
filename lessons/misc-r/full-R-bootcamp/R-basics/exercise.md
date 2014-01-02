@@ -4,13 +4,13 @@ Please try out these exercises from now until the break. Feel free to break if y
 
 1. What is wrong with this code example?
 
-```
+```coffee
 df <- data.frame(id = c("Jason","Paul","Mary", "Robert","Toby","Nina","Robin","James"), x = 1:10, y = rnorm(10))
 ```
 
 2. Fix each of the following common data frame subsetting errors:
 
-```
+```coffee
 mtcars[mtcars$cyl = 4, ]
 # Exclude only rows 1 through 4
 mtcars[-1:4, ]
@@ -30,7 +30,7 @@ mtcars[mtcars$cyl == 4 | 6, ]
 
 5. Given a linear model
 
-```
+```coffee
 mod <- lm(mpg ~ wt, data = mtcars)
 ```
 
