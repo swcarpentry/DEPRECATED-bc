@@ -111,7 +111,7 @@ class(z)
 str(z)
 ```
 
-Question: Do you see property that's common to all these vectors above?
+Question: Do you see a property that's common to all these vectors above?
 
 **Add elements**
 
