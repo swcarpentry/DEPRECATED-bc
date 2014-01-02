@@ -143,10 +143,8 @@ seq(1, 10, by = 0.1)
 `Inf` is infinity. You can have positive or negative infinity.
 
 ```{r, eval = TRUE}
- 1/0
-
- 1/Inf
-
+1/0
+1/Inf
 ```
 
 
@@ -154,7 +152,6 @@ seq(1, 10, by = 0.1)
 
 ```{r, eval = TRUE}
 0/0
-
 ```
 
 Each object can have attributes. Attribues can be part of an object of R. These include: 
@@ -223,7 +220,6 @@ as.logical(x)
 
 ```{r, eval = TRUE}
 1 < "2"
-
 "1" > 2
 ```
 
@@ -381,7 +377,6 @@ rownames are usually 1..n.
 ```{r, eval = TRUE}
 df <- data.frame(id = letters[1:10], x = 1:10, y = rnorm(10))
 df
-
 cbind(df, data.frame(z = 4))
 ```
 
@@ -461,7 +456,6 @@ x
 ```{r, eval = TRUE}
 is.na(x) # returns logical
 # shows third
-
 is.nan(x)
 # none are NaN
 ```
