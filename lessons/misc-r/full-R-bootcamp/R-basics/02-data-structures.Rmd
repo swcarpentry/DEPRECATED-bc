@@ -63,6 +63,7 @@ A vector is the most common and basic data structure in `R` and is pretty much t
 although the term "vector" most commonly refers to the atomic type not lists.
 
 **Atomic Vectors**
+
 A vector can be a vector of elements that are most commonly `character`, `logical`, `integer` or `numeric`.
 
 You can create an empty vector with `vector()` (By default the mode is `logical`. You can be more explicit as shown in the examples below.) It is more common to use direct constructors such as `character()`, `numeric()` etc.
