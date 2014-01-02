@@ -9,7 +9,7 @@ After a while operations at the interactive prompt are not enough. You have spec
 * Example
 
 Functions are created using the `function()` directive.
-They are stored as any other R object.  They are of class "function"
+They are stored as any other R object.  They are of class `"function"`.
 
 **Basic syntax**
 
@@ -21,7 +21,7 @@ func <- function(<take some input>)  {
 
 Functions are first class objects. Treat them the same way as any other objects. This means you can pass them to other functions (as you would do with say vectors). Very useful feature for statistical analyses. We can also nest functions inside each other.
 
-Return value is the very last R expression to be evaluated. No special expression for returning although you can use return()
+Return value is the very last R expression to be evaluated. To specify the return value, you can use `return()`, and you have to if you wish to return early. Note that it is marginally more efficient to use `foo` and not `return(foo)` as the last statement in the function to set `foo` as the return value.
 
 Functions have named arguments and these can have default values. Arguments used inside a function definition are called formal arguments.
 
@@ -29,7 +29,7 @@ use `formals()` to see what they are.
 
 Not every function makes use of all formal arguments.
 
-Function arguments can be missing or might just use default values. Formal arguments are included in the function definition.
+Function arguments can be missing or might just use default values. 
 
 If a function has 10 arguments, you don't have to specify all of them. 
 
@@ -40,7 +40,7 @@ args(sd)
 ```
 
 
-Takes x, a vector of data. 
+Takes `x`, a vector of data. 
 Default is `na.rm` is false.
 So you don't have to do anything.
 
@@ -77,7 +77,7 @@ a^2
 }
 ```
 
-The function call never uses b. So calling `f(10)` will not produce an error because `a` got positionally matched.
+The function call never uses `b`. So calling `f(10)` will not produce an error because `a` was matched positionally.
 
 Another example of lazy evaluation
 
@@ -89,9 +89,9 @@ print(b^2)
 }
 ```
 
-`add(10)` will work until it reaches a point where the function will break.
+`add(10)` will work until it reaches a point where the function will break as `b` is not defined.
 
-**The three dot operator.**
+**The dots operator.**
 
 `...` are used when extending another function and you don't want to copy the entire list of arguments from the original function.
 

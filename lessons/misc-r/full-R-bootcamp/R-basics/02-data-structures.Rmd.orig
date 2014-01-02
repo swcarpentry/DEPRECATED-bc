@@ -123,7 +123,12 @@ More examples of vectors
 
 ```{r, eval = TRUE}
 x <- c(0.5, 0.7)
+<<<<<<< HEAD
 x <- c(TRUE, FALSE)
+x <- c(T, F)
+=======
+x <-c (TRUE, FALSE)
+>>>>>>> 2c22d83130cf5368e21acd8a3eaf5c608d6f7549
 x <- c("a", "b", "c", "d", "e")
 x <- 9:100
 x <- c(1+0i, 2+4i)
