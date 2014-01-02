@@ -400,12 +400,10 @@ A data frame is a special type of list where every element of the list has same 
 
 See that it is actually a special list:
 
-    > is.list(iris)
-    [1] TRUE
-    > class(iris)
-    [1] "data.frame"
-    > 
---
+```{r}
+is.list(iris)
+class(iris)
+```
 
 **Naming objects**
 
