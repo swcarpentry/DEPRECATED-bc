@@ -261,7 +261,7 @@ rbind(x, y)
 
 You can also use the `byrow` argument to specify how the matrix is filled. From R's own documentation:
 
-```{r, eval = TRUE}
+```{r, eval = TRUE, tidy = FALSE}
 mdat <- matrix(c(1,2,3, 11,12,13), nrow = 2, ncol = 3, byrow = TRUE,
                dimnames = list(c("row1", "row2"),
                                c("C.1", "C.2", "C.3")))
