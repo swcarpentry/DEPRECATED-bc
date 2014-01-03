@@ -17,6 +17,7 @@ sapply
 
 ```{r, eval = TRUE}
 m <- matrix(c(1:10, 11:20), nrow = 10, ncol = 2)
+m
 # 1 is the row index
 # 2 is the column index
 apply(m, 1, sum)
@@ -39,6 +40,7 @@ Two examples
 
 ```{r, eval = TRUE}
 df <- data.frame(names = sample(c("A","B","C"), 10, rep = T), length = rnorm(10))
+df
 tapply(df$length, df$names, mean)
 
 # Now with a more familiar dataset
@@ -52,6 +54,7 @@ Each element of the output is a result of applying a function to the correspondi
 
 ```{r, eval = TRUE}
 my_list <- list(a = 1:10, b = 2:20)
+my_list
 lapply(my_list, mean)
 ```
 
@@ -67,6 +70,7 @@ Let's work with the same list we just created.
 ```{r, eval = TRUE}
 my_list
 x <- sapply(my_list, mean)
+x
 class(x)
 ```
 
@@ -87,7 +91,9 @@ example:
 
 ```{r, eval = TRUE}
 list_1 <- list(a = c(1:10), b = c(11:20))
+list_1
 list_2 <- list(c = c(21:30), d = c(31:40))
+list_2
 mapply(sum, list_1$a, list_1$b, list_2$c, list_2$d)
 ```
 
