@@ -117,19 +117,30 @@ a[c(T, F, T), c("B", "A")]
 a[0, -2]
 ```
 
-# Subsetting data frames
+## Subsetting data frames
 
 ```{r, eval = TRUE}
 df <- data.frame(x = 1:3, y = 3:1, z = letters[1:3])
 df[df$x == 2, ]
 df[c(1, 3), ]
-# There are two ways to select columns from a data frame
-# Like a list:
+```
+
+There are two ways to select columns from a data frame
++ Like a list:
+
+```{r}
 df[c("x", "z")]
-# Like a matrix
+```
+
++ Like a matrix:
+
+```{r}
 df[, c("x", "z")]
-# There's an important difference if you select a simple column:
-# matrix subsetting simplifies by default, list subsetting does not.
+```
+
+There's an important difference if you select a simple column: matrix subsetting simplifies by default, list subsetting does not.
+
+```{r}
 df["x"]
 df[, "x"]
 ```
