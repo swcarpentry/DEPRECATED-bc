@@ -107,6 +107,8 @@ x[["a"]]
 
 ## Subsetting matrices
 
+A matrix is subset with two arguments within single brackets, `[]`, and separated by a comma. The first argument specifies the rows, and the second the columns.
+
 ```{r, eval = TRUE}
 a <- matrix(1:9, nrow = 3)
 colnames(a) <- c("A", "B", "C")
