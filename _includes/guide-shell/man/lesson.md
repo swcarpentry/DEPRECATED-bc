@@ -103,6 +103,3 @@ follows
 
 which helps a little and show the 'cp' command at the top of the list.
 
-
-Exercises
-=========
