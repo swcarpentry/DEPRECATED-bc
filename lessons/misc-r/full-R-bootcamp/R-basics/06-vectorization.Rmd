@@ -26,6 +26,13 @@ x > 2
 x >= 2
 ```
 
+A shorter vector is recycled:
+
+```{r}
+z <- c(1, 2)
+x * z
+```
+
 Matrix operations are also vectorized
 
 ```{r}
