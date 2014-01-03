@@ -26,7 +26,7 @@ environment(f)
 **Question: How do we delete this function from our environment?**
 
 ## More on environments
-Variables defined inside functions exist in a different environment than the global environment. However, if a function is not defined inside one, it will look one level above.
+Variables defined inside functions exist in a different environment than the global environment. However, if a variabe is not defined inside a function, it will look one level above.
 
 example.
 
@@ -68,8 +68,9 @@ sapply(vector, add, 1)
 ```{r, eval = FALSE}
 x <- 5
 f <- function() {
-y <- 10
-c(x = x, y = y) }
+  y <- 10
+  c(x = x, y = y)
+}
 f()
 ```
 
@@ -92,10 +93,10 @@ x <- 5
 h <- function() {
   y <- 10
   i <- function() {
-z <- 20
+    z <- 20
     c(x = x, y = y, z = z)
   }
-i() 
+  i() 
 }
 h()
 ```
@@ -104,7 +105,7 @@ h()
 **Functions with pre defined values**
 
 ```{r, eval = FALSE}
-temp <- function(a = 1, b =2) {
+temp <- function(a = 1, b = 2) {
     return(a + b)
 }
 ```
