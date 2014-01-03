@@ -62,7 +62,7 @@ setwd()
 
 ## Writing files
 
-Saving files is easy in R. We have loaded the `iris` dataset into our memory. Can you save this back to a `csv` file to disk with the name `tgac_iris.csv`?
+Saving files is easy in R. Load the `iris` dataset by running `data(iris)`. Can you save this back to a `csv` file to disk with the name `tgac_iris.csv`?
 
 What commands did you use?
 
