@@ -57,7 +57,7 @@ In the example below, we use a data file obtained as plain text and clean up inc
 ```{r, load_data}
 library("stringr")
 # If you don't have this package simply run install.packages("stringr")
-rawData <- readLines("../data/messy_data.txt")
+rawData <- readLines("data/messy_data.txt")
 ```
 
 ```{r examine_data}
@@ -149,7 +149,7 @@ Now we can confidently save these data into a separate file which we called `cle
 
 
 ```{r save_data}
-write.csv(cleaned_data, file = "../data/cleaned_data.csv")
+write.csv(cleaned_data, file = "data/cleaned_data.csv")
 ```
 
 As you can see in the `data` folder, we now have both the original untransformed raw data and also the cleaned data which is now read for further analysis. If there's ever any questions about the cleanup process, this script will provide a way to audit all the steps. The original data are always there untouched. Now you are free to proceed with the analysis and the reporting.
