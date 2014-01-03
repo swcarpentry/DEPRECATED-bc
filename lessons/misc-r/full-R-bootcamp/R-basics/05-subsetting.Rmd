@@ -66,19 +66,14 @@ x[0]
 
 6. Referencing objects by their names
 
-```{R, eval = TRUE}
+```{r, eval = TRUE}
 (y <- setNames(x, letters[1:4]))
-
 y[c("d", "c", "a")]
-
 # We can also repeat indices
 y[c("a", "a", "a")]
-
 # Names are always matched exactly, not partially
 z <- c(abc = 1, def = 2)
 z[c("a", "d")]
-# <NA> <NA> 
-#   NA   NA
 ```
 
 ---
@@ -87,89 +82,67 @@ z[c("a", "d")]
 
 Subsetting a list works in exactly the same way as subsetting an atomic vector. Subsetting a list with [ will always return a list: `[[` and `$`, as described below, let you pull out the components of the list.
 
-```{R, eval = TRUE}
+```{r, eval = TRUE}
 x <- as.list(1:10)
-
 x[1:5]
-
 # What class is this object?
 ```
 
 To extract individual elements inside a list, use the `[[` operator
 
-```{R, eval = TRUE}
+```{r, eval = TRUE}
 # to get element 5
-
 x[[5]]
-
 class(x[[5]])
-
 another_variable <- x[[5]]
-
 ```
 
 Or using their names
 
-```{R, eval = TRUE}
+```{r, eval = TRUE}
 names(x) <- letters[1:5]
-
 x$a
 x[["a"]]
 ```
 
 ## Subsetting matrices
 
-```{R, eval = TRUE}
+A matrix is subset with two arguments within single brackets, `[]`, and separated by a comma. The first argument specifies the rows, and the second the columns.
+
+```{r, eval = TRUE}
 a <- matrix(1:9, nrow = 3)
 colnames(a) <- c("A", "B", "C")
 a[1:2, ]
-#      A B C
-# [1,] 1 4 7
-# [2,] 2 5 8
 a[c(T, F, T), c("B", "A")]
-#      B A
-# [1,] 4 1
-# [2,] 6 3
 a[0, -2]
-#      A C
 ```
 
-# Subsetting data frames
+## Subsetting data frames
 
-```{R, eval = TRUE}
+```{r, eval = TRUE}
 df <- data.frame(x = 1:3, y = 3:1, z = letters[1:3])
-
 df[df$x == 2, ]
-#   x y z
-# 2 2 2 b
 df[c(1, 3), ]
-#   x y z
-# 1 1 3 a
-# 3 3 1 c
+```
 
-# There are two ways to select columns from a data frame
-# Like a list:
+There are two ways to select columns from a data frame
++ Like a list:
+
+```{r}
 df[c("x", "z")]
-#   x z
-# 1 1 a
-# 2 2 b
-# 3 3 c
-# Like a matrix
-df[, c("x", "z")]
-#   x z
-# 1 1 a
-# 2 2 b
-# 3 3 c
+```
 
-# There's an important difference if you select a simple column:
-# matrix subsetting simplifies by default, list subsetting does not.
++ Like a matrix:
+
+```{r}
+df[, c("x", "z")]
+```
+
+There's an important difference if you select a simple column: matrix subsetting simplifies by default, list subsetting does not.
+
+```{r}
 df["x"]
-#   x
-# 1 1
-# 2 2
-# 3 3
 df[, "x"]
-# [1] 1 2 3
 ```
 
 
