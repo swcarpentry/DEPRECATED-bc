@@ -75,8 +75,6 @@ add <- function(a, b) {
 
 R first searches in the environment where the function was defined. An environment is a collection of symbols and values. Environments have parents. 
 
-Since we defined `add` in the global env, R looks for `n` in that environment. 
-
 ```{r, eval = FALSE}
 > parent.env(globalenv())
 <environment: package:graphics>
@@ -92,6 +90,11 @@ attr(,"path")
 [13] "package:methods"   "Autoloads"         "package:base"
 ````
 
+Since we defined `add` in the global env, R looks for `n` in that environment. You can confirm that the function `add` was defined in the global env using the function `environment`.
+
+```{r, eval = FALSE}
+environment(add)
+```
 
 These rules matter because you can define nested functions. 
 
