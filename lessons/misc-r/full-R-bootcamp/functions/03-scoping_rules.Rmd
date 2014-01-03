@@ -52,7 +52,7 @@ library(plyr)
 is.discrete
 ```
 
-Reference functions inside function's namespace using the `::` operator.
+Reference functions inside a package's namespace using the `::` operator.
 
 ```{r, eval = FALSE}
 Hmisc::is.discrete
@@ -72,7 +72,8 @@ add <- function(a, b) {
 `n` here is the free variable.
 
 **Rules of scoping**  
-* R first searches in the environment where the function was defined.* Environment is a collection of symbols and values. Environments have parents. 
+
+R first searches in the environment where the function was defined. An environment is a collection of symbols and values. Environments have parents. 
 
 Since we defined `add` in the global env, R looks for `n` in that environment. 
 
@@ -106,7 +107,7 @@ pow
 }
 ```
 
-This is a constructor function. A function that creates another one.
+This is a constructor function, i.e. a function that creates another one.
 
 ```{r, eval = FALSE}
 cube <- make.power(3)
