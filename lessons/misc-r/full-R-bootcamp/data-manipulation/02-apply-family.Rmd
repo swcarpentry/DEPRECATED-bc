@@ -47,8 +47,11 @@ by(iris[, 1:2], iris[,"Species"], sum)
 df <- data.frame(names = sample(c("A","B","C"), 10, rep = T), length = rnorm(10))
 df
 tapply(df$length, df$names, mean)
+```
 
-# Now with a more familiar dataset
+Now with a more familiar dataset.
+
+```{r, eval = TRUE}
 tapply(iris$Petal.Length, iris$Species, mean)
 ```
 
@@ -86,8 +89,9 @@ An extremely useful function to generate datasets for simulation purposes.
 ```{r, eval = TRUE}
 replicate(10, rnorm(10))
 replicate(10, rnorm(10), simplify = TRUE)
-# The final arguments turns the result into a vector or matrix if possible.
 ```
+
+The final arguments turns the result into a vector or matrix if possible.
 
 ## mapply
 Its more or less a multivariate version of `sapply`. It applies a function to all corresponding elements of each argument. 
