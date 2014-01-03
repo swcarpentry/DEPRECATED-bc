@@ -63,9 +63,10 @@ A vector is the most common and basic data structure in `R` and is pretty much t
 although the term "vector" most commonly refers to the atomic type not lists.
 
 **Atomic Vectors**
+
 A vector can be a vector of elements that are most commonly `character`, `logical`, `integer` or `numeric`.
 
-You can create an empty vector with `vector()` (By default the mode is `logical`. You can be more explicit as shown in the examples below.) It is more common to use direct constructors such as `character()`, `numeric()` etc.
+You can create an empty vector with `vector()` (By default the mode is `logical`. You can be more explicit as shown in the examples below.) It is more common to use direct constructors such as `character()`, `numeric()`, etc.
 
 ```{r, eval = TRUE}
 x <- vector()
@@ -83,7 +84,7 @@ x <- c(1, 2, 3)
 x
 length(x)
 ```
-`x` is a numeric vector. These are the most common kind. They are numeric objects and are treated as double precision real numbers. To explicitly create integers, add a `L` at the end.
+`x` is a numeric vector. These are the most common kind. They are numeric objects and are treated as double precision real numbers. To explicitly create integers, add an `L` at the end.
 
 ```{r, eval = TRUE}
 x1 <- c(1L, 2L, 3L)
@@ -110,7 +111,7 @@ class(z)
 str(z)
 ```
 
-Question: Do you see property that's common to all these vectors above?
+Question: Do you see a property that's common to all these vectors above?
 
 **Add elements**
 
@@ -129,7 +130,7 @@ x <- 9:100
 x <- c(1+0i, 2+4i)
 ```
 
-You can also create vectors as sequence of numbers
+You can also create vectors as a sequence of numbers
 
 ```{r, eval = TRUE}
 series <- 1:10
@@ -139,13 +140,11 @@ seq(1, 10, by = 0.1)
 
 **Other objects**
 
-`Inf` is infinity. You can have positive or negative infinity.
+`Inf` is infinity. You can have either positive or negative infinity.
 
 ```{r, eval = TRUE}
- 1/0
-
- 1/Inf
-
+1/0
+1/Inf
 ```
 
 
@@ -153,7 +152,6 @@ seq(1, 10, by = 0.1)
 
 ```{r, eval = TRUE}
 0/0
-
 ```
 
 Each object can have attributes. Attribues can be part of an object of R. These include: 
@@ -164,7 +162,7 @@ Each object can have attributes. Attribues can be part of an object of R. These 
 * class
 * attributes (contain metadata)
 
-You can also glean other attribute like information such as length (works on vectors and lists) or number of characters (for character strings). 
+You can also glean other attribute-like information such as length (works on vectors and lists) or number of characters (for character strings). 
 
 ```{r, eval = TRUE}
 length(1:10)
@@ -222,7 +220,6 @@ as.logical(x)
 
 ```{r, eval = TRUE}
 1 < "2"
-
 "1" > 2
 ```
 
@@ -264,7 +261,7 @@ rbind(x, y)
 
 You can also use the `byrow` argument to specify how the matrix is filled. From R's own documentation:
 
-```{r, eval = TRUE}
+```{r, eval = TRUE, tidy = FALSE}
 mdat <- matrix(c(1,2,3, 11,12,13), nrow = 2, ncol = 3, byrow = TRUE,
                dimnames = list(c("row1", "row2"),
                                c("C.1", "C.2", "C.3")))
@@ -277,7 +274,7 @@ mdat
 
 In R lists act as containers. Unlike atomic vectors, the contents of a list are not restricted to a single mode and can encompass any mixture of data types. Lists are sometimes called recursive vectors, because a list can contain other lists. This makes them fundamentally different from atomic vectors. 
 
-List is a special vector. Each element can be a different type.
+A list is a special type of vector. Each element can be a different type.
 
 
 
@@ -302,8 +299,8 @@ xlist <- list(a = "Karthik Ram", b = 1:10, data = head(iris))
 xlist
 ```
 
-what is the length of this object?
-what about its structure?
+What is the length of this object?
+What about its structure?
 
 A list can contain many lists nested inside.
 
@@ -315,7 +312,7 @@ is.recursive(temp)
 
 Lists are extremely useful inside functions. You can "staple" together lots of different kinds of results into a single object that a function can return.
 
-It doesn't print out like a vector. Prints a new line for each element.
+A list does not print to the console like a vector. Instead, each element of the list starts on a new line.
 
 Elements are indexed by double brackets. Single brackets will still return a(nother) list.
 
@@ -341,7 +338,7 @@ Which is `male`? `1` or `2`? You wouldn't be able to tell with just integer data
 
 Factors can be created with `factor()`. Input is generally a character vector.
 
-```
+```{r}
 x <- factor(c("yes", "no", "no", "yes", "yes"))
 x
 ```
@@ -350,11 +347,12 @@ x
 
 `unclass(x)` strips out the class information.
 
-In modeling functions, important to know what the baseline levels is.
-This is the first factor but by default the ordering is determined by alphabetical order of words entered. You can change this by speciying the levels.
+In modeling functions, it is important to know what the baseline level is.
+This is the first factor but by default the ordering is determined by alphabetical order of words entered. You can change this by speciying the levels (another option is to use the function `relevel`).
 
-```
+```{r}
 x <- factor(c("yes", "no", "yes"), levels = c("yes", "no"))
+x
 ```
 
 ## Data frame
@@ -379,7 +377,6 @@ rownames are usually 1..n.
 ```{r, eval = TRUE}
 df <- data.frame(id = letters[1:10], x = 1:10, y = rnorm(10))
 df
-
 cbind(df, data.frame(z = 4))
 ```
 
@@ -398,16 +395,14 @@ A data frame is a special type of list where every element of the list has same 
 
 See that it is actually a special list:
 
-    > is.list(iris)
-    [1] TRUE
-    > class(iris)
-    [1] "data.frame"
-    > 
---
+```{r}
+is.list(iris)
+class(iris)
+```
 
 **Naming objects**
 
-Other R objects can also have names not just true for data frames. Adding names is helpful since it's useful for readable code and self describing objects.
+Other R objects can also have names. Adding names is helpful since it's useful for readable code and self describing objects.
 
 ```{r, eval = TRUE}
 x <- 1:3
@@ -461,7 +456,6 @@ x
 ```{r, eval = TRUE}
 is.na(x) # returns logical
 # shows third
-
 is.nan(x)
 # none are NaN
 ```
@@ -478,7 +472,7 @@ is.nan(x)
 
 # Review of R data types
 
-![](data-types.png)
+<img src="data-types.png" width="100%" height="100%">
 
 
 
