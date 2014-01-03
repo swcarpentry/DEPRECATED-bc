@@ -9,32 +9,43 @@ x <- 1:4
 y <- 6:9 
 ```
 
-add element wise
+Mathematical operations are performed element wise:
 
 ```{r}
 x + y
-x > 2
-x >= 2
+x - y
+x * y
+x / y
 ```
-returns logical vectors
+
+Boolean comparisons return logical vectors:
 
 ```{r}
 y == 8
-
-x * y
-
-x / y 
+x > 2
+x >= 2
 ```
 
-Matrix operations are also vectorized
+A shorter vector is recycled:
+
+```{r}
+z <- c(1, 2)
+x * z
+```
+
+Matrix operations are also vectorized:
 
 ```{r}
 x <- matrix(1:4, 2, 2)
 y <- matrix(rep(10, 4), 2, 2)
-
 x * y # is not matrix multiplication. It's element wise
-
 x / y # is elementwise division.
+```
+
+Element wise matrix operations are performed by column. In the example below, `y[1, 1]` is multipled by `z[1]`, followed by `y[1, 2]` multiplied by `z[2]`, and then the vector `z` is recycled for multipying the second column of `y`.
+
+```{r}
+y * z
 ```
 
 True matrix multiplication is:
