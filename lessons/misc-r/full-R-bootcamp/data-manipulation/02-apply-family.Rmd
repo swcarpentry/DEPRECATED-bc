@@ -15,6 +15,8 @@ sapply
 
 ## apply
 
+`apply` applies a function to each row or column of a matrix.
+
 ```{r, eval = TRUE}
 m <- matrix(c(1:10, 11:20), nrow = 10, ncol = 2)
 m
@@ -28,6 +30,8 @@ apply(m, 2, mean)
 
 ## by
 
+`by` applies a function to subsets of a data frame.
+
 ```{r, eval = TRUE}
 head(iris)
 by(iris[, 1:2], iris[,"Species"], summary)
@@ -36,7 +40,8 @@ by(iris[, 1:2], iris[,"Species"], sum)
 
 
 ## tapply
-Two examples
+
+`tapply` applies a function to subsets of a vector.
 
 ```{r, eval = TRUE}
 df <- data.frame(names = sample(c("A","B","C"), 10, rep = T), length = rnorm(10))
@@ -62,7 +67,7 @@ lapply(my_list, mean)
 
 ## sapply
 
-sapply is a more user friendly version of `lapply` and will return a list of matrix where appropriate.
+`sapply` is a more user friendly version of `lapply` and will return a list of matrix where appropriate.
 
 
 Let's work with the same list we just created.
