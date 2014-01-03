@@ -361,7 +361,9 @@ A data frame is a very important data type in R. It's pretty much the *de facto*
 
 Data frames can have additional attributes such as `rownames()`, which can be useful for annotating data, like subject_id or sample_id. But most of the time they are not used.
 
-* Data frames Usually created by `read.csv()` and `read.table()`.
+Some additional information on data frames:
+
+* Usually created by `read.csv()` and `read.table()`.
 
 * Can convert to `matrix` with `data.matrix()`
 
@@ -369,8 +371,9 @@ Data frames can have additional attributes such as `rownames()`, which can be us
 
 * Can also create with `data.frame()` function.
 
-With and data frame, you can do `nrow(df)` and `ncol(df)`
-rownames are usually 1..n.
+* Find the number of rows and columns with `nrow(df)` and `ncol(df)`, respectively.
+
+* Rownames are usually 1..n.
 
 **Combining data frames**
 
