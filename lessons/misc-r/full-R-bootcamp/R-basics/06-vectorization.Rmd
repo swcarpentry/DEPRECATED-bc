@@ -9,19 +9,21 @@ x <- 1:4
 y <- 6:9 
 ```
 
-add element wise
+Mathematical operations are performed element wise:
 
 ```{r}
 x + y
-x > 2
-x >= 2
+x - y
+x * y
+x / y
 ```
-returns logical vectors
+
+Boolean comparisons return logical vectors:
 
 ```{r}
 y == 8
-x * y
-x / y 
+x > 2
+x >= 2
 ```
 
 Matrix operations are also vectorized
