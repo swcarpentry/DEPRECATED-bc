@@ -6,7 +6,7 @@
 ```{r, eval = FALSE}
 x <- scan("data_file.txt")
 # add a separator
-x <- scan("../data/messy_data.txt", what=" ", sep = "\n")
+x <- scan("data/messy_data.txt", what=" ", sep = "\n")
 # or read data from the console
 x <- scan()
 # keep entering values and hit an empty return key to end
@@ -30,14 +30,14 @@ df <- read.table("data.dat", header = TRUE)
 or using `readLines`
 
 ```{r, eval = TRUE}
-dt <- readLines("../data/messy_data.txt")
+dt <- readLines("data/messy_data.txt")
 head(dt)
 ```
 
 ## Files from the web
 
 ```{r, eval = TRUE}
-url <- "../data/climate.csv"
+url <- "data/climate.csv"
 my_data <- read.csv(url, header = TRUE)
 head(my_data)
 ```
@@ -62,7 +62,7 @@ setwd()
 
 ## Writing files
 
-Saving files is easy in R. We have loaded the `iris` dataset into our memory. Can you save this back to a `csv` file to disk with the name `tgac_iris.csv`?
+Saving files is easy in R. Load the `iris` dataset by running `data(iris)`. Can you save this back to a `csv` file to disk with the name `tgac_iris.csv`?
 
 What commands did you use?
 

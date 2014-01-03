@@ -43,7 +43,8 @@ dat <- melt(dat, "status")
 Add some nice metadata that was absent before:
 
 ```{r, eval = TRUE}
-names(dat) <- c("status", "sex", "count") 
+names(dat) <- c("status", "sex", "count")
+dat
 ```
 
 ---
@@ -52,12 +53,13 @@ names(dat) <- c("status", "sex", "count")
 
 
 
-In the example below, we use a data file obtained as plain text and clean up incorrect spacing, separators. Then we look up the appropriate metadata 
+In the example below, we use a data file obtained as plain text and clean up incorrect spacing and separators. Then we look up the appropriate metadata 
 
 ```{r, load_data}
 library("stringr")
 # If you don't have this package simply run install.packages("stringr")
-rawData <- readLines("../data/messy_data.txt")
+rawData <- readLines("data/messy_data.txt")
+rawData
 ```
 
 ```{r examine_data}
@@ -65,7 +67,7 @@ rawData <- readLines("../data/messy_data.txt")
 length(rawData)
 ```
 
-We've got two issues here. First, we need to split the dates into two separate fields.Next we need to remove the uneven spaces and split the remaining data into individual cells. We can write functions to accomplish both tasks.
+We've got two issues here. First, we need to split the dates into two separate fields. Next we need to remove the uneven spaces and split the remaining data into individual cells. We can write functions to accomplish both tasks.
 
 
 ```{r clean_up}
@@ -112,6 +114,7 @@ formatData  <- function(rawD) {
 
     return(as.data.frame(t(results)))
 } 
+```
 
 ```{r, clean_data}
 first_pass <- sapply(1:length(rawData), function(x) {
@@ -125,9 +128,7 @@ names(cleaned_data) <- c("observer", "date_first", "date_last", "id", "distance"
 ```{r, fix_dates}
 # str is short for structure
 str(cleaned_data)
-
 cleaned_data$date_first
-
 # oops, we forgot to add the year. All these data were collected in 2012
 cleaned_data$date_first  <- paste0(cleaned_data$date_first, "/12")
 cleaned_data$date_last  <- paste0(cleaned_data$date_last, "/12")
@@ -149,7 +150,7 @@ Now we can confidently save these data into a separate file which we called `cle
 
 
 ```{r save_data}
-write.csv(cleaned_data, file = "../data/cleaned_data.csv")
+write.csv(cleaned_data, file = "data/cleaned_data.csv")
 ```
 
 As you can see in the `data` folder, we now have both the original untransformed raw data and also the cleaned data which is now read for further analysis. If there's ever any questions about the cleanup process, this script will provide a way to audit all the steps. The original data are always there untouched. Now you are free to proceed with the analysis and the reporting.
