@@ -21,7 +21,7 @@ The Rules
 
 *   Make it fail fast. <a name="make-it-fail-fast"></a>
 
-*   Change on thing at a time, for a reason. <a name="change-one-thing-at-a-time"></a>
+*   Change one thing at a time, for a reason. <a name="change-one-thing-at-a-time"></a>
 
 *   Keep track of what you've done. <a name="keep-track-of-what-youve-done"></a>
 
