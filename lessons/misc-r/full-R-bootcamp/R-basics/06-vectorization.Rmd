@@ -20,9 +20,7 @@ returns logical vectors
 
 ```{r}
 y == 8
-
 x * y
-
 x / y 
 ```
 
@@ -31,9 +29,7 @@ Matrix operations are also vectorized
 ```{r}
 x <- matrix(1:4, 2, 2)
 y <- matrix(rep(10, 4), 2, 2)
-
 x * y # is not matrix multiplication. It's element wise
-
 x / y # is elementwise division.
 ```
 
