@@ -36,9 +36,11 @@ if(sample(x, 1) <= 10) {
 }
 ```
 
-**Shorthand for ifelse**
+**Vectorization with ifelse**
 
-`ifelse(sample(x, 1) <10, "x less than 10", "x greater than 10")`
+```{r, eval = FALSE}
+ifelse(x <= 10, "x less than 10", "x greater than 10")
+```
 
 Other valid ways of writing if/else
 
