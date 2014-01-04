@@ -6,6 +6,7 @@ _site
 
 # For the misc-r/full-R-bootcamp
 lessons/misc-r/full-R-bootcamp/R-basics/01-basics-of-R.md
+lessons/misc-r/full-R-bootcamp/R-basics/rstudio-basics.md
 lessons/misc-r/full-R-bootcamp/R-basics/02-data-structures.md
 lessons/misc-r/full-R-bootcamp/R-basics/03-best-practices.md
 lessons/misc-r/full-R-bootcamp/R-basics/04-seeking-help.md
