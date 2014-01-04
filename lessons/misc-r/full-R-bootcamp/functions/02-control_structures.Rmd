@@ -21,7 +21,6 @@ if(condition) {
     # do something 
 } else { 
     # do something else
-    }
 }
 ```
 e.g. 
@@ -37,9 +36,11 @@ if(sample(x, 1) <= 10) {
 }
 ```
 
-**Shorthand for ifelse**
+**Vectorization with ifelse**
 
-`ifelse(sample(x, 1) <10, "x less than 10", "x greater than 10")`
+```{r, eval = FALSE}
+ifelse(x <= 10, "x less than 10", "x greater than 10")
+```
 
 Other valid ways of writing if/else
 
@@ -61,7 +62,7 @@ y <- if(sample(x,1) < 10) {
 
 ## for
 
-For loops work on an iterable variable and assign successive values till the end of a sequence.
+A `for` loop works on an iterable variable and assigns successive values till the end of a sequence.
 
 ```{r, eval = FALSE}
 for(i in 1:10) {
@@ -97,6 +98,7 @@ for(i in seq(nrow(m))) {
         print(m[i,j])
 }
 }
+```
 
 ## While
 
@@ -108,7 +110,7 @@ while(i < 10) {
 }
 ```  
 
-Be sure there is a way to exit out of a while loop.
+Be sure there is a way to exit out of a `while` loop.
 
 ## Repeat and break
 
@@ -136,7 +138,7 @@ for(i in 1:20) {
 }
 ```
 
-This loop will only print even numbers and skip over odd numbers. In the afternoon we'll learn other functions that will help us avoid these types of slow control flows as much as possible (mostly the whiel and for loops).
+This loop will only print even numbers and skip over odd numbers. Later we'll learn other functions that will help us avoid these types of slow control flows as much as possible (mostly the `while` and `for` loops).
 
 
 
