@@ -1,3 +1,6 @@
+```{r, include = FALSE}
+source("../chunk_options.R")
+```
 
 # Using the split-apply strategy to manipulate data
 

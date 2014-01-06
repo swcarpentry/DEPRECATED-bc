@@ -1,3 +1,6 @@
+```{r, include = FALSE}
+source("../chunk_options.R")
+```
 
 # Understanding basic data types in R
 

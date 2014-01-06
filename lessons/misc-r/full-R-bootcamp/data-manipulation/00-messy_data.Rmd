@@ -1,3 +1,6 @@
+```{r, include = FALSE}
+source("../chunk_options.R")
+```
 
 # A short tutorial on how to read and clean messy data
 

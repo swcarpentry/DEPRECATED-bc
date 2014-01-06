@@ -1,3 +1,6 @@
+```{r, include = FALSE}
+source("../chunk_options.R")
+```
 # Functions 
 
 Represent one of the most powerful features of the R language. By creating functions, you can go past just using what others have written and create your own.

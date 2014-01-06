@@ -1,3 +1,6 @@
+```{r, include = FALSE}
+source("../chunk_options.R")
+```
 # Some notes on vectorization
 
 Many operations in R are vectorized which means that writing code is more efficient, concise and easy to read.
