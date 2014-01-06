@@ -1,6 +1,6 @@
 # Literate programming in R
 
-It's easy to generate reports dynamically in R. The paradigm come from Donald Knuth (Knuth, 1984).
+It's easy to generate reports dynamically in R. The paradigm came from Donald Knuth (Knuth, 1984).
 
 **Basic idea:** Write **data** + **software** + **documentation** (or in this case manuscripts, reports) together.
 
@@ -8,7 +8,7 @@ Analysis code is divided into text and code "chunks".
 
 This allows us to extract the code for machine readable documents (technically called `tangle`) or produce a human-readable document (called `weave`).
 
-Literate programming involves with three main steps:  
+Literate programming involves three main steps:  
 
 1. Parse the source document and separate code from narratives.
 2. Execute source code and return results.
@@ -39,7 +39,7 @@ An incredibly simple semantic file format, not too dissimilar from .doc, .rtf or
 ## When to implement reproducibility via literate programming?
 
 * Anytime but easiest to do at the beginning of a project.
-* Best used alongside version control (keeps track of everything as * you go along)
+* Best used alongside version control (keeps track of everything as you go along)
 * Use software like R where instructions are coded (no GUIs unless they generate code)
 * Don't save the output (only raw dataset with pre-processing code. Don't save the cleaned datasets except for temporary use).
 and save the data in a non-proporietary format (e.g. `csv` over `xls`).
