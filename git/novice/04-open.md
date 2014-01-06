@@ -74,14 +74,16 @@ about what exactly "open" means in practice.
 
 The first question is licensing.
 Broadly speaking,
-there are two kinds of open license for software,
+there are three kinds of open license for software,
 and half a dozen for data and publications.
-For software,
-people can choose between the [GNU Public License](http://opensource.org/licenses/GPL-3.0) (GPL) on the one hand,
+For software, people can choose between
+the [GNU Public License](http://opensource.org/licenses/GPL-3.0) (GPL),
+the [Apache License](http://www.apache.org/licenses/LICENSE-2.0)
 and licenses like the [MIT](http://opensource.org/licenses/MIT)
-and [BSD](http://opensource.org/licenses/BSD-2-Clause) licenses on the other.
+and [BSD](http://opensource.org/licenses/BSD-2-Clause).
 All of these licenses allow unrestricted sharing and modification of programs,
-but the GPL is [infective](../gloss.html#infective-license):
+but Apache and GPL also include/require a patent license and
+the GPL is [infective](../gloss.html#infective-license):
 anyone who distributes a modified version of the code
 (or anything that includes GPL'd code)
 must make *their* code freely available as well.
