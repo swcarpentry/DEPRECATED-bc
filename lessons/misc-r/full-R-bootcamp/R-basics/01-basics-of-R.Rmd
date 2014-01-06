@@ -1,3 +1,6 @@
+```{r, include = FALSE}
+source("../chunk_options.R")
+```
 # Very basics of R
 
 R is a versatile, open source programming/scripting language that's useful both for statistics but also data science. Inspired by the programming language [`S`][S].
