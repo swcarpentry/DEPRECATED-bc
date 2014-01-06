@@ -3,7 +3,7 @@
 
 **Why document your code?**
 
-Without clear and concise documentation, it becomes impossible for anyone (including yourself after some time) to make sense of what your code does. It's always good practice to write plenty of comments in your functions. In addition to inline comments (anything to the right of a `#`), the package `roxygen2` provides an easy way to document your functions right inside a script and use it generate help files.
+Without clear and concise documentation, it becomes impossible for anyone (including yourself after some time) to make sense of what your code does. It's always good practice to write plenty of comments in your functions. In addition to inline comments (anything to the right of a `#`), the package `roxygen2` provides an easy way to document your functions right inside a script and use it to generate help files.
 
 Inline documentation makes it easy to keep everything up-to-date as you work through your code.
 
@@ -29,7 +29,7 @@ roxygen2 documentation always begins with this syntax:
 | `roxygen2` document tags | What they mean |
 | ------------------  | -------------  |
 |  `@title`           | Function title | 
-|  `@description`     | A clear (yet concise description fo what your package does) | 
+|  `@description`     | A clear yet concise description fo what your package does | 
 |  `@details`           | A longer description (optional) | 
 |  `@param`           | An arugment that a function takes as input. Usage is `@param arg description` | 
 |  `@keywords`           | Any keywords that your function might take | 
