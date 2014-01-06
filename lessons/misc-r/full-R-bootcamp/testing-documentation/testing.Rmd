@@ -45,7 +45,6 @@ The longer answer is that testing either before or after your software is writte
 
 **More confidence in the code**  
 * Better code structure. Code that’s easy to test is usually better designed. Tests sometimes make you see large complicated functions and break them down into smaller, more manageable chunks.
-* 
 
 **Make changes or updates without worrying too much**  
 * Make changes confidently because you know your tests will catch any issues.
@@ -92,7 +91,7 @@ expect_that(10, is_identical_to(10 + 1e-10))
 expect_that(c("one" = 1, "two" = 2), is_equivalent_to(1:2))
 ```
 
-**4. `is_a()` checks that an object inherit()s from a specified class**  
+**4. `is_a()` checks that an object inherits from a specified class**  
 
 ```{r, eval = TRUE}
 model <- lm(mpg ~ cyl, mtcars)
@@ -244,7 +243,7 @@ The minimal reporter prints:
 
 # Documenting functions
 
-We can document functions inline using a simple markup that's not all that different from writing comments. In addition to helping others understand what your function does, we can use a little bit more syntax to easily turn these into function documentation if we decide to create a package. More on this on Thursday.
+We can document functions inline using a simple markup that's not all that different from writing comments. In addition to helping others understand what your function does, we can use a little bit more syntax to easily turn these into function documentation if we decide to create a package.
 
 
 
