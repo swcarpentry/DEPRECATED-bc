@@ -154,7 +154,7 @@ stitch("your-script.R")
 As mentioned in Chapter 3, we can write chunk options in the chunk header. The syntax for chunk options is almost exactly the same as the syntax for function arguments in R. 
 
 ```
-{r chunk_mame, eval=if (value < 5) TRUE else FALSE}
+{r chunk_name, eval=if (value < 5) TRUE else FALSE}
 ```
 
 Suppose value is a numeric variable created in the source document before this chunk.We can pass an expression if (value < 5) TRUE else FALSE to the option eval, which makes the option eval depends on the value of value, and the consequence is we evaluate this chunk based on the value of value (if it is greater than 5, the chunk will not be evaluated), i.e. we are able to selectively evaluate certain chunks. 
@@ -211,7 +211,7 @@ It can be more convenient to write R code chunks in a separate R script, rather 
 Be sure to leave a blank line between chunks.
 
 
-In the source document, we can first read the script using the func- tion read chunk():
+In the source document, we can first read the script using the function read chunk():
 
 ```
 read_chunk("shared_code.R")
