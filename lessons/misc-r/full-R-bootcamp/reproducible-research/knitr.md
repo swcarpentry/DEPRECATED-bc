@@ -21,7 +21,7 @@ Reproducible research (RR) is one possible by-product of dynamic report generati
 
 ## Installing Knitr
 
-```{r, eval = FALSE}
+```
 install.packages("knitr", dependencies = TRUE)
 install.packages("pander") # useful for formatting tables.
 ```
@@ -59,8 +59,7 @@ or create a new file and save it with extension `.Rmd`.
 
 A basic code chunk
 
-<pre><code>
-```{r}
+<pre><code>```{r}
 # some R code
 ```
 </code></pre>
@@ -68,7 +67,7 @@ A basic code chunk
 
 Either knit using the knit button or do it programmatically.
 
-```{r, eval = FALSE}
+```
 library(knitr)
 knit("file.Rmd")
 ```
@@ -99,9 +98,9 @@ Do not edit the output files because they are automatically generated. When repr
 
 **Write sentences in text with inline output**
 
-<pre><code>
+```
 Include some text `r mean(1:5)`. 
-</code></pre>
+```
 
 **Summarizing output from models.**
 
@@ -121,8 +120,7 @@ pander(fit)
 
 Global options are shared across all the following chunks after the location in which the options are set, and local options in the chunk header can override global options.
 
-<pre><code>
-```{r setoptions, eval = FALSE, echo = FALSE}
+<pre><code>```{r setoptions, eval = FALSE, echo = FALSE}
 options(width = 60, show.signif.stars = FALSE)
 opts_chunk$set(echo = FALSE, 
             results = "asis", 
@@ -147,7 +145,7 @@ If a user only has basic knowledge about R but knows nothing about knitr, or one
 
 The basic idea of `stitch()` is that knitr provides a template of the source document with some default settings, so that the user only needs to feed this template with an R script (as one code chunk), then knitr will compile the template to a report. Currently it has built-in templates for LATEX, HTML and Markdown. The usage is like this:
 
-```{r, eval = FALSE}
+```
 library(knitr) 
 stitch("your-script.R")
 ```
@@ -193,7 +191,7 @@ The meaning of the integer code for stop on error is as follows
 
 ## Working with graphics in knitr
 
-```{r, eval = FALSE}
+```
 library(ggplot2)
 p <- qplot(carat, price, data = diamonds) + geom_hex()
 p 
@@ -208,7 +206,6 @@ It can be more convenient to write R code chunks in a separate R script, rather 
 
 ```
 ## @knitr chunk_label
-
 ```
 
 Be sure to leave a blank line between chunks.
@@ -223,11 +220,9 @@ read_chunk("shared_code.R")
 
 This is usually done in an early chunk such as the first chunk of a document, and we can use the chunk Q1 later in the source document:
 
-
-<pre></code>```
+```
 {r, chunk_name}
 ```
-</code></pre>
 
 ## Pandoc
 Pandoc (http://johnmacfarlane.net/pandoc) is a universal document converter. In particular, Pandoc can convert Markdown to many other document formats, including LATEX, HTML, Rich Text Format (*.rtf), E- Book (*.epub), Microsoft Word (*.docx) and OpenDocument Text (*.odt), etc.
