@@ -348,8 +348,6 @@ x
 
 `table(x)` will return a frequency table.
 
-`unclass(x)` strips out the class information.
-
 In modeling functions, it is important to know what the baseline level is.
 This is the first factor but by default the ordering is determined by alphabetical order of words entered. You can change this by speciying the levels (another option is to use the function `relevel`).
 
