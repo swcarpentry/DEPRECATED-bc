@@ -1,36 +1,36 @@
-# Literate programming in R
+# Literate programming in R using `knitr`
 
-It's easy to generate reports dynamically in R. The paradigm came from Donald Knuth (Knuth, 1984).
+It's easy to generate reports dynamically in R. A paradigm that originally me from Donald Knuth (Knuth, 1984).
 
 **Basic idea:** Write **data** + **software** + **documentation** (or in this case manuscripts, reports) together.
 
-Analysis code is divided into text and code "chunks".
-
-This allows us to extract the code for machine readable documents (technically called `tangle`) or produce a human-readable document (called `weave`).
+Analysis code can be divided into text and code "chunks". Doing so allows us to extract the code for machine readable documents (technically referred to as a `tangle`) or produce a human-readable document (also called `weave`).
 
 Literate programming involves three main steps:  
 
+1. Separate the narrative from the code
+
 1. Parse the source document and separate code from narratives.
-2. Execute source code and return results.
-3. Mix results from the source code with the original narratives.
+2. Execute source code and return the results.
+3. Combine the results from the source code with the original narratives to produce a final document.
 
 ## Why this is important?
-Results from scientific research have to be reproducible to be trustworthy. We do not want a finding to be merely due to an isolated occurrence, e.g. only one specific lab can produce the results on one specific day, but no one else can.
+Results from scientific research have to be easy to reproduce so others can verify results which makes it trustworthy. Otherwise we risk producing one off results that no one outside the original research group or lab can reproduce. In this lesson we will learn reproducible research which is one of the by products of dynamics report generation. However, this will not always guarantee reproducibility. 
 
-Reproducible research (RR) is one possible by-product of dynamic report generation, but it does not absolutely guarantee RR. 
 
-## Installing Knitr
+## Installing `knitr`
 
-```
+```coffee
+# Installing knitr is quite easy. 
 install.packages("knitr", dependencies = TRUE)
-install.packages("pander") # useful for formatting tables.
+install.packages("pander") # Pander is a useful package for formatting tables in markdown.
 ```
 
-Knitr supports a variety of documentation formats including markdown, `html` and `LaTeX`. Exports to `PDF` and `HTML`.
+Knitr supports a variety of documentation formats including `markdown`, `html` and `LaTeX`. It also allows for easy export to `PDF` and `HTML`.
 
 ## What is markdown?
 
-An incredibly simple semantic file format, not too dissimilar from .doc, .rtf or .txt. Markdown makes it easy for even those without a web-publishing background to write any sort of text (including with links, lists, bullets, etc.) and have it displayed in a variety of formats. 
+Markdown is an incredibly simple semantic file format, not too dissimilar from .doc, .rtf, or .txt. Markdown makes it easy for even those without a web-publishing background to write any sort of text (including with links, lists, bullets, etc.) and have it parsed into a variety of formats. To learn more about the basics of markdown, peruse this [short tutorial on the format](markdown.md).
 
 * [Markdown cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 * [Original markdown reference](http://daringfireball.net/projects/markdown/basics)
@@ -38,18 +38,18 @@ An incredibly simple semantic file format, not too dissimilar from .doc, .rtf or
 
 ## When to implement reproducibility via literate programming?
 
-* Anytime but easiest to do at the beginning of a project.
-* Best used alongside version control (keeps track of everything as you go along)
-* Use software like R where instructions are coded (no GUIs unless they generate code)
-* Don't save the output (only raw dataset with pre-processing code. Don't save the cleaned datasets except for temporary use).
-and save the data in a non-proporietary format (e.g. `csv` over `xls`).
+* You can do this anytime but it is always best to do this at the beginning of a project. Much like writing unit tests, waiting till after a project is completed is a bad idea. 
+* Best used alongside version control like Git. 
+* Use software like R where instructions are scripted.
+* Never save the output (only raw dataset with pre-processing code. Even cleaned datasets can be discarded but it might help to save them temporarily during intermediate steps).
+* Finally, store the data in a non-proporietary format (e.g. `csv` over `xls`). This will ensure that your data will be readable long into the future. 
 
 
 ---
 
 **Good and Bad Practices**
 
-See best practices document in the 01-R-basics folder.
+Related: See best practices document in the 01-R-basics folder.
 
 
 ## Creating a basic knitr document
@@ -74,27 +74,41 @@ knit("file.Rmd")
 
 **What just happened?**
 
-knitr reads the Rmd file, finds and runs the code chunks identified by the backticks, and replaces it with the output of the functions. 
+knitr reads the Rmd file, finds and runs the code chunks identified by the backticks, and replaces it with the output of any R commands. If figures are generated from any such calls, they will be included in markdown syntax.  
 
-Add names to code chunk
+
+## Chunk labels
+
+You can also name your code chunks. This allows you to keep all the code in a separate script and just refer to code chunks using meaningful names (e.g. data-processing, analysis, model-fitting, visualization, figures, tables)
 
 
 ```
 {r, chunk_name}
 ```
 
-Do not edit the output files because they are automatically generated. When reprocessing the original document all changes will be lost.
+
+__Some rules on naming chunks__
+* Chunk labels are supposed to be unique id’s in a document.  
+* knitr will throw an error if two chunks have the same name.  
+* If no chunk names are given, knitr will simply increment from chunk 1, 2,3 etc.
+
+
+
+In addition to naming chunks within the curly braces, you can also add a bunch of other options on how that particular code chunk should behave. 
 
 **Other options you can add to the tag**
 
-**echo** = : TRUE or FALSE to show or hide code.  
-**eval** = : TRUE or FALSE to run or skip the code.  
-**warning** = : TRUE or FALSE to show or hide function warnings.  
-**message** = :TRUE or FALSE to show or hide function messages.  
-**results** = "hide": will hide results.  
-**fig.height**: Height of figure  
-**fig.width**: width of figure  
+| Option | Description |
+| ------ | ------------ |
+| **echo** =   TRUE or FALSE |  to show or hide code.  |
+| **eval** =   TRUE or FALSE | to run or skip the code.  |
+| **warning** =   TRUE or FALSE | to show or hide function warnings.  |
+| **message** =  TRUE or FALSE | to show or hide function R messages.  |
+| **results** = "hide"  | will hide results. They will still be executed |
+| **fig.height** = | Height of figure  |
+| **fig.width** =  | width of figure  |
 
+Once your output markdown files (`.md`) files are generated, you should never edit them because they are automatically generated. Next time you knit the original `.Rmd` files, all the changes in the `.md` file will get wiped out. 
 
 **Write sentences in text with inline output**
 
@@ -110,6 +124,7 @@ data(airquality)
 fit = lm(Ozone ~ Wind + Temp + Solar.R, data = airquality)
 ```
 
+## Including formatted tables in markdown
 
 ```{r showtable, results="asis", echo = FALSE, message = FALSE, eval = FALSE, warning = FALSE}
 library(pandoc)
@@ -129,21 +144,21 @@ opts_chunk$set(echo = FALSE,
             fig.width = 5, 
             fig.height = 4, 
             tidy = TRUE, 
-            fig.align='center')
+            fig.align = 'center')
 ```</code></pre>
 
 
 ## Other Options
 **Deailing with long running process**
 
-add `cache=TRUE` to a code block definition. After the first run, results are cached. We'll discuss better ways to acheive the same thing using `Make` in the next section.
+By adding `cache = TRUE` to a code block definition. After the first run, results will be cached. We'll discuss better ways to acheive the same thing using `Make` in the next section.
 
 
 ## Quick reporting
 
-If a user only has basic knowledge about R but knows nothing about knitr, or one does not want to write anything else other than an R script, it is also possible to generate a quick report from this R script using the `stitch()` function.
+Generating reports in knitr doesn't always have to involve a laborious `.Rmd ` file where scripts need to be broken down into smaller chunks. Sometimes a user might need a simple report generated very quickly from an existing script. The function `stitch()` in knitr makes it possible to generate nicely formatted reports from R scripts. 
 
-The basic idea of `stitch()` is that knitr provides a template of the source document with some default settings, so that the user only needs to feed this template with an R script (as one code chunk), then knitr will compile the template to a report. Currently it has built-in templates for LATEX, HTML and Markdown. The usage is like this:
+knitr provides a template of the source document with default settings which  allows the user to simply pass any R script into this template (consider this one giant code chunk). knitr will  then compile the template to a report. The package currently has build in support for a range of templates from LateX, html, and markdown. To stitch a report:
 
 ```
 library(knitr) 
@@ -151,42 +166,34 @@ stitch("your-script.R")
 ```
 ## Additional chunk options
 
-As mentioned in Chapter 3, we can write chunk options in the chunk header. The syntax for chunk options is almost exactly the same as the syntax for function arguments in R. 
+Chunks are extremely flexible and more options (beyond the ones listed in the table above) can be included in the header. These look exactly like the kinds of arguments that one might pass to standard R functions. In the example below, the chunk will only be executed if the condition (in this case x less than 5) is satisfied. 
 
 ```
+<<<<<<< HEAD
 {r chunk_name, eval=if (value < 5) TRUE else FALSE}
+=======
+{r chunk_name, eval=if (x < 5) TRUE else FALSE}
+>>>>>>> Fixed #40, fixed #41, fixed #42
 ```
-
-Suppose value is a numeric variable created in the source document before this chunk.We can pass an expression if (value < 5) TRUE else FALSE to the option eval, which makes the option eval depends on the value of value, and the consequence is we evaluate this chunk based on the value of value (if it is greater than 5, the chunk will not be evaluated), i.e. we are able to selectively evaluate certain chunks. 
-
-
-## Chunk Label
-The only possible exception is the chunk label, which does not have to follow the syntax rule. In other words, it can be invalid R code. This is for both historical reasons (Sweave convention) and laziness (avoid typing quotes). Strictly speaking, the chunk label, as a part of chunk options, should take a character value, hence it should be quoted, but in most cases, knitr can take care of the unquoted labels and quote them internally, even if the “objects” used in the label expression do not exist. Below are all valid ways to write chunk labels:
-
-```
-{r, label_name}
-```
-
-Chunk labels are supposed to be unique id’s in a document.  
-knitr will throw an error if two chunks have the same name.  
-If no chunk names are given, knitr will simply increment from chunk 1, 2,3 etc.
+This allows your document to be dynamic allowing certain chunks to be executed only when specific conditions are met.
 
 
 
 ## Error handling
 
-It may be very surprising to knitr users that knitr does not stop on errors! As we can see from the previous example, 1 + ’a’ should have stopped R because that is not a valid addition operation in R (a number + a string). The default behavior of knitr is to act as if the code were pasted into an R console: if you paste 1 + ’a’ to the R console, you will see an error message, but that does not halt R – you can continue to type or paste more code. To completely stop knitr when errors occur, set this option in advance:
+By default `knitr` will not stop execution if it encounters an error. It will continue through to the end of the document and include any errors that arise within chunks. The reason for this behavior is that knitr treats the code as if it were fed directly into the R console. Any errors get printed to the screen and the remaining commands are executed. 
+
+To stop knitr as soon as it encounters an error, one can set an option explicitly:
 
 ```coffee
 opts_knit$set(stop_on_error = 2L)
 ```
 
+__Possible options for error handling__
 
-The meaning of the integer code for stop on error is as follows
-(from the evaluate package; see the documentation for evaluate() there):
-* **0L** do not stop on errors, just like the code was pasted into R console
-* **1L** when an error occurs, return the results up to this point and ignore the rest of code in the chunk but do not throw the error either
-* **2L** a full stop on errors
+* **0L** do not stop on errors, continue on as if code was pasted into R console  
+* **1L** when an error occurs, return the results up to this point, ignore the rest of the code within that particular chunk without reporting any further errors.
+* **2L** Completely stop upon encountering the first error.
 
 
 ## Working with graphics in knitr
@@ -195,14 +202,34 @@ The meaning of the integer code for stop on error is as follows
 library(ggplot2)
 p <- qplot(carat, price, data = diamonds) + geom_hex()
 p 
-# no need to print(p)
+# no need to explicitly print(p)
 ```
 
 ---
 
 ## Code Externalization
-It can be more convenient to write R code chunks in a separate R script, rather than mixing them into a source document; Using the format:
 
+Sometimes it can be rather tedious to include dozens of lines of code in the same file as the narrative. In such cases, one can improve readability by externalizing the code into a separate script and simply calling the chunks at the appropriate locations in a document. The code will get read in and executed at those points. There are two steps to making this happen.
+
+First, read the script using `read_chunk()` at the top of any `.Rmd` file
+```
+read_chunk("source_code.R")
+```
+<<<<<<< HEAD
+
+Be sure to leave a blank line between chunks.
+
+
+In the source document, we can first read the script using the function read chunk():
+=======
+This is usually done in an early chunk such as the first chunk of a document, and we can use the chunk `data-processing` later in the source document:
+>>>>>>> Fixed #40, fixed #41, fixed #42
+
+```
+{r, data-processing}
+```
+
+Then simply call any chunk as needed simply by using its label. You do not have to include any code between the backticks. 
 
 ```
 ## @knitr chunk_label
@@ -210,19 +237,7 @@ It can be more convenient to write R code chunks in a separate R script, rather 
 
 Be sure to leave a blank line between chunks.
 
-
-In the source document, we can first read the script using the function read chunk():
-
-```
-read_chunk("shared_code.R")
-```
-
-
-This is usually done in an early chunk such as the first chunk of a document, and we can use the chunk Q1 later in the source document:
-
-```
-{r, chunk_name}
-```
+--- 
 
 ## Pandoc
 Pandoc (http://johnmacfarlane.net/pandoc) is a universal document converter. In particular, Pandoc can convert Markdown to many other document formats, including LATEX, HTML, Rich Text Format (*.rtf), E- Book (*.epub), Microsoft Word (*.docx) and OpenDocument Text (*.odt), etc.
@@ -242,3 +257,4 @@ Add margins using (in this case 1 inch):
 pandoc -V geometry:margin=1in test.md -o test.pdf
 ```
 
+You can use Make to automate much of this process. For example, by setting up a series of dependencies, you can have a new document knitted if the underlying data or code changes but not otherwise. 
