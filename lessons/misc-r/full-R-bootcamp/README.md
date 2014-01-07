@@ -22,7 +22,7 @@ Shell and Git are intentionally missing from this set. Please consult other less
 | __Data Manipulation__ | [00-messy_data.Rmd](data-manipulation/00-messy_data.Rmd) <br> [01-input-output.Rmd](data-manipulation/01-input-output.Rmd) <br> [02-apply-family.Rmd](data-manipulation/02-apply-family.Rmd) <br> [03-split-apply.Rmd](data-manipulation/03-split-apply.Rmd) <br>  |
 | __Functions and Control Structures__ |  [01-functions.Rmd](functions/01-functions.Rmd) <br> [02-control_structures.Rmd](functions/02-control_structures.Rmd) <br> [03-scoping_rules.Rmd](functions/03-scoping_rules.Rmd) <br>  |
 | __Data Visualization__ <br> _If you make changes, only edit the `.Rnw` file. <br>Then knit and tagle to generate other two files_ |  [ggplot.R](data-visualization/ggplot.R) (tangled code from source)  <br> [ggplot.Rnw](data-visualization/ggplot.Rnw) (source) <br> [ggplot.pdf](data-visualization/ggplot.pdf) (rendered) <br>  |
-| __Reproducible Research__ |  [knitr.Rmd](reproducible-research/knitr.Rmd) <br> [make.md](reproducible-research/make.md) <br> [markdown.md](reproducible-research/markdown.md) <br>  |
+| __Reproducible Research__ |  [knitr.Rmd](reproducible-research/knitr.md) <br> [make.md](reproducible-research/make.md) <br> [markdown.md](reproducible-research/markdown.md) <br>  |
 | __Testing and Documentation__ | [documentation.md](testing-documentation/documentation.md) <br> [testing.Rmd](testing-documentation/testing.Rmd) <br>   |
 
 __Note:__ _You will not be able to teach all topics in 2 days, especially since the above table does not include Git or Shell. So you will have to drop Reproducible research or Testing/documentation (or both) depending on audience skill level and interest._
