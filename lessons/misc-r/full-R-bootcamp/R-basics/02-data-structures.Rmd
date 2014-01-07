@@ -348,6 +348,12 @@ x
 
 `table(x)` will return a frequency table.
 
+If you need to convert a factor to a character vector, simply use
+
+```{r}
+as.character(x)
+```
+
 In modeling functions, it is important to know what the baseline level is.
 This is the first factor but by default the ordering is determined by alphabetical order of words entered. You can change this by speciying the levels (another option is to use the function `relevel`).
 
