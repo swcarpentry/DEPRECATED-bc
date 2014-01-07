@@ -1,6 +1,6 @@
 # Literate programming in R using `knitr`
 
-It's easy to generate reports dynamically in R. A paradigm that originally me from Donald Knuth (Knuth, 1984).
+It's easy to generate reports dynamically in `R`. Literate programming is a paradigm that originally came from Donald Knuth (Knuth, 1984).
 
 **Basic idea:** Write **data** + **software** + **documentation** (or in this case manuscripts, reports) together.
 
@@ -9,13 +9,11 @@ Analysis code can be divided into text and code "chunks". Doing so allows us to 
 Literate programming involves three main steps:  
 
 1. Separate the narrative from the code
-
-1. Parse the source document and separate code from narratives.
 2. Execute source code and return the results.
 3. Combine the results from the source code with the original narratives to produce a final document.
 
 ## Why this is important?
-Results from scientific research have to be easy to reproduce so others can verify results which makes it trustworthy. Otherwise we risk producing one off results that no one outside the original research group or lab can reproduce. In this lesson we will learn reproducible research which is one of the by products of dynamics report generation. However, this will not always guarantee reproducibility. 
+Results from scientific research have to be easy to reproduce so others can verify results making them trustworthy. Otherwise we risk producing one off results that no one outside the original research group can reproduce. In this lesson we will learn reproducible research, which is one of the by products of dynamics report generation. However, this process alone will not always guarantee reproducibility. 
 
 
 ## Installing `knitr`
@@ -30,7 +28,7 @@ Knitr supports a variety of documentation formats including `markdown`, `html` a
 
 ## What is markdown?
 
-Markdown is an incredibly simple semantic file format, not too dissimilar from .doc, .rtf, or .txt. Markdown makes it easy for even those without a web-publishing background to write any sort of text (including with links, lists, bullets, etc.) and have it parsed into a variety of formats. To learn more about the basics of markdown, peruse this [short tutorial on the format](markdown.md).
+Markdown is an incredibly simple semantic file format, not too dissimilar from .doc, .rtf, or .txt. Markdown makes it easy for even those without significant knowledge of markup languages like html or LaTex to write any sort of text (including with links, lists, bullets, etc.) and have it parsed into a variety of formats. To learn more about the basics of markdown, peruse this [short tutorial on the format](markdown.md).
 
 * [Markdown cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 * [Original markdown reference](http://daringfireball.net/projects/markdown/basics)
@@ -49,15 +47,15 @@ Markdown is an incredibly simple semantic file format, not too dissimilar from .
 
 **Good and Bad Practices**
 
-Related: See best practices document in the 01-R-basics folder.
+Related: See [best practices](../R-basics/best-practices.Rmd) in the [R-basics folder](../R-basics/).
 
 
 ## Creating a basic knitr document
 
 In RStudio, choose new R Markdown file (easiest way)
-or create a new file and save it with extension `.Rmd`.
+or you can create a new text file and save it with extension `.Rmd`.
 
-A basic code chunk
+A basic code chunk looks like this:
 
 <pre><code>```{r}
 # some R code
@@ -65,7 +63,7 @@ A basic code chunk
 </code></pre>
 ---
 
-Either knit using the knit button or do it programmatically.
+You can knit this document using the knit button or do it programmatically using the `knit()` function.
 
 ```
 library(knitr)
@@ -74,7 +72,7 @@ knit("file.Rmd")
 
 **What just happened?**
 
-knitr reads the Rmd file, finds and runs the code chunks identified by the backticks, and replaces it with the output of any R commands. If figures are generated from any such calls, they will be included in markdown syntax.  
+knitr read the Rmd file, then located and ran all the code chunks identified by the backticks, and replaced it with the output of R function calls. If figures are generated from any such calls, they will be included in markdown syntax.  
 
 
 ## Chunk labels
@@ -91,8 +89,6 @@ __Some rules on naming chunks__
 * Chunk labels are supposed to be unique id’s in a document.  
 * knitr will throw an error if two chunks have the same name.  
 * If no chunk names are given, knitr will simply increment from chunk 1, 2,3 etc.
-
-
 
 In addition to naming chunks within the curly braces, you can also add a bunch of other options on how that particular code chunk should behave. 
 
@@ -149,7 +145,7 @@ opts_chunk$set(echo = FALSE,
 
 
 ## Other Options
-**Deailing with long running process**
+**Dealing with long running process**
 
 By adding `cache = TRUE` to a code block definition. After the first run, results will be cached. We'll discuss better ways to acheive the same thing using `Make` in the next section.
 
@@ -169,11 +165,7 @@ stitch("your-script.R")
 Chunks are extremely flexible and more options (beyond the ones listed in the table above) can be included in the header. These look exactly like the kinds of arguments that one might pass to standard R functions. In the example below, the chunk will only be executed if the condition (in this case x less than 5) is satisfied. 
 
 ```
-<<<<<<< HEAD
-{r chunk_name, eval=if (value < 5) TRUE else FALSE}
-=======
-{r chunk_name, eval=if (x < 5) TRUE else FALSE}
->>>>>>> Fixed #40, fixed #41, fixed #42
+{r chunk_name, eval = if (x < 5) TRUE else FALSE}
 ```
 This allows your document to be dynamic allowing certain chunks to be executed only when specific conditions are met.
 
@@ -191,12 +183,16 @@ opts_knit$set(stop_on_error = 2L)
 
 __Possible options for error handling__
 
-* **0L** do not stop on errors, continue on as if code was pasted into R console  
-* **1L** when an error occurs, return the results up to this point, ignore the rest of the code within that particular chunk without reporting any further errors.
-* **2L** Completely stop upon encountering the first error.
+| Option | What it does | 
+| ------ | ------------ | 
+| * **0L** | do not stop on errors, continue on as if code was pasted into R console  |
+| * **1L** | when an error occurs, return the results up to this point, ignore the rest of the code within that particular chunk without reporting any further errors. |
+| * **2L** | Completely stop upon encountering the first error. |
 
 
-## Working with graphics in knitr
+## Working with graphics in `knitr`
+
+If you use `ggplot2` from the data visualization section, you can have that easily parsed into your document.
 
 ```
 library(ggplot2)
@@ -215,15 +211,9 @@ First, read the script using `read_chunk()` at the top of any `.Rmd` file
 ```
 read_chunk("source_code.R")
 ```
-<<<<<<< HEAD
 
-Be sure to leave a blank line between chunks.
-
-
-In the source document, we can first read the script using the function read chunk():
-=======
 This is usually done in an early chunk such as the first chunk of a document, and we can use the chunk `data-processing` later in the source document:
->>>>>>> Fixed #40, fixed #41, fixed #42
+
 
 ```
 {r, data-processing}
@@ -232,7 +222,7 @@ This is usually done in an early chunk such as the first chunk of a document, an
 Then simply call any chunk as needed simply by using its label. You do not have to include any code between the backticks. 
 
 ```
-## @knitr chunk_label
+## @knitr data-processing
 ```
 
 Be sure to leave a blank line between chunks.
@@ -251,10 +241,16 @@ pandoc test.md -o test.docx
 pandoc test.md -o test.pdf
 ```
 
-Add margins using (in this case 1 inch):
+You can add more options to the basic Pandoc call. To see a full list of options
+
+```
+pandoc --help
+```
+
+A commonly used option is to add margins using the `-V` argument (in this case 1 inch):
 
 ```
 pandoc -V geometry:margin=1in test.md -o test.pdf
 ```
 
-You can use Make to automate much of this process. For example, by setting up a series of dependencies, you can have a new document knitted if the underlying data or code changes but not otherwise. 
+You can use `Make` to automate much of this process. For example, by setting up a series of dependencies, you can have a new document knitted if the underlying data or code changes but not otherwise. 
