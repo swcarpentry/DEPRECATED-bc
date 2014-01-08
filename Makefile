@@ -17,7 +17,7 @@ LINK_OUT = /tmp/bc-links
 
 # Source directories (add more here as lessons materialize).
 NOVICE_DIR = bash git python sql
-INTERMEDIATE_DIR = bash
+INTERMEDIATE_DIR = bash hash make
 
 # Source and destination Markdown/HTML pages.
 MARKDOWN_SRC = \
@@ -66,10 +66,14 @@ $(NOTEBOOK_DST) : $(OUT)
 $(OUT)/%.html : $(TMP)/%.html
 	cp $< $@
 
-# Build HTML versions of Markdown source files using Jekyll.  This always
-# erases and re-creates the output directory.
+# Build HTML versions of Markdown source files using Jekyll.  This
+# always erases and re-creates the output directory, and replaces the
+# template file for bootcamp websites with the NEW_MATERIAL.html index
+# to the lessons.
 $(OUT) : $(MARKDOWN_SRC)
 	jekyll -t build -d $(OUT)
+	mv $(OUT)/NEW_MATERIAL.html $(OUT)/index.html
+	rm -rf $$(find _site -name '*_files' -type d -print)
 
 # Build HTML versions of IPython Notebooks.  This is slow, so we cache
 # the results in a temporary directory.
@@ -99,7 +103,7 @@ links :
 
 ## clean    : clean up
 clean :
-	rm -rf $(OUT) $(TMP) $$(find . -name '*~' -print) $$(find . -name '*.pyc' -print)
+	rm -rf $(OUT) $(TMP) $$(find . -name '*~' -print) $$(find . -name '*.pyc' -print) $$(find . -name '*_files' -type d -print)
 
 ## show     : show variables
 show :
