@@ -10,10 +10,14 @@
 # as needed.
 #-----------------------------------------------------------
 
-# Directories.
+# Auxiliary directories.
 OUT = _site
 TMP = tmp
 LINK_OUT = /tmp/bc-links
+
+# Source directories (add more here as lessons materialize).
+NOVICE_DIR = bash git python sql
+INTERMEDIATE_DIR = bash
 
 # Source and destination Markdown/HTML pages.
 MARKDOWN_SRC = \
@@ -22,19 +26,15 @@ MARKDOWN_SRC = \
 	bib.md \
 	gloss.md \
 	rules.md \
-	$(wildcard bash/novice/*.md) \
-	$(wildcard git/novice/*.md) \
-	$(wildcard python/novice/*.md) \
-	$(wildcard sql/novice/*.md)
+	$(wildcard $(patsubst %,%/novice/*.md,$(NOVICE_DIR))) \
+	$(wildcard $(patsubst %,%/intermediate/*.md,$(INTERMEDIATE_DIR)))
 MARKDOWN_DST = \
 	$(patsubst %.md,$(OUT)/%.html,$(MARKDOWN_SRC))
 
 # Source, cached, and destination Notebook files/HTML pages.
 NOTEBOOK_SRC = \
-	$(wildcard bash/novice/*.ipynb) \
-	$(wildcard git/novice/*.ipynb) \
-	$(wildcard python/novice/*.ipynb) \
-	$(wildcard sql/novice/*.ipynb)
+	$(wildcard $(patsubst %,%/novice/*.ipynb,$(NOVICE_DIR))) \
+	$(wildcard $(patsubst %,%/intermediate/*.ipynb,$(INTERMEDIATE_DIR)))
 NOTEBOOK_TMP = \
 	$(patsubst %.ipynb,$(TMP)/%.html,$(NOTEBOOK_SRC))
 NOTEBOOK_DST = \
