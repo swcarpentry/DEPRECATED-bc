@@ -22,7 +22,7 @@ MARKDOWN_SRC = \
 	bib.md \
 	gloss.md \
 	rules.md \
-	$(wildcard bash/novice/*.md) \
+	$(wildcard shell/novice/*.md) \
 	$(wildcard git/novice/*.md) \
 	$(wildcard python/novice/*.md) \
 	$(wildcard sql/novice/*.md)
@@ -31,7 +31,7 @@ MARKDOWN_DST = \
 
 # Source, cached, and destination Notebook files/HTML pages.
 NOTEBOOK_SRC = \
-	$(wildcard bash/novice/*.ipynb) \
+	$(wildcard shell/novice/*.ipynb) \
 	$(wildcard git/novice/*.ipynb) \
 	$(wildcard python/novice/*.ipynb) \
 	$(wildcard sql/novice/*.ipynb)
@@ -79,7 +79,7 @@ $(TMP)/%.html : %.ipynb
 
 ## fixme    : find places where fixes are needed.
 fixme :
-	@grep -n FIXME $$(find -f bash git python sql -type f -print | grep -v .ipynb_checkpoints)
+	@grep -n FIXME $$(find -f shell git python sql -type f -print | grep -v .ipynb_checkpoints)
 
 ## gloss    : check glossary
 gloss :

@@ -11,7 +11,7 @@ title: New Material
   </tr>
   <tr>
     <th>The Unix Shell</th>
-    <td><a href="./bash/novice/index.html">X</a></td>
+    <td><a href="./shell/novice/index.html">X</a></td>
     <td>-</td>
   </tr>
   <tr>
