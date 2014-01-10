@@ -34,9 +34,9 @@ You should not try to use the same repo for both purposes because:
 [Include Files](#include-files)  
 [Instructors and Sponsors](#instructors-and-sponsors)  
 [Lesson Material](#lesson-material)  
-[Other Lesson Material](#other-lesson-material)  
-[Improving This Material](#improving-this-material)  
+[Other Lesson Material](#other-lesson-material)
 [FAQ](#faq)
+
 
 
 Background
@@ -347,35 +347,6 @@ We have also put two other kinds of lesson materials in this directory:
 The file `[lessons/index.html](lessons/index.html)`
 lists all of the lessons we currently have,
 and includes links to the main page for each.
-
-Improving This Material
------------------------
-
-We welcome improvements to the master copy of the bootcamp template repository,
-particularly new lesson material.
-To send them to us as a pull request:
-
-1.  Fork the `bc` repository on GitHub.
-2.  Make that a remote named "upstream" of your local YYYY-MM-DD-site repository:
-
-        git remote add upstream https://github.com/<me>/bc.git
-
-(replacing 'me' with your GitHub username)
-
-![Alt text](img/readme/step3.png)
-
-3.  Isolate the changes you want to share in a branch and push them to GitHub
-    (you should have added `swcarpentry` as a remote in Step 3 of [Getting Started](#getting-started)):
-
-        git fetch swcarpentry
-        git checkout -t swcarpentry/gh-pages -b improvements
-        git cherry-pick <commits related to improvements on your gh-pages branch>
-        git push upstream improvements
-
-4.  Send a pull request to the master repository on GitHub.
-
-If it is easier for you to send them to us some other way,
-please mail us at admin@software-carpentry.org.
 
 FAQ
 ---
