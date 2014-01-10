@@ -63,7 +63,7 @@ rather than Git itself.
     an instructor may be involved in several bootcamps,
     each of which has its own website repo.
     Those website repositories ought to be forks of this one,
-    but GitHub since doesn't allow that,
+    but since GitHub doesn't allow that,
     we've had to find a workaround.
 
 3.  If a repository has a branch called `gh-pages`
