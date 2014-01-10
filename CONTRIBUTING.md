@@ -28,7 +28,7 @@ get feedback on your ideas and coordinate with other developers.
 
     (replacing 'me' with your GitHub username)
 
-![Alt text](img/readme/step3.png)
+    ![Alt text](img/readme/step3.png)
 
     If you do not wish to start wih a YYYY-MM-DD-site repository copy, clone a
     local copy of your `bc` fork and replace all instances of `upstream` in the
