@@ -34,9 +34,9 @@ You should not try to use the same repo for both purposes because:
 [Include Files](#include-files)  
 [Instructors and Sponsors](#instructors-and-sponsors)  
 [Lesson Material](#lesson-material)  
-[Other Lesson Material](#other-lesson-material)  
-[Improving This Material](#improving-this-material)  
+[Other Lesson Material](#other-lesson-material)
 [FAQ](#faq)
+
 
 
 Background
