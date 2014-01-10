@@ -9,9 +9,8 @@ how you can build a website for your bootcamp using this repo as a starting poin
 what lessons we have,
 where they're located,
 and how you can incorporate them into your teaching.
-Please submit corrections or additions as pull requests,
-bug reports,
-or by email to admin@software-carpentry.org.
+To contribute corrections or additions to this repository, see the
+[contributing guidelines][contributing].
 
 **Note:**
 If you are teaching Git in your bootcamp,
@@ -441,3 +440,6 @@ FAQ
     <br/>
     Use subdirectories like `2013-07-01-esu/beginners`,
     so that main directory names always follow our four-part convention.
+
+
+[contributing]: https://github.com/swcarpentry/bc/blob/master/CONTRIBUTING.md
