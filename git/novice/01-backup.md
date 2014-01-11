@@ -507,7 +507,7 @@ $ git reset --soft HEAD~
 
 which will leave your working tree alone like --mixed, but also automatically stage all the differences between HEAD and HEAD~ in the index, ready to be committed as a descendent of HEAD~ - use this to change the commit message or add something you forgot to the last commit.
 
-In all cases, git reset is moving where HEAD is currently pointing; think of HEAD as the end of that chain of commits that git is making, and moving it changes where the next commit is going to get tacked on to; the difference between --hard, --mixed and --soft is jsut what happens to the index and working trees as we move HEAD.  In later lessons we'll learn more about the tremendous power of git's relational structure, but for now it's enough to understand that making a new commit moves the HEAD forward by one commit, and reset moves HEAD backwards along the chain to wherever we reset to.
+In all cases, git reset is moving where HEAD is currently pointing; think of HEAD as the end of that chain of commits that git is making, and moving it changes where the next commit is going to get tacked on to; the difference between --hard, --mixed and --soft is just what happens to the index and working trees as we move HEAD.  In later lessons we'll learn more about the tremendous power of git's relational structure, but for now it's enough to understand that making a new commit moves the HEAD forward by one commit, and reset moves HEAD backwards along the chain to wherever we reset to.
 
 
 But what if we want to recover somes files without wandering around on our chain of commits and messing with where HEAD is?
