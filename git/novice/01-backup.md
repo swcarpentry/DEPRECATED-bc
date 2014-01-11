@@ -491,7 +491,7 @@ to back up to earlier revisions,
 `git reset --hard 34961b1` to back up to a particular revision,
 and so on.  
 
-In other words, 'git reset --hard HEAD' (or whichever revision we like) wipes out our index and makes our working tree match whatever commit we asked for exactly - so watch out!  If you didn't commit some work and do a hard reset, it's gone forever.  If you did commit the work, you can get back to it with another hard reset pointing at its commit ID; hard resets just take you to whatever commit you want, abandoning the index and working tree as it does.
+In other words, 'git reset --hard HEAD' wipes out our index and makes our working tree match HEAD exactly - so watch out!  Any work you've done since your last commit is now gone forever.
 
 There are less drastic things we can do with git reset as well:  
 
@@ -499,15 +499,16 @@ There are less drastic things we can do with git reset as well:
 $ git reset --mixed HEAD
 ```
 
-will dump the index just like git reset --hard, but it won't touch your working tree, so you won't lose any work (much safer) - use this if you've committed some things you regret, and would like to go back to HEAD (or any other revision) and start changing things and re-committing from there.  Even more tame is the ever-gentle
+will empty the index just like git reset --hard, but it won't touch your working tree, so you won't lose any work (much safer) - use this if you've added some things with 'git add' which you regret, and would like to empty the index (but not the working tree).  Even more tame is the ever-gentle
 
 ```
-$ git reset --soft HEAD
+$ git reset --soft HEAD~
 ```
 
-which will leave your working tree alone like --mixed, but also automatically set all those changes up in the index, staged and ready to be committed as a descendent of HEAD or whatever other revision you asked for - this is for when all you want to change is how you committed things, not the contents of your files.
+which will leave your working tree alone like --mixed, but also automatically stage all the differences between HEAD and HEAD~ in the index, ready to be committed as a descendent of HEAD~ - use this to change the commit message or add something you forgot to the last commit.
 
-There's one more thing to understand about git reset - the savvy reader might notice that from our description, there doesn't actually seem to be a reason to provide a revision ID for the --mixed or --soft options to reset; --hard resets the working tree, so it needs to know what to reset it to, but if --mixed and --soft don't touch the working tree, what's the point of the revision ID?  Recall again the relational structure between revisions, that chain of commits; when we git reset to a revision (regardless of --hard, --mixed, or --soft), we're telling git to start tacking commits onto the chain starting from that revision; in other words, we're changing what `HEAD` and all it's relational pointers like HEAD~1, HEAD~74 etc mean.  This may seem like a lot of bother to define a lineage that so far we only use for navigation relative to HEAD, but in later lessons we'll learn about the tremendous power of git's relational structure for more complicated projects.
+In all cases, git reset is moving where HEAD is currently pointing; think of HEAD as the end of that chain of commits that git is making, and moving it changes where the next commit is going to get tacked on to; the difference between --hard, --mixed and --soft is jsut what happens to the index and working trees as we move HEAD.  In later lessons we'll learn more about the tremendous power of git's relational structure, but for now it's enough to understand that making a new commit moves the HEAD forward by one commit, and reset moves HEAD backwards along the chain to wherever we reset to.
+
 
 But what if we want to recover somes files without wandering around on our chain of commits and messing with where HEAD is?
 For example,
