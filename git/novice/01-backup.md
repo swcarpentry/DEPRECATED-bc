@@ -105,10 +105,10 @@ nothing added to commit but untracked files present (use "git add" to track)
 In order to understand what the "untracked files" message really means, we need to understand the basic model of how git groups your files.  There are essentially three places your work can reside:
 - As a 'revision'.  A revision is like a snapshot of your work which you can come back to at any time.  Revisions also have a relational tree-like structure; we'll get into the details of this later, but for now just imagine a very simple chain of revisions; every time you make a new revision, it has (for now) one parent revision, which is just whatever revision came before it.
 - In the 'index'.  Git's index is like the staging area where you put your work to tell git 'these are the changes I'd like to package as my next revision'.
-- In the 'work tree'.  Git's work tree is just the new work you've done that hasn't been added to the index or committed; every time you save a change to a file in the way you're used to, you've put new stuff in the work tree.  
+- In the 'working tree'.  Git's working tree is just the new work you've done that hasn't been added to the index or committed; every time you save a change to a file in the way you're used to, you've put new stuff in the working tree.  
 
 With that mental model in mind, the "untracked files" message means that there's a file in the directory
-that Git isn't keeping track of - it's in your work tree, but not your index.
+that Git isn't keeping track of - it's in your working tree, but not your index.
 We can tell Git that it should add it to the index so that we can later commit it:
 
 ```
@@ -146,7 +146,7 @@ When we run `git commit`,
 Git takes everything we have told it to save by using `git add`
 and stores a copy permanently inside the special `.git` directory.
 This permanent copy is called a [revision](../../gloss.html#revision). 
-In git parlance, 'git add mars.txt' promoted mars.txt from the work tree to the index,
+In git parlance, 'git add mars.txt' promoted mars.txt from the working tree to the index,
 and 'git commit -m ....' packaged up everything in the index as a commit that we can return to at a later time if need be. 
 We use the `-m` flag (for "message")
 to record a comment that will help us remember later on what we did and why.
@@ -201,7 +201,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 The last line is the key phrase:
 "no changes added to commit".
-We have changed this file in our work tree, but we haven't promoted those changes to the index or saved them as as commit. 
+We have changed this file in our working tree, but we haven't promoted those changes to the index or saved them as as commit. 
 Let's double-check our work using `git diff`,
 which shows us the differences between
 the current state of the file
@@ -249,7 +249,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 Whoops:
 Git won't commit because we didn't use `git add` first - there's nothing in the index and nothing for git to make a commit out of!
-Remember to promote our work from the work tree to the index first using 'git add':
+Remember to promote our work from the working tree to the index first using 'git add':
 
 ```
 $ git add mars.txt
@@ -491,7 +491,7 @@ to back up to earlier revisions,
 `git reset --hard 34961b1` to back up to a particular revision,
 and so on.  
 
-In other words, 'git reset --hard HEAD' (or whichever revision we like) wipes out our index and makes our work tree match whatever commit we asked for exactly - so watch out!  If you didn't commit some work and do a hard reset, it's gone forever.  If you did commit the work, you can get back to it with another hard reset pointing at its commit ID; hard resets just take you to whatever commit you want, abandoning the index and work tree as it does.
+In other words, 'git reset --hard HEAD' (or whichever revision we like) wipes out our index and makes our working tree match whatever commit we asked for exactly - so watch out!  If you didn't commit some work and do a hard reset, it's gone forever.  If you did commit the work, you can get back to it with another hard reset pointing at its commit ID; hard resets just take you to whatever commit you want, abandoning the index and working tree as it does.
 
 There are less drastic things we can do with git reset as well:  
 
@@ -499,15 +499,15 @@ There are less drastic things we can do with git reset as well:
 $ git reset --mixed HEAD
 ```
 
-will dump the index just like git reset --hard, but it won't touch your work tree, so you won't lose any work (much safer) - use this if you've committed some things you regret, and would like to go back to HEAD (or any other revision) and start changing things and re-committing from there.  Even more tame is the ever-gentle
+will dump the index just like git reset --hard, but it won't touch your working tree, so you won't lose any work (much safer) - use this if you've committed some things you regret, and would like to go back to HEAD (or any other revision) and start changing things and re-committing from there.  Even more tame is the ever-gentle
 
 ```
 $ git reset --soft HEAD
 ```
 
-which will leave your work tree alone like --mixed, but also automatically set all those changes up in the index, staged and ready to be committed as a descendent of HEAD or whatever other revision you asked for - this is for when all you want to change is how you committed things, not the contents of your files.
+which will leave your working tree alone like --mixed, but also automatically set all those changes up in the index, staged and ready to be committed as a descendent of HEAD or whatever other revision you asked for - this is for when all you want to change is how you committed things, not the contents of your files.
 
-There's one more thing to understand about git reset - the savvy reader might notice that from our description, there doesn't actually seem to be a reason to provide a revision ID for the --mixed or --soft options to reset; --hard resets the work tree, so it needs to know what to reset it to, but if --mixed and --soft don't touch the work tree, what's the point of the revision ID?  Recall again the relational structure between revisions, that chain of commits; when we git reset to a revision (regardless of --hard, --mixed, or --soft), we're telling git to start tacking commits onto the chain starting from that revision; in other words, we're changing what `HEAD` and all it's relational pointers like HEAD~1, HEAD~74 etc mean.  This may seem like a lot of bother to define a lineage that so far we only use for navigation relative to HEAD, but in later lessons we'll learn about the tremendous power of git's relational structure for more complicated projects.
+There's one more thing to understand about git reset - the savvy reader might notice that from our description, there doesn't actually seem to be a reason to provide a revision ID for the --mixed or --soft options to reset; --hard resets the working tree, so it needs to know what to reset it to, but if --mixed and --soft don't touch the working tree, what's the point of the revision ID?  Recall again the relational structure between revisions, that chain of commits; when we git reset to a revision (regardless of --hard, --mixed, or --soft), we're telling git to start tacking commits onto the chain starting from that revision; in other words, we're changing what `HEAD` and all it's relational pointers like HEAD~1, HEAD~74 etc mean.  This may seem like a lot of bother to define a lineage that so far we only use for navigation relative to HEAD, but in later lessons we'll learn about the tremendous power of git's relational structure for more complicated projects.
 
 But what if we want to recover somes files without wandering around on our chain of commits and messing with where HEAD is?
 For example,
