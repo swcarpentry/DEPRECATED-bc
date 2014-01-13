@@ -137,26 +137,28 @@ things like error functions, gamma functions, Legendre polynomials, etc.
 But as a example let's focus on my favorites: the Bessel functions.
 
 ```python
-  from scipy.special import * 
-  from pylab import *
-  
-  x = arange(0.0, 10.1, 0.1)
+  from scipy.special import *
+  import numpy as np
+  from matplotlib import pyplot as plt
+
+  x = np.arange(0.0, 10.1, 0.1)
   
   for n in range(4): 
     j = jn(n, x) 
-    plot(x, j, 'k-') 
-    text(x[10*(n+1)+1], j[10*(n+1)], r'$J_%r$'%n)
+    plt.plot(x, j, 'k-') 
+    plt.text(x[10*(n+1)+1], j[10*(n+1)], r'$J_%r$'%n)
   
   for n in range(3): 
-    y = yn(n, x) plot(x, y, 'k--') 
-    text(x[10*(n)+6], y[10*(n)+5], r'$Y_%r$'%n)
+    y = yn(n, x)
+    plt.plot(x, y, 'k--') 
+    plt.text(x[10*(n)+6], y[10*(n)+5], r'$Y_%r$'%n)
   
-  axis([0, 10, -2, 1.25]) 
-  xlabel(r'$x$') 
-  ylabel("Bessel Functions")
+  plt.axis([0, 10, -2, 1.25]) 
+  plt.xlabel(r'$x$') 
+  plt.ylabel("Bessel Functions")
   
-  show() 
-```
+  plt.show()
+  ```
 
 These 20-ish lines of code should produce :
 
@@ -444,7 +446,8 @@ First let's take the case for where f(x) = e\^x.
 
 ```python
   import scipy.misc
-  from pylab import *
+  import numpy as np
+  from matplotlib import pyplot as plt
   
   #Let's expand e^x to fifth order and record the coefficents 
   e_exp = [1.0, 1.0, 1.0/2.0, 1.0/6.0, 1.0/24.0, 1.0/120.0]
@@ -457,21 +460,21 @@ First let's take the case for where f(x) = e\^x.
       return p(x) / q(x)
   
   #Let's test it...
-  x = arange(0.0, 3.1, 0.1)
+  x = np.arange(0.0, 3.1, 0.1)
   
   e_exp.reverse()
-  e_poly = poly1d(e_exp)
+  e_poly = np.poly1d(e_exp)
   
-  plot(x, PadeAppx(x), 'k--', label="Pade Approximation")
-  plot(x, scipy.e**x, 'k-', label=r'$e^x$')
-  plot(x, e_poly(x), 'r-', label="Power Series")
+  plt.plot(x, PadeAppx(x), 'k--', label="Pade Approximation")
+  plt.plot(x, scipy.e**x, 'k-', label=r'$e^x$')
+  plt.plot(x, e_poly(x), 'r-', label="Power Series")
   
-  xlabel(r'$x$')
-  ylabel("Exponential Functions")
+  plt.xlabel(r'$x$')
+  plt.ylabel("Exponential Functions")
   
-  legend(loc=0)
+  plt.legend(loc=0)
 
-  show()
+  plt.show()
 ```
 
 The above script, pade1.py, generates the following figure :
@@ -495,7 +498,8 @@ function. Let's try approximating a rougher function...
 ```python
 
   import scipy.misc
-  from pylab import *
+  import numpy as np
+  from matplotlib import pyplot as plt
   
   def f(x):
           return (7.0 + (1+x)**(4.0/3.0))**(1.0/3.0)
@@ -511,21 +515,21 @@ function. Let's try approximating a rougher function...
           return p(x) / q(x)
   
   #Let's test it...
-  x = arange(0.0, 10.01, 0.01)
+  x = np.arange(0.0, 10.01, 0.01)
   
   f_exp.reverse()
-  f_poly = poly1d(f_exp)
+  f_poly = np.poly1d(f_exp)
   
-  plot(x, PadeAppx(x), 'k--', label="Pade Approximation")
-  plot(x, f(x), 'k-', label=r'$f(x)$')
-  plot(x, f_poly(x), 'r-', label="Power Series")
+  plt.plot(x, PadeAppx(x), 'k--', label="Pade Approximation")
+  plt.plot(x, f(x), 'k-', label=r'$f(x)$')
+  plt.plot(x, f_poly(x), 'r-', label="Power Series")
   
-  xlabel(r'$x$')
-  ylabel("Polynomial Function")
+  plt.xlabel(r'$x$')
+  plt.ylabel("Polynomial Function")
 
-  legend(loc=0)
+  plt.legend(loc=0)
 
-  show()
+  plt.show()
 ```
 
 The above script, pade2.py, generates the following figure
