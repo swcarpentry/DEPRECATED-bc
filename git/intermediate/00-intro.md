@@ -34,7 +34,7 @@ won't scale as they add more scientists to their team.
 A final concern,
 is that the text and graphics in their report,
 might fall out of sync with the code that generated them,
-and that they might accidentally publish a chart,
+and that they might accidentally publish a chart
 their code can't reproduce
 and that they can no longer explain.
 
@@ -56,14 +56,15 @@ Distributed version control is better than mailing files back and forth or cloud
     This means that Barbara can experimentally try out new predator-prey models
     without worrying about changing the main simulation,
     and that Candace can checkpoint her work on the report at any time,
-    even when her cable provider's Internet connection,
+    even when her cable provider's Internet connection
     mysteriously fails in the middle of the day.
 
 This lesson shows how to use
 a popular open source distributed version control system called Git.
 It is more complex than some alternatives,
 but it is widely used,
-and is further augmented by a free hosting site called [GitHub](http://github.com).
+and is further augmented by a free hosting sites such as
+[BitBucket](http://bitbucket.org) and [GitHub](http://github.com).
 No matter which distributed version control system you use,
 the most important thing to learn is not the details of their more obscure commands,
 but the fundamentals of how they work,
@@ -71,8 +72,8 @@ and the workflow that they encourage.
 
 ## Introducing Yourself to Git
 
-The first time we use Git on a new machine,
-we need to run commands to configure a few things.
+The first time you use Git on a new machine,
+you need to run commands to configure a few things.
 
 First, you need to tell Git
 your preferred name and email address.
