@@ -1,8 +1,7 @@
 ---
 layout: lesson
 root: ../..
-title: Introducing Distributed Version Control, and Introducing
-Yourself to Git
+title: Introducing Distributed Version Control, and Introducing Yourself to Git
 level: intermediate
 ---
 
