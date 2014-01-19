@@ -509,11 +509,11 @@ which will leave your working tree alone like `--mixed`, but also automatically 
 
 We can summarize the impact of the three options as follows...
 
-| Command             | Effect                                         |
-|---------------------|------------------------------------------------|
-| `git reset --soft`  | No changes to working tree or index            |
-| `git reset --mixed` | Remove staged changes from index               |
-| `git reset --hard`  | Remove changed files in index and working tree |
+| Command             | Effect                                         | Common Use                                 |
+|---------------------|------------------------------------------------|--------------------------------------------|
+| `git reset --soft`  | No changes to working tree or index            |Change the commit message you just made     |
+| `git reset --mixed` | Remove staged changes from index               |Change what's going into the next commit    |
+| `git reset --hard`  | Remove changed files in index and working tree |Completely abandon everything and go back   |
 
 
 In all cases, `git reset` is moving where `HEAD` is currently pointing; think of `HEAD` as the end of that chain of commits that git is making, and moving it changes where the next commit is going to get tacked on to; the difference between `--hard`, `--mixed` and `--soft` is just what happens to the index and working trees as we move `HEAD`.  In later lessons we'll learn more about the tremendous power of git's relational structure, but for now it's enough to understand that making a new commit moves the `HEAD` forward by one commit, and reset moves `HEAD` backwards along the chain to wherever we reset to.
