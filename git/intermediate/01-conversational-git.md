@@ -94,8 +94,9 @@ we can see that Git has created a hidden directory called `.git`:
 
 ```
 $ ls -a
-.	..	.git
-```
+.                        2013-05-24-2760-2763.txt Lumi.2762.csv
+..                       Lumi.2760.csv            Lumi.2763.csv
+.git                     Lumi.2761.csv            python_pipeline.ipy```
 
 Git stores information about the project
 in this special sub-directory.
@@ -108,7 +109,7 @@ we had not published yet.
 
 We are looking
 at the latest *revision*,
-also referred to in the Git documentation as a  *commit*,
+also referred to in the Git documentation as a *commit*,
 of the `bio-pipeline` repository.
 If we want to see the name of this revision,
 we use the `log` command.
@@ -116,7 +117,7 @@ By default, when we execute `git log`, it gives us
 information about this revision
 and every other revision
 made before it.
-We use the the command-line argument, *--max count 1*,
+We use the the command-line argument, `--max count 1`,
 to inform Git that we only want to see the current one.
 
 ```
@@ -217,12 +218,18 @@ index 0000000..ab9e62b
 ...
 ```
 
-The output is cryptic
-because it is intended to be read by machines,
-and only sometimes humans.
+The output is slightly cryptic
+because it is intended to be read by machines
+in addition to humans.
 The differences, also known as the *diff*,
 tells you how each file was changed
 from its previous version to this one.
+
+In general, lines starting with a single ‘+’ were added,
+and lines starting with a single ‘-’ were removed.”.
+Lines without the initial ‘+’ or ‘-’ are present in both versions,
+and are provided as helpful context
+so you can understand the changes. 
 
 The diff headers in the output:
 
@@ -272,7 +279,7 @@ are the contents of the new file he added,
 
 Here are two more useful arguments to `git log`:
 
-* `--oneline` - Prints only the first few digits of the hash
+* `--oneline` - Prints only the first few characters of the hash
   and the first line of the commit message in each revision.
 * `--stat` - Prints out a summary of files changed in each revision.
 
@@ -336,7 +343,7 @@ changes and commit them, and you can discard any commits you make in this
 state without impacting any branches by performing another checkout.
 
 If you want to create a new branch to retain commits you create, you may
-do so (now or later) by using -b with the checkout command again. Example:
+do so (now or later) by using `-b` with the checkout command again. Example:
 
   git checkout -b new_branch_name
 
@@ -358,7 +365,7 @@ cbd6ff5 Added data file
 ```
 
 Uh-oh.  `git log`, by default,
-only tells us the history of our current revision..
+only tells us the history of our current revision.
 
 Don't worry, we only need to add
 the `--all` flag,
@@ -427,7 +434,7 @@ where we started.
 Lets we go back to the revision we started at.
 
 ```
-$❯ git checkout 61fd
+$ git checkout 61fd
 Previous HEAD position was cbd6ff5... Added data file
 HEAD is now at 61fd2bc... Made fixes to Python pipeline
 ```
@@ -466,7 +473,7 @@ Let's practice by doing something dangerous.
 First, let's make sure you're on the most recent revision.
 
 ```
-git checkout 61fd
+$ git checkout 61fd
 ```
 
 Then, go ahead and remove Lumi.2763.csv.

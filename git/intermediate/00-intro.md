@@ -10,13 +10,13 @@ level: intermediate
 Barbara Biologist and Candace Cosmologist have been hired by Universal Missions
 (a space services spinoff from Euphoric State University)
 to figure out where the company should send its next planetary lander.
-Since their couple biocosmology simulation software is still being developed,
+Since their coupled biocosmology simulation software is still being developed,
 they need to coordinate the changes between
 Barbara's biology code and Candace's new cosmology simulations.
 Barbara and Candace are developing more than just a report;
 their reproducible analysis will include data, code, figures, and text.
 New online writing collaboration tools
-such as writeLaTeX , Google Docs, and Microsoft SkyDrive
+such as writeLaTeX, Google Docs, and Microsoft SkyDrive
 can support their distributed authoring process,
 but so far they've relied on email and Dropbox
 to coordinate the rest of their development.
@@ -27,7 +27,7 @@ If they take turns,
 each one will spend a lot of time waiting for the other to finish,
 but if they work on their own copies and email changes back and forth,
 things will be lost, overwritten, or duplicated.
-Barbara and Candace also fear
+Barbara and Candace also worry
 this process of communicating changes
 to code, data, figures, and text
 won't scale as they add more scientists to their team.
