@@ -5,14 +5,18 @@ title: A Better Kind of Backup
 level: novice
 ---
 The first time we use Git on a new machine,
-we need to configure a few things:
+we need to configure a few things (we'll insert blank lines
+between groups of shell commands to make them easier to read):
 
-```
+~~~
 $ git config --global user.name "Vlad Dracula"
+
 $ git config --global user.email "vlad@tran.sylvan.ia"
+
 $ git config --global color.ui "auto"
+
 $ git config --global core.editor "nano"
-```
+~~~
 
 (Please use your own name and email address instead of Dracula's,
 and please make sure you choose an editor that's actually on your system
@@ -34,31 +38,32 @@ Once Git is configured,
 we can start using Git.
 Let's create a directory for our work:
 
-```
+~~~
 $ mkdir planets
+
 $ cd planets
-```
+~~~
 
 and tell Git to make it a [repository](../gloss.html#repository):
 
-```
+~~~
 $ git init
-```
+~~~
 
 If we use `ls` to show the directory's contents,
 it appears that nothing has changed:
 
-```
+~~~
 $ ls
-```
+~~~
 
 But if we add the `-a` flag to show everything,
 we can see that Git has created a hidden directory called `.git`:
 
-```
+~~~
 $ ls -a
 .	..	.git
-```
+~~~
 
 Git stores information about the project in this special sub-directory.
 If we ever delete it,
@@ -66,24 +71,24 @@ we will lose the project's history.
 
 We can ask Git for the status of our project at any time like this:
 
-```
+~~~
 $ git status
 # On branch master
 #
 # Initial commit
 #
 nothing to commit (create/copy files and use "git add" to track)
-```
+~~~
 
 We'll explain what `branch master` means later.
 For the moment,
 let's add some notes about Mars's suitability as a base.
 (We'll `cat` the text in the file after we edit it so that you can see what we're doing,
-but in real life this isn't necessary.
-We'll also insert blank lines between groups of shell commands to make them easier to read.)
+but in real life this isn't necessary.)
 
-```
+~~~
 $ nano mars.txt
+
 $ cat mars.txt
 Cold and dry, but everything is my favorite color
 
@@ -100,7 +105,7 @@ $ git status
 #
 #	mars.txt
 nothing added to commit but untracked files present (use "git add" to track)
-```
+~~~
 
 In order to understand what the "untracked files" message really means, we need to understand the basic model of how git groups your files.  There are essentially three places your work can reside:
 - As a 'revision'.  A revision is like a snapshot of your work which you can come back to at any time.  Revisions also have a relational tree-like structure; we'll get into the details of this later, but for now just imagine a very simple chain of revisions; every time you make a new revision, it has (for now) one parent revision, which is just whatever revision came before it.
@@ -111,13 +116,13 @@ With that mental model in mind, the "untracked files" message means that there's
 that Git isn't keeping track of - it's in your working tree, but not your index.
 We can tell Git that it should add it to the index so that we can later commit it:
 
-```
+~~~
 $ git add mars.txt
-```
+~~~
 
 and check that the right thing happened like this:
 
-```
+~~~
 $ git status
 # On branch master
 #
@@ -128,19 +133,19 @@ $ git status
 #
 #	new file:   mars.txt
 #
-```
+~~~
 
 mars.txt is now in the index - Git now knows that it's supposed to keep track of this file,
 but it hasn't yet recorded any changes for posterity as a commit.
 To get it to do that,
 we need to run one more command:
 
-```
+~~~
 $ git commit -m "Starting to think about Mars"
 [master (root-commit) f22b25e] Starting to think about Mars
  1 file changed, 1 insertion(+)
  create mode 100644 mars.txt
-```
+~~~
 
 When we run `git commit`,
 Git takes everything we have told it to save by using `git add`
@@ -156,38 +161,39 @@ so that we can write a longer message.
 
 If we run `git status` now:
 
-```
+~~~
 $ git status
 # On branch master
 nothing to commit, working directory clean
-```
+~~~
 
 it tells us everything is up to date.
 If we want to know what we've done recently,
 we can ask Git to show us the project's history:
 
-```
+~~~
 $ git log
 commit f22b25e3233b4645dabd0d81e651fe074bd8e73b
 Author: Vlad Dracula <vlad@tran.sylvan.ia>
 Date:   Thu Aug 22 09:51:46 2013 -0400
 
     Starting to think about Mars
-```
+~~~
 
 Now suppose Dracula adds more information to the file:
 
-```
+~~~
 $ nano mars.txt
+
 $ cat mars.txt
 Cold and dry, but everything is my favorite color
 The two moons may be a problem for Wolfman
-```
+~~~
 
 If we run `git status`,
 it tells us the file has been modified:
 
-```
+~~~
 $ git status
 # On branch master
 # Changes not staged for commit:
@@ -197,7 +203,7 @@ $ git status
 #	modified:   mars.txt
 #
 no changes added to commit (use "git add" and/or "git commit -a")
-```
+~~~
 
 The last line is the key phrase:
 "no changes added to commit".
@@ -207,7 +213,7 @@ which shows us the differences between
 the current state of the file
 and the most recently saved version:
 
-```
+~~~
 $ git diff
 diff --git a/mars.txt b/mars.txt
 index df0654a..315bf3a 100644
@@ -216,7 +222,7 @@ index df0654a..315bf3a 100644
 @@ -1 +1,2 @@
  Cold and dry, but everything is my favorite color
 +The two moons may be a problem for Wolfman
-```
+~~~
 
 The output is cryptic because
 it is actually a series of commands for tools like editors and `patch`
@@ -235,7 +241,7 @@ If we can break it down into pieces:
 
 Let's commit our change:
 
-```
+~~~
 $ git commit -m "Concerns about Mars's moons on my furry friend"
 # On branch master
 # Changes not staged for commit:
@@ -245,19 +251,19 @@ $ git commit -m "Concerns about Mars's moons on my furry friend"
 #	modified:   mars.txt
 #
 no changes added to commit (use "git add" and/or "git commit -a")
-```
+~~~
 
 Whoops:
 Git won't commit because we didn't use `git add` first - there's nothing in the index and nothing for git to make a commit out of!
 Remember to promote our work from the working tree to the index first using 'git add':
 
-```
+~~~
 $ git add mars.txt
 
 $ git commit -m "Concerns about Mars's moons on my furry friend"
 [master 34961b1] Concerns about Mars's moons on my furry friend
  1 file changed, 1 insertion(+)
-```
+~~~
 
 Git insists that we add files to the set we want to commit
 before actually committing anything
@@ -280,8 +286,9 @@ and `git commit` then copies them to long-term storage (as a commit):
 
 The following commands show this in action:
 
-```
+~~~
 $ nano mars.txt
+
 $ cat mars.txt
 Cold and dry, but everything is my favorite color
 The two moons may be a problem for Wolfman
@@ -296,7 +303,7 @@ index 315bf3a..b36abfd 100644
  Cold and dry, but everything is my favorite color
  The two moons may be a problem for Wolfman
 +But the Mummy will appreciate the lack of humidity
-```
+~~~
 
 So far, so good:
 we've made a change,
@@ -304,10 +311,11 @@ and `git diff` tells us what it is.
 Now let's put that change in the staging area
 and see what `git diff` reports:
 
-```
+~~~
 $ git add mars.txt
+
 $ git diff
-```
+~~~
 
 There is no output:
 as far as Git can tell,
@@ -316,7 +324,7 @@ and what's currently in the directory.
 However,
 if we do this:
 
-```
+~~~
 $ git diff --staged
 diff --git a/mars.txt b/mars.txt
 index 315bf3a..b36abfd 100644
@@ -326,30 +334,30 @@ index 315bf3a..b36abfd 100644
  Cold and dry, but everything is my favorite color
  The two moons may be a problem for Wolfman
 +But the Mummy will appreciate the lack of humidity
-```
+~~~
 
 it shows us the difference between
 the last committed change
 and what's in the staging area.
 Let's save our changes:
 
-```
+~~~
 $ git commit -m "Thoughts about the climate"
 [master 005937f] Thoughts about the climate
  1 file changed, 1 insertion(+)
-```
+~~~
 
 check our status:
 
-```
+~~~
 $ git status
 # On branch master
 nothing to commit, working directory clean
-```
+~~~
 
 and look at the history of what we've done so far:
 
-```
+~~~
 $ git log
 git log
 commit 005937fbe2a98fb83f0ade869025dc2636b4dad5
@@ -369,14 +377,14 @@ Author: Vlad Dracula <vlad@tran.sylvan.ia>
 Date:   Thu Aug 22 09:51:46 2013 -0400
 
     Starting to think about Mars
-```
+~~~
 
 If we want to see what we changed when,
 we use `git diff` again,
 but refer to old versions
 using the notation `HEAD~1`, `HEAD~2`, and so on:
 
-```
+~~~
 $ git diff HEAD~1 mars.txt
 diff --git a/mars.txt b/mars.txt
 index 315bf3a..b36abfd 100644
@@ -396,7 +404,7 @@ index df0654a..b36abfd 100644
  Cold and dry, but everything is my favorite color
 +The two moons may be a problem for Wolfman
 +But the Mummy will appreciate the lack of humidity
-```
+~~~
 
 Recall above we mentioned that revisions have a relational structure, for now just like a simple chain; in git, the word `HEAD` always refers to the most recent end of that chain, the last revision you tacked on.  In other words, `HEAD` means "the most recently saved version".  Every time you do git commit, a new revision is tacked onto the end of that chain, and `HEAD` moves forward to point at that new latest revision.  We can step backwards on the chain using the `~` notation;
 `HEAD~1` (pronounced "head minus one")
@@ -412,7 +420,7 @@ Our first commit was given the ID
 f22b25e3233b4645dabd0d81e651fe074bd8e73b,
 so let's try this:
 
-```
+~~~
 $ git diff f22b25e3233b4645dabd0d81e651fe074bd8e73b mars.txt
 diff --git a/mars.txt b/mars.txt
 index df0654a..b36abfd 100644
@@ -422,13 +430,13 @@ index df0654a..b36abfd 100644
  Cold and dry, but everything is my favorite color
 +The two moons may be a problem for Wolfman
 +But the Mummy will appreciate the lack of humidity
-```
+~~~
 
 That's the right answer,
 but typing random 40-character strings is annoying,
 so Git lets us use just the first few:
 
-```
+~~~
 $ git diff f22b25e mars.txt
 diff --git a/mars.txt b/mars.txt
 index df0654a..b36abfd 100644
@@ -438,23 +446,24 @@ index df0654a..b36abfd 100644
  Cold and dry, but everything is my favorite color
 +The two moons may be a problem for Wolfman
 +But the Mummy will appreciate the lack of humidity
-```
+~~~
 
 All right:
 we can save changes to files and see what we've changed---how
 can we restore older versions of things?
 Let's suppose we accidentally overwrite our file:
 
-```
+~~~
 $ nano mars.txt
+
 $ cat mars.txt
 We will need to manufacture our own oxygen
-```
+~~~
 
 `git status` now tells us that the file has been changed,
 but those changes haven't been staged:
 
-```
+~~~
 $ git status
 # On branch master
 # Changes not staged for commit:
@@ -464,11 +473,11 @@ $ git status
 #	modified:   mars.txt
 #
 no changes added to commit (use "git add" and/or "git commit -a")
-```
+~~~
 
 We can put things back the way they were like this:
 
-```
+~~~
 $ git reset --hard HEAD
 HEAD is now at 005937f Thoughts about the climate
 
@@ -476,7 +485,7 @@ $ cat mars.txt
 Cold and dry, but everything is my favorite color
 The two moons may be a problem for Wolfman
 But the Mummy will appreciate the lack of humidity
-```
+~~~
 
 The `--hard` argument to `git reset` tells it to throw away local changes:
 without that,
@@ -527,9 +536,9 @@ In that case,
 we want to check out an older revision of the file,
 so we do something like this:
 
-```
+~~~
 $ git checkout 123456 mars.txt
-```
+~~~
 
 but use the first few digits of an actual revision number instead of 123456.
 To get the right answer,
@@ -548,3 +557,122 @@ without also undoing changes made later to the conclusion.
 If the introduction and conclusion are stored in separate files,
 on the other hand,
 moving backward and forward in time becomes much easier.
+
+
+What if we have files that we do not want Git to track for us? For
+example, we might have backup files created by the editor, or result
+files or intermediate data files that we do not need to track, and
+these can clutter up our `git status` output.
+
+Let's create some data files that we don't want to track:
+
+```
+$ touch a.dat b.dat c.dat
+$ mkdir results
+$ touch results/a.out results/b.out
+```
+
+Then, we can look at the status:
+
+```
+$ git status
+# On branch master 
+# 
+# Initial commit 
+# 
+# Untracked files: 
+# (use "git add <file>..." to include in what will be committed) 
+# 
+# a.dat 
+# b.dat 
+# c.dat 
+# results/ 
+nothing added to commit but untracked files present (use "git add" to track)
+```
+
+Seeing all of these files can be annoying, and worse, the clutter can
+hide important files from us. Let's tell Git to ignore those files.
+
+Git has a powerful mechanism for ignoring files.  We will look at a
+basic example.  In a repository, the file `.gitignore` is used to
+specify files to ignore.
+
+```
+$ nano .gitignore
+$ cat .gitignore
+*.dat
+/results/
+```
+
+This tells Git to ignore any file ending with `.dat`, and all files
+under the `results` directory. (If any of these files were already being
+tracked, they would not be affected by `.gitginore`.)
+
+Now, we have a much cleaner status.
+
+
+```
+# On branch master
+#
+# Initial commit
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	.gitignore
+nothing added to commit but untracked files present (use "git add" to track)
+```
+
+
+Now Git notices the `.gitignore` file.  You might think we wouldn't
+want to track this file, but if our programs are creating these extra
+data files, all users of this repository will probably want to ignore
+them too.  So, we can add the ignore file to the repository and check
+it in.
+
+```
+$ git add .gitignore
+$ git commit -m "Add the ignore file"
+$ git status
+# On branch master
+nothing to commit, working directory clean
+```
+
+When `git status` is clean, it is much easier to tell that all of our
+work is checked in.
+
+We can see the ignored files in the status if we want.  That can be
+helpful when making sure that no files were accidentally ignored.
+
+```
+$ git status --ignored
+# On branch master
+# Ignored files:
+#  (use "git add -f <file>..." to include in what will be committed)
+#
+#        a.dat
+#        b.dat
+#        c.dat
+#        results/
+
+nothing to commit, working directory clean
+```
+
+Finally, the ignore file helps us avoid accidentally adding files to
+the repository that we don't want.
+
+```
+$ git add a.dat
+The following paths are ignored by one of your .gitignore files:
+a.dat
+Use -f if you really want to add them.
+fatal: no files added
+```
+
+Git notices that `a.dat` would be excluded by the rules given in the
+`.gitignore` file and doesn't automatically include it. We can
+override this by using the `-f` flag.
+
+As shown here, the `.gitignore` file just works on a specific
+repository, but you can also set global rules for `git ignore` using a
+`.gitginore` file in your home directory.
