@@ -1,0 +1,11 @@
+
+# This is a simple R markdown file
+
+We can include some narrative here, that can be easily formatted as __bold__, _italics_. We can also include [links](http://software-carpentry.org) to web pags and also citations [@Ram2013] to be processed by tools like Pandoc.
+
+```{r}
+data(iris)
+head(iris)
+```
+
+This will load Fisher's iris dataset and display the first `r nrow(head(iris))` rows. 

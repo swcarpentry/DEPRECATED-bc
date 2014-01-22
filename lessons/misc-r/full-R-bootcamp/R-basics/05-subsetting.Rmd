@@ -1,0 +1,153 @@
+```{r, include = FALSE}
+source("../chunk_options.R")
+```
+
+# Subsetting data
+
+R has many powerful subset operators and mastering them will allow you to easily perform complex operation on any kind of dataset. Allows you to manipulate data very succinctly.
+
+As the last section for this topic we'll cover:
+
+* The three subsetting operators,
+* The six types of subsetting,
+* Important difference in subsetting behaviour for different objects 
+* Using subsetting in conjunction with assignment
+
+
+## Subsetting atomic vectors
+
+```{r, eval = TRUE}
+x <- c(5.4, 6.2, 7.1, 4.8)
+```
+
+**We can subset this in 5 ways**
+
+1. Using positive integers
+
+```{r, eval = TRUE}
+x[1]
+x[c(3,1)]
+# We can duplicate indices
+x[c(1, 1)]
+# Real numbers are silently truncated to integers
+x[c(2.1, 2.9)]
+```
+
+2. Using negative integers
+
+```{r, eval = TRUE}
+# skip the first element
+x[-1]
+# skip the first and the fifth
+x[-c(1, 5)]
+```
+
+3. Using logical operators
+
+```{r, eval = TRUE}
+x[c(TRUE, TRUE, FALSE, FALSE)]
+# or based on a condition
+x[x > 3]
+x[which(x >3)]
+# Also see `which.max()` and `which.min()`
+```
+
+4. with nothing
+
+```{r, eval = TRUE}
+x[]
+# useful when dealing with 2 or higher dimensional objects
+```
+
+5. with zero
+
+```{r, eval = TRUE}
+x[0]
+# helpful for generating test data or creating empty objects
+```
+
+
+6. Referencing objects by their names
+
+```{r, eval = TRUE}
+(y <- setNames(x, letters[1:4]))
+y[c("d", "c", "a")]
+# We can also repeat indices
+y[c("a", "a", "a")]
+# Names are always matched exactly, not partially
+z <- c(abc = 1, def = 2)
+z[c("a", "d")]
+```
+
+---
+
+## Subsetting lists
+
+Subsetting a list works in exactly the same way as subsetting an atomic vector. Subsetting a list with [ will always return a list: `[[` and `$`, as described below, let you pull out the components of the list.
+
+```{r, eval = TRUE}
+x <- as.list(1:10)
+x[1:5]
+# What class is this object?
+```
+
+To extract individual elements inside a list, use the `[[` operator
+
+```{r, eval = TRUE}
+# to get element 5
+x[[5]]
+class(x[[5]])
+another_variable <- x[[5]]
+```
+
+Or using their names
+
+```{r, eval = TRUE}
+names(x) <- letters[1:5]
+x$a
+x[["a"]]
+```
+
+## Subsetting matrices
+
+A matrix is subset with two arguments within single brackets, `[]`, and separated by a comma. The first argument specifies the rows, and the second the columns.
+
+```{r, eval = TRUE}
+a <- matrix(1:9, nrow = 3)
+colnames(a) <- c("A", "B", "C")
+a[1:2, ]
+a[c(T, F, T), c("B", "A")]
+a[0, -2]
+```
+
+## Subsetting data frames
+
+```{r, eval = TRUE}
+df <- data.frame(x = 1:3, y = 3:1, z = letters[1:3])
+df[df$x == 2, ]
+df[c(1, 3), ]
+```
+
+There are two ways to select columns from a data frame
++ Like a list:
+
+```{r}
+df[c("x", "z")]
+```
+
++ Like a matrix:
+
+```{r}
+df[, c("x", "z")]
+```
+
+There's an important difference if you select a simple column: matrix subsetting simplifies by default, list subsetting does not.
+
+```{r}
+df["x"]
+df[, "x"]
+```
+
+
+
+

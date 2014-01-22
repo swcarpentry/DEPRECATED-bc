@@ -1,0 +1,64 @@
+```{r, include = FALSE}
+source("../chunk_options.R")
+```
+# Some notes on vectorization
+
+Many operations in R are vectorized which means that writing code is more efficient, concise and easy to read.
+
+Idea with vectorized operations is that things can happen in parallel without needing to act on one element at a time.
+
+```{r}
+x <- 1:4
+y <- 6:9 
+```
+
+Mathematical operations are performed element wise:
+
+```{r}
+x + y
+x - y
+x * y
+x / y
+```
+
+Boolean comparisons return logical vectors:
+
+```{r}
+y == 8
+x > 2
+x >= 2
+```
+
+A shorter vector is recycled:
+
+```{r}
+z <- c(1, 2)
+x * z
+```
+
+Matrix operations are also vectorized:
+
+```{r}
+x <- matrix(1:4, 2, 2)
+y <- matrix(rep(10, 4), 2, 2)
+x * y # is not matrix multiplication. It's element wise
+x / y # is elementwise division.
+```
+
+Element wise matrix operations are performed by column. In the example below, `y[1, 1]` is multipled by `z[1]`, followed by `y[1, 2]` multiplied by `z[2]`, and then the vector `z` is recycled for multipying the second column of `y`.
+
+```{r}
+y * z
+```
+
+True matrix multiplication is:
+
+```{r}
+x %% y
+```
+
+Vectorized operations make code a lot simpler.
+
+
+
+
