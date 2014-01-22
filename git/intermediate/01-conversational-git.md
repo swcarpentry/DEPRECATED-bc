@@ -61,7 +61,7 @@ in the same directory you entered the command.
 The command (and its successful output)
 should look similar to this:
 
-```
+~~~
 $ git clone https://github.com/ahmadia/bio-pipeline.git
 Cloning into 'bio-pipeline'...
 remote: Counting objects: 41, done.
@@ -69,34 +69,34 @@ remote: Compressing objects: 100% (36/36), done.
 remote: Total 41 (delta 19), reused 23 (delta 4)
 Unpacking objects: 100% (41/41), done.
 Checking connectivity... done
-```
+~~~
 You can now enter the repository
 (which is also a directory on your file system)
 by typing:
 
-```
+~~~
 $ cd bio-pipeline
-```
+~~~
 
 If we now type `ls`,
 we see that the repository
 has some code
 and a few data files.
 
-```
+~~~
 $ ls
 2013-05-24-2760-2763.txt Lumi.2761.csv            Lumi.2763.csv
 Lumi.2760.csv            Lumi.2762.csv            python_pipeline.ipy
-```
+~~~
 
 If we add the `-a` flag to show everything,
 we can see that Git has created a hidden directory called `.git`:
 
-```
+~~~
 $ ls -a
 .                        2013-05-24-2760-2763.txt Lumi.2762.csv
 ..                       Lumi.2760.csv            Lumi.2763.csv
-.git                     Lumi.2761.csv            python_pipeline.ipy```
+.git                     Lumi.2761.csv            python_pipeline.ipy~~~
 
 Git stores information about the project
 in this special sub-directory.
@@ -120,23 +120,23 @@ made before it.
 We use the the command-line argument, `--max count 1`,
 to inform Git that we only want to see the current one.
 
-```
+~~~
 $ git log --max-count 1
 commit 61fd2bcece2126cdd8ee24f40a04c18d39403022
 Author: Aron Ahmadia <aron@ahmadia.net>
 Date:   Tue Jun 4 10:59:21 2013 -0400
 
 	Made fixes to Python pipeline
-```
+~~~
 
 Our fingers are starting to get sore from all of this typing.
 Luckily, `-n` is a common shortcut for *number of things*
 in programming and at the command line.
 To save a few keystrokes, we will instead type:
 
-```
+~~~
 $ git log -n 1
-```
+~~~
 
 which is equivalent to the previous command.
 
@@ -163,14 +163,14 @@ We can see each revision's parents
 as output from `git log`
 by adding the `--parents` flag.
 
-```
+~~~
 $❯ git log --parents -n 1
 commit 61fd2bcece2126cdd8ee24f40a04c18d39403022 8595b710e3be4b2bf01d51a1c55842510b82ff87
 Author: Aron Ahmadia <aron@ahmadia.net>
 Date:   Tue Jun 4 10:59:21 2013 -0400
 
 	Made fixes to Python pipeline
-```
+~~~
 
 Notice that the parent revision is referred to only by its hash.
 Since the hash uniquely identifies this revision,
@@ -195,7 +195,7 @@ by using the up and down arrow keys.
 When you are done,
 just press `q`.
 
-```
+~~~
 $ git log -n 1 -p
 commit 61fd2bcece2126cdd8ee24f40a04c18d39403022
 Author: Aron Ahmadia <aron@ahmadia.net>
@@ -216,7 +216,7 @@ index 0000000..ab9e62b
 +g = f.readlines()
 +f.close()
 ...
-```
+~~~
 
 The output is slightly cryptic
 because it is intended to be read by machines
@@ -233,13 +233,13 @@ so you can understand the changes.
 
 The diff headers in the output:
 
-```
+~~~
 diff --git a/python_pipeline.ipy b/python_pipeline.ipy
 new file mode 100644
 index 0000000..ab9e62b
 --- /dev/null
 +++ b/python_pipeline.ipy
-```
+~~~
 
 summarize the differences
 between the previous version of the file
@@ -248,25 +248,25 @@ and its new version.
 Since `python_pipeline.ipy` was a file new to the repository,
 we see this special line:
 
-```
+~~~
 --- /dev/null
-```
+~~~
 
 This indicates that there was no previous file,
 and this file is new.
 The following line:
 
-```
+~~~
 +++ b/python_pipeline.ipy
-```
+~~~
 
 Tells you that the new file was named `python_pipeline.ipy`.
 
 The numbers between the `@@` markers informs you which lines were changed,
 
-```
+~~~
 @@ -0,0 +1,44 @@
-```
+~~~
 
 In this case,
 Aron created a new file
@@ -288,7 +288,7 @@ we see a nice text summary
 of how the repository has changed
 since it was created.
 
-```
+~~~
 $ git log --stat --oneline
 61fd2bc Made fixes to Python pipeline
  python_pipeline.ipy | 44 ++++++++++++++++++++++++++++++++++++++++++++
@@ -311,7 +311,7 @@ cbd6ff5 Added data file
  2013-05-24-2760-2763.txt | 50 ++++++++++++++++++++++++++++++++++++++++++++++++++
  Lumi.2760.csv            | 10 ++++++++++
  2 files changed, 60 insertions(+)
-```
+~~~
 
 ## Time travel (git checkout)
 
@@ -334,7 +334,7 @@ when it was first created,
 by giving `git checkout` the first four digits
 of the oldest commit in our history:
 
-```
+~~~
 $ git checkout cbd6
 Note: checking out 'cbd6'.
 
@@ -350,7 +350,7 @@ do so (now or later) by using `-b` with the checkout command again. Example:
 HEAD is now at cbd6ff5... Added data file
 $ ls
 2013-05-24-2760-2763.txt Lumi.2760.csv
-```
+~~~
 
 We'll explain the `detached HEAD` message in the next section.
 For now, note that the contents of the directory have changed.
@@ -359,10 +359,10 @@ Let's restore the original revision
 by finding the right hash
 in `git log`.
 
-```
+~~~
 $ git log --oneline
 cbd6ff5 Added data file
-```
+~~~
 
 Uh-oh.  `git log`, by default,
 only tells us the history of our current revision.
@@ -371,7 +371,7 @@ Don't worry, we only need to add
 the `--all` flag,
 to see all of a repository's available history:
 
-```
+~~~
 $ git log --oneline --all
 61fd2bc Made fixes to Python pipeline
 8595b71 first pass at making a pipeline
@@ -380,7 +380,7 @@ a396b40 added Lumi 2763
 ef023fe added Lumi 2762
 779f888 Added Lumi 2761
 cbd6ff5 Added data file
-```
+~~~
 
 This is enough to go back to where we were,
 but let's use this as an opportunity
@@ -411,11 +411,11 @@ see where we are,
 and where we've been
 in the history of our repository.
 
-```
+~~~
 $ git reflog
 cbd6ff5 HEAD@{0}: checkout: moving from master to cbd6
 61fd2bc HEAD@{1}: clone: from https://github.com/ahmadia/bio-pipeline.git
-```
+~~~
 
 By default, `git reflog` outputs one line of text
 for each time HEAD has moved.
@@ -433,11 +433,11 @@ where we started.
 
 Lets we go back to the revision we started at.
 
-```
+~~~
 $ git checkout 61fd
 Previous HEAD position was cbd6ff5... Added data file
 HEAD is now at 61fd2bc... Made fixes to Python pipeline
-```
+~~~
 
 ### Checkpoint 1
 
@@ -472,17 +472,17 @@ to just restore a specific file.
 Let's practice by doing something dangerous.
 First, let's make sure you're on the most recent revision.
 
-```
+~~~
 $ git checkout 61fd
-```
+~~~
 
 Then, go ahead and remove Lumi.2763.csv.
 
-```
+~~~
 $ rm Lumi.2763.csv
 $ ls Lumi.2763.csv                                                                            ✖
 ls: Lumi.2763.csv: No such file or directory
-```
+~~~
 
 There are a number of ways
 to accidentally corrupt, modify, overwrite, or destroy files.
@@ -494,11 +494,11 @@ Fortunately, since our copy of `Lumi.2763.csv`
 was committed to the repository,
 it is as easy as pie to restore it.
 
-```
+~~~
 $ git checkout Lumi.2763.csv
 $ ls Lumi.2763.csv
 Lumi.2763.csv
-```
+~~~
 
 In fact, so long as an undamaged copy of our Git repository
 exists *somewhere*,
