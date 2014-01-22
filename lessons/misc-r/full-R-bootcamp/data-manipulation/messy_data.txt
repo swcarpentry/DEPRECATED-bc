@@ -1,0 +1,6 @@
+J. Pritchard    01/12 - 12/11  1 1500 W  7.0 420 48  Migratory 3
+E. Jones  02/18 - 04/21  4 1293 N  8.0 490 48  Resident 1
+J. Pritchard   01/13 - 02/17   15 1028 N  4.0 46  460 Migratory
+Matt Jones   09/23 - 11/23  23 563 N   3.0 470 47  Resident 2
+S. Chamberlain 07/05 - 09/26 22  713 N   5.2 500 45  Resident 4
+C. Boettiger 10/24 - 10/30   1495 S 30 1.9 47  410 Migratory

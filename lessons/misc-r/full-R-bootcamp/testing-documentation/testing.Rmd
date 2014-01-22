@@ -1,0 +1,252 @@
+```{r, include = FALSE}
+source("../chunk_options.R")
+```
+
+# Software Testing
+
+*With additional material from  by Katy Huff, Rachel Slaybaugh, and Anthony Scopatz* 
+
+## What is testing?
+
+Software testing is a process by which one or more expected behaviors
+and results from a piece of software are exercised and confirmed. Well chosen tests will confirm expected code behavior for the extreme
+boundaries of the input domains, output ranges, parametric combinations, and other behavioral **edge cases**.
+
+# Why test software?
+
+Unless you write flawless, bug-free, perfectly accurate, fully precise,and predictable code **every time**, you must test your code in order to trust it enough to answer in the affirmative to at least a few of the following questions:
+
+-   Does your code work?
+-   **Always?**
+-   Does it do what you think it does? ([Patriot Missile Failure](http://www.ima.umn.edu/~arnold/disasters/patriot.html)),  Software Glitch Means Loss of NASA's Deep Impact Comet Probe [1](http://science.slashdot.org/story/13/09/20/2356211/software-glitch-means-loss-of-nasas-deep-impact-comet-probe), [2](http://science.slashdot.org/story/04/11/28/099245/nasas-deep-impact)
+-   Does it continue to work after changes are made?
+-   Does it continue to work after system configurations or libraries
+    are upgraded?
+-   Does it respond properly for a full range of input parameters?
+-   What about **edge or corner cases**?
+-   What's the limit on that input parameter?
+-   How will it affect your
+    [publications](http://www.nature.com/news/2010/101013/full/467775a.html)?
+
+
+# When should we test?
+
+The three right answers are:
+
+-   **ALWAYS!**
+-   **EARLY!**
+-   **OFTEN!**    
+
+
+The longer answer is that testing either before or after your software is written will improve your code, but testing after your program is used for something important is too late.
+
+
+## Why testing is important?
+
+**Seems like extra work but will save you time**  
+* Decreased frustration. Bugs appear very close to hard deadlines.  Testing allows to quickly identify where the problem is and fix it.
+
+**More confidence in the code**  
+* Better code structure. Code that’s easy to test is usually better designed. Tests sometimes make you see large complicated functions and break them down into smaller, more manageable chunks.
+
+**Make changes or updates without worrying too much**  
+* Make changes confidently because you know your tests will catch any issues.
+
+
+## Basics of testing
+
+We'll use the `testthat` package to make testing a little easier. The hierarchy of the package consists of:  
+
+* expectations
+* tests 
+* and contexts. 
+
+### Expectations
+
+
+**1. `equals()` Equality with a numerical tolerence**
+
+```{r, eval = TRUE}
+library(testthat)
+# If you don't have this package, 
+# install.packages("testthat")
+# passes
+expect_that(10, equals(10))
+# passes
+expect_that(10, equals(10 + 1e-7))
+# Fails
+expect_that(10, equals(10 + 1e-6))
+# Definitely fails!
+expect_that(10, equals(11))
+```
+
+**2. `is_identical_to`:  Exact quality with identical**
+
+```{r, eval = TRUE}
+expect_that(10, is_identical_to(10))
+expect_that(10, is_identical_to(10 + 1e-10))
+```
+
+**3. `is_equivalent_to()` is a more relaxed version of equals()**
+
+```{r, eval = TRUE}
+# ignores attribute names
+expect_that(c("one" = 1, "two" = 2), is_equivalent_to(1:2))
+```
+
+**4. `is_a()` checks that an object inherits from a specified class**  
+
+```{r, eval = TRUE}
+model <- lm(mpg ~ cyl, mtcars)
+expect_that(model, is_a("lm"))
+```
+
+
+**5. `matches()` matches a character vector against a regular expression.**
+
+```{r, eval = TRUE}
+string <- "Testing is fun!"
+# Passes
+expect_that(string, matches("Testing"))
+```
+
+**6. `prints_text()` matches the printed output from an expression against a regular expression**
+
+```{r, eval = TRUE}
+a <- list(1:10, letters)
+# Passes
+expect_that(str(a), prints_text("List of 2"))
+# Passes
+expect_that(str(iris), prints_text("data.frame"))
+```
+
+
+**7. `shows_message()` checks that an expression shows a message**
+
+```{r, eval = TRUE}
+expect_that(library(mgcv),
+shows_message("This is mgcv"))
+```
+
+**8. `gives_warning()` expects that you get a warning**
+
+```{r, eval = TRUE}
+expect_that(log(-1), gives_warning())
+expect_that(log(-1),
+  gives_warning("NaNs produced"))
+# Fails
+expect_that(log(0), gives_warning())
+```
+
+**9. `throws_error()` verifies that the expression throws an error. You can also supply a regular expression which is applied to the text of the error**
+
+```{r, eval = TRUE}
+expect_that(1 / 2, throws_error())
+expect_that(seq_along(1:NULL), throws_error())
+```
+
+
+**10. `is_true()` is a useful catchall if none of the other expectations do what you want -it checks that an expression is true**
+
+```{r, eval = TRUE}
+x <- require(ggplot2)
+expect_that(x, is_true())
+```
+
+This entire suite of tests can also be shortened.
+
+| Long form | Short form |
+| -------   | ---------  | 
+| expect_that(x, is_true()) | expect_true(), expect_false() |
+| expect_that(x, is_true()) | expect_true(), expect_false() |
+| expect_that(x, is_a(y)) | expect_is(x, y) |
+| expect_that(x, equals(y)) | expect_equal(x, y) |
+| expect_that(x, is_equivalent_to(y)) | expect_equivalent(x, y) |
+| expect_that(x, is_identical_to(y)) | expect_identical(x, y) |
+| expect_that(x, matches(y)) |  expect_matches(x, y) |
+| expect_that(x, prints_text(y)) | expect_output(x, y)  |
+| expect_that(x, shows_message(y)) | expect_message(x, y) |
+| expect_that(x, gives_warning(y)) |  expect_warning(x, y) |
+| expect_that(x, throws_error(y)) |  expect_error(x, y) |
+
+
+---
+
+## Writing a test suite
+
+Basic syntax
+
+```{r, eval = FALSE}
+test_that("a description for the test suite", {
+# load all necessary objects and variables
+# ...
+# run tests
+# run more tests
+})
+```
+
+A full example
+
+
+```{r, eval = FALSE}
+context("String length")
+
+test_that("str_length is number of characters", {
+  expect_that(str_length("a"), equals(1))
+  expect_that(str_length("ab"), equals(2))
+  expect_that(str_length("abc"), equals(3))
+})
+test_that("str_length of missing is missing", {
+  expect_that(str_length("NA"), equals(2))
+})
+test_that("str_length of factor is length of level", {
+  expect_that(str_length(factor("a")), equals(1))
+  expect_that(str_length(factor("ab")), equals(2))
+  expect_that(str_length(factor("abc")), equals(3))
+})
+```
+
+
+## Running tests
+
+Save all tests in a folder. In the case of a package, the folder is located under `inst/tests`. Otherwise save into a file that has the word `test` in the title. example. `test_script.R`
+
+Run using one of the following:
+
+```{r, eval = FALSE}
+test_file("test-str_length.r")
+test_dir('path/to/test/folder')
+test_dir('path/to/test/folder', "minimal")
+
+source("test-str_length.r")
+```
+
+## Load and test package
+
+```{r, eval = FALSE}
+library(testthat)
+library(package_name)
+test_package("package_name")
+```
+
+## Automatic testing
+
+You can leave another instance of R to run tests automatically when code is changing rapidly. This can be done using the `autotest()` function. It takes:
+
+* A code path
+* and a test path
+* (optional) reporter = "summary" by default. Can be changed to "minimal".
+
+The minimal reporter prints:  
+* **‘.’** for success, 
+* **‘E’** for an error 
+* and **‘F’** for a failure. 
+
+---
+
+# Documenting functions
+
+We can document functions inline using a simple markup that's not all that different from writing comments. In addition to helping others understand what your function does, we can use a little bit more syntax to easily turn these into function documentation if we decide to create a package.
+
+
+
