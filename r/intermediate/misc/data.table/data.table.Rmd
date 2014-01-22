@@ -72,7 +72,7 @@ do.call(rbind, l)
 rbindlist(l)
 ```
 
-This too is much faster with the data.table `rbindlist()` than with the base R `rbind()`.  To show the difference, we'll do the same procedure with data.frames 10 million rows long.
+This too is much faster with the data.table `rbindlist()` than with the base R `rbind()`.  To show the difference, we'll do the same procedure with data.frames 1 million rows long.
 
 ```{r rbindlisttiming}
 df3 <- data.frame(a = 1:10^6, b = 1:10^6)
