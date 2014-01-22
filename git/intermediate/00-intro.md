@@ -81,10 +81,10 @@ We usually prefer a permanent email address
 so that our authorship
 is still asserted in the future.
 
-```
+~~~
 $ git config --global user.name "Barbara Biologist"
 $ git config --global user.email "barbara@biologist.net"
-```
+~~~
 
 Why does Git need your name and email?
 It turns out that email addresses
@@ -100,9 +100,9 @@ that you are using a modern terminal
 and prefer colored output.
 (UI stands for user interface).
 
-```
+~~~
 $ git config --global color.ui "auto"
-```
+~~~
 
 In newer versions of Git,
 this option has already been set for you.
