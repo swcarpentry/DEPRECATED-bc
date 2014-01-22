@@ -96,7 +96,8 @@ we can see that Git has created a hidden directory called `.git`:
 $ ls -a
 .                        2013-05-24-2760-2763.txt Lumi.2762.csv
 ..                       Lumi.2760.csv            Lumi.2763.csv
-.git                     Lumi.2761.csv            python_pipeline.ipy~~~
+.git                     Lumi.2761.csv            python_pipeline.ipy
+~~~
 
 Git stores information about the project
 in this special sub-directory.
