@@ -17,6 +17,10 @@
 
 Write code that does the following:
 
+Create a list of length two containing "species1.csv" and "species2.csv". 
+Now write a `lapply` function to read both csv files using write.csv into a list.
+
+__Advanced version__
 * Reads all file names in your working directory with a `.csv` extension.  
 * Treating that as a list, run the `read.csv` function on each item so you get a list of size 2 that contains all the data.
 
