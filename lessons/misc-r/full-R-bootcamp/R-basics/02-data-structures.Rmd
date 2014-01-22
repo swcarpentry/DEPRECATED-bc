@@ -1,0 +1,493 @@
+```{r, include = FALSE}
+source("../chunk_options.R")
+```
+
+# Understanding basic data types in R
+
+* To make the best of the R language, you'll need a strong understanding of the basic data types and data structures and how to operate on those.
+
+* **Very Important** to understand because these are the objects you will manipulate on a day-to-day basis in R. Dealing with object conversions is one of the most common sources of frustration for beginners.
+
+* Everything in `R` is an object. 
+
+`R` has 6 (although we will not discuss the `raw` class for this workshop)  atomic classes.
+
+* character
+* numeric (real or decimal)
+* integer
+* logical
+* complex
+
+| Example | Type |
+| ------- | ---- |
+| "a", "swc" | character |
+| 2, 15.5 | numeric | 
+| 2 (Must add a `L` at end to denote integer) | integer |
+| `TRUE`, `FALSE` | logical |
+| 1+4i | complex | 
+
+
+```{r, eval = FALSE}
+typeof() # what is it?
+length() # how long is it? What about two dimensional objects?
+attributes() # does it have any metadata?
+
+# Example
+
+x <- "dataset"
+typeof(x)
+attributes(x)
+
+y <- 1:10
+typeof(y)
+length(y)
+attributes(y)
+
+z <- c(1L, 2L, 3L)
+typeof(z)
+```
+
+R has many data structures. These include
+
+* atomic vector
+* list
+* matrix
+* data frame
+* factors
+* tables
+
+
+### Vectors
+A vector is the most common and basic data structure in `R` and is pretty much the workhorse of R. Technically, vectors can be one of two types:
+
+* atomic vectors
+* lists
+
+although the term "vector" most commonly refers to the atomic type not lists.
+
+**Atomic Vectors**
+
+A vector can be a vector of elements that are most commonly `character`, `logical`, `integer` or `numeric`.
+
+You can create an empty vector with `vector()` (By default the mode is `logical`. You can be more explicit as shown in the examples below.) It is more common to use direct constructors such as `character()`, `numeric()`, etc.
+
+```{r, eval = TRUE}
+x <- vector()
+# with a length and type
+vector("character", length = 10)
+character(5) ## character vector of length 5
+numeric(5)
+logical(5)
+```
+
+Various examples:
+
+```{r, eval = TRUE}
+x <- c(1, 2, 3)
+x
+length(x)
+```
+`x` is a numeric vector. These are the most common kind. They are numeric objects and are treated as double precision real numbers. To explicitly create integers, add an `L` at the end.
+
+```{r, eval = TRUE}
+x1 <- c(1L, 2L, 3L)
+```
+
+You can also have logical vectors. 
+
+```{r, eval = TRUE}
+y <- c(TRUE, TRUE, FALSE, FALSE)
+```
+
+Finally you can have character vectors:
+
+```{r, eval = TRUE}
+z <- c("Alec", "Dan", "Rob", "Karthik")
+```
+
+**Examine your vector**  
+
+```{r, eval = TRUE}
+typeof(z)
+length(z)
+class(z)
+str(z)
+```
+
+Question: Do you see a property that's common to all these vectors above?
+
+**Add elements**
+
+```{r, eval = TRUE}
+z <- c(z, "Annette")
+z
+```
+
+More examples of vectors
+
+```{r, eval = TRUE}
+x <- c(0.5, 0.7)
+x <- c(TRUE, FALSE)
+x <- c("a", "b", "c", "d", "e")
+x <- 9:100
+x <- c(1+0i, 2+4i)
+```
+
+You can also create vectors as a sequence of numbers
+
+```{r, eval = TRUE}
+series <- 1:10
+seq(10)
+seq(1, 10, by = 0.1)
+```
+
+**Other objects**
+
+`Inf` is infinity. You can have either positive or negative infinity.
+
+```{r, eval = TRUE}
+1/0
+1/Inf
+```
+
+
+`NaN` means Not a number. It's an undefined value.
+
+```{r, eval = TRUE}
+0/0
+```
+
+Each object can have attributes. Attribues can be part of an object of R. These include: 
+
+* names
+* dimnames
+* dim
+* class
+* attributes (contain metadata)
+
+You can also glean other attribute-like information such as length (works on vectors and lists) or number of characters (for character strings). 
+
+```{r, eval = TRUE}
+length(1:10)
+nchar("Software Carpentry")
+````
+
+
+**What happens when you mix types?**
+
+R will create a resulting vector that is the least common denominator. The coercion will move towards the one that's easiest to coerce to.
+
+**Guess what the following do without running them first**
+
+```{r, eval = FALSE}
+xx <- c(1.7, "a") 
+xx <- c(TRUE, 2) 
+xx <- c("a", TRUE) 
+```
+
+This is called implicit coercion.  You can also coerce vectors explicitly using the `as.<class_name>`. Example
+
+```{r, eval = FALSE}
+as.numeric()
+as.character()
+```
+
+
+When you coerce an existing numeric vector with `as.numeric()`, it converts the vector to a double.
+
+```{r, eval = TRUE}
+x <- 0:6
+identical(x, as.numeric(x))
+typeof(x)
+typeof(as.numeric(x))
+```
+
+```{r, eval = TRUE}
+x <- 0:6
+as.numeric(x)
+as.logical(x) 
+as.character(x)
+as.complex(x) 
+```
+
+Sometimes coercions, especially nonsensical ones, won’t work.
+
+```{r, eval = TRUE}
+x <- c("a", "b", "c")
+as.numeric(x)
+as.logical(x)
+# both don't work
+```
+
+**Sometimes there is implicit conversion**
+
+```{r, eval = TRUE}
+1 < "2"
+"1" > 2
+```
+
+## Matrix
+
+Matrices are a special vector in R. They are not a separate type of object but simply an atomic vector with dimensions added on to it. Matrices have rows and columns. 
+
+```{r, eval = TRUE}
+m <- matrix(nrow = 2, ncol = 2)
+m
+dim(m)
+```
+
+Matrices are filled column-wise. 
+
+```{r, eval = TRUE}
+m <- matrix(1:6, nrow = 2, ncol = 3)
+```
+
+Other ways to construct a matrix
+
+```{r, eval = TRUE}
+m <- 1:10
+dim(m) <- c(2, 5)
+```
+
+This takes a vector and transform into a matrix with 2 rows and 5 columns.
+
+
+Another way is to bind columns or rows using `cbind()` and `rbind()`.
+
+```{r, eval = TRUE}
+x <- 1:3
+y <- 10:12
+cbind(x, y)
+# or 
+rbind(x, y)
+```
+
+You can also use the `byrow` argument to specify how the matrix is filled. From R's own documentation:
+
+```{r, eval = TRUE, tidy = FALSE}
+mdat <- matrix(c(1,2,3, 11,12,13), nrow = 2, ncol = 3, byrow = TRUE,
+               dimnames = list(c("row1", "row2"),
+                               c("C.1", "C.2", "C.3")))
+mdat
+```
+
+---
+
+## List
+
+In R lists act as containers. Unlike atomic vectors, the contents of a list are not restricted to a single mode and can encompass any mixture of data types. Lists are sometimes called recursive vectors, because a list can contain other lists. This makes them fundamentally different from atomic vectors. 
+
+A list is a special type of vector. Each element can be a different type.
+
+
+
+Create lists using `list()` or coerce other objects using `as.list()`
+
+```{r, eval = TRUE}
+x <- list(1, "a", TRUE, 1+4i)
+x
+```
+
+```{r, eval = TRUE}
+x <- 1:10
+x <- as.list(x)
+length(x)
+```
+
+What is the class of `x[1]`?  
+How about `x[[1]]`?
+
+```{r, eval = TRUE}
+xlist <- list(a = "Karthik Ram", b = 1:10, data = head(iris))
+xlist
+```
+
+What is the length of this object?
+What about its structure?
+
+A list can contain many lists nested inside.
+
+```{r, eval = TRUE}
+temp <- list(list(list(list())))
+temp
+is.recursive(temp)
+```
+
+Lists are extremely useful inside functions. You can "staple" together lots of different kinds of results into a single object that a function can return.
+
+A list does not print to the console like a vector. Instead, each element of the list starts on a new line.
+
+Elements are indexed by double brackets. Single brackets will still return a(nother) list.
+
+---
+
+## Factors
+
+Factors are special vectors that represent categorical data. Factors can be ordered or unordered and are important when for modelling functions such as `lm()` and `glm()` and also in plot methods.
+
+Factors can only contain pre-defined values.
+
+Factors are pretty much integers that have labels on them.  While factors look (and often behave) like character vectors, they are actually integers under the hood, and you need to be careful when treating them like strings. Some string methods will coerce factors to strings, while others will throw an error.
+
+Sometimes factors can be left unordered. Example: `male`, `female`.
+
+Other times you might want factors to be ordered (or ranked). Example: `low`, `medium`, `high`. 
+
+Underlying it's represented by numbers 1, 2, 3.
+
+They are better than using simple integer labels because factors are what are called self describing. `male` and `female` is more descriptive than `1`s and `2`s. Helpful when there is no additional metadata.
+
+Which is `male`? `1` or `2`? You wouldn't be able to tell with just integer data. Factors have this information built in.
+
+Factors can be created with `factor()`. Input is generally a character vector.
+
+```{r}
+x <- factor(c("yes", "no", "no", "yes", "yes"))
+x
+```
+
+`table(x)` will return a frequency table.
+
+If you need to convert a factor to a character vector, simply use
+
+```{r}
+as.character(x)
+```
+
+In modeling functions, it is important to know what the baseline level is.
+This is the first factor but by default the ordering is determined by alphabetical order of words entered. You can change this by speciying the levels (another option is to use the function `relevel`).
+
+```{r}
+x <- factor(c("yes", "no", "yes"), levels = c("yes", "no"))
+x
+```
+
+## Data frame
+
+A data frame is a very important data type in R. It's pretty much the *de facto* data structure for most tabular data and what we use for statistics.
+
+Data frames can have additional attributes such as `rownames()`, which can be useful for annotating data, like subject_id or sample_id. But most of the time they are not used.
+
+Some additional information on data frames:
+
+* Usually created by `read.csv()` and `read.table()`.
+
+* Can convert to `matrix` with `data.matrix()`
+
+* Coercion will be forced and not always what you expect.
+
+* Can also create with `data.frame()` function.
+
+* Find the number of rows and columns with `nrow(df)` and `ncol(df)`, respectively.
+
+* Rownames are usually 1..n.
+
+**Combining data frames**
+
+```{r, eval = TRUE}
+df <- data.frame(id = letters[1:10], x = 1:10, y = rnorm(10))
+df
+cbind(df, data.frame(z = 4))
+```
+
+When you combine column wise, only row numbers need to match. If you are adding a vector, it will get repeated.
+
+**Useful functions**  
+* `head()` - see first 6 rows
+* `tail()` - see last 6 rows
+* `dim()` - see dimensions
+* `nrow()` - number of rows
+* `ncol()` - number of columns
+* `str()` - structure of each column
+* `names()` - will list the `names` attribute for a data frame (or any object really), which gives the column names.
+
+A data frame is a special type of list where every element of the list has same length.
+
+See that it is actually a special list:
+
+```{r}
+is.list(iris)
+class(iris)
+```
+
+**Naming objects**
+
+Other R objects can also have names. Adding names is helpful since it's useful for readable code and self describing objects.
+
+```{r, eval = TRUE}
+x <- 1:3
+names(x) <- c("karthik", "ram", "rocks")
+x
+```
+
+Lists can also have names.
+
+```{r, eval = TRUE}
+x <- as.list(1:10)
+names(x) <- letters[seq(along = x)]
+x
+```
+
+Finally matrices can have names and these are called `dimnames`
+
+```{r, eval = TRUE}
+m <- matrix(1:4, nrow = 2)
+dimnames(m) <- list(c("a", "b"), c("c", "d"))
+# first element = rownames
+# second element = colnames
+m
+dimnames(m)
+colnames(m) ## or rownames(m)
+```
+
+---
+
+
+## Missing values
+
+Denoted by `NA` and/or `NaN` for undefined mathematical operations.
+
+```{r, eval = FALSE}
+is.na()
+is.nan()
+```
+
+check for both.
+
+NA values have a class. So you can have both an integer NA (`NA_integer_`) and a character NA (`NA_character_`).
+
+`NaN` is also `NA`. But not the other way around.
+
+```{r, eval = TRUE}
+x <- c(1,2, NA, 4, 5)
+x
+```
+
+```{r, eval = TRUE}
+is.na(x) # returns logical
+# shows third
+is.nan(x)
+# none are NaN
+```
+
+```{r, eval = TRUE}
+x <- c(1,2, NA, NaN, 4, 5)
+is.na(x)
+# shows 2 TRUE
+is.nan(x)
+# shows 1 TRUE
+```
+
+---
+
+# Review of R data types
+
+<img src="data-types.png" width="100%" height="100%">
+
+
+
+
+
+
+
+

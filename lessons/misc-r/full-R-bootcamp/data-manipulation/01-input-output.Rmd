@@ -1,0 +1,101 @@
+```{r, include = FALSE}
+source("../chunk_options.R")
+```
+
+# Input output operations
+
+## Inputting data
+
+```{r, eval = FALSE}
+x <- scan("data_file.txt")
+# add a separator
+x <- scan("data/messy_data.txt", what=" ", sep = "\n")
+# or read data from the console
+x <- scan()
+# keep entering values and hit an empty return key to end
+```
+Reading single lines (e.g. user input)
+
+```{r, eval = FALSE}
+variable <- readline()
+# or provide more information
+variable <- readline("Enter number of simulations: ")
+```
+
+
+## Reading files  
+Most plain text files can be read with `read.table` or variants thereof (such as `read.csv`).
+
+```{r, eval = FALSE}
+df <- read.table("data.dat", header = TRUE)
+```
+
+or using `readLines`
+
+```{r, eval = TRUE}
+dt <- readLines("data/messy_data.txt")
+head(dt)
+```
+
+## Files from the web
+
+```{r, eval = TRUE}
+url <- "data/climate.csv"
+my_data <- read.csv(url, header = TRUE)
+head(my_data)
+```
+
+## Local file operations
+
+One can list files from any local source as well.
+
+```{r, eval = FALSE}
+list.files()
+file.info()
+dir()
+file.exists()
+getwd()
+setwd()
+```
+
+
+---
+
+
+
+## Writing files
+
+Saving files is easy in R. Load the `iris` dataset by running `data(iris)`. Can you save this back to a `csv` file to disk with the name `tgac_iris.csv`?
+
+What commands did you use?
+
+
+# Short term storage
+
+```{r, eval = TRUE}
+saveRDS(iris, file = "my_iris.rds")
+iris_data <- readRDS("my_iris.rds")
+unlink("my_iris.rds")
+```
+This is great for short term storage. All factors and other modfications to the dataset will be preserved. However, only R can read these data back and not the best option if you want to keep the file stored in the easiest format.
+
+# Long-term storage
+
+```{r, eval = FALSE}
+write.csv(iris, file = "my_iris.csv", row.names = FALSE)
+```
+
+# Easy to store compressed files to save space:
+
+```{r, eval = FALSE}
+write.csv(diamonds, file = bzfile("diamonds.csv.bz2"),
+  row.names = FALSE)
+```
+
+# Reading is even easier:
+
+```{r, eval = FALSE}
+diamonds5 <- read.csv("diamonds.csv.bz2")
+```
+
+Files stored with `saveRDS()` are automatically compressed.
