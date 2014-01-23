@@ -10,14 +10,18 @@ input/output) you may be running concurrently.
 
 #### What is tmux?
 
-Here is the raw definition: A terminal multiplexer. And what is a terminal?
-It is a physical dumb device used to send and receive (text) to and from a
-machine.  We also have the software version of that: a terminal emulator,
-which is a piece of software that replicates the features of a terminal.
+Here is the raw definition: A terminal multiplexer.
+
+And what is a terminal?  It is a physical dumb device used to send and receive
+(text) to and from a machine.
+
+We also have the software version of that: a terminal emulator, which is a
+piece of software that replicates the features of a terminal.
 
 We can also think about this tool as a window manager for the terminal. With
-tmux we can launch multiple terminals each running its own process. For
-example, I am writing this document within a tmux session that has multiple
+tmux we can launch multiple terminals each running its own process.
+
+For example, I am writing this document within a tmux session that has multiple
 windows:
 
 ![](http://f.cl.ly/items/3f0Q0s2f0I2t1J413M16/Screen%20Shot%202014-01-23%20at%2010.33.00%20AM.png)
