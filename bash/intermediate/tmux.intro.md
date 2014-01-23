@@ -75,8 +75,9 @@ since we only have one session, we can just run:
 
 #### windows
 
-Windows are created by typing: ```PREFIX c``` (create). Once you are in the
-new window, you can rename its name with ```PREFIX ,```.
+Windows are created by typing: ```PREFIX c``` (create).
+
+Once you are in the new window, you can rename its name with ```PREFIX ,```.
 
 #### Panes
 
