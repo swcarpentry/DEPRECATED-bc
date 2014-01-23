@@ -32,10 +32,12 @@ have an instance of vim for the document I am editing:
 ![](http://f.cl.ly/items/0b3S0s3F391V3J321v11/Screen%20Shot%202014-01-23%20at%2010.34.30%20AM.png)
 
 There is one more feature I want to point out about tmux: *detaching* from a
-session. You can have leave (detach) an active tmux session, when doing that,
-tmux will take care of the output from the different windows (and its
-terminals) so you can *reattach* to that session and pick it up where you left
-it. That is extremely powerful.
+session.
+
+You can have leave (detach) an active tmux session, when doing that, tmux will
+take care of the output from the different windows (and its terminals) so you
+can *reattach* to that session and pick it up where you left it. That is
+extremely powerful.
 
 #### Installation
 
