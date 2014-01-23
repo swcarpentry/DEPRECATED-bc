@@ -71,7 +71,7 @@ query. To get information on `-t`, we would type `/-t` followed by RETURN.
 
 This would take us to:
 
-   -t, --target-directory=DIRECTORY
+    -t, --target-directory=DIRECTORY
          copy all SOURCE arguments into DIRECTORY
 
 This means that this option has the short form `-t` and the long form
@@ -93,7 +93,8 @@ the command is 'cp' but know it copies files I can use
     % man -k copy
 
 to find command that relate to copying stuff. There is a quirky synonym for
-this command, which might be simpler to remember:
+this command, which might be simpler to remember (especially if you know
+French):
 
     % apropos copy
 
