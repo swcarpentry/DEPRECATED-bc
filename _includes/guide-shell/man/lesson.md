@@ -53,7 +53,8 @@ This means the command `cp` followed by `[OPTION]...`. When something is in
 square brackets, it means it can be left out. When something is followed by
 `...` it means it can be repeated. Thus, `[OPTION]...` means any number of
 options, including zero. `[-T]` means you can use the options `-T` here if you
-wish. Then you add a SOURCE and a DEST.
+wish. Then you add a SOURCE (the source file or directory) and a DEST (the 
+destination file or directory).
 
 The variants can be read in similar ways. Note that to use the last one, the
 `-t` option is mandatory. In fact, this option switches the order of arguments
@@ -101,5 +102,5 @@ follows
 
     % man -k copy | grep file
 
-which helps a little and show the 'cp' command at the top of the list.
+which helps a little and shows the 'cp' command at the top of the list.
 
