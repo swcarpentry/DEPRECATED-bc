@@ -1,4 +1,9 @@
-# R bootcamp material
+---
+layout: lesson
+root: ../..
+title: Programming with R
+level: intermediate
+---
 
 This README is meant for Software Carpentry instructors planning to teach a intermediate level R bootcamp. Do not commit this readme as-is without editing.
 
