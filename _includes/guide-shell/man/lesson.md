@@ -1,24 +1,26 @@
 Introduction
 ============
 
-You can get help with any Unix command with the `man` (short for manual)
-command.  As an example here is the command to get the help for 'cp'
+You can get help for any Unix command with the `man` (short for manual)
+command.  As an example here is the command to lookup information on 'cp'
 
     % man cp
 
-The output will be shown directly in the terminal. This is sometimes refered to
-as the "man page" (for example, you can say *there is an option to `cp` to
-create links instead of copies, but I cannot remember what it is called; you
-should check the man page*)
+The output will be shown directly in the terminal. The content displayed is
+sometimes refered to as the "man page" (for example, you can say *there is an
+option to `cp` to create links instead of copies, but I cannot remember what it
+is called; you should check the man page*).
 
-The way in which the man page is displayed depends a little on your system and
+The way in which the man page is displayed depends on your system and
 configuration. On a modern system, you should be able to use the Up and Down
 keys to navigate (on an older system, you will only be able to see a page at at
 time). When you have finished reading you can return to the command prompt with
 'q'.
 
-The output of the man command is typically very complete, as it is designed to
-be used as a reference. For quick browsing, it is divided into sections:
+The output of the man command is typically very complete, but concise, as it is
+designed to be used as a reference. It does not provide tutorial-like
+introductions to the Unix system. For quick browsing, it is divided into
+sections:
 
  * NAME - gives the name of the command and a brief description
  * SYNOPSIS - how to run the command, including optional and mandatory 
