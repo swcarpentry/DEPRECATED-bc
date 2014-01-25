@@ -7,7 +7,7 @@ root: ../..
 {% block input %}
 <div class="input">
 <span>In [{{ cell.prompt_number }}]:</span>
-<pre>{{ cell.input }}</pre>
+<pre>{{ cell.input | escape }}</pre>
 </div>
 {% endblock input %}
 
@@ -19,16 +19,28 @@ root: ../..
 {% endblock output_group %}
 
 {% block stream %}
-{{ output.text }}
+{{ output.text | escape }}
 {% endblock stream %}
 
 {% block pyout %}
-{{ output.text }}
+{{ output.text | escape }}
 {% endblock pyout %}
 
 {% block pyerr %}
 {{ output.traceback | join('\n') | strip_ansi | escape }}
 {% endblock pyerr %}
+
+{% block data_svg %}
+<img src="../../{{ output.svg_filename | path2url }}">
+{% endblock data_svg %}
+
+{% block data_png %}
+<img src="../../{{ output.png_filename | path2url }}">
+{% endblock data_png %}
+
+{% block data_jpg %}
+<img src="../../{{ output.jpeg_filename | path2url }}">
+{% endblock data_jpg %}
 
 {% block markdowncell %}
 {% if 'cell_tags' in cell.metadata %}
