@@ -6,7 +6,8 @@
 #As you have seen, SciPy has some really neat functionality that comes stock.
 #Oddly, some of the best stuff is in the 'miscelaneous' module.
 import scipy.misc 
-from pylab import *
+import numpy as np 
+from matplotlib import pyplot as plt 
 
 #So our exponential pade approimation didn't give us great gains, 
 #But let's try approximating a rougher function.
@@ -24,21 +25,20 @@ def PadeAppx(x):
 	return p(x) / q(x)
 
 #Let's test it...
-x = arange(0.0, 10.01, 0.01)
+x = np.arange(0.0, 10.01, 0.01)
 
 f_exp.reverse()
-f_poly = poly1d(f_exp)
+f_poly = np.poly1d(f_exp)
 
-plot(x, PadeAppx(x), 'k--', label="Pade Approximation")
-plot(x, f(x), 'k-', label=r'$f(x)$')
-plot(x, f_poly(x), 'r-', label="Power Series")
+plt.plot(x, PadeAppx(x), 'k--', label="Pade Approximation")
+plt.plot(x, f(x), 'k-', label=r'$f(x)$')
+plt.plot(x, f_poly(x), 'r-', label="Power Series")
 
-xlabel(r'$x$')
-ylabel("Polynomial Function")
+plt.xlabel(r'$x$')
+plt.ylabel("Polynomial Function")
 
-legend(loc=0)
+plt.legend(loc=0)
 
-show()
+plt.show()
 
 #Check out http://docs.scipy.org/doc/scipy/reference/misc.html for a complete listing.
-
