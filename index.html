@@ -38,16 +38,58 @@ contact: random@software-carpentry.org
 
 <h2>Setup</h2>
 
+To participate in a Software Carpentry bootcamp, 
+you will need working copies of:
+{% include setup/overview-bash.html %}
+{% include setup/overview-git.html %}
+{% include setup/overview-editor.html %}
+{% include setup/overview-python.html %}
+{% include setup/overview-r.html %}
+
+The instructions for installing each of these components is organzed below by operating system.  
+
 <div class="row-fluid">
   <div class="span6">
-    {% include setup/overview-bash.html %}
-    {% include setup/overview-editor.html %}
+
+	
+<h3>MacOSX</h3>
+	<div class="well">
+{% include setup/macosx-bash.html %}
+{% include setup/macosx-editor.html %}
+{% include setup/macosx-git.html %}
+{% include setup/macosx-python.html %}
+<!--{% include setup/macosx-r.html %}-->
+	</div>
   </div>
   <div class="span6">
-    {% include setup/overview-git.html %}
-    {% include setup/overview-python.html %}
-  </div>
+	
+<h3>Windows</h3>
+	<div class="well">
+{% include setup/windows-swc.html %}
+{% include setup/windows-git.html %}
+{% include setup/windows-editor.html %}
+{% include setup/windows-anaconda.html %}
+<!--{% include setup/windows-r.html %}-->
+	</div>
+	
+<h3>Linux</h3>
+	<div class="well">
+{% include setup/linux-bash.html %}
+{% include setup/linux-git.html %}
+{% include setup/linux-editor.html %}
+{% include setup/linux-python.html %}
+<!--{% include setup/linux-r.html %}-->
+	</div>
 </div>
+</div>
+
+
+
+<!--    {% include setup/overview-bash.html %}
+    {% include setup/overview-editor.html %}
+    {% include setup/overview-git.html %}
+    {% include setup/overview-python.html %}-->
+
 
 <hr/>
 
