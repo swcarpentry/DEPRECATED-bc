@@ -19,7 +19,8 @@ import scipy.misc
 
 
 #The stregnth of this method is demonstated though figures...
-from pylab import *
+import numpy as np 
+from matplotlib import pyplot as plt 
 
 #Let's expand e^x to fith order and record the coefficents 
 e_exp = [1.0, 1.0, 1.0/2.0, 1.0/6.0, 1.0/24.0, 1.0/120.0]
@@ -32,22 +33,21 @@ def PadeAppx(x):
 	return p(x) / q(x)
 
 #Let's test it...
-x = arange(0.0, 3.1, 0.1)
+x = np.arange(0.0, 3.1, 0.1)
 
 e_exp.reverse()
-e_poly = poly1d(e_exp)
+e_poly = np.poly1d(e_exp)
 
-plot(x, PadeAppx(x), 'k--', label="Pade Approximation")
-plot(x, scipy.e**x, 'k-', label=r'$e^x$')
-plot(x, e_poly(x), 'r-', label="Power Series")
+plt.plot(x, PadeAppx(x), 'k--', label="Pade Approximation")
+plt.plot(x, scipy.e**x, 'k-', label=r'$e^x$')
+plt.plot(x, e_poly(x), 'r-', label="Power Series")
 
 #axis([0, 10, -2, 1.25])
-xlabel(r'$x$')
-ylabel("Exponential Functions")
+plt.xlabel(r'$x$')
+plt.ylabel("Exponential Functions")
 
-legend(loc=0)
+plt.legend(loc=0)
 
-show()
+plt.show()
 
 #Check out http://docs.scipy.org/doc/scipy/reference/misc.html for a complete listing.
-
