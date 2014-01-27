@@ -1,7 +1,7 @@
 ---
 layout: lesson
 root: ../..
-title: The Unix Shell
+title: Instructor's Guide
 level: intermediate
 ---
-FIXME: to be written.
+FIXME
