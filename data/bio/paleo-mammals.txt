@@ -1,0 +1,23 @@
+Arctodus simus,Shortfaced Bear,1.7m,800K,10K
+Canis dirus,Dire Wolf,1.5m,1M,10K 
+Smilodon fatalis,Sabertooth Cat,1.2m,1.5M,10K
+Homotherium serum,American Scimitar Cat,1m,1.5M,10K
+Castoroides ohioensis,Giant Beaver,1m,1.5M,10K
+Dasypus bellus,Beautiful Armadillo,1m,1M,10K
+Osteoborus cynoides,Bone-Crushing Dog,.9m,8M,1.5M
+Camelops hesternus,American Camel,3.6m,1M,10K
+Aepycamelus,Giraffe Camel,3m,10M,5M
+Megalocerous giganteus,Giant Irish Elk,2.1m,500k,10K
+Gomphotheres,Four-Tusked Elephant,2.4m,15M,5M
+Indricotherium transsouralicum,,4.7m,30M,25M
+Chalicotherium,,2.75m,45M,3.5M
+Gigantopithecus blacki,,3m,700K,125K 
+Elasmotherium sibiricus,,2m,1M,10K
+Doedicurus,Glyptodon,1.5m,1.5M,12K 
+Uintatherium robustum,,1.5m,50M,35M
+Odobenocetops peruvianus,Walrus-Whale,2.1m,5M,1M
+Mammuthus primigenius,Woolly mammoth,2.75m,1.5M,8K 
+Coelodonta antiquitatis,Woolly rhinoceros,2m,500K,10K
+Megatherium americanum,Ground sloth,6m,30M,8K 
+Megalonyx jeffersonii,Jefferson's Ground Sloth,3m,30M,8K 
+Nothrotheriops shastensis,Shasta Ground Sloth,1.5m,30M,8K 

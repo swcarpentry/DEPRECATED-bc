@@ -1,0 +1,308 @@
+<div id="s:pyblocks:lib:lesson" class="lesson">
+
+  <p>
+    Now that we can do basic arithmetic,
+    let's look at where the real power of most programming languages is.
+    Run this in an IPython Notebook cell:
+  </p>
+
+<pre>
+<span class="in">import math
+print "pi is", math.pi
+print "square root of 5 is", math.sqrt(5)</span>
+<span class="out">pi is 3.14159265359
+square root of 5 is 2.2360679775</span>
+</pre>
+
+  <p>
+    The first line in this cell is the most important.
+    It tells Python to load a library called <code>math</code> into our program.
+    We can then refer to the variables defined inside that library,
+    like &pi;,
+    as <code><em>library</em>.<em>variable</em></code>,
+    and call its functions,
+    like square root,
+    as <code><em>library</em>.<em>function</em></code>.
+  </p>
+
+  <p>
+    Two-part names are used because
+    many different libraries can define variables or functions with the same names.
+    For example,
+    <code>math.log</code> returns the natural logarithm of a number,
+    while <code>server.log</code>
+    (i.e., the <code>log</code> function defined by the <code>server</code> library)
+    writes a log message to a file.
+    It's exactly like saying "Valerie's paper" rather than just "the paper".
+  </p>
+
+  <div class="box">
+    <h3>Shortcuts</h3>
+
+    <p>
+      If we only want a few specific functions from a library,
+      we can import them by name and then call them directly:
+    </p>
+
+<pre>
+<span class="in">from math import sqrt
+print sqrt(3)</span>
+<span class="out">1.7320508075688772</span>
+</pre>
+
+    <p class="continue">
+      We can also import a function under a different name,
+      so that if two libraries define functions with the same name,
+      we can give one or the other a different name when we want to use them together:
+    </p>
+
+<pre>
+<span class="in">from math import hypot as euclid
+print euclid(3, 4)</span>
+<span class="out">5.0</span>
+</pre>
+
+    <p>
+      Finally,
+      we can use <code>import *</code>
+      to bring everything in the module into the current scope at once.
+      This has the same effect as using <code>from module import a</code>,
+      <code>from module import b</code>,
+      and so on for every name in the module:
+    </p>
+
+<pre>
+<span class="in">from math import *
+print sin(pi)</span>
+<span class="out">1.2246063538223773e-16</span>
+</pre>
+
+    <p class="continue">
+      <code>import *</code> is usually a bad idea:
+      if someone adds a new function or variable to the next version of the module,
+      your <code>import *</code> could silently overwrite something that you have written,
+      or are importing from somewhere else.
+      Bugs like this can be extremely hard to find,
+      since nothing seemed to change in your program.
+    </p>
+  </div>
+
+  <p>
+    Now that we know how to import libraries,
+    let's create a grid of colored blocks:
+  </p>
+
+<pre>
+<span class="in">from ipythonblocks import ImageGrid
+grid = ImageGrid(10, 5)
+grid.show()</span>
+{% include guide-pyblocks/lib/blocks-initial-grid.html %}
+</pre>
+
+  <p class="continue">
+    The first line loads <code>ImageGrid</code> from the <code>ipythonblocks</code> library.
+    When we give <code>ImageGrid</code> two integers,
+    it creates a grid of the specified width and height.
+    We can assign that grid to a variable
+    (in this case, called <code>grid</code>),
+    and then ask it to display itself
+    by calling a <a href="glossary.html#method">method</a> named <code>show</code>.
+    A method is just a function that belongs to a particular object:
+    in this case, the grid.
+  </p>
+
+  <p>
+    Objects can also have <a href="glossary.html#member">members</a>,
+    which are just variables attached to the object:
+  </p>
+
+<pre>
+<span class="in">print 'width:', grid.width
+print 'height', grid.height
+print 'lines_on', grid.lines_on</span>
+<span class="out">width: 10
+height: 5
+lines_on: True</span>
+</pre>
+
+  <p>
+    We can change some of the grid's members:
+  </p>
+
+<pre>
+<span class="in">grid.lines_on = False
+grid.show()</span>
+{% include guide-pyblocks/lib/blocks-grid-lines-off.html %}
+</pre>
+
+  <p class="continue">
+    but not others:
+  </p>
+
+<pre>
+<span class="in">grid.width = 100</span>
+<span class="err">AttributeError                            Traceback (most recent call last)
+&lt;ipython-input-21-38b1940fb9ea&gt; in &lt;module&gt;()
+----&gt; 1 grid.width=100
+
+AttributeError: can't set attribute</span>
+</pre>
+
+  <p class="continue">
+    The reason is the same as the one given <a href="#a:add-num-str">earlier</a>
+    when talking about why we can't add strings and numbers:
+    if we enlarged the grid,
+    Python would have to guess what colors to use for the new blocks.
+  </p>
+
+  <div class="box">
+    <h3>Getting Help</h3>
+    <p>
+      To find out what methods and members something has,
+      we can ask Python for help:
+    </p>
+
+<pre>
+<span class="in">help(grid)</span>
+<span class="out'">class BlockGrid(__builtin__.object)
+ |  A grid of blocks whose colors can be individually controlled.
+ |  
+ |  Parameters
+ |  ----------
+ |  width : int
+ |      Number of blocks wide to make the grid.
+ |  height : int
+ |      Number of blocks high to make the grid.
+...</span>
+</pre>
+
+  </div>
+
+  <p>
+    A monochrome grid isn't very exciting;
+    we need a way to change blocks' colors,
+    and some way to specify the colors we want.
+    The most common way to do this is called "RGB",
+    which defines colors according to how much red, green, and blue they contain.
+    This is an additive color model:
+    the color we see is the sum of the individual color values,
+    each of which can range between 0 and 255.
+  </p>
+
+  <div class="box">
+    <h3>Bytes and Colors</h3>
+    <p>
+      Color values go up to 255
+      because computer memory is organized into 8-bit bytes,
+      and 255 (or 11111111 in base 2) is the largest integer that can be represented in one byte.
+      Storing each color component in a single byte is a good balance between
+      being able to represent enough colors to fool the human eye
+      and being able to store color values efficiently.
+    </p>
+  </div>
+
+  <p>
+    In RGB,
+    black is (0, 0, 0), i.e., nothing of any color.
+    White is the maximum value of all three colors, or (255, 255, 255).
+    We can think of this color model is as a cube
+    (<a href="#f:color_cube">Figure XXX</a>).:
+    the three axes represent the primary colors,
+    while secondary colors are combinations of maximum values,
+    and each actual color is a coordinate in this cube.
+  </p>
+
+  <figure id="f:color_cube">
+    <img src="pymedia/color_cube.png" alt="A Color Cube" />
+    <figcaption>Figure XXX: A Color Cube</figcaption>
+  </figure>
+
+  <p>
+    The IPythonBlocks library includes a function called <code>show_color</code>
+    that we can use to explore the RGB color cube:
+  </p>
+
+<pre>
+<span class="in">from ipythonblocks import show_color
+show_color(255, 0, 0)</span> <span class="comment"># all red</span>
+FIXME: output
+<span class="in">show_color(0, 255, 0)
+show_color(0, 0, 255)</span>
+FIXME: output
+<span class="in">show_color(50, 100, 200)</span>
+FIXME: output
+</pre>
+
+  <p>
+    Let's change one corner of our grid from black to green:
+  </p>
+
+<pre>
+<span class="in">grid[0, 0] = (0, 255, 0)
+grid.show()</span>
+{% include guide-pyblocks/lib/blocks-grid-one-cell-green.html %}
+</pre>
+
+  <p>
+    There's a lot going on in that assignment statement:
+  </p>
+
+  <ol>
+    <li>
+      A color is one value,
+      but we write it in three parts (red, green, and blue).
+      To make it clear that we want those three parts grouped together,
+      we put them in parentheses,
+      as in <code>(0, 255, 0)</code>.
+      This is called a <a href="glossary.html#tuple">tuple</a>;
+      we'll see more of them as we go along.
+    </li>
+    <li>
+      If we want to refer to a particular block in a grid,
+      we use an <a href="glossary.html#index">index</a>
+      (sometimes called a <a href="glossary.html#subscript">subscript</a>),
+      just as we do when referring to a particular element of a matrix in mathematics such as <em>A<sub>i,j</sub></em>.
+    </li>
+    <li id="a:count-from-zero">
+      The corner's coordinates are (0, 0), not (1, 1).
+      Programming languages derived from C (a family that includes Python and Perl) all count from 0,
+      for the same reason that color values run from 0 to 255
+      instead of 1 to 256.
+      Some other languages (notably Fortran, MATLAB, and R) count from 1.
+      The latter is more natural&mdash;nobody says, "Zero, one, two, three, four," when counting their fingers&mdash;but
+      we're stuck with the former for programming.
+    </li>
+  </ol>
+
+  <p>
+    Finally,
+    look closely at which pixel turned green.
+    A Cartesian grid is typically drawn with the origin in the lower left,
+    so that's what <code>ImageGrid</code> does.
+    IPythonBlocks has another class called <code>BlockGrid</code>
+    that uses the same coordinate scheme as tables and spreadsheets:
+    the first index counts down the rows,
+    while the second counts across the columns.
+    To see this,
+    let's import the class,
+    create a grid of that type,
+    and change the color of a cell
+  </p>
+
+<pre>
+<span class="in">from ipythonblocks import BlockGrid
+blocks = BlockGrid(6, 3)
+blocks[1, 2] = (255, 0, 0)
+blocks.show()</span>
+{% include guide-pyblocks/lib/blocks-blockgrid.html %}
+</pre>
+
+  <p>
+    Changing the color of one block isn't very useful, though:
+    if we wanted to draw a picture that way,
+    we'd have to write millions of assignment statements.
+    What we need is a way to set the colors of many blocks at once,
+    which is the subject of the next section.
+  </p>
+
+</div>

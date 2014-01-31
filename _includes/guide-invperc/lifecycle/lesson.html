@@ -1,0 +1,950 @@
+<div id="s:invperc:lifecycle:lesson" class="lesson">
+
+  <p>
+    The term "software engineering" was first used at a NATO conference in 1968,
+    and was chosen to provoke discussion about how we ought to build large, complex software systems.
+    People have argued ever since about what the term actually means,
+    and whether "engineering" is the right model to aspire to.
+    For example, should we be able to sue programmers for making flaky software
+    the same way that we can sue engineers for designing faulty dams and bridges?
+    On the one hand, quality would probably improve.
+    On the other,
+    mathematical techniques for analyzing programs are still quite limited
+    despite fifty years of hard work,
+    and it's hardly fair to require someone to meet standards that aren't yet achievable.
+  </p>
+
+  <p>
+    Either way,
+    most people's definition of "software engineering" includes project management,
+    which is what this final section will focus on.
+    For our purposes, the difference between software carpentry and software engineering
+    is the difference between putting up some drywall and building a bridge.
+    A reasonably skilled amateur can do the first in a few hours or a couple of days
+    with a little bit of planning, a couple of sketches, and a few hand tools.
+    The second is more involved:
+    it requires a team of people (some of them specialists), bigger tools,
+    and a lot more planning and monitoring.
+  </p>
+
+  <p>
+    The good news is, studies show that most scientists and engineers work at the carpentry end of the scale.
+    The bad news is,
+    many people don't recognize when the techniques that have served them well for years are no longer adequate,
+    which is one of the reasons many large software projects (in industry as well as in research)
+    come in late or over budget,
+    or wind up failing completely.
+  </p>
+
+  <p>
+    As a quick rule of thumb,
+    if a dozen people are involved in your project,
+    or if the work is going to take more than a dozen weeks,
+    then you're doing engineering.
+    And like it or not,
+    you're going to have to think about how you plan, scope, and monitor your work.
+    The only question is whether you're going to do this at the start of the project,
+    or after everything has come crashing down around you.
+  </p>
+
+  <div>
+    <h3>Agile Development</h3>
+
+    <p>
+      The term "agile" was coined in 2001 to describe
+      a "bottom-up" style of software project management
+      based on short iterations and frequent feedback from both developers and customers.
+      Agile development practices are actually as old as programming itself,
+      but they came into their own with the rise of the World Wide Web.
+      First, the web made it possible to "release" software weekly, daily, or even hourly
+      since updating a server is a lot faster (and a lot less expensive)
+      than shipping CDs to thousands of people.
+    </p>
+
+    <p>
+      Second, during the 1990s and early 2000s it seemed as if
+      the things the web could do
+      and how best to make it do those things
+      were changing almost daily.
+      Multi-year development plans didn't make a lot of sense
+      when everything they depended on would be obsolete by the time work started,
+      much less by the time it finished.
+      Third, the growth of the web coincided with the growth of open source software.
+      People couldn't help noticing that most open source projects didn't have long-range plans,
+      but nevertheless produced high-quality software faster than many closed-source commercial projects.
+      While open source isn't necessarily agile,
+      and agile development projects usually aren't open source,
+      there are a lot of similarities.
+    </p>
+
+    <p>
+      So what is agile software development?
+      At its heart,
+      it is any software development method that relies on continuous or nearly continuous feedback
+      on short timescales
+      (<a href="#f:agile_cycles">Figure 17</a>).
+      Agile developers work in short steps that are typically no more than two weeks long,
+      and often as short as a single day.
+      In each iteration,
+      the team decides what to build next,
+      designs it,
+      builds it,
+      tests it,
+      and delivers it.
+      Feedback loops at several scales help them get this right
+      and do it better next time.
+    </p>
+
+    <figure id="f:agile_cycles">
+      <img src="dev/agile_cycles.png" alt="Agile Feedback Loops" />
+      <figcaption>Figure 17: Agile Feedback Loops</figcaption>
+    </figure>
+
+    <p>
+      The iteration itself is the primary feedback loop.
+      Users often don't know what they want until they see it,
+      so short cycles are a way to avoid spending too much time building what turns out to be the wrong thing.
+      This "exploratory" philosophy is why many people think that agile is a good way to develop research software.
+      Most researchers are their own users,
+      and often can't know what they should write next until they've seen the output of the current version of the program,
+      so long-term planning often isn't possible.
+    </p>
+
+    <p>
+      Short iterations help improve efficiency in two other ways as well.
+      First, most people can keep track of what they're doing for a few days at a time
+      without elaborate time charts,
+      so short cycles allow them to spend proportionally less time coordinating with one another.
+      Second, finding bugs becomes easier:
+      instead of looking through weeks' or months' worth of software to find out where the problem is,
+      developers usually only have to look at what's been written in the last few days.
+    </p>
+
+    <p>
+      A typical working day starts with a <a href="glossary.html#stand-up-meeting">stand-up meeting</a>
+      where everyone in the team reports what they did the day before,
+      what they're planning to do that day, and what's blocking them (if anything).
+      (It's called a "stand-up" meeting because it is held standing up,
+      which encourages people to be brief.)
+      For example, suppose Wolfman, Dracula, Frankenstein, and the Mummy are working on some new mind control software.
+      Wolfman's report might be:
+    </p>
+
+    <ul>
+      <li>
+        Yesterday:
+        fixed the bug that was making the message file reader crash on accented characters,
+        and added code to the web page generator to display accented characters properly.
+      </li>
+      <li>
+        Today:
+        will get message file reader to recognize links to images and load those images.
+      </li>
+      <li>
+        Blockers:
+        what should the message file reader do if the image is on the web instead of local?
+        Should it try to read it, or is that a security hole?
+      </li>
+    </ul>
+
+    <p>
+      Stand-up meetings are a feedback loop.
+      Each day,
+      the team gets feedback on the progress they're making,
+      whether they're still on track to meet the iteration's goals,
+      whether the technical decisions they're making are paying off,
+      and so on.
+      The key to making this work is that
+      each task is either done or not done:
+      "80% done" and "almost finished" aren't allowed.
+      This rule encourages people to break large tasks into pieces
+      that can be completed in a day or less
+      so that they'll have something substantial to report every morning.
+      This in turn encourages them to think ahead a little more,
+      and helps make their estimation more accurate.
+    </p>
+
+    <p>
+      Once the stand-up meeting is over, everyone gets back to work.
+      In many agile teams, this means sitting with a partner and doing
+      <a href="glossary.html#pair-programming">pair programming</a>.
+      Two people work together at one machine:
+      the "driver" does the typing,
+      the "navigator" watches and comments,
+      and every hour or so, the two switch roles.
+    </p>
+
+    <p>
+      Pair programming is beneficial for several reasons.
+      First, the navigator will often notice mistakes in the driver's code,
+      or remember design decisions that the driver is too busy typing to recall.
+      This is the tightest of the feedback loops that make agile work,
+      since feedback is nearly continuous.
+    </p>
+
+    <p>
+      Second, pair programming spreads knowledge around:
+      every piece of code has been seen by at least two people,
+      which increases the <a href="glossary.html#bus-factor">bus factor</a> of the project.
+      Pairing also helps people pick up new skills:
+      if you have just seen someone do something with two clicks,
+      you will probably do it that way when it's your turn to drive,
+      rather than spending two minutes doing it the way you always have.
+      And finally,
+      most people are less likely to check Facebook every five minutes
+      if someone else is working with them...
+    </p>
+
+    <div class="box">
+      <h3>On the Other Hand...</h3>
+
+      <p>
+        Pairing improves overall productivity,
+        but in many research settings
+        everyone has a problem of their own to work on,
+        so it may not be practical.
+        People also often find it disruptive or awkward:
+        having several conversations going on at once makes for a noisy lab,
+        and desks often aren't built for two people to share comfortably.
+      </p>
+
+      <p>
+        For these reasons,
+        many groups reserve pairing for:
+      </p>
+
+      <ol>
+        <li>
+          bringing a new person up to speed
+          (which happens a lot faster if they're paired with
+          a more experienced team member for a few days);
+        </li>
+        <li>
+          tackling hard bugs
+          (where "hard" means "anything one person can't figure out in an hour");
+          and
+        </li>
+        <li>
+          once or twice a week,
+          just to stay in practice.
+        </li>
+      </ol>
+
+    </div>
+
+    <p>
+      As well as pair programming,
+      most agile teams rely on
+      <a href="quality.html#s:tdd">test-driven development</a>
+      and <a href="quality.html#a:ci">continuous integration</a>,
+      both of which we discussed in the lesson on <a href="quality.html">software quality</a>.
+      Together, the two practices give developers more feedback:
+      TDD lets them see how their design decisions are going to play out
+      before they're committed to a particular implementation,
+      while continuous integration tells them (and everyone else) when they've forgotten something,
+      or broken something that was working a moment ago.
+    </p>
+
+    <p>
+      Is agile development right for you?
+      As a rough guide, it works best when:
+    </p>
+
+    <ol>
+      <li>
+        Requirements are constantly changing,
+        i.e.,
+        long-range planning isn't possible anyway.
+        This is often the case for scientific research, particularly at the small scale.
+      </li>
+      <li>
+        Developers and users can communicate continuously,
+        or at worst daily or weekly.
+        Again,
+        this is normal for small-scale research, where developers and users are the same people.
+      </li>
+      <li>
+        The team is small,
+        so that everyone can take part in a single stand-up meeting.
+        This is usually also true,
+        though getting everyone to show up for a morning meeting is a challenge in many labs.
+      </li>
+      <li>
+        Team members are disciplined enough not to use "agile" as an excuse for cowboy coding.
+      </li>
+      <li>
+        People actually <em>like</em> being empowered.
+      </li>
+    </ol>
+
+    <p>
+      The last two points are the most important.
+      Even professional developers don't like writing plans before they code,
+      or documentation when they're done.
+      Coincidentally, agile doesn't require them to do much of either.
+      It's therefore all too common for developers to say "we're agile"
+      when what they mean is "we're not going to bother doing anything we don't want to".
+      Agile development actually requires <em>more</em> discipline,
+      not less,
+      just as improvising well requires even more musical talent than playing a score exactly.
+    </p>
+
+    <p>
+      As for the second point,
+      many people don't like making decisions:
+      after two decades of schooling,
+      they want to be told what the assignment is
+      and exactly what they have to do to get an 'A'.
+      Many become quite defensive when told that
+      figuring out what to do is now part of their job,
+      but that's as essential to agile development as it is to scientific research.
+    </p>
+
+  </div>
+
+  <div>
+    <h3>Sturdy Development</h3>
+
+    <p>
+      Agile isn't the only way to develop software.
+      Before the term was invented,
+      the major alternative didn't have a name:
+      it was just how big software engineering projects were run.
+      Today,
+      it's usually called "traditional" or "waterfall" development,
+      though fans of agile often call it "big design up front" or something less kind.
+    </p>
+
+    <p>
+      We prefer the label "sturdy" because it puts a more positive spin on things.
+      While agile is all about reacting quickly and taking advantage of opportunities as they arise,
+      sturdy emphasizes predictability,
+      particularly on large, long-lived projects.
+    </p>
+
+    <p>
+      Let's start by looking at what sturdy development <em>isn't</em>.
+      A <a href="glossary.html#waterfall-development">waterfall model</a> of software development
+      divides development into distinct stages,
+      with information flowing from one stage to the next like water falling down a hill
+      (<a href="#f:waterfall_model">Figure 18</a>).
+    </p>
+
+    <figure id="f:waterfall_model">
+      <img src="dev/waterfall_model.png" alt="Waterfall Model" />
+      <figcaption>Figure 18: Waterfall Model</figcaption>
+    </figure>
+
+    <p>
+      Even in 1970,
+      when this model was first given a name,
+      people knew it didn't work.
+      Nobody has 20/20 foresight:
+      requirements are always discovered or changed as software is designed,
+      while designs are re-done based on what's learned during implementation,
+      implementations are modified as testing finds problems,
+      and so on.
+    </p>
+
+    <p>
+      But that doesn't mean that up-front planning and design are pointless.
+      Thirty-five years ago,
+      Barry Boehm and others discovered that the later a bug is found,
+      the more expensive fixing it is.
+      What's more, the cost curve is exponential:
+      as we move from requirements to design to implementation to testing to deployment,
+      the cost of fixing a problem increases by a factor of 3 to 5 at each stage,
+      and those increases multiply
+      (<a href="#f:boehm_curve">Figure 19</a>).
+    </p>
+
+    <figure id="f:boehm_curve">
+      <img src="dev/boehm_curve.png" alt="Boehm Curve" />
+      <figcaption>Figure 19: Boehm Curve</figcaption>
+    </figure>
+
+    <p>
+      The obvious implication is that time invested in up-front design
+      can pay off many-fold if it prevents mistakes being made in the first place.
+      It isn't always possible to do&mdash;people may not know what they want
+      until they see something running,
+      or tools may change so quickly that anything we design today
+      will be obsolete by the time it's implemented&mdash;but
+      very few programmers have ever said,
+      "I wish I'd spent <em>less</em> time thinking about this before I started coding."
+    </p>
+
+    <p>
+      <a href="#f:sturdy_lifecycle">Figure 20</a> shows
+      what a year-long sturdy development lifecycle looks like in practice.
+      The first step in each cycle is to gather requirements,
+      i.e.,
+      to figure out what the software is supposed to do.
+      This is the <a href="glossary.html#product-manager">product manager</a>'s job;
+      while the developers are working on version 4,
+      she talks to the customers about what they want version 5 to do.
+    </p>
+
+    <figure id="f:sturdy_lifecycle">
+      <img src="dev/sturdy_lifecycle.png" alt="Sturdy Lifecycle" />
+      <figcaption>Figure 20: Sturdy Lifecycle</figcaption>
+    </figure>
+
+    <p>
+      Crucially,
+      she should never ask them what features they want in the software&mdash;that's
+      up to her to figure out.
+      Instead,
+      she should ask,
+      "What does it do now that you don't like?" and,
+      "What can't you do that you'd like to be able to?"
+      She collates these needs and figures out how the software should be changed to satisfy them.
+    </p>
+
+    <p>
+      Good requirements are as unambiguous as a legal contract.
+      "The system will reformat data files as they are submitted" isn't enough;
+      instead, the requirements should read:
+    </p>
+
+    <ol>
+      <li>Only users who have logged in by providing a valid user name and password can upload files.</li>
+      <li>The system allows users to upload files via a secure web form.</li>
+      <li>The system accepts files up to 16MB long.</li>
+      <li>The system accepts files in PDB and RJCS-1 format.</li>
+      <li>The system converts files to RJCS-2 format before storing them.</li>
+      <li>The system displays an error message page if an uploaded file cannot be parsed, but takes no other action.</li>
+    </ol>
+
+    <p class="continue">
+      and so on.
+    </p>
+
+    <p>
+      The next step is <a href="glossary.html#analysis-and-estimation">analysis and estimation</a>.
+      Each team member is responsible for analyzing and estimating one or more features.
+      She has to come up with a plausible rough design, and estimate how long it will take to implement.
+      In fact,
+      wherever possible she should come up with <em>two</em> such plans:
+      one for doing the whole feature,
+      and one that obeys the 80/20 rule by providing part of what's been asked for with much less effort.
+    </p>
+
+    <p>
+      Analysis and estimation presupposes some sort of overall design for the system as a whole.
+      For example,
+      it doesn't make sense to say,
+      "We'll create a plugin to handle communication with the new orbiting mind control laser,"
+      unless the application has some sort of plugin system.
+      If it doesn't,
+      creating one is a task in its own right (probably a large one).
+    </p>
+
+    <p>
+      Once everything has been estimated,
+      it's time to prioritize,
+      because there's always more to do than there is time to do it.
+      The easiest way to do this for medium-sized projects and teams is to draw a 3&times;3 grid on a whiteboard.
+      One axis is "effort", broken down into "small", "medium", and "large".
+      The other is "importance", broken down into "low", "medium", and "high".
+      Each feature's name is put on a sticky note,
+      and each sticky note goes into one of the nine boxes on the grid
+      (<a href="#f:schedule_grid">Figure 21</a>).
+    </p>
+
+    <figure id="f:schedule_grid">
+      <img src="dev/schedule_grid.png" alt="Schedule Grid" />
+      <figcaption>Figure 21: Schedule Grid</figcaption>
+    </figure>
+
+    <p>
+      Once this has been done,
+      it's easy to draw a diagonal line on the grid and throw away everything below it&mdash;after all,
+      anything that's rated "high effort" but "low importance" isn't worth doing.
+      Conversely,
+      anything that's high importance and low effort definitely belongs in the plan.
+    </p>
+
+    <p>
+      But then there are the diagonal boxes.
+      Should the team try to do one important, high-effort feature,
+      or tackle a handful of things that are less important but easier?
+      Whatever they choose,
+      it's critical that they don't shave their time estimates to make things fit,
+      and that the <a href="glossary.html#project-manager">project manager</a> doesn't either.
+      The project manager is responsible for making sure things get built on time and to spec;
+      if the product manager owns the feature list,
+      the project manager owns the schedule
+      (and yes, the similarity in those job titles is confusing).
+      If the project manager starts shaving or squeezing estimates,
+      developers will start padding them in self-defense.
+      In response,
+      the project manager will cut them back even more,
+      until all the numbers are just so much science fiction.
+      Lazy or timid developers can betray this trust by over-estimating,
+      but even minimal time tracking will catch that sooner rather than later.
+    </p>
+
+    <p>
+      Once the features have been picked,
+      it's the project manager's job to assemble them into a schedule showing who's going to do what when.
+      The real purpose of this schedule is to help the team figure how far behind they are
+      so that they can start cutting corners early on.
+      A common way to do this is to keep a <a href="glossary.html#burn-down-chart">burn-down chart</a>,
+      which compares the plan with reality on a day-by-day or week-by-week basis.
+      If and when a gap opens up,
+      the team can either figure out when they're actually going to be done,
+      and move the delivery date back,
+      or go back to the 3&times;3 grid
+      to figure out what they can drop or scale back to meet the current deadline.
+    </p>
+
+    <p>
+      This is why it's useful to have people estimate both the full feature and an 80/20 version.
+      If and when time is running short,
+      it may be possible to switch tracks and deliver most of the value with much less effort.
+      The right time to think about this is the start of the project,
+      when people are rested and relatively relaxed,
+      not six weeks before a major conference deadline when tempers are already frayed.
+    </p>
+
+    <p>
+      In order for any of this to work,
+      developers have to be fairly good at estimating how long things will take.
+      That comes from experience,
+      but also from careful record keeping.
+      Just as runners and swimmers keep track of their times for doing their favorite distances,
+      good developers keep track of how long it takes to build X or fix Y
+      so that they'll be able to do a better job of estimating how long the next one will take.
+      (In fact,
+      whether or not a developer keeps track of their stats
+      is a good way to tell how serious they are about their craft in an interview&mdash;something
+      that would-be developers should keep in mind.)
+    </p>
+
+    <p>
+       Going back to <a href="#f:sturdy_lifecycle">Figure 20</a>,
+       you may have noticed that design overlaps estimation,
+       and coding overlaps design.
+       This is deliberate:
+       it's usually impossible to figure out how to do something without writing some throwaway code.
+       You may also have noticed that testing starts just as soon as development.
+       This is critical to the project's success:
+       if it is left until development is mostly done,
+       it will inevitably be shortchanged.
+       The consequences are usually disastrous,
+       not least for the team's morale.
+    </p>
+
+    <p>
+      In fact,
+      the members of the team responsible for testing
+      should be involved in the analysis and estimation phase as well.
+      They should review every part of the plan
+      to ensure that what the developer is planning to is testable.
+      Anything that isn't should be sent back to the drawing board.
+    </p>
+
+    <p>
+      Delivery starts at the same time as development.
+      Daily or weekly,
+      the team should "deliver" the software by creating and testing installers,
+      deploying it on a handful of servers,
+      burning ROMs and putting them into test rigs in the lab,
+      or whatever it is they're going to do when the iteration is finished.
+      Packaging and delivery are often just as complex as the software itself,
+      and leaving it until the last moment will once again usually have disastrous consequences.
+    </p>
+
+    <p>
+      Finally,
+      notice that development stops well before the target delivery date.
+      Ideally,
+      developers should stop adding new code to the project about two thirds of the way through the development cycle
+      so that they can spend the remaining third of the time fixing the problems that testing turns up.
+    </p>
+
+    <p>
+      The two-thirds point isn't chosen at random.
+      In all too many projects,
+      that's when the high hopes that the team started with bump into the reality of over-optimistic scheduling,
+      poor progress monitoring,
+      and design decisions that weren't reviewed carefully
+      (or at all).
+      The common reaction is to ask the team to buckle down and put in extra hours.
+      This almost always makes things worse:
+      as study after study has shown,
+      human beings are only capable of about 40 hours of productive intellectual work per week.
+      Anything more,
+      and the mistakes they make because of fatigue outweigh the extra time they're putting in,
+      so that the project actually slows down.
+    </p>
+
+    <div class="box">
+      <h3>Science Says...</h3>
+
+      <p>
+        Evan Robinson's excellent article "<a href="http://www.igda.org/why-crunch-modes-doesnt-work-six-lessons">Why Crunch Mode Doesn't Work</a>"
+        summarizes the science behind this.
+        Continuous work reduces cognitive function 25% for every 24 hours,
+        which means that after two all nighters,
+        a person's IQ is that of someone legally incompetent to care for themselves.
+        The kicker is that,
+        as with other forms of impairment,
+        people don't realize they're affected:
+        they believe they're still functioning properly.
+      </p>
+    </div>
+
+    <p>
+      So, is sturdy development right for you?
+      As a rough guide,
+      you should use it when:
+    </p>
+
+    <ol>
+      <li>
+        Requirements are relatively fixed,
+        or the team has enough experience in the problem domain to make estimation and planning possible.
+      </li>
+      <li>
+        The team is large.
+        If some team members aren't ever going to meet others,
+        frequent course changes probably aren't going to be possible.
+      </li>
+      <li>
+        Your customer insists on knowing well in advance exactly what you're going to deliver and when.
+        Avionics software and control systems for nuclear power plants are extreme examples,
+        but there are many other situations in which stakeholders genuinely do need to know
+        exactly what's going to be ready to use this time next year.
+      </li>
+    </ol>
+
+  </div>
+
+  <div>
+    <h3>More Alike Than Different</h3>
+
+    <p>
+      In practice,
+      agile and sturdy development are more alike than their most passionate advocates like to pretend.
+      Sturdy teams often use continuous integration systems and test-driven development,
+      while agile projects often have an "iteration zero"
+      in which they analyze architectural options and do large-scale design.
+    </p>
+
+    <p>
+      One key practice the two methods share is
+      the use of <a href="glossary.html#ticketing">ticketing</a> to keep track of work.
+      Ticketing tools are often called <a href="glossary.html#bug-tracking">bug-tracking systems</a>,
+      since they are often used to keep track of bugs that need to be fixed,
+      but well-organized teams use them as a shared to-do list to manage all kinds of tasks.
+      Every task is recorded as a separate ticket,
+      each of which has a unique number,
+      a one-line summary,
+      and a longer description that may include screenshots, error messages, and so on.
+      It also has some state,
+      such as "open", "in progress", "closed", or "rejected",
+      and keeps track of who created it and when,
+      and who it's assigned to.
+      A typical ticket might look like this:
+    </p>
+
+<pre>ID: 1278
+Created-By: mummy
+Owned-By: wolfman
+State: assigned
+Summary: Message file reader crashes on accented characters
+Description:
+1. Create a text file called 'accent.msg' containing the message
+   "You vill dream of p&uuml;mpernickel" (with an umlaut over the 'u').
+
+2. Run the program with 'python mindcontrol.py --all --message accent.msg'.
+
+Program crashes with the message "No encoding for [] on line 1 of 'accent.msg'".
+([] shows where a solid black box appears in the output instead of a printable
+character.)</pre>
+
+    <p>
+      When Wolfman checks in the code that fixes this bug,
+      and the tests for that fix,
+      he changes the ticket's state from "in progress" to "closed".
+      If someone later discovers that his fix doesn't actually work,
+      they can change the state from "closed" to "open"
+      (meaning "we need to decide who's going to work on this")
+      or back to "in progress"
+      (meaning "a particular person is now responsible for working on this").
+      More sophisticated ticketing systems allow people to record dependencies between tickets
+      (such as "work can't start on this one until #917 is closed"),
+      to estimate how long work will take,
+      to record how long work actually took,
+      and so on.
+      They also limit who can change the states of tickets or assign them to particular people,
+      which is one way to implement particular workflows.
+    </p>
+
+    <p>
+      Another key practice in sturdy development is code review.
+      As we discuss <a href="#a:code-review">later</a>,
+      empirical studies have found that this is the single most cost-effective way to find bugs.
+      It also helps spread understanding in teams that don't use pair programming
+      (which most don't).
+    </p>
+
+    <p>
+      Code can be reviewed before it's committed to version control or after.
+      Most teams prefer pre-commit reviews for two reasons.
+      First,
+      they prevent mistakes getting into the repository in the first place,
+      which is better than putting them there and then taking them out.
+      Second,
+      if the team agrees that nothing gets committed until it has been reviewed,
+      it's much more likely that reviews will actually get done.
+      If changes can be committed,
+      then reviewed later,
+      that "later" may slip and slip and never come at all.
+    </p>
+
+    <p>
+      How can the Mummy review Frankenstein's code <em>before</em> Frankenstein checks it in?
+      Some teams solve this problem by creating one branch per developer,
+      or per feature.
+      The people working in that branch can check in any time,
+      but review has to happen before code can be merged with the main line.
+    </p>
+
+    <p>
+      Another common approach is for developers to create a <a href="glossary.html#patch">patch</a>
+      before committing their work to version control.
+      A patch is just a list of the differences between two sets of files,
+      such as two different versions of the source code for a program.
+      Developers can store their patches in the version control system,
+      attach them to tickets,
+      or submit them to a code review management tool like ReviewBoard.
+      Someone else can then comment on the patch,
+      which the author can then revise.
+      In large open source projects like Python and Firefox,
+      it's common for patches to be reviewed and updated a dozen times or more
+      before finally being committed to version control.
+      Newcomers often find this frustrating,
+      but experience shows that as projects become larger,
+      "measure twice, cut once" pays off.
+    </p>
+
+  </div>
+
+  <div>
+    <h3>The Evidence</h3>
+
+    <p>
+      We've made a lot of claims in this section about
+      how development should be done.
+      The time has come to look at the evidence that backs them up.
+    </p>
+
+    <p>
+      Before we begin,
+      though,
+      it's important to realize
+      most programmers know as little about research in their field
+      as doctors knew about science a hundred years ago.
+      Someone doing a degree in geology or biochemistry
+      probably does at least one laboratory experiment a week,
+      but if that same person does a computer science degree,
+      they will probably only collect and analyze data once or twice
+      during four years.
+      Most programmers therefore don't have a hands-on appreciation for
+      what evidence looks like and how to assess it;
+      as a result,
+      many think that a couple of pints,
+      a loud voice,
+      and a "just so" story about a startup in Silicon Valley
+      constitute proof of whatever they want to prove.
+    </p>
+
+    <p>
+      The good news is, things are finally changing.
+      While data on real programmers and real software
+      were a rarity well into the 1990s,
+      papers published today that describe new tools or new working practices
+      routinely report results from some kind of empirical study.
+      Many of these studies are still smaller in scale than we'd like,
+      or methodologically naive,
+      but standards are improving rapidly.
+    </p>
+
+    <p id="a:code-review">
+      Here's one classic result.
+      In the mid-1970s,
+      Michael Fagan shows that
+      reading code carefully is the most cost-effective way to find bugs&mdash;it
+      can find 60-90% of all the bugs in a piece of software before it's run for the first time.
+      Thirty years later,
+      Cohen and others refined this result by looking at data collected by a web-based code review tool at Cisco.
+      They found that almost all of the value of code reviews came from the first reviewer,
+      and the first hour they were reviewing code.
+      Basically,
+      extra reviewers beyond the first don't find enough bugs to make their reviews cost-effective,
+      and if someone spends more than an hour reading code,
+      they become fatigued and stop finding anything except trivial formatting errors.
+    </p>
+
+    <p>
+      In light of this,
+      it's not surprising that code review has become a common practice in most open source projects:
+      given the freedom to work any way they want,
+      most top-notch developers have discovered for themselves that
+      having someone else look over a piece of code before it's committed to version control
+      produces working code in less time.
+    </p>
+
+    <p>
+      Getting scientists to adopt code reviews has proven surprisingly difficult,
+      especially considering that peer review of publications is a normal part of scientific life.
+      The main reason seems to be that
+      most pieces of small-scale scientific are written by one person for themselves,
+      and it's hard to get people to review code that they're not going to use themselves.
+    </p>
+
+    <p>
+      Here's another interesting result.
+      After Windows Vista shipped,
+      several researchers threw some machine learning algorithms at
+      the data Microsoft had collected during its construction.
+      They had a record of every change made to the software,
+      every meeting ever scheduled,
+      where developers sat,
+      what tests they had run,
+      what they'd said via instant messaging,
+      and so on.
+    </p>
+
+    <p>
+      One of the things they looked at was whether
+      developers who sat together
+      produced better code
+      (i.e., fewer bugs)
+      than developers who were geographically distributed.
+      Much to their surprise,
+      they found that physical geography was a weak predictor of software quality.
+      What correlated much more strongly was
+      how far apart developers were in the company's organization chart.
+      Basically,
+      the higher you had to go in the org chart to find a common boss
+      who could set direction and resolve disputes,
+      the more bugs there would be in the software.
+    </p>
+
+    <p>
+      Here are a few other interesting results:
+    </p>
+
+    <dl>
+      <dt>
+        Is there anything we can measure in software
+        that's bettr at predicting either the number of bugs
+        or the effort required to build it
+        than simply counting the number of lines of code?
+      </dt>
+      <dd>
+        No:
+        every sophisticated measure we have
+        correlates closely with the simplest.
+      </dd>
+      <dt>
+        Do more frequent releases improve software quality?
+      </dt>
+      <dd>
+        Yes,
+        but they also change the nature of the bugs that do occur.
+      </dd>
+      <dt>
+        Are some programmers really 40 times better than others?
+      </dt>
+      <dd>
+        Probably not:
+        studies that seem to show this
+        were often comparing the best to the worst,
+        which exaggerates the effect.
+        What does seem true is the claim that
+        any given programmer produces roughly the same number of lines of code per day,
+        regardless of what language she is working in.
+      </dd>
+      <dt>
+        Does knowledge and use of design patterns improve the quality of code?
+      </dt>
+      <dd>
+        Yes,
+        and there is a causative relationship:
+        it isn't simply the case that
+        good developers are more likely to know about patterns.
+      </dd>
+      <dt>
+        Are women intrinsically less likely to be interested in programming,
+        or are social forces largely responsible for the seven-to-one gender disparity
+        among programmers?
+      </dt>
+      <dd>
+        Social forces (some subtle, some not) are overwhelmingly responsible.
+      </dd>
+      <dt>
+        Are code modules with clear "owners"
+        less likely to contain errors than
+        code modules authored by many people?
+      </dt>
+      <dd>
+        Yes,
+        but keep the <a href="glossary.html#bus-factor">bus factor</a> in mind:
+        a module with one or a few owners,
+        also has higher risk of being orphaned in the long run.
+      </dd>
+      <dt>
+        Are some programming languages harder to learn than others?
+      </dt>
+      <dd>
+        Almost certainly:
+        in fact,
+        it appears as though Perl is as hard to learn as
+        a language whose syntax has been "designed" by a random number generator.
+      </dd>
+    </dl>
+
+    <p>
+      Even when people do know about research,
+      they are often to change what they do
+      to reflect what we know
+      (just as they are with smoking).
+      One example is test-driven development.
+      Many programmers believe quite strongly that this is the "right" way to program,
+      and that it leads to better code in less time.
+      However, a meta-analysis of over thirty studies found no consistent effect:
+      some of the studies reported benefits,
+      some found that it made things worse,
+      and some were inconclusive.
+      One clear finding, though,
+      was that the better the study,
+      the weaker the signal.
+      This result may be disappointing to some people (it certainly was to me),
+      but progress sometimes is.
+      And even if these studies are wrong,
+      figuring out why,
+      and doing better studies,
+      will advance our understanding.
+    </p>
+
+    <p>
+      Books like Glass's
+      <a href="bib.html#glass-facts-fallacies"><cite>Facts and Fallacies of Software Engineering</cite></a>
+      and the collection
+      <a href="bib.html#oram-wilson-making-software"><cite>Making Software</cite></a>
+      are good summaries of what we actually know and why we belive it's true.
+      If you're going to spend any significant time programming
+      (or arguing with programmers)
+      it's easier than ever to find out
+      what the evidence actually is.
+      And if we want people to pay attention to our science,
+      we have an obligation to base our opinions on theirs.
+    </p>
+
+  </div>
+</div>

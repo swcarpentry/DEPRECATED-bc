@@ -1,0 +1,583 @@
+<div id="s:shell:filedir:lesson" class="lesson">
+
+  <p>
+    The part of the operating system responsible for managing files and directories
+    is called the <a href="glossary.html#file-system">file system</a>.
+    It organizes our data into files,
+    which hold information,
+    and directories (also called "folders"),
+    which hold files or other directories.
+  </p>
+
+  <p>
+    Several commands are frequently used
+    to create, inspect, rename, and delete files and directories.
+    To start exploring them,
+    let's log in to the computer by typing our user ID and password.
+    Most systems will print stars to obscure the password,
+    or nothing at all,
+    in case some evildoer is shoulder surfing behind us.
+  </p>
+
+<pre>
+login: <span class="in">vlad</span>
+password: <span class="in">********</span>
+$
+</pre>
+
+  <p>
+    Once we have logged in we'll see a <a href="glossary.html#prompt">prompt</a>,
+    which is how the shell tells us that it's waiting for input.
+    This is usually just a dollar sign,
+    but which may show extra information such as our user ID or the current time.
+    Type the command <code class="in">whoami</code>,
+    then press the <span class="keyboard">Enter</span> key
+    (sometimes marked <span class="keyboard">Return</span>)
+    to send the command to the shell.
+    The command's output is the ID of the current user,
+    i.e.,
+    it shows us who the shell thinks we are:
+  </p>
+
+<pre>
+$ <span class="in">whoami</span>
+<span class="out">vlad</span>
+$
+</pre>
+
+  <p class="continue">
+    More specifically,
+    when we type <code>whoami</code>
+    the shell:
+  </p>
+
+  <ol>
+    <li>finds a program called <code>whoami</code>,</li>
+    <li>runs it,</li>
+    <li>waits for it to display its output, and</li>
+    <li>displays a new prompt to tell us that it's ready for more commands.</li>
+  </ol>
+
+  <h3>Getting Around</h3>
+
+  <p>
+    Next,
+    let's find out where we are
+    by running a command called <code>pwd</code>
+    (which stands for "print working directory").
+    At any moment,
+    our <a href="glossary.html#current-working-directory">current working directory</a>
+    is our current default directory,
+    i.e., the directory that the computer assumes we want to run commands in
+    unless we explicitly specify something else.
+    Here,
+    the computer's response is <code class="out">/users/vlad</code>,
+    which is Vlad's <a href="glossary.html#home-directory">home directory</a>:
+  </p>
+
+<pre>
+$ <span class="in">pwd</span>
+<span class="out">/users/vlad</span>
+$
+</pre>
+
+  <div class="box">
+    <h3>Alphabet Soup</h3>
+
+    <p>
+      If the command to find out <em>who</em> we are is <code>whoami</code>,
+      the command to find out <em>where</em> we are ought to be called <code>whereami</code>,
+      so why is it <code>pwd</code> instead?
+      The usual answer is that in the early 1970s,
+      when Unix was first being developed,
+      every keystroke counted:
+      the devices of the day were slow,
+      and backspacing on a teletype was so painful
+      that cutting the number of keystrokes
+      in order to cut the number of typing mistakes
+      was actually a win for usability.
+      The reality is that commands were added to Unix one by one,
+      without any master plan,
+      by people who were immersed in its jargon.
+      The result is as inconsistent as the roolz uv Inglish speling,
+      but we're stuck with it now.
+    </p>
+
+  </div>
+
+  <p>
+    To understand what a "home directory" is,
+    let's have a look at how the file system as a whole is organized
+    (<a href="#f:filesystem">Figure 4</a>).
+    At the top is the <a href="glossary.html#root-directory">root directory</a>
+    that holds everything else the computer is storing.
+    We refer to it using a slash character <code>/</code> on its own;
+    this is the leading slash in <code>/users/vlad</code>.
+  </p>
+
+  <figure id="f:filesystem">
+    <img src="{{page.root}}/img/lessons/swc-shell/filesystem.png" alt="File System" />
+    <figcaption>Figure 4: File System</figcaption>
+  </figure>
+
+  <p>
+    Inside that directory (or underneath it, if you're drawing a tree) are several other directories:
+    <code>bin</code> (which is where some built-in programs are stored),
+    <code>data</code> (for miscellaneous data files),
+    <code>users</code> (where users' personal directories are located),
+    <code>tmp</code> (for temporary files that don't need to be stored long-term),
+    and so on.
+    We know that our current working directory <code>/users/vlad</code> is stored inside <code>/users</code>
+    because <code>/users</code> is the first part of its name.
+    Similarly,
+    we know that <code>/users</code> is stored inside the root directory <code>/</code> because its name begins with <code>/</code>.
+  </p>
+
+  <p>
+    Underneath <code>/users</code>,
+    we find one directory for each user with an account on this machine
+    (<a href="#f:home_directories">Figure 5</a>).
+    The Mummy's files are stored in <code>/users/imhotep</code>,
+    Wolfman's in <code>/users/larry</code>,
+    and ours in <code>/users/vlad</code>,
+    which is why <code>vlad</code> is the last part of the directory's name.
+    Notice, by the way, that there are two meanings for the <code>/</code> character.
+    When it appears at the front of a file or directory name, it refers to the root directory.
+    When it appears <em>inside</em> a name, it's just a separator.
+  </p>
+
+  <figure id="f:home_directories">
+    <img src="{{page.root}}/img/lessons/swc-shell/home_directories.png" alt="Home Directories" />
+    <figcaption>Figure 5: Home Directories</figcaption>
+  </figure>
+
+  <p>
+    Let's see what's in Vlad's home directory by running <code>ls</code>,
+    which stands for "listing":
+  </p>
+
+<pre>
+$ <span class="in">ls</span>
+<span class="out">bin          data      mail       music
+notes.txt    papers    pizza.cfg  solar
+solar.pdf    swc</span>
+$
+</pre>
+
+  <p class="continue">
+    <code>ls</code> prints the names of the files and directories in the current directory in alphabetical order,
+    arranged neatly into columns.
+    To make its output more comprehensible,
+    we can give it the <a href="glossary.html#command-line-flag">flag</a> <code>-F</code> by typing <code>ls -F</code>.
+    This tells <code>ls</code> to add a trailing <code>/</code> to the names of directories:
+  </p>
+
+<pre>
+$ <span class="in">ls -F</span>
+<span class="out">bin/         data/     mail/      music/
+notes.txt    papers/   pizza.cfg  solar/
+solar.pdf    swc/</span>
+$
+</pre>
+
+  <p class="continue">
+    As you can see,
+    <code>/users/vlad</code> contains seven <a href="glossary.html#sub-directory">sub-directories</a>
+    (<a href="#f:vlad_homedir">Figure 6</a>).
+    The names that don't have trailing slashes&mdash;<code>notes.txt</code>, <code>pizza.cfg</code>, and <code>solar.pdf</code>&mdash;are
+    plain old files.
+  </p>
+
+  <figure id="f:vlad_homedir">
+    <img src="{{page.root}}/img/lessons/swc-shell/vlad_homedir.png" alt="Vlad's Home Directory" />
+    <figcaption>Figure 6: Vlad's Home Directory</figcaption>
+  </figure>
+
+  <div class="box">
+    <h3>What's In A Name?</h3>
+
+    <p>
+      You may have noticed that all of Vlad's files' names are "something dot something".
+      This is just a convention:
+      we can call a file <code>mythesis</code> or almost anything else we want.
+      However,
+      most people use two-part names most of the time
+      to help them (and their programs) tell different kinds of files apart.
+      The second part of such a name is called the <a href="glossary.html#filename-extension">filename extension</a>,
+      and indicates what type of data the file holds:
+      <code>.txt</code> signals a plain text file,
+      <code>.pdf</code> indicates a PDF document,
+      <code>.cfg</code> is a configuration file full of parameters for some program or other,
+      and so on.
+    </p>
+
+    <p>
+      It's important to remember that this is just a convention.
+      Files contain bytes:
+      it's up to us and our programs to interpret those bytes according to the rules for PDF documents, images, and so on.
+      For example,
+      naming a PNG image of a whale as <code>whale.mp3</code>
+      doesn't somehow magically turn it into a recording of whalesong.
+    </p>
+
+  </div>
+
+  <p>
+    Now let's take a look at what's in Vlad's <code>data</code> directory
+    by running the command <code>ls -F data</code>.
+    The second parameter&mdash;the one <em>without</em> a leading dash&mdash;tells
+    <code>ls</code> that we want a listing of something other than our current working directory:
+  </p>
+
+<pre>
+$ <span class="in">ls -F data</span>
+<span class="out">amino_acids.txt   elements/     morse.txt
+pdb/              planets.txt   sunspot.txt</span>
+$
+</pre>
+
+  <p class="continue">
+    The output shows us that there are four text files and two sub-sub-directories.
+    Organizing things hierarchically in this way
+    is a good way to keep track of our work:
+    it's possible to put hundreds of files in our home directory,
+    just as it's possible to pile hundreds of printed papers on our desk,
+    but in the long run it's a self-defeating strategy.
+  </p>
+
+  <p>
+    Notice,
+    by the way
+    that we spelled the directory name <code>data</code>.
+    It doesn't have a trailing slash:
+    that's added to directory names by <code>ls</code>
+    when we use the <code>-F</code> flag
+    to help us tell things apart.
+    And it doesn't begin with a slash
+    because it's a <a href="glossary.html#relative-path">relative path</a>,
+    i.e., it tells <code>ls</code> how to find something from where we are,
+    rather than from the root of the file system
+    (<a href="#f:relative_path">Figure 7</a>).
+  </p>
+
+  <figure id="f:relative_path">
+    <img src="{{page.root}}/img/lessons/swc-shell/absolute_relative_path.png" alt="Absolute and Relative Paths" />
+    <figcaption>Figure 7: Absolute and Relative Paths</figcaption>
+  </figure>
+
+  <p>
+    If we run <code>ls -F /data</code>
+    (<em>with</em> a leading slash)
+    we get a different answer,
+    because <code>/data</code> is an <a href="glossary.html#absolute-path">absolute path</a>:
+  </p>
+
+<pre>
+$ <span class="in">ls -F /data</span>
+<span class="out">access.log    backup/    hardware.cfg
+network.cfg</span>
+$
+</pre>
+
+  <p class="continue">
+    The leading <code>/</code> tells the computer to follow the path from the root of the filesystem,
+    so it always refers to exactly one directory,
+    no matter where we are when we run the command.
+  </p>
+
+  <p>
+    What if we want to change our current working directory?
+    Before we do this,
+    <code>pwd</code> shows us that we're in <code>/users/vlad</code>,
+    and <code>ls</code> without any parameters shows us that directory's contents:
+  </p>
+
+<pre>
+$ <span class="in">pwd</span>
+<span class="out">/users/vlad</span>
+$ <span class="in">ls</span>
+<span class="out">bin/         data/     mail/      music/
+notes.txt    papers/   pizza.cfg  solar/
+solar.pdf    swc/</span>
+$
+</pre>
+
+  <p>
+    We can use <code>cd</code> followed by a directory name to change our working directory.
+    <code>cd</code> stands for "change directory",
+    which is a bit misleading:
+    the command doesn't change the directory,
+    it changes the shell's idea of what directory we are in.
+  </p>
+
+<pre>
+$ <span class="in">cd data</span>
+$
+</pre>
+
+  <p class="continue">
+    <code>cd</code> doesn't print anything,
+    but if we run <code>pwd</code> after it,
+    we can see that we are now in <code>/users/vlad/data</code>.
+    If we run <code>ls</code> without parameters now,
+    it lists the contents of <code>/users/vlad/data</code>,
+    because that's where we now are:
+  </p>
+
+<pre>
+$ <span class="in">pwd</span>
+<span class="out">/users/vlad/data</span>
+$ <span class="in">ls</span>
+<span class="out">amino_acids.txt   elements/     morse.txt
+pdb/              planets.txt   sunspot.txt</span>
+$
+</pre>
+
+    <p>
+      OK, we can go down the directory tree: how do we go up?
+      We could use an absolute path:
+    </p>
+
+<pre>
+$ <span class="in">cd /users/vlad</span>
+$
+</pre>
+
+  <p class="continue">
+    but it's almost always simpler to use <code>cd&nbsp;..</code>
+    to go up one level:
+  </p>
+
+<pre>
+$ <span class="in">pwd</span>
+<span class="out">/users/vlad/data</span>
+$ <span class="in">cd ..</span>
+</pre>
+
+  <p class="continue">
+    <code>..</code> is a special directory name meaning "the directory containing this one",
+    or,
+    more succinctly,
+    the <a href="glossary.html#parent-directory">parent</a> of the current directory.
+  </p>
+  
+  <div class="box">
+    <h3>No Output = OK</h3>
+
+    <p>
+      In general, shell programs do not output anything
+      if no errors occurred. The principle behind this is
+      "If there is nothing to report, shut up.", i. e. if
+      there is output, either you specifically requested the
+      program to do so or something bad happened.
+    </p>
+    <p>
+      This does not apply to programs like <code>ls</code> or 
+      <code>pwd</code>, since the purpose of such programs is
+      to output something.
+    </p>
+
+  </div>
+
+  <p class="continue">
+    Sure enough,
+    if we run <code>pwd</code> after running <code>cd&nbsp;..</code>,
+    we're back in <code>/users/vlad</code>:
+  </p>
+
+<pre>
+$ <span class="in">pwd</span>
+<span class="out">/users/vlad</span>
+$
+</pre>
+
+  <p>
+    The special directory <code>..</code> doesn't usually show up when we run <code>ls</code>.
+    If we want to display it,
+    we can give <code>ls</code> the <code>-a</code> flag:
+  </p>
+
+<pre>
+$ <span class="in">ls -F -a</span>
+<span class="out">./           ../       bin/       data/
+mail/        music/    notes.txt  papers/
+pizza.cfg    solar/    solar.pdf  swc/</span>
+</pre>
+
+  <p class="continue" id="a:dot-directory">
+    <code>-a</code> stands for "show all";
+    it forces <code>ls</code> to show us file and directory names that begin with <code>.</code>,
+    such as <code>..</code>
+    (which, if we're in <code>/users/vlad</code>, refers to the <code>/users</code> directory).
+    As you can see,
+    it also displays another special directory that's just called <code>.</code>,
+    which means "the current working directory".
+    It may seem redundant to have a name for it,
+    but we'll see some uses for it <a href="#a:move-to-here">soon</a>.
+  </p>
+
+  <div class="box">
+    <h3>Orthogonality</h3>
+
+    <p>
+      The special names <code>.</code> and <code>..</code> don't belong to <code>ls</code>;
+      they are interpreted the same way by every program.
+      For example,
+      if we are in <code>/users/vlad/data</code>,
+      the command <code>ls&nbsp;..</code>
+      will give us a listing of <code>/users/vlad</code>.
+      Programmers call this <a href="glossary.html#orthogonality">orthogonality</a>:
+      the meanings of the parts are the same no matter how they're combined.
+      Orthogonal systems tend to be easier for people to learn
+      because there are fewer special cases and exceptions to keep track of.
+    </p>
+
+  </div>
+
+  <p>
+    Everything we have seen so far works on Unix and its descendents,
+    such as Linux and Mac OS X.
+    Things are a bit different on Windows.
+    A typical directory path on a Windows 7 machine might be <code>C:\Users\vlad</code>.
+    The first part, <code>C:</code>, is a <a href="glossary.html#drive-letter">drive letter</a>
+    that identifies which disk we're talking about.
+    This notation dates back to the days of floppy drives;
+    today,
+    different "drives" are usually different filesystems on the network.
+  </p>
+
+  <p id="a:space-in-filename">
+    Instead of a forward slash,
+    Windows uses a backslash to separate the names in a path.
+    This causes headaches because Unix uses backslash for input of special characters.
+    For example,
+    if we want to put a space in a filename on Unix,
+    we would write the filename as <code>my\&nbsp;results.txt</code>.
+    Please don't ever do this, though:
+    if you put spaces,
+    question marks,
+    and other special characters in filenames on Unix,
+    you can confuse the shell for reasons that we'll see shortly.
+  </p>
+
+  <p>
+    Finally,
+    Windows filenames and directory names are <a href="glossary.html#case-insensitive">case insensitive</a>:
+    upper and lower case letters mean the same thing.
+    This means that the path name <code>C:\Users\vlad</code> could be spelled
+    <code>c:\users\VLAD</code>,
+    <code>C:\Users\Vlad</code>,
+    and so on.
+    Some people argue that this is more natural:
+    after all, "VLAD" in all upper case and "Vlad" spelled normally refer to the same person.
+    However,
+    it causes headaches for programmers,
+    and can be difficult for people to understand
+    if their first language doesn't use a cased alphabet.
+  </p>
+
+  <div class="box">
+    <h3>For Cygwin Users</h3>
+
+    <p>
+      <a href="http://www.cygwin.org">Cygwin</a> tries to make Windows paths look more like Unix paths
+      by allowing us to use a forward slash instead of a backslash as a separator.
+      It also allows us to refer to the C drive as <code>/cygdrive/c/</code> instead of as <code>C:</code>.
+      (The latter usually works too, but not always.)
+      Paths are still case insensitive,
+      though,
+      which means that if you try to put files called <code>backup.txt</code> (in all lower case)
+      and <code>Backup.txt</code> (with a capital 'B') into the same directory,
+      the second will overwrite the first.
+    </p>
+
+    <p>
+      Cygwin does something else that frequently causes confusion.
+      By default,
+      it interprets a path like <code>/home/vlad</code> to mean <code>C:\cygwin\home\vlad</code>,
+      i.e.,
+      it acts as if <code>C:\cygwin</code> was the root of the filesystem.
+      This is sometimes helpful,
+      but if you are using an editor like Notepad,
+      and want to save a file in what Cygwin thinks of as your home directory,
+      you need to keep this translation in mind.
+    </p>
+
+  </div>
+
+  <div>
+    <h3>Nelle's Pipeline: Organizing Files</h3>
+
+    <p>
+      Knowing just this much about files and directories,
+      Nelle is ready to organize the files that the protein assay machine will create.
+      First,
+      she creates a directory called <code>north-pacific-gyre</code>
+      (to remind herself where the data came from).
+      Inside that, she creates a directory called <code>2012-07-03</code>,
+      which is the date she started processing the samples.
+      She used to use names like <code>conference-paper</code> and <code>revised-results</code>,
+      but she found them hard to understand after a couple of years.
+      (The final straw was when she found herself creating a directory called
+      <code>revised-revised-results-3</code>.)
+    </p>
+
+    <p>
+      Each of her physical samples is labelled
+      according to her lab's convention
+      with a unique ten-character ID,
+      such as "NENE01729A".
+      This is what she used in her collection log to record the location,
+      time, depth, and other characteristics of the sample,
+      so she decides to use it as part of each data file's name.
+      Since the assay machine's output is plain text,
+      she will call her files <code>NENE01729A.txt</code>,
+      <code>NENE01812A.txt</code>,
+      and so on.
+      All 1520 files will go into the same directory.
+    </p>
+
+    <p>
+      If she is in her home directory,
+      Nelle can see what files she has using the command:
+    </p>
+
+<pre>
+$ <span class="in">ls north-pacific-gyre/2012-07-03/</span>
+</pre>
+
+    <p>
+      Since this is a lot to type,
+      she can take advantage of Bash's
+      <a href="glossary.html#command-completion">command completion</a>.
+      If she types:
+    </p>
+
+<pre>
+$ <span class="in">ls no</span>
+</pre>
+
+    <p class="continue">
+      and then presses <span class="in">tab</span>,
+      Bash will automatically complete the directory name for her:
+    </p>
+
+<pre>
+$ <span class="in">ls north-pacific-gyre/</span>
+</pre>
+
+    <p class="continue">
+      If she presses tab again,
+      Bash will add <code>2012-07-03/</code> to the command,
+      since it's the only possible completion.
+      Pressing tab again does nothing,
+      since there are 1520 possibilities;
+      pressing tab twice brings up a list of all the files,
+      and so on.
+      This is called <a id="a:tab-completion" href="glossary.html#tab-completion">tab completion</a>,
+      and we will see it in many other tools as we go on.
+    </p>
+
+  </div>
+
+</div>

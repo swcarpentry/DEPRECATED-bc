@@ -1,0 +1,248 @@
+---
+layout: lesson
+root: ..
+title: Lesson Material
+ipythonnotebook: http://nbviewer.ipython.org/urls
+raw: raw.github.com/swcarpentry/bc/gh-pages
+---
+
+<p>
+  This directory contains one page for each Software Carpentry lesson package.
+  Each of those pages uses {% raw %}{% include %}{% endraw %}
+  to include all of the lesson material for viewing and checking.
+</p>
+
+<div>
+  <h2>Software Carpentry</h2>
+
+  <p>
+    This material is original to Software Carpentry.
+  </p>
+
+  <dl>
+
+    <dt><a href="swc-shell/tutorial.html">The Unix Shell</a></dt>
+    <dd>
+      Core material for the Unix shell:
+      the organization of files and directories,
+      creating and deleting things,
+      the pipe and filter model,
+      processing multiple files using loops,
+      putting commonly-used commands in shell scripts,
+      and finding things.
+      <br/>
+      To do: diagrams.
+    </dd>
+
+    <dt><a href="swc-git/tutorial.html">Version Control with Git</a></dt>
+    <dd>
+      A short introduction to version control using Git and GitHub
+      that builds toward a branch-per-feature workflow.
+      <br/>
+      To do: lots of revision; diagrams.
+    </dd>
+
+    <dt><a href="swc-python/tutorial.html">Basic Programming Using Python</a></dt>
+    <dd>
+      An introduction to basic programming concepts using the IPython Notebook, skimage.novice, and ipythonblocks.
+      <br/>
+      To do: lots.
+    </dd>
+
+    <dt><a href="swc-setdict/tutorial.html">Sets and Dictionaries</a></dt>
+    <dd>
+      Optional material for Python programming:
+      sets and dictionaries,
+      how hash-based data structures work,
+      the JSON data format
+      (which relies heavily on dictionaries),
+      and three examples of increasing complexity.
+      <br/>
+      To do: diagrams.
+    </dd>
+
+    <dt><a href="swc-invperc/tutorial.html">Invasion Percolation</a></dt>
+    <dd>
+      Invasion percolation is a good half-day example
+      that brings together many of the things we teach about programming
+      while introducing new concepts like performance profiling and development lifecycles.
+      <br/>
+      To do: diagrams; challenges; IPython Notebooks.
+    </dd>
+
+    <dt><a href="swc-db/tutorial.html">Databases and SQL</a></dt>
+    <dd>
+      Core material for SQL databases:
+      selection,
+      removing duplicates,
+      filtering with Boolean conditions,
+      performing calculations on values,
+      sorting,
+      handling NULLs,
+      aggregating values,
+      grouping,
+      joining multiple tables,
+      a <em>very</em> brief introduction to creating tables and inserting data,
+      an equally brief coverage of transactions,
+      and a couple of examples showing how to uses databases from inside a program.
+      <br/>
+      To do: diagrams, and material on how to design and structure tables.
+    </dd>
+
+    <dt><a href="swc-web/tutorial.html">Web Programming with Python</a></dt>
+    <dd>
+      Preliminary material on web programming:
+      a little bit of history,
+      basic HTML,
+      using a templating engine to create pages,
+      how HTTP works,
+      fetching data programmatically,
+      providing data by dynamically generating static pages,
+      why and how to create an index,
+      and data syndication.
+      <br/>
+      To do: diagrams; switch from Jinja2 to Jekyll (since that's what GitHub uses).
+    </dd>
+
+  </dl>
+
+</div>
+
+<div>
+  <h2>The Hacker Within</h2>
+
+  <p>
+    This material originated with a grassroots group
+    at the University of Wisconsin - Madison
+    called The Hacker Within.
+    We are grateful for their permission to re-use it.
+  </p>
+
+  <dl>
+
+    <dt>The Unix Shell</dt>
+    <dd>
+      This introduction is based on materials by
+      Milad Fatenejad, Sasha Wood, and Radhika Khetani,
+      and includes a <a href="thw-shell/tutorial.html">single tutorial</a>.
+    </dd>
+
+    <dt>Version Control With Git</dt>
+    <dd>
+      This introduction is based on materials by
+      Katy Huff and Anthony Scopatz
+      as modified by Joshua R. Smith and Sri Hari Krishna Narayanan.
+      It includes:
+      <ul>
+<!--	<li><a href="thw-git/instructors.html">Instructors' Guide</a></li> -->
+	<li><a href="thw-git/local.html">Local Operations</a></li>
+	<li><a href="thw-git/remote.html">Using Remote Repositories</a></li>
+      </ul>
+    </dd>
+
+    <dt>Introduction to Python</dt>
+    <dd>
+      An introduction to the basic features of Python,
+      which covers:
+      <ul>
+	<li><a href="{{page.ipythonnotebook}}/{{page.raw}}/lessons/thw-python/vars-types/variables.ipynb">Variables and Types</a></li>
+	<li><a href="{{page.ipythonnotebook}}/{{page.raw}}/lessons/thw-python/data-structures/data_structures.ipynb">Data Structures</a></li>
+	<li><a href="{{page.ipythonnotebook}}/{{page.raw}}/lessons/thw-python/flow-control/python_flow_control.ipynb">Flow Control</a></li>
+	<li><a href="{{page.ipythonnotebook}}/{{page.raw}}/lessons/thw-python/strings-io/tutorial.ipynb">Strings and File I/O</a></li>
+	<li><a href="{{page.ipythonnotebook}}/{{page.raw}}/lessons/thw-python/functions-and-modules/python_functions_and_modules.ipynb">Functions and Modules</a></li>
+      </ul>
+      Most sections also include some exercise material.
+    </dd>
+
+    <dt>Python Debugging</dt>
+    <dd>
+      This introduction is based on materials
+      originally written by Anthony Scopatz and Patrick Fuller.
+      It includes a <a href="{{page.ipythonnotebook}}/{{page.raw}}/lessons/thw-python-debugging/tutorial.ipynb">notebook</a>.
+    </dd>
+
+    <dt>Testing with Python</dt>
+    <dd>
+      This introduction is based on materials
+      originally written by Katy Huff, Rachel Slaybaugh, and Anthony Scopatz.
+      It includes a <a href="{{page.ipythonnotebook}}/{{page.raw}}/lessons/thw-testing/tutorial.ipynb">notebook</a>.
+    </dd>
+
+    <dt>NumPy</dt>
+    <dd>
+      An introduction to array-based computing in Python from Matthew Terry.
+      It consists of a <a href="{{page.ipythonnotebook}}/{{page.raw}}/lessons/thw-numpy/numpy.ipynb">notebook</a>.
+    </dd>
+
+    <dt>SciPy</dt>
+    <dd>
+      A supplement to the NumPy tutorial from Anthony Scopatz.
+      It also consists of a <a href="thw-scipy/tutorial.html">single tutorial</a>.
+    </dd>
+
+    <dt>Plotting in Python with matplotlib</dt>
+    <dd>
+      An introduction to plotting in Python using matplotlib
+      originally written by Anthony Scopatz and Katy Huff.
+      It consists of a <a href="{{page.ipythonnotebook}}/{{page.raw}}/lessons/thw-matplotlib/matplotlib-instructor.ipynb">notebook</a>.
+    </dd>
+
+    <dt>Documentation</dt>
+    <dd>
+      An introduction to documenting code from Anthony Scopatz.
+      It consists of a <a href="{{page.ipythonnotebook}}/{{page.raw}}/lessons/thw-documentation/tutorial.ipynb">notebook</a>.
+    </dd>
+
+  </dl>
+
+<div>
+  <h2>Miscellaneous</h2>
+
+  <p>
+    This material was written and contributed by a variety of people.
+    We are grateful for their permission to reuse it.
+  </p>
+
+  <dl>
+
+    <dt>Introduction to R</dt>
+    <dd>
+      An introduction to R originally developed by Prof. Jenny Bryan
+      at the University of British Columbia,
+      and modified by others for use in Software Carpentry bootcamps.
+      See the <a href="misc-r/tutorial.html">main tutorial file</a>
+      for the starting point.
+    </dd>
+
+    <dt>Introduction to Pandas</dt>
+    <dd>
+      An introduction to the Pandas statistical library
+      written by Indiana University's Michael Hansen,
+      contained in a <a href="https://raw.github.com/swcarpentry/bc/gh-pages/lessons/misc-pandas/an-introduction-to-pandas.ipynb">ipython notebook (HTML rendering)</a>.
+    </dd>
+
+    <dt>Introduction to Biopython</dt>
+    <dd>
+      An introduction to bioinformatics computing using biopython
+      originally written by Will Trimble, Aron Ahmadia, and others.
+      It covers:
+      <ul>
+	<li>The <a href="misc-biopython/tutorial.html">main tutorial</a></li>
+	<li>The <a href="misc-biopython/reproducible_workflow.html">creating a reproducible workflow</a></li>
+	<li><a href="misc-biopython/eutils.html">NCBI's EUTILS</a></li>
+	<li><a href="misc-biopython/similarity.html">similarity searching</a></li>
+	<li><a href="misc-biopython/fastq.html">FASTQ sequence parsing</a></li>
+      </ul>
+    </dd>
+
+    <dt>Installing a Python Package Locally</dt>
+    <dd>
+      A short introduction to installing <code>grin</code> with <code>pip</code>
+      and updating <code>PATH</code> to find it
+      that was originally created by Cindee Madison.
+      (And yes,
+      those terms are all explained in <a href="misc-installation/tutorial.html">the tutorial</a>.)
+    </dd>
+
+  </dl>
+</div>

@@ -1,0 +1,497 @@
+<div id="s:shell:create:lesson" class="lesson">
+
+  <p>
+    We now know how to explore files and directories,
+    but how do we create them in the first place?
+    Let's go back to Vlad's home directory,
+    <code>/users/vlad</code>,
+    and use <code>ls -F</code> to see what it contains:
+  </p>
+
+<pre>
+$ <span class="in">pwd</span>
+<span class="out">/users/vlad</span>
+$ <span class="in">ls -F</span>
+<span class="out">bin/         data/     mail/      music/
+notes.txt    papers/   pizza.cfg  solar/
+solar.pdf    swc/</span>
+$
+</pre>
+
+  <p>
+    Let's create a new directory called <code>thesis</code>
+    using the command <code>mkdir thesis</code>
+    (which has no output):
+  </p>
+
+<pre>
+$ <span class="in">mkdir thesis</span>
+$
+</pre>
+
+  <p class="continue">
+    As you might (or might not) guess from its name,
+    <code>mkdir</code> means "make directory".
+    Since <code>thesis</code> is a relative path
+    (i.e., doesn't have a leading slash),
+    the new directory is made below the current one:
+  </p>
+
+<pre>
+$ <span class="in">ls -F</span>
+<span class="out">bin/         data/     mail/      music/
+notes.txt    papers/   pizza.cfg  solar/
+solar.pdf    swc/      <span class="highlight">thesis/</span></span>
+$
+</pre>
+
+  <p class="continue">
+    However, there's nothing in it yet:
+  </p>
+
+<pre>
+$ <span class="in">ls -F thesis</span>
+$
+</pre>
+
+  <p>
+    Let's change our working directory to <code>thesis</code> using <code>cd</code>,
+    then run an editor called Nano
+    to create a file called <code>nano draft.txt</code>:
+  </p>
+
+<pre>
+$ <span class="in">cd thesis</span>
+$ <span class="in">nano draft.txt</span>
+</pre>
+
+  <p class="continue">
+    Nano is a very simple text editor that only a programmer could really love.
+    <a href="#f:nano">Figure 9</a> shows what it looks like when it runs:
+    the cursor is the blinking square in the upper left,
+    and the two lines across the bottom show us the available commands.
+    (By convention,
+    Unix documentation uses the caret <code>^</code> followed by a letter
+    to mean "control plus that letter",
+    so <code>^O</code> means <span class="keyboard">Control+O</span>.)
+  </p>
+
+  <figure id="f:nano">
+    <img src="{{page.root}}/img/lessons/swc-shell/nano.png" alt="The Nano Editor" />
+    <figcaption>Figure 9: The Nano Editor</figcaption>
+  </figure>
+
+  <p>
+    Let's type in a short quotation
+    (<a href="#f:nano_quotation">Figure 10</a>)
+    then use <span class="in">Control-O</span> to write our data to disk.
+    Once our quotation is saved,
+    we can use <span class="in">Control-X</span> to quit the editor and return to the shell.
+  </p>
+
+  <figure id="f:nano_quotation">
+    <img src="{{page.root}}/img/lessons/swc-shell/nano_quotation.png" alt="Nano in Action" />
+    <figcaption>Figure 10: Nano in Action</figcaption>
+  </figure>
+
+  <div class="box">
+    <h3>Which Editor?</h3>
+
+    <p>
+      When we say, "<code>nano</code> is a text editor,"
+      we really do mean "text":
+      it can only work with plain character data,
+      not tables,
+      images,
+      or any other human-friendly media.
+      We use it in examples because
+      almost anyone can drive it anywhere without training,
+      but please use something more powerful for real work.
+      On Unix systems (such as Linux and Mac OS&nbsp;X),
+      many programmers use <a href="http://www.gnu.org/software/emacs/">Emacs</a>
+      or <a href="http://www.vim.org/">Vim</a>
+      (both of which are completely unintuitive, even by Unix standards),
+      or a graphical editor such as <a href="http://projects.gnome.org/gedit/">Gedit</a>.
+      On Windows,
+      you may wish to use <a href="http://notepad-plus-plus.org/">Notepad++</a>.
+    </p>
+
+    <p>
+      No matter what editor you use,
+      you will need to know where it searches for and saves files.
+      If you start it from the shell,
+      it will (probably) use your current working directory as its default location.
+      If you use your computer's start menu,
+      it may want to save files in your desktop or documents directory instead.
+      You can change this by navigating to another directory
+      the first time you "Save As..."
+    </p>
+
+  </div>
+
+  <p>
+    <code>nano</code> doesn't leave any output on the screen after it exits.
+    But <code>ls</code> now shows that we have created a file called <code>draft.txt</code>:
+  </p>
+
+<pre>
+$ <span class="in">ls</span>
+<span class="out">draft.txt</span>
+$
+</pre>
+
+  <p>
+    If we just want to quickly create a file with no content, we
+    can use the command <code>touch</code>.
+  </p>
+
+<pre>
+$ <span class="in">touch draft_empty.txt</span>
+$ <span class="in">ls</span>
+<span class="out">draft.txt   draft_empty.txt</span>
+$
+</pre>
+
+  <p>
+    The <code>touch</code> command has allowed us to create a file
+    without leaving the command line.  As with text editors like 
+    <code>nano</code>, <code>touch</code> will create the file in
+    your current working directory.
+  </p>
+
+  <p>
+    If we <code>touch</code> a file that already exists, the time of
+    last modification for the file is updated to the present time,
+    but the file is otherwise unaltered.  We can demonstrate this by
+    running <code>ls</code> with the <code>-l</code> flag to give a
+    long listing of files in the
+    current directory which includes information about the date and
+    time of last modification.
+  </p>
+
+<pre>
+$ <span class="in">ls -l</span>
+<span class="out">-rw-r--r-- 1 username username 512 Oct  9 15:46 draft.txt</span>
+<span class="out">-rw-r--r-- 1 username username   0 Oct  9 15:47 draft_empty.txt</span>
+$ <span class="in">touch draft.txt</span>
+$ <span class="in">ls -l</span>
+<span class="out">-rw-r--r-- 1 username username 512 Oct  9 15:48 draft.txt</span>
+<span class="out">-rw-r--r-- 1 username username   0 Oct  9 15:47 draft_empty.txt</span>
+</pre>
+
+  <p>
+    Note how the modification time of <code>draft.txt</code> changes
+    after we <code>touch</code> it.
+  </p>
+
+  <p>
+    We can run <code>ls</code> with the <code>-s</code> flag
+    (for "size")
+    to show us how large <code>draft.txt</code> is:
+  </p>
+
+<pre>
+$ <span class="in">ls -s</span>
+<span class="out">   1  draft.txt        0  draft_empty.txt</span>
+$
+</pre>
+
+  <p class="continue">
+    Unfortunately,
+    Unix reports sizes in <a href="glossary.html#disk-block">disk blocks</a> by default,
+    which might be the least helpful default imaginable.
+    If we add the <code>-h</code> flag,
+    <code>ls</code> switches to more human-friendly units:
+  </p>
+
+<pre>
+$ <span class="in">ls -s -h</span>
+<span class="out"> 512  draft.txt        0  draft_empty.txt</span>
+$
+</pre>
+
+  <p class="continue">
+    Here, 512 is the number of bytes in the <code>draft.txt</code> file.
+    This is more than we actually typed in because
+    the smallest unit of storage on the disk is typically a block of 512 bytes.
+  </p>
+
+  <p>
+    Let's start tidying up by running <code>rm draft.txt</code>:
+  </p>
+
+<pre>
+$ <span class="in">rm draft.txt</span>
+$
+</pre>
+
+  <p class="continue">
+    This command removes files ("rm" is short for "remove").
+    If we run <code>ls</code>, only the <code>draft_empty.txt</code>
+    file remains:
+  </p>
+
+<pre>
+$ <span class="in">ls</span>
+<span class="out">draft_empty.txt</span>
+$
+</pre>
+
+  <p>
+    Now we'll finish cleaning up by running <code>rm draft_empty.txt</code>:
+  </p>
+
+<pre>
+$ <span class="in">rm draft_empty.txt</span>
+$
+</pre>
+
+  <p>
+    If we run <code>ls</code> again, its output is empty,
+    which tells us that both of our files are gone:
+  </p>
+
+<pre>
+$ <span class="in">ls</span>
+$
+</pre>
+
+  <div class="box">
+    <h3>Deleting Is Forever</h3>
+
+    <p>
+      Unix doesn't have a trash bin:
+      when we delete files,
+      they are unhooked from the file system
+      so that their storage space on disk can be recycled.
+      Tools for finding and recovering deleted files do exist,
+      but there's no guarantee they'll work in any particular situation,
+      since the computer may recycle the file's disk space right away.
+    </p>
+
+  </div>
+
+  <p>
+    Let's re-create <code>draft.txt</code> as an empty file,
+    and then move up one directory to <code>/users/vlad</code> using <code>cd&nbsp;..</code>:
+  </p>
+
+<pre>
+$ <span class="in">pwd</span>
+<span class="out">/users/vlad/thesis</span>
+$ <span class="in">touch draft.txt</span>
+$ <span class="in">ls</span>
+<span class="out">draft.txt</span>
+$ <span class="in">cd ..</span>
+$
+</pre>
+
+  <p class="continue">
+    If we try to remove the entire <code>thesis</code> directory using <code>rm thesis</code>,
+    we get an error message:
+  </p>
+
+<pre>
+$ <span class="in">rm thesis</span>
+<span class="err">rm: cannot remove `thesis': Is a directory</span>
+$
+</pre>
+
+  <p class="continue">
+    This happens because <code>rm</code> only works on files, not directories.
+    The right command is <code>rmdir</code>, which is short for "remove directory":
+    It doesn't work yet either, though,
+    because the directory we're trying to remove isn't empty:
+  </p>
+
+<pre>
+$ <span class="in">rmdir thesis</span>
+<span class="err">rmdir: failed to remove `thesis': Directory not empty</span>
+$
+</pre>
+
+  <p class="continue">
+    This little safety feature can save you a lot of grief,
+    particularly if you are a bad typist.
+    If we really want to get rid of <code>thesis</code>
+    we should first delete the file <code>draft.txt</code>:
+  </p>
+
+<pre>
+$ <span class="in">rm thesis/draft.txt</span>
+$
+</pre>
+
+  <p class="continue">
+    The directory is now empty,
+    so <code>rmdir</code> can delete it:
+  </p>
+
+<pre>
+$ <span class="in">rmdir thesis</span>
+$
+</pre>
+
+  <div class="box">
+    <h3>With Great Power Comes Great Responsibility</h3>
+
+    <p>
+      Removing the files in a directory
+      just so that we can remove the directory
+      quickly becomes tedious.
+      Instead,
+      we can use <code>rm</code> with the <code>-r</code> flag
+      (which stands for "recursive"):
+    </p>
+
+<pre>
+$ <span class="in">rm -r thesis</span>
+$
+</pre>
+
+    <p>
+      This removes everything in the directory,
+      then the directory itself.
+      If the directory contains sub-directories,
+      <code>rm&nbsp;-r</code> does the same thing to them,
+      and so on.
+      It's very handy,
+      but can do a lot of damage if used without care.
+    </p>
+
+  </div>
+
+  <p>
+    Let's create that directory and file one more time.
+    (Note that this time we're running <code>touch</code> with the path <code>thesis/draft.txt</code>,
+    rather than going into the <code>thesis</code> directory
+    and running <code>touch</code> on <code>draft.txt</code> there.)
+  </p>
+
+<pre>
+$ <span class="in">pwd</span>
+<span class="out">/users/vlad/thesis</span>
+$ <span class="in">mkdir thesis</span>
+$ <span class="in">touch thesis/draft.txt</span>
+$ <span class="in">ls thesis</span>
+<span class="out">draft.txt</span>
+$
+</pre>
+
+  <p class="continue">
+    <code>draft.txt</code> isn't a particularly informative name,
+    so let's change the file's name using <code>mv</code>,
+    which is short for "move":
+  </p>
+
+<pre>
+$ <span class="in">mv thesis/draft.txt thesis/quotes.txt</span>
+$
+</pre>
+
+  <p class="continue">
+    The first parameter tells <code>mv</code> what we're "moving",
+    while the second is where it's to go.
+    In this case,
+    we're moving <code>thesis/draft.txt</code> to <code>thesis/quotes.txt</code>,
+    which has the same effect as renaming the file.
+    Sure enough,
+    <code>ls</code> shows us that <code>thesis</code> now contains one file called <code>quotes.txt</code>:
+  </p>
+
+<pre>
+$ <span class="in">ls thesis</span>
+<span class="out">quotes.txt</span>
+$
+</pre>
+
+  <p class="continue">
+    Just for the sake of inconsistency,
+    <code>mv</code> also works on directories&mdash;there
+    is no separate <code>mvdir</code> command.
+  </p>
+
+  <p id="a:move-to-here">
+    Let's move <code>quotes.txt</code> into the current working directory.
+    We use <code>mv</code> once again,
+    but this time
+    we'll just use the name of a directory as the second parameter
+    to tell <code>mv</code> that we want to keep the filename,
+    but put the file somewhere new.
+    (This is why the command is called "move".)
+    In this case,
+    the directory name we use is
+    the special directory name <code>.</code> that we <a href="#a:dot-directory">mentioned earlier</a>):
+  </p>
+
+<pre>
+$ <span class="in">mv thesis/quotes.txt .</span>
+$
+</pre>
+
+  <p class="continue">
+    The effect is to move the file from the directory it was in
+    to the current directory.
+    <code>ls</code> now shows us that <code>thesis</code> is empty,
+    and that <code>quotes.txt</code> is in our current directory:
+  </p>
+
+<pre>
+$ <span class="in">ls thesis</span>
+$ <span class="in">ls quotes.txt</span>
+<span class="out">quotes.txt</span>
+$
+</pre>
+
+  <p class="continue">
+    (Notice that <code>ls</code> with a filename or directory name as an parameter
+    only lists that file or directory.)
+  </p>
+
+  <p>
+    The <code>cp</code> command works very much like <code>mv</code>,
+    except it copies a file instead of moving it.
+    We can check that it did the right thing
+    using <code>ls</code> with two paths as parameters&mdash;like most Unix commands,
+    <code>ls</code> can be given thousands of paths at once:
+  </p>
+
+<pre>
+$ <span class="in">cp quotes.txt thesis/quotations.txt</span>
+$ <span class="in">ls quotes.txt thesis/quotations.txt</span>
+<span class="out">quotes.txt   thesis/quotations.txt</span>
+$
+</pre>
+
+  <p>
+    To prove that we made a copy,
+    let's delete the <code>quotes.txt</code> file in the current directory,
+    and then run that same <code>ls</code> again.
+    This time,
+    it tells us that it can't find <code>quotes.txt</code> in the current directory,
+    but it does find the copy in <code>thesis</code> that we didn't delete:
+  </p>
+
+<pre>
+$ <span class="in">ls quotes.txt thesis/quotations.txt</span>
+<span class="err">ls: cannot access quotes.txt: No such file or directory</span>
+<span class="out">thesis/quotations.txt</span>
+$
+</pre>
+
+  <div class="box">
+    <h3>Another Useful Abbreviation</h3>
+
+    <p>
+      The shell interprets the character <code>~</code> (tilde) at the start of a path
+      to mean "the current user's home directory".
+      For example,
+      if Vlad's home directory is <code>/home/vlad</code>,
+      then <code>~/data</code> is equivalent to <code>/home/vlad/data</code>.
+      This only works if it is the first character in the path:
+      <code>/~</code> is <em>not</em> the user's home directory,
+      and <code>here/there/~/elsewhere</code> is <em>not</em> <code>/home/vlad/elsewhere</code>.
+    </p>
+  </div>
+
+</div>

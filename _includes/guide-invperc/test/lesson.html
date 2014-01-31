@@ -1,0 +1,313 @@
+<div id="s:invperc:test:lesson" class="lesson">
+  
+  <p>
+    We can finally start testing our program systematically.
+    To begin,
+    let's add another clause to the main body of the program
+    so that if the scenario is <code>"5x5_line"</code> we will create a 5&times;5 grid,
+    fill a line of cells from the center to the edge with lower values,
+    and then check that <code>fill_grid</code> does the right thing
+    (<a href="#f:5x5_line">Figure 16</a>):
+  </p>
+
+<pre>
+if __name__ == '__main__':
+    scenario = sys.argv[1]
+    if scenario == 'random':
+        do_random(arguments)
+    elif scenario == '5x5_line':
+        do_5x5_line()
+    else:
+        fail('Unknown scenario "%s"' % scenario)
+</pre>
+
+  <figure id="f:5x5_line">
+    <img src="dev/5x5_line.png" alt="Racing for the Border" />
+    <figcaption>Figure 16: Racing for the Border</figcaption>
+  </figure>
+
+  <p>
+    The function <code>do_5x5_line</code> is pretty simple:
+  </p>
+
+<pre src="src/dev/invperc_5x5.py">
+def do_5x5_line():
+    '''Run a test on a 5x5 grid with a run to the border.'''
+
+    grid = create_grid(5)
+    init_grid_5x5_line(grid)
+    num_filled_cells = fill_grid(grid)
+    check_grid_5x5_line(grid, num_filled_cells)
+</pre>
+
+  <p class="continue">
+    <code>create_grid</code> and <code>fill_grid</code> already exist:
+    in fact,
+    the whole point of our earlier refactoring was
+    to let us re-use <code>fill_grid</code> for testing purposes.
+    The new test-specific functions
+    are <code>init_grid_5x5_line</code> and <code>check_grid_5x5_line</code>.
+    (We will need a similar pair of functions for each of our tests,
+    so we will write these,
+    then use our experience to guide some further refactoring.)
+    Here's the first function:
+  </p>
+
+<pre src="src/dev/invperc_5x5.py">
+def init_grid_NxN_line(grid):
+    '''Fill NxN grid with straight line to edge for testing purposes.'''
+
+    N = len(grid)
+    for x in range(N):
+        for y in range(N):
+            grid[x][y] = 2
+
+    for i in range(N/2 + 1):
+        grid[N/2][i] = 1
+</pre>
+
+  <p>
+    It's just as easy to write this function for the N&times;N case as for the 5&times;5 case,
+    so we generalize early.
+    The first part of the function is easy to understand:
+    find the value of N by looking at the grid,
+    then fill all of the cells with the integer 2.
+    The second part,
+    which fills the cells from the center to the edge in a straight line with the lower value 1,
+    isn't as easy to understand:
+    it's not immediately obvious that <code>i</code> should go in the range from 0 to N/2+1,
+    or that the X coordinate should be N/2 and the Y coordinate should be <code>i</code> for the cells that we want to fill.
+  </p>
+
+  <p>
+    When we say "it's not obvious,"
+    what we mean is,
+    "There's the possibility that it will contain bugs."
+    If there are bugs in our test cases,
+    then we're just making more work for ourselves.
+    We'll refactor this code later so that it's easier for us to see that it's doing the right thing.
+  </p>
+
+  <p>
+    Here's the code that checks that an N&times;N grid
+    with a line of cells from the center to the edge has been filled correctly:
+  </p>
+
+<pre>
+def check_grid_NxN_line(grid, num_filled):
+    '''Check NxN grid straight line grid.'''
+
+    N = len(grid)
+    assert num_filled == N/2 + 1, 'Wrong number filled'
+
+    for x in range(N):
+        for y in range(N):
+            if (x == N/2) and (y &lt;= N/2):
+                assert grid[x][y] == FILLED, 'Not filled!'
+            else:
+                assert grid[x][y] != FILLED, 'Wrongly filled!'
+</pre>
+
+  <p class="continue">
+    Again,
+    it's as easy to check for the N&times;N case as the 5&times;5 case,
+    so we've generalized the function.
+    But take a look at that <code>if</code>:
+    are we sure that the only cells that should be filled are
+    the ones with X coordinate equal to N/2 and Y coordinate from 0 to N/2?
+    Shouldn't that be N/2+1?
+    Or 1 to N/2,
+    or maybe the X coordinate should be N/2+1.
+  </p>
+
+  <p>
+    In fact,
+    these two functions <em>are</em> correct,
+    and when they're run,
+    they report that <code>fill_grid</code> behaves properly.
+    But writing and checking two functions like this for each test
+    won't actually increase our confidence in our program,
+    because the tests themselves might contain bugs.
+    We need a simpler way to create and check tests,
+    so that our testing is actually helping us create a correct program
+    rather than giving us more things to worry about.
+    How do we do that?
+  </p>
+
+  <p>
+    Let's go back to the example in <a href="#f:5x5_line">Figure 16</a>.
+    Why don't we just draw our test cases exactly as shown?
+    Today's programming languages don't actually let us include sketches in programs,
+    but we can get close using strings:
+  </p>
+
+<pre>
+fixture = '''2 2 2 2 2
+             2 2 2 2 2
+             1 1 1 2 2
+             2 2 2 2 2
+             2 2 2 2 2'''
+</pre>
+
+  <p class="continue">
+    We can write the result as a similar string:
+  </p>
+
+<pre>
+result = '''. . . . .
+            . . . . .
+            * * * . .
+            . . . . .
+            . . . . .'''
+</pre>
+
+  <p class="continue">
+    As you can probably guess,
+    the '*' character means "this cell should be filled",
+    while the '.' means "this cell should hold whatever value it had at the start".
+    Here's how we want to use them:
+  </p>
+
+<pre>
+def do_5x5_line():
+    '''Run a test on a 5x5 grid with a run to the border.'''
+
+    fixture  = '''2 2 2 2 2
+                  2 2 2 2 2
+                  1 1 1 2 2
+                  2 2 2 2 2
+                  2 2 2 2 2'''
+
+    expected = '''. . . . .
+                  . . . . .
+                  * * * . .
+                  . . . . .
+                  . . . . .'''
+
+    fixture = parse_grid(fixture)
+    num_filled_cells = fill_grid(fixture)
+    check_result(expected, fixture, num_filled_cells)
+</pre>
+
+  <p>
+    Parsing a grid of numbers is pretty easy:
+  </p>
+
+<pre>
+def parse_grid(fixture):
+    '''Turn a string representation of a grid into a grid of numbers.'''
+
+    result = []
+    for row in fixture.split('\n'):
+        values = row.split()
+        assert (result == []) or (len(row) == len(result[0])), \
+               'Mis-match in row sizes'
+        temp = []
+        for v in values:
+            temp.append(int(v))
+        result.append(temp)
+    return result
+</pre>
+
+  <p class="continue">
+    Checking cells is pretty easy too:
+  </p>
+
+<pre>
+def check_result(expected, grid, num_filled):
+    '''Check the results of filling.'''
+    expected, count = convert_grid(expected)
+
+    if len(expected) != len(grid):
+        fail('Mis-match between size of expected result and size of grid')
+    if count != num_filled:
+        fail('Wrong number of cells filled')
+
+    for i in range(len(expected)):
+        g = grid[i]
+        e = expected[i]
+        if len(g) != len(e):
+            fail('Rows are not the same length')
+        for j in range(len(g)):
+            if g[j] and (e[j] != FILLED):
+                fail('Cell %d,%d should be filled but is not' % (i, j))
+            elif (not g[j]) and (e[j] == FILLED):
+                fail('Cell %d,%d should not be filled but is' % (i, j))
+    return result
+</pre>
+
+  <p>
+    We still have one function to write,
+    though&mdash;the one that parses a string of '*' and '.' characters
+    and produces a grid of trues and falses.
+    But this is almost exactly the same as what we do to parse a fixture.
+    The only difference is how we convert individual items.
+    Let's refactor:
+  </p>
+
+<pre>
+<span class="highlight">def should_be_filled(x):
+    '''Is this cell supposed to be filled?'''
+    return x == '*'</span>
+
+def parse_general(fixture<span class="highlight">, converter</span>):
+    '''Turn a string representation of a grid into a grid of values.'''
+
+    result = []
+    for row in fixture.split('\n'):
+        values = row.split()
+        assert (result == []) or (len(row) == len(result[0])), \
+               'Mis-match in row sizes'
+        temp = []
+        for v in values:
+            temp.append(<span class="highlight">converter</span>(v))
+        result.append(temp)
+    return result
+
+def do_5x5_line():
+    '''Run a test on a 5x5 grid with a run to the border.'''
+
+    ...define fixture and expected strings...
+
+    fixture = <span class="highlight">parse_general</span>(fixture, <span class="highlight">int</span>)
+    num_filled_cells = fill_grid(fixture)
+    expected = <span class="highlight">parse_general(fixture, should_be_filled)</span>
+    check_result(expected, fixture, num_filled_cells)
+</pre>
+
+  <p>
+    Writing the functions to parse fixture strings might seem like a lot of work,
+    but what are you comparing it to?
+    The time it would take to inspect printouts of real grids,
+    or the time to step through the program over and over again in the debugger?
+    And did you think to include the time it would take
+    to re-do this after every change to your program?
+    Or are you comparing it to the time it would take to retract a published paper
+    after you find a bug in your code?
+  </p>
+
+  <p>
+    In real applications,
+    it's not unusual for test code to be anywhere from 20% to 200% of the size
+    of the actual application code
+    (and yes, 200% does mean more test code than application code).
+    But that's no different from physical experiments:
+    if you look at the size and cost of the machines used to create a space probe,
+    it's many times greater than the size and cost of the space probe itself.
+  </p>
+
+  <p>
+    The good news is,
+    we're now in a position to replace our <code>fill_grid</code> function
+    with one that is harder to get right,
+    but which will run many times faster.
+    If our tests have been designed well,
+    they shouldn't have to be rewritten because they'll all continue to work the same way.
+    This is a common pattern in scientific programming:
+    create a simple version first,
+    check it,
+    then replace the parts one by one with more sophisticated parts that are harder to check
+    but give better performance.
+  </p>
+
+</div>

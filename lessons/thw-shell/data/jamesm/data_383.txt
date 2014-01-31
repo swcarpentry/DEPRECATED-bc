@@ -1,0 +1,9 @@
+# 
+Reported: Mon Aug 22 16:26:09 2011
+Subject: beyonceSpice307
+Year/month of birth: 1997/01
+Sex: N
+CI type: 20
+Volume: 8
+Range: 10
+Discrimination: 6

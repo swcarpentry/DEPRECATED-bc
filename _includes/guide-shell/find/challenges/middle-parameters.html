@@ -1,0 +1,19 @@
+<p>
+  The <code>middle.sh</code> script's numerical parameters are
+  the number of lines to take from the head of the file,
+  and the number of lines to take from the tail of that range.
+  It would be more intuitive if the parameters were
+  the index of the first line to keep and the number of lines,
+  e.g.,
+  if:
+</p>
+
+<pre>
+$ <span class="in">bash middle.sh somefile 50 5</span>
+</pre>
+
+<p>
+  selected lines 50-54 instead of lines 46-50.
+  Use <code>$()</code> and the <code>expr</code> command
+  to do this.
+</p>

@@ -1,0 +1,12 @@
+<p>
+  What does the following function do?
+  Explain when and why you would use it,
+  and write a small example that calls it with sample data.
+</p>
+<pre>
+def show(writer, format, data):
+    keys = data.keys()
+    keys.sort()
+    for k in keys:
+        print &gt;&gt; writer, format % (key, data[key])
+</pre>

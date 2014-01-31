@@ -1,0 +1,210 @@
+<div id="s:setdict:storage:lesson" class="lesson">
+
+  <p>
+    Let's create a set,
+    add the string <code>'lithium'</code> to it
+    (as a single item, not character by character),
+    and print the result:
+  </p>
+
+<pre>
+&gt;&gt;&gt; things = set()
+&gt;&gt;&gt; things.add('lithium')
+&gt;&gt;&gt; print things
+<span class="out">set(['lithium'])</span>
+</pre>
+
+  <p class="continue">
+    As expected, the string is in the set.
+    Now let's try adding a list to the same set:
+  </p>
+
+<pre>
+&gt;&gt;&gt; things.add([1, 2, 3])
+<span class="err">TypeError: unhashable type: 'list'</span>
+</pre>
+
+  <p class="continue">
+    Why doesn't that work?
+    And what does that word "unhashable" mean?
+  </p>
+
+  <p>
+    When we create a set,
+    the computer allocates a block of memory to store references to the set's elements.
+    When we add something to the set,
+    or try to look something up,
+    the computer uses a <a href="glossary.html#hash-function">hash function</a> to figure out where to look.
+    A hash function is any function that produces a seemingly-random number
+    when given some data as input.
+    For example,
+    one way to hash a string is to add up the numerical values of its characters.
+    If the string is "zebra",
+    those values are 97 for lower-case 'a',
+    98 for lower-case 'b',
+    and so on up to 122 for lower-case 'z'.
+    When we add them up,
+    we will always get the same result:
+    in this case, 532.
+    If our hash table has 8 slots,
+    we can take the remainder <code>532%8=4</code>
+    to figure out
+    where to store a reference to our string in the hash table
+    (<a href="#f:set_storage_string">Figure 2</a>).
+  </p>
+
+  <figure id="f:set_storage_string">
+    <img src="setdict/set_storage_string.png" alt="Hashing a String" />
+    <figcaption>Figure 2: Hashing a String</figcaption>
+  </figure>
+
+  <p>
+    Now let's take a look at how a list would be stored.
+    If the list contains the same five characters,
+    so that its hash code is still 4,
+    it would be stored as shown in
+    <a href="#f:set_storage_list">Figure 3</a>:
+  </p>
+
+  <figure id="f:set_storage_list">
+    <img src="setdict/set_storage_list.png" alt="Hashing a List" />
+    <figcaption>Figure 3: Hashing a List</figcaption>
+  </figure>
+
+  <p>
+    But what happens if we change the characters in the list
+    after we've added it to the set?
+    For example,
+    suppose that we change the first letter in the list from 'z' to 'X'.
+    The hash function's value is now 498 instead of 532,
+    which means that the modified list belongs in slot 2 rather than slot 4.
+    However, the reference to the list is still in the old location:
+    the set doesn't know that the list's contents have changed,
+    so it hasn't moved its reference to the right location
+    (<a href="#f:set_storage_mutate">Figure 4</a>):
+  </p>
+
+  <figure id="f:set_storage_mutate">
+    <img src="setdict/set_storage_mutate.png" alt="After Mutation" />
+    <figcaption>Figure 4: After Mutation</figcaption>
+  </figure>
+
+  <p>
+    This is bad news.
+    If we now ask, "Is the list containing 's', 'e', 'b', 'r', and 'a' in the set?"
+    the answer will be "no",
+    because the reference to the list isn't stored in the location that our hash function tells us to look.
+    It's as if someone changed their name from "Tom Riddle" to "Lord Voldemort",
+    but we left all the personnel records filed under 'R'.
+  </p>
+
+  <p>
+    This problem arises with any <a href="glossary.html#mutable">mutable</a> structure&mdash;i.e.,
+    any structure whose contents or value can be changed after its creation.
+    Integers and strings are safe to hash because their values are fixed,
+    but the whole point of lists is that we can grow them,
+    shrink them,
+    and overwrite their contents.
+  </p>
+
+  <p>
+    Different languages and libraries handle this problem in different ways.
+    One option is to have each list keep track of the sets that it is in,
+    and move itself whenever its values change.
+    However, this is expensive:
+    every time a program touched a list,
+    it would have to see if it was in any sets,
+    and if it was,
+    recalculate its hash code and update all the references to it.
+  </p>
+
+  <p>
+    A second option is to shrug and say, "It's the programmer's fault."
+    This is what most languages do,
+    but it's also expensive:
+    programmers can spend hours tracking down the bugs that arise
+    from data being in the wrong place.
+  </p>
+
+  <p>
+    Python uses a third option:
+    it only allows programmers to put <a href="glossary.html#immutable">immutable</a> values in sets.
+    After all,
+    if something's value can't change,
+    neither can its hash code or its location in a hash table.
+  </p>
+
+  <p>
+    But if sets can only hold immutable values,
+    what do we do with mutable ones?
+    In particular,
+    how should we store things like (x,y) coordinates,
+    which are naturally represented as lists,
+    or people's names,
+    which are naturally represented as lists of first, middle, and last names?
+    Again, there are several options.
+  </p>
+
+  <p>
+    The first is to concatenate those values somehow.
+    For example,
+    if we want to store "Charles" and "Darwin",
+    we'd create the string "Charles Darwin" and store that.
+    This is simple to do,
+    but our code will wind up being littered with string joins and string splits,
+    which will make it slower to run and harder to read.
+    More importantly,
+    it's only safe to do if
+    we can find a concatenator that can never come up in our data.
+    (If we join "Paul Antoine" and "St. Cyr" using a space,
+    there would be three possible ways to split it apart again.)
+  </p>
+
+  <p id="a:tuple">
+    The second option&mdash;the right one&mdash;is to use <a href="glossary.html#tuple">tuples</a> instead of lists.
+    A tuple is an immutable list,
+    i.e., a sequence of values that cannot be changed after its creation.
+    Tuples are created exactly like lists,
+    except we use parentheses instead of square brackets:
+  </p>
+
+<pre>
+&gt;&gt;&gt; full_name = ('Charles', 'Darwin')
+</pre>
+
+  <p class="continue">
+    They are indexed the same way,
+    too,
+    and functions like <code>len</code> do exactly what we'd expect:
+  </p>
+
+<pre>
+&gt;&gt;&gt; print full_name[0]
+<span class="out">Charles</span>
+&gt;&gt;&gt; print len(full_name)
+<span class="out">2</span>
+</pre>
+
+  <p class="continue">
+    What we <em>cannot</em> do is assign a new value to a tuple element,
+    i.e., change the tuple after it has been created:
+  </p>
+
+<pre>
+&gt;&gt;&gt; full_name[0] = 'Erasmus'
+<span class="err">TypeError: 'tuple' object does not support item assignment</span>
+</pre>
+
+  <p class="continue">
+    This means that a tuple's hash code never changes,
+    and <em>that</em> means that tuples can be put in sets:
+  </p>
+
+<pre>
+&gt;&gt;&gt; names = set()
+&gt;&gt;&gt; names.add(('Charles', 'Darwin'))
+&gt;&gt;&gt; print names
+<span class="out">set([('Charles', 'Darwin')])</span>
+</pre>
+
+</div>

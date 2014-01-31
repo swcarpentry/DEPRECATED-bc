@@ -1,0 +1,200 @@
+<div id="s:setdict:json:lesson" class="lesson">
+
+  <p>
+    The example above used two data file formats:
+    one for storing molecular formulas,
+    the other for storing inventory.
+    Both formats were specific to this application,
+    which means we needed to write, debug, document, and maintain functions to handle them.
+    Those functions weren't particularly difficult to create,
+    but they still took time to create,
+    and if anyone ever wants to read our files in Java, MATLAB, or Perl,
+    they'll have to write equivalent functions themselves.
+  </p>
+
+  <p>
+    A growing number of programs avoid these problems
+    by using a flexible data format called
+    <a href="glossary.html#json">JSON</a>,
+    which stands for "JavaScript Object Notation".
+    Despite the name,
+    it is a language-independent way to store nested data structures
+    made up of strings, numbers, Booleans, lists, dictionaries,
+    and the special value <code>null</code> (equivalent to Python's <code>None</code>)&mdash;in short,
+    the basic data types that almost every language supports.
+    For example,
+    let's convert a dictionary of scientists' birthdays
+    to a string:
+  </p>
+
+<pre src="setdict/json_first.py">
+&gt;&gt;&gt; import json
+&gt;&gt;&gt; birthdays = {'Curie' : 1867, 'Hopper' : 1906, 'Franklin' : 1920}
+&gt;&gt;&gt; as_string = json.dumps(birthdays)
+&gt;&gt;&gt; print as_string
+<span class="out">{"Curie": 1867, "Hopper": 1906, "Franklin": 1920}</span>
+&gt;&gt;&gt; print type(as_string)
+<span class="out">&lt;type 'str'&gt;</span>
+</pre>
+
+  <p>
+    <code>json.dumps</code> doesn't seem to do much,
+    but that's kind of the point:
+    the textual representation of the data structure looks pretty much like
+    what a programmer would type in to re-create it.
+    The advantage is that this representation can be saved in a file:
+  </p>
+
+<pre src="setdict/json_second.py">
+&gt;&gt;&gt; import json
+&gt;&gt;&gt;
+&gt;&gt;&gt; writer = open('/tmp/example.json', 'w')
+&gt;&gt;&gt; json.dump(birthdays, writer)
+&gt;&gt;&gt; writer.close()
+&gt;&gt;&gt;
+&gt;&gt;&gt; reader = open('/tmp/example.json', 'r')
+&gt;&gt;&gt; duplicate = json.load(reader)
+&gt;&gt;&gt; reader.close()
+&gt;&gt;&gt;
+&gt;&gt;&gt; print 'original:', birthdays
+<span class="out">original: {'Curie': 1867, 'Hopper': 1906, 'Franklin': 1920}</span>
+&gt;&gt;&gt; print 'duplicate:', duplicate
+<span class="out">duplicate: {u'Curie': 1867, u'Hopper': 1906, u'Franklin': 1920}</span>
+&gt;&gt;&gt; print 'original == duplicate:', birthdays == duplicate
+<span class="out">original == duplicate: True</span>
+&gt;&gt;&gt; print 'original is duplicate:', birthdays is duplicate
+<span class="out">original is duplicate: False</span>
+</pre>
+
+  <p>
+    As the example above shows,
+    saving and loading data is as simple as opening a file
+    and then calling one function.
+    The data file holds what we'd type in to create the data in a program:
+  </p>
+
+<pre>
+$ <span class="in">cat /tmp/example.json</span>
+<span class="out">{"Curie": 1867, "Hopper": 1906, "Franklin": 1920}</span>
+</pre>
+
+  <p class="continue">
+    which makes it easy to edit by hand.
+  </p>
+
+  <p>
+    How is this different in practice from what we had?
+    First,
+    our inventory file now looks like this:
+  </p>
+
+<pre src="setdict/inventory.json">
+{"He" : 1,
+ "H" : 4,
+ "O" : 3}
+</pre>
+
+  <p class="continue">
+    while our formulas files look like:
+  </p>
+
+<pre src="setdict/formulas.json">
+{"helium"   : {"He" : 1},
+ "water"    : {"H" : 2, "O" : 1},
+ "hydrogen" : {"H" : 2}}
+</pre>
+
+  <p>
+    Those aren't as intuitive for non-programmers as the original flat text files,
+    but they're not too bad.
+    The worst thing is the lack of comments:
+    unfortunately&mdash;very unfortunately&mdash;the JSON format
+    doesn't support them.
+    (And note that JSON requires us to use a double-quote for strings:
+    unlike Python,
+    we cannot substitute single quotes.)
+  </p>
+
+  <p>
+    The good news is that given files like these,
+    we can rewrite our program as:
+  </p>
+
+<pre src="setdict/nanotech_json.py">
+'''Calculate how many molecules of each type can be made with the atoms on hand.'''
+import json
+
+def main(inventory_file, formulas_file):
+    '''Main driver for program.'''
+<span class="highlight">    with open(inventory_file, 'r') as reader:
+        inventory = json.load(reader)
+    with open(formulas_file, 'r') as reader:
+        formulas = json.load(reader)</span>
+    counts = calculate_counts(inventory, formulas)
+    show_counts(counts)
+
+def calculate_counts(inventory, formulas):
+    <em>...as before...</em>
+
+def dict_divide(inventory, molecule):
+    <em>...as before...</em>
+
+def show_counts(counts):
+    <em>...as before...</em>
+</pre>
+
+  <p class="continue">
+    The two functions that read formula and inventory files
+    have been replaced with a single function that reads JSON.
+    Nothing else has to change,
+    because the data structures loaded from the data files
+    are exactly what we had before.
+    The end result is 51 lines long compared to the 80 we started with,
+    a reduction of more than a third.
+  </p>
+
+  <div class="box">
+    <h3>Nothing's Perfekt</h3>
+
+    <p>
+      JSON's greatest weakness isn't its lack of support for comments,
+      but the fact that it doesn't recognize and manage aliases.
+      Instead,
+      each occurrence of an aliased structure is treated as something brand new
+      when data is being saved.
+      For example:
+    </p>
+<pre>
+&gt;&gt;&gt; inner = ['name']
+&gt;&gt;&gt; outer = [inner, inner] <span class="comment"># Creating an alias.</span>
+&gt;&gt;&gt; print outer
+<span class="out">[['name'], ['name']]</span>
+&gt;&gt;&gt; print outer[0] is outer[1]
+<span class="out">True</span>
+&gt;&gt;&gt; as_string = json.dumps(outer)
+&gt;&gt;&gt; duplicate = json.loads(as_string)
+&gt;&gt;&gt; print duplicate
+<span class="out">[[u'name'], [u'name']]</span>
+&gt;&gt;&gt; print duplicate[0] is duplicate[1]
+<span class="out">False</span>
+</pre>
+    <p class="continue">
+      <a href="#f:json_alias">Figure 9</a> shows the difference between
+      the original data structure (referred to by <code>outer</code>)
+      and what winds up in <code>duplicate</code>.
+      If aliases might be present in our data,
+      and it's important to preserve their structure,
+      we must either record the aliasing ourself (which is tricky),
+      or use some other format.
+      Luckily,
+      a lot of data either doesn't contain aliases,
+      or the aliasing in it isn't important.
+    </p>
+
+    <figure id="f:json_alias">
+      <img src="setdict/json_alias.png" alt="Aliasing in JSON" />
+      <figcaption>Figure 9: Aliasing in JSON</figcaption>
+    </figure>
+  </div>
+
+</div>

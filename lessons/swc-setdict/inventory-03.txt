@@ -1,0 +1,4 @@
+# Atomic inventory file
+He 1
+H 4
+O 3

@@ -1,0 +1,208 @@
+<div id="s:pyblocks:types:lesson" class="lesson">
+
+  <p>
+    Let's take another look at the Python we have written so far:
+  </p>
+
+<pre>
+<span class="in">temp_fahr = 98.6
+temp_kelvin = (temp_fahr - 32.0) * (5.0 / 9.0) + 273.15
+print 'body temperature in Kelvin:', temp_kelvin</span>
+<span class="out">body temperature in Kelvin: 310.15</span>
+</pre>
+
+  <p>
+    Why have we written 5.0/9.0 instead of simply 5/9?
+    Let's see what happens if we take out the .0's:
+  </p>
+
+<pre>
+<span class="in">temp_fahr = 98.6
+temp_kelvin = (temp_fahr - 32) * <span class="highlight">(5 / 9)</span> + 273.15
+print 'body temperature in Kelvin:', temp_kelvin</span>
+<span class="out">body temperature in Kelvin: 273.15</span>
+</pre>
+
+  <p>
+    That's not right.
+    To understand what's gone wrong,
+    let's look at 5/9:
+  </p>
+
+<pre>
+<span class="in">print 5/9</span>
+<span class="out">0</span>
+</pre>
+
+  <p>
+    The problem is that computers have two different kinds of numbers:
+    <a href="glossary.html#integer">integers</a> like 1, 2, and 3,
+    and floating-point numbers
+    (or <a href="glossary.html#float">floats</a>),
+    which have fractional parts.
+    If a number is written without a decimal point,
+    Python stores it as an integer.
+    When it divides one integer by another,
+    it throws away the remainder:
+    to a computer,
+    5/2 is 2, not 2.5.
+  </p>
+
+  <p>
+    If a number contains a decimal point,
+    though,
+    Python stores it as a float.
+    When it does division or any other kind of arithmetic,
+    the result is a float if either of the values involved is a float:
+  </p>
+
+<pre>
+<span class="in">10 / 3</span>
+<span class="out">3</span>
+<span class="in">10.0 / 3</span>
+<span class="out">3.3333333333333335</span>
+</pre>
+
+  <p>
+    Computers have both kinds of numbers for two reasons.
+    The first is historical:
+    integer operations were significantly faster on early computers,
+    so allowing people to use them was one way to speed up programs.
+    Secondly,
+    they actually have different purposes:
+    integers are for counting things,
+    and floats for measuring quantities.
+  <p>
+
+  <div class="box">
+    <h3>Changing the Rules</h3>
+
+    <p>
+      Version 3 of Python changed the rules for division
+      so that it creates fractional numbers when it should.
+      However,
+      we're using Python 2.7,
+      so 10/3 is 3 until further notice.
+    </p>
+  </div>
+
+  <div class="box">
+    <h3>Remainder</h3>
+    <p>
+      Python has another "division" operator,
+      written '%',
+      which returns the remainder that integer division throws away:
+    </p>
+<pre>
+<span class="in">10 % 3</span>
+<span class="out">1</span>
+<span class="in">15 % 6</span>
+<span class="out">3</span>
+</pre>
+  </div>
+
+  <p>
+    Integers and floats are two <a href="glossary.html#type">types</a> of data.
+    Every value in a program has a specific type
+    that determines how it behaves and what can be done to it.
+    We can find out what type something is
+    using a built-in <a href="glossary.html#function">function</a> called <code>type</code>:
+  </p>
+
+<pre>
+<span class="in">type(12)</span>
+<span class="out">&lt;type 'int&gt;</span>
+<span class="in">type(12.0)</span>
+<span class="out">&lt;type 'float&gt;</span>
+</pre>
+
+  <p>
+    Another common data type is the character string.
+    We can create one by putting characters inside either single or double quotes
+    (as long as we use the same kind at the beginning and end):
+  </p>
+
+<pre>
+<span class="in">name = "Alan Turing"</span>
+<span class="in">born = 'June 23, 1912'</span>
+<span class="in">print name, born</span>
+<span class="out">Alan Turing June 23, 1912</span>
+</pre>
+
+  <p>
+    We can also "add" and "multiply" strings:
+  </p>
+
+<pre>
+<span class="in">full = name + " (" + born + ")"</span>
+<span class="in">print full</span>
+<span class="out">Alan Turing (June 23, 1912)</span>
+<span class="in">print "xo" * 3</span>
+<span class="out">xoxoxo</span>
+</pre>
+
+  <p id="a:add-num-str">
+    What we <em>can't</em> do is add numbers and strings:
+  </p>
+
+<pre>
+<span class="in">print 2 + "three"</span>
+<span class="err">TypeError                                 Traceback (most recent call last)
+&lt;ipython-input-8-f6f99c093ec8&gt; in &lt;module&gt;()
+----&gt; 1 print 2 + "three"
+
+TypeError: unsupported operand type(s) for +: 'int' and 'str'</span>
+</pre>
+
+  <p>
+    The reason we can't is that Python won't always know what we actually want.
+    "2three" would be a reasonable result in this case,
+    but should <code>2+"3"</code> produce the integer 5 or the string <code>"23"</code>?
+    Rather than guessing at the programmer's intentions,
+    Python requires us to tell it
+    whether to convert the number to a string or the string to a number
+    so that it knows what kind of addition to do.
+    We do this using <code>int</code> and <code>str</code>,
+    which are two more built-in functions:
+  </p>
+
+<pre>
+<span class="in">print 2 + int("3")</span>
+<span class="out">5</span>
+<span class="in">print str(2) + "3"</span>
+<span class="out">23</span>
+</pre>
+
+  <p>
+    One last fact about types is that variables in Python don't have them:
+    only values do.
+    A variable is a just a name;
+    it can refer to a string at one point in a program,
+    and a float a moment later:
+  </p>
+
+<pre>
+<span class="in">temp = 'temperature'</span>
+<span class="in">print temp, type(temp)</span>
+<span class="out">temperature &lt;type 'str'&gt;</span>
+<span class="in">temp = 37.2</span>
+<span class="in">print temp, type(temp)</span>
+<span class="out">37.2 &lt;type 'float'&gt;</span>
+</pre>
+
+  <div class="box">
+    <h3>Static vs. Dynamic Typing</h3>
+    <p>
+      Programmers argue incessantly about whether this is a good idea or not.
+      In <a href="glossary.html#static-typing">statically-typed</a> languages like Fortran, C++, Java, and Haskell,
+      a variable can only store values of a particular type.
+      This restriction makes it easier for compilers to check programs' correctness
+      and optimize their performance,
+      but languages like Python and R,
+      which are designed for interactive use,
+      tend to be <a href="glossary.html#dynamic-typing">dynamically typed</a>
+      in order to keep fingers-on-keyboard typing to a minimum.
+    </p>
+  </div>
+
+</div>

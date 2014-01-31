@@ -1,0 +1,510 @@
+<div id="s:shell:loop:lesson" class="lesson">
+
+  <p>
+    Wildcards and tabs are one way to save on typing.
+    Another is to tell the shell to do something over and over again.
+    Suppose we have several hundred genome data files in a directory
+    with names like <code>basilisk.dat</code>,
+    <code>unicorn.dat</code>,
+    and so on.
+    When new files arrive,
+    we'd like to rename the existing ones to
+    <code>original-basilisk.dat</code>,
+    <code>original-unicorn.dat</code>,
+    etc.
+    We can't use:
+  </p>
+
+<pre>
+mv *.dat original-*.dat
+</pre>
+
+  <p class="continue">
+    because that would expand (in the two-file case) to:
+  </p>
+
+<pre>
+mv basilisk.dat unicorn.dat
+</pre>
+
+  <p class="continue">
+    This wouldn't back up our files:
+    it would replace the content of <code>unicorn.dat</code>
+    with whatever's in <code>basilisk.dat</code>.
+  </p>
+
+  <p>
+    Instead,
+    we can use a <a href="glossary.html#for-loop">loop</a>
+    to do some operation once for each thing in a list.
+    Here's a simple example
+    that displays the first three lines of each file in turn:
+  </p>
+
+<pre>
+$ <span class="in">for filename in basilisk.dat unicorn.dat</span>
+&gt; <span class="in">do</span>
+&gt;    <span class="in">head -3 $filename</span>
+&gt; <span class="in">done</span>
+<span class="out">COMMON NAME: basilisk
+CLASSIFICATION: basiliscus vulgaris
+UPDATED: 1745-05-02
+COMMON NAME: unicorn
+CLASSIFICATION: equus monoceros
+UPDATED: 1738-11-24</span>
+</pre>
+
+  <p>
+    When the shell sees the keyword <code>for</code>,
+    it knows it is supposed to repeat a command (or group of commands)
+    once for each thing in a list.
+    In this case,
+    the list is the two filenames.
+    Each time through the loop,
+    the name of the thing currently being operated on
+    is assigned to the <a href="glossary.html#variable">variable</a> <code>filename</code>.
+    Inside the loop,
+    we get the variable's value by putting <code>$</code> in front of it
+    (this is known as shell parameter expansion),
+    so the first time through the loop,
+    <code>$filename</code> is <code>basilisk.dat</code>,
+    and the second time,
+    <code>unicorn.dat</code>.
+    Finally,
+    the command that's actually being run is our old friend <code>head</code>,
+    so this loop prints out the first three lines of each data file in turn.
+  </p>
+
+  <div class="box">
+    <h3>Follow the Prompt</h3>
+
+    <p>
+      You may have noticed that the shell prompt changed
+      from <code>$</code> to <code>&gt;</code> and back again
+      as we were typing in our loop.
+      The second prompt, <code>&gt;</code>,
+      is different to remind us that we haven't finished typing a complete command yet.
+    </p>
+  </div>
+
+  <div class="box">
+    <h3>What's In a Name?</h3>
+
+    <p>
+      We have called the variable in this loop <code>filename</code>
+      in order to make its purpose clearer to human readers.
+      The shell itself doesn't care what the variable is called
+      (but when we use the variable value it is a good practice to use
+      <code>${filename}</code> instead of <code>$filename</code> to avoid
+      some types of problems);
+      if we wrote this loop as:
+    </p>
+
+<pre>
+for x in basilisk.dat unicorn.dat
+do
+    head -3 $x
+done
+</pre>
+
+    <p class="continue">
+      or:
+    </p>
+
+<pre>
+for temperature in basilisk.dat unicorn.dat
+do
+    head -3 $temperature
+done
+</pre>
+
+    <p class="continue">
+      it would work exactly the same way.
+      <em>Don't do this.</em>
+      Programs are only useful if people can understand them,
+      so using meaningless names (like <code>x</code>)
+      or misleading names (like <code>temperature</code>)
+      increases the likelihood of the program being wrong.
+    </p>
+
+  </div>
+
+  <p>
+    Here's a slightly more complicated loop:
+  </p>
+
+<pre>
+for filename in *.dat
+do
+    echo $filename
+    head -100 $filename | tail -20
+done
+</pre>
+
+  <p>
+    The shell starts by expanding <code>*.dat</code>
+    to create the list of files it will process.
+    The <a href="glossary.html#loop-body">loop body</a> then executes two commands
+    for each of those files.
+    The first,
+    <code>echo</code>,
+    just prints its command-line parameters to standard output.
+    For example:
+  </p>
+
+<pre>
+echo hello there
+</pre>
+
+  <p class="continue">
+    prints:
+  </p>
+
+<pre>
+hello there
+</pre>
+
+  <p>
+    In this case,
+    since the shell expands <code>$filename</code> to be the name of a file,
+    <code>echo $filename</code> just prints the name of the file.
+    Note that we can't write this as:
+  </p>
+
+<pre>
+for filename in *.dat
+do
+    <span class="highlight">$filename</span>
+    head -100 $filename | tail -20
+done
+</pre>
+
+  <p class="continue">
+    because then the first time through the loop,
+    when <code>$filename</code> expanded to <code>basilisk.dat</code>,
+    the shell would try to run <code>basilisk.dat</code> as a program.
+    Finally,
+    the <code>head</code> and <code>tail</code> combination
+    selects lines 80-100 from whatever file is being processed.
+  </p>
+
+  <div class="box">
+    <h3>Spaces in Names</h3>
+
+    <p>
+      Filename expansion in loops is another reason
+      <a href="#a:space-in-filename">you should <em>not</em> use spaces in filenames</a>.
+      Suppose our data files are named:
+    </p>
+
+<pre>
+basilisk.dat
+red dragon.dat
+unicorn.dat
+</pre>
+
+    <p class="continue">
+      If we try to process them using:
+    </p>
+
+<pre>
+for filename in *.dat
+do
+    echo $filename
+    head -100 $filename | tail -20
+done
+</pre>
+
+    <p class="continue">
+      then <code>*.dat</code> will expand to:
+    </p>
+
+<pre>
+basilisk.dat red dragon.dat unicorn.dat
+</pre>
+
+    <p class="continue">
+      which means that <code>filename</code> will be assigned
+      each of the following values in turn:
+    </p>
+
+<pre>
+basilisk.dat
+<span class="highlight">red
+dragon.dat</span>
+unicorn.dat
+</pre>
+
+    <p>
+      The highlighted lines show the problem:
+      instead of getting one name <code>red&nbsp;dragon.dat</code>,
+      the commands in the loop will get <code>red</code> and <code>dragon.dat</code> separately.
+      To make matters worse,
+      the file <code>red&nbsp;dragon.dat</code> won't be processed at all.
+      There are ways to get around this, the simplest of which is to put quote marks around <code>"$filename"</code>,
+      but the safest thing is to use dashes,
+      underscores,
+      or some other printable character instead of spaces in your file names.
+    </p>
+
+  </div>
+
+  <p>
+    Going back to our original file renaming problem,
+    we can solve it using this loop:
+  </p>
+
+<pre>
+for filename in *.dat
+do
+    mv $filename original-$filename
+done
+</pre>
+
+  <p>
+    This loop runs the <code>mv</code> command once for each filename.
+    The first time,
+    when <code>$filename</code> expands to <code>basilisk.dat</code>,
+    the shell executes:
+  </p>
+
+<pre>
+mv basilisk.dat original-basilisk.dat
+</pre>
+
+  <p class="continue">
+    The second time,
+    the command is:
+  </p>
+
+<pre>
+mv unicorn.dat original-unicorn.dat
+</pre>
+
+  <div class="box">
+    <h3>Measure Twice, Run Once</h3>
+
+    <p>
+      A loop is a way to do many things at once&mdash;or
+      to make many mistakes at once
+      if it does the wrong thing.
+      One way to check what a loop <em>would</em> do is
+      to echo the commands it would run
+      instead of actually running them.
+      For example,
+      we could write our file renaming loop like this:
+    </p>
+
+<pre>
+for filename in *.dat
+do
+    <span class="highlight">echo</span> mv $filename original-$filename
+done
+</pre>
+
+    <p>
+      Instead of running <code>mv</code>,
+      this loop runs <code>echo</code>,
+      which prints out:
+    </p>
+
+<pre>
+mv basilisk.dat original-basilisk.dat
+mv unicorn.dat original-unicorn.dat
+</pre>
+
+    <p class="continue">
+      <em>without</em> actually running those commands.
+      We can then use up-arrow to redisplay the loop,
+      back-arrow to get to the word <code>echo</code>,
+      delete it,
+      and then press "enter" to run the loop
+      with the actual <code>mv</code> commands.
+      This isn't foolproof,
+      but it's a handy way to see what's going to happen
+      when you're still learning how loops work.
+    </p>
+
+  </div>
+
+  <p>
+  So far we have been renaming files of the form <code>someanimal.dat</code> to
+  <code>original-someanimal.dat</code>. But, what if instead of
+  <code>original-someanimal.dat</code> we want
+  <code>someanimal.dat.original</code> or <code>someanimal-original.dat</code>?
+  For <code>someanimal.dat.original</code> we can do
+  </p>
+
+<pre>
+for filename in *.dat
+do
+    mv $filename $filename.original
+done
+</pre>
+
+  <p class="continue">
+  But for <code>someanimal-original.dat</code> we will need to go a little deeper
+  in shell parameter expansion and use its find and replace feature. That syntax
+  is <code>${variable/find/substitute/}</code> where <code>find</code> is the
+  longest string in <code>variable</code> value that we want to be replaced by
+  <code>substitute</code>. We can achieve this task using
+  </p>
+
+<pre>
+for filename in *.dat
+do
+    mv $filename ${filename/.dat/-original.dat/}
+done
+</pre>
+
+  <div>
+    <h3>Nelle's Pipeline: Processing Files</h3>
+
+    <p>
+      Nelle is now ready to process her data files.
+      Since she's still learning how to use the shell,
+      she decides to build up the required commands in stages.
+      Her first step is to make sure that she can select the right files&mdash;remember,
+      these are ones whose names end in 'A' or 'B', rather than 'Z':
+    </p>
+
+<pre>
+$ <span class="in">cd north-pacific-gyre/2012-07-03</span>
+$ <span class="in">for datafile in *[AB].txt
+do
+    echo $datafile
+done</span>
+<span class="out">NENE01729A.txt
+NENE01729B.txt
+NENE01736A.txt
+...
+NENE02043A.txt
+NENE02043B.txt</span>
+$
+</pre>
+
+    <p>
+      Her next step is to figure out what to call the files
+      that the <code>goostat</code> analysis program will create.
+      Prefixing each input file's name with "stats" seems simple,
+      so she modifies her loop to do that:
+    </p>
+
+<pre>
+$ <span class="in">for datafile in *[AB].txt
+do
+    echo $datafile stats-$datafile
+done</span>
+<span class="out">NENE01729A.txt stats-NENE01729A.txt
+NENE01729B.txt stats-NENE01729B.txt
+NENE01736A.txt stats-NENE01736A.txt
+...
+NENE02043A.txt stats-NENE02043A.txt
+NENE02043B.txt stats-NENE02043B.txt</span>
+$
+</pre>
+
+    <p class="continue">
+      She hasn't actually run <code>goostats</code> yet,
+      but now she's sure she can select the right files
+      and generate the right output filenames.
+    </p>
+
+    <p id="a:repeat">
+      Typing in commands over and over again is becoming tedious,
+      though,
+      and Nelle is worried about making mistakes,
+      so instead of re-entering her loop,
+      she presses the up arrow.
+      In response,
+      Bash redisplays the whole loop on one line
+      (using semi-colons to separate the pieces):
+    </p>
+
+<pre>
+$ <span class="in">for datafile in *[AB].txt; do echo $datafile stats-$datafile; done</span>
+</pre>
+
+    <p class="continue">
+      Using the left arrow key,
+      Nelle backs up and changes the command <code>echo</code> to <code>goostats</code>:
+    </p>
+
+<pre>
+$ <span class="in">for datafile in *[AB].txt; do <span class="highlight">goostats</span> $datafile stats-$datafile; done</span>
+</pre>
+
+    <p>
+      When she presses enter,
+      Bash runs the modified command.
+      However,
+      nothing appears to happen&mdash;there is no output.
+      After a moment,
+      Nelle realizes that since her script doesn't print anything to the screen any longer,
+      she has no idea whether it is running,
+      much less how quickly.
+      She kills the job by typing Control-C,
+      uses up-arrow to repeat the command,
+      and edits it to read:
+    </p>
+
+<pre>
+$ <span class="in">for datafile in *[AB].txt; do <span class="highlight">echo $datafile;</span> goostats $datafile stats-$datafile; done</span>
+</pre>
+
+    <p class="continue">
+      When she runs her program now,
+      it produces one line of output every five seconds or so:
+    </p>
+
+<pre>
+<span class="out">NENE01729A.txt
+NENE01729B.txt
+NENE01736A.txt
+...</span>
+$
+</pre>
+
+    <p class="continue">
+      1518 times 5 seconds, divided by 60,
+      tells her that her script will take about two hours to run.
+      As a final check,
+      she opens another terminal window,
+      goes into <code>north-pacific-gyre/2012-07-03</code>,
+      and uses <code>cat NENE01729B.txt</code> to examine
+      one of the output files.
+      It looks good,
+      so she decides to get some coffee and catch up on her reading.
+    </p>
+
+    <div class="box">
+      <h3>Those Who Know History Can Choose to Repeat It</h3>
+
+      <p>
+        Another way to repeat previous work is to use the <code>history</code> command
+        to get a list of the last few hundred commands that have been executed,
+        and then to use <code>!123</code> (where "123" is replaced by the command number)
+        to repeat one of those commands.
+        For example,
+        if Nelle types this:
+      </p>
+
+<pre>
+$ <span class="in">$ history | tail -5</span>
+<span class="out">  456  ls -l NENE0*.txt
+  457  rm stats-NENE01729B.txt.txt
+  458  goostats NENE01729B.txt stats-NENE01729B.txt
+  459  ls -l NENE0*.txt
+  460  history</span>
+</pre>
+
+      <p class="continue">
+        then she can re-run <code>goostats</code> on <code>NENE01729B.txt</code>
+        simply by typing <code>!458</code>.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>

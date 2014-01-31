@@ -1,0 +1,447 @@
+<div id="s:shell:pipefilter:lesson" class="lesson">
+
+  <p>
+    Now that we know a few basic commands and have learned how
+    to use wildcards,
+    we can finally look at the shell's most powerful feature:
+    the ease with which it lets you combine existing programs in new ways.
+    We'll start with a directory called <code>molecules</code>
+    that contains six files describing some simple organic molecules.
+    The <code>.pdb</code> extension indicates that these files are in Protein Data Bank format,
+    a simple text format that specifies the type and position of each atom in the molecule.
+  </p>
+
+<pre>
+$ <span class="in">ls molecules</span>
+<span class="out">cubane.pdb    ethane.pdb    methane.pdb
+octane.pdb    pentane.pdb   propane.pdb</span>
+$
+</pre>
+
+  <p>
+    Let's go into that directory with <code>cd</code>
+    and run the command <code>wc&nbsp;*.pdb</code>.
+    <code>wc</code> is the "word count" command;
+    it counts the number of lines, words, and characters in files:
+  </p>
+
+<pre>
+$ <span class="in">cd molecules</span>
+$ <span class="in">wc *.pdb</span>
+<span class="out">  20  156 1158 cubane.pdb
+  12   84  622 ethane.pdb
+   9   57  422 methane.pdb
+  30  246 1828 octane.pdb
+  21  165 1226 pentane.pdb
+  15  111  825 propane.pdb
+ 107  819 6081 total</span>
+$
+</pre>
+
+  <p>
+    If we run <code>wc -l</code> instead of just <code>wc</code>,
+    the output shows only the number of lines per file:
+  </p>
+
+<pre>
+$ <span class="in">wc -l *.pdb</span>
+<span class="out">  20  cubane.pdb
+  12  ethane.pdb
+   9  methane.pdb
+  30  octane.pdb
+  21  pentane.pdb
+  15  propane.pdb
+ 107  total</span>
+$
+</pre>
+
+  <p class="continue">
+    We can also use <code>-w</code> to get only the number of words,
+    or <code>-c</code> to get only the number of characters.
+  </p>
+
+  <p>
+    Now, which of these files is shortest?
+    It's an easy question to answer when there are only six files, but what if there were 6000?
+    That's the kind of job we want a computer to do.
+  </p>
+
+  <p>
+    Our first step toward a solution is to run the command:
+  </p>
+
+<pre>
+$ <span class="in">wc -l *.pdb &gt; lengths</span>
+</pre>
+
+  <p class="continue">
+    The <code>&gt;</code> tells the shell to <a href="glossary.html#redirection">redirect</a>
+    the command's output to a file
+    instead of printing it to the screen.
+    The shell will create the file if it doesn't exist,
+    or overwrite the contents of that file if it does.
+    (This is why there is no screen output:
+    everything that <code>wc</code> would have printed has gone into the file <code>lengths</code> instead.)
+  </p>
+
+  <p>
+    <code>ls lengths</code> confirms that the file exists:
+  </p>
+
+<pre>
+$ <span class="in">ls lengths</span>
+<span class="out">lengths</span>
+$
+</pre>
+
+  <p class="continue">
+    We can now send the content of <code>lengths</code> to the screen using <code>cat lengths</code>.
+    <code>cat</code> stands for "concatenate":
+    it prints the contents of files one after another.
+    In this case,
+    there's only one file,
+    so <code>cat</code> just shows us what it contains:
+  </p>
+
+<pre>
+$ <span class="in">cat lengths</span>
+<span class="out">  20  cubane.pdb
+  12  ethane.pdb
+   9  methane.pdb
+  30  octane.pdb
+  21  pentane.pdb
+  15  propane.pdb
+ 107  total</span>
+$
+</pre>
+
+  <p>
+    Now let's use the <code>sort</code> command to sort its contents.
+    This does <em>not</em> change the file.
+    Instead,
+    it sends the sorted result to the screen:
+  </p>
+
+<pre>
+$ <span class="in">sort lengths</span>
+<span class="out">  9  methane.pdb
+ 12  ethane.pdb
+ 15  propane.pdb
+ 20  cubane.pdb
+ 21  pentane.pdb
+ 30  octane.pdb
+107  total</span>
+$
+</pre>
+
+  <p>
+    We can put the sorted list of lines in another temporary file called <code>sorted-lengths</code>
+    by putting <code>&gt;&nbsp;sorted-lengths</code> after the command,
+    just as we used <code>&gt;&nbsp;lengths</code> to put the output of <code>wc</code> into <code>lengths</code>.
+    Once we've done that,
+    we can run another command called <code>head</code> to get the first few lines in <code>sorted-lengths</code>:
+  </p>
+
+<pre>
+$ <span class="in">sort lengths &gt; sorted-lengths</span>
+$ <span class="in">head -1 sorted-lengths</span>
+<span class="out">  9  methane.pdb</span>
+$
+</pre>
+
+  <p class="continue">
+    Giving <code>head</code> the parameter <code>-1</code> tells us we only want the first line of the file;
+    <code>-20</code> would get the first 20, and so on.
+    Since <code>sorted-lengths</code> the lengths of our files ordered from least to greatest,
+    the output of <code>head</code> must be the file with the fewest lines.
+  </p>
+
+  <p>
+    If you think this is confusing, you're in good company:
+    even once you understand what <code>wc</code>, <code>sort</code>, and <code>head</code> do,
+    all those intermediate files make it hard to follow what's going on.
+    How can we make it easier to understand?
+  </p>
+
+  <p>
+    Let's start by getting rid of the <code>sorted-lengths</code> file
+    by running <code>sort</code> and <code>head</code> together:
+  </p>
+
+<pre>
+$ <span class="in">sort lengths | head -1</span>
+<span class="out">  9  methane.pdb</span>
+$
+</pre>
+
+  <p class="continue">
+    The vertical bar between the two commands
+    is called a <a href="glossary.html#pipe">pipe</a>.
+    It tells the shell that we want to use the output of the command on the left
+    as the input to the command on the right.
+    The computer might create a temporary file if it needs to,
+    or copy data from one program to the other in memory,
+    or something else entirely:
+    we don't have to know or care.
+  </p>
+
+  <p>
+    Well, if we don't need to create the temporary file <code>sorted-lengths</code>,
+    can we get rid of the <code>lengths</code> file too?
+    The answer is "yes":
+    we can use another pipe to send the output of <code>wc</code> directly to <code>sort</code>,
+    which then sends its output to <code>head</code>:
+  </p>
+
+<pre>
+$ <span class="in">wc -l *.pdb | sort | head -1</span>
+<span class="out">  9  methane.pdb</span>
+$
+</pre>
+
+  <p class="continue">
+    This is exactly like a mathematician nesting functions like <em>sin(&pi;x)<sup>2</sup></em>
+    and saying "the square of the sine of <em>x</em> times &pi;":
+    in our case, the calculation is "head of sort of word count of <code>*.pdb</code>".
+  </p>
+
+  <div class="box" id="b:pipefilter:pipes">
+    <h3>Inside Pipes</h3>
+
+    <p>
+      Here's what actually happens behind the scenes when we create a pipe.
+      When a computer runs a program&mdash;any program&mdash;it
+      creates a <a href="glossary.html#process">process</a> in memory
+      to hold the program's software and its current state.
+      Every process has an input channel called <a href="glossary.html#standard-input">standard input</a>.
+      (By this point, you may be surprised that the name is so memorable, but don't worry:
+      most Unix programmers call it <a href="glossary.html#stdin">stdin</a>.)
+      Every process also has a default output channel called <a href="glossary.html#standard-output">standard output</a>,
+      or <a href="glossary.html#stdout">stdout</a>
+      (<a href="#f:process_stdin_stdout">Figure 11</a>).
+    </p>
+
+    <figure id="f:process_stdin_stdout">
+      <img src="{{page.root}}/img/lessons/swc-shell/process_stdin_stdout.png" alt="A Process with Standard Input and Output" />
+      <figcaption>Figure 11: A Process with Standard Input and Output</figcaption>
+    </figure>
+
+    <p>
+      The shell is just another program, and runs in a process like any other.
+      Under normal circumstances,
+      whatever we type on the keyboard is sent to the shell on its standard input,
+      and whatever it produces on standard output is displayed on our screen
+      (<a href="#f:shell_as_process">Figure 12</a>):
+    </p>
+
+    <figure id="f:shell_as_process">
+      <img src="{{page.root}}/img/lessons/swc-shell/shell_as_process.png" alt="The Shell as a Process" />
+      <figcaption>Figure 12: The Shell as a Process</figcaption>
+    </figure>
+
+    <p>
+      When we run a program,
+      the shell creates a new process.
+      It then temporarily sends whatever we type on our keyboard to that process's standard input,
+      and whatever the process sends to standard output to the screen
+      (<a href="#f:running_a_process">Figure 13</a>):
+    </p>
+
+    <figure id="f:running_a_process">
+      <img src="{{page.root}}/img/lessons/swc-shell/running_a_process.png" alt="Running a Process" />
+      <figcaption>Figure 13: Running a Process</figcaption>
+    </figure>
+
+    <p>
+      Here's what happens when we run <code>wc -l *.pdb &gt; lengths</code>.
+      The shell starts by telling the computer to create a new process to run the <code>wc</code> program.
+      Since we've provided some filenames as parameters,
+      <code>wc</code> reads from them instead of from standard input.
+      And since we've used <code>&gt;</code> to redirect output to a file,
+      the shell connects the process's standard output to that file
+      (<a href="#f:running_wc">Figure 14</a>).
+    </p>
+
+    <figure id="f:running_wc">
+      <img src="{{page.root}}/img/lessons/swc-shell/running_wc.png" alt="Running One Program with Redirection" />
+      <figcaption>Figure 14: Running One Program with Redirection</figcaption>
+    </figure>
+
+    <p>
+      If we run <code>wc -l *.pdb | sort</code> instead,
+      the shell creates two processes,
+      one for each process in the pipe,
+      so that <code>wc</code> and <code>sort</code> run simultaneously.
+      The standard output of <code>wc</code> is fed directly to the standard input of <code>sort</code>;
+      since there's no redirection with <code>&gt;</code>, <code>sort</code>'s output goes to the screen
+      (<a href="#f:running_wc_sort">Figure 15</a>):
+    </p>
+
+    <figure id="f:running_wc_sort">
+      <img src="{{page.root}}/img/lessons/swc-shell/running_wc_sort.png" alt="Running Two Programs in a Pipe" />
+      <figcaption>Figure 15: Running Two Programs in a Pipe</figcaption>
+    </figure>
+
+    <p class="continue">
+      And if we run <code>wc -l *.pdb | sort | head -1</code>,
+      we get the three processes shown in <a href="#f:running_wc_sort_head">Figure 16</a>
+      with data flowing from the files,
+      through <code>wc</code> to <code>sort</code>,
+      and from <code>sort</code> through <code>head</code> to the screen.
+    </p>
+
+    <figure id="f:running_wc_sort_head">
+      <img src="{{page.root}}/img/lessons/swc-shell/running_wc_sort_head.png" alt="Running the Full Pipeline" />
+      <figcaption>Figure 16: Running the Full Pipeline</figcaption>
+    </figure>
+
+  </div>
+
+  <p>
+    This simple idea is why Unix has been so successful.
+    Instead of creating enormous programs that try to do many different things,
+    Unix programmers focus on creating lots of simple tools that each do one job well,
+    and work well with each other.
+    Ten such tools can be combined in 100 ways, and that's only looking at pairings:
+    when we start to look at pipes with multiple stages,
+    the possibilities are almost uncountable.
+  </p>
+
+  <p>
+    This programming model is called <a href="glossary.html#pipe-and-filter">pipes and filters</a>.
+    We've already seen pipes;
+    a <a href="glossary.html#filter">filter</a> is
+    a program that transforms a stream of input into a stream of output.
+    Almost all of the standard Unix tools can work this way:
+    unless told to do otherwise,
+    they read from standard input,
+    do something with what they've read,
+    and write to standard output.
+  </p>
+
+  <p>
+    The key is that any program that reads lines of text from standard input,
+    and writes lines of text to standard output,
+    can be combined with every other program that behaves this way as well.
+    You can <em>and should</em> write your programs this way,
+    so that you and other people can put those programs into pipes to multiply their power.
+  </p>
+  
+  <div class="box">
+    <h3>Redirecting Input</h3>
+
+    <p>
+      As well as using <code>&gt;</code> to redirect a program's output,
+      we can use <code>&lt;</code> to redirect its input,
+      i.e.,
+      to read from a file instead of from standard input.
+      For example, instead of writing <code>wc ammonia.pdb</code>,
+      we could write <code>wc &lt; ammonia.pdb</code>.
+      In the first case,
+      <code>wc</code> gets a command line parameter telling it what file to open.
+      In the second,
+      <code>wc</code> doesn't have any command line parameters,
+      so it reads from standard input,
+      but we have told the shell to send the contents of <code>ammonia.pdb</code> to <code>wc</code>'s standard input.
+    </p>
+
+  </div>
+
+  <div>
+    <h3>Nelle's Pipeline: Checking Files</h3>
+
+    <p>
+      Nelle has run her samples through the assay machines
+      and created 1520 files in the <code>north-pacific-gyre/2012-07-03</code> directory
+      described <a href="#a:organizing-files">earlier</a>.
+      As a quick sanity check,
+      she types:
+    </p>
+
+<pre>
+$ <span class="in">cd north-pacific-gyre/2012-07-03</span>
+$ <span class="in">wc -l *.txt</span>
+</pre>
+
+    <p class="continue">
+      The output is 1520 lines that look like this:
+    </p>
+
+<pre>
+ 300 NENE01729A.txt
+ 300 NENE01729B.txt
+ 300 NENE01736A.txt
+ 300 NENE01751A.txt
+ 300 NENE01751B.txt
+ 300 NENE01812A.txt
+ ... ...
+</pre>
+
+    <p>
+      Now she types this:
+    </p>
+
+<pre>
+$ <span class="in">wc -l *.txt | sort | head -5</span>
+ 240 NENE02018B.txt
+ 300 NENE01729A.txt
+ 300 NENE01729B.txt
+ 300 NENE01736A.txt
+ 300 NENE01751A.txt
+</pre>
+
+    <p class="continue">
+      Whoops:
+      one of the files is 60 lines shorter than the others.
+      When she goes back and checks it,
+      she sees that she did that assay at 8:00 on a Monday morning&mdash;someone
+      was probably in using the machine on the weekend,
+      and she forgot to reset it.
+      Before re-running that sample,
+      she checks to see if any files have too much data:
+    </p>
+
+<pre>
+$ <span class="in">wc -l *.txt | sort | <span class="highlight">tail</span> -5</span>
+ 300 NENE02040A.txt
+ 300 NENE02040B.txt
+ 300 NENE02040Z.txt
+ 300 NENE02043A.txt
+ 300 NENE02043B.txt
+</pre>
+
+    <p>
+      Those numbers look good&mdash;but what's that 'Z' doing there in the third-to-last line?
+      All of her samples should be marked 'A' or 'B';
+      by convention,
+      her lab uses 'Z' to indicate samples with missing information.
+      To find others like it,
+      she does this:
+    </p>
+
+<pre>
+$ <span class="in">ls *Z.txt</span>
+NENE01971Z.txt    NENE02040Z.txt
+</pre>
+
+    <p class="continue">
+      Sure enough,
+      when she checks the log on her laptop,
+      there's no depth recorded for either of those samples.
+      Since it's too late to get the information any other way,
+      she must exclude those two files from her analysis.
+      She could just delete them using <code>rm</code>,
+      but there are actually some analyses she might do later
+      where depth doesn't matter,
+      so instead,
+      she'll just be careful later on to select files using the wildcard expression
+      <code>*[AB].txt</code>.
+      As always, the '*' matches any number of characters,
+      and recall from the previous section that <code>[AB]</code>
+      matches either an 'A' or a 'B',
+      so this matches all the valid data files she has.
+    </p>
+
+  </div>
+
+</div>

@@ -1,0 +1,179 @@
+<div class="lesson" id="s:db:aggregate:lesson">
+
+  <p>
+    Gina now wants to calculate ranges and averages for her data.
+    She knows how to select all of the dates from the <code>Visited</code> table:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="1">
+<pre>select dated from Visited;</pre>
+      </td>
+    </tr>
+    <tr><td>1927-02-08</td></tr>
+    <tr><td>1927-02-10</td></tr>
+    <tr><td>1939-01-07</td></tr>
+    <tr><td>1930-01-12</td></tr>
+    <tr><td>1930-02-26</td></tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr><td>1932-01-14</td></tr>
+    <tr><td>1932-03-22</td></tr>
+  </table>
+
+  <p class="continue">
+    but to combine them,
+    she must use an <a href="glossary.html#aggregation-function">aggregation function</a>
+    such as <code>min</code> or <code>max</code>.
+    Each of these functions takes a set of records as input,
+    and produces a single record as output:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="1">
+<pre>select min(dated) from Visited;</pre>
+      </td>
+    </tr>
+    <tr><td>1927-02-08</td></tr>
+    <tr>
+      <td colspan="1">
+<pre>select max(dated) from Visited;</pre>
+      </td>
+    </tr>
+    <tr><td>1939-01-07</td></tr>
+  </table>
+
+  <p>
+    <code>min</code> and <code>max</code> are just two of
+    the aggregation functions built into SQL.
+    Three others are <code>avg</code>,
+    <code>count</code>,
+    and <code>sum</code>:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="1">
+<pre>select avg(reading) from Survey where quant='sal';</pre>
+      </td>
+    </tr>
+    <tr><td>7.20333333333</td></tr>
+    <tr>
+      <td colspan="1">
+<pre>select count(reading) from Survey where quant='sal';</pre>
+      </td>
+    </tr>
+    <tr><td>9</td></tr>
+    <tr>
+      <td colspan="1">
+<pre>select sum(reading) from Survey where quant='sal';</pre>
+      </td>
+    </tr>
+    <tr><td>64.83</td></tr>
+  </table>
+
+  <p>
+    We used <code>count(reading)</code> here,
+    but we could just as easily have counted <code>quant</code>
+    or any other field in the table,
+    or even used <code>count(*)</code>,
+    since the function doesn't care about the values themselves,
+    just how many values there are.
+  </p>
+
+  <p>
+    SQL lets us do several aggregations at once.
+    We can,
+    for example,
+    find the range of sensible salinity measurements:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="2">
+<pre>select min(reading), max(reading) from Survey where quant='sal' and reading&lt;=1.0;</pre>
+      </td>
+    </tr>
+    <tr><td>0.05</td><td>0.21</td></tr>
+  </table>
+
+  <p>
+    We can also combine aggregated results with raw results,
+    although the output might surprise you:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="2">
+<pre>select person, count(*) from Survey where quant='sal' and reading&lt;=1.0;</pre>
+      </td>
+    </tr>
+    <tr><td>lake</td><td>7</td></tr>
+  </table>
+
+  <p>
+    Why does Lake's name appear rather than Roerich's or Dyer's?
+    The answer is that when it has to aggregate a field,
+    but isn't told how to,
+    the database manager chooses an actual value from the input set.
+    It might use the first one processed,
+    the last one,
+    or something else entirely.
+  </p>
+
+  <p>
+    Another important fact is that when there are no values to aggregate,
+    aggregation's result is "don't know"
+    rather than zero or some other arbitrary value:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="3">
+<pre>select person, max(reading), sum(reading) from Survey where quant='missing';</pre>
+      </td>
+    </tr>
+    <tr><td /><td /><td /></tr>
+  </table>
+
+  <p>
+    One final important feature of aggregation functions is that
+    they are inconsistent with the rest of SQL in a very useful way.
+    If we add two values,
+    and one of them is null,
+    the result is null.
+    By extension,
+    if we use <code>sum</code> to add all the values in a set,
+    and any of those values are null,
+    the result should also be null.
+    It's much more useful,
+    though,
+    for aggregation functions to ignore null values
+    and only combine those that are non-null.
+    This behavior lets us write our queries as:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="1">
+<pre>select min(dated) from Visited;</pre>
+      </td>
+    </tr>
+    <tr><td>1927-02-08</td></tr>
+  </table>
+
+  <p class="continue">
+    instead of always having to filter explicitly:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="1">
+<pre>select min(dated) from Visited <span class="highlight">where dated is not null</span>;</pre>
+      </td>
+    </tr>
+    <tr><td>1927-02-08</td></tr>
+  </table>
+
+</div>

@@ -1,0 +1,133 @@
+<div id="s:shell:intro:lesson" class="lesson">
+
+  <p>
+    At a high level, computers do four things:
+  </p>
+
+  <ul>
+    <li>run programs;</li>
+    <li>store data;</li>
+    <li>communicate with each other; and</li>
+    <li>interact with us.</li>
+  </ul>
+
+  <p>
+    They can do the last of these in many different ways,
+    including direct brain-computer links and speech interfaces.
+    Since these are still in their infancy,
+    most of us use windows, icons, mice, and pointers.
+    These technologies didn't become widespread until the 1980s,
+    but their roots go back to Doug Engelbart's work in the 1960s,
+    which you can see in what has been called
+    "<a href="http://video.google.com/videoplay?docid=-8734787622017763097#">The Mother of All Demos</a>".
+  </p>
+
+  <p>
+    Going back even further,
+    the only way to interact with early computers was to rewire them.
+    But in between,
+    from the 1950s to the 1980s,
+    most people used a technology based on the old-fashioned typewriter.
+    That technology is still widely used today,
+    and is the subject of this chapter.
+  </p>
+
+  <figure id="f:decwriter">
+    <img src="{{page.root}}/img/lessons/swc-shell/decwriter.jpg" alt="DECWriter LA-36" />
+    <figcaption>Figure 1: DECWriter LA-36</figcaption>
+  </figure>
+
+  <p>
+    When I say "typewriter", I actually mean a line printer connected to a keyboard
+    (<a href="#f:decwriter">Figure 1</a>).
+    These devices only allowed input and output of the letters, numbers, and punctuation found on a standard keyboard,
+    so programming languages and interfaces had to be designed around that constraint&mdash;though
+    if you had enough time on your hands,
+    you could draw simple pictures using just those characters
+    (<a href="#f:ascii_art">Figure 2</a>).
+  </p>
+
+  <figure id="f:ascii_art">
+<pre>
+                    ,-.             __
+                  ,'   `---.___.---'  `.
+                ,'   ,-                 `-._
+              ,'    /                       \
+           ,\/     /                        \\
+       )`._)>)     |                         \\
+       `>,'    _   \                  /       ||
+         )      \   |   |            |        |\\
+.   ,   /        \  |    `.          |        | ))
+\`. \`-'          )-|      `.        |        /((
+ \ `-`   .`     _/  \ _     )`-.___.--\      /  `'
+  `._         ,'     `j`.__/           `.    \
+    / ,    ,'         \   /`             \   /
+    \__   /           _) (               _) (
+      `--'           /____\             /____\
+</pre>
+    <figcaption>Figure 2: ASCII Art</figcaption>
+  </figure>
+
+  <p>
+    Today,
+    this kind of interface is called a <a href="glossary.html#clui">command-line user interface</a>,
+    or CLUI,
+    to distinguish it from the <a href="glossary.html#gui">graphical user interface</a>,
+    or GUI,
+    that most of us now use.
+    The heart of a CLUI is a <a href="glossary.html#repl">read-evaluate-print loop</a>,
+    or REPL:
+    when the user types a command,
+    the computer reads it,
+    executes it,
+    and prints its output.
+    (In the case of old teletype terminals, it literally printed the output onto paper, a line at a time.)
+    The user then types another command,
+    and so on until the user logs off.
+  </p>
+
+  <p>
+    This description makes it sound as though
+    the user sends commands directly to the computer,
+    and the computer sends output directly to the user.
+    In fact,
+    there is usually a program in between called a <a href="glossary.html#shell">command shell</a>
+    (<a href="#f:command_shell">Figure 3</a>).
+    What the user types goes into the shell;
+    it figures out what commands to run and orders the computer to execute them.
+  </p>
+
+  <figure id="f:command_shell">
+    <img src="{{page.root}}/img/lessons/swc-shell/command_shell.svg" alt="The Command Shell" />
+    <figcaption>Figure 3: The Command Shell</figcaption>
+  </figure>
+
+  <p>
+    A shell is a program like any other.
+    What's special about it is that its job is to run other programs,
+    rather than to do calculations itself.
+    The most popular Unix shell is Bash, the Bourne Again SHell
+    (so-called because it's derived from a shell written by Stephen Bourne&mdash;this
+    is what passes for wit among programmers).
+    Bash is the default shell on most modern implementations of Unix,
+    and in most packages that provide Unix-like tools for Windows,
+    such as <a href="http://www.cygwin.org">Cygwin</a>.
+  </p>
+
+  <p>
+    Using Bash,
+    or any other shell,
+    sometimes feels more like programming that like using a mouse.
+    Commands are terse (often only a couple of characters long),
+    their names are frequently cryptic,
+    and their output is lines of text rather than something visual like a graph.
+    On the other hand,
+    the shell allows us to combine existing tools in powerful ways with only a few keystrokes,
+    and to set up pipelines to handle large volumes of data automatically.
+    In addition,
+    the command line is often the easiest way to interact with remote machines.
+    As clusters and cloud computing become more popular for scientific data crunching,
+    being able to drive them is becoming a necessary skill.
+  </p>
+
+</div>

@@ -1,0 +1,38 @@
+<p>
+  Joel's <code>data</code> directory contains three files:
+  <code>fructose.dat</code>,
+  <code>glucose.dat</code>,
+  and <code>sucrose.dat</code>.
+  Explain what each of the following shell scripts does
+  when run as <code>bash <em>scriptname</em> *.dat</code>.
+</p>
+
+<table>
+  <tr>
+    <td valign="top">1.</td>
+    <td valign="top">
+<pre>
+echo *.*
+</pre>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">2.</td>
+    <td valign="top">
+<pre>
+for filename in $1 $2 $3
+do
+    cat $filename
+done
+</pre>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">3.</td>
+    <td valign="top">
+<pre>
+echo $*.dat
+</pre>
+    </td>
+  </tr>
+</table>

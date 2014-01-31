@@ -1,0 +1,9 @@
+# 
+Reported: Tue May 3 11:27:09 2011
+Subject: beyonceZ388
+Year/month of birth: 1991/08
+Sex: N
+CI type: 24
+Volume: 4
+Range: 5
+Discrimination: 3
