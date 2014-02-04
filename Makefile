@@ -15,7 +15,7 @@ OUT = _site
 TMP = tmp
 LINK_OUT = /tmp/bc-links
 
-# Source and destination Markdown/HTML pages.
+# Source and destination Markdown pages.
 MARKDOWN_SRC = \
 	LICENSE.md \
 	NEW_MATERIAL.md \
@@ -28,6 +28,12 @@ MARKDOWN_SRC = \
 	$(wildcard sql/novice/*.md)
 MARKDOWN_DST = \
 	$(patsubst %.md,$(OUT)/%.html,$(MARKDOWN_SRC))
+
+# Source and destination HTML slides.
+SLIDE_SRC = \
+	$(wildcard slides/*.html)
+SLIDE_DST = \
+	$(patsubst %,$(OUT)/%,$(SLIDE_SRC))
 
 # Source, cached, and destination Notebook files/HTML pages.
 NOTEBOOK_SRC = \
@@ -68,7 +74,7 @@ $(OUT)/%.html : $(TMP)/%.html
 
 # Build HTML versions of Markdown source files using Jekyll.  This always
 # erases and re-creates the output directory.
-$(OUT) : $(MARKDOWN_SRC)
+$(OUT) : $(MARKDOWN_SRC) $(SLIDE_SRC)
 	jekyll -t build -d $(OUT)
 
 # Build HTML versions of IPython Notebooks.  This is slow, so we cache
@@ -107,3 +113,5 @@ show :
 	@echo "MARKDOWN_DST" $(MARKDOWN_DST)
 	@echo "NOTEBOOK_SRC" $(NOTEBOOK_SRC)
 	@echo "NOTEBOOK_DST" $(NOTEBOOK_DST)
+	@echo "SLIDE_SRC" $(SLIDE_SRC)
+	@echo "SLIDE_DST" $(SLIDE_DST)
