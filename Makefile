@@ -40,6 +40,12 @@ NOTEBOOK_TMP = \
 NOTEBOOK_DST = \
 	$(patsubst %.ipynb,$(OUT)/%.html,$(NOTEBOOK_SRC))
 
+# Slides.
+SLIDES_SRC = \
+	$(wildcard slides/*.html)
+SLIDES_DST = \
+	$(patsubst %.html,$(OUT)/%.html,$(SLIDES_SRC))
+
 # Mark cached versions of compiled notebooks as SECONDARY so that GNU
 # Make won't delete them after rebuilding.
 .SECONDARY : $(NOTEBOOK_TMP)
@@ -68,7 +74,7 @@ $(OUT)/%.html : $(TMP)/%.html
 
 # Build HTML versions of Markdown source files using Jekyll.  This always
 # erases and re-creates the output directory.
-$(OUT) : $(MARKDOWN_SRC)
+$(OUT) : $(MARKDOWN_SRC) $(SLIDES_SRC)
 	jekyll -t build -d $(OUT)
 
 # Build HTML versions of IPython Notebooks.  This is slow, so we cache
