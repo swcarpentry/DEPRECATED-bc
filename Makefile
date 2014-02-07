@@ -120,6 +120,10 @@ tmp/%.md : %.md
 commands :
 	@grep -E '^##' Makefile | sed -e 's/## //g'
 
+## contribs : list contributors (uses .mailmap file)
+contribs :
+	git log --pretty=format:%aN | sort | uniq
+
 ## fixme    : find places where fixes are needed.
 fixme :
 	@grep -i -n FIXME $$(find -f shell git python sql -type f -print | grep -v .ipynb_checkpoints)
