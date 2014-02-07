@@ -31,7 +31,6 @@
 	<div align="center">
 	  <h1 class="title">Software Carpentry</h1>
 	  <h2 class="subtitle">Volume 1: Basics</h2>
-	  <h2 class="subtitle">Greg Wilson</h2>
 	</div>
 
 	<ul>
