@@ -6,6 +6,7 @@
 OUT = _site
 LINK_OUT = /tmp/bc-links
 BOOK = _book
+INSTALL_DIR = $(HOME)/sites/software-carpentry.org/v5
 
 # Source Markdown pages.
 MARKDOWN_SRC = \
@@ -57,6 +58,11 @@ BOOK_DST = $(OUT)/book.html
 
 # Default action: show available commands (marked with double '#').
 all : commands
+
+## install  : install.
+install : $(OUT)/index.html
+	rm -rf $(INSTALL_DIR)
+	cp -r _site $(INSTALL_DIR)
 
 ## site     : build site.
 site : $(OUT)/index.html
