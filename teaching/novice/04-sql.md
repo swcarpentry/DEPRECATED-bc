@@ -1,7 +1,7 @@
 ---
 layout: lesson
 root: ../..
-title: Instructor's Guide
+title: Using Databases and SQL
 level: novice
 ---
 Relational databases are not as widely used in science as in business,
@@ -15,8 +15,7 @@ data ranges,
 and so on could be in a database
 to make it easier for scientists to find what they want to.
 
-Teaching Notes
---------------
+#### Teaching Notes
 
 *   The first few sections (up to "Missing Data") usually go very quickly.
     The pace usually slows down a bit when null values are discussed

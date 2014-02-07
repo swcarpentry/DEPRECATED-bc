@@ -1,37 +1,29 @@
 ---
 layout: lesson
 root: .
-title: New Material
+title: Lessons (Version 5.0 Beta)
 ---
-<table class="table table-striped">
-  <tr>
-    <td></td>
-    <th>Novice</th>
-    <th>Intermediate</th>
-  </tr>
-  <tr>
-    <th>The Unix Shell</th>
-    <td><a href="./shell/novice/index.html">X</a></td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <th>Version Control with Git</th>
-    <td><a href="./git/novice/index.html">X</a></td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <th>Programming with Python</th>
-    <td><a href="./python/novice/index.html">X</a></td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <th>Programming with R</th>
-    <td>-</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <th>Using Databases and SQL</th>
-    <td><a href="./sql/novice/index.html">X</a></td>
-    <td>-</td>
-  </tr>
-</table>
+We are currently updating our lessons
+to incorporate what we've learned from our learners
+in the last four years.
+
+## For Novices
+
+*   [Introduction](intro.html)
+*   [The Unix Shell](shell/novice/index.html)
+*   [Version Control with Git](git/novice/index.html)
+*   [Programming with Python](python/novice/index.html)
+*   [Using Databases and SQL](sql/novice/index.html)
+*   [A Few Extras](extras/novice/index.html)
+
+These lessons are also available in [book form](book.html).
+
+## For the More Experienced
+
+Under development.
+
+## Other Materials
+
+*   [Setup Instructions](setup.html)
+*   [Recommended Reading](bib.html)
+*   [Glossary](gloss.html)

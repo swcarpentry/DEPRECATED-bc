@@ -17,8 +17,13 @@ We use Python in our lessons because:
 3.  it has a large (and growing) user base among scientists; and
 4.  experience shows that it's easier for novices to pick up than most other languages.
 
-Topics
-------
+But the two most important things are
+to use whatever language your colleagues are using,
+so that you can share you work with them easily,
+and to use that language *well*.
+
+<div class="toc" markdown="1">
+
 1.  [Analyzing Patient Data](01-numpy.html)
 2.  [Creating Functions](02-func.html)
 3.  [Analyzing Multiple Data Sets](03-loop.html)
@@ -26,17 +31,4 @@ Topics
 5.  [Defensive Programming](05-defensive.html)
 6.  [Command-Line Programs](06-cmdline.html)
 
-See Also
---------
-*   [Instructor's Guide](guide.html)
-*   [Reference](reference.html)
-
-Resources
----------
-*   `inflammation-*.csv`: data files used in notebooks.
-*   `readings-*.py`: successive versions of command-line script.
-*   `small-*.csv`: small data files used to test command-line script.
-*   `argv-list.py`: example command-line script.
-*   `count-stdin.py`: example command-line script.
-*   `sys-version.py`: example command-line script.
-*   `img/*`: images used in notebooks
+</div>

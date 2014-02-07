@@ -4,8 +4,7 @@ root: ../..
 title: SQL Reference
 level: novice
 ---
-Basic Queries
--------------
+#### Basic Queries
 
 Select one or more columns from a table:
 
@@ -31,8 +30,7 @@ Sort results in ascending and descending order:
 
     SELECT * FROM table_name ORDER BY column_name_1 ASC, column_name_2 DESC;
 
-Filtering
----------
+#### Filtering
 
 Select only data meeting a condition:
 
@@ -42,8 +40,7 @@ Select only data meeting a combination of conditions:
 
     SELECT * FROM table_name WHERE (column_name_1 >= 1000) AND (column_name_2 = 'A' OR column_name_2 = 'B');
 
-Missing Data
-------------
+#### Missing Data
 
 Use `NULL` to represent missing data.
 
@@ -58,8 +55,7 @@ Test whether a value is not null:
 
     SELECT * FROM table_name WHERE column_name IS NOT NULL;
 
-Grouping and Aggregation
-------------------------
+#### Grouping and Aggregation
 
 Combine values using aggregation functions:
 
@@ -69,21 +65,18 @@ Combine data into groups and calculate combined values in groups:
 
     SELECT column_name_1, SUM(column_name_2), COUNT(*) FROM table_name GROUP BY column_name_1;
 
-Joins
------
+#### Joins
 
 Join data from two tables:
 
     SELECT * FROM table_name_1 JOIN table_name_2 ON table_name_1.column_name = table_name_2.column_name;
 
-Writing Queries
----------------
+#### Writing Queries
 
 SQL commands must be combined in the following order:
 `SELECT`, `FROM`, `JOIN`, `ON`, `WHERE`, `GROUP BY`, `ORDER BY`.
 
-Creating Tables
----------------
+#### Creating Tables
 
 Create tables by specifying column names and types.
 Include primary and foreign key relationships and other constraints.
@@ -96,8 +89,7 @@ Include primary and foreign key relationships and other constraints.
         FOREIGN KEY(person) REFERENCES person(ident)
     );
 
-Programming
------------
+#### Programming
 
 Execute queries in a general-purpose programming language by:
 

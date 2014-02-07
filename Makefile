@@ -1,85 +1,122 @@
 #-----------------------------------------------------------
 # Re-make lecture materials.
-#
-# We use Jekyll to compile HTML and Markdown files into their final
-# form, and nbconvert to translate IPython Notebooks to theirs.  The
-# problem is that Jekyll always erases and re-creates the output
-# directory, so any compiled notebooks we put there are lost when we
-# run it.  The solution is to cache compiled notebooks in a temporary
-# directory, and copy those compiled pages into the output directory
-# as needed.
 #-----------------------------------------------------------
 
 # Directories.
 OUT = _site
-TMP = tmp
 LINK_OUT = /tmp/bc-links
+BOOK = _book
 
-# Source and destination Markdown/HTML pages.
+# Source Markdown pages.
 MARKDOWN_SRC = \
 	LICENSE.md \
 	NEW_MATERIAL.md \
 	bib.md \
 	gloss.md \
 	rules.md \
+	setup.md \
 	$(wildcard shell/novice/*.md) \
 	$(wildcard git/novice/*.md) \
 	$(wildcard python/novice/*.md) \
-	$(wildcard sql/novice/*.md)
-MARKDOWN_DST = \
-	$(patsubst %.md,$(OUT)/%.html,$(MARKDOWN_SRC))
+	$(wildcard sql/novice/*.md) \
+	$(wildcard teaching/novice/*.md)
 
-# Source, cached, and destination Notebook files/HTML pages.
 NOTEBOOK_SRC = \
-	$(wildcard shell/novice/*.ipynb) \
-	$(wildcard git/novice/*.ipynb) \
-	$(wildcard python/novice/*.ipynb) \
-	$(wildcard sql/novice/*.ipynb)
-NOTEBOOK_TMP = \
-	$(patsubst %.ipynb,$(TMP)/%.html,$(NOTEBOOK_SRC))
-NOTEBOOK_DST = \
-	$(patsubst %.ipynb,$(OUT)/%.html,$(NOTEBOOK_SRC))
+	$(wildcard python/novice/??-*.ipynb) \
+	$(wildcard sql/novice/??-*.ipynb)
 
-# Mark cached versions of compiled notebooks as SECONDARY so that GNU
-# Make won't delete them after rebuilding.
-.SECONDARY : $(NOTEBOOK_TMP)
+NOTEBOOK_MD = \
+	$(patsubst %.ipynb,%.md,$(NOTEBOOK_SRC))
+
+HTML_DST = \
+	$(patsubst %.md,$(OUT)/%.html,$(MARKDOWN_SRC)) \
+	$(patsubst %.md,$(OUT)/%.html,$(NOTEBOOK_MD))
+
+BOOK_SRC = \
+	intro.md \
+	shell/novice/index.md $(wildcard shell/novice/*-*.md) \
+	git/novice/index.md $(wildcard git/novice/*-*.md) \
+	python/novice/index.md $(patsubst %.ipynb,%.md,$(wildcard python/novice/??-*.ipynb)) \
+	sql/novice/index.md $(patsubst %.ipynb,%.md,$(wildcard sql/novice/??-*.ipynb)) \
+	extras/novice/index.md $(wildcard extras/novice/*-*.md) \
+	teaching/novice/index.md  $(wildcard teaching/novice/*-*.md) \
+	ref/novice/index.md  $(wildcard ref/novice/*-*.md) \
+	bib.md \
+	tmp/gloss.md \
+	rules.md \
+	LICENSE.md
+
+BOOK_TMP = \
+	$(patsubst %,tmp/%,$(BOOK_SRC))
+
+BOOK_DST = $(OUT)/book.html
+
+.SECONDARY : $(NOTEBOOK_MD)
 
 #-----------------------------------------------------------
 
 # Default action: show available commands (marked with double '#').
 all : commands
 
+## site     : build site.
+site : $(OUT)/index.html
+
+# Build HTML versions of Markdown source files using Jekyll.
+$(OUT)/index.html : $(MARKDOWN_SRC) $(NOTEBOOK_MD)
+	jekyll -t build -d $(OUT)
+	mv $(OUT)/NEW_MATERIAL.html $(OUT)/index.html
+	sed -i -e 's!img src="python/novice/!img src="!g' $(OUT)/python/novice/??-*.html
+
+# Build Markdown versions of IPython Notebooks.
+%.md : %.ipynb _templates/ipynb.tpl
+	ipython nbconvert --template=_templates/ipynb.tpl --to=markdown --output="$(subst .md,,$@)" "$<"
+
+## book     : build all-in-one book version of material.
+book : $(BOOK_DST)
+
+$(BOOK_DST) : $(OUT)/index.html $(BOOK_TMP) _templates/book.tpl tmp/gloss.md bin/make-book.py
+	python bin/make-book.py $(BOOK_TMP) \
+	| pandoc --email-obfuscation=none --template=_templates/book.tpl -t html -o - \
+	| sed -e 's!../../gloss.html#!#g:!g' \
+	| sed -e 's!../gloss.html#!#g:!g' \
+	> $@
+
+# Patch targets and links in the glossary for inclusion in the book.
+tmp/gloss.md : gloss.md
+	@mkdir -p $$(dirname $@)
+	sed -e 's!](#!](#g:!g' -e 's!<a name="!<a name="#g:!g' $< > $@
+
+# Patch image paths in the sections.
+tmp/shell/novice/%.md : shell/novice/%.md
+	@mkdir -p $$(dirname $@)
+	sed -e 's!<img src="img!<img src="shell/novice/img!g' $< > $@
+
+tmp/git/novice/%.md : git/novice/%.md
+	@mkdir -p $$(dirname $@)
+	sed -e 's!<img src="img!<img src="git/novice/img!g' $< > $@
+
+tmp/python/novice/%.md : python/novice/%.md
+	@mkdir -p $$(dirname $@)
+	sed -e 's!<img src="img!<img src="python/novice/img!g' $< > $@
+
+tmp/sql/novice/%.md : sql/novice/%.md
+	@mkdir -p $$(dirname $@)
+	sed -e 's!<img src="img!<img src="sql/novice/img!g' $< > $@
+
+# All other Markdown files used in the book.
+tmp/%.md : %.md
+	@mkdir -p $$(dirname $@)
+	cp $< $@
+
+#-----------------------------------------------------------
+
 ## commands : show all commands
 commands :
 	@grep -E '^##' Makefile | sed -e 's/## //g'
 
-## check    : build site.
-#  We know we're done when the compiled IPython Notebook files are
-#  in the output directory.
-check : $(NOTEBOOK_DST)
-
-# Cannot create final versions of compiled notebook files until Jekyll
-# has re-created the output directory.
-$(NOTEBOOK_DST) : $(OUT)
-
-# Copy cached versions of compiled notebook files into output directory.
-$(OUT)/%.html : $(TMP)/%.html
-	cp $< $@
-
-# Build HTML versions of Markdown source files using Jekyll.  This always
-# erases and re-creates the output directory.
-$(OUT) : $(MARKDOWN_SRC)
-	jekyll -t build -d $(OUT)
-
-# Build HTML versions of IPython Notebooks.  This is slow, so we cache
-# the results in a temporary directory.
-$(TMP)/%.html : %.ipynb
-	@mkdir -p $$(dirname $@)
-	ipython nbconvert --output="$(subst .html,,$@)" "$<"
-
 ## fixme    : find places where fixes are needed.
 fixme :
-	@grep -n FIXME $$(find -f shell git python sql -type f -print | grep -v .ipynb_checkpoints)
+	@grep -i -n FIXME $$(find -f shell git python sql -type f -print | grep -v .ipynb_checkpoints)
 
 ## gloss    : check glossary
 gloss :
@@ -97,13 +134,26 @@ images :
 links :
 	@bin/linklint -doc $(LINK_OUT) -textonly -root $(OUT) /@
 
+## valid      : check validity of HTML book.
+valid : tmp-book.html
+	xmllint --noout tmp-book.html 2>&1 | python bin/unwarn.py
+
 ## clean    : clean up
-clean :
-	rm -rf $(OUT) $(TMP) $$(find . -name '*~' -print) $$(find . -name '*.pyc' -print)
+clean : tidy
+	@rm -rf $(OUT) $(NOTEBOOK_MD)
+
+## tidy    : clean up intermediate files only
+tidy :
+	@rm -rf \
+	image-page.html \
+	tmp \
+	$$(find . -name '*~' -print) \
+	$$(find . -name '*.pyc' -print) \
+	$$(find . -name '??-*_files' -type d -print)
 
 ## show     : show variables
 show :
 	@echo "MARKDOWN_SRC" $(MARKDOWN_SRC)
-	@echo "MARKDOWN_DST" $(MARKDOWN_DST)
 	@echo "NOTEBOOK_SRC" $(NOTEBOOK_SRC)
-	@echo "NOTEBOOK_DST" $(NOTEBOOK_DST)
+	@echo "NOTEBOOK_MD" $(NOTEBOOK_MD)
+	@echo "HTML_DST" $(HTML_DST)

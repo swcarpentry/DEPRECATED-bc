@@ -21,8 +21,8 @@ knowing how they work will help us understand why so many of the systems we use
 behave the way we do,
 and why they insist on structuring data in certain ways.
 
-Topics
-------
+<div class="toc" markdown="1">
+
 1.  [Selecting Data](01-select.html)
 2.  [Sorting and Removing Duplicates](02-sort-dup.html)
 3.  [Filtering](03-filter.html)
@@ -33,12 +33,4 @@ Topics
 8.  [Creating and Modifying Data](08-create.html)
 9.  [Programming with Databases](09-prog.html)
 
-See Also
---------
-*   [Instructor's Guide](guide.html)
-*   [Reference](reference.html)
-
-Resources
----------
-*   `gen-survey-database.sql`: re-generate survey database used in examples.
-*   `sqlitemagic.py`: IPython Notebook plugin to support SQLite interaction.
+</div>

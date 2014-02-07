@@ -4,8 +4,7 @@ root: ../..
 title: Python Reference
 level: novice
 ---
-Basic Operations
-----------------
+#### Basic Operations
 
 *   Use `variable = value` to assign a value to a variable.
 *   Use `print first, second, third` to display values.
@@ -17,8 +16,7 @@ Basic Operations
 *   `[value1, value2, value3, ...]` creates a list.
 *   `list_name[i]` selects the i'th value from a list.
 
-Control Flow
-------------
+#### Control Flow
 
 *   Create a `for` loop to process elements in a collection one at a time:
 
@@ -39,15 +37,13 @@ Control Flow
 *   `X or Y` is true if either X or Y, or both, are true.
 *   Use `assert condition, message` to check that something is true when the program is running.
 
-Functions
----------
+#### Functions
 
 *   `def name(...params...)` defines a new function.
 *   `def name(param=default)` specifies a default value for a parameter.
 *   Call a function using `name(...values...)`.
 
-Libraries
----------
+#### Libraries
 
 *   Import a library into a program using `import libraryname`.
 *   The `sys` library contains:
@@ -55,8 +51,7 @@ Libraries
     *   `sys.stdin`, `sys.stdout`: standard input and output.
 *   `glob.glob(pattern)` returns a list of files whose names match a pattern.
 
-Arrays
-------
+#### Arrays
 
 *   `import numpy` to load the NumPy library.
 *   `array.shape` gives the shape of an array.

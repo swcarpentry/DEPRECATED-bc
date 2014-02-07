@@ -5,7 +5,9 @@
 _site
 tmp
 image-page.html
-# For the misc-r/full-R-bootcamp
+tmp-book.*
+patched-gloss.md
+*/*/*_files
 lessons/misc-r/full-R-bootcamp/R-basics/01-basics-of-R.md
 lessons/misc-r/full-R-bootcamp/R-basics/rstudio-basics.md
 lessons/misc-r/full-R-bootcamp/R-basics/02-data-structures.md

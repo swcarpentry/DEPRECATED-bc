@@ -1,7 +1,7 @@
 ---
 layout: lesson
 root: ../..
-title: Instructor's Guide
+title: Version Control with Git
 level: novice
 ---
 Version control might be the most important topic we teach,
@@ -30,8 +30,7 @@ We close with material on licensing because:
 2.  the discussion gives learners a chance to catch their breath
     after what is often a frustrating couple of hours.
 
-Teaching Notes
---------------
+#### Teaching Notes
 
 *   Make sure the network is working *before* starting this lesson.
 
@@ -64,13 +63,29 @@ Teaching Notes
 
 *   Be very clear what files learners are to edit
     and what user IDs they are to use
-    when giving instructions.
-    It is common for them to edit the instructor's biography,
+    when giving instructions:
+    it is common for them to edit the file the instructor is working on
+    rather than their own,
     or to use the instructor's user ID and password when committing.
-    Be equally clear *when* they are to edit things:
+
+*   Be equally clear *when* they are to edit things:
     it's also common for someone to edit the file the instructor is editing
     and commit changes while the instructor is explaining what's going on,
     so that a conflict occurs when the instructor comes to commit the file.
 
 *   If some learners are using Windows,
     there will inevitably be issues merging files with different line endings.
+    (Even if everyone's on some flavor of Unix,
+    different editors may or may not add a newline to the last line of a file.)
+    Take a moment to explain these issues,
+    since learners will almost certainly trip over them again.
+
+*   We don't use a Git GUI in these notes because
+    we haven't found one that installs easily and runs reliably on the three major operating systems,
+    and because we want learners to understand what commands are being run.
+    That said,
+    instructors should demo a GUI on their desktop at some point during this lesson
+    and point learners at [this page](http://git-scm.com/downloads/guis).
+
+*   Instructors should also show learners graphical diff/merge tools like
+    [DiffMerge](https://sourcegear.com/diffmerge/).
