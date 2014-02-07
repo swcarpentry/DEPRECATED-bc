@@ -46,6 +46,7 @@
 	  <li><a href="#glossary">Glossary</a></li>
 	  <li><a href="#the-rules">The Rules</a></li>
 	  <li><a href="#licenses">Licenses</a></li>
+	  <li><a href="#our-team">Our Team</a></li>
 	</ul>
 
 $body$

@@ -16,6 +16,7 @@ MARKDOWN_SRC = \
 	gloss.md \
 	rules.md \
 	setup.md \
+	team.md \
 	$(wildcard shell/novice/*.md) \
 	$(wildcard git/novice/*.md) \
 	$(wildcard python/novice/*.md) \
@@ -45,6 +46,7 @@ BOOK_SRC = \
 	bib.md \
 	tmp/gloss.md \
 	rules.md \
+	team.md \
 	LICENSE.md
 
 BOOK_TMP = \
@@ -144,7 +146,7 @@ images :
 links :
 	@bin/linklint -doc $(LINK_OUT) -textonly -root $(OUT) /@
 
-## valid      : check validity of HTML book.
+## valid    : check validity of HTML book.
 valid : tmp-book.html
 	xmllint --noout tmp-book.html 2>&1 | python bin/unwarn.py
 
@@ -152,7 +154,7 @@ valid : tmp-book.html
 clean : tidy
 	@rm -rf $(OUT) $(NOTEBOOK_MD)
 
-## tidy    : clean up intermediate files only
+## tidy     : clean up intermediate files only
 tidy :
 	@rm -rf \
 	image-page.html \

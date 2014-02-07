@@ -27,3 +27,4 @@ Under development.
 *   [Setup Instructions](setup.html)
 *   [Recommended Reading](bib.html)
 *   [Glossary](gloss.html)
+*   [Our Team](team.html)
