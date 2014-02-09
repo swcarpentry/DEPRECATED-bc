@@ -70,8 +70,8 @@ example, we may want to know more about the `-t` option mentioned above.
 
 We can search the output of man with the slash key (/), followed by our search
 query. To get information on `-t`, we would type `/-t` followed by RETURN.
-
-This would take us to:
+Using 'n', we can navigate to the _next_ match until we find the detailed
+information we need:
 
     -t, --target-directory=DIRECTORY
          copy all SOURCE arguments into DIRECTORY
