@@ -111,6 +111,10 @@ tmp/sql/novice/%.md : sql/novice/%.md
 	@mkdir -p $$(dirname $@)
 	sed -e 's!<img src="img!<img src="sql/novice/img!g' $< > $@
 
+tmp/extras/novice/%.md : extras/novice/%.md
+	@mkdir -p $$(dirname $@)
+	sed -e 's!<img src="img!<img src="extras/novice/img!g' $< > $@
+
 # All other Markdown files used in the book.
 tmp/%.md : %.md
 	@mkdir -p $$(dirname $@)
