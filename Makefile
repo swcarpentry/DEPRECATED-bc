@@ -27,6 +27,12 @@ NOTEBOOK_SRC = \
 	$(wildcard python/novice/??-*.ipynb) \
 	$(wildcard sql/novice/??-*.ipynb)
 
+# Slides.
+SLIDES_SRC = \
+	$(wildcard slides/*.html)
+SLIDES_DST = \
+	$(patsubst %.html,$(OUT)/%.html,$(SLIDES_SRC))
+
 NOTEBOOK_MD = \
 	$(patsubst %.ipynb,%.md,$(NOTEBOOK_SRC))
 
@@ -54,6 +60,8 @@ BOOK_TMP = \
 
 BOOK_DST = $(OUT)/book.html
 
+# Mark cached versions of compiled notebooks as SECONDARY so that GNU
+# Make won't delete them after rebuilding.
 .SECONDARY : $(NOTEBOOK_MD)
 
 #-----------------------------------------------------------
@@ -169,6 +177,9 @@ tidy :
 
 ## show     : show variables
 show :
+	@echo "OUT" $(OUT)
+	@echo "TMP" $(TMP)
+	@echo "LINK_OUT" $(LINK_OUT)
 	@echo "MARKDOWN_SRC" $(MARKDOWN_SRC)
 	@echo "NOTEBOOK_SRC" $(NOTEBOOK_SRC)
 	@echo "NOTEBOOK_MD" $(NOTEBOOK_MD)
