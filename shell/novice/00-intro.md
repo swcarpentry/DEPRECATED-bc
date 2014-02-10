@@ -39,12 +39,12 @@ Since her lab has eight assay machines that she can use in parallel,
 this step will "only" take about two weeks.
 
 The bad news is that if she has to run `goostat` and `goodiff` by hand,
-she'll have to enter filenames and click "OK" roughly 300<sup>2</sup> times
-(300 runs of `goostat`, plus 300&times;299 runs of `goodiff`).
+she'll have to enter filenames and click "OK" 45,150 times
+(300 runs of `goostat`, plus 300&times;299/2 runs of `goodiff`).
 At 30 seconds each,
-that will take 18 weeks.
+that will take more than another two weeks.
 Not only would she miss her paper deadline,
-the chances of her getting all 90,000 commands right are approximately zero.
+the chances of her getting all 45,150 commands right are practically zero.
 
 The next few lessons will explore what she should do instead.
 More specifically,
@@ -118,7 +118,7 @@ Commands are terse (often only a couple of characters long),
 their names are frequently cryptic,
 and their output is lines of text rather than something visual like a graph.
 On the other hand,
-the shell allows us to combine existing tools in powerful ways with only a few keystrokes.
+the shell allows us to combine existing tools in powerful ways with only a few keystrokes
 and to set up pipelines to handle large volumes of data automatically.
 In addition,
 the command line is often the easiest way to interact with remote machines.

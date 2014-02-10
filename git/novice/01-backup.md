@@ -43,8 +43,7 @@ $ git config --global core.editor "nano"
 ~~~
 
 (Please use your own name and email address instead of Dracula's,
-and please make sure you choose an editor that's actually on your system
-rather than `nano`.)
+and please make sure you choose an editor that's actually on your system. On Windows you might want to use `notepad`.)
 
 Git commands are written `git verb`,
 where `verb` is what we actually want it to do.
@@ -113,7 +112,7 @@ nothing to commit (create/copy files and use "git add" to track)
 Let's create a file called `mars.txt` that contains some notes
 about the Red Planet's suitability as a base.
 (We'll use `nano` to edit the file;
-you can use whatever editor you like.)
+you can use whatever editor you like. In particular, this does not have to be the core.editor you set globally earlier.)
 
 ~~~
 $ nano mars.txt
@@ -600,7 +599,7 @@ Let's create a few dummy files:
 
 ```
 $ mkdir results
-$ touch a.dat b.dat c.dat touch results/a.out results/b.out
+$ touch a.dat b.dat c.dat results/a.out results/b.out
 ```
 
 and see what Git says:
@@ -724,12 +723,12 @@ nothing to commit, working directory clean
 
     ~~~
     cd           # return to home directory
-    mkdir alpha  # make a new directory
-    cd alpha     # go into it
-    git init .   # make the alpha directory a Git repository
+    mkdir alpha  # make a new directory alpha
+    cd alpha     # go into alpha
+    git init     # make the alpha directory a Git repository
     mkdir beta   # make a sub-directory alpha/beta
-    cd beta      # go into it
-    git init .   # make the beta sub-dirctory a Git repository
+    cd beta      # go into alpha/beta
+    git init     # make the beta sub-directory a Git repository
     ~~~
 
     Why is it a bad idea to do this?

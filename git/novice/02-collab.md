@@ -63,7 +63,7 @@ the string we need to identify it:
 
 <img src="img/github-find-repo-string.png" alt="Where to Find Repository URL on GitHub" />
 
-Click on the 'HTTPS' link to change the [protocol](../../gloss.html#protocol) to HTTP.
+Click on the 'HTTPS' link to change the [protocol](../../gloss.html#protocol) from SSH to HTTPS.
 It's slightly less convenient for day-to-day use,
 but much less work for beginners to set up:
 
@@ -129,11 +129,10 @@ Already up-to-date.
 
 Pulling has no effect in this case
 because the two repositories are already synchronized.
-If someone else had pushed some changes,
+If someone else had pushed some changes to the repository on GitHub,
 though,
 this command would download them to our local repository.
-We can simulate this by going to another directory&mdash;for example, `/tmp`&mdash;and
-[cloning](../gloss.html#repository-clone) our GitHub repository:
+We can simulate the workflow with a collaborator by going to another directory, for example, `/tmp` (note the absolute path, don't make `tmp` a subdirectory of `home/vlad/planets`). In contrast to our first local repository, we don't want to create a new repository again (with `git init`), but instead [clone](../gloss.html#repository-clone) the existing repository from GitHub:
 
 ~~~
 $ cd /tmp
@@ -220,9 +219,9 @@ to share work between different people and machines.
 #### Key Points
 *   A local Git repository can be connected to one or more remote repositories.
 *   Use the HTTPS protocol to connect to remote repositories until you have learned how to set up SSH.
-*   Cloning a remote repository creates a local copy with a remote called `origin` automatically set up.
-*   `git pull` copies changes from a remote repository to a local repository.
 *   `git push` copies changes from a local repository to a remote repository.
+*   `git pull` copies changes from a remote repository to a local repository.
+*   `git clone` clones a remote repository and creates a local copy with a remote called `origin` automatically set up.
 
 </div>
 
