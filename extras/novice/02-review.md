@@ -48,11 +48,11 @@ Instead,
 he [forks](../gloss.html#repository-fork) it,
 i.e., clones it on GitHub. He does this using the GitHub web interface:
 
-<img src="extras/novice/img/git-fork-ui.png" alt="The Fork Button" />
+<img src="img/git-fork-ui.png" alt="The Fork Button" />
 
 He then clones his GitHub repository, not Dracula's, to give himself a desktop copy:
 
-<img src="extras/novice/img/git-forking-01.svg" alt="After Forking on GitHub" />
+<img src="img/git-forking-01.svg" alt="After Forking on GitHub" />
 
 This may seem like unnecessary work,
 but it allows Wolfman and Dracula to collaborate much more effectively.
@@ -60,12 +60,12 @@ Suppose Wolfman makes a change to the project.
 He commits it to his local repository,
 then uses `git push` to copy those changes to GitHub:
 
-<img src="extras/novice/img/git-forking-02.svg" alt="After Pushing to Fork" />
+<img src="img/git-forking-02.svg" alt="After Pushing to Fork" />
 
 He then creates a [pull request](../gloss.html#pull-request),
 which notifies Dracula that Wolfman wants to merge some changes into Dracula's repository:
 
-<img src="extras/novice/img/git-forking-03.svg" alt="After Creating Pull Request" />
+<img src="img/git-forking-03.svg" alt="After Creating Pull Request" />
 
 A pull request is a merge waiting to happen.
 When Dracula views it online,

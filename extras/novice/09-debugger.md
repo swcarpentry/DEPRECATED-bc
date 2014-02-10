@@ -126,7 +126,7 @@ the debugger can:
 
 Here's what a typical debugger looks like in action:
 
-<img src="extras/novice/img/debugger-screenshot.png" alt="Debugger in Action" />
+<img src="img/debugger-screenshot.png" alt="Debugger in Action" />
 
 The most important parts of this display are
 the source code window and the call stack display.
@@ -159,7 +159,7 @@ which functions are actually being called,
 and most importantly,
 why.
 
-<img src="extras/novice/img/debugger-screenshot.png" alt="A Debugger in Action" />
+<img src="img/debugger-screenshot.png" alt="A Debugger in Action" />
 
 But debuggers can do much more than this.
 For example,
