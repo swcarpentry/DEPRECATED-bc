@@ -7,7 +7,7 @@ level: novice
 
 > *1997*
 >
-> P: Hi, I'm a programmer. I'm starting an online retail company. What do you two do?
+> P: Hi, I'm a programmer. I'm starting an online retail company. What do you do?
 > 
 > G: Hi, I'm a graphic designer. I know how to select and arrange text and images in ways that are appealing, informative, and usable.
 > 
@@ -25,7 +25,7 @@ level: novice
 > 
 > T: Hi, I'm a teacher. I know how to create and deliver learning materials in ways that are appealing, informative, and usable.
 > 
-> P: Huh. That seems simpler to me than programming...
+> P: Huh. That seems much simpler to me than programming...
 
 As a species,
 we know a lot about how brains learn,
@@ -40,8 +40,10 @@ It's as if only doctors knew about the connection between smoking and cancer.
 The best guide to evidence-based learning we have found is
 *How Learning Works: Seven Research-Based Principles for Smart Teaching*
 (see the bibliography for the full citation).
-Its advice is based in equal parts on theory, research, and experience,
-and while some of its recommendations may seem banal,
+Its advice,
+summarized below,
+is based in equal parts on theory, research, and experience.
+While some of the recommendations may seem banal,
 the full-length explanations in the book itself are anything but.
 
 > 1. Students' prior knowledge can help or hinder learning.
