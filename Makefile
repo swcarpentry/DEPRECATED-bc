@@ -34,12 +34,22 @@ NOTEBOOK_SRC = \
 	$(wildcard python/novice/*.ipynb) \
 	$(wildcard sql/novice/*.ipynb)
 
+# Slides.
+SLIDES_SRC = \
+	$(wildcard slides/*.html)
+SLIDES_DST = \
+	$(patsubst %.html,$(OUT)/%.html,$(SLIDES_SRC))
+
 NOTEBOOK_MD = \
 	$(patsubst %.ipynb,%.md,$(NOTEBOOK_SRC))
 
 HTML_DST = \
 	$(patsubst %.md,$(OUT)/%.html,$(MARKDOWN_SRC)) \
 	$(patsubst %.md,$(OUT)/%.html,$(NOTEBOOK_MD))
+
+# Mark cached versions of compiled notebooks as SECONDARY so that GNU
+# Make won't delete them after rebuilding.
+.SECONDARY : $(NOTEBOOK_TMP)
 
 #-----------------------------------------------------------
 
@@ -55,8 +65,9 @@ commands :
 #  in the output directory.
 check : $(OUT)/index.html
 
-# Build HTML versions of Markdown source files using Jekyll.
-$(OUT)/index.html : $(MARKDOWN_SRC) $(NOTEBOOK_MD)
+# Build HTML versions of Markdown source files using Jekyll.  This always
+# erases and re-creates the output directory.
+$(OUT)/index.html : $(MARKDOWN_SRC) $(NOTEBOOK_MD) $(SLIDES_SRC)
 	jekyll -t build -d $(OUT)
 	mv $(OUT)/NEW_MATERIAL.html $(OUT)/index.html
 
