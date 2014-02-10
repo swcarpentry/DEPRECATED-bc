@@ -62,7 +62,7 @@ provided a specific path, so it knows what to do. But which one should
 the shell do if we just type `analyze`?
 
 The rule is simple: the shell checks each directory in the `PATH`
-variable in turn, looking for a program with the rqeuested name in that
+variable in turn, looking for a program with the requested name in that
 directory. As soon as it finds a match, it stops searching and runs the
 program.
 
@@ -161,7 +161,7 @@ running. We don't see anything signalling this on the screen because the
 new shell prints the same prompt as the old one, but our keyboard input
 and screen output are now tied to the child shell.
 
-![Running a Shell from the Shell](../img/shell/shell-on-shell.png)
+<img src="img/shell-on-shell.png" alt="Running a Shell from the Shell" />
 
 If we `echo $SECRET_IDENTITY` in the child shell, nothing is printed,
 because the variable doesn't have a value in the child shell: it was

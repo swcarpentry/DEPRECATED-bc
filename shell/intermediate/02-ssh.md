@@ -23,7 +23,7 @@ characters on the screen to represent what we type, and then, if what we
 typed was a command, the shell executes it and displays its output (if
 any).
 
-![Direct Shell Usage](img/web/direct-shell-usage.png)
+<img src="img/direct-shell-usage.png" alt="Direct Shell Usage" />
 
 What if we want to run some commands on another machine, such as the
 server in the basement that manages our database of experimental
@@ -34,7 +34,7 @@ shell running on the remote computer. That shell interacts runs those
 commands on our behalf, just as a local shell would, then sends back
 output for our computer to display:
 
-![Remote Shell Usage](img/web/remote-shell-usage.png)
+<img src="img/remote-shell-usage.png" alt="Remote Shell Usage" />
 
 The tool we use to log in remotely is the [secure
 shell](gloss.html#secure-shell), or SSH. In particular, the command
@@ -255,7 +255,7 @@ $ ssh vlad@fastmachine pwd
 Here is what is on both machines after we created and installed the
 keys:
 
-![Public/Private Keys](img/web/public-private-keys.png)
+<img src="img/public-private-keys.png" alt="Public/Private Keys" />
 
 We can now run `ssh` (and `scp`) from our local machine to the remote
 machine without having to authenticate every time. This only works one
