@@ -90,7 +90,7 @@ However, while we no longer have to worry about consistency,
 we're still making changes to a file that's under version control that we *don't* want written back to the repository.
 
 > ### Parenthesizing Macros in Make
-
+>
 > We have to put curly brackets or parentheses around a macro's name when we use it&mdash;we can't just write `$MACRO`.
 > If we do, Make will interpret it as `$M` (a reference to the macro `M`) followed by "ACRO".
 > Since we probably don't have a macro called `M`, `$M` will expand to the empty string,
@@ -174,9 +174,9 @@ Our main Makefile is now happy in both cases because the file it's including now
 and has the right definition of `STYLE_DIR`.
 
 We can also solve this problem by defining `STYLE_DIR` on the command line each time we run Make.
-To do this, we use the `-D` flag, and specify the macro's name and the value we want to give it:
+To do this, we set the variable on the command line when invoking `make`:
 
-    $ make -DSTYLE_DIR=/lib/styles -f Makefile
+    $ make STYLE_DIR=/lib/styles -f Makefile
 
 This is almost always a bad idea, though.
 We have to remember to type the definition each time,
