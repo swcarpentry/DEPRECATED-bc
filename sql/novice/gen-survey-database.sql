@@ -53,7 +53,7 @@ insert into Visited values(844, 'DR-1',  '1932-03-22');
 create table Survey(
 	taken   integer,
 	person  text,
-	quant   real,
+	quant   text,
 	reading real
 );
 
