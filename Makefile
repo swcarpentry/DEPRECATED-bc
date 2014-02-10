@@ -15,7 +15,7 @@ OUT = _site
 TMP = tmp
 LINK_OUT = /tmp/bc-links
 
-# Source and destination Markdown/HTML pages.
+# Source Markdown pages.
 MARKDOWN_SRC = \
 	LICENSE.md \
 	NEW_MATERIAL.md \
@@ -26,8 +26,6 @@ MARKDOWN_SRC = \
 	$(wildcard git/novice/*.md) \
 	$(wildcard python/novice/*.md) \
 	$(wildcard sql/novice/*.md)
-MARKDOWN_DST = \
-	$(patsubst %.md,$(OUT)/%.html,$(MARKDOWN_SRC))
 
 # Source, cached, and destination Notebook files/HTML pages.
 NOTEBOOK_SRC = \
@@ -35,16 +33,19 @@ NOTEBOOK_SRC = \
 	$(wildcard git/novice/*.ipynb) \
 	$(wildcard python/novice/*.ipynb) \
 	$(wildcard sql/novice/*.ipynb)
-NOTEBOOK_TMP = \
-	$(patsubst %.ipynb,$(TMP)/%.html,$(NOTEBOOK_SRC))
-NOTEBOOK_DST = \
-	$(patsubst %.ipynb,$(OUT)/%.html,$(NOTEBOOK_SRC))
 
 # Slides.
 SLIDES_SRC = \
 	$(wildcard slides/*.html)
 SLIDES_DST = \
 	$(patsubst %.html,$(OUT)/%.html,$(SLIDES_SRC))
+
+NOTEBOOK_MD = \
+	$(patsubst %.ipynb,%.md,$(NOTEBOOK_SRC))
+
+HTML_DST = \
+	$(patsubst %.md,$(OUT)/%.html,$(MARKDOWN_SRC)) \
+	$(patsubst %.md,$(OUT)/%.html,$(NOTEBOOK_MD))
 
 # Mark cached versions of compiled notebooks as SECONDARY so that GNU
 # Make won't delete them after rebuilding.
@@ -62,26 +63,17 @@ commands :
 ## check    : build site.
 #  We know we're done when the compiled IPython Notebook files are
 #  in the output directory.
-check : $(NOTEBOOK_DST)
-
-# Cannot create final versions of compiled notebook files until Jekyll
-# has re-created the output directory.
-$(NOTEBOOK_DST) : $(OUT)
-
-# Copy cached versions of compiled notebook files into output directory.
-$(OUT)/%.html : $(TMP)/%.html
-	cp $< $@
+check : $(OUT)/index.html
 
 # Build HTML versions of Markdown source files using Jekyll.  This always
 # erases and re-creates the output directory.
-$(OUT) : $(MARKDOWN_SRC) $(SLIDES_SRC)
+$(OUT)/index.html : $(MARKDOWN_SRC) $(NOTEBOOK_MD) $(SLIDES_SRC)
 	jekyll -t build -d $(OUT)
+	mv $(OUT)/NEW_MATERIAL.html $(OUT)/index.html
 
-# Build HTML versions of IPython Notebooks.  This is slow, so we cache
-# the results in a temporary directory.
-$(TMP)/%.html : %.ipynb
-	@mkdir -p $$(dirname $@)
-	ipython nbconvert --output="$(subst .html,,$@)" "$<"
+# Build Markdown versions of IPython Notebooks.
+%.md : %.ipynb
+	ipython nbconvert --template=./swc.tpl --to=markdown --output="$(subst .md,,$@)" "$<"
 
 ## fixme    : find places where fixes are needed.
 fixme :
@@ -106,10 +98,14 @@ links :
 ## clean    : clean up
 clean :
 	rm -rf $(OUT) $(TMP) $$(find . -name '*~' -print) $$(find . -name '*.pyc' -print)
+	rm -f $(HTML_DST)
 
 ## show     : show variables
 show :
+	@echo "OUT" $(OUT)
+	@echo "TMP" $(TMP)
+	@echo "LINK_OUT" $(LINK_OUT)
 	@echo "MARKDOWN_SRC" $(MARKDOWN_SRC)
-	@echo "MARKDOWN_DST" $(MARKDOWN_DST)
 	@echo "NOTEBOOK_SRC" $(NOTEBOOK_SRC)
-	@echo "NOTEBOOK_DST" $(NOTEBOOK_DST)
+	@echo "NOTEBOOK_MD" $(NOTEBOOK_MD)
+	@echo "HTML_DST" $(HTML_DST)
