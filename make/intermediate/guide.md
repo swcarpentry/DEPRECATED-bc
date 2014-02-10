@@ -1,7 +1,7 @@
 ---
 layout: lesson
 root: ../..
-title: Shell Reference
+title: Instructor's Guide
 level: intermediate
 ---
 FIXME
