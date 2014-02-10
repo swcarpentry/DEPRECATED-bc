@@ -17,7 +17,7 @@ second = first
 After these two lines have been executed,
 the program's memory looks like this:
 
-<img src="extras/novice/img/python-alias-01.svg" alt="Initial State of Memory" />
+<img src="img/python-alias-01.svg" alt="Initial State of Memory" />
 
 If we change the last value of the list that `first` refers to:
 
@@ -25,7 +25,7 @@ If we change the last value of the list that `first` refers to:
 first[2] = 99
 ~~~
 
-<img src="extras/novice/img/python-alias-02.svg" alt="After Changing List" />
+<img src="img/python-alias-02.svg" alt="After Changing List" />
 
 then `second`'s value changes as well:
 
@@ -111,24 +111,24 @@ Just before the call,
 the global frame has two variables
 that refer to a string and a list:
 
-<img src="extras/novice/img/python-alias-03.svg" alt="Before Aliasing Function Call" />
+<img src="img/python-alias-03.svg" alt="Before Aliasing Function Call" />
 
 The call creates a new stack frame with aliases for those values:
 
-<img src="extras/novice/img/python-alias-04.svg" alt="During Aliasing Function Call" />
+<img src="img/python-alias-04.svg" alt="During Aliasing Function Call" />
 
 The `a_string + 'turing'` creates a new string `'alanturing'`;
 assigning this to the variable `a_string`
 changes what that local variable refers to,
 but doesn't change what the global variable `string_val` refers to:
 
-<img src="extras/novice/img/python-alias-05.svg" alt="After Assigning to String" />
+<img src="img/python-alias-05.svg" alt="After Assigning to String" />
 
 The statement `a_list.append('turing')`,
 however,
 actually modifies the list that `a_list` is pointing to:
 
-<img src="extras/novice/img/python-alias-06.svg" alt="After Assigning to List" />
+<img src="img/python-alias-06.svg" alt="After Assigning to List" />
 
 But this is the same thing that the variable `list_val` in the caller is pointing to.
 When the function returns and the call frame is thrown away,
@@ -139,7 +139,7 @@ on the other hand,
 is kept,
 because the function actually modified the list in place:
 
-<img src="extras/novice/img/python-alias-07.svg" alt="After Function Call" />
+<img src="img/python-alias-07.svg" alt="After Function Call" />
 
 Let's change one line in the function:
 

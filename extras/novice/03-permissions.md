@@ -231,7 +231,7 @@ It gives someone the right to *traverse* the directory, but not to look at its c
 The distinction is subtle, so let's have a look at an example.
 Vlad's home directory has three subdirectories called `venus`, `mars`, and `pluto`:
 
-<img src="extras/novice/img/x-for-directories.svg" alt="Execute Permission for Directories" />
+<img src="img/x-for-directories.svg" alt="Execute Permission for Directories" />
 
 Each of these has a subdirectory in turn called `notes`,
 and those sub-subdirectories contain various files.

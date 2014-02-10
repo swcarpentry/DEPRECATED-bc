@@ -35,7 +35,7 @@ But the Mummy will appreciate the lack of humidity
 We can draw the history of the repository like this
 (we'll see in a second why there's a box called `master`):
 
-<img src="extras/novice/img/git-branching-01.svg" alt="Initial State of Repository" />
+<img src="img/git-branching-01.svg" alt="Initial State of Repository" />
 
 Let's run this command:
 
@@ -53,7 +53,7 @@ $ git branch
   moons
 ~~~
 
-<img src="extras/novice/img/git-branching-02.svg" alt="Immediately After Creating Branch" />
+<img src="img/git-branching-02.svg" alt="Immediately After Creating Branch" />
 
 Git is now maintaining two named bookmarks in our history:
 `master`,
@@ -72,7 +72,7 @@ $ git branch
 * moons
 ~~~
 
-<img src="extras/novice/img/git-branching-03.svg" alt="After Switching to Branch" />
+<img src="img/git-branching-03.svg" alt="After Switching to Branch" />
 
 Our file looks the same:
 
@@ -138,7 +138,7 @@ $ git commit -m "Thinking about the moons"
 
 Our repository is now in the state shown below:
 
-<img src="extras/novice/img/git-branching-04.svg" alt="After Committing on Moons Branch" />
+<img src="img/git-branching-04.svg" alt="After Committing on Moons Branch" />
 
 The `moons` branch has advanced to record the changes we just made,
 but `master` is still where it was.
@@ -184,7 +184,7 @@ $ git commit -m "We will need a cool name for our secret base"
 
 Our repository is now in this state:
 
-<img src="extras/novice/img/git-branching-05.svg" alt="After Committing on Master Branch" />
+<img src="img/git-branching-05.svg" alt="After Committing on Master Branch" />
 
 `master` and `moons` have both moved on from their original common state,
 but in different ways.
@@ -239,7 +239,7 @@ mars.txt    moons.txt    names.txt
 
 and our repository looks like this:
 
-<img src="extras/novice/img/git-branching-06.svg" alt="After Merging" />
+<img src="img/git-branching-06.svg" alt="After Merging" />
 
 We can visualize the history with this set of arguments to `git log`:
 
