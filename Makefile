@@ -75,7 +75,14 @@ install : $(OUT)/index.html
 	cp -r _site $(INSTALL_DIR)
 
 ## site     : build site.
-site : $(OUT)/index.html
+site : $(BOOK_DST)
+
+$(BOOK_DST) : $(OUT)/index.html $(BOOK_TMP) _templates/book.tpl tmp/gloss.md bin/make-book.py
+	python bin/make-book.py $(BOOK_TMP) \
+	| pandoc --email-obfuscation=none --template=_templates/book.tpl -t html -o - \
+	| sed -e 's!../../gloss.html#!#g:!g' \
+	| sed -e 's!../gloss.html#!#g:!g' \
+	> $@
 
 # Build HTML versions of Markdown source files using Jekyll.
 $(OUT)/index.html : $(MARKDOWN_SRC) $(NOTEBOOK_MD)
@@ -86,16 +93,6 @@ $(OUT)/index.html : $(MARKDOWN_SRC) $(NOTEBOOK_MD)
 # Build Markdown versions of IPython Notebooks.
 %.md : %.ipynb _templates/ipynb.tpl
 	ipython nbconvert --template=_templates/ipynb.tpl --to=markdown --output="$(subst .md,,$@)" "$<"
-
-## book     : build all-in-one book version of material.
-book : $(BOOK_DST)
-
-$(BOOK_DST) : $(OUT)/index.html $(BOOK_TMP) _templates/book.tpl tmp/gloss.md bin/make-book.py
-	python bin/make-book.py $(BOOK_TMP) \
-	| pandoc --email-obfuscation=none --template=_templates/book.tpl -t html -o - \
-	| sed -e 's!../../gloss.html#!#g:!g' \
-	| sed -e 's!../gloss.html#!#g:!g' \
-	> $@
 
 # Patch targets and links in the glossary for inclusion in the book.
 tmp/gloss.md : gloss.md
