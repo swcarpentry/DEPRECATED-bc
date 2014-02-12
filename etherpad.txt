@@ -1,0 +1,11 @@
+Etherpad.txt
+
+Instructions for Students.
+
+Go to the URL given by your instructor. 
+
+The page displays a screen with three major parts. 
+
+1.The left side holds the wiki with today's notes written by the instructor. 
+2.The top right side shows the names of users who are logged in. 
+3.The bottom right is a real time chat window for asking questions of the instructor.
