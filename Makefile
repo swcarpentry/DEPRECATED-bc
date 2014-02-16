@@ -69,6 +69,10 @@ BOOK_DST = $(OUT)/book.html
 # Default action: show available commands (marked with double '#').
 all : commands
 
+## quick    : build just the bootcamp home page.
+quick :
+	jekyll -t build -d $(OUT)
+
 ## install  : install.
 install : $(OUT)/index.html
 	rm -rf $(INSTALL_DIR)

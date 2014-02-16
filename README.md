@@ -207,13 +207,10 @@ Previewing the Site
 To preview your bootcamp's page(s),
 go into its root directory and run:
 
-    make site
+    make quick
 
-This will run `jekyll` to create the directory `./_site` with your rendered pages.
-The `./_site/README.html` file this produces will not have any CSS styling applied:
-GitHub will do that when the page is uploaded.
-The `./_site/index.html` page,
-on the other hand,
+This will run `jekyll` to create the directory `./_site`;
+the `index.html` page in this directory
 should have the Software Carpentry look and feel
 and the information about your bootcamp.
 
@@ -390,10 +387,19 @@ FAQ
 
 *   *Why use Jekyll?  Why not some other markup language and some other converter?*
     <br/>
-    Because they're the defaults on GitHub.
+    Because it's the default on GitHub.
     If we're going to teach people to use that site,
     we should teach them to use it as it is,
     not as we wish it was.
+
+*   *Why does `make site` take so long?*
+    <br/>
+    On a MacBook Air with pandoc 1.11.1 and Jekyll 1.3.0,
+    making the site from scratch takes approximately 24 seconds,
+    half of which is spent converting IPython Notebooks.
+    Some other versions of Pandoc take much longer to translate our files,
+    possibly because we are nesting Markdown inside `div` elements.
+    We are investigating...
 
 *   *What do I do if I see a `invalid byte sequence in ...` error when I run `make check`?*
     <br/>
