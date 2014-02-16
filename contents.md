@@ -10,11 +10,11 @@ in the last four years.
 ## For Novices
 
 *   [Introduction](intro.html)
-*   [The Unix Shell](shell/novice/index.html)
-*   [Version Control with Git](git/novice/index.html)
-*   [Programming with Python](python/novice/index.html)
-*   [Using Databases and SQL](sql/novice/index.html)
-*   [A Few Extras](extras/novice/index.html)
+*   [The Unix Shell](novice/shell/index.html)
+*   [Version Control with Git](novice/git/index.html)
+*   [Programming with Python](novice/python/index.html)
+*   [Using Databases and SQL](novice/sql/index.html)
+*   [A Few Extras](novice/extras/index.html)
 
 These lessons are also available in [book form](book.html).
 

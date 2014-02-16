@@ -17,15 +17,17 @@ MARKDOWN_SRC = \
 	rules.md \
 	setup.md \
 	team.md \
-	$(wildcard shell/novice/*.md) \
-	$(wildcard git/novice/*.md) \
-	$(wildcard python/novice/*.md) \
-	$(wildcard sql/novice/*.md) \
-	$(wildcard teaching/novice/*.md)
+	$(wildcard novice/shell/*.md) \
+	$(wildcard novice/git/*.md) \
+	$(wildcard novice/python/*.md) \
+	$(wildcard novice/sql/*.md) \
+	$(wildcard novice/extras/*.md) \
+	$(wildcard novice/teaching/*.md) \
+	$(wildcard novice/ref/*.md)
 
 NOTEBOOK_SRC = \
-	$(wildcard python/novice/??-*.ipynb) \
-	$(wildcard sql/novice/??-*.ipynb)
+	$(wildcard novice/python/??-*.ipynb) \
+	$(wildcard novice/sql/??-*.ipynb)
 
 # Slides.
 SLIDES_SRC = \
@@ -40,15 +42,16 @@ HTML_DST = \
 	$(patsubst %.md,$(OUT)/%.html,$(MARKDOWN_SRC)) \
 	$(patsubst %.md,$(OUT)/%.html,$(NOTEBOOK_MD))
 
+# Source for book (in order, with some substutitions).
 BOOK_SRC = \
 	intro.md \
-	shell/novice/index.md $(wildcard shell/novice/*-*.md) \
-	git/novice/index.md $(wildcard git/novice/*-*.md) \
-	python/novice/index.md $(patsubst %.ipynb,%.md,$(wildcard python/novice/??-*.ipynb)) \
-	sql/novice/index.md $(patsubst %.ipynb,%.md,$(wildcard sql/novice/??-*.ipynb)) \
-	extras/novice/index.md $(wildcard extras/novice/*-*.md) \
-	teaching/novice/index.md  $(wildcard teaching/novice/*-*.md) \
-	ref/novice/index.md  $(wildcard ref/novice/*-*.md) \
+	novice/shell/index.md $(wildcard novice/shell/*-*.md) \
+	novice/git/index.md $(wildcard novice/git/*-*.md) \
+	novice/python/index.md $(patsubst %.ipynb,%.md,$(wildcard novice/python/??-*.ipynb)) \
+	novice/sql/index.md $(patsubst %.ipynb,%.md,$(wildcard novice/sql/??-*.ipynb)) \
+	novice/extras/index.md $(wildcard novice/extras/*-*.md) \
+	novice/teaching/index.md  $(wildcard novice/teaching/*-*.md) \
+	novice/ref/index.md  $(wildcard novice/ref/*-*.md) \
 	bib.md \
 	tmp/gloss.md \
 	rules.md \
@@ -92,7 +95,7 @@ $(BOOK_DST) : $(OUT)/index.html $(BOOK_TMP) _templates/book.tpl tmp/gloss.md bin
 # Build HTML versions of Markdown source files using Jekyll.
 $(OUT)/index.html : $(MARKDOWN_SRC) $(NOTEBOOK_MD)
 	jekyll -t build -d $(OUT)
-	sed -i -e 's!img src="python/novice/!img src="!g' $(OUT)/python/novice/??-*.html
+	sed -i -e 's!img src="novice/python/!img src="!g' $(OUT)/novice/python/??-*.html
 
 # Build Markdown versions of IPython Notebooks.
 %.md : %.ipynb _templates/ipynb.tpl
@@ -104,25 +107,25 @@ tmp/gloss.md : gloss.md
 	sed -e 's!](#!](#g:!g' -e 's!<a name="!<a name="#g:!g' $< > $@
 
 # Patch image paths in the sections.
-tmp/shell/novice/%.md : shell/novice/%.md
+tmp/novice/shell/%.md : novice/shell/%.md
 	@mkdir -p $$(dirname $@)
-	sed -e 's!<img src="img!<img src="shell/novice/img!g' $< > $@
+	sed -e 's!<img src="img!<img src="novice/shell/img!g' $< > $@
 
-tmp/git/novice/%.md : git/novice/%.md
+tmp/novice/git/%.md : novice/git/%.md
 	@mkdir -p $$(dirname $@)
-	sed -e 's!<img src="img!<img src="git/novice/img!g' $< > $@
+	sed -e 's!<img src="img!<img src="novice/git/img!g' $< > $@
 
-tmp/python/novice/%.md : python/novice/%.md
+tmp/novice/python/%.md : novice/python/%.md
 	@mkdir -p $$(dirname $@)
-	sed -e 's!<img src="img!<img src="python/novice/img!g' $< > $@
+	sed -e 's!<img src="img!<img src="novice/python/img!g' $< > $@
 
-tmp/sql/novice/%.md : sql/novice/%.md
+tmp/novice/sql/%.md : novice/sql/%.md
 	@mkdir -p $$(dirname $@)
-	sed -e 's!<img src="img!<img src="sql/novice/img!g' $< > $@
+	sed -e 's!<img src="img!<img src="novice/sql/img!g' $< > $@
 
-tmp/extras/novice/%.md : extras/novice/%.md
+tmp/novice/extras/%.md : novice/extras/%.md
 	@mkdir -p $$(dirname $@)
-	sed -e 's!<img src="img!<img src="extras/novice/img!g' $< > $@
+	sed -e 's!<img src="img!<img src="novice/extras/img!g' $< > $@
 
 # All other Markdown files used in the book.
 tmp/%.md : %.md

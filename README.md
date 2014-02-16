@@ -313,61 +313,49 @@ Reorganize, rewrite, or delete this material as you think best.
 Lesson Material
 ---------------
 
-*   Our old lesson material,
-    which we plan to retire in Spring 2014,
+*   Our old lesson material
     is in the `lessons` directory.
-
-*   The new material for novices is in the directories
-    `shell/novice`, `python/novice`, `git/novice`, and `sql/novice`.
+    We plan to retire it in Spring 2014,
+*   The new material for novices is in the directories under `novice`.
     The shell and Git materials are written in Markdown,
     while the Python and SQL use the IPython Notebook.
-
 *   New material for intermediate learners is currently under development
-    in directories called `*/intermediate`.
-
-*   Our R material is in `lessons/misc-R`;
-    we are currently working to merge it into the main directory structure.
+    in directories under `intermediate`.
 
 Site Map
 --------
+
+The most important files and directories are **highlighted**.
 
 *   CITATION - how to cite Software Carpentry.
 *   CONTRIBUTING.md - how to contribute new material.
 *   LICENSE.md - our license.
 *   Makefile - rebuild this site (type `make` on its own for a list of targets).
 *   README.md - how to use this site.
+*   bib.md - bibliography.
+*   contents.md - site map used in place of `index.html` on the main web site.
+*   **gloss.md** - glossary of terms.
+*   **index.html** - template for bootcamp home pages.
+*   intro.md - introduction to book version of this site.
+*   rules.md - the rules of programming (used in the book version of this site).
+*   **team.md** - who we are.
 *   _config.yml - Jekyll configuration directives.
 *   _includes/ - snippets of HTML that can be included in other files by Jekyll.
 *   _layouts/ - Jekyll page layouts.
-*   _site/ - output directory when building the site locally.
+*   **_site/** - output directory (created when building the site locally).
 *   _templates/ - template files for Pandoc conversion of IPython Notebooks.
-*   bib.md - bibliography.
 *   bin/ - miscellaneous tools used in building the site.
 *   branding/ - graphical assets related to Software Carpentry.
-*   contents.md - site map used in place of `index.html` on the main web site.
 *   css/ - CSS files for this site.
 *   data/ - miscellaneous data files used by examples.
-*   extras/ - supplementary materials included in the book version of this site.
-*   git/ - lessons on Git.
-*   gloss.md - glossary of terms.
 *   img/ - images used throughout this site.
-*   index.html - template for bootcamp home pages.
-*   intro.md - introduction to book version of this site.
+*   **intermediate/** - intermediate lesson material (under development).
 *   js/ - Javascript files used in this site.
-*   lessons/ - old lesson material.
-*   make/ - lesson on Make (intermediate only).
-*   python/ - lessons on Python.
-*   r/ - lessons on R (under construction).
-*   ref/ - reference guides.
-*   regex/ - lesson on regular expressions (intermediate only).
-*   rules.md - the rules of programming (used in the book version of this site).
+*   **lessons/** - old lesson material.
+*   **novice/** - novice lesson material.
 *   setup/ - setup tools for installing bootcamp software.
 *   setup.md - setup instructions for software used in bootcamps.
-*   shell/ - lessons on the Unix shell.
 *   slides/ - slideshows (under construction).
-*   sql/ - lessons on SQL and databases.
-*   teaching/ - instructor's guides.
-*   team.md - who we are.
 
 FAQ
 ---
