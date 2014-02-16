@@ -334,6 +334,7 @@ The most important files and directories are **highlighted**.
 *   README.md - how to use this site.
 *   bib.md - bibliography.
 *   contents.md - site map used in place of `index.html` on the main web site.
+*   etherpad.txt - starter text for the bootcamp's Etherpad.
 *   **gloss.md** - glossary of terms.
 *   **index.html** - template for bootcamp home pages.
 *   intro.md - introduction to book version of this site.
