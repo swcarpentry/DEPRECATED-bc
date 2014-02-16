@@ -178,11 +178,12 @@ contact: admin@software-carpentry.org
   <div class="span6">
     <h4>Python</h4>
     <p>
-      Python is becoming more and more popular in scientific computing,
+      Python is becoming very popular in scientific computing,
       and it's a great language for teaching general programming concepts due to its easy-to-read syntax.
-      We will be using Python version 2.7.
+      We teach with Python version 2.7,
+      since it is still the most widely used.
       Installing all the scientific packages for Python individually can be a bit difficult,
-      so we recommend using an all-in-one installer.
+      so we recommend an all-in-one installer.
     </p>
     <h4>R</h4>
     <p>
@@ -191,6 +192,12 @@ contact: admin@software-carpentry.org
       interact with R, we will
       use <a href="http://www.rstudio.com/">RStudio</a>, an interactive
       development environment (IDE).
+    </p>
+    <h4>SQL</h4>
+    <p>
+      SQL is a specialized programming language used with databases.
+      We use a simple database manager called [SQLite](http://www.sqlite.org/),
+      either directly or through a browser plugin.
     </p>
   </div>
 </div>
@@ -213,14 +220,6 @@ contact: admin@software-carpentry.org
 	Double click on the file to run it.
       </li>
     </ul>
-    <h4>Git Bash</h4>
-    <p>
-      Install Git for Windows by download and running
-      <a href="https://msysgit.googlecode.com/files/Git-1.8.4-preview20130916.exe">the installer</a>
-      This will provide you with both Git and Bash in the Git Bash program.
-    </p>
-  </div>
-  <div class="span6">
     <h4>Editor</h4>
     <p>
       <a href="http://notepad-plus-plus.org/">Notepad++</a> is a
@@ -230,6 +229,14 @@ contact: admin@software-carpentry.org
       (or have other tools like Git launch it for you).
       Please ask your instructor to help you do this.
     </p>
+    <h4>Git Bash</h4>
+    <p>
+      Install Git for Windows by download and running
+      <a href="https://msysgit.googlecode.com/files/Git-1.8.4-preview20130916.exe">the installer</a>
+      This will provide you with both Git and Bash in the Git Bash program.
+    </p>
+  </div>
+  <div class="span6">
     <h4>Python</h4>
     <ul>
       <li>
@@ -248,6 +255,13 @@ contact: admin@software-carpentry.org
       from <a href="http://cran.r-project.org/index.html">CRAN</a>.
       Also, please install the
       <a href="http://www.rstudio.com/ide/download/desktop">RStudio IDE</a>.
+    </p>
+    <h4>SQLite</h4>
+    <p>
+      Download the [sqlite3 program](http://files.software-carpentry.org/sqlite3.exe)
+      and put it in the directory where you are running examples.
+      Alternatively,
+      you may install the Firefox SQLite browser plugin described [below](#firefox-sqlite).
     </p>
   </div>
 </div>
@@ -338,13 +352,19 @@ contact: admin@software-carpentry.org
 	distribution the default Python).
       </li>
     </ol>
-    <h5>R</h5>
+    <h4>R</h4>
     <p>
       Install R by downloading and running
       <a href="http://cran.r-project.org/bin/macosx/R-latest.pkg">this .pkg file</a>
       from <a href="http://cran.r-project.org/index.html">CRAN</a>.
       Also, please install the
       <a href="http://www.rstudio.com/ide/download/desktop">RStudio IDE</a>.
+    </p>
+    <h4>SQLite</h4>
+    <p>
+      <code>sqlite3</code> comes pre-installed on Mac OS X.
+      Alternatively,
+      you may install the Firefox SQLite browser plugin described [below](#firefox-sqlite).
     </p>
   </div>
 </div>
@@ -372,7 +392,7 @@ contact: admin@software-carpentry.org
       In a pinch, you can use <code>nano</code>,
       which should be pre-installed.
     </p>
-    <h5>R</h5>
+    <h4>R</h4>
     <p>
       You can download the binary files for your distribution
       from <a href="http://cran.r-project.org/index.html">CRAN</a>. Or
@@ -380,6 +400,12 @@ contact: admin@software-carpentry.org
       run <code>apt-get install r-base</code>. Also, please install
       the
       <a href="http://www.rstudio.com/ide/download/desktop">RStudio IDE</a>.
+    </p>
+    <h4>SQLite</h4>
+    <p>
+      <code>sqlite3</code> comes pre-installed on Linux.
+      Alternatively,
+      you may install the Firefox SQLite browser plugin described [below](#firefox-sqlite).
     </p>
   </div>
   <div class="span6">
@@ -417,5 +443,28 @@ contact: admin@software-carpentry.org
 	distribution the default Python).
       </li>
     </ol>
+  </div>
+</div>
+
+<h3>Miscellaneous</h3>
+
+<div class="row-fluid">
+  <div class="span6">
+    <h4 id="firefox-sqlite">Firefox SQLite Plugin</h4>
+    <p>
+      Instead of using <code>sqlite3</code> from the command line,
+      you may use <a href="https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/">this plugin</a>
+      for Firefox instead.
+    </p>
+  </div>
+  <div class="span6">
+    <h4>Virtual Machine</h4>
+    <p>
+      Some instructors prefer to have learners use a virtual machine (VM)
+      rather than install software on their own computers.
+      If your instructors have chosen to do this,
+      please follow the instructions they have given you
+      to install and configure the VM.
+    </p>
   </div>
 </div>
