@@ -31,10 +31,12 @@
 	<div align="center">
 	  <h1 class="title">Software Carpentry</h1>
 	  <h2 class="subtitle">Volume 1: Basics</h2>
+	  <h2 class="subtitle">edited by Greg Wilson</h2>
 	</div>
 
 	<ul>
 	  <li><a href="#introduction">Introduction</a></li>
+	  <li><a href="#our-team">Our Team</a></li>
 	  <li><a href="#the-unix-shell">The Unix Shell</a></li>
 	  <li><a href="#version-control-with-git">Version Control with Git</a></li>
 	  <li><a href="#programming-with-python">Programming with Python</a></li>
@@ -46,7 +48,6 @@
 	  <li><a href="#glossary">Glossary</a></li>
 	  <li><a href="#the-rules">The Rules</a></li>
 	  <li><a href="#licenses">Licenses</a></li>
-	  <li><a href="#our-team">Our Team</a></li>
 	</ul>
 
 $body$

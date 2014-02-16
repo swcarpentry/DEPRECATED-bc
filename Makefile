@@ -45,6 +45,7 @@ HTML_DST = \
 # Source for book (in order, with some substutitions).
 BOOK_SRC = \
 	intro.md \
+	team.md \
 	novice/shell/index.md $(wildcard novice/shell/*-*.md) \
 	novice/git/index.md $(wildcard novice/git/*-*.md) \
 	novice/python/index.md $(patsubst %.ipynb,%.md,$(wildcard novice/python/??-*.ipynb)) \
@@ -55,7 +56,6 @@ BOOK_SRC = \
 	bib.md \
 	tmp/gloss.md \
 	rules.md \
-	team.md \
 	LICENSE.md
 
 BOOK_TMP = \

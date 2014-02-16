@@ -85,33 +85,64 @@ or [our most popular blog posts](http://software-carpentry.org/blog/index.html#p
 
 Software Carpentry has been made possible by the generous support of:
 
-*   [Indiana University](http://www.indiana.edu)
-*   [Lawrence Berkeley National Laboratory](http://www.lbl.gov)
-*   [Los Alamos National Laboratory](http://www.lanl.gov)
-*   [MathWorks](http://www.mathworks.com)
-*   [Michigan State University](http://www.msu.edu)
-*   [Microsoft](http://www.microsoft.com)
-*   [MITACS](http://www.mitacs.ca)
-*   [The Mozilla Foundation](http://mozillafoundation.org)
-*   [The Python Software Foundation](http://www.python.org/psf/)
-*   [Queen Mary University of London](http://www.qmul.ac.uk)
-*   [Scimatic Software](http://www.scimatic.com)
-*   [SciNet](http://www.scinet.utoronto.ca)
-*   [SHARCNET](http://www.sharcnet.ca)
-*   [The Alfred P. Sloan Foundation](http://www.sloan.org)
-*   [The Space Telescope Science Institute](http://www.stsci.edu)
-*   [The UK Meteorological Office](http://www.metoffice.gov.uk)
-*   [The University of Alberta](http://www.ualberta.ca)
-*   [The University Consortium for Atmospheric Research](http://www.ucar.edu)
-*   [The University of Toronto](http://www.utoronto.ca)
+<table width="100%">
+<tr>
+<td valign="top">
+[Continuum Analytics](http://continuum.io/)
+<br/>
+[Indiana University](http://www.indiana.edu)
+<br/>
+[Lawrence Berkeley National Laboratory](http://www.lbl.gov)
+<br/>
+[Los Alamos National Laboratory](http://www.lanl.gov)
+<br/>
+[MathWorks](http://www.mathworks.com)
+<br/>
+[Michigan State University](http://www.msu.edu)
+<br/>
+[Microsoft](http://www.microsoft.com)
+<br/>
+[MITACS](http://www.mitacs.ca)
+<br/>
+[The Mozilla Foundation](http://mozillafoundation.org)
+<br/>
+[The Python Software Foundation](http://www.python.org/psf/)
+</td>
+<td valign="top">
+[Queen Mary University of London](http://www.qmul.ac.uk)
+<br/>
+[Scimatic Software](http://www.scimatic.com)
+<br/>
+[SciNet](http://www.scinet.utoronto.ca)
+<br/>
+[SHARCNET](http://www.sharcnet.ca)
+<br/>
+[The Alfred P. Sloan Foundation](http://www.sloan.org)
+<br/>
+[The Space Telescope Science Institute](http://www.stsci.edu)
+<br/>
+[The UK Meteorological Office](http://www.metoffice.gov.uk)
+<br/>
+[The University of Alberta](http://www.ualberta.ca)
+<br/>
+[The University Consortium for Atmospheric Research](http://www.ucar.edu)
+<br/>
+[The University of Toronto](http://www.utoronto.ca)
+</td>
+</tr>
+</table>
 
-Special thanks go to Brent Gorda, who helped build and teach the first
-version of this course, and to the hundreds of people who have hosted
-workshops or helped us teach.
+Special thanks go to Brent Gorda,
+who helped build and teach the first version of this course.
 
 <div align="center" markdown="1">
-This book is dedicated to [Professor David Wallace](http://www.chu.cam.ac.uk/fellows/111-David-Wallace),
-who started me on this road,
+This book is dedicated to
+[Betty Jennings](http://en.wikipedia.org/wiki/Jean_Bartik),
+[Betty Snyder](http://en.wikipedia.org/wiki/Betty_Holberton),
+[Fran Bilas](http://en.wikipedia.org/wiki/Frances_Spence),
+[Kay McNulty](http://en.wikipedia.org/wiki/Kathleen_Antonelli),
+[Marlyn Wescoff](http://en.wikipedia.org/wiki/Marlyn_Meltzer),
+and [Ruth Lichterman](http://en.wikipedia.org/wiki/Ruth_Teitelbaum),
 <br/>
-and to my sister, who did not live to see it finished.
+the original programmers of the [ENIAC](http://en.wikipedia.org/wiki/ENIAC).
 </div>
