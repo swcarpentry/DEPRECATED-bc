@@ -9,7 +9,7 @@ how you can build a website for your bootcamp using this repo as a starting poin
 what lessons we have,
 and where they're located.
 To contribute corrections or additions to this repository, see the
-[contributing guidelines][contributing].
+[contribution guidelines][CONTRIBUTING.html].
 
 **Note:**
 If you are teaching Git in your bootcamp,
@@ -316,14 +316,70 @@ Reorganize, rewrite, or delete this material as you think best.
 Lesson Material
 ---------------
 
-Our new lesson material is in FIXME
+*   Our old lesson material,
+    which we plan to retire in Spring 2014,
+    is in the `lessons` directory.
+
+*   The new material for novices is in the directories
+    `shell/novice`, `python/novice`, `git/novice`, and `sql/novice`.
+    The shell and Git materials are written in Markdown,
+    while the Python and SQL use the IPython Notebook.
+
+*   New material for intermediate learners is currently under development
+    in directories called `*/intermediate`.
+
+*   Our R material is in `lessons/misc-R`;
+    we are currently working to merge it into the main directory structure.
+
+Site Map
+--------
+
+*   CITATION - how to cite Software Carpentry.
+*   CONTRIBUTING.md - how to contribute new material.
+*   LICENSE.md - our license.
+*   Makefile - rebuild this site (type `make` on its own for a list of targets).
+*   README.md - how to use this site.
+*   _config.yml - Jekyll configuration directives.
+*   _includes/ - snippets of HTML that can be included in other files by Jekyll.
+*   _layouts/ - Jekyll page layouts.
+*   _site/ - output directory when building the site locally.
+*   _templates/ - template files for Pandoc conversion of IPython Notebooks.
+*   bib.md - bibliography.
+*   bin/ - miscellaneous tools used in building the site.
+*   branding/ - graphical assets related to Software Carpentry.
+*   contents.md - site map used in place of `index.html` on the main web site.
+*   css/ - CSS files for this site.
+*   data/ - miscellaneous data files used by examples.
+*   extras/ - supplementary materials included in the book version of this site.
+*   git/ - lessons on Git.
+*   gloss.md - glossary of terms.
+*   img/ - images used throughout this site.
+*   index.html - template for bootcamp home pages.
+*   intro.md - introduction to book version of this site.
+*   js/ - Javascript files used in this site.
+*   lessons/ - old lesson material.
+*   make/ - lesson on Make (intermediate only).
+*   python/ - lessons on Python.
+*   r/ - lessons on R (under construction).
+*   ref/ - reference guides.
+*   regex/ - lesson on regular expressions (intermediate only).
+*   rules.md - the rules of programming (used in the book version of this site).
+*   setup/ - setup tools for installing bootcamp software.
+*   setup.md - setup instructions for software used in bootcamps.
+*   shell/ - lessons on the Unix shell.
+*   slides/ - slideshows (under construction).
+*   sql/ - lessons on SQL and databases.
+*   swc.tpl - template for converting IPython Notebooks to HTML.
+    FIXME: should be in `_templates`.
+*   teaching/ - instructor's guides.
+*   team.md - who we are.
 
 FAQ
 ---
 
 *   *Where can I get help?*
     <br/>
-    Mail us at admin@software-carpentry.org,
+    Mail us at [admin@software-carpentry.org](mailto:admin@software-carpentry.org),
     or join our [discussion list](http://software-carpentry.org/contrib/discuss.html)
     and ask for help there.
 
@@ -332,21 +388,7 @@ FAQ
     Because any particular user can only have one fork of a repository,
     but instructors frequently need to work on several bootcamps at once.
 
-*   *Why are the lesson and topic files HTML instead of Markdown?*
-    <br/>
-    Primarily convenience---that's what Greg Wilson had in hand to convert.
-    These may be converted to Markdown in future.
-    (Help would be welcome.)
-
-*   *Why do files like `lessons/db.html` include everything explicitly?*
-    <br/>
-    Because Jekyll does not support parameterized includes like:
-    <br/>
-    `{% include {{lesson}}/something.html %}`
-    <br/>
-    so we can't loop over a set of topics.
-
-*   *Then why use Jekyll?  Why not some other markup language and some other converter?*
+*   *Why use Jekyll?  Why not some other markup language and some other converter?*
     <br/>
     Because they're the defaults on GitHub.
     If we're going to teach people to use that site,
@@ -400,14 +442,10 @@ FAQ
     <br/>
     Some additional packages are required. They can be installed (under Ubuntu and alike) with:
     
-        sudo apt-get install pandoc jinja2
-
-    Installation of `jinja2` can also be carried on using `pip`.
+        sudo apt-get install pandoc
 
 *   *Where should pages go if multiple boot camps are running at a site simultaneously?*
     <br/>
     Use subdirectories like `2013-07-01-esu/beginners`,
     so that main directory names always follow our four-part convention.
 
-
-[contributing]: https://github.com/swcarpentry/bc/blob/master/CONTRIBUTING.md

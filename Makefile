@@ -11,7 +11,7 @@ INSTALL_DIR = $(HOME)/sites/software-carpentry.org/v5
 # Source Markdown pages.
 MARKDOWN_SRC = \
 	LICENSE.md \
-	NEW_MATERIAL.md \
+	contents.md \
 	bib.md \
 	gloss.md \
 	rules.md \
@@ -73,6 +73,7 @@ all : commands
 install : $(OUT)/index.html
 	rm -rf $(INSTALL_DIR)
 	cp -r _site $(INSTALL_DIR)
+	mv $(INSTALL_DIR)/contents.html $(INSTALL_DIR)/index.html
 
 ## site     : build site.
 site : $(BOOK_DST)
@@ -87,7 +88,6 @@ $(BOOK_DST) : $(OUT)/index.html $(BOOK_TMP) _templates/book.tpl tmp/gloss.md bin
 # Build HTML versions of Markdown source files using Jekyll.
 $(OUT)/index.html : $(MARKDOWN_SRC) $(NOTEBOOK_MD)
 	jekyll -t build -d $(OUT)
-	mv $(OUT)/NEW_MATERIAL.html $(OUT)/index.html
 	sed -i -e 's!img src="python/novice/!img src="!g' $(OUT)/python/novice/??-*.html
 
 # Build Markdown versions of IPython Notebooks.
