@@ -46,13 +46,13 @@ HTML_DST = \
 BOOK_SRC = \
 	intro.md \
 	team.md \
-	novice/shell/index.md $(wildcard novice/shell/*-*.md) \
-	novice/git/index.md $(wildcard novice/git/*-*.md) \
+	novice/shell/index.md $(wildcard novice/shell/??-*.md) \
+	novice/git/index.md $(wildcard novice/git/??-*.md) \
 	novice/python/index.md $(patsubst %.ipynb,%.md,$(wildcard novice/python/??-*.ipynb)) \
 	novice/sql/index.md $(patsubst %.ipynb,%.md,$(wildcard novice/sql/??-*.ipynb)) \
-	novice/extras/index.md $(wildcard novice/extras/*-*.md) \
-	novice/teaching/index.md  $(wildcard novice/teaching/*-*.md) \
-	novice/ref/index.md  $(wildcard novice/ref/*-*.md) \
+	novice/extras/index.md $(wildcard novice/extras/??-*.md) \
+	novice/teaching/index.md  $(wildcard novice/teaching/??-*.md) \
+	novice/ref/index.md  $(wildcard novice/ref/??-*.md) \
 	bib.md \
 	tmp/gloss.md \
 	rules.md \
