@@ -85,52 +85,26 @@ or [our most popular blog posts](http://software-carpentry.org/blog/index.html#p
 
 Software Carpentry has been made possible by the generous support of:
 
-<table width="100%">
-<tr>
-<td valign="top">
-[Continuum Analytics](http://continuum.io/)
-<br/>
-[Indiana University](http://www.indiana.edu)
-<br/>
-[Lawrence Berkeley National Laboratory](http://www.lbl.gov)
-<br/>
-[Los Alamos National Laboratory](http://www.lanl.gov)
-<br/>
-[MathWorks](http://www.mathworks.com)
-<br/>
-[Michigan State University](http://www.msu.edu)
-<br/>
-[Microsoft](http://www.microsoft.com)
-<br/>
-[MITACS](http://www.mitacs.ca)
-<br/>
-[The Mozilla Foundation](http://mozillafoundation.org)
-<br/>
-[The Python Software Foundation](http://www.python.org/psf/)
-</td>
-<td valign="top">
-[Queen Mary University of London](http://www.qmul.ac.uk)
-<br/>
-[Scimatic Software](http://www.scimatic.com)
-<br/>
-[SciNet](http://www.scinet.utoronto.ca)
-<br/>
-[SHARCNET](http://www.sharcnet.ca)
-<br/>
-[The Alfred P. Sloan Foundation](http://www.sloan.org)
-<br/>
-[The Space Telescope Science Institute](http://www.stsci.edu)
-<br/>
-[The UK Meteorological Office](http://www.metoffice.gov.uk)
-<br/>
-[The University of Alberta](http://www.ualberta.ca)
-<br/>
-[The University Consortium for Atmospheric Research](http://www.ucar.edu)
-<br/>
-[The University of Toronto](http://www.utoronto.ca)
-</td>
-</tr>
-</table>
+*   [Continuum Analytics](http://continuum.io/)
+*   [Indiana University](http://www.indiana.edu)
+*   [Lawrence Berkeley National Laboratory](http://www.lbl.gov)
+*   [Los Alamos National Laboratory](http://www.lanl.gov)
+*   [MathWorks](http://www.mathworks.com)
+*   [Michigan State University](http://www.msu.edu)
+*   [Microsoft](http://www.microsoft.com)
+*   [MITACS](http://www.mitacs.ca)
+*   [The Mozilla Foundation](http://mozillafoundation.org)
+*   [The Python Software Foundation](http://www.python.org/psf/)
+*   [Queen Mary University of London](http://www.qmul.ac.uk)
+*   [Scimatic Software](http://www.scimatic.com)
+*   [SciNet](http://www.scinet.utoronto.ca)
+*   [SHARCNET](http://www.sharcnet.ca)
+*   [The Alfred P. Sloan Foundation](http://www.sloan.org)
+*   [The Space Telescope Science Institute](http://www.stsci.edu)
+*   [The UK Meteorological Office](http://www.metoffice.gov.uk)
+*   [The University of Alberta](http://www.ualberta.ca)
+*   [The University Consortium for Atmospheric Research](http://www.ucar.edu)
+*   [The University of Toronto](http://www.utoronto.ca)
 
 Special thanks go to Brent Gorda,
 who helped build and teach the first version of this course.
