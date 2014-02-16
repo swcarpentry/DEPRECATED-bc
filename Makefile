@@ -74,7 +74,7 @@ BOOK_DST = $(OUT)/book.html
 all : commands
 
 ## quick    : build just the bootcamp home page.
-quick :
+quick : $(OUT)/index.html
 	jekyll -t build -d $(OUT)
 
 ## install  : install on the server.
@@ -97,6 +97,8 @@ $(BOOK_DST) : $(OUT)/index.html $(BOOK_TMP) _templates/book.tpl tmp/gloss.md bin
 $(OUT)/index.html : $(MARKDOWN_SRC) $(NOTEBOOK_MD)
 	jekyll -t build -d $(OUT)
 	sed -i -e 's!img src="novice/python/!img src="!g' $(OUT)/novice/python/??-*.html
+
+index.html setup.md : _includes/setup.html
 
 # Build Markdown versions of IPython Notebooks.
 %.md : %.ipynb _templates/ipynb.tpl
