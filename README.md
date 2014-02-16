@@ -366,8 +366,6 @@ Site Map
 *   shell/ - lessons on the Unix shell.
 *   slides/ - slideshows (under construction).
 *   sql/ - lessons on SQL and databases.
-*   swc.tpl - template for converting IPython Notebooks to HTML.
-    FIXME: should be in `_templates`.
 *   teaching/ - instructor's guides.
 *   team.md - who we are.
 
