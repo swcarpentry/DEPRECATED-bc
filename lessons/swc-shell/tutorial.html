@@ -96,6 +96,18 @@ order: ["intro", "filedir", "create", "wildcard", "pipefilter", "loop", "scripts
   {% include guide-shell/scripts/challenges.html %}
 </section>
 
+<section id="s:shell:man">
+  <h2>{% include guide-shell/man/title.md %}</h2>
+  <h3>Objectives</h3>
+  {% include guide-shell/man/objectives.html %}
+  <h3>Lesson</h3>
+  {% capture lesson %}{% include guide-shell/man/lesson.md %}{% endcapture %}{{ lesson | markdownify }}
+  <h3>Summary</h3>
+  {% include guide-shell/man/keypoints.html %}
+  <h3>Challenges</h3>
+  {% include guide-shell/man/challenges.html %}
+</section>
+
 <section id="s:shell:find">
   <h2>{% include guide-shell/find/title.md %}</h2>
   <h3>Objectives</h3>
