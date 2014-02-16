@@ -12,83 +12,999 @@ title: Setup Instructions
 
 <section id="s:setup:overviews">
   <h2>Overviews</h2>
-  {% include setup/overview-bash.html %}
-  {% include setup/overview-editor.html %}
-  {% include setup/overview-git.html %}
-  {% include setup/overview-python.html %}
+
+<div id="setup-overview-bash" class="setup setup-bash">
+  <h4>The Bash Shell</h4>
+  <p>
+    Bash is a commonly-used shell. Using a shell gives you
+    more power to do more tasks more quickly with your
+    computer.
+  </p>
+</div>
+
+
+<div id="setup-overview-editor" class="setup setup-editor">
+  <h4>Editor</h4>
+  <p>
+    When you're writing code, it's nice to have a text
+    editor that is optimized for writing code, with features
+    like automatic color-coding of key words.
+  </p>
+</div>
+
+
+<div id="setup-overview-git" class="setup setup-git">
+  <h4>Git</h4>
+  <p>
+    Git is a state-of-the-art version control system. It
+    lets you track who made changes to what when and has
+    options for easily updating a shared or public version of
+    your code on <a href="https://github.com/">github.com</a>.
+  </p>
+</div>
+
+
+<div id="setup-overview-python" class="setup setup-python">
+  <h4>Python</h4>
+  <p>
+    Python is becoming more and more popular in scientific computing,
+    and it's a great language for teaching general programming concepts due to its easy-to-read syntax.
+    We will be using Python version 2.7.
+    Installing all the scientific packages for Python individually can be a bit difficult,
+    so we recommend using an all-in-one installer.
+  </p>
+</div>
+
 </section>
 
 <section id="s:setup:windows">
   <h2>Windows</h2>
-  {% include setup/windows-anaconda.html %}
-  {% include setup/windows-bash.html %}
-  {% include setup/windows-cygwin.html %}
-  {% include setup/windows-editor.html %}
-  {% include setup/windows-git.html %}
-  {% include setup/windows-mercurial.html %}
-  {% include setup/windows-python.html %}
-  {% include setup/windows-sqlite.html %}
-  {% include setup/windows-swc.html %}
+
+<div id="setup-windows-anaconda" class="setup setup-windows setup-anaconda">
+  <h4>Windows / Anaconda Python</h4>
+  <ul>
+    <li>
+      Download and install  <a href="http://continuum.io/anacondace.html">Anaconda CE</a>.
+    </li>
+    <li>
+      Use all of the defaults for installation
+      <em>except</em> before pressing <strong>Finish</strong>
+      make sure to check <strong>Make Anaconda the default Python</strong>.
+    </li>
+  </ul>
+</div>
+
+
+<div id="setup-windows-bash" class="setup setup-windows setup-gitbash">
+  <h4>Windows / Git Bash</h4>
+  <p>
+  Install Git for Windows
+  by <a href="https://msysgit.googlecode.com/files/Git-1.8.4-preview20130916.exe">
+  downloading and running the installer.</a>  This will provide you
+  with both Git as well as Bash in the Git Bash program.
+  </p>
+</div>
+
+
+<div id="setup-windows-cygwin" class="setup setup-windows setup-cygwin">
+  <h4>Windows / Cygwin</h4>
+  <p>
+    For Cygwin under Windows,
+    start the Cygwin Terminal by clicking on its desk-top icon:
+  </p>
+  <p>
+    <img src="{{page.root}}/img/setup/cygwin-icon.jpg" alt="Cygwin icon" />
+  </p>
+  <p>
+    Or browse using Windows Explorer to <code>C:\cygwin\bin\</code>
+    and double-click on <code>mintty.exe</code>.
+    You should see a terminal window like:
+  </p>
+  <p>
+    <img src="{{page.root}}/img/setup/cygwin-terminal-300x175.jpg" alt="Cygwin terminal" />
+  </p>
+  <p>
+    Your home directory&mdash;the one the Cygwin Terminal defaults to&mdash;can
+    be found at <code>C:\cygwin\home\<em>your-user-name</em>\</code>.
+  </p>
+</div>
+
+
+<div id="setup-windows-editor" class="setup setup-windows setup-editor">
+  <h4>Windows / Editor</h4>
+  
+  <p>
+    <a href="http://notepad-plus-plus.org/">Notepad++</a> is a
+    popular free code editor for Windows.
+  </p>
+</div>
+
+
+<div id="setup-windows-git" class="setup setup-windows setup-git">
+  <h4>Windows / Git Bash</h4>
+  <p>
+  Install Git for Windows
+  by <a href="https://msysgit.googlecode.com/files/Git-1.8.4-preview20130916.exe">
+  downloading and running the installer.</a>  This will provide you
+  with both Git as well as Bash in the Git Bash program.
+  </p>
+</div>
+
+
+<div id="setup-windows-mercurial" class="setup setup-windows setup-mercurial">
+  <h4>Windows / Mercurial</h4>
+  <ul>
+    <li>
+      Download and install <a href="http://mercurial.selenic.com/downloads/">Mercurial</a>.
+    </li>
+    <li>
+      If your bootcamp is using EasyMercurial,
+      <a href="http://easyhg.org/download.html">download</a> and install it.
+    </li>
+  </ul>
+</div>
+
+
+<div id="setup-windows-python" class="setup setup-windows setup-python">
+  <h4>Windows / Python</h4>
+  <p>
+    For Windows we recommend the Enthought
+    <a href="https://www.enthought.com/downloads/">Canopy</a>
+    distribution since it seems to work well with Git Bash.
+  </p>
+  <p>
+    For other options check the Python4Astronomers page on
+    <a href="http://python4astronomers.github.com/installation/python_install.html">installing scientific Python</a>.
+  </p>
+</div>
+
+
+<div id="setup-windows-sqlite" class="setup setup-windows setup-sqlite">
+  <h4>Windows / SQLite</h4>
+  <ul>
+    <li>
+      Download <code>sqlite-shell-win32-x86-SOMENUMBERS.zip</code>
+      from the <a href="http://www.sqlite.org/download.html">SQLite download page</a>.
+    </li>
+    <li>
+      Unzip the file.
+    </li>
+    <li>
+      Copy <code>sqlite.exe</code> into <code>C:\Windows</code>.
+    </li>
+  </ul>
+</div>
+
+
+<div id="setup-windows-swc" class="setup setup-windows setup-swc">
+  <h5>Windows / Software Carpentry Installer</h5>
+For an all-in-one installer: 
+  <ul>
+    <li>
+      Download the <a href="https://raw.github.com/swcarpentry/bc/master/setup/swc-windows-installer.py">installer</a>.
+    </li>
+    <li>
+      If the file opens directly in the browser select <strong>File&rarr;Save Page As</strong>
+      to download it to your computer.
+    </li>
+    <li>
+      Double click on the file to run it.
+    </li>
+  </ul>
+</div>
+
 </section>
 
 <section id="s:setup:macosx">
   <h2>Mac OS X</h2>
-  {% include setup/macosx-common.html %}
-  {% include setup/macosx-bash.html %}
-  {% include setup/macosx-editor.html %}
-  {% include setup/macosx-git.html %}
-  {% include setup/macosx-make.html %}
-  {% include setup/macosx-mercurial.html %}
-  {% include setup/macosx-nose.html %}
-  {% include setup/macosx-python.html %}
-  {% include setup/macosx-terminal.html %}
+
+<div id="setup-macosx-common" class="setup setup-macosx setup-common">
+  <h4>Mac OS X / Common</h4>
+  <p>
+    These instructions were tested using Mac OS&nbsp;X 10.7.4,
+    which comes with:
+  </p>
+  <ul>
+    <li>Bash shell</li>
+    <li>vi and nano text editors</li>
+    <li>Python 2.7</li>
+    <li>Python setuptools</li>
+    <li>sqlite3</li>
+  </ul>
+  <p>
+    All installation needs to be done as a root user or user with certain administrator privileges.
+  </p>
+</div>
+
+
+<div id="setup-macosx-bash" class="setup setup-macosx setup-bash">
+  <h4>Mac OS X / Bash</h4>
+  <p>
+    The default shell in all versions of Mac OS X is bash,
+    so no need to install anything.  You access bash from
+    the Terminal (found
+    in <code>/Applications/Utilities</code>).  You may want
+    to keep Terminal in your dock for this workshop.
+  </p>
+</div>
+
+
+<div id="setup-macosx-editor" class="setup setup-macosx setup-editor">
+  <h4>Mac OS X / Editor</h4>
+  <p>
+    We recommend
+    <a href="http://www.barebones.com/products/textwrangler/">Text Wrangler</a> or
+    <a href="http://www.sublimetext.com/">Sublime Text</a>.
+  </p>
+</div>
+
+
+<div id="setup-macosx-git" class="setup setup-macosx setup-git">
+  <h4>Mac OS X / Git</h4>
+  <p><em>
+    Installing Git may require you to first install XCode.
+    This is a very large download (several gigabytes),
+    so please do it <strong>before</strong> arriving at the bootcamp.
+  </em></p>
+  <h5>For Mac OS X 10.7 and higher:</h5>
+  <p>
+    Go to the
+    <a href="https://developer.apple.com/xcode/">Xcode website</a>.
+    Get XCode from the App Store making
+    certain to install the command line tools (from the
+    Download preferences pane). Git is included in the
+    command line tools.
+  </p>
+  <h5>For Mac OS X 10.6</h5>
+  <p>
+    If you have Mac OS X 10.6,
+    first get XCode by going to
+    <a href="https://developer.apple.com/downloads/">the Apple developer site</a>.
+    You have to sign in with an Apple ID linked to a Developer account.
+    If you don't have one,
+    you can register and create one.
+    Once you log in,
+    go to page 8 and find "XCode 3.2.6 and iOS SDK 4.3 for Snow Leopard".
+    Click to open that section,
+    and then download the <code>.dmg</code> file.
+    Finally,
+    <a href="http://code.google.com/p/git-osx-installer/downloads/list?can=3">install just git</a>.
+  </p>
+</div>
+
+
+<div id="setup-macosx-make" class="setup setup-macosx setup-make">
+  <h4>Mac OS X / Make</h4>
+  <p>
+    If you do not already have access to <code>make</code> from within your shell,
+    you will need to install XCode (which is free, but over a gigabyte to download).
+  </p>
+  <ul>
+    <li>Go to the Apple app store</li>
+    <li>Search for XCode</li>
+    <li>Click <strong>Free</strong></li>
+    <li>Click <strong>Install App</strong></li>
+  </ul>
+  <p>
+    Once XCode has installed:
+  </p>
+  <ul>
+    <li>Click <strong>Applications</strong></li>
+    <li>Click <strong>XCode</strong></li>
+    <li>Select <strong>XCode&rarr;Preferences...</strong></li>
+    <li>Click <strong>Downloads</strong></li>
+    <li>Select <strong>Command Line Tools</strong></li>
+    <li>Click <strong>Install</strong></li>
+  </ul>
+  <p>
+    You will now be able to run <code>make</code> within your Bash shell.
+  </p>
+</div>
+
+
+<div id="setup-macosx-mercurial" class="setup setup-macosx setup-mercurial">
+  <h4>Mac OS X / Mercurial</h4>
+  <p>
+    Download and install the <a href="http://mercurial.selenic.com/">Mac binary package</a>.
+    If your bootcamp is also using the EasyMercurial GUI,
+    download the <a href="https://code.soundsoftware.ac.uk/projects/easyhg/files">Mac binary package</a>.
+  </p>
+</div>
+
+
+<div id="setup-macosx-nose" class="setup setup-macosx setup-python-nose">
+  <h4>Mac OS X / Python Nose</h4>
+  <p>
+    Run:
+  </p>
+<pre>
+$ easy_install nose
+</pre>
+  <p>
+    and then run:
+  </p>
+<pre>
+$ nosetests
+</pre>
+  <p>
+    You should see something like:
+  </p>
+<pre>
+----------------------------------------------------------------------
+Ran 0 tests in 0.003s
+OK
+</pre>
+</div>
+
+
+<div id="setup-macosx-python" class="setup setup-macosx setup-python">
+  <h4>Mac OS X / Python</h4>
+  <p>
+    We recommend the all-in-one scientific Python installer
+    <a href="http://continuum.io/downloads.html">Anaconda</a>.
+    (Installation requires using the shell and if you aren't
+    comfortable doing the installation yourself just
+    download the installer and we'll help you at the boot
+    camp.)
+  </p>
+  <ol>
+    <li>
+      Download the installer that matches your operating
+      system and save it in your home folder.
+    </li>
+    <li>
+      Open a terminal window.
+    </li>
+    <li>
+      Type <pre>bash Anaconda-</pre> and then press
+      tab. The name of the file you just downloaded should
+      appear.
+    </li>
+    <li>
+      Press enter. You will follow the text-only
+      prompts. When there is a colon at the bottom of the
+      screen press the down arrow to move down through the
+      text. Type <code>yes</code> and press enter to approve
+      the license. Press enter to approve the default
+      location for the files. Type <code>yes</code> and
+      press enter to prepend Anaconda to
+      your <code>PATH</code> (this makes the Anaconda
+      distribution the default Python).
+    </li>
+  </ol>
+</div>
+
+
+<div id="setup-macosx-terminal" class="setup setup-macosx setup-terminal">
+  <h4>Mac OS X / Terminal</h4>
+  <p>
+    Browse to the <strong>Applications</strong> folder,
+    then into the <strong>Utilities</strong> folder
+    and open the Terminal application.
+    You should see a terminal window like:
+  </p>
+  <p>
+    <img src="{{page.root}}/img/setup/mac-terminal-300x257.jpg" alt="Mac terminal" />
+  </p>
+  
+  <p>
+    Your home directory&mdash;the one the terminal defaults to&mdash;can be found at
+    <code>/Users/<em>your-user-name</em></code>.
+  </p>
+</div>
+
 </section>
 
 <section id="s:setup:linux">
   <h2>Generic Linux</h2>
-  {% include setup/linux-bash.html %}
-  {% include setup/linux-editor.html %}
-  {% include setup/linux-git.html %}
-  {% include setup/linux-python.html %}
+
+<div id="setup-linux-bash" class="setup setup-linux setup-bash">
+  <h4>Linux / Bash</h4>
+  <p>
+    The default shell is usually <code>bash</code>,
+    but if your machine is set up differently
+    you can run it by opening a terminal and typing <code>bash</code>.
+    There is no need to install anything.
+  </p>
+</div>
+
+
+<div id="setup-linux-editor" class="setup setup-linux setup-editor">
+  <h4>Linux / Editor</h4>
+  
+  <p>
+    <a href="http://kate-editor.org/">Kate</a> is one option for Linux users.
+  </p>
+</div>
+
+
+<div id="setup-linux-git" class="setup setup-linux setup-git">
+  <h4>Linux / Git</h4>
+  <p>
+    If Git is not already available on your machine you can try
+    to install it via your distro's package manager
+    (e.g. <code>apt-get</code>).
+  </p>
+</div>
+
+
+<div id="setup-linux-python" class="setup setup-linux setup-python">
+  <h4>Linux / Python</h4>
+  <p>
+    We recommend the all-in-one scientific Python installer
+    <a href="http://continuum.io/downloads.html">Anaconda</a>.
+    (Installation requires using the shell and if you aren't
+    comfortable doing the installation yourself just
+    download the installer and we'll help you at the boot
+    camp.)
+  </p>
+  
+  <ol>
+    <li>
+      Download the installer that matches your operating
+      system and save it in your home folder.
+    </li>
+    <li>
+      Open a terminal window..
+    </li>
+    <li>
+      Type <pre>bash Anaconda-</pre> and then press
+      tab. The name of the file you just downloaded should
+      appear.
+    </li>
+    <li>
+      Press enter. You will follow the text-only
+      prompts. When there is a colon at the bottom of the
+      screen press the down arrow to move down through the
+      text. Type <code>yes</code> and press enter to approve
+      the license. Press enter to approve the default
+      location for the files. Type <code>yes</code> and
+      press enter to prepend Anaconda to
+      your <code>PATH</code> (this makes the Anaconda
+      distribution the default Python).
+    </li>
+  </ol>
+</div>
+
 </section>
 
 <section id="s:setup:rhsl">
   <h2>Red Hat Scientific Linux</h2>
-  {% include setup/rhsl-common.html %}
-  {% include setup/rhsl-easymercurial.html %}
-  {% include setup/rhsl-emacs.html %}
-  {% include setup/rhsl-mercurial.html %}
-  {% include setup/rhsl-nano.html %}
-  {% include setup/rhsl-nose.html %}
-  {% include setup/rhsl-python.html %}
-  {% include setup/rhsl-setuptools.html %}
-  {% include setup/rhsl-sqlite.html %}
-  {% include setup/rhsl-terminal.html %}
+
+<div id="setup-rhsl-common" class="setup setup-rhsl setup-common">
+  <h4>Red Hat Scientific Linux</h4>
+  <p>
+    Scientific Linux 6 already comes with:
+  </p>
+  <ul>
+    <li>Bash shell</li>
+    <li>Make</li>
+    <li>vi text editor</li>
+  </ul>
+  <p>
+    All installation needs to be done as a root user or user with certain administrator privileges.
+    If you have such access you can do:
+  </p>
+<pre>
+$ sudo su -
+</pre>
+  <p>
+    and then enter your usual password.
+    The <code>yum</code> commands used in the instructions
+    were tested using Scientific Linux release 6.2 (Carbon).
+  </p>
+</div>
+
+
+<div id="setup-rhsl-easymercurial" class="setup setup-rhsl setup-easymercurial">
+  <h4>Red Hat Scientific Linux / EasyMercurial</h4>
+  <p>
+    If your bootcamp is using the EasyMercurial GUI,
+    download the <a href="https://code.soundsoftware.ac.uk/projects/easyhg/files">EasyMercurial Debian/Ubuntu source package</a>.
+    This can be done at the command-line by copying the download link from the download page
+    (using right-click and <strong>Copy Shortcut</strong>)
+    then using <code>wget</code>,
+    e.g.:
+  </p>
+<pre>
+$ wget https://code.soundsoftware.ac.uk/attachments/download/489/EasyMercurial-1.2.2-src.tar.gz
+</pre>
+  <p>
+    (This link may have been updated since this page was written,
+    so check the download page above for the URL to use.)
+    Next,
+    unpack the distribution:
+  </p>
+<pre>
+$ gunzip EasyMercurial-1.2.2-src.tar.gz
+$ tar -xf EasyMercurial-1.2.2-src.tar
+$ cd EasyMercurial-1.2.2-src
+</pre>
+  <p>
+    Install dependencies:
+  </p>
+<pre>
+$ yum install qt4
+$ yum install qt4-devel
+$ yum install PyQt4
+</pre>
+  <p>
+    and then build
+    (the EasyMercurial <code>README</code> says to use <code>qmake</code>
+    but I used <code>qmake-qt4</code>):
+  </p>
+<pre>
+$ qmake-qt4
+$ make
+</pre>
+  <p>
+    Finally,
+    run:
+  </p>
+<pre>
+$ ./EasyMercurial
+</pre>
+</div>
+
+
+<div id="setup-rhsl-emacs" class="setup setup-rhsl setup-emacs">
+  <h4>Red Hat Scientific Linux / Emacs or XEmacs</h4>
+  <p>
+    Run:
+  </p>
+<pre>
+$ yum install emacs
+$ emacs --version
+</pre>
+  <p>
+    Run:
+  </p>
+<pre>
+$ yum install xemacs
+$ xemacs --version
+</pre>
+</div>
+
+
+<div id="setup-rhsl-mercurial" class="setup setup-rhsl setup-mercurial">
+  <h4>Red Hat Scientific Linux / Mercurial</h4>
+  <p>
+    If you are using the latest version of EasyMercurial
+    then you need at least Mercurial 1.7.
+    Unfortunately the easy-to-use command:
+  </p>
+<pre>
+$ yum install mercurial
+</pre>
+  <p>
+    only installs 1.4,
+    so we need to build from source.
+    First,
+    <a href="http://mercurial.selenic.com/">download the Mercurial source package</a>.
+    This can be done at the command-line by copying the download link from the download page
+    (using right-click and <strong>Copy Shortcut</strong>)
+    then using a <code>wget</code>,
+    e.g.:
+  </p>
+<pre>
+$ wget http://mercurial.selenic.com/release/mercurial-2.3.2.tar.gz
+</pre>
+  <p>
+    (This link may have been updated since this page was written,
+    so check the download page above for the URL to use.)
+    Second,
+    unpack the distribution:
+  </p>
+<pre>
+$ gunzip mercurial-2.3.2.tar.gz
+$ tar -xf mercurial-2.3.2.tar
+$ cd mercurial-2.3.2
+</pre>
+  <p>
+    Third,
+    install dependencies:
+  </p>
+<pre>
+$ yum install python-devel
+$ easy_install docutils
+</pre>
+  <p>
+    Fourth and finally,
+    build and install the software:
+  </p>
+<pre>
+$ make install
+</pre>
+</div>
+
+
+<div id="setup-rhsl-nano" class="setup setup-rhsl setup-nano">
+  <h4>Red Hat Scientific Linux / Nano</h4>
+  <p>
+    Run:
+  </p>
+<pre>
+$ yum install nano
+$ nano --version
+</pre>
+</div>
+
+
+<div id="setup-rhsl-nose" class="setup setup-rhsl setup-nose">
+  <h4>Red Hat Scientific Linux / Python Nose</h4>
+  <p>
+    Run:
+  </p>
+<pre>
+$ easy_install nose
+</pre>
+  <p>
+    And check:
+  </p>
+<pre>
+$ nosetests
+----------------------------------------------------------------------
+Ran 0 tests in 0.003s
+OK
+</pre>
+</div>
+
+
+<div id="setup-rhsl-python" class="setup setup-rhsl setup-python">
+  <h4>Red Hat Scientific Linux / Python</h4>
+  <p>Run:</p>
+<pre>
+$ yum install python
+</pre>
+</div>
+
+
+<div id="setup-rhsl-setuptools" class="setup setup-rhsl setup-setuptools">
+  <h4>Red Hat Scientific Linux / Python Setuptools</h4>
+  <p>
+    Run:
+  </p>
+<pre>
+$ yum install python-setuptools
+</pre>
+</div>
+
+
+<div id="setup-rhsl-sqlite" class="setup setup-rhsl setup-sqlite">
+  <h4>Red Hat Scientific Linux / SQLite</h4>
+  <p>
+    SQLite does not need administrator privileges to run.
+    To install,
+    download the SQLite Precompiled Binaries for Linux package
+    from the <a href="http://www.sqlite.org/download.html">SQLite download page</a>.
+    This can be done at the command-line by copying the download link from the download page
+    (using right-click and <strong>Copy Shortcut</strong>) then using <code>wget</code>,
+    e.g.:
+  </p>
+<pre>
+$ wget http://www.sqlite.org/sqlite-shell-linux-x86-3071401.zip
+</pre>
+  <p>
+    (This link may have been updated since this page was written,
+    so check the download page above for the URL to use.)
+    Next,
+    unzip and make sure the binary runs:
+  </p>
+<pre>
+$ unzip sqlite-shell-linux-x86-3071100.zip
+$ ./sqlite3 --version
+</pre>
+  <p>
+    You can then copy the <code>sqlite3</code> binary wherever you would like.
+  </p>
+</div>
+
+
+<div id="setup-rhsl-terminal" class="setup setup-rhsl setup-terminal">
+  <h4>Red Hat Scientific Linux / Terminal</h4>
+  <p>
+    This depends on what windowing system you are using whether it be KDE, GNOME or X-windows.
+    For example, for GNOME select the menu <strong>Applications&rarr;System Tools</strong>
+    and select <strong>Terminal</strong>.
+    You should see a terminal window like:
+  </p>
+  <p>
+    <img src="{{page.root}}/img/setup/gnome-terminal-300x195.jpg" alt="Gnome terminal" />
+  </p>
+</div>
+
 </section>
 
 <section id="s:setup:ubuntu">
   <h2>Ubuntu</h2>
-  {% include setup/ubuntu-common.html %}
-  {% include setup/ubuntu-easymercurial.html %}
-  {% include setup/ubuntu-emacs.html %}
-  {% include setup/ubuntu-mercurial.html %}
-  {% include setup/ubuntu-nose.html %}
-  {% include setup/ubuntu-setuptools.html %}
-  {% include setup/ubuntu-sqlite.html %}
-  {% include setup/ubuntu-terminal.html %}
+
+<div id="setup-ubuntu-common" class="setup setup-ubuntu setup-common">
+  <h4>Ubuntu / Common</h4>
+  <p>
+    These commands were tested using Ubuntu 11.04 running within VMWare.
+    Ubuntu 11.04 already comes with:
+  </p>
+  <ul>
+    <li>Bash shell</li>
+    <li>Make</li>
+    <li>vi and nano text editors</li>
+    <li>Python 2.7</li>
+    <li>Firefox</li>
+  </ul>
+  <p>
+    All installation needs to be done as a root user or user with certain administrator privileges.
+    If you have such access you can do:
+  </p>
+<pre>
+$ sudo su -
+</pre>
+  <p>
+    Then enter your usual password.
+  </p>
+</div>
+
+
+<div id="setup-ubuntu-easymercurial" class="setup setup-ubuntu setup-easymercurial">
+  <h4>Ubuntu / EasyMercurial</h4>
+  <p>
+    If your bootcamp is using the EasyMercurial GUI,
+    download the <a href="http://easyhg.org/download.html">EasyMercurial Debian/Ubuntu <code>.deb</code> package</a>.
+    This can be done at the command-line by copying the download link from the download page
+    (using right-click and <strong>Copy Shortcut</strong>) then using <code>wget</code>,
+    e.g.:
+  </p>
+<pre>
+$ wget https://code.soundsoftware.ac.uk/attachments/download/487/easymercurial_1.2.2cc-1_i386.deb
+</pre>
+  <p>
+    (This link may have been updated since this page was written,
+    so check the download page above for the URL to use.)
+    Next,
+    run:
+  </p>
+<pre>
+$ dpkg -i easymercurial_1.2cc-1_i386.deb
+</pre>
+  <p>
+    This will produce a lot of warnings about dependency problems&mdash;ignore them.
+    Now run:
+  </p>
+<pre>
+$ apt-get -f install
+$ dpkg -i easymercurial_1.2cc-1_i386.deb
+</pre>
+  <p>
+    Go to the <strong>Applications&rarr;Programming</strong> menu
+    and you should see an <strong>EasyMercurial</strong> command.
+    Select it and EasyMercurial should start.
+  </p>
+</div>
+
+
+<div id="setup-ubuntu-emacs" class="setup setup-common setup-emacs">
+  <h4>Ubuntu / Emacs or XEmacs</h4>
+  <p>
+    Run:
+  </p>
+<pre>
+$ apt-get install emacs23
+$ emacs --version
+</pre>
+  <p>
+    Run:
+  </p>
+<pre>
+$ apt-get install xemacs21
+$ xemacs --version
+</pre>
+</div>
+
+
+<div id="setup-ubuntu-mercurial" class="setup setup-ubuntu setup-mercurial">
+  <h4>Ubuntu / Mercurial</h4>
+  <p>
+    Run:
+  </p>
+<pre>
+$ apt-get install mercurial
+$ hg --version
+</pre>
+</div>
+
+
+<div id="setup-ubuntu-nose" class="setup setup-ubuntu setup-nose">
+  <h4>Ubuntu / Python Nose</h4>
+  <p>
+    Run:
+  </p>
+<pre>
+$ easy_install nose
+</pre>
+  <p>
+    and check:
+  </p>
+<pre>
+$ nosetests
+----------------------------------------------------------------------
+Ran 0 tests in 0.003s
+OK
+</pre>
+</div>
+
+
+<div id="setup-ubuntu-setuptools" class="setup setup-ubuntu setup-setuptools">
+  <h4>Ubuntu / Python Setuptools</h4>
+  <p>
+    Run:
+  </p>
+<pre>
+$ apt-get install python-setuptools
+</pre>
+</div>
+
+
+<div id="setup-ubuntu-sqlite" class="setup setup-ubuntu setup-sqlite">
+  <h4>Ubuntu / SQLite</h4>
+  <p>
+    SQLite does not need administrator privileges to run.
+    To install,
+    download the SQLite Precompiled Binaries for Linux package
+    from the <a href="http://www.sqlite.org/download.html">SQLite download page</a>.
+    This can be done at the command-line by copying the download link from the download page
+    (using right-click and <strong>Copy Shortcut</strong>) then using <code>wget</code>,
+    e.g.:
+  </p>
+<pre>
+$ wget http://www.sqlite.org/sqlite-shell-linux-x86-3071401.zip
+</pre>
+  <p>
+    (This link may have been updated since this page was written,
+    so check the download page above for the URL to use.)
+    Next,
+    unzip and make sure the binary runs:
+  </p>
+<pre>
+$ unzip sqlite-shell-linux-x86-3071100.zip
+$ ./sqlite3 --version
+</pre>
+  <p>
+    You can then copy the <code>sqlite3</code> binary wherever you would like.
+  </p>
+</div>
+
+
+<div id="setup-ubuntu-terminal" class="setup setup-ubuntu setup-terminal">
+  <h4>Ubuntu / Terminal Window</h4>
+  <p>
+    Select the menu <strong>Applications&rarr;Accessories</strong>
+    and select <strong>Terminal</strong>.
+    You should see a terminal window like:
+  </p>
+  <p>
+    <img src="{{page.root}}/img/setup/ubuntu-terminal-300x197.jpg" alt="Ubuntu terminal" />
+  </p>
+</div>
+
 </section>
 
 <section id="s:setup:vm">
   <h2>Virtual Machine</h2>
-  {% include setup/vm.html %}
+
+<div id="setup-vm" class="setup setup-vm">
+  <h4>Virtual Machine</h4>
+  
+  <p>
+    Installation issues can and do happen. To ensure that you
+    can continue to participate in a lesson even if one of your
+    software programs fails, we provide a Linux virtual machine
+    that contains all the necessary software
+    pre-installed. Please install
+    <a href="https://www.virtualbox.org/">VirtualBox</a>
+    and download
+    <a href="http://files.software-carpentry.org/swc_lubuntu.ova">this virtual machine image</a>.
+    Load the VM into VirtualBox by doing Import Appliance and loading the <code>.ova</code> file.
+  </p>
+</div>
+
 </section>
 
 <section id="s:setup:ipynb">
   <h2>IPython Notebook</h2>
-  {% include setup/testing-ipython.html %}
+
+<div id="testing-ipython" class="setup setup-anaconda">
+  <h4>Testing IPython notebook installation</h4>
+  <ul>
+    <li>
+      In your terminal window type <code>ipython notebook</code>.
+      It may take several seconds,
+      but an IPython dashboard window should open in your web browser.
+    </li>
+    <li>
+      Click "new notebook".
+    </li>
+    <li>
+      In the box next to <code>In&nbsp;[&nbsp;]:</code> enter 2+2.
+    </li>
+    <li>
+      Type Shift+Enter (i.e., both keys at the same time) to execute the cell.
+    </li>
+    <li>
+      If the number 4 appears below the cell, you're all set!
+      Feel free to try out some commands or simple addition.
+    </li>
+    <li>
+      If not: see troubleshooting below.
+    </li>
+  </ul>
+  <p>
+    You can close the browser window.
+    If your IPython command in the previous step worked then the notebook should still be running.
+    You won't see a Bash prompt (the $ symbol) while IPython is still running.
+    Type Control-C (i.e., hold down the "Control" or "Ctrl" key on your keyboard and type the C key).
+    You'll be prompted to confirm:
+    "Shutdown Notebook Server (y/[n])?"
+    Simply type a 'y' and Enter
+    to shut down the server.
+  </p>
+  <p>
+    If a result did not appear when you tried to run 2+2,
+    make sure you are hitting Shift+Enter (or click the little play button at the top of the window).
+  </p>
+  <p>
+    If Internet Explorer is your default browser,
+    copy the URL from your IPython dashboard and open it in another browser (e.g., Firefox or Chrome).
+    If you are using Firefox or Chrome on Windows and results still do not appear,
+    this may be due to the Sophos antivirus.
+    The steps below will fix this,
+    but require administrator privileges:
+  </p>
+  <ol>
+    <li>Open your Sophos Endpoint Security and Control Panel from your tray or start menu.</li>
+    <li>Select "configure" &gt; "Anti-virus" &gt; "Authorization" from the menu at the top.</li>
+    <li>Select the websites tab.</li>
+    <li>click the "Add" button and add 127.0.0.1 and localhost to the "Authorized websites" list.</li>
+    <li>Restart your computer.</li>
+  </ol>
+</div>
+
 </section>
 
 <section id="s:setup:firefox">
   <h2>Firefox SQLite Manager Plugin</h2>
-  {% include setup/firefox-sqlite-manager-plugin.html %}
+
+<div id="setup-firefox-sqlite-manager-plugin" class="setup">
+  <h4>Firefox SQLite Manager Plugin</h4>
+  <p>
+    The SQLite Manager add-on can be installed through the "Add-ons Manager" in Firefox.
+  </p>
+  <ul>
+    <li>
+      Start Firefox.
+    </li>
+    <li>
+      Select <strong>Tools&rarr;Add-ons</strong>.
+    </li>
+    <li>
+      In the search field, enter <code>sqlite</code>.
+    </li>
+    <li>
+      Click the search icon.
+    </li>
+    <li>
+      Double-click to select <strong>SQLite Manager 0.7.7</strong>.
+    </li>
+    <li>
+      Click <strong>Install</strong>.
+    </li>
+    <li>
+      Click <strong>restart now</strong>.
+    </li>
+    <li>
+      When Firefox restarts,
+      select either <strong>Web Developer&rarr;SQLite Manager</strong>
+      or <strong>Tools&rarr;SQLite Manager</strong>.
+    </li>
+  </ul>
+</div>
+
 </section>

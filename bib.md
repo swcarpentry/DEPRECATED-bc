@@ -6,12 +6,20 @@ title: Recommended Reading
 Papers
 ------
 
+*   Susan A. Ambrose, Michael W. Bridges, Michele DiPietro, Marsha C. Lovett, and Marie K. Norman:
+    *[How Learning Works: Seven Research-Based Principles for Smart Teaching](http://www.amazon.com/How-Learning-Works-Research-Based-Principles/dp/0470484101/)*.
+    Jossey-Bass,
+    2010,
+    978-0470484104.
+    <br/>
+    The best single-volume guide to evidence-based practices in education around.
+
 *   Paul F. Dubois:
     "Maintaining Correctness in Scientific Programs".
     *Computing in Science & Engineering*,
     May–June 2005.
     <br/>
-    This paper shows how several good programming practices fit together
+    Shows how several good programming practices fit together
     to create defense in depth,
     so that errors missed by one will be caught by another.
 

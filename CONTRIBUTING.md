@@ -61,7 +61,7 @@ get feedback on your ideas and coordinate with other developers.
     `swcarpentry/bc` on GitHub.
 
 If it is easier for you to send them to us some other way, please mail us at
-admin@software-carpentry.org.
+[admin@software-carpentry.org](mailto:admin@software-carpentry.org).
 
 More Information
 ----------------
