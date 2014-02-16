@@ -17,6 +17,7 @@ MARKDOWN_SRC = \
 	rules.md \
 	setup.md \
 	team.md \
+	intro.md \
 	$(wildcard novice/shell/*.md) \
 	$(wildcard novice/git/*.md) \
 	$(wildcard novice/python/*.md) \
