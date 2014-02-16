@@ -76,7 +76,7 @@ all : commands
 quick :
 	jekyll -t build -d $(OUT)
 
-## install  : install.
+## install  : install on the server.
 install : $(OUT)/index.html
 	rm -rf $(INSTALL_DIR)
 	cp -r _site $(INSTALL_DIR)
@@ -134,11 +134,11 @@ tmp/%.md : %.md
 
 #-----------------------------------------------------------
 
-## commands : show all commands
+## commands : show all commands.
 commands :
 	@grep -E '^##' Makefile | sed -e 's/## //g'
 
-## contribs : list contributors (uses .mailmap file)
+## contribs : list contributors (uses .mailmap file).
 contribs :
 	git log --pretty=format:%aN | sort | uniq
 
@@ -146,31 +146,29 @@ contribs :
 fixme :
 	@grep -i -n FIXME $$(find -f shell git python sql -type f -print | grep -v .ipynb_checkpoints)
 
-## gloss    : check glossary
+## gloss    : check glossary.
 gloss :
 	@bin/gloss.py ./gloss.md $(MARKDOWN_DST) $(NOTEBOOK_DST)
 
-## images   : create a temporary page to display images
+## images   : create a temporary page to display images.
 images :
 	@bin/make-image-page.py $(MARKDOWN_SRC) $(NOTEBOOK_SRC) > image-page.html
 	@echo "Open ./image-page.html to view images"
 
-## links    : check links
-# Depends on linklint, an HTML link-checking module from
+## valid    : check validity of HTML book.
+# Depends on xmllint to check validity of generated pages.
+# Also depends on linklint, an HTML link-checking module from
 # http://www.linklint.org/, which has been put in bin/linklint.
 # Look in output directory's 'error.txt' file for results.
-links :
-	@bin/linklint -doc $(LINK_OUT) -textonly -root $(OUT) /@
-
-## valid    : check validity of HTML book.
 valid : tmp-book.html
 	xmllint --noout tmp-book.html 2>&1 | python bin/unwarn.py
+	@bin/linklint -doc $(LINK_OUT) -textonly -root $(OUT) /@
 
-## clean    : clean up
+## clean    : clean up all generated files.
 clean : tidy
 	@rm -rf $(OUT) $(NOTEBOOK_MD)
 
-## tidy     : clean up intermediate files only
+## tidy     : clean up intermediate files only.
 tidy :
 	@rm -rf \
 	image-page.html \
@@ -179,7 +177,7 @@ tidy :
 	$$(find . -name '*.pyc' -print) \
 	$$(find . -name '??-*_files' -type d -print)
 
-## show     : show variables
+# show variables (for debugging)
 show :
 	@echo "OUT" $(OUT)
 	@echo "TMP" $(TMP)
