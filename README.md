@@ -76,11 +76,13 @@ rather than Git itself.
     some data about the page,
     and three more dashes:
 
-        ---
-        key: value
-        other_key: other_value
-        ---
-        Page Content
+    ~~~
+    ---
+    key: value
+    other_key: other_value
+    ---
+    Page Content
+    ~~~
 
     then GitHub doesn't just copy the file over verbatim.
     Instead,
@@ -164,22 +166,30 @@ To create a website for a new bootcamp:
 
 3.  Add the template repository `https://github.com/swcarpentry/bc.git` as a remote named `swc`:
 
-        git remote add swc https://github.com/swcarpentry/bc.git
+    ~~~
+    git remote add swc https://github.com/swcarpentry/bc.git
+    ~~~
 
 ![Alt text](img/readme/step2.png)
 
 4.  Create a new branch in the local clone named `gh-pages`.
 
-        git checkout -b gh-pages
+    ~~~
+    git checkout -b gh-pages
+    ~~~
 
 5.  Pull content from the template repository's `gh-pages` branch into your desktop repository:
 
-        git pull swc gh-pages
+    ~~~
+    git pull swc gh-pages
+    ~~~
 
 6.  Delete the `swc` remote so that you don't accidentally try
     to push your changes to the main `bc` repository:
 
-        git remote rm swc
+    ~~~
+    git remote rm swc
+    ~~~
 
 7.  Edit `index.html` to create the bootcamp home page (see below).
     Please double-check the information in the page's header (described below),
@@ -192,12 +202,16 @@ To create a website for a new bootcamp:
 
 10. Push content to your YYYY-MM-DD-site repository:
 
-        git push origin gh-pages
+    ~~~
+    git push origin gh-pages
+    ~~~
 
 As soon as your repo has been pushed to GitHub, GitHub will render your pages
 at the url:
 
-    http://{your-github-username}.github.io/YYYY-MM-DD-site/
+~~~
+http://{your-github-username}.github.io/YYYY-MM-DD-site/
+~~~
 
 You may update your bootcamp's website whenever you want.
 
@@ -207,7 +221,9 @@ Previewing the Site
 To preview your bootcamp's page(s),
 go into its root directory and run:
 
-    make quick
+~~~
+make quick
+~~~
 
 This will run `jekyll` to create the directory `./_site`;
 the `index.html` page in this directory
@@ -219,12 +235,16 @@ you will need to install Jekyll 1.0.3 or later in order to preview things locall
 If you have Ruby installed on your computer,
 this *should* be as simple as:
 
-    gem install github-pages
+~~~
+gem install github-pages
+~~~
 
 or if that doesn't work:
 
-    gem install jekyll
-    gem install kramdown
+~~~
+gem install jekyll
+gem install kramdown
+~~~
 
 (We use Kramdown for translating Markdown instead of the default
 Redcarpet because Kramdown will handle Markdown inside HTML blocks).
@@ -240,7 +260,17 @@ brew install ruby
 and then `gem install` as above.  If you don't have `make` in your
 machine, you can build the preview with:
 
-    jekyll -t build -d _site
+~~~
+jekyll -t build -d _site
+~~~
+
+or run:
+
+~~~
+make quick
+~~~
+
+which executes the same command.
 
 Variables
 ---------
@@ -298,9 +328,12 @@ The `_includes` directory contains the following `.html` files:
 *   `banner.html`: the generic banner with the Software Carpentry logo.
 *   `footer.html`: the generic footer with links to Software Carpentry's web presence.
 *   `javascript.html`: JQuery and Bootstrap Javascript.
+*   `setup.html`: common setup instructions.
 
-You normally won't need to worry about these:
-they're included in the right places by our standard layouts.
+You normally won't need to worry about the first four ---
+they're included in the right places by our standard layouts ---
+but you may want to edit the fifth,
+or inline it in `index.html`.
 
 Page Content
 ------------
@@ -392,50 +425,64 @@ FAQ
     <br/>
     Declare the `en_US.UTF-8` locale in your shell:
 
-        export LC_ALL=en_US.UTF-8
-        export LANG=en_US.UTF-8
+    ~~~
+    export LC_ALL=en_US.UTF-8
+    export LANG=en_US.UTF-8
+    ~~~
 
 *   *What do I do if I see a `Conversion error` when I run `make check`?*
     <br/>
     The error message may look something like this:
 
-        Configuration file: d:/OpenCourses/swc/2013-10-17-round6.4/_config.yml
-                Source: d:/OpenCourses/swc/2013-10-17-round6.4
-           Destination: _site
-          Generating... c:/Ruby193/lib/ruby/gems/1.9.1/gems/posix-spawn-0.3.6/lib/posix/spawn.rb:162: wa
-        rning: cannot close fd before spawn
-        Conversion error: There was an error converting 'lessons/misc-biopython/fastq.md'.
-        done.
+    ~~~
+    Configuration file: d:/OpenCourses/swc/2013-10-17-round6.4/_config.yml
+            Source: d:/OpenCourses/swc/2013-10-17-round6.4
+       Destination: _site
+      Generating... c:/Ruby193/lib/ruby/gems/1.9.1/gems/posix-spawn-0.3.6/lib/posix/spawn.rb:162: wa
+    rning: cannot close fd before spawn
+    Conversion error: There was an error converting 'lessons/misc-biopython/fastq.md'.
+    done.
+    ~~~
         
     This is a [problem in Pygments.rb](http://stackoverflow.com/questions/17364028/jekyll-on-windows-pygments-not-working)
     Uninstall pygments.rb 0.5.1 or 0.5.2, install 0.5.0.  For example, here's how you would
     uninstall pygments 0.5.2 and restore version 0.5.0:
-    
-        gem uninstall pygments.rb --version "=0.5.2"
-        gem install pygments.rb --version "=0.5.0"
+
+    ~~~    
+    gem uninstall pygments.rb --version "=0.5.2"
+    gem install pygments.rb --version "=0.5.0"
+    ~~~
 
 *   *What do I do if I see a `File not found: u'nbconvert'` when I run `make check`?*
     <br/>
     The output of `make check` looks like this:
-    
-        WARNING: Unrecognized alias: 'output', it will probably have no effect.[TerminalIPythonApp] File not found: u'nbconvert'
-        cp tmp/python/novice/01-numpy.html _site/python/novice/01-numpy.html
-        cp: cannot stat ‘tmp/python/novice/01-numpy.html’: No such file or directory
+
+    ~~~    
+    WARNING: Unrecognized alias: 'output', it will probably have no effect.[TerminalIPythonApp] File not found: u'nbconvert'
+    cp tmp/python/novice/01-numpy.html _site/python/novice/01-numpy.html
+    cp: cannot stat ‘tmp/python/novice/01-numpy.html’: No such file or directory
+    ~~~
     
     This means you don't have a recent enough version of IPython (below 1.0) and you should install a newer version.
     Installing a local version can be done with:
     
-        pip install --upgrade --user ipython
+    ~~~
+    pip install --upgrade --user ipython
+    ~~~
 
     You might need `pip` that can be installed (under Ubuntu and alike) with:
-    
-        sudo apt-get install python-pip
+
+    ~~~
+    sudo apt-get install python-pip
+    ~~~
 
 *   *What if I get some missing packages messages when I run `make check`?*
     <br/>
     Some additional packages are required. They can be installed (under Ubuntu and alike) with:
     
-        sudo apt-get install pandoc
+    ~~~
+    sudo apt-get install pandoc
+    ~~~
 
 *   *Where should pages go if multiple boot camps are running at a site simultaneously?*
     <br/>
