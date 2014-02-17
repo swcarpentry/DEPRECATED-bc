@@ -9,7 +9,7 @@ how you can build a website for your bootcamp using this repo as a starting poin
 what lessons we have,
 and where they're located.
 To contribute corrections or additions to this repository, see the
-[contribution guidelines][CONTRIBUTING.html].
+[contribution guidelines](CONTRIBUTING.md).
 
 **Note:**
 If you are teaching Git in your bootcamp,
