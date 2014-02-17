@@ -6,28 +6,26 @@ root: ../..
 
 {% block input %}
 <div class="input">
-<span>In [{{ cell.prompt_number }}]:</span>
 <pre>{{ cell.input | escape }}</pre>
 </div>
 {% endblock input %}
 
 {% block output_group %}
 <div class="output">
-<span>Out [{{ cell.prompt_number }}]:</span>
-<pre>{{ super() }}</pre>
+<pre>{{- super() -}}</pre>
 </div>
 {% endblock output_group %}
 
 {% block stream %}
-{{ output.text | escape }}
+{{- output.text | escape -}}
 {% endblock stream %}
 
 {% block pyout %}
-{{ output.text | escape }}
+{{- output.text | escape -}}
 {% endblock pyout %}
 
 {% block pyerr %}
-{{ output.traceback | join('\n') | strip_ansi | escape }}
+{{- output.traceback | join('\n') | strip_ansi | escape -}}
 {% endblock pyerr %}
 
 {% block data_svg %}
