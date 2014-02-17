@@ -18,21 +18,21 @@ MARKDOWN_SRC = \
 	setup.md \
 	team.md \
 	intro.md \
-	$(wildcard novice/shell/*.md) \
-	$(wildcard novice/git/*.md) \
-	$(wildcard novice/python/*.md) \
-	$(wildcard novice/sql/*.md) \
-	$(wildcard novice/extras/*.md) \
-	$(wildcard novice/teaching/*.md) \
-	$(wildcard novice/ref/*.md)
+	$(sort $(wildcard novice/shell/*.md)) \
+	$(sort $(wildcard novice/git/*.md)) \
+	$(sort $(wildcard novice/python/*.md)) \
+	$(sort $(wildcard novice/sql/*.md)) \
+	$(sort $(wildcard novice/extras/*.md)) \
+	$(sort $(wildcard novice/teaching/*.md)) \
+	$(sort $(wildcard novice/ref/*.md))
 
 NOTEBOOK_SRC = \
-	$(wildcard novice/python/??-*.ipynb) \
-	$(wildcard novice/sql/??-*.ipynb)
+	$(sort $(wildcard novice/python/??-*.ipynb)) \
+	$(sort $(wildcard novice/sql/??-*.ipynb))
 
 # Slides.
 SLIDES_SRC = \
-	$(wildcard slides/*.html)
+	$(sort (wildcard slides/*.html))
 SLIDES_DST = \
 	$(patsubst %.html,$(OUT)/%.html,$(SLIDES_SRC))
 
@@ -47,13 +47,13 @@ HTML_DST = \
 BOOK_SRC = \
 	intro.md \
 	team.md \
-	novice/shell/index.md $(wildcard novice/shell/??-*.md) \
-	novice/git/index.md $(wildcard novice/git/??-*.md) \
-	novice/python/index.md $(patsubst %.ipynb,%.md,$(wildcard novice/python/??-*.ipynb)) \
-	novice/sql/index.md $(patsubst %.ipynb,%.md,$(wildcard novice/sql/??-*.ipynb)) \
-	novice/extras/index.md $(wildcard novice/extras/??-*.md) \
-	novice/teaching/index.md  $(wildcard novice/teaching/??-*.md) \
-	novice/ref/index.md  $(wildcard novice/ref/??-*.md) \
+	novice/shell/index.md $(sort $(wildcard novice/shell/??-*.md)) \
+	novice/git/index.md $(sort $(wildcard novice/git/??-*.md)) \
+	novice/python/index.md $(patsubst %.ipynb,%.md,$(sort $(wildcard novice/python/??-*.ipynb))) \
+	novice/sql/index.md $(patsubst %.ipynb,%.md,$(sort $(wildcard novice/sql/??-*.ipynb))) \
+	novice/extras/index.md $(sort $(wildcard novice/extras/??-*.md)) \
+	novice/teaching/index.md  $(sort $(wildcard novice/teaching/??-*.md)) \
+	novice/ref/index.md  $(sort $(wildcard novice/ref/??-*.md)) \
 	bib.md \
 	tmp/gloss.md \
 	rules.md \
