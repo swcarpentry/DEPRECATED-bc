@@ -59,7 +59,7 @@ Papers
 
 *   Greg Wilson, D. A. Aruliah, C. Titus Brown, Neil P. Chue Hong, Matt Davis, Richard T. Guy, Steven H. D. Haddock, Katy Huff, Ian M. Mitchell, Mark Plumbley, Ben Waugh, Ethan P. White, and Paul Wilson:
     "Best Practices for Scientific Computing".
-	*PLoS Biology*,
+    *PLoS Biology*,
     12(1),
     2014.
     <br/>
