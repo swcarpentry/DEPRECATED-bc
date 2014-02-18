@@ -5,13 +5,13 @@ root: ../..
 {% extends 'markdown.tpl' %}
 
 {% block input %}
-<div class="input">
+<div class="in">
 <pre>{{ cell.input | escape }}</pre>
 </div>
 {% endblock input %}
 
 {% block output_group %}
-<div class="output">
+<div class="out">
 <pre>{{- super() -}}</pre>
 </div>
 {% endblock output_group %}
