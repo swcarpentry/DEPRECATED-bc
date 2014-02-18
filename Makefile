@@ -107,7 +107,7 @@ index.html setup.md : _includes/setup.html
 # Patch targets and links in the glossary for inclusion in the book.
 tmp/gloss.md : gloss.md
 	@mkdir -p $$(dirname $@)
-	sed -e 's!](#!](#g:!g' -e 's!<a name="!<a name="#g:!g' $< > $@
+	sed -e 's!](#!](#g:!g' -e 's!<a name="!<a name="g:!g' $< > $@
 
 # Patch image paths in the sections.
 tmp/novice/shell/%.md : novice/shell/%.md
