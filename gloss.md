@@ -68,7 +68,7 @@ in which the values in each row are separated by commas.
 **command-line interface** (CLI): <a name="cli"></a>
 An interface based on typing commands,
 usually at a [REPL](#repl).
-See also: (graphical user interface)[#gui].
+See also: [graphical user interface](#gui).
 
 **comment**: <a name="comment"></a>
 A remark in a program that is intended to help human readers understand what is going on,
@@ -82,9 +82,9 @@ A statement in a program that might or might not be executed
 depending on whether a test is true or false.
 
 **conflict**: <a name="conflict"></a>
-A change made by one user of a (version control system)[#version-control]
+A change made by one user of a [version control system](#version-control)
 that is incompatible with changes made by other users.
-Helping users (resolve)[#resolve] conflicts
+Helping users [resolve](#resolve) conflicts
 is one of version control's major tasks.
 
 **cross product**: <a name="cross-product"></a>
@@ -209,7 +209,7 @@ such as `f(g(x))`.
 **graphical user interface** (GUI): <a name="gui"></a>
 A graphical user interface,
 usually controlled by using a mouse.
-See also: command-line interface[#cli].
+See also: [command-line interface](#cli).
 
 **home directory**: <a name="home-directory"></a>
 The default directory associated with an account on a computer system.
@@ -259,7 +259,7 @@ The variable that keeps track of the progress of the loop.
 A variable contained within an [object](#object).
 
 **merge** (a repository): <a name="repository-merge"></a>
-To reconcile two sets of change to a [repository].
+To reconcile two sets of change to a [repository](#repository).
 
 **method**: <a name="method"></a>
 A function which is tied to a particular [object](#object).
@@ -288,7 +288,7 @@ See also: [inner loop](#inner-loop).
 
 **parameter**: <a name="parameter"></a>
 A value passed into a function,
-or a variable named in the functin's declaration
+or a variable named in the function's declaration
 that is used to hold such a value.
 
 **parent directory**: <a name="parent-directory"></a>
