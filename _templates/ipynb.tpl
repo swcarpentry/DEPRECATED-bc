@@ -16,29 +16,19 @@ root: ../..
 </div>
 {% endblock output_group %}
 
-{% block stream %}
-{{- output.text | escape -}}
-{% endblock stream %}
+{%- block stream -%}{{- output.text | escape -}}{%- endblock stream -%}
 
-{% block pyout %}
-{{- output.text | escape -}}
-{% endblock pyout %}
+{%- block pyout -%}{{- output.text | escape -}}{%- endblock pyout -%}
 
-{% block pyerr %}
-{{- output.traceback | join('\n') | strip_ansi | escape -}}
-{% endblock pyerr %}
+{%- block pyerr -%}{{- output.traceback | join('\n') | strip_ansi | escape -}}{%- endblock pyerr -%}
 
-{% block data_svg %}
-<img src="../../{{ output.svg_filename | path2url }}">
-{% endblock data_svg %}
+{%- block data_svg -%}<img src="../../{{ output.svg_filename | path2url }}">{%- endblock data_svg -%}
 
-{% block data_png %}
-<img src="../../{{ output.png_filename | path2url }}">
-{% endblock data_png %}
+{%- block data_png -%}<img src="../../{{ output.png_filename | path2url }}">{%- endblock data_png -%}
 
-{% block data_jpg %}
-<img src="../../{{ output.jpeg_filename | path2url }}">
-{% endblock data_jpg %}
+{%- block data_jpg -%}<img src="../../{{ output.jpeg_filename | path2url }}">{%- endblock data_jpg -%}
+
+{%- block display_data -%}{{- output.html -}}{%- endblock display_data -%}
 
 {% block markdowncell %}
 {% if 'cell_tags' in cell.metadata %}
