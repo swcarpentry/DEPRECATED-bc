@@ -2,11 +2,8 @@
 
 #### Intro
 
-When transitioning from GUIs to the console people tend to be overwhelmed with
-the difficulties of controlling all the multiple processes (and its
-input/output) you may be running concurrently.
-
-[Tmux](http://tmux.sourceforge.net/) can help with that.
+Controlling I/O from multiple processes can be overwhelming when working in the
+console. [Tmux](http://tmux.sourceforge.net/) can help with that.
 
 #### What is tmux?
 
