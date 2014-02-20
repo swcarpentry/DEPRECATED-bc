@@ -47,49 +47,49 @@ you cannot find it, use the source code and compile it for your target machine.
 
 #### Basic usage
 
-To start tmux we just execute its binary: ```$ tmux```, that will create a new
+To start tmux we just execute its binary: `$ tmux`, that will create a new
 tmux session and will link our current terminal to it.
 
-Now, if we ```$ exit```, tmux will terminate that session.
+Now, if we `$ exit`, tmux will terminate that session.
 
 You can name a session so you can identify what you are running on them, to do
-so, we use the ```-s``` option: ```$ tmux new -s first``` where ```first``` is
+so, we use the `-s` option: `$ tmux new -s first` where `first` is
 the name of the session.
 
 To communicate with tmux, we use a shortcuts prefixed with a key combination.
-By default that is: ```Ctrl-b```.
+By default that is: `Ctrl-b`.
 
 For example, if we want to detach ourselves from a session we do so by typing:
-```Ctrl-b``` (the prefix) followed by ```d```.
+`Ctrl-b` (the prefix) followed by `d`.
 
 Now, to reattach to that session we can:
 
-```sh
+`sh
 $ tmux ls
 0: 8 windows (created Wed Dec  4 10:00:35 2013) [178x49]
-```
+`
 
 since we only have one session, we can just run:
 
-```$ tmux attach```
+`$ tmux attach`
 
 #### windows
 
-Windows are created by typing: ```PREFIX c``` (create).
+Windows are created by typing: `PREFIX c` (create).
 
-Once you are in the new window, you can rename its name with ```PREFIX ,```.
+Once you are in the new window, you can rename its name with `PREFIX ,`.
 
 #### Panes
 
 Within windows we can create panes, so we can see the output of the processes
 running on each pane in the same window. To split a window vertically press:
-```PREFIX %``` and ```PREFIX "``` to split horizontally.
+`PREFIX %` and `PREFIX "` to split horizontally.
 
 ![](http://f.cl.ly/items/0N0t44402t3Y0z3W3727/Screen%20Shot%202014-01-23%20at%2011.02.31%20AM.png)
 
 Here you have a tmux window, within a session that has 3 panes. In number 0
 we are doing some editing with, same in number 1 (but for a different file) and
-in pane number 2 we have the ```top``` command running.
+in pane number 2 we have the `top` command running.
 
 #### Final remarks
 
