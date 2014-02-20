@@ -24,12 +24,12 @@ tmux we can launch multiple terminals each running its own process.
 For example, I am writing this document within a tmux session that has multiple
 windows:
 
-![](http://f.cl.ly/items/3f0Q0s2f0I2t1J413M16/Screen%20Shot%202014-01-23%20at%2010.33.00%20AM.png)
+![](img/tmux/windows.png)
 
 I have 8 window, each of them running multiple programs, in window number 7 I
 have an instance of vim for the document I am editing:
 
-![](http://f.cl.ly/items/0b3S0s3F391V3J321v11/Screen%20Shot%202014-01-23%20at%2010.34.30%20AM.png)
+![](img/tmux/vim.png)
 
 There is one more feature I want to point out about tmux: *detaching* from a
 session.
@@ -85,7 +85,7 @@ Within windows we can create panes, so we can see the output of the processes
 running on each pane in the same window. To split a window vertically press:
 `PREFIX %` and `PREFIX "` to split horizontally.
 
-![](http://f.cl.ly/items/0N0t44402t3Y0z3W3727/Screen%20Shot%202014-01-23%20at%2011.02.31%20AM.png)
+![](img/tmux/panels.png)
 
 Here you have a tmux window, within a session that has 3 panes. In number 0
 we are doing some editing with, same in number 1 (but for a different file) and
@@ -99,4 +99,4 @@ the reference section if you want to learn more about this great tool.
 
 ### References
 
-1. [Tmux (pragmatic programmer book)](http://pragprog.com/book/bhtmux/tmux).
+1. [Tmux site](http://tmux.sourceforge.net/).
