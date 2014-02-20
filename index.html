@@ -4,15 +4,21 @@ root: .
 venue: Euphoric State University
 address: 123 College Street, Euphoria
 country: United-States
-humandate: June 17-18, 2020
+humandate: Feb 17-18, 2020
 humantime: 9:00 am - 4:30 pm
 startdate: 2020-06-17
 enddate: 2020-06-18
 latlng: 41.7901128,-87.6007318
 registration: restricted
 instructor: ["Grace Hopper", "Alan Turing"]
-contact: random@software-carpentry.org
+contact: admin@software-carpentry.org
 ---
+<!--
+    Edit the values in the parameter block above to be appropriate for your bootcamp.
+    Please use three-letter month names for the 'humandate' field.
+-->
+
+<!-- Remove the block below. -->
 <div align="center">
   <p><strong><em>
       This page is a template for bootcamp home pages.
@@ -21,76 +27,122 @@ contact: random@software-carpentry.org
       <a href="https://github.com/swcarpentry/bc">https://github.com/swcarpentry/bc</a>
       for instructions on how to create
       a repository for your bootcamp.
-      <br/>
-      Please also see
-      the <a href="{{page.root}}/lessons/index.html">index to our lessons</a>
-      and the <a href="{{page.root}}/lessons/setup.html">index to setup instructions</a>.
   </em></strong></p>
 </div>
-{% include bootcamps/instructors.html %}
-{% include bootcamps/what.html %}
-{% include bootcamps/who.html %}
-{% include bootcamps/requirements.html %}
-{% include bootcamps/python.html %}
-{% include bootcamps/contact.html %}
+
+<!--
+    This block includes the Eventbrite registration widget if 'eventbrite' has been set in the header.
+-->
+{% if page.eventbrite %}
+<iframe src="http://www.eventbrite.com/tickets-external?eid={{page.eventbrite}}&ref=etckt" frameborder="0" width="100%" scrolling="auto"></iframe>
+{% endif %}
+
+<h2>General Information</h2>
+
+<p>
+  <a href="http://software-carpentry.org">Software Carpentry</a>'s mission
+  is to help scientists and engineers become more productive
+  by teaching them basic lab skills for computing
+  like program design, version control, data management, and task automation.
+  This two-day hands-on bootcamp will cover basic concepts and tools;
+  participants will be encouraged to help one another
+  and to apply what they have learned to their own research problems.
+</p>
+
+<!-- This block displays the instructors' names if they are available. -->
+{% if page.instructor %}
+<p>
+  <strong>Instructors:</strong>
+  {{page.instructor | join: ', ' %}}
+</p>
+{% endif %}
+
+<!--
+    Modify this block to reflect the target audience for your bootcamp.
+    In particular, if it is only open to people from a particular institution,
+    or if specialized prerequisite knowledge is required, please mention that.
+-->
+<p>
+  <strong>Who:</strong>
+  The course is aimed at graduate students and other researchers.
+</p>
+
+<!--
+    This block displays the address and links to a map showing directions.
+-->
+{% if page.latlng %}
+<p>
+  <strong>Where:</strong>
+  {{ page.address }}.
+  Get directions with
+  <a href="http://www.openstreetmap.org/?mlat={{ page.latlng | replace:',','&mlon=' }}&zoom=16">OpenStreetMap</a>
+  or
+  <a href="http://maps.google.com/maps?q={{ page.latlng }}">Google Maps</a>.
+</p>
+{% endif %}
+
+<!--
+    Modify the block below if there are any special requirements.
+-->
+<p>
+  <strong>Requirements:</strong>
+  Participants must bring a laptop with a few specific software packages installed
+  (listed below).
+</p>
+
+<!--
+    This block automatically inserts a contact email address if one has been specified for the page.
+    If one hasn't, this block inserts the generic contact address for Software Carpentry.
+-->
+<p>
+  <strong>Contact</strong>:
+  Please mail
+  {% if page.contact %}
+    <a href='mailto:{{page.contact}}'>{{page.contact}}</a>
+  {% else %}
+    <a href='mailto:{{site.contact}}'>{{site.contact}}</a>
+  {% endif %}
+  for more information.
+</p>
 
 <hr/>
+
+<!--
+    Edit this block to show the syllabus and schedule for your bootcamp.
+-->
+<h2>Schedule</h2>
+
+<table class="table table-striped">
+  <tr> <td>Monday</td>  <td>09:00</td>  <td>Introduction to task automation with the Unix shell</td> </tr>
+  <tr> <td></td>        <td></td>       <td>Coffee will be served at 10:30.</td> </tr>
+  <tr> <td></td>        <td>12:00</td>  <td>Lunch break</td> </tr>
+  <tr> <td></td>        <td>13:00</td>  <td>Building programs with Python</td> </tr>
+  <tr> <td></td>        <td></td>       <td>Coffee will be served at 14:30.</td> </tr>
+  <tr> <td></td>        <td>16:00</td>  <td>Wrap-up</td> </tr>
+  <tr> <td>Tuesday</td> <td>09:00</td>  <td>Version control with Git</td> </tr>
+  <tr> <td></td>        <td></td>       <td>Coffee will be served at 10:30.</td> </tr>
+  <tr> <td></td>        <td>12:00</td>  <td>Lunch break</td> </tr>
+  <tr> <td></td>        <td>13:00</td>  <td>Managing data with SQL</td> </tr>
+  <tr> <td></td>        <td></td>       <td>Coffee will be served at 14:30.</td> </tr>
+  <tr> <td></td>        <td>15:00</td>  <td>Putting it all together</td> </tr>
+  <tr> <td></td>        <td>16:00</td>  <td>Wrap-up</td> </tr>
+</table>
+
+<hr/>
+
+<!--
+    Edit the setup instructions in _includes/setup.html to reflect your bootcamp.
+    (In particular, most bootcamps teach either Python or R, not both.)
+-->
 
 <h2>Setup</h2>
 
-<div class="row-fluid">
-  <div class="span6">
-    {% include setup/overview-bash.html %}
-    {% include setup/overview-editor.html %}
-  </div>
-  <div class="span6">
-    {% include setup/overview-git.html %}
-    {% include setup/overview-python.html %}
-  </div>
-</div>
+<p>
+  To participate in a Software Carpentry bootcamp, 
+  you will need working copies of the software described below.
+  Please make sure to install everything
+  (or at least to download the installers)
+  <em>before</em> the start of your bootcamp.
+</p>
 
-<hr/>
-
-<h2>Topics</h2>
-
-<div class="row-fluid">
-  <div class="span6">
-    <h3><a href="lessons/swc-shell/tutorial.html">The Unix Shell</a></h3>
-    <ul>
-      <li>{% include guide-shell/intro/title.md %}</li>
-      <li>{% include guide-shell/filedir/title.md %}</li>
-      <li>{% include guide-shell/create/title.md %}</li>
-      <li>{% include guide-shell/pipefilter/title.md %}</li>
-      <li>{% include guide-shell/loop/title.md %}</li>
-      <li>{% include guide-shell/scripts/title.md %}</li>
-      <li>{% include guide-shell/find/title.md %}</li>
-    </ul>
-  </div>
-  <div class="span6">
-    <h3><a href="lessons/swc-db/tutorial.html">Databases</a></h3>
-    <ul>
-      <li>{% include guide-db/select/title.md %}</li>
-      <li>{% include guide-db/distinct/title.md %}</li>
-      <li>{% include guide-db/filter/title.md %}</li>
-      <li>{% include guide-db/calc/title.md %}</li>
-      <li>{% include guide-db/sort/title.md %}</li>
-      <li>{% include guide-db/null/title.md %}</li>
-      <li>{% include guide-db/aggregate/title.md %}</li>
-      <li>{% include guide-db/grouping/title.md %}</li>
-      <li>{% include guide-db/join/title.md %}</li>
-      <li>{% include guide-db/create/title.md %}</li>
-      <li>{% include guide-db/transactions/title.md %}</li>
-      <li>{% include guide-db/programming/title.md %}</li>
-    </ul>
-  </div>
-</div>
-
-<hr/>
-
-<h2>Reference Guides</h2>
-
-<ul>
-  <li><a href="{{page.root}}/lessons/ref/shell.html">The Unix Shell</a></li>
-  <li><a href="{{page.root}}/lessons/ref/python.html">Python</a></li>
-  <li><a href="{{page.root}}/lessons/ref/sql.html">SQL</a></li>
-</ul>
+{% include setup.html %}

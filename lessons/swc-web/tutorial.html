@@ -7,135 +7,3380 @@ order: ["history"]
 
 <section>
   <h2>Opening</h2>
-  {% include guide-web/opening.html %}
+
+<div id="s:web:opening" class="opening">
+
+  <p>
+    Carla Climate is studying climate change in the Northern and Southern hemispheres.
+    As part of her work,
+    she wants to see whether the gap between annual temperatures in Canada and Australia
+    increased during the Twentieth Century.
+    The raw data she needs is available online;
+    her goal is to get it,
+    do her calculations,
+    and then post her results so that other scientists can use them.
+  </p>
+
+  <p>
+    This chapter is about how she can do that.
+    More specifically,
+    it's about how to fetch data from the web,
+    and how to create web pages that are useful to both human beings and computers.
+    What we will <em>not</em> cover is how to build interactive web applications;
+    making those secure is more work than we can cover in the time we have.
+    However,
+    everything in this chapter is a prerequisite for interactive apps,
+    and there are other good tutorials available
+    if you decide that's what you really need. Carla's goal is to share with everyone,
+    and that's the easiest kind of site to create.
+  </p>
+
+</div>
+
 </section>
 
 <section>
   <h2>Instructors</h2>
-  {% include guide-web/instructors.html %}
+
+<div id="s:web:instructors" class="instructors">
+  <p>FIXME</p>
+</div>
+
 </section>
 
 <section id="s:web:history">
-  <h2>{% include guide-web/history/title.md %}</h2>
+  <h2>How We Got Here</h2>
   <h3>Objectives</h3>
-  {% include guide-web/history/objectives.html %}
+
+<div id="s:web:history:objectives" class="objectives">
+  <ul>
+    <li>Distinguish between human-readable and machine-readable data.</li>
+    <li>Explain the relationship between HTML and XML.</li>
+  </ul>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-web/history/lesson.html %}
+
+<div id="s:web:history:lesson" class="lesson">
+
+  <p>
+    To start,
+    let's have another look at the hearing tests from
+    <a href="python.html">our chapter on Python programming</a>.
+    Most people would probably store these results in a plain text file
+    with one row for each test:
+  </p>
+
+<pre>
+Date         Experimenter        Subject          Test       Score
+----------   ------------        -------          -----      -----
+2011-05-02   A. Binet            H. Ebbinghaus    DL-11      88%
+2011-05-07   A. Binet            H. Ebbinghaus    DL-12      71%
+2011-05-02   A. Binet            W. Wundt         DL-11      29%
+2011-05-02   C. S. Pierce        W. Wundt         DL-11      45%
+</pre>
+
+  <p>
+    This is pretty much what a conscientious researcher would write in a lab notebook,
+    and is easy for a human being to read.
+    It's a lot harder for a computer to understand, though.
+    Any program that wanted to load this data
+    would have to know that the first line of the file contains column titles,
+    that the second can be ignored,
+    that the first field of each row thereafter should be translated from text into a date,
+    that the fields after that start in particular columns
+    (since the number of spaces between them is variable,
+    and the number of spaces inside names can also vary&mdash;compare
+    "A.&nbsp;Binet" with "C.&nbsp;S.&nbsp;Pierce"),
+    and so on.
+    Such a program would not be hard to write,
+    but having to write, debug, and maintain a separate program for each data set
+    would be tedious.
+  </p>
+
+  <p>
+    Now consider something like this quotation
+    from Richard Feynman's 1965 Nobel Prize acceptance speech:
+  </p>
+
+  <blockquote>
+    As a by-product of this same view,
+    I received a telephone call one day at the graduate college at Princeton from Professor Wheeler,
+    in which he said,
+    "Feynman, I know why all electrons have the same charge and the same mass."
+    "Why?"
+    "Because, they are all the same electron!"
+  </blockquote>
+
+  <p>
+    A lot of information is implicit in these four sentences,
+    like the fact that "Wheeler" and "Feynman" are particular people,
+    that "Princeton" is a place,
+    that the speakers are alternating (with Wheeler speaking first),
+    and so on.
+    None of that is "visible" to a computer program,
+    so if we had a database containing millions of documents
+    and wanted to see which ones mentioned both John Wheeler
+    (the physicist, not the geologist)
+    and Princeton (the university, not the glacier),
+    we might have to wade through a lot of false matches.
+    What we need is some way to explicitly tell a computer
+    all the things that human beings are able to infer.
+  </p>
+
+  <p>
+    An early effort to tackle this problem dates back to 1969,
+    when Charles Goldfarb and others at IBM created
+    the <a href="glossary.html#sgml">Standard Generalized Markup Language</a>, or SGML.
+    It was designed as a way of adding extra data
+    to medical and legal documents
+    so that programs could search them more accurately.
+    SGML was very complex (the specification is over 500 pages long),
+    and unless you were a specialist,
+    you probably didn't even know it existed:
+    all you saw were the programs that used it.
+  </p>
+
+  <p>
+    But in 1989 Tim Berners-Lee borrowed the syntax of SGML
+    to create the <a href="glossary.html#html">HyperText Markup Language</a>, or HTML,
+    for his new "World Wide Web".
+    HTML looked superficially the same as SGML, but it was much (much) simpler:
+    almost anyone could write it, so almost everyone did.
+  </p>
+
+  <p>
+    However, HTML only had a small vocabulary,
+    which users could not change or extend.
+    They could say, "This is a paragraph," or, "This is a table,"
+    but not, "This is a chemical formula," or, "This is a person's name."
+    Instead of adding thousands of new terms for different application domains,
+    a new standard for <em>defining</em> terms was created in 1998.
+    This standard was called the
+    <a href="glossary.html#xml">Extensible Markup Language</a> (XML);
+    it was much more complex than HTML,
+    but hundreds of specialized vocabularies have now been defined in terms of it,
+    such as the <a href="http://www.xml-cml.org/">Chemical Markup Language</a>
+    for describing chemical compounds and related concepts.
+  </p>
+
+  <p>
+    More recently,
+    a new version of HTML called HTML5 has been created.
+    Web programmers are very excited about it,
+    primarily because its new features allow them to create
+    sophisticated user interfaces that run on smart phones and tablets as well as conventional computers.
+    In what follows,
+    though,
+    we'll focus on some basics that haven't changed (much) in 20 years.
+  </p>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-web/history/keypoints.html %}
+
+<div id="s:web:history:keypoints" class="keypoints">
+  <ul>
+    <li>Structured data is much easier for machines to process than unstructured data.</li>
+    <li>Markup languages like HTML and XML can be used to add semantic information to text.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-web/history/challenges.html %}
+
+<div id="s:web:history:challenges" class="challenges">
+  <p>FIXME</p>
+</div>
+
 </section>
 
 <section id="s:web:formatting">
-  <h2>{% include guide-web/formatting/title.md %}</h2>
+  <h2>Formatting Rules</h2>
   <h3>Objectives</h3>
-  {% include guide-web/formatting/objectives.html %}
+
+<div id="s:web:formatting:objectives" class="objectives">
+  <ul>
+    <li>Explain the difference between text, elements, and tags.</li>
+    <li>Explain the difference between a model and a view, and correctly identify instances of each.</li>
+    <li>Write correctly-formatted HTML (using escape sequences for special characters).</li>
+    <li>Identify and fix improperly-nested HTML.</li>
+  </ul>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-web/formatting/lesson.html %}
+
+<div id="s:web:formatting:lesson" class="lesson">
+
+  <p>
+    A basic HTML <a href="glossary.html#document">document</a>
+    contains <a href="glossary.html#text">text</a>
+    and <a href="glossary.html#element">elements</a>.
+    (The full specification allows for many other things
+    with names like "external entity references" and "processing instructions",
+    but we'll ignore them.)
+    The text in a document is just characters,
+    and as far as HTML is concerned,
+    it has no intrinsic meaning:
+    "Feynman" is just seven characters,
+    not a person.
+  </p>
+
+  <p>
+    Elements are <a href="glossary.html#metadata">metadata</a>
+    that describe the meaning of the document's content.
+    For example,
+    one element might signal a heading,
+    while another might indicate that something is a cross-reference.
+  </p>
+
+  <p>
+    Elements are written using <a href="glossary.html#tag-xml">tags</a>,
+    which must be enclosed in angle brackets <code>&lt;&hellip;&gt;</code>.
+    For example, <code>&lt;cite&gt;</code> is used to mark the start of a citation,
+    and <code>&lt;/cite&gt;</code> is used to mark its end.
+    Elements must be properly nested:
+    if an element called <code>inner</code> begins inside an element called <code>outer</code>,
+    <code>inner</code> must end before <code>outer</code> ends.
+    This means that <code>&lt;outer&gt;&hellip;&lt;inner&gt;&hellip;&lt;/inner&gt;&lt;/outer&gt;</code> is legal HTML,
+    but <code>&lt;outer&gt;&hellip;&lt;inner&gt;&hellip;&lt;/outer&gt;&lt;/inner&gt;</code> is not.
+  </p>
+
+  <p>
+    Here are some commonly-used HTML tags:
+  </p>
+
+  <table>
+    <tr>
+      <th>Tag</th>
+      <th>Usage</th>
+    </tr>
+    <tr>
+      <td><code>html</code></td>
+      <td>Root element of entire HTML document.</td>
+    </tr>
+    <tr>
+      <td><code>body</code></td>
+      <td>Body of page (i.e., visible content).</td>
+    </tr>
+    <tr>
+      <td><code>h1</code></td>
+      <td>Top-level heading.  Use <code>h2</code>, <code>h3</code>, etc. for second- and third-level headings.</td>
+    </tr>
+    <tr>
+      <td><code>p</code></td>
+      <td>Paragraph.</td>
+    </tr>
+    <tr>
+      <td><code>em</code></td>
+      <td>Emphasized text.</td>
+    </tr>
+  </table>
+
+  <p>
+    Finally,
+    every well-formed document started with a <code>DOCTYPE</code> declaration,
+    which looks like:
+  </p>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+</pre>
+
+  <p class="continue">
+    This tells programs what kind of elements are allowed to appear in the document:
+    'html' (by far the most common case),
+    'math' for MathML,
+    and so on.
+    Here is a simple HTML document that uses everything we've seen so far:
+  </p>
+  
+<pre>
+&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Dimorphism&lt;/h1&gt;&lt;p&gt;Occurring or existing in two different &lt;em&gt;forms&lt;/em&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+</pre>
+
+  <p>
+    A web browser like Firefox might present this document
+    as shown in <a href="#f:very_simple">Figure XXX</a>.
+    Other devices will display it differently.
+    A phone,
+    for example,
+    might use a different background color for the heading,
+    while a screen reader for people with visual disabilities
+    would read the text aloud.
+  </p>
+
+  <figure id="f:very_simple">
+    <img src="web/very_simple.png" alt="A Very Simple Web Page" />
+    <figcaption>Figure XXX: A Very Simple Web Page</figcaption>
+  </figure>
+
+  <p>
+    These different presentations are possible because
+    HTML separates content from presentation,
+    or in computer science jargon,
+    separates <a href="glossary.html#model">models</a> from <a href="glossary.html#view">views</a>.
+    The model is the data itself;
+    the view is how that data is displayed,
+    such as a particular pattern of pixels on our screen
+    or a particular sequence of sounds on our headphones.
+    A given model may be viewed in many different ways,
+    just as what files are on your hard drive
+    can be viewed as a list,
+    as snapshots,
+    or as a hierarchical tree
+    (<a href="#f:filesystem_views">Figure XXX</a>).
+  </p>
+
+  <figure id="f:filesystem_views">
+    <img src="web/filesystem_views.png" alt="Different Views of a File System" />
+    <figcaption>Figure XXX: Different Views of a File System</figcaption>
+  </figure>
+
+  <p>
+    People can construct models from views almost effortlessly&mdash;if you are able to read,
+    it's almost impossible <em>not</em> to see the letters "HTML"
+    in the following block of text:
+  </p>
+
+<pre>
+*   *  *****  *   *  *
+*   *    *    ** **  *
+*****    *    * * *  *
+*   *    *    *   *  *
+*   *    *    *   *  ****
+</pre>
+
+  <p class="continue">
+    Computers,
+    on the other hand,
+    are very bad at reconstructing models from views.
+    In fact,
+    many of the things we do without apparent effort,
+    like understanding sentences,
+    are still open research problems in computer science.
+    That's why markup languages were invented:
+    they are how we explicitly specify the "what" that we infer so easily
+    for computers' benefit.
+  </p>
+
+  <p>
+    There are a couple of other formatting rules we need to know
+    in order to create and understand documents.
+    If we are writing HTML by hand
+    instead of using a <a href="glossary.html#wysiwyg">WYSIWYG</a> editor
+    like LibreOffice or Microsoft Word,
+    we might lay it out like this to make it easier to read:
+  </p>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+<span class="highlight">  </span>&lt;body&gt;
+<span class="highlight">    </span>&lt;h1&gt;Dimorphism&lt;/h1&gt;
+<span class="highlight">    </span>&lt;p&gt;Occurring or existing in two different &lt;em&gt;forms&lt;/em&gt;.&lt;/p&gt;
+<span class="highlight">  </span>&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <p class="continue">
+    Doing this doesn't change how most browsers render the document,
+    since they usually ignore "extra" whitespace
+    (highlighted above).
+    As we'll see when we start writing programs of our own, though,
+    that whitespace doesn't magically disappear when a program reads the document.
+  </p>
+
+  <p>
+    Second,
+    we must use <a href="glossary.html#escape-sequence">escape sequences</a>
+    to represent the special characters <code>&lt;</code> and <code>&gt;</code>
+    for the same reason that we have to use <code>\&quot;</code>
+    inside a double-quoted string in a program.
+    <span class="fixme">where do we explain escape sequences?</span>
+    In HTML and XML,
+    an escape sequence is an ampersand '&amp;'
+    followed by the abbreviated name of the character
+    (such as 'amp' for "ampersand")
+    and a semi-colon.
+    The four most common escape sequences are:
+  </p>
+
+  <table>
+    <tr>
+      <th>Sequence</th>
+      <th>Character</th>
+    </tr>
+    <tr>
+      <td><code>&amp;lt;</code></td>
+      <td><code>&lt;</code></td>
+    </tr>
+    <tr>
+      <td><code>&amp;gt;</code></td>
+      <td><code>&gt;</code></td>
+    </tr>
+    <tr>
+      <td><code>&amp;quot;</code></td>
+      <td><code>&quot;</code></td>
+    </tr>
+    <tr>
+      <td><code>&amp;amp;</code></td>
+      <td><code>&amp;</code></td>
+    </tr>
+  </table>
+
+  <p>
+    One final formatting rule is that
+    every document must have a single <a href="glossary.html#root-element">root element</a>,
+    i.e., a single element must enclose everything else.
+    When combined with the rule that elements must be properly nested,
+    this means that every document can be thought of as a <a href="glossary.html#tree">tree</a>.
+    For example,
+    we could draw the logical structure of our little document
+    as shown in <a href="#f:very_simple_tree">Figure XXX</a>.
+  </p>
+
+  <figure id="f:very_simple_tree">
+    <img src="web/very_simple_tree.png" alt="Tree View of a Very Simple Web Page" />
+    <figcaption>Figure XXX: Tree View of a Very Simple Web Page</figcaption>
+  </figure>
+
+  <p>
+    A document like this, on the other hand, is not strictly legal:
+  </p>
+
+<pre>
+&lt;h1&gt;Dimorphism&lt;/h1&gt;
+&lt;p&gt;Occurring or existing in two different &lt;em&gt;forms&lt;/em&gt;.&lt;/p&gt;
+</pre>
+
+  <p class="continue">
+    because it has two top-level elements
+    (the <code>h1</code> and the <code>p</code>).
+    Most browsers will render it correctly,
+    since they're designed to accommodate improperly-formatted HTML,
+    but most programs won't,
+    because they're not.
+  </p>
+
+  <div class="box" id="a:beautiful-soup">
+    <h3>Beautiful Soup</h3>
+    <p>
+      There are a lot of incorrectly-formatted HTML pages out there.
+      To deal with them,
+      people have written libraries like <a href="http://www.crummy.com/software/BeautifulSoup/">Beautiful Soup</a>,
+      which does its best to turn real-world HTML into something that
+      a run-of-the-mill program can handle.
+      It almost always gets things right,
+      but sticking to the standard makes life a lot easier for everyone.
+    </p>
+  </div>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-web/formatting/keypoints.html %}
+
+<div id="s:web:formatting:keypoints" class="keypoints">
+  <ul>
+    <li>HTML documents contain elements and text.</li>
+    <li>Elements are represented using tags.</li>
+    <li>Different devices may display HTML differently.</li>
+    <li>Every document must have a single root element.</li>
+    <li>Tags must be properly nested to form a tree.</li>
+    <li>Special characters must be written using escape sequences beginning with &amp;.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-web/formatting/challenges.html %}
+
+<div id="s:web:formatting:challenges" class="challenges">
+  <p>FIXME</p>
+</div>
+
 </section>
 
 <section id="s:web:attributes">
-  <h2>{% include guide-web/attributes/title.md %}</h2>
+  <h2>Attributes</h2>
   <h3>Objectives</h3>
-  {% include guide-web/attributes/objectives.html %}
+
+<div id="s:web:attributes:objectives" class="objectives">
+  <ul>
+    <li>Explain what element attributes are, and what they are for.</li>
+    <li>Write HTML that uses attributes to alter a document's appearance.</li>
+    <li>Explain when to use attributes rather than nested elements.</li>
+  </ul>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-web/attributes/lesson.html %}
+
+<div id="s:web:attributes:lesson" class="lesson">
+
+  <p>
+    Elements can be customized by giving them <a href="glossary.html#attribute">attributes</a>.
+    These are name/value pairs enclosed in the opening tag like this:
+  </p>
+
+<pre>
+&lt;h1 align="center"&gt;A Centered Heading&lt;/h1&gt;
+</pre>
+
+  <p class="continue">
+    or:
+  </p>
+
+<pre>
+&lt;p class="disclaimer"&gt;This planet provided as-is.&lt;/p&gt;
+</pre>
+
+  <p>
+    Any particular attribute name may appear at most once in any element,
+    just like keys may be present at most once in a <a href="setdict.html#s:dict">dictionary</a>,
+    so <code>&lt;p align="left" align="right"&gt;&hellip;&lt;/p&gt;</code> is illegal.
+    Attributes' values <em>must</em> be in quotes in XML and older dialects of HTML;
+    HTML5 allows single-word values to be unquoted,
+    but quoting is still recommended.
+  </p>
+
+  <p>
+    Another similarity between attributes and dictionaries is that
+    attributes are unordered.
+    They have to be <em>written</em> in some order,
+    just as the keys and values in a dictionary have to be displayed in some order when they are printed,
+    but as far as the rules of HTML are concerned,
+    the elements:
+  </p>
+
+<pre>
+&lt;p align="center" class="disclaimer"&gt;This web page is made from 100% recycled pixels.&lt;/p&gt;
+</pre>
+
+  <p class="continue">
+    and:
+  </p>
+
+<pre>
+&lt;p class="disclaimer" align="center"&gt;This web page is made from 100% recycled pixels.&lt;/p&gt;
+</pre>
+
+  <p class="continue">
+    mean the same thing.
+  </p>
+
+  <div class="box">
+    <h3>HTML and Version Control</h3>
+    <p class="fixme">explain</p>
+  </div>
+
+  <p>
+    When should we use attributes, and when should we nest elements?
+    As a general rule,
+    we should use attributes when:
+  </p>
+
+  <ul>
+
+    <li>
+      each value can occur at most once for any element;
+    </li>
+
+    <li>
+      the order of the values doesn't matter; and
+    </li>
+
+    <li>
+      those values have no internal structure,
+      i.e.,
+      we will never need to parse an attribute's value
+      in order to understand it.
+    </li>
+
+  </ul>
+
+  <p class="continue">
+    In all other cases, we should use nested elements.
+    However, many widely-used XML formats break these rules
+    in order to make it easier for people to write XML by hand.
+    For example,
+    in the Scalable Vector Graphics (SVG) format used to describe images as XML,
+    we would define a rectangle as follows:
+  </p>
+
+<pre>
+&lt;rect width="300" height="100" style="fill:rgb(0,0,255); stroke-width:1; stroke:rgb(0,0,0)"/&gt;
+</pre>
+
+  <p class="continue">
+    In order to understand the <code>style</code> attribute,
+    a program has to somehow know to split it on semicolons,
+    and then to split each piece on colons.
+    This means that a generic program for reading XML
+    can't extract all the information that's in SVG,
+    which partly defeats the purpose of using XML in the first place.
+  </p>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-web/attributes/keypoints.html %}
+
+<div id="s:web:attributes:keypoints" class="keypoints">
+  <ul>
+    <li>Elements can be customized by adding key-value pairs called attributes.</li>
+    <li>An element's attributes must be unique, and are unordered.</li>
+    <li>Attribute values should not have any internal structure.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-web/attributes/challenges.html %}
+
+<div id="s:web:attributes:challenges" class="challenges">
+  <p>FIXME</p>
+</div>
+
 </section>
 
 <section id="s:web:morehtml">
-  <h2>{% include guide-web/morehtml/title.md %}</h2>
+  <h2>More HTML</h2>
   <h3>Objectives</h3>
-  {% include guide-web/morehtml/objectives.html %}
+
+<div id="s:web:morehtml:objectives" class="objectives">
+  <ul>
+    <li>Write correctly-formatted HTML pages containing lists, tables, images, and links.</li>
+    <li>Add correctly-formatted metadata to the head of an HTML page.</li>
+  </ul>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-web/morehtml/lesson.html %}
+
+<div id="s:web:morehtml:lesson" class="lesson">
+
+  <p>
+    As anyone who has surfed the web has seen,
+    web pages can contain a lot more than just headings and paragraphs.
+    To start with,
+    HTML provides two kinds of lists:
+    <code>ul</code> to mark an unordered (bulleted) list,
+    and <code>ol</code> for an ordered (numbered) one
+    (<a href="#f:nested_lists">Figure XXX</a>).
+    Items inside either kind of list must be wrapped in <code>li</code> elements:
+  </p>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;ul&gt;
+      &lt;li&gt;A. Binet
+        &lt;ol&gt;
+          &lt;li&gt;H. Ebbinghaus&lt;/li&gt;
+          &lt;li&gt;W. Wundt&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;C. S. Pierce
+        &lt;ol&gt;
+          &lt;li&gt;W. Wundt&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <figure id="f:nested_lists">
+    <img src="web/nested_lists.png" alt="Nested Lists"/>
+    <figcaption>Figure XXX: Nested Lists</figcaption>
+  </figure>
+
+  <p class="continue">
+    Note how elements are nested:
+    since the ordered lists "belong" to the unordered list items above them,
+    they are inside those items' <code>&lt;li&gt;&hellip;&lt;/li&gt;</code> tags.
+    And remember,
+    the indentation used to make this list easier for people to read
+    means nothing to the computer:
+    we could put the whole thing on one line,
+    or write it as:
+  </p>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+  &lt;ul&gt;
+    &lt;li&gt;A. Binet
+  &lt;ol&gt;
+    &lt;li&gt;H. Ebbinghaus&lt;/li&gt;
+    &lt;li&gt;W. Wundt&lt;/li&gt;
+  &lt;/ol&gt;
+    &lt;/li&gt;
+    &lt;li&gt;C. S. Pierce
+  &lt;ol&gt;
+    &lt;li&gt;W. Wundt&lt;/li&gt;
+  &lt;/ol&gt;
+    &lt;/li&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <p class="continue">
+    and the computer would interpret and display it the same way.
+    A human being,
+    on the other hand,
+    would find the inconsistent indentation of the second layout
+    much harder to follow.
+  </p>
+
+  <p>
+    HTML also provides tables, but they are awkward to use:
+    tables are naturally two-dimensional,
+    but text is one-dimensional.
+    This is exactly like the problem of representing a two-dimensional array in memory,
+    which we saw in the <a href="numpy.html#s:storage">NumPy</a>
+    and <a href="dev.html#s:storage">development</a> lessons.
+    We solve it in the same way:
+    by writing down the rows,
+    and the columns within each row,
+    in a fixed order.
+    The <code>table</code> element marks the table itself;
+    within that,
+    each row is wrapped in <code>tr</code> (for "table row"),
+    and within those,
+    column items are wrapped in <code>th</code> (for "table heading")
+    or <code>td</code> (for "table data"):
+  </p>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;table&gt;
+      &lt;tr&gt;
+        &lt;th&gt;&lt;/th&gt;
+        &lt;th&gt;A. Binet&lt;/th&gt;
+        &lt;th&gt;C. S. Pierce&lt;/th&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;th&gt;H. Ebbinghaus&lt;/th&gt;
+        &lt;td&gt;88%&lt;/td&gt;
+        &lt;td&gt;NA&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;th&gt;W. Wundt&lt;/th&gt;
+        &lt;td&gt;29%&lt;/td&gt;
+        &lt;td&gt;45%&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <figure id="f:simple_table">
+    <img src="web/simple_table.png" alt="A Simple Table" />
+    <figcaption>A Simple Table</figcaption>
+  </figure>
+
+  <div class="box">
+    <h3>Tables, Layout, and CSS</h3>
+
+    <p>
+      Tables are sometimes used to do multi-column layout,
+      as well as for tabular data,
+      but this is a bad idea.
+      To understand why,
+      consider two other HTML tags:
+      <code>i</code>, meaning "italics",
+      and <code>em</code>, meaning "emphasis".
+      The former directly controls how text is displayed,
+      but by doing so,
+      it breaks the separation between model and view that is the heart of markup's usefulness.
+      Without understanding the text that has been italicized,
+      a program cannot understand whether it is meant to indicate someone shouting,
+      the definition of a new term,
+      or the title of a book.
+      The <code>em</code> tag, on the other hand, has exactly one meaning,
+      and that meaning is different from the meaning of <code>dfn</code> (a definition)
+      or <code>cite</code> (a citation).
+    </p>
+
+    <p>
+      Conscientious authors use <a href="glossary.html#css">Cascading Style Sheets</a> (or CSS)
+      to describe how they want pages to appear,
+      and only use <code>table</code> elements for actual tables.
+      CSS is beyond the scope of this lesson,
+      but is described briefly in <a href="extras.html#s:web:css">the appendix</a>.
+    </p>
+
+  </div>
+
+  <p>
+    HTML pages can also contain images.
+    (In fact,
+    the World Wide Web didn't really take off until
+    the Mosaic browser allowed people to mix images with text.)
+    The word "contain" is misleading, though:
+    HTML documents can only contain text,
+    so we cannot store an image "in" a page.
+    Instead,
+    we must put it in some other file,
+    and insert a reference to that file in the HTML using the <code>img</code> tag.
+    Its <code>src</code> attribute specifies where to find the image file;
+    this can be a path to a file on the same host as the web page,
+    or a URL for something stored elsewhere.
+    For example,
+    when a browser displays this:
+  </p>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;My daughter's first online chat:&lt;/p&gt;
+    &lt;img src="madeleine.jpg"/&gt;
+    &lt;p&gt;but probably not her last.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <p class="continue">
+    it looks for the file <code>madeleine.jpg</code>
+    in the same directory as the HTML file:
+  </p>
+
+  <figure id="f:simple_image">
+    <img src="web/simple_image.png" alt="Simple Images" />
+    <figcaption>Figure XXX: Simple Images</figcaption>
+  </figure>
+
+  <p>
+    Notice,
+    by the way,
+    that the <code>img</code> element is written as
+    <code>&lt;img&hellip;/&gt;</code>,
+    i.e.,
+    with a trailing slash inside the <code>&lt;&gt;</code>
+    rather than with a separate closing tag.
+    This makes sense because the element doesn't contain any text:
+    the content is referred to by its <code>src</code> attribute.
+    Any element that doesn't contain anything
+    can be written using this short form.
+  </p>
+
+  <p>
+    Images don't have to be in the same directory as the pages that refer to them.
+    When the browser displays this:
+  </p>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;Yes, she knows she's cute:&lt;/p&gt;
+    &lt;img src="img/cute-smile.jpg"/&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <p class="continue">
+    it looks in the directory containing the page
+    for a sub-directory called <code>img</code>,
+    and loads the image file from there,
+    while if it's given:
+  </p>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;img src="http://software-carpentry.org/img/software-carpentry-logo.png"/&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <p class="continue">
+    it downloads the image from the URL
+    <code>http://software-carpentry.org/img/software-carpentry-logo.png</code>
+    and displays that.
+  </p>
+
+  <div class="box">
+    <h3>It's Always Interpreted</h3>
+    <p class="fixme">The path is <em>always</em> interpreted (web browser config)</p>
+  </div>
+
+  <p>
+    Whenever we refer to an image,
+    we should use the <code>img</code> tag's <code>alt</code> attribute
+    to provide a title or description of the image.
+    This is what screen readers for people with visual handicaps will say aloud to "display" the image;
+    it's also what search engines rely on,
+    since they can't "see" the image either.
+    Adding this to our previous example gives:
+  </p>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;My daughter's first online chat:&lt;/p&gt;
+    &lt;img src="madeleine.jpg" <span class="highlight">alt="Madeleine's first online chat"</span>/&gt;
+    &lt;p&gt;but probably not her last.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <p>
+    We can use URLs for images,
+    but their most important use is
+    to create the links within and between pages that make HTML "hypertext".
+    This is done using the <code>a</code> element.
+    Whatever is inside the element is displayed and highlighted for clicking;
+    this is usually a few words of text,
+    but it can be an entire paragraph or an image.
+  </p>
+
+  <p>
+    The <code>a</code> element's <code>href</code> attribute
+    specifies what the link is pointing at;
+    as with images,
+    this can be either a local filename or a URL.
+    For example,
+    we can create a listing of the examples we've written so far like this
+    (<a href="#f:simple_listing">Figure XXX</a>):
+  </p>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      Simple HTML examples for
+      &lt;a href="http://software-carpentry.org"&gt;Software Carpentry&lt;/a&gt;.
+    &lt;/p&gt;
+    &lt;ol&gt;
+      &lt;li&gt;&lt;a href="very-simple.html"&gt;a very simple page&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="hide-paragraph.html"&gt;hiding paragraphs&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="nested-lists.html"&gt;nested lists&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="simple-table.html"&gt;a simple table&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="simple-image.html"&gt;a simple image&lt;/a&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <figure id="f:simple_listing">
+    <img src="web/simple_listing.png" alt="Using Hyperlinks" />
+    <figcaption>Figure XXX: Using Hyperlinks</figcaption>
+  </figure>
+
+  <p>
+    The hyperlink element is called <code>a</code> because
+    it can also used to create <a href="glossary.html#anchor">anchors</a> in documents
+    by giving them a <code>name</code> attribute instead of an <code>href</code>.
+    An anchor is simply a location in a document that can be linked to.
+    For example,
+    suppose we formatted the Feynman quotation given earlier like this:
+  </p>
+
+<pre>
+&lt;blockquote&gt;
+  As a by-product of this same view, I received a telephone call one day
+  at the graduate college at &lt;a name="pu"&gt;Princeton&lt;/a&gt;
+  from Professor Wheeler, in which he said,
+  "Feynman, I know why all electrons have the same charge and the same mass."
+  "Why?"
+  "Because, they are all the same electron!"
+&lt;/blockquote&gt;
+</pre>
+
+  <p class="continue">
+    If this quotation was in a file called <code>quote.html</code>,
+    we could then create a hyperlink directly to the mention of Princeton
+    using <code>&lt;a&nbsp;href="quote.html#pu"&gt;</code>.
+    The <code>#</code> in the <code>href</code>'s value separates the path to the document
+    from the anchor we're linking to.
+    Inside <code>quote.html</code> itself,
+    we could link to that same location simply using
+    <code>&lt;a&nbsp;href="#pu"&gt;</code>.
+  </p>
+
+  <p>
+    Using the <code>a</code> element for both links and targets was poor design&mdash;programs
+    are simpler to write if each element has one purpose, and one alone&mdash;but
+    we're stuck with it now.
+    A better way to create anchors is to add an <code>id</code> attribute
+    to some other element.
+    For example,
+    if we wanted to be able to link to the quotation itself,
+    we could write:
+  </p>
+
+<pre>
+&lt;blockquote <span class="highlight">id="wheeler-electron-quote"</span>&gt;
+  As a by-product of this same view, I received a telephone call one day
+  at the graduate college at &lt;a name="pu"&gt;Princeton&lt;/a&gt;
+  from Professor Wheeler, in which he said,
+  "Feynman, I know why all electrons have the same charge and the same mass."
+  "Why?"
+  "Because, they are all the same electron!"
+&lt;/blockquote&gt;
+</pre>
+
+  <p class="continue">
+    and then refer to <code>quote.html#wheeler-electron-quote</code>.
+  </p>
+
+  <p>
+    Finally,
+    well-written HTML pages have a <code>head</code> element as well as a <code>body</code>.
+    The head isn't displayed;
+    instead,
+    it's used to store metadata about the page as a whole.
+    The most common element inside <code>head</code> is <code>title</code>,
+    which,
+    as its name suggests,
+    gives the page's title.
+    (This is usually displayed in the browser's title bar.)
+    Another common item in the head is <code>meta</code>,
+    whose two attributes <code>name</code> and <code>content</code>
+    let authors add arbitrary information to their pages.
+    If we add these to the web page we wrote earlier,
+    we might have:
+  </p>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Dimorphism Defined&lt;title&gt;
+    &lt;meta name="author" content="Alan Turing"/&gt;
+    &lt;meta name="institution" content="Euphoric State University"/&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Dimorphism&lt;/h1&gt;
+    &lt;p&gt;Occurring or existing in two different &lt;em&gt;forms&lt;/em&gt;.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <p>
+    Well-written pages also use comments (just like code),
+    which start with <code>&lt;!--</code> and end with <code>--&gt;</code>.
+  </p>
+
+  <div class="box" id="a:hide-paragraph">
+    <h3>Hiding Content</h3>
+
+    <p>
+      Commenting out part of a page does <em>not</em> hide the content
+      from people who really want to see it:
+      while a browser won't display what's inside a comment,
+      it's still in the page,
+      and anyone who uses "View Source" can read it.
+      For example,
+      if you are looking at this page in a web browser right now,
+      try viewing the source
+      and searching for the word "Surprise".
+    </p>
+
+    <!-- Surprise: this isn't displayed by the browser, but is still in the document. -->
+
+    <p>
+      If you really don't want people to be able to read something,
+      the only safe thing to do is to keep it off the web.
+    </p>
+
+  </div>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-web/morehtml/keypoints.html %}
+
+<div id="s:web:morehtml:keypoints" class="keypoints">
+  <ul>
+    <li>Put metadata in <code>meta</code> elements in a page's <code>head</code> element.</li>
+    <li>Use <code>ul</code> for unordered lists and <code>ol</code> for ordered lists.</li>
+    <li>Add comments to pages using <code>&lt;!--</code> and <code>--&gt;</code>.</li>
+    <li>Use <code>table</code> for tables, with <code>tr</code> for rows and <code>td</code> for values.</li>
+    <li>Use <code>img</code> for images.</li>
+    <li>Use <code>a</code> to create hyperlinks.</li>
+    <li>Give elements a unique <code>id</code> attribute to link to it.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-web/morehtml/challenges.html %}
+
+<div id="s:web:morehtml:challenges" class="challenges">
+  <p>FIXME</p>
+</div>
+
 </section>
 
 <section id="s:web:templating">
-  <h2>{% include guide-web/templating/title.md %}</h2>
+  <h2>Creating Documents</h2>
   <h3>Objectives</h3>
-  {% include guide-web/templating/objectives.html %}
+
+<div id="s:web:templating:objectives" class="objectives">
+  <ul>
+    <li>Explain how page templating works.</li>
+    <li>Use Jinja2 to create and compile a templated page that uses conditionals and loops.</li>
+  </ul>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-web/templating/lesson.html %}
+
+<div id="s:web:templating:lesson" class="lesson">
+
+  <p>
+    Turning a Python list into an HTML <code>ol</code> or <code>ul</code> list
+    seems like a natural thing to do,
+    so you might expect that programmers would have created libraries to do it.
+    In fact,
+    they have gone one step further
+    and creating systems that allow people to put bits of code directly into HTML files.
+    Such a file is usually called a <a href="glossary.html#template">template</a>,
+    since it is the general pattern for any number of potential pages.
+  </p>
+
+  <p>
+    Here's a simple example.
+    Suppose we want to create a set of web pages
+    to display point-form biographies of famous scientists.
+    We want each page to look like this:
+  </p>
+
+<pre>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Biography of Beatrice Tinsley&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Beatrice Tinsley&lt;/h1&gt;
+    &lt;ol&gt;
+      &lt;li&gt;Born 1941&lt;/li&gt;
+      &lt;li&gt;Died 1981&lt;/li&gt;
+      &lt;li&gt;Studied stellar aging&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <p class="continue">
+    but since we expect to have hundreds of such pages,
+    we don't want to write each one by hand.
+    (We certainly don't want to have to <em>revise</em> each one by hand
+    when the university decides it wants them in a slightly different format...)
+    To make things easier on ourselves,
+    let's create a single template page called <code>biography.html</code>
+    that contains:
+  </p>
+
+{% raw %}
+<pre>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Biography of {{name}}&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;{{name}}&lt;/h1&gt;
+    &lt;ol&gt;
+      {% for f in facts %}
+      &lt;li&gt;{{f}}&lt;/li&gt;
+      {% endfor %}
+    &lt;/ol&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+{% endraw %}
+
+  <p>
+    This has the same general structure as a general biography,
+    but there are a few changes:
+    it uses <code>{{name}}</code> instead of the scientist's name,
+    and rather than listing each biographical detail,
+    it has something that looks a lot like a <code>for</code> loop
+    that iterates over something called <code>facts</code>.
+  </p>
+
+  <p>
+    What we need next is a program that can expand this template
+    using particular values for <code>name</code> and <code>facts</code>.
+    We will use a Python template library called Jinja2 to do this;
+    there are many others
+    but they all work in more or less the same way
+    (which means, "They each have their own slightly different rules
+    for what can go in a page and how it's expanded.").
+  </p>
+
+  <p>
+    First,
+    let's put all the values we want to customize the page with into variables:
+  </p>
+
+<pre>
+who = 'Beatrice Tinsley'
+what = ['Born 1941', 'Died 1981', 'Studied stellar aging']
+</pre>
+
+  <p>
+    Next,
+    we have to import the Jinja2 library
+    and do a bit of magic to load the template for our page:
+  </p>
+
+<pre>
+import jinja2
+
+loader = jinja2.FileSystemLoader(['.'])
+environment = jinja2.Environment(loader=loader)
+template = environment.get_template('biography.html')
+</pre>
+
+  <p class="continue">
+    We start by importing the <code>jinja2</code> library,
+    and then create an object called a "loader".
+    Its job is to find template files and load them into memory;
+    its argument is a list of the directories we want it to search (in order).
+    For now,
+    we are only looking in the current directory,
+    so the list is just <code>['.']</code>
+    (i.e., the current directory).
+  </p>
+
+  <p>
+    Once we have that loader,
+    we use it to create a Jinja2 "environment",
+    which&mdash;well, honestly,
+    we don't need two separate objects for what we're doing,
+    but more complicated applications might need several loaders,
+    or might be expanding different sets of templates in different ways,
+    and the <code>Environment</code> object is where all that is handled.
+  </p>
+
+  <p>
+    What we <em>really</em> want is the last line,
+    which asks the environment to load the template file <code>'biography.html'</code>
+    and give us an object that knows how to expand itself.
+    We're now ready to do the actual expansion:
+  </p>
+
+<pre>
+result = template.render(name=who, facts=what)
+print result
+</pre>
+
+{% raw %}
+  <p class="continue">
+    When we call <code>template.render</code>,
+    we pass it any number of name-value pairs.
+    (Remember,
+    the odd-looking expression <code>name=who</code> in the function call
+    <a href="python.html#a:default-value">means</a>,
+    "Assign the value of the variable <code>who</code> in the calling code
+    to the parameter called <code>name</code> inside the function.")
+    Those names are turned into variables,
+    and can be used inside the template,
+    so that <code>{{name}}</code> is given the string <code>'Beatrice Tinsley'</code>
+    and <code>facts</code> is given our list of facts about her.
+  </p>
+{% endraw %}
+
+  <p>
+    The method call <code>template.render</code> "runs" the template
+    as if it were a program,
+    and returns the string that's created.
+    When we print it out,
+    we get:
+  </p>
+
+<pre>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Biography of Beatrice Tinsley&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Beatrice Tinsley&lt;/h1&gt;
+    &lt;ol&gt;
+      
+      &lt;li&gt;Born 1941&lt;/li&gt;
+      
+      &lt;li&gt;Died 1981&lt;/li&gt;
+      
+      &lt;li&gt;Studied stellar aging&lt;/li&gt;
+      
+    &lt;/ol&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <p>
+    Why go to all of this trouble?
+    Because if we want to create another page with exactly the same format,
+    all we have to do is call:
+  </p>
+
+<pre>
+result = template.render(name='Helen Sawyer Hogg',
+                         facts=['Born 1905',
+                                'Died 1993',
+                                'Studied globular clusters',
+                                'Wrote a popular astronomy column for 30 years'])
+</pre>
+
+  <p class="continue">
+    and we will get:
+  </p>
+
+<pre>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Biography of Helen Sawyer Hogg&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Helen Sawyer Hogg&lt;/h1&gt;
+    &lt;ol&gt;
+      
+      &lt;li&gt;Born 1905&lt;/li&gt;
+      
+      &lt;li&gt;Died 1993&lt;/li&gt;
+      
+      &lt;li&gt;Studied globular clusters&lt;/li&gt;
+      
+      &lt;li&gt;Wrote a popular astronomy column for 30 years&lt;/li&gt;
+      
+    &lt;/ol&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <div class="box">
+    <h3>Pros and Cons of Templating</h3>
+
+    <p>
+      Putting code in HTML templates and then expanding that to create actual pages
+      has advantages and disadvantages.
+      The main advantage is that simple things are simple to do:
+      the biography template shown above is a lot easier to understand than either
+      a bunch of <code>print</code> statements,
+      or a set of functions that
+      <a href="extras.html#s:web:creating">construct a document in memory</a>
+      and then turn the result into a string.
+    </p>
+
+    <p>
+      The other big advantage of templating is that
+      all of the generated pages are guaranteed to have the same format.
+      If subsections are marked with an <code>h2</code> heading in one,
+      they'll be marked with an <code>h2</code> in all the others.
+      This makes it easier for programs to read and process those pages.
+    </p>
+
+    <p>
+      The biggest drawback of templating is the lack of support for debugging.
+      It's very common for template expansion to do what you said,
+      rather than what you meant,
+      and working backward from a page that has the wrong content
+      to the bits of template that weren't quite right
+      can be complicated.
+      One way to keep it manageable is
+      to keep the templates as simple as possible.
+      Any calculations more complicated than simple addition
+      should be done in the program,
+      and the result passed in as a variable.
+      Similarly,
+      while deeply-nested conditional statements in programs are hard to understand,
+      their equivalents in templates are even harder,
+      and so should be avoided.
+    </p>
+
+  </div>
+
+  <p>
+    Jinja2 templates support all the basic features of Python.
+    For example,
+    we can modify our template file to say:
+  </p>
+
+{% raw %}
+<pre>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Biography of {{name}}&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;{{name}}&lt;/h1&gt;
+    <span class="highlight">{% if facts %}</span>
+      &lt;ol&gt;
+        {% for f in facts %}
+        &lt;li&gt;{{f}}&lt;/li&gt;
+        {% endfor %}
+      &lt;/ol&gt;
+    <span class="highlight">{% else %}
+      &lt;p&gt;No facts available.&lt;p&gt;
+    {% endif %}</span>
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+{% endraw %}
+
+  <p class="continue">
+    so that if the list <code>facts</code> is empty,
+    the page displays a paragraph saying that,
+    rather than an empty ordered list.
+    We can also tell Jinja2 to include one template in another,
+    so that if we want every page to have the same logo and license statement,
+    we can use:
+  </p>
+
+{% raw %}
+<pre>
+{% include "logo.html" %}
+</pre>
+{% endraw %}
+
+  <p class="continue">
+    at the top,
+    and:
+  </p>
+
+{% raw %}
+<pre>
+{% include "license.html" %}
+</pre>
+{% endraw %}
+
+  <p class="continue">
+    at the bottom.
+  </p>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-web/templating/keypoints.html %}
+
+<div id="s:web:templating:keypoints" class="keypoints">
+  <ul>
+    <li>Use a page templating system like Jinja2 to generate web pages from data.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-web/templating/challenges.html %}
+
+<div id="s:web:templating:challenges" class="challenges">
+  <p>FIXME</p>
+</div>
+
 </section>
 
 <section id="s:web:http">
-  <h2>{% include guide-web/http/title.md %}</h2>
+  <h2>How the Web Works</h2>
   <h3>Objectives</h3>
-  {% include guide-web/http/objectives.html %}
+
+<div id="s:web:http:objectives" class="keypoints">
+  <ul>
+    <li>Explain what IP addresses, host names, and sockets are.</li>
+    <li>Draw a diagram of HTTP's request-response cycle and explain the major steps.</li>
+    <li>Draw a diagram showing what information HTTP requests and responses contain.</li>
+    <li>Explain the difference between client-server and peer-to-peer architectures, and give an example of each.</li>
+  </ul>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-web/http/lesson.html %}
+
+<div id="s:web:http:lesson" class="lesson">
+
+  <p>
+    Now that we know how to read and write the web's most common data format,
+    it's time to look at how data is moved around on the web.
+    Broadly speaking,
+    web applications are built in one of two ways.
+    In a <a href="glossary.html#client-server-architecture">client/server architecture</a>
+    many <a href="glossary.html#client">clients</a>
+    communicate with a central <a href="glossary.html#server">server</a>
+    (<a href="#f:client_server">Figure XXX</a>).
+    This model is asymmetric:
+    clients ask for things,
+    and servers provide them.
+    Web browsers and web servers like Firefox and Apache are the best-known example of this model,
+    but many <a href="db.html#a:dbms">database management systems</a>
+    also use a client/server architecture.
+  </p>
+
+  <figure id="f:client_server">
+    <img src="web/client_server.png" alt="Client-Server Architecture" />
+    <figcaption>Figure XXX: Client-Server Architecture</figcaption>
+  </figure>
+
+  <p>
+    In contrast,
+    a <a href="glossary.html#peer-to-peer-architecture">peer-to-peer architecture</a>
+    is one in which all processes exchange information equally
+    (<a href="#f:peer_to_peer">Figure XXX</a>).
+    This is symmetric:
+    every participant both provides and receives data.
+    The most widely used example today is probably BitTorrent,
+    but again,
+    there are many others.
+    Peer-to-peer systems are generally harder to design than client-server systems,
+    but they are also more resilient:
+    if a centralized web server fails,
+    the whole system goes down,
+    while if one node in a filesharing network goes down,
+    the rest can (usually) carry on.
+  </p>
+
+  <figure id="f:peer_to_peer">
+    <img src="web/peer_to_peer.png" alt="Peer-to-Peer Architecture" />
+    <figcaption>Peer-to-Peer Architecture</figcaption>
+  </figure>
+
+  <p>
+    Under the hood,
+    both kinds of systems
+    (and pretty much every other program that uses the network)
+    run on a family of communication standards called
+    <a href="glossary.html#internet-protocol">Internet Protocol</a> (IP).
+    IP breaks messages down into small <a href="glossary.html#packet">packets</a>,
+    each of which is forwarded from one machine to another
+    along any available route to its destination,
+    where the whole message is reassembled
+    (<a href="#f:packets">Figure XXX</a>).
+  </p>
+
+  <figure id="f:packets">
+    <img src="web/packets.png" alt="Packet-Based Communication" />
+    <figcaption>Figure XXX: Packet-Based Communication</figcaption>
+  </figure>
+
+  <p>
+    The only part of IP that concerns us is
+    the <a href="glossary.html#tcp">Transmission Control Protocol</a> (TCP/IP).
+    It guarantees that every packet we send is received,
+    and that packets are received in the right order.
+    Putting it another way,
+    it turns an unreliable stream of disordered packets
+    into a reliable, ordered stream of data,
+    so that communication between computers looks as much as possible
+    like reading and writing files.
+    (<a href="#f:streams">Figure XXX</a>).
+  </p>
+
+  <figure id="f:streams">
+    <img src="web/streams.png" alt="Building Streams Out of Packets" />
+    <figcaption>Figure XXX: Building Streams Out of Packets</figcaption>
+  </figure>
+
+  <p>
+    Programs using IP communicate through <a href="glossary.html#socket">sockets</a>.
+    Each socket is one end of a point-to-point communication channel,
+    just like a phone is one end of a phone call.
+    A socket is identified by two numbers.
+    The first is its <a href="glossary.html#host-address">host address</a>
+    or <a href="glossary.html#ip-address">IP address</a>,
+    which identifies a particular machine on the network.
+    This address consists of four 8-bit numbers,
+    such as <code>208.113.154.118</code>.
+    The <a href="glossary.html#dns">Domain Name System</a> (DNS)
+    matches these numbers to symbolic names like <code>software-carpentry.org</code>
+    that are easier for human beings to remember.
+    We can use tools like <code>nslookup</code> to query DNS directly:
+  </p>
+
+<pre>
+$ <span class="in">nslookup software-carpentry.org</span>
+<span class="out">Server:  admin1.private.tor1.mozilla.com
+Address:  10.242.75.5
+
+Non-authoritative answer:
+Name:    software-carpentry.org
+Address:  173.236.199.157</span>
+</pre>
+
+  <p>
+    A socket's <a href="glossary.html#port">port number</a>
+    is just a number in the range 0-65535
+    that uniquely identifies the socket on the host machine.
+    (If the IP address is like a university's phone number,
+    then the port number is the extension.)
+    Ports 0-1023 are reserved for the operating system's use;
+    anyone else can use the remaining ports
+    (<a href="#f:ports">Figure XXX</a>).
+  </p>
+
+  <figure id="f:ports">
+    <img src="web/ports.png" alt="Ports"/>
+    <figcaption>Figure XXX: Ports</figcaption>
+  </figure>
+
+  <p>
+    The <a href="glossary.html#http">Hypertext Transfer Protocol</a> (HTTP)
+    sits on top of TCP/IP.
+    It describes one way that programs can exchange web pages and other data,
+    such as image files.
+    The communicating parties were originally web browsers and web servers,
+    but HTTP is now used by many other kinds of applications as well.
+  </p>
+
+  <p>
+    In principle,
+    HTTP is simple:
+    the client sends a request specifying what it wants over a socket connection,
+    and the server sends some data in response.
+    The data may be HTML copied from a file on disk,
+    a similar page generated dynamically by a program,
+    an image,
+    or just about anything else
+    (<a href="#f:http_cycle">Figure XXX</a>).
+  </p>
+
+  <figure id="f:http_cycle">
+    <img src="web/http_cycle.png" alt="HTTP Request Cycle"/>
+    <figcaption>Figure XXX: HTTP Request Cycle</figcaption>
+  </figure>
+
+  <div class="box">
+    <h3>The Internet vs. the Web</h3>
+
+    <p>
+      A lot of people use the terms "Internet" and "World Wide Web" synonymously,
+      but they're actually very different things.
+      The Internet is what lets (almost) any computer communicate with (almost) any other.
+      That communication can be email,
+      File Transfer Protocol (FTP),
+      streaming video,
+      or any of a hundred other things.
+      The World Wide Web,
+      on the other hand,
+      is just one particular way to share data on top of
+      the network that the Internet provides.
+    </p>
+
+  </div>
+
+  <p>
+    An HTTP request has three parts
+    (<a href="#f:http_request">Figure XXX</a>).
+    The HTTP method is almost always either
+    <a href="glossary.html#http-get"><code>"GET"</code></a>
+    (to fetch information)
+    or
+    <a href="glossary.html#http-post"><code>"POST"</code></a>
+    (to submit form data or upload files).
+    The URL specifies what the client wants;
+    it may be a path to a file on disk,
+    such as <code>/research/experiments.html</code>,
+    but it's entirely up to the server to decide what to send back.
+    The HTTP version is usually <code>"HTTP/1.0"</code> or <code>"HTTP/1.1"</code>;
+    the differences between the two don't matter to us.
+  </p>
+
+  <figure id="f:http_request">
+    <img src="web/http_request.png" alt="HTTP Request"/>
+    <figcaption>Figure XXX: HTTP Request</figcaption>
+  </figure>
+
+  <p>
+    An <a href="glossary.html#http-header">HTTP header</a> is a key/value pair,
+    such as the three shown below:
+  </p>
+
+<pre>
+Accept: text/html
+Accept-Language: en, fr
+If-Modified-Since: 16-May-2005
+</pre>
+
+  <p class="continue">
+    A key may appear any number of times,
+    so that (for example)
+    a request can specify that it's willing to accept several types of content.
+  </p>
+
+  <p>
+    The body is any extra data associated with the request.
+    This is used when submitting data via web forms,
+    when uploading files,
+    and so on.
+    There <em>must</em> be a blank line between the last header and the start of the body
+    to signal the end of the headers;
+    forgetting it is a common mistake.
+  </p>
+
+  <p>
+    One header,
+    called <code>Content-Length</code>,
+    tells the server how many bytes to expect to read in the body of the request.
+    There's no magic in any of this:
+    an HTTP request is just text,
+    and any program that wants to can create one or parse one.
+  </p>
+
+  <figure id="f:http_response">
+    <img src="web/http_response.png" alt="HTTP Response"/>
+    <figcaption>Figure XXX: HTTP REsponse</figcaption>
+  </figure>
+
+  <p>
+    HTTP responses are formatted like HTTP requests
+    (<a href="#f:http_response">Figure XXX</a>).
+    The version, headers, and body have the same form
+    and mean the same thing.
+    The status code is a number indicating what happened
+    when the request was processed by the server.
+    200 means "everything worked",
+    404 means "not found",
+    and other codes have other meanings
+    (<a href="#f:http_codes">Figure XXX</a>).
+    The status phrase repeats that information in a human-readable phrase
+    like "OK" or "not found".
+  </p>
+
+  <figure id="f:http_codes">
+    <table>
+      <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Meaning</th>
+      </tr>
+      <tr>
+        <td>100</td>
+        <td>Continue</td>
+        <td>Client should continue sending data</td>
+      </tr>
+      <tr>
+        <td>200</td>
+        <td>OK</td>
+        <td>The request has succeeded</td>
+      </tr>
+      <tr>
+        <td>204</td>
+        <td>No Content</td>
+        <td>The server has completed the request, but doesn't need to return any data</td>
+      </tr>
+      <tr>
+        <td>301</td>
+        <td>Moved Permanently</td>
+        <td>The requested resource has moved to a new permanent location</td>
+      </tr>
+      <tr>
+        <td>307</td>
+        <td>Temporary Redirect</td>
+        <td>The requested resource is temporarily at a different location</td>
+      </tr>
+      <tr>
+        <td>400</td>
+        <td>Bad Request</td>
+        <td>The request is badly formatted</td>
+      </tr>
+      <tr>
+        <td>401</td>
+        <td>Unauthorized</td>
+        <td>The request requires authentication</td>
+      </tr>
+      <tr>
+        <td>404</td>
+        <td>Not Found</td>
+        <td>The requested resource could not be found</td>
+      </tr>
+      <tr>
+        <td>408</td>
+        <td>Timeout</td>
+        <td>The server gave up waiting for the client</td>
+      </tr>
+      <tr>
+        <td>418</td>
+        <td>I'm a teapot</td>
+        <td>No, really</td>
+      </tr>
+      <tr>
+        <td>500</td>
+        <td>Internal Server Error</td>
+        <td>An error occurred in the server that prevented it fulfilling the request</td>
+      </tr>
+      <tr>
+        <td>601</td>
+        <td>Connection Timed Out</td>
+        <td>The server did not respond before the connection timed out</td>
+      </tr>
+    </table>
+    <figcaption>Figure XXX: HTTP Codes</figcaption>
+  </figure>
+
+  <p>
+    The one other thing that we need to know about HTTP is that
+    it is <a href="glossary.html#stateless-protocol">stateless</a>:
+    each request is handled on its own,
+    and the server doesn't remember anything between one request and the next.
+    If an application wants to keep track of something like a user's identity,
+    it must do so itself.
+    The usual way to do this is with a <a href="glossary.html#cookie">cookie</a>,
+    which is just a short character string that the server sends to the client,
+    and the client later returns to the server
+    (<a href="#f:cookies">Figure XXX</a>).
+    When a user signs in,
+    the server creates a new cookie,
+    stores it in a database,
+    and sends it to their browser.
+    Each time the browser sends the cookie back,
+    the server uses it to look up information about
+    what the user is doing
+    (e.g., what wiki page they are editing).
+  </p>
+
+  <figure id="f:cookies">
+    <img src="web/cookies.png" alt="Cookies" />
+    <figcaption>Figure XXX: Cookies</figcaption>
+  </figure>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-web/http/keypoints.html %}
+
+<div id="s:web:http:keypoints" class="keypoints">
+  <ul>
+    <li>Most communication on the web uses TCP/IP and sockets.</li>
+    <li>A socket endpoint is identified by a host address and a port number.</li>
+    <li>The Domain Name System (DNS) translates between human-readable names and host addresses.</li>
+    <li>An HTTP request contains a method, headers, and a body.</li>
+    <li>An HTTP response also contains a response code.</li>
+    <li>HTTP is a stateless request-response protocol.</li>
+    <li>Many web sites use cookies to keep track of state.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-web/http/challenges.html %}
+
+<div id="s:web:http:challenges" class="challenges">
+  <p>FIXME</p>
+</div>
+
 </section>
 
 <section id="s:web:client">
-  <h2>{% include guide-web/client/title.md %}</h2>
+  <h2>Getting Data</h2>
   <h3>Objectives</h3>
-  {% include guide-web/client/objectives.html %}
+
+<div id="s:web:client:objectives" class="objectives">
+  <ul>
+    <li>Write a program that downloads a data file given its URL.</li>
+    <li>Format values as URL query parameters.</li>
+  </ul>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-web/client/lesson.html %}
+
+<div id="s:web:client:lesson" class="lesson">
+
+  <p>
+    Opening sockets, constructing HTTP requests, and parsing responses is tedious,
+    so most people use libraries to do most of the work.
+    Python comes with such a library called <code>urllib2</code>
+    (because it's a replacement for an earlier library called <code>urllib</code>),
+    but it exposes a lot of plumbing that most people never want to care about.
+    Instead,
+    we recommend using the Requests library.
+    Here's an example that uses it to download a page from our web site:
+  </p>
+
+<pre>
+import requests
+response = requests.get("http://guide.software-carpentry.org/web/testpage.html")
+print 'status code:', response.status_code
+print 'content length:', response.headers['content-length']
+print response.text
+<span class="out">status code: 200
+content length: 126
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Software Carpentry Test Page&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Use this page to test requests.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</span>
+</pre>
+
+  <p class="continue">
+    <code>request.get</code> does an HTTP GET on a URL
+    and returns an object containing the response.
+    That object's <code>status_code</code> member is the response's status code;
+    its <code>content_length</code> member  is the number of bytes in the response data,
+    and <code>text</code> is the actual data
+    (in this case, an HTML page).
+  </p>
+
+  <div class="box">
+    <h3>One at a Time</h3>
+    <p class="fixme">no images etc. fetched</p>
+  </div>
+
+  <p>
+    Sometimes a URL isn't enough on its own:
+    for example,
+    we have to specify what our search terms are
+    if we are using a search engine.
+    We could add these to the path in the URL,
+    but that would be misleading
+    (since most people think of paths as identifying files and directories),
+    and we've have to decide whether <code>/software/carpentry</code>
+    and <code>/carpentry/software</code> were the same search or not.
+  </p>
+
+  <p>
+    What we should do instead is
+    add parameters to the URL
+    by adding a '?' to the URL
+    followed by 'key=value' pairs separated by '&amp;'.
+    For example,
+    the URL <code>http://www.google.ca?q=Python</code>
+    ask Google to search for pages related to Python&mdash;the key is the letter 'q',
+    and the value is 'Python'&mdash;while
+    the longer query
+    <code>http://www.google.ca/search?q=Python&amp;client=Firefox</code>
+    tells Google that we're using Firefox.
+    We can pass whatever parameters we want,
+    but it's up to the application running on the web site to decide
+    which ones to pay attention to,
+    and how to interpret them.
+  </p>
+
+  <div class="box">
+    <h3>You Are Who You Say You Are</h3>
+    <p>
+      Yes,
+      this means that we could write a program
+      that tells websites it is Firefox,
+      Internet Explorer,
+      or pretty much anything else.
+      We'll return to this and other security issues later.
+    </p>
+  </div>
+
+  <p>
+    Of course,
+    if '?' and '&amp;' are special characters,
+    there must be a way to escape them.
+    The <a href="glossary.html#url-encoding">URL encoding</a> standard
+    represents special characters using <code>"%"</code> followed by a 2-digit code,
+    and replaces spaces with the '+' character
+    (<a href="#f:url_encoding">Figure XXX</a>).
+    Thus,
+    to search Google for "grade&nbsp;=&nbsp;A+" (with the spaces),
+    we would use the URL <code>http://www.google.ca/search?q=grade+%3D+A%2B</code>.
+  </p>
+
+  <figure id="f:url_encoding">
+    <table>
+      <tr>
+        <th>Character</th>
+        <th>Encoding</th>
+      </tr>
+      <tr>
+        <td><code>"#"</code></td>
+        <td><code>%23</code></td>
+      </tr>
+      <tr>
+        <td><code>"$"</code></td>
+        <td><code>%24</code></td>
+      </tr>
+      <tr>
+        <td><code>"%"</code></td>
+        <td><code>%25</code></td>
+      </tr>
+      <tr>
+        <td><code>"&amp;"</code></td>
+        <td><code>%26</code></td>
+      </tr>
+      <tr>
+        <td><code>"+"</code></td>
+        <td><code>%2B</code></td>
+      </tr>
+      <tr>
+        <td><code>","</code></td>
+        <td><code>%2C</code></td>
+      </tr>
+      <tr>
+        <td><code>"/"</code></td>
+        <td><code>%2F</code></td>
+      </tr>
+      <tr>
+        <td><code>":"</code></td>
+        <td><code>%3A</code></td>
+      </tr>
+      <tr>
+        <td><code>";"</code></td>
+        <td><code>%3B</code></td>
+      </tr>
+      <tr>
+        <td><code>"="</code></td>
+        <td><code>%3D</code></td>
+      </tr>
+      <tr>
+        <td><code>"?"</code></td>
+        <td><code>%3F</code></td>
+      </tr>
+      <tr>
+        <td><code>"@"</code></td>
+        <td><code>%40</code></td>
+      </tr>
+    </table>
+    <figcaption>Figure XXX: URL Encoding</figcaption>
+  </figure>
+
+  <p>
+    Encoding things by hand is very error-prone,
+    so the Requests library lets us use
+    a dictionary of key-value pairs instead
+    via the keyword argument <code>params</code>:
+  </p>
+
+<pre>
+import requests
+parameters = {'q' : 'Python', 'client' : 'Firefox'}
+response = requests.get('http://www.google.com/search', params=parameters)
+print 'actual URL:', response.url
+<span class="out">actual URL: http://www.google.com/search?q=Python&amp;client=Firefox</span>
+</pre>
+
+  <p class="continue">
+    You should <em>always</em> let the library build the URL for you,
+    rather than doing it yourself:
+    there are subtleties we haven't covered,
+    and even if there weren't,
+    there's no point duplicating code that's already been written and tested.
+  </p>
+
+  <p>
+    Suppose we want to write a script that actually <em>does</em> search Google.
+    Constructing a URL is easy.
+    Sending it and reading the response is easy too,
+    but parsing the response is hard,
+    since there's a lot of stuff in the page that Google sends back.
+    Many first-generation web applications relied on
+    <a href="glossary.html#screen-scraping">screen scraping</a>
+    to get data,
+    i.e.,
+    they would search for substrings in the HTML
+    using something like <a href="#a:beautiful-soup">Beautiful Soup</a>.
+    They had to do this because a lot of hand-written HTML was improperly formatted:
+    for example,
+    it was quite common to use <code>&lt;br&gt;</code> on its own to break a line.
+  </p>
+
+  <p>
+    Screen scraping is always hard to get right if the page layout is complex.
+    It is also fragile:
+    whenever the layout of the pages changes,
+    the application will most likely break
+    because data is no longer where it was.
+  </p>
+
+  <p>
+    Most modern web applications try to sidestep this problem
+    by providing some sort of <a href="glossary.html#web-services">web services</a> interface,
+    which is a lot simpler than it sounds.
+    When a client sends a request,
+    it indicates that it wants machine-oriented data rather than human-readable HTML
+    by using a slightly different URL
+    (<a href="#f:web_services">Figure XXX</a>).
+    When asked for data,
+    the server sends back <a href="setdict.html#s:json">JSON</a>,
+    XML,
+    or something else that is easy for a program to handle.
+    If the client asks for HTML,
+    on the other hand,
+    the application turns that data into HTML pages with italics and colored highlights and the like
+    to make it easy for human beings to read.
+  </p>
+
+  <figure id="f:web_services">
+    <img src="web/web_services.png" alt="Web Services"/>
+    <figcaption>Figure XXX: Web Services</figcaption>
+  </figure>
+
+  <p>
+    Using "live" data from a web service is a powerful way to get a lot of science done in a hurry,
+    but only when it works.
+    As a case in point,
+    we wanted to use bird-watching data from <a href="http://ebird.org">ebird.org</a> in this example,
+    but their server was locked down for security reasons
+    when it came time for us to write our examples.
+    (This is another way in which software is like other experimental apparatus:
+    odds are that when you need it most,
+    it will be broken or someone will have borrowed it.)
+    We therefore chose to use climate data from the World Bank instead.
+    According to <a href="http://data.worldbank.org/developers/climate-data-api">the documentation</a>,
+    data for a particular country can be found at:
+  </p>
+
+<pre>
+http://climatedataapi.worldbank.org/climateweb/rest/v1/country/cru/<em>VARIABLE</em>/year/<em>ISO</em>.<em>FORMAT</em>
+</pre>
+
+  <p class="continue">
+    where:
+  </p>
+
+  <ul>
+    <li>
+      <em>VARIABLE</em> is either "pr" (for precipitation)
+      or "tas" (for <em>t</em>emperature <em>a</em>t <em>s</em>urface);
+    </li>
+    <li>
+      <em>ISO</em> is the International Standards Organization's 3-letter country code
+      for the country of interest,
+      and
+    </li>
+    <li>
+      <em>FORMAT</em> is "JSON" for JSON,
+      and other strings for other formats.
+    </li>
+  </ul>
+
+  <p>
+    Let's try getting temperature data for France:
+  </p>
+
+<pre id="a:sample-response">
+&gt;&gt;&gt; <span class="in">import requests</span>
+&gt;&gt;&gt; <span class="in">url = 'http://climatedataapi.worldbank.org/climateweb/rest/v1/country/cru/tas/year/FRA.JSON'</span>
+&gt;&gt;&gt; <span class="in">response = requests.get(url)</span>
+&gt;&gt;&gt; <span class="in">print response.text</span>
+<span class="out">[{"year":1901, "data":9.748865},
+ {"year":1902, "data":9.864603},
+ {"year":1903, "data":10.130159},
+ ...
+ {"year":2009,"data":11.709985}]</span>
+</pre>
+
+  <p>
+    This is straightforward to interpret:
+    the outer list element contains a dictionary for each year,
+    each of which contains <code>"year"</code> and <code>"data"</code> entries.
+    Let's use this to write a program
+    that compares the data for two countries
+    (which is the problem Carla wanted to solve at the start of this chapter).
+    We need to know which countries to compare:
+  </p>
+
+<pre>
+def main(args):
+    first_country = 'AUS'
+    second_country = 'CAN'
+    if len(args) &gt; 0:
+        first_country = args[0]
+    if len(args) &gt; 1:
+        second_country = args[1]
+
+    result = ratios(first_country, second_country)
+    display(result)
+
+def ratios(first, second):
+    '''Calculate ratio of average temperatures for two countries over time.'''
+    return {} <span class="comment"># FIXME: fill in</span>
+
+def display(values):
+    '''Show dictionary entries in sorted order.'''
+    keys = values.keys()
+    keys.sort()
+    for k in keys:
+        print k, values[k]
+
+if __name__ == '__main__':
+    main(sys.argv[1:])
+</pre>
+
+  <p>
+    The pattern here should be familiar:
+    we solve the top-level problem as if we already have the functions we need,
+    then come back and fill them in.
+    In this case,
+    this function to be filled in is <code>ratios</code>,
+    which fetches data and calculates our result:
+  </p>
+
+<pre src="web/temperatures.py">
+def ratios(first, second):
+    '''Calculate ratio of average temperatures for two countries over time.'''
+    first = get_temps(first)
+    second = get_temps(second)
+    assert len(first) == len(second), 'Length mis-match in results'
+    result = {}
+    for (i, first_entry) in enumerate(first):
+        year = first_entry['year']
+        second_entry = second[i]
+        assert second_entry['year'] == year, 'Year mis-match'
+        result[year] = first_entry['data'] / second_entry['data']
+    return result
+</pre>
+
+  <p>
+    It depends in turn on <code>get_temps</code>:
+  </p>
+
+<pre src="web/temperatures.py">
+URL = 'http://climatedataapi.worldbank.org/climateweb/rest/v1/country/cru/tas/year/%s.JSON'
+
+...all the code written so far...
+
+def get_temps(country_code):
+    '''Get annual temperatures for a country.'''
+    response = requests.get(URL % country_code)
+    assert response.status_code == 200, \
+           'Failed to get data for %s' % country_code
+    return json.loads(response.text)
+</pre>
+
+  <p>
+    But wait a second:
+    judging from the <a href="#a:sample-response">sample response shown earlier</a>,
+    temperatures are being reported in Celsius.
+    We should probably convert them to Kelvin
+    to make the ratios more meaningful
+    (and to avoid the risk of dividing by zero).
+    Let's modify <code>get_temps</code>:
+  </p>
+
+<pre src="web/temperatures.py">
+def get_temps(country_code):
+    '''Get annual temperatures for a country.'''
+    response = requests.get(URL % country_code)
+    assert response.status_code == 200, \
+           'Failed to get data for %s' % country_code
+    <span class="highlight">result = json.loads(response.text)
+    for entry in result:
+        result['data'] = kelvin(result['data'])
+    return result</span>
+</pre>
+
+  <p class="continue">
+    and add the required conversion function:
+  </p>
+
+<pre src="web/temperatures.py">
+def kelvin(celsius):
+    '''Convert degrees C to degrees K.'''
+    return celsius + 273.15
+</pre>
+
+  <p>
+    Let's try running this program with no arguments
+    to compare Australia to Canada:
+  </p>
+
+<pre>
+$ <span class="in">python temperatures.py</span>
+<span class="out">1901 1.10934799048
+1902 1.11023963325
+1903 1.10876094164
+...  ...
+2007 1.10725265753
+2008 1.10793365185
+2009 1.10865537105</span>
+</pre>
+
+  <p class="continue">
+    and then with arguments to compare Malaysia to Norway:
+  </p>
+
+<pre>
+$ <span class="in">python temperatures.py MYS NOR</span>
+<span class="out">1901 1.08900632708
+1902 1.09536126502
+1903 1.08935268463
+...  ...
+2007 1.08564675748
+2008 1.08481881663
+2009 1.08720464013</span>
+</pre>
+
+  <p>
+    Only six lines in this program do anything webbish
+    (i.e., format the actual URL and get the data).
+    The remaining 47 lines are the user interface
+    (handling command-line arguments and printing output)
+    data manipulation
+    (converting temperatures and calculating ratios),
+    <code>import</code> statements,
+    and docstrings.
+    It really is that simple.
+  </p>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-web/client/keypoints.html %}
+
+<div id="s:web:client:keypoints" class="keypoints">
+  <ul>
+    <li>Use Python's Requests library to make HTTP requests.</li>
+    <li>Let the library format URL parameters.</li>
+    <li>Ask web sites for data instead of scraping it from HTML pages.</li>
+    <li>The URLs and query parameters needed to fetch data are specified by the web site.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-web/client/challenges.html %}
+
+<div id="s:web:client:challenges" class="challenges">
+  <p>FIXME</p>
+</div>
+
 </section>
 
 <section id="s:web:server">
-  <h2>{% include guide-web/server/title.md %}</h2>
+  <h2>Providing Data</h2>
   <h3>Objectives</h3>
-  {% include guide-web/server/objectives.html %}
+
+<div id="s:web:server:objectives" class="objectives">
+  <ul>
+    <li>Explain how server applications provide data to clients, and why doing this securely is hard.</li>
+    <li>Recognize when dynamically-generated static pages are a usable alternative, and explain how this differs from truly dynamic service.</li>
+    <li>Generate pages containing data in human-readable form.</li>
+  </ul>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-web/server/lesson.html %}
+
+<div id="s:web:server:lesson" class="lesson">
+
+  <p>
+    The next logical step is to provide data to others
+    by writing some kind of server application.
+    The basic idea is simple
+    (<a href="#f:web_application">Figure XXX</a>):
+  </p>
+
+  <ol>
+    <li>
+      wait for someone to connect to your server and send you an HTTP request;
+    </li>
+    <li>
+      parse that request;
+    </li>
+    <li>
+      figure out what it's asking for;
+    </li>
+    <li>
+      fetch that data (or run a program to generate some data dynamically);
+    </li>
+    <li>
+      format the data as HTML or XML; and
+    </li>
+    <li>
+      send it back.
+    </li>
+  </ol>
+
+  <figure id="f:web_application">
+    <img src="web/web_application.png" alt="Web Application Lifecycle"/>
+    <figcaption>Web Application Lifecycle</figcaption>
+  </figure>
+
+  <p>
+    As simple as this is,
+    we're not going to show you how to do it,
+    because experience has shown that
+    all we can actually do in a short lecture
+    is show you how to create security problems.
+    Here's just one example.
+    Suppose you want to write a web application that accepts URLs of the form
+    <code>http://my.site/data?species=homo.sapiens</code>
+    and fetches a database record
+    containing information about that species.
+    One way to do it in Python might look like this:
+  </p>
+
+<pre>
+def get_species(url):
+    '''Get data for a species given a URL with the species name as a query parameter.'''
+    params = url.split('?')[1]                                # Get everything after the '?'.
+    pairs = params.split('&amp;')                                 # Get the name1=value1&amp;name2=value2 pairs.
+    pairs = [pairs.split('=') for p in pairs]                 # Split the name=value pairs.
+    pairs = dict(pairs)                                       # Convert to a {name : value} dictionary.
+    species = pairs['species']                                # Get the species we want to look up.
+    sql = '''SELECT * FROM Species WHERE Name = "%s";'''      # Template for SQL query.
+    sql = sql % species                                       # Insert the species name.
+    cursor.execute(sql)                                       # Send query to database.
+    results = cursor.fetchall()                               # Get all the results.
+    return results[0]
+</pre>
+
+  <p>
+    We've taken out all the error-checking&mdash;for example,
+    this code will fail if there aren't actually any query parameters,
+    or if the species' name isn't in the database&mdash;but
+    that's not the problem.
+    The problem is what happens if someone sends us this URL:
+  </p>
+
+<pre>
+http://my.site/data?species=homo.sapiens&quot;;DROP TABLE Species&quot;--
+</pre>
+
+  <p class="continue">
+    Why?
+    Because the dictionary of query parameters produced by
+    the first five lines of the function
+    will be:
+  </p>
+
+<pre>
+{'species' : 'homo.sapiens&quot;;DROP TABLE Species;--'}
+</pre>
+
+  <p class="continue">
+    which means that the SQL query will be:
+  </p>
+
+<pre>
+SELECT * FROM Species WHERE Name = "homo.sapiens&quot;;DROP TABLE Species;--";
+</pre>
+
+  <p class="continue">
+    which is the same as:
+  </p>
+
+<pre>
+SELECT * FROM Species WHERE Name = "homo.sapiens";
+DROP TABLE Species;
+</pre>
+
+  <p class="continue">
+    In other words,
+    this query selects something from the database,
+    then deletes the entire <code>Species</code> table.
+  </p>
+
+  <p>
+    This is called an <a href="glossary.html#sql-injection">SQL injection attack</a>,
+    because the user is injecting SQL into our database query.
+    It's just one of hundreds of different ways that
+    evil-doers can try to compromise a web application.
+    Built properly,
+    web sites can withstand such attacks,
+    but learning what "properly" is and how to implement it
+    takes more time than we have.
+  </p>
+
+  <p>
+    Instead,
+    we will look at how to write programs that create static HTML pages
+    that can then be given to clients by a standard web server.
+    Using the ratios of average annual temperatures as our example,
+    we'll create pages whose names look like
+    <code>http://my.site/tempratio/AUS-CAN.html</code>,
+    and which contain data formatted like this:
+  </p>
+
+<pre>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta name="revised" content="2013-09-15" /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Ratio of Average Annual Temperatures for AUS and CAN&lt;/h1&gt;
+    &lt;table class="data"&gt;
+      &lt;tr&gt;
+        &lt;td class="year"&gt;1901&lt;/td&gt;
+        &lt;td class="data"&gt;1.10934799048&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="year"&gt;1902&lt;/td&gt;
+        &lt;td class="data"&gt;1.11023963325&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="year"&gt;1903&lt;/td&gt;
+        &lt;td class="data"&gt;1.10876094164&lt;/td&gt;
+      &lt;/tr&gt;
+      ...
+      &lt;tr&gt;
+        &lt;td class="year"&gt;2007&lt;/td&gt;
+        &lt;td class="data"&gt;1.10725265753&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="year"&gt;2008&lt;/td&gt;
+        &lt;td class="data"&gt;1.10793365185&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="year"&gt;2009&lt;/td&gt;
+        &lt;td class="data"&gt;1.10865537105&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <p>
+    The first step is to calculate ratios,
+    which we did in the <a href="#s:client">previous section</a>.
+    The main function of our program is:
+  </p>
+
+<pre>
+def main(args):
+    '''Create web page showing temperature ratios for two countries.'''
+
+    assert len(args) == 4, \
+           'Usage: make_data_page template_filename output_filename country_1 country_2'
+    template_filename = args[0]
+    output_filename = args[1]
+    country_1 = args[2]
+    country_2 = args[3]
+
+    page = make_page(template_filename, country_1, country_2)
+
+    writer = open(output_filename, 'w')
+    writer.write(page)
+    writer.close()
+
+if __name__ == '__main__':
+    main(sys.argv[1:])
+</pre>
+
+  <p>
+    Most of the work is done by <code>make_page</code>,
+    which gets temperature data for two countries,
+    calculates ratios,
+    and fills in a Jinja2 template.
+    Using the <code>get_temps</code> function we wrote earlier,
+    it is:
+  </p>
+
+<pre>
+def make_page(template_filename, output_filename, country_1, country_2):
+    '''Create page showing temperature ratios.'''
+
+    data_1 = get_temps(country_1)
+    data_2 = get_temps(country_2)
+    years = data_1.keys()
+    years.sort()
+    the_date = date.isoformat(date.today())  <span class="comment"># Format today's date</span>
+
+    loader = jinja2.FileSystemLoader(['.'])
+    environment = jinja2.Environment(loader=loader)
+    template = environment.get_template(template_filename)
+
+    result = template.render(country_1=country_1, data_1=data_1,
+                             country_2=country_2, data_2=data_2,
+                             years=years, the_date=the_date)
+    return result
+</pre>
+
+  <p class="continue">
+    The only new thing here is the use of
+    <code>date.isoformat</code> and <code>date.today</code>
+    to format today's date as something like "2013-09-15".
+  </p>
+
+  <p>
+    To finish,
+    we need a Jinja2 template for the pages we want to create:
+  </p>
+
+{% raw %}
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Temperature Ratios of {{country_1}} and {{country_2}} as of {{the_date}}&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Temperature Ratios of {{country_1}} and {{country_2}}&lt;/h1&gt;
+    &lt;h2&gt;Calculated {{the_date}}&lt;/h2&gt;
+    &lt;table&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Year&lt;/td&gt;
+        &lt;td&gt;{{country_1}}&lt;/td&gt;
+        &lt;td&gt;{{country_2}}&lt;/td&gt;
+        &lt;td&gt;Ratio&lt;/td&gt;
+      &lt;/tr&gt;
+      {% for year in years %}
+      &lt;tr&gt;
+        &lt;td&gt;{{year}}&lt;/td&gt;
+        &lt;td&gt;{{data_1[year]}}&lt;/td&gt;
+        &lt;td&gt;{{data_2[year]}}&lt;/td&gt;
+        &lt;td&gt;{{data_1[year] / data_2[year]}}&lt;/td&gt;
+      &lt;/tr&gt;
+      {% endfor %}
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+{% endraw %}
+
+  <p>
+    Let's run it for Australia and Canada:
+  </p>
+
+<pre>
+$ <span class="in">python make_data_page.py temp_ratio.html /tmp/aus-can.html AUS CAN</span>
+</pre>
+
+  <p class="continue">
+    Sure enough,
+    the file <code>/tmp/aus-can.html</code>contains:
+  </p>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Temperature Ratios of AUS and CAN as of 2013-02-10&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Temperature Ratios of AUS and CAN&lt;/h1&gt;
+    &lt;h2&gt;Calculated 2013-02-10&lt;/h2&gt;
+    &lt;table&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Year&lt;/td&gt;
+        &lt;td&gt;AUS&lt;/td&gt;
+        &lt;td&gt;CAN&lt;/td&gt;
+        &lt;td&gt;Ratio&lt;/td&gt;
+      &lt;/tr&gt;
+      
+      &lt;tr&gt;
+        &lt;td&gt;1901&lt;/td&gt;
+        &lt;td&gt;294.507021&lt;/td&gt;
+        &lt;td&gt;265.477581&lt;/td&gt;
+        &lt;td&gt;1.10934799048&lt;/td&gt;
+      &lt;/tr&gt;
+      
+      &lt;tr&gt;
+        &lt;td&gt;1902&lt;/td&gt;
+        &lt;td&gt;294.532462&lt;/td&gt;
+        &lt;td&gt;265.2872886&lt;/td&gt;
+        &lt;td&gt;1.11023963325&lt;/td&gt;
+      &lt;/tr&gt;
+
+      ...
+      
+      &lt;tr&gt;
+        &lt;td&gt;2009&lt;/td&gt;
+        &lt;td&gt;295.07194&lt;/td&gt;
+        &lt;td&gt;266.1529883&lt;/td&gt;
+        &lt;td&gt;1.10865537105&lt;/td&gt;
+      &lt;/tr&gt;
+      
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <p>
+    This looks right,
+    but most experienced programmers would ask us to make one improvement.
+    Our program doesn't actually calculate temperature ratios;
+    that's done by this line in the template:
+  </p>
+
+{% raw %}
+<pre>
+        &lt;td&gt;{{data_1[year] / data_2[year]}}&lt;/td&gt;
+</pre>
+{% endraw %}
+
+  <p>
+    Experience shows that the more calculations we do in our views
+    (i.e., our information displays),
+    the harder they are to maintain.
+    What we should do is:
+  </p>
+
+  <ol>
+    <li>
+      create another dictionary called <code>ratios</code>
+      in the Python program
+      and pass it into the template,
+      and
+    </li>
+    <li>
+      have the template display those values
+      rather than calculating ratios itself.
+    </li>
+  </ol>
+
+  <p>
+    Splitting things this way is extra work in this small case,
+    but it's the best way to manage information
+    as our displays become more complex.
+  </p>
+
+  <div class="box">
+    <h3>Running a Local Server</h3>
+
+    <p>
+      The HTTP servers taht come in the standard Python library are useful
+      for practicing these things in class.
+      To start serving files,
+      we go into the directory that contains them and run:
+    </p>
+
+<pre>
+$ <span class="in">python -m SimpleHTTPServer 8080</span>
+</pre>
+
+    <p>
+      <code>-m SimpleHTTPServer</code> tells Python
+      to find the <code>SimpleHTTPServer</code> library
+      and run it as a program;
+      the parameter <code>8080</code> tells it what port to use.
+      (It's normal to run HTTP servers on port 80,
+      but your system may forbid you from doing that
+      if you don't have administrator privileges.)
+      To get files,
+      we use <code>localhost</code> as the site,
+      and include the appropriate port number,
+      so the URL is <code>http://localhost:80/index.html</code>,
+      or more simply,
+      <code>http://localhost:80/</code>.
+    </p>
+  </div>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-web/server/keypoints.html %}
+
+<div id="s:web:server:keypoints" class="keypoints">
+  <ul>
+    <li>Creating static files is a safe, simple alternative to providing content dynamically.</li>
+    <li>Use a program to get and manipulate data, and a template to generate the page.</li>
+    <li>Views should display values, not calculate them.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-web/server/challenges.html %}
+
+<div id="s:web:server:challenges" class="challenges">
+  <p>FIXME</p>
+</div>
+
 </section>
 
 <section id="s:web:index">
-  <h2>{% include guide-web/index/title.md %}</h2>
+  <h2>Creating an Index</h2>
   <h3>Objectives</h3>
-  {% include guide-web/index/objectives.html %}
+
+<div id="s:web:index:objectives" class="objectives">
+  <ul>
+    <li>Create and update an index for a set of pages.</li>
+    <li>Explain why having an index is important.</li>
+  </ul>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-web/index/lesson.html %}
+
+<div id="s:web:index:lesson" class="lesson">
+
+  <p>
+    If Carla is calculating temperature ratios for many different countries,
+    how will other scientists know which ones she has done?
+    In other words,
+    how can she make her data findable?
+  </p>
+
+  <p>
+    The standard answer for hundreds of years has been,
+    "Create an index."
+    On the web,
+    we can do this by creating a file called <code>index.html</code>
+    and putting it in the directory that holds our data files.
+  </p>
+
+  <div class="box">
+    <h3>Indexing Conventions</h3>
+
+    <p>
+      We don't have to call our index file <code>index.html</code>,
+      but it's best to do so.
+      By default,
+      most web servers will give clients that file
+      when they're asked for the directory itself.
+      In other words,
+      if someone points a browser (or any other program)
+      at <code>http://my.site/tempratio/</code>,
+      the web server will look for <code>/tempratio</code>.
+      When it realizes that path is a directory rather than a file,
+      it will look inside that directory for a file called <code>index.html</code>
+      and return that.
+      This is <em>not</em> guaranteed&mdash;system administrators
+      can and do set up other default behaviors&mdash;but it is a common convention,
+      and we can always tell our colleagues to fetch
+      <code>http://my.site/tempratio/</code>
+      if they want the current index anyway.
+    </p>
+
+  </div>
+
+  <p>
+    What should be in <code>index.html</code>?
+    The answer is simple:
+    a table of some kind showing what files are available,
+    when they were created,
+    and where they are.
+    The first piece of information is the most important;
+    the second allows users to determine
+    what has been added since they last looked at our site
+    without having to download actual data files,
+    while the third tells them how to get what they want.
+    Our <code>index.html</code> will therefore be something like this:
+  </p>
+
+<pre>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Index of Average Annual Temperature Ratios&lt;/title&gt;
+    &lt;meta name="revised" content="2013-09-15" /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Index of Average Annual Temperature Ratios&lt;/h1&gt;
+    &lt;table class="data"&gt;
+      &lt;tr&gt;
+        &lt;td class="country"&gt;AUS&lt;/td&gt;
+        &lt;td class="country"&gt;CAN&lt;/td&gt;
+        &lt;td class="revised"&gt;2013-09-12&lt;/td&gt;
+        &lt;td class="revised"&gt;&lt;a href="http://my.site/tempratio/AUS-CAN.html"&gt;download&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      ...
+      &lt;tr&gt;
+        &lt;td class="country"&gt;MYS&lt;/td&gt;
+        &lt;td class="country"&gt;NOR&lt;/td&gt;
+        &lt;td class="revised"&gt;2013-09-15&lt;/td&gt;
+        &lt;td class="download"&gt;&lt;a href="http://my.site/tempratio/MYS-NOR.html"&gt;download&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+  <div class="box" id="b:index:explicit">
+    <h3>Why Explicit URLs?</h3>
+
+    <p>
+      Strictly speaking,
+      we don't need to store the URLs in the index file:
+      we could instead tell people that if they got the index from
+      <code>http://my.site/tempratio/index.html</code>,
+      then the data for AUS and CAN is in <code>http://my.site/tempratio/AUS-CAN.html</code>,
+      and let them construct the URL themselves.
+      However,
+      that puts more of a burden on the user both in the short term
+      (since more coding is required)
+      and in the long term
+      (since the rule for constructing the URL for a particular data set could well change).
+      It also effectively hides our data from search engines,
+      since there's no way for them to know what our URL construction rule is.
+    </p>
+
+  </div>
+
+  <p>
+    Now,
+    unlike our actual data files,
+    this index file is added to incrementally:
+    each time we generate a new version,
+    we have to include all the data that was in the old version as well.
+    We therefore need to remember what we've done.
+    The usual way to do this in a real application is to use a database,
+    but for our purposes,
+    a plain old text file will suffice.
+  </p>
+
+  <p>
+    We <em>could</em> make up a format to store the information we need,
+    such as:
+  </p>
+
+<pre>
+Updated 2013-05-09
+AUS CAN 2013-03-07
+AUS NOR 2013-03-09
+CAN NOR 2013-04-22
+CAN MDG 2013-05-09
+</pre>
+
+  <p class="continue">
+    but it's much simpler just to use JSON:
+  </p>
+
+<pre>
+{
+    'updated' : '2013-05-09',
+    'entries' : [
+        ['AUS', 'CAN', '2013-03-07'],
+        ['AUS', 'NOR', '2013-03-09'],
+        ['CAN', 'NOR', '2013-04-22'],
+        ['CAN', 'MDG', '2013-05-09']
+    ]
+}
+</pre>
+
+  <p>
+    Loading this data is as simple as:
+  </p>
+
+<pre>
+import json
+reader = open('index.json', 'r')
+check = json.load(reader)
+print check
+<span class="out">{u'updated': u'2013-05-09', u'entries': [[u'AUS', u'CAN', u'2013-03-07'], [u'AUS', u'NOR', u'2013-03-09'], [u'CAN', u'NOR', u'2013-04-22'], [u'CAN', u'MDG', u'2013-05-09']]}</span>
+</pre>
+
+  <p class="continue">
+    (Remember,
+    the 'u' in front of each string signals that these strings are actually stored as Unicode,
+    but we can safely ignore that for now.)
+    Let's rewrite the main function of our temperature ratio program
+    so that it creates the index as well as the individual page:
+  </p>
+
+<pre>
+import sys
+import os
+from datetime import date
+import jinja2
+import json
+from temperatures import get_temps
+
+INDIVIDUAL_PAGE = 'temp_ratio.html'
+INDEX_PAGE = 'index.html'
+INDEX_FILE = 'index.json'
+
+def main(args):
+    '''
+    Create web page showing temperature ratios for two countries,
+    and update the index.html page with the new entry.
+    '''
+
+    assert len(args) == 5, \
+           'Usage: make_indexed_page url_base template_dir output_dir country_1 country_2'
+    url_base, template_dir, output_dir, country_1, country_2 = args
+    the_date = date.isoformat(date.today())
+
+    loader = jinja2.FileSystemLoader([template_dir])
+    environment = jinja2.Environment(loader=loader)
+
+    page = make_page(environment, country_1, country_2, the_date)
+    save_page(output_dir, '%s-%s.html' % (country_1, country_2), page)
+
+    index_data = load_index(output_dir, INDEX_FILE)
+    index_data['entries'].append([country_1, country_2, the_date])
+    save_page(output_dir, INDEX_FILE, json.dumps(index_data))
+
+    page = make_index(environment, url_base, index_data)
+    save_page(output_dir, INDEX_PAGE, page)
+</pre>
+
+  <p class="continue">
+    Since we will be expanding templates in a couple of different functions,
+    we move the creation of the Jinja2 environment to the main program.
+    We then pass the environment into both <code>make_page</code>
+    and a new function called <code>update_index</code>,
+    and use another new function <code>save_page</code>
+    to save generated pages where they need to go.
+    (Note that we update the index data <em>before</em> rewriting the index HTML page,
+    so that the updates to the index appear in the HTML.
+    We did these two steps in the wrong order
+    in the first version of this program that we wrote,
+    and it was several hours before we noticed the error...)
+  </p>
+
+  <p>
+    <code>save_page</code> is the simplest function to write,
+    so let's do that:
+  </p>
+
+<pre>
+def save_page(output_dir, page_name, content):
+    '''Save text in a file output_dir/page_name.'''
+    path = os.path.join(output_dir, page_name)
+    writer = open(path, 'w')
+    writer.write(content)
+    writer.close()
+</pre>
+
+  <p>
+    Our revised <code>make_page</code> function is shorter than our original,
+    since the environment is now being created in <code>main</code>.
+    It is also now being passed the date
+    (since that is used to update the index as well),
+    and uses a fixed template specified by the global variable
+    <code>INDIVIDUAL_PAGE</code>.
+    The result is:
+  </p>
+
+<pre>
+def make_page(environment, country_1, country_2, the_date):
+    '''Create page showing temperature ratios.'''
+
+    data_1 = get_temps(country_1)
+    data_2 = get_temps(country_2)
+    years = data_1.keys()
+    years.sort()
+
+    template = environment.get_template(INDIVIDUAL_PAGE)
+    result = template.render(country_1=country_1, data_1=data_1,
+                             country_2=country_2, data_2=data_2,
+                             years=years, the_date=the_date)
+
+    return result
+</pre>
+
+  <p>
+    The function that loads existing index data is also pretty simple:
+  </p>
+
+<pre>
+def load_index(output_dir, filename):
+    '''Load index data from output_dir/filename.'''
+
+    path = os.path.join(output_dir, filename)
+    reader = open(path, 'r')
+    result = json.load(reader)
+    reader.close()
+    return result
+</pre>
+
+  <p>
+    All that's left are the function that regenerates the HTML version of the index:
+  </p>
+
+<pre>
+def make_index(environment, url_base, index_data):
+    '''Refresh the HTML index page.'''
+
+    template = environment.get_template(INDEX_PAGE)
+    return template.render(url_base=url_base,
+                           updated=index_data['updated'],
+                           entries=index_data['entries'])
+</pre>
+
+  <p class="continue">
+    and the HTML template it relies on:
+  </p>
+
+{% raw %}
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Index of Average Annual Temperature Ratios&lt;/title&gt;
+    &lt;meta name="revised" content="{{updated}}" /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Index of Average Annual Temperature Ratios&lt;/h1&gt;
+    &lt;table class="data"&gt;
+      {% for entry in entries %}
+      &lt;tr&gt;
+        &lt;td class="country"&gt;{{entry[0]}}&lt;/td&gt;
+        &lt;td class="country"&gt;{{entry[1]}}&lt;/td&gt;
+        &lt;td class="revised"&gt;{{entry[2]}}&lt;/td&gt;
+        &lt;td class="revised"&gt;&lt;a href="{{url_base}}/{{entry[0]}}-{{entry[1]}}.html"&gt;download&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      {% endfor %}
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+{% endraw %}
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-web/index/keypoints.html %}
+
+<div id="s:web:index:keypoints" class="keypoints">
+  <ul>
+    <li>Every collection of data should have an index.</li>
+    <li>The index should specify when things were updated, as well as what they are.</li>
+    <li>The URLs linking files should be absolute, so that client programs do not have to modify them in order to use them.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-web/index/challenges.html %}
+
+<div id="s:web:index:challenges" class="challenges">
+  <p>FIXME</p>
+</div>
+
 </section>
 
 <section id="s:web:syndicate">
-  <h2>{% include guide-web/syndicate/title.md %}</h2>
+  <h2>Syndicating Data</h2>
   <h3>Objectives</h3>
-  {% include guide-web/syndicate/objectives.html %}
+
+<div id="s:web:syndicate:objectives" class="objectives">
+  <p>FIXME</p>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-web/syndicate/lesson.html %}
+
+<div id="s:web:syndicate:lesson" class="lesson">
+
+  <p>
+    We'll now use what we have learned to build a simple tool
+    to download new temperature comparisons from a web site.
+    In broad strokes,
+    our program will keep a list of URLs to download data from,
+    along with a timestamp showing when data was last downloaded.
+    When we run the program,
+    it will poll each site to see if any new data sets have been added
+    since the last check.
+    If any have,
+    the program will display their URLs.
+  </p>
+
+  <p>
+    In order for this to work,
+    each of the sites that's providing data needs to be able to tell us
+    what data sets it has calculated,
+    and when they were created.
+    This information is in the site's <code>index.html</code> file in human-readable form,
+    but it's also in the <code>index.json</code> file each site is maintaining.
+    Client programs can load this file directly without having to do any parsing,
+    so we'll rely on that.
+  </p>
+
+  <div class="box">
+    <h3>Making Life Simpler</h3>
+    <p>
+      An earlier version of this tutorial loaded the HTML version of the index
+      and extracted dates and URLs from it.
+      Doing so only required twelve extra lines of code&mdash;but
+      an extra 1200 words to explain how to read HTML into a program
+      and find things in it.
+      Storing information in machine-friendly formats for machines to use
+      makes life a <em>lot</em> simpler...
+    </p>
+  </div>
+
+  <p>
+    The next step is to decide how to keep track of what we have downloaded and when.
+    The simplest thing is to create another JSON file
+    containing the timestamp and the list of URLs.
+    We'll call this <code>sources.json</code>:
+  </p>
+
+<pre>
+{
+    "timestamp" : "2013-05-02:07:04:03",
+    "sites" : [
+        "http://software-carpentry.org/temperatures/index.json",
+        "http://some.other.site/some/path/index.json"
+    ]
+}
+</pre>
+
+  <p class="continue">
+    (Again, a larger application would use a database of some kind,
+    but that's more than we need right now.)
+    Each time we run our program,
+    it will read this file,
+    then download each <code>index.json</code> file.
+    If any of those files contain links to data sets that are newer than the timestamp,
+    it will print the data set's URL.
+    (A real data analysis program would download the data and do something with it.)
+    We will then save a fresh copy of <code>sources.json</code>
+    with an updated timestamp
+    (<a href="#f:syndication_lifecycle">Figure XXX</a>).
+    Our main program looks like this:
+  </p>
+
+<pre src="web/syndicate.py">
+import date
+
+def main(sources_path):
+    '''Check all data sites in list, then update timestamp of sources.json.'''
+    old_timestamp, all_sources = read_sources(sources_path)
+    new_timestamp = date.datetime.now()
+    for source in all_sources:
+        for url in get_new_datasets(old_timestamp, source):
+            process(url)
+    write_sources(sources_path, new_timestamp, sources)
+</pre>
+
+  <figure id="f:syndication_lifecycle">
+    <img src="web/syndication_lifecycle.png" alt="Syndication Lifecycle" />
+    <figcaption>Figure XXX: Syndication Lifecycle</figcaption>
+  </figure>
+
+  <p>
+    That seems pretty simple;
+    the only subtlety is that we calculate the new timestamp
+    <em>before</em> we start checking for new datasets.
+    The reason is that this check might take
+    anything from a few seconds to a few hours,
+    depending on how busy the Internet is
+    and how much data we actually download.
+    If we wait until we're done
+    and then record that moment as the new timestamp,
+    then the next time we run our program,
+    we won't download any datasets that were created
+    between the time we started the first run of our program
+    and the time it finished
+    (<a href="#f:when_to_timestamp">Figure XXX</a>).
+  </p>
+
+  <figure id="f:when_to_timestamp">
+    <img src="web/when_to_timestamp.png" alt="When to Create Timestamps"/>
+    <figcaption>Figure XXX: When to create Timestamps</figcaption>
+  </figure>
+
+  <p>
+    We now have four functions to write:
+    <code>read_sources</code>,
+    <code>write_sources</code>,
+    <code>get_new_datasets</code>,
+    and
+    <code>process</code>.
+    Reading and writing the <code>sources.json</code> file is pretty simple:
+  </p>
+
+<pre>
+import json
+
+def read_sources(path):
+    '''Read timestamp and data sources from JSON files.'''
+    reader = open(path, 'r')
+    data = json.load(reader)
+    timestamp = data['timestamp']
+    sources = data['sources']
+    return timestamp, sources
+
+def write_sources(sources_path, timestamp, sources):
+    '''Write timestamp and data sources to JSON file.'''
+    data = {'timestamp' : timestamp,
+            'sources'   : sources}
+    writer = open(sources_path, 'w')
+    json.dump(data, writer)
+    writer.close()
+</pre>
+
+  <p>
+    What about processing a URL?
+    Right now,
+    we're just going to print it,
+    though in a real application we would probably download the data
+    and do some further calculations with it:
+  </p>
+
+<pre>
+def process(url):
+    '''Placeholder for processing a data set given its URL.'''
+    print url
+</pre>
+
+  <p>
+    Finally,
+    we need to construct a list of dataset URLs
+    given the URL of an <code>index.json</code> file:
+  </p>
+
+<pre>
+import requests
+
+def get_new_datasets(last_checked, index_url):
+    '''Return a list of URLs of datasets that are newer than the timestamp.'''
+    response = requests.get(index_url)
+    index_data = json.loads(index.text)
+    result = []
+    for (country_a, country_b, updated) in index_data:
+        dataset_timestamp = datetime.parse(updated)
+        if dataset_timestamp &gt;= last_checked:
+            dataset_url = make_dataset_url(index_url, country_a, country_b)
+            result.append(dataset_url)
+    return result
+</pre>
+
+  <p>
+    The logic here is straightforward:
+    grab the <code>index.json</code> file,
+    check each dataset to see if it's newer than the last time we checked,
+    and if it is&mdash;hm.
+    This code uses a not-yet-written function called <code>make_dataset_url</code>
+    to construct the URL for the specific dataset
+    from the URL of the index file
+    and the two country codes,
+    but as we discussed <a href="#b:index:explicit">earlier</a>,
+    asking client programs to construct links themselves is a bad idea.
+    Instead,
+    we should modify the <code>index.json</code> files so that they include the URLs.
+    Doing this is left as an exercise for the reader.
+  </p>
+
+  <p>
+    But hang on:
+    what exactly are we downloading when we download data sets?
+    Right now,
+    our temperature ratio files are all HTML pages;
+    if we want to use that information in programs,
+    it would be a lot easier if producers generated JSON files
+    that consumers could use directly.
+    It's almost trivial to extend our original program
+    to produce such a file
+    each time it produces a new HTML file,
+    and to include the URLs for both files in both versions of the index
+    (<a href="#f:final_system">Figure XXX</a>).
+    Once we've done that,
+    we have a first-class data syndication system:
+    human-friendly and machine-friendly formats live side by side,
+    so scientists and programs all over the world
+    can make use of our results as soon as they appear.
+  </p>
+
+  <figure id="f:final_system">
+    <img src="web/final_system.png" alt="Final System" />
+    <figcaption>Figure XXX: Final System</figcaption>
+  </figure>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-web/syndicate/keypoints.html %}
+
+<div id="s:web:syndicate:keypoints" class="keypoints">
+  <ul>
+    <li>Provide human-readable and machine-readable versions of everything.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-web/syndicate/challenges.html %}
+
+<div id="s:web:syndicate:challenges" class="challenges">
+  <p>FIXME</p>
+</div>
+
 </section>
 
 <section>
   <h2>Summary</h2>
-  {% include guide-web/summary.html %}
+
+<div id="s:web:summary" class="summary">
+
+  <p>
+    The web has changed in many ways over the last 20 years,
+    not all of them for the better.
+    An HTML page on a modern commercial site
+    is likely to include dozens or hundreds of lines of Javascript
+    that depend on several large, complicated libraries,
+    and which generate the page's content on the fly inside the browser.
+    Such a "page" is really a small (or not-so-small) program
+    rather than a document in the classical sense of the word,
+    and while that may produce a better experience for human users,
+    it makes life more difficult for programs
+    (and for people with disabilities,
+    whose assistive aids are all too easy to confuse).
+    And while XML is widely used for representing data,
+    many people believe that younger alternatives like JSON
+    do a better job of balancing the needs of human and computer readers.
+  </p>
+
+  <p>
+    Regardless of the technology used,
+    though,
+    the web's <a href="http://blog.jonudell.net/2011/01/24/seven-ways-to-think-like-the-web/">basic design principles</a>
+    are both simple and stable:
+    tell people where data is, rather than giving them a copy;
+    make the data itself and your names for it
+    easy for both human beings and computers to understand;
+    remix other people's data,
+    and allow them to remix yours.
+  </p>
+
+</div>
+
 </section>

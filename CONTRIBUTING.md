@@ -61,20 +61,18 @@ get feedback on your ideas and coordinate with other developers.
     `swcarpentry/bc` on GitHub.
 
 If it is easier for you to send them to us some other way, please mail us at
-admin@software-carpentry.org.
+[admin@software-carpentry.org](mailto:admin@software-carpentry.org).
 
 More Information
 ----------------
 
-Software Carpentry uses a development workflow similar to that of
-[AstroPy][] and many other open source projects. The AstroPy docs have
-excellent sections on:
+Software Carpentry uses a development workflow similar to that of many
+other open source projects.  For a graphical introduction to feature
+branches as we use them, see GitHub's [workflow
+guide][github-workflow].  For more information about getting started
+with Git, see [our Git lesson][git-lesson].
 
-* [Getting started with git][astropy-git]
-* [Developer workflow][astropy-workflow]
-
-[AstroPy]: http://astropy.org
-[astropy-git]: http://astropy.readthedocs.org/en/latest/development/workflow/index.html#getting-started-with-git
-[astropy-workflow]: http://astropy.readthedocs.org/en/latest/development/workflow/development_workflow.html
+[github-workflow]: http://guides.github.com/overviews/flow/
+[git-lesson]: ./git/novice/index.md
 [creators]: http://software-carpentry.org/badges/creator.html
 [licenses]: http://software-carpentry.org/license.html
