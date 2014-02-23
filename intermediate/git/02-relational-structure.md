@@ -25,7 +25,7 @@ Git has more structure than just the chain of commits, too.  Every project has s
 [Rev 0]-----[Rev 1]-----[Rev 2]
                            ^
                            |
-              HEAD---------
+               HEAD---------
 ```
 
 You've already seen the first simple use of git's relational structure by way of `HEAD` - in the above diagram, asking for `HEAD~1` refers to `[Rev 1]`, and `HEAD~2` refers to `[Rev 0]`; we can simply count backwards from `HEAD` in order to ask for earlier revisions.
@@ -36,7 +36,7 @@ As we saw in earlier lessons, just firing off a `git commit` at any old time won
 [Rev 0]-----[Rev 1]-----[Rev 2]-----(Index)
                            ^
                            |
-              HEAD---------
+               HEAD---------
 ``` 
 
 The final piece of structure to git is called the **working tree**, which is actually just a fancy name for whatever you've saved in the directory containing your project.  Every time you change a file and save it, you've modified the working tree.  We can think of it as a box of stuff that lives alongside your git project:
@@ -45,7 +45,7 @@ The final piece of structure to git is called the **working tree**, which is act
 [Rev 0]-----[Rev 1]-----[Rev 2]-----(Index)        ----------------------
                            ^                       |    working tree    |
                            |                       ----------------------
-              HEAD---------
+               HEAD---------
 ``` 
 
 Every time you do `git add myFile.txt`, you're taking the current state of `myFile.txt` and adding it to the index, ready to be part of the next revision; every time you do `git commit -m 'my message'`, you're packaging up the contents of the index into the next revision in the chain, and moving `HEAD` to point at that new revision.
@@ -100,7 +100,7 @@ Now that we understand this basic relational structure, we're ready to learn abo
 
 ##`git reset`
 
-Let's suppose that in the course of our work, we make some kind of mistake, and we want to rewind the project to an earlier point - `git reset` might be the right tool for the job; think of it as git's big 'undo' button.  `git reset` has three options to choose from: `--hard`, `--mixed`, or `--soft`.  The simplest to understand is the most drastic: `git reset --hard HEAD` will empty the index, change everything in the working tree to match the version recored at `HEAD`, and move the `HEAD` pointer to point at whatever revision we pointed at (which in the example of `git reset --hard HEAD` of course doesn't move `HEAD` at all, but it would if we did something like `git reset --hard HEAD~1`, or used an earlier revision hash instead of `HEAD`).  So continuing our example from the last section, if we did `git reset --hard HEAD~1`, our repo would look something like:
+Let's suppose that in the course of our work, we make some kind of mistake, and we want to rewind the project to an earlier point - `git reset` might be the right tool for the job; think of it as git's big 'undo' button.  `git reset` has three options to choose from: `--hard`, `--mixed`, or `--soft`.  The simplest to understand is the most drastic: `git reset --hard HEAD` will empty the index, change everything in the working tree to match the version recorded at `HEAD`, and move the `HEAD` pointer to point at whatever revision we pointed at (which in the example of `git reset --hard HEAD` of course doesn't move `HEAD` at all, but it would if we did something like `git reset --hard HEAD~1`, or used an earlier revision hash instead of `HEAD`).  So continuing our example from the last section, if we did `git reset --hard HEAD~1`, our repo would look something like:
 
 ```
 [Rev 0: main.txt]-----[Rev 1: main.txt]-----[Rev 2: main.txt]-----[Rev 3: main.txt -----(Index)
