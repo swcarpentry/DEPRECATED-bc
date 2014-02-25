@@ -5,15 +5,11 @@ root: ../..
 {% extends 'markdown.tpl' %}
 
 {% block input %}
-<div class="in">
-<pre>{{ cell.input | escape }}</pre>
-</div>
+<pre class="in"><code>{{ cell.input | escape }}</code></pre>
 {% endblock input %}
 
 {% block output_group %}
-<div class="out">
-<pre>{{- super() -}}</pre>
-</div>
+<pre class="out"><code>{{- super() -}}</code></pre>
 {% endblock output_group %}
 
 {%- block stream -%}{{- output.text | escape -}}{%- endblock stream -%}
@@ -36,8 +32,6 @@ root: ../..
 {{ cell.source  | markdown2html | strip_files_prefix }}
 </div>
 {% else %}
-<div>
 {{ cell.source  | markdown2html | strip_files_prefix }}
-</div>
 {% endif %}
 {%- endblock markdowncell %}
