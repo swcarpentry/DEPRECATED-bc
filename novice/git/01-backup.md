@@ -1,9 +1,5 @@
----
-layout: lesson
-root: ../..
-title: A Better Kind of Backup
-level: novice
----
+# A Better Kind of Backup
+
 <div class="objectives" markdown="1">
 
 #### Objectives

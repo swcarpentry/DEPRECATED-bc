@@ -1,9 +1,5 @@
----
-layout: lesson
-root: ../..
-title: A Few Extras
-level: novice
----
+# A Few Extras
+
 A few things come up in our classes
 that don't fit naturally into the flow of our lessons.
 We have gathered several of them here.

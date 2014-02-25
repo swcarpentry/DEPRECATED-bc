@@ -1,9 +1,5 @@
----
-layout: lesson
-root: ../..
-title: Code Review
-level: novice
----
+# Code Review
+
 The model shown in the previous section,
 in which everyone pushes and pulls from a single repository,
 is perfectly usable,

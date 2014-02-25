@@ -1,141 +1,132 @@
-#-----------------------------------------------------------
+#--------------------------------------------------------------------------------
 # Re-make lecture materials.
-#-----------------------------------------------------------
+#--------------------------------------------------------------------------------
 
 # Directories.
 OUT = _site
-LINK_OUT = /tmp/bc-links
-BOOK = _book
-INSTALL_DIR = $(HOME)/sites/software-carpentry.org/v5
+INSTALL = $(HOME)/sites/software-carpentry.org/v5
+LINKS = /tmp/bc-links
+COLLECTED = collected
+PATCHED = patched
 
-# Source Markdown pages.
-MARKDOWN_SRC = \
-	LICENSE.md \
-	contents.md \
-	bib.md \
-	gloss.md \
-	rules.md \
-	setup.md \
-	team.md \
-	intro.md \
-	$(sort $(wildcard novice/shell/*.md)) \
-	$(sort $(wildcard novice/git/*.md)) \
-	$(sort $(wildcard novice/python/*.md)) \
-	$(sort $(wildcard novice/sql/*.md)) \
-	$(sort $(wildcard novice/extras/*.md)) \
-	$(sort $(wildcard novice/teaching/*.md)) \
-	$(sort $(wildcard novice/ref/*.md))
+# Templates.
+IPYNB_TPL = _templates/ipynb.tpl
+BOOK_TPL = _templates/book.tpl
+LESSON_TPL = _templates/lesson.tpl
 
-NOTEBOOK_SRC = \
-	$(sort $(wildcard novice/python/??-*.ipynb)) \
-	$(sort $(wildcard novice/sql/??-*.ipynb))
+# Files.
+BOOK = $(OUT)/book.html
 
-# Slides.
-SLIDES_SRC = \
-	$(sort (wildcard slides/*.html))
-SLIDES_DST = \
-	$(patsubst %.html,$(OUT)/%.html,$(SLIDES_SRC))
-
-NOTEBOOK_MD = \
-	$(patsubst %.ipynb,%.md,$(NOTEBOOK_SRC))
-
-HTML_DST = \
-	$(patsubst %.md,$(OUT)/%.html,$(MARKDOWN_SRC)) \
-	$(patsubst %.md,$(OUT)/%.html,$(NOTEBOOK_MD))
-
-# Source for book (in order, with some substutitions).
-BOOK_SRC = \
-	intro.md \
-	team.md \
-	novice/shell/index.md $(sort $(wildcard novice/shell/??-*.md)) \
-	novice/git/index.md $(sort $(wildcard novice/git/??-*.md)) \
-	novice/python/index.md $(patsubst %.ipynb,%.md,$(sort $(wildcard novice/python/??-*.ipynb))) \
-	novice/sql/index.md $(patsubst %.ipynb,%.md,$(sort $(wildcard novice/sql/??-*.ipynb))) \
-	novice/extras/index.md $(sort $(wildcard novice/extras/??-*.md)) \
-	novice/teaching/index.md  $(sort $(wildcard novice/teaching/??-*.md)) \
-	novice/ref/index.md  $(sort $(wildcard novice/ref/??-*.md)) \
-	bib.md \
-	tmp/gloss.md \
-	rules.md \
-	LICENSE.md
-
-BOOK_TMP = \
-	$(patsubst %,tmp/%,$(BOOK_SRC))
-
-BOOK_DST = $(OUT)/book.html
-
-# Mark cached versions of compiled notebooks as SECONDARY so that GNU
-# Make won't delete them after rebuilding.
-.SECONDARY : $(NOTEBOOK_MD)
-
-#-----------------------------------------------------------
+#--------------------------------------------------------------------------------
+# Specify the default command.
+#--------------------------------------------------------------------------------
 
 # Default action: show available commands (marked with double '#').
 all : commands
 
-## quick    : build just the bootcamp home page.
-quick : $(OUT)/index.html
-	jekyll -t build -d $(OUT)
+#--------------------------------------------------------------------------------
+# Collect Markdown versions of IPython Notebooks.
+#--------------------------------------------------------------------------------
 
-## install  : install on the server.
-install : $(OUT)/index.html
-	rm -rf $(INSTALL_DIR)
-	cp -r _site $(INSTALL_DIR)
-	mv $(INSTALL_DIR)/contents.html $(INSTALL_DIR)/index.html
+# IPython Notebook source (split by directory for later interpolation).
+IPYNB_SRC_PYTHON = $(sort $(wildcard novice/python/??-*.ipynb))
+IPYNB_SRC_SQL = $(sort $(wildcard novice/sql/??-*.ipynb))
 
-## site     : build site.
-site : $(BOOK_DST)
+# Notebooks converted to Markdown.
+IPYNB_COLLECTED_PYTHON = $(patsubst %.ipynb,$(COLLECTED)/%.md,$(IPYNB_SRC_PYTHON))
+IPYNB_COLLECTED_SQL = $(patsubst %.ipynb,$(COLLECTED)/%.md,$(IPYNB_SRC_SQL))
+IPYNB_COLLECTED = $(IPYNB_COLLECTED_PYTHON) $(IPYNB_COLLECTED_SQL)
 
-$(BOOK_DST) : $(OUT)/index.html $(BOOK_TMP) _templates/book.tpl tmp/gloss.md bin/make-book.py
+# Convert from .ipynb to .md.
+$(COLLECTED)/%.md : %.ipynb $(IPYNB_TPL)
+	ipython nbconvert --template=$(IPYNB_TPL) --to=markdown --output="$(subst .md,,$@)" "$<"
+
+#--------------------------------------------------------------------------------
+# Markdown source (not including files generated from .ipynb).
+#--------------------------------------------------------------------------------
+
+# Raw Markdown.
+MD_SRC = \
+	intro.md \
+	team.md \
+	novice/shell/index.md $(sort $(wildcard novice/shell/??-*.md)) \
+	novice/git/index.md $(sort $(wildcard novice/git/??-*.md)) \
+	novice/python/index.md \
+	novice/sql/index.md \
+	novice/extras/index.md $(sort $(wildcard novice/extras/??-*.md)) \
+	novice/teaching/index.md  $(sort $(wildcard novice/teaching/??-*.md)) \
+	novice/ref/index.md  $(sort $(wildcard novice/ref/??-*.md)) \
+	bib.md \
+	gloss.md \
+	rules.md \
+	LICENSE.md
+
+# Collected Markdown files (just a copy).
+MD_COLLECTED = $(patsubst %,$(COLLECTED)/%,$(MD_SRC))
+
+# Copy over Markdown files.
+$(COLLECTED)/%.md : %.md
+	@mkdir -p $$(dirname $@)
+	cp $< $@
+
+#--------------------------------------------------------------------------------
+# Patch image paths in files (directory by directory).
+#--------------------------------------------------------------------------------
+
+# Use string substitution to interpolate Markdown files generated from notebooks
+# in the right order.
+ALL_COLLECTED = $(subst $(COLLECTED)/novice/python/index.md,$(COLLECTED)/novice/python/index.md $(IPYNB_COLLECTED_PYTHON),\
+                $(subst $(COLLECTED)/novice/sql/index.md,$(COLLECTED)/novice/sql/index.md $(IPYNB_COLLECTED_SQL),\
+                $(MD_COLLECTED)))
+
+# All patched files.
+ALL_PATCHED = $(patsubst $(COLLECTED)/%,$(PATCHED)/%,$(ALL_COLLECTED))
+
+$(PATCHED)/novice/shell/%.md : $(COLLECTED)/novice/shell/%.md
+	@mkdir -p $$(dirname $@)
+	sed -e 's!<img src="img!<img src="novice/shell/img!g' $< > $@
+$(PATCHED)/novice/git/%.md : $(COLLECTED)/novice/git/%.md
+	@mkdir -p $$(dirname $@)
+	sed -e 's!<img src="img!<img src="novice/git/img!g' $< > $@
+$(PATCHED)/novice/python/%.md : $(COLLECTED)/novice/python/%.md
+	@mkdir -p $$(dirname $@)
+	sed -e 's!<img src="img!<img src="novice/python/img!g' $< > $@
+$(PATCHED)/novice/sql/%.md : $(COLLECTED)/novice/sql/%.md
+	@mkdir -p $$(dirname $@)
+	sed -e 's!<img src="img!<img src="novice/sql/img!g' $< > $@
+$(PATCHED)/novice/extras/%.md : $(COLLECTED)/novice/extras/%.md
+	@mkdir -p $$(dirname $@)
+	sed -e 's!<img src="img!<img src="novice/extras/img!g' $< > $@
+
+# Everything else can just be copied over.
+$(PATCHED)/%.md : %.md
+	@mkdir -p $$(dirname $@)
+	cp $< $@
+
+#--------------------------------------------------------------------------------
+# Build the web site from the patched source files.
+#--------------------------------------------------------------------------------
+
+ALL_OUT = $(BOOK) $(patsubst $(PATCHED)/%.md,$(OUT)/%.html,$(ALL_PATCHED))
+
+$(BOOK) : $(ALL_PATCHED) $(BOOK_TPL) bin/make-book.py
+	@mkdir -p $$(dirname $@)
 	python bin/make-book.py $(BOOK_TMP) \
-	| pandoc --email-obfuscation=none --template=_templates/book.tpl -t html -o - \
+	| pandoc --email-obfuscation=none --template=$(BOOK_TPL) -t html -o - \
 	| sed -e 's!../../gloss.html#!#g:!g' \
 	| sed -e 's!../gloss.html#!#g:!g' \
 	> $@
 
-# Build HTML versions of Markdown source files using Jekyll.
-$(OUT)/index.html : $(MARKDOWN_SRC) $(NOTEBOOK_MD)
-	jekyll -t build -d $(OUT)
-	sed -i -e 's!img src="novice/python/!img src="!g' $(OUT)/novice/python/??-*.html
-
-index.html setup.md : _includes/setup.html
-
-# Build Markdown versions of IPython Notebooks.
-%.md : %.ipynb _templates/ipynb.tpl
-	ipython nbconvert --template=_templates/ipynb.tpl --to=markdown --output="$(subst .md,,$@)" "$<"
-
-# Patch targets and links in the glossary for inclusion in the book.
-tmp/gloss.md : gloss.md
+$(OUT)/%.html : $(PATCHED)/%.md
 	@mkdir -p $$(dirname $@)
-	sed -e 's!](#!](#g:!g' -e 's!<a name="!<a name="g:!g' $< > $@
+	pandoc --email-obfuscation=none --template=$(LESSON_TPL) -t html -o $@ $<
 
-# Patch image paths in the sections.
-tmp/novice/shell/%.md : novice/shell/%.md
-	@mkdir -p $$(dirname $@)
-	sed -e 's!<img src="img!<img src="novice/shell/img!g' $< > $@
+#--------------------------------------------------------------------------------
+# All invokable targets.
+#--------------------------------------------------------------------------------
 
-tmp/novice/git/%.md : novice/git/%.md
-	@mkdir -p $$(dirname $@)
-	sed -e 's!<img src="img!<img src="novice/git/img!g' $< > $@
-
-tmp/novice/python/%.md : novice/python/%.md
-	@mkdir -p $$(dirname $@)
-	sed -e 's!<img src="img!<img src="novice/python/img!g' $< > $@
-
-tmp/novice/sql/%.md : novice/sql/%.md
-	@mkdir -p $$(dirname $@)
-	sed -e 's!<img src="img!<img src="novice/sql/img!g' $< > $@
-
-tmp/novice/extras/%.md : novice/extras/%.md
-	@mkdir -p $$(dirname $@)
-	sed -e 's!<img src="img!<img src="novice/extras/img!g' $< > $@
-
-# All other Markdown files used in the book.
-tmp/%.md : %.md
-	@mkdir -p $$(dirname $@)
-	cp $< $@
-
-#-----------------------------------------------------------
+## site     : build the whole site.
+site : $(BOOK) $(ALL_OUT)
 
 ## commands : show all commands.
 commands :
@@ -165,27 +156,50 @@ images :
 # Look in output directory's 'error.txt' file for results.
 valid : tmp-book.html
 	xmllint --noout tmp-book.html 2>&1 | python bin/unwarn.py
-	@bin/linklint -doc $(LINK_OUT) -textonly -root $(OUT) /@
+	@bin/linklint -doc $(LINKS) -textonly -root $(OUT) /@
+
+## sterile  : _really_ clean up.
+sterile : clean
+	rm -rf $(COLLECTED) $(PATCHED)
 
 ## clean    : clean up all generated files.
 clean : tidy
-	@rm -rf $(OUT) $(NOTEBOOK_MD)
+	rm -rf $(OUT)
 
 ## tidy     : clean up intermediate files only.
 tidy :
-	@rm -rf \
+	rm -rf \
 	image-page.html \
-	tmp \
 	$$(find . -name '*~' -print) \
-	$$(find . -name '*.pyc' -print) \
-	$$(find . -name '??-*_files' -type d -print)
+	$$(find . -name '*.pyc' -print)
 
-# show variables (for debugging)
+## show     : show variables for debugging
 show :
-	@echo "OUT" $(OUT)
-	@echo "TMP" $(TMP)
-	@echo "LINK_OUT" $(LINK_OUT)
-	@echo "MARKDOWN_SRC" $(MARKDOWN_SRC)
-	@echo "NOTEBOOK_SRC" $(NOTEBOOK_SRC)
-	@echo "NOTEBOOK_MD" $(NOTEBOOK_MD)
-	@echo "HTML_DST" $(HTML_DST)
+	@echo OUT $(OUT)
+	@echo INSTALL $(INSTALL)
+	@echo LINKS $(LINKS)
+	@echo COLLECTED $(COLLECTED)
+	@echo PATCHED $(PATCHED)
+	@echo IPYNB_TPL $(IPYNB_TPL)
+	@echo BOOK_TPL $(BOOK_TPL)
+	@echo BOOK $(BOOK)
+	@echo IPYNB_SRC_PYTHON $(IPYNB_SRC_PYTHON)
+	@echo IPYNB_SRC_SQL $(IPYNB_SRC_SQL)
+	@echo IPYNB_COLLECTED_PYTHON $(IPYNB_COLLECTED_PYTHON)
+	@echo IPYNB_COLLECTED_SQL $(IPYNB_COLLECTED_SQL)
+	@echo IPYNB_COLLECTED $(IPYNB_COLLECTED)
+	@echo MD_SRC $(MD_SRC)
+	@echo MD_COLLECTED $(MD_COLLECTED)
+	@echo ALL_COLLECTED $(ALL_COLLECTED)
+	@echo ALL_PATCHED $(ALL_PATCHED)
+	@echo ALL_OUT $(ALL_OUT)
+
+#--------------------------------------------------------------------------------
+# Support.
+#--------------------------------------------------------------------------------
+
+# Stop GNU Make from deleting these temporary files.
+.SECONDARY : \
+	$(IPYNB_COLLECTED) $(IPYNB_PATCHED) \
+	$(MD_COLLECTED) $(MD_PATCHED)
+

@@ -3,10 +3,9 @@
 .DS_Store
 .ipynb_checkpoints
 _site
-tmp
 image-page.html
-tmp-book.*
-patched-gloss.md
+collected
+patched
 */*/*_files
 lessons/misc-r/full-R-bootcamp/R-basics/01-basics-of-R.md
 lessons/misc-r/full-R-bootcamp/R-basics/rstudio-basics.md

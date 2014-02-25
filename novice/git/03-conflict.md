@@ -1,9 +1,5 @@
----
-layout: lesson
-root: ../..
-title: Conflicts
-level: novice
----
+# Conflicts
+
 <div class="objectives" markdown="1">
 
 #### Objectives

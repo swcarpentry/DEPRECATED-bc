@@ -1,9 +1,5 @@
----
-layout: lesson
-root: .
-title: Licenses
----
-### Instructional Material
+# Licenses
+
 
 All Software Carpentry instructional material is made available under
 the Creative Commons Attribution license. You are free:

@@ -1,9 +1,5 @@
----
-layout: lesson
-root: ../..
-title: Why I Teach
-level: novice
----
+# Why I Teach
+
 When I was your age, I thought universities existed to teach people
 how to learn.  Later, when I was in grad school, I thought
 universities were about doing research and creating new knowledge. Now

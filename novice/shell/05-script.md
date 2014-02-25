@@ -1,9 +1,5 @@
----
-layout: lesson
-root: ../..
-title: Shell Scripts
-level: novice
----
+# Shell Scripts
+
 <div class="objectives" markdown="1">
 
 #### Objectives

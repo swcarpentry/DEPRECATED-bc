@@ -1,9 +1,5 @@
----
-layout: lesson
-root: ../..
-title: Collaborating
-level: novice
----
+# Collaborating
+
 <div class="objectives" markdown="1">
 
 #### Objectives

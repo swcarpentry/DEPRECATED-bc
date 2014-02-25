@@ -1,9 +1,5 @@
----
-layout: lesson
-root: ../..
-title: Unit Testing
-level: novice
----
+# Unit Testing
+
 Most people don't enjoy writing tests,
 so if we want them to actually do it,
 it must be easy to:

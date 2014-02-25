@@ -1,9 +1,5 @@
----
-layout: lesson
-root: ../..
-title: Aliasing
-level: novice
----
+# Aliasing
+
 At this point,
 we need to take a small side trip to explore something which is very useful,
 but which can also be the source of some hard-to-find bugs.

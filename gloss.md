@@ -1,8 +1,5 @@
----
-layout: lesson
-root: .
-title: Glossary
----
+# Glossary
+
 **absolute path**: <a name="absolute-path"></a>
 A [path](#path) that refers to a particular location in a file system.
 Absolute paths are usually written with respect to the file system's
