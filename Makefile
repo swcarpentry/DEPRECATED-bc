@@ -1,9 +1,9 @@
-#--------------------------------------------------------------------------------
+#================================================================================
 # Re-make lecture materials.
-#--------------------------------------------------------------------------------
+#================================================================================
 
 # Directories.
-OUT = _site
+WEBSITE = site
 INSTALL = $(HOME)/sites/software-carpentry.org/v5
 LINKS = /tmp/bc-links
 COLLECTED = collected
@@ -15,7 +15,8 @@ BOOK_TPL = _templates/book.tpl
 LESSON_TPL = _templates/lesson.tpl
 
 # Files.
-BOOK = $(OUT)/book.html
+BOOK = $(WEBSITE)/book.html
+INDEX = $(WEBSITE)/index.html
 
 #--------------------------------------------------------------------------------
 # Specify the default command.
@@ -47,6 +48,7 @@ $(COLLECTED)/%.md : %.ipynb $(IPYNB_TPL)
 
 # Raw Markdown.
 MD_SRC = \
+	contents.md \
 	intro.md \
 	team.md \
 	novice/shell/index.md $(sort $(wildcard novice/shell/??-*.md)) \
@@ -107,9 +109,10 @@ $(PATCHED)/%.md : %.md
 # Build the web site from the patched source files.
 #--------------------------------------------------------------------------------
 
-ALL_OUT = $(BOOK) $(patsubst $(PATCHED)/%.md,$(OUT)/%.html,$(ALL_PATCHED))
+# All patched files in the website.
+ALL_WEBSITE = $(patsubst $(PATCHED)/%.md,$(WEBSITE)/%.html,$(ALL_PATCHED))
 
-$(BOOK) : $(ALL_PATCHED) $(BOOK_TPL) bin/make-book.py
+$(BOOK) : $(INDEX) $(BOOK_TPL) bin/make-book.py
 	@mkdir -p $$(dirname $@)
 	python bin/make-book.py $(BOOK_TMP) \
 	| pandoc --email-obfuscation=none --template=$(BOOK_TPL) -t html -o - \
@@ -117,7 +120,10 @@ $(BOOK) : $(ALL_PATCHED) $(BOOK_TPL) bin/make-book.py
 	| sed -e 's!../gloss.html#!#g:!g' \
 	> $@
 
-$(OUT)/%.html : $(PATCHED)/%.md
+$(INDEX) : $(ALL_WEBSITE)
+	cp $(WEBSITE)/contents.html $@
+
+$(WEBSITE)/%.html : $(PATCHED)/%.md
 	@mkdir -p $$(dirname $@)
 	pandoc --email-obfuscation=none --template=$(LESSON_TPL) -t html -o $@ $<
 
@@ -127,22 +133,22 @@ $(OUT)/%.html : $(PATCHED)/%.md
 
 # CSS files.
 CSS_SRC = $(wildcard css/*.css) $(wildcard css/*/*.css)
-CSS_OUT = $(patsubst %,$(OUT)/%,$(CSS_SRC))
+CSS_OUT = $(patsubst %,$(WEBSITE)/%,$(CSS_SRC))
 
 # Image files.
 IMG_SRC = \
 	$(wildcard novice/*/img/*.png) $(wildcard novice/*/img/*.svg) \
 	$(wildcard img/*.png) $(wildcard img/slides/*.png)
-IMG_OUT = $(patsubst %,$(OUT)/%,$(IMG_SRC))
+IMG_OUT = $(patsubst %,$(WEBSITE)/%,$(IMG_SRC))
 
 # Rules (repeated because there's no easy way to abstract across suffixes).
-$(OUT)/%.css : %.css
+$(WEBSITE)/%.css : %.css
 	@mkdir -p $$(dirname $@)
 	cp $< $@
-$(OUT)/%.png : %.png
+$(WEBSITE)/%.png : %.png
 	@mkdir -p $$(dirname $@)
 	cp $< $@
-$(OUT)/%.svg : %.svg
+$(WEBSITE)/%.svg : %.svg
 	@mkdir -p $$(dirname $@)
 	cp $< $@
 
@@ -151,7 +157,7 @@ $(OUT)/%.svg : %.svg
 #--------------------------------------------------------------------------------
 
 ## site     : build the whole site.
-site : $(BOOK) $(ALL_OUT) $(CSS_OUT) $(IMG_OUT)
+site : $(BOOK) $(CSS_OUT) $(IMG_OUT)
 
 ## commands : show all commands.
 commands :
@@ -181,7 +187,7 @@ images :
 # Look in output directory's 'error.txt' file for results.
 valid : tmp-book.html
 	xmllint --noout tmp-book.html 2>&1 | python bin/unwarn.py
-	@bin/linklint -doc $(LINKS) -textonly -root $(OUT) /@
+	@bin/linklint -doc $(LINKS) -textonly -root $(WEBSITE) /@
 
 ## sterile  : _really_ clean up.
 sterile : clean
@@ -189,7 +195,7 @@ sterile : clean
 
 ## clean    : clean up all generated files.
 clean : tidy
-	rm -rf $(OUT)
+	rm -rf $(WEBSITE)
 
 ## tidy     : clean up intermediate files only.
 tidy :
@@ -200,7 +206,7 @@ tidy :
 
 ## show     : show variables for debugging
 show :
-	@echo OUT $(OUT)
+	@echo OUT $(WEBSITE)
 	@echo INSTALL $(INSTALL)
 	@echo LINKS $(LINKS)
 	@echo COLLECTED $(COLLECTED)
@@ -217,14 +223,10 @@ show :
 	@echo MD_COLLECTED $(MD_COLLECTED)
 	@echo ALL_COLLECTED $(ALL_COLLECTED)
 	@echo ALL_PATCHED $(ALL_PATCHED)
-	@echo ALL_OUT $(ALL_OUT)
 
 #--------------------------------------------------------------------------------
 # Support.
 #--------------------------------------------------------------------------------
 
 # Stop GNU Make from deleting these temporary files.
-.SECONDARY : \
-	$(IPYNB_COLLECTED) $(IPYNB_PATCHED) \
-	$(MD_COLLECTED) $(MD_PATCHED)
-
+.SECONDARY : $(ALL_COLLECTED) $(ALL_PATCHED)

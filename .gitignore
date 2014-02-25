@@ -3,6 +3,7 @@
 .DS_Store
 .ipynb_checkpoints
 _site
+site
 image-page.html
 collected
 patched
