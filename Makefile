@@ -122,11 +122,22 @@ $(OUT)/%.html : $(PATCHED)/%.md
 	pandoc --email-obfuscation=none --template=$(LESSON_TPL) -t html -o $@ $<
 
 #--------------------------------------------------------------------------------
+# Extra files used in web site (CSS, images, etc.).
+#--------------------------------------------------------------------------------
+
+CSS_SRC = $(wildcard css/*.css) $(wildcard css/*/*.css)
+CSS_OUT = $(patsubst %,$(OUT)/%,$(CSS_SRC))
+
+$(OUT)/%.css : %.css
+	@mkdir -p $$(dirname $@)
+	cp $< $@
+
+#--------------------------------------------------------------------------------
 # All invokable targets.
 #--------------------------------------------------------------------------------
 
 ## site     : build the whole site.
-site : $(BOOK) $(ALL_OUT)
+site : $(BOOK) $(ALL_OUT) $(CSS_OUT)
 
 ## commands : show all commands.
 commands :
