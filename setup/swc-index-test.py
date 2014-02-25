@@ -42,18 +42,21 @@ Checks for:
     5. startdate/enddate should be valid dates
     6. country should be a string with no spaces
     7. instructor list should be a valid Python/Ruby list
+    8. Template header should be removed
 '''
 
-import sys as _sys
+import sys
+import re
 
-__version__ = '0.1'
+__version__ = '0.2'
 
 # Currently, a header has exactly 13 elements
-_categories = set(['layout', 'root', 'venue', 'address', 'country', 'humandate', 'humantime', 'startdate', 'enddate', 'latlng', 'registration', 'instructor', 'contact'])
+CATEGORIES = set(['layout', 'root', 'venue', 'address', 'country', \
+        'humandate', 'humantime', 'startdate', 'enddate', 'latlng', \
+        'registration', 'instructor', 'contact'])
 
 def check_email(email):
     '''A valid email has letters, then an @, followed by letters, followed by a dot, followed by letters.'''
-    import re
     if not re.match(r'[^@]+@[^@]+\.[^@]+', email):
         return False
     return True
@@ -88,22 +91,6 @@ def check_date(date):
         return False
     return True
 
-def get_header(index_fh):
-    '''Parses index.html file, returns just the header'''
-    inside = False
-    header = []
-    for line in index_fh:
-        line = line.rstrip('\n\r')
-        if line == '---' and not inside:
-            inside = True
-            continue
-        if line == '---' and inside:
-            inside = False
-            break # we can stop here - for now, just check header
-        if inside:
-            header.append(line)
-    return header
-
 def check_instructor(instructor):
     '''Checks whether instructor list is of format ['First name', 'Second name', ...']'''
     try:
@@ -112,7 +99,7 @@ def check_instructor(instructor):
         # Human names are complicated so I'll just leave it at that.
     except ImportError:
         # skip
-        _sys.stderr.write('WARNING: module "ast" not found. Skipping test for instructor names.\n')
+        sys.stderr.write('WARN: module "ast" not found. Skipping test for instructor names.\n')
         return True
     except:
         # There was a problem with parsing the instructor list
@@ -123,29 +110,49 @@ def check_validity(data, function, error):
     '''Wrapper-function around the various check-functions.'''
     valid = function(data)
     if not valid:
-        _sys.stderr.write(error)
-        _sys.stderr.write('\tOffending entry was: "%s"\n' %(data))
+        sys.stderr.write(error)
+        sys.stderr.write('\tOffending entry was: "%s"\n' %(data))
         return True
     return False
 
-if __name__ == '__main__':
-    args = _sys.argv
-    if len(args) > 2:
-        _sys.stderr.write('Usage: python swc-index-test.py\nAlternative: python swc-index-test.py path/to/index.html\n')
-        _sys.exit(0)
+def get_header(index_fh):
+    '''Parses index.html file, returns just the header'''
+    inside = False
+    header = []
+    for line in index_fh:
+        line = line.rstrip('\n\r')
+        if line == '---' and not inside:
+            inside = True
+            continue
+        elif line == '---' and inside:
+            inside = False
 
-    if len(args) == 1:
+        if inside:
+            header.append(line)
+        if "This page is a template for bootcamp home pages." in line:
+            sys.stderr.write('WARN:\tYou seem to still have the template header in your index.html. Please remove that.\n')
+            sys.stderr.write('\tLook for: "<!-- Remove the block below. -->" in the index.html.\n')
+            break # we can stop here - for now, just check header and template header
+    return header
+
+if __name__ == '__main__':
+    args = sys.argv
+    if len(args) > 2:
+        sys.stderr.write('Usage: python swc-index-test.py\nAlternative: python swc-index-test.py path/to/index.html\n')
+        sys.exit(0)
+    elif len(args) == 1:
         filename = '../index.html'
     else:
         filename = args[1]
 
-    _sys.stderr.write('Testing file "%s".\n' %filename)
+    sys.stderr.write('Testing file "%s".\n' %filename)
     index_fh = open(filename)
 
     header = get_header(index_fh)
+
     if not header:
-        _sys.stderr.write('ERROR: Can\'t find header in given file "%s". Please check path, is this the bc index.html?\n' %(filename))
-        _sys.exit(1)
+        sys.stderr.write('ERROR:\tCan\'t find header in given file "%s". Please check path, is this the bc index.html?\n' %(filename))
+        sys.exit(1)
 
     broken = False
     # to check whether all categories are present
@@ -162,24 +169,29 @@ if __name__ == '__main__':
         this_categories.append(category)
 
         if category == 'contact':
-            broken |= check_validity(data, check_email, 'ERROR:\tEmail seems to be invalid.\n')
+            broken |= check_validity(data, check_email, \
+                    'ERROR:\tEmail seems to be invalid.\n')
         elif category == 'country':
-            broken |= check_validity(data, check_country, 'ERROR:\tCountry seems to be invalid. Check whether there are spaces inside the string.\n')
+            broken |= check_validity(data, check_country, \
+                    'ERROR:\tCountry seems to be invalid. Check whether there are spaces inside the string.\n')
         elif category == 'latlng':
-            broken |= check_validity(data, check_latitude_longitude, 'ERROR:\tLatitude/Longitude seems to be invalid. Check whether it\'s two floating point numbers, separated by a comma.\n')
+            broken |= check_validity(data, check_latitude_longitude, \
+                    'ERROR:\tLatitude/Longitude seems to be invalid. Check whether it\'s two floating point numbers, separated by a comma.\n')
         elif (category == 'startdate') or (category == 'enddate'):
-            broken |= check_validity(data, check_date, 'ERROR:\t%s seems to be invalid. Must be of format year-month-day, i.e., 2014-01-31.\n' %category)
+            broken |= check_validity(data, check_date, \
+                    'ERROR:\t%s seems to be invalid. Must be of format year-month-day, i.e., 2014-01-31.\n' %category)
         elif category == 'instructor':
-            broken |= check_validity(data, check_instructor, 'ERROR:\tInstructor string isn\'t a valid list of format ["Name 1", "Name 2",..].\n')
+            broken |= check_validity(data, check_instructor, \
+                    'ERROR:\tInstructor string isn\'t a valid list of format ["First instructor", "Second instructor",..].\n')
 
     # Double categories?
     if len(this_categories) != len(set(this_categories)):
-        _sys.stderr.write('ERROR:\tIdentical categories appear twice or more.\n')
+        sys.stderr.write('ERROR:\tIdentical categories appear twice or more.\n')
         # this is a slightly ugly solution - collections.Counter might be nicer
         seen_set = set()
         for cat in this_categories:
             if cat in seen_set:
-                _sys.stderr.write('\t"%s" appears more than once.\n' %(cat))
+                sys.stderr.write('\t"%s" appears more than once.\n' %(cat))
             else:
                 seen_set.add(cat)
         broken = True
@@ -187,21 +199,21 @@ if __name__ == '__main__':
     # See how many categories we got
     this_categories = set(this_categories)
 
-    missing_categories = _categories - this_categories
+    missing_categories = CATEGORIES - this_categories
     if missing_categories:
-        _sys.stderr.write('ERROR:\tnot enough categories.\n')
-        _sys.stderr.write('\tMissing: %s\n' %(list(missing_categories)))
+        sys.stderr.write('ERROR:\tnot enough categories.\n')
+        sys.stderr.write('\tMissing: %s\n' %(list(missing_categories)))
         broken = True
 
-    extra_categories = this_categories - _categories
+    extra_categories = this_categories - CATEGORIES
     if extra_categories:
-        _sys.stderr.write('ERROR:\tThere are superfluous categories.\n')
-        _sys.stderr.write('\tToo many: %s\n' %(list(extra_categories)))
+        sys.stderr.write('ERROR:\tThere are superfluous categories.\n')
+        sys.stderr.write('\tToo many: %s\n' %(list(extra_categories)))
         broken = True
 
     if not broken:
-        _sys.stderr.write('Everything seems to be in order.\n')
-        _sys.exit(0)
+        sys.stderr.write('Everything seems to be in order.\n')
+        sys.exit(0)
     else:
-        _sys.stderr.write('There were problems, please see above.\n')
-        _sys.exit(1)
+        sys.stderr.write('There were problems, please see above.\n')
+        sys.exit(1)
