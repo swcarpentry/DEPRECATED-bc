@@ -175,11 +175,6 @@ fixme :
 gloss :
 	@bin/gloss.py ./gloss.md $(MARKDOWN_DST) $(NOTEBOOK_DST)
 
-## images   : create a temporary page to display images.
-images :
-	@bin/make-image-page.py $(MARKDOWN_SRC) $(NOTEBOOK_SRC) > image-page.html
-	@echo "Open ./image-page.html to view images"
-
 ## valid    : check validity of HTML book.
 # Depends on xmllint to check validity of generated pages.
 # Also depends on linklint, an HTML link-checking module from
@@ -200,7 +195,6 @@ clean : tidy
 ## tidy     : clean up intermediate files only.
 tidy :
 	rm -rf \
-	image-page.html \
 	$$(find . -name '*~' -print) \
 	$$(find . -name '*.pyc' -print)
 
