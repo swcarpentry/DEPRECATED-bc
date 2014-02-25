@@ -143,13 +143,15 @@ if __name__ == '__main__':
     index_fh = open(filename)
 
     header = get_header(index_fh)
+    if not header:
+        _sys.stderr.write('ERROR: Can\'t find header in given file "%s". Please check path, is this the bc index.html?\n' %(filename))
+        _sys.exit(1)
 
     broken = False
     # to check whether all categories are present
     this_categories = []
     # look through all header entries
     for element in header:
-        # this currently hinges on whether there's a space between the category and the entry.
         element_list = element.split(':')
         # This also splits human times, account for that
         if len(element_list) > 2:
@@ -197,7 +199,6 @@ if __name__ == '__main__':
         _sys.stderr.write('\tToo many: %s\n' %(list(extra_categories)))
         broken = True
 
-    _sys.stderr.write('\n')
     if not broken:
         _sys.stderr.write('Everything seems to be in order.\n')
         _sys.exit(0)
