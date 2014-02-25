@@ -125,10 +125,24 @@ $(OUT)/%.html : $(PATCHED)/%.md
 # Extra files used in web site (CSS, images, etc.).
 #--------------------------------------------------------------------------------
 
+# CSS files.
 CSS_SRC = $(wildcard css/*.css) $(wildcard css/*/*.css)
 CSS_OUT = $(patsubst %,$(OUT)/%,$(CSS_SRC))
 
+# Image files.
+IMG_SRC = \
+	$(wildcard novice/*/img/*.png) $(wildcard novice/*/img/*.svg) \
+	$(wildcard img/*.png) $(wildcard img/slides/*.png)
+IMG_OUT = $(patsubst %,$(OUT)/%,$(IMG_SRC))
+
+# Rules (repeated because there's no easy way to abstract across suffixes).
 $(OUT)/%.css : %.css
+	@mkdir -p $$(dirname $@)
+	cp $< $@
+$(OUT)/%.png : %.png
+	@mkdir -p $$(dirname $@)
+	cp $< $@
+$(OUT)/%.svg : %.svg
 	@mkdir -p $$(dirname $@)
 	cp $< $@
 
@@ -137,7 +151,7 @@ $(OUT)/%.css : %.css
 #--------------------------------------------------------------------------------
 
 ## site     : build the whole site.
-site : $(BOOK) $(ALL_OUT) $(CSS_OUT)
+site : $(BOOK) $(ALL_OUT) $(CSS_OUT) $(IMG_OUT)
 
 ## commands : show all commands.
 commands :
