@@ -25,15 +25,15 @@ You should not try to use the same repo for both purposes because:
 
 **Table of Contents**
 
-[Background](#background)  
-[Getting Started](#getting-started)  
-[Previewing the Site](#previewing-the-site)  
-[Layout and Variables](#layout-and-variables)  
-[Include Files](#include-files)  
-[Page Content](#page-content)  
-[Lesson Material](#lesson-material)  
-[Site Map](#site-map)  
-[FAQ](#faq)
+*   [Background](#background)  
+*   [Getting Started](#getting-started)  
+*   [Previewing the Site](#previewing-the-site)  
+*   [Variables](#variables)  
+*   [Include Files](#include-files)  
+*   [Page Content](#page-content)  
+*   [Lesson Material](#lesson-material)  
+*   [Site Map](#site-map)  
+*   [FAQ](#faq)
 
 Background
 ----------
