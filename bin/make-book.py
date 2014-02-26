@@ -1,3 +1,4 @@
+from __future__ import print_function
 import sys
 import os.path
 
@@ -11,11 +12,11 @@ def main():
         lines = skip(filename, lines, False, '<div class="toc"', '</div>')
 
         if title:
-            print make_title(filename, title)
+            print(make_title(filename, title))
         for line in lines:
-            print line.rstrip()
+            print(line.rstrip())
 
-        print
+        print()
 
 def extract_title(filename, lines):
     for ln in lines:
