@@ -11,7 +11,8 @@ insert into metadata values('pr',  'mm',     'annual total precipitation');
 
 create table readings(
     country text    not null, -- 3-letter ISO country code
-    year    integer not null, -- year of observation
     what    text    not null, -- name of observation
-    value   real    not null  -- recorded value
+    year    integer not null, -- year of observation
+    value   real    not null, -- recorded value
+    foreign key(what) references metadata(what)
 );
