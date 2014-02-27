@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: Exceptions
-level: novice
 ---
 Assertions help us catch errors in our code,
 but things can go wrong for other reasons,

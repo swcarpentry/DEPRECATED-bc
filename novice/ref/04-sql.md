@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: SQL Reference
-level: novice
 ---
 #### Basic Queries
 

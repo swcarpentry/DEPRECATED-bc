@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: Using a Debugger
-level: novice
 ---
 Programmers spend a lot of time debugging,
 so it's worth learning how to do it systematically.

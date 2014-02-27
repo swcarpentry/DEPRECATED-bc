@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: Python Reference
-level: novice
 ---
 #### Basic Operations
 
