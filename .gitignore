@@ -1,5 +1,5 @@
 *.pyc
-translated/novice/*/*_files
+cached/novice/*/*_files
 *~
 .DS_Store
 .ipynb_checkpoints

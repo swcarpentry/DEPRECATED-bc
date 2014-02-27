@@ -6,7 +6,7 @@
 SITE = _site
 INSTALL = $(HOME)/sites/software-carpentry.org/v5
 LINKS = /tmp/bc-links
-TRANSLATED = translated
+CACHED = cached
 
 # Templates for nbconvert and Pandoc.
 IPYNB_TPL = _templates/ipynb.tpl
@@ -28,7 +28,7 @@ INDEX = $(SITE)/index.html
 all : commands
 
 #----------------------------------------------------------------------
-# Create Markdown versions of IPython Notebooks in TRANSLATED directory.
+# Create Markdown versions of IPython Notebooks in CACHED directory.
 #----------------------------------------------------------------------
 
 # IPython Notebooks (split by directory so that they can be
@@ -37,11 +37,11 @@ IPYNB_SRC_PYTHON = $(sort $(wildcard novice/python/??-*.ipynb))
 IPYNB_SRC_SQL = $(sort $(wildcard novice/sql/??-*.ipynb))
 
 # Notebooks converted to Markdown.
-IPYNB_TX_PYTHON = $(patsubst %.ipynb,$(TRANSLATED)/%.md,$(IPYNB_SRC_PYTHON))
-IPYNB_TX_SQL = $(patsubst %.ipynb,$(TRANSLATED)/%.md,$(IPYNB_SRC_SQL))
+IPYNB_TX_PYTHON = $(patsubst %.ipynb,$(CACHED)/%.md,$(IPYNB_SRC_PYTHON))
+IPYNB_TX_SQL = $(patsubst %.ipynb,$(CACHED)/%.md,$(IPYNB_SRC_SQL))
 
 # Convert a .ipynb to .md.
-$(TRANSLATED)/%.md : %.ipynb $(IPYNB_TPL)
+$(CACHED)/%.md : %.ipynb $(IPYNB_TPL)
 	ipython nbconvert --template=$(IPYNB_TPL) --to=markdown --output="$(subst .md,,$@)" "$<"
 
 #----------------------------------------------------------------------
