@@ -82,6 +82,13 @@ commands :
 ## gh       : build the site as GitHub will see it.
 gh : $(INDEX)
 
+## install  : install on the server.
+install : $(INDEX)
+	rm -rf $(INSTALL)
+	mkdir -p $(INSTALL)
+	cp -r $(SITE)/* $(INSTALL)
+	mv $(INSTALL)/contents.html $(INSTALL)/index.html
+
 ## contribs : list contributors (uses .mailmap file).
 contribs :
 	git log --pretty=format:%aN | sort | uniq
