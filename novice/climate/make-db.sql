@@ -6,8 +6,8 @@ create table metadata(
     note    text    not null  -- any other information
 );
 
-insert into metadata values('temp', 'deg. C', 'annual average surface temperature');
-insert into metadata values('precip', 'mm', 'annual total precipitation');
+insert into metadata values('tas', 'deg. C', 'annual average surface temperature');
+insert into metadata values('pr',  'mm',     'annual total precipitation');
 
 create table readings(
     country text    not null, -- 3-letter ISO country code
