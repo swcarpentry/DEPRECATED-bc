@@ -74,7 +74,7 @@ try:
 reader = open('nonexistent-file.txt', 'r')
 except IOError:
 print 'Whoops!'
-<span class="err">Whoops!
+<span class="err">Whoops!</span>
 ~~~
 
 When Python executes this code,
