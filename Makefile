@@ -93,8 +93,8 @@ $(INDEX) : $(BOOK_MD)
 commands :
 	@grep -E '^##' Makefile | sed -e 's/## //g'
 
-## gh       : build the site as GitHub will see it.
-gh : $(INDEX) $(BOOK)
+## site    : build the site as GitHub will see it.
+site : $(INDEX) $(BOOK)
 
 ## install  : install on the server.
 install : $(INDEX)
