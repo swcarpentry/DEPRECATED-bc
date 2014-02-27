@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: Version Control with Git
-level: novice
 ---
 Version control might be the most important topic we teach,
 but Git is definitely the most complicated tool.

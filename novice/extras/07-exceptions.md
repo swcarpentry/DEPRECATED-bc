@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: Exceptions
-level: novice
 ---
 Assertions help us catch errors in our code,
 but things can go wrong for other reasons,
@@ -75,7 +74,7 @@ try:
 reader = open('nonexistent-file.txt', 'r')
 except IOError:
 print 'Whoops!'
-<span class="err">Whoops!
+<span class="err">Whoops!</span>
 ~~~
 
 When Python executes this code,

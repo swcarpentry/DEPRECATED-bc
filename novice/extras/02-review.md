@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: Code Review
-level: novice
 ---
 The model shown in the previous section,
 in which everyone pushes and pulls from a single repository,
