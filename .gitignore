@@ -1,7 +1,6 @@
 *.pyc
-*/*/*_files
+translated/novice/*/*_files
 *~
 .DS_Store
 .ipynb_checkpoints
 _site
-translated
