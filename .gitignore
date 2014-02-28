@@ -1,6 +1,7 @@
 *.pyc
-cached/novice/*/*_files
 *~
 .DS_Store
 .ipynb_checkpoints
 _site
+book.md
+cached/novice/*/*_files
