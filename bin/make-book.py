@@ -1,4 +1,5 @@
 import sys
+import os.path
 
 # Header required to make this a Jekyll file.
 HEADER = '''---
@@ -6,41 +7,48 @@ layout: book
 root: .
 ---'''
 
-def main(filenames):
-    '''Splice a bunch of files together to make a book.'''
+def main():
     print HEADER
-    for f in filenames:
-        with open(f, 'r') as reader:
+    for filename in sys.argv[1:]:
+        with open(filename, 'r') as reader:
             lines = reader.readlines()
-            lines = remove_jekyll_header(lines)
-            lines = remove_toc(lines)
-            sys.stdout.writelines(lines)
 
-def remove_jekyll_header(lines):
-    '''Remove a dash-delimited Jekyll header (if present).'''
-    if not lines[0].startswith('---'):
-        return lines
+        title = extract_title(filename, lines)
+        if lines[0].startswith('---'):
+            lines = skip(filename, lines, '---', '---')
+        lines = skip(filename, lines, '<div class="toc"', '</div>')
 
-    count = 0
+        if title:
+            print make_title(filename, title)
+        for line in lines:
+            print line.rstrip()
+
+        print
+
+def extract_title(filename, lines):
+    for ln in lines:
+        if ln.startswith('title:'):
+            return ln.split(':', 1)[1].strip()
+    return None
+
+def skip(filename, lines, open, close):
+    i_open = None
+    i_close = None
     for (i, ln) in enumerate(lines):
-        if ln.startswith('---'):
-            count += 1
-        if count == 2:
-            break
-    return lines[i+1:]
-
-def remove_toc(lines):
-    '''Remove a div with class "toc" (if present).'''
-    start = end = None
-    for (i, ln) in enumerate(lines):
-        if ('<div class="toc"' in ln):
-            start = i
-        if (start is not None) and ('</div>' in ln):
-            end = i+1
-            break
-    if (end is not None):
-        lines = lines[0:start] + lines[end:]
+        if (i_open is None) and ln.startswith(open):
+            i_open = i
+        elif (i_open is not None) and ln.startswith(close):
+            i_close = i
+            return lines[:i_open] + lines[i_close+1:]
     return lines
 
+def make_title(filename, title):
+    title = '## {0}'.format(title)
+    f = os.path.split(filename)[-1]
+    if f in ('index.md', 'intro.md'):
+        return '\n'.join(['<div class="chapter">', title, '</div>'])
+    else:
+        return title
+
 if __name__ == '__main__':
-    main(sys.argv[1:])
+    main()
