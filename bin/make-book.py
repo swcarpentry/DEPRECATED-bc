@@ -21,6 +21,7 @@ def main():
         lines, _ = skip(filename, lines, '<div class="toc"', '</div>')
 
         lines = fix_image_paths(filename, lines)
+        lines = fix_gloss(filename, lines)
 
         if title:
             print format_title(filename, title)
@@ -52,6 +53,15 @@ def fix_image_paths(filename, lines):
         lines[i] = ln.replace(src, dst)
     return lines
 
+def fix_gloss(filename, lines):
+    '''Fix up glossary entries.'''
+    is_glossary = 'gloss.md' in filename
+    for (i, ln) in enumerate(lines):
+        lines[i] = ln.replace('href="../../gloss.html#', 'href="#g:')
+        if is_glossary:
+            lines[i] = ln.replace('](#', '](#g:').replace('<a name="', '<a name="g:')
+    return lines
+
 def extract_title(filename, lines):
     '''Extract title from YAML header.'''
     for ln in lines:
@@ -63,7 +73,7 @@ def format_title(filename, title):
     title = '## {0}'.format(title)
     f = os.path.split(filename)[-1]
     if f in ('index.md', 'intro.md'):
-        return '\n'.join(['<div class="chapter">', title, '</div>'])
+        return '\n'.join(['<div class="chapter" markdown="1">', title, '</div>'])
     else:
         return title
 
