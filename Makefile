@@ -75,7 +75,7 @@ PAGES_SRC = \
 # sections of Markdown files, patching glossary references and image
 # paths, and then running the whole shebang through Jekyll at the same
 # time as everything else.
-$(BOOK_MD) : $(PAGES_SRC)
+$(BOOK_MD) : $(PAGES_SRC) bin/make-book.py
 	python bin/make-book.py $(BOOK_SRC) > $@
 
 # Convert from Markdown to HTML.  This builds *all* the pages (Jekyll
