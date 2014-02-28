@@ -3,6 +3,7 @@ layout: lesson
 root: ../..
 title: Python Reference
 ---
+
 #### Basic Operations
 
 *   Use `variable = value` to assign a value to a variable.

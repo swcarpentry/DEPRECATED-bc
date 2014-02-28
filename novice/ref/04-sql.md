@@ -3,6 +3,7 @@ layout: lesson
 root: ../..
 title: SQL Reference
 ---
+
 #### Basic Queries
 
 Select one or more columns from a table:
