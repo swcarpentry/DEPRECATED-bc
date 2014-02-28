@@ -1,9 +1,5 @@
----
-layout: lesson
-root: ../..
-title: Finding Things
-level: novice
----
+# Finding Things
+
 <div class="objectives" markdown="1">
 
 #### Objectives

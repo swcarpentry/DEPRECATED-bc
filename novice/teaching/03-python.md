@@ -1,9 +1,5 @@
----
-layout: lesson
-root: ../..
-title: Programming with Python
-level: novice
----
+# Programming with Python
+
 This lesson is written as an introduction to Python,
 but its real purpose is to introduce the single most important idea in programming:
 how to solve problems by building functions,

@@ -1,8 +1,5 @@
----
-layout: lesson
-root: .
-title: Lessons (Version 5.0 Beta)
----
+# Lessons (Version 5.0 Beta)
+
 We are currently updating our lessons
 to incorporate what we've learned from our learners
 in the last four years.

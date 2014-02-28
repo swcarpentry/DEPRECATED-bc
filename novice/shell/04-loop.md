@@ -1,9 +1,5 @@
----
-layout: lesson
-root: ../..
-title: Loops
-level: novice
----
+# Loops
+
 <div class="objectives" markdown="1">
 
 #### Objectives

@@ -1,9 +1,5 @@
----
-layout: lesson
-root: ../..
-title: Branching in Git
-level: novice
----
+# Branching in Git
+
 Here's where we are right now:
 
 ~~~

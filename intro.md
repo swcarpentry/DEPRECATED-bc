@@ -1,8 +1,4 @@
----
-layout: lesson
-root: .
-title: Introduction
----
+# Introduction
 
 Here's the dream:
 

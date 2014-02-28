@@ -1,9 +1,4 @@
----
-layout: lesson
-root: ../..
-title: Reference
-level: novice
----
+# Reference
 
 These short reference guides cover the basic tools and ideas introduced in our lessons.
 

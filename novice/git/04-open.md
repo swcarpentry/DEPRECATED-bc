@@ -1,9 +1,5 @@
----
-layout: lesson
-root: ../..
-title: Open Science
-level: novice
----
+# Open Science
+
 <div class="objectives" markdown="1">
 
 #### Objectives

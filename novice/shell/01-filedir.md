@@ -1,9 +1,5 @@
----
-layout: lesson
-root: ../..
-title: Files and Directories
-level: novice
----
+# Files and Directories
+
 <div class="objectives" markdown="1">
 
 #### Objectives

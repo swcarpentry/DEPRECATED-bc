@@ -1,8 +1,5 @@
----
-layout: lesson
-root: .
-title: The Rules
----
+# The Rules
+
 *   A week of hard work can sometimes save you an hour of thought. <a name="week-hard-work-hour-thought"></a>
 
 *   Fail early, fail often. <a name="fail-early-fail-often"></a>

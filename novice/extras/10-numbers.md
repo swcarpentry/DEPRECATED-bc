@@ -1,9 +1,5 @@
----
-layout: lesson
-root: ../..
-title: Numbers
-level: novice
----
+# Numbers
+
 Let's start by looking at how numbers are stored.
 If we only have the two digits 0 and 1,
 the natural way to store a positive integer is to use base 2,

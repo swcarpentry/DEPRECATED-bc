@@ -1,11 +1,6 @@
----
-layout: lesson
-root: ../
-title: Setup Scripts
----
+# Setup Scripts
 
-Students
-========
+## Students
 
 This directory contains scripts for testing your machine to make sure
 you have the software you'll need for your bootcamp installed.  See
@@ -51,8 +46,7 @@ option:
     os.name            : posix
     …
 
-Instructors
-===========
+## Instructors
 
 `swc-installation-test-1.py` is pretty simple, and just checks that
 the students have a recent enough version of Python installed that

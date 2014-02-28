@@ -1,9 +1,5 @@
----
-layout: lesson
-root: ../..
-title: Permissions
-level: novice
----
+# Permissions
+
 It's now time to look at how Unix determines who can see the contents of which files,
 who can *change* those files,
 and who can run particular programs.

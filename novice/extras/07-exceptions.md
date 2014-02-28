@@ -1,9 +1,5 @@
----
-layout: lesson
-root: ../..
-title: Exceptions
-level: novice
----
+# Exceptions
+
 Assertions help us catch errors in our code,
 but things can go wrong for other reasons,
 like missing or badly-formatted files.

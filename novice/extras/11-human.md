@@ -1,9 +1,5 @@
----
-layout: lesson
-root: ../..
-title: The Human Side of Things
-level: novice
----
+# The Human Side of Things
+
 In my experience, the things that go wrong most often in software
 development projects&mdash;undergraduate or professional&mdash;have nothing to
 do with software.  Instead, the worst mistakes people make are all

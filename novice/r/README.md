@@ -1,7 +1,3 @@
----
-layout: lesson
-root: ../..
-title: Programming with R
-level: novice
----
+# Programming with R
+
 FIXME: to be written.

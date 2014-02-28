@@ -1,9 +1,5 @@
----
-layout: lesson
-root: ../..
-title: The Unix Shell
-level: novice
----
+# The Unix Shell
+
 Many people have questioned whether we should still teach the shell.
 After all,
 anyone who wants to rename several thousand data files

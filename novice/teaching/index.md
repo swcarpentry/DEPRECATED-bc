@@ -1,9 +1,4 @@
----
-layout: lesson
-root: ../..
-title: Instructor's Guide
-level: novice
----
+# Instructor's Guide
 
 > *1997*
 >

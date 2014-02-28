@@ -1,8 +1,5 @@
----
-layout: lesson
-root: .
-title: Our Team
----
+# Our Team
+
 Many thanks to all of the people who have contributed to Software Carpentry over the years.
 
 <table width="100%">

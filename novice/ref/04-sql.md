@@ -1,9 +1,5 @@
----
-layout: lesson
-root: ../..
-title: SQL Reference
-level: novice
----
+# SQL Reference
+
 #### Basic Queries
 
 Select one or more columns from a table:
