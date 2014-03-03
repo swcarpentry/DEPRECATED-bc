@@ -1,3 +1,4 @@
+from __future__ import print_function
 import sys
 import os.path
 
@@ -8,7 +9,7 @@ root: .
 ---'''
 
 def main():
-    print HEADER
+    print(HEADER)
     for filename in sys.argv[1:]:
         with open(filename, 'r') as reader:
             lines = reader.readlines()
@@ -24,11 +25,11 @@ def main():
         lines = fix_gloss(filename, lines)
 
         if title:
-            print format_title(filename, title)
+            print(format_title(filename, title))
         for line in lines:
-            print line.rstrip()
+            print(line.rstrip())
 
-        print
+        print()
 
 def skip(filename, lines, open, close):
     '''Skip a block of lines starting with open and ending with close.'''
