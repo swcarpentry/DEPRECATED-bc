@@ -31,6 +31,16 @@ CONFIG = _config.yml
 all : commands
 
 #----------------------------------------------------------------------
+# Extra files the site depends on.
+#----------------------------------------------------------------------
+
+EXTRAS = \
+	$(wildcard css/*.css) \
+	$(wildcard css/*/*.css) \
+	$(wildcard novice/*/img/*.png) \
+	$(wildcard novice/*/img/*.svg)
+
+#----------------------------------------------------------------------
 # Create Markdown versions of IPython Notebooks in CACHED directory.
 # This is currently the same as the source directory so that files
 # will be in the right places after Jekyll converts them.
@@ -87,7 +97,7 @@ $(BOOK_MD) : $(PAGES_SRC) bin/make-book.py
 # only does batch mode), and erases the SITE directory first, so
 # having the output index.html file depend on all the page source
 # Markdown files triggers the desired build once and only once.
-$(INDEX) : $(BOOK_MD) $(CONFIG)
+$(INDEX) : $(BOOK_MD) $(CONFIG) $(EXTRAS)
 	jekyll -t build -d $(SITE)
 	rm -rf $(SITE)/novice/*/??-*_files
 
@@ -100,7 +110,7 @@ commands :
 	@grep -E '^##' Makefile | sed -e 's/## //g'
 
 ## site     : build the site as GitHub will see it.
-site : $(INDEX) $(BOOK)
+site : $(INDEX)
 
 ## install  : install on the server.
 install : $(INDEX)
