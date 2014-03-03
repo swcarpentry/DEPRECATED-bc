@@ -35,8 +35,9 @@ create vectors. The simplest one is with the `c` function.
 (v1 <- c(1, 2, 5))
 ```
 
-The `c` function allows to combine its arguments. All the arguments
-are *coerced* into a single type:
+The `c` function allows to combine its arguments. If the arguments
+are of various modes, they will be reduced to their lowest common
+type:
 
 ```{r}
 (v2 <- c(1, 3, "a"))
@@ -101,9 +102,11 @@ The function `str` is used here. It stands for *structure* and shows
 the internal structure of an R object.
 
 ## Matrices
-A matrix is a 2-dimensional vector, of a single mode. This is what you
-would use to analyze a spreadsheet full of only numbers, or only
-words. You can create a matrix with the `matrix` function:
+A matrix is a rectangular array of numbers. Technically, it is a
+vector with two additional attributes: number of rows and number of
+columns. This is what you would use to analyze a spreadsheet full of
+only numbers, or only words. You can create a matrix with the `matrix`
+function:
 
 ```{r}
 (m <- rbind(c(1, 4), c(2, 2)))
@@ -113,7 +116,9 @@ words. You can create a matrix with the `matrix` function:
 ```
 
 ## Arrays
-An array is a multidimensional vector, of a single type. It can be
+If a matrix is a two-dimensional data structure, we can add *layers*
+to the data and have further dimensions in addition to rows and
+columns. These datasets would be arrays. It can be
 created with the `array` function:
 
 ```{r}
