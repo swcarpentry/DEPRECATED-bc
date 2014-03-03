@@ -6,7 +6,7 @@
 SITE = _site
 INSTALL = $(HOME)/sites/software-carpentry.org/v5
 LINKS = /tmp/bc-links
-CACHED = cached
+CACHED = .
 
 # Templates for nbconvert and Pandoc.
 IPYNB_TPL = _templates/ipynb.tpl
@@ -16,6 +16,9 @@ BOOK_MD = ./book.md
 
 # Principal target files.
 INDEX = $(SITE)/index.html
+
+# Jekyll configuration file.
+CONFIG = _config.yml
 
 # Directives.
 .INTERMEDIATE : $(BOOK_MD)
@@ -29,7 +32,9 @@ all : commands
 
 #----------------------------------------------------------------------
 # Create Markdown versions of IPython Notebooks in CACHED directory.
-#----------------------------------------------------------------------
+# This is currently the same as the source directory so that files
+# will be in the right places after Jekyll converts them.
+# ----------------------------------------------------------------------
 
 # IPython Notebooks (split by directory so that they can be
 # interpolated into other variables later on).
@@ -82,8 +87,9 @@ $(BOOK_MD) : $(PAGES_SRC) bin/make-book.py
 # only does batch mode), and erases the SITE directory first, so
 # having the output index.html file depend on all the page source
 # Markdown files triggers the desired build once and only once.
-$(INDEX) : $(BOOK_MD)
+$(INDEX) : $(BOOK_MD) $(CONFIG)
 	jekyll -t build -d $(SITE)
+	rm -rf $(SITE)/novice/*/??-*_files
 
 #----------------------------------------------------------------------
 # Targets.
@@ -93,7 +99,7 @@ $(INDEX) : $(BOOK_MD)
 commands :
 	@grep -E '^##' Makefile | sed -e 's/## //g'
 
-## site    : build the site as GitHub will see it.
+## site     : build the site as GitHub will see it.
 site : $(INDEX) $(BOOK)
 
 ## install  : install on the server.
