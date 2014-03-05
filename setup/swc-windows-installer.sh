@@ -6,6 +6,7 @@
 #
 # The script:
 # * Installs nano and makes it accessible from msysGit
+# * Creates ~/.nanorc with links to syntax highlighting configs
 # * Provides standard nosetests behavior (if Python and the nose
 #   module are installed) for msysGit
 #
@@ -28,25 +29,50 @@ die()
 	exit 1
 }
 
+download()
+{
+	URL="${1}"
+	EXPECTED_MD5="${2}"
+	FILENAME=$(basename "${URL}")
+	msg "download ${URL} and install into ${INSTALL_DIRECTORY}"
+	curl -o "${FILENAME}" "${URL}" || die "couldn't download ${URL}"
+	MD5=$(md5sum "${FILENAME}" | cut -d ' ' -f 1) || die "couldn't hash ${FILENAME}"
+	if test "${MD5}" != "${EXPECTED_MD5}"
+	then
+		die "downloaded ${URL} has the wrong MD5 hash: ${MD5} != ${EXPECTED_MD5}"
+	fi
+}
+
+tar_install()
+{
+	URL="${1}"
+	EXPECTED_MD5="${2}"
+	INSTALL_DIRECTORY="${3}"
+	shift 3
+	TAR=$(basename "${URL}")
+	if test ! -d "${INSTALL_DIRECTORY}"
+	then
+		download "${URL}" "${EXPECTED_MD5}"
+		mkdir -p "${INSTALL_DIRECTORY}" ||
+			die "couldn't create ${INSTALL_DIRECTORY}"
+		tar -xf "${FILENAME}" -C "${INSTALL_DIRECTORY}" "$@" ||
+			die "couldn't unzip ${FILENAME} into ${INSTALL_DIRECTORY}"
+	fi
+}
+
 zip_install()
 {
 	URL="${1}"
 	EXPECTED_MD5="${2}"
 	INSTALL_DIRECTORY="${3}"
-	ZIP=$(basename "${URL}")
+	FILENAME=$(basename "${URL}")
 	if test ! -d "${INSTALL_DIRECTORY}"
 	then
-		msg "download ${URL} and install into ${INSTALL_DIRECTORY}"
-		curl -o "${ZIP}" "${URL}" || die "couldn't download ${URL}"
-		MD5=$(md5sum "${ZIP}" | cut -d ' ' -f 1) || die "couldn't hash ${ZIP}"
-		if test "${MD5}" != "${EXPECTED_MD5}"
-		then
-			die "downloaded ${URL} has the wrong MD5 hash: ${MD5} != ${EXPECTED_MD5}"
-		fi
+		download "${URL}" "${EXPECTED_MD5}"
 		mkdir -p "${INSTALL_DIRECTORY}" ||
 			die "couldn't create ${INSTALL_DIRECTORY}"
-		unzip "${ZIP}" -d "${INSTALL_DIRECTORY}" ||
-			die "couldn't unzip ${ZIP} into ${INSTALL_DIRECTORY}"
+		unzip "${FILENAME}" -d "${INSTALL_DIRECTORY}" ||
+			die "couldn't unzip ${FILENAME} into ${INSTALL_DIRECTORY}"
 	fi
 }
 
@@ -56,6 +82,22 @@ install_nano()
 	zip_install 'http://www.nano-editor.org/dist/v2.2/NT/nano-2.2.6.zip' \
 		'4d8987b64a6be0f8de29d51ab5dc5a7a' \
 		"${INSTALL_DIRECTORY}"
+}
+
+install_nanorc()
+{
+	INSTALL_DIRECTORY="${1}"
+	tar_install 'http://www.nano-editor.org/dist/v2.2/nano-2.2.6.tar.gz' \
+		'03233ae480689a008eb98feb1b599807' \
+		"${INSTALL_DIRECTORY}" \
+		--strip-components 1 &&
+	if [ ! -f ~/.nanorc ]
+	then
+		for RCPATH in "${INSTALL_DIRECTORY}"/doc/syntax/*.nanorc
+		do
+			echo "include ${RCPATH}" >> ~/.nanorc
+		done
+	fi
 }
 
 # Creates a terminal-based nosetests entry point for msysGit
@@ -118,8 +160,10 @@ main()
 	SWC_DIR=~/.swc
 	BIN_DIR="${SWC_DIR}/bin"
 	NANO_DIR="${SWC_DIR}/lib/nano"
+	NANORC_DIR="${SWC_DIR}/share/nanorc"
 	create_nosetests_entry_point "${BIN_DIR}" || die "couldn't create nosetests"
 	install_nano "${NANO_DIR}" || die "couldn't install nano"
+	install_nanorc "${NANORC_DIR}" || die "couldn't install nanorc"
 	add_swc_paths "${NANO_DIR}" "${BIN_DIR}" || die "couldn't add SWC paths"
 	set_default_editor nano || die "couldn't set EDITOR"
 }
