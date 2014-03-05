@@ -10,12 +10,17 @@
 #
 # Note:
 #
-# This script will not store any password for security reasons.
+# This script will ask the users for their GitHub password twice. The first time
+# it will store the password in memory and use it when using GitHub API. The
+# second time will be git requesting it to push the repository.
 
 # Functions
 
 function create_repo {
     # TODO: Add description
+    #
+    # Description can be a little complex to handle in the command line, because
+    # of that the script don't support it right now.
     url=https://api.github.com/user/repos
     ghpages=https://${OWNER}.github.io/${BOOTCAMPID}
     curl -u "${OWNER}:${PASSWORD}" -i \
@@ -53,7 +58,7 @@ function clone_and_push {
     # but it don't work either.
     #
     # git push origin gh-pages <<< ${PASSWORD}
-    git push origin gh-pages
+    git push -u origin gh-pages
 }
 
 function end_message {
@@ -66,7 +71,7 @@ function end_message {
     echo "2. Check the information at ../${BOOTCAMPID}/index.html"
     echo "3. Update the repository:"
     echo ""
-    echo "    $ git push origin gh-pages"
+    echo "    $ git push gh-pages"
 }
 
 function main {
