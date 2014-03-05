@@ -26,11 +26,8 @@ function create_repo {
 function set_team {
     for instructor in ${INSTRUCTORS};
     do
-        # This don't work.
-        #
-        # More information at http://stackoverflow.com/q/21698009/1802726.
         url=https://api.github.com/repos/${OWNER}/${BOOTCAMPID}/collaborators/${instructor}
-        curl -u "${OWNER}:${PASSWORD}" -i -X PUT \
+        curl -u "${OWNER}:${PASSWORD}" -i -X PUT -d "{}" \
             ${url}
     done
 }
