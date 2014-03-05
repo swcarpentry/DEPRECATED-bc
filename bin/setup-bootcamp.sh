@@ -26,6 +26,9 @@ function create_repo {
 function set_team {
     for instructor in ${INSTRUCTORS};
     do
+        # This don't work.
+        #
+        # More information at http://stackoverflow.com/q/21698009/1802726.
         url=https://api.github.com/repos/${OWNER}/${BOOTCAMPID}/collaborators/${instructor}
         curl -u "${OWNER}:${PASSWORD}" -i -X PUT \
             ${url}
@@ -34,12 +37,26 @@ function set_team {
 
 function clone_and_push {
     git clone -b gh-pages -o bc \
-        https://github.com/swcarpentry/bc ../${BOOTCAMPID}
+        https://github.com/swcarpentry/bc.git ../${BOOTCAMPID}
     cd ../${BOOTCAMPID}
-    git remote add origin ${BOOTCAMPURL}
-    git push \
-        --repo ${BOOTCAMPURL/https:\/\//https:\/\/${OWNER}:${PASSWORD}@} \
-        gh-pages
+    git remote add origin \
+        ${BOOTCAMPURL/https:\/\//https:\/\/${OWNER}@}.git
+    # This is only supported by git >= 1.7.9
+    #
+    # More information: http://stackoverflow.com/a/5343146/1802726
+    git config credential.username ${OWNER}
+    # Try to avoid user be asked for password. Don't work properly.
+    #
+    # git push \
+    #      --force-with-lease=gh-pages:gh-pages \
+    #     --repo=${BOOTCAMPURL/https:\/\//https:\/\/${OWNER}:${PASSWORD}@}.git
+    #
+    # Try to use "[Here
+    # string](http://www.gnu.org/software/bash/manual/bashref.html#Here-Strings)"
+    # but it don't work either.
+    #
+    # git push origin gh-pages <<< ${PASSWORD}
+    git push origin gh-pages
 }
 
 function end_message {
