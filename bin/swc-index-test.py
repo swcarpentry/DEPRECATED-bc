@@ -52,6 +52,13 @@ Checks for:
 '''
 
 import sys
+
+try:
+    import yaml
+except ImportError:
+    # die immediately, no reason to keep on working
+    sys.stderr.write("ERROR: Need the library 'yaml'. Please install via 'pip install pyyaml'.\nSee http://pyyaml.org/wiki/PyYAMLDocumentation for more information.\n")
+    sys.exit(1)
 import re
 
 __version__ = '0.3'
@@ -102,12 +109,11 @@ def check_humantime(time):
         return False
     return True
 
-def check_date(date):
+def check_date(this_date):
     '''A valid date is YEAR-MONTH-DAY, example: 2014-06-30'''
-    from datetime import datetime
-    try:
-        datetime.strptime(date, '%Y-%m-%d')
-    except ValueError:
+    from datetime import date
+    # libyaml automagically loads valid dates as datetime.date
+    if not isinstance(this_date, date):
         return False
     return True
 
@@ -134,17 +140,11 @@ def check_registration(registration):
 
 def check_instructor(instructor):
     '''Checks whether instructor list is of format ['First instructor', 'Second instructor', ...']'''
-    try:
-        import ast # from Python 2.6 on
-        ast.literal_eval(instructor)
-        # Human names are complicated so I'll just leave it at that.
-    except ImportError:
-        # skip
-        sys.stderr.write('WARN:\tmodule "ast" not found. Skipping test for instructor names.\n')
-        return True
-    except:
+    # libyaml automagically loads list-like strings as lists
+    if not isinstance(instructor, list):
         # There was a problem with parsing the instructor list
         return False
+    # Human names are complicated so I'll just leave it at that.
     return True
 
 def check_email(email):
@@ -172,6 +172,7 @@ def get_header(index_fh):
     '''Parses index.html file, returns just the header'''
     inside = False
     header = []
+    this_categories = []
     for line in index_fh:
         line = line.rstrip('\n\r')
         if line == '---' and not inside:
@@ -182,13 +183,14 @@ def get_header(index_fh):
 
         if inside:
             header.append(line)
+            this_categories.append(line.split(":")[0].strip())
 
         if "This page is a template for bootcamp home pages." in line:
             sys.stderr.write('WARN:\tYou seem to still have the template header in your index.html. Please remove that.\n')
             sys.stderr.write('\tLook for: "<!-- Remove the block below. -->" in the index.html.\n')
             break # we can stop here - for now, just check header and template header
 
-    return header
+    return yaml.load("\n".join(header)), this_categories
 
 def check_file(index_fh):
     '''Gets header from index.html, calls all other functions and checks file for validity. 
@@ -199,25 +201,28 @@ def check_file(index_fh):
         A boolean which is True when 'index.html' has problems and False when there are no problems.
 
     '''
-    header = get_header(index_fh)
+    header, this_categories = get_header(index_fh)
+    # header is now a dictionary - key is category, value is the entry for that category
 
     if not header:
         sys.stderr.write('ERROR:\tCan\'t find header in given file "%s". Please check path, is this the bc index.html?\n' %(filename))
         sys.exit(1)
 
     broken = False
-    # to check whether all categories are present
-    this_categories = []
-    # look through all header entries
-    for element in header:
-        element_list = element.split(':')
-        # This also splits human times, account for that
-        if len(element_list) > 2:
-            category, data = element_list[0], element_list[1:]
-        else:
-            category, data = element_list[0], element_list[1].strip()
 
-        this_categories.append(category)
+    # Do we have double categories?
+    if len(this_categories) != len(set(this_categories)):
+        sys.stderr.write('ERROR:\tIdentical categories appear twice or more.\n')
+        # this is a slightly ugly solution - collections.Counter might be nicer
+        seen_set = set()
+        for cat in this_categories:
+            if cat in seen_set:
+                sys.stderr.write('\t"%s" appears more than once.\n' %(cat))
+            seen_set.add(cat)
+        broken = True
+
+    # look through all header entries
+    for category, data in header.iteritems():
 
         if category == 'layout':
             broken |= check_validity(data, check_layout, \
@@ -232,7 +237,6 @@ def check_file(index_fh):
             broken |= check_validity(data, check_humandate, \
                     'EROR:\tCategory "humandate" seems to be invalid. Please use a three-letter month like "Jan" and four-letter year like "2025".\n')
         elif category == 'humantime':
-            data = ":".join(data).lower() # have to restore time from previous split()
             broken |= check_validity(data, check_humantime, \
                     'ERROR:\thumantime doesn\'t include "am" or "pm".\n')
         elif (category == 'startdate') or (category == 'enddate'):
@@ -253,18 +257,6 @@ def check_file(index_fh):
         else:
             broken |= check_validity(data, check_empty, \
                     'ERROR:\tData for category "%s" is empty.\n' %(category))
-
-    # Double categories?
-    if len(this_categories) != len(set(this_categories)):
-        sys.stderr.write('ERROR:\tIdentical categories appear twice or more.\n')
-        # this is a slightly ugly solution - collections.Counter might be nicer
-        seen_set = set()
-        for cat in this_categories:
-            if cat in seen_set:
-                sys.stderr.write('\t"%s" appears more than once.\n' %(cat))
-            else:
-                seen_set.add(cat)
-        broken = True
 
     # See how many categories we got
     this_categories = set(this_categories)
