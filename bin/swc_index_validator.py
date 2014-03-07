@@ -105,7 +105,9 @@ def check_humandate(date):
     if not any(char.isdigit() for char in day):
         return False
     # year contains *only* numbers
-    if not all(char.isdigit() for char in year):
+    try:
+        int(year)
+    except ValueError:
         return False
 
     return True
