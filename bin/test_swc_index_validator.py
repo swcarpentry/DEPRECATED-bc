@@ -104,6 +104,9 @@ instructor: ["Grace Hopper", "Alan Turing"]
 contact: admin@software-carpentry.org
 ---"""
 
-    file_ = StringIO(header_sample)
+    try: # this happens in Python3
+        file_ = StringIO(header_sample)
+    except TypeError: # this happens in Python2
+        file_ = StringIO(unicode(header_sample))
 
     assert not swc_index_validator.check_file(file_)

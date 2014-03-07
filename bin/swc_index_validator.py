@@ -95,14 +95,25 @@ def check_humandate(date):
         month, day, year = date.split(" ")
     except ValueError:
         return False
+
     if len(month) != 3:
         return False
     if len(year) != 4:
         return False
+
+    # day contains numbers and digits
+    if not any(char.isdigit() for char in day):
+        return False
+    # year contains *only* numbers
+    if not all(char.isdigit() for char in year):
+        return False
+
     return True
 
 def check_humantime(time):
-    '''A valid humantime has either "am" or "pm" or both.'''
+    '''A valid humantime has either "am" or "pm" or both, and contains at least one number'''
+    if not any(char.isdigit() for char in time):
+        return False
     if ('am' not in time) and ('pm' not in time):
         return False
     return True
