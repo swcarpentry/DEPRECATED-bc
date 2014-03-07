@@ -77,20 +77,18 @@ def check_layout(layout):
 
 def check_root(root):
     '''Checks root - can only be "."'''
-    if root.strip() != ".":
+    if root != ".":
         return False
     return True
 
 def check_country(country):
     '''A valid country has no spaces, is one string, isn't empty'''
-    if ' ' in country:
-        return False
-    elif country.strip() == '':
+    if country is None or ' ' in country:
         return False
     return True
 
 def check_humandate(date):
-    '''A valid human date starts with a three-letter month and ends with four-letter year, 
+    '''A valid human date starts with a three-letter month and ends with four-letter year,
     Example: "Feb 18-20, 2525"
     '''
     try:
@@ -128,7 +126,7 @@ def check_latitude_longitude(latlng):
         # just one of them has to break
         float(lat)
         float(lng)
-    except:
+    except ValueError:
         return False
     return True
 
@@ -141,7 +139,7 @@ def check_registration(registration):
 def check_instructor(instructor):
     '''Checks whether instructor list is of format ['First instructor', 'Second instructor', ...']'''
     # libyaml automagically loads list-like strings as lists
-    if not isinstance(instructor, list):
+    if not isinstance(instructor, list) or len(instructor) == 0:
         # There was a problem with parsing the instructor list
         return False
     # Human names are complicated so I'll just leave it at that.
@@ -150,12 +148,6 @@ def check_instructor(instructor):
 def check_email(email):
     '''A valid email has letters, then an @, followed by letters, followed by a dot, followed by letters.'''
     if not re.match(r'[^@]+@[^@]+\.[^@]+', email):
-        return False
-    return True
-
-def check_empty(data):
-    '''Catchall function. Checks whether data is empty or not.'''
-    if data.strip() == '':
         return False
     return True
 
@@ -193,8 +185,8 @@ def get_header(index_fh):
     return yaml.load("\n".join(header)), this_categories
 
 def check_file(index_fh):
-    '''Gets header from index.html, calls all other functions and checks file for validity. 
-    
+    '''Gets header from index.html, calls all other functions and checks file for validity.
+
     Args:
         index_fh: the file handle of 'index.html'.
     Returns:
@@ -222,41 +214,38 @@ def check_file(index_fh):
         broken = True
 
     # look through all header entries
-    for category, data in header.iteritems():
+    for category in header:
 
         if category == 'layout':
-            broken |= check_validity(data, check_layout, \
+            broken |= check_validity(header[category], check_layout, \
                     'ERROR:\tLayout isn\'t "bootcamp".\n')
         elif category == 'root':
-            broken |= check_validity(data, check_root, \
+            broken |= check_validity(header[category], check_root, \
                     'ERROR:\troot can only be ".".\n')
         elif category == 'country':
-            broken |= check_validity(data, check_country, \
+            broken |= check_validity(header[category], check_country, \
                     'ERROR:\tCountry seems to be invalid. Check whether there are spaces inside the string.\n')
         elif category == 'humandate':
-            broken |= check_validity(data, check_humandate, \
+            broken |= check_validity(header[category], check_humandate, \
                     'EROR:\tCategory "humandate" seems to be invalid. Please use a three-letter month like "Jan" and four-letter year like "2025".\n')
         elif category == 'humantime':
-            broken |= check_validity(data, check_humantime, \
+            broken |= check_validity(header[category], check_humantime, \
                     'ERROR:\thumantime doesn\'t include "am" or "pm".\n')
         elif (category == 'startdate') or (category == 'enddate'):
-            broken |= check_validity(data, check_date, \
+            broken |= check_validity(header[category], check_date, \
                     'ERROR:\t%s seems to be invalid. Must be of format year-month-day, i.e., 2014-01-31.\n' %category)
         elif category == 'latlng':
-            broken |= check_validity(data, check_latitude_longitude, \
+            broken |= check_validity(header[category], check_latitude_longitude, \
                     'ERROR:\tLatitude/Longitude seems to be invalid. Check whether it\'s two floating point numbers, separated by a comma.\n')
         elif category == 'registration':
-            broken |= check_validity(data, check_registration, \
+            broken |= check_validity(header[category], check_registration, \
                     'ERROR:\tregistration can only be "open" or "restricted".\n')
         elif category == 'instructor':
-            broken |= check_validity(data, check_instructor, \
+            broken |= check_validity(header[category], check_instructor, \
                     'ERROR:\tInstructor string isn\'t a valid list of format ["First instructor", "Second instructor",..].\n')
         elif category == 'contact':
-            broken |= check_validity(data, check_email, \
+            broken |= check_validity(header[category], check_email, \
                     'ERROR:\tEmail seems to be invalid.\n')
-        else:
-            broken |= check_validity(data, check_empty, \
-                    'ERROR:\tData for category "%s" is empty.\n' %(category))
 
     # See how many categories we got
     this_categories = set(this_categories)
