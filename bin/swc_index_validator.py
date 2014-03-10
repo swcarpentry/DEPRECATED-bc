@@ -169,7 +169,7 @@ def check_validity(data, function, error):
     valid = function(data)
     if not valid:
         sys.stderr.write(error)
-        sys.stderr.write('\tOffending entry is: "%s"\n' %(data))
+        sys.stderr.write('\tOffending entry is: "{0}"\n'.format((data)))
         return True
     return False
 
@@ -210,7 +210,7 @@ def check_file(index_fh):
     # header is now a dictionary - key is category, value is the entry for that category
 
     if not header:
-        sys.stderr.write('ERROR:\tCan\'t find header in given file "%s". Please check path, is this the bc index.html?\n' %(filename))
+        sys.stderr.write('ERROR:\tCan\'t find header in given file "{0}". Please check path, is this the bc index.html?\n'.format((filename)))
         sys.exit(1)
 
     broken = False
@@ -222,7 +222,7 @@ def check_file(index_fh):
         seen_set = set()
         for cat in this_categories:
             if cat in seen_set:
-                sys.stderr.write('\t"%s" appears more than once.\n' %(cat))
+                sys.stderr.write('\t"{0}" appears more than once.\n'.format(cat))
             seen_set.add(cat)
         broken = True
 
@@ -246,7 +246,7 @@ def check_file(index_fh):
                     'ERROR:\thumantime doesn\'t include "am" or "pm".\n')
         elif (category == 'startdate') or (category == 'enddate'):
             broken |= check_validity(header[category], check_date, \
-                    'ERROR:\t%s seems to be invalid. Must be of format year-month-day, i.e., 2014-01-31.\n' %category)
+                    'ERROR:\t{0} seems to be invalid. Must be of format year-month-day, i.e., 2014-01-31.\n'.format(category))
         elif category == 'latlng':
             broken |= check_validity(header[category], check_latitude_longitude, \
                     'ERROR:\tLatitude/Longitude seems to be invalid. Check whether it\'s two floating point numbers, separated by a comma.\n')
@@ -266,13 +266,13 @@ def check_file(index_fh):
     missing_categories = CATEGORIES - this_categories
     if missing_categories:
         sys.stderr.write('ERROR:\tnot enough categories.\n')
-        sys.stderr.write('\tMissing: %s\n' %(list(missing_categories)))
+        sys.stderr.write('\tMissing: {0}\n'.format((list(missing_categories))))
         broken = True
 
     extra_categories = this_categories - CATEGORIES
     if extra_categories:
         sys.stderr.write('ERROR:\tThere are superfluous categories.\n')
-        sys.stderr.write('\tToo many: %s\n' %(list(extra_categories)))
+        sys.stderr.write('\tToo many: {0}\n'.format((list(extra_categories))))
         broken = True
 
     return broken
@@ -287,7 +287,7 @@ if __name__ == '__main__':
     else:
         filename = args[1]
 
-    sys.stderr.write('Testing file "%s".\n' %filename)
+    sys.stderr.write('Testing file "{0}".\n'.format(filename))
 
     with open(filename) as index_fh:
         broken = check_file(index_fh)
