@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: Branching in Git
-level: novice
 ---
 Here's where we are right now:
 

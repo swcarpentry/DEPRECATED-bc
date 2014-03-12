@@ -7,7 +7,7 @@ title: Glossary
 A [path](#path) that refers to a particular location in a file system.
 Absolute paths are usually written with respect to the file system's
 [root directory](#root-directory),
-and begin with either "/" (on Unix) or "\" (on Microsoft Windows).
+and begin with either "/" (on Unix) or "\\" (on Microsoft Windows).
 See also: [relative path](#relative-path).
 
 **additive color model**: <a name="additive-color-model"></a>
@@ -381,7 +381,7 @@ A collection of data organized into [tables](#table-database).
 **relative path**: <a name="relative-path"></a>
 A [path](#path) that specifies the location of a file or directory
 with respect to the [current working directory](#current-working-directory).
-Any path that does not begin with a separator character ("/" or "\") is a relative path.
+Any path that does not begin with a separator character ("/" or "\\") is a relative path.
 See also: [absolute path](#absolute-path).
 
 **remote repository**: <a name="repository-remote"></a>
@@ -411,7 +411,7 @@ Each color's value is typically in the range 0..255
 
 **root directory**: <a name="root-directory"></a>
 The top-most directory in a [filesystem](#filesystem).
-Its name is "/" on Unix (including Linux and Mac OS X) and "\" on Microsoft Windows.
+Its name is "/" on Unix (including Linux and Mac OS X) and "\\" on Microsoft Windows.
 
 **sentinel value**: <a name="sentinel-value"></a>
 A value in a collection that has a special meaning,

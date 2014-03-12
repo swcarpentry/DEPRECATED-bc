@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: Working Remotely
-level: novice
 ---
 Let's take a closer look at what happens when we use a desktop or laptop computer.
 The first step is to log in

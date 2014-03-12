@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: Git Reference
-level: novice
 ---
 Set global configuration (only needs to be done once per machine):
 

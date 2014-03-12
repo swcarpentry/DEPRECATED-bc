@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: Instructor's Guide
-level: novice
 ---
 
 > *1997*
