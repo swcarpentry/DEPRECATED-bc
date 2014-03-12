@@ -91,10 +91,15 @@ install_nanorc()
 		'03233ae480689a008eb98feb1b599807' \
 		"${INSTALL_DIRECTORY}" \
 		--strip-components 1 &&
-	if [ ! -f ~/nano.rc ]
+	HOME=~
+	if test ! -f ~/nano.rc
 	then
 		for RCPATH in "${INSTALL_DIRECTORY}"/doc/syntax/*.nanorc
 		do
+			if test "_${RCPATH:0:${#HOME}}" = "_${HOME}"
+			then
+				RCPATH="~${RCPATH:${#HOME}}"
+			fi
 			echo "include ${RCPATH}" >> ~/nano.rc
 		done
 	fi
