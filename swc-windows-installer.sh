@@ -6,7 +6,7 @@
 #
 # The script:
 # * Installs nano and makes it accessible from msysGit
-# * Creates ~/.nanorc with links to syntax highlighting configs
+# * Creates ~/nano.rc with links to syntax highlighting configs
 # * Provides standard nosetests behavior (if Python and the nose
 #   module are installed) for msysGit
 #
@@ -91,11 +91,11 @@ install_nanorc()
 		'03233ae480689a008eb98feb1b599807' \
 		"${INSTALL_DIRECTORY}" \
 		--strip-components 1 &&
-	if [ ! -f ~/.nanorc ]
+	if [ ! -f ~/nano.rc ]
 	then
 		for RCPATH in "${INSTALL_DIRECTORY}"/doc/syntax/*.nanorc
 		do
-			echo "include ${RCPATH}" >> ~/.nanorc
+			echo "include ${RCPATH}" >> ~/nano.rc
 		done
 	fi
 }
