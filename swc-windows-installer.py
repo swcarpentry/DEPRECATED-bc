@@ -28,12 +28,26 @@ except ImportError:  # Python 2
     from StringIO import StringIO as _BytesIO
 import os
 import re
+import sys
 import tarfile
 try:  # Python 3
     from urllib.request import urlopen as _urlopen
 except ImportError:  # Python 2
     from urllib2 import urlopen as _urlopen
 import zipfile
+
+
+if sys.version_info >= (3, 0):  # Python 3
+    open3 = open
+else:
+    def open3(file, mode='r', newline=None):
+        if newline:
+            if newline != '\n':
+                raise NotImplementedError(newline)
+            f = open(file, mode + 'b')
+        else:
+            f = open(file, mode)
+        return f
 
 
 def download(url, sha1):
@@ -127,7 +141,7 @@ def install_nanorc(install_directory):
     nanorc = os.path.join(home, 'nano.rc')
     if not os.path.isfile(nanorc):
         syntax_dir = os.path.join(install_directory, 'doc', 'syntax')
-        with open(nanorc, 'w') as f:
+        with open3(nanorc, 'w', newline='\n') as f:
             for filename in os.listdir(syntax_dir):
                 if filename.endswith('.nanorc'):
                     path = os.path.join(syntax_dir, filename)
