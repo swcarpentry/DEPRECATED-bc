@@ -132,7 +132,7 @@ def install_nanorc(install_directory):
                 if filename.endswith('.nanorc'):
                     path = os.path.join(syntax_dir, filename)
                     rel_path = os.path.relpath(path, home)
-                    include_path = os.path.join('~', rel_path)
+                    include_path = make_posix_path(os.path.join('~', rel_path))
                     f.write('include {}\n'.format(include_path))
 
 
