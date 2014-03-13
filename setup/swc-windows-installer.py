@@ -6,7 +6,7 @@ Helps mimic a *nix environment on Windows with as little work as possible.
 
 The script:
 * Installs nano and makes it accessible from msysgit
-* Creates ~/.nanorc with links to syntax highlighting configs
+* Creates ~/nano.rc with links to syntax highlighting configs
 * Provides standard nosetests behavior for msysgit
 
 To use:
@@ -123,14 +123,17 @@ def install_nanorc(install_directory):
         sha1='f2a628394f8dda1b9f28c7e7b89ccb9a6dbd302a',
         install_directory=install_directory,
         strip_components=1)
-    nanorc = os.path.join(os.path.expanduser('~'), '.nanorc')
+    home = os.path.expanduser('~')
+    nanorc = os.path.join(home, 'nano.rc')
     if not os.path.isfile(nanorc):
         syntax_dir = os.path.join(install_directory, 'doc', 'syntax')
         with open(nanorc, 'w') as f:
             for filename in os.listdir(syntax_dir):
                 if filename.endswith('.nanorc'):
                     path = os.path.join(syntax_dir, filename)
-                    f.write('include {}\n'.format(path))
+                    rel_path = os.path.relpath(path, home)
+                    include_path = os.path.join('~', rel_path)
+                    f.write('include {}\n'.format(include_path))
 
 
 def create_nosetests_entry_point(python_scripts_directory):
