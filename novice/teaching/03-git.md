@@ -88,3 +88,9 @@ We close with material on licensing because:
 
 *   Instructors should also show learners graphical diff/merge tools like
     [DiffMerge](https://sourcegear.com/diffmerge/).
+
+*   When appropriate,
+    explain that we teach Git rather than CVS, Subversion, or Mercurial
+    primarily because of GitHub's growing popularity:
+    CVS and Subversion are now seen as legacy systems,
+    and Mercurial isn't nearly as widely used in the sciences right now.
