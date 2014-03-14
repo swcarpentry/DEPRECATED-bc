@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: The Human Side of Things
-level: novice
 ---
 In my experience, the things that go wrong most often in software
 development projects&mdash;undergraduate or professional&mdash;have nothing to

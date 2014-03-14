@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: Shell Variables
-level: novice
 ---
 The shell is just a program, and like other programs, it has variables.
 Those variables control its execution,

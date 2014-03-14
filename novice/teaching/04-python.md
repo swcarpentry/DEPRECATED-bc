@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: Programming with Python
-level: novice
 ---
 This lesson is written as an introduction to Python,
 but its real purpose is to introduce the single most important idea in programming:
@@ -32,6 +31,17 @@ the programs our learners can write at this point in their careers,
 but it's crucial they realize this is a difference of scale rather than kind.
 
 #### Teaching Notes
+
+*   Explain that we use Python because:
+    *   It's free.
+    *   It has a lot of scientific libraries, and more are constantly being added.
+    *   It has a large scientific user community.
+    *   It's easier for novices to learn than most of the mature alternatives.
+        (Software Carpentry originally used Perl;
+        when we switched,
+        we found that we could cover as much material in two days in Python
+        as we'd covered in three days in Perl,
+        and that retention was higher.)
 
 *   We do *not* include instructions on running the IPython Notebook in the tutorial
     because we want to focus on the language rather than the tools.

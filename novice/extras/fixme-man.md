@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: Manual Pages
-level: novice
 ---
 You can get help for any Unix command with the `man` (short for manual)
 command.  As an example here is the command to lookup information on 'cp'

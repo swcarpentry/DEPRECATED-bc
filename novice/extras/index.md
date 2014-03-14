@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: A Few Extras
-level: novice
 ---
 A few things come up in our classes
 that don't fit naturally into the flow of our lessons.

@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: Instructor's Guide
-level: novice
 ---
 
 > *1997*
@@ -118,9 +117,10 @@ please get in touch.
 
 <div class="toc" markdown="1">
 
-1.  [The Unix Shell](01-shell.html)
-2.  [Version Control with Git](02-git.html)
-3.  [Programming with Python](03-python.html)
-4.  [Using Databases and SQL](04-sql.html)
+1.  [General Advice](01-general.html)
+2.  [The Unix Shell](02-shell.html)
+3.  [Version Control with Git](03-git.html)
+4.  [Programming with Python](04-python.html)
+5.  [Using Databases and SQL](05-sql.html)
 
 </div>

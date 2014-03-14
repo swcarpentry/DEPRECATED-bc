@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: Aliasing
-level: novice
 ---
 At this point,
 we need to take a small side trip to explore something which is very useful,

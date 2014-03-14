@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: Unit Testing
-level: novice
 ---
 Most people don't enjoy writing tests,
 so if we want them to actually do it,
