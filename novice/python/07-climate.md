@@ -1,7 +1,7 @@
 ---
 layout: lesson
 root: ../..
-title: Worked Example: Climate Data
+title: "Worked Example: Climate Data"
 level: novice
 ---
 To pull everything together,
