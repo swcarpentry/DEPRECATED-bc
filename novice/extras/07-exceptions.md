@@ -19,11 +19,11 @@ and reports an error if either goes wrong:
 
 ~~~
 try:
-params = read_params(param_file)
-grid = read_grid(grid_file)
+    params = read_params(param_file)
+    grid = read_grid(grid_file)
 except:
-log.error('Failed to read input file(s)')
-sys.exit(ERROR)
+    log.error('Failed to read input file(s)')
+    sys.exit(ERROR)
 ~~~
 
 We join the normal case and the error-handling code using the keywords `try` and
@@ -71,9 +71,9 @@ if we don't want the program simply to fall over:
 
 ~~~
 try:
-reader = open('nonexistent-file.txt', 'r')
+    reader = open('nonexistent-file.txt', 'r')
 except IOError:
-print 'Whoops!'
+    print 'Whoops!'
 <span class="err">Whoops!</span>
 ~~~
 
@@ -96,16 +96,15 @@ For example,
 here's some code to calculate the entropy at each point in a grid:
 
 ~~~
-python
 try:
-params = read_params(param_file)
-grid = read_grid(grid_file)
-entropy = lee_entropy(params, grid)
-write_entropy(entropy_file, entropy)
+    params = read_params(param_file)
+    grid = read_grid(grid_file)
+    entropy = lee_entropy(params, grid)
+    write_entropy(entropy_file, entropy)
 except IOError:
-report_error_and_exit('IO error')
+    report_error_and_exit('IO error')
 except ArithmeticError:
-report_error_and_exit('Arithmetic error')
+    report_error_and_exit('Arithmetic error')
 ~~~
 
 Python tries to run the four functions inside the `try` as normal.
@@ -128,16 +127,15 @@ We can do better if we capture and hang on to the object that Python creates
 to record information about the error:
 
 ~~~
-python
 try:
-params = read_params(param_file)
-grid = read_grid(grid_file)
-entropy = lee_entropy(params, grid)
-write_entropy(entropy_file, entropy)
+    params = read_params(param_file)
+    grid = read_grid(grid_file)
+    entropy = lee_entropy(params, grid)
+    write_entropy(entropy_file, entropy)
 except IOError as err:
-report_error_and_exit('Cannot read/write' + err.filename)
+    report_error_and_exit('Cannot read/write' + err.filename)
 except ArithmeticError as err:
-report_error_and_exit(err.message)
+    report_error_and_exit(err.message)
 ~~~
 
 If something goes wrong in the `try`,
@@ -164,22 +162,20 @@ if this code can't read the grid file that the user has asked for,
 it creates a default grid instead:
 
 ~~~
-python
 try:
-grid = read_grid(grid_file)
+    grid = read_grid(grid_file)
 except IOError:
-grid = default_grid()
+    grid = default_grid()
 ~~~
 
 Other programmers would explicitly test for the grid file,
 and use `if` and `else` for control flow:
 
 ~~~
-python
 if file_exists(grid_file):
-grid = read_grid(grid_file)
+    grid = read_grid(grid_file)
 else:
-grid = default_grid()
+    grid = default_grid()
 ~~~
 
 It's mostly a matter of taste,
@@ -201,16 +197,15 @@ they don't have to be handled immediately.
 Take another look at this code:
 
 ~~~
-python
 try:
-params = read_params(param_file)
-grid = read_grid(grid_file)
-entropy = lee_entropy(params, grid)
-write_entropy(entropy_file, entropy)
+    params = read_params(param_file)
+    grid = read_grid(grid_file)
+    entropy = lee_entropy(params, grid)
+    write_entropy(entropy_file, entropy)
 except IOError as err:
-report_error_and_exit('Cannot read/write' + err.filename)
+    report_error_and_exit('Cannot read/write' + err.filename)
 except ArithmeticError as err:
-report_error_and_exit(err.message)
+    report_error_and_exit(err.message)
 ~~~
 
 The four lines in the `try` block are all function calls.
