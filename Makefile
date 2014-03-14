@@ -48,8 +48,11 @@ EXTRAS = \
 
 # IPython Notebooks (split by directory so that they can be
 # interpolated into other variables later on).
-IPYNB_SRC_PYTHON = $(sort $(wildcard novice/python/??-*.ipynb))
-IPYNB_SRC_SQL = $(sort $(wildcard novice/sql/??-*.ipynb))
+IPYNB_SRC_PYTHON = \
+	$(sort $(wildcard novice/python/??-*.ipynb)) \
+	$(sort $(wildcard intermediate/python/??-*.ipynb))
+IPYNB_SRC_SQL = \
+	$(sort $(wildcard novice/sql/??-*.ipynb))
 
 # Notebooks converted to Markdown.
 IPYNB_TX_PYTHON = $(patsubst %.ipynb,$(CACHED)/%.md,$(IPYNB_SRC_PYTHON))
@@ -84,6 +87,7 @@ BOOK_SRC = \
 # All source pages (including things not in the book).
 PAGES_SRC = \
 	contents.md \
+	$(wildcard intermediate/python/*.md) \
 	$(BOOK_SRC)
 
 # Build the temporary input for the book by concatenating relevant
