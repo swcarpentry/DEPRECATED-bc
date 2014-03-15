@@ -1,6 +1,7 @@
 ---
 layout: lesson
 root: ../..
+prev: 05-defensive.md
 ---
 
 ## Command-Line Programs

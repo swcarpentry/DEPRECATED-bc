@@ -1,6 +1,8 @@
 ---
 layout: lesson
 root: ../..
+prev: 04-calc.md
+next: 06-agg.md
 ---
 
 ## Missing Data

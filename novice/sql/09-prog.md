@@ -1,6 +1,7 @@
 ---
 layout: lesson
 root: ../..
+prev: 08-create.md
 ---
 
 ## Programming with Databases

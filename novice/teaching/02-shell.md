@@ -2,6 +2,8 @@
 layout: lesson
 root: ../..
 title: The Unix Shell
+prev: 01-general.md
+next: 03-git.md
 ---
 Many people have questioned whether we should still teach the shell.
 After all,

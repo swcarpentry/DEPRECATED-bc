@@ -1,6 +1,8 @@
 ---
 layout: lesson
 root: ../..
+prev: 01-select.md
+next: 03-filter.md
 ---
 
 ## Sorting and Removing Duplicates

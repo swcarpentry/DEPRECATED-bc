@@ -2,6 +2,8 @@
 layout: lesson
 root: ../..
 title: Git Reference
+prev: 01-shell.md
+next: 03-python.md
 ---
 Set global configuration (only needs to be done once per machine):
 

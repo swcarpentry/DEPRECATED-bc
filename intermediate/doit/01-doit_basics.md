@@ -1,6 +1,7 @@
 ---
 layout: lesson
 root: ../..
+next: 02-sub_tasks.md
 ---
 
 ## Automating Tasks With "doit"

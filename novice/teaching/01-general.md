@@ -3,6 +3,7 @@ layout: lesson
 root: ../..
 title: General Advice
 level: novice
+next: 02-shell.md
 ---
 This is a placeholder for general notes about teaching.
 For up-to-date information about software installation and configuration problems,

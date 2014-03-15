@@ -1,6 +1,8 @@
 ---
 layout: lesson
 root: ../..
+prev: 05-null.md
+next: 07-join.md
 ---
 
 ## Aggregation

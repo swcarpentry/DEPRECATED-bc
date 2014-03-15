@@ -2,6 +2,8 @@
 layout: lesson
 root: ../..
 title: Shell Scripts
+prev: 04-loop.md
+next: 06-find.md
 ---
 <div class="objectives" markdown="1">
 

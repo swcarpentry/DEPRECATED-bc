@@ -2,6 +2,7 @@
 layout: lesson
 root: ../..
 title: Introducing the Shell
+next: 01-filedir.md
 ---
 <div class="objectives" markdown="1">
 

@@ -2,6 +2,8 @@
 layout: lesson
 root: ../..
 title: Exceptions
+prev: 06-ssh.md
+next: 08-numbers.md
 ---
 Assertions help us catch errors in our code,
 but things can go wrong for other reasons,

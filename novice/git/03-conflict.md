@@ -2,6 +2,8 @@
 layout: lesson
 root: ../..
 title: Conflicts
+prev: 02-collab.md
+next: 04-open.md
 ---
 <div class="objectives" markdown="1">
 

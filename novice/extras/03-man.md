@@ -2,6 +2,8 @@
 layout: lesson
 root: ../..
 title: Manual Pages
+prev: 02-review.md
+next: 04-permissions.md
 ---
 We can get help for any Unix command with the `man`
 (short for manual) command.

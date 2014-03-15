@@ -1,6 +1,8 @@
 ---
 layout: lesson
 root: ../..
+prev: 01-doit_basics.md
+next: 03-uptodate.md
 ---
 
 ## Using sub-tasks to define a group of similar tasks

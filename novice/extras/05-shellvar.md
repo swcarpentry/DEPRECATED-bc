@@ -2,6 +2,8 @@
 layout: lesson
 root: ../..
 title: Shell Variables
+prev: 04-permissions.md
+next: 06-ssh.md
 ---
 The shell is just a program, and like other programs, it has variables.
 Those variables control its execution,

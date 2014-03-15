@@ -2,6 +2,7 @@
 layout: lesson
 root: ../..
 title: Using Databases and SQL
+prev: 04-python.md
 ---
 Relational databases are not as widely used in science as in business,
 but they are still a common way to store large data sets with complex structure.

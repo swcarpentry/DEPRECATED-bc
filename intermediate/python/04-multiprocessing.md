@@ -1,6 +1,7 @@
 ---
 layout: lesson
 root: ../..
+prev: 03-qa.md
 ---
 
 # Parallel programming with Python's multiprocessing library

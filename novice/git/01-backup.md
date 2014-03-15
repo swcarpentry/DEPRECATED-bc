@@ -2,6 +2,8 @@
 layout: lesson
 root: ../..
 title: A Better Kind of Backup
+prev: 00-intro.md
+next: 02-collab.md
 ---
 <div class="objectives" markdown="1">
 

@@ -1,6 +1,7 @@
 ---
 layout: lesson
 root: ../..
+next: 02-sort-dup.md
 ---
 
 ## Selecting Data

@@ -2,6 +2,8 @@
 layout: lesson
 root: ../..
 title: Code Review
+prev: 01-branching.md
+next: 03-man.md
 ---
 The model shown in the [main lesson](../git/02-collab.html)
 in which everyone pushes and pulls from a single repository,

@@ -2,6 +2,8 @@
 layout: lesson
 root: ../..
 title: Permissions
+prev: 03-man.md
+next: 05-shellvar.md
 ---
 Unix controls who can read, modify, and run files using *permissions*.
 We'll discuss how Windows handles permissions at the end of the section:

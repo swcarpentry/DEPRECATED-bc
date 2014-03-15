@@ -1,6 +1,8 @@
 ---
 layout: lesson
 root: ../..
+prev: 03-loop.md
+next: 05-defensive.md
 ---
 
 ## Making Choices

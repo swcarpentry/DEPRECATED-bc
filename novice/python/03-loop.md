@@ -1,6 +1,8 @@
 ---
 layout: lesson
 root: ../..
+prev: 02-func.md
+next: 04-cond.md
 ---
 
 ## Analyzing Multiple Data Sets

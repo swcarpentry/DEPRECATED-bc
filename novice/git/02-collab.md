@@ -2,6 +2,8 @@
 layout: lesson
 root: ../..
 title: Collaborating
+prev: 01-backup.md
+next: 03-conflict.md
 ---
 <div class="objectives" markdown="1">
 
