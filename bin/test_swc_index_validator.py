@@ -42,6 +42,9 @@ def test_check_humandate_chars():
 def test_check_humantime():
     assert swc_index_validator.check_humantime("09:00am")
 
+def test_check_euro_humantime():
+    assert swc_index_validator.check_humantime("09:00-17:00")
+
 def test_check_humantime_fail():
     assert not swc_index_validator.check_humantime("09:00")
 
@@ -65,6 +68,9 @@ def test_check_registration_open():
 
 def test_check_registration_restricted():
     assert swc_index_validator.check_registration("restricted")
+
+def test_check_registration_closed():
+    assert swc_index_validator.check_registration("closed")
 
 def test_check_registration_fail():
     assert not swc_index_validator.check_registration("close")
@@ -109,4 +115,4 @@ contact: admin@software-carpentry.org
     except TypeError: # this happens in Python2
         file_ = StringIO(unicode(header_sample))
 
-    assert not swc_index_validator.check_file(file_)
+    assert swc_index_validator.check_file(file_)
