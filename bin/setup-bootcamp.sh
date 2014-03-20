@@ -1,30 +1,37 @@
 #!/bin/bash
 
-# Setup new bootcamp
-#
-# This script follow the steps in https://vimeo.com/87241285.
-#
-# Usage:
-#
-#     $ ./setup-bootcamp.sh bootcamp_id owner [instructor [instructor ...]]
-#
-# Note:
-#
-# This script will ask the users for their GitHub password twice. The first time
-# it will store the password in memory and use it when using GitHub API. The
-# second time will be git requesting it to push the repository.
+## Setup new bootcamp
+##
+## This script follow the steps in https://vimeo.com/87241285.
+##
+## Usage:
+##
+##     $ ./setup-bootcamp.sh bootcamp_id description owner [instructor [instructor ...]]
+##
+## Parameters:
+##
+## - `bootcamp_id`: is the identifier provide by Software Carpentry for the
+##   bootcamp that you will be running. It will be used for the name of the Git
+##   repository and is a name like YYYY-MM-DD-site, e.g., `2014-03-31-esu`.
+## - `description`: is the description of the bootcamp that you will be running.
+##   It should be multi-word and must be enclose with single or double quotes.
+## - `owner`: this is your GitHub username.
+## - `instructors`: this is the GitHub username of folks that will be teaching
+##    with you.
+##
+## Note:
+##
+## This script will ask the users for their GitHub password twice. The first time
+## it will store the password in memory and use it when using GitHub API. The
+## second time will be git requesting it to push the repository.
 
 # Functions
 
 function create_repo {
-    # TODO: Add description
-    #
-    # Description can be a little complex to handle in the command line, because
-    # of that the script don't support it right now.
     url=https://api.github.com/user/repos
     ghpages=https://${OWNER}.github.io/${BOOTCAMPID}
     curl -u "${OWNER}:${PASSWORD}" -i \
-        -d "{\"name\":\"${BOOTCAMPID}\",\"homepage\":\"${ghpages}\"${REPO_DEFAULTS}}" \
+        -d "{\"name\":\"${BOOTCAMPID}\",\"description\":\"${DESCRIPTION}\",\"homepage\":\"${ghpages}\"${REPO_DEFAULTS}}" \
         ${url}
 }
 
@@ -82,18 +89,18 @@ function main {
 }
 
 # Check the number of input arguments
-if test $# -lt 2
+if test $# -lt 3
 then
-    echo "You must provide at least the bootcamp id and"
-    echo "your GitHub username."
+    grep '^##' $0 | sed -r 's/## ?//'
     exit 1
 fi
 
 # Setup environments variables
 BOOTCAMPID=$1
 OWNER=$2
+DESCRIPTION="$3"
 BOOTCAMPURL=https://github.com/${OWNER}/${BOOTCAMPID}
-INSTRUCTORS=${@:3}
+INSTRUCTORS=${@:4}
 REPO_DEFAULTS=,\"has_issues\":false,\"has_wiki\":false,\"has_downloads\":false
 
 # Ask for password
