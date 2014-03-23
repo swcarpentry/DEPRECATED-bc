@@ -5,15 +5,15 @@
 Helps mimic a *nix environment on Windows with as little work as possible.
 
 The script:
-* Installs nano and makes it accessible from msysgit
-* Provides standard nosetests behavior for msysgit
+* Installs nano and makes it accessible from Git for Windows
+* Provides standard nosetests behavior for Git for Windows
 
 To use:
 
 1. Install Python, IPython, and Nose.  An easy way to do this is with
    the Anaconda CE Python distribution
    http://continuum.io/anacondace.html
-2. Install msysgit
+2. Install Git for Windows
    http://code.google.com/p/msysgit/downloads/list?q=full+installer+official+git
 3. Run swc_windows_installer.py
    You should be able to simply double click the file in Windows
@@ -59,7 +59,7 @@ def install_nano(install_directory):
 
 
 def create_nosetests_entry_point(python_scripts_directory):
-    """Creates a terminal-based nosetests entry point for msysgit"""
+    """Creates a terminal-based nosetests entry point for Git for Windows"""
     contents = '\n'.join([
             '#!/usr/bin/env/ python',
             'import sys',
