@@ -17,6 +17,7 @@ here's a small piece of code that tries to read parameters and a grid from two
 separate files,
 and reports an error if either goes wrong:
 
+<div class="file">
 ~~~
 try:
     params = read_params(param_file)
@@ -25,6 +26,7 @@ except:
     log.error('Failed to read input file(s)')
     sys.exit(ERROR)
 ~~~
+</div>
 
 We join the normal case and the error-handling code using the keywords `try` and
 `except`.
@@ -43,20 +45,31 @@ trying to open a nonexistent file triggers a type of exception called an
 while trying to access a list element that doesn't exist
 causes an `IndexError`:
 
+<div class="in">
 ~~~
 open('nonexistent-file.txt', 'r')
-<span class="err">---------------------------------------------------------------------------
+~~~
+</div>
+<div class="err">
+~~~
+---------------------------------------------------------------------------
 IOError                                   Traceback (most recent call last)
 
 <ipython-input-13-58cbde3dd63c> in <module>()
 ----> 1 open('nonexistent-file.txt', 'r')
 
 IOError: [Errno 2] No such file or directory: 'nonexistent-file.txt'
-
+~~~
+</div>
+<div class="in">
+~~~
 values = [0, 1, 2]
 print values[999]
-
-<span class="err">---------------------------------------------------------------------------
+~~~
+</div>
+<div class="err">
+~~~
+---------------------------------------------------------------------------
 IndexError                                Traceback (most recent call last)
 
 <ipython-input-14-7fed13afc650> in <module>()
@@ -65,10 +78,12 @@ IndexError                                Traceback (most recent call last)
 
 IndexError: list index out of range
 ~~~
+</div>
 
 We can use `try` and `except` to deal with these errors ourselves
 if we don't want the program simply to fall over:
 
+<div class="file">
 ~~~
 try:
     reader = open('nonexistent-file.txt', 'r')
@@ -76,6 +91,7 @@ except IOError:
     print 'Whoops!'
 <span class="err">Whoops!</span>
 ~~~
+</div>
 
 When Python executes this code,
 it runs the statement inside the `try`.
@@ -95,6 +111,7 @@ We can also handle several different kinds of errors afterward.
 For example,
 here's some code to calculate the entropy at each point in a grid:
 
+<div class="file">
 ~~~
 try:
     params = read_params(param_file)
@@ -106,6 +123,7 @@ except IOError:
 except ArithmeticError:
     report_error_and_exit('Arithmetic error')
 ~~~
+</div>
 
 Python tries to run the four functions inside the `try` as normal.
 If an error occurs in any of them,
@@ -126,6 +144,7 @@ which file caused the problem.
 We can do better if we capture and hang on to the object that Python creates
 to record information about the error:
 
+<div class="file">
 ~~~
 try:
     params = read_params(param_file)
@@ -137,6 +156,7 @@ except IOError as err:
 except ArithmeticError as err:
     report_error_and_exit(err.message)
 ~~~
+</div>
 
 If something goes wrong in the `try`,
 Python creates an exception object,
@@ -161,22 +181,26 @@ For example,
 if this code can't read the grid file that the user has asked for,
 it creates a default grid instead:
 
+<div class="file">
 ~~~
 try:
     grid = read_grid(grid_file)
 except IOError:
     grid = default_grid()
 ~~~
+</div>
 
 Other programmers would explicitly test for the grid file,
 and use `if` and `else` for control flow:
 
+<div class="file">
 ~~~
 if file_exists(grid_file):
     grid = read_grid(grid_file)
 else:
     grid = default_grid()
 ~~~
+</div>
 
 It's mostly a matter of taste,
 but we prefer the second style.
@@ -189,13 +213,14 @@ instead of `try` and `except`
 sends different signals to anyone reading our code,
 even if they do the same thing.
 
-Novices often ask another question about exception handling style as well,
+Novices often ask another question about exception handling style,
 but before we address it,
 there's something in our example that you might not have noticed.
 Exceptions can actually be thrown a long way:
 they don't have to be handled immediately.
 Take another look at this code:
 
+<div class="file">
 ~~~
 try:
     params = read_params(param_file)
@@ -207,6 +232,7 @@ except IOError as err:
 except ArithmeticError as err:
     report_error_and_exit(err.message)
 ~~~
+</div>
 
 The four lines in the `try` block are all function calls.
 They might catch and handle exceptions themselves,
