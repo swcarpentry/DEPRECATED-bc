@@ -38,7 +38,7 @@ CATEGORIES = set(['layout', 'root', 'venue', 'address', 'country',
 REGISTRATIONS = set(['open', 'restricted', 'closed'])
 
 EMAIL_PATTERN = '[^@]+@[^@]+\.[^@]+'
-HUMANTIME_PATTERN = '((0?[0-9]|1[0-1]):[0-5][0-9](am|pm)(-| to )(0?[0-9]|1[0-1]):[0-5][0-9](am|pm))|((0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9](-| to )(0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9])'
+HUMANTIME_PATTERN = '((0?[0-9]|1[0-1]):[0-5][0-9](am|pm)(-|to)(0?[0-9]|1[0-1]):[0-5][0-9](am|pm))|((0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9](-|to)(0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9])'
 
 def check_layout(layout):
     '''Checks whether layout equals "bootcamp".'''

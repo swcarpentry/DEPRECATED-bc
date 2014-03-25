@@ -51,6 +51,27 @@ def test_check_humantime_fail():
 def test_check_humantime_only_am():
     assert not swc_index_validator.check_humantime("am")
 
+def test_check_humantime_without_spaces():
+    assert swc_index_validator.check_humantime("9:00am-5:00pm")
+
+def test_check_humantime_with_spaces():
+    assert swc_index_validator.check_humantime("9:00am - 5:00pm")
+
+def test_check_humantime_with_extra_spaces():
+    assert swc_index_validator.check_humantime("9:00 am - 5:00 pm")
+
+def test_check_humantime_with_to():
+    assert swc_index_validator.check_humantime("9:00am to 5:00pm")
+
+def test_check_humantime_with_to_and_spaces():
+    assert swc_index_validator.check_humantime("9:00 am to 5:00 pm")
+
+def test_check_humantime_without_am_pm():
+    assert swc_index_validator.check_humantime("9:00-17:00")
+
+def test_check_humantime_without_am_pm_with_to():
+    assert swc_index_validator.check_humantime("9:00 to 17:00")
+
 def test_check_date():
     assert swc_index_validator.check_date(date(2525, 2, 20))
 
