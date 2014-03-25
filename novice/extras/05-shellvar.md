@@ -10,12 +10,12 @@ you can change how the shell and other programs behave.
 
 Let's start by running the command `set` and looking at some of the variables in a typical shell session:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ set
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 COMPUTERNAME=TURING
 HOME=/home/vlad
@@ -69,7 +69,7 @@ As soon as it finds a match, it stops searching and runs the program.
 To show how this works,
 here are the components of `PATH` listed one per line:
 
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 /Users/vlad/bin
 /usr/local/git/bin
@@ -97,12 +97,12 @@ since the directory `/users/vlad` isn't in `PATH`.
 
 Let's show the value of the variable `HOME`:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ echo HOME
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 HOME
 ~~~
@@ -112,12 +112,12 @@ That just prints "HOME", which isn't what we wanted
 (though it is what we actually asked for).
 Let's try this instead:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ echo $HOME
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 /home/vlad
 ~~~
@@ -134,13 +134,13 @@ which displays the right thing.
 
 Creating a variable is easy&mdash;we just assign a value to a name using "=":
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ SECRET_IDENTITY=Dracula
 $ echo $SECRET_IDENTITY
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 Dracula
 ~~~
@@ -148,13 +148,13 @@ Dracula
 
 To change the value, just assign a new one:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ SECRET_IDENTITY=Camilla
 $ echo $SECRET_IDENTITY
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 Camilla
 ~~~
@@ -172,7 +172,7 @@ and is now just a convention everyone follows without understanding why.)
 For example,
 here are two lines in `/home/vlad/.bashrc`:
 
-<div class="file">
+<div class="file" markdown="1">
 ~~~
 export SECRET_IDENTITY=Dracula
 export TEMP_DIR=/tmp
@@ -193,7 +193,7 @@ it's also common to use the `alias` command to create shortcuts for things we fr
 For example, we can define the alias `backup`
 to run `/bin/zback` with a specific set of arguments:
 
-<div class="file">
+<div class="file" markdown="1">
 ~~~
 alias backup=/bin/zback -v --nostir -R 20000 $HOME $BACKUP_DIR
 ~~~

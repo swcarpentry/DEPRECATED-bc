@@ -17,7 +17,7 @@ here's a small piece of code that tries to read parameters and a grid from two
 separate files,
 and reports an error if either goes wrong:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 try:
     params = read_params(param_file)
@@ -45,12 +45,12 @@ trying to open a nonexistent file triggers a type of exception called an
 while trying to access a list element that doesn't exist
 causes an `IndexError`:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 open('nonexistent-file.txt', 'r')
 ~~~
 </div>
-<div class="err">
+<div class="err" markdown="1">
 ~~~
 ---------------------------------------------------------------------------
 IOError                                   Traceback (most recent call last)
@@ -61,13 +61,13 @@ IOError                                   Traceback (most recent call last)
 IOError: [Errno 2] No such file or directory: 'nonexistent-file.txt'
 ~~~
 </div>
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 values = [0, 1, 2]
 print values[999]
 ~~~
 </div>
-<div class="err">
+<div class="err" markdown="1">
 ~~~
 ---------------------------------------------------------------------------
 IndexError                                Traceback (most recent call last)
@@ -83,7 +83,7 @@ IndexError: list index out of range
 We can use `try` and `except` to deal with these errors ourselves
 if we don't want the program simply to fall over:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 try:
     reader = open('nonexistent-file.txt', 'r')
@@ -111,7 +111,7 @@ We can also handle several different kinds of errors afterward.
 For example,
 here's some code to calculate the entropy at each point in a grid:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 try:
     params = read_params(param_file)
@@ -144,7 +144,7 @@ which file caused the problem.
 We can do better if we capture and hang on to the object that Python creates
 to record information about the error:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 try:
     params = read_params(param_file)
@@ -181,7 +181,7 @@ For example,
 if this code can't read the grid file that the user has asked for,
 it creates a default grid instead:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 try:
     grid = read_grid(grid_file)
@@ -193,7 +193,7 @@ except IOError:
 Other programmers would explicitly test for the grid file,
 and use `if` and `else` for control flow:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 if file_exists(grid_file):
     grid = read_grid(grid_file)
@@ -220,7 +220,7 @@ Exceptions can actually be thrown a long way:
 they don't have to be handled immediately.
 Take another look at this code:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 try:
     params = read_params(param_file)

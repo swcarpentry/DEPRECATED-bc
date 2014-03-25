@@ -8,7 +8,7 @@ We can get help for any Unix command with the `man`
 For example,
 here is the command to look up information on `cp`:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ man cp
 ~~~
@@ -50,7 +50,7 @@ AUTHOR, REPORTING BUGS, COPYRIGHT, HISTORY, (known) BUGS, and COMPATIBILITY.
 
 Here is the is synopsis for the `cp` command on Ubuntu Linux:
 
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 SYNOPSIS
    cp [OPTION]... [-T] SOURCE DEST
@@ -62,7 +62,7 @@ SYNOPSIS
 This tells the reader that there are three ways to use the command.
 Let's look at the first usage:
 
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 cp [OPTION]... [-T] SOURCE DEST
 ~~~
@@ -90,7 +90,7 @@ Note that to use the last one, the `-t` option is mandatory
 The `DESCRIPTION` section starts with a few paragraphs explaining the command and its use,
 then expands on the possible options one by one:
 
-<div class="out">
+<div class="out" markdown="1">
 ~~~
      The following options are available:
 
@@ -122,7 +122,7 @@ After that,
 we can use the 'n' key to navigate to the next match
 until we find the detailed information we need:
 
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 -t, --target-directory=DIRECTORY
      copy all SOURCE arguments into DIRECTORY

@@ -17,7 +17,7 @@ The first is that this scheme gives us two representations for zero (00000<sub>2
 This isn't necessarily fatal,
 but any claims this scheme has to being "natural" disappear when we have to write code like:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 if (length != +0) and (length != -0)
 ~~~
@@ -142,7 +142,7 @@ it makes little sense to say that we're off by a hundredth when the value in que
 
 To see why this matters, let's have a look at a little program:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 nines = []
 sums = []

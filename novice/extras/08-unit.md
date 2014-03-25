@@ -29,7 +29,7 @@ Here,
 we call the function three times with different arguments,
 checking that the right value is returned each time.
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 from rectangle import rectangle_area
 
@@ -38,7 +38,7 @@ assert rectangle_area([1, 1, 4, 4]) == 9.0
 assert rectangle_area([0, 1, 4, 7]) == 24.0
 ~~~
 </div>
-<div class="err">
+<div class="err" markdown="1">
 ~~~
 ---------------------------------------------------------------------------
 AssertionError                            Traceback (most recent call last)
@@ -56,14 +56,14 @@ This result is used,
 in the sense that we know something's wrong,
 but look closely at what happens if we run the tests in a different order:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 assert rectangle_area([0, 1, 4, 7]) == 24.0
 assert rectangle_area([1, 1, 4, 4]) == 9.0
 assert rectangle_area([0, 0, 1, 1]) == 1.0
 ~~~
 </div>
-<div class="err">
+<div class="err" markdown="1">
 ~~~
 ---------------------------------------------------------------------------
 AssertionError                            Traceback (most recent call last)
@@ -91,7 +91,7 @@ we'd like to know how many passed or failed.
 Here's a different approach.
 First, let's put each test in a function with a meaningful name:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 def test_unit_square():
     assert rectangle_area([0, 0, 1, 1]) == 1.0
@@ -108,13 +108,13 @@ Next,
 import a library called `ears`
 and ask it to run our tests for us:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 import ears
 ears.run()
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 ..f
 2 pass, 1 fail, 0 error

@@ -5,12 +5,12 @@ title: Branching in Git
 ---
 Here's where we are right now:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ git log
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 commit 005937fbe2a98fb83f0ade869025dc2636b4dad5
 Author: Vlad Dracula <vlad@tran.sylvan.ia>
@@ -44,7 +44,7 @@ We can draw the history of the repository like this
 
 Let's run this command:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ git branch moons
 ~~~
@@ -53,12 +53,12 @@ $ git branch moons
 It appears to do nothing,
 but behind the scenes it has created a new [branch](../gloss.html#branch) called `moons`:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ git branch
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 * master
   moons
@@ -76,22 +76,22 @@ They both point to the same revision right now,
 but we can change that.
 Let's make `moons` the active branch:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ git checkout moons
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 Switched to branch 'moons'
 ~~~
 </div>
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ git branch
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
   master
 * moons
@@ -102,12 +102,12 @@ $ git branch
 
 Our file looks the same:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ cat mars.txt
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 Cold and dry, but everything is my favorite color
 The two moons may be a problem for Wolfman
@@ -118,7 +118,7 @@ But the Mummy will appreciate the lack of humidity
 because it *is* the same:
 Let's add another line to it:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ echo "Maybe we should put the base on one of the moons instead?" >> mars.txt
 ~~~
@@ -126,13 +126,13 @@ $ echo "Maybe we should put the base on one of the moons instead?" >> mars.txt
 
 and add an entirely new file:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ echo "Phobos is larger than Deimos" > moons.txt
 $ ls
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 mars.txt    moons.txt
 ~~~
@@ -140,12 +140,12 @@ mars.txt    moons.txt
 
 Git now tells us that we have one changed file and one new file:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ git status
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 # On branch moons
 # Changes not staged for commit:
@@ -165,13 +165,13 @@ no changes added to commit (use "git add" and/or "git commit -a")
 Let's add and commit those changes
 (the `-A` flag to `git commit` means "add everything"):
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ git add -A
 $ git status
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 # On branch moons
 # Changes to be committed:
@@ -182,12 +182,12 @@ $ git status
 #
 ~~~
 </div>
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ git commit -m "Thinking about the moons"
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 [moons 62e7791] Thinking about the moons
  2 files changed, 2 insertions(+)
@@ -203,7 +203,7 @@ The `moons` branch has advanced to record the changes we just made,
 but `master` is still where it was.
 If we switch back to `master`:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ git checkout master
 ~~~
@@ -211,22 +211,22 @@ $ git checkout master
 
 our changes seem to disappear:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ ls
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 mars.txt
 ~~~
 </div>
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ cat mars.txt
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 Cold and dry, but everything is my favorite color
 The two moons may be a problem for Wolfman
@@ -241,13 +241,13 @@ we've created a parallel timeline that shares some history with the original one
 
 Let's make some changes in the `master` branch to further illustrate this point:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ echo "Should we go with a classical name like Ares Base?" > names.txt
 $ git status
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 # On branch master
 # Untracked files:
@@ -257,13 +257,13 @@ $ git status
 nothing added to commit but untracked files present (use "git add" to track)
 ~~~
 </div>
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ git add names.txt
 $ git commit -m "We will need a cool name for our secret base"
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 [master dfcf908] We will need a cool name for our secret base
  1 file changed, 1 insertion(+)
@@ -281,18 +281,18 @@ They could continue independent existence indefinitely,
 but at some point we'll probably want to [merge](../gloss.html#merge) our changes.
 Let's do that now:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ git branch
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 * master
   moons
 ~~~
 </div>
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ git merge moons
 ~~~
@@ -302,7 +302,7 @@ When we run the `git merge` command,
 Git opens an editor to let us write a log entry about what we're doing.
 The editor session initially contains this:
 
-<div class="file">
+<div class="file" markdown="1">
 ~~~
 Merge branch 'moons'
 
@@ -323,7 +323,7 @@ In this case,
 we'll stick with the default log message.
 When we save the file and exit the editor, Git displays this:
 
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 Merge made by the 'recursive' strategy.
  mars.txt  | 1 +
@@ -335,12 +335,12 @@ Merge made by the 'recursive' strategy.
 
 We now have all of our changes in one place:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ ls
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 mars.txt    moons.txt    names.txt
 ~~~
@@ -352,12 +352,12 @@ and our repository looks like this:
 
 We can ask Git to draw a diagram of the repository's history with this command:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ git log --oneline --topo-order --graph
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 *   e0cf8ab Merge branch 'moons'
 |\

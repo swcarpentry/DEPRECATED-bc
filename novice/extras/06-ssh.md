@@ -47,63 +47,63 @@ To make it clearer which machine is doing what,
 we'll indent the commands sent to the remote machine
 and their output.
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ pwd
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 /users/vlad
 ~~~
 </div>
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ ssh vlad@moon.euphoric.edu
 Password: ********
 ~~~
 </div>
-<div class="in">
+<div class="in" markdown="1">
 ~~~
     moon> hostname
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
     moon
 ~~~
 </div>
-<div class="in">
+<div class="in" markdown="1">
 ~~~
     moon> pwd
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
     /home/vlad
 ~~~
 </div>
-<div class="in">
+<div class="in" markdown="1">
 ~~~
     moon> ls -F
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
     bin/     cheese.txt   dark_side/   rocks.cfg
 ~~~
 </div>
-<div class="in">
+<div class="in" markdown="1">
 ~~~
     moon> exit
 ~~~
 </div>
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ pwd
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 /users/vlad
 ~~~
@@ -137,13 +137,13 @@ For example,
 this command copies our latest results to the backup server in the basement,
 printing out its progress as it does so:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ scp results.dat vlad@backupserver:backups/results-2011-11-11.dat
 Password: ********
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 results.dat              100%  9  1.0 MB/s 00:00
 ~~~
@@ -154,13 +154,13 @@ we just use the `-r` option to signal that we want copying to be recursive.
 For example,
 this command copies all of our results from the backup server to our laptop:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ scp -r vlad@backupserver:backups ./backups
 Password: ********
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 results-2011-09-18.dat              100%  7  1.0 MB/s 00:00
 results-2011-10-04.dat              100%  9  1.0 MB/s 00:00
@@ -175,13 +175,13 @@ Suppose we want to check whether we have already created the file
 Instead of logging in and then typing `ls`,
 we could do this:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ ssh vlad@backupserver "ls results"
 Password: ********
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 results-2011-09-18.dat  results-2011-10-28.dat
 results-2011-10-04.dat  results-2011-11-11.dat

@@ -83,13 +83,13 @@ This is its way of telling us that `setup` is executable,
 i.e.,
 that it's (probably) something the computer can run.
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ cd labs
 $ ls -F
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 safety.txt    setup*     waiver.txt
 ~~~
@@ -110,12 +110,12 @@ safety.txt    setup*     waiver.txt
 
 Now let's run the command `ls -l`:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ ls -l
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 -rw-rw-r-- 1 vlad bio  1158  2010-07-11 08:22 safety.txt
 -rwxr-xr-x 1 vlad bio 31988  2010-07-23 20:04 setup
@@ -160,12 +160,12 @@ To change permissions, we use the `chmod` command
 (whose name stands for "change mode").
 Here's a long-form listing showing the permissions on the final grades in the course Vlad is teaching:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ ls -l final.grd
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 -rwxrwxrwx 1 vlad bio  4215  2010-08-29 22:30 final.grd
 ~~~
@@ -178,7 +178,7 @@ which would almost certainly not work.)
 
 The command to change the owner's permissions to `rw-` is:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ chmod u=rw final.grd
 ~~~
@@ -190,12 +190,12 @@ and `rw` is the new set of permissions.
 A quick `ls -l` shows us that it worked,
 because the owner's permissions are now set to read and write:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ ls -l final.grd
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 -rw-rwxrwx 1 vlad bio  4215  2010-08-30 08:19 final.grd
 ~~~
@@ -203,13 +203,13 @@ $ ls -l final.grd
 
 Let's run `chmod` again to give the group read-only permission:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ chmod g=r final.grd
 $ ls -l final.grd
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 -rw-r--rw- 1 vlad bio  4215  2010-08-30 08:19 final.grd
 ~~~
@@ -218,13 +218,13 @@ $ ls -l final.grd
 And finally,
 let's give "all" (everyone on the system who isn't the file's owner or in its group) no permissions at all:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ chmod a= final.grd
 $ ls -l final.grd
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 -rw-r----- 1 vlad bio  4215  2010-08-30 08:20 final.grd
 ~~~
@@ -239,12 +239,12 @@ We can search by permissions, too.
 Here, for example, we can use `-type f -perm -u=x` to find files
 that the user can execute:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ find . -type f -perm -u=x
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 ./tools/format
 ./tools/stats
@@ -255,12 +255,12 @@ Before we go any further,
 let's run `ls -a -l`
 to get a long-form listing that includes directory entries that are normally hidden:
 
-<div class="in">
+<div class="in" markdown="1">
 ~~~
 $ ls -a -l
 ~~~
 </div>
-<div class="out">
+<div class="out" markdown="1">
 ~~~
 drwxr-xr-x 1 vlad bio     0  2010-08-14 09:55 .
 drwxr-xr-x 1 vlad bio  8192  2010-08-27 23:11 ..
