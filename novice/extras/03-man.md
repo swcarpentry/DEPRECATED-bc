@@ -3,125 +3,144 @@ layout: lesson
 root: ../..
 title: Manual Pages
 ---
-You can get help for any Unix command with the `man` (short for manual)
-command.  As an example here is the command to lookup information on 'cp'
+We can get help for any Unix command with the `man`
+(short for manual) command.
+For example,
+here is the command to look up information on `cp`:
 
+<div class="in">
 ~~~
 $ man cp
 ~~~
+</div>
 
-The output will be shown directly in the terminal. The content displayed is
-sometimes refered to as the "man page" (for example, you can say *there is an
-option to `cp` to create links instead of copies, but I cannot remember what it
-is called; you should check the man page*).
+The output displayed is referred to as the "man page".
 
-The way in which the man page is displayed depends on your system and
-configuration. On a modern system, you should be able to use the Up and Down
-keys to navigate (on an older system, you will only be able to see a page at at
-time). When you have finished reading you can return to the command prompt with
-'q'.
+The man page will be displayed in the default file viewer for our shell,
+which usually a program called `more`.
+When `more` displays a colon ':',
+we can press the space bar to get the next page,
+the letter 'h' to get help,
+or the letter 'q' to quit.
 
-The output of the man command is typically very complete, but concise, as it is
-designed to be used as a reference. It does not provide tutorial-like
-introductions to the Unix system. For quick browsing, it is divided into
-sections:
+`man`'s output is typically complete but concise,
+as it is designed to be used as a reference rather than a tutorial.
+Most man pages are divided into sections:
 
-*   NAME - 
+*   NAME:
     gives the name of the command and a brief description
-*   SYNOPSIS - 
-    how to run the command, including optional and mandatory information.
-    We will explain the syntax later
-*   DESCRIPTION -
-    A fuller description based on the SYNOPSIS including a description of all the options to the command.
-    This section may also include some example usage or extra details of how the command works.
-*   AUTHOR -
-    Who wrote the code to implement the command
-*   REPORTING BUGS -
-    How to report bugs
-*   COPYRIGHT -
-    Copyright information 
-*   SEE ALSO -
-    Points out other commands that you might find useful or which complement the current command.
-    Also points to alternative sources of information.
+*   SYNOPSIS:
+    how to run the command, including optional and mandatory parameters.
+    (We will explain the syntax later.)
+*   DESCRIPTION:
+    a fuller description than the synopsis,
+    including a description of all the options to the command.
+    This section may also include example usage
+    or details about how the command works.
+*   EXAMPLES:
+    self-explanatory.
+*   SEE ALSO:
+    list other commands that we might find useful
+    or other sources of information that might help us.
+
+Other sections we might see include
+AUTHOR, REPORTING BUGS, COPYRIGHT, HISTORY, (known) BUGS, and COMPATIBILITY.
 
 #### How to Read the Synopsis
 
-Here is the is synopsis for the 'cp' command:
+Here is the is synopsis for the `cp` command on Ubuntu Linux:
 
+<div class="out">
 ~~~
 SYNOPSIS
    cp [OPTION]... [-T] SOURCE DEST
    cp [OPTION]... SOURCE... DIRECTORY
    cp [OPTION]... -t DIRECTORY SOURCE...
 ~~~
+</div>
 
-This tells the reader that there are 3 ways to use the command. We will dissect
-the first one:
+This tells the reader that there are three ways to use the command.
+Let's look at the first usage:
 
+<div class="out">
 ~~~
 cp [OPTION]... [-T] SOURCE DEST
 ~~~
+</div>
 
-This means the command `cp` followed by `[OPTION]...`. When something is in
-square brackets, it means it can be left out. When something is followed by
-`...` it means it can be repeated. Thus, `[OPTION]...` means any number of
-options, including zero. `[-T]` means you can use the options `-T` here if you
-wish. Then you add a SOURCE (the source file or directory) and a DEST (the 
-destination file or directory).
+`[OPTION]` means the `cp` command can be followed by
+one or more optional [flags](../../gloss.html#command-line-flag).
+We can tell they're optional because of the square brackets,
+and we can tell that one or more are welcome because of the ellipsis (...).
+For example,
+the fact that `[-T]` is in square brackets,
+but after the ellipsis,
+means that it's optional,
+but if it's used,
+it must come after all the other options.
 
-The variants can be read in similar ways. Note that to use the last one, the
-`-t` option is mandatory. In fact, this option switches the order of arguments
-so that the destination immediately follows it.
+`SOURCE` refers to the source file or directory,
+and `DEST` to the destination file or directory.
+Their precise meanings are explained at the top of the `DESCRIPTION` section.
+
+The other two usage examples can be read in similar ways.
+Note that to use the last one, the `-t` option is mandatory
+(because it isn't shown in square brackets).
+
+The `DESCRIPTION` section starts with a few paragraphs explaining the command and its use,
+then expands on the possible options one by one:
+
+<div class="out">
+~~~
+     The following options are available:
+
+     -a    Same as -pPR options. Preserves structure and attributes of
+           files but not directory structure.
+
+     -f    If the destination file cannot be opened, remove it and create
+           a new file, without prompting for confirmation regardless of
+           its permissions.  (The -f option overrides any previous -n
+           option.)
+
+           The target file is not unlinked before the copy.  Thus, any
+           existing access rights will be retained.
+
+      ...  ...
+~~~
+</div>
 
 #### Finding Help on Specific Options
 
-The man output can serve as a quick reference for an option by searching. For
-example, we may want to know more about the `-t` option mentioned above.
+If we want to skip ahead to the option you're interested in,
+we can search for it using the slash key '/'.
+(This isn't part of the `man` command:
+it's a feature of `more`.)
+For example,
+to find out about `-t`,
+we can type `/-t` and press return.
+After that,
+we can use the 'n' key to navigate to the next match
+until we find the detailed information we need:
 
-We can search the output of man with the slash key (/), followed by our search
-query. To get information on `-t`, we would type `/-t` followed by RETURN.
-Using 'n', we can navigate to the _next_ match until we find the detailed
-information we need:
-
+<div class="out">
 ~~~
 -t, --target-directory=DIRECTORY
      copy all SOURCE arguments into DIRECTORY
 ~~~
+</div>
 
-This means that this option has the short form `-t` and the long form
-`--target-directory` and that it takes an argument. Its meaning is to copy all
-the SOURCE arguments into DIRECTORY. Thus, we can give the destination
-explicitly instead of relying on having to place the directory at the end.
+This means that this option has the short form `-t` and the long form `--target-directory`
+and that it takes an argument.
+Its meaning is to copy all the SOURCE arguments into DIRECTORY.
+Thus,
+we can give the destination explicitly instead of relying on having to place the directory at the end.
 
-#### What If I Cannot Remember the Command Name?
+#### Limitations of Man Pages
 
-You can run man on itself
+Man pages can be useful for a quick confirmation of how to run a command,
+but they are not famous for being readable.
+If you can't find what you need in the man page&mdash;or you can't understand what you've found&mdash;try
+entering "unix command copy file" into your favorite search engine:
+it will often produce more helpful results.
 
-~~~
-$ man man
-~~~
-
-and this will tell you that there is a '-k' option that does keyword searching
-in the database of Linux commands on your current machine. So if I forget that 
-the command is 'cp' but know it copies files I can use
-
-~~~
-$ man -k copy
-~~~
-
-to find command that relate to copying stuff. There is a quirky synonym for
-this command, which might be simpler to remember (especially if you know
-French):
-
-~~~
-$ apropos copy
-~~~
-
-This could produce a long list but you could filter it with the grep command as
-follows
-
-~~~
-$ man -k copy | grep file
-~~~
-
-which helps a little and shows the 'cp' command at the top of the list.
+FIXME: introduce web-based deconstruction tool.
