@@ -17,9 +17,11 @@ The first is that this scheme gives us two representations for zero (00000<sub>2
 This isn't necessarily fatal,
 but any claims this scheme has to being "natural" disappear when we have to write code like:
 
+<div class="in">
 ~~~
 if (length != +0) and (length != -0)
 ~~~
+</div>
 
 As for the other problem,
 it turns out that the circuits needed to do addition and other arithmetic on this
@@ -140,6 +142,7 @@ it makes little sense to say that we're off by a hundredth when the value in que
 
 To see why this matters, let's have a look at a little program:
 
+<div class="in">
 ~~~
 nines = []
 sums = []
@@ -153,6 +156,7 @@ for i in range(1, 10):
 for i in range(len(nines)):
     print '%.18f %.18f' % (nines[i], sums[i])
 ~~~
+</div>
 
 The loop runs over the integers from 1 to 9 inclusive.
 Using those values, we create the numbers 0.9, 0.09, 0.009, and so on, and put them in the list `vals`.
@@ -212,7 +216,7 @@ For example,
 if you're looking at the behavior of drops of liquid helium,
 start by checking your program's output on a stationary spherical drop in zero gravity.
 You should be able to calculate the right answer in that case,
-and if your program doesn't work for it,
+and if your program doesn't work for that,
 it probably won't work for anything else.
 
 The second rule is to compare more complex versions of your code to simpler ones.
