@@ -29,14 +29,18 @@ Here,
 we call the function three times with different arguments,
 checking that the right value is returned each time.
 
+<div class="in">
 ~~~
 from rectangle import rectangle_area
 
 assert rectangle_area([0, 0, 1, 1]) == 1.0
 assert rectangle_area([1, 1, 4, 4]) == 9.0
 assert rectangle_area([0, 1, 4, 7]) == 24.0
-
-<span class="err">---------------------------------------------------------------------------
+~~~
+</div>
+<div class="err">
+~~~
+---------------------------------------------------------------------------
 AssertionError                            Traceback (most recent call last)
 
 <ipython-input-16-ebf7f5f1c120> in <module>()
@@ -46,17 +50,22 @@ AssertionError                            Traceback (most recent call last)
 
 AssertionError:
 ~~~
+</div>
 
 This result is used,
 in the sense that we know something's wrong,
 but look closely at what happens if we run the tests in a different order:
 
+<div class="in">
 ~~~
 assert rectangle_area([0, 1, 4, 7]) == 24.0
 assert rectangle_area([1, 1, 4, 4]) == 9.0
 assert rectangle_area([0, 0, 1, 1]) == 1.0
-
-<span class="err">---------------------------------------------------------------------------
+~~~
+</div>
+<div class="err">
+~~~
+---------------------------------------------------------------------------
 AssertionError                            Traceback (most recent call last)
 
 <ipython-input-17-548f3f32c981> in <module>()
@@ -66,6 +75,7 @@ AssertionError                            Traceback (most recent call last)
 
 AssertionError:
 ~~~
+</div>
 
 Python halts at the first failed assertion,
 so the second and third tests aren't run at all.
@@ -81,6 +91,7 @@ we'd like to know how many passed or failed.
 Here's a different approach.
 First, let's put each test in a function with a meaningful name:
 
+<div class="in">
 ~~~
 def test_unit_square():
     assert rectangle_area([0, 0, 1, 1]) == 1.0
@@ -91,15 +102,20 @@ def test_large_square():
 def test_actual_rectangle():
     assert rectangle_area([0, 1, 4, 7]) == 24.0
 ~~~
+</div>
 
 Next,
 import a library called `ears`
 and ask it to run our tests for us:
 
+<div class="in">
 ~~~
 import ears
 ears.run()
-
+~~~
+</div>
+<div class="out">
+~~~
 ..f
 2 pass, 1 fail, 0 error
 ----------------------------------------
@@ -111,11 +127,12 @@ test()
 assert rectangle_area([0, 1, 4, 7]) == 24.0
 AssertionError
 ~~~
+</div>
 
 `ears.run` looks in the calling program
 for functions whose names start with the letters `'test_'`
 and runs each one.
-If the function complete without an assertion being triggered,
+If the function completes without an assertion being triggered,
 we count the test as a [success](../gloss.html#test-success).
 If an assertion fails,
 we count the test as a [failure](../gloss.html#test-failure),
