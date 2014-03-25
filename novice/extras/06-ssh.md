@@ -3,7 +3,8 @@ layout: lesson
 root: ../..
 title: Working Remotely
 ---
-Let's take a closer look at what happens when we use a desktop or laptop computer.
+Let's take a closer look at what happens when we use the shell
+on a desktop or laptop computer.
 The first step is to log in
 so that the operating system knows who we are and what we're allowed to do.
 We do this by typing our username and password;
@@ -26,7 +27,7 @@ We call this a [remote login](../gloss.html#remote-login),
 and the other computer a remote computer.
 Once we do this,
 everything we type is passed to a shell running on the remote computer.
-That shell interacts runs those commands on our behalf,
+That shell runs those commands on our behalf,
 just as a local shell would,
 then sends back output for our computer to display.
 
@@ -38,25 +39,75 @@ After we log in,
 we can use the remote shell to use the remote computer's files and directories.
 Typing `exit` or Control-D
 terminates the remote shell and returns us to our previous shell.
-In the example below, we use highlighting to show our interaction with the remote shell.
-We can also see that the remote machine's command prompt is `moon>`
-instead of just `$`:
 
+In the example below,
+the remote machine's command prompt is `moon>`
+instead of just `$`.
+To make it clearer which machine is doing what,
+we'll indent the commands sent to the remote machine
+and their output.
+
+<div class="in">
 ~~~
 $ pwd
+~~~
+</div>
+<div class="out">
+~~~
 /users/vlad
+~~~
+</div>
+<div class="in">
+~~~
 $ ssh vlad@moon.euphoric.edu
 Password: ********
-moon> hostname
-moon
-moon> pwd
-/home/vlad
-moon> ls -F
-bin/     cheese.txt   dark_side/   rocks.cfg
-moon> exit
+~~~
+</div>
+<div class="in">
+~~~
+    moon> hostname
+~~~
+</div>
+<div class="out">
+~~~
+    moon
+~~~
+</div>
+<div class="in">
+~~~
+    moon> pwd
+~~~
+</div>
+<div class="out">
+~~~
+    /home/vlad
+~~~
+</div>
+<div class="in">
+~~~
+    moon> ls -F
+~~~
+</div>
+<div class="out">
+~~~
+    bin/     cheese.txt   dark_side/   rocks.cfg
+~~~
+</div>
+<div class="in">
+~~~
+    moon> exit
+~~~
+</div>
+<div class="in">
+~~~
 $ pwd
+~~~
+</div>
+<div class="out">
+~~~
 /users/vlad
 ~~~
+</div>
 
 The secure shell is called "secure" to contrast it with an older program called `rsh`,
 which stood for "remote shell".
@@ -75,7 +126,8 @@ going back and forth between different computers.
 `ssh` has a companion program called `scp`,
 which stands for "secure copy".
 It allows us to copy files to or from a remote computer using the same kind of connection as SSH.
-The syntax is a simple mix of `cp`'s and `ssh`'s.
+The command's name combines `cp`'s and `ssh`'s,
+and so does its operation.
 To copy a file,
 we specify the source and destination paths,
 either of which may include computer names.
@@ -85,42 +137,70 @@ For example,
 this command copies our latest results to the backup server in the basement,
 printing out its progress as it does so:
 
+<div class="in">
 ~~~
 $ scp results.dat vlad@backupserver:backups/results-2011-11-11.dat
 Password: ********
+~~~
+</div>
+<div class="out">
+~~~
 results.dat              100%  9  1.0 MB/s 00:00
 ~~~
+</div>
 
 Copying a whole directory is similar:
 we just use the `-r` option to signal that we want copying to be recursive.
 For example,
 this command copies all of our results from the backup server to our laptop:
 
+<div class="in">
 ~~~
 $ scp -r vlad@backupserver:backups ./backups
 Password: ********
+~~~
+</div>
+<div class="out">
+~~~
 results-2011-09-18.dat              100%  7  1.0 MB/s 00:00
 results-2011-10-04.dat              100%  9  1.0 MB/s 00:00
 results-2011-10-28.dat              100%  8  1.0 MB/s 00:00
 results-2011-11-11.dat              100%  9  1.0 MB/s 00:00
 ~~~
+</div>
 
-To close off this chapter,
-let's look at one more thing SSH can do for us.
+Here's one more thing SSH can do for us.
 Suppose we want to check whether we have already created the file
 `backups/results-2011-11-12.dat` on the backup server.
 Instead of logging in and then typing `ls`,
 we could do this:
 
+<div class="in">
 ~~~
-$ ssh vlad@backupserver ls results
+$ ssh vlad@backupserver "ls results"
 Password: ********
+~~~
+</div>
+<div class="out">
+~~~
 results-2011-09-18.dat  results-2011-10-28.dat
 results-2011-10-04.dat  results-2011-11-11.dat
 ~~~
+</div>
 
-SSH has taken the arguments after our username and the name of the computer we want to run on
-and passed them to the shell on the remote computer.
+SSH takes the argument after our remote username
+and passes them to the shell on the remote computer.
+(We have to put quotes around it to make it look like a single argument.)
 Since those arguments are a legal command,
-the remote shell has run `ls results` for us
-and sent the output back to our local shell for display.
+the remote shell runs `ls results` for us
+and sends the output back to our local shell for display.
+
+> #### All Those Passwords
+>
+> Typing our password over and over again is annoying,
+> especially if the commands we want to run remotely are in a loop.
+> To remove the need to do this,
+> we can create an [authentication key](../../gloss.html#authentication-key)
+> to tell the remote machine
+> that it should always trust us.
+> We discuss authentication keys in our intermediate lessons.
