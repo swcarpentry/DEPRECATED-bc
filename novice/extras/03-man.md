@@ -143,4 +143,10 @@ If you can't find what you need in the man page&mdash;or you can't understand wh
 entering "unix command copy file" into your favorite search engine:
 it will often produce more helpful results.
 
-FIXME: introduce web-based deconstruction tool.
+> #### You May Also Enjoy...
+>
+> The [explainshell.com](http://explainshell.com/) site
+> does a great job of breaking complex Unix commands into parts
+> and explaining what each does.
+> Sadly,
+> it doesn't work in reverse...
