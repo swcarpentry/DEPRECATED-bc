@@ -17,9 +17,11 @@ The first is that this scheme gives us two representations for zero (00000<sub>2
 This isn't necessarily fatal,
 but any claims this scheme has to being "natural" disappear when we have to write code like:
 
+<div class="in" markdown="1">
 ~~~
 if (length != +0) and (length != -0)
 ~~~
+</div>
 
 As for the other problem,
 it turns out that the circuits needed to do addition and other arithmetic on this
@@ -69,17 +71,17 @@ we'll use a much dumber representation:
 we'll only worry about positive values without fractional parts,
 and we'll only use 3 for the magnitude and 2 for the exponent.
 
-<table>
-<tr><th rowspan="10" class="rotate">Mantissa</th><th colspan="4" align="center">Exponent</th></tr>
-<tr><th></th><th>00</th><th>01</th><th>10</th><th>11</th></tr>
-<tr><th>000</th><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-<tr><th>001</th><td>1</td><td>2</td><td>4</td><td>8</td></tr>
-<tr><th>010</th><td>2</td><td>4</td><td>8</td><td>16</td></tr>
-<tr><th>011</th><td>3</td><td>6</td><td>12</td><td>24</td></tr>
-<tr><th>100</th><td>4</td><td>8</td><td>16</td><td>32</td></tr>
-<tr><th>101</th><td>5</td><td>10</td><td>20</td><td>40</td></tr>
-<tr><th>110</th><td>6</td><td>12</td><td>24</td><td>48</td></tr>
-<tr><th>111</th><td>7</td><td>14</td><td>28</td><td>56</td></tr>
+<table class="table table-striped">
+<tr><th></th>        <th>   </th><th colspan="4" align="center">Exponent</th></tr>
+<tr><th></th>        <th>   </th><th>00</th><th>01</th><th>10</th><th>11</th></tr>
+<tr><th></th>        <th>000</th><td> 0</td><td> 0</td><td> 0</td><td> 0</td></tr>
+<tr><th></th>        <th>001</th><td> 1</td><td> 2</td><td> 4</td><td> 8</td></tr>
+<tr><th></th>        <th>010</th><td> 2</td><td> 4</td><td> 8</td><td>16</td></tr>
+<tr><th>Mantissa</th><th>011</th><td> 3</td><td> 6</td><td>12</td><td>24</td></tr>
+<tr><th></th>        <th>100</th><td> 4</td><td> 8</td><td>16</td><td>32</td></tr>
+<tr><th></th>        <th>101</th><td> 5</td><td>10</td><td>20</td><td>40</td></tr>
+<tr><th></th>        <th>110</th><td> 6</td><td>12</td><td>24</td><td>48</td></tr>
+<tr><th></th>        <th>111</th><td> 7</td><td>14</td><td>28</td><td>56</td></tr>
 </table>
 
 The table above
@@ -140,6 +142,7 @@ it makes little sense to say that we're off by a hundredth when the value in que
 
 To see why this matters, let's have a look at a little program:
 
+<div class="in" markdown="1">
 ~~~
 nines = []
 sums = []
@@ -153,6 +156,7 @@ for i in range(1, 10):
 for i in range(len(nines)):
     print '%.18f %.18f' % (nines[i], sums[i])
 ~~~
+</div>
 
 The loop runs over the integers from 1 to 9 inclusive.
 Using those values, we create the numbers 0.9, 0.09, 0.009, and so on, and put them in the list `vals`.
@@ -160,7 +164,7 @@ We then calculate the sum of those numbers.
 Clearly, this should be 0.9, 0.99, 0.999, and so on.
 But is it?
 
-<table>
+<table class="table table-striped">
 <tr><td>1</td><td>0.900000000000000022</td><td>0.900000000000000022</td></tr>
 <tr><td>2</td><td>0.089999999999999997</td><td>0.989999999999999991</td></tr>
 <tr><td>3</td><td>0.008999999999999999</td><td>0.998999999999999999</td></tr>
@@ -212,7 +216,7 @@ For example,
 if you're looking at the behavior of drops of liquid helium,
 start by checking your program's output on a stationary spherical drop in zero gravity.
 You should be able to calculate the right answer in that case,
-and if your program doesn't work for it,
+and if your program doesn't work for that,
 it probably won't work for anything else.
 
 The second rule is to compare more complex versions of your code to simpler ones.
