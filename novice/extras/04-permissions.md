@@ -63,7 +63,7 @@ or execute the file
 
 For example, if a file had the following set of permissions:
 
-<table>
+<table class="table table-striped">
 <tr><td></td><th>user</th><th>group</th><th>all</th></tr>
 <tr><th>read</th><td>yes</td><td>yes</td><td>no</td></tr>
 <tr><th>write</th><td>yes</td><td>no</td><td>no</td></tr>

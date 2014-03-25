@@ -271,6 +271,7 @@ Here,
 for example,
 is a function that reads a grid and checks its consistency:
 
+<div class="in" markdown="1">
 ~~~
 def read_grid(grid_file):
     data = read_raw_data(grid_file)
@@ -279,6 +280,7 @@ def read_grid(grid_file):
     result = normalize_grid(data)
     return result
 ~~~
+</div>
 
 The `raise` statement creates a new exception with a meaningful error message.
 Since `read_grid` itself doesn't contain a `try`/`except` block,

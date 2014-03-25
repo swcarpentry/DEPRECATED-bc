@@ -16,8 +16,7 @@ We have gathered several of them here.
 5.  [Shell Variables](05-shellvar.html)
 6.  [Working Remotely](06-ssh.html)
 7.  [Exceptions](07-exceptions.html)
-8.  [Unit Testing](08-unit.html)
-9.  [Numbers](09-numbers.html)
-10. [Why I Teach](10-why.html)
+8.  [Numbers](08-numbers.html)
+9. [Why I Teach](09-why.html)
 
 </div>

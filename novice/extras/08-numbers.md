@@ -71,17 +71,17 @@ we'll use a much dumber representation:
 we'll only worry about positive values without fractional parts,
 and we'll only use 3 for the magnitude and 2 for the exponent.
 
-<table>
-<tr><th rowspan="10" class="rotate">Mantissa</th><th colspan="4" align="center">Exponent</th></tr>
-<tr><th></th><th>00</th><th>01</th><th>10</th><th>11</th></tr>
-<tr><th>000</th><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-<tr><th>001</th><td>1</td><td>2</td><td>4</td><td>8</td></tr>
-<tr><th>010</th><td>2</td><td>4</td><td>8</td><td>16</td></tr>
-<tr><th>011</th><td>3</td><td>6</td><td>12</td><td>24</td></tr>
-<tr><th>100</th><td>4</td><td>8</td><td>16</td><td>32</td></tr>
-<tr><th>101</th><td>5</td><td>10</td><td>20</td><td>40</td></tr>
-<tr><th>110</th><td>6</td><td>12</td><td>24</td><td>48</td></tr>
-<tr><th>111</th><td>7</td><td>14</td><td>28</td><td>56</td></tr>
+<table class="table table-striped">
+<tr><th></th>        <th>   </th><th colspan="4" align="center">Exponent</th></tr>
+<tr><th></th>        <th>   </th><th>00</th><th>01</th><th>10</th><th>11</th></tr>
+<tr><th></th>        <th>000</th><td> 0</td><td> 0</td><td> 0</td><td> 0</td></tr>
+<tr><th></th>        <th>001</th><td> 1</td><td> 2</td><td> 4</td><td> 8</td></tr>
+<tr><th></th>        <th>010</th><td> 2</td><td> 4</td><td> 8</td><td>16</td></tr>
+<tr><th>Mantissa</th><th>011</th><td> 3</td><td> 6</td><td>12</td><td>24</td></tr>
+<tr><th></th>        <th>100</th><td> 4</td><td> 8</td><td>16</td><td>32</td></tr>
+<tr><th></th>        <th>101</th><td> 5</td><td>10</td><td>20</td><td>40</td></tr>
+<tr><th></th>        <th>110</th><td> 6</td><td>12</td><td>24</td><td>48</td></tr>
+<tr><th></th>        <th>111</th><td> 7</td><td>14</td><td>28</td><td>56</td></tr>
 </table>
 
 The table above
@@ -164,7 +164,7 @@ We then calculate the sum of those numbers.
 Clearly, this should be 0.9, 0.99, 0.999, and so on.
 But is it?
 
-<table>
+<table class="table table-striped">
 <tr><td>1</td><td>0.900000000000000022</td><td>0.900000000000000022</td></tr>
 <tr><td>2</td><td>0.089999999999999997</td><td>0.989999999999999991</td></tr>
 <tr><td>3</td><td>0.008999999999999999</td><td>0.998999999999999999</td></tr>
