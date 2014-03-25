@@ -40,7 +40,7 @@ def test_check_humandate_chars():
     assert not swc_index_validator.check_humandate("XXX SomeDay, Year")
 
 def test_check_humantime():
-    assert swc_index_validator.check_humantime("09:00am")
+    assert not swc_index_validator.check_humantime("09:00am")
 
 def test_check_euro_humantime():
     assert swc_index_validator.check_humantime("09:00-17:00")
