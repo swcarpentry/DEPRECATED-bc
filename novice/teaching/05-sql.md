@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: Using Databases and SQL
-level: novice
 ---
 Relational databases are not as widely used in science as in business,
 but they are still a common way to store large data sets with complex structure.

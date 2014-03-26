@@ -3,8 +3,8 @@ layout: lesson
 root: .
 title: Recommended Reading
 ---
-Papers
-------
+
+## Papers
 
 *   Susan A. Ambrose, Michael W. Bridges, Michele DiPietro, Marsha C. Lovett, and Marie K. Norman:
     *[How Learning Works: Seven Research-Based Principles for Smart Teaching](http://www.amazon.com/How-Learning-Works-Research-Based-Principles/dp/0470484101/)*.
@@ -74,8 +74,7 @@ Papers
     Describes what we've learned about how to teach programming to scientists
     over the last 15 years.
 
-Books
------
+## Books
 
 *   Chris Fehily:
     *SQL: Visual QuickStart Guide* (3rd ed).

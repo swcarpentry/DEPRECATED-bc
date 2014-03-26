@@ -25,15 +25,15 @@ You should not try to use the same repo for both purposes because:
 
 **Table of Contents**
 
-[Background](#background)  
-[Getting Started](#getting-started)  
-[Previewing the Site](#previewing-the-site)  
-[Layout and Variables](#layout-and-variables)  
-[Include Files](#include-files)  
-[Instructors and Sponsors](#instructors-and-sponsors)  
-[Lesson Material](#lesson-material)  
-[Other Lesson Material](#other-lesson-material)
-[FAQ](#faq)
+*   [Background](#background)  
+*   [Getting Started](#getting-started)  
+*   [Previewing the Site](#previewing-the-site)  
+*   [Variables](#variables)  
+*   [Include Files](#include-files)  
+*   [Page Content](#page-content)  
+*   [Lesson Material](#lesson-material)  
+*   [Site Map](#site-map)  
+*   [FAQ](#faq)
 
 Background
 ----------
@@ -414,12 +414,12 @@ FAQ
 
 *   *Why does `make site` take so long?*
     <br/>
+    We know this problem happens with pandoc >= 1.2 and <= 1.12.3.3. If you are
+    using one of this versions you can (a) update or (b) downgrade pandoc.
+
     On a MacBook Air with pandoc 1.11.1 and Jekyll 1.3.0,
     making the site from scratch takes approximately 24 seconds,
     half of which is spent converting IPython Notebooks.
-    Some other versions of Pandoc take much longer to translate our files,
-    possibly because we are nesting Markdown inside `div` elements.
-    We are investigating...
 
 *   *What do I do if I see a `invalid byte sequence in ...` error when I run `make check`?*
     <br/>

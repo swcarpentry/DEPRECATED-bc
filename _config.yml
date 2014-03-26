@@ -12,4 +12,4 @@ swc_prefix      : "http://software-carpentry.org"
 twitter_name    : "@swcarpentry"
 twitter_url     : "https://twitter.com/swcarpentry"
 vm_url          : "https://docs.google.com/uc?id=0B4Kr6DYkzkQtd05FekRId05DLXM&amp;export=download"
-exclude         : [branding, data, tmp, swc.tpl]
+exclude         : [branding]
