@@ -13,7 +13,7 @@
 # To use:
 #
 # 1. Install msysGit
-#    http://code.google.com/p/msysgit/downloads/list?q=full+installer+official+git
+#    http://code.google.com/p/msysgit/downloads/list
 # 2. Run swc_windows_installer.sh
 #    You should be able to simply double click the file in Windows
 
