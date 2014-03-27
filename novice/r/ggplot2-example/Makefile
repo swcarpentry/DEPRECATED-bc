@@ -12,4 +12,4 @@ clean:
 	gsed -i 's/```r/```coffee/g' $*.md
 
 %.R: %.Rmd
-	Rscript -e 'library(knitr); purl("$*.Rmd")'
+	Rscript -e 'knitr::purl("$*.Rmd")'
