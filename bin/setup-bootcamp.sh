@@ -28,7 +28,8 @@
 # Functions
 
 function check_pwd {
-    if test $(git remote --verbose 2>&1 | grep -c swcarpentry/bc) -ge 1; then
+    if test $(git remote --verbose 2>&1 | grep -c swcarpentry/bc) -ge 1
+    then
         echo "Look like that you are inside bc repository."
         echo "Since cloning a repository inside another can create some problems,"
         echo "please move to outside bc repository and call this script again."
@@ -39,17 +40,26 @@ function check_pwd {
 function create_repo {
     url=https://api.github.com/user/repos
     ghpages=https://${OWNER}.github.io/${BOOTCAMPID}
-    curl -u "${OWNER}:${PASSWORD}" -i \
+    curl -f -u "${OWNER}:${PASSWORD}" -i \
         -d "{\"name\":\"${BOOTCAMPID}\",\"description\":\"${DESCRIPTION}\",\"homepage\":\"${ghpages}\"${REPO_DEFAULTS}}" \
         ${url}
+    if test $? -ne 0
+    then
+        echo "Can't create the remote repository. Aborting."
+        exit $?
+    fi
 }
 
 function set_team {
     for instructor in ${INSTRUCTORS};
     do
         url=https://api.github.com/repos/${OWNER}/${BOOTCAMPID}/collaborators/${instructor}
-        curl -u "${OWNER}:${PASSWORD}" -i -X PUT -d "{}" \
+        curl -f -u "${OWNER}:${PASSWORD}" -i -X PUT -d "{}" \
             ${url}
+        if test $? -ne 0
+        then
+            echo "WARNING: can't add ${instructor} as collaborators."
+        fi
     done
 }
 
