@@ -1,5 +1,6 @@
-
-
+```{r, echo=FALSE}
+opts_chunk$set(results='hide')
+```
 # Novice R materials - following Python examples
 --------------------------------------------------
 
@@ -24,28 +25,22 @@ R is a versatile, open source programming/scripting language that's useful both 
 Some of the same commands we learned from the command line can be used in R.
 List objects in your current environment
 
-
-```r
+```{r}
 ls()
 ```
 
-
 Remove objects from your current environment.  
 
-
-```r
+```{r}
 x <- 5
 rm(x)
 ```
 
-
 Remove all objects from your current environment. Typing `x` on the console will give you an error.
 
-
-```r
+```{r}
 rm(list = ls())
 ```
-
 
 Notice that we have _nested_ one function inside of another.  
 
@@ -61,11 +56,9 @@ __Package management__
 
 Use `old.packages()` to list all your locally installed packages that are now out of date. `update.packages()` will update all packages in the known libraries interactively. This can take a while if you haven't done it recently. To update everything without any user intervention, use the `ask = FALSE` argument.
 
-
-```r
+```{r, eval=FALSE}
 update.packages(ask = FALSE)
 ```
-
 
 ## Introduction to R and RStudio
 
@@ -79,31 +72,25 @@ _Point out the different windows in R._
 
 You can get output from R simply by typing in math
 	
-
-```r
+```{r}
 3 + 5
 12/7
 ```
 
-
 or by typing words, with the command `print`
 
-
-```r
+```{r}
 print("hello world")
 ```
-
 
 We can annotate our code (take notes) by typing "#". Everything to the right of # is ignored by R
 
 We can save our results to an object, if we give it a name
 
-
-```r
-a <- 60 * 60
+```{r}
+a     <- 60 * 60
 hours <- 365 * 24
 ```
-
 
 ## Data types and structures
 
@@ -135,8 +122,7 @@ __Example	Type__
 `length()` - how long is it? What about two dimensional objects?  
 `attributes()` - does it have any metadata?  
 
-
-```r
+```{r}
 # Example
 x <- "dataset"
 typeof(x)
@@ -150,7 +136,6 @@ attributes(y)
 z <- c(1L, 2L, 3L)
 typeof(z)
 ```
-
 
 R has many __data structures__. These include
 
@@ -178,110 +163,88 @@ A vector can be a vector of elements that are most commonly `character`, `logica
 
 You can create an empty vector with `vector()` (By default the mode is `logical`. You can be more explicit as shown in the examples below.) It is more common to use direct constructors such as `character()`, `numeric()`, etc.
 
-
-```r
+```{r}
 x <- vector()
 # with a length and type
 vector("character", length = 10)
-character(5)  ## character vector of length 5
+character(5) ## character vector of length 5
 numeric(5)
 logical(5)
 ```
 
-
 Various examples:
 
-
-```r
+```{r}
 x <- c(1, 2, 3)
 x
 length(x)
 ```
 
-
 `x` is a numeric vector. These are the most common kind. They are numeric objects and are treated as double precision real numbers. To explicitly create integers, add an `L` at the end.
 
-
-```r
+```{r}
 x1 <- c(1L, 2L, 3L)
 ```
 
-
 You can also have logical vectors. 
 
-
-```r
+```{r}
 y <- c(TRUE, TRUE, FALSE, FALSE)
 ```
 
-
 Finally you can have character vectors:
 
-
-```r
+```{r}
 z <- c("Sarah", "Tracy", "Jon")
 ```
 
-
 **Examine your vector**  
 
-
-```r
+```{r}
 typeof(z)
 length(z)
 class(z)
 str(z)
 ```
 
-
 Question: Do you see a property that's common to all these vectors above?
 
 **Add elements**
 
-
-```r
+```{r}
 z <- c(z, "Annette")
 z
 ```
 
-
 More examples of vectors
 
-
-```r
+```{r}
 x <- c(0.5, 0.7)
 x <- c(TRUE, FALSE)
 x <- c("a", "b", "c", "d", "e")
 x <- 9:100
-x <- c(1 + 0, 2 + 4)
+x <- c(1+0i, 2+4i)
 ```
-
 
 You can also create vectors as a sequence of numbers
 
-
-```r
+```{r}
 series <- 1:10
 seq(10)
 seq(1, 10, by = 0.1)
 ```
 
-
 `Inf` is infinity. You can have either positive or negative infinity.
 
-
-```r
+```{r}
 1/0
 ```
 
-
 `NaN` means Not a number. It's an undefined value.
 
-
-```r
+```{r}
 0/0
 ```
-
 
 Each object can have __attributes__. Attribues can be part of an object of R. These include:
 
@@ -293,12 +256,10 @@ Each object can have __attributes__. Attribues can be part of an object of R. Th
 
 You can also glean other attribute-like information such as length (works on vectors and lists) or number of characters (for character strings).
 
-
-```r
+```{r}
 length(1:10)
 nchar("Software Carpentry")
 ```
-
 
 What happens when you mix types?
 
@@ -306,74 +267,61 @@ R will create a resulting vector that is the least common denominator. The coerc
 
 Guess what the following do without running them first
 
-
-```r
-xx <- c(1.7, "a")
-xx <- c(TRUE, 2)
-xx <- c("a", TRUE)
+```{r}
+xx <- c(1.7, "a") 
+xx <- c(TRUE, 2) 
+xx <- c("a", TRUE) 
 ```
-
 
 This is called implicit coercion. You can also coerce vectors explicitly using the `as.<class_name>`. Example
 
-
-```r
+```{r}
 as.numeric()
 as.character()
 ```
-
 
 ### Matrix
 
 Matrices are a special vector in R. They are not a separate type of object but simply an atomic vector with dimensions added on to it. Matrices have rows and columns.
 
-
-```r
+```{r}
 m <- matrix(nrow = 2, ncol = 2)
 m
 dim(m)
 ```
 
-
 Matrices are filled column-wise.
 
-
-```r
+```{r}
 m <- matrix(1:6, nrow = 2, ncol = 3)
 ```
 
-
 Other ways to construct a matrix
 
-
-```r
-m <- 1:10
+```{r}
+m      <- 1:10
 dim(m) <- c(2, 5)
 ```
-
 
 This takes a vector and transform into a matrix with 2 rows and 5 columns.
 
 Another way is to bind columns or rows using `cbind()` and `rbind()`.
 
-
-```r
+```{r}
 x <- 1:3
 y <- 10:12
 cbind(x, y)
 rbind(x, y)
 ```
 
-
 You can also use the byrow argument to specify how the matrix is filled. From R's own documentation:
 
-
-```r
-mdat <- matrix(c(1, 2, 3, 11, 12, 13), nrow = 2, ncol = 3, byrow = TRUE, dimnames = list(c("row1", 
-    "row2"), c("C.1", "C.2", "C.3")))
+```{r}
+mdat <- matrix(c(1,2,3, 11,12,13), nrow = 2, ncol = 3, byrow = TRUE,
+               dimnames = list(c("row1", "row2"),
+                               c("C.1", "C.2", "C.3")))
 mdat
 ```
-
 
 ### List
 
@@ -383,9 +331,8 @@ A list is a special type of vector. Each element can be a different type.
 
 Create lists using `list()` or coerce other objects using `as.list()`
 
-
-```r
-x <- list(1, "a", TRUE, 1 + 4)
+```{r}
+x <- list(1, "a", TRUE, 1+4i)
 x
 
 x <- 1:10
@@ -393,16 +340,13 @@ x <- as.list(x)
 length(x)
 ```
 
-
 1. What is the class of `x[1]`?
 2. How about `x[[1]]`?
 
-
-```r
+```{r}
 xlist <- list(a = "Karthik Ram", b = 1:10, data = head(iris))
 xlist
 ```
-
 
 1. What is the length of this object? What about its structure?
 
@@ -433,31 +377,25 @@ Which is male? 1 or 2? You wouldn't be able to tell with just integer data. Fact
 
 Factors can be created with `factor()`. Input is generally a character vector.
 
-
-```r
+```{r}
 x <- factor(c("yes", "no", "no", "yes", "yes"))
 x
 ```
-
 
 `table(x)` will return a frequency table.
 
 If you need to convert a factor to a character vector, simply use
 
-
-```r
+```{r}
 as.character(x)
 ```
 
-
 In modeling functions, it is important to know what the baseline level is. This is the first factor but by default the ordering is determined by alphabetical order of words entered. You can change this by speciying the levels (another option is to use the function relevel).
 
-
-```r
+```{r}
 x <- factor(c("yes", "no", "yes"), levels = c("yes", "no"))
 x
 ```
-
 
 ### Data frame
 
@@ -476,12 +414,10 @@ Some additional information on data frames:
 
 ## __Combining data frames__
 
-
-```r
+```{r}
 dat <- data.frame(id = letters[1:10], x = 1:10, y = 11:20)
 dat
 ```
-
 
 ### __Useful functions__
 
@@ -496,12 +432,10 @@ dat
 
 See that it is actually a special list:
 
-
-```r
+```{r}
 is.list(iris)
 class(iris)
 ```
-
 
 | Dimensions | Homogenous | Heterogeneous |
 | ------- | ---- | ---- |
@@ -512,11 +446,9 @@ class(iris)
 
 Vectors have positions, these positions are ordered and can be called using name_vector[index]
 
-
-```r
+```{r}
 letters[2]
 ```
-
 
 ### __Functions__
 
@@ -525,12 +457,10 @@ Functions take in information and return desired outputs.
 
 output = name_of_function(inputs)
 
-
-```r
+```{r}
 x <- 1:10
 y <- sum(x)
 ```
-
 
 ### __Help__
 
