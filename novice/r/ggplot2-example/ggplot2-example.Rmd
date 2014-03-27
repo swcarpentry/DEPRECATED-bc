@@ -1,9 +1,10 @@
 # Data visualization with ggplot2
 
-```{r, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE, eval=FALSE}
 # Set default to hide all results and figures.
 # Can change this manually in individual chunks.
 # Must load knitr so opts_chunk is in search path.
+# Set eval=FALSE to disable and keep figs.
 library(knitr)
 opts_chunk$set(results="hide", fig.show="hide", fig.keep="none")
 ```
@@ -38,7 +39,7 @@ install.packages("ggplot2")
 
 Then load it:
 
-```{r loadggplot2}
+```{r loadggplot2, message=FALSE}
 library(ggplot2)
 ```
 
@@ -100,7 +101,7 @@ Here we see that for whiter diamonds (D, E, F) the price rises more quickly with
 
 We can further facet the plot across two different categorical variables using the same syntax:
 
-```{r facetclarcol}
+```{r facetclarcol, fig.height=10, fig.width=10}
 qplot(carat, price, data=diamonds, facets = clarity~color)
 ```
 
@@ -108,10 +109,14 @@ Here we see that the price per carat rises very steeply for very white, very cle
 
 Finally, we can combind both color-coding and faceting in the same plot. Let's use the same faceting scheme as last time, but color the points by the quality of the diamond's cut.
 
-```{r facetclarcol_colcut}
+```{r facetclarcol_colcut, fig.height=10, fig.width=10}
 qplot(carat, price, data=diamonds, facets=clarity~color, col=cut)
 ```
 
 This color-coding reveals that clearer, whiter diamonds *generally* have higher quality cuts, but the relationship doesn't appear strong, visually. Looking down the plot toward clearer diamonds you start to see more "Ideal" cuts than at the top, which are the more included diamonds. 
 
 What we've done here in addition to faceting is map a feature of the data (here, the cut quality) onto a scale (here, color). This behavior will work differently depending on whether you're looking at categorical or continuous variables. We can also map features to other *scales* such as `size=`, `shape=`, `linetype=`, or even transparency using `alpha=`. All of these different scales can be combined with each other or with facets, and give you an extremely powerful and easy-to-use graphical toolbox for exploratory data analysis. 
+
+### Exercise
+
+Now, install the `xx` package, and load the `xx` dataset. Using the techniques we've learned here, use faceting and scaling options to explore how xx, xx, and xx affect the relationship between xx and xx.
