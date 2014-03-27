@@ -1,10 +1,11 @@
 
-## ----, echo=FALSE, message=FALSE-----------------------------------------
-# Set default to hide all results and figures.
-# Can change this manually in individual chunks.
-# Must load knitr so opts_chunk is in search path.
-library(knitr)
-opts_chunk$set(results="hide", fig.show="hide", fig.keep="none")
+## ----, echo=FALSE, message=FALSE, eval=FALSE-----------------------------
+## # Set default to hide all results and figures.
+## # Can change this manually in individual chunks.
+## # Must load knitr so opts_chunk is in search path.
+## # Set eval=FALSE to disable and keep figs.
+## library(knitr)
+## opts_chunk$set(results="hide", fig.show="hide", fig.keep="none")
 
 
 ## ----irisbase------------------------------------------------------------
@@ -21,7 +22,7 @@ plot(iris$Sepal.Length, iris$Petal.Length)
 ## install.packages("ggplot2")
 
 
-## ----loadggplot2---------------------------------------------------------
+## ----loadggplot2, message=FALSE------------------------------------------
 library(ggplot2)
 
 
@@ -51,11 +52,11 @@ qplot(carat, price, data=diamonds, facets = ~clarity)
 qplot(carat, price, data=diamonds, facets = ~color)
 
 
-## ----facetclarcol--------------------------------------------------------
+## ----facetclarcol, fig.height=10, fig.width=10---------------------------
 qplot(carat, price, data=diamonds, facets = clarity~color)
 
 
-## ----facetclarcol_colcut-------------------------------------------------
+## ----facetclarcol_colcut, fig.height=10, fig.width=10--------------------
 qplot(carat, price, data=diamonds, facets=clarity~color, col=cut)
 
 
