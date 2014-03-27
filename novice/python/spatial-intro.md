@@ -7,6 +7,17 @@ root: ../..
 
 
 <div>
+<h2 id="objectives">Objectives</h2>
+<ul>
+<li>Explain what a library is, and what libraries are used for.</li>
+<li>Load a Python library and use the things it contains.</li>
+<li>Read tabular data from a file into a program.</li>
+<li>Display simple visualizations of the data</li>
+</ul>
+</div>
+
+
+<div>
 <blockquote>
 <h2>A note to students and instructors</h2>
 <p>This lesson requires the <a href="http://matplotlib.org/basemap">Basemap</a> toolkit for Matplotlib. This library is not distributed with Matplotlib; if you are using Continuum's Anaconda distribution, you can obtain it by running:</p>
@@ -32,18 +43,6 @@ root: ../..
 <li>load the data into our analysis environment;</li>
 <li>inspect the data; and</li>
 <li>visualize it.</li>
-</ul>
-<p>To do this, we'll delve into working with Python.</p>
-</div>
-
-
-<div>
-<h2 id="objectives">Objectives</h2>
-<ul>
-<li>Explain what a library is, and what libraries are used for.</li>
-<li>Load a Python library and use the things it contains.</li>
-<li>Read tabular data from a file into a program.</li>
-<li>Display simple visualizations of the data</li>
 </ul>
 </div>
 
@@ -142,7 +141,7 @@ plt.plot(lon, lat, &#39;o&#39;)</pre>
 </div>
 
 <div class="out">
-<pre>[&lt;matplotlib.lines.Line2D at 0x10622ce50&gt;]</pre>
+<pre>[&lt;matplotlib.lines.Line2D at 0x1060c9190&gt;]</pre>
 </div>
 
 
@@ -172,36 +171,41 @@ plt.plot(lon, lat, &#39;o&#39;)</pre>
 
 
 <div class="in">
-<pre>map = Basemap(projection=&#39;robin&#39;, lat_0=0.0, lon_0=0.0)</pre>
+<pre>bmap = Basemap(projection=&#39;robin&#39;, lat_0=0.0, lon_0=0.0)</pre>
 </div>
 
 
 <div>
 <p>The <code>projection</code> parameter is self-explanatory; the parameters <code>lat_0</code> and <code>lon_0</code> define the center of the map.</p>
-<p>Now that we have a map, we can use <code>pyplot</code> to create a figure to display things in, and then tell the map which features to display: coastlines, country borders, shaded continents, and so on.</p>
-<p>FIXME: explain the <code>x, y = map(lon, lat)</code> call.</p>
+<p>Now that we have a map, we can use <code>pyplot</code> to create a figure to display things in, and then tell the map which features to display: coastlines, country borders, shaded continents, and so on. We do this by calling <a href="../../gloss.html#method">methods</a> of the <code>Basemap</code> object assigned to the variable <code>bmap</code>. Once we have done that, we do a bit of magic (which we'll explain below) to get the (x,y) coordinates of the cities we want to add to the plot, and then use <code>bmap.plot</code> to add markers for these cities to the map:</p>
 </div>
 
 
 <div class="in">
 <pre>plt.figure(figsize=(12,12))
-map.drawcoastlines()
-map.drawcountries()
-map.fillcontinents()
-map.drawmeridians(np.arange(-180,180,20))
-map.drawparallels(np.arange(-90,90,20))
+bmap.drawcoastlines()
+bmap.drawcountries()
+bmap.fillcontinents()
+bmap.drawmeridians(np.arange(-180,180,20))
+bmap.drawparallels(np.arange(-90,90,20))
 
-x, y = map(lon, lat)
-map.plot(x, y, &#39;o&#39;, markersize=4, color=&#39;red&#39;)</pre>
+x, y = bmap(lon, lat)
+bmap.plot(x, y, &#39;o&#39;, markersize=4, color=&#39;red&#39;)</pre>
 </div>
 
 <div class="out">
-<pre>[&lt;matplotlib.lines.Line2D at 0x108c88f10&gt;]</pre>
+<pre>[&lt;matplotlib.lines.Line2D at 0x108dcc2d0&gt;]</pre>
 </div>
 
 
 <div>
-<p>The final line of the above code cell mimics matplotlib's built-in <code>plot</code> method to plot our projected coordinates onto the map.</p>
+<p>The bit of magic we mentioned above is the line:</p>
+<pre><code>x, y = bmap(lon, lat)</code></pre>
+<p>If we give <code>bmap</code> the longitudes and latitudes of a set of points, it will give us back their (x,y) locations in meters. We can then ask <code>bmap</code> to plot those.</p>
+<blockquote>
+<h4>Room for Improvement</h4>
+<p>Using the <code>bmap</code> object as if it were a function is confusing: a better design would have been to give it another method for coordinate conversion. What's even more confusing is that we have to pass longitude and latitude instead of the usual latitude and longitude. This actually does correspond to X and Y, which is presumably why the authors of this code chose to do things this way, but it's still a rich source of errors.</p>
+</blockquote>
 </div>
 
 
@@ -211,4 +215,15 @@ map.plot(x, y, &#39;o&#39;, markersize=4, color=&#39;red&#39;)</pre>
 <li><p>Integrate the coloring scheme from Exercise 1 into the Basemap projection.</p></li>
 <li><p>Try out a different projection that better shows the boot camp locations in North America. (You can find a list of projections in the <a href="http://matplotlib.org/basemap/users/mapsetup.html">Basemap documentation</a>.)</p></li>
 </ol>
+</div>
+
+
+<div>
+<h4 id="key-points">Key Points</h4>
+<ul>
+<li>Import a library into a program using <code>import libraryname</code>.</li>
+<li>Use the <code>numpy</code> library to work with arrays in Python.</li>
+<li>Use the <code>pyplot</code> library from <code>matplotlib</code> for creating simple visualizations.</li>
+<li>The <code>basemap</code> library can be used to augment <code>matplotlib</code> to visualize spatial data.</li>
+</ul>
 </div>
