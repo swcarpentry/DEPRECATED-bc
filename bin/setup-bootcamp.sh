@@ -27,6 +27,15 @@
 
 # Functions
 
+function check_pwd {
+    if test $(git remote --verbose 2>&1 | grep -c swcarpentry/bc) -ge 1; then
+        echo "Look like that you are inside bc repository."
+        echo "Since cloning a repository inside another can create some problems,"
+        echo "please move to outside bc repository and call this script again."
+        exit 2
+    fi
+}
+
 function create_repo {
     url=https://api.github.com/user/repos
     ghpages=https://${OWNER}.github.io/${BOOTCAMPID}
@@ -46,8 +55,8 @@ function set_team {
 
 function clone_and_push {
     git clone -b gh-pages -o bc \
-        https://github.com/swcarpentry/bc.git ../${BOOTCAMPID}
-    cd ../${BOOTCAMPID}
+        https://github.com/swcarpentry/bc.git ${REPOSITORYPATH}
+    cd ${REPOSITORYPATH}
     git remote add origin \
         ${BOOTCAMPURL/https:\/\//https:\/\/${OWNER}@}.git
     # This is only supported by git >= 1.7.9
@@ -69,19 +78,22 @@ function clone_and_push {
 }
 
 function end_message {
+    echo "LOG:"
+    echo ""
     echo "1. Repository create at ${BOOTCAMPURL}"
-    echo "2. Repository cloned at ../${BOOTCAMPID}"
+    echo "2. Repository cloned at ${REPOSITORYPATH}"
     echo ""
     echo "TODO:"
     echo ""
-    echo "1. Update ../${BOOTCAMPID}/index.html"
-    echo "2. Check the information at ../${BOOTCAMPID}/index.html"
+    echo "1. Update ${REPOSITORYPATH}/index.html"
+    echo "2. Check the information at ${REPOSITORYPATH}/index.html"
     echo "3. Update the repository:"
     echo ""
     echo "    $ git push gh-pages"
 }
 
 function main {
+    check_pwd
     create_repo
     set_team
     clone_and_push
@@ -97,8 +109,9 @@ fi
 
 # Setup environments variables
 BOOTCAMPID=$1
-OWNER=$2
-DESCRIPTION="$3"
+REPOSITORYPATH=./$1
+DESCRIPTION="$2"
+OWNER=$3
 BOOTCAMPURL=https://github.com/${OWNER}/${BOOTCAMPID}
 INSTRUCTORS=${@:4}
 REPO_DEFAULTS=,\"has_issues\":false,\"has_wiki\":false,\"has_downloads\":false
