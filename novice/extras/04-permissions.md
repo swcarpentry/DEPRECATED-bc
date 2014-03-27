@@ -9,9 +9,9 @@ the concepts are similar,
 but the rules are different.
 
 Let's start with Nelle.
-She has a unique [user name](../gloss.html#user-name),
+She has a unique [user name](../../gloss.html#user-name),
 `nnemo`,
-and a [user ID](../gloss.html#user-id),
+and a [user ID](../../gloss.html#user-id),
 1404.
 
 > #### Why Integer IDs?
@@ -35,9 +35,9 @@ and a [user ID](../gloss.html#user-id),
 > in the same way that someone working in a lab might talk about Experiment 28
 > instead of "the chronotypical alpha-response trials on anacondas".
 
-Users can belong to any number of [groups](../gloss.html#user-group),
-each of which has a unique [group name](../gloss.html#user-group-name)
-and numeric [group ID](../gloss.html#user-group-id).
+Users can belong to any number of [groups](../../gloss.html#user-group),
+each of which has a unique [group name](../../gloss.html#user-group-name)
+and numeric [group ID](../../gloss.html#user-group-id).
 The list of who's in what group is usually stored in the file `/etc/group`.
 (If you're in front of a Unix machine right now,
 try running `cat /etc/group` to look at that file.)
@@ -302,7 +302,7 @@ without opening up everything else.
 
 Those are the basics of permissions on Unix.
 As we said at the outset, though, things work differently on Windows.
-There, permissions are defined by [access control lists](../gloss.html#access-control-list),
+There, permissions are defined by [access control lists](../../gloss.html#access-control-list),
 or ACLs.
 An ACL is a list of pairs, each of which combines a "who" with a "what".
 For example,

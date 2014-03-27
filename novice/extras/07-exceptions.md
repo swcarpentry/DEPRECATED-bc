@@ -7,7 +7,7 @@ Assertions help us catch errors in our code,
 but things can go wrong for other reasons,
 like missing or badly-formatted files.
 Most modern programming languages allow programmers to use
-[exceptions](../gloss.html#exception) to separate
+[exceptions](../../gloss.html#exception) to separate
 what the program should do if everything goes right
 from what it should do if something goes wrong.
 Doing this makes both cases easier to read and understand.

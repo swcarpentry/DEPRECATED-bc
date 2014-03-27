@@ -23,7 +23,7 @@ What if we want to run some commands on another machine,
 such as the server in the basement that manages our database of experimental results?
 To do this,
 we have to first log in to that machine.
-We call this a [remote login](../gloss.html#remote-login),
+We call this a [remote login](../../gloss.html#remote-login),
 and the other computer a remote computer.
 Once we do this,
 everything we type is passed to a shell running on the remote computer.
@@ -31,7 +31,7 @@ That shell runs those commands on our behalf,
 just as a local shell would,
 then sends back output for our computer to display.
 
-The tool we use to log in remotely is the [secure shell)(../gloss.html#secure-shell),
+The tool we use to log in remotely is the [secure shell)(../../gloss.html#secure-shell),
 or SSH.
 In particular, the command `ssh username@computer`
 runs SSH and connects to the remote computer we have specified.
@@ -200,7 +200,7 @@ and sends the output back to our local shell for display.
 > Typing our password over and over again is annoying,
 > especially if the commands we want to run remotely are in a loop.
 > To remove the need to do this,
-> we can create an [authentication key](../../gloss.html#authentication-key)
+> we can create an [authentication key](../../../gloss.html#authentication-key)
 > to tell the remote machine
 > that it should always trust us.
 > We discuss authentication keys in our intermediate lessons.
