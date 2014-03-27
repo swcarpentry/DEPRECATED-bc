@@ -25,9 +25,9 @@ if (length != +0) and (length != -0)
 
 As for the other problem,
 it turns out that the circuits needed to do addition and other arithmetic on this
-[sign and magnitude representation](../gloss.html#sign-and-magnitude)
+[sign and magnitude representation](../../gloss.html#sign-and-magnitude)
 are more complicated than the hardware needed for another called
-[two's complement](../gloss.html#twos-complement).
+[two's complement](../../gloss.html#twos-complement).
 Instead of mirroring positive values,
 two's complement rolls over when going below zero,
 just like a car's odometer.
@@ -52,7 +52,7 @@ numbers go from -8 to 7, or -16 to 15, and so on.
 As a result, even if `x` is a valid number, `-x` may not be.
 
 Finding a good representation for real numbers
-(called [floating point numbers](../gloss.html#floating-point),
+(called [floating point numbers](../../gloss.html#floating-point),
 since the decimal point can move around)
 is a much harder problem.
 The root of the problem is that
@@ -126,9 +126,9 @@ so that the ratio of the spacing to the values stays roughly constant.
 This happens because we're multiplying the same fixed set of mantissas by ever-larger exponents,
 and it points us at a couple of useful definitions.
 
-The [absolute error](../gloss.html#absolute-error) in some approximation
+The [absolute error](../../gloss.html#absolute-error) in some approximation
 is simply the absolute value of the difference between the actual value and the approximation.
-The [relative error](../gloss.html#relative-error),
+The [relative error](../../gloss.html#relative-error),
 on the other hand,
 is the ratio of the absolute error to the value we're approximating.
 For example, if we're off by 1 in approximating 8+1 and 56+1,

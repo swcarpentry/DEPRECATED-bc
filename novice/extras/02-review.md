@@ -7,7 +7,7 @@ The model shown in the [main lesson](../git/02-collab.html)
 in which everyone pushes and pulls from a single repository,
 is perfectly usable,
 but there's one thing it *doesn't* let us do:
-[code review](../gloss.html#code-review).
+[code review](../../gloss.html#code-review).
 Suppose Dracula wants to be able to look at Wolfman's changes before merging them into the master copy on GitHub,
 just as he would review Wolfman's paper before publishing it
 (or perhaps even before submitting it for publication).
@@ -21,7 +21,7 @@ most programmers take a slightly more roundabout route to merging.
 When the project starts,
 Dracula creates a repository on GitHub
 in exactly the same way as [we created the `planets` repository](../git/02-collab.html)
-and then [clones](../gloss.html#repository-clone) it to his desktop:
+and then [clones](../../gloss.html#repository-clone) it to his desktop:
 
 <div class="in" markdown="1">
 ~~~
@@ -56,7 +56,7 @@ Dracula can now push and pull changes just as before.
 
 Wolfman doesn't clone Dracula's GitHub repository directly.
 Instead,
-he [forks](../gloss.html#repository-fork) it,
+he [forks](../../gloss.html#repository-fork) it,
 i.e., clones it on GitHub. He does this using the GitHub web interface:
 
 <img src="img/git-fork-ui.png" alt="The Fork Button" />
@@ -75,7 +75,7 @@ then uses `git push` to copy those changes to GitHub:
 
 <img src="img/git-forking-02.svg" alt="After Pushing to Fork" />
 
-He then creates a [pull request](../gloss.html#pull-request),
+He then creates a [pull request](../../gloss.html#pull-request),
 which notifies Dracula that Wolfman wants to merge some changes into Dracula's repository:
 
 <img src="img/git-forking-03.svg" alt="After Creating Pull Request" />
