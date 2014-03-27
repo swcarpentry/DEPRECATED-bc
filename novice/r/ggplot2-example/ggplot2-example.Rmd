@@ -1,9 +1,11 @@
 # Data visualization with ggplot2
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE}
 # Set default to hide all results and figures.
 # Can change this manually in individual chunks.
-opts_chunk$set(results="hide", fig.show="hide")
+# Must load knitr so opts_chunk is in search path.
+library(knitr)
+opts_chunk$set(results="hide", fig.show="hide", fig.keep="none")
 ```
 
 ## Review
