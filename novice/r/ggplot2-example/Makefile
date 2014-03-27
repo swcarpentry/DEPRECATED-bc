@@ -1,11 +1,13 @@
-OUTS := $(patsubst %.Rmd,%.html,$(wildcard *.Rmd)) $(patsubst %.Rmd,%.md,$(wildcard *.Rmd))
+OUTS := $(patsubst %.Rmd,%.md,$(wildcard *.Rmd)) $(patsubst %.Rmd,%.R,$(wildcard *.Rmd))
 
 all: $(OUTS)
 
 clean:
-	rm $(OUTS)
+	rm -rf $(OUTS) figure/
 
-%.html: %.Rmd
-	Rscript -e "knitr::knit2html('$*.Rmd')"
-	Rscript -e "knitr::purl('$*.Rmd')"
-	gsed -i 's/```r/```S/g' $*.md
+%.md: %.Rmd
+	Rscript -e 'library(knitr); opts_chunk$$set(results="hide", fig.show="hide"); knit("$*.Rmd")'
+	gsed -i 's/```r/```coffee/g' $*.md
+
+%.R: %.Rmd
+	Rscript -e "library(knitr); purl('$*.Rmd')"

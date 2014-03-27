@@ -3,7 +3,7 @@
 ```{r, echo=FALSE}
 # Set default to hide all results and figures.
 # Can change this manually in individual chunks.
-opts_chunk$set(results='hide', fig.show="hide")
+opts_chunk$set(results="hide", fig.show="hide")
 ```
 
 ## Review
