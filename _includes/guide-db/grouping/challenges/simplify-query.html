@@ -1,9 +1,0 @@
-<p>
-  How can the query below be simplified without changing its result?
-</p>
-<pre>
-select   min(reading), max(reading) from Survey
-where    taken in (734, 735)
-and      quant='temp'
-group by taken, quant;
-</pre>

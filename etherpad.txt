@@ -1,0 +1,12 @@
+Welcome to Software Carpentry
+
+We will use this Etherpad to share links and snippets of code, take notes, ask and answer questions, and whatever else comes to mind.
+The page displays a screen with three major parts:
+
+* The left side holds today's notes: please edit these as we go along.
+* The top right side shows the names of users who are logged in: please add your name and pick the color that best reflects your mood and personality.
+* The bottom right is a real time chat window for asking questions of the instructor and your fellow learners.
+
+To start, please add yourself to the attendee list below:
+
+* Instructor (discipline, institution)

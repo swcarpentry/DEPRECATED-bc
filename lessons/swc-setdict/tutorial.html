@@ -6,107 +6,3479 @@ order: ["sets", "storage", "dict", "aggregate", "nanotech", "json", "phylotree"]
 ---
 <section>
   <h2>Opening</h2>
-  {% include guide-setdict/opening.html %}
+
+<div id="s:setdict:opening" class="opening">
+
+  <p>
+    Fan Fullerene has just joined Molecules'R'Us,
+    a nanotechnology startup that fabricates molecules
+    using only the highest quality atoms.
+    His first job is to build a simple inventory management system
+    that compares incoming orders for molecules
+    to the stock of atoms in the company's supercooled warehouse
+    to see how many of those molecules we can build.
+    For example,
+    if the warehouse holds 20 hydrogen atoms,
+    5 oxygen atoms,
+    and 11 nitrogen atoms,
+    Fan could make 10 water molecules (H<sub>2</sub>O)
+    or 6 ammonia molecules (NH<sub>3</sub>),
+    but could not make any methane (CH<sub>4</sub>)
+    because there isn't any carbon.
+  </p>
+
+  <p>
+    Fan could solve this problem using the tools we've seen so far.
+    As we'll see, though,
+    it's a lot more efficient to do it using a different data structure.
+    And "efficient" means both "takes less programmer time to create"
+    and "takes less computer time to execute":
+    the data structures introduced in this chapter are both simpler to use and faster
+    than the lists most programmers are introduced to first.
+  </p>
+
+</div>
+
 </section>
 
 <section>
   <h2>Instructors</h2>
-  {% include guide-setdict/instructors.html %}
+
+<div id="s:setdict:instructors" class="instructors">
+
+  <p>
+    The ostensible goal of this set of lessons is
+    to introduce learners to non-linear data structures.
+    Most have ony ever seen arrays or lists,
+    i.e.,
+    things that are accessed using sequential numeric indices.
+    Sets and dictionaries are usually their first exposure
+    to accessing content by value rather than by location,
+    and to the bigger idea that there are lots of other data structures
+    they might want to learn about.
+    (Unfortunately,
+    there still isn't a good data structure handbook for Python programmers
+    that we can point them at.)
+  </p>
+
+  <p>
+    These lessons also introduce JSON as a general-purpose data format
+    that requires less effort to work with than flat text or CSV.
+    We discuss its shortcomings as well as its benefits to help learners see
+    what forces are at play when designing and/or choosing data representations.
+  </p>
+
+  <p>
+    Finally,
+    these lessons are also our first chance to introduce
+    the idea of computational complexity
+    via back-of-the-envelope calculations of how
+    the number of steps required to look things up in an unordered list
+    grows with the number of things being looked up.
+    We return to this idea in the <a href="dev.html">extended example of invasion percolation</a>,
+    and to the notion that algorithmic improvements help more than tuning code,
+    but this is a chance to touch on the idea in classes that don't get to that example.
+    The discussion of hash tables is also good preparation
+    for the discussion of <a href="db.html">relational databases</a>,
+    but isn't required.
+  </p>
+
+  <p>
+    Everything in this lesson except the final example on phylogenetic trees
+    can be covered in two hours,
+    assuming that only three short exercises are given
+    (one for sets, one for basic dictionary operations, and one related to aggregation).
+  </p>
+
+  <ul>
+    <li>
+      Start with sets:
+      they're a familiar concept,
+      there's no confusion between keys and values,
+      and they are enough to motivate discussion of hash tables.
+    </li>
+    <li>
+      Python's requirement that entries in hash-based data structures be immutable
+      only makes sense once the mechanics of hash tables are explained.
+      Terms like "hash codes" and "hash function" also come up
+      in error messages and Python's documentation,
+      so learners are likely to become confused
+      without some kind of hand-waving overview.
+      Tuples are also easy to explain as
+      "how to create immutable multi-part keys",
+      and it's easy to explain why entries can't be looked up by parts
+      (e.g., why a tuple containing a first and a last name
+      can't be looked up by last name only)
+      in terms of hash functions.
+    </li>
+    <li>
+      Finally,
+      explaining why hash tables are fast
+      is a good first encounter with the idea of "big oh" complexity.
+    </li>
+    <li>
+      Once sets have been mastered,
+      dictionaries can be explained as
+      "sets with extra information attached to each entry".
+      The canonical example&mdash;counting things&mdash;shows why
+      that "extra information" is useful.
+      The original motivating problem then uses
+      both a dictionary and a dictionary of dictionaries;
+      when introducing the latter,
+      compare it to a list of lists.
+    </li>
+    <li>
+      Use the nanotechnology inventory example
+      to re-emphasize how code is build top-down
+      by writing code as if desired functions existed,
+      then filling them in.
+    </li>
+    <li>
+      Only tackle the phylogenetic tree example with very advanced learners.
+      The algorithm is usually presented as a table,
+      which makes an array a natural representation.
+      Showing how and why to use dictionaries instead
+      is as important as showing vector operations when introducing NumPy,
+      but the example is hard to follow (and debug)
+      without a graphical representation of the evolving tree.
+    </li>
+  </ul>
+
+</div>
+
   <h2>Prerequisites</h2>
-  {% include guide-setdict/prereq.html %}
+
+<div id="s:setdict:prereq" class="prereq">
+
+  <p>
+    Basic data types (strings, numbers, lists);
+    loops;
+    file I/O;
+    conditionals;
+    string operations;
+    references and aliasing;
+    creating functions;
+    top-down development.
+  </p>
+
+</div>
+
 </section>
 
 <section id="s:setdict:sets">
-  <h2>{% include guide-setdict/sets/title.md %}</h2>
+  <h2>Sets</h2>
   <p><a href="setdict-sets.ipynb">Notebook</a></p>
   <h3>Objectives</h3>
-  {% include guide-setdict/sets/objectives.html %}
+
+<div id="s:setdict:sets:objectives" class="objectives">
+  <ul>
+    <li>Explain why some programs that use lists become proportionally slower as data sizes increase.</li>
+    <li>Explain the three adjectives in "unordered collection of distinct values".</li>
+    <li>Use a set to eliminate duplicate values from data.</li>
+  </ul>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-setdict/sets/lesson.html %}
+
+<div id="s:setdict:sets:lesson" class="lesson">
+
+  <p>
+    Let's start with something simpler than our actual inventory problem.
+    Suppose we have a list of all the atoms in the warehouse,
+    and we want to know which different kinds we have&mdash;not how many,
+    but just their types.
+    We could solve this problem using a list to store
+    the unique atomic symbols we have seen.
+    Here's a function to add a new atom to the list:
+  </p>
+
+<pre>
+def another_atom(seen, atom):
+    for i in range(len(seen)):
+        if seen[i] == atom:
+            return # atom is already present, so do not re-add
+    seen.append(atom)
+</pre>
+
+  <p>
+    <code>another_atom</code>'s arguments are
+    a list of the unique atoms we've already seen,
+    and the symbol of the atom we're adding.
+    Inside the function,
+    we loop over the atoms that are already in the list.
+    If we find the one we're trying to add,
+    we exit the function immediately:
+    we aren't supposed to have duplicates in our list,
+    so there's nothing to add.
+    If we reach the end of the list without finding this symbol,
+    though,
+    we append it.
+    This is a common <a href="glossary.html#design-pattern">design pattern</a>:
+    either we find pre-existing data in a loop and return right away,
+    or take some default action if we finish the loop without finding a match.
+  </p>
+
+  <p>
+    Let's watch this function in action.
+    We start with an empty list.
+    If the first atomic symbol is <code>'Na'</code>,
+    we find no match (since the list is empty),
+    so we add it.
+    The next symbol is <code>'Fe'</code>;
+    it doesn't match <code>'Na'</code>,
+    so we add it as well.
+    Our third symbol is <code>'Na'</code> again.
+    It matches the first entry in the list,
+    so we exit the function immediately.
+  </p>
+
+  <table>
+    <tr>
+      <th>Before</th>
+      <th>Adding</th>
+      <th>After</th>
+    </tr>
+    <tr>
+      <td><code>[]</code></td>
+      <td><code>'Na'</code></td>
+      <td><code>['Na']</code></td>
+    </tr> 
+    <tr>
+      <td><code>['Na']</code></td>
+      <td><code>'Fe'</code></td>
+      <td><code>['Na', 'Fe']</code></td>
+    </tr> 
+    <tr>
+      <td><code>['Na', 'Fe']</code></td>
+      <td><code>'Na'</code></td>
+      <td><code>['Na', 'Fe']</code></td>
+    </tr> 
+  </table>
+
+  <p>
+    This code works,
+    but it is inefficient.
+    Suppose there are <em>V</em> distinct atomic symbols in our data,
+    and <em>N</em> symbols in total.
+    Each time we add an observation to our list,
+    we have to look through an average of <em>V/2</em> entries.
+    The total running time for our program is therefore approximately <em>NV/2</em>.
+    If <em>V</em> is small,
+    this is only a few times larger than <em>N</em>,
+    but what happens if we're keeping track of something like patient records rather than atoms?
+    In that case,
+    most values are distinct,
+    so <em>V</em> is approximately the same as <em>N</em>,
+    which means that our running time is proportional to <em>N<sup>2</sup>/2</em>.
+    That's bad news:
+    if we double the size of our data set,
+    our program runs four times slower,
+    and if we double it again,
+    our program will have slowed down by a factor of 16.
+  </p>
+
+  <p>
+    There's a better way to solve this problem
+    that is simpler to use and runs much faster.
+    The trick is to use a <a href="glossary.html#set">set</a>
+    to store the symbols.
+    A set is an unordered collection of distinct items.
+    The word "collection" means that a set can hold zero or more values.
+    The word "distinct" means that any particular value is either in the set or not:
+    a set can't store two or more copies of the same thing.
+    And finally, "unordered" means that values are simply "in" the set.
+    They're not in any particular order,
+    and there's no first value or last value.
+    (They actually are stored in some order,
+    but as we'll discuss in <a href="#s:storage">the next section</a>,
+    that order is as random as the computer can make it.)
+  </p>
+
+  <p>
+    To create a set,
+    we simply write down its elements inside curly braces:
+  </p>
+
+<pre>
+&gt;&gt;&gt; primes = {3, 5, 7}
+</pre>
+
+  <figure id="f:simple_set">
+    <img src="setdict/simple_set.png" alt="A Simple Set" />
+    <figcaption>Figure 1: A Simple Set</figcaption>
+  </figure>
+
+  <p class="continue" id="a:previous-use">
+    However,
+    we have to use <code>set()</code> to create an empty set,
+    because the symbol <code>{}</code> was already being used for something else
+    when sets were added to Python:
+  </p>
+
+<pre>
+&gt;&gt;&gt; even_primes = set() <span class="comment"># not '{}' as in math</span>
+</pre>
+
+  <p class="continue">
+    We'll meet that "something else" <a href="#s:dict">later in this chapter</a>.
+  </p>
+
+  <p>
+    To see what we can do with sets,
+    let's create three holding the integers 0 through 9,
+    the first half of that same range of numbers (0 through 4),
+    and the odd values 1, 3, 5, 7, and 9:
+  </p>
+
+<pre>
+&gt;&gt;&gt; ten  = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+&gt;&gt;&gt; lows = {0, 1, 2, 3, 4}
+&gt;&gt;&gt; odds = {1, 3, 5, 7, 9}
+</pre>
+
+  <p>
+    If we ask Python to display one of our sets,
+    it shows us this:
+  </p>
+
+<pre>
+&gt;&gt;&gt; print lows
+<span class="out">set([0, 1, 2, 3, 4])</span>
+</pre>
+
+  <p class="continue">
+    rather than using the curly-bracket notation.
+    I personally regard this as a design flaw,
+    but it does remind us that we can create always create a set from a list.
+  </p>
+
+  <p>
+    Sets have methods just like strings and lists,
+    and,
+    like the methods of strings and lists,
+    most of those methods create new sets
+    instead of modifying the set they are called for.
+    These three come straight from mathematics:
+  </p>
+
+<pre>
+&gt;&gt;&gt; print lows.union(odds)
+<span class="out">set([0, 1, 2, 3, 4, 5, 7, 9])</span>
+&gt;&gt;&gt; print lows.intersection(odds)
+<span class="out">set([1, 3])</span>
+&gt;&gt;&gt; print lows.difference(odds)
+<span class="out">set([0, 2, 4])</span>
+</pre>
+
+  <p>
+    Another method that creates a new set is <code>symmetric_difference</code>,
+    which is sometimes called "exclusive or":
+  </p>
+
+<pre>
+&gt;&gt;&gt; print lows.symmetric_difference(odds)
+<span class="out">set([0, 2, 4, 5, 7, 9])</span>
+</pre>
+
+  <p class="continue">
+    It returns the values that are in one set or another, but not in both.
+  </p>
+
+  <p>
+    Not all set methods return new sets.
+    For example,
+    <code>issubset</code> returns <code>True</code> or <code>False</code>
+    depending on whether all the elements in one set are present in another:
+  </p>
+
+<pre>
+&gt;&gt;&gt; print lows.issubset(ten)
+<span class="out">True</span>
+</pre>
+
+  <p class="continue">
+    A complementary method called <code>issuperset</code> also exists,
+    and does the obvious thing:
+  </p>
+
+<pre>
+&gt;&gt;&gt; print lows.issuperset(odds)
+<span class="out">False</span>
+</pre>
+
+  <p>
+    We can count how many values are in a set using <code>len</code>
+    (just as we would to find the length of a list or string),
+    and check whether a particular value is in the set or not using <code>in</code>:
+  </p>
+
+<pre>
+&gt;&gt;&gt; print len(odds)
+<span class="out">7</span>
+&gt;&gt;&gt; print 6 in odds
+<span class="out">False</span>
+</pre>
+
+  <p class="continue">
+    Some methods modify the sets they are called for.
+    The most commonly used is <code>add</code>,
+    which adds an element to the set:
+  </p>
+
+<pre>
+&gt;&gt;&gt; lows.add(9)
+&gt;&gt;&gt; print lows
+<span class="out">set([0, 1, 2, 3, 4, 9])</span>
+</pre>
+
+  <p class="continue">
+    If the thing being added is already in the set,
+    <code>add</code> has no effect,
+    because any specific thing can appear in a set at most once:
+  </p>
+
+<pre>
+&gt;&gt;&gt; lows.add(9)
+&gt;&gt;&gt; print lows
+<span class="out">set([0, 1, 2, 3, 4, 9])</span>
+</pre>
+
+  <p class="continue">
+    This behavior is different from that of <code>list.append</code>,
+    which always adds a new element to a list.
+  </p>
+
+  <p>
+    Finally,
+    we can remove individual elements from the set:
+  </p>
+
+<pre>
+&gt;&gt;&gt; lows.remove(0)
+&gt;&gt;&gt; print lows
+<span class="out">set([1, 2, 3, 4])</span>
+</pre>
+
+  <p class="continue">
+    or clear it entirely:
+  </p>
+
+<pre>
+&gt;&gt;&gt; lows.clear()
+&gt;&gt;&gt; print lows
+<span class="out">set()</span>
+</pre>
+
+  <p>
+    Removing elements is similar to deleting things from a list,
+    but there's an important difference.
+    When we delete something from a list,
+    we specify its <em>location</em>.
+    When we delete something from a set,
+    though,
+    we must specify the <em>value</em> that we want to take out,
+    because sets are not ordered.
+    If that value isn't in the set,
+    <code>remove</code> does nothing.
+  </p>
+
+  <p>
+    To help make programs easier to type and read,
+    most of the methods we've just seen can be written using arithmetic operators as well.
+    For example, instead of <code>lows.issubset(ten)</code>,
+    we can write <code>lows &lt;= ten</code>,
+    just as if we were using pen and paper.
+    There are even a couple of operators,
+    like the strict subset test <code>&lt;</code>,
+    that don't have long-winded equivalents.
+  </p>
+
+  <table>
+    <tr>
+      <th>Operation</th>
+      <th>As Method</th>
+      <th>Using Operator</th>
+    </tr>
+    <tr>
+      <td><em>difference</em></td>
+      <td><code>lows.difference(odds)</code></td>
+      <td><code>lows - odds</code></td>
+    </tr>
+    <tr>
+      <td><em>intersection</em></td>
+      <td><code>lows.intersection(odds)</code></td>
+      <td><code>lows &amp; odds</code></td>
+    </tr>
+    <tr>
+      <td><em>subset</em></td>
+      <td><code>lows.issubset(ten)</code></td>
+      <td><code>lows &lt;= ten</code></td>
+    </tr>
+    <tr>
+      <td><em>strict subset</em></td> <td></td>
+      <td><code>lows &lt; ten</code></td>
+    </tr>
+    <tr>
+      <td><em>superset</em></td>
+      <td><code>lows.issuperset(ten)</code></td>
+      <td><code>lows &gt;= odds</code></td>
+    </tr>
+    <tr>
+      <td><em>strict superset</em></td> <td></td>
+      <td><code>lows &gt;= odds</code></td>
+    </tr>
+    <tr>
+      <td><em>exclusive or</em></td>
+      <td><code>lows.symmetric_difference(odds)</code></td>
+      <td><code>lows ^ odds</code></td>
+    </tr>
+    <tr>
+      <td><em>union</em></td>
+      <td><code>lows.union(odds)</code></td>
+      <td><code>lows | odds</code></td>
+    </tr>
+  </table>
+
+  <p>
+    The fact that the values in a set are distinct makes them
+    a convenient way to get rid of duplicate values,
+    like the "unique atoms" problem at the start of this section.
+    Suppose we have a file containing the names of all the atoms in our warehouse,
+    and our task is to produce a list of the their types.
+    Here's how simple that code is:
+  </p>
+
+<pre>
+def unique_atoms(filename):
+    atoms = set()
+    with open(filename, 'r') as source:
+        for line in source:
+            name = line.strip()
+            atoms.add(name)
+    return atoms
+</pre>
+
+  <p>
+    We start by creating an empty set which we will fill with atomic symbols
+    and opening the file containing our data.
+    As we read the lines in the file,
+    we strip off any whitespace (such as the newline character at the end of the line)
+    and put the resulting strings in the set.
+    When we're done,
+    we print the set.
+    If our input is the file:
+  </p>
+
+<pre>
+Na
+Fe
+Na
+Si
+Pd
+Na
+</pre>
+
+  <p class="continue">
+    then our output is:
+  </p>
+
+<pre>
+set(['Na', 'Fe', 'Si', 'Pd'])
+</pre>
+
+  <p>
+    The right atoms are there,
+    but what are those extra square brackets for?
+    The answer is that
+    if we want to construct a set with values using <code>set()</code>,
+    we have to pass those values in a single object,
+    such as a list.
+    This syntax:
+  </p>
+
+<pre>
+set('Na', 'Fe', 'Si', 'Pd')
+</pre>
+
+  <p class="continue">
+    does <em>not</em> work,
+    even though it seems more natural.
+    On the other hand,
+    this means that we can construct a set from almost anything
+    that a <code>for</code> loop can iterate over:
+  </p>
+
+<pre>
+&gt;&gt;&gt; <span class="in">set('lithium')</span>
+<span class="out">set(['i', 'h', 'm', 'l', 'u', 't'])</span>
+</pre>
+
+  <p>
+    But hang on:
+    if we're adding characters to the set in the order
+    <code>'l'</code>, <code>'i'</code>, <code>'t'</code>, <code>'h'</code>, <code>'i'</code>, <code>'u'</code>, <code>'m'</code>,
+    why does Python show them in the order
+    <code>'i'</code>, <code>'h'</code>, <code>'m'</code>, <code>'l'</code>, <code>'u'</code>, <code>'t'</code>?
+    To answer that question,
+    we need to look at how sets are actually stored,
+    and why they're stored that way.
+  </p>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-setdict/sets/keypoints.html %}
+
+<div id="s:setdict:sets:keypoints" class="keypoints">
+  <ul>
+    <li>Use sets to store distinct unique values.</li>
+    <li>Create sets using <code>set()</code> or <code>{<em>v1</em>, <em>v2</em>, ...}</code>.</li>
+    <li>Sets are mutable, i.e., they can be updated in place like lists.</li>
+    <li>A loop over a set produces each element once, in arbitrary order.</li>
+    <li>Use sets to find unique things.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-setdict/sets/challenges.html %}
+
+<div id="s:setdict:sets:challenges" class="challenges">
+  <ol>
+    <li>
+<p>
+  Mathematicians are quite comfortable negating sets:
+  for example, the negation of the set <code>{1, 2}</code>
+  is all numbers that aren't 1 or 2.
+  Why don't Python's sets have a <code>not</code> operator?
+</p>
+    </li>
+    <li>
+<p>
+  Fan has created a set containing the names of five noble gases:
+</p>
+<pre>
+&gt;&gt;&gt; print gases
+<span class="out">set(['helium', 'argon', 'neon', 'xenon', 'radon'])</span>
+</pre>
+<p>
+  He would like to print them in alphabetical order.
+  What is one simple way to do this?
+  (Hint: the <code>list</code> function converts its arguments to a list.)
+</p>
+    </li>
+    <li>
+<p>
+  Fan has the following code:
+</p>
+<pre>
+left = {'He', 'Ar', 'Ne'}
+right = set()
+while len(left) &gt; len(right):
+    temp = left.pop()
+    right.add(temp)
+</pre>
+<p>
+  What values could <code>left</code> and <code>right</code> have
+  after this code is finished running?
+  Explain why your answer makes this code hard to test.
+</p>
+    </li>
+    <li>
+<p>
+  Fan has written the following code:
+</p>
+<pre>
+left = {'He', 'Ar', 'Ne'}
+right = {'Ar', 'Xe'}
+for element in left:                <span class="comment"># X</span>
+    if element not in right:        <span class="comment"># X</span>
+        right.add(element)          <span class="comment"># X</span>
+assert left.issubset(right)
+</pre>
+<p>
+  What single line could be used
+  in place of the three marked with 'X'
+  to achieve the same effect?
+</p>
+    </li>
+    <li>
+<p>
+  Fan has written a program to print the names of the distinct atoms in a data file:
+</p>
+<pre>
+<span class="comment"># Print the name of each atom in the data file once.</span>
+reader = open('atoms.txt', 'r')
+seen = set()
+for line in reader:
+    name = line.strip()
+    if name in seen:
+        print name
+    else:
+        seen.add(name)
+reader.close()
+</pre>
+<p>
+  When he runs the program on this data file:
+</p>
+<pre>
+Na
+Fe
+Na
+</pre>
+<p>
+  it only prints:
+</p>
+<pre>
+<span class="out">Na</span>
+</pre>
+<p>
+  What is the simplest change you can make to the program
+  so that it produces the correct answer?
+</p>
+    </li>
+    <li>
+<p>
+  Fan has created a set containing the names of five noble gases:
+</p>
+<pre>
+&gt;&gt;&gt; print noble_gases
+<span class="out">set(['He', 'Ne', 'Ar', 'Kr', 'Xe'])</span>
+</pre>
+<p>
+  Fan also has a set of "smaller" elements (here 10 or less protons).
+</p>
+<pre>
+&gt;&gt;&gt; print small_elements
+<span class="out">set(['H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne'])</span>
+</pre>
+<p>
+  He would like to create two different sets.  One that contains the noble gases
+  that contain more than 10 protons, and one that contains the noble gases with
+  less than 10 protons.
+
+  What are two ways he can create the first set and what
+  are two ways he can create the second set?
+</p>
+    </li>
+  </ol>
+</div>
+
 </section>
 
 <section id="s:setdict:storage">
-  <h2>{% include guide-setdict/storage/title.md %}</h2>
+  <h2>Storage</h2>
   <p><a href="setdict-storage.ipynb">Notebook</a></p>
   <h3>Objectives</h3>
-  {% include guide-setdict/storage/objectives.html %}
+
+<div id="s:setdict:storage:objectives" class="objectives">
+  <ul>
+    <li>Draw a diagram showing how hash tables are implemented, and correctly label the main parts.</li>
+    <li>Explain the purpose of a hash function.</li>
+    <li>Explain why using mutable values as keys in a hash table can cause problems.</li>
+    <li>Correctly identify the error messages Python produces when programs try to put mutable values in hashed data structures.</li>
+    <li>Explain the similarities and differences between tuples and lists.</li>
+    <li>Explain why using tuples is better than concatenating values when storing multi-part data in hashed data structures.</li>
+  </ul>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-setdict/storage/lesson.html %}
+
+<div id="s:setdict:storage:lesson" class="lesson">
+
+  <p>
+    Let's create a set,
+    add the string <code>'lithium'</code> to it
+    (as a single item, not character by character),
+    and print the result:
+  </p>
+
+<pre>
+&gt;&gt;&gt; things = set()
+&gt;&gt;&gt; things.add('lithium')
+&gt;&gt;&gt; print things
+<span class="out">set(['lithium'])</span>
+</pre>
+
+  <p class="continue">
+    As expected, the string is in the set.
+    Now let's try adding a list to the same set:
+  </p>
+
+<pre>
+&gt;&gt;&gt; things.add([1, 2, 3])
+<span class="err">TypeError: unhashable type: 'list'</span>
+</pre>
+
+  <p class="continue">
+    Why doesn't that work?
+    And what does that word "unhashable" mean?
+  </p>
+
+  <p>
+    When we create a set,
+    the computer allocates a block of memory to store references to the set's elements.
+    When we add something to the set,
+    or try to look something up,
+    the computer uses a <a href="glossary.html#hash-function">hash function</a> to figure out where to look.
+    A hash function is any function that produces a seemingly-random number
+    when given some data as input.
+    For example,
+    one way to hash a string is to add up the numerical values of its characters.
+    If the string is "zebra",
+    those values are 97 for lower-case 'a',
+    98 for lower-case 'b',
+    and so on up to 122 for lower-case 'z'.
+    When we add them up,
+    we will always get the same result:
+    in this case, 532.
+    If our hash table has 8 slots,
+    we can take the remainder <code>532%8=4</code>
+    to figure out
+    where to store a reference to our string in the hash table
+    (<a href="#f:set_storage_string">Figure 2</a>).
+  </p>
+
+  <figure id="f:set_storage_string">
+    <img src="setdict/set_storage_string.png" alt="Hashing a String" />
+    <figcaption>Figure 2: Hashing a String</figcaption>
+  </figure>
+
+  <p>
+    Now let's take a look at how a list would be stored.
+    If the list contains the same five characters,
+    so that its hash code is still 4,
+    it would be stored as shown in
+    <a href="#f:set_storage_list">Figure 3</a>:
+  </p>
+
+  <figure id="f:set_storage_list">
+    <img src="setdict/set_storage_list.png" alt="Hashing a List" />
+    <figcaption>Figure 3: Hashing a List</figcaption>
+  </figure>
+
+  <p>
+    But what happens if we change the characters in the list
+    after we've added it to the set?
+    For example,
+    suppose that we change the first letter in the list from 'z' to 'X'.
+    The hash function's value is now 498 instead of 532,
+    which means that the modified list belongs in slot 2 rather than slot 4.
+    However, the reference to the list is still in the old location:
+    the set doesn't know that the list's contents have changed,
+    so it hasn't moved its reference to the right location
+    (<a href="#f:set_storage_mutate">Figure 4</a>):
+  </p>
+
+  <figure id="f:set_storage_mutate">
+    <img src="setdict/set_storage_mutate.png" alt="After Mutation" />
+    <figcaption>Figure 4: After Mutation</figcaption>
+  </figure>
+
+  <p>
+    This is bad news.
+    If we now ask, "Is the list containing 's', 'e', 'b', 'r', and 'a' in the set?"
+    the answer will be "no",
+    because the reference to the list isn't stored in the location that our hash function tells us to look.
+    It's as if someone changed their name from "Tom Riddle" to "Lord Voldemort",
+    but we left all the personnel records filed under 'R'.
+  </p>
+
+  <p>
+    This problem arises with any <a href="glossary.html#mutable">mutable</a> structure&mdash;i.e.,
+    any structure whose contents or value can be changed after its creation.
+    Integers and strings are safe to hash because their values are fixed,
+    but the whole point of lists is that we can grow them,
+    shrink them,
+    and overwrite their contents.
+  </p>
+
+  <p>
+    Different languages and libraries handle this problem in different ways.
+    One option is to have each list keep track of the sets that it is in,
+    and move itself whenever its values change.
+    However, this is expensive:
+    every time a program touched a list,
+    it would have to see if it was in any sets,
+    and if it was,
+    recalculate its hash code and update all the references to it.
+  </p>
+
+  <p>
+    A second option is to shrug and say, "It's the programmer's fault."
+    This is what most languages do,
+    but it's also expensive:
+    programmers can spend hours tracking down the bugs that arise
+    from data being in the wrong place.
+  </p>
+
+  <p>
+    Python uses a third option:
+    it only allows programmers to put <a href="glossary.html#immutable">immutable</a> values in sets.
+    After all,
+    if something's value can't change,
+    neither can its hash code or its location in a hash table.
+  </p>
+
+  <p>
+    But if sets can only hold immutable values,
+    what do we do with mutable ones?
+    In particular,
+    how should we store things like (x,y) coordinates,
+    which are naturally represented as lists,
+    or people's names,
+    which are naturally represented as lists of first, middle, and last names?
+    Again, there are several options.
+  </p>
+
+  <p>
+    The first is to concatenate those values somehow.
+    For example,
+    if we want to store "Charles" and "Darwin",
+    we'd create the string "Charles Darwin" and store that.
+    This is simple to do,
+    but our code will wind up being littered with string joins and string splits,
+    which will make it slower to run and harder to read.
+    More importantly,
+    it's only safe to do if
+    we can find a concatenator that can never come up in our data.
+    (If we join "Paul Antoine" and "St. Cyr" using a space,
+    there would be three possible ways to split it apart again.)
+  </p>
+
+  <p id="a:tuple">
+    The second option&mdash;the right one&mdash;is to use <a href="glossary.html#tuple">tuples</a> instead of lists.
+    A tuple is an immutable list,
+    i.e., a sequence of values that cannot be changed after its creation.
+    Tuples are created exactly like lists,
+    except we use parentheses instead of square brackets:
+  </p>
+
+<pre>
+&gt;&gt;&gt; full_name = ('Charles', 'Darwin')
+</pre>
+
+  <p class="continue">
+    They are indexed the same way,
+    too,
+    and functions like <code>len</code> do exactly what we'd expect:
+  </p>
+
+<pre>
+&gt;&gt;&gt; print full_name[0]
+<span class="out">Charles</span>
+&gt;&gt;&gt; print len(full_name)
+<span class="out">2</span>
+</pre>
+
+  <p class="continue">
+    What we <em>cannot</em> do is assign a new value to a tuple element,
+    i.e., change the tuple after it has been created:
+  </p>
+
+<pre>
+&gt;&gt;&gt; full_name[0] = 'Erasmus'
+<span class="err">TypeError: 'tuple' object does not support item assignment</span>
+</pre>
+
+  <p class="continue">
+    This means that a tuple's hash code never changes,
+    and <em>that</em> means that tuples can be put in sets:
+  </p>
+
+<pre>
+&gt;&gt;&gt; names = set()
+&gt;&gt;&gt; names.add(('Charles', 'Darwin'))
+&gt;&gt;&gt; print names
+<span class="out">set([('Charles', 'Darwin')])</span>
+</pre>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-setdict/storage/keypoints.html %}
+
+<div id="s:setdict:storage:keypoints" class="keypoints">
+  <ul>
+    <li>Sets are stored in hash tables, which guarantee fast access for arbitrary values.</li>
+    <li>The values in sets must be immutable to prevent hash tables misplacing them.</li>
+    <li>Use tuples to store multi-part values in sets.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-setdict/storage/challenges.html %}
+
+<div id="s:setdict:storage:challenges" class="challenges">
+  <ol>
+    <li>
+<p>
+  A friend of yours argues,
+  "Finding a value in an unordered list of length <em>N</em> takes <em>N/2</em> steps on average.
+  Finding it in a hash table takes only one step,
+  but it's a more expensive step,
+  since we have to calculate a hash code for that value.
+  We should therefore use lists for small data sets,
+  and only use things like sets for large ones."
+  Explain the flaws in your friend's reasoning.
+</p>
+    </li>
+    <li>
+<p>
+  Nelle has inherited the following function:
+</p>
+<pre>
+def is_sample_repeated(left_channel, right_channel, history):
+    '''Report repeated samples.  Both channels' values are integers in [0..10] inclusive.'''
+    combined = 1000 * left_channel + right_channel
+    if combined in history:
+        return True
+    else:
+        history.add(combined)
+        return False
+</pre>
+<p>
+  How would you improve this function, and why?
+</p>
+    </li>
+    <li>
+<p>
+  Nelle has a function that extracts the latitudes and longitudes of data collection sites from a file:
+</p>
+<pre>
+&gt;&gt;&gt; sites = extract_sites('north-pacific.dat')
+&gt;&gt;&gt; print sites[:3]
+[[52.097, -173.505], [52.071, -173.510], [51.985, -173.507]]
+</pre>
+<p>
+  Write another function called <code>filter_duplicate_sites</code>
+  that takes a list of this kind as its only input,
+  and returns a set (not a list) containing only the unique latitude/longitude pairs.
+</p>
+    </li>
+    <li>
+<p>
+  A list containing just the number 5 is written as <code>[5]</code>,
+  and a set containing just that same number is written as <code>{5}</code>.
+  However,
+  a tuple containing just that number must be written with a comma as <code>(5,)</code>.
+  Why?
+</p>
+    </li>
+  </ol>
+</div>
+
 </section>
 
 <section id="s:setdict:dict">
-  <h2>{% include guide-setdict/dict/title.md %}</h2>
+  <h2>Dictionaries</h2>
   <p><a href="setdict-dict.ipynb">Notebook</a></p>
   <h3>Objectives</h3>
-  {% include guide-setdict/dict/objectives.html %}
+
+<div id="s:setdict:dict:objectives" class="objectives">
+  <ul>
+    <li>Explain the similarities and differences between sets and dictionaries.</li>
+    <li>Perform common operations on dictionaries.</li>
+  </ul>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-setdict/dict/lesson.html %}
+
+<div id="s:setdict:dict:lesson" class="lesson">
+
+  <p>
+    Now that we know how to find out what kinds of atoms are in our inventory,
+    we want to find out how many of each we have.
+    Our input is a list of several thousand atomic symbols,
+    and the output we want is a list of names and counts.
+  </p>
+
+  <p>
+    Once again,
+    we could use a list to store names and counts,
+    but the right solution is
+    to use another new data strucure called a <a href="glossary.html#dictionary">dictionary</a>.
+    A dictionary is a unordered collection of key-value pairs
+    (<a href="#f:simple_dict">Fixture 5</a>).
+    The keys are immutable, unique, and unordered,
+    just like the elements of a set.
+    There are no restrictions on the values stored with those keys:
+    they don't have to be immutable or unique.
+    However,
+    we can only look up entries by their keys,
+    not by their values.
+  </p>
+
+  <figure id="f:simple_dict">
+    <img src="setdict/simple_dict.png" alt="A Simple Dictionary" />
+    <figcaption>Figure 5: A Simple Dictionary</figcaption>
+  </figure>
+
+  <p>
+    We create a new dictionary by putting key-value pairs inside curly braces
+    with a colon between the two parts of each pair:
+  </p>
+
+<pre>
+&gt;&gt;&gt; birthdays = {'Newton' : 1642, 'Darwin' : 1809}
+</pre>
+
+  <p class="continue">
+    The dictionary's keys are the strings <code>'Newton'</code> and <code>'Darwin'</code>.
+    The value associated with <code>'Newton'</code> is 1642,
+    while the value associated with <code>'Darwin'</code> is 1809.
+    We can think of this as a two-column table:
+  </p>
+
+  <table>
+    <tr>
+      <th>Key</th>
+      <th>Value</th>
+    </tr>
+    <tr>
+      <td><code>'Newton'</code></td>
+      <td>1642</td>
+    </tr>
+    <tr>
+      <td><code>'Darwin'</code></td>
+      <td>1809</td>
+    </tr>
+  </table>
+
+  <p class="continue">
+    but it's important to remember that the entries aren't necessarily stored in this order
+    (or any other specific order).
+  </p>
+
+  <p>
+    We can get the value associated with a key by putting the key in square brackets:
+  </p>
+
+<pre>
+&gt;&gt;&gt; print birthdays['Newton']
+<span class="out">1642</span>
+</pre>
+
+  <p class="continue">
+    This looks just like subscripting a string or list,
+    except dictionary keys don't have to be integers&mdash;they can be strings,
+    tuples, or any other immutable object.
+    It's just like using a phonebook or a real dictionary:
+    instead of looking things up by location using an integer index,
+    we look things up by name.
+  </p>
+
+  <p>
+    If we want to add another entry to a dictionary,
+    we just assign a value to the key,
+    just as we create a new variable in a program by assigning it a value:
+  </p>
+
+<pre>
+&gt;&gt;&gt; birthdays['Turing'] = 1612
+&gt;&gt;&gt; print birthdays
+<span class="out">{'Turing' : 1612, 'Newton' : 1642, 'Darwin' : 1809}</span>
+</pre>
+
+  <p>
+    If the key is already in the dictionary,
+    assignment replaces the value associated with it
+    rather than adding another entry
+    (since each key can appear at most once).
+    Let's fix Turing's birthday by replacing 1612 with 1912:
+  </p>
+
+<pre>
+&gt;&gt;&gt; birthdays['Turing'] = 1912
+&gt;&gt;&gt; print birthdays
+<span class="out">{'Turing' : 1912, 'Newton' : 1642, 'Darwin' : 1809}</span>
+</pre>
+
+  <p>
+    Trying to get the value associated with a key that <em>isn't</em> in the dictionary is an error,
+    just like trying to access a nonexistent variable
+    or get an out-of-bounds element from a list.
+    For example,
+    let's try to look up Florence Nightingale's birthday:
+  </p>
+
+<pre>
+&gt;&gt;&gt; print birthdays['Nightingale']
+<span class="err">KeyError: 'Nightingale'</span>
+</pre>
+
+  <p>
+    If we're not sure whether a key is in a dictionary or not,
+    we can test for it using <code>in</code>:
+  </p>
+
+<pre>
+&gt;&gt;&gt; print 'Nightingale' in birthdays
+<span class="out">False</span>
+&gt;&gt;&gt; print 'Darwin' in birthdays
+<span class="out">True</span>
+</pre>
+
+  <p class="continue">
+    And we can see how many entries are in the dictionary using <code>len</code>:
+  </p>
+
+<pre>
+&gt;&gt;&gt; print len(birthdays)
+<span class="out">3</span>
+</pre>
+
+  <p class="continue">
+    and loop over the keys in a dictionary using <code>for</code>:
+  </p>
+
+<pre>
+&gt;&gt;&gt; for name in birthdays:
+...     print name, birthdays[name]
+...
+<span class="out">Turing 1912
+Newton 1642
+Darwin 1809</span>
+</pre>
+
+  <p class="continue">
+    This is a little bit different from looping over a list.
+    When we loop over a list we get the values in the list.
+    When we loop over a dictionary,
+    on the other hand,
+    the loop gives us the keys,
+    which we can use to look up the values.
+  </p>
+
+  <p>
+    We're now ready to count atoms.
+    The main body of our program looks like this:
+  </p>
+
+<pre>
+def main(filename):
+    counts = count_atoms(filename)
+    for atom in counts:
+        print atom, counts[atom]
+</pre>
+
+  <p class="continue">
+    <code>count_atoms</code> reads atomic symbols from a file,
+    one per line,
+    and creates a dictionary of atomic symbols and counts.
+    Once we have that dictionary,
+    we use a loop like the one we just saw to print out its contents.
+  </p>
+
+  <p>
+    Here's the function that does the counting:
+  </p>
+
+<pre>
+def count_atoms(filename):
+    '''Count unique atoms, returning a dictionary.'''
+
+    result = {}
+    with open(filename, 'r') as reader:
+        for line in reader:
+            atom = line.strip()
+            if atom not in result:
+                result[atom] = 1
+            else:
+                result[atom] = result[atom] + 1
+    return result
+</pre>
+
+  <p>
+    We start with a docstring to explain the function's purpose to whoever has to read it next.
+    We then create an empty dictionary to fill with data,
+    and use a loop to process the lines from the input file one by one.
+    Notice that the empty dictionary is written <code>{}</code>:
+    this is the "<a href="#a:previous-use">previous use</a>"
+    we referred to when explaining why an empty set had to be written <code>set()</code>.
+  </p>
+
+  <p>
+    After stripping whitespace off the atom's symbol,
+    we check to see if we've seen it before.
+    If we haven't,
+    we set its count to 1,
+    because we've now seen that atom one time.
+    If we <em>have</em> seen it before,
+    we add one to the previous count
+    and store that new value back in the dictionary.
+    When the loop is done, we return the dictionary we have created.
+  </p>
+
+  <p>
+    Let's watch this function in action.
+    Before we read any data, our dictionary is empty.
+    After we see <code>'Na'</code> for the first time,
+    our dictionary has one entry:
+    its key is <code>'Na'</code>, and its value is 1.
+    When we see <code>'Fe'</code>,
+    we add another entry to the dictionary
+    with that string as a key and 1 as a value.
+    Finally, when we see <code>'Na'</code> for the second time,
+    we add one to its count.
+  </p>
+
+  <table>
+    <tr>
+      <th>Input</th>
+      <th>Dictionary</th>
+    </tr>
+    <tr>
+      <td><em>start</em></td>
+      <td><code>{}</code></td>
+    </tr>
+    <tr>
+      <td><code>Na</code></td>
+      <td><code>{'Na' : 1}</code></td>
+    </tr>
+    <tr>
+      <td><code>Fe</code></td>
+      <td><code>{'Na' : 1, 'Fe' : 1}</code></td>
+    </tr>
+    <tr>
+      <td><code>Na</code></td>
+      <td><code>{'Na' : 2, 'Fe' : 1}</code></td>
+    </tr>
+  </table>
+
+  <p>
+    Just as we use tuples for multi-part entries in sets,
+    we can use them for multi-part keys in dictionaries.
+    For example,
+    if we want to store the years in which scientists were born
+    using their full names,
+    we could do this:
+  </p>
+
+<pre>
+birthdays = {
+    ('Isaac', 'Newton') : 1642,
+    ('Charles', 'Robert', 'Darwin') : 1809,
+    ('Alan', 'Mathison', 'Turing') : 1912
+}
+</pre>
+
+  <p class="continue">
+    If we do this,
+    though,
+    we always have to look things up by the full key:
+    there is no way to ask for
+    all the entries whose keys contain the word <code>'Darwin'</code>,
+    because Python cannot match part of a tuple.
+  </p>
+
+  <p>
+    If we think of a dictionary as a two-column table,
+    it is occasionally useful to get one or the other column,
+    i.e.,
+    just the keys or just the values:
+  </p>
+
+<pre>
+all_keys = birthdays.keys()
+print all_keys
+<span class="out">[('Isaac', 'Newton'), ('Alan', 'Mathison', 'Turing'), ('Charles', 'Robert', 'Darwin')]</span>
+all_values = birthdays.values()
+print all_values
+<span class="out">[1642, 1912, 1809]</span>
+</pre>
+
+  <p>
+    These methods should be used sparingly:
+    the dictionary doesn't store the keys or values in a list,
+    these methods both actually create a new list as their result.
+    In particular,
+    we <em>shouldn't</em> loop over a dictionary's entries like this:
+  </p>
+
+<pre>
+for key in some_dict.keys():
+    ...do something with key and some_dict[key]
+</pre>
+
+  <p class="continue">
+    since "<code>for key in some_dict</code>" is shorter and much more efficient.
+  </p>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-setdict/dict/keypoints.html %}
+
+<div id="s:setdict:dict:keypoints" class="keypoints">
+  <ul>
+    <li>Use dictionaries to store key-value pairs with distinct keys.</li>
+    <li>Create dictionaries using <code>{<em>k1</em>:<em>v1</em>, <em>k2</em>:<em>v2</em>, ...}</code></li>
+    <li>Dictionaries are mutable, i.e., they can be updated in place.</li>
+    <li>Dictionary keys must be immutable, but values can be anything.</li>
+    <li>Use tuples to store multi-part keys in dictionaries.</li>
+    <li><code><em>dict</em>[<em>key</em>]</code> refers to the dictionary entry with a particular key.</li>
+    <li><code><em>key</em> in <em>dict</em></code> tests whether a key is in a dictionary.</li>
+    <li><code>len(<em>dict</em>)</code> returns the number of entries in a dictionary.</li>
+    <li>A loop over a dictionary produces each key once, in arbitrary order.</li>
+    <li><code><em>dict</em>.keys()</code> creates a list of the keys in a dictionary.</li>
+    <li><code><em>dict</em>.values()</code> creates a list of the keys in a dictionary.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-setdict/dict/challenges.html %}
+
+<div id="s:setdict:dict:challenges" class="challenges">
+  <ol>
+    <li>
+<p>
+  What is one possible output of the following program?
+  And why does this question say
+  "one possible output"
+  instead of
+  "<em>the</em> output"?
+</p>
+<pre>
+periods = {'Mercury' : 87.97, 'Venus' : 224.70}
+print periods
+periods.update({'Earth' : 3.6526, 'Mars' : 686.98})
+print periods
+periods['Earthy'] = 365.26
+print periods
+</pre>
+    </li>
+    <li>
+<p>
+  Fan has a table with the pH levels of samples as the keys,
+  and the percentage of carbon-12 as the values:
+</p>
+<table>
+  <tr>
+    <th>pH</th>
+    <th>C12</th>
+  </tr>
+  <tr>
+    <td>7.43</td>
+    <td>0.48</td>
+  </tr>
+  <tr>
+    <td>7.51</td>
+    <td>0.47</td>
+  </tr>
+  <tr>
+    <td>7.56</td>
+    <td>0.45</td>
+  </tr>
+</table>
+<p>
+  He needs to interpolate between these values,
+  i.e.,
+  to predict the percentage of carbon-12 in the sample
+  for a pH 7.50.
+  Will storing his data in a dictionary:
+</p>
+<pre>
+{7.43 : 0.48, 7.51 : 0.47, 7.56 : 0.45}
+</pre>
+<p>
+  be any more efficient than storing it in a list of pairs:
+</p>
+<pre>
+[ [7.43, 0.48], [7.51, 0.47], [7.56, 0.45] ]
+</pre>
+<p>
+  Why or why not?
+</p>
+    </li>
+    <li>
+<p>
+  Before sets were added to Python,
+  people frequently imitated them using dictionaries;
+  the dictionary's keys were the set's elements,
+  and the dictionary's values were all <code>None</code>.
+  This function calculates the intersection of two such "sets":
+</p>
+<pre>
+def setdict_intersect(left, right):
+    '''Return new dictionary with intersection of keys from left and right.'''
+    result = {}
+    for key in left:
+        if key in right:
+            result[key] = None
+    return result
+</pre>
+<p>
+  Write a function <code>setdict_union</code> that calculates
+  the union of two sets represented in this way.
+</p>
+    </li>
+    <li>
+<p>
+  What does the following function do?
+  Explain when and why you would use it,
+  and write a small example that calls it with sample data.
+</p>
+<pre>
+def show(writer, format, data):
+    keys = data.keys()
+    keys.sort()
+    for k in keys:
+        print &gt;&gt; writer, format % (key, data[key])
+</pre>
+    </li>
+    <li>
+<p>
+  Dictionaries are more general than lists,
+  since you can trivially simulate a list like <code>['first', 'second', 'third']</code>
+  using <code>{0 : 'first', 1 : 'second', 2 : 'third'}</code>.
+  Given that,
+  when and why should you use a list rather than a dictionary?
+</p>
+    </li>
+    <li>
+<p>
+  Why should you <em>not</em> use the name <code>dict</code> as a variable?
+</p>
+    </li>
+  </ol>
+</div>
+
 </section>
 
 <section id="s:setdict:aggregate">
   <p><a href="setdict-aggregate.ipynb">Notebook</a></p>
-  <h2>{% include guide-setdict/aggregate/title.md %}</h2>
+  <h2>Aggregation</h2>
   <h3>Objectives</h3>
-  {% include guide-setdict/aggregate/objectives.html %}
+
+<div id="s:setdict:aggregate:objectives" class="objectives">
+  <ul>
+    <li>Recognize problems that can be solved by aggregating values.</li>
+    <li>Use dictionaries to aggregate values.</li>
+    <li>Explain why actual data values should be used as initializers rather than "impossible" values.</li>
+  </ul>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-setdict/aggregate/lesson.html %}
+
+<div id="s:setdict:aggregate:lesson" class="lesson">
+
+  <p>
+    To see how useful dictionaries can be,
+    let's switch tracks and do some birdwatching.
+    We'll start by asking how early in the day we saw each kind of bird?
+    Our data consists of the date and time of the observation, the bird's name, and an optional comment:
+  </p>
+
+<pre>
+2010-07-03    05:38    loon
+2010-07-03    06:02    goose
+2010-07-03    06:07    loon
+2010-07-04    05:09    ostrich   # hallucinating?
+2010-07-04    05:29    loon
+     &hellip;           &hellip;        &hellip;
+</pre>
+
+  <p>
+    Rephrasing our problem,
+    we want the minimum of all the times associated with each bird name.
+    If our data was stored in memory like this:
+  </p>
+
+<pre>
+loon = ['05:38', '06:07', '05:20', ...]
+</pre>
+
+  <p class="continue">
+    the solution would simply be <code>min(loon)</code>,
+    and similarly for the other birds.
+    However,
+    we have to work with the data we have,
+    so let's start by reading our data file and creating a list of tuples,
+    each of which contains a date, time, and bird name as strings:
+  </p>
+
+<pre>
+def read_observations(filename):
+    '''Read data, returning [(date, time, bird)...].'''
+
+    reader = open(filename, 'r')
+    result = []
+
+    for line in reader:
+        fields = line.split('#')[0].strip().split()
+        assert len(fields) == 3, 'Bad line "%s"' % line
+        result.append(fields)
+
+    return result
+</pre>
+
+  <p class="continue">
+    This function follows the pattern we've seen many times before.
+    We set up by opening the input file and creating an empty list that we'll append records to.
+    We then process each line of the file in turn.
+    Splitting the line on the <code>'#'</code> character and taking the first part of the result
+    gets rid of any comment that might be present;
+    stripping off whitespace and then splitting breaks the remainder into fields.
+  </p>
+
+  <p>
+    To prevent trouble later on, we check that there actually are three fields before going on.
+    (An industrial-strength version of this function
+    would also check that the date and time were properly formatted,
+    but we'll skip that for now.)
+    Once we've done our check,
+    we append the triple containing the date,
+    time, and bird name to the list we're going to return.
+  </p>
+
+  <p>
+    Here's the function that turns that list of tuples into a dictionary:
+  </p>
+
+<pre>
+def earliest_observation(data):
+    '''How early did we see each bird?'''
+
+    result = {}
+    for (date, time, bird) in data:
+        if bird not in result:
+            result[bird] = time
+        else:
+            result[bird] = min(result[bird], time)
+
+    return result
+</pre>
+
+  <p class="continue">
+    Once again,
+    the pattern should by now be familiar.
+    We start by creating an empty dictionary,
+    then use a loop to inspect each tuple in turn.
+    The loop explodes the tuple into separate variables for the date, time and bird.
+    If the bird's name is not already a key in our dictionary,
+    this must be the first time we've seen it,
+    so we store the time we saw it in the dictionary.
+    If the bird's name is already there,
+    on the other hand,
+    we keep the minimum of the stored time and the new time.
+    This is almost exactly the same as our earlier counting example,
+    but instead of either storing 1 or adding 1 to the count so far,
+    we're either storing the time or taking the minimum of it and the least time so far.
+  </p>
+
+  <p>
+    Now,
+    what if we want to find out which birds were seen on particular days?
+    Once again,
+    we are <a href="glossary.html#aggregation">aggregating</a> values,
+    i.e.,
+    combining many separate values to create one new one.
+    However,
+    since we probably saw more than one kind of bird each day,
+    that "new value" needs to be a collection of some kind.
+    We're only interested in which birds we saw,
+    so the right kind of collection is a set.
+    Here's our function:
+  </p>
+
+<pre>
+def birds_by_date(data):
+    '''Which birds were seen on each day?'''
+
+    result = {}
+    for (date, time, bird) in data:
+        if date not in result:
+            result[date] = {bird}
+        else:
+            result[date].add(bird)
+
+    return result
+</pre>
+
+  <p class="continue">
+    Again,
+    we start by creating an empty dictionary,
+    and then process each tuple in turn.
+    Since we're recording birds by date,
+    the keys in our dictionary are dates rather than bird names.
+    If the current date isn't already a key in the dictionary,
+    we create a set containing only this bird,
+    and store it in the dictionary with the date as the key.
+    Otherwise,
+    we add this bird to the set associated with the date.
+    (As always,
+    we don't need to check whether the bird is already in that set,
+    since the set will automatically eliminate any duplication.)
+  </p>
+
+  <p>
+    Let's watch this function in action
+    for the first few records from our data:
+  </p>
+
+  <table>
+    <tr>
+      <th>Input</th>
+      <th>Dictionary</th>
+    </tr>
+    <tr>
+      <td><em>start</em></td>
+      <td><code>{}</code></td>
+    </tr>
+    <tr>
+      <td><code>2010-07-03&nbsp;&nbsp;05:38&nbsp;&nbsp;loon</code></td>
+      <td><code>{'2010-07-03' : {'loon'}}</code></td>
+    </tr>
+    <tr>
+      <td><code>2010-07-03&nbsp;&nbsp;06:02&nbsp;&nbsp;goose</code></td>
+      <td><code>{'2010-07-03' : {'goose', 'loon'}}</code></td>
+    </tr>
+    <tr>
+      <td><code>2010-07-03&nbsp;&nbsp;06:07&nbsp;&nbsp;loon</code></td>
+      <td><code>{'2010-07-03' : {'goose', 'loon'}}</code></td>
+    </tr>
+    <tr>
+      <td><code>2010-07-04&nbsp;&nbsp;05:09&nbsp;&nbsp;ostrich</code></td>
+      <td><code>{'2010-07-03' : {'goose', 'loon'}, '2010-07-04' : {'ostrich'}}</code></td>
+    </tr>
+    <tr>
+      <td><code>2010-07-04&nbsp;&nbsp;05:29&nbsp;&nbsp;loon</code></td>
+      <td><code>{'2010-07-03' : {'goose', 'loon'}, '2010-07-04' : {'ostrich', 'loon'}}</code></td>
+    </tr>
+  </table>
+
+  <p>
+    For our last example,
+    we'll figure out which bird we saw least frequently&mdash;or rather,
+    which <em>birds</em>,
+    since two or more may be tied for the low score.
+    Forgetting that values may not be unique
+    is a common mistake in data crunching,
+    and often a hard one to track down.
+  </p>
+
+  <p>
+    Our first strategy is simple:
+    figure out how many times we've seen each bird,
+    then find the minimum of those counts
+    and get the set of birds we've seen that many times.
+    The function below implements this fairly directly:
+  </p>
+
+<pre>
+def least_common_birds(data):
+    '''Which bird or birds have been seen least frequently?'''
+    
+    counts = count_by_bird(data)
+    least = min(counts.values())
+    result = set()
+    for bird in counts:
+        if counts[bird] == least:
+            result.add(bird)
+    return result
+</pre>
+
+  <p>
+    <code>least_common_birds</code> depends on a function <code>count_by_bird</code>,
+    but this is yet another example of using a dictionary to aggregate values
+    (in this case, to sum the number of birds we have seen).
+    Just for variety's sake,
+    we'll use a slightly different strategy that we've used before:
+    whenever we see a new kind of bird,
+    we'll set its count to zero,
+    and then always add one to the stored count:
+  </p>
+
+<pre>
+def count_by_bird(data):
+    '''How many times was each bird seen?'''
+    result = {}
+    for (date, time, bird) in data:
+        if bird not in result:
+            result[bird] = 0
+        result[bird] += 1
+    return result
+</pre>
+
+  <p>
+    Finally,
+    we'll test our function:
+  </p>
+
+<pre>
+print least_common_birds(entries)
+<span class="out">set(['goose', 'ostrich'])</span>
+</pre>
+
+  <p>
+    This does the job,
+    but is somewhat inefficient:
+    we do one pass through all the data while counting birds,
+    then another pass through all the birds to find
+    those that we've seen the least number of times.
+    We can actually do the whole job with a single pass through the data,
+    but as we'll see in the challenges,
+    the resulting code is significantly more complex than what we have written so far.
+    Unless we're sure that the second pass is really a performance bottleneck,
+    we should stick with this simple implementation.
+  </p>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-setdict/aggregate/keypoints.html %}
+
+<div id="s:setdict:aggregate:keypoints" class="keypoints">
+  <ul>
+    <li>Use dictionaries to count things.</li>
+    <li>Initialize values from actual data instead of trying to guess what values could "never" occur.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-setdict/aggregate/challenges.html %}
+
+<div id="s:setdict:aggregate:challenges" class="challenges">
+  <ol>
+    <li>
+<p>
+  Draw a blob-and-arrow diagram of the two dictionaries in <code>least_common_birds</code>
+  and all the data they refer to
+  after the following seven lines of data have been processed:
+</p>
+<pre>
+2013-06-23    05:31    sparrow
+2013-06-25    06:19    robin
+2013-07-03    06:21    robin
+2013-07-17    05:28    cardinal
+2013-07-19    05:28    robin
+2013-07-19    05:29    penguin
+2013-07-19    05:30    penguin
+</pre>
+    </li>
+    <li>
+<p>
+  We have frequently used the idiom:
+</p>
+<pre>
+if key in data:
+    data[key] = data[key] + 1
+else:
+    data[key] = 1
+</pre>
+<p>
+  to either update the value associated with a key,
+  or insert a value if the key isn't present.
+  We can rewrite this as:
+</p>
+<pre>
+if key not in data:
+    data[key] = 0
+data[key] += 1
+</pre>
+<p>
+  but it's even better to use:
+</p>
+<pre>
+data[key] = data.get(key, 0) + 1
+</pre>
+<p>
+  Rewrite the examples in this lesson to use this idiom,
+  and explain why we <em>can't</em> simplify it even further by writing:
+</p>
+<pre>
+data.get(key, 0) += 1
+</pre>
+    </li>
+    <li>
+<p>
+  Modify <code>least_common_birds</code> so that it returns
+  a list of all the birds that have been seen,
+  sorted from least common to most common.
+  (Birds that appeared with equal frequency should be sorted alphabetically by name.)
+</p>
+    </li>
+    <li>
+<p>
+  Write a function <code>dict_subtract</code>
+  that "subtracts" one dictionary mapping names to numbers from another.
+  For example:
+</p>
+<pre>
+assert dict_subtract({'X' : 3},          {'X' : 2})          == {'X' : 1}
+assert dict_subtract({'X' : 3, 'Y' : 2}, {'X' : 5, 'Z' : 1}) == {'X' : -2, 'Y' : 2, 'Z' : -1}
+</pre>
+    </li>
+    <li>
+<p>
+  It's possible to figure out which birds have been seen the least number of times
+  using only a single pass through the data.
+  The strategy is:
+</p>
+<ul>
+  <li>
+    Use a dictionary <code>counts_by_bird</code> to keep track of how many times each bird has been seen,
+    and another <code>birds_by_count</code> to keep track of which birds have been seen how often.
+    The first uses bird names as keys, and counts as values;
+    the second uses counts as keys, and sets of bird names as values.
+  </li>
+  <li>
+    When a bird is seen for the first time,
+    it is added to the set stored with <code>birds_by_count[0]</code>,
+    and <code>counts_by_bird[bird]</code> is set to 1.
+  </li>
+  <li>
+    When a bird is seen for the second or subsequent time,
+    <code>counts_by_bird[bird]</code> is incremented,
+    and the bird is taken out of the set stored in <code>birds_by_count[old_count]</code>
+    and added to the set stored in <code>birds_by_count[new_count]</code>.
+  </li>
+  <li>
+    Once all the data has been read,
+    the set associated with the smallest key in <code>birds_by_count</code> is returned.
+  </li>
+</ul>
+<p>
+  The diagram below shows the two data structures used by this algorithm
+  and how they change when "loon" is read for the third time:
+</p>
+<figure id="f:single_pass_aggregation">
+  <img src="setdict/single_pass_aggregation.png" alt="Single Pass Aggregation" />
+  <figcaption>Single Pass Aggregation</figcaption>
+</figure>
+<p>
+  Do you think this approach will actually run faster than the one used in the lesson?
+  If so, why?
+  If not, why not?
+  And in either case,
+  how much more complex do you think the code will be
+  than the code given in the lesson?
+  What measure of "complex" did you use, and why?
+</p>
+    </li>
+  </ol>
+</div>
+
 </section>
 
 <section id="s:setdict:nanotech">
-  <h2>{% include guide-setdict/nanotech/title.md %}</h2>
+  <h2>Nanotech Inventory</h2>
   <p><a href="setdict-nanotech.ipynb">Notebook</a></p>
   <h3>Objectives</h3>
-  {% include guide-setdict/nanotech/objectives.html %}
+
+<div id="s:setdict:nanotech:objectives" class="objectives">
+  <ul>
+    <li>Create and manipulate nested dictionaries.</li>
+    <li>Explain the similarities and differences between nested dictionaries and nested lists.</li>
+  </ul>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-setdict/nanotech/lesson.html %}
+
+<div id="s:setdict:nanotech:lesson" class="lesson">
+
+  <p>
+    We can now solve Fan's original nanotech inventory problem.
+    As explained in the introduction,
+    our goal is to find out how many molecules of various kinds we can make using the atoms in our warehouse.
+    The number of molecules of any particular type we can make
+    is limited by the scarcest atom that molecule requires.
+    For example,
+    if we have five nitrogen atoms and ten hydrogen atoms,
+    we can only make three ammonia molecules,
+    because we need three hydrogen atoms for each.
+  </p>
+
+  <p>
+    The formulas for the molecules we know how to make
+    are stored in a file like this:
+  </p>
+
+<pre>
+# Molecular formula file
+
+helium : He 1
+water : H 2 O 1
+hydrogen : H 2
+</pre>
+
+  <p class="continue">
+    and our inventory is stored in a file like this:
+  </p>
+
+<pre>
+# Atom inventory file
+
+He 1
+H 4
+O 3
+</pre>
+
+  <p>
+    Let's start by reading in our inventory.
+    It consists of pairs of strings and numbers,
+    which by now should suggest using a dictionary for storage.
+    The keys will be atomic symbols,
+    and the values will be the number of atoms of that kind we currently have
+    (<a href="#f:nanotech_inventory">Figure 6</a>).
+    If an atom isn't listed in our inventory,
+    we'll assume that we don't have any.
+  </p>
+
+  <figure id="f:nanotech_inventory">
+    <img src="setdict/nanotech_inventory.png" alt="Nanotech Inventory" />
+    <figcaption>Figure 6: Nanotech Inventory</figcaption>
+  </figure>
+
+  <p>
+    What about the formulas for the molecules we know how to make?
+    Once again,
+    we want to use strings&mdash;the names of molecules&mdash;as indices,
+    which suggests a dictionary.
+    Each of its values will be something storing
+    atomic symbols and the number of atoms of that type in the molecule&mdash;the same structure,
+    in fact,
+    that we're using for our inventory.
+    <a href="#f:nanotech_formulas">Figure 7</a> shows
+    what this looks like in memory
+    if the only molecules we know how to make are water and ammonia.
+  </p>
+
+  <figure id="f:nanotech_formulas">
+    <img src="setdict/nanotech_formulas.png" alt="Storing Formulas" />
+    <figcaption>Figure 7: Storing Formulas</figcaption>
+  </figure>
+
+  <p>
+    Finally,
+    we'll store the results of our calculation in yet another dictionary,
+    this one mapping the names of molecules to how many molecules of that kind we can make
+    (<a href="#f:nanotech_results">Figure 8</a>).
+  </p>
+
+  <figure id="f:nanotech_results">
+    <img src="setdict/nanotech_results.png" alt="Nanotech Results" />
+    <figcaption>Figure 8: Nanotech Results</figcaption>
+  </figure>
+
+  <p>
+    The main body of the program is straightforward:
+    it reads in the input files,
+    does our calculation,
+    and prints the result:
+  </p>
+
+<pre>
+def main(inventory_file, formula_file):
+    inventory = read_inventory(inventory_file)
+    formulas = read_formulas(formula_file)
+    counts = calculate_counts(inventory, formulas)
+    show_counts(counts)
+</pre>
+
+  <p>
+    Reading the inventory file is simple.
+    We take each interesting line in the file,
+    split it to get an atomic symbol and a count,
+    and store them together in a dictionary:
+  </p>
+
+<pre>
+def read_inventory(inventory_file):
+    result = {}
+    with open(inventory_file, 'r') as reader:
+        for line in reader:
+            name, count = line.strip().split()
+            result[name] = int(count)
+    return result
+</pre>
+
+  <p>
+    Let's test it:
+  </p>
+
+<pre>
+print read_inventory('inventory-03.txt')
+<span class="err">ValueError                                Traceback (most recent call last)
+<ipython-input-9-c05b7b912bfb> in <module>()
+----> 1 print read_inventory('inventory-03.txt')
+
+<ipython-input-8-d5dd028eb45b> in read_inventory(inventory_file)
+      3     with open(inventory_file, 'r') as reader:
+      4         for line in reader:
+----> 5             name, count = line.strip().split()
+      6             result[name] = int(count)
+      7     return result
+
+ValueError: too many values to unpack</span>
+</pre>
+
+  <p>
+    Our mistake was to forget that files can contain blank lines and comments.
+    It's easy enough to modify the function to handle them,
+    though it complicates the logic:
+  </p>
+
+<pre>
+def read_inventory(inventory_file):
+    result = {}
+    with open(inventory_file, 'r') as reader:
+        for line in reader:
+            line = line.strip()
+            if (not line) or line.startswith('#'):
+                continue
+            name, count = line.split()
+            result[name] = int(count)
+    return result
+
+print read_inventory('inventory-03.txt')
+<span class="out">{'H': 4, 'O': 3, 'He': 1}</span>
+</pre>
+
+  <p>
+    The next step is to read the files containing formulas.
+    Since the file format is more complicated,
+    the function is as well.
+    In fact,
+    it's complicated enough that we'll come back later and simplify it.
+  </p>
+
+<pre>
+def read_formulas(formula_file):
+    result = {}
+    with open(formula_file, 'r') as reader:
+        for line in reader:
+            line = line.strip()
+            if (not line) or line.startswith('#'):
+                continue
+            name, atoms = line.split(':')
+            name = name.strip()
+            atoms = atoms.strip().split()
+    
+            formula = {}
+            for i in range(0, len(atoms), 2):
+                symbol = atoms[i].strip()
+                count = int(atoms[i+1])
+                formula[symbol] = count
+            result[name] = formula
+
+    return result
+</pre>
+
+  <p class="continue">
+    We start by creating a dictionary to hold our results.
+    We then split each interesting line in the data file on the colon ':'
+    to separate the molecule's name (which may contain spaces) from its formula.
+    We then split the formulas into a list of strings.
+    These alternate between atomic symbols and numbers,
+    so in the inner loop,
+    we move forward through those values two elements at a time,
+    storing the atomic symbol and count in a dictionary.
+    Once we're done,
+    we store that dictionary as the value for the molecule name in the main dictionary.
+    When we've processed all the lines,
+    we return the final result.
+    Here's a simple test:
+  </p>
+
+<pre>
+print read_formulas('formulas-03.txt')
+<span class="out">{'water': {'H': 2, 'O': 1}, 'hydrogen': {'H': 2}, 'helium': {'He': 1}}</span>
+</pre>
+
+  <p>
+    Now that we have all our data,
+    it's time to calculate how many molecules of each kind we can make.
+    <code>inventory</code> maps atomic symbols to counts,
+    and so does <code>formulas[name]</code>,
+    so let's loop over all the molecules we know how to make
+    and "divide" the inventory by each one:
+  </p>
+
+<pre>
+def calculate_counts(inventory, formulas):
+    '''Calculate how many of each molecule can be made with inventory.'''
+
+    counts = {}
+    for name in formulas:
+        counts[name] = dict_divide(inventory, formulas[name])
+
+    return counts
+</pre>
+
+  <p class="continue">
+    We say we're "dividing" the inventory by each molecule
+    because we're trying to find out how many of that molecule we can make
+    without requiring more of any particular atom than we actually have.
+    (By analogy,
+    when we divide 11 by 3,
+    we're trying to find out how many 3's we can make from 11.)
+    The function that does the division is:
+  </p>
+
+<pre>
+def dict_divide(inventory, molecule):
+    number = None
+    for atom in molecule:
+        required = molecule[atom]
+        available = inventory.get(atom, 0)
+        limit = available / required
+        if (number is None) or (limit &lt; number):
+            number = limit
+
+    return number
+</pre>
+
+  <p class="continue">
+    This function loops over all the atoms in the molecule we're trying to build,
+    see what limit the available inventory puts on us,
+    and return the minimum of all those results.
+    This function uses a few patterns that come up frequently in many kinds of programs:
+  </p>
+
+  <ol>
+
+    <li>
+      The first pattern is to initialize the value we're going to return to <code>None</code>,
+      then test for that value inside the loop
+      to make sure we re-set it to a legal value the first time we have real data.
+      In this case, we could just as easily use -1
+      or some other impossible value as an "uninitialized" flag for <code>number</code>.
+    </li>
+
+    <li>
+      Since we're looping over the keys of <code>molecule</code>,
+      we know that we can get the value stored in <code>molecule[atom]</code>.
+      However, that atom might not be a key in <code>inventory</code>,
+      so we use <code>inventory.get(atom, 0)</code> to get either the stored value or a sensible default.
+      In this case zero, the sensible default is 0,
+      because if the atom's symbol isn't in the dictionary, we don't have any of it.
+      This is our second pattern.
+    </li>
+
+    <li>
+      The third is using calculate, test, and store to find a single value&mdash;in this case, the minimum&mdash;from
+      a set of calculated values.
+      We could calculate the list of available over required values,
+      then find the minimum of the list,
+      but doing the minimum test as we go along saves us having to store the list of intermediate values.
+      It's probably not a noticeable time saving in this case,
+      but it would be with larger data sets.
+    </li>
+
+  </ol>
+
+  <p>
+    The last step in building our program is to show how many molecules of each kind we can make.
+    We could just loop over our result dictionary,
+    printing each molecule's name and the number of times we could make it,
+    but let's put the results in alphabetical order
+    to make it easier to read:
+  </p>
+
+<pre>
+def show_counts(counts):
+    names = counts.keys()
+    names.sort()
+    for name in names:
+        print name, counts[name]
+</pre>
+
+  <p>
+    It's time to test our code.
+    Let's start by using an empty inventory and a single formula:
+  </p>
+
+  <table>
+    <tr>
+      <th>
+        Inventory
+      </th>
+      <th>
+        Formulas
+      </th>
+      <th>
+        Output
+      </th>
+    </tr>
+    <tr>
+      <td>
+<pre>
+# inventory-00.txt
+</pre>
+      </td>
+      <td>
+<pre>
+# formulas-00.txt
+</pre>
+      </td>
+      <td>
+<pre>
+</pre>
+      </td>
+    </tr>
+  </table>
+
+  <p class="continue">
+    There's no output, which is what we expect.
+    Let's add a formula but no atoms:
+  </p>
+
+  <table>
+    <tr>
+      <th>
+        Inventory
+      </th>
+      <th>
+        Formulas
+      </th>
+      <th>
+        Output
+      </th>
+    </tr>
+    <tr>
+      <td>
+<pre>
+# inventory-00.txt
+</pre>
+      </td>
+      <td>
+<pre>
+# formulas-01.txt
+helium : He 1
+</pre>
+      </td>
+      <td>
+<pre>
+helium 0
+</pre>
+      </td>
+    </tr>
+  </table>
+
+  <p class="continue">
+    and now an atom:
+  </p>
+
+  <table>
+    <tr>
+      <th>
+        Inventory
+      </th>
+      <th>
+        Formulas
+      </th>
+      <th>
+        Output
+      </th>
+    </tr>
+    <tr>
+      <td>
+<pre>
+# inventory-01.txt
+He 1
+</pre>
+      </td>
+      <td>
+<pre>
+# formulas-01.txt
+helium : He 1
+</pre>
+      </td>
+      <td>
+<pre>
+helium 1
+</pre>
+      </td>
+    </tr>
+  </table>
+
+  <p class="continue">
+    That seems right as well.
+    Let's add some hydrogen and another formula:
+  </p>
+
+  <table>
+    <tr>
+      <th>
+        Inventory
+      </th>
+      <th>
+        Formulas
+      </th>
+      <th>
+        Output
+      </th>
+    </tr>
+    <tr>
+      <td>
+<pre>
+# inventory-02.txt
+He 1
+H 4
+</pre>
+      </td>
+      <td>
+<pre>
+# formulas-01.txt
+helium : He 1
+water : H 2 O 1
+</pre>
+      </td>
+      <td>
+<pre>
+helium 1
+water 0
+</pre>
+      </td>
+    </tr>
+  </table>
+
+  <p class="continue">
+    The output doesn't change, which is correct.
+    Our final test adds some oxygen:
+  </p>
+
+  <table>
+    <tr>
+      <th>
+        Inventory
+      </th>
+      <th>
+        Formulas
+      </th>
+      <th>
+        Output
+      </th>
+    </tr>
+    <tr>
+      <td>
+<pre>
+# inventory-03.txt
+He 1
+H 4
+O 3
+</pre>
+      </td>
+      <td>
+<pre>
+# formulas-03.txt
+helium : He 1
+water: H 2 O 1
+hydrogen : H 2
+</pre>
+      </td>
+      <td>
+<pre>
+helium 1
+water 2
+</pre>
+      </td>
+    </tr>
+  </table>
+
+  <p class="continue">
+    That's right too:
+    we can make two water molecules
+    (because we don't have enough hydrogen to pair with our three oxygen atoms).
+  </p>
+
+  <div class="box">
+    <h3>Refactoring</h3>
+
+    <p>
+      There are quite a few other interesting tests still to run,
+      but before we do that,
+      we should clean up our code.
+      Both of our input functions handle comments and blank lines the same way;
+      let's put that code in a helper function:
+    </p>
+
+<pre>
+def readlines(filename):
+    result = []
+    with open(filename, 'r') as reader:
+        for line in reader:
+            line = line.strip()
+            if line and (not line.startswith('#')):
+                result.append(line)
+    return result
+</pre>
+
+    <p>
+      If we convert <code>read_inventory</code> to use it,
+      the result is six lines long instead of ten.
+      More importantly,
+      the logic of what we're doing is much clearer:
+    </p>
+
+<pre>
+def read_inventory(inventory_file):
+    result = {}
+    for line in readlines(inventory_file):
+        name, count = line.split()
+        result[name] = int(count)
+    return result
+</pre>
+
+    <p>
+      The converted version of <code>read_formulas</code>
+      is 15 lines instead of 19:
+    </p>
+
+<pre>
+def read_formulas(formula_file):
+    result = {}
+    for line in readlines(formula_file):
+        name, atoms = line.split(':')
+        name = name.strip()
+        atoms = atoms.strip().split()
+
+        formula = {}
+        for i in range(0, len(atoms), 2):
+            symbol = atoms[i].strip()
+            count = int(atoms[i+1])
+            formula[symbol] = count
+        result[name] = formula
+
+    return result
+</pre>
+
+    <p class="continue">
+      but we can do better still
+      by putting the code that handles atom/count pairs
+      in a helper function of its own:
+    </p>
+
+<pre>
+def read_formulas(formula_file):
+    result = {}
+    for line in readlines(formula_file):
+        name, atoms = line.split(':')
+        name = name.strip()
+        result[name] = make_formula(atoms)
+    return result
+
+def make_formula(atoms):
+    formula = {}
+    atoms = atoms.strip().split()
+    for i in range(0, len(atoms), 2):
+        symbol = atoms[i].strip()
+        count = int(atoms[i+1])
+        formula[symbol] = count
+    return formula
+</pre>
+
+    <p>
+      This change has actually made the code slightly longer,
+      but each function now does one small job,
+      and as a bonus,
+      the code in <code>make_formula</code>
+      (which is moderately complex)
+      can now be tested on its own.
+    </p>
+  </div>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-setdict/nanotech/keypoints.html %}
+
+<div id="s:setdict:nanotech:keypoints" class="keypoints">
+  <ul>
+    <li>Whenever names are used to label things, consider using dictionaries to store them.</li>
+    <li>Use nested dictionaries to store hierarchical values (like molecule names and atomic counts).</li>
+    <li>Get it right, then refactor to make each part simple.</li>
+    <li>Test after each refactoring step.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-setdict/nanotech/challenges.html %}
+
+<div id="s:setdict:nanotech:challenges" class="challenges">
+  <ol>
+    <li>
+<p>
+  Trace the behavior of <code>read_formulas</code>
+  by showing the value of each variable each time line #6 finishes executing
+  when given the data file:
+</p>
+<pre>
+helium  : He 1
+ammonia : N 1 H 3
+cyanide : H 1 C 1 N 1
+</pre>
+<table>
+  <tr>
+    <th></th>
+    <th><code>result</code></th>
+    <th><code>line</code></th>
+    <th><code>name</code></th>
+    <th><code>atoms</code></th>
+    <th><code>formula</code></th>
+  </tr>
+  <tr>
+    <td>1) after "helium":</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>2) after "ammonia":</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>3) after "cyanide":</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+    </li>
+    <li>
+<p>
+  Can one dictionary be used as a key in another?
+  I.e., is it possible to create the structure:
+</p>
+<pre>
+{ {'site' : 3, 'affinity' : 6} : 'sampled'}
+</pre>
+<p>
+  If so,
+  give an example showing when this would be useful.
+  If not,
+  explain why not.
+</p>
+    </li>
+    <li>
+<p>
+  A geographic information system stores the distance between survey points
+  in a dictionary of dictionaries like this:
+</p>
+<pre>
+dist = {
+    'Left Bend'  : {'Sump Creek' : 25.6,
+                    'Brents Bay' : 31.1,
+                    'Ogalla'     :  4.0},
+    'Sump Creek' : {'Brents Bay' : 17.5,
+                    'Ogalla'     : 19.2},
+    'Brents Bay' : {'Ogalla'     : 20.1}
+}
+</pre>
+<p>
+  Given this structure,
+  what is the simplest Python function that will return
+  the distance between any two survey points?
+</p>
+    </li>
+    <li>
+<p>
+  Fan has inherited an activity log for an experimental project
+  formatted as shown below:
+</p>
+<pre>
+2012-11-30: Re-setting equipment.
+2012-12-12: First run with acidic reagants.
+2012-12-12: Re-ran acidic reagants.
+2012-12-14: Tried neutral reagants again.
+2013-02-05: Back to this stuff after writing up the CSRTI paper.
+2013-02-06: Trying basic reagants this time.
+</pre>
+<p>
+  He has written a function to translate this into
+  a dictionary of dictionaries of sets,
+  where the outer dictionary's keys are years (as strings),
+  the inner dictionary's keys are months (also as strings),
+  and the innermost sets are the days (strings again)
+  for which there are comments.
+  For example,
+  the output of this function for the data sample above is supposed to be:
+</p>
+<pre>
+{
+    '2012' : {
+        '11' : {'30'},
+        '12' : {'12', '14'}
+    },
+    '2013' : {
+        '02' : {'05', '06'}
+    }
+}
+</pre>
+<p>
+  His function is:
+</p>
+<pre>
+def extract_dates(filename):
+    reader = open(filename, 'r')
+    result = {}
+    for line in reader:
+        year, month, day = line.strip().split(' ', 1)[0].split('-')
+        if year not in result:
+            pass <span class="comment"># fill in 1</span>
+        if month not in result[year]:
+            pass <span class="comment"># fill in 2</span>
+        pass <span class="comment"># fill in 3</span>
+    reader.close()
+    return result
+</pre>
+<p>
+  Fill in the three missing lines with a single statement each
+  so that this function returns the right answer.
+</p>
+    </li>
+  </ol>
+</div>
+
 </section>
 
 <section id="s:setdict:json">
-  <h2>{% include guide-setdict/json/title.md %}</h2>
+  <h2>JSON</h2>
   <p><a href="setdict-json.ipynb">Notebook</a></p>
   <h3>Objectives</h3>
-  {% include guide-setdict/json/objectives.html %}
+
+<div id="s:setdict:json:objectives" class="objectives">
+  <ul>
+    <li>Correctly define "JSON" and give simple examples of valid JSON structures.</li>
+    <li>Describe JSON's strengths and weaknesses as a storage format.</li>
+    <li>Write code to read and write JSON-formatted data files using standard libraries.</li>
+  </ul>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-setdict/json/lesson.html %}
+
+<div id="s:setdict:json:lesson" class="lesson">
+
+  <p>
+    The example above used two data file formats:
+    one for storing molecular formulas,
+    the other for storing inventory.
+    Both formats were specific to this application,
+    which means we needed to write, debug, document, and maintain functions to handle them.
+    Those functions weren't particularly difficult to create,
+    but they still took time to create,
+    and if anyone ever wants to read our files in Java, MATLAB, or Perl,
+    they'll have to write equivalent functions themselves.
+  </p>
+
+  <p>
+    A growing number of programs avoid these problems
+    by using a flexible data format called
+    <a href="glossary.html#json">JSON</a>,
+    which stands for "JavaScript Object Notation".
+    Despite the name,
+    it is a language-independent way to store nested data structures
+    made up of strings, numbers, Booleans, lists, dictionaries,
+    and the special value <code>null</code> (equivalent to Python's <code>None</code>)&mdash;in short,
+    the basic data types that almost every language supports.
+    For example,
+    let's convert a dictionary of scientists' birthdays
+    to a string:
+  </p>
+
+<pre src="setdict/json_first.py">
+&gt;&gt;&gt; import json
+&gt;&gt;&gt; birthdays = {'Curie' : 1867, 'Hopper' : 1906, 'Franklin' : 1920}
+&gt;&gt;&gt; as_string = json.dumps(birthdays)
+&gt;&gt;&gt; print as_string
+<span class="out">{"Curie": 1867, "Hopper": 1906, "Franklin": 1920}</span>
+&gt;&gt;&gt; print type(as_string)
+<span class="out">&lt;type 'str'&gt;</span>
+</pre>
+
+  <p>
+    <code>json.dumps</code> doesn't seem to do much,
+    but that's kind of the point:
+    the textual representation of the data structure looks pretty much like
+    what a programmer would type in to re-create it.
+    The advantage is that this representation can be saved in a file:
+  </p>
+
+<pre src="setdict/json_second.py">
+&gt;&gt;&gt; import json
+&gt;&gt;&gt;
+&gt;&gt;&gt; writer = open('/tmp/example.json', 'w')
+&gt;&gt;&gt; json.dump(birthdays, writer)
+&gt;&gt;&gt; writer.close()
+&gt;&gt;&gt;
+&gt;&gt;&gt; reader = open('/tmp/example.json', 'r')
+&gt;&gt;&gt; duplicate = json.load(reader)
+&gt;&gt;&gt; reader.close()
+&gt;&gt;&gt;
+&gt;&gt;&gt; print 'original:', birthdays
+<span class="out">original: {'Curie': 1867, 'Hopper': 1906, 'Franklin': 1920}</span>
+&gt;&gt;&gt; print 'duplicate:', duplicate
+<span class="out">duplicate: {u'Curie': 1867, u'Hopper': 1906, u'Franklin': 1920}</span>
+&gt;&gt;&gt; print 'original == duplicate:', birthdays == duplicate
+<span class="out">original == duplicate: True</span>
+&gt;&gt;&gt; print 'original is duplicate:', birthdays is duplicate
+<span class="out">original is duplicate: False</span>
+</pre>
+
+  <p>
+    As the example above shows,
+    saving and loading data is as simple as opening a file
+    and then calling one function.
+    The data file holds what we'd type in to create the data in a program:
+  </p>
+
+<pre>
+$ <span class="in">cat /tmp/example.json</span>
+<span class="out">{"Curie": 1867, "Hopper": 1906, "Franklin": 1920}</span>
+</pre>
+
+  <p class="continue">
+    which makes it easy to edit by hand.
+  </p>
+
+  <p>
+    How is this different in practice from what we had?
+    First,
+    our inventory file now looks like this:
+  </p>
+
+<pre src="setdict/inventory.json">
+{"He" : 1,
+ "H" : 4,
+ "O" : 3}
+</pre>
+
+  <p class="continue">
+    while our formulas files look like:
+  </p>
+
+<pre src="setdict/formulas.json">
+{"helium"   : {"He" : 1},
+ "water"    : {"H" : 2, "O" : 1},
+ "hydrogen" : {"H" : 2}}
+</pre>
+
+  <p>
+    Those aren't as intuitive for non-programmers as the original flat text files,
+    but they're not too bad.
+    The worst thing is the lack of comments:
+    unfortunately&mdash;very unfortunately&mdash;the JSON format
+    doesn't support them.
+    (And note that JSON requires us to use a double-quote for strings:
+    unlike Python,
+    we cannot substitute single quotes.)
+  </p>
+
+  <p>
+    The good news is that given files like these,
+    we can rewrite our program as:
+  </p>
+
+<pre src="setdict/nanotech_json.py">
+'''Calculate how many molecules of each type can be made with the atoms on hand.'''
+import json
+
+def main(inventory_file, formulas_file):
+    '''Main driver for program.'''
+<span class="highlight">    with open(inventory_file, 'r') as reader:
+        inventory = json.load(reader)
+    with open(formulas_file, 'r') as reader:
+        formulas = json.load(reader)</span>
+    counts = calculate_counts(inventory, formulas)
+    show_counts(counts)
+
+def calculate_counts(inventory, formulas):
+    <em>...as before...</em>
+
+def dict_divide(inventory, molecule):
+    <em>...as before...</em>
+
+def show_counts(counts):
+    <em>...as before...</em>
+</pre>
+
+  <p class="continue">
+    The two functions that read formula and inventory files
+    have been replaced with a single function that reads JSON.
+    Nothing else has to change,
+    because the data structures loaded from the data files
+    are exactly what we had before.
+    The end result is 51 lines long compared to the 80 we started with,
+    a reduction of more than a third.
+  </p>
+
+  <div class="box">
+    <h3>Nothing's Perfekt</h3>
+
+    <p>
+      JSON's greatest weakness isn't its lack of support for comments,
+      but the fact that it doesn't recognize and manage aliases.
+      Instead,
+      each occurrence of an aliased structure is treated as something brand new
+      when data is being saved.
+      For example:
+    </p>
+<pre>
+&gt;&gt;&gt; inner = ['name']
+&gt;&gt;&gt; outer = [inner, inner] <span class="comment"># Creating an alias.</span>
+&gt;&gt;&gt; print outer
+<span class="out">[['name'], ['name']]</span>
+&gt;&gt;&gt; print outer[0] is outer[1]
+<span class="out">True</span>
+&gt;&gt;&gt; as_string = json.dumps(outer)
+&gt;&gt;&gt; duplicate = json.loads(as_string)
+&gt;&gt;&gt; print duplicate
+<span class="out">[[u'name'], [u'name']]</span>
+&gt;&gt;&gt; print duplicate[0] is duplicate[1]
+<span class="out">False</span>
+</pre>
+    <p class="continue">
+      <a href="#f:json_alias">Figure 9</a> shows the difference between
+      the original data structure (referred to by <code>outer</code>)
+      and what winds up in <code>duplicate</code>.
+      If aliases might be present in our data,
+      and it's important to preserve their structure,
+      we must either record the aliasing ourself (which is tricky),
+      or use some other format.
+      Luckily,
+      a lot of data either doesn't contain aliases,
+      or the aliasing in it isn't important.
+    </p>
+
+    <figure id="f:json_alias">
+      <img src="setdict/json_alias.png" alt="Aliasing in JSON" />
+      <figcaption>Figure 9: Aliasing in JSON</figcaption>
+    </figure>
+  </div>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-setdict/json/keypoints.html %}
+
+<div id="s:setdict:json:keypoints" class="keypoints">
+  <ul>
+    <li>The JSON data format can represent arbitrarily-nested lists and dictionaries containing strings, numbers, Booleans, and <code>None</code>.</li>
+    <li>Using JSON reduces the code we have to write ourselves and improves interoperability with other programming languages.</li>
+    <li>JSON doesn't allow for comments, and doesn't handle aliasing.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-setdict/json/challenges.html %}
+
+<div id="s:setdict:json:challenges" class="challenges">
+  <ol>
+    <li>
+<p>
+  A friend of yours says,
+  "I understand why flat text files are not ideal,
+  but wouldn't it be better to use comma-separated values (CSV) than JSON?
+  It's easier to read,
+  and more programs support it."
+  What example could you show your friend to explain JSON's advantages?
+</p>
+    </li>
+    <li>
+<p>
+  <code>json.dump</code> has an extra parameter called <code>sort_keys</code>;
+  its default value is <code>False</code>,
+  but if it is <code>True</code>,
+  then all dictionaries are printed with keys in sorted order.
+  Explain why this option <em>isn't</em> <code>True</code> by default,
+  and how setting it to <code>True</code> can be useful in testing.
+</p>
+    </li>
+    <li>
+<p>
+  If we really do need to add comments to JSON files,
+  how can we do it without altering the format?
+</p>
+    </li>
+    <li>
+<p>
+  The bird watching data from
+  an earlier section
+  was stored like this:
+</p>
+<pre>
+2010-07-03    05:38    loon
+2010-07-03    06:02    goose
+2010-07-03    06:07    loon
+2010-07-04    05:09    ostrich
+2010-07-04    05:29    loon
+</pre>
+<p>
+  How would you represent this as JSON?
+  If you rewrite the <code>early_bird.py</code> program
+  (that finds the earliest time each bird was seen)
+  so that it uses your JSON format,
+  how much code do you save?
+</p>
+    </li>
+  </ol>
+</div>
+
 </section>
 
 <section id="s:setdict:phylotree">
-  <h2>{% include guide-setdict/phylotree/title.md %}</h2>
+  <h2>Phylogenetic Trees</h2>
   <h3>Objectives</h3>
-  {% include guide-setdict/phylotree/objectives.html %}
+
+<div id="s:setdict:phylogen:objectives" class="objectives">
+  <ul>
+    <li>That many "matrix" problems may be best solved using dictionaries.</li>
+    <li>Why the values in multi-part keys should be ordered.</li>
+  </ul>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-setdict/phylotree/lesson.html %}
+
+<div id="s:setdict:phylotree:lesson" class="lesson">
+
+  <p>
+    As Theodosius Dobzhansky said almost a century ago,
+    nothing in biology makes sense except in the light of evolution.
+    Since mutations usually occur one at a time,
+    the more similarities there are between the DNA of two species,
+    the more recently they had a common ancestor.
+    We can use this idea to reconstruct the evolutionary tree for a group of organisms
+    using a hierarchical clustering algorithm.
+  </p>
+
+  <p>
+    We don't have to look at the natural world very hard
+    to realize that some organisms are more alike than others.
+    For example, if we look at the appearance, anatomy, and lifecycles
+    of the seven fish shown in <a href="#f:species_pairs">Figure 10</a>,
+    we can see that three pairs are closely related.
+    But where does the seventh fit in?
+    And how do the pairs relate to each other?
+  </p>
+
+  <figure id="f:species_pairs">
+    <table>
+      <tr>
+        <td><img src="setdict/species_pairs_1.png" alt="Pairing Up Species" /></td>
+        <td><img src="setdict/species_pairs_2.png" alt="Pairing Up Species" /></td>
+      </tr>
+    </table>
+    <figcaption>Figure 10: Pairing Up Species</figcaption>
+  </figure>
+
+  <p>
+    The first step is to find the two species that are most similar,
+    and construct their plausible common ancestor.
+    We then pair two more, and two more,
+    and start joining pairs to individuals,
+    or pairs with other pairs.
+    Eventually, all the organisms are connected.
+    We can redraw those connections as a tree,
+    using the heights of branches to show the number of differences between the species we're joining up
+    (<a href="#f:species_tree">Figure 11</a>).
+  </p>
+
+  <figure id="f:species_tree">
+    <img src="setdict/species_pairs_3.png" alt="Pairing Up Species" />
+    <figcaption>Figure 11: Tree of Life</figcaption>
+  </figure>
+
+  <p>
+    Let's turn this into an algorithm:
+  </p>
+
+<pre>
+S = {all organisms}
+while S != {}:
+  a, b = two closest entries in U
+  p = common parent of {a, b}
+  S = S - {a, b}
+  S = S + {p}
+</pre>
+
+  <p class="continue">
+    Initially, the set S contains all the species we're interested in.
+    Each time through the loop,
+    we find the two that are closest,
+    create their common parent,
+    remove the two we just paired up from the set,
+    and insert the newly-created parent.
+    Since the set shrinks by one element each time
+    (two out, one in),
+    we can be sure this algorithm eventually terminates.
+  </p>
+
+  <p>
+    But how do we calculate the distance between an inferred parent and other species?
+    One simple rule is to use the average distance between that other species
+    and the two species that were combined to create that parent.
+    Let's illustrate it by calculating a phylogenetic tree for humans, vampires, werewolves, and mermaids.
+    The distances between each pair of species is shown in
+    <a href="#f:species_tree">Figure 12</a>
+    and in the table below.
+    (We only show the lower triangle because it's symmetric.)
+  </p>
+
+  <figure id="f:species_tree">
+    <table>
+      <tr>
+        <td><img src="setdict/species_distance_1.png" alt="Distances Between Species" /></td>
+        <td><img src="setdict/species_distance_2.png" alt="Distances Between Species" /></td>
+        <td><img src="setdict/species_distance_3.png" alt="Distances Between Species" /></td>
+        <td><img src="setdict/species_distance_4.png" alt="Distances Between Species" /></td>
+      </tr>
+    </table>
+    <figcaption>Figure 12: Distances Between Species</figcaption>
+  </figure>
+
+  <table border="1">
+    <tr> <td>&nbsp;</td>   <td>human</td>  <td>vampire</td> <td>werewolf</td> <td>mermaid</td> </tr>
+    <tr> <td>human</td>    <td>&nbsp;</td> <td>&nbsp;</td>  <td>&nbsp;</td>   <td>&nbsp;</td> </tr>
+    <tr> <td>vampire</td>  <td>13</td>     <td>&nbsp;</td>  <td>&nbsp;</td>   <td>&nbsp;</td> </tr>
+    <tr> <td>werewolf</td> <td>5</td>      <td>6</td>       <td>&nbsp;</td>   <td>&nbsp;</td> </tr>
+    <tr> <td>mermaid</td>  <td>12</td>     <td>15</td>      <td>29</td>       <td>&nbsp;</td> </tr>
+  </table>
+
+  <p>
+    The closest entries&mdash;i.e., the pair with minimum distance&mdash;are human and werewolf.
+    We replace this with a common ancestor,
+    which we will call HW,
+    then set the distance between it and each other species X
+    to be (HX + WX)/2,
+    i.e.,
+    the average of the human-to-X and werewolf-to-X distances.
+    This gives us a new table:
+  </p>
+
+  <table border="1">
+    <tr> <td>&nbsp;</td>   <td>HW</td>     <td>vampire</td> <td>mermaid</td> </tr>
+    <tr> <td>HW</td>       <td>&nbsp;</td> <td>&nbsp;</td>  <td>&nbsp;</td> </tr>
+    <tr> <td>vampire</td>  <td>9.5</td>    <td>&nbsp;</td>  <td>&nbsp;</td> </tr>
+    <tr> <td>mermaid</td>  <td>20.5</td>   <td>15</td>      <td>&nbsp;</td> </tr>
+  </table>
+
+  <p>
+    Repeating this step, we combine HW with V:
+  </p>
+
+  <table border="1">
+    <tr> <td>&nbsp;</td>   <td>HWV</td>    <td>mermaid</td> </tr>
+    <tr> <td>HWV</td>      <td>&nbsp;</td> <td>&nbsp;</td> </tr>
+    <tr> <td>mermaid</td>  <td>17.75</td>  <td>&nbsp;</td> </tr>
+  </table>
+
+  <p class="continue">
+    and finally HWV with M.
+  </p>
+
+  <p>
+    We illustrated our algorithm with a triangular matrix,
+    but the order of the rows and columns is arbitrary.
+    The matrix is really just a lookup table mapping species to distances,
+    and as soon as we think of lookup tables,
+    we should think of dictionaries.
+    The keys are species&mdash;either the ones we started with,
+    or the ones we created&mdash;and
+    the values are the distances between them,
+    so our original table becomes:
+  </p>
+
+<pre>
+{
+    ('human',   'mermaid')  : 12,
+    ('human',   'vampire')  : 13,
+    ('human',   'werewolf') :  5,
+    ('mermaid', 'vampire')  : 15,
+    ('mermaid', 'werewolf') : 29,
+    ('vampire', 'werewolf') :  6
+}
+</pre>
+
+  <p>
+    There is one trick here.
+    Whenever we have a distance,
+    such as that between mermaids and vampires,
+    we have to decide whether to use the key <code>('mermaid', 'vampire')</code>
+    or <code>('vampire', 'mermaid')</code>
+    (or to record the value twice,
+    once under each key).
+  </p>
+
+  <p>
+    Let's start by setting up our test case
+    and then calling a top-level function
+    to process our data:
+  </p>
+
+<pre src="setdict/phylogen.py">
+if __name__ == '__main__':
+
+    species = {'human', 'mermaid', 'werewolf', 'vampire'}
+
+    scores = {
+        ('human',   'mermaid')  : 12,
+        ('human',   'vampire')  : 13,
+        ('human',   'werewolf') :  5,
+        ('mermaid', 'vampire')  : 15,
+        ('mermaid', 'werewolf') : 29,
+        ('vampire', 'werewolf') :  6
+    }
+
+    order = main(species, scores)
+    print order
+</pre>
+
+  <p class="continue">
+    In a real program,
+    of course,
+    the data would be read in from a file,
+    and the set of actual species' names would be generated from it,
+    but this will do for now.
+  </p>
+
+  <p>
+    Next,
+    let's translate our algorithm into something that could be runnable Python:
+  </p>
+
+<pre src="setdict/phylogen.py">
+def main(species, scores):
+    result = []
+    while len(species) &gt; 1:
+        left, right = find_min_pair(species, scores)
+        result.append(make_pair(left, right))
+        species -= {left, right}
+        make_new_pairs(species, scores, left, right)
+        species.add(make_name(left, right))
+    return result
+</pre>
+
+  <p>
+    This is almost a direct translation of our starting point;
+    the only significant difference is that we're keeping
+    the set of "active" species in a set,
+    and the scores in a dictionary.
+    As species are combined,
+    we remove their names from the set and add a made-up name for their parent.
+    We never actually remove scores from the table;
+    once the name of a species is out of the set <code>species</code>,
+    we'll never try to look up anything associated with it
+    in <code>scores</code> again.
+  </p>
+
+  <p>
+    The next step is to write <code>find_min_pair</code>
+    to find the lowest score currently in the table:
+  </p>
+
+<pre>
+def find_min_pair(species, scores):
+    min_pair = None
+    min_val = None
+    for left in species:
+        for right in species:
+            if left &lt; right:
+                this_pair = make_pair(left, right)
+                if (min_val is None) or (scores[this_pair] &lt; min_val):
+                    min_pair = this_pair
+                    min_val = scores[this_pair]
+    return min_pair
+</pre>
+
+  <p class="continue">
+    This function loops over all possible combinations of species names,
+    but only actually <em>uses</em> the ones that pass our ordering test
+    (i.e., the ones for which the first species name
+    comes before the second species name).
+    If this is the first score we've looked at,
+    or if it's lower than a previously-seen score,
+    we record the pair of species and the associated score.
+    When we're done,
+    we return the pair of species.
+  </p>
+
+  <p>
+    The function that makes new entries for the table
+    is fairly straightforward as well.
+    It just loops over all the active species,
+    averages the distances between them and the two species being combined,
+    and puts a new score in the table:
+  </p>
+
+<pre>
+def make_new_pairs(species, scores, left, right):
+    for current in species:
+        left_score = scores[make_pair(current, left)]
+        right_score = scores[make_pair(current, right)]
+        new_score = (left_score + right_score) / 2.0
+        scores[make_pair(current, make_name(left, right))] = new_score
+</pre>
+
+  <p>
+    Finally,
+    the <code>make_pair</code> and <code>make_name</code> functions are simply:
+  </p>
+
+<pre>
+def make_pair(left, right):
+    if left &lt; right:
+        return (left, right)
+    else:
+        return (right, left)
+
+def make_name(left, right):
+    return '&lt;%s, %s&gt;' % make_pair(left, right)
+</pre>
+
+  <p>
+    Let's try running the program:
+  </p>
+
+<pre>
+$ python phylogen.py
+<span class="out">[('human', 'werewolf'), ('&lt;human, werewolf&gt;', 'vampire'), ('&lt;&lt;human, werewolf&gt;, vampire&gt;', 'mermaid')]</span>
+</pre>
+
+  <p>
+    This shows that humans and werewolves were combined first,
+    that their pairing was then combined with vampires,
+    and that mermaids were added to the cluster last.
+    We obviously should do a lot more testing,
+    but so far,
+    we seem to be on the right track.
+  </p>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-setdict/phylotree/keypoints.html %}
+
+<div id="s:setdict:phylotree:keypoints" class="keypoints">
+  <ul>
+    <li>Problems that are described using matrices can often be solved more efficiently using dictionaries.</li>
+    <li>When using tuples as multi-part dictionary keys, order the tuple entries to avoid accidental duplication.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-setdict/phylotree/challenges.html %}
+
+<div id="s:setdict:phylotree:challenges" class="challenges">
+  <ol>
+    <li>
+<p>
+  Work through the clustering algorithm by hand
+  for the following distance matrix:
+</p>
+<table border="1">
+  <tr> <td>&nbsp;</td>     <td>centaur</td>    <td>hippogriff</td> <td>pegasus</td> <td>unicorn</td> </tr>
+  <tr> <td>centaur</td>    <td>&nbsp;</td>     <td>&nbsp;</td>     <td>&nbsp;</td>  <td>&nbsp;</td> </tr>
+  <tr> <td>hippogriff</td> <td>19</td>         <td>&nbsp;</td>     <td>&nbsp;</td>  <td>&nbsp;</td> </tr>
+  <tr> <td>pegasus</td>    <td>7</td>          <td>23</td>         <td>&nbsp;</td>  <td>&nbsp;</td> </tr>
+  <tr> <td>unicorn</td>    <td>7</td>          <td>12</td>         <td>15</td>      <td>&nbsp;</td> </tr>
+</table>
+<p>
+  Check your answers against the output of the program.
+  Would you use this as a test case to check the program's correctness?
+  Why or why not?
+</p>
+    </li>
+    <li>
+<p>
+  The body of the loop in <code>main</code> is:
+</p>
+<pre>
+left, right = find_min_pair(species, scores)
+result.append(make_pair(left, right))
+species -= {left, right}
+make_new_pairs(species, scores, left, right)
+species.add(make_name(left, right))
+</pre>
+<p>
+  What happens if the last line
+  (the call to <code>species.add</code>)
+  is move up above the call to <code>make_new_pairs</code>?
+  (Hint: what assumptions does <code>make_new_pairs</code> make
+  that wouldn't be true
+  if the call to <code>species.add</code> was moved up one line?)
+</p>
+    </li>
+    <li>
+<p>
+  What would happen if the line:
+</p>
+<pre>
+species -= {left, right}
+</pre>
+<p>
+  was moved down one line,
+  so that it was executed after the call to <code>make_new_pairs</code>?
+  (Hint:
+  what assumptions does <code>make_new_pairs</code> make
+  that wouldn't be true
+  if the set subtraction was moved down one line?)
+</p>
+    </li>
+    <li>
+<p>
+  Write docstrings for all five functions in this program.
+  How self-contained are they?
+  How much do you have to explain about who is going to call them,
+  and when,
+  in order to explain what they do and why?
+</p>
+    </li>
+  </ol>
+</div>
+
 </section>
 
 <section>
   <h2>Summary</h2>
-  {% include guide-setdict/summary.html %}
+
+<div id="s:setdict:summary" class="summary">
+
+  <p>
+    Every programmer meets lists (or arrays or matrices) early in her career.
+    Many in science never meet sets and dictionaries,
+    and that's a shame:
+    they often make programs easier to write and faster to run at the same time.
+  </p>
+
+  <p>
+    Before we leave this topic,
+    try running the function <code>globals</code>
+    at an interactive Python prompt:
+  </p>
+
+<pre>
+&gt;&gt;&gt; globals()
+{'__builtins__': &lt;module '__builtin__' (built-in)&gt;,
+ '__doc__': None,
+ '__name__': '__main__',
+ '__package__': None}
+</pre>
+
+  <p class="continue">
+    That's right&mdash;Python actually stores the program's variables in a dictionary.
+    In fact,
+    it uses one dictionary for the global variables
+    and one for each currently-active function call:
+  </p>
+
+<pre>
+&gt;&gt;&gt; def example(first, second):
+...     print 'globals in example', globals()
+...     print 'locals in example', locals()
+... 
+&gt;&gt;&gt; example(22, 33)
+globals in example {'__builtins__': &lt;module '__builtin__' (built-in)&gt;,
+                    '__doc__': None,
+                    '__name__': '__main__',
+                    '__package__': None,
+                    'example': &lt;function example at 0x50b630&gt;}
+locals in example {'second': 33,
+                   'first': 22}
+</pre>
+
+  <p>
+    You now know everything you need to know
+    in order to build a programming language of your own.
+    But please don't:
+    the world will be much better off
+    if you keep doing science instead.
+  </p>
+
+</div>
+
 </section>

@@ -108,11 +108,9 @@ it has a bewildering variety of knobs and dials.
 To get started with it,
 let's open a shell and configure a few things:
 
-```
-$ git config --global user.name "Vlad Dracula"
-$ git config --global user.email "vlad@tran.sylvan.ia"
-$ git config --global color.ui "auto"
-```
+    $ git config --global user.name "Vlad Dracula"
+    $ git config --global user.email "vlad@tran.sylvan.ia"
+    $ git config --global color.ui "auto"
 
 Git commands are written `git verb`,
 where `verb` is what we actually want it to do.
@@ -154,31 +152,23 @@ On Windows:
 We can now start actually using Git.
 Let's create a directory for our work:
 
-```
-$ mkdir planets
-$ cd planets
-```
+    $ mkdir planets
+    $ cd planets
 
 and tell Git to initialize it:
 
-```
-$ git init
-```
+    $ git init
 
 If we use `ls` to show the directory's contents,
 it appears that nothing has changed:
 
-```
-$ ls
-```
+    $ ls
 
 But if we add the `-a` flag to show everything,
 we can see that Git has created a hidden directory called `.git`:
 
-```
-$ ls -a
-.	..	.git
-```
+    $ ls -a
+    .	..	.git
 
 Git will store information about our project in this directory.
 If you ever delete it,
@@ -187,69 +177,59 @@ so please don't.
 
 We can ask Git for the status of our project at any time like this:
 
-```
-$ git status
-# On branch master
-#
-# Initial commit
-#
-nothing to commit (create/copy files and use "git add" to track)
-```
+    $ git status
+    # On branch master
+    #
+    # Initial commit
+    #
+    nothing to commit (create/copy files and use "git add" to track)
 
 Let's add some notes about Mars's suitability as a base.
 (We'll echo the text to the file so that you can see what we're doing,
 but in real life you would use a text editor.)
 
-```
-$ echo "Cold and dry, but everything is my favorite color" > mars.txt
-$ ls
-mars.txt
-$ git status
-# On branch master
-#
-# Initial commit
-#
-# Untracked files:
-#   (use "git add <file>..." to include in what will be committed)
-#
-#	mars.txt
-nothing added to commit but untracked files present (use "git add" to track)
-```
+    $ echo "Cold and dry, but everything is my favorite color" > mars.txt
+    $ ls
+    mars.txt
+    $ git status
+    # On branch master
+    #
+    # Initial commit
+    #
+    # Untracked files:
+    #   (use "git add <file>..." to include in what will be committed)
+    #
+    #	mars.txt
+    nothing added to commit but untracked files present (use "git add" to track)
 
 The message "untracked files" means that there's a file in the directory
 that Git doesn't think it's repsonsible for managing.
 We can tell it that it should start like this:
 
-```
-$ git add mars.txt
-```
+    $ git add mars.txt
 
 and check that the right thing happened like this:
 
-```
-$ git status
-# On branch master
-#
-# Initial commit
-#
-# Changes to be committed:
-#   (use "git rm --cached <file>..." to unstage)
-#
-#	new file:   mars.txt
-#
-```
+    $ git status
+    # On branch master
+    #
+    # Initial commit
+    #
+    # Changes to be committed:
+    #   (use "git rm --cached <file>..." to unstage)
+    #
+    #	new file:   mars.txt
+    #
 
 Git now knows that it's supposed to keep track of this file,
 but it *hasn't* recorded our changes for posterity---not yet.
 To do that,
 we need to run one more command:
 
-```
-$ git commit -m "Starting to think about Mars"
-[master (root-commit) f22b25e] Starting to think about Mars
- 1 file changed, 1 insertion(+)
- create mode 100644 mars.txt
-```
+    $ git commit -m "Starting to think about Mars"
+    [master (root-commit) f22b25e] Starting to think about Mars
+     1 file changed, 1 insertion(+)
+     create mode 100644 mars.txt
 
 When we run `git commit`,
 Git takes everything we have told it to save
@@ -259,47 +239,39 @@ We use the `-m` flag to specify a comment that we want saved as well
 to help us remember later on what we did and why.
 We can use `git status` to check that everything has been saved:
 
-```
-$ git status
-# On branch master
-nothing to commit, working directory clean
-```
+    $ git status
+    # On branch master
+    nothing to commit, working directory clean
 
 We'll come back and explain what `branch master` means soon;
 for the moment,
 all we need to know is that once Git has saved things,
 we can ask it about their history:
 
-```
-$ git log
-commit f22b25e3233b4645dabd0d81e651fe074bd8e73b
-Author: Vlad Dracula <vlad@tran.sylvan.ia>
-Date:   Thu Aug 22 09:51:46 2013 -0400
-
-    Starting to think about Mars
-```
+    $ git log
+    commit f22b25e3233b4645dabd0d81e651fe074bd8e73b
+    Author: Vlad Dracula <vlad@tran.sylvan.ia>
+    Date:   Thu Aug 22 09:51:46 2013 -0400
+    
+        Starting to think about Mars
 
 Now suppose Dracula adds more information to the file
 (remember, `>>` appends rather than overwriting):
 
-```
-$ echo "The two moons may be a problem for Wolfman" >> mars.txt
-```
+    $ echo "The two moons may be a problem for Wolfman" >> mars.txt
 
 This time, `git status` tells us that the file has been modified,
 because Git already knows it's supposed to keep track of it:
 
-```
-$ git status
-# On branch master
-# Changes not staged for commit:
-#   (use "git add <file>..." to update what will be committed)
-#   (use "git checkout -- <file>..." to discard changes in working directory)
-#
-#	modified:   mars.txt
-#
-no changes added to commit (use "git add" and/or "git commit -a")
-```
+    $ git status
+    # On branch master
+    # Changes not staged for commit:
+    #   (use "git add <file>..." to update what will be committed)
+    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #
+    #	modified:   mars.txt
+    #
+    no changes added to commit (use "git add" and/or "git commit -a")
 
 The key phrase is in the last line:
 "no changes added to commit".
@@ -310,16 +282,14 @@ which shows us the differences between
 the current state of the file
 and the most recently saved version:
 
-```
-$ git diff
-diff --git a/mars.txt b/mars.txt
-index df0654a..315bf3a 100644
---- a/mars.txt
-+++ b/mars.txt
-@@ -1 +1,2 @@
- Cold and dry, but everything is my favorite color
-+The two moons may be a problem for Wolfman
-```
+    $ git diff
+    diff --git a/mars.txt b/mars.txt
+    index df0654a..315bf3a 100644
+    --- a/mars.txt
+    +++ b/mars.txt
+    @@ -1 +1,2 @@
+     Cold and dry, but everything is my favorite color
+    +The two moons may be a problem for Wolfman
 
 The output is rather cryptic,
 but we can break it down into pieces:
@@ -336,28 +306,24 @@ but we can break it down into pieces:
 
 Let's commit our change:
 
-```
-$ git commit -m "Concerns about Mars's moons on my furry friend"
-# On branch master
-# Changes not staged for commit:
-#   (use "git add <file>..." to update what will be committed)
-#   (use "git checkout -- <file>..." to discard changes in working directory)
-#
-#	modified:   mars.txt
-#
-no changes added to commit (use "git add" and/or "git commit -a")
-```
+    $ git commit -m "Concerns about Mars's moons on my furry friend"
+    # On branch master
+    # Changes not staged for commit:
+    #   (use "git add <file>..." to update what will be committed)
+    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #
+    #	modified:   mars.txt
+    #
+    no changes added to commit (use "git add" and/or "git commit -a")
 
 Whoops:
 Git refuses to commit the changes because we didn't use `git add` first.
 Let's do that:
 
-```
-$ git add mars.txt
-$ git commit -m "Concerns about Mars's moons on my furry friend"
-[master 34961b1] Concerns about Mars's moons on my furry friend
- 1 file changed, 1 insertion(+)
-```
+    $ git add mars.txt
+    $ git commit -m "Concerns about Mars's moons on my furry friend"
+    [master 34961b1] Concerns about Mars's moons on my furry friend
+     1 file changed, 1 insertion(+)
 
 Git insists that we add files to the set we want to commit
 before actually committing anything
@@ -380,18 +346,16 @@ FIXME: diagram
 
 The following commands show this in action:
 
-```
-$ echo "But the Mummy will appreciate the lack of humidity" >> mars.txt
-$ git diff
-diff --git a/mars.txt b/mars.txt
-index 315bf3a..b36abfd 100644
---- a/mars.txt
-+++ b/mars.txt
-@@ -1,2 +1,3 @@
- Cold and dry, but everything is my favorite color
- The two moons may be a problem for Wolfman
-+But the Mummy will appreciate the lack of humidity
-```
+    $ echo "But the Mummy will appreciate the lack of humidity" >> mars.txt
+    $ git diff
+    diff --git a/mars.txt b/mars.txt
+    index 315bf3a..b36abfd 100644
+    --- a/mars.txt
+    +++ b/mars.txt
+    @@ -1,2 +1,3 @@
+     Cold and dry, but everything is my favorite color
+     The two moons may be a problem for Wolfman
+    +But the Mummy will appreciate the lack of humidity
 
 So far, so good:
 we've made a change,
@@ -399,10 +363,8 @@ and `git diff` tells us what it is.
 Now let's put that change in the staging area
 and see what `git diff` reports:
 
-```
-$ git add mars.txt
-$ git diff
-```
+    $ git add mars.txt
+    $ git diff
 
 There is no output:
 as far as Git can tell,
@@ -411,87 +373,77 @@ and what's currently in the directory.
 However,
 if we do this:
 
-```
-$ git diff --staged
-diff --git a/mars.txt b/mars.txt
-index 315bf3a..b36abfd 100644
---- a/mars.txt
-+++ b/mars.txt
-@@ -1,2 +1,3 @@
- Cold and dry, but everything is my favorite color
- The two moons may be a problem for Wolfman
-+But the Mummy will appreciate the lack of humidity
-```
+    $ git diff --staged
+    diff --git a/mars.txt b/mars.txt
+    index 315bf3a..b36abfd 100644
+    --- a/mars.txt
+    +++ b/mars.txt
+    @@ -1,2 +1,3 @@
+     Cold and dry, but everything is my favorite color
+     The two moons may be a problem for Wolfman
+    +But the Mummy will appreciate the lack of humidity
 
 it shows us the difference between
 the last committed change
 and what's in the staging area.
 Let's save our changes:
 
-```
-$ git commit -m "Thoughts about the climate"
-[master 005937f] Thoughts about the climate
- 1 file changed, 1 insertion(+)
-```
+    $ git commit -m "Thoughts about the climate"
+    [master 005937f] Thoughts about the climate
+     1 file changed, 1 insertion(+)
 
 check our status:
 
-```
-$ git status
-# On branch master
-nothing to commit, working directory clean
-```
+    $ git status
+    # On branch master
+    nothing to commit, working directory clean
 
 and look at the history of what we've done so far:
 
-```
-$ git log
-git log
-commit 005937fbe2a98fb83f0ade869025dc2636b4dad5
-Author: Vlad Dracula <vlad@tran.sylvan.ia>
-Date:   Thu Aug 22 10:14:07 2013 -0400
-
-    Thoughts about the climate
-
-commit 34961b159c27df3b475cfe4415d94a6d1fcd064d
-Author: Vlad Dracula <vlad@tran.sylvan.ia>
-Date:   Thu Aug 22 10:07:21 2013 -0400
-
-    Concerns about Mars's moons on my furry friend
-
-commit f22b25e3233b4645dabd0d81e651fe074bd8e73b
-Author: Vlad Dracula <vlad@tran.sylvan.ia>
-Date:   Thu Aug 22 09:51:46 2013 -0400
-
-    Starting to think about Mars
-```
+    $ git log
+    git log
+    commit 005937fbe2a98fb83f0ade869025dc2636b4dad5
+    Author: Vlad Dracula <vlad@tran.sylvan.ia>
+    Date:   Thu Aug 22 10:14:07 2013 -0400
+    
+        Thoughts about the climate
+    
+    commit 34961b159c27df3b475cfe4415d94a6d1fcd064d
+    Author: Vlad Dracula <vlad@tran.sylvan.ia>
+    Date:   Thu Aug 22 10:07:21 2013 -0400
+    
+        Concerns about Mars's moons on my furry friend
+    
+    commit f22b25e3233b4645dabd0d81e651fe074bd8e73b
+    Author: Vlad Dracula <vlad@tran.sylvan.ia>
+    Date:   Thu Aug 22 09:51:46 2013 -0400
+    
+        Starting to think about Mars
 
 If we want to see what we changed when,
 we can use `git diff` yet again.
 We can refer to old versions
 using the notation `HEAD~1`, `HEAD~2`, and so on:
 
-```
-$ git diff HEAD~1 mars.txt
-diff --git a/mars.txt b/mars.txt
-index 315bf3a..b36abfd 100644
---- a/mars.txt
-+++ b/mars.txt
-@@ -1,2 +1,3 @@
- Cold and dry, but everything is my favorite color
- The two moons may be a problem for Wolfman
-+But the Mummy will appreciate the lack of humidity
-
-$ git diff HEAD~2 mars.txt
-diff --git a/mars.txt b/mars.txt
-index df0654a..b36abfd 100644
---- a/mars.txt
-+++ b/mars.txt
-@@ -1 +1,3 @@
- Cold and dry, but everything is my favorite color
-+The two moons may be a problem for Wolfman
-+But the Mummy will appreciate the lack of humidity
-```
+    $ git diff HEAD~1 mars.txt
+    diff --git a/mars.txt b/mars.txt
+    index 315bf3a..b36abfd 100644
+    --- a/mars.txt
+    +++ b/mars.txt
+    @@ -1,2 +1,3 @@
+     Cold and dry, but everything is my favorite color
+     The two moons may be a problem for Wolfman
+    +But the Mummy will appreciate the lack of humidity
+    
+    $ git diff HEAD~2 mars.txt
+    diff --git a/mars.txt b/mars.txt
+    index df0654a..b36abfd 100644
+    --- a/mars.txt
+    +++ b/mars.txt
+    @@ -1 +1,3 @@
+     Cold and dry, but everything is my favorite color
+    +The two moons may be a problem for Wolfman
+    +But the Mummy will appreciate the lack of humidity
 
 `HEAD` means "the most recently saved version".
 `HEAD~1` is pronounced "head minus one",
@@ -507,33 +459,29 @@ Our first commit was given the ID
 f22b25e3233b4645dabd0d81e651fe074bd8e73b,
 so let's try this:
 
-```
-$ git diff f22b25e3233b4645dabd0d81e651fe074bd8e73b mars.txt
-diff --git a/mars.txt b/mars.txt
-index df0654a..b36abfd 100644
---- a/mars.txt
-+++ b/mars.txt
-@@ -1 +1,3 @@
- Cold and dry, but everything is my favorite color
-+The two moons may be a problem for Wolfman
-+But the Mummy will appreciate the lack of humidity
-```
+    $ git diff f22b25e3233b4645dabd0d81e651fe074bd8e73b mars.txt
+    diff --git a/mars.txt b/mars.txt
+    index df0654a..b36abfd 100644
+    --- a/mars.txt
+    +++ b/mars.txt
+    @@ -1 +1,3 @@
+     Cold and dry, but everything is my favorite color
+    +The two moons may be a problem for Wolfman
+    +But the Mummy will appreciate the lack of humidity
 
 That's the right answer,
 but typing in 40-character strings is annoying,
 so Git lets us use just the first few:
 
-```
-$ git diff f22b25e mars.txt
-diff --git a/mars.txt b/mars.txt
-index df0654a..b36abfd 100644
---- a/mars.txt
-+++ b/mars.txt
-@@ -1 +1,3 @@
- Cold and dry, but everything is my favorite color
-+The two moons may be a problem for Wolfman
-+But the Mummy will appreciate the lack of humidity
-```
+    $ git diff f22b25e mars.txt
+    diff --git a/mars.txt b/mars.txt
+    index df0654a..b36abfd 100644
+    --- a/mars.txt
+    +++ b/mars.txt
+    @@ -1 +1,3 @@
+     Cold and dry, but everything is my favorite color
+    +The two moons may be a problem for Wolfman
+    +But the Mummy will appreciate the lack of humidity
 
 All right:
 we can save changes to files and see what we've changed---how
@@ -541,37 +489,31 @@ can we restore older versions of things?
 Let's suppose we accidentally overwrite our file
 by using `>` instead of `>>`:
 
-```
-$ echo "We will need to manufacture our own oxygen" > mars.txt
-$ cat mars.txt
-We will need to manufacture our own oxygen
-```
+    $ echo "We will need to manufacture our own oxygen" > mars.txt
+    $ cat mars.txt
+    We will need to manufacture our own oxygen
 
 `git status` now tells us that the file has been changed,
 but those changes haven't been staged:
 
-```
-$ git status
-# On branch master
-# Changes not staged for commit:
-#   (use "git add <file>..." to update what will be committed)
-#   (use "git checkout -- <file>..." to discard changes in working directory)
-#
-#	modified:   mars.txt
-#
-no changes added to commit (use "git add" and/or "git commit -a")
-```
+    $ git status
+    # On branch master
+    # Changes not staged for commit:
+    #   (use "git add <file>..." to update what will be committed)
+    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #
+    #	modified:   mars.txt
+    #
+    no changes added to commit (use "git add" and/or "git commit -a")
 
 We can put things back the way they were like this:
 
-```
-$ git reset --hard HEAD
-HEAD is now at 005937f Thoughts about the climate
-$ cat mars.txt
-Cold and dry, but everything is my favorite color
-The two moons may be a problem for Wolfman
-But the Mummy will appreciate the lack of humidity
-```
+    $ git reset --hard HEAD
+    HEAD is now at 005937f Thoughts about the climate
+    $ cat mars.txt
+    Cold and dry, but everything is my favorite color
+    The two moons may be a problem for Wolfman
+    But the Mummy will appreciate the lack of humidity
 
 The `--hard` argument to `git reset` tells it to throw away local changes:
 without that,
@@ -597,48 +539,42 @@ we'll need to explore branching.
 
 Here's where we are right now:
 
-```
-$ git log
-commit 005937fbe2a98fb83f0ade869025dc2636b4dad5
-Author: Vlad Dracula <vlad@tran.sylvan.ia>
-Date:   Thu Aug 22 10:14:07 2013 -0400
-
-    Thoughts about the climate
-
-commit 34961b159c27df3b475cfe4415d94a6d1fcd064d
-Author: Vlad Dracula <vlad@tran.sylvan.ia>
-Date:   Thu Aug 22 10:07:21 2013 -0400
-
-    Concerns about Mars's moons on my furry friend
-
-commit f22b25e3233b4645dabd0d81e651fe074bd8e73b
-Author: Vlad Dracula <vlad@tran.sylvan.ia>
-Date:   Thu Aug 22 09:51:46 2013 -0400
-
-    Starting to think about Mars
-$ cat mars.txt
-Cold and dry, but everything is my favorite color
-The two moons may be a problem for Wolfman
-But the Mummy will appreciate the lack of humidity
-```
+    $ git log
+    commit 005937fbe2a98fb83f0ade869025dc2636b4dad5
+    Author: Vlad Dracula <vlad@tran.sylvan.ia>
+    Date:   Thu Aug 22 10:14:07 2013 -0400
+    
+        Thoughts about the climate
+    
+    commit 34961b159c27df3b475cfe4415d94a6d1fcd064d
+    Author: Vlad Dracula <vlad@tran.sylvan.ia>
+    Date:   Thu Aug 22 10:07:21 2013 -0400
+    
+        Concerns about Mars's moons on my furry friend
+    
+    commit f22b25e3233b4645dabd0d81e651fe074bd8e73b
+    Author: Vlad Dracula <vlad@tran.sylvan.ia>
+    Date:   Thu Aug 22 09:51:46 2013 -0400
+    
+        Starting to think about Mars
+    $ cat mars.txt
+    Cold and dry, but everything is my favorite color
+    The two moons may be a problem for Wolfman
+    But the Mummy will appreciate the lack of humidity
 
 FIXME: diagram
 
 Let's run this command:
 
-```
-$ git branch moons
-```
+    $ git branch moons
 
 It appears to do nothing,
 but behind the scenes,
 it has created a new [branch](glossary.html#branch) called `moons`:
 
-```
-$ git branch
-* master
-  moons
-```
+    $ git branch
+    * master
+      moons
 
 FIXME: diagram
 
@@ -651,76 +587,64 @@ They both point to the same revision right now,
 but we can change that.
 Let's make `moons` the active branch:
 
-```
-$ git checkout moons
-Switched to branch 'moons'
-$ git branch
-  master
-* moons
-```
+    $ git checkout moons
+    Switched to branch 'moons'
+    $ git branch
+      master
+    * moons
 
 Our file looks the same:
 
-```
-$ cat mars.txt
-Cold and dry, but everything is my favorite color
-The two moons may be a problem for Wolfman
-But the Mummy will appreciate the lack of humidity
-```
+    $ cat mars.txt
+    Cold and dry, but everything is my favorite color
+    The two moons may be a problem for Wolfman
+    But the Mummy will appreciate the lack of humidity
 
 because it *is* the same:
 Git hasn't made a copy of it yet
 because it hasn't needed to.
 Let's add another line to it:
 
-```
-$ echo "Maybe we should put the base on one of the moons instead?" >> mars.txt
-```
+    $ echo "Maybe we should put the base on one of the moons instead?" >> mars.txt
 
 and add an entirely new file:
 
-```
-$ echo "Phobos is larger than Deimos" > moons.txt
-$ ls
-mars.txt    moons.txt
-```
+    $ echo "Phobos is larger than Deimos" > moons.txt
+    $ ls
+    mars.txt    moons.txt
 
 Git now tells us that we have one changed file and one new file:
 
-```
-$ git status
-# On branch moons
-# Changes not staged for commit:
-#   (use "git add <file>..." to update what will be committed)
-#   (use "git checkout -- <file>..." to discard changes in working directory)
-#
-#	modified:   mars.txt
-#
-# Untracked files:
-#   (use "git add <file>..." to include in what will be committed)
-#
-#	moons.txt
-no changes added to commit (use "git add" and/or "git commit -a")
-```
+    $ git status
+    # On branch moons
+    # Changes not staged for commit:
+    #   (use "git add <file>..." to update what will be committed)
+    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #
+    #	modified:   mars.txt
+    #
+    # Untracked files:
+    #   (use "git add <file>..." to include in what will be committed)
+    #
+    #	moons.txt
+    no changes added to commit (use "git add" and/or "git commit -a")
 
 Let's add and commit those changes
 (the `-A` flag to `git add` means "add everything"):
 
-```
-$ git add -A .
-$ git status
-# On branch moons
-# Changes to be committed:
-#   (use "git reset HEAD <file>..." to unstage)
-#
-#	modified:   mars.txt
-#	new file:   moons.txt
-#
-~/planets: git commit -m "Thinking about the moons"
-[moons 62e7791] Thinking about the moons
- 2 files changed, 2 insertions(+)
- create mode 100644 moons.txt
-```
+    $ git add -A .
+    $ git status
+    # On branch moons
+    # Changes to be committed:
+    #   (use "git reset HEAD <file>..." to unstage)
+    #
+    #	modified:   mars.txt
+    #	new file:   moons.txt
+    #
+    ~/planets: git commit -m "Thinking about the moons"
+    [moons 62e7791] Thinking about the moons
+     2 files changed, 2 insertions(+)
+     create mode 100644 moons.txt
 
 Our repository is now in the state shown below:
 
@@ -730,20 +654,16 @@ The `moons` branch has advanced to record the changes we just made,
 but `master` is still where it was.
 If we switch back to `master`:
 
-```
-$ git checkout master
-```
+    $ git checkout master
 
 our changes seem to disappear:
 
-```
-$ ls
-mars.txt
-$ cat mars.txt
-Cold and dry, but everything is my favorite color
-The two moons may be a problem for Wolfman
-But the Mummy will appreciate the lack of humidity
-```
+    $ ls
+    mars.txt
+    $ cat mars.txt
+    Cold and dry, but everything is my favorite color
+    The two moons may be a problem for Wolfman
+    But the Mummy will appreciate the lack of humidity
 
 They're still in the repository---they're just not in
 the revision that `master` is currently pointing to.
@@ -755,21 +675,19 @@ before diverging.
 Let's make some changes in the `master` branch
 to further illustrate this point:
 
-```
-$ echo "Should we go with a classical name like Ares Base?" > names.txt
-$ git status
-# On branch master
-# Untracked files:
-#   (use "git add <file>..." to include in what will be committed)
-#
-#	names.txt
-nothing added to commit but untracked files present (use "git add" to track)
-$ git add names.txt
-$ git commit -m "We will need a cool name for our secret base"
-[master dfcf908] We will need a cool name for our secret base
- 1 file changed, 1 insertion(+)
- create mode 100644 names.txt
-```
+    $ echo "Should we go with a classical name like Ares Base?" > names.txt
+    $ git status
+    # On branch master
+    # Untracked files:
+    #   (use "git add <file>..." to include in what will be committed)
+    #
+    #	names.txt
+    nothing added to commit but untracked files present (use "git add" to track)
+    $ git add names.txt
+    $ git commit -m "We will need a cool name for our secret base"
+    [master dfcf908] We will need a cool name for our secret base
+     1 file changed, 1 insertion(+)
+     create mode 100644 names.txt
 
 Our repository is now in the state shown below:
 
@@ -780,26 +698,22 @@ They could continue independent existence indefinitely,
 but at some point we'll probably want to [merge](glossary.html#merge) our changes.
 Let's do that now:
 
-```
-$ git branch
-* master
-  moons
-$ git merge moons
-```
+    $ git branch
+    * master
+      moons
+    $ git merge moons
 
 When we run the `git merge` command,
 Git opens an editor to let us write a log entry about what we're doing.
 The editor session initially contains this:
 
-```
-Merge branch 'moons'
-
-# Please enter a commit message to explain why this merge is necessary,
-# especially if it merges an updated upstream into a topic branch.
-#
-# Lines starting with '#' will be ignored, and an empty message aborts
-# the commit.
-```
+    Merge branch 'moons'
+    
+    # Please enter a commit message to explain why this merge is necessary,
+    # especially if it merges an updated upstream into a topic branch.
+    #
+    # Lines starting with '#' will be ignored, and an empty message aborts
+    # the commit.
 
 If we notice that something is wrong
 and decide not to complete the merge,
@@ -812,20 +726,16 @@ we'll stick with the default log message.
 When we save the file and exit the editor,
 Git displays this:
 
-```
-Merge made by the 'recursive' strategy.
- mars.txt  | 1 +
- moons.txt | 1 +
- 2 files changed, 2 insertions(+)
- create mode 100644 moons.txt
-```
+    Merge made by the 'recursive' strategy.
+     mars.txt  | 1 +
+     moons.txt | 1 +
+     2 files changed, 2 insertions(+)
+     create mode 100644 moons.txt
 
 We now have all of our changes in one place:
 
-```
-$ ls
-mars.txt    moons.txt    names.txt
-```
+    $ ls
+    mars.txt    moons.txt    names.txt
 
 and our repository looks like this:
 
@@ -833,17 +743,15 @@ FIXME: diagram
 
 We can visualize the history with this set of arguments to `git log`:
 
-```
-$ git log --oneline --topo-order --graph
-*   e0cf8ab Merge branch 'moons'
-|\  
-| * 62e7791 Thinking about the moons
-* | dfcf908 We will need a cool name for our secret base
-|/  
-* 005937f Thoughts about the climate
-* 34961b1 Concerns about Mars's moons on my furry friend
-* f22b25e Starting to think about Mars
-```
+    $ git log --oneline --topo-order --graph
+    *   e0cf8ab Merge branch 'moons'
+    |\  
+    | * 62e7791 Thinking about the moons
+    * | dfcf908 We will need a cool name for our secret base
+    |/  
+    * 005937f Thoughts about the climate
+    * 34961b1 Concerns about Mars's moons on my furry friend
+    * f22b25e Starting to think about Mars
 
 This ASCII art is fine for small sets of changes,
 but for anything significant,
@@ -937,35 +845,31 @@ To see how merging works,
 we must first create a conflict.
 Let's add a line to the version of `moons.txt` in the `master` branch:
 
-```
-$ git branch
-* master
-  moons
-$ echo "This line added in master" >> moons.txt
-$ cat moons.txt
-Phobos is larger than Deimos
-This line added in master
-$ git add moons.txt
-$ git commit -m "Adding a line to moons.txt in the master branch"
-[master 5ae9631] Adding a line in the master branch
- 1 file changed, 1 insertion(+)
-```
+    $ git branch
+    * master
+      moons
+    $ echo "This line added in master" >> moons.txt
+    $ cat moons.txt
+    Phobos is larger than Deimos
+    This line added in master
+    $ git add moons.txt
+    $ git commit -m "Adding a line to moons.txt in the master branch"
+    [master 5ae9631] Adding a line in the master branch
+     1 file changed, 1 insertion(+)
 
 FIXME: diagram
 
 Now let's switch to the `moons` branch and make a different change there:
 
-```
-$ git checkout moons
-$ echo "This line added in the moons branch" >> moons.txt
-$ cat moons.txt
-Phobos is larger than Deimos
-This line added in the moons branch
-$ git add moons.txt
-$ git commit -m "Adding a line in the moons branch"
-[moons 07ebc69] Adding a line in the moons branch
- 1 file changed, 1 insertion(+)
-```
+    $ git checkout moons
+    $ echo "This line added in the moons branch" >> moons.txt
+    $ cat moons.txt
+    Phobos is larger than Deimos
+    This line added in the moons branch
+    $ git add moons.txt
+    $ git commit -m "Adding a line in the moons branch"
+    [moons 07ebc69] Adding a line in the moons branch
+     1 file changed, 1 insertion(+)
 
 Our repository now looks like this:
 
@@ -973,49 +877,43 @@ FIXME: diagram
 
 Let's pull all the changes made in `master` into the `moons` branch:
 
-```
-$ git merge master
-Auto-merging moons.txt
-CONFLICT (content): Merge conflict in moons.txt
-Automatic merge failed; fix conflicts and then commit the result.
-```
+    $ git merge master
+    Auto-merging moons.txt
+    CONFLICT (content): Merge conflict in moons.txt
+    Automatic merge failed; fix conflicts and then commit the result.
 
 Git has detected that the changes made in the `master` branch
 overlap with those made in the `moons` branch.
 If we ask it for our status,
 we get this:
 
-```
-$ git status
-# On branch moons
-# You have unmerged paths.
-#   (fix conflicts and run "git commit")
-#
-# Changes to be committed:
-#
-#	new file:   names.txt
-#
-# Unmerged paths:
-#   (use "git add <file>..." to mark resolution)
-#
-#	both modified:      moons.txt
-#
-```
+    $ git status
+    # On branch moons
+    # You have unmerged paths.
+    #   (fix conflicts and run "git commit")
+    #
+    # Changes to be committed:
+    #
+    #	new file:   names.txt
+    #
+    # Unmerged paths:
+    #   (use "git add <file>..." to mark resolution)
+    #
+    #	both modified:      moons.txt
+    #
 
 which tells us that it brought over the file `names.txt` successfully
 (which was added in `master`, but didn't yet exist in `moons`),
 but was unable to handle the conflict in `moons.txt`.
 What it *has* done is mark the conflict in that file:
 
-```
-$ cat moons.txt
-Phobos is larger than Deimos
-<<<<<<< HEAD
-This line added in the moons branch
-=======
-This line added in master
->>>>>>> master
-```
+    $ cat moons.txt
+    Phobos is larger than Deimos
+    <<<<<<< HEAD
+    This line added in the moons branch
+    =======
+    This line added in master
+    >>>>>>> master
 
 Our change---the one in `HEAD`---is preceded by `<<<<<<<`.
 Git has then inserted `=======` as a separator between the conflicting changes
@@ -1030,31 +928,27 @@ write something new to replace both,
 or get rid of the change entirely.
 Let's replace both so that the file looks like this:
 
-```
-$ cat moons.txt
-Phobos is larger than Deimos
-Lines added in the master and moons branches
-```
+    $ cat moons.txt
+    Phobos is larger than Deimos
+    Lines added in the master and moons branches
 
 To finish merging,
 we need to add `moons.txt` to the changes being made by the merge
 and then commit:
 
-```
-$ git add moons.txt
-$ git status
-# On branch moons
-# All conflicts fixed but you are still merging.
-#   (use "git commit" to conclude merge)
-#
-# Changes to be committed:
-#
-#	modified:   moons.txt
-#	new file:   names.txt
-#
-$ git commit -m "Pulling in changes from master"
-[moons 2f20801] Pulling in changes from master
-```
+    $ git add moons.txt
+    $ git status
+    # On branch moons
+    # All conflicts fixed but you are still merging.
+    #   (use "git commit" to conclude merge)
+    #
+    # Changes to be committed:
+    #
+    #	modified:   moons.txt
+    #	new file:   names.txt
+    #
+    $ git commit -m "Pulling in changes from master"
+    [moons 2f20801] Pulling in changes from master
 
 Our repository now looks like this:
 
@@ -1064,17 +958,15 @@ Git tries hard to keep track of what we've merged with what,
 so if we switch back to `master` and merge the changes in `moons`,
 we don't have to fix things by hand again:
 
-```
-$ git checkout master
-$ git merge moons
-Updating 5ae9631..2f20801
-Fast-forward
- moons.txt | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-$ cat moons.txt 
-Phobos is larger than Deimos
-Lines added in the master and moons branches
-```
+    $ git checkout master
+    $ git merge moons
+    Updating 5ae9631..2f20801
+    Fast-forward
+     moons.txt | 2 +-
+     1 file changed, 1 insertion(+), 1 deletion(-)
+    $ cat moons.txt 
+    Phobos is larger than Deimos
+    Lines added in the master and moons branches
 
 The key phrase here is "fast-forward"
 (which appears in the output of the `git merge` command).
@@ -1114,11 +1006,9 @@ FIXME: screenshot
 
 This effectively does the following on GitHub's servers:
 
-```
-$ mkdir planets
-$ cd planets
-$ git init
-```
+    $ mkdir planets
+    $ cd planets
+    $ git init
 
 We're now in the situation shown in the figure below:
 
@@ -1145,18 +1035,14 @@ Copy that string from the browser,
 go into the local `planets` repository,
 and run this command:
 
-```
-$ git remote add origin https://github.com/yourname/planets
-```
+    $ git remote add origin https://github.com/yourname/planets
 
 (using your GitHub ID instead of `yourname`).
 We can check that the command has worked by running `git remote -v`:
 
-```
-$ git remote -v
-origin   https://github.com/yourname/planets.git (push)
-origin   https://github.com/yourname/planets.git (fetch)
-```
+    $ git remote -v
+    origin   https://github.com/yourname/planets.git (push)
+    origin   https://github.com/yourname/planets.git (fetch)
 
 There's nothing special about the name `origin`:
 we can use almost anything,
@@ -1165,16 +1051,14 @@ Once this is set up,
 the following command will push the changes from our local repository's `master` branch
 to the corresponding branch in the repository on GitHub:
 
-```
-$ git push origin master
-Counting objects: 27, done.
-Delta compression using up to 4 threads.
-Compressing objects: 100% (23/23), done.
-Writing objects: 100% (27/27), 2.62 KiB, done.
-Total 27 (delta 5), reused 0 (delta 0)
-To https://github.com/gvwilson/planets.git
- * [new branch]      master -> master
-```
+    $ git push origin master
+    Counting objects: 27, done.
+    Delta compression using up to 4 threads.
+    Compressing objects: 100% (23/23), done.
+    Writing objects: 100% (27/27), 2.62 KiB, done.
+    Total 27 (delta 5), reused 0 (delta 0)
+    To https://github.com/gvwilson/planets.git
+     * [new branch]      master -> master
 
 This command just did what `git merge` does,
 except it moved changes between repositories
@@ -1185,12 +1069,10 @@ FIXME: diagram
 
 We can pull changes from the remote repository to the local one as well:
 
-```
-$ git pull origin master
-From https://github.com/gvwilson/planets
- * branch            master     -> FETCH_HEAD
-Already up-to-date.
-```
+    $ git pull origin master
+    From https://github.com/gvwilson/planets
+     * branch            master     -> FETCH_HEAD
+    Already up-to-date.
 
 Pulling has no effect in this case
 because the two repositories are already synchronized.
@@ -1224,22 +1106,18 @@ Dracula creates a repository on GitHub
 in exactly the same way as we created the `planets` repository a few moments ago,
 and then [clones](glossary.html#repository_clone) it to his desktop:
 
-```
-$ git clone https://github.com/vlad/undersea.git
-Cloning into 'undersea'...
-warning: You appear to have cloned an empty repository.
-```
+    $ git clone https://github.com/vlad/undersea.git
+    Cloning into 'undersea'...
+    warning: You appear to have cloned an empty repository.
 
 `git clone` automatically adds the original repository on GitHub
 as a remote of the local repository called `origin`---this
 is why we chose `origin` as a remote name in our previous example:
 
-```
-$ cd undersea
-$ git remote -v
-origin	    https://github.com/vlad/undersea.git (fetch)
-origin	    https://github.com/vlad/undersea.git (push)
-```
+    $ cd undersea
+    $ git remote -v
+    origin	    https://github.com/vlad/undersea.git (fetch)
+    origin	    https://github.com/vlad/undersea.git (push)
 
 Dracula can now push and pull changes just as before.
 

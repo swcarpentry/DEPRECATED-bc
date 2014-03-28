@@ -3,15 +3,23 @@ layout: lesson
 root: .
 title: Recommended Reading
 ---
-Papers
-------
+
+## Papers
+
+*   Susan A. Ambrose, Michael W. Bridges, Michele DiPietro, Marsha C. Lovett, and Marie K. Norman:
+    *[How Learning Works: Seven Research-Based Principles for Smart Teaching](http://www.amazon.com/How-Learning-Works-Research-Based-Principles/dp/0470484101/)*.
+    Jossey-Bass,
+    2010,
+    978-0470484104.
+    <br/>
+    The best single-volume guide to evidence-based practices in education around.
 
 *   Paul F. Dubois:
     "Maintaining Correctness in Scientific Programs".
     *Computing in Science & Engineering*,
     May–June 2005.
     <br/>
-    This paper shows how several good programming practices fit together
+    Shows how several good programming practices fit together
     to create defense in depth,
     so that errors missed by one will be caught by another.
 
@@ -51,8 +59,9 @@ Papers
 
 *   Greg Wilson, D. A. Aruliah, C. Titus Brown, Neil P. Chue Hong, Matt Davis, Richard T. Guy, Steven H. D. Haddock, Katy Huff, Ian M. Mitchell, Mark Plumbley, Ben Waugh, Ethan P. White, and Paul Wilson:
     "Best Practices for Scientific Computing".
-    arXiv pre-print,
-    submitted November 29, 2012.
+    *PLoS Biology*,
+    12(1),
+    2014.
     <br/>
     Describes a set of best practices for scientific software development
     that have solid foundations in research and experience,
@@ -65,8 +74,7 @@ Papers
     Describes what we've learned about how to teach programming to scientists
     over the last 15 years.
 
-Books
------
+## Books
 
 *   Chris Fehily:
     *SQL: Visual QuickStart Guide* (3rd ed).

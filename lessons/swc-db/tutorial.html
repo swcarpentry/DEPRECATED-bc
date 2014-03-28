@@ -7,159 +7,3634 @@ order: ["select", "distinct", "filter", "calc", "sort", "null", "aggregate", "gr
 
 <section>
   <h2>Opening</h2>
-  {% include guide-db/opening.html %}
+
+<div id="s:db:opening" class="opening">
+
+  <p>
+    In the late 1920s and early 1930s,
+    William Dyer,
+    Frank Pabodie,
+    and Valentina Roerich led expeditions to the
+    <a href="http://en.wikipedia.org/wiki/Pole_of_inaccessibility">Pole of Inaccessibility</a>
+    in the South Pacific,
+    and then onward to Antarctica.
+    Two years ago,
+    Gina Geographer discovered their expedition journals
+    in a storage locker at Miskatonic University.
+    She has scanned and OCR'd the data they contain,
+    and wants to store that information
+    in a way that will make search and analysis easy.
+  </p>
+  
+  <p>
+    Gina basically has three options:
+    text files,
+    a spreadsheet,
+    or a database.
+    Text files are easiest to create,
+    and work well with version control,
+    but she would then have to build all her search and analysis herself.
+    Spreadsheets are good for doing simple analysis,
+    but as she found in her last project,
+    they don't handle large or complex data sets very well.
+    She would therefore like to put her data in a database,
+    and this chapter will show her how.
+  </p>
+  
+  <p>
+    As many scientists have found out the hard way,
+    if collecting data is the first 90% of the work,
+    managing it is the other 90%.
+    In this chapter,
+    we'll see how to use a database to store and analyze field observations.
+    The techniques we will explore apply directly to other kinds of databases as well,
+    and as we'll see,
+    knowing how to get information <em>out</em> of a database is essential to
+    figuring out how to put data <em>in</em>.
+  </p>
+
+</div>
+
 </section>
 
 <section>
   <h2>Instructors</h2>
-  {% include guide-db/instructors.html %}
+
+<div id="s:db:instructors" class="instructors">
+
+  <ul>
+
+    <li>
+      Relational databases are not as widely used in science as in business,
+      but they are still a common way to store large data sets with complex structure.
+      Even when the data itself isn't in a database,
+      the metadata could be:
+      for example,
+      meteorological data might be stored in files on disk,
+      but data about when and where observations were made,
+      data ranges,
+      and so on could be in a database
+      to make it easier for scientists to find what they want to.
+    </li>
+
+    <li>
+      The first few sections
+      (up to <a href="#s:sort">Ordering Results</a>)
+      usually go very quickly.
+      The pace usually slows down a bit when null values and aggregation are discussed,
+      mostly because learners have a lot of details to keep straight by this point.
+      Things <em>really</em> slow down during the discussion of joins,
+      but this is the key idea in the whole lesson:
+      important ideas like primary keys and referential integrity only make sense
+      once learners have seen how they're used in joins.
+      It's worth going over things a couple of times if necessary
+      (with lots of examples).
+    </li>
+
+    <li>
+      The final three sections are independent of each other,
+      and can be dropped if time is short.
+      Of the three,
+      people seem to care most about how to add data
+      (which only takes a few minutes to demonstrate),
+      and how to use databases from inside "real" programs.
+      The material on transactions is more abstract than the rest,
+      and should be omitted if <a href="web.html">web programming</a>
+      isn't being taught.
+      Overall,
+      this material takes three hours to present
+      assuming that a short exercise is done with each topic.
+    </li>
+
+    <li>
+      It isn't necessary to cover <a href="setdict.html">sets and dictionaries</a>
+      before this material,
+      but if that has been discussed,
+      it's helpful to point out that a relational table is a generalized dictionary.
+    </li>
+
+    <li>
+      Simple calculations are actually easier to do in a spreadsheet,
+      the advantages of using a database become clear
+      as soon as filtering and joins are needed.
+      Instructors may therefore want to show a spreadsheet
+      with the information from the four database tables
+      consolidated into a single sheet,
+      and demonstrate what's needed in both systems to answer questions like,
+      "What was the average radiation reading in 1931?"
+    </li>
+
+    <li>
+      Some learners may have heard that NoSQL databases
+      (i.e., ones that don't use the relational model)
+      are the next big thing,
+      and ask why we're not teaching those.
+      The answers are:
+      <ol>
+        <li>
+          Relational databases are far more widely used than NoSQL databases.
+        </li>
+        <li>
+          We have far more experience with relational databases
+          than with any other kind,
+          so we have a better idea of what to teach
+          and how to teach it.
+        </li>
+        <li>
+          NoSQL databases are as different from each other
+          as they are from relational databases.
+          Until a leader emerges,
+          it isn't clear <em>which</em> NoSQL database we should teach.
+        </li>
+      </ol>
+    </li>
+
+    <li>
+      This discussion is a useful companion to that of vectorization
+      in the lesson on <a href="numpy.html">numerical computing</a>:
+      in both cases,
+      the key point is to describe <em>what</em> to do,
+      and let the computer figure out <em>how</em> to do it.
+    </li>
+
+  </ul>
+
+</div>
+
 </section>
 
 <section id="s:db:select">
-  <h2>{% include guide-db/select/title.md %}</h2>
+  <h2>Selecting</h2>
   <h3>Objectives</h3>
-  {% include guide-db/select/objectives.html %}
+
+<div id="s:db:select:objectives" class="objectives">
+  <ul>
+    <li>Explain the difference between a table, a database, and a database manager.</li>
+    <li>Explain the difference between a field and a record.</li>
+    <li>Select specific fields from specific tables, and display them in a specific order.</li>
+  </ul>
+  <p>Duration: 15 minutes (not including time required to download database file and connect to it).</p>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-db/select/lesson.html %}
+
+<div id="s:db:select:lesson" class="lesson">
+
+  <p>
+    A <a href="glossary.html#relational-database">relational database</a>
+    is a way to store and manipulate information
+    that is arranged as <a href="glossary.html#table">tables</a>.
+    Each table has columns (also known as <a href="glossary.html#field-database">fields</a>) which describe the data,
+    and rows (also known as <a href="glossary.html#record-database">records</a>) which contain the data.
+  </p>
+
+  <p id="a:dbms">
+    When we are using a spreadsheet,
+    we put formulas into cells to calculate new values based on old ones.
+    When we are using a database,
+    we send commands
+    (usually called <a href="glossary.html#query">queries</a>)
+    to a <a href="glossary.html#database-manager">database manager</a>:
+    a program that manipulates the database for us.
+    The database manager does whatever lookups and calculations the query specifies,
+    returning the results in a tabular form
+    that we can then use as a starting point for further queries.
+  </p>
+
+  <div class="box">
+    <h3>Under the Hood</h3>
+
+    <p>
+      Every database manager&mdash;Oracle,
+      IBM DB2, PostgreSQL, MySQL, Microsoft Access, and SQLite&mdash;stores
+      data in a different way,
+      so a database created with one cannot be used directly by another.
+      However,
+      every database manager can import and export data in a variety of formats,
+      so it <em>is</em> possible to move information from one to another.
+    </p>
+  </div>
+
+  <p>
+    Queries are written in a language called <a href="glossary.html#sql">SQL</a>,
+    which stands for "Structured Query Language".
+    SQL provides hundreds of different ways to analyze and recombine data;
+    we will only look at a handful,
+    but that handful accounts for most of what scientists do.
+  </p>
+
+  <p>
+    <a href="#f:survey_db">Figure 1</a> shows
+    a simple database that stores some of the data
+    Gina extracted from the logs of those long-ago expeditions.
+    It contains four tables:
+  </p>
+
+  <table>
+    <tr>
+      <th>Table</th>
+      <th>Purpose</th>
+    </tr>
+    <tr>
+      <td><code>Person</code></td>
+      <td>People who took readings.</td>
+    </tr>
+    <tr>
+      <td><code>Site</code></td>
+      <td>Locations of observation sites.</td>
+    </tr>
+    <tr>
+      <td><code>Visited</code></td>
+      <td>When readings were taken at specific sites.</td>
+    </tr>
+    <tr>
+      <td><code>Survey</code></td>
+      <td>The actual measurement values.</td>
+    </tr>
+  </table>
+
+  <figure id="f:survey_db">
+    <table border="1">
+      <tr>
+        <td valign="top">
+          <table class="db">
+            <tr><th colspan="3">Person</th></tr>
+            <tr><td><i><u>ident</u></i></td><td><i><u>personal</u></i></td><td><i><u>family</u></i></td></tr>
+            <tr><td>dyer</td><td>William</td><td>Dyer</td></tr>
+            <tr><td>pb</td><td>Frank</td><td>Pabodie</td></tr>
+            <tr><td>lake</td><td>Anderson</td><td>Lake</td></tr>
+            <tr><td>roe</td><td>Valentina</td><td>Roerich</td></tr>
+            <tr><td>danforth</td><td>Frank</td><td>Danforth</td></tr>
+          </table>
+        </td>
+        <td valign="top" rowspan="3">
+          <table class="db">
+            <tr><th colspan="4">Survey</th></tr>
+            <tr><td><i><u>taken</i></u></td><td><i><u>person</i></u></td><td><i><u>quant</u></i></td><td><i><u>reading</i></u></td></tr>
+            <tr><td>619</td><td>dyer</td><td>rad</td><td>9.82</td></tr>
+            <tr><td>619</td><td>dyer</td><td>sal</td><td>0.13</td></tr>
+            <tr><td>622</td><td>dyer</td><td>rad</td><td>7.8</td></tr>
+            <tr><td>622</td><td>dyer</td><td>sal</td><td>0.09</td></tr>
+            <tr><td>734</td><td>pb</td><td>rad</td><td>8.41</td></tr>
+            <tr><td>734</td><td>lake</td><td>sal</td><td>0.05</td></tr>
+            <tr><td>734</td><td>pb</td><td>temp</td><td>-21.5</td></tr>
+            <tr><td>735</td><td>pb</td><td>rad</td><td>7.22</td></tr>
+            <tr><td>735</td><td>NULL</td><td>sal</td><td>0.06</td></tr>
+            <tr><td>735</td><td>NULL</td><td>temp</td><td>-26.0</td></tr>
+            <tr><td>751</td><td>pb</td><td>rad</td><td>4.35</td></tr>
+            <tr><td>751</td><td>pb</td><td>temp</td><td>-18.5</td></tr>
+            <tr><td>751</td><td>lake</td><td>sal</td><td>0.1</td></tr>
+            <tr><td>752</td><td>lake</td><td>rad</td><td>2.19</td></tr>
+            <tr><td>752</td><td>lake</td><td>sal</td><td>0.09</td></tr>
+            <tr><td>752</td><td>lake</td><td>temp</td><td>-16.0</td></tr>
+            <tr><td>752</td><td>roe</td><td>sal</td><td>41.6</td></tr>
+            <tr><td>837</td><td>lake</td><td>rad</td><td>1.46</td></tr>
+            <tr><td>837</td><td>lake</td><td>sal</td><td>0.21</td></tr>
+            <tr><td>837</td><td>roe</td><td>sal</td><td>22.5</td></tr>
+            <tr><td>844</td><td>roe</td><td>rad</td><td>11.25</td></tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td valign="top">
+          <table class="db">
+            <tr><th colspan="3">Site</th></tr>
+            <tr><td><i><u>name</i></u></td><td><i><u>lat</i></u></td><td><i><u>long</i></u></td></tr>
+            <tr><td>DR-1</td><td>-49.85</td><td>-128.57</td></tr>
+            <tr><td>DR-3</td><td>-47.15</td><td>-126.72</td></tr>
+            <tr><td>MSK-4</td><td>-48.87</td><td>-123.4</td></tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td valign="top">
+          <table class="db">
+            <tr><th colspan="3">Visited</th></tr>
+            <tr><td><i><u>ident</i></u></td><td><i><u>site</i></u></td><td><i><u>dated</i></u></td></tr>
+            <tr><td>619</td><td>DR-1</td><td>1927-02-08</td></tr>
+            <tr><td>622</td><td>DR-1</td><td>1927-02-10</td></tr>
+            <tr><td>734</td><td>DR-3</td><td>1939-01-07</td></tr>
+            <tr><td>735</td><td>DR-3</td><td>1930-01-12</td></tr>
+            <tr><td>751</td><td>DR-3</td><td>1930-02-26</td></tr>
+            <tr><td>752</td><td>DR-3</td><td>NULL</td></tr>
+            <tr><td>837</td><td>MSK-4</td><td>1932-01-14</td></tr>
+            <tr><td>844</td><td>DR-1</td><td>1932-03-22</td></tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <figcaption>Figure 1: Survey Database (field names are in italics)</figcaption>
+  </figure>
+
+  <p>
+    Notice that three entries&mdash;one in the <code>Visited</code> table,
+    and two in the <code>Survey</code> table&mdash;are shown as <code>NULL</code>.
+    We'll return to these values <a href="#s:null">later</a>.
+    For now,
+    let's write an SQL query that displays scientists' names.
+    We do this using the SQL command <code>select</code>,
+    giving it the names of the columns we want and the table we want them from.
+    Our query and its output look like this:
+  </p>
+
+<pre>
+sqlite&gt; <span class="in">select family, personal from Person;</span>
+</pre>
+<table class="db">
+  <tr><td>Dyer</td><td>William</td></tr>
+  <tr><td>Pabodie</td><td>Frank</td></tr>
+  <tr><td>Lake</td><td>Anderson</td></tr>
+  <tr><td>Roerich</td><td>Valentina</td></tr>
+  <tr><td>Danforth</td><td>Frank</td></tr>
+</table>
+
+  <p>
+    The semi-colon at the end of the query
+    tells the database manager that the query is complete and ready to run.
+    If we enter the query without the semi-colon,
+    or press 'enter' part-way through the query,
+    the SQLite interpreter will give us a different prompt
+    to show us that it's waiting for more input:
+  </p>
+
+<pre>
+sqlite&gt; <span class="in">select family, personal</span>
+   ...&gt; <span class="in">from Person</span>
+   ...&gt; <span class="in">;</span>
+</pre>
+<table class="db">
+<tr><td>Dyer</td><td>William</td></tr>
+<tr><td>Pabodie</td><td>Frank</td></tr>
+<tr><td>Lake</td><td>Anderson</td></tr>
+<tr><td>Roerich</td><td>Valentina</td></tr>
+<tr><td>Danforth</td><td>Frank</td></tr>
+</table>
+
+  <p class="continue">
+    From now on,
+    we won't bother to display the prompt(s) with our commands.
+  </p>
+
+  <div class="box">
+    <h3>Case and Consistency</h3>
+
+    <p>
+      We have written our command and the column names in lower case,
+      and the table name in title case,
+      but we could use any mix:
+      SQL is <a href="glossary.html#case-insensitive">case insensitive</a>,
+      so we could write them all in upper case,
+      or even like this:
+    </p>
+
+<pre>
+<span class="in">SeLeCt famILY, PERSonal frOM PERson;</span>
+</pre>
+
+    <p>    
+      But please don't:
+      large SQL queries are hard enough to read
+      without the extra cognitive load of random capitalization.
+    </p>
+  </div>
+
+  <div class="box">
+    <h3>Displaying Results</h3>
+
+    <p>
+      Exactly <em>how</em> the database displays the query's results
+      depends on what kind of interface we are using.
+      If we are running SQLite directly from the shell,
+      its default output looks like this:
+    </p>
+
+<span class="out">Dyer|William
+Pabodie|Frank
+Lake|Anderson
+Roerich|Valentina
+Danforth|Frank</span>
+
+    <p class="continue">
+      If we are using a graphical interface,
+      such as the <a href="https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/">SQLite Manager</a> plugin for Firefox
+      or the <a href="https://github.com/catherinedevlin/ipython-sql">database extension</a> for the IPython Notebook,
+      our output will be displayed graphically
+      (<a href="#f:firefox_output">Figure 2</a>
+      and <a href="#f:notebook_output">Figure 3</a>).
+      We'll use a simple table-based display in these notes.
+    </p>
+
+    <figure id="f:firefox_output">
+      <img src="db/firefox_output.png" alt="Firefox SQLite Manager Output" />
+      <figcaption>Figure 2: Firefox SQLite Manager Output</figcaption>
+    </figure>
+
+    <figure id="f:notebook_output">
+      <img src="db/notebook_output.png" alt="IPython Notebook Database Extension Output" />
+      <figcaption>Figure 3: IPython Notebook Database Extension Output</figcaption>
+    </figure>
+
+  </div>
+
+  <p>
+    Going back to our query,
+    it's important to understand that
+    the rows and columns in a database table aren't actually stored in any particular order.
+    They will always be <em>displayed</em> in some order,
+    but we can control that in various ways.
+    For example,
+    we could swap the columns in the output by writing our query as:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="2">
+<pre>select personal, family from Person;</pre>
+      </td>
+    </tr>
+    <tr><td>William</td><td>Dyer</td></tr>
+    <tr><td>Frank</td><td>Pabodie</td></tr>
+    <tr><td>Anderson</td><td>Lake</td></tr>
+    <tr><td>Valentina</td><td>Roerich</td></tr>
+    <tr><td>Frank</td><td>Danforth</td></tr>
+  </table>
+
+  <p class="continue">
+    or even repeat columns:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="3">
+<pre>select ident, ident, ident from Person;</pre>
+      </td>
+    </tr>
+    <tr><td>dyer</td><td>dyer</td><td>dyer</td></tr>
+    <tr><td>pb</td><td>pb</td><td>pb</td></tr>
+    <tr><td>lake</td><td>lake</td><td>lake</td></tr>
+    <tr><td>roe</td><td>roe</td><td>roe</td></tr>
+    <tr><td>danforth</td><td>danforth</td><td>danforth</td></tr>
+  </table>
+
+  <p class="continue">
+    We will see ways to rearrange the rows <a href="#s:sort">later</a>.
+  </p>
+
+  <p>
+    As a shortcut, we can select all of the columns in a table
+    using the wildcard <code>*</code>:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="3">
+<pre>select * from Person;</pre>
+      </td>
+    </tr>
+    <tr><td>dyer</td><td>William</td><td>Dyer</td></tr>
+    <tr><td>pb</td><td>Frank</td><td>Pabodie</td></tr>
+    <tr><td>lake</td><td>Anderson</td><td>Lake</td></tr>
+    <tr><td>roe</td><td>Valentina</td><td>Roerich</td></tr>
+    <tr><td>danforth</td><td>Frank</td><td>Danforth</td></tr>
+  </table>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-db/select/keypoints.html %}
+
+<div id="s:db:select:keypoints" class="keypoints">
+  <ul>
+    <li>A relational database stores information in tables with fields and records.</li>
+    <li>A database manager is a program that manipulates a database.</li>
+    <li>The commands or queries given to a database manager are usually written in a specialized language called SQL.</li>
+    <li>SQL is case insensitive.</li>
+    <li>The rows and columns of a database table aren't stored in any particular order.</li>
+    <li>Use <code>select <em>fields</em> from <em>table</em></code> to get all the values for specific fields from a single table.</li>
+    <li>Use <code>select * from <em>table</em></code> to select everything from a table.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-db/select/challenges.html %}
+
+<div id="s:db:select:challenges" class="challenges">
+  <ol>
+    <li>
+<p>
+  Write a query that selects only site names from the <code>Site</code> table.
+</p>
+    </li>
+    <li>
+<p>
+  Many people format queries as:
+</p>
+
+<pre>
+SELECT personal, family FROM person;
+</pre>
+
+<p>
+  or as:
+</p>
+
+<pre>
+select Personal, Family from PERSON;
+</pre>
+
+<p>
+  what style do you find easiest to read, and why?
+</p>
+    </li>
+  </ol>
+</div>
+
 </section>
 
 <section id="s:db:distinct">
-  <h2>{% include guide-db/distinct/title.md %}</h2>
+  <h2>Removing Duplicates</h2>
   <h3>Objectives</h3>
-  {% include guide-db/distinct/objectives.html %}
+
+<div class="objectives" id="s:db:distinct:objectives">
+  <ul>
+    <li>Write queries that only display distinct results once.</li>
+  </ul>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-db/distinct/lesson.html %}
+
+<div class="lesson" id="s:db:distinct:lesson">
+
+  <p>
+    Data is often redundant,
+    so queries often return redundant information.
+    For example,
+    if we select the quantitites that have been measured
+    from the <code>survey</code> table,
+    we get this:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="1">
+<pre>select quant from Survey;</pre>
+      </td>
+    </tr>
+    <tr><td>rad</td></tr>
+    <tr><td>sal</td></tr>
+    <tr><td>rad</td></tr>
+    <tr><td>sal</td></tr>
+    <tr><td>rad</td></tr>
+    <tr><td>sal</td></tr>
+    <tr><td>temp</td></tr>
+    <tr><td>rad</td></tr>
+    <tr><td>sal</td></tr>
+    <tr><td>temp</td></tr>
+    <tr><td>rad</td></tr>
+    <tr><td>temp</td></tr>
+    <tr><td>sal</td></tr>
+    <tr><td>rad</td></tr>
+    <tr><td>sal</td></tr>
+    <tr><td>temp</td></tr>
+    <tr><td>sal</td></tr>
+    <tr><td>rad</td></tr>
+    <tr><td>sal</td></tr>
+    <tr><td>sal</td></tr>
+    <tr><td>rad</td></tr>
+  </table>
+
+  <p>
+    We can eliminate the redundant output
+    to make the result more readable
+    by adding the <code>distinct</code> keyword
+    to our query:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="1">
+<pre>select distinct quant from Survey;</pre>
+      </td>
+    </tr>
+    <tr><td>rad</td></tr>
+    <tr><td>sal</td></tr>
+    <tr><td>temp</td></tr>
+  </table>
+
+  <p>
+    If we select more than one column&mdash;for example,
+    both the survey site ID and the quantity measured&mdash;then
+    the distinct pairs of values are returned:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="2">
+<pre>select distinct taken, quant from Survey;</pre>
+      </td>
+    </tr>
+    <tr><td>619</td><td>rad</td></tr>
+    <tr><td>619</td><td>sal</td></tr>
+    <tr><td>622</td><td>rad</td></tr>
+    <tr><td>622</td><td>sal</td></tr>
+    <tr><td>734</td><td>rad</td></tr>
+    <tr><td>734</td><td>sal</td></tr>
+    <tr><td>734</td><td>temp</td></tr>
+    <tr><td>735</td><td>rad</td></tr>
+    <tr><td>735</td><td>sal</td></tr>
+    <tr><td>735</td><td>temp</td></tr>
+    <tr><td>751</td><td>rad</td></tr>
+    <tr><td>751</td><td>temp</td></tr>
+    <tr><td>751</td><td>sal</td></tr>
+    <tr><td>752</td><td>rad</td></tr>
+    <tr><td>752</td><td>sal</td></tr>
+    <tr><td>752</td><td>temp</td></tr>
+    <tr><td>837</td><td>rad</td></tr>
+    <tr><td>837</td><td>sal</td></tr>
+    <tr><td>844</td><td>rad</td></tr>
+  </table>
+
+  <p>
+    Notice in both cases that duplicates are removed
+    even if they didn't appear to be adjacent in the database.
+    Again,
+    it's important to remember that rows aren't actually ordered:
+    they're just displayed that way.
+  </p>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-db/distinct/keypoints.html %}
+
+<div class="keypoints" id="s:db:distinct:keypoints">
+  <ul>
+    <li>Use <code>distinct</code> to eliminate duplicates from a query's output.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-db/distinct/challenges.html %}
+
+<div class="challenges" id="s:db:distinct:challenges">
+  <ol>
+    <li>
+<p>
+  Write a query that selects distinct dates from the <code>Site</code> table.
+</p>
+    </li>
+    <li>
+<p>
+  If you are using SQLite from the command line,
+  you can run a single query by passing it to the interpreter
+  right after the path to the database file:
+</p>
+<pre>
+$ <span class="in">sqlite3 survey.db 'select * from Person;'</span>
+<span class="out">dyer|William|Dyer
+pb|Frank|Pabodie
+lake|Anderson|Lake
+roe|Valentina|Roerich
+danforth|Frank|Danforth</span>
+</pre>
+<p>
+  Fill in the missing commands in the pipeline below
+  so that the output contains no redundant values.
+</p>
+<pre>
+$ <span class="in">sqlite3 survey.db 'select person, quant from Survey;' | <em>command 1</em> | <em>command 2</em></span>
+</pre>
+<p>
+  Do you think this is less efficient, just as efficient, or more efficient
+  that using <code>distinct</code> for large data?
+</p>
+    </li>
+  </ol>
+</div>
+
 </section>
 
 <section id="s:db:filter">
-  <h2>{% include guide-db/filter/title.md %}</h2>
+  <h2>Filtering</h2>
   <h3>Objectives</h3>
-  {% include guide-db/filter/objectives.html %}
+
+<div class="objectives" id="s:db:filter:objectives">
+  <ul>
+    <li>Write queries that select records based on the values of their fields.</li>
+    <li>Write queries that select records using combinations of several tests on their fields' values.</li>
+    <li>Build up complex filtering criteria incrementally.</li>
+    <li>Explain the logical order in which filtering by field value and displaying fields takes place.</li>
+  </ul>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-db/filter/lesson.html %}
+
+<div class="lesson" id="s:db:filter:lesson">
+
+  <p>
+    One of the most powerful features of a database is
+    the ability to <a href="glossary.html#filter">filter</a> data,
+    i.e.,
+    to select only those records that match certain criteria.
+    For example,
+    suppose we want to see when a particular site was visited.
+    We can select these records from the <code>Visited</code> table
+    by using a <code>where</code> clause in our query:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="3">
+<pre>select * from Visited where site='DR-1';</pre>
+      </td>
+    </tr>
+    <tr><td>619</td><td>DR-1</td><td>1927-02-08</td></tr>
+    <tr><td>622</td><td>DR-1</td><td>1927-02-10</td></tr>
+    <tr><td>844</td><td>DR-1</td><td>1932-03-22</td></tr>
+  </table>
+
+  <p>
+    The database manager executes this query in two stages
+    (<a href="#f:pipeline_where">Figure 4</a>).
+    First,
+    it checks at each row in the <code>Visited</code> table
+    to see which ones satisfy the <code>where</code>.
+    It then uses the column names following the <code>select</code> keyword
+    to determine what columns to display.
+  </p>
+
+  <figure id="f:pipeline_where">
+    	<table >
+	<tr>
+		<td> <code>select * from Visited <span class="highlight">where site='DR-1'</span>;</code>
+		</td>
+		<td>
+		</td>
+		<td> <code><span class="highlight">select * </span>from Visited where site='DR-1';</code>
+		</td>
+		</tr>
+	<tr valign="top">
+		<td >
+			
+		
+          <table border="1" cellspacing="0" cellpadding="2" class="db">
+            <tr><th colspan="3">Visited</th></tr>
+            <tr><td><i><u>ident</i></u></td><td><i><u>site</i></u></td><td><i><u>dated</i></u></td></tr>
+            <tr bgcolor="#FFFF00"><td>619</td><td>DR-1</td><td>1927-02-08</td></tr>
+            <tr bgcolor="#FFFF00"><td>622</td><td>DR-1</td><td>1927-02-10</td></tr>
+            <tr><td>734</td><td>DR-3</td><td>1939-01-07</td></tr>
+            <tr><td>735</td><td>DR-3</td><td>1930-01-12</td></tr>
+            <tr><td>751</td><td>DR-3</td><td>1930-02-26</td></tr>
+            <tr><td>752</td><td>DR-3</td><td>NULL</td></tr>
+            <tr><td>837</td><td>MSK-4</td><td>1932-01-14</td></tr>
+            <tr bgcolor="#FFFF00"><td>844</td><td>DR-1</td><td>1932-03-22</td></tr>
+          </table>
+		</td>
+		<td cellpadding="20">
+			&#8594;
+		</td>
+		<td >
+			
+		
+			<table border="1" cellspacing="0" cellpadding="2" class="db">
+            <tr><th colspan="3">Visited</th></tr>
+            <tr><td><i><u>ident</i></u></td><td><i><u>site</i></u></td><td><i><u>dated</i></u></td></tr>
+            <tr bgcolor="#FFFF00"><td>619</td><td>DR-1</td><td>1927-02-08</td></tr>
+            <tr bgcolor="#FFFF00"><td>622</td><td>DR-1</td><td>1927-02-10</td></tr>
+            <tr bgcolor="#FFFF00"><td>844</td><td>DR-1</td><td>1932-03-22</td></tr>
+          </table>
+		
+		</td>
+    </tr>
+	</table>    
+	
+	
+    <figcaption>Figure 4: Two-Stage Query Processing Pipeline</figcaption>
+  </figure>
+
+  <p>
+    This processing order means that
+    we can filter records using <code>where</code>
+    based on values in columns that aren't then displayed:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="1">
+<pre>select ident from Visited where site='DR-1';</pre>
+      </td>
+    </tr>
+    <tr><td>619</td></tr>
+    <tr><td>622</td></tr>
+    <tr><td>844</td></tr>
+  </table>
+
+  <p>
+    We can use many other Boolean operators to filter our data.
+    For example,
+    we can ask for all information from the DR-1 site collected since 1930:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="3">
+<pre>select * from Visited where (site='DR-1') and (dated>='1930-00-00');</pre>
+      </td>
+    </tr>
+    <tr><td>844</td><td>DR-1</td><td>1932-03-22</td></tr>
+  </table>
+
+  <p class="continue">
+    (The parentheses around the individual tests aren't strictly required,
+    but they help make the query easier to read.)
+  </p>
+
+  <div class="box" id="a:dates">
+    <h3>Working With Dates</h3>
+
+    <p>
+      Most database managers have a special data type for dates.
+      In fact, many have two:
+      one for dates,
+      such as "May 31, 1971",
+      and one for durations,
+      such as "31 days".
+      SQLite doesn't:
+      instead,
+      it stores dates as either text
+      (in the ISO-8601 standard format "YYYY-MM-DD HH:MM:SS.SSSS"),
+      real numbers
+      (the number of days since November 24, 4714 BCE),
+      or integers
+      (the number of seconds since midnight, January 1, 1970).
+      If this sounds complicated,
+      it is,
+      but not nearly as complicated as figuring out
+      <a href="http://en.wikipedia.org/wiki/Swedish_calendar">historical dates in Sweden</a>.
+    </p>
+
+  </div>
+
+  <p>
+    If we want to find out what measurements were taken by either Lake or Roerich,
+    we can combine the tests on their names using <code>or</code>:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="4">
+<pre>select * from Survey where person='lake' or person='roe';</pre>
+      </td>
+    </tr>
+    <tr><td>734</td><td>lake</td><td>sal</td><td>0.05</td></tr>
+    <tr><td>751</td><td>lake</td><td>sal</td><td>0.1</td></tr>
+    <tr><td>752</td><td>lake</td><td>rad</td><td>2.19</td></tr>
+    <tr><td>752</td><td>lake</td><td>sal</td><td>0.09</td></tr>
+    <tr><td>752</td><td>lake</td><td>temp</td><td>-16.0</td></tr>
+    <tr><td>752</td><td>roe</td><td>sal</td><td>41.6</td></tr>
+    <tr><td>837</td><td>lake</td><td>rad</td><td>1.46</td></tr>
+    <tr><td>837</td><td>lake</td><td>sal</td><td>0.21</td></tr>
+    <tr><td>837</td><td>roe</td><td>sal</td><td>22.5</td></tr>
+    <tr><td>844</td><td>roe</td><td>rad</td><td>11.25</td></tr>
+  </table>
+
+  <p>
+    Alternatively,
+    we can use <code>in</code> to see if a value is in a specific set:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="4">
+<pre>select * from Survey where person in ('lake', 'roe');</pre>
+      </td>
+    </tr>
+    <tr><td>734</td><td>lake</td><td>sal</td><td>0.05</td></tr>
+    <tr><td>751</td><td>lake</td><td>sal</td><td>0.1</td></tr>
+    <tr><td>752</td><td>lake</td><td>rad</td><td>2.19</td></tr>
+    <tr><td>752</td><td>lake</td><td>sal</td><td>0.09</td></tr>
+    <tr><td>752</td><td>lake</td><td>temp</td><td>-16.0</td></tr>
+    <tr><td>752</td><td>roe</td><td>sal</td><td>41.6</td></tr>
+    <tr><td>837</td><td>lake</td><td>rad</td><td>1.46</td></tr>
+    <tr><td>837</td><td>lake</td><td>sal</td><td>0.21</td></tr>
+    <tr><td>837</td><td>roe</td><td>sal</td><td>22.5</td></tr>
+    <tr><td>844</td><td>roe</td><td>rad</td><td>11.25</td></tr>
+  </table>
+
+  <p>
+    We can combine <code>and</code> with <code>or</code>,
+    but we need to be careful about which operator is executed first.
+    If we <em>don't</em> use parentheses,
+    we get this:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="4">
+<pre>select * from Survey where quant='sal' and person='lake' or person='roe';</pre>
+      </td>
+    </tr>
+    <tr><td>734</td><td>lake</td><td>sal</td><td>0.05</td></tr>
+    <tr><td>751</td><td>lake</td><td>sal</td><td>0.1</td></tr>
+    <tr><td>752</td><td>lake</td><td>sal</td><td>0.09</td></tr>
+    <tr><td>752</td><td>roe</td><td>sal</td><td>41.6</td></tr>
+    <tr><td>837</td><td>lake</td><td>sal</td><td>0.21</td></tr>
+    <tr><td>837</td><td>roe</td><td>sal</td><td>22.5</td></tr>
+    <tr><td>844</td><td>roe</td><td>rad</td><td>11.25</td></tr>
+  </table>
+
+  <p class="continue">
+    which is salinity measurements by Lake,
+    and <em>any</em> measurement by Roerich.
+    We probably want this instead:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="4">
+<pre>select * from Survey where quant='sal' and <span class="highlight">(</span>person='lake' or person='roe'<span class="highlight">)</span>;</pre>
+      </td>
+    </tr>
+    <tr><td>734</td><td>lake</td><td>sal</td><td>0.05</td></tr>
+    <tr><td>751</td><td>lake</td><td>sal</td><td>0.1</td></tr>
+    <tr><td>752</td><td>lake</td><td>sal</td><td>0.09</td></tr>
+    <tr><td>752</td><td>roe</td><td>sal</td><td>41.6</td></tr>
+    <tr><td>837</td><td>lake</td><td>sal</td><td>0.21</td></tr>
+    <tr><td>837</td><td>roe</td><td>sal</td><td>22.5</td></tr>
+  </table>
+
+  <p>
+    Finally,
+    we can use <code>distinct</code> with <code>where</code>
+    to give a second level of filtering:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="2">
+<pre>select distinct person, quant from Survey where person='lake' or person='roe';</pre>
+      </td>
+    </tr>
+    <tr><td>lake</td><td>sal</td></tr>
+    <tr><td>lake</td><td>rad</td></tr>
+    <tr><td>lake</td><td>temp</td></tr>
+    <tr><td>roe</td><td>sal</td></tr>
+    <tr><td>roe</td><td>rad</td></tr>
+  </table>
+
+  <p class="continue">
+    But remember:
+    <code>distinct</code> is applied to the values displayed in the chosen columns,
+    not to the entire rows as they are being processed.
+  </p>
+
+  <div class="box">
+    <h3>Growing Queries</h3>
+
+    <p>
+      What we have just done is how most people "grow" their SQL queries.
+      We started with something simple that did part of what we wanted,
+      then added more clauses one by one,
+      testing their effects as we went.
+      This is a good strategy&mdash;in fact,
+      for complex queries it's often the <em>only</em> strategy&mdash;but
+      it depends on quick turnaround,
+      and on us recognizing the right answer when we get it.
+    </p>
+
+    <p>
+      The best way to achieve quick turnaround is often
+      to put a subset of data in a temporary database
+      and run our queries against that,
+      or to fill a small database with synthesized records.
+      For example,
+      instead of trying our queries against an actual database of 20 million Australians,
+      we could run it against a sample of ten thousand,
+      or write a small program to generate ten thousand random (but plausible) records
+      and use that.
+    </p>
+
+  </div>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-db/filter/keypoints.html %}
+
+<div class="keypoints" id="s:db:filter:keypoints">
+  <ul>
+    <li>Use <code>where <em>test</em></code> in a query to filter records based on Boolean tests.</li>
+    <li>Use <code>and</code> and <code>or</code> to combine tests.</li>
+    <li>Use <code>in</code> to check if a value is in a set.</li>
+    <li>Build up queries a bit at a time, and test them against small data sets.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-db/filter/challenges.html %}
+
+<div class="challenges" id="s:db:filter:challenges">
+  <ol>
+    <li>
+<p>
+  Gina wants to select all sites that lie within 30&deg; of the equator.
+  Her query is:
+</p>
+<pre>
+select * from Site where (lat &gt; -30) or (lat &lt; 30);
+</pre>
+<p>
+  Explain why this is wrong,
+  and rewrite the query so that it is correct.
+</p>
+    </li>
+    <li>
+<p>
+  Normalized salinity readings are supposed to be between 0.0 and 1.0.
+  Write a query that selects all records from <code>Survey</code>
+  with salinity values outside this range.
+</p>
+    </li>
+    <li>
+<p>
+  The SQL test <code><em>column-name</em> like <em>pattern</em></code>
+  is true if the value in the named column
+  matches the pattern given;
+  the character '%' can be used any number of times in the pattern
+  to mean "match zero or more characters".
+</p>
+<table>
+  <tr>
+    <th>Expression</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td><code>'a' like 'a'</code></td>
+    <td><code>True</code></td>
+  </tr>
+  <tr>
+    <td><code>'a' like '%a'</code></td>
+    <td><code>True</code></td>
+  </tr>
+  <tr>
+    <td><code>'b' like '%a'</code></td>
+    <td><code>False</code></td>
+  </tr>
+  <tr>
+    <td><code>'alpha' like 'a%'</code></td>
+    <td><code>True</code></td>
+  </tr>
+  <tr>
+    <td><code>'alpha' like 'a%p%'</code></td>
+    <td><code>True</code></td>
+  </tr>
+  <tr>
+    <td><code>'beta' like 'a%p%'</code></td>
+    <td><code>False</code></td>
+  </tr>
+</table>
+<p>
+  The expression <code><em>column-name</em> not like <em>pattern</em></code>
+  inverts the test.
+  Using <code>like</code>,
+  write a query that finds all the records in <code>Visited</code>
+  that <em>aren't</em> from sites labelled 'DR-something'.
+</p>
+    </li>
+  </ol>
+</div>
+
 </section>
 
 <section id="s:db:calc">
-  <h2>{% include guide-db/calc/title.md %}</h2>
+  <h2>Calculating New Values</h2>
   <h3>Objectives</h3>
-  {% include guide-db/calc/objectives.html %}
+
+<div class="objectives" id="s:db:calc:objectives">
+  <ul>
+    <li>Write queries that do arithmetic using the values in individual records.</li>
+  </ul>
+  <p>Duration: 5 minutes.</p>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-db/calc/lesson.html %}
+
+<div class="lesson" id="s:db:calc:lesson">
+
+  <p>
+    After carefully reading the expedition logs,
+    Gina realizes that the radiation measurements they report
+    may need to be corrected upward by 5%.
+    Rather than modifying the stored data,
+    she can do this calculation on the fly
+    as part of her query:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="1">
+<pre>select 1.05 * reading from Survey where quant='rad';</pre>
+      </td>
+    </tr>
+    <tr><td>10.311</td></tr>
+    <tr><td>8.19</td></tr>
+    <tr><td>8.8305</td></tr>
+    <tr><td>7.581</td></tr>
+    <tr><td>4.5675</td></tr>
+    <tr><td>2.2995</td></tr>
+    <tr><td>1.533</td></tr>
+    <tr><td>11.8125</td></tr>
+  </table>
+
+  <p>
+    When we run the query,
+    the expression <code>1.05 * reading</code> is evaluated for each row.
+    Expressions can use any of the fields,
+    all of usual arithmetic operators,
+    and a variety of common functions.
+    (Exactly which ones depends on which database manager is being used.)
+    For example,
+    we can convert temperature readings from Fahrenheit to Celsius
+    and round to two decimal places as follows:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="2">
+<pre>select taken, round(5*(reading-32)/9, 2) from Survey where quant='temp';</pre>
+      </td>
+    </tr>
+    <tr><td>734</td><td>-29.72</td></tr>
+    <tr><td>735</td><td>-32.22</td></tr>
+    <tr><td>751</td><td>-28.06</td></tr>
+    <tr><td>752</td><td>-26.67</td></tr>
+  </table>
+
+  <p>
+    We can also combine values from different fields,
+    for example by using the string concatenation operator <code>||</code>:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="1">
+<pre>select personal || ' ' || family from Person;</pre>
+      </td>
+    </tr>
+    <tr><td>William Dyer</td></tr>
+    <tr><td>Frank Pabodie</td></tr>
+    <tr><td>Anderson Lake</td></tr>
+    <tr><td>Valentina Roerich</td></tr>
+    <tr><td>Frank Danforth</td></tr>
+  </table>
+
+  <div class="box">
+    <h3>A Note on Names</h3>
+
+    <p>
+      It may seem strange to use <code>personal</code> and <code>family</code> as field names
+      instead of <code>first</code> and <code>last</code>,
+      but it's a necessary first step toward handling cultural differences.
+      For example,
+      consider the following rules:
+    </p>
+
+    <table>
+      <tr>
+        <th>Full Name</th>
+        <th>Alphabetized Under</th>
+        <th>Reason</th>
+      </tr>
+      <tr>
+        <td>Liu Xiaobo</td>
+        <td>Liu</td>
+        <td>Chinese family names come first</td>
+      </tr>
+      <tr>
+        <td>Leonardo da Vinci</td>
+        <td>Leonardo</td>
+        <td>"da Vinci" just means "from Vinci"</td>
+      </tr>
+      <tr>
+        <td>Catherine de Medici</td>
+        <td>Medici</td>
+        <td>family name</td>
+      </tr>
+      <tr>
+        <td>Jean de La Fontaine</td>
+        <td>La Fontaine</td>
+        <td>family name is "La Fontaine"</td>
+      </tr>
+      <tr>
+        <td>Juan Ponce de Leon</td>
+        <td>Ponce de Leon</td>
+        <td>full family name is "Ponce de Leon"</td>
+      </tr>
+      <tr>
+        <td>Gabriel Garcia Marquez</td>
+        <td>Garcia Marquez</td>
+        <td>double-barrelled Spanish surnames</td>
+      </tr>
+      <tr>
+        <td>Wernher von Braun</td>
+        <td>von <em>or</em> Braun</td>
+        <td>depending on whether he was in Germany or the US</td>
+      </tr>
+      <tr>
+        <td>Elizabeth Alexandra May Windsor</td>
+        <td>Elizabeth</td>
+        <td>monarchs alphabetize by the name under which they reigned</td>
+      </tr>
+      <tr>
+        <td>Thomas a Beckett</td>
+        <td>Thomas</td>
+        <td>and saints according to the names by which they were canonized</td>
+      </tr>
+    </table>
+
+    <p class="continue">
+      Clearly,
+      even a two-part division into "personal" and "family"
+      isn't enough...
+    </p>
+  </div>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-db/calc/keypoints.html %}
+
+<div class="keypoints" id="s:db:calc:keypoints">
+  <ul>
+    <li>Use expressions as fields to calculate per-record values.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-db/calc/challenges.html %}
+
+<div class="challenges" id="s:db:calc:challenges">
+  <ol>
+    <li>
+<p>
+  After further reading,
+  Gina realizes that Valentina Roerich
+  was reporting salinity as percentages.
+  Write a query that returns all of her salinity measurements
+  from the <code>Survey</code> table
+  with the values divided by 100.
+</p>
+    </li>
+    <li>
+<p>
+  The <code>union</code> operator combines the results of two queries:
+</p>
+<table class="db">
+  <tr>
+    <td colspan="3">
+      <pre>select * from Person where ident='dyer' union select * from Person where ident='roe';</pre>
+    </td>
+  </tr>
+  <tr><td>dyer</td><td>William</td><td>Dyer</td></tr>
+  <tr><td>roe</td><td>Valentina</td><td>Roerich</td></tr>
+</table>
+<p>
+  Use <code>union</code> to create a consolidated list of salinity measurements
+  in which Roerich's, and only Roerich's,
+  have been corrected as described in the previous challenge.
+  The output should be something like:
+</p>
+<table class="db">
+  <tr><td>619</td><td>0.13</td></tr>
+  <tr><td>622</td><td>0.09</td></tr>
+  <tr><td>734</td><td>0.05</td></tr>
+  <tr><td>751</td><td>0.1</td></tr>
+  <tr><td>752</td><td>0.09</td></tr>
+  <tr><td>752</td><td>0.416</td></tr>
+  <tr><td>837</td><td>0.21</td></tr>
+  <tr><td>837</td><td>0.225</td></tr>
+</table>
+    </li>
+    <li>
+<p>
+  The site identifiers in the <code>Visited</code> table have two parts
+  separated by a '-':
+</p>
+<table class="db">
+  <tr>
+    <td colspan="1">
+<pre>select distinct site from Visited;</pre>
+    </td>
+  </tr>
+  <tr><td>DR-1</td></tr>
+  <tr><td>DR-3</td></tr>
+  <tr><td>MSK-4</td></tr>
+</table>
+<p>
+  Some major site identifiers are two letters long and some are three.
+  The "in string" function <code>instr(X, Y)</code>
+  returns the 1-based index of the first occurrence of string Y in string X,
+  or 0 if Y does not exist in X.
+  The substring function <code>substr(X, I)</code>
+  returns the substring of X starting at index I.
+  Use these two functions to produce a list of unique major site identifiers.
+  (For this data,
+  the list should contain only "DR" and "MSK").
+</p>
+    </li>
+    <li>
+<p>
+  Pabodie's journal notes that all his temperature measurements
+  are in &deg;F,
+  but Lake's journal does not report whether he used &deg;F or &deg;C.
+  How should Gina treat his measurements,
+  and why?
+</p>
+    </li>
+  </ol>
+</div>
+
 </section>
 
 <section id="s:db:sort">
-  <h2>{% include guide-db/sort/title.md %}</h2>
+  <h2>Ordering Results</h2>
   <h3>Objectives</h3>
-  {% include guide-db/sort/objectives.html %}
+
+<div id="s:db:sort:objectives" class="objectives">
+  <ul>
+    <li>Write queries that order results according to fields' values.</li>
+    <li>Write queries that order results according to calculated values.</li>
+    <li>Explain why it is possible to sort records using the values of fields that are not displayed.</li>
+  </ul>
+  <p>Duration: 5 minutes.</p>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-db/sort/lesson.html %}
+
+<div id="s:db:sort:lesson" class="lesson">
+
+  <p>
+    As we mentioned earlier,
+    database records are not stored in any particular order.
+    This means that query results aren't necessarily sorted,
+    and even if they are,
+    we often want to sort them in a different way,
+    e.g., by the name of the project instead of by the name of the scientist.
+    We can do this in SQL by adding an <code>order by</code> clause to our query:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="1">
+<pre>select reading from Survey where quant='rad' order by reading;</pre>
+      </td>
+    </tr>
+    <tr><td>1.46</td></tr>
+    <tr><td>2.19</td></tr>
+    <tr><td>4.35</td></tr>
+    <tr><td>7.22</td></tr>
+    <tr><td>7.8</td></tr>
+    <tr><td>8.41</td></tr>
+    <tr><td>9.82</td></tr>
+    <tr><td>11.25</td></tr>
+  </table>
+
+  <p>
+    By default,
+    results are sorted in ascending order
+    (i.e.,
+    from least to greatest).
+    We can sort in the opposite order using <code>desc</code> (for "descending"):
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="1">
+<pre>select reading from Survey where quant='rad' order by reading desc;</pre>
+      </td>
+    </tr>
+    <tr><td>11.25</td></tr>
+    <tr><td>9.82</td></tr>
+    <tr><td>8.41</td></tr>
+    <tr><td>7.8</td></tr>
+    <tr><td>7.22</td></tr>
+    <tr><td>4.35</td></tr>
+    <tr><td>2.19</td></tr>
+    <tr><td>1.46</td></tr>
+  </table>
+
+  <p class="continue">
+    (And if we want to make it clear that we're sorting in ascending order,
+    we can use <code>asc</code> instead of <code>desc</code>.)
+  </p>
+
+    <p>
+      We can also sort on several fields at once.
+      For example,
+      this query sorts results first in ascending order by <code>taken</code>,
+      and then in descending order by <code>person</code>
+      within each group of equal <code>taken</code> values:
+    </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="2">
+<pre>select taken, person from Survey order by taken asc, person desc;</pre>
+      </td>
+    </tr>
+    <tr><td>619</td><td>dyer</td></tr>
+    <tr><td>619</td><td>dyer</td></tr>
+    <tr><td>622</td><td>dyer</td></tr>
+    <tr><td>622</td><td>dyer</td></tr>
+    <tr><td>734</td><td>pb</td></tr>
+    <tr><td>734</td><td>pb</td></tr>
+    <tr><td>734</td><td>lake</td></tr>
+    <tr><td>735</td><td>pb</td></tr>
+    <tr><td>735</td><td></td></tr>
+    <tr><td>735</td><td></td></tr>
+    <tr><td>751</td><td>pb</td></tr>
+    <tr><td>751</td><td>pb</td></tr>
+    <tr><td>751</td><td>lake</td></tr>
+    <tr><td>752</td><td>roe</td></tr>
+    <tr><td>752</td><td>lake</td></tr>
+    <tr><td>752</td><td>lake</td></tr>
+    <tr><td>752</td><td>lake</td></tr>
+    <tr><td>837</td><td>roe</td></tr>
+    <tr><td>837</td><td>lake</td></tr>
+    <tr><td>837</td><td>lake</td></tr>
+    <tr><td>844</td><td>roe</td></tr>
+  </table>
+
+  <p>
+    This is easier to understand if we also remove duplicates:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="2">
+<pre>select <span class="highlight">distinct</span> taken, person from Survey order by taken asc, person desc;</pre>
+      </td>
+    </tr>
+    <tr><td>619</td><td>dyer</td></tr>
+    <tr><td>622</td><td>dyer</td></tr>
+    <tr><td>734</td><td>pb</td></tr>
+    <tr><td>734</td><td>lake</td></tr>
+    <tr><td>735</td><td>pb</td></tr>
+    <tr><td>735</td><td></td></tr>
+    <tr><td>751</td><td>pb</td></tr>
+    <tr><td>751</td><td>lake</td></tr>
+    <tr><td>752</td><td>roe</td></tr>
+    <tr><td>752</td><td>lake</td></tr>
+    <tr><td>837</td><td>roe</td></tr>
+    <tr><td>837</td><td>lake</td></tr>
+    <tr><td>844</td><td>roe</td></tr>
+  </table>
+
+  <p>
+    Since sorting happens before columns are filtered,
+    we can sort by a field that isn't actually displayed:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="1">
+<pre>select reading from Survey where quant='rad' order by taken;</pre>
+      </td>
+    </tr>
+    <tr><td>9.82</td></tr>
+    <tr><td>7.8</td></tr>
+    <tr><td>8.41</td></tr>
+    <tr><td>7.22</td></tr>
+    <tr><td>4.35</td></tr>
+    <tr><td>2.19</td></tr>
+    <tr><td>1.46</td></tr>
+    <tr><td>11.25</td></tr>
+  </table>
+
+  <p>
+    We can also sort results by the value of an expression.
+    In SQLite,
+    for example,
+    the <code>random</code> function returns a pseudo-random integer
+    each time it is called
+    (i.e.,
+    once per record):
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="2">
+<pre>select random(), ident from Person;</pre>
+      </td>
+    </tr>
+    <tr><td>-6309766557809954936</td><td>dyer</td></tr>
+    <tr><td>-2098461436941487136</td><td>pb</td></tr>
+    <tr><td>-2248225962969032314</td><td>lake</td></tr>
+    <tr><td>6062184424509295966</td><td>roe</td></tr>
+    <tr><td>-1268956870222271271</td><td>danforth</td></tr>
+  </table>
+
+  <p class="continue">
+    So to randomize the order of our query results,
+    e.g., when doing clinical trials,
+    we can sort them by the value of this function:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="1">
+<pre>select ident from Person order by random();</pre>
+      </td>
+    </tr>
+    <tr><td>danforth</td></tr>
+    <tr><td>pb</td></tr>
+    <tr><td>dyer</td></tr>
+    <tr><td>lake</td></tr>
+    <tr><td>roe</td></tr>
+    <tr>
+      <td colspan="1">
+<pre>select ident from Person order by random();</pre>
+      </td>
+    </tr>
+    <tr><td>roe</td></tr>
+    <tr><td>dyer</td></tr>
+    <tr><td>pb</td></tr>
+    <tr><td>lake</td></tr>
+    <tr><td>danforth</td></tr>
+  </table>
+
+  <p>
+    Our query pipeline now has four stages
+    (<a href="#f:pipeline_sort_distinct">Figure 5</a>):
+  </p>
+
+  <ol>
+    <li>Select the rows that pass the <code>where</code> criteria.</li>
+    <li>Sort them if required.</li>
+    <li>Filter the columns according to the <code>select</code> criteria.</li>
+    <li>Remove duplicates if required.</li>
+  </ol>
+
+  <figure id="f:pipeline_sort_distinct">
+    <img src="db/pipeline_sort_distinct.png" alt="Four-Stage Query Processing Pipeline" />
+    <figcaption>Figure 5: Four-Stage Query Processing Pipeline</figcaption>
+  </figure>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-db/sort/keypoints.html %}
+
+<div id="s:db:sort:keypoints" class="keypoints">
+  <ul>
+    <li>Use <code>order by</code> (with <code>asc</code> or <code>desc</code>) to order a query's results.</li>
+    <li>Use <code>random</code> to generate pseudo-random numbers.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-db/sort/challenges.html %}
+
+<div id="s:db:sort:challenges" class="challenges">
+  <ol>
+    <li>
+<p>
+  Create a list of sites identifiers
+  and their distance from the equator in kilometers,
+  sorted from furthest to closest.
+  (A degree of latitude corresponds to 111.12 km.)
+</p>
+    </li>
+    <li>
+<p>
+  Gina needs a list of radiation measurements from all sites
+  sorted by when they were taken.
+  The query:
+</p>
+
+<pre>
+select * from Survey where quant='rad' order by taken;
+</pre>
+
+<p>
+  produces the correct answer for the data used in our examples.
+  Explain when and why it might produce the wrong answer.
+</p>
+    </li>
+  </ol>
+</div>
+
 </section>
 
 <section id="s:db:null">
-  <h2>{% include guide-db/null/title.md %}</h2>
+  <h2>Missing Data</h2>
   <h3>Objectives</h3>
-  {% include guide-db/null/objectives.html %}
+
+<div id="s:db:null:objectives" class="objectives">
+  <ul>
+    <li>Explain what databases use the special value <code>NULL</code> to represent.</li>
+    <li>Explain why databases should <em>not</em> uses their own special values (like 9999 or "N/A") to represent missing or unknown data.</li>
+    <li>Explain what atomic and aggregate calculations involving <code>NULL</code> produce, and why.</li>
+    <li>Write queries that include or exclude records containing <code>NULL</code>.</li>
+  </ul>
+  <p>Duration: 10-20 minutes (the latter figure includes time for an anecdote about what happens when you <em>don't</em> take nulls into account).</p>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-db/null/lesson.html %}
+
+<div id="s:db:null:lesson" class="lesson">
+
+  <p>
+    Real-world data is never complete&mdash;there are always holes.
+    Databases represent these holes using special value called <code>null</code>.
+    <code>null</code> is not zero, <code>False</code>, or the empty string;
+    it is a one-of-a-kind value that means "nothing here".
+    Dealing with <code>null</code> requires a few special tricks
+    and some careful thinking.
+  </p>
+
+  <p>
+    To start,
+    let's have a look at the <code>Visited</code> table.
+    There are eight records,
+    but #752 doesn't have a date&mdash;or rather,
+    its date is null:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="3">
+<pre>select * from Visited;</pre>
+      </td>
+    </tr>
+    <tr><td>619</td><td>DR-1</td><td>1927-02-08</td></tr>
+    <tr><td>622</td><td>DR-1</td><td>1927-02-10</td></tr>
+    <tr><td>734</td><td>DR-3</td><td>1939-01-07</td></tr>
+    <tr><td>735</td><td>DR-3</td><td>1930-01-12</td></tr>
+    <tr><td>751</td><td>DR-3</td><td>1930-02-26</td></tr>
+    <tr><td>752</td><td>DR-3</td><td></td></tr>
+    <tr><td>837</td><td>MS-4</td><td>1932-01-14</td></tr>
+    <tr><td>844</td><td>DR-1</td><td>1932-03-22</td></tr>
+  </table>
+
+  <div class="box">
+    <h3>Displaying Nulls</h3>
+
+    <p>
+      Different databases display nulls differently.
+      Unfortunately,
+      SQLite's default is to print nothing at all,
+      which makes nulls easy to overlook
+      (particularly if they're in the middle of a long row).
+    </p>
+  </div>
+
+  <p>
+    Null doesn't behave like other values.
+    If we select the records that come before 1930:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="3">
+<pre>select * from Visited where dated&lt;'1930-00-00';</pre>
+      </td>
+    </tr>
+    <tr><td>619</td><td>DR-1</td><td>1927-02-08</td></tr>
+    <tr><td>622</td><td>DR-1</td><td>1927-02-10</td></tr>
+  </table>
+
+  <p class="continue">
+    we get two results,
+    and if we select the ones that come during or after 1930:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="3">
+<pre>select * from Visited where dated&gt;='1930-00-00';</pre>
+      </td>
+    </tr>
+    <tr><td>734</td><td>DR-3</td><td>1939-01-07</td></tr>
+    <tr><td>735</td><td>DR-3</td><td>1930-01-12</td></tr>
+    <tr><td>751</td><td>DR-3</td><td>1930-02-26</td></tr>
+    <tr><td>837</td><td>MS-4</td><td>1932-01-14</td></tr>
+    <tr><td>844</td><td>DR-1</td><td>1932-03-22</td></tr>
+  </table>
+
+  <p class="continue">
+    we get five,
+    but record #752 isn't in either set of results.
+    The reason is that
+    <code>null&lt;'1930-00-00'</code>
+    is neither true nor false:
+    null means, "We don't know,"
+    and if we don't know the value on the left side of a comparison,
+    we don't know whether the comparison is true or false.
+    Since databases represent "don't know" as null,
+    the value of <code>null&lt;'1930-00-00'</code>
+    is actually <code>null</code>.
+    <code>null&gt;='1930-00-00'</code> is also null
+    because we can't answer to that question either.
+    And since the only records kept by a <code>where</code>
+    are those for which the test is true,
+    record #752 isn't included in either set of results.
+  </p>
+
+  <p>
+    Comparisons aren't the only operations that behave this way with nulls.
+    <code>1+null</code> is <code>null</code>,
+    <code>5*null</code> is <code>null</code>,
+    <code>log(null)</code> is <code>null</code>,
+    and so on.
+    In particular,
+    comparing things to null with = and != produces null:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="1">
+<pre>select * from Visited where dated=NULL;</pre>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="1">
+<pre>select * from Visited where dated!=NULL;</pre>
+      </td>
+    </tr>
+  </table>
+
+  <p>
+    To check whether a value is <code>null</code> or not,
+    we must use a special test <code>is&nbsp;null</code>:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="3">
+<pre>select * from Visited where dated is NULL;</pre>
+      </td>
+    </tr>
+    <tr><td>752</td><td>DR-3</td><td></td></tr>
+  </table>
+
+  <p class="continue">
+    or its inverse <code>is&nbsp;not&nbsp;null</code>:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="3">
+<pre>select * from Visited where dated is not NULL;</pre>
+      </td>
+    </tr>
+    <tr><td>619</td><td>DR-1</td><td>1927-02-08</td></tr>
+    <tr><td>622</td><td>DR-1</td><td>1927-02-10</td></tr>
+    <tr><td>734</td><td>DR-3</td><td>1939-01-07</td></tr>
+    <tr><td>735</td><td>DR-3</td><td>1930-01-12</td></tr>
+    <tr><td>751</td><td>DR-3</td><td>1930-02-26</td></tr>
+    <tr><td>837</td><td>MS-4</td><td>1932-01-14</td></tr>
+    <tr><td>844</td><td>DR-1</td><td>1932-03-22</td></tr>
+  </table>
+
+  <p>
+    Null values cause headaches wherever they appear.
+    For example,
+    suppose we want to find the all of salinity measurements
+    that weren't taken by Dyer.
+    It's natural to write the query like this:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="4">
+<pre>select * from Survey where quant='sal' and person!='lake';</pre>
+      </td>
+    </tr>
+    <tr><td>619</td><td>dyer</td><td>sal</td><td>0.13</td></tr>
+    <tr><td>622</td><td>dyer</td><td>sal</td><td>0.09</td></tr>
+    <tr><td>752</td><td>roe</td><td>sal</td><td>41.6</td></tr>
+    <tr><td>837</td><td>roe</td><td>sal</td><td>22.5</td></tr>
+  </table>
+
+  <p class="continue">
+    but this query filters omits the records
+    where we don't know who took the measurement.
+    Once again,
+    the reason is that when <code>person</code> is <code>null</code>,
+    the <code>!=</code> comparison produces <code>null</code>,
+    so the record isn't kept in our results.
+    If we want to keep these records
+    we need to add an explicit check:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="4">
+<pre>select * from Survey where quant='sal' and (person!='lake' <span class="highlight">or person is null</span>);</pre>
+      </td>
+    </tr>
+    <tr><td>619</td><td>dyer</td><td>sal</td><td>0.13</td></tr>
+    <tr><td>622</td><td>dyer</td><td>sal</td><td>0.09</td></tr>
+    <tr><td>735</td><td></td><td>sal</td><td>0.06</td></tr>
+    <tr><td>752</td><td>roe</td><td>sal</td><td>41.6</td></tr>
+    <tr><td>837</td><td>roe</td><td>sal</td><td>22.5</td></tr>
+  </table>
+
+  <p class="continue">
+    We still have to decide whether this is the right thing to do or not.
+    If we want to be absolutely sure that
+    we aren't including any measurements by Lake in our results,
+    we need to exclude all the records for which we don't know who did the work.
+  </p>
+
+  <div class="box">
+    <h3>What Happens When You Forget</h3>
+
+    <p>
+      Several years ago,
+      I was helping a group who were looking at
+      the spread of drug-resistant tuberculosis (DRTB)
+      in industrialized countries.
+      In particular,
+      they wanted to know if it was spreading faster among less affluent people.
+    </p>
+
+    <p>
+      We tackled the problem by combining two data sets.
+      The first gave us skin and blood test results for DRTB
+      along with patients' postal codes
+      (the only identifying information we were allowed---we didn't even have gender).
+      The second was Canadian census data that gave us
+      median income per postal code.
+      Since a PC is about 300-800 people,
+      we felt justified in joining the first with the second
+      to estimate incomes for people with positive and negative test results.
+    </p>
+
+    <p>
+      To our surprise,
+      we didn't find a correlation between income and infection.
+      We were just about to publish when someone spotted the mistake I'd made.
+    </p>
+
+    <p>
+      Question: Who <em>doesn't</em> have a postal code?
+    </p>
+
+    <p>
+      Answer: Homeless people.
+    </p>
+
+    <p>
+      When I did the join,
+      I was throwing away homeless people,
+      which introduced a statistically significant error in my results.
+      But I couldn't just set the income of anyone without a postal code to zero,
+      because our sample included another set of people without postal codes:
+      16-21 year olds whose addresses were suppressed
+      because they had tested positive for sexually-transmitted diseases.
+    </p>
+
+    <p>
+      At this point the problem is no longer a database issue,
+      but rather a question of statistics.
+      The takeaway is,
+      checking your queries when you're programming is as important as
+      checking your samples when you're doing chemistry.
+    </p>
+  </div>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-db/null/keypoints.html %}
+
+<div id="s:db:null:keypoints" class="keypoints">
+  <ul>
+    <li>Use <code>null</code> in place of missing information.</li>
+    <li>Almost every operation involving <code>null</code> produces <code>null</code> as a result.</li>
+    <li>Test for nulls using <code>is&nbsp;null</code> and <code>is&nbsp;not&nbsp;null</code>.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-db/null/challenges.html %}
+
+<div id="s:db:null:challenges" class="challenges">
+  <ol>
+    <li>
+<p>
+  Write a query that sorts the records in <code>Visited</code> by date,
+  omitting entries for which the date is not known
+  (i.e., is null).
+</p>
+    </li>
+    <li>
+<p>
+  What do you expect the query:
+</p>
+
+<pre>
+select * from Visited where dated in ('1927-02-08', null);
+</pre>
+
+<p>
+  to produce?
+  What does it actually produce?
+</p>
+    </li>
+    <li>
+<p>
+  Some database designers prefer to use
+  a <a href="glossary.html#sentinel-value">sentinel value</a>
+  to mark missing data rather than <code>null</code>.
+  For example,
+  they will use the date "0000-00-00" to mark a missing date,
+  or -1.0 to mark a missing salinity or radiation reading
+  (since actual readings cannot be negative).
+  What does this simplify?
+  What burdens or risks does it introduce?
+</p>
+    </li>
+  </ol>
+</div>
+
 </section>
 
 <section id="s:db:aggregate">
-  <h2>{% include guide-db/aggregate/title.md %}</h2>
+  <h2>Aggregation</h2>
   <h3>Objectives</h3>
-  {% include guide-db/aggregate/objectives.html %}
+
+<div class="objectives" id="s:db:aggregate:objectives">
+  <ul>
+    <li>Write queries that combine values from many records to create a single aggregate value.</li>
+    <li>Write queries that put records into groups based on their values.</li>
+    <li>Write queries that combine values group by group.</li>
+    <li>Explain what is displayed for <em>unaggregated</em> fields when some fields are aggregated.</li>
+  </ul>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-db/aggregate/lesson.html %}
+
+<div class="lesson" id="s:db:aggregate:lesson">
+
+  <p>
+    Gina now wants to calculate ranges and averages for her data.
+    She knows how to select all of the dates from the <code>Visited</code> table:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="1">
+<pre>select dated from Visited;</pre>
+      </td>
+    </tr>
+    <tr><td>1927-02-08</td></tr>
+    <tr><td>1927-02-10</td></tr>
+    <tr><td>1939-01-07</td></tr>
+    <tr><td>1930-01-12</td></tr>
+    <tr><td>1930-02-26</td></tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr><td>1932-01-14</td></tr>
+    <tr><td>1932-03-22</td></tr>
+  </table>
+
+  <p class="continue">
+    but to combine them,
+    she must use an <a href="glossary.html#aggregation-function">aggregation function</a>
+    such as <code>min</code> or <code>max</code>.
+    Each of these functions takes a set of records as input,
+    and produces a single record as output:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="1">
+<pre>select min(dated) from Visited;</pre>
+      </td>
+    </tr>
+    <tr><td>1927-02-08</td></tr>
+    <tr>
+      <td colspan="1">
+<pre>select max(dated) from Visited;</pre>
+      </td>
+    </tr>
+    <tr><td>1939-01-07</td></tr>
+  </table>
+
+  <p>
+    <code>min</code> and <code>max</code> are just two of
+    the aggregation functions built into SQL.
+    Three others are <code>avg</code>,
+    <code>count</code>,
+    and <code>sum</code>:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="1">
+<pre>select avg(reading) from Survey where quant='sal';</pre>
+      </td>
+    </tr>
+    <tr><td>7.20333333333</td></tr>
+    <tr>
+      <td colspan="1">
+<pre>select count(reading) from Survey where quant='sal';</pre>
+      </td>
+    </tr>
+    <tr><td>9</td></tr>
+    <tr>
+      <td colspan="1">
+<pre>select sum(reading) from Survey where quant='sal';</pre>
+      </td>
+    </tr>
+    <tr><td>64.83</td></tr>
+  </table>
+
+  <p>
+    We used <code>count(reading)</code> here,
+    but we could just as easily have counted <code>quant</code>
+    or any other field in the table,
+    or even used <code>count(*)</code>,
+    since the function doesn't care about the values themselves,
+    just how many values there are.
+  </p>
+
+  <p>
+    SQL lets us do several aggregations at once.
+    We can,
+    for example,
+    find the range of sensible salinity measurements:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="2">
+<pre>select min(reading), max(reading) from Survey where quant='sal' and reading&lt;=1.0;</pre>
+      </td>
+    </tr>
+    <tr><td>0.05</td><td>0.21</td></tr>
+  </table>
+
+  <p>
+    We can also combine aggregated results with raw results,
+    although the output might surprise you:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="2">
+<pre>select person, count(*) from Survey where quant='sal' and reading&lt;=1.0;</pre>
+      </td>
+    </tr>
+    <tr><td>lake</td><td>7</td></tr>
+  </table>
+
+  <p>
+    Why does Lake's name appear rather than Roerich's or Dyer's?
+    The answer is that when it has to aggregate a field,
+    but isn't told how to,
+    the database manager chooses an actual value from the input set.
+    It might use the first one processed,
+    the last one,
+    or something else entirely.
+  </p>
+
+  <p>
+    Another important fact is that when there are no values to aggregate,
+    aggregation's result is "don't know"
+    rather than zero or some other arbitrary value:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="3">
+<pre>select person, max(reading), sum(reading) from Survey where quant='missing';</pre>
+      </td>
+    </tr>
+    <tr><td /><td /><td /></tr>
+  </table>
+
+  <p>
+    One final important feature of aggregation functions is that
+    they are inconsistent with the rest of SQL in a very useful way.
+    If we add two values,
+    and one of them is null,
+    the result is null.
+    By extension,
+    if we use <code>sum</code> to add all the values in a set,
+    and any of those values are null,
+    the result should also be null.
+    It's much more useful,
+    though,
+    for aggregation functions to ignore null values
+    and only combine those that are non-null.
+    This behavior lets us write our queries as:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="1">
+<pre>select min(dated) from Visited;</pre>
+      </td>
+    </tr>
+    <tr><td>1927-02-08</td></tr>
+  </table>
+
+  <p class="continue">
+    instead of always having to filter explicitly:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="1">
+<pre>select min(dated) from Visited <span class="highlight">where dated is not null</span>;</pre>
+      </td>
+    </tr>
+    <tr><td>1927-02-08</td></tr>
+  </table>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-db/aggregate/keypoints.html %}
+
+<div class="keypoints" id="s:db:aggregate:keypoints">
+  <ul>
+    <li>Use aggregation functions like <code>sum</code> and <code>max</code> to combine query results.</li>
+    <li>Use <code>count</code> function to count the number of results.</li>
+    <li>If some fields are aggregated and others are not, the database manager chooses an arbitrary result for the unaggregated field.</li>
+    <li>Most aggregation functions skip nulls when combining values.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-db/aggregate/challenges.html %}
+
+<div class="challenges" id="s:db:aggregate:challenges">
+  <ol>
+    <li>
+<p>
+  How many temperature readings did Frank Pabodie record,
+  and what was their average value?
+</p>
+    </li>
+    <li>
+<p>
+  The average of a set of values is the sum of the values
+  divided by the number of values.
+  Does this mean that the <code>avg</code> function returns 2.0 or 3.0
+  when given the values 1.0, <code>null</code>, and 5.0?
+</p>
+    </li>
+    <li>
+<p>
+  Gina wants to calculate the difference between
+  each individual radiation reading
+  and the average of all the radiation readings.
+  She writes the query:
+</p>
+<pre>
+select reading-avg(reading) from Survey where quant='rad';
+</pre>
+<p>
+  What does this actually produce, and why?
+</p>
+    </li>
+    <li>
+<p>
+  The function <code>group_concat(field, separator)</code>
+  concatenates all the values in a field
+  using the specified separator character
+  (or ',' if the separator isn't specified).
+  Use this to produce a one-line list of scientists' names,
+  such as:
+</p>
+<pre>
+William Dyer, Frank Pabodie, Anderson Lake, Valentina Roerich, Frank Danforth
+</pre>
+<p>
+  Can you find a way to order the list by surname?
+</p>
+    </li>
+  </ol>
+</div>
+
 </section>
 
 <section id="s:db:grouping">
-  <h2>{% include guide-db/grouping/title.md %}</h2>
+  <h2>Grouping</h2>
   <h3>Objectives</h3>
-  {% include guide-db/grouping/objectives.html %}
+
+<div id="s:db:grouping:objectives" class="objectives">
+  <ul>
+    <li>Group results to be aggregated separately.</li>
+    <li>Explain when grouping occurs in the processing pipeline.</li>
+  </ul>
+  <p>Duration: 10 minutes.</p>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-db/grouping/lesson.html %}
+
+<div id="s:db:grouping:lesson" class="lesson">
+
+  <p>
+    Aggregating all records at once doesn't always make sense.
+    For example,
+    suppose Gina suspects that there is a systematic bias in her data,
+    and that some scientists' radiation readings are higher than others.
+    We know that this doesn't work:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="3">
+<pre>select person, count(reading), round(avg(reading), 2)
+from  Survey
+where quant='rad';</pre>
+      </td>
+    </tr>
+    <tr><td>roe</td><td>8</td><td>6.56</td></tr>
+  </table>
+
+  <p class="continue">
+    because the database manager selects a single arbitrary scientist's name
+    rather than aggregating separately for each scientist.
+    Since there are only five scientists,
+    she could write five queries of the form:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="3">
+<pre>select person, count(reading), round(avg(reading), 2)
+from  Survey
+where quant='rad'
+and   person='dyer';</pre>
+      </td>
+    </tr>
+    <tr><td>dyer</td><td>2</td><td>8.81</td></tr>
+  </table>
+
+  <p class="continue">
+    but this would be tedious,
+    and if she ever had a data set with fifty or five hundred scientists,
+    the chances of her getting all of those queries right is small.
+  </p>
+
+  <p>
+    What we need to do is
+    tell the database manager to aggregate the hours for each scientist separately
+    using a <code>group by</code> clause:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="3">
+<pre>select   person, count(reading), round(avg(reading), 2)
+from     Survey
+where    quant='rad'
+group by person;</pre>
+      </td>
+    </tr>
+    <tr><td>dyer</td><td>2</td><td>8.81</td></tr>
+    <tr><td>lake</td><td>2</td><td>1.82</td></tr>
+    <tr><td>pb</td><td>3</td><td>6.66</td></tr>
+    <tr><td>roe</td><td>1</td><td>11.25</td></tr>
+  </table>
+
+  <p>
+    <code>group by</code> does exactly what its name implies:
+    groups all the records with the same value for the specified field together
+    so that aggregation can process each batch separately.
+    Since all the records in each batch have the same value for <code>person</code>,
+    it no longer matters that the database manager
+    is picking an arbitrary one to display
+    alongside the aggregated <code>reading</code> values
+    (<a href="#f:grouped_aggregation">Figure 6</a>).
+  </p>
+
+  <figure id="f:grouped_aggregation">
+    <img src="db/grouped_aggregation.png" alt="Grouped Aggregation" />
+    <figcaption>Figure 6: Grouped Aggregation</figcaption>
+  </figure>
+
+  <p>
+    Just as we can sort by multiple criteria at once,
+    we can also group by multiple criteria.
+    To get the average reading by scientist and quantity measured,
+    for example,
+    we just add another field to the <code>group by</code> clause:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="4">
+<pre>select   person, quant, count(reading), round(avg(reading), 2)
+from     Survey
+group by person, quant;</pre>
+      </td>
+    </tr>
+    <tr><td></td><td>sal</td><td>1</td><td>0.06</td></tr>
+    <tr><td></td><td>temp</td><td>1</td><td>-26.0</td></tr>
+    <tr><td>dyer</td><td>rad</td><td>2</td><td>8.81</td></tr>
+    <tr><td>dyer</td><td>sal</td><td>2</td><td>0.11</td></tr>
+    <tr><td>lake</td><td>rad</td><td>2</td><td>1.82</td></tr>
+    <tr><td>lake</td><td>sal</td><td>4</td><td>0.11</td></tr>
+    <tr><td>lake</td><td>temp</td><td>1</td><td>-16.0</td></tr>
+    <tr><td>pb</td><td>rad</td><td>3</td><td>6.66</td></tr>
+    <tr><td>pb</td><td>temp</td><td>2</td><td>-20.0</td></tr>
+    <tr><td>roe</td><td>rad</td><td>1</td><td>11.25</td></tr>
+    <tr><td>roe</td><td>sal</td><td>2</td><td>32.05</td></tr>
+  </table>
+
+  <p class="continue">
+    Note that we have added <code>person</code> to the list of fields displayed,
+    since the results wouldn't make much sense otherwise.
+  </p>
+
+  <p>
+    Let's go one step further and remove all the entries
+    where we don't know who took the measurement:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="4">
+<pre>select   person, quant, count(reading), round(avg(reading), 2)
+from     Survey
+where    person is not null
+group by person, quant
+order by person, quant;</pre>
+      </td>
+    </tr>
+    <tr><td>dyer</td><td>rad</td><td>2</td><td>8.81</td></tr>
+    <tr><td>dyer</td><td>sal</td><td>2</td><td>0.11</td></tr>
+    <tr><td>lake</td><td>rad</td><td>2</td><td>1.82</td></tr>
+    <tr><td>lake</td><td>sal</td><td>4</td><td>0.11</td></tr>
+    <tr><td>lake</td><td>temp</td><td>1</td><td>-16.0</td></tr>
+    <tr><td>pb</td><td>rad</td><td>3</td><td>6.66</td></tr>
+    <tr><td>pb</td><td>temp</td><td>2</td><td>-20.0</td></tr>
+    <tr><td>roe</td><td>rad</td><td>1</td><td>11.25</td></tr>
+    <tr><td>roe</td><td>sal</td><td>2</td><td>32.05</td></tr>
+  </table>
+
+  <p class="continue">
+    Looking more closely,
+    this query:
+  </p>
+
+  <ol>
+
+    <li>
+      selected records from the <code>Survey</code> table
+      where the <code>person</code> field was not null;
+    </li>
+
+    <li>
+      grouped those records into subsets
+      so that the <code>person</code> and <code>quant</code> values in each subset
+      were the same;
+    </li>
+
+    <li>
+      ordered those subsets first by <code>person</code>,
+      and then within each sub-group by <code>quant</code>;
+      and
+    </li>
+
+    <li>
+      counted the number of records in each subset,
+      calculated the average <code>reading</code> in each,
+      and chose a <code>person</code> and <code>quant</code> value from each
+      (it doesn't matter which ones,
+      since they're all equal).
+    </li>
+
+  </ol>
+
+  <p class="continue">
+    Our query processing pipeline now looks like
+    <a href="#f:pipeline_grouping">Figure 7</a>.
+  </p>
+
+  <figure id="f:pipeline_grouping">
+    <img src="db/pipeline_grouping.png" alt="Query Processing Pipeline With Grouping" />
+    <figcaption>Figure 7: Query Processing Pipeline With Grouping</figcaption>
+  </figure>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-db/grouping/keypoints.html %}
+
+<div id="s:db:grouping:summary" class="keypoints">
+  <ul>
+    <li>Use <code>group by</code> to group values for separate aggregation.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-db/grouping/challenges.html %}
+
+<div id="s:db:grouping:challenges" class="challenges">
+  <ol>
+    <li>
+<p>
+  Write a single query that finds the earliest and latest date
+  that each site was visited.
+</p>
+    </li>
+    <li>
+<p>
+  Show the records produced by each stage of
+  <a href='#f:pipeline_grouping'>Figure 7</a>
+  for the following query:
+</p>
+<pre>
+select   min(reading), max(reading) from Survey
+where    taken in (734, 735)
+and      quant='temp'
+group by taken, quant;
+</pre>
+    </li>
+    <li>
+<p>
+  How can the query below be simplified without changing its result?
+</p>
+<pre>
+select   min(reading), max(reading) from Survey
+where    taken in (734, 735)
+and      quant='temp'
+group by taken, quant;
+</pre>
+    </li>
+  </ol>
+</div>
+
 </section>
 
 <section id="s:db:join">
-  <h2>{% include guide-db/join/title.md %}</h2>
+  <h2>Combining Data</h2>
   <h3>Objectives</h3>
-  {% include guide-db/join/objectives.html %}
+
+<div id="s:db:join:objectives" class="objectives">
+  <ul>
+    <li>Explain what primary keys and foreign keys are.</li>
+    <li>Write queries that combine information from two or more tables by matching keys.</li>
+    <li>Write queries using aliases for table names.</li>
+    <li>Explain why the <code>tablename.fieldname</code> notation is needed when tables are joined.</li>
+    <li>Explain the logical sequence of operations that occurs when two or more tables are joined.</li>
+  </ul>
+  <p>Duration: 20 minutes (including time to walk through one small example step by step).</p>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-db/join/lesson.html %}
+
+<div id="s:db:join:lesson" class="lesson">
+
+  <p>
+    In order to submit her data to a web site
+    that aggregates historical meteorological data,
+    Gina needs to format it as:
+  </p>
+
+  <table>
+    <tr>
+      <td>latitude</td>
+      <td>longitude</td>
+      <td>date</td>
+      <td>quantity</td>
+      <td>reading</td>
+    </tr>
+  </table>
+
+  <p>
+    However,
+    her latitudes and longitudes are in the <code>Site</code> table,
+    while the dates of measurements are in the <code>Visited</code> table
+    and the readings themselves are in the <code>Survey</code> table.
+    She needs to combine these tables somehow.
+  </p>
+
+  <p>
+    The SQL command to do this is <code>join</code>.
+    To see how it works,
+    let's start by joining the <code>Site</code> and <code>Visited</code> tables:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="6">
+<pre>select * from Site join Visited;</pre>
+      </td>
+    </tr>
+    <tr><td>DR-1</td><td>-49.85</td><td>-128.57</td><td>619</td><td>DR-1</td><td>1927-02-08</td></tr>
+    <tr><td>DR-1</td><td>-49.85</td><td>-128.57</td><td>622</td><td>DR-1</td><td>1927-02-10</td></tr>
+    <tr><td>DR-1</td><td>-49.85</td><td>-128.57</td><td>734</td><td>DR-3</td><td>1939-01-07</td></tr>
+    <tr><td>DR-1</td><td>-49.85</td><td>-128.57</td><td>735</td><td>DR-3</td><td>1930-01-12</td></tr>
+    <tr><td>DR-1</td><td>-49.85</td><td>-128.57</td><td>751</td><td>DR-3</td><td>1930-02-26</td></tr>
+    <tr><td>DR-1</td><td>-49.85</td><td>-128.57</td><td>752</td><td>DR-3</td><td></td></tr>
+    <tr><td>DR-1</td><td>-49.85</td><td>-128.57</td><td>837</td><td>MS-4</td><td>1932-01-14</td></tr>
+    <tr><td>DR-1</td><td>-49.85</td><td>-128.57</td><td>844</td><td>DR-1</td><td>1932-03-22</td></tr>
+    <tr><td>DR-3</td><td>-47.15</td><td>-126.72</td><td>619</td><td>DR-1</td><td>1927-02-08</td></tr>
+    <tr><td>DR-3</td><td>-47.15</td><td>-126.72</td><td>622</td><td>DR-1</td><td>1927-02-10</td></tr>
+    <tr><td>DR-3</td><td>-47.15</td><td>-126.72</td><td>734</td><td>DR-3</td><td>1939-01-07</td></tr>
+    <tr><td>DR-3</td><td>-47.15</td><td>-126.72</td><td>735</td><td>DR-3</td><td>1930-01-12</td></tr>
+    <tr><td>DR-3</td><td>-47.15</td><td>-126.72</td><td>751</td><td>DR-3</td><td>1930-02-26</td></tr>
+    <tr><td>DR-3</td><td>-47.15</td><td>-126.72</td><td>752</td><td>DR-3</td><td></td></tr>
+    <tr><td>DR-3</td><td>-47.15</td><td>-126.72</td><td>837</td><td>MS-4</td><td>1932-01-14</td></tr>
+    <tr><td>DR-3</td><td>-47.15</td><td>-126.72</td><td>844</td><td>DR-1</td><td>1932-03-22</td></tr>
+    <tr><td>MS-4</td><td>-48.87</td><td>-123.4</td><td>619</td><td>DR-1</td><td>1927-02-08</td></tr>
+    <tr><td>MS-4</td><td>-48.87</td><td>-123.4</td><td>622</td><td>DR-1</td><td>1927-02-10</td></tr>
+    <tr><td>MS-4</td><td>-48.87</td><td>-123.4</td><td>734</td><td>DR-3</td><td>1939-01-07</td></tr>
+    <tr><td>MS-4</td><td>-48.87</td><td>-123.4</td><td>735</td><td>DR-3</td><td>1930-01-12</td></tr>
+    <tr><td>MS-4</td><td>-48.87</td><td>-123.4</td><td>751</td><td>DR-3</td><td>1930-02-26</td></tr>
+    <tr><td>MS-4</td><td>-48.87</td><td>-123.4</td><td>752</td><td>DR-3</td><td></td></tr>
+    <tr><td>MS-4</td><td>-48.87</td><td>-123.4</td><td>837</td><td>MS-4</td><td>1932-01-14</td></tr>
+    <tr><td>MS-4</td><td>-48.87</td><td>-123.4</td><td>844</td><td>DR-1</td><td>1932-03-22</td></tr>
+  </table>
+
+  <figure id="f:basicjoin">
+    <img src="db/basicjoin.png" alt="Basic Join" />
+    <figcaption>Figure 8: A Join of the Site and Visited Tables</figcaption>
+  </figure>
+
+  <p>
+    <code>join</code> creates
+    the <a href="glossary.html#cross-product">cross product</a>
+    of two tables,
+    i.e.,
+    it joins each record of one with each record of the other
+    to give all possible combinations (<a href="#f:basicjoin">Figure 8</a>).
+    Since there are three records in <code>Site</code>
+    and eight in <code>Visited</code>,
+    the join's output has 24 records.
+    And since each table has three fields,
+    the output has six fields.
+  </p>
+
+  <p>
+    What the join <em>hasn't</em> done is
+    figure out if the records being joined have anything to do with each other.
+    It has no way of knowing whether they do or not until we tell it how.
+    To do that,
+    we add a clause specifying that
+    we're only interested in combinations that have the same site name:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="6">
+<pre>select * from Site join Visited <span class="highlight">on Site.name=Visited.site</span>;</pre>
+      </td>
+    </tr>
+    <tr><td>DR-1</td><td>-49.85</td><td>-128.57</td><td>619</td><td>DR-1</td><td>1927-02-08</td></tr>
+    <tr><td>DR-1</td><td>-49.85</td><td>-128.57</td><td>622</td><td>DR-1</td><td>1927-02-10</td></tr>
+    <tr><td>DR-1</td><td>-49.85</td><td>-128.57</td><td>844</td><td>DR-1</td><td>1932-03-22</td></tr>
+    <tr><td>DR-3</td><td>-47.15</td><td>-126.72</td><td>734</td><td>DR-3</td><td>1939-01-07</td></tr>
+    <tr><td>DR-3</td><td>-47.15</td><td>-126.72</td><td>735</td><td>DR-3</td><td>1930-01-12</td></tr>
+    <tr><td>DR-3</td><td>-47.15</td><td>-126.72</td><td>751</td><td>DR-3</td><td>1930-02-26</td></tr>
+    <tr><td>DR-3</td><td>-47.15</td><td>-126.72</td><td>752</td><td>DR-3</td><td></td></tr>
+    <tr><td>MS-4</td><td>-48.87</td><td>-123.4</td><td>837</td><td>MS-4</td><td>1932-01-14</td></tr>
+  </table>
+
+  <p>
+    <code>on</code> does the same job as <code>where</code>:
+    it only keeps records that pass some test.
+    (The difference between the two is that <code>on</code> filters records
+    as they're being created,
+    while <code>where</code> waits until the join is done
+    and then does the filtering.)
+    Once we add this to our query,
+    the database manager throws away records
+    that combined information about two different sites,
+    leaving us with just the ones we want.
+  </p>
+
+  <p>
+    Notice that we used <code>table.field</code> to specify field names
+    in the output of the join.
+    We do this because tables can have fields with the same name,
+    and we need to be specific which ones we're talking about.
+    For example,
+    if we joined the <code>person</code> and <code>visited</code> tables,
+    the result would inherit a field called <code>ident</code>
+    from each of the original tables.
+  </p>
+
+  <p>
+    We can now use the same dotted notation
+    to select the three columns we actually want
+    out of our join:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="3">
+<pre>select <span class="highlight">Site.lat, Site.long, Visited.dated</span>
+from   Site join Visited
+on     Site.name=Visited.site;</pre>
+      </td>
+    </tr>
+    <tr><td>-49.85</td><td>-128.57</td><td>1927-02-08</td></tr>
+    <tr><td>-49.85</td><td>-128.57</td><td>1927-02-10</td></tr>
+    <tr><td>-49.85</td><td>-128.57</td><td>1932-03-22</td></tr>
+    <tr><td>-47.15</td><td>-126.72</td><td></td></tr>
+    <tr><td>-47.15</td><td>-126.72</td><td>1930-01-12</td></tr>
+    <tr><td>-47.15</td><td>-126.72</td><td>1930-02-26</td></tr>
+    <tr><td>-47.15</td><td>-126.72</td><td>1939-01-07</td></tr>
+    <tr><td>-48.87</td><td>-123.4</td><td>1932-01-14</td></tr>
+  </table>
+
+  <p>
+    If joining two tables is good,
+    joining many tables must be better.
+    In fact,
+    we can join any number of tables
+    simply by adding more <code>join</code> clauses to our query,
+    and more <code>on</code> tests to filter out combinations of records
+    that don't make sense:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="5">
+<pre>select Site.lat, Site.long, Visited.dated, <span class="highlight">Survey.quant, Survey.reading</span>
+from   Site join Visited join Survey
+on     Site.name=Visited.site
+<span class="highlight">and    Visited.ident=Survey.taken
+and    Visited.dated is not null</span>;</pre>
+      </td>
+    </tr>
+    <tr><td>-49.85</td><td>-128.57</td><td>1927-02-08</td><td>rad</td><td>9.82</td></tr>
+    <tr><td>-49.85</td><td>-128.57</td><td>1927-02-08</td><td>sal</td><td>0.13</td></tr>
+    <tr><td>-49.85</td><td>-128.57</td><td>1927-02-10</td><td>rad</td><td>7.8</td></tr>
+    <tr><td>-49.85</td><td>-128.57</td><td>1927-02-10</td><td>sal</td><td>0.09</td></tr>
+    <tr><td>-47.15</td><td>-126.72</td><td>1939-01-07</td><td>rad</td><td>8.41</td></tr>
+    <tr><td>-47.15</td><td>-126.72</td><td>1939-01-07</td><td>sal</td><td>0.05</td></tr>
+    <tr><td>-47.15</td><td>-126.72</td><td>1939-01-07</td><td>temp</td><td>-21.5</td></tr>
+    <tr><td>-47.15</td><td>-126.72</td><td>1930-01-12</td><td>rad</td><td>7.22</td></tr>
+    <tr><td>-47.15</td><td>-126.72</td><td>1930-01-12</td><td>sal</td><td>0.06</td></tr>
+    <tr><td>-47.15</td><td>-126.72</td><td>1930-01-12</td><td>temp</td><td>-26.0</td></tr>
+    <tr><td>-47.15</td><td>-126.72</td><td>1930-02-26</td><td>rad</td><td>4.35</td></tr>
+    <tr><td>-47.15</td><td>-126.72</td><td>1930-02-26</td><td>sal</td><td>0.1</td></tr>
+    <tr><td>-47.15</td><td>-126.72</td><td>1930-02-26</td><td>temp</td><td>-18.5</td></tr>
+    <tr><td>-48.87</td><td>-123.4</td><td>1932-01-14</td><td>rad</td><td>1.46</td></tr>
+    <tr><td>-48.87</td><td>-123.4</td><td>1932-01-14</td><td>sal</td><td>0.21</td></tr>
+    <tr><td>-48.87</td><td>-123.4</td><td>1932-01-14</td><td>sal</td><td>22.5</td></tr>
+    <tr><td>-49.85</td><td>-128.57</td><td>1932-03-22</td><td>rad</td><td>11.25</td></tr>
+  </table>
+
+  <p id="a:keys">
+    We can tell which records from <code>Site</code>, <code>Visited</code>, and <code>Survey</code>
+    correspond with each other
+    because those tables contain
+    <a href="glossary.html#primary-key">primary keys</a>
+    and <a href="glossary.html#foreign-key">foreign keys</a>.
+    A primary key is a value,
+    or combination of values,
+    that uniquely identifies each record in a table.
+    A foreign key is a value (or combination of values) from one table
+    that identifies a unique record in another table.
+    Another way of saying this is that
+    a foreign key is the primary key of one table
+    that appears in some other table.
+    In our database,
+    <code>Person.ident</code> is the primary key in the <code>Person</code> table,
+    while <code>Survey.person</code> is a foreign key
+    relating the <code>Survey</code> table's entries
+    to entries in <code>Person</code>.
+  </p>
+
+  <p>
+    Most database designers believe that
+    every table should have a well-defined primary key.
+    They also believe that this key should be separate from the data itself,
+    so that if we ever need to change the data,
+    we only need to make one change in one place.
+    One easy way to do this is
+    to create an arbitrary, unique ID for each record
+    as we add it to the database.
+    This is actually very common:
+    those IDs have names like "student numbers" and "patient numbers",
+    and they almost always turn out to have originally been
+    a unique record identifier in some database system or other.
+    As the query below demonstrates,
+    SQLite automatically numbers records as they're added to tables,
+    and we can use those record numbers in queries:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="4">
+<pre>select rowid, * from Person;</pre>
+      </td>
+    </tr>
+    <tr><td>1</td><td>dyer</td><td>William</td><td>Dyer</td></tr>
+    <tr><td>2</td><td>pb</td><td>Frank</td><td>Pabodie</td></tr>
+    <tr><td>3</td><td>lake</td><td>Anderson</td><td>Lake</td></tr>
+    <tr><td>4</td><td>roe</td><td>Valentina</td><td>Roerich</td></tr>
+    <tr><td>5</td><td>danforth</td><td>Frank</td><td>Danforth</td></tr>
+  </table>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-db/join/keypoints.html %}
+
+<div id="s:db:join:summary" class="keypoints">
+  <ul>
+    <li>Use <code>join</code> to create all possible combinations of records from two or more tables.</li>
+    <li>Use <code>join <em>tables</em> on <em>test</em></code> to keep only those combinations that pass some test.</li>
+    <li>Use <code><em>table</em>.<em>field</em></code> to specify a particular field of a particular table.</li>
+    <li>Every record in a table should be uniquely identified by the value of its primary key.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-db/join/challenges.html %}
+
+<div id="s:db:join:challenges" class="challenges">
+  <ol>
+    <li>
+<p>
+  Write a query that lists all radiation readings from the DR-1 site.
+</p>
+    </li>
+    <li>
+<p>
+  Write a query that lists all sites visited by people named "Frank".
+</p>
+    </li>
+    <li>
+<p>
+  Describe in your own words what the following query produces:
+</p>
+
+<pre>
+select Site.name from Site join Visited
+on Site.lat&lt;-49.0 and Site.name=Visited.site and Visited.dated&gt;='1932-00-00';
+</pre>
+    </li>
+    <li>
+<p>
+  Why does the <code>Person</code> table have an <code>ident</code> field?
+  Why do we not just use scientists' names in the <code>Survey</code> table?
+</p>
+    </li>
+    <li>
+<p>
+  Why does the table <code>Site</code> exist?
+  Why didn't Gina just record latitudes and longitudes
+  directly in the <code>Visited</code> and <code>Survey</code> tables?
+</p>
+    </li>
+  </ol>
+</div>
+
 </section>
 
 <section id="s:db:create">
-  <h2>{% include guide-db/create/title.md %}</h2>
+  <h2>Creating and Modifying Tables</h2>
   <h3>Objectives</h3>
-  {% include guide-db/create/objectives.html %}
+
+<div id="s:db:create:objectives">
+  <ul>
+    <li>Write queries that create database tables with fields of common types.</li>
+    <li>Write queries that specify the primary and foreign key relationships of tables.</li>
+    <li>Write queries that specify whether field values must be unique and/or are allowed to be <code>null</code>.</li>
+    <li>Write queries that erase database tables.</li>
+    <li>Write queries that add records to database tables.</li>
+    <li>Write queries that delete specific records from tables.</li>
+    <li>Explain what referential integrity is, and how a database can become inconsistent as data is changed.</li>
+  </ul>
+  <p>Duration: 10-15 minutes.</p>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-db/create/lesson.html %}
+
+<div class="lesson" id="s:db:create:lesson">
+
+  <p>
+    So far we have only looked at how to get information out of a database,
+    both because that is more frequent than adding information,
+    and because most other operations only make sense
+    once queries are understood.
+    If we want to create and modify data,
+    we need to know two other pairs of commands.
+  </p>
+
+  <p>
+    The first pair are <code>create&nbsp;table</code> and <code>drop&nbsp;table</code>.
+    While they are written as two words,
+    they are actually single commands.
+    The first one creates a new table;
+    its arguments are the names and types of the table's columns.
+    For example,
+    the following statements create the four tables in our survey database:
+  </p>
+
+<pre>
+create table Person(ident text, personal text, family text);
+create table Site(name text, lat real, long real);
+create table Visited(ident integer, site text, dated text);
+create table Survey(taken integer, person text, quant real, reading real);
+</pre>
+
+  <p>
+    We can get rid of one of our tables using:
+  </p>
+
+<pre>
+drop table Survey;
+</pre>
+
+  <p class="continue">
+    Be very careful when doing this:
+    most databases have some support for undoing changes,
+    but it's better not to have to rely on it.
+  </p>
+
+  <p>
+    Different database systems support different data types for table columns,
+    but most provide the following:
+  </p>
+
+  <table>
+    <tr>
+      <td>
+        <code>integer</code>
+      </td>
+      <td>
+        A signed integer.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>real</code>
+      </td>
+      <td>
+        A floating point value.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>text</code>
+      </td>
+      <td>
+        A string.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>blob</code>
+      </td>
+      <td>
+        Any "binary large object"
+        such as an image or audio file.
+      </td>
+    </tr>
+  </table>
+
+  <p>
+    most databases also support Booleans and date/time values;
+    SQLite uses the integers 0 and 1 for the former,
+    and represents the latter as discussed <a href="#a:dates">earlier</a>.
+    An increasing number of databases also support geographic data types,
+    such as latitude and longitude.
+    Keeping track of what particular systems do or do not offer,
+    and what names they give different data types,
+    is an unending portability headache.
+  </p>
+
+  <p>
+    When we create a table,
+    we can specify several kinds of constraints on its columns.
+    For example,
+    a better definition for the <code>Survey</code> table would be:
+  </p>
+
+<pre>
+create table Survey(
+        taken   integer not null, <span class="comment">-- where reading taken</span>
+        person  text,             <span class="comment">-- may not know who took it</span>
+        quant   real not null,    <span class="comment">-- the quantity measured</span>
+        reading real not null,    <span class="comment">-- the actual reading</span>
+        primary key(taken, quant),
+        foreign key(taken) references Visited(ident),
+        foreign key(person) references Person(ident)
+);
+</pre>
+
+  <p class="continue">
+    Once again,
+    exactly what constraints are avialable
+    and what they're called
+    depends on which database manager we are using.
+  </p>
+
+  <p>
+    Once tables have been created,
+    we can add and remove records using our other pair of commands,
+    <code>insert</code> and <code>delete</code>.
+    The simplest form of <code>insert</code> statement lists values in order:
+  </p>
+
+<pre>
+insert into Site values('DR-1', -49.85, -128.57);
+insert into Site values('DR-3', -47.15, -126.72);
+insert into Site values('MSK-4', -48.87, -123.40);
+</pre>
+
+  <p>
+    We can also insert values into one table directly from another:
+  </p>
+
+<pre>
+create table JustLatLong(lat text, long TEXT);
+insert into JustLatLong select lat, long from site;
+</pre>
+
+  <p>
+    Deleting records can be a bit trickier,
+    because we have to ensure that the database remains internally consistent.
+    If all we care about is a single table,
+    we can use the <code>DELETE</code> command with a <code>WHERE</code> clause
+    that matches the records we want to discard.
+    For example,
+    once we realize that Frank Danforth didn't take any measurements,
+    we can remove him from the <code>Person</code> table like this:
+  </p>
+
+<pre>
+delete from Person where ident = "danforth";
+</pre>
+
+  <p>
+    But what if we removed Anderson Lake instead?
+    Our <code>Survey</code> table would still contain seven records
+    of measurements he'd taken:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="1">
+<pre>select count(*) from Survey where person='lake';</pre>
+      </td>
+    </tr>
+    <tr><td>7</td></tr>
+  </table>
+
+  <p>
+    That's never supposed to happen:
+    <code>Survey.person</code> is a foreign key into the <code>Person</code> table,
+    and all our queries assume there will be a row in the latter
+    matching every value in the former.
+  </p>
+
+  <p>
+    This problem is called <a href="glossary.html#referential-integrity">referential integrity</a>:
+    we need to ensure that all references between tables can always be resolved correctly.
+    One way to do this is to delete all the records
+    that use <code>'lake'</code> as a foreign key
+    before deleting the record that uses it as a primary key.
+    If our database manager supports it,
+    we can automate this
+    using <a href="glossary.html#cascading-delete">cascading delete</a>.
+    However,
+    this technique is outside the scope of this chapter.
+  </p>
+
+  <div class="box" id="a:hybrid">
+    <h3>Other Ways to Do It</h3>
+
+    <p>
+      Many applications use a hybrid storage model
+      instead of putting everything into a database:
+      the actual data (such as astronomical images) is stored in files,
+      while the database stores the files' names,
+      their modification dates,
+      the region of the sky they cover,
+      their spectral characteristics,
+      and so on.
+      This is also how most music player software is built:
+      the database inside the application keeps track of the MP3 files,
+      but the files themselves live on disk.
+    </p>
+  </div>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-db/create/keypoints.html %}
+
+<div class="keypoints" id="s:db:create:keypoints">
+  <ul>
+    <li>Use <code>create table <em>name</em>(...)</code> to create a table.</li>
+    <li>Use <code>drop table <em>name</em></code> to erase a table.</li>
+    <li>Specify field names and types when creating tables.</li>
+    <li>Specify <code>primary key</code>, <code>foreign key</code>, <code>not null</code>, and other constraints when creating tables.</li>
+    <li>Use <code>insert into <em>table</em> values(...)</code> to add records to a table.</li>
+    <li>Use <code>delete from <em>table</em> where <em>test</em></code> to erase records from a table.</li>
+    <li>Maintain referential integrity when creating or deleting information.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-db/create/challenges.html %}
+
+<div class="challenges" id="s:db:create:challenges">
+  <ol>
+    <li>
+<p>
+  Write an SQL statement to replace all uses of <code>null</code>
+  in <code>Survey.person</code>
+  with the string <code>'unknown'</code>.
+</p>
+    </li>
+    <li>
+<p>
+  One of Gina's colleagues has sent her a <a href='glossary.html#csv'>CSV</a> file
+  containing temperature readings by Robert Olmstead,
+  which is formatted like this:
+</p>
+<pre>
+Taken,Temp
+619,-21.5
+622,-15.5
+</pre>
+<p>
+  Write a small Python program that reads this file in
+  and prints out the SQL <code>insert</code> statements needed
+  to add these records to the survey database.
+  Note: you will need to add an entry for Olmstead
+  to the <code>Person</code> table.
+  If you are testing your program repeatedly,
+  you may want to investigate SQL's <code>insert or replace</code> command.
+</p>
+    </li>
+    <li>
+<p>
+  SQLite has several administrative commands that aren't part of the SQL standard.
+  One of them is <code>.dump</code>,
+  which prints the SQL commands needed to re-create the database.
+  Another is <code>.load</code>,
+  which reads a file created by <code>.dump</code> and restores the database.
+  A colleague of yours thinks that storing dump files (which are text) in version control
+  is a good way to track and manage changes to the database.
+  What are the pros and cons of this approach?
+</p>
+    </li>
+  </ol>
+</div>
+
 </section>
 
 <section id="s:db:transactions">
-  <h2>{% include guide-db/transactions/title.md %}</h2>
+  <h2>Transactions</h2>
   <h3>Objectives</h3>
-  {% include guide-db/transactions/objectives.html %}
+
+<div id="s:db:transactions:objectives" class="objectives">
+  <ul>
+    <li>Explain what a race condition is.</li>
+    <li>Explain why database operations sometimes have to be placed ina transaction to ensure correct behavior.</li>
+    <li>Explain what it means to commit a transaction.</li>
+  </ul>
+  <p>Duration: 15 minutes.</p>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-db/transactions/lesson.html %}
+
+<div id="s:db:transactions:lesson" class="lesson">
+
+  <p>
+    Suppose we have another table in our database that shows
+    which pieces of equipment have been borrowed by which scientists:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="2">
+<pre>select * from Equipment;</pre>
+      </td>
+    </tr>
+    <tr><td>dyer</td><td>CX-211 oscilloscope</td></tr>
+    <tr><td>pb</td><td>Greenworth balance</td></tr>
+    <tr><td>lake</td><td>Cavorite damping plates</td></tr>
+  </table>
+  
+  <p class="continue">
+    (We should actually give each piece of equipment a unique ID,
+    and use that ID here instead of the full name,
+    just as we created a separate table for scientists earlier in this chapter,
+    but we will bend the rules for now.)
+    If William Dyer gives the oscilloscope to Valentina Roerich,
+    we need to execute two statements to update this table:
+  </p>
+
+<pre>
+delete from Equipment where person="dyer" and thing="CX-211 oscilloscope";
+insert into Equipment values("roe", "CX-211 oscilloscope");
+</pre>
+
+  <p>
+    This is all fine&mdash;unless our program happens to crash
+    between the first statement and the second.
+    If that happens,
+    the <code>Equipment</code> table won't have a record for the oscilloscope at all.
+    Such a crash may seem unlikely,
+    but remember:
+    if a computer can do two billion operations per second,
+    that means there are two billion opportunities every second for something to go wrong.
+    And if our operations take a long time to complete&mdash;as they will
+    when we are working with large datasets,
+    or when the database is being heavily used&mdash;the odds of failure increase.
+  </p>
+
+  <p>
+    What we really want is a way to ensure that every operation is <a href="glossary.html#acid">ACID</a>:
+    <a href="glossary.html#atomic-operation">atomic</a> (i.e. indivisible),
+    consistent, isolated, and durable.
+    The precise meanings of these terms doesn't matter;
+    what does is the notion that
+    every logical operation on the database should either run to completion
+    as if nothing else was going on at the same time,
+    or fail without having any effect at all.
+  </p>
+
+  <p>
+    The tool we use to ensure that this happens is called
+    a <a href="glossary.html#transaction">transaction</a>.
+    Here's how we should actually write the statements
+    to move the oscilloscope from one person to another:
+  </p>
+
+<pre>
+<span class="highlight">begin transaction;</span>
+delete from Equipment where person="dyer" and thing="CX-211 oscilloscope";
+insert into Equipment values("roe", "CX-211 oscilloscope");
+<span class="highlight">end transaction;</span>
+</pre>
+
+  <p>
+    The database manager treats everything in the transaction as one large statement.
+    If anything goes wrong inside,
+    then none of the changes made in the transaction will actually be written to the database&mdash;it
+    will be as if the transaction had never happened.
+    Changes are only stored permanently
+    when we <a href="glossary.html#commit">commit</a> them at the end of the transaction.
+  </p>
+
+  <div class="box">
+    <h3>Transactions and Commits</h3>
+
+    <p>
+      We first used the term "transaction" in
+      <a href="svn.html#b:basics:transaction">our discussion of version control</a>.
+      That's not a coincidence:
+      behind the scenes,
+      tools like Subversion are using many of the same algorithms as database managers
+      to ensure that either everything happens consistently
+      or nothing happens at all.
+      We <a href="svn.html#a:commit">use the term "commit"</a> for the same reason:
+      just as our changes to local files aren't written back to the version control repository
+      until we commit them,
+      our (apparent) changes to a database aren't written to disk
+      until we say so.
+    </p>
+
+  </div>
+
+  <p>
+    Transactions serve another purpose as well.
+    Suppose there is another table in the database called <code>Exposure</code>
+    that records the number of days each scientist was exposed to
+    higher-than-normal levels of radiation:
+  </p>
+
+  <table class="db">
+    <tr>
+      <td colspan="2">
+<pre>select * from Exposure;</pre>
+      </td>
+    </tr>
+    <tr><td>pb</td><td>4</td></tr>
+    <tr><td>dyer</td><td>1</td></tr>
+    <tr><td>lake</td><td>5</td></tr>
+  </table>
+
+  <p class="continue">
+    After going through the journal entries for 1932,
+    Gina wants to add two days to Lake's count:
+  </p>
+
+<pre>
+update Exposure set days = days + 2 where person='lake';
+</pre>
+
+  <p class="continue">
+    However,
+    her labmate has been doing through the journal entries for 1933
+    to help Gina meet a paper deadline.
+    At the same moment as Gina runs her command,
+    her labmate runs this
+    to add one more day to Lake's exposure:
+  </p>
+
+<pre>
+update Exposure set days = days + 1 where person='lake';
+</pre>
+
+  <p>
+    After both operations have completed,
+    the database should show that Lake was exposed for eight days
+    (the original five, plus two from Gina, plus one from her labmate).
+    However,
+    there is a small chance that it won't.
+    To see why,
+    let's break the two queries into their respective read and write steps
+    and place them side by side:
+  </p>
+
+  <table border="1">
+    <tr>
+      <td><code>X = read Exposure('lake', __)</code></td>
+      <td><code>Y = read Exposure('lake', __)</code></td>
+    </tr>
+    <tr>
+      <td><code>write Exposure('lake', X+2)</code></td>
+      <td><code>write Exposure('lake', Y+1)</code></td>
+    </tr>
+  </table>
+
+  <p>
+    The database can only actually do one thing at once,
+    so it must put these four operations into some sequential order.
+    That order has to respect the original order within each column,
+    but the database can interleave the two columns any way it wants.
+    If it orders them like this:
+  </p>
+
+  <table border="1">
+    <tr>
+      <td><code>X = read Exposure('lake', __)</code></td>
+      <td><code>X</code> is 5</td>
+    </tr>
+    <tr>
+      <td><code>write Exposure('lake', X+2)</code></td>
+      <td>database contains 7</td>
+    </tr>
+    <tr>
+      <td><code>Y = read Exposure('lake', __)</code></td>
+      <td><code>Y</code> is 7</td>
+    </tr>
+    <tr>
+      <td><code>write Exposure('lake', Y+1)</code></td>
+      <td>database contains 8</td>
+    </tr>
+  </table>
+
+  <p class="continue">
+    then all is well.
+    But what if it interleaves the operations like this:
+  </p>
+
+  <table border="1">
+    <tr>
+      <td><code>X = read Exposure('lake', __)</code></td>
+      <td><code>X</code> is 5</td>
+    </tr>
+    <tr>
+      <td><code>Y = read Exposure('lake', __)</code></td>
+      <td><code>Y</code> is 5</td>
+    </tr>
+    <tr>
+      <td><code>write Exposure('lake', X+2)</code></td>
+      <td>database contains 7</td>
+    </tr>
+    <tr>
+      <td><code>write Exposure('lake', Y+1)</code></td>
+      <td>database contains 6</td>
+    </tr>
+  </table>
+
+  <p class="continue">
+    This ordering puts the initial value, 5, into both <code>X</code> and <code>Y</code>.
+    It then writes 7 back to the database (the third statement),
+    and then overwrites that with 6,
+    since <code>Y</code> holds 5.
+  </p>
+
+  <p>
+    This is called a <a href="glossary.html#race-condition">race condition</a>,
+    since the final result depends on a race between the two operations.
+    Race conditions are part of what makes programming large systems with many components a nightmare:
+    they are difficult to spot in advance
+    (since they are caused by the interactions between components,
+    rather than by anything in any one of those components),
+    and can be almost impossible to debug
+    (since they usually occur intermittently and infrequently).
+  </p>
+
+  <p>
+    Transactions come to our rescue once again.
+    If Gina and her labmate put their statements in transactions,
+    the database will act as if it executed all of one and then all of the other.
+    Whether or not it <em>actually</em> does this is up to whoever wrote the database manager:
+    modern databases use very sophisticated algorithms to determine
+    which operations actually have to be run sequentially,
+    and which can safely be run in parallel to improve performance.
+    The key thing is that
+    every transaction will appear to have had the entire database to itself.
+  </p>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-db/transactions/keypoints.html %}
+
+<div id="s:db:transactions:keypoints" class="keypoints">
+  <ul>
+    <li>Place operations in a transaction to ensure that they appear to be atomic, consistent, isolated, and durable.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-db/transactions/challenges.html %}
+
+<div id="s:db:transactions:challenges" class="challenges">
+  <ol>
+    <li>
+<p>
+  A friend of yours manages a database of aerial photographs.
+  New records are added all the time,
+  but existing records are never modified or updated.
+  Your friend claims that because of this,
+  he doesn't need to put his queries in transactions.
+  Is he right or wrong, and why?
+</p>
+    </li>
+  </ol>
+</div>
+
 </section>
 
 <section id="s:db:programming">
-  <h2>{% include guide-db/programming/title.md %}</h2>
+  <h2>Programming with Databases</h2>
   <h3>Objectives</h3>
-  {% include guide-db/programming/objectives.html %}
+
+<div id="s:db:programming:objectives" class="objectives">
+  <ul>
+    <li>Write a Python program that queries a database and processes the results.</li>
+    <li>Explain what an SQL injection attack is.</li>
+    <li>Write a program that safely interpolates values into queries.</li>
+  </ul>
+  <p>Duration: 20 minutes.</p>
+</div>
+
   <h3>Lesson</h3>
-  {% include guide-db/programming/lesson.html %}
+
+<div id="s:db:programming:lesson" class="lesson">
+
+  <p>
+    To end this chapter,
+    let's have a look at how to access a database from
+    a general-purpose programming language like Python.
+    Other languages use almost exactly the same model:
+    library and function names may differ,
+    but the concepts are the same.
+  </p>
+
+  <p>
+    Here's a short Python program that selects latitudes and longitudes
+    from an SQLite database stored in a file called <code>survey.db</code>:
+  </p>
+
+<pre>
+import sqlite3
+connection = sqlite3.connect("survey.db")
+cursor = connection.cursor()
+cursor.execute("select site.lat, site.long from site;")
+results = cursor.fetchall()
+for r in results:
+    print r
+cursor.close()
+connection.close()
+</pre>
+
+  <p>
+    The program starts by importing the <code>sqlite3</code> library.
+    If we were connecting to MySQL, DB2, or some other database,
+    we would import a different library,
+    but all of them provide the same functions,
+    so that the rest of our program does not have to change
+    (at least, not much)
+    if we switch from one database to another.
+  </p>
+
+  <p>
+    Line 2 establishes a connection to the database.
+    Since we're using SQLite,
+    all we need to specify is the name of the database file.
+    Other systems may require us to provide a username and password as well.
+    Line 3 then uses this connection to create
+    a <a href="glossary.html#cursor">cursor</a>;
+    just like the cursor in an editor,
+    its role is to keep track of where we are in the database.
+  </p>
+
+  <p>
+    On line 4, we use that cursor to ask the database to execute a query for us.
+    The query is written in SQL,
+    and passed to <code>cursor.execute</code> as a string.
+    It's our job to make sure that SQL is properly formatted;
+    if it isn't,
+    or if something goes wrong when it is being executed,
+    the database will report an error.
+  </p>
+
+  <p>
+    The database returns the results of the query to us
+    in response to the <code>cursor.fetchall</code> call on line 5.
+    This result is a list with one entry for each record in the result set;
+    if we loop over that list (line 6) and print those list entries (line 7),
+    we can see that each one is a tuple
+    with one element for each field we asked for.
+  </p>
+
+  <p>
+    Finally, lines 8 and 9 close our cursor and our connection,
+    since the database can only keep a limited number of these open at one time.
+    Since establishing a connection takes time,
+    though,
+    we shouldn't open a connection,
+    do one operation,
+    then close the connection,
+    only to reopen it a few microseconds later to do another operation.
+    Instead,
+    it's normal to create one connection that stays open for the lifetime of the program.
+  </p>
+
+  <div class="box">
+    <h3>What Are The u's For?</h3>
+
+    <p>
+      You may have noticed that
+      each of the strings in our output has a lower-case 'u' in front of it.
+      That is Python's way of telling us that the string is stored in
+      <a href="glossary.html#unicode">Unicode</a>.
+    </p>
+
+  </div>
+
+  <p>
+    Queries in real applications will often depend on values provided by users.
+    For example,
+    a program might take a user ID as a command-line parameter
+    and display the user's full name:
+  </p>
+
+<pre>
+import sys
+import sqlite3
+
+query = "select personal, family from Person where ident='%s';"
+user_id = sys.argv[1]
+
+connection = sqlite3.connect("survey.db")
+cursor = connection.cursor()
+
+cursor.execute(query % user_id)
+results = cursor.fetchall()
+print results[0][0], results[0][1]
+
+cursor.close()
+connection.close()
+</pre>
+
+  <p>
+    The variable <code>query</code> holds the statement we want to execute
+    with a <code>%s</code> format string where we want to insert
+    the ID of the person we're looking up.
+    It seems simple enough,
+    but what happens if someone gives the program this input?
+  </p>
+
+<pre>
+dyer&quot;; drop table Survey; select &quot;
+</pre>
+
+  <p class="continue">
+    It looks like there's garbage after the name of the project,
+    but it is very carefully chosen garbage.
+    If we insert this string into our query,
+    the result is:
+  </p>
+
+<pre>
+select personal, family from Person where ident='dyer'; drop table Survey; select '';
+</pre>
+
+  <p class="continue">
+    Whoops:
+    if we execute this,
+    it will erase one of the tables in our database.
+  </p>
+
+  <p>
+    This technique is called <a href="glossary.html#sql-injection">SQL injection</a>,
+    and it has been used to attack thousands of programs over the years.
+    In particular,
+    many web sites that take data from users insert values directly into queries
+    without checking them carefully first.
+  </p>
+
+  <p>
+    Since a villain might try to smuggle commands into our queries in many different ways,
+    the safest way to deal with this threat is
+    to replace characters like quotes with their escaped equivalents,
+    so that we can safely put whatever the user gives us inside a string.
+    We can do this by using a <a href="glossary.html#prepared-statement">prepared statement</a>
+    instead of formatting our statements as strings.
+    Here's what our example program looks like if we do this:
+  </p>
+
+<pre>
+import sys
+import sqlite3
+
+query = <span class="highlight">"select personal, family from Person where ident=?;"</span>
+user_id = sys.argv[1]
+
+connection = sqlite3.connect("survey.db")
+cursor = connection.cursor()
+
+<span class="highlight">cursor.execute(query, [user_id])</span>
+results = cursor.fetchall()
+print results[0][0], results[0][1]
+
+cursor.close()
+connection.close()
+</pre>
+
+  <p>
+    The key changes are in the query string and the <code>execute</code> call.
+    Instead of formatting the query ourselves,
+    we put question marks in the query template where we want to insert values.
+    When we call <code>execute</code>,
+    we provide a list
+    that contains as many values as there are question marks in the query.
+    The library matches values to question marks in order,
+    and translates any special characters in the values
+    into their escaped equivalents
+    so that they are safe to use.
+  </p>
+
+</div>
+
   <h3>Key Points</h3>
-  {% include guide-db/programming/keypoints.html %}
+
+<div id="s:db:programming:keypoints" class="keypoints">
+  <ul>
+    <li>Most applications that use databases embed SQL in a general-purpose programming language.</li>
+    <li>Database libraries use connections and cursors to manage interactions.</li>
+    <li>Programs can fetch all results at once, or a few results at a time.</li>
+    <li>If queries are constructed dynamically using input from users, malicious users may be able to inject their own commands into the queries.</li>
+    <li>Dynamically-constructed queries can use SQL's native formatting to safeguard against such attacks.</li>
+  </ul>
+</div>
+
   <h3>Challenges</h3>
-  {% include guide-db/programming/challenges.html %}
+
+<div id="s:db:programming:challenges" class="challenges">
+  <ol>
+    <li>
+<p>
+  Write a Python program that creates a new database
+  in a file called <code>original.db</code>
+  containing a single table called <code>Pressure</code>,
+  with a single field called <code>reading</code>,
+  and inserts 100,000 random numbers between 10.0 and 25.0.
+  How long does it take this program to run?
+  How long does it take to run a program
+  that simply writes those random numbers to a file?
+</p>
+    </li>
+    <li>
+<p>
+  Write a Python program that creates a new database
+  called <code>backup.db</code>
+  with the same structure as <code>original.db</code>
+  and copies all the values greater than 20.0
+  from <code>original.db</code> to <code>backup.db</code>.
+  Which is faster:
+  filtering values in the query,
+  or reading everything into memory and filtering in Python?
+</p>
+    </li>
+  </ol>
+</div>
+
 </section>
 
 <section>
   <h2>Summary</h2>
-  {% include guide-db/summary.html %}
+
+<div id="s:db:summary" class="summary">
+
+  <p>
+    There are many things databases can't do,
+    or can't do well
+    (which is why we have general-purpose programming languages like Python).
+    However,
+    they are still the best tool available
+    for managing many kinds of complex, structured data.
+    Thousands of programmer-years have gone into their design and implementation
+    so that they can handle very large datasets&mdash;terabytes or more&mdash;quickly and reliably.
+    Queries allow for great flexibility in how you are able to analyze your data,
+    which makes databases a good choice when you are exploring data.
+  </p>
+
+</div>
+
 </section>
