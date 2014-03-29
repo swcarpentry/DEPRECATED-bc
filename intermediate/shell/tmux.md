@@ -69,7 +69,7 @@ $ tmux ls
 since we only have one session, we can just run:
 
 ~~~sh
-$ tmux attach`
+$ tmux attach
 ~~~
 
 #### windows
