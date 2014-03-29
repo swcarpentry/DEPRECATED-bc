@@ -57,7 +57,6 @@ class DoitMagic(Magics):
         cmd += doit_command
         cmd += [ '-d', cur_dir, '-f', tmp_name]
         cmd += doit_args
-        print ' '.join(cmd)
 
         p = Popen(cmd, stdout=PIPE, stderr=PIPE)
 
