@@ -44,13 +44,13 @@ you cannot find it, use the source code and compile it for your target machine.
 
 #### Basic usage
 
-To start tmux we just execute its binary: `$ tmux`, that will create a new
+To start tmux we just execute its binary: `tmux`, that will create a new
 tmux session and will link our current terminal to it.
 
-Now, if we `$ exit`, tmux will terminate that session.
+Now, if we `exit`, tmux will terminate that session.
 
 You can name a session so you can identify what you are running on them, to do
-so, we use the `-s` option: `$ tmux new -s first` where `first` is
+so, we use the `-s` option: `tmux new -s first` where `first` is
 the name of the session.
 
 To communicate with tmux, we use a shortcuts prefixed with a key combination.
@@ -61,10 +61,10 @@ For example, if we want to detach ourselves from a session we do so by typing:
 
 Now, to reattach to that session we can:
 
-`sh
+~~~sh
 $ tmux ls
 0: 8 windows (created Wed Dec  4 10:00:35 2013) [178x49]
-`
+~~~
 
 since we only have one session, we can just run:
 
