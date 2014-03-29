@@ -68,7 +68,9 @@ $ tmux ls
 
 since we only have one session, we can just run:
 
-`$ tmux attach`
+~~~sh
+$ tmux attach`
+~~~
 
 #### windows
 
