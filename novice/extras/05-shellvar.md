@@ -2,17 +2,21 @@
 layout: lesson
 root: ../..
 title: Shell Variables
-level: novice
 ---
 The shell is just a program, and like other programs, it has variables.
 Those variables control its execution,
-and by changing their values,
+so by changing their values
 you can change how the shell and other programs behave.
 
 Let's start by running the command `set` and looking at some of the variables in a typical shell session:
 
+<div class="in" markdown="1">
 ~~~
 $ set
+~~~
+</div>
+<div class="out" markdown="1">
+~~~
 COMPUTERNAME=TURING
 HOME=/home/vlad
 HOMEDRIVE=C:
@@ -20,12 +24,13 @@ HOSTNAME=TURING
 HOSTTYPE=i686
 NUMBER_OF_PROCESSORS=4
 OS=Windows_NT
-PATH=/Users/gwilson/bin:/usr/local/git/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
+PATH=/Users/vlad/bin:/usr/local/git/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
 PWD=/home/vlad
 UID=1000
 USERNAME=vlad
 ...
 ~~~
+</div>
 
 As you can see, there are quite a few&mdash;in fact, four or five times more than what's shown here.
 And yes,
@@ -37,7 +42,7 @@ it might as well show you things you *could* set.
 Every variable has a name.
 By convention, variables that are always present are given upper-case names.
 All shell variables' values are strings, even those (like `UID`) that look like numbers.
-it's up to programs to convert these strings to other types when necessary.
+It's up to programs to convert these strings to other types when necessary.
 For example, if a program wanted to find out how many processors the computer had,
 it would convert the value of the `NUMBER_OF_PROCESSORS` variable from a string to an integer.
 
@@ -46,24 +51,27 @@ In this case, the convention is to use a colon ':' as a separator.
 If a program wants the individual elements of such a list,
 it's the program's responsibility to split the variable's string value into pieces.
 
-Let's have a closer look at that `PATH` variable.
-Its value defines the shell's [search path](../gloss.html#search-path),
-i.e., the directories that the shell looks in for runnable programs.
-If you recall, when we type a command like `./analyze` that has a specific directory in the path,
-the shell runs the program that path specifies.
-Similarly, if we type `/bin/analyze`, the shell runs that specific program:
-we've provided a specific path, so it knows what to do.
-But which one should the shell do if we just type `analyze`?
+#### The `PATH` Variable
 
-The rule is simple:
+Let's have a closer look at that `PATH` variable.
+Its value defines the shell's [search path](../../gloss.html#search-path),
+i.e., the list of directories that the shell looks in for runnable programs
+when you type in a program name without specifying what directory it is in.
+
+For example,
+when we type a command like `analyze`,
+the shell needs to decide whether to run `./analyze` or `/bin/analyze`.
+The rule it uses is simple:
 the shell checks each directory in the `PATH` variable in turn,
 looking for a program with the requested name in that directory.
 As soon as it finds a match, it stops searching and runs the program.
 
-To show how this works, here are the components of `PATH` broken out one per line:
+To show how this works,
+here are the components of `PATH` listed one per line:
 
+<div class="out" markdown="1">
 ~~~
-/Users/gwilson/bin
+/Users/vlad/bin
 /usr/local/git/bin
 /usr/bin
 /bin
@@ -71,69 +79,110 @@ To show how this works, here are the components of `PATH` broken out one per lin
 /sbin
 /usr/local/bin
 ~~~
+</div>
 
-On our computer, there are actually three programs called `analyze` in three different directories:
-`/bin/analyze`, `/usr/local/bin/analyze`, and `/users/vlad/analyze`.
-Since the shell searches the directories in order, it finds the one in `/bin`, not either of the others.
-Notice that it will *never* find the program `/users/vlad/analyze`,
-since the directory `/users/vlad` isn't in our path.
+On our computer,
+there are actually three programs called `analyze`
+in three different directories:
+`/bin/analyze`,
+`/usr/local/bin/analyze`,
+and `/users/vlad/analyze`.
+Since the shell searches the directories in the order they're listed in `PATH`,
+it finds `/bin/analyze` first and runs that.
+Notice that it will *never* find the program `/users/vlad/analyze`
+unless we type in the full path to the program,
+since the directory `/users/vlad` isn't in `PATH`.
+
+#### Showing the Value of a Variable
 
 Let's show the value of the variable `HOME`:
 
+<div class="in" markdown="1">
 ~~~
 $ echo HOME
+~~~
+</div>
+<div class="out" markdown="1">
+~~~
 HOME
 ~~~
+</div>
 
-That just prints "HOME", which isn't what we wanted.
-Let's try this instead: `echo $HOME`:
+That just prints "HOME", which isn't what we wanted
+(though it is what we actually asked for).
+Let's try this instead:
 
+<div class="in" markdown="1">
 ~~~
 $ echo $HOME
+~~~
+</div>
+<div class="out" markdown="1">
+~~~
 /home/vlad
 ~~~
+</div>
 
-The dollar sign tells the shell to replace the variable's name with its value.
+The dollar sign tells the shell that we want the *value* of the variable
+rather than its name.
 This works just like wildcards:
 the shell does the replacement *before* running the program we've asked for.
 Thanks to this expansion, what we actually run is `echo /home/vlad`,
 which displays the right thing.
 
-Creating a variable is easy: just assign a value to a name using "=":
+#### Creating and Changing Variables
 
+Creating a variable is easy&mdash;we just assign a value to a name using "=":
+
+<div class="in" markdown="1">
 ~~~
 $ SECRET_IDENTITY=Dracula
 $ echo $SECRET_IDENTITY
+~~~
+</div>
+<div class="out" markdown="1">
+~~~
 Dracula
 ~~~
+</div>
 
 To change the value, just assign a new one:
 
+<div class="in" markdown="1">
 ~~~
 $ SECRET_IDENTITY=Camilla
 $ echo $SECRET_IDENTITY
+~~~
+</div>
+<div class="out" markdown="1">
+~~~
 Camilla
 ~~~
+</div>
 
-If we want to set some variables' values automatically every time we run a shell,
-we can put the command to do this in a file called `.bashrc` in our home directory.
+If we want to set some variables automatically every time we run a shell,
+we can put commands to do this in a file called `.bashrc` in our home directory.
 (The '.' character at the front prevents `ls` from listing this file
 unless we specifically ask it to using `-a`:
 we normally don't want to worry about it.
 The "rc" at the end is an abbreviation for "run control",
 which meant something really important decades ago,
 and is now just a convention everyone follows without understanding why.)
-For example, here are two lines in Vlad's `.bashrc` file,
-which is in `/home/vlad/.bashrc`:
 
+For example,
+here are two lines in `/home/vlad/.bashrc`:
+
+<div class="file" markdown="1">
 ~~~
 export SECRET_IDENTITY=Dracula
 export TEMP_DIR=/tmp
 export BACKUP_DIR=$TEMP_DIR/backup
 ~~~
+</div>
 
-These two lines create the variables `SECRET_IDENTITY` and `BACKUP_DIR`,
-give them values,
+These three lines create the variables `SECRET_IDENTITY`,
+`TEMP_DIR`,
+and `BACKUP_DIR`,
 and export them so that any programs the shell runs can see them as well.
 Notice that `BACKUP_DIR`'s definition relies on the value of `TEMP_DIR`,
 so that if we change where we put temporary files,
@@ -144,8 +193,14 @@ it's also common to use the `alias` command to create shortcuts for things we fr
 For example, we can define the alias `backup`
 to run `/bin/zback` with a specific set of arguments:
 
+<div class="file" markdown="1">
 ~~~
 alias backup=/bin/zback -v --nostir -R 20000 $HOME $BACKUP_DIR
 ~~~
+</div>
 
-As you can see, aliases can save us a lot of typing, and hence a lot of typing mistakes.
+As you can see,
+aliases can save us a lot of typing, and hence a lot of typing mistakes.
+You can find interesting suggestions for other aliases 
+and other bash tricks by searching for "sample bashrc" 
+in your favorite search engine.

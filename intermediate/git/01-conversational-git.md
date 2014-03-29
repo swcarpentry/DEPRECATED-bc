@@ -43,7 +43,7 @@ After this lesson, students should be able to:
 ## Copying Repositories (git clone)
 
 The first concept we introduce
-is the [repository](../gloss.html#repository).
+is the [repository](../../gloss.html#repository).
 The repository contains a directory of files and folders
 and their revisions going back to its creation.
 
