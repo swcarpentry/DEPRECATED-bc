@@ -51,7 +51,7 @@ $ git branch moons
 </div>
 
 It appears to do nothing,
-but behind the scenes it has created a new [branch](../gloss.html#branch) called `moons`:
+but behind the scenes it has created a new [branch](../../gloss.html#branch) called `moons`:
 
 <div class="in" markdown="1">
 ~~~
@@ -278,7 +278,7 @@ Our repository is now in this state:
 `master` and `moons` have both moved on from their original common state,
 but in different ways.
 They could continue independent existence indefinitely,
-but at some point we'll probably want to [merge](../gloss.html#merge) our changes.
+but at some point we'll probably want to [merge](../../gloss.html#merge) our changes.
 Let's do that now:
 
 <div class="in" markdown="1">
