@@ -175,28 +175,22 @@ def check_file(index_fh):
 
     file_is_valid = True
 
-    handlers = {'layout' : check_layout, 'root' : check_root, 'country' : check_country, 'humandate' : check_humandate,
-            'humantime' : check_humantime, 'startdate' : check_date, 'enddate' : check_date, 'latlng' : check_latitude_longitude,
-            'registration' : check_registration, 'instructor' : check_instructor, 'contact' : check_email }
-
-    messages = {'layout' : 'ERROR:\tLayout isn\'t "bootcamp".\n', 'root' : 'ERROR:\troot can only be ".".\n', 
-            'country' : 'ERROR:\tCountry seems to be invalid. Check whether there are spaces inside the string.\n',
-            'humandate' : 'ERROR:\tCategory "humandate" seems to be invalid. Please use a three-letter month like "Jan" and four-letter year like "2025".\n',
-            'humantime' : 'ERROR:\t"humantime" doesn\'t include numbers.\n',
-            'startdate' : 'ERROR:\t"startdate" seems to be invalid. Must be of format year-month-day, i.e., 2014-01-31.\n',
-            'enddate' : 'ERROR:\t"enddate" seems to be invalid. Must be of format year-month-day, i.e., 2014-01-31.\n',
-            'latlng' : 'ERROR:\tLatitude/Longitude seems to be invalid. Check whether it\'s two floating point numbers, separated by a comma.\n',
-            'registration' : 'ERROR:\tregistration can only be {0}.\n'.format(REGISTRATIONS),
-            'instructor' : 'ERROR:\tInstructor string isn\'t a valid list of format ["First instructor", "Second instructor",..].\n',
-            'contact' : 'ERROR:\tEmail seems to be invalid.\n'}
+    handlers_and_messages = { 'layout' : (check_layout, 'ERROR:\tLayout isn\'t "bootcamp".\n'),
+        'root' : (check_root, 'ERROR:\troot can only be ".".\n'), 
+        'country' : (check_country, 'ERROR:\tCountry seems to be invalid. Please check whether there are spaces inside the country-name.\n'),
+        'humandate' : (check_humandate, 'ERROR:\tCategory "humandate" seems to be invalid. Please use a three-letter month like "Jan" and four-letter year like "2025".\n'),
+        'humantime' : (check_humantime, 'ERROR:\t"humantime" doesn\'t include numbers.\n'),
+        'startdate' : (check_date, 'ERROR:\t"startdate" seems to be invalid. Must be of format year-month-day, i.e., 2014-01-31.\n'),
+        'enddate' : (check_date, 'ERROR:\t"enddate" seems to be invalid. Must be of format year-month-day, i.e., 2014-01-31.\n'),
+        'latlng' : (check_latitude_longitude, 'ERROR:\tLatitude/Longitude seems to be invalid. Check whether it\'s two floating point numbers, separated by a comma.\n'),
+        'registration' : (check_registration, 'ERROR:\tregistration can only be {0}.\n'.format(REGISTRATIONS)), 
+        'instructor' : (check_instructor, 'ERROR:\tInstructor string isn\'t a valid list of format ["First instructor", "Second instructor",..].\n'),
+        'contact' : (check_email,'ERROR:\tEmail seems to be invalid.\n') }
 
     # look through all header entries
-    for category in header_data:
-        if category not in handlers:
-            # there are categories for which we have no error handling function yet
-            # these are: address, venue
-            continue
-        file_is_valid &= check_validity(header_data[category], handlers[category], messages[category])
+    for category in handlers_and_messages:
+        handler_function, error_message = handlers_and_messages[category]
+        file_is_valid &= check_validity(header_data[category], handler_function, error_message)
 
     # Do we have double categories?
     file_is_valid &= check_double_categories(seen_categories, 'ERROR:\tThere are categories appearing twice or more.\n')
