@@ -200,7 +200,7 @@ and sends the output back to our local shell for display.
 > Typing our password over and over again is annoying,
 > especially if the commands we want to run remotely are in a loop.
 > To remove the need to do this,
-> we can create an [authentication key](../../../gloss.html#authentication-key)
+> we can create an [authentication key](../../gloss.html#authentication-key)
 > to tell the remote machine
 > that it should always trust us.
 > We discuss authentication keys in our intermediate lessons.
