@@ -235,18 +235,22 @@ $ git commit -m "Starting to think about Mars"
 ~~~
 </div>
 
-When we run `git commit`,
+#####Let's break down what we just did-
+
+If we think about the command we just ran like a sentence the 'git commit', part tells git what to store:
 Git takes everything we have told it to save by using `git add`
 and stores a copy permanently inside the special `.git` directory.
 This permanent copy is called a [revision](../../../gloss.html#revision)
 and its short identifier is `f22b25e`.
 (Your revision may have another identifier.)
 
-We use the `-m` flag (for "message")
+The other part of our sentence attaches a message to the commit so we (or others) can refer back to what we changed and why. To do this, we use the `-m` flag (for "message")
 to record a comment that will help us remember later on what we did and why.
 If we just run `git commit` without the `-m` option,
 Git will launch `nano` (or whatever other editor we configured at the start)
 so that we can write a longer message.
+
+
 
 If we run `git status` now:
 
