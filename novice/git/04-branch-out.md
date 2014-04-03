@@ -1,3 +1,9 @@
+---
+layout: lesson
+root: ../..
+title: Branch Out
+---
+##From conflicts to branches:
 So, we just covered how we can resolve conflicting changes but what if we are renegades? What if what we want is to maintain both changes that were made, i.e. keeping both changes in the same file that caused our conflict?
 
 Well we can't leave the conflict as is, because as we saw previously we won't be able to push our changes and save both versions of the same file due to the conflict. There is a way around this, though. We can make something called a branch! We are, in fact, branching out from our site of conflict to make two different versions of the same file or repo!
