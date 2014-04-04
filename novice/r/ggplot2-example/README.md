@@ -15,3 +15,8 @@ The lesson should take approximately 10 minutes for instruction, and another 5 m
 * Basic plotting using base graphics
 
 ---
+
+To Do: 
+
+* Expand lesson to ggplot2 philosophy, using `ggplot` instead of `qplot`
+* Populate the exercise under the `qplot` section.
