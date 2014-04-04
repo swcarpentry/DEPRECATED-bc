@@ -13,3 +13,5 @@ The lesson should take approximately 10 minutes for instruction, and another 5 m
 * Loading built-in data with the `data()` function
 * Inspecting data frames with `head()`, `str()`, etc.
 * Basic plotting using base graphics
+
+---

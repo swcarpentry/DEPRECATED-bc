@@ -1,9 +1,8 @@
 
 ## ----, echo=FALSE, message=FALSE, eval=FALSE-----------------------------
-## # Set default to hide all results and figures.
-## # Can change this manually in individual chunks.
+## # Set eval=TRUE to hide all results and figures.
+## # This sets defaults. Can change this manually in individual chunks.
 ## # Must load knitr so opts_chunk is in search path.
-## # Set eval=FALSE to disable and keep figs.
 ## library(knitr)
 ## opts_chunk$set(results="hide", fig.show="hide", fig.keep="none")
 
@@ -14,7 +13,7 @@ data(iris)
 head(iris)
 
 # Make a basic scatter plot
-plot(iris$Sepal.Length, iris$Petal.Length)
+with(iris, plot(Sepal.Length, Petal.Length))
 
 
 ## ----installggplot2, eval=FALSE------------------------------------------
@@ -33,30 +32,30 @@ str(diamonds)
 
 
 ## ----basediamond---------------------------------------------------------
-plot(diamonds$carat, diamonds$price)
+with(diamonds, plot(carat, price))
 
 
 ## ----qplot1--------------------------------------------------------------
-qplot(carat, price, data=diamonds)
+qplot(carat, price, data = diamonds)
 
 
 ## ----clarcolor-----------------------------------------------------------
-qplot(carat, price, data=diamonds, col=clarity)
+qplot(carat, price, data = diamonds, col = clarity)
 
 
 ## ----facetclar-----------------------------------------------------------
-qplot(carat, price, data=diamonds, facets = ~clarity)
+qplot(carat, price, data = diamonds, facets = ~ clarity)
 
 
 ## ----facetcol------------------------------------------------------------
-qplot(carat, price, data=diamonds, facets = ~color)
+qplot(carat, price, data = diamonds, facets = ~ color)
 
 
 ## ----facetclarcol, fig.height=10, fig.width=10---------------------------
-qplot(carat, price, data=diamonds, facets = clarity~color)
+qplot(carat, price, data = diamonds, facets = clarity ~ color)
 
 
 ## ----facetclarcol_colcut, fig.height=10, fig.width=10--------------------
-qplot(carat, price, data=diamonds, facets=clarity~color, col=cut)
+qplot(carat, price, data = diamonds, facets = clarity ~ color, col = cut)
 
 
