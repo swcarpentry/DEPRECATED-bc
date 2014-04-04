@@ -6,6 +6,7 @@ Helps mimic a *nix environment on Windows with as little work as possible.
 
 The script:
 * Installs nano and makes it accessible from msysgit
+* Installs sqlite3 and makes it accessible from msysGit
 * Creates ~/nano.rc with links to syntax highlighting configs
 * Provides standard nosetests behavior for msysgit
 
@@ -15,7 +16,7 @@ To use:
    the Anaconda CE Python distribution
    http://continuum.io/anacondace.html
 2. Install msysgit
-   http://code.google.com/p/msysgit/downloads/list?q=full+installer+official+git
+   http://code.google.com/p/msysgit/downloads/list
 3. Run swc_windows_installer.py
    You should be able to simply double click the file in Windows
 
@@ -150,6 +151,14 @@ def install_nanorc(install_directory):
                     f.write('include {}\n'.format(include_path))
 
 
+def install_sqlite(install_directory):
+    """Download and install the sqlite3 shell"""
+    zip_install(
+        url='https://sqlite.org/2014/sqlite-shell-win32-x86-3080403.zip',
+        sha1='1a8ab0ca9f4c51afeffeb49bd301e1d7f64741bb',
+        install_directory=install_directory)
+
+
 def create_nosetests_entry_point(python_scripts_directory):
     """Creates a terminal-based nosetests entry point for msysgit"""
     contents = '\n'.join([
@@ -202,10 +211,12 @@ def main():
     bin_dir = os.path.join(swc_dir, 'bin')
     nano_dir = os.path.join(swc_dir, 'lib', 'nano')
     nanorc_dir = os.path.join(swc_dir, 'share', 'nanorc')
+    sqlite_dir = os.path.join(swc_dir, 'lib', 'sqlite')
     create_nosetests_entry_point(python_scripts_directory=bin_dir)
     install_nano(install_directory=nano_dir)
     install_nanorc(install_directory=nanorc_dir)
-    update_bash_profile(extra_paths=(nano_dir, bin_dir))
+    install_sqlite(install_directory=sqlite_dir)
+    update_bash_profile(extra_paths=(nano_dir, sqlite_dir, bin_dir))
 
 
 if __name__ == '__main__':
