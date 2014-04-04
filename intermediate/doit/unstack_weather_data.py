@@ -50,6 +50,11 @@ if __name__ == '__main__':
     unstacked_data = unstack_data(full_data)
 
     # Write the new dataframe to stdout
-    unstacked_data.to_csv(sys.stdout)
+    try:
+        unstacked_data.to_csv(sys.stdout)
+
+    # Don't fall over if we pipe the output to head
+    except IOError:
+        pass
 
     
