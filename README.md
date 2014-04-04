@@ -379,7 +379,6 @@ The most important files and directories are **highlighted**.
 *   **_site/** - output directory (created when building the site locally).
 *   _templates/ - template files for Pandoc conversion of IPython Notebooks.
 *   bin/ - miscellaneous tools used in building the site.
-*   branding/ - graphical assets related to Software Carpentry.
 *   css/ - CSS files for this site.
 *   data/ - miscellaneous data files used by examples.
 *   img/ - images used throughout this site.
