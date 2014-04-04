@@ -7,6 +7,7 @@
 # The script:
 # * Installs nano and makes it accessible from msysGit
 # * Creates ~/nano.rc with links to syntax highlighting configs
+# * Installs sqlite3 and makes it accessible from msysGit
 # * Provides standard nosetests behavior (if Python and the nose
 #   module are installed) for msysGit
 #
@@ -105,6 +106,14 @@ install_nanorc()
 	fi
 }
 
+install_sqlite()
+{
+	INSTALL_DIRECTORY="${1}"
+	zip_install 'https://sqlite.org/2014/sqlite-shell-win32-x86-3080403.zip' \
+		'09ba6646cb0a57eab11c8bab7caec854' \
+		"${INSTALL_DIRECTORY}"
+}
+
 # Creates a terminal-based nosetests entry point for msysGit
 create_nosetests_entry_point()
 {
@@ -166,10 +175,13 @@ main()
 	BIN_DIR="${SWC_DIR}/bin"
 	NANO_DIR="${SWC_DIR}/lib/nano"
 	NANORC_DIR="${SWC_DIR}/share/nanorc"
+	SQLITE_DIR="${SWC_DIR}/lib/sqlite"
 	create_nosetests_entry_point "${BIN_DIR}" || die "couldn't create nosetests"
 	install_nano "${NANO_DIR}" || die "couldn't install nano"
 	install_nanorc "${NANORC_DIR}" || die "couldn't install nanorc"
-	add_swc_paths "${NANO_DIR}" "${BIN_DIR}" || die "couldn't add SWC paths"
+	install_sqlite "${SQLITE_DIR}" || die "couldn't install sqlite"
+	add_swc_paths "${NANO_DIR}" "${SQLITE_DIR}" "${BIN_DIR}" ||
+		die "couldn't add SWC paths"
 	set_default_editor nano || die "couldn't set EDITOR"
 }
 
