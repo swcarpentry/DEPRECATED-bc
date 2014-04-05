@@ -150,7 +150,7 @@ age <- age - 20
 
 
 We can also add to variable that are vectors, and update them by making them longer. 
-For example, if we are creating a vector of patient weights, we could update that vector using `append`. `append` takes two arguments, and adds the second item to the end of the first one.
+For example, if we are creating a vector of patient weights, we could update that vector using `append`. `append` takes two parameters, and adds the second item to the end of the first one.
 
 
 ```r
@@ -337,7 +337,7 @@ rbind(x, y)
 ```
 
 
-You can also use the byrow argument to specify how the matrix is filled. From R's own documentation:
+You can also use the byrow parameter to specify how the matrix is filled. From R's own documentation:
 
 
 ```r

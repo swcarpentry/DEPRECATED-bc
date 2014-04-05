@@ -35,7 +35,7 @@ grid1 <- block_grid(5, type = "vector")
 grid1
 ```
 
-We can see that this grid represents a vector. It is a single dimension and has 5 locations (which we gave to it in the first argument). We can see the summarized information in the grid:
+We can see that this grid represents a vector. It is a single dimension and has 5 locations (which we gave to it in the first parameter). We can see the summarized information in the grid:
 
 ```{r}
 str(grid1)

@@ -307,7 +307,7 @@ Sure enough, the maxima of these data sets show exactly the same ramp as the fir
 
 ### Challenges
 
-1. Write a function called `analyze_all` that takes a filename pattern as its sole argument and runs analyze for each file whose name matches the pattern.
+1. Write a function called `analyze_all` that takes a filename pattern as its sole parameter and runs analyze for each file whose name matches the pattern.
 
 ## Key Points
 

@@ -17,7 +17,7 @@ root: ../..
 
 <div>
 <p>So far we have only looked at how to get information out of a database, both because that is more frequent than adding information, and because most other operations only make sense once queries are understood. If we want to create and modify data, we need to know two other pairs of commands.</p>
-<p>The first pair are <code>create table</code> and <code>drop table</code>. While they are written as two words, they are actually single commands. The first one creates a new table; its arguments are the names and types of the table's columns. For example, the following statements create the four tables in our survey database:</p>
+<p>The first pair are <code>create table</code> and <code>drop table</code>. While they are written as two words, they are actually single commands. The first one creates a new table; its parameters are the names and types of the table's columns. For example, the following statements create the four tables in our survey database:</p>
 <pre><code>create table Person(ident text, personal text, family text);
 create table Site(name text, lat real, long real);
 create table Visited(ident integer, site text, dated text);

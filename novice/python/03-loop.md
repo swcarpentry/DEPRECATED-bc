@@ -391,7 +391,7 @@ inflammation-03.csv
 <div class="challenges">
 <h4 id="challenges">Challenges</h4>
 <ol style="list-style-type: decimal">
-<li>Write a function called <code>analyze_all</code> that takes a filename pattern as its sole argument and runs <code>analyze</code> for each file whose name matches the pattern.</li>
+<li>Write a function called <code>analyze_all</code> that takes a filename pattern as its sole parameter and runs <code>analyze</code> for each file whose name matches the pattern.</li>
 </ol>
 </div>
 

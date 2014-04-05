@@ -623,7 +623,7 @@ TypeError: data type &#34;,&#34; not understood</pre>
 
 
 <div class="">
-<p>The key change is that the second parameter is now written <code>desired=0.0</code> instead of just <code>desired</code>. If we call the function with two arguments, it works as it did before:</p>
+<p>The key change is that the second parameter is now written <code>desired=0.0</code> instead of just <code>desired</code>. If we call the function with two parameters, it works as it did before:</p>
 </div>
 
 

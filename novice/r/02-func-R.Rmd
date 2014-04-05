@@ -323,7 +323,7 @@ center <- function(data, desired=0){
 }
 ```
 
-The key change is that the second parameter is now written `desired=0` instead of just `desired`. If we call the function with two arguments, it works as it did before:
+The key change is that the second parameter is now written `desired=0` instead of just `desired`. If we call the function with two parameters, it works as it did before:
 
 ```{r}
 test_data <- matrix(0,2,2)

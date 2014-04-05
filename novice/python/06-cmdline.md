@@ -26,14 +26,14 @@ root: ../..
 <li>If one or more filenames are given, read data from them and report statistics for each file separately.</li>
 <li>Use the <code>--min</code>, <code>--mean</code>, or <code>--max</code> flag to determine what statistic to print.</li>
 </ol>
-<p>To make this work, we need to know how to handle command-line arguments in a program, and how to get at standard input. We'll tackle these questions in turn below.</p>
+<p>To make this work, we need to know how to handle command-line parameters in a program, and how to get at standard input. We'll tackle these questions in turn below.</p>
 </div>
 
 
 <div class="objectives">
 <h4 id="objectives">Objectives</h4>
 <ul>
-<li>Use the values of command-line arguments in a program.</li>
+<li>Use the values of command-line parameters in a program.</li>
 <li>Handle flags and files separately in a command-line program.</li>
 <li>Read data from standard input in a program so that it can be used in a pipeline.</li>
 </ul>
@@ -112,7 +112,7 @@ print &#39;sys.argv is&#39;, sys.argv
 
 
 <div class="">
-<p>The strange name <code>argv</code> stands for &quot;argument values&quot;. Whenever Python runs a program, it takes all of the values given on the command line and puts them in the list <code>sys.argv</code> so that the program can determine what they were. If we run this program with no arguments:</p>
+<p>The strange name <code>argv</code> stands for &quot;argument values&quot;. &quot;Argument&quot; is just a synonym for &quot;parameter&quot;; whenever Python runs a program, it takes all of the values given on the command line and puts them in the list <code>sys.argv</code> so that the program can determine what they were. If we run this program with no arguments:</p>
 </div>
 
 

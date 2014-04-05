@@ -189,8 +189,9 @@ results-2011-10-04.dat  results-2011-11-11.dat
 </div>
 
 SSH takes the argument after our remote username
-and passes them to the shell on the remote computer.
-(We have to put quotes around it to make it look like a single argument.)
+and passes it to the shell on the remote computer.
+(We put quotes around the two words `ls` and `results`
+so that the shell will think of them as a single string.)
 Since those arguments are a legal command,
 the remote shell runs `ls results` for us
 and sends the output back to our local shell for display.
