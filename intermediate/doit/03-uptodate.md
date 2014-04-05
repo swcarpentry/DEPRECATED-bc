@@ -24,6 +24,11 @@ root: ../..
 
 
 <div class="in">
+<pre>%load_ext doitmagic</pre>
+</div>
+
+
+<div class="in">
 <pre>%%doit
 
 # download_all_data.py
@@ -66,27 +71,27 @@ def task_reformat_data():
 .  download_data:Sunshine
 -- reformat_data:UK_Sunshine_data.txt
 -- reformat_data:UK_Tmean_data.txt
---2014-04-05 10:12:11--  http://www.metoffice.gov.uk/climate/uk/datasets/Tmean/ranked/UK.txt
-Resolving www.metoffice.gov.uk (www.metoffice.gov.uk)... 23.63.99.216, 23.63.99.209
-Connecting to www.metoffice.gov.uk (www.metoffice.gov.uk)|23.63.99.216|:80... connected.
+--2014-04-05 12:08:57--  http://www.metoffice.gov.uk/climate/uk/datasets/Tmean/ranked/UK.txt
+Resolving www.metoffice.gov.uk (www.metoffice.gov.uk)... 23.63.99.234, 23.63.99.216
+Connecting to www.metoffice.gov.uk (www.metoffice.gov.uk)|23.63.99.234|:80... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 25576 (25K) [text/plain]
 Saving to: ‘UK_Tmean_data.txt’
 
-     0K .......... .......... ....                            100%  954K=0.03s
+     0K .......... .......... ....                            100% 1.51M=0.02s
 
-2014-04-05 10:12:11 (954 KB/s) - ‘UK_Tmean_data.txt’ saved [25576/25576]
+2014-04-05 12:08:57 (1.51 MB/s) - ‘UK_Tmean_data.txt’ saved [25576/25576]
 
---2014-04-05 10:12:11--  http://www.metoffice.gov.uk/climate/uk/datasets/Sunshine/ranked/UK.txt
-Resolving www.metoffice.gov.uk (www.metoffice.gov.uk)... 23.63.99.209, 23.63.99.216
-Connecting to www.metoffice.gov.uk (www.metoffice.gov.uk)|23.63.99.209|:80... connected.
+--2014-04-05 12:08:57--  http://www.metoffice.gov.uk/climate/uk/datasets/Sunshine/ranked/UK.txt
+Resolving www.metoffice.gov.uk (www.metoffice.gov.uk)... 23.63.99.216, 23.63.99.234
+Connecting to www.metoffice.gov.uk (www.metoffice.gov.uk)|23.63.99.216|:80... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 20986 (20K) [text/plain]
 Saving to: ‘UK_Sunshine_data.txt’
 
-     0K .......... ..........                                 100% 1.41M=0.01s
+     0K .......... ..........                                 100% 6.48M=0.003s
 
-2014-04-05 10:12:11 (1.41 MB/s) - ‘UK_Sunshine_data.txt’ saved [20986/20986]
+2014-04-05 12:08:57 (6.48 MB/s) - ‘UK_Sunshine_data.txt’ saved [20986/20986]
 
 </pre>
 </div>
@@ -149,27 +154,27 @@ def task_reformat_data():
 .  download_data:Sunshine
 -- reformat_data:UK_Sunshine_data.txt
 -- reformat_data:UK_Tmean_data.txt
---2014-04-05 10:12:11--  http://www.metoffice.gov.uk/climate/uk/datasets/Tmean/ranked/UK.txt
-Resolving www.metoffice.gov.uk (www.metoffice.gov.uk)... 23.63.99.216, 23.63.99.209
-Connecting to www.metoffice.gov.uk (www.metoffice.gov.uk)|23.63.99.216|:80... connected.
+--2014-04-05 12:08:57--  http://www.metoffice.gov.uk/climate/uk/datasets/Tmean/ranked/UK.txt
+Resolving www.metoffice.gov.uk (www.metoffice.gov.uk)... 23.63.99.234, 23.63.99.216
+Connecting to www.metoffice.gov.uk (www.metoffice.gov.uk)|23.63.99.234|:80... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 25576 (25K) [text/plain]
 Saving to: ‘UK_Tmean_data.txt’
 
-     0K .......... .......... ....                            100% 1.91M=0.01s
+     0K .......... .......... ....                            100% 1.87M=0.01s
 
-2014-04-05 10:12:11 (1.91 MB/s) - ‘UK_Tmean_data.txt’ saved [25576/25576]
+2014-04-05 12:08:57 (1.87 MB/s) - ‘UK_Tmean_data.txt’ saved [25576/25576]
 
---2014-04-05 10:12:11--  http://www.metoffice.gov.uk/climate/uk/datasets/Sunshine/ranked/UK.txt
-Resolving www.metoffice.gov.uk (www.metoffice.gov.uk)... 23.63.99.209, 23.63.99.216
-Connecting to www.metoffice.gov.uk (www.metoffice.gov.uk)|23.63.99.209|:80... connected.
+--2014-04-05 12:08:57--  http://www.metoffice.gov.uk/climate/uk/datasets/Sunshine/ranked/UK.txt
+Resolving www.metoffice.gov.uk (www.metoffice.gov.uk)... 23.63.99.216, 23.63.99.234
+Connecting to www.metoffice.gov.uk (www.metoffice.gov.uk)|23.63.99.216|:80... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 20986 (20K) [text/plain]
 Saving to: ‘UK_Sunshine_data.txt’
 
-     0K .......... ..........                                 100% 6.42M=0.003s
+     0K .......... ..........                                 100% 6.86M=0.003s
 
-2014-04-05 10:12:11 (6.42 MB/s) - ‘UK_Sunshine_data.txt’ saved [20986/20986]
+2014-04-05 12:08:57 (6.86 MB/s) - ‘UK_Sunshine_data.txt’ saved [20986/20986]
 
 </pre>
 </div>
@@ -231,16 +236,16 @@ def task_reformat_data():
 .  reformat_data:UK_Rainfall_data.txt
 -- reformat_data:UK_Sunshine_data.txt
 -- reformat_data:UK_Tmean_data.txt
---2014-04-05 10:12:12--  http://www.metoffice.gov.uk/climate/uk/datasets/Rainfall/ranked/UK.txt
-Resolving www.metoffice.gov.uk (www.metoffice.gov.uk)... 23.63.99.216, 23.63.99.209
-Connecting to www.metoffice.gov.uk (www.metoffice.gov.uk)|23.63.99.216|:80... connected.
+--2014-04-05 12:08:58--  http://www.metoffice.gov.uk/climate/uk/datasets/Rainfall/ranked/UK.txt
+Resolving www.metoffice.gov.uk (www.metoffice.gov.uk)... 23.63.99.234, 23.63.99.216
+Connecting to www.metoffice.gov.uk (www.metoffice.gov.uk)|23.63.99.234|:80... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 25518 (25K) [text/plain]
 Saving to: ‘UK_Rainfall_data.txt’
 
-     0K .......... .......... ....                            100% 2.12M=0.01s
+     0K .......... .......... ....                            100% 1.68M=0.01s
 
-2014-04-05 10:12:12 (2.12 MB/s) - ‘UK_Rainfall_data.txt’ saved [25518/25518]
+2014-04-05 12:08:58 (1.68 MB/s) - ‘UK_Rainfall_data.txt’ saved [25518/25518]
 
 </pre>
 </div>

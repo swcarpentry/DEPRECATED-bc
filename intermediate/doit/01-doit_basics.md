@@ -126,7 +126,7 @@ Cleaning up...
 
 
 <div class="in">
-<pre>%%doit list
+<pre>%%doit
 
 # one_task.py
 
@@ -142,7 +142,7 @@ def task_reformat_temperature_data():
 </div>
 
 <div class="out">
-<pre>reformat_temperature_data   Reformats the raw temperature data file for easier analysis
+<pre>.  reformat_temperature_data
 </pre>
 </div>
 
@@ -163,7 +163,16 @@ def task_reformat_temperature_data():
 </div>
 
 <div class="out">
-<pre>head: cannot open ‘UK_Tmean_data.reformatted.txt’ for reading: No such file or directory
+<pre>month,value
+1910-01-01,2.6
+1910-02-01,2.6
+1910-03-01,4.0
+1910-04-01,6.4
+1910-05-01,9.5
+1910-06-01,12.3
+1910-07-01,14.0
+1910-08-01,13.8
+1910-09-01,11.8
 </pre>
 </div>
 
@@ -199,7 +208,7 @@ def task_reformat_sunshine_data():
 </div>
 
 <div class="out">
-<pre>.  reformat_temperature_data
+<pre>-- reformat_temperature_data
 .  reformat_sunshine_data
 </pre>
 </div>

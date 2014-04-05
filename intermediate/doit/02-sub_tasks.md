@@ -23,6 +23,11 @@ root: ../..
 
 
 <div class="in">
+<pre>%load_ext doitmagic</pre>
+</div>
+
+
+<div class="in">
 <pre>%%doit
 
 # automatic_variables.py
@@ -114,7 +119,7 @@ is_a_generator()</pre>
 </div>
 
 <div class="out">
-<pre>&lt;generator object is_a_generator at 0x21a0780&gt;</pre>
+<pre>&lt;generator object is_a_generator at 0x3052780&gt;</pre>
 </div>
 
 
@@ -235,16 +240,16 @@ def task_reformat_data():
 <pre>.  get_temp_data
 -- reformat_data:UK_Sunshine_data.txt
 .  reformat_data:UK_Tmean_data.txt
---2014-04-05 10:12:10--  http://www.metoffice.gov.uk/climate/uk/datasets/Tmean/ranked/UK.txt
-Resolving www.metoffice.gov.uk (www.metoffice.gov.uk)... 23.63.99.209, 23.63.99.216
-Connecting to www.metoffice.gov.uk (www.metoffice.gov.uk)|23.63.99.209|:80... connected.
+--2014-04-05 12:08:16--  http://www.metoffice.gov.uk/climate/uk/datasets/Tmean/ranked/UK.txt
+Resolving www.metoffice.gov.uk (www.metoffice.gov.uk)... 23.63.99.234, 23.63.99.216
+Connecting to www.metoffice.gov.uk (www.metoffice.gov.uk)|23.63.99.234|:80... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 25576 (25K) [text/plain]
 Saving to: ‘UK_Tmean_data.txt’
 
-     0K .......... .......... ....                            100% 1.83M=0.01s
+     0K .......... .......... ....                            100% 2.15M=0.01s
 
-2014-04-05 10:12:11 (1.83 MB/s) - ‘UK_Tmean_data.txt’ saved [25576/25576]
+2014-04-05 12:08:16 (2.15 MB/s) - ‘UK_Tmean_data.txt’ saved [25576/25576]
 
 </pre>
 </div>
