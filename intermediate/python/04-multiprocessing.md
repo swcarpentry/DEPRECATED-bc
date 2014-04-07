@@ -32,18 +32,19 @@ don't know NumPy and matplotlib well).
 
 ## Parallel programming models
 
-Parallel programming has gained more attention in scientific computing
-during the 2000s and 2010s as a way to decrease program run times,
-making more complex analyses possible (e.g. higher resolution
-climate models with corresponding greater forecast skill).
+Parallel programming has been important to scientific computing for
+decades as a way to decrease program run times, making more complex
+analyses possible (e.g. climate modeling, gene sequencing,
+pharmacuetical development, aircraft design).
 
 One of the motivations for parallel programming has been the
 diminishing marginal increases in single CPU performance with each new
-generation of CPU (as so-called "Moore's Law" slows down).  In
-response, computer makers have introduced multi-core processors that
-contain more than one processing core.  It's not uncommon for desktop,
-laptop, and even tablets and smart phones to have two or more CPU
-cores.
+generation of CPU (see <a
+href="http://www.gotw.ca/publications/concurrency-ddj.htm"
+target="_blank">The Free Lunch is over</a>).  In response, computer
+makers have introduced multi-core processors that contain more than
+one processing core.  It's not uncommon for desktop, laptop, and even
+tablets and smart phones to have two or more CPU cores.
 
 ### GPU and heterogenuous computing
 
@@ -53,7 +54,7 @@ execution units). GPUs are increasingly being use not just for drawing
 graphics to the screen, but for general purpose computation.  GPUs can
 even be used in conjunction with CPUs to boost parallel computing
 performance (this is known as heterogeneous computing).  GPUs are best
-suited to applying the same computation over matrices of data, while
+suited to applying the same computation over arrays of data, while
 CPUs are better suited to algorithms that include conditional branches
 of execution (e.g. different paths through the code based on if
 statements). Emerging tools, such as <a
@@ -61,7 +62,7 @@ href="http://en.wikipedia.org/wiki/OpenCL" target="_blank">OpenCL</a>
 help coordinate parallel execution across heterogeneous computer
 platforms that contain differing CPU and GPU resources.
 
-### CPU multi-processing
+### CPU multi-processing / Distributed-memory parallelism
 
 Unfortunately, most computer programs cannot take advantage of
 performance increases offered by GPUs or multi-core CPUs unless we
@@ -94,7 +95,7 @@ can run in parallel if the computer has more than one CPU core. For
 certain algorithms, multi-threading can be more efficient than
 multi-processing (though multi-processing solutions such as MPI often
 scale better to larger problem sizes).  However, multi-threading is
-more error prone to program and is generally only done directly by
+more error-prone to program and is generally only done directly by
 expert systems programmers.  Tools such as <a
 href="http://openmp.org/" target="_blank">OpenMP</a> should in general
 be used for multi-threading in scientific computing.
@@ -105,7 +106,7 @@ In our example application, we'll show how to parallelize the plotting
 of randomly generated data using multiple processors.  You can find
 the complete solution <a href="plot_rand_mp.py"
 target="_blank">here</a>.  Key portions of the code will be discussed
-below.
+below.  
 
 Due to the design of the multiprocessing library, the code portions
 generally will not work in interactive interpreters such as IPython.
@@ -195,7 +196,7 @@ care is taken in your code** (even when doing multi-processing
 programming where each process has its own memory space).  In this
 case, there are two special things we must do.
 
-Firstly, we must force NumPy's random number generator to
+First, we must force NumPy's random number generator to
 re-initialize for each call of the parallel function, this is
 accomplished by:
 
@@ -207,7 +208,7 @@ process will use the same random number generator as it makes the
 plots it is responsible for.  Thus, all plots made by Worker 1 would
 contain the same sequence of "random" data.
 
-Secondly, we need to tell matplotlib to clear the current figure
+Second, we need to tell matplotlib to clear the current figure
 context after each plot is generated:
 
     plt.clf()
@@ -230,8 +231,9 @@ tasks we need to make a list of specific tasks to be performed
         tasks.append( (args.outputDir, plotNum, ) )
 
 Each task is simply a tuple of the path where plot PDF files should be
-saved and as well as the current plot identifier.  We store these tuples
-in a list called `tasks`.
+saved and as well as the current plot identifier.  We store these
+tuples in a list called `tasks`, thus our tasks are described as a
+list of tuples.
 
 ### Run tasks in parallel
 
@@ -315,8 +317,13 @@ and efficiency</a> are common ways of doing this.
 > runtime reductions.
 
 Speedup (Sp) is defined as the ratio of runtime for a sequential
-algorithm (T1) to runtime for a parallel algorithm with *p*
-processors (Tp). That is, Sp = T1 / Tp. Ideal speedup results when Sp = p.
+algorithm (T1) to runtime for a parallel algorithm with *p* processors
+(Tp). That is, Sp = T1 / Tp. Ideal speedup results when Sp = p.
+Speedup is formally derived from <a
+href="http://en.wikipedia.org/wiki/Amdahl's_law"
+target="_blank">Amdahl's law</a>, which considers the portion of a
+program that is serial vs. the portion that is parallel when
+calculating speedup.
 
 Efficiency (Ep) is defined as the ratio of speedup for p processors (Sp) to
 the number of processors p, or Ep = Sp / p.
@@ -327,7 +334,7 @@ processors on computer with a 4-core processor (each data point
 represents the average of three runs).
 ![Speedup plot](speedup.png "Plot of speedup and efficiency of example parallel program")
 
-> Note that the comparison here is not quite fair becuase a sequential
+> Note that the comparison here is not quite fair because a sequential
 > version of the program was not written.  The runtimes for the
 > sequential version were approximated by running the parallel version
 > using a single processor.  The single processor runtime was likely
@@ -341,9 +348,14 @@ farther away from the ideal speedup line as the number of processors
 increases.  Some divergence between actual and ideal speedup is
 typical.  However our example program isn't strictly computational and
 involves input/output (I/O) to the filesystem (i.e. writing the plot).
-IO-bound tasks do not typically parallelize well because I/O
-operations, espcially to disk, usually take orders of magnitude more
-time to complete than computational operations.
+I/O-bound tasks do not typically parallelize well because I/O
+resources (e.g. disks, network, memory) are shared across processors,
+and because I/O operations, espcially to disk, usually take orders of
+magnitude more time to complete than computational operations.
+However, even I/O-bound tasks can see moderate speedup due to the
+effects of "pipelining" (see <a
+href="http://en.wikipedia.org/wiki/Pipeline_(computing)"
+target="_blank">here</a>).
 
 Efficiency, which ranges from 0 to 1, is a bit easier to interpret
 than speedup. With two processors, efficiency was over 90% (i.e. our
@@ -354,7 +366,7 @@ However, the speedup continued increasing up to and including eight
 processors; that is, runtimes continued to drop until we added more
 than eight workers.  Thus, even though efficiency was decreasing, we
 were still able to save time by adding more workers, up to a point.
-Efficiency is more important in enterprise computing environments,
+Efficiency is especially important in enterprise computing environments,
 where concerns like providing equitable access shared resources and
 reducing energy consumption may dictate the use of fewer processors to
 maintain higher processor utilization.
@@ -365,16 +377,15 @@ maintain higher processor utilization.
 > "HyperThreading."  HyperThreading is the marketing name of a
 > technology that enables each core of a CPU to appear as two virtual
 > cores to your operating system.  These virtual cores can improve
-> performance somewhat, but are no substitute for additional real
-> cores.
+> performance, but are often no substitute for additional real cores.
 
 ## Challenge
 
 Run the <a href="plot_rand_mp.py" target="_blank">example
 application</a> on your computer several times.  Each time, vary the
 number of processors to use and note how the computation efficiency
-varies.  You can use a stopwatch or the Unix `time` program to measure
-execution times.
+varies.  You can use the Unix `time` program to measure execution
+times.
 
 ## Key Points
 
@@ -393,8 +404,10 @@ execution times.
 - You can combine results from individual tasks allowing each worker
   to share in the computational load
 
-- It is important to use metrics such as speedup and efficiency to
-  evaluate the performance and utility of parallel programs
+- It is important to use profiling before optimizing computer programs
+
+- Metrics such as speedup and efficiency must be used to evaluate the
+  performance and utility of parallel programs
 
 ## Next steps
 
