@@ -1,9 +1,0 @@
-# 
-Reported: Tue Jun 14 13:22:45 2011
-Subject: scaryBackstreet433
-Year/month of birth: 1992/12
-Sex: F
-CI type: 22
-Volume: 7
-Range: 5
-Discrimination: 4

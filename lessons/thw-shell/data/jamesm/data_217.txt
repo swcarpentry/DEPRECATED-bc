@@ -1,9 +1,0 @@
-# 
-Reported: Thu Sep 8 15:08:36 2011
-Subject: jayBackstreet179
-Year/month of birth: 1994/09
-Sex: N
-CI type: 18
-Volume: 6
-Range: 5
-Discrimination: 7

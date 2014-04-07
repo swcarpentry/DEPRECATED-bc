@@ -1,2 +1,0 @@
-helium : He 1
-water : H 2 O 1
