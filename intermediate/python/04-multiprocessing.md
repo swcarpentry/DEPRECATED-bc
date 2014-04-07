@@ -35,7 +35,7 @@ don't know NumPy and matplotlib well).
 Parallel programming has been important to scientific computing for
 decades as a way to decrease program run times, making more complex
 analyses possible (e.g. climate modeling, gene sequencing,
-pharmacuetical development, aircraft design).
+pharmaceutical development, aircraft design).
 
 One of the motivations for parallel programming has been the
 diminishing marginal increases in single CPU performance with each new
@@ -46,7 +46,7 @@ makers have introduced multi-core processors that contain more than
 one processing core.  It's not uncommon for desktop, laptop, and even
 tablets and smart phones to have two or more CPU cores.
 
-### GPU and heterogenuous computing
+### GPU and heterogeneous computing
 
 In addition to multi-core CPUs, Graphics Processing Units (GPU) have
 become more powerful recently (often having hundreds of parallel
@@ -312,7 +312,7 @@ and efficiency</a> are common ways of doing this.
 > should first use a <a
 > href="http://en.wikipedia.org/wiki/Profiling_(computer_programming)"
 > target="_blank">profiler</a> to identify what proportion of runtime
-> your progam is spending in each function or component. This will
+> your program is spending in each function or component. This will
 > help you to prioritize optimization or parallelization to maximize
 > runtime reductions.
 
@@ -335,7 +335,7 @@ represents the average of three runs).
 ![Speedup plot](speedup.png "Plot of speedup and efficiency of example parallel program")
 
 > Note that the comparison here is not quite fair because a sequential
-> version of the program was not written.  The runtimes for the
+> version of the program was not written.  The runtime for the
 > sequential version were approximated by running the parallel version
 > using a single processor.  The single processor runtime was likely
 > longer than that of a sequential version of the same program due to
@@ -350,7 +350,7 @@ typical.  However our example program isn't strictly computational and
 involves input/output (I/O) to the filesystem (i.e. writing the plot).
 I/O-bound tasks do not typically parallelize well because I/O
 resources (e.g. disks, network, memory) are shared across processors,
-and because I/O operations, espcially to disk, usually take orders of
+and because I/O operations, especially to disk, usually take orders of
 magnitude more time to complete than computational operations.
 However, even I/O-bound tasks can see moderate speedup due to the
 effects of "pipelining" (see <a
@@ -375,9 +375,10 @@ maintain higher processor utilization.
 > to decrease between four and eight processors?  This was in part
 > because the computer we ran the tests on had a feature call
 > "HyperThreading."  HyperThreading is the marketing name of a
-> technology that enables each core of a CPU to appear as two virtual
-> cores to your operating system.  These virtual cores can improve
-> performance, but are often no substitute for additional real cores.
+> technology that enables each physical core of a CPU to appear as two
+> virtual cores to your operating system.  These virtual cores can
+> improve performance, but are rarely as effective as additional
+> physical cores.
 
 ## Challenge
 
@@ -406,7 +407,7 @@ times.
 
 - It is important to use profiling before optimizing computer programs
 
-- Metrics such as speedup and efficiency must be used to evaluate the
+- Metrics such as speedup and efficiency aid in evaluating the
   performance and utility of parallel programs
 
 ## Next steps
