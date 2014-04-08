@@ -366,10 +366,10 @@ However, the speedup continued increasing up to and including eight
 processors; that is, runtimes continued to drop until we added more
 than eight workers.  Thus, even though efficiency was decreasing, we
 were still able to save time by adding more workers, up to a point.
-Efficiency is especially important in enterprise computing environments,
-where concerns like providing equitable access shared resources and
-reducing energy consumption may dictate the use of fewer processors to
-maintain higher processor utilization.
+Efficiency is especially important in enterprise computing
+environments, where concerns like providing equitable access shared
+resources and reducing energy consumption may dictate the use of fewer
+processors to maintain higher processor utilization.
 
 > Despite our computer having only 4-cores, why did runtime continue
 > to decrease between four and eight processors?  This was in part
@@ -385,22 +385,22 @@ maintain higher processor utilization.
 Running a computation in multiple processes requires some
 communication between these processes. One of the nice aspects of
 multiprocessing in Python is that most of the time you do not need to
-know *how* this communication is handled: it just works. However,
-it is useful to understand the basics of this mechanism in order
-to figure out how to solve two kinds of problems: unexpected errors,
-and bad performance.
+know *how* this communication is handled: it just works. However, it
+is useful to understand the basics of this mechanism in order to
+figure out how to solve two kinds of problems: unexpected errors, and
+bad performance.
 
 Communication between processes takes the form of streams of bytes
 that travel through specific communication channels. To send an object
 from one process to another, Python has to convert it to a stream of
 bytes, and assemble the object back at the receiving end.  Python's
-mechanism for doing these conversions was originally designed
-for storing objects in files and is implemented in the <a
+mechanism for doing these conversions was originally designed for
+storing objects in files and is implemented in the <a
 href="https://docs.python.org/2.7/library/pickle.html"
-target="_blank">pickle</a> module. Every argument that is passed
-to a Python function running in another process is pickled and
-then unpickled. The result of the function undergoes the same process
-on its way back.
+target="_blank">pickle</a> module. Every argument that is passed to a
+Python function running in another process is pickled and then
+unpickled. The result of the function undergoes the same process on
+its way back.
 
 There are two things you need to know about pickle in the context of
 multiprocessing. First, most objects can be pickled but some cannot.
@@ -408,26 +408,24 @@ Second, pickling and unpickling take time and can sometimes add
 considerable overhead to your multiprocessing.
 
 The objects that cannot be pickled come in two varieties: those for
-which pickling does not make sense, and those for which it has
-simply not been implemented. A good example for the first
-category is file objects. The second category contains mainly
-object types defined in extension modules whose authors didn't
-implement pickling. If you use an old release of NumPy, you
-may discover that its array-aware functions are not picklable,
-making it impossible to use such a function directly as a task
-in multiprocessing. For Python's built-in objects, there is one important
-restriction that are due to the implementation details of pickle:
-functions and classes can only be pickled if they are defined at
-the top level of a module. This means, for example, that if you
-define a function inside another function, you cannot pickle it
-and thus not pass it to a multiprocessing task.
+which pickling does not make sense, and those for which it has simply
+not been implemented. A good example for the first category is file
+objects. The second category contains mainly object types defined in
+extension modules whose authors didn't implement pickling. If you use
+an old release of NumPy, you may discover that its array-aware
+functions are not picklable, making it impossible to use such a
+function directly as a task in multiprocessing. For Python's built-in
+objects, there is one important restriction that is due to the
+implementation details of pickle: functions and classes can only be
+pickled if they are defined at the top level of a module. This means,
+for example, that if you define a function inside another function,
+you cannot pickle it and thus not pass it to a multiprocessing task.
 
-The performance implications of pickling are rather obvious:
-you should try to pass as few arguments as possible to your tasks,
-and make sure you pass no more data than you really need to.
-For example, rather than passing a huge list and the index of
-the item that your taks is supposed to process, you should pass
-only that item.
+The performance implications of pickling are rather obvious: you
+should try to pass as few arguments as possible to your tasks, and
+make sure you pass no more data than you really need to.  For example,
+rather than passing a huge list and the index of the item that your
+taks is supposed to process, you should pass only that item.
 
 ## Challenge
 
