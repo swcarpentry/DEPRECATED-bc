@@ -122,38 +122,10 @@ type:
 for usage instructions. We suggest you create an output directory
 called "temp" to store the plots in (to make deletion easier).
 
-### Creating a pool of workers
-
-There are several ways to use Python's multiprocessing library to
-execute tasks in parallel.  In this lesson we'll use a <a
-href="https://docs.python.org/2.7/library/multiprocessing.html#using-a-pool-of-workers"
-target="_blank">pool of worker processes</a>.
-
-Assuming we import the multiprocessing library as follows:
-
-    import multiprocessing
-
-we can create a pool by:
-
-    pool = multiprocessing.Pool( args.numProcessors )
-
-In our example, we're passing in the number of processors to use via
-an optional command line argument called `numProcessors`.  If the user
-doesn't specify the number of processors on the command line, the
-default value is determined using the cpu_count() method of
-multiprocessing:
-
-    multiprocessing.cpu_count()
-
-> We're using the <a
-> href="https://docs.python.org/2.7/library/argparse.html"
-> target="_blank">argparse</a> library, a standard part of Python 2.7
-> and later, to manage command line arguments.
-
 ### Defining the work to be done
 
-Now that we have a pool of workers, we need to give them some work to
-do.  In multiprocessing, this work is defined as a *callable* object,
+Before running code in parallel, we need to define the work to be
+done. In multiprocessing, this work is defined as a *callable* object,
 usually a Python function.  Here is the function we'll use:
 
     def plotData(outputDir, plotNum):
@@ -216,6 +188,35 @@ context after each plot is generated:
 Otherwise, each plot made by Worker 1 would contain the data from all
 previous plots created by Worker 1.
 
+### Creating a pool of workers
+
+Now that we have defined the work to be done, we can write the code to
+execute in tasks in parallel.  There are several ways to use Python's
+multiprocessing library to execute tasks in parallel.  In this lesson
+we'll use a <a
+href="https://docs.python.org/2.7/library/multiprocessing.html#using-a-pool-of-workers"
+target="_blank">pool of worker processes</a>.
+
+Assuming we import the multiprocessing library as follows:
+
+    import multiprocessing
+
+we can create a pool by:
+
+    pool = multiprocessing.Pool( args.numProcessors )
+
+In our example, we're passing in the number of processors to use via
+an optional command line argument called `numProcessors`.  If the user
+doesn't specify the number of processors on the command line, the
+default value is determined using the cpu_count() method of
+multiprocessing:
+
+    multiprocessing.cpu_count()
+
+> We're using the <a
+> href="https://docs.python.org/2.7/library/argparse.html"
+> target="_blank">argparse</a> library, a standard part of Python 2.7
+> and later, to manage command line arguments.
 
 ### Build a list of tasks
 
