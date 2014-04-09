@@ -19,7 +19,7 @@ all : ipynb
 # Rules.
 #----------------------------------------------------------------------
 
-# Templates for nbconvert and Pandoc.
+# Templates.
 IPYNB_TPL = _templates/ipynb.tpl
 
 # IPython Notebooks.  Add patterns here to convert notebooks stored in
