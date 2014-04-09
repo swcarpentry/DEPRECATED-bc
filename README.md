@@ -34,6 +34,7 @@ You should not try to use the same repo for both purposes because:
 *   [Variables](#variables)  
 *   [Website Content](#website-content)  
 *   [Lesson Material](#lesson-material)  
+*   [Building Things](#building-things)  
 *   [Site Map](#site-map)  
 *   [FAQ](#faq)
 
@@ -364,10 +365,40 @@ Lesson Material
     is in the `lessons` directory.
     We plan to retire it in Spring 2014,
 
-As explained earlier,
+As explained [below](#building-things),
 you can use `make` to compile this material in the way that GitHub does
 when changes are committed to the `gh-pages` branch.
-The comments in `Makefile` explain how to add new lessons.
+
+Building Things
+---------------
+
+GitHub automatically runs Jekyll
+to regenerate the pretty HTML versions of our content
+every time changes are pushed to the `gh-pages` branch of this repository.
+We use `make` to imitate that process locally
+so that people can preview changes before committing.
+We also use `make` to automate a handful of other tasks,
+such as converting IPython Notebooks from `.ipynb` format to Markdown (`.md`)
+so that Jekyll can convert them to HTML.
+
+Most of the commands to rebuild things are in `Makefile`;
+run the command `make` on its own to get a list of targets,
+and `make site` to re-run Jekyll to preview your site
+(which Jekyll will put in the `_site` directory).
+You can also run `make check` to run a Python script
+that checks whether `index.html`'s variables are formatted correctly,
+and `make clean` to clean up all generated files.
+
+The commands used to turn IPython Notebooks into Markdown files
+are stored in a separate Makefile called `ipynb.mk`.
+This separation ensures that people can rebuild the site
+even if they don't have IPython installed
+(which R instructors might not);
+it also guarantees that `make` won't try to regenerate Markdown after a Git pull
+(which might change the timestamps on files,
+but not actually change their contents).
+If we add more languages and file formats in future,
+we may also create separate Makefiles for them.
 
 Site Map
 --------
@@ -383,7 +414,8 @@ The most important files and directories are **highlighted**.
 *   _includes/ - snippets of HTML that can be included in other files by Jekyll.
 *   _layouts/ - Jekyll page layouts.
 *   **_site/** - output directory (created when building the site locally).
-*   _templates/ - template files for Pandoc conversion of IPython Notebooks.
+*   _templates/ - template files for conversion of IPython Notebooks to Markdown.
+    Templates for other conversion systems (e.g., Pandoc) should go here too.
 *   bib.md - bibliography.
 *   bin/ - miscellaneous tools used in building the site.
 *   book.md - generated when compiling the website locally.
@@ -396,6 +428,7 @@ The most important files and directories are **highlighted**.
 *   **index.html** - template for bootcamp home pages.
 *   intermediate/ - intermediate lesson material (under development).
 *   intro.md - introduction to book version of this site.
+*   ipynb.mk - Makefile for turning IPython Notebooks into Markdown.
 *   js/ - Javascript files used in this site.
 *   lessons/ - old lesson material.
 *   novice/ - novice lesson material.
