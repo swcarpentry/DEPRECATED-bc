@@ -53,10 +53,13 @@ IPYNB_SRC_PYTHON = \
 	$(sort $(wildcard intermediate/python/??-*.ipynb))
 IPYNB_SRC_SQL = \
 	$(sort $(wildcard novice/sql/??-*.ipynb))
+IPYNB_SRC_DOIT = \
+	$(sort $(wildcard intermediate/doit/??-*.ipynb))
 
 # Notebooks converted to Markdown.
 IPYNB_TX_PYTHON = $(patsubst %.ipynb,$(CACHED)/%.md,$(IPYNB_SRC_PYTHON))
 IPYNB_TX_SQL = $(patsubst %.ipynb,$(CACHED)/%.md,$(IPYNB_SRC_SQL))
+IPYNB_TX_DOIT = $(patsubst %.ipynb,$(CACHED)/%.md,$(IPYNB_SRC_DOIT))
 
 # Convert a .ipynb to .md.
 $(CACHED)/%.md : %.ipynb $(IPYNB_TPL)
@@ -88,6 +91,8 @@ BOOK_SRC = \
 PAGES_SRC = \
 	contents.md \
 	$(wildcard intermediate/python/*.md) \
+	$(wildcard intermediate/doit/*.md) \
+	$(IPYNB_TX_DOIT)\
 	$(BOOK_SRC)
 
 # Build the temporary input for the book by concatenating relevant
