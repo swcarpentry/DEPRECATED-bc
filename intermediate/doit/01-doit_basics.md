@@ -8,6 +8,7 @@ root: ../..
 
 <div>
 <p>We're starting a project where we need to do some analysis of climate data. This analysis is going to require a number of steps, which all have to be carried out in the correct order. Our data is also updating all the time with new readings, so we don't want to have to keep track of which steps we have or have not remembered to re-run every time we update the source data.</p>
+<p>In order to do this, we're going to use a python library called <a href="http://pydoit.org/">doit</a>. This lesson will cover the basics of doit, but doit has excellent <a href="http://pydoit.org/contents.html">documentation</a> for those who are interested in more advanced usage.</p>
 </div>
 
 ### Objectives:
