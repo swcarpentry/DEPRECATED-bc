@@ -82,7 +82,6 @@ INDEX = $(SITE)/index.html
 # Markdown files triggers the desired build once and only once.
 $(INDEX) : $(ALL_SRC) $(CONFIG) $(EXTRAS)
 	jekyll -t build -d $(SITE)
-	rm -rf $(SITE)/novice/*/??-*_files
 
 #----------------------------------------------------------------------
 # Create Markdown versions of IPython Notebooks.
