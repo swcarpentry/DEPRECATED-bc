@@ -1,21 +1,20 @@
-"""sqlitemagic provices a simple magic for interacting with SQLite
-databases stored on disk.
+"""doitmagic provices a simple magic for running
+tasks through doit in the ipython notebook
 
 Usage:
 
-%%sqlite filename.db
-select personal, family from person;
+%%doit doit_args
 
-produces:
+def task_example():
+    return { 'actions' : ['echo "Hello world!"'] }
 
-Alan|Turing
-Grace|Hopper
 """
 
-# This file is copyright 2013 by Greg Wilson: see
+# This file is copyright 2014 by Rob Beagrie: see
 # https://github.com/gvwilson/sqlitemagic/blob/master/LICENSE
 # for the license.
-# Inspired by https://github.com/tkf/ipython-sqlitemagic.
+# Inspired by https://github.com/tkf/ipython-sqlitemagic
+# and Greg Wilson's sqlitemagic elsewhere in the SWC repo
 
 from tempfile import NamedTemporaryFile
 from subprocess import Popen, PIPE
