@@ -84,27 +84,6 @@ $(INDEX) : $(ALL_SRC) $(CONFIG) $(EXTRAS)
 	jekyll -t build -d $(SITE)
 
 #----------------------------------------------------------------------
-# Create Markdown versions of IPython Notebooks.
-#----------------------------------------------------------------------
-
-# Templates for nbconvert and Pandoc.
-IPYNB_TPL = _templates/ipynb.tpl
-
-# IPython Notebooks.  Add patterns here to convert notebooks stored in
-# other locations.
-IPYNB_SRC = \
-	$(wildcard novice/python/??-*.ipynb) \
-	$(wildcard novice/sql/??-*.ipynb) \
-	$(wildcard intermediate/python/??-*.ipynb)
-
-# Notebooks converted to Markdown.
-IPYNB_TX = $(patsubst %.ipynb,%.md,$(IPYNB_SRC))
-
-# Convert a .ipynb to .md.
-%.md : %.ipynb $(IPYNB_TPL)
-	ipython nbconvert --template=$(IPYNB_TPL) --to=markdown --output="$(subst .md,,$@)" "$<"
-
-#----------------------------------------------------------------------
 # Create all-in-one book version of notes.
 #----------------------------------------------------------------------
 
@@ -121,12 +100,26 @@ $(BOOK_MD) : $(MOST_SRC) bin/make-book.py
 # Targets.
 #----------------------------------------------------------------------
 
+## ---------------------------------------
+
 ## commands : show all commands.
 commands :
-	@grep -E '^##' Makefile | sed -e 's/## //g'
+	@grep -E '^##' Makefile | sed -e 's/##//g'
+
+## ---------------------------------------
 
 ## site     : build the site as GitHub will see it.
 site : $(INDEX)
+
+## check    : check that the index.html file is properly formatted.
+check :
+	@python bin/swc_index_validator.py ./index.html
+
+## clean    : clean up all generated files.
+clean : tidy
+	rm -rf $(SITE)
+
+## ---------------------------------------
 
 ## book     : build the site including the all-in-one book.
 #  To do this, we simply create the book Markdown file then build
@@ -141,13 +134,6 @@ install : $(INDEX)
 	cp -r $(SITE)/* $(INSTALL)
 	mv $(INSTALL)/contents.html $(INSTALL)/index.html
 
-## ipynb    : convert IPython Notebooks to Markdown files.
-ipynb : $(IPYNB_TX)
-
-## check    : check that the index.html file is properly formatted.
-check :
-	@python bin/swc_index_validator.py ./index.html
-
 ## contribs : list contributors.
 #  Relies on ./.mailmap to translate user IDs into names.
 contribs :
@@ -157,12 +143,21 @@ contribs :
 fixme :
 	@grep -i -n FIXME $$(find novice -type f -print | grep -v .ipynb_checkpoints)
 
-## clean    : clean up all generated files.
-clean : tidy
-	rm -rf $(SITE)
-
 ## tidy     : clean up odds and ends.
 tidy :
 	rm -rf \
 	$$(find . -name '*~' -print) \
 	$$(find . -name '*.pyc' -print)
+
+#----------------------------------------------------------------------
+# Rules to launch builds of formats other than Markdown.
+#----------------------------------------------------------------------
+
+## ---------------------------------------
+
+## ipynb    : convert IPython Notebooks to Markdown files.
+#  This uses an auxiliary Makefile 'ipynb.mk'.
+ipynb :
+	make -f ipynb.mk
+
+## ---------------------------------------
