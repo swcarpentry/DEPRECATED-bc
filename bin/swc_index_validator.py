@@ -10,7 +10,7 @@ Checks for:
     2. Categories are allowed to appear only once
     3. Contact email should be valid (letters + @ + letters + . + letters)
     4. Latitute/longitude should be 2 floating point numbers separated by comma
-    5. startdate/enddate should be valid dates
+    5. startdate should be a valid date; if enddate is present, it should be valid as well
     6. country should be a string with no spaces
     7. instructor list should be a valid Python/Ruby list
     8. Template header should not exist
@@ -22,7 +22,6 @@ Checks for:
     14. registration should be 'open' or 'restricted'
 '''
 
-
 import sys
 import re
 
@@ -31,14 +30,14 @@ from collections import Counter
 
 __version__ = '0.4'
 
-# See docstring for definitions and restrictions for each category
-CATEGORIES = set(['layout', 'root', 'venue', 'address', 'country',
-        'humandate', 'humantime', 'startdate', 'enddate', 'latlng',
-        'registration', 'instructor', 'contact'])
 REGISTRATIONS = set(['open', 'restricted', 'closed'])
 
-EMAIL_PATTERN = '[^@]+@[^@]+\.[^@]+'
-HUMANTIME_PATTERN = '((0?[0-9]|1[0-1]):[0-5][0-9](am|pm)(-|to)(0?[0-9]|1[0-1]):[0-5][0-9](am|pm))|((0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9](-|to)(0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9])'
+EMAIL_PATTERN = r'[^@]+@[^@]+\.[^@]+'
+HUMANTIME_PATTERN = r'((0?\d|1[0-1]):[0-5]\d(am|pm)(-|to)(0?\d|1[0-1]):[0-5]\d(am|pm))|((0?\d|1\d|2[0-3]):[0-5]\d(-|to)(0?\d|1\d|2[0-3]):[0-5]\d)'
+EVENTBRITE_PATTERN = r'\d{9,10}'
+
+ERROR = 'ERROR:\t{0}\n'
+SUB_ERROR = '\t{0}\n'
 
 def check_layout(layout):
     '''Checks whether layout equals "bootcamp".'''
@@ -51,7 +50,6 @@ def check_root(root):
 def check_country(country):
     '''A valid country has no spaces, is one string, isn't empty'''
     return (country is not None) and (' ' not in country)
-
 
 def check_humandate(date):
     '''A valid human date starts with a three-letter month and ends with four-letter year,
@@ -114,21 +112,50 @@ def check_email(email):
     '''A valid email has letters, then an @, followed by letters, followed by a dot, followed by letters.'''
     return bool(re.match(EMAIL_PATTERN, email))
 
+def check_eventbrite(eventbrite):
+    '''A valid EventBrite key is 9 or more digits.'''
+    return bool(re.match(EVENTBRITE_PATTERN, eventbrite))
+
+def check_pass(value):
+    '''A test that always passes, used for things like addresses.'''
+    return True
+
+HANDLERS = {
+    'layout' :       (True, check_layout, 'Layout isn\'t "bootcamp".'),
+    'root' :         (True, check_root, 'root can only be ".".'), 
+    'country' :      (True, check_country, 'Country invalid. Please check whether there are spaces inside the country-name.'),
+    'humandate' :    (True, check_humandate, 'Category "humandate" invalid. Please use a three-letter month like "Jan" and four-letter year like "2025".'),
+    'humantime' :    (True, check_humantime, '"humantime" doesn\'t include numbers.'),
+    'startdate' :    (True, check_date, '"startdate" invalid. Must be of format year-month-day, i.e., 2014-01-31.'),
+    'enddate' :      (False, check_date, '"enddate" invalid. Must be of format year-month-day, i.e., 2014-01-31.'),
+    'latlng' :       (True, check_latitude_longitude, 'Lat/long invalid. Check whether it\'s two floating point numbers, separated by a comma.'),
+    'registration' : (True, check_registration, 'registration can only be {0}.'.format(REGISTRATIONS)), 
+    'instructor' :   (True, check_instructor, 'Instructor string isn\'t a valid list of format ["First instructor", "Second instructor",..].'),
+    'contact' :      (True, check_email, 'Email invalid.'),
+    'eventbrite' :   (False, check_eventbrite, 'Eventbrite key appears invalid.'),
+    'venue' :        (False, check_pass, ''),
+    'address' :      (False, check_pass, '')
+}
+
+# REQUIRED is all required categories.
+REQUIRED = set([k for k in HANDLERS if HANDLERS[k][0]])
+
+# OPTIONAL is all optional categories.
+OPTIONAL = set([k for k in HANDLERS if not HANDLERS[k][0]])
+
 def check_validity(data, function, error):
     '''Wrapper-function around the various check-functions.'''
     valid = function(data)
-    if valid:
-        return True
-    else:
-        sys.stderr.write(error)
-        sys.stderr.write('\tOffending entry is: "{0}"\n'.format((data)))
-        return False
+    if not valid:
+        sys.stderr.write(ERROR.format(error))
+        sys.stderr.write(SUB_ERROR.format('Offending entry is: "{0}"'.format(data)))
+    return valid
 
-def check_categories(first_categories, second_categories, message):
-    result = first_categories - second_categories
+def check_categories(left, right, message):
+    result = left - right
     if result:
-        sys.stderr.write(message)
-        sys.stderr.write('\tOffending entries: {0}\n'.format(result))
+        sys.stderr.write(ERROR.format(message))
+        sys.stderr.write(SUB_ERROR.format('Offending entries: {0}'.format(result)))
         return False
     return True
 
@@ -136,8 +163,8 @@ def check_double_categories(seen_categories, message):
     category_counts = Counter(seen_categories)
     double_categories = [category for category in category_counts if category_counts[category] > 1]
     if double_categories:
-        sys.stderr.write(message)
-        sys.stderr.write('\t"{0}" appears more than once.\n'.format(double_categories))
+        sys.stderr.write(ERROR.format(message))
+        sys.stderr.write(SUB_ERROR.format('"{0}" appears more than once.\n'.format(double_categories)))
         return False
     return True
 
@@ -148,7 +175,7 @@ def get_header(index_fh):
     header = []
     this_categories = []
     for line in index_fh:
-        line = line.rstrip('\n\r')
+        line = line.rstrip()
         if line == '---':
             header_counter += 1
             continue
@@ -170,42 +197,35 @@ def check_file(index_fh):
     header_data, seen_categories = get_header(index_fh)
 
     if not header_data:
-        sys.stderr.write('ERROR:\tCan\'t find header in given file "{0}". Please check path, is this the bc index.html?\n'.format((filename)))
+        msg = 'Cannot find header in given file "{0}". Please check path, is this the bc index.html?\n'.format(filename)
+        sys.stderr.write(ERROR.format(msg))
         sys.exit(1)
 
-    file_is_valid = True
-
-    handlers_and_messages = { 'layout' : (check_layout, 'ERROR:\tLayout isn\'t "bootcamp".\n'),
-        'root' : (check_root, 'ERROR:\troot can only be ".".\n'), 
-        'country' : (check_country, 'ERROR:\tCountry seems to be invalid. Please check whether there are spaces inside the country-name.\n'),
-        'humandate' : (check_humandate, 'ERROR:\tCategory "humandate" seems to be invalid. Please use a three-letter month like "Jan" and four-letter year like "2025".\n'),
-        'humantime' : (check_humantime, 'ERROR:\t"humantime" doesn\'t include numbers.\n'),
-        'startdate' : (check_date, 'ERROR:\t"startdate" seems to be invalid. Must be of format year-month-day, i.e., 2014-01-31.\n'),
-        'enddate' : (check_date, 'ERROR:\t"enddate" seems to be invalid. Must be of format year-month-day, i.e., 2014-01-31.\n'),
-        'latlng' : (check_latitude_longitude, 'ERROR:\tLatitude/Longitude seems to be invalid. Check whether it\'s two floating point numbers, separated by a comma.\n'),
-        'registration' : (check_registration, 'ERROR:\tregistration can only be {0}.\n'.format(REGISTRATIONS)), 
-        'instructor' : (check_instructor, 'ERROR:\tInstructor string isn\'t a valid list of format ["First instructor", "Second instructor",..].\n'),
-        'contact' : (check_email,'ERROR:\tEmail seems to be invalid.\n') }
+    is_valid = True
 
     # look through all header entries
-    for category in handlers_and_messages:
-        handler_function, error_message = handlers_and_messages[category]
-        file_is_valid &= check_validity(header_data[category], handler_function, error_message)
+    for category in HANDLERS:
+        required, handler_function, error_message = HANDLERS[category]
+        if category in header_data:
+            is_valid &= check_validity(header_data[category], handler_function, error_message)
+        elif required:
+            sys.stderr.write(ERROR.format('index file is missing mandatory key "%s".'))
+            is_valid &= False
 
     # Do we have double categories?
-    file_is_valid &= check_double_categories(seen_categories, 'ERROR:\tThere are categories appearing twice or more.\n')
+    is_valid &= check_double_categories(seen_categories, 'There are categories appearing twice or more.')
 
     # Check whether we have missing or too many categories
     seen_categories = set(seen_categories)
-    file_is_valid &= check_categories(seen_categories, CATEGORIES, 'ERROR:\tThere are superfluous categories.\n')
-    file_is_valid &= check_categories(CATEGORIES, seen_categories, 'ERROR:\tThere are missing categories.\n')
+    is_valid &= check_categories(REQUIRED, seen_categories, 'There are missing categories.')
+    is_valid &= check_categories(seen_categories, REQUIRED.union(OPTIONAL), 'There are superfluous categories.')
 
-    return file_is_valid
+    return is_valid
 
 if __name__ == '__main__':
     args = sys.argv
     if len(args) > 2:
-        sys.stderr.write('Usage: python swc-index-test.py\nAlternative: python swc-index-test.py path/to/index.html\n')
+        sys.stderr.write('Usage: "python swc_index_validator.py" or "python swc_index_validator.py path/to/index.html"\n')
         sys.exit(0)
     elif len(args) == 1:
         filename = '../index.html'
@@ -215,9 +235,9 @@ if __name__ == '__main__':
     sys.stderr.write('Testing file "{0}".\n'.format(filename))
 
     with open(filename) as index_fh:
-        file_is_valid = check_file(index_fh)
+        is_valid = check_file(index_fh)
 
-    if file_is_valid:
+    if is_valid:
         sys.stderr.write('Everything seems to be in order.\n')
         sys.exit(0)
     else:
