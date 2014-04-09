@@ -4,7 +4,8 @@ Contributing Boot Camp Material
 Software Carpentry is an open source/open access project,
 and we welcome contributions of all kinds.
 By contributing,
-you are agreeing that Software Carpentry may redistribute your work under [these licenses][licenses].
+you are agreeing that Software Carpentry may redistribute your work under
+[these licenses](LICENSE.md).
 
 Basic Instructions
 ------------------
@@ -18,7 +19,7 @@ Before beginning this workflow,
 we recommend that you open an issue in the `swcarpentry/bc` Issue Tracker
 to get feedback on your ideas and coordinate with other developers.
 
-1.  Read the README file in this directory.
+1.  Read the [README.md](README.md) file in this directory.
 
 2.  Fork the `swcarpentry/bc` repository on GitHub.
 
@@ -56,16 +57,12 @@ to get feedback on your ideas and coordinate with other developers.
     git push upstream improvements
     ~~~
 
-    The `gh-pages` branch in the `swcarpentry/bc` repository the production branch
-    that provides the template for bootcamp teaching materials,
-    while the `master` branch is currently being used for development and integration
-    and may contain incomplete materials.
-    In general
-    you should use `master` as the starting point for your improvements,
-    although you may also use `gh-pages` for fully complete changes
-    or new materials that should be introduced immediately into the curriculum.
+    The `gh-pages` branch in the `swcarpentry/bc` repository
+    is the "production" branch that provides the template for bootcamp teaching materials,
+    while the `master` branch is used for development and integration.
+    You should use `master` as the starting point for your improvements.
 
-5.  Send a pull request to the `master` or `gh-pages` branch of `swcarpentry/bc` on GitHub.
+5.  Send a pull request to the `master` branch of `[swcarpentry/bc](http://github.com/swcarpentry/bc)`.
 
 If it is easier for you to send them to us some other way,
 please mail us at
@@ -78,17 +75,12 @@ More Information
 
 Software Carpentry uses a development workflow similar to that of many other open source projects.
 For a graphical introduction to feature branches as we use them,
-see GitHub's [workflow guide][github-workflow].
+see GitHub's [workflow guide](https://guides.github.com/overviews/flow/).
 For more information about getting started with Git,
-see [our Git lesson][git-lesson].
+see [our Git lesson](http://software-carpentry.org/v5/novice/git/index.html).
 
 Acknowledgments
 ---------------
 
 Software Carpentry could not exist without the hard work of
-[our volunteers][volunteers].
-
-[github-workflow]: http://guides.github.com/overviews/flow/
-[git-lesson]: ./git/novice/index.md
-[licenses]: http://software-carpentry.org/license.html
-[volunteers]: ./team.md
+[our volunteers](team.md).
