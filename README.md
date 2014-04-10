@@ -488,4 +488,3 @@ FAQ
     <br/>
     Use subdirectories like `2013-07-01-esu/beginners`,
     so that main directory names always follow our four-part convention.
-
