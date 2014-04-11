@@ -24,7 +24,7 @@ Even if you aren't collaborating with other people,
 version control is much better for this than this:
 
 <div>
-  <a href="http://www.phdcomics.com"><img src="img/phd101212s.gif" alt="Piled Higher and Deeper by Jorge Cham, http://www.phdcomics.com" /></a>
+  <a href="http://www.phdcomics.com"><img src="img/phd101212s.png" alt="Piled Higher and Deeper by Jorge Cham, http://www.phdcomics.com" /></a>
   <p>"Piled Higher and Deeper" by Jorge Cham, http://www.phdcomics.com</p>
 </div>
 

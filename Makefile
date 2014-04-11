@@ -14,6 +14,9 @@ IPYNB_TPL = _templates/ipynb.tpl
 # Temporary book file.
 BOOK_MD = ./book.md
 
+# Printed/PDF version of book
+BOOK_PDF = ./book.pdf
+
 # Principal target files.
 INDEX = $(SITE)/index.html
 
@@ -103,7 +106,28 @@ $(BOOK_MD) : $(PAGES_SRC) bin/make-book.py
 # Markdown files triggers the desired build once and only once.
 $(INDEX) : $(BOOK_MD) $(CONFIG) $(EXTRAS)
 	jekyll -t build -d $(SITE)
-	rm -rf $(SITE)/novice/*/??-*_files
+
+_site/book.tex: $(INDEX) _site/book.html
+	pandoc -f html -t latex \
+	    --standalone --table-of-contents --no-highlight \
+	    --ascii --template _templates/tex.tpl \
+	    -o $@ _site/book.html
+	sed -i \
+	    -e 's@\\paragraph@\\mbox\{\}\\paragraph@g' \
+	    -e 's@\.svg@\.png@g' \
+	    -e 's@π@\$$\\pi\$$@' $@
+	for i in $$(find _site -name '*.svg' -type f); \
+	do \
+	    convert $$i $${i/.svg/.png}; \
+	done;
+
+
+$(BOOK_PDF) : _site/book.tex
+	# pdflatex \
+	#     -interaction nonstopmode \
+	#     _site/book.tex
+	cd _site && pdflatex \
+	    book.tex
 
 #----------------------------------------------------------------------
 # Targets.
@@ -122,6 +146,9 @@ install : $(INDEX)
 	mkdir -p $(INSTALL)
 	cp -r $(SITE)/* $(INSTALL)
 	mv $(INSTALL)/contents.html $(INSTALL)/index.html
+
+## print    : generate printed version of lessons
+print : $(BOOK_PDF)
 
 ## contribs : list contributors (uses .mailmap file).
 contribs :
