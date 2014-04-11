@@ -141,6 +141,14 @@ $ nano mars.txt
 ~~~
 </div>
 
+Type 
+
+<div class="in" markdown="1">
+~~~
+Cold and dry, but everything is my favorite color
+~~~
+</div>
+
 `mars.txt` now contains a single line:
 
 <div class="in" markdown="1">
