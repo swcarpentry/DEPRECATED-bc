@@ -137,6 +137,10 @@ clean : tidy
 #  with Jekyll as usual.
 book : $(BOOK_HTML)
 
+## epub     : build epub version of lessons (this is experimental)
+epub : book
+	make -f epub.mk epub
+
 ## install  : install on the server.
 install : $(INDEX)
 	rm -rf $(INSTALL)
