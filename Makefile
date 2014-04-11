@@ -103,7 +103,6 @@ $(BOOK_MD) : $(PAGES_SRC) bin/make-book.py
 # Markdown files triggers the desired build once and only once.
 $(INDEX) : $(BOOK_MD) $(CONFIG) $(EXTRAS)
 	jekyll -t build -d $(SITE)
-	rm -rf $(SITE)/novice/*/??-*_files
 
 #----------------------------------------------------------------------
 # Targets.
