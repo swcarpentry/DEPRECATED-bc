@@ -15,18 +15,18 @@ Sanger sequencing and get back from the sequencing center thousands
 of chromatogram files. You now have two choices to proceed: serial or parallel.
 
 #Assumptions
-This lesson assumes familiarity with the Python langauge, navigating and
+This lesson assumes familiarity with the Python language, navigating and
 executing commands using the command line, and running Python code from
 the IPython notebook.
 
 #Introduction
 
 The purpose of this lesson is to show you how to process your data (Sanger sequences
-or otherwise) in parallel, whenever possible, and to reconize situations where
+or otherwise) in parallel, whenever possible, and to recognize situations where
 parallelization can greatly speed up and streamline your workflow. Fortunately
 (or not) Python provides many packages which can meet this need, some better
-suited to certain types of problems than others, with varyng degress of
-user-friendiness. Some of these packages that you might have seen are:
+suited to certain types of problems than others, with varying degrees of
+user-friendliness. Some of these packages that you might have seen are:
 
 * Symmetric multiprocessing
   * Threading
@@ -38,12 +38,12 @@ user-friendiness. Some of these packages that you might have seen are:
   * mpi4py
 
 Symmetric multiprocessing (SMP) and Cluster computing are two models
-of parallization running either multiple cores on a single server or
+of parallelization running either multiple cores on a single server or
 across multiple servers, respectively. Rather than having to choose
 between packages, depending on your infrastructure, the IPython
 parallel paradigm can suit both scenarios, with little or no
 changes to your existing code. Indeed, running your code
-across multiple machines is effectly identical to running through a
+across multiple machines is effectively identical to running through a
 local cluster from a user's perspective, outside of setting up a
 remote client connected to an IPython cluster with access to engines
 on remote nodes. 
@@ -51,7 +51,7 @@ on remote nodes.
 #Infrastructure
 
 The IPython infrastructure provides a robust and functional
-infrastucture for parallel computing though multiple components
+infrastructure for parallel computing though multiple components
 working together behind the scenes, waiting to receive and run your jobs.
 These connections are managed by a `client` which provides connections
 to a `view`, which are the entry points to the cluster.  After going
@@ -63,7 +63,7 @@ notebook
 1. Define which of your code you want to run in parallel
 1. Execute your code in parallel
 
-For the full details on the IPython parallel infrasctructure,
+For the full details on the IPython parallel infrastructure,
 outside of the scope of this lesson, please refer to the
 excellent and
 [official documentation](http://ipython.org/ipython-doc/stable/parallel/).
@@ -79,7 +79,7 @@ from the command line:
 This will create in your `IPYTHONDIR`, a directory called
 `ipython_cluster` and include configuration files for
 both engine and controller in that directory. These files contain a
-huge array of customization possiblities for running the cluster,
+huge array of customization possibilities for running the cluster,
 and these will be covered in subsequent lessons. For now, we will
 leave these files alone since we will be working on a single machine.
 
@@ -115,7 +115,7 @@ do it both ways, using similar code, so let's take a look.
 
 We're going to frame your setup like this: You have your chromatograms, in 12
 different directories, representing 6 different treatment conditions, each
-with a replicate. The directores are labeled as follows: tX_1/2 where X is the
+with a replicate. The directories are labeled as follows: tX_1/2 where X is the
 treatment number and 1/2 indicates the replicate (e.g., t1\_1 and t1\_2). You've
 already executed [phred](http://www.phrap.org/phredphrapconsed.html) and extracted
 your sequences.  Fire up your ipython notebook, if you've not done this already, and execute the
@@ -270,5 +270,5 @@ are added and tasks become more time consuming these benefits can grow from seco
 
 In this module, we have gone over the basics of parallelizing code with IPython given
 a concrete (albeit small) real-world example of a type of tasks that can
-benefit from parallization. Stay tuned for more about how to do more advanced things
+benefit from parallelization. Stay tuned for more about how to do more advanced things
 with the IPython cluster infrastructure.
