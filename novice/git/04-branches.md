@@ -1,10 +1,9 @@
 ---
 layout: lesson
 root: ../..
-title: Branch Out
+title: Learning to Branch
 ---
 
-####Learning Branching
 
 
 #####Branches defined: 
