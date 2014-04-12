@@ -74,7 +74,6 @@ We see that there are two branches possible:
 <div class="out" markdown="1">
 ~~~
 * shelter
-
   master
 ~~~
 </div>
