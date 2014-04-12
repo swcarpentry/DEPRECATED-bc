@@ -70,6 +70,7 @@ git branch
 </div>
 
 We see that there are two branches possible:
+
 <div class="out" markdown="1">
 ~~~
 * shelter
@@ -81,6 +82,7 @@ We see that there are two branches possible:
 The master is our main project! We're not there so any changes we push won't be seen by Dracula or Mummy! Phew! That's a relief. 
 
 Let's make some changes that will be more fair to everyone:
+
 <div class="in" markdown="1">
 ~~~
 nano shelter.txt
@@ -88,6 +90,7 @@ nano shelter.txt
 </div>
 
 Edit the numbers in shelter.txt to be more fair as so:
+
 <div class="in" markdown="1">
 ~~~
 Bedrooms:
