@@ -34,7 +34,6 @@ $ Nano shelter.txt
 ~~~
 Bedrooms:
 3
-
 * For Dracula: Coffin 10x10
 * For Mummy: Sarcaphogus 10x10 
 * For me: Bedroom with no windows 80x80
@@ -49,13 +48,11 @@ ls
 ~~~
 </div>
 
-####Great!
 Wolfman isn't sure these dimensions will be agreeable, and Mummy and Dracula aren't the best people to upset when you're the only warm-blooded creature on Mars! So instead of pushing his changes to the main project, he can make his changes there to ask Dracula and Mummy for feedback before he without disrupting their other work.
 
 <div class="in" markdown="1">
 ~~~
 git branch shelter
-
 git add shelter.txt
 git status
 git commit shelter.txt
@@ -73,8 +70,13 @@ git branch
 </div>
 
 We see that there are two branches possible:
+<div class="out" markdown="1">
+~~~
 * shelter
+
   master
+~~~
+</div>
 
 The master is our main project! We're not there so any changes we push won't be seen by Dracula or Mummy! Phew! That's a relief. 
 
@@ -90,7 +92,6 @@ Edit the numbers in shelter.txt to be more fair as so:
 ~~~
 Bedrooms:
 3
-
 * For Dracula: Coffin 33.3x33.3
 * For Mummy: Sarcaphogus 33.3x33.3 
 * For me: Bedroom with no windows 33.3x33.3
@@ -126,5 +127,5 @@ git push
 ~~~
 </div>
 
-Let's checkout our repository online at github.com to ensure we have added the right dimensions to shelter.txt!
+Let's checkout our repository online to ensure we have added the right dimensions to shelter.txt!
 
