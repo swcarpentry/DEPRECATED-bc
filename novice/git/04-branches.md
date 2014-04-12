@@ -117,6 +117,7 @@ We should see that we are back to the main project, known as the master in our o
 ~~~
 * master
   shelter
+~~~
 </div>
 
 Great! Now we can "push our changes to the master branch!"
