@@ -52,18 +52,44 @@ ls
 
 Wolfman isn't sure these dimensions will be agreeable, and Mummy and Dracula aren't the best people to upset when you're the only warm-blooded creature on Mars! So instead of pushing his changes to the main project, he can make his changes there to ask Dracula and Mummy for feedback before he without disrupting their other work.
 
+By using the following command, we can make a new branch so that Dracula and Mummy won't see Wolfman's changes, until he's ready to show them.
+
 <div class="in" markdown="1">
 ~~~
 git branch shelter
+~~~
+</div>
+
+We just created a new branch, now we need to switch to it to start working. We do that by doing the following:
+
+<div class="in" markdown="1">
+~~~
+git checkout shelter
+~~~
+</div>
+
+If we type `git branch` again, we should see what branch we're on. Let's give that a try. We should get the following:
+
+<div class="out" markdown="1">
+~~~
+* shelter
+  master
+~~~
+ </div>
+
+Now, it's time to do our git workflow to add the `shelter.txt` file we made earlier to our new branch. This is how we do that:
+
+<div class="in" markdown="1">
+~~~
 git add shelter.txt
 git status
-git commit shelter.txt
+git commit 
 git status
 git push
 ~~~
 </div>
 
-We just pushed `shelter.txt` to a new branch of the main project! Let's see if that worked!
+So, we just pushed `shelter.txt` to a new branch of the main project! Let's see if that worked!
 
 <div class="in" markdown="1">
 ~~~
