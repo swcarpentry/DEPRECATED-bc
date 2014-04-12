@@ -3,11 +3,14 @@ layout: lesson
 root: ../..
 title: Branch Out
 ---
+
 ####Learning Branching
+
 
 #####Branches defined: 
 
 * Branching is a way for you to create a new working copy of a project without affecting the main project.
+
 
 #####Benefits of branching:
 
