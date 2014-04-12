@@ -113,8 +113,11 @@ git branch
 
 We should see that we are back to the main project, known as the master in our output, as shown below:
 
+<div class="out" markdown="1">
+~~~
 * master
   shelter
+</div>
 
 Great! Now we can "push our changes to the master branch!"
 
