@@ -273,6 +273,6 @@ or about 1 second.  I'm sure that you can see that as things scale up and more p
 are added and tasks become more time consuming these benefits can grow from seconds to days.
 
 In this module, we have gone over the basics of parallelizing code with IPython given
-a concrete (albeit small) real-world example of a type of tasks that can
+a concrete (albeit small) real-world example of a type of task that can
 benefit from parallelization. Stay tuned for more about how to do more advanced things
 with the IPython cluster infrastructure.
