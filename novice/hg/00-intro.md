@@ -30,11 +30,11 @@ Version control is better than mailing files back and forth because:
     whenever there's a conflict between one person's work and another's.
 
 This lesson shows how to use
-a popular open source version control system called Git.
-It is more complex than some alternatives,
-but it is widely used,
+a popular open source version control system called Mercurial
+(also known as hg).
+It is widely used,
 both because it's easy to set up
-and because of a hosting site called [GitHub](http://github.com).
+and because of a hosting site called [Bitbucket](http://bitbucket.org).
 No matter which version control system you use,
 the most important thing to learn is not the details of their more obscure commands,
 but the workflow that they encourage.
