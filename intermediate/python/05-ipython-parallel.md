@@ -3,7 +3,9 @@ layout: lesson
 root: ../..
 ---
 
-#Motivation
+#Using the IPython infrastructure for parallel computing
+
+##Motivation
 
 As a scientist, you are continually processing data.  Often, this processing can
 benefit greatly from parallelization.  However, due to various barriers and/or
@@ -14,12 +16,12 @@ transforming your cells, and picking your clones.  You send your clones off for
 Sanger sequencing and get back from the sequencing center thousands
 of chromatogram files. You now have two choices to proceed: serial or parallel.
 
-#Assumptions
+##Assumptions
 This lesson assumes familiarity with the Python language, navigating and
 executing commands using the command line, and running Python code from
 the IPython notebook.
 
-#Introduction
+##Introduction
 
 The purpose of this lesson is to show you how to process your data (Sanger sequences
 or otherwise) in parallel, whenever possible, and to recognize situations where
@@ -48,7 +50,7 @@ local cluster from a user's perspective, outside of setting up a
 remote client connected to an IPython cluster with access to engines
 on remote nodes. 
 
-#Infrastructure
+##Infrastructure
 
 The IPython infrastructure provides a robust and functional
 infrastructure for parallel computing though multiple components
@@ -68,7 +70,7 @@ outside of the scope of this lesson, please refer to the
 excellent and
 [official documentation](http://ipython.org/ipython-doc/stable/parallel/).
 
-#Creating a profile
+##Creating a profile
 
 The first thing we need to do is create a profile to store the settings
 for our cluster.  This can be done by running the following command
@@ -83,12 +85,12 @@ huge array of customization possibilities for running the cluster,
 and these will be covered in subsequent lessons. For now, we will
 leave these files alone since we will be working on a single machine.
 
-#Starting the cluster
+##Starting the cluster
 
 Now that your cluster, "cluster," has been created, let's start it up
 using its profile.  This can be done in two ways:
 
-##Using ipcluster
+###Using ipcluster
 From a command line, execute the `ipcluster` command to start the
 cluster. Let's use a 4-node cluster:
 
@@ -99,19 +101,19 @@ that used will be the default IPython profile. For simple cases, this
 is probably fine, but a good habit is to always use a parallel
 profile, even if you're only using default settings.
 
-##Using the IPython notebook
+###Using the IPython notebook
 
 From your running IPython notebook, go to the `Clusters` tab, enter
 the number of engines (i.e., nodes) in your cluster (in this case,
 enter 4), and click `Start.`
 
-#Synchronous vs. asynchronous tasks
+##Synchronous vs. asynchronous tasks
 
 So, we've arrived - your ultimate choice. Do you process your code in
 parallel or do you do it serially (synchronously)? IPython let's you
 do it both ways, using similar code, so let's take a look.
 
-##Getting the data
+###Getting the data
 
 We're going to frame your setup like this: You have your chromatograms, in 12
 different directories, representing 6 different treatment conditions, each
@@ -146,6 +148,8 @@ look at what we're dealing with:
 If you're not familiar with the `{}` notation, this allows passing of python
 variables into the shell.
 
+###Setting up the code
+
 Now that we have access to all of the files, let's set up a function that we can
 call to see how this all works. It's important to know what the distribution of
 quality scores is for your sequences across positions.  Let's set up a function to do that.
@@ -170,7 +174,7 @@ quality scores is for your sequences across positions.  Let's set up a function 
 						pos += 1
 		return positions, os.getpid()
 
-#Coding example
+##Coding example
 
 To get an idea of the time it will take to get the quality score distributions,
 let's run it as one might normally, without any parallelization
@@ -183,7 +187,7 @@ Make a note of this number, so we can compare later.
 
 Let's add some ipython parallel magic.
 
-##Create the IPython client
+###Create the IPython client
 In a new cell, enter the following code, and execute the cell.
 
 	from IPython.parallel import Client
@@ -209,7 +213,7 @@ for its remote execution.
 
 Let's get the quality distributions for each of our 6 treatments and replicates
 
-##Submit your jobs
+###Submit your jobs
 
 	dists = []
 	for d in dirs:
@@ -231,7 +235,7 @@ use `len` as well, to avoid killing the notebook.
 
 Is this the result you expected? Take a look at what is returned from `get_quality_distribution`.
 
-##Verify remote engines
+###Verify remote engines
 
 We did something tricky, and very useful it turns out, in the return from our function. We
 included the os-level PID. To verify that your job ran remotely, you can view all of them
@@ -260,7 +264,7 @@ dictionary, but it's just too much data to look at by hand. Let's plot it, inste
 	for i, x in enumerate(dists):
 		plot_quality_scores(x.get()[0], dirs[i])
 
-#Wrap up
+##Wrap up
 
 To process all of my files, one at a time, would take about 3 seconds. No one would argue
 that this is a long time. However, when we look at parallelizing, the jobs each individually
