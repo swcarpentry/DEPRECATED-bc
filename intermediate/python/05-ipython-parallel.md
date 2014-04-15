@@ -52,7 +52,7 @@ on remote nodes.
 
 ##Infrastructure
 
-IPython infrastructure provides a robust and functional
+IPython provides a robust and functional
 infrastructure for parallel computing though multiple components
 working together behind the scenes, waiting to receive and run your jobs.
 These connections are managed by a `client` which provides connections
