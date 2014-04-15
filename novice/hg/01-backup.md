@@ -8,12 +8,13 @@ title: A Better Kind of Backup
 #### Objectives
 *   Explain which initialization and configuration steps are required once per machine,
     and which are required once per repository.
-*   Go through the modify-add-commit cycle for single and multiple files
-    and explain where information is stored at each stage.
-*   Identify and Use Git revision numbers.
+*   Add files to Mercurial's collection of tracked files.
+*   Go through the modify-commit cycle for single and multiple files
+    and explain where information is stored before and after the commit.
+*   Identify and use Mercurial revision numbers and changeset identifiers.
 *   Compare files with old versions of themselves.
 *   Restore old versions of files.
-*   Configure Git to ignore specific files,
+*   Configure Mercurial to ignore specific files,
     and explain why it is sometimes useful to do so.
 
 </div>
@@ -21,7 +22,7 @@ title: A Better Kind of Backup
 We'll start by exploring how version control can be used
 to keep track of what one person did and when.
 Even if you aren't collaborating with other people,
-version control is much better for this than this:
+version control is much better for that than this:
 
 <div>
   <a href="http://www.phdcomics.com"><img src="img/phd101212s.gif" alt="Piled Higher and Deeper by Jorge Cham, http://www.phdcomics.com" /></a>
@@ -30,39 +31,57 @@ version control is much better for this than this:
 
 #### Setting Up
 
-The first time we use Git on a new machine,
+The first time we use Mercurial on a new machine,
 we need to configure a few things.
-Here's how Dracula sets up his new laptop:
+Dracula sets up his new Windows laptop by using his editor to create
+a new file called `%USERPROFILE%\Mercurial.ini` containing the following
+lines:
 
-<div class="in" markdown="1">
+<div class="out" markdown="1">
 ~~~
-$ git config --global user.name "Vlad Dracula"
-$ git config --global user.email "vlad@tran.sylvan.ia"
-$ git config --global color.ui "auto"
-$ git config --global core.editor "nano"
+  [ui]
+  username = Vlad Dracula <vlad@tran.sylvan.ia>
+  editor = nano
+
+  [extensions]
+  color =
 ~~~
 </div>
 
-(Please use your own name and email address instead of Dracula's,
+Wolfman has both a Mac laptop and a Linux one and he uses his editor
+to create a new file called `~/.hgrc` on both of those machines with
+very similar contents:
+
+<div class="out" markdown="1">
+~~~
+  [ui]
+  username = Jack Wolfman <jack@cali.forn.ia>
+  editor = nano
+
+  [extensions]
+  color =
+~~~
+</div>
+
+(Please use your own name and email address instead of Dracula's
+or Wolfman's,
 and please make sure you choose an editor that's actually on your system,
 such as `notepad` on Windows.)
 
-Git commands are written `git verb`,
-where `verb` is what we actually want it to do.
-In this case,
-we're telling Git:
+Those configuration file settings tell Mercurial:
 
 *   our name and email address,
-*   to colorize output,
 *   what our favorite text editor is, and
-*   that we want to use these settings globally (i.e., for every project),
+*   to colorize output.
 
-The four commands above only need to be run once:
-the flag `--global` tells Git to use the settings for every project on this machine.
+The fact that these settings are in the Mercurial configuration file in
+our home directory means that they will be used for every project on this
+machine.
+This bit of setup only needs to be done once.
 
 #### Creating a Repository
 
-Once Git is configured,
+Once Mercurial is configured,
 we can start using it.
 Let's create a directory for our work:
 
@@ -73,14 +92,17 @@ $ cd planets
 ~~~
 </div>
 
-and tell Git to make it a [repository](../../gloss.html#repository)&mdash;a place where
-Git can store old versions of our files:
+and tell Mercurial to make it a [repository](../../gloss.html#repository)&mdash;a place where
+Mercurial can store old versions of our files:
 
 <div class="in" markdown="1">
 ~~~
-$ git init
+$ hg init
 ~~~
 </div>
+
+Mercurial commands are written `hg verb`,
+where `verb` is what we actually want it to do.
 
 If we use `ls` to show the directory's contents,
 it appears that nothing has changed:
@@ -92,7 +114,7 @@ $ ls
 </div>
 
 But if we add the `-a` flag to show everything,
-we can see that Git has created a hidden directory called `.git`:
+we can see that Mercurial has created a hidden directory called `.hg`:
 
 <div class="in" markdown="1">
 ~~~
@@ -101,29 +123,29 @@ $ ls -a
 </div>
 <div class="out" markdown="1">
 ~~~
-.	..	.git
+.	..	.hg
 ~~~
 </div>
 
-Git stores information about the project in this special sub-directory.
+Mercurial stores information about the project in this special sub-directory.
 If we ever delete it,
 we will lose the project's history.
 
 We can check that everything is set up correctly
-by asking Git to tell us the status of our project:
+by asking Mercurial to verify the structure of our repository:
 
 <div class="in" markdown="1">
 ~~~
-$ git status
+$ hg verify
 ~~~
 </div>
 <div class="out" markdown="1">
 ~~~
-# On branch master
-#
-# Initial commit
-#
-nothing to commit (create/copy files and use "git add" to track)
+checking changesets
+checking manifests
+crosschecking files in changesets and manifests
+checking files
+0 files, 0 changesets, 0 total revisions
 ~~~
 </div>
 
@@ -133,7 +155,8 @@ Let's create a file called `mars.txt` that contains some notes
 about the Red Planet's suitability as a base.
 (We'll use `nano` to edit the file;
 you can use whatever editor you like.
-In particular, this does not have to be the core.editor you set globally earlier.)
+In particular, this does not have to be the editor that you set in your
+Mercurial global configuration earlier.)
 
 <div class="in" markdown="1">
 ~~~
@@ -141,7 +164,7 @@ $ nano mars.txt
 ~~~
 </div>
 
-`mars.txt` now contains a single line:
+`mars.txt` has now been created and it contains a single line:
 
 <div class="in" markdown="1">
 ~~~
@@ -164,35 +187,29 @@ Cold and dry, but everything is my favorite color
 ~~~
 </div>
 
-If we check the status of our project again,
-Git tells us that it's noticed the new file:
+
+We can ask Mercurial to tell us what it knows about the files in our project
+with the `hg status` command.
+Mercurial tells us that it's noticed the new file:
 
 <div class="in" markdown="1">
 ~~~
-$ git status
+$ hg status
 ~~~
 </div>
 <div class="out" markdown="1">
 ~~~
-# On branch master
-#
-# Initial commit
-#
-# Untracked files:
-#   (use "git add <file>..." to include in what will be committed)
-#
-#	mars.txt
-nothing added to commit but untracked files present (use "git add" to track)
+? mars.txt
 ~~~
 </div>
 
-The "untracked files" message means that there's a file in the directory
-that Git isn't keeping track of.
-We can tell Git that it should do so using `git add`:
+The `?` at the beginning of the line means that Mercurial isn't keeping
+track of the file.
+We can tell Mercurial that it should do so using `hg add`:
 
 <div class="in" markdown="1">
 ~~~
-$ git add mars.txt
+$ hg add mars.txt
 ~~~
 </div>
 
@@ -200,101 +217,86 @@ and then check that the right thing happened:
 
 <div class="in" markdown="1">
 ~~~
-$ git status
+$ hg status
 ~~~
 </div>
 <div class="out" markdown="1">
 ~~~
-# On branch master
-#
-# Initial commit
-#
-# Changes to be committed:
-#   (use "git rm --cached <file>..." to unstage)
-#
-#	new file:   mars.txt
-#
+A mars.txt
 ~~~
 </div>
 
-Git now knows that it's supposed to keep track of `mars.txt`,
+Mercurial now knows that it's supposed to keep track of `mars.txt`,
 but it hasn't yet recorded any changes for posterity as a commit.
 To get it to do that,
 we need to run one more command:
 
 <div class="in" markdown="1">
 ~~~
-$ git commit -m "Starting to think about Mars"
-~~~
-</div>
-<div class="out" markdown="1">
-~~~
-[master (root-commit) f22b25e] Starting to think about Mars
- 1 file changed, 1 insertion(+)
- create mode 100644 mars.txt
+$ hg commit -m "Starting to think about Mars"
 ~~~
 </div>
 
-When we run `git commit`,
-Git takes everything we have told it to save by using `git add`
-and stores a copy permanently inside the special `.git` directory.
-This permanent copy is called a [revision](../../gloss.html#revision)
-and its short identifier is `f22b25e`.
-(Your revision may have another identifier.)
+When we run `hg commit`,
+Mercurial takes the file we have told it about by using `hg add`
+and stores a copy permanently inside the special `.hg` directory.
 
 We use the `-m` flag (for "message")
 to record a comment that will help us remember later on what we did and why.
-If we just run `git commit` without the `-m` option,
-Git will launch `nano` (or whatever other editor we configured at the start)
+If we just run `hg commit` without the `-m` option,
+Mercurial will launch `nano` (or whatever other editor we configured at the start)
 so that we can write a longer message.
 
-If we run `git status` now:
+If we run `hg status` now:
 
 <div class="in" markdown="1">
 ~~~
-$ git status
-~~~
-</div>
-<div class="out" markdown="1">
-~~~
-# On branch master
-nothing to commit, working directory clean
+$ hg status
 ~~~
 </div>
 
-it tells us everything is up to date.
+we get no output because everything is up to date.
+
 If we want to know what we've done recently,
-we can ask Git to show us the project's history using `git log`:
+we can ask Mercurial to show us the project's history using `hg log`:
 
 <div class="in" markdown="1">
 ~~~
-$ git log
+$ hg log
 ~~~
 </div>
 <div class="out" markdown="1">
 ~~~
-commit f22b25e3233b4645dabd0d81e651fe074bd8e73b
-Author: Vlad Dracula <vlad@tran.sylvan.ia>
-Date:   Thu Aug 22 09:51:46 2013 -0400
+changeset:   0:72ab25fa99a1
+tag:         tip
+user:        Vlad Dracula <vlad@tran.sylvan.ia>
+date:        Mon Apr 14 14:41:58 2014 -0400
+summary:     Starting to think about Mars
 
-    Starting to think about Mars
 ~~~
 </div>
 
-`git log` lists all revisions  made to a repository in reverse chronological order.
-The listing for each revision includes
-the revision's full identifier
-(which starts with the same characters as
-the short identifier printed by the `git commit` command earlier),
-the revision's author,
-when it was created,
-and the log message Git was given when the revision was created.
+`hg log` lists all changes committed to a repository
+in reverse chronological order.
+The listing for each [changeset](../../gloss.html#change-set) includes:
+
+* the changeset's revision number and identifier
+  (`0` and `72ab25fa99a1` in this case,
+  but your identifier will likely be different),
+* its tags
+  (more about tags later),
+* the changeset's author,
+* when it was created,
+* and the log message Mercurial was given when the changeset was created.
+
+The revision number is a convenient integer shorthand for the hexidecimal
+identifier.
 
 > #### Where Are My Changes?
 >
 > If we run `ls` at this point, we will still see just one file called `mars.txt`.
-> That's because Git saves information about files' history
-> in the special `.git` directory mentioned earlier
+> That's because Mercurial saves information about files' history
+> in the special `.hg` directory mentioned earlier
 > so that our filesystem doesn't become cluttered
 > (and so that we can't accidentally edit or delete an old version).
 
@@ -317,50 +319,39 @@ The two moons may be a problem for Wolfman
 ~~~
 </div>
 
-When we run `git status` now,
+When we run `hg status` now,
 it tells us that a file it already knows about has been modified:
 
 <div class="in" markdown="1">
 ~~~
-$ git status
+$ hg status
 ~~~
 </div>
 <div class="out" markdown="1">
 ~~~
-# On branch master
-# Changes not staged for commit:
-#   (use "git add <file>..." to update what will be committed)
-#   (use "git checkout -- <file>..." to discard changes in working directory)
-#
-#	modified:   mars.txt
-#
-no changes added to commit (use "git add" and/or "git commit -a")
+M mars.txt
 ~~~
 </div>
 
-The last line is the key phrase:
-"no changes added to commit".
-We have changed this file,
-but we haven't told Git we will want to save those changes
-(which we do with `git add`)
-much less actually saved them.
-Let's double-check our work using `git diff`,
+The `M` at the beginning of the line means that Mercurial has noticed that
+we have modified the `mars.txt` file.
+
+We can double-check our work using `hg diff`,
 which shows us the differences between
 the current state of the file
-and the most recently saved version:
+and the most recently committed version:
 
 <div class="in" markdown="1">
 ~~~
-$ git diff
+$ hg diff
 ~~~
 </div>
 <div class="out" markdown="1">
 ~~~
-diff --git a/mars.txt b/mars.txt
-index df0654a..315bf3a 100644
---- a/mars.txt
-+++ b/mars.txt
-@@ -1 +1,2 @@
+diff -r 72ab25fa99a1 mars.txt
+--- a/mars.txt  Mon Apr 14 14:41:58 2014 -0400
++++ b/mars.txt  Mon Apr 14 15:48:53 2014 -0400
+@@ -1,1 +1,2 @@
  Cold and dry, but everything is my favorite color
 +The two moons may be a problem for Wolfman
 ~~~
@@ -371,11 +362,10 @@ it is actually a series of commands for tools like editors and `patch`
 telling them how to reconstruct one file given the other.
 If we can break it down into pieces:
 
-1.  The first line tells us that Git is using the Unix `diff` command
-    to compare the old and new versions of the file.
-2.  The second line tells exactly which [revisions](../../gloss.html#revision) of the file
-    Git is comparing;
-    `df0654a` and `315bf3a` are unique computer-generated labels for those revisions.
+1.  The first line tells us that Mercurial is using the Unix `diff` command
+    to compare the last committed and new versions of the file.
+2.  The next two lines show us the time stamps of the 2 versions of the file
+    that are being compared.
 3.  The remaining lines show us the actual differences
     and the lines on which they occur.
     In particular,
@@ -385,65 +375,72 @@ Let's commit our change:
 
 <div class="in" markdown="1">
 ~~~
-$ git commit -m "Concerns about Mars's moons on my furry friend"
-~~~
-</div>
-<div class="out" markdown="1">
-~~~
-# On branch master
-# Changes not staged for commit:
-#   (use "git add <file>..." to update what will be committed)
-#   (use "git checkout -- <file>..." to discard changes in working directory)
-#
-#	modified:   mars.txt
-#
-no changes added to commit (use "git add" and/or "git commit -a")
+$ hg commit -m "Concerns about Mars's moons on my furry friend"
 ~~~
 </div>
 
-Whoops:
-Git won't commit because we didn't use `git add` first.
-Let's fix that:
+Checking our project's status:
 
 <div class="in" markdown="1">
 ~~~
-$ git add mars.txt
-$ git commit -m "Concerns about Mars's moons on my furry friend"
+$ hg status
+~~~
+</div>
+
+we get no output because all of the changes have been committed.
+We can see our commits with `hg log`:
+
+<div class="in" markdown="1">
+~~~
+$ hg log
 ~~~
 </div>
 <div class="out" markdown="1">
 ~~~
-[master 34961b1] Concerns about Mars's moons on my furry friend
- 1 file changed, 1 insertion(+)
+changeset:   1:9b3b65e50b8c
+tag:         tip
+user:        Vlad Dracula <vlad@tran.sylvan.ia>
+date:        Mon Apr 14 15:52:43 2014 -0400
+summary:     Concerns about Mars's moons on my furry friend
+
+changeset:   0:72ab25fa99a1
+user:        Vlad Dracula <vlad@tran.sylvan.ia>
+date:        Mon Apr 14 14:41:58 2014 -0400
+summary:     Starting to think about Mars
+
 ~~~
 </div>
 
-Git insists that we add files to the set we want to commit
-before actually committing anything
-because we may not want to commit everything at once.
+Of course sometimes we may not want to commit everything at once.
 For example,
 suppose we're adding a few citations to our supervisor's work
 to our thesis.
 We might want to commit those additions,
 and the corresponding addition to the bibliography,
-but *not* commit the work we're doing on the conclusion
+but *not* commit the work we're doing on the conclusions
 (which we haven't finished yet).
+To handle that,
+simply do two
+(or more)
+separate commits,
+listing the names of the files to be included in each commit in the `hg commit`
+command:
 
-To allow for this,
-Git has a special staging area
-where it keeps track of things that have been added to
-the current [change set](../../gloss.html#change-set)
-but not yet committed.
-`git add` puts things in this area,
-and `git commit` then copies them to long-term storage (as a commit):
+<div class="in" markdown="1">
+~~~
+$ hg commit -m "Cite Frankenstein(2010) and Frankenstein, etal(2011)." methods.txt biblio.txt
+...
+<later>
+...
+$ hg commit conclusions.txt -m "Update conclusions re: sunlight."
+~~~
+</div>
 
-<img src="img/git-staging-area.svg" alt="The Git Staging Area" />
+Notice that the list of file names can come before or after the commit comment
+in the `hg commit` command.
 
-Let's watch as our changes to a file move from our editor
-to the staging area
-and into long-term storage.
-First,
-we'll add another line to the file:
+Let's add another line to the file for practice and to make our revision
+history more interesting:
 
 <div class="in" markdown="1">
 ~~~
@@ -460,15 +457,14 @@ But the Mummy will appreciate the lack of humidity
 </div>
 <div class="in" markdown="1">
 ~~~
-$ git diff
+$ hg diff
 ~~~
 </div>
 <div class="out" markdown="1">
 ~~~
-diff --git a/mars.txt b/mars.txt
-index 315bf3a..b36abfd 100644
---- a/mars.txt
-+++ b/mars.txt
+diff -r 9b3b65e50b8c mars.txt
+--- a/mars.txt  Mon Apr 14 15:52:43 2014 -0400
++++ b/mars.txt  Mon Apr 14 16:33:57 2014 -0400
 @@ -1,2 +1,3 @@
  Cold and dry, but everything is my favorite color
  The two moons may be a problem for Wolfman
@@ -479,69 +475,11 @@ index 315bf3a..b36abfd 100644
 So far, so good:
 we've added one line to the end of the file
 (shown with a `+` in the first column).
-Now let's put that change in the staging area
-and see what `git diff` reports:
+Now, let's commit our changes:
 
 <div class="in" markdown="1">
 ~~~
-$ git add mars.txt
-$ git diff
-~~~
-</div>
-
-There is no output:
-as far as Git can tell,
-there's no difference between what it's been asked to save permanently
-and what's currently in the directory.
-However,
-if we do this:
-
-<div class="in" markdown="1">
-~~~
-$ git diff --staged
-~~~
-</div>
-<div class="out" markdown="1">
-~~~
-diff --git a/mars.txt b/mars.txt
-index 315bf3a..b36abfd 100644
---- a/mars.txt
-+++ b/mars.txt
-@@ -1,2 +1,3 @@
- Cold and dry, but everything is my favorite color
- The two moons may be a problem for Wolfman
-+But the Mummy will appreciate the lack of humidity
-~~~
-</div>
-
-it shows us the difference between
-the last committed change
-and what's in the staging area.
-Let's save our changes:
-
-<div class="in" markdown="1">
-~~~
-$ git commit -m "Thoughts about the climate"
-~~~
-</div>
-<div class="out" markdown="1">
-~~~
-[master 005937f] Thoughts about the climate
- 1 file changed, 1 insertion(+)
-~~~
-</div>
-
-check our status:
-
-<div class="in" markdown="1">
-~~~
-$ git status
-~~~
-</div>
-<div class="out" markdown="1">
-~~~
-# On branch master
-nothing to commit, working directory clean
+$ hg commit mars.txt -m "Thoughts about the climate"
 ~~~
 </div>
 
@@ -549,49 +487,47 @@ and look at the history of what we've done so far:
 
 <div class="in" markdown="1">
 ~~~
-$ git log
+$ hg log
 ~~~
 </div>
 <div class="out" markdown="1">
 ~~~
-commit 005937fbe2a98fb83f0ade869025dc2636b4dad5
-Author: Vlad Dracula <vlad@tran.sylvan.ia>
-Date:   Thu Aug 22 10:14:07 2013 -0400
+changeset:   2:43da31fb96ec
+tag:         tip
+user:        Vlad Dracula <vlad@tran.sylvan.ia>
+date:        Mon Apr 14 16:37:12 2014 -0400
+summary:     Thoughts about the climate
 
-    Thoughts about the climate
+changeset:   1:9b3b65e50b8c
+user:        Vlad Dracula <vlad@tran.sylvan.ia>
+date:        Mon Apr 14 15:52:43 2014 -0400
+summary:     Concerns about Mars's moons on my furry friend
 
-commit 34961b159c27df3b475cfe4415d94a6d1fcd064d
-Author: Vlad Dracula <vlad@tran.sylvan.ia>
-Date:   Thu Aug 22 10:07:21 2013 -0400
+changeset:   0:72ab25fa99a1
+user:        Vlad Dracula <vlad@tran.sylvan.ia>
+date:        Mon Apr 14 14:41:58 2014 -0400
+summary:     Starting to think about Mars
 
-    Concerns about Mars's moons on my furry friend
-
-commit f22b25e3233b4645dabd0d81e651fe074bd8e73b
-Author: Vlad Dracula <vlad@tran.sylvan.ia>
-Date:   Thu Aug 22 09:51:46 2013 -0400
-
-    Starting to think about Mars
 ~~~
 </div>
 
 #### Exploring History
 
 If we want to see what we changed when,
-we use `git diff` again,
+we use `hg diff` again,
 but refer to old versions
-using the notation `HEAD~1`, `HEAD~2`, and so on:
+using the `--rev` or `-r` flag and the revision numbers:
 
 <div class="in" markdown="1">
 ~~~
-$ git diff HEAD~1 mars.txt
+$ hg diff --rev 1:2 mars.txt
 ~~~
 </div>
 <div class="out" markdown="1">
 ~~~
-diff --git a/mars.txt b/mars.txt
-index 315bf3a..b36abfd 100644
---- a/mars.txt
-+++ b/mars.txt
+diff -r 9b3b65e50b8c mars.txt
+--- a/mars.txt  Mon Apr 14 15:52:43 2014 -0400
++++ b/mars.txt  Mon Apr 14 16:44:06 2014 -0400
 @@ -1,2 +1,3 @@
  Cold and dry, but everything is my favorite color
  The two moons may be a problem for Wolfman
@@ -600,16 +536,15 @@ index 315bf3a..b36abfd 100644
 </div>
 <div class="in" markdown="1">
 ~~~
-$ git diff HEAD~2 mars.txt
+$ hg diff -r 0:2 mars.txt
 ~~~
 </div>
 <div class="out" markdown="1">
 ~~~
-diff --git a/mars.txt b/mars.txt
-index df0654a..b36abfd 100644
---- a/mars.txt
-+++ b/mars.txt
-@@ -1 +1,3 @@
+diff -r 72ab25fa99a1 -r 43da31fb96ec mars.txt
+--- a/mars.txt  Mon Apr 14 14:41:58 2014 -0400
++++ b/mars.txt  Mon Apr 14 16:37:12 2014 -0400
+@@ -1,1 +1,3 @@
  Cold and dry, but everything is my favorite color
 +The two moons may be a problem for Wolfman
 +But the Mummy will appreciate the lack of humidity
@@ -618,60 +553,25 @@ index df0654a..b36abfd 100644
 
 In this way,
 we build up a chain of revisions.
-The most recent end of the chain is referred to as `HEAD`;
-we can refer to previous revisions using the `~` notation,
-so `HEAD~1` (pronounced "head minus one")
-means "the previous revision",
-while `HEAD~123` goes back 123 revisions from where we are now.
+The most recent end of the chain is the changeset with the highest revision
+number.
 
-We can also refer to revisions using
-those long strings of digits and letters
-that `git log` displays.
-These are unique IDs for the changes,
-and "unique" really does mean unique:
-every change to any set of files on any machine
-has a unique 40-character identifier.
-Our first commit was given the ID
-f22b25e3233b4645dabd0d81e651fe074bd8e73b,
-so let's try this:
+To see what changes were made between a particular changeset and its parent
+use the `--change` or `-c` flag:
 
 <div class="in" markdown="1">
 ~~~
-$ git diff f22b25e3233b4645dabd0d81e651fe074bd8e73b mars.txt
+hg diff --change 1
 ~~~
 </div>
 <div class="out" markdown="1">
 ~~~
-diff --git a/mars.txt b/mars.txt
-index df0654a..b36abfd 100644
---- a/mars.txt
-+++ b/mars.txt
-@@ -1 +1,3 @@
+diff -r 72ab25fa99a1 -r 9b3b65e50b8c mars.txt
+--- a/mars.txt  Mon Apr 14 14:41:58 2014 -0400
++++ b/mars.txt  Mon Apr 14 15:52:43 2014 -0400
+@@ -1,1 +1,2 @@
  Cold and dry, but everything is my favorite color
-+The two moons may be a problem for Wolfman
-+But the Mummy will appreciate the lack of humidity
-~~~
-</div>
-
-That's the right answer,
-but typing random 40-character strings is annoying,
-so Git lets us use just the first few:
-
-<div class="in" markdown="1">
-~~~
-$ git diff f22b25e mars.txt
-~~~
-</div>
-<div class="out" markdown="1">
-~~~
-diff --git a/mars.txt b/mars.txt
-index df0654a..b36abfd 100644
---- a/mars.txt
-+++ b/mars.txt
-@@ -1 +1,3 @@
- Cold and dry, but everything is my favorite color
-+The two moons may be a problem for Wolfman
-+But the Mummy will appreciate the lack of humidity
++The two moons may be a problem for Wolfman~~~
 ~~~
 </div>
 
@@ -694,33 +594,26 @@ We will need to manufacture our own oxygen
 ~~~
 </div>
 
-`git status` now tells us that the file has been changed,
-but those changes haven't been staged:
+`hg status` now tells us that the file has been changed:
+but those changes haven't been committed:
 
 <div class="in" markdown="1">
 ~~~
-$ git status
+$ hg status
 ~~~
 </div>
 <div class="out" markdown="1">
 ~~~
-# On branch master
-# Changes not staged for commit:
-#   (use "git add <file>..." to update what will be committed)
-#   (use "git checkout -- <file>..." to discard changes in working directory)
-#
-#	modified:   mars.txt
-#
-no changes added to commit (use "git add" and/or "git commit -a")
+M mars.txt
 ~~~
 </div>
 
 We can put things back the way they were
-by using `git checkout`:
+by using `hg revert`:
 
 <div class="in" markdown="1">
 ~~~
-$ git checkout HEAD mars.txt
+$ hg revert mars.txt
 $ cat mars.txt
 ~~~
 </div>
@@ -733,44 +626,18 @@ But the Mummy will appreciate the lack of humidity
 </div>
 
 As you might guess from its name,
-`git checkout` checks out (i.e., restores) an old version of a file.
+`hg revert` reverts to (i.e., restores) an old version of a file.
 In this case,
-we're telling Git that we want to recover the version of the file recorded in `HEAD`,
-which is the last saved revision.
+we're telling Mercurial that we want to recover the last committed version
+of the file.
 If we want to go back even further,
-we can use a revision identifier instead:
+we can use a the `--rev` or `-r` flag and a revision number instead:
 
 <div class="in" markdown="1">
 ~~~
-$ git checkout f22b25e mars.txt
+$ hg revert --rev 0 mars.txt
 ~~~
 </div>
-
-It's important to remember that
-we must use the revision number that identifies the state of the repository
-*before* the change we're trying to undo.
-A common mistake is to use the revision number of
-the commit in which we made the change we're trying to get rid of:
-
-<img src="img/git-when-revisions-updated.svg" alt="When Git Updates Revision Numbers" />
-
-> #### Simplifying the Common Case
->
-> If you read the output of `git status` carefully,
-> you'll see that it includes this hint:
->
-> <div class="in" markdown="1">
-> ~~~
-> (use "git checkout -- <file>..." to discard changes in working directory)
-> ~~~
-> </div>
->
-> As it says,
-> `git checkout` without a version identifier restores files to the state saved in `HEAD`.
-> The double dash `--` is needed to separate the names of the files being recovered
-> from the command itself:
-> without it,
-> Git would try to use the name of the file as the revision identifier.
 
 The fact that files can be reverted one by one
 tends to change the way people organize their work.
@@ -783,7 +650,7 @@ moving backward and forward in time becomes much easier.
 
 #### Ignoring Things
 
-What if we have files that we do not want Git to track for us,
+What if we have files that we do not want Mercurial to track for us,
 like backup files created by our editor
 or intermediate files created during data analysis.
 Let's create a few dummy files:
@@ -795,147 +662,113 @@ $ touch a.dat b.dat c.dat results/a.out results/b.out
 ~~~
 </div>
 
-and see what Git says:
+and see what Mercurial says:
 
 <div class="in" markdown="1">
 ~~~
-$ git status
+$ hg status
 ~~~
 </div>
 <div class="out" markdown="1">
 ~~~
-# On branch master
-# Untracked files:
-#   (use "git add <file>..." to include in what will be committed)
-#
-#	a.dat
-#	b.dat
-#	c.dat
-#	results/
-nothing added to commit but untracked files present (use "git add" to track)
+? a.dat
+? b.dat
+? c.dat
+? results/a.out
+? results/b.out
 ~~~
 </div>
 
 Putting these files under version control would be a waste of disk space.
 What's worse,
 having them all listed could distract us from changes that actually matter,
-so let's tell Git to ignore them.
+so let's tell Mercurial to ignore them.
 
-We do this by creating a file in the root directory of our project called `.gitignore`.
+We do this by creating a file in the root directory of our project called `.hgignore`.
 
 <div class="in" markdown="1">
 ~~~
-$ nano .gitignore
-$ cat .gitignore
+$ nano .hgignore
+$ cat .hgignore
 ~~~
 </div>
 <div class="out" markdown="1">
 ~~~
+syntax: glob
 *.dat
 results/
 ~~~
 </div>
 
-These patterns tell Git to ignore any file whose name ends in `.dat`
+These patterns tell Mercurial to ignore any file whose name ends in `.dat`
 and everything in the `results` directory.
 (If any of these files were already being tracked,
-Git would continue to track them.)
+Mercurial would continue to track them.)
+The `syntax: glob` line at the top of the file tells Mercurial that
+we want to use the same kind of pattern matching that we use in the shell
+(which is known as "globbing" and the patterns as "globs").
 
 Once we have created this file,
-the output of `git status` is much cleaner:
+the output of `hg status` is much cleaner:
 
 <div class="in" markdown="1">
 ~~~
-$ git status
+$ hg status
 ~~~
 </div>
 <div class="out" markdown="1">
 ~~~
-# On branch master
-# Untracked files:
-#   (use "git add <file>..." to include in what will be committed)
-#
-#	.gitignore
-nothing added to commit but untracked files present (use "git add" to track)
+? .hgignore
 ~~~
 </div>
 
-The only thing Git notices now is the newly-created `.gitignore` file.
+The only thing Mercurial notices now is the newly-created `.hgignore` file.
 You might think we wouldn't want to track it,
 but everyone we're sharing our repository with will probably want to ignore
 the same things that we're ignoring.
-Let's add and commit `.gitignore`:
+Let's add and commit `.hgignore`:
 
 <div class="in" markdown="1">
 ~~~
-$ git add .gitignore
-$ git commit -m "Add the ignore file"
-$ git status
-~~~
-</div>
-<div class="out" markdown="1">
-~~~
-# On branch master
-nothing to commit, working directory clean
+$ hg add .hgignore
+$ hg commit -m "Add the ignore file"
+$ hg status
 ~~~
 </div>
 
-As a bonus,
-using `.gitignore` helps us avoid accidentally adding files to the repository that we don't want.
-
-<div class="in" markdown="1">
-~~~
-$ git add a.dat
-~~~
-</div>
-<div class="out" markdown="1">
-~~~
-The following paths are ignored by one of your .gitignore files:
-a.dat
-Use -f if you really want to add them.
-fatal: no files added
-~~~
-</div>
-
-If we really want to override our ignore settings,
-we can use `git add -f` to force Git to add something.
 We can also always see the status of ignored files if we want:
 
 <div class="in" markdown="1">
 ~~~
-$ git status --ignored
+$ hg status --ignored
 ~~~
 </div>
 <div class="out" markdown="1">
 ~~~
-# On branch master
-# Ignored files:
-#  (use "git add -f <file>..." to include in what will be committed)
-#
-#        a.dat
-#        b.dat
-#        c.dat
-#        results/
-
-nothing to commit, working directory clean
+I a.dat
+I b.dat
+I c.dat
+I results/a.out
+I results/b.out
 ~~~
 </div>
 
 <div class="keypoints" markdown="1">
 
 #### Key Points
-*   Use `git config` to configure a user name, email address, editor, and other preferences once per machine.
-*   `git init` initializes a repository.
-*   `git status` shows the status of a repository.
-*   Files can be stored in a project's working directory (which users see),
-    the staging area (where the next commit is being built up)
-    and the local repository (where snapshots are permanently recorded).
-*   `git add` puts files in the staging area.
-*   `git commit` creates a snapshot of the staging area in the local repository.
+*   Create a `~/.hgrc`
+    (or `%USERPROFILE%\Mercurial.ini` on Windows) to configure a user name,
+    email address, editor, and other preferences once per machine.
+*   `hg init` initializes a repository.
+*   `hg status` shows the status of a repository.
+*   Files are be stored in a project's working directory (which users see),
+    and the local repository (where committed snapshots are permanently recorded).
+*   `hg add` tells Mercurial to track files.
+*   `hg commit` creates a snapshot of the changes to 1 or more files in the local repository.
 *   Always write a log message when committing changes.
-*   `git diff` displays differences between revisions.
-*   `git checkout` recovers old versions of files.
-*   The `.gitignore` file tells Git what files to ignore.
+*   `hg diff` displays differences between revisions.
+*   `hg revert` recovers old versions of files.
+*   The `.hgignore` file tells Mercurial what files to ignore.
 
 </div>
 
@@ -943,26 +776,10 @@ nothing to commit, working directory clean
 
 #### Challenges
 
-1.  Create a new Git repository on your computer called `bio`.
+1.  Create a new Mercurial repository on your computer called `bio`.
     Write a three-line biography for yourself in a file called `me.txt`,
     commit your changes,
     then modify one line and add a fourth and display the differences
     between its updated state and its original state.
-
-2.  The following sequence of commands creates one Git repository inside another:
-
-    <div class="in" markdown="1">
-    ~~~
-    cd           # return to home directory
-    mkdir alpha  # make a new directory alpha
-    cd alpha     # go into alpha
-    git init     # make the alpha directory a Git repository
-    mkdir beta   # make a sub-directory alpha/beta
-    cd beta      # go into alpha/beta
-    git init     # make the beta sub-directory a Git repository
-    ~~~
-    </div>
-
-    Why is it a bad idea to do this?
 
 </div>
