@@ -11,7 +11,7 @@ As a scientist, you are continually processing data.  Often, this processing can
 benefit greatly from parallelization.  However, due to various barriers and/or
 habits, these techniques are often underused. Consider the following scenario: You
 are performing an experiment to determine differential expression of genes in
-two different tissues types. You do all of the lab work, creating cDNA libraries,
+two different tissue types. You do all of the lab work, creating cDNA libraries,
 transforming your cells, and picking your clones.  You send your clones off for
 Sanger sequencing and get back from the sequencing center thousands
 of chromatogram files. You now have two choices to proceed: serial or parallel.
@@ -52,7 +52,7 @@ on remote nodes.
 
 ##Infrastructure
 
-The IPython infrastructure provides a robust and functional
+IPython infrastructure provides a robust and functional
 infrastructure for parallel computing though multiple components
 working together behind the scenes, waiting to receive and run your jobs.
 These connections are managed by a `client` which provides connections
@@ -66,7 +66,7 @@ notebook
 1. Execute your code in parallel
 
 For the full details on the IPython parallel infrastructure,
-outside of the scope of this lesson, please refer to the
+which is outside of the scope of this lesson, please refer to the
 excellent and
 [official documentation](http://ipython.org/ipython-doc/stable/parallel/).
 
@@ -185,7 +185,7 @@ let's run it as one might normally, without any parallelization
 
 Make a note of this number, so we can compare later.
 
-Let's add some ipython parallel magic.
+Let's add some IPython parallel magic.
 
 ###Create the IPython client
 In a new cell, enter the following code, and execute the cell.
