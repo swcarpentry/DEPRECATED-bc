@@ -50,7 +50,7 @@ lines:
 
 Wolfman has both a Mac laptop and a Linux one and he uses his editor
 to create a new file called `~/.hgrc` on both of those machines with
-very similar contents:
+the same contents:
 
 <div class="out" markdown="1">
 ~~~
@@ -631,7 +631,7 @@ In this case,
 we're telling Mercurial that we want to recover the last committed version
 of the file.
 If we want to go back even further,
-we can use a the `--rev` or `-r` flag and a revision number instead:
+we can use the `--rev` or `-r` flag and a revision number instead:
 
 <div class="in" markdown="1">
 ~~~
