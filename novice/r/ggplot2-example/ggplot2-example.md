@@ -3,6 +3,9 @@
 
 
 
+
+
+
 ## Review
 
 Remember an earlier lesson where we introduced basic plotting commands using built-in data and base plotting tools. For example, we made a few plots using Edgar Anderson's famous iris dataset, which measured petal and sepal length and width for several different species of flower.
@@ -191,7 +194,7 @@ What we've done here in addition to faceting is map a feature of the data (here,
 
 #### Exercise
 
-Now, install the `xx` package, and load the `xx` dataset. Using the techniques we've learned here, use faceting and scaling options to explore how xx, xx, and xx affect the relationship between xx and xx.
+FIXME: Now, install the `xx` package, and load the `xx` dataset. Using the techniques we've learned here, use faceting and scaling options to explore how xx, xx, and xx affect the relationship between xx and xx.
 
 ***Note:** This is where the *Teaching Software Carpentry* exercise ends, and where the future expansion begins.*
 
@@ -208,9 +211,132 @@ Because **ggplot2** implements a *layered* grammar of graphics, data points and 
 
 To make the best use of **ggplot2** it helps to understand the grammar and how it affects how plots are produced. In addition, it is important to note that **ggplot2** is not a general-purpose plotting tool-kit; you may not be able to achieve certain plots or additions to a figure of they do not map onto concepts included in the layered grammar.
 
-In the examples above, we used **ggplot2**'s convenience function, `qplot`, because it's syntax should be familiar if you've already used base graphics. The `qplot` function did a lot of stuff for us: it created the plot object, added layers, plotted geoms, mapped features to aesthetics, created facets, and displayed the result. From here out, we'll use the `ggplot` function to build everything ourselves. `ggplot` has two required arguments: the *data* used for creating the plot, and an *aesthetic* mapping to describe how variables in said data are mapped to things we can see on the plot.
+In the examples above, we used **ggplot2**'s convenience function, `qplot`, because it's syntax should be familiar if you've already used base graphics. The `qplot` function did a lot of stuff for us: it created the plot object, added layers, plotted geoms, mapped features to aesthetics, created facets, and displayed the result. From here out, we'll use the `ggplot` function to build everything ourselves. 
 
-***More to come.***
+The `ggplot` function has two required arguments: the *data* used for creating the plot, and an *aesthetic* mapping to describe how variables in said data are mapped to things we can see on the plot. Let's use `ggplot` to recreate some of the same plots we produced above. First, the simple scatterplot:
+
+
+```coffee
+# Using the qplot convenience function: qplot(carat, price, data = diamonds)
+
+# Using ggplot:
+ggplot(diamonds, aes(carat, price)) + geom_point()
+```
+
+![plot of chunk ggdiamonds](figure/ggdiamonds.png) 
+
+
+Here, we've built our plot in layers. First, we create a canvas for plotting layers to come using the `ggplot` function, specifying which **data** to use (here, the *diamonds* data frame), and an **aesthetic mapping** of *carat* to the x-axis and *price* to the y-axis. We next add a layer to the plot, specifying a **geom**, or a way of visually representing the aesthetic mapping. Here we're using a point. Instead of using a point, we could use a different geom. Here, let's use [hexagonal binning](http://cran.r-project.org/web/packages/hexbin/vignettes/hexagon_binning.pdf) instead of a point.
+
+
+```coffee
+ggplot(diamonds, aes(carat, price)) + geom_hex()
+```
+
+![plot of chunk gghexbin](figure/gghexbin.png) 
+
+
+Here, each bin represents a segment of the plotting surface with lighter blue colors representing more density in that segment. The number of bins can be adjusted as an argument to the `geom_hex()` function. This is one method of solving the overplotting problem we have in this plot without doing any faceting. Another method, here using points again, is to lower the opacity of each point. Here, `alpha=1/5` sets the opacity of each point to 20%. In other words, 5 points would have to overlap to result in a completely solid point. Note that in this case we're not *mapping* the alpha level aesthetic to some other variable as we did above with color -- we're setting it to a static value of 0.20 for all points in the layer.
+
+
+```coffee
+ggplot(diamonds, aes(carat, price)) + geom_point(alpha = 1/5)
+```
+
+![plot of chunk gghexbin2](figure/gghexbin2.png) 
+
+
+We can easily add more layers to the plot. For instance, we could add another layer displaying a smoothed conditional mean using the `geom_smooth()` function.
+
+
+```coffee
+ggplot(diamonds, aes(carat, price)) + geom_point() + geom_smooth()
+```
+
+![plot of chunk smoothgam](figure/smoothgam.png) 
+
+
+We'll get a message telling us that because we have >1,000 observations we will default to using a generalized additive model. We could easily plot a straight line by specifying that we want a linear model (`method="lm"`) instead of a generalized additive model, the default for large datasets.
+
+
+```coffee
+ggplot(diamonds, aes(carat, price)) + geom_point() + geom_smooth(method = "lm")
+```
+
+![plot of chunk smoothlinear](figure/smoothlinear.png) 
+
+
+Getting back to our examples above, using the `ggplot` syntax we can map the color of the points (an aesthetic) onto one of the variables in our dataset.
+
+
+```coffee
+# Using the qplot convenience function: qplot(carat, price, data = diamonds,
+# col = clarity) Using ggplot:
+ggplot(diamonds, aes(carat, price, col = clarity)) + geom_point()
+```
+
+![plot of chunk ggclarcol](figure/ggclarcol.png) 
+
+
+We can also create a faceted plot as we did above using the `ggplot` function adding another layer with `facet_grid`.
+
+
+```coffee
+# Using the qplot convenience function: qplot(carat, price, data = diamonds,
+# facets = clarity ~ color) Using ggplot:
+ggplot(diamonds, aes(carat, price)) + geom_point() + facet_grid(clarity ~ color)
+```
+
+![plot of chunk ggfacet](figure/ggfacet.png) 
+
+
+By combining multiple layers with aesthetic mappings to different scales, **ggplot2** provides a foundation for producing a wide range of statistical graphics beyond simple "named" plots like scatter plots, histograms, bar plots, etc.
+
+How about a stacked histogram, mapping the fill color of the stacked histogram to levels of the *clarity* variable:
+
+
+```coffee
+ggplot(diamonds, aes(price, fill = clarity)) + geom_histogram(position = "fill", 
+    binwidth = 200)
+```
+
+![plot of chunk ggfillhisto](figure/ggfillhisto.png) 
+
+
+Or what about box plots of the price grouped separately by the quality of the cut, color-coded by the color of the diamond, with the price on the y-axis being on the log (base 10) scale? Simple:
+
+
+```coffee
+ggplot(diamonds, aes(cut, price)) + geom_boxplot(aes(fill = color)) + scale_y_log10()
+```
+
+![plot of chunk ggboxplots](figure/ggboxplots.png) 
+
+
+Or what about a kernel density plot (think about a smooth histogram) of the diamond's table depth in different semitransparent curves with the color fill mapped to each level of *cut*, all on the same facet limited to depths between 55 and 70, with a title and a proper axis labels? This also shows the syntax of building up a plot one step at a time. We first initialize the plot with `ggplot`, giving it the data we're working with, and aesthetic mappings. We then add a `geom_density` layer, limit the x-axis displayed, and finally give it a title and axis labels. The plot is in the **g** object here; we can simply enter `g` and the plot will be displayed.
+
+
+```coffee
+g <- ggplot(diamonds, aes(depth, fill = cut))
+g <- g + geom_density(alpha = 1/4)
+g <- g + xlim(55, 70)
+g <- g + ggtitle("Table Depths by Cut Quality")
+g <- g + xlab("Table Depth") + ylab("Density")
+g
+```
+
+![plot of chunk ggdepthdensity](figure/ggdepthdensity.png) 
+
+
+Finally, we can save the plot created using the `ggsave` function:
+
+
+```coffee
+ggsave(filename = "~/Desktop/table-depth-density.png", plot = g)
+```
+
+
+There are endless ways to combine aesthetic mappings with different geoms and multiple layers. Read about other **geom**s, mappings, scales, and other layer options at the links below.
 
 ## Further **ggplot2** resources
 
