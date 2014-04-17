@@ -8,8 +8,13 @@ The sections below explain how GitHub turns a repository into a web site,
 how you can build a website for your bootcamp using this repo as a starting point,
 what lessons we have,
 and where they're located.
-To contribute corrections or additions to this repository, see the
-[contribution guidelines](CONTRIBUTING.md).
+
+To contribute corrections or additions to this repository,
+see the [contribution guidelines](CONTRIBUTING.md).
+You may also want to view these videos:
+
+*   [Setting Up a Software Carpentry Bootcamp Repository](https://vimeo.com/87241285)
+*   [Adding Lesson Material to the Software Carpentry Bootcamp Repository](https://vimeo.com/92273942)
 
 **Note:**
 If you are teaching Git in your bootcamp,
