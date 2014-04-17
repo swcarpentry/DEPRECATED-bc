@@ -391,7 +391,7 @@ d.summary = data.frame(tempo, avg_inflammation, min_inflammation, max_inflammati
 ```
 
 ## Plotting  
-The mathematician Richard Hamming once said, "The purpose of computing is insight, not numbers," and the best way to develop insight is often to visualize data. Visualization deserves an entire lecture (or course) of its own, but we can explore a few features of R's base plotting package and ggplot2 here. 
+The mathematician Richard Hamming once said, "The purpose of computing is insight, not numbers," and the best way to develop insight is often to visualize data. Visualization deserves an entire lecture (or course) of its own, but we can explore a few features of R's base plotting package and **ggplot2** here. 
 
 Lets use the average inflammation data that we saved and plot it over the study time. 
 
@@ -422,20 +422,20 @@ for each day across all patients.
 
 ## Key Points
 
-* Import a library into a program using library libraryname.
-* What are the data types in R?
-* Use `variable = value` to assign a value to a variable in order to record it in memory.
-* Variables are created on demand whenever a value is assigned to them.
-* Use print something to display the value of something.
+* Import a package into your workspace using `library("pkgname")`.
+* The key data types in R?
+* Use `variable <- value` to assign a value to a variable in order to record it in memory.
+* Objects are created on demand whenever a value is assigned to them.
+* Use `print(something)` to display the value of something.
 * The expression `dim()` gives the dimensions of a data frame or matrix.
 * Use `object[x, y]` to select a single element from an array.
-* Array indices start at 1.
-* Use low:high to specify a slice that includes the indices from low to high.
-* Use # some kind of explanation to add comments to programs.
+* Object indices start at 1.
+* Use `low:high` to specify a slice that includes the indices from `low` to `high`.
+* Use `#` to add comments to programs.
 * Use `mean()`, `max()`, `min()` and `sd()` to calculate simple statistics.
-* Update vectors using append
-* Write a simple for loop 
-* Use base R and the `ggplot2` library for creating simple visualizations.
+* Update vectors using `append()`
+<!-- * Write a simple for loop -->
+* Use base R and the **ggplot2** package for creating simple visualizations.
 
 ## Next Steps
 
