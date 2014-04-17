@@ -5,6 +5,9 @@ title: General Advice
 level: novice
 ---
 This is a placeholder for general notes about teaching.
+For up-to-date information about software installation and configuration problems,
+and their solutions,
+see [this wiki page](https://github.com/swcarpentry/bc/wiki/Configuration-Problems-and-Solutions).
 
 #### Teaching Notes
 

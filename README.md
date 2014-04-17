@@ -193,7 +193,8 @@ To create a website for a new bootcamp:
 
 7.  Edit `index.html` to create the bootcamp home page (see below).
     Please double-check the information in the page's header (described below),
-    as it is used to update the main website.
+    as it is used to update the main website. You can run the script 
+    `swc_index_validator.py` in `./bin/` which parses the index.html and tells you of any problems.
 
 8.  Preview your changes (see below).
 
