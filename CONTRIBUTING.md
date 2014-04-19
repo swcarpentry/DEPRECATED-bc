@@ -73,6 +73,6 @@ guide][github-workflow].  For more information about getting started
 with Git, see [our Git lesson][git-lesson].
 
 [github-workflow]: http://guides.github.com/overviews/flow/
-[git-lesson]: ./git/novice/index.md
+[git-lesson]: http://software-carpentry.org/v5/novice/git/index.html
 [creators]: http://software-carpentry.org/badges/creator.html
 [licenses]: http://software-carpentry.org/license.html
