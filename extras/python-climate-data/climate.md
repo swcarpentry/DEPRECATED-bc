@@ -61,7 +61,7 @@ http://climatedataapi.worldbank.org/climateweb/rest/v1/country/cru/tas/year/CAN.
 <li>Format the data as CSV.</li>
 <li>Send that to our browser.</li>
 </ol>
-<p>As long as the World Bank doesn't change its URLs, it can switch back and forth without breaking our programs.</p>
+<p>As long as the World Bank doesn't change its URLs, it can switch back and forth between these approaches without breaking our programs.</p>
 </blockquote>
 </div>
 
@@ -105,12 +105,12 @@ response = requests.get(url)
 if response.status_code != 200:
     print &#39;Failed to get data:&#39;, response.status_code
 else:
-    print &#39;First 100 characters of data is&#39;
+    print &#39;First 100 characters of data are&#39;
     print response.text[:100]</pre>
 </div>
 
 <div class="out">
-<pre>First 100 characters of data is
+<pre>First 100 characters of data are
 year,data
 1901,-7.67241907119751
 1902,-7.862711429595947
@@ -251,7 +251,7 @@ for line in as_lines:
 <h4>Escape Sequences</h4>
 <p>Programmers need a way to put quotes, double quotes, and other special characters in strings. To do this, they use <a href="../../gloss.html#escape-sequence">escape sequences</a>: <code>\'</code> for a single quote, <code>\&quot;</code> for a double quote, <code>\n</code> for a newline, and so on. This means that: <sub>~</sub> 'This can't bewithout&quot;escape sequences&quot;.' <sub>~</sub> prints as: <sub>~</sub> This can't be written without &quot;escape sequences&quot;. <sub>~</sub></p>
 </blockquote>
-<p>Now let's have a look at how we could do this using a couple of standard Python libraries. The first, called <code>cStringIO</code>, lets Python treat a string as if it was an input file:</p>
+<p>Now let's have a look at how we could parse the data using a couple of standard Python libraries. The first, called <code>cStringIO</code>, lets Python treat a string as if it was an input file:</p>
 </div>
 
 
@@ -732,7 +732,7 @@ AssertionError: Inputs have different lengths. right is shorter</pre>
 <p>Excellent: the assertions we've added will now alert us if we try to work with badly-formatted or inconsistent data.</p>
 <blockquote>
 <h4>There's a Better Way to Do It</h4>
-<p>We had to run each test in a cell of its own because Python stops executed the code in a cell as soon as an assertion fails, and we want to make sure all three tests actually run. A <a href="../../gloss.html#unit-testing">unit testing</a> library would handle this for us, and do much else as well; we cover unit testing libraries in our intermediate lesson on Python.</p>
+<p>We had to run each test in a cell of its own because Python stops executing the code in a cell as soon as an assertion fails, and we want to make sure all three tests actually run. A <a href="../../gloss.html#unit-testing">unit testing</a> library would handle this for us, and do much else as well; we cover unit testing libraries in our intermediate lesson on Python.</p>
 </blockquote>
 </div>
 
