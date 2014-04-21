@@ -8,8 +8,13 @@ The sections below explain how GitHub turns a repository into a web site,
 how you can build a website for your bootcamp using this repo as a starting point,
 what lessons we have,
 and where they're located.
-To contribute corrections or additions to this repository, see the
-[contribution guidelines](CONTRIBUTING.md).
+
+To contribute corrections or additions to this repository,
+see the [contribution guidelines](CONTRIBUTING.md).
+You may also want to view these videos:
+
+*   [Setting Up a Software Carpentry Bootcamp Repository](https://vimeo.com/87241285)
+*   [Adding Lesson Material to the Software Carpentry Bootcamp Repository](https://vimeo.com/92273942)
 
 **Note:**
 If you are teaching Git in your bootcamp,
@@ -193,7 +198,8 @@ To create a website for a new bootcamp:
 
 7.  Edit `index.html` to create the bootcamp home page (see below).
     Please double-check the information in the page's header (described below),
-    as it is used to update the main website.
+    as it is used to update the main website. You can run the script 
+    `swc_index_validator.py` in `./bin/` which parses the index.html and tells you of any problems.
 
 8.  Preview your changes (see below).
 

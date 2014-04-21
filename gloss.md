@@ -18,7 +18,7 @@ such as [red, green, and blue](#rgb).
 A function such as `sum` or `max` that combines many values to produce a single result.
 
 **alias** (a library): <a name="alias-library"></a>
-To give a library a nickname while importing it.
+To give a [library](#library) a nickname while importing it.
 
 **assertion**: <a name="assertion"></a>
 An expression which is supposed to be true at a particular point in a program.
@@ -221,7 +221,7 @@ The value of immutable data cannot be altered after it has been created.
 See also: [mutable](#mutable).
 
 **import**: <a name="import"></a>
-To load a library into a program.
+To load a [library](#library) into a program.
 
 **in-place operator**: <a name="in-place-operator"></a>
 An operator such as `+=` that provides a shorthand notation for
@@ -251,6 +251,10 @@ See also: [floating-point number](#float).
 An expression whose value doesn't change during the execution of a program,
 typically used in an [assertion](#assertion).
 See also: [precondition](#precondition), [postcondition](#postcondition).
+
+**library**: <a name="library"></a>
+A family of code units (functions, classes, variables) that implement a set of
+related tasks.
 
 **loop variable**: <a name="loop-variable"></a>
 The variable that keeps track of the progress of the loop.
