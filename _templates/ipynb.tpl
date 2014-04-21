@@ -28,7 +28,15 @@ root: ../..
 
 {%- block data_jpg -%}<img src="../../{{ output.jpeg_filename | path2url }}">{%- endblock data_jpg -%}
 
-{%- block display_data -%}{{- output.html -}}{%- endblock display_data -%}
+{%- block data_text -%}{{ output.html }}{%- endblock data_text -%}
+
+{%- block display_data -%}
+{%- if output.html -%}
+{{- output.html -}}
+{%- else -%}
+{{- super() -}}
+{%- endif -%}
+{%- endblock display_data -%}
 
 {% block markdowncell %}
 {% if 'cell_tags' in cell.metadata %}
