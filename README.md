@@ -448,6 +448,7 @@ FAQ
 *   *Where can I get help?*
     <br/>
     Mail us at [admin@software-carpentry.org](mailto:admin@software-carpentry.org),
+    come chat with us on [our IRC channel](irc://moznet/sciencelab),
     or join our [discussion list](http://software-carpentry.org/contrib/discuss.html)
     and ask for help there.
 

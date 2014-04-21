@@ -147,7 +147,8 @@ fixme :
 tidy :
 	rm -rf \
 	$$(find . -name '*~' -print) \
-	$$(find . -name '*.pyc' -print)
+	$$(find . -name '*.pyc' -print) \
+	$(BOOK_MD)
 
 #----------------------------------------------------------------------
 # Rules to launch builds of formats other than Markdown.
