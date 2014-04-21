@@ -175,7 +175,7 @@ To create a website for a new bootcamp:
 3.  Add the repository `https://github.com/swcarpentry/bc.git` as a remote named `swc`:
 
     ~~~
-    git remote add swc https://github.com/swcarpentry/bc.git
+    $ git remote add swc https://github.com/swcarpentry/bc.git
     ~~~
 
 ![Step 2](img/readme/step2.png)
@@ -183,13 +183,13 @@ To create a website for a new bootcamp:
 4.  Create a new branch in the local clone named `gh-pages`.
 
     ~~~
-    git checkout -b gh-pages
+    $ git checkout -b gh-pages
     ~~~
 
 5.  Pull content from the template repository's `gh-pages` branch into your desktop repository:
 
     ~~~
-    git pull swc gh-pages
+    $ git pull swc gh-pages
     ~~~
 
     This may take a minute or two.
@@ -198,7 +198,7 @@ To create a website for a new bootcamp:
     to push your changes to the main `bc` repository:
 
     ~~~
-    git remote rm swc
+    $ git remote rm swc
     ~~~
 
 7.  Edit `index.html` to create the bootcamp home page.
@@ -221,7 +221,7 @@ To create a website for a new bootcamp:
 11. Push content to your YYYY-MM-DD-site repository:
 
     ~~~
-    git push origin gh-pages
+    $ git push origin gh-pages
     ~~~
 
 As soon as your repo has been pushed to GitHub, GitHub will render your pages
@@ -240,7 +240,7 @@ To preview your bootcamp's page(s),
 go into its root directory and run:
 
 ~~~
-make site
+$ make site
 ~~~
 
 This will run `jekyll` to create the directory `./_site`.
@@ -255,14 +255,14 @@ If you have Ruby installed on your computer,
 this *should* be as simple as:
 
 ~~~
-gem install github-pages
+$ gem install github-pages
 ~~~
 
 or if that doesn't work:
 
 ~~~
-gem install jekyll
-gem install kramdown
+$ gem install jekyll
+$ gem install kramdown
 ~~~
 
 (We use Kramdown for translating Markdown instead of the default
@@ -272,17 +272,17 @@ On OS X, we suggest you use a recent Ruby to get access to these.
 If you don't have Homebrew or MacPorts installed,
 here's a quick recipe to get started using HomeBrew.
 
-```
-ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
-brew install ruby
-```
+~~~
+$ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+$ brew install ruby
+~~~
 
 and then `gem install` as above.
 If you don't have `make` in your machine,
 you can build the preview with:
 
 ~~~
-jekyll -t build -d _site
+$ jekyll -t build -d _site
 ~~~
 
 Variables
@@ -478,8 +478,8 @@ FAQ
     Declare the `en_US.UTF-8` locale in your shell:
 
     ~~~
-    export LC_ALL=en_US.UTF-8
-    export LANG=en_US.UTF-8
+    $ export LC_ALL=en_US.UTF-8
+    $ export LANG=en_US.UTF-8
     ~~~
 
 *   *What do I do if I see a `Conversion error` when I run `make check`?*
@@ -501,8 +501,8 @@ FAQ
     uninstall pygments 0.5.2 and restore version 0.5.0:
 
     ~~~    
-    gem uninstall pygments.rb --version "=0.5.2"
-    gem install pygments.rb --version "=0.5.0"
+    $ gem uninstall pygments.rb --version "=0.5.2"
+    $ gem install pygments.rb --version "=0.5.0"
     ~~~
 
 *   *What do I do if I see a `File not found: u'nbconvert'` when I run `make check`?*
@@ -519,13 +519,13 @@ FAQ
     Installing a local version can be done with:
     
     ~~~
-    pip install --upgrade --user ipython
+    $ pip install --upgrade --user ipython
     ~~~
 
     You might need `pip` that can be installed (under Ubuntu and alike) with:
 
     ~~~
-    sudo apt-get install python-pip
+    $ sudo apt-get install python-pip
     ~~~
 
 *   *What if I get some missing packages messages when I run `make check`?*
@@ -533,11 +533,10 @@ FAQ
     Some additional packages are required. They can be installed (under Ubuntu and alike) with:
     
     ~~~
-    sudo apt-get install pandoc
+    $ sudo apt-get install pandoc
     ~~~
 
 *   *Where should pages go if multiple boot camps are running at a site simultaneously?*
     <br/>
     Use subdirectories like `2013-07-01-esu/beginners`,
     so that main directory names always follow our four-part convention.
-
