@@ -4,5 +4,5 @@
 .ipynb_checkpoints
 _site
 book.md
-novice/*/*_files
-intermediate/*/*_files
+*/*/*_files/*/*/*.text
+*/*/*_files/*/*/*.html
