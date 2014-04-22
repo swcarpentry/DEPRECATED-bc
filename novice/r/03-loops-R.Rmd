@@ -7,18 +7,18 @@ We have created a function called analyze that creates graphs of the minimum, av
 
 ```{r}
 analyze <- function(filename) {
-	data <- read.csv(filename)
-		
-	avg_inflammation <- apply(data, 2, mean)
-	max_inflammation <- apply(data, 2, max)
-	min_inflammation <- apply(data, 2, min)
-	tempo <- c(1:ncol(data))
+    data <- read.csv(filename)
+        
+    avg_inflammation <- apply(data, 2, mean)
+    max_inflammation <- apply(data, 2, max)
+    min_inflammation <- apply(data, 2, min)
+    tempo <- c(1:ncol(data))
   
-	plot(tempo, avg_inflammation)
-	plot(tempo, min_inflammation)
-	plot(tempo, max_inflammation)
+    plot(tempo, avg_inflammation)
+    plot(tempo, min_inflammation)
+    plot(tempo, max_inflammation)
 }
-	  
+      
 analyze('data/inflammation-01.csv')
 ```
 
@@ -33,29 +33,29 @@ but we have a dozen data sets right now and more on the way. We want to create p
 ## Objectives
 
 * Explain what a `for` loop does.
-* Correctly write for loops to repeat simple calculations.
+* Correctly write `for` loops to repeat simple calculations.
 * Trace changes to a loop variable as the loop runs.
 * Trace changes to other variables as they are updated by a for loop.
 * Explain what a list is.
 * Create and index lists of simple values.
-* Use a library function to get a list of filenames that match a simple wildcard pattern.
-* Use a for loop to process multiple files.
+* Use a function to get a list of filenames that match a simple wildcard pattern.
+* Use a `for` loop to process multiple files.
 
 ## For Loops
 
 Suppose we want to print each word in our sentence we defined earlier on a line of its own. One way is to use four print statements:
 
-```{r, echo=FALSE}
+```{r}
 pangram <- "the quick brown fox jumps over the lazy dog"
 words   <-  words <- strsplit(pangram, " ")[[1]]
 ```
 ```{r}
-print_words = function(sentence){
-	print (sentence[1])
-	print (sentence[2])
-	print (sentence[3])
-	print (sentence[4])
-	print (sentence[5])
+print_words <- function(sentence){
+    print(sentence[1])
+    print(sentence[2])
+    print(sentence[3])
+    print(sentence[4])
+    print(sentence[5])
 }
 
 print_words(words)
@@ -63,9 +63,9 @@ print_words(words)
 
 but that's a bad approach for two reasons:
 
-It doesn't scale: if we want to print the elements in a vector that's hundreds long, we'd be better off just typing them in.
+ 1. **It doesn't scale** if we want to print the elements in a vector that's hundreds long, we'd be better off just typing them in.
 
-It's fragile: if we give it a longer vector, it only prints part of the data, and if we give it a shorter one, it produces an error or gives us `NA` values because we're asking for elements that don't exist.
+ 2. **It's fragile** if we give it a longer vector, it only prints part of the data, and if we give it a shorter input, it produces an error or returns `NA` values because we're asking for elements that don't exist!
 
 ```{r}
 hello <- c("I", "was", "here")
@@ -76,35 +76,35 @@ Here's a better approach:
 
 ```{r}
 print_words <- function(sentence) {
-	for(i in 1:length(sentence)){
-		print(sentence[i])
-	}
+    for (i in seq_along(sentence)) {
+        print(sentence[i])
+    }
 }
 ```
 
 This is shorter---certainly shorter than something that prints every character in a hundred-letter string---and more robust as well:
 
 ```{r}
-print_words('oxygen')
+print_words("oxygen")
 ```
 
-The improved version of `print_words` uses a `for loop` to repeat an operation---in this case, printing---once for each thing in a collection. The general form of a loop is:
+The improved version of `print_words` uses a `for` loop to repeat an operation---in this case, printing---once for each thing in a collection. The general form of a loop is:
 
 ```{r, eval=FALSE}
-for (variable in collection){
-	do things with variable
+for (variable in collection) {
+    do things with variable
 }
 ```
 
-We can call the loop variable anything we like, but there must be a curly brace `{` at the end of the line starting the loop, and we should indent the body of the loop.
+We can name the loop variable anything (syntactically valid). `in` is part of the `for` syntax. Note that the body of the loop is enclosed in braces `{`. For a single-line loop body, as here, the braces aren't needed, but it is good practice to include them as we did.
 
 Here's another loop that repeatedly updates a variable:
 
 ```{r}
-len = 0
-for (vowel in 1:nchar('aeiou')){
-    len = len + 1
-	print(paste('There are', len, 'vowels'))
+len <- 0
+for (vowel in seq_len(nchar("aeiou"))) {
+    len <- len + 1
+    print(paste("There are", len, "vowels"))
 }
 ```
 
@@ -113,35 +113,35 @@ It's worth tracing the execution of this little program step by step. Since ther
 Note that a loop variable is just a variable that's being used to record progress in a loop. It still exists after the loop is over, and we can re-use variables previously defined as loop variables as well:
 
 ```{r}
-letter = 'z'
-for (letter in 1:nchar('abc')){
-	print(substr('abc',letter, letter))
-	print(paste('after the loop, letter is', letter))
+letter <- 'z'
+for (letter in seq_len(nchar("abc"))) {
+    print(substr("abc", letter, letter))
+    print(paste("after the loop, letter is", letter))
 }
 ```
 
-Note also that finding the length of a string is such a common operation that R actually has a built-in function to do it called len:
+Note also that finding the length of a string is such a common operation that R actually has a built-in function to do it called `nchar()`:
 
 ```{r}
 nchar('aeiou')
 ```
 
-`nchar` is much faster than any function we could write ourselves, and much easier to read than a two-line loop. We can also use `length` to tell use the number of elements in a vector, the number of columns in a dataframe, or the number of cells in a matrix.
+`nchar` is much faster than any R function we could write ourselves, and much easier to read than a two-line loop. We can also use `length` to tell use the number of elements in a vector, the number of columns in a data frame, or the number of cells in a matrix.
 
 ### Challenges
 
-1. R has a built-in function called `seq` that creates a list of numbers: `seq(3)` produces `[1] 1, 2, 3`, `seq(2, 5)` produces [1] 2, 3, 4, 5, and `seq(2, 10, 3)` produces `[1] 2, 5, 8`. Using `seq`, write a function that prints the _n_ natural numbers:
-	
+1. R has a built-in function called `seq()` that creates a list of numbers: `seq(3)` produces `[1] 1, 2, 3`, `seq(2, 5)` produces [1] 2, 3, 4, 5, and `seq(2, 10, 3)` produces `[1] 2, 5, 8`. Using `seq()`, write a function that prints the _n_ natural numbers:
+    
 ```{r}
 print_numbers <- function(N) {
-	nseq <- seq(N)
-	for (i in 1:length(nseq)) {
-		print(nseq[i])
-	}
+    nseq <- seq(N)
+    for (i in seq_along(nseq)) {
+        print(nseq[i])
+    }
 }
 ```
 
-2. Exponentiation is built into R: `2**4`. Write a function called expo that uses a loop to calculate the same result.
+2. Exponentiation is built into R: `2^4`. Write a function called `expo()` that uses a loop to calculate the same result.
 
 3. We can also apply some simple methods to R vectors. One of these is called `sort`. It works on numbers or letters: 
 
@@ -150,20 +150,19 @@ sort(words)
 sort(words, decreasing = TRUE)
 ```
 
-Write a function called rev that does the same thing. As always, be sure to include a docstring.
+Write a function called `rsort()` that does the same thing. <!-- This seems an odd thing to ask in a section on for loops -->
 
 ## Lists
+<!-- this repeats almost verbatim the content from the earlier lesson. Keep?-->
+In R lists act as containers. Unlike atomic vectors, the contents of a list are not restricted to a single mode and can encompass any mixture of data types. Lists are sometimes called recursive vectors, because a list can contain other lists. This makes them fundamentally different from atomic vectors.
 
-In R lists act as containers. Unlike atomic vectors, the contents of a list are not restricted to a single mode and can encompass any mixture of data types. Lists are sometimes called recursive vectors, because a list can contain other lists. This makes them fundamentally different from atomic vectors. 
-
-A list is a special type of vector. Each element can be a different type.
-
-Create lists using `list()` or coerce other objects using `as.list()`
+You create lists using `list()`
 
 ```{r}
 x <- list(1, "a", TRUE, 1+4i)
 x
 ```
+or coerce other objects using `as.list()`
 
 ```{r}
 x <- 1:10
@@ -191,15 +190,15 @@ temp
 is.recursive(temp)
 ```
 
-Lists are extremely useful inside functions. You can "staple" together lots of different kinds of results into a single object that a function can return.
+Lists are extremely useful inside functions. You can *staple* together lots of different kinds of results into a single object that a function can return.
 
 A list does not print to the console like a vector. Instead, each element of the list starts on a new line.
 
-Elements are indexed by double brackets. Single brackets will still return a(nother) list.
+Components are indexed by double brackets `[[`. Single brackets will return a list *containing* only the indexed components..
 
 # Ch-Ch-Ch-Changes
 
-Data that can be changed is called mutable, while data that cannot be is called immutable. Like strings, numbers are immutable: there's no way to make the number 0 have the value 1 or vice versa (at least, not in R—there actually are languages that will let people do this, with predictably confusing results). vectors, data frames, and matrices, on the other hand, are mutable: they can be modified after they have been created.
+Data that can be changed is called *mutable*, while data that cannot be is called *immutable*. Like strings, numbers are immutable: there's no way to make the number 0 have the value 1 or vice versa (at least, not in R---there actually are languages that will let people do this, with predictably confusing results). Vectors, data frames, and matrices, on the other hand, are mutable: they can be modified after they have been created.
 
 Programs that modify data in place can be harder to understand than ones that don't because readers may have to mentally sum up many lines of code in order to figure out what the value of something actually is. On the other hand, programs that modify data in place instead of creating copies that are almost identical to the original every time they want to make a small change are much more efficient.
 There are many ways to change the contents besides assigning to elements:
@@ -215,16 +214,17 @@ odds <- sort(odds, decreasing = TRUE)
 Challenges
 -------------
 
-1. Write a function called total that calculates the sum of the values in a list. (R has a built-in function called `sum` that does this for you. Please don't use it for this exercise.)
+1. Write a function called `ar1()` taking a single argument `phi` that simulates 20 values from an AR(1) process. An AR(1) is a series where the the current value of the series, `yt`, is given by `yt = (phi * yt-1) + e`, where `phi` is a constant and `e` is white noise. Assume that`yt = 0` at `t = 0` and `rnorm()` can be used for `e`. 
 
 ```{r}
-total <- function(vector) {
-	#calculates the sum of the values in a vector
-	sum <- 0
-	for (i in 1:length(vector)){
-		sum <- sum + vector[i]
-	}
-	sum
+ar1 <- function(phi = 0.5) {
+    # simulates AR(1)
+    start <- 0
+    out <- c(start, numeric(length = 20))
+    for (i in seq(2, 20, by = 1)) {
+        out[i] <- (phi * out[i-1]) + rnorm(1)
+    }
+    out[-1]
 }
 ```
 
@@ -232,13 +232,13 @@ total <- function(vector) {
 
 We now have almost everything we need to process all our data files. 
 
-What we need is a function that finds files whose names match a pattern. We provide those patterns as strings: the character * matches zero or more characters, while ? matches any one character. We can use this to get the names of all the R files we have created so far:
+What we need is a function that finds files whose names match a pattern. We provide those patterns as strings: the character `*` matches zero or more characters, while `?` matches any one character. We can use this to get the names of all the R files we have created so far:
 
 ```{r}
 list.files(pattern = "*.R")
 ```
 
-or to get the names of all our CSV data files:
+or to get the names of all our `.csv` data files:
 
 ```{r}
 list.files(pattern="*.csv", recursive = TRUE)
@@ -251,8 +251,8 @@ filenames <- list.files(pattern = "*.csv", recursive = TRUE)
 filenames <- filenames[1:3]
 
 for (f in 1:length(filenames)){
-	print (filenames[f])
-	analyze(filenames[f])
+    print (filenames[f])
+    analyze(filenames[f])
 }
 ```
 
