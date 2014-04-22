@@ -8,24 +8,24 @@ But we have twelve files to check, and may have more in future. In this lesson, 
 
 ## Objectives
 
-* Define a function that takes parameters.
+* Define a function that takes arguments (parameters).
 * Return a value from a function.
 * Test and debug a function.
 * Explain what a call stack is, and trace changes to the call stack as functions are called.
 * Set default values for function parameters.
 * Explain why we should divide programs into small, single-purpose functions.
-* Defining a Function
+* Defining a function
 
-Let's start by defining a function `fahr_to_kelvin` that converts temperatures from Fahrenheit to Kelvin:
+Let's start by defining a function `fahr_to_kelvin()` that converts temperatures from Fahrenheit to Kelvin:
 
 ```{r}
 fahr_to_kelvin <- function(temp) {
-    kelvin <- ((temp - 32) * (5/9)) + 273.15
-	kelvin
+    kelvin <- ((temp - 32) * (5 / 9)) + 273.15
+    kelvin
 }
 ```
 
-The definition opens with the name of your new function, which is followed by the call to make it a `function` and a parenthesized list of parameter names. You can have as many input parameters as you would like (but too many might be bad style). The body, or implementation, is surrounded by curly braces `{ }`. In many languages, the body of the function - the statements that are executed when it runs - must be indented, typically using 4 spaces. While this is not a mandatory requirement in R coding, we strongly recommend you to adopt this as good practice.
+The definition opens with the name of your new function, which is followed by the call to make it a `function()` and a parenthesized list of arguments. You can have as many input parameters as you would like (but too many might be bad style). The body, or implementation, is surrounded by curly braces `{ }`. In many languages, the body of the function - the statements that are executed when it runs - must be indented, typically using 4 spaces. While this is not a mandatory requirement in R coding, we strongly recommend you to adopt this as good practice.
 
 When we call the function, the values we pass to it are assigned to those variables so that we can use them inside the function. The last line within the function is what R will evaluate as a returning value. Remember that the last line has to be a command that will print to the screen, and not an object definition, otherwise the function will return nothing - it will work, but will provide no output. For example, let's try running our function. Calling our own function is no different from calling any other function:
 
@@ -48,7 +48,7 @@ Now typing
 fahr_to_kelvin(32)
 ```
 
-Will return nothing.
+Will return nothing. Why?
 
 --> In Python lessons, now would come debugging…
 ==============================
@@ -71,8 +71,8 @@ What about converting Fahrenheit to Celsius? We could write out the formula, but
 
 ```{r}
 fahr_to_celsius <- function(temp) {
-	temp_k <- fahr_to_kelvin(temp)
-	result <- kelvin_to_celsius(temp_k)
+    temp_k <- fahr_to_kelvin(temp)
+    result <- kelvin_to_celsius(temp_k)
     result
 }
 
@@ -80,23 +80,23 @@ paste('freezing point of water in Celsius:', fahr_to_celsius(32.0))
 ```
 
 This is our first taste of how larger programs are built: we define basic operations, then combine them in ever-large chunks to get the effect we want. 
-Real-life functions will usually be larger than the ones shown here—typically half a dozen to a few dozen lines—but they shouldn't ever be much longer than that, or the next person who reads it won't be able to understand what's going on. __Modular programming__
+Real-life functions will usually be larger than the ones shown here - typically half a dozen to a few dozen lines - but they shouldn't ever be much longer than that, or the next person who reads it won't be able to understand what's going on. __Modular programming__
 
 
 ### Challenges
 
 As we've seen in our print statements, we can use `paste` to concatenate strings, `paste(a, b, sep = "")` is `ab`. __Note__: the `sep` can be an important value to define! What is the default? What can `sep` be?
 
-1. Write a function called `fence` that takes two parameters called `original` and `wrapper` and returns a new string that has the `wrapper` character at the beginning and end of the `original`:
+1. Write a function called `fence` that takes two arguments called `original` and `wrapper` and returns a new string that has the `wrapper` character at the beginning and end of the `original`:
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=TRUE}
 fence  <-  function(original, wrapper) {
     paste(wrapper, original, wrapper, sep="")
 }
 ```
-```
-fence('name', '*')
-*name*
+
+```{r, results="markup"}
+fence("name", "*")
 ```
 
 ## String splits
@@ -109,28 +109,33 @@ strsplit(pangram, " ")
 ```
 		
 The output from strsplit is in a `list`. 
-Notice that the unusual first line of strsplit()’s output consists of [[1]]. 
-Similar to the way that R displays vectors, [[1]] means that R is showing the first element of a list. 
+Notice that the unusual first line of `strsplit()`’s output consists of `[[1]]`. 
+Similar to the way that R displays vectors, `[[1]]` means that R is showing the first element of a list. 
 Lists are extremely important concepts in R; they allow you to combine all kinds of variables.
-For example, a list can be made up of many elements, and elements could be vectors, dataframes, or matrices. 
+For example, a list can be made up of many elements, and elements could be vectors, data frames, matrices, or further lists. 
 
 In this example, this list has only a single element. Yes, that’s right: The list has one element, but that element is a vector.
 
-To extract an element from a list, you have to use double square brackets. 
+To extract an element from a list, you have to use double square brackets: `[[`. 
 Split your pangram into words, and assign the first element to a new variable called words, using double-square-brackets `[[]]` subsetting, as follows:
 
 ```{r}
 words <- strsplit(pangram, " ")[[1]]
 ```
 
-We can then pull out the different words using our indexing, where words[1] is the first element in the vector of words and words [9] would be our last:
+We can then pull out the different words using indexing, where `words[1]` is the first element in the vector of `words` and `words[9]` would be the last:
 
 ```{r}
 words[2]
 words[9]
 ```
 
-1. Write a function called `out` that returns a string made up of just the first and last characters of its input. a) Outline the steps you need to take to write this function. Discuss with the person sitting next you. b) Write part of the code, make sure it works. c) Write the next step. d) test your function. e) can your function handle words of different lengths?
+1. Write a function `out()` that returns a string made up of just the first and last characters of its input.
+    a. Outline the steps you need to take to write this function. Discuss with the person sitting next you.
+    b. Write part of the code, make sure it works.
+    c. Write the next step.
+    d. Test your function.
+    e. Can your function handle words of different lengths?
 
 ```{r}
 out <- function(word) {
@@ -156,26 +161,26 @@ __BREAK__
 Let's take a closer look at what happens when we call `fahr_to_celsius(32)`. To make things clearer, we'll start by putting the initial value 32 in a variable and store the final result in one as well:
 
 ```{r}
-original <- 32.0
+original <- 32
 final    <- fahr_to_celsius(original)
 ```
 
 _Discuss and draw a diagram showing what memory looks like after the first line has been executed. Point to the environment_
 
-When we call `fahr_to_celsius`, R doesn't create the variable temp right away. Instead, it creates a new environment, local to the function, to keep track of the variables defined by `fahr_to_kelvin`. Initially, the environment only holds the value of temp:
+When we call `fahr_to_celsius()`, R doesn't create the object `temp` right away. Instead, it creates a new environment, *local* to the function, to keep track of the objects involved in the `fahr_to_kelvin()` call. Initially, the environment only holds the object `temp`:
 
-Your function has its own environment where variables local to that function are stored (`temp` in this case). Since R is lexically scoped that means that the function's environment has a parent environment which is defined by where the function is defined, the global environment in this case (if it were defined inside of another function then the parent environment would be the env for that function).
+Your function has its own environment where variables local to that function are stored (`temp` in this case). Since R is lexically scoped that means that the function's environment has a parent environment which is defined by where the function is called, the global environment in this case (if it were called inside of another function then the parent environment would be the env for that function). <!-- need to think about this; think confusing definition with calling? -->
 
-When we call `fahr_to_kelvin` inside `fahr_to_celsius`, R creates another local environment to hold `fahr_to_kelvin` variables:
+When we call `fahr_to_kelvin()` inside `fahr_to_celsius()`, R creates another local environment to hold the objects involved in the evaluation of `fahr_to_kelvin()`
 
-When you call `fahr_to_celsius` and it calls `fahr_to_kelvin` then `fahr_to_kelvin` tries to find the variable `temp`, it first looks in its own environment, but if it does not find it there, then looks in its parent environment which is the global env. 
+When you call `fahr_to_celsius()` it calls `fahr_to_kelvin()` and then `fahr_to_kelvin()` tries to find the variable `temp`, it first looks in its own environment, but if it does not find it there, then looks in its parent environment which is the global env. 
 
-It does this because there are now two variables in play called `temp`: the parameter to `fahr_to_celsius`, and the parameter to `fahr_to_kelvin`. 
-Having two variables with the same name in the same part of the program would be ambiguous, so R (and every other modern programming language) creates a new environment for each function call to keep that function's variables separate from those defined by other functions.
+It does this because there are now two objects in play called `temp`: the argument to `fahr_to_celsius()`, and argument to `fahr_to_kelvin()`. 
+Having two variables with the same name in the same part of the program would be ambiguous, so R (and every other modern programming language) creates a new environment for each function call to keep that function's objects separated from those in use by other functions.
 
-When the call to `fahr_to_kelvi`n returns a value, R throws away `fahr_to_kelvin` stack frame and creates a new variable in the stack frame for `fahr_to_celsius` to hold the temperature in Kelvin:
+When the call to `fahr_to_kelvin()` returns a value, R throws away `fahr_to_kelvin()`'s stack frame and creates a new object in the stack frame for `fahr_to_celsius()` to hold the temperature in Kelvin:
 
-It then calls `kelvin_to_celsius`, which means it creates an environment to hold that function's variables:
+It then calls `kelvin_to_celsius()`, which means it creates an environment to hold that function's variables:
 
 Once again, R throws away that stack frame when `kelvin_to_celsius` is done and creates the variable result in the environment for `fahr_to_celsius`:
 
