@@ -347,7 +347,7 @@ As the diagram below shows, we want to perform the operation across an axis:
 
 To support this, in R we can use the `apply()` function:
 
-```{r}
+```{r, eval=FALSE}
 help(apply) #or ?apply
 ```
 
