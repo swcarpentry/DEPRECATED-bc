@@ -17,21 +17,18 @@ Write paragraphs of text here.
 When you need to show input, output, and errors,
 use `<div ...>` and triple tildes as shown below:
 
-<div class="in" markdown="1">
 ~~~
 $ this is the input
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 this is the output
 ~~~
-</div>
-<div class="err" markdown="1">
+{:class="out"}
 ~~~
 error message
 ~~~
-</div>
+{:class="err"}
 
 The `div`'s are needed because
 Jekyll's Markdown processor will not let us put classes on code blocks.
