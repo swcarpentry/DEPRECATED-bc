@@ -386,7 +386,7 @@ paste('only setting the value of c', display(c = 77))
 
 With that in hand, let's look at the help for `read.csv()`:
 
-```{r}
+```{r, eval=FALSE}
 ?read.csv
 ```
 
