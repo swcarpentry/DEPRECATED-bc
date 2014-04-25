@@ -1,191 +1,164 @@
-#-----------------------------------------------------------
-# Re-make lecture materials.
-#-----------------------------------------------------------
+#======================================================================
+# Default Makefile for Software Carpentry bootcamps.  Use 'make' on
+# its own to see a list of targets.
+#
+# To add new lessons, add their Markdown files to the MOST_SRC target.
+# Order is important: when we build the single-page book version of
+# the notes on the web site, lessons appear in the order in which they
+# appear in MOST_SRC.
+#
+# If the source of those lessons isn't Markdown, whoever adds them is
+# responsible for adding rules to convert them from whatever format
+# they're in to Markdown.  The section titled "Create Markdown
+# versions of IPython Notebooks" does this for IPython Notebooks; if
+# more notebooks are added, make sure to add them to the target
+# IPYNB_SRC.  If other source formats are used, add a new section to
+# this Makefile and list it here.
+#
+# Note that this Makefile uses $(wildcard pattern) to match sets of
+# files instead of using shell wildcards, and $(sort list) to ensure
+# that matches are ordered when necessary.
+#======================================================================
 
-# Directories.
-OUT = _site
-LINK_OUT = /tmp/bc-links
-BOOK = _book
-INSTALL_DIR = $(HOME)/sites/software-carpentry.org/v5
+#----------------------------------------------------------------------
+# Settings.
+#----------------------------------------------------------------------
 
-# Source Markdown pages.
-MARKDOWN_SRC = \
-	LICENSE.md \
-	contents.md \
-	bib.md \
-	gloss.md \
-	rules.md \
-	setup.md \
-	team.md \
-	intro.md \
-	$(sort $(wildcard novice/shell/*.md)) \
-	$(sort $(wildcard novice/git/*.md)) \
-	$(sort $(wildcard novice/python/*.md)) \
-	$(sort $(wildcard novice/sql/*.md)) \
-	$(sort $(wildcard novice/extras/*.md)) \
-	$(sort $(wildcard novice/teaching/*.md)) \
-	$(sort $(wildcard novice/ref/*.md))
+# Output directory for local build.
+SITE = _site
 
-NOTEBOOK_SRC = \
-	$(sort $(wildcard novice/python/??-*.ipynb)) \
-	$(sort $(wildcard novice/sql/??-*.ipynb))
+# Installation directory on server.
+INSTALL = $(HOME)/sites/software-carpentry.org/v5
 
-# Slides.
-SLIDES_SRC = \
-	$(sort (wildcard slides/*.html))
-SLIDES_DST = \
-	$(patsubst %.html,$(OUT)/%.html,$(SLIDES_SRC))
+# Jekyll configuration file.
+CONFIG = _config.yml
 
-NOTEBOOK_MD = \
-	$(patsubst %.ipynb,%.md,$(NOTEBOOK_SRC))
+#----------------------------------------------------------------------
+# Specify the default target before any other targets are defined so
+# that we're sure which one Make will choose.
+#----------------------------------------------------------------------
 
-HTML_DST = \
-	$(patsubst %.md,$(OUT)/%.html,$(MARKDOWN_SRC)) \
-	$(patsubst %.md,$(OUT)/%.html,$(NOTEBOOK_MD))
+all : commands
 
-# Source for book (in order, with some substutitions).
-BOOK_SRC = \
+#----------------------------------------------------------------------
+# Convert Markdown to HTML exactly as GitHub will when files are
+# committed in the repository's gh-pages branch.
+#----------------------------------------------------------------------
+
+# Source Markdown files.  These are listed in the order in which they
+# appear in the final book-format version of the notes.
+MOST_SRC = \
 	intro.md \
 	team.md \
 	novice/shell/index.md $(sort $(wildcard novice/shell/??-*.md)) \
 	novice/git/index.md $(sort $(wildcard novice/git/??-*.md)) \
-	novice/python/index.md $(patsubst %.ipynb,%.md,$(sort $(wildcard novice/python/??-*.ipynb))) \
-	novice/sql/index.md $(patsubst %.ipynb,%.md,$(sort $(wildcard novice/sql/??-*.ipynb))) \
+	novice/python/index.md $(sort $(wildcard novice/python/??-*.md)) \
+	novice/sql/index.md $(sort $(wildcard novice/sql/??-*.md)) \
 	novice/extras/index.md $(sort $(wildcard novice/extras/??-*.md)) \
 	novice/teaching/index.md  $(sort $(wildcard novice/teaching/??-*.md)) \
 	novice/ref/index.md  $(sort $(wildcard novice/ref/??-*.md)) \
 	bib.md \
-	tmp/gloss.md \
+	gloss.md \
 	rules.md \
 	LICENSE.md
 
-BOOK_TMP = \
-	$(patsubst %,tmp/%,$(BOOK_SRC))
+# All source pages (including things not in the book).
+ALL_SRC = \
+	contents.md \
+	$(wildcard intermediate/python/*.md) \
+	$(MOST_SRC)
 
-BOOK_DST = $(OUT)/book.html
+# Other files that the site depends on.
+EXTRAS = \
+	$(wildcard css/*.css) \
+	$(wildcard css/*/*.css)
 
-# Mark cached versions of compiled notebooks as SECONDARY so that GNU
-# Make won't delete them after rebuilding.
-.SECONDARY : $(NOTEBOOK_MD)
+# Principal target files
+INDEX = $(SITE)/index.html
 
-#-----------------------------------------------------------
+# Convert from Markdown to HTML.  This builds *all* the pages (Jekyll
+# only does batch mode), and erases the SITE directory first, so
+# having the output index.html file depend on all the page source
+# Markdown files triggers the desired build once and only once.
+$(INDEX) : $(ALL_SRC) $(CONFIG) $(EXTRAS)
+	jekyll -t build -d $(SITE)
 
-# Default action: show available commands (marked with double '#').
-all : commands
+#----------------------------------------------------------------------
+# Create all-in-one book version of notes.
+#----------------------------------------------------------------------
 
-## quick    : build just the bootcamp home page.
-quick : $(OUT)/index.html
-	jekyll -t build -d $(OUT)
+# Temporary book file.
+BOOK_MD = ./book.md
 
-## install  : install on the server.
-install : $(OUT)/index.html
-	rm -rf $(INSTALL_DIR)
-	cp -r _site $(INSTALL_DIR)
-	mv $(INSTALL_DIR)/contents.html $(INSTALL_DIR)/index.html
+# Build the temporary input for the book by concatenating relevant
+# sections of Markdown files and then patching glossary references and
+# image paths.
+$(BOOK_MD) : $(MOST_SRC) bin/make-book.py
+	python bin/make-book.py $(MOST_SRC) > $@
 
-## site     : build site.
-site : $(BOOK_DST)
+#----------------------------------------------------------------------
+# Targets.
+#----------------------------------------------------------------------
 
-$(BOOK_DST) : $(OUT)/index.html $(BOOK_TMP) _templates/book.tpl tmp/gloss.md bin/make-book.py
-	python bin/make-book.py $(BOOK_TMP) \
-	| pandoc --email-obfuscation=none --template=_templates/book.tpl -t html -o - \
-	| sed -e 's!../../gloss.html#!#g:!g' \
-	| sed -e 's!../gloss.html#!#g:!g' \
-	> $@
-
-# Build HTML versions of Markdown source files using Jekyll.
-$(OUT)/index.html : $(MARKDOWN_SRC) $(NOTEBOOK_MD)
-	jekyll -t build -d $(OUT)
-	sed -i -e 's!img src="novice/python/!img src="!g' $(OUT)/novice/python/??-*.html
-
-index.html setup.md : _includes/setup.html
-
-# Build Markdown versions of IPython Notebooks.
-%.md : %.ipynb _templates/ipynb.tpl
-	ipython nbconvert --template=_templates/ipynb.tpl --to=markdown --output="$(subst .md,,$@)" "$<"
-
-# Patch targets and links in the glossary for inclusion in the book.
-tmp/gloss.md : gloss.md
-	@mkdir -p $$(dirname $@)
-	sed -e 's!](#!](#g:!g' -e 's!<a name="!<a name="g:!g' $< > $@
-
-# Patch image paths in the sections.
-tmp/novice/shell/%.md : novice/shell/%.md
-	@mkdir -p $$(dirname $@)
-	sed -e 's!<img src="img!<img src="novice/shell/img!g' $< > $@
-
-tmp/novice/git/%.md : novice/git/%.md
-	@mkdir -p $$(dirname $@)
-	sed -e 's!<img src="img!<img src="novice/git/img!g' $< > $@
-
-tmp/novice/python/%.md : novice/python/%.md
-	@mkdir -p $$(dirname $@)
-	sed -e 's!<img src="img!<img src="novice/python/img!g' $< > $@
-
-tmp/novice/sql/%.md : novice/sql/%.md
-	@mkdir -p $$(dirname $@)
-	sed -e 's!<img src="img!<img src="novice/sql/img!g' $< > $@
-
-tmp/novice/extras/%.md : novice/extras/%.md
-	@mkdir -p $$(dirname $@)
-	sed -e 's!<img src="img!<img src="novice/extras/img!g' $< > $@
-
-# All other Markdown files used in the book.
-tmp/%.md : %.md
-	@mkdir -p $$(dirname $@)
-	cp $< $@
-
-#-----------------------------------------------------------
+## ---------------------------------------
 
 ## commands : show all commands.
 commands :
-	@grep -E '^##' Makefile | sed -e 's/## //g'
+	@grep -E '^##' Makefile | sed -e 's/##//g'
 
-## contribs : list contributors (uses .mailmap file).
+## ---------------------------------------
+
+## site     : build the site as GitHub will see it.
+site : $(INDEX)
+
+## check    : check that the index.html file is properly formatted.
+check :
+	@python bin/swc_index_validator.py ./index.html
+
+## clean    : clean up all generated files.
+clean : tidy
+	rm -rf $(SITE)
+
+## ---------------------------------------
+
+## book     : build the site including the all-in-one book.
+#  To do this, we simply create the book Markdown file then build
+#  with Jekyll as usual.
+book : $(BOOK_MD)
+	make site
+
+## install  : install on the server.
+install : $(INDEX)
+	rm -rf $(INSTALL)
+	mkdir -p $(INSTALL)
+	cp -r $(SITE)/* $(INSTALL)
+	mv $(INSTALL)/contents.html $(INSTALL)/index.html
+
+## contribs : list contributors.
+#  Relies on ./.mailmap to translate user IDs into names.
 contribs :
 	git log --pretty=format:%aN | sort | uniq
 
 ## fixme    : find places where fixes are needed.
 fixme :
-	@grep -i -n FIXME $$(find -f shell git python sql -type f -print | grep -v .ipynb_checkpoints)
+	@grep -i -n FIXME $$(find novice -type f -print | grep -v .ipynb_checkpoints)
 
-## gloss    : check glossary.
-gloss :
-	@bin/gloss.py ./gloss.md $(MARKDOWN_DST) $(NOTEBOOK_DST)
-
-## images   : create a temporary page to display images.
-images :
-	@bin/make-image-page.py $(MARKDOWN_SRC) $(NOTEBOOK_SRC) > image-page.html
-	@echo "Open ./image-page.html to view images"
-
-## valid    : check validity of HTML book.
-# Depends on xmllint to check validity of generated pages.
-# Also depends on linklint, an HTML link-checking module from
-# http://www.linklint.org/, which has been put in bin/linklint.
-# Look in output directory's 'error.txt' file for results.
-valid : tmp-book.html
-	xmllint --noout tmp-book.html 2>&1 | python bin/unwarn.py
-	@bin/linklint -doc $(LINK_OUT) -textonly -root $(OUT) /@
-
-## clean    : clean up all generated files.
-clean : tidy
-	@rm -rf $(OUT) $(NOTEBOOK_MD)
-
-## tidy     : clean up intermediate files only.
+## tidy     : clean up odds and ends.
 tidy :
-	@rm -rf \
-	image-page.html \
-	tmp \
+	rm -rf \
 	$$(find . -name '*~' -print) \
 	$$(find . -name '*.pyc' -print) \
-	$$(find . -name '??-*_files' -type d -print)
+	$(BOOK_MD)
 
-# show variables (for debugging)
-show :
-	@echo "OUT" $(OUT)
-	@echo "TMP" $(TMP)
-	@echo "LINK_OUT" $(LINK_OUT)
-	@echo "MARKDOWN_SRC" $(MARKDOWN_SRC)
-	@echo "NOTEBOOK_SRC" $(NOTEBOOK_SRC)
-	@echo "NOTEBOOK_MD" $(NOTEBOOK_MD)
-	@echo "HTML_DST" $(HTML_DST)
+#----------------------------------------------------------------------
+# Rules to launch builds of formats other than Markdown.
+#----------------------------------------------------------------------
+
+## ---------------------------------------
+
+## ipynb    : convert IPython Notebooks to Markdown files.
+#  This uses an auxiliary Makefile 'ipynb.mk'.
+ipynb :
+	make -f ipynb.mk
+
+## ---------------------------------------

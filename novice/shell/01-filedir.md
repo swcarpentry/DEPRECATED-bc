@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: Files and Directories
-level: novice
 ---
 <div class="objectives" markdown="1">
 
@@ -27,9 +26,11 @@ Several commands are frequently used to create, inspect, rename, and delete file
 To start exploring them,
 let's open a shell window:
 
+<div class="in" markdown="1">
 ~~~
 $
 ~~~
+</div>
 
 The dollar sign is a [prompt](../../gloss.html#prompt),
 which shows us that the shell is waiting for input;
@@ -41,10 +42,16 @@ The command's output is the ID of the current user,
 i.e.,
 it shows us who the shell thinks we are:
 
+<div class="in" markdown="1">
 ~~~
 $ whoami
+~~~
+</div>
+<div class="out" markdown="1">
+~~~
 vlad
 ~~~
+</div>
 
 More specifically, when we type `whoami` the shell:
 
@@ -66,10 +73,16 @@ Here,
 the computer's response is `/users/vlad`,
 which is Vlad's [home directory](../../gloss.html#home-directory):
 
+<div class="in" markdown="1">
 ~~~
 $ pwd
+~~~
+</div>
+<div class="out" markdown="1">
+~~~
 /users/vlad
 ~~~
+</div>
 
 > #### Alphabet Soup
 > 
@@ -123,12 +136,18 @@ which is why `vlad` is the last part of the directory's name.
 Let's see what's in Vlad's home directory by running `ls`,
 which stands for "listing":
 
+<div class="in" markdown="1">
 ~~~
 $ ls
+~~~
+</div>
+<div class="out" markdown="1">
+~~~
 bin          data      mail       music
 notes.txt    papers    pizza.cfg  solar
 solar.pdf    swc
 ~~~
+</div>
 
 <img src="img/vlad-homedir.svg" alt="Vlad's Home Directory" />
 
@@ -137,12 +156,18 @@ arranged neatly into columns.
 We can make its output more comprehensible by using the [flag](../../gloss.html#command-line-flag) `-F`,
 which tells `ls` to add a trailing `/` to the names of directories:
 
+<div class="in" markdown="1">
 ~~~
 $ ls -F
+~~~
+</div>
+<div class="out" markdown="1">
+~~~
 bin/         data/     mail/      music/
 notes.txt    papers/   pizza.cfg  solar/
 solar.pdf    swc/
 ~~~
+</div>
 
 Here,
 we can see that `/users/vlad` contains seven [sub-directories](../../gloss.html#sub-directory).
@@ -181,11 +206,17 @@ the command `ls` with the parameters `-F` and `data`.
 The second parameter&mdash;the one *without* a leading dash&mdash;tells `ls` that
 we want a listing of something other than our current working directory:
 
+<div class="in" markdown="1">
 ~~~
 $ ls -F data
+~~~
+</div>
+<div class="out" markdown="1">
+~~~
 amino-acids.txt   elements/     morse.txt
 pdb/              planets.txt   sunspot.txt
 ~~~
+</div>
 
 The output shows us that there are four text files and two sub-sub-directories.
 Organizing things hierarchically in this way helps us keep track of our work:
@@ -203,11 +234,17 @@ rather than from the root of the file system.
 If we run `ls -F /data` (*with* a leading slash) we get a different answer,
 because `/data` is an [absolute path](../../gloss.html#absolute-path):
 
+<div class="in" markdown="1">
 ~~~
 $ ls -F /data
+~~~
+</div>
+<div class="out" markdown="1">
+~~~
 access.log    backup/    hardware.cfg
 network.cfg
 ~~~
+</div>
 
 The leading `/` tells the computer to follow the path from the root of the filesystem,
 so it always refers to exactly one directory,
@@ -218,15 +255,28 @@ Before we do this,
 `pwd` shows us that we're in `/users/vlad`,
 and `ls` without any parameters shows us that directory's contents:
 
+<div class="in" markdown="1">
 ~~~
 $ pwd
+~~~
+</div>
+<div class="out" markdown="1">
+~~~
 /users/vlad
-
+~~~
+</div>
+<div class="in" markdown="1">
+~~~
 $ ls
+~~~
+</div>
+<div class="out" markdown="1">
+~~~
 bin/         data/     mail/      music/
 notes.txt    papers/   pizza.cfg  solar/
 solar.pdf    swc/
 ~~~
+</div>
 
 We can use `cd` followed by a directory name to change our working directory.
 `cd` stands for "change directory",
@@ -234,9 +284,11 @@ which is a bit misleading:
 the command doesn't change the directory,
 it changes the shell's idea of what directory we are in.
 
+<div class="in" markdown="1">
 ~~~
 $ cd data
 ~~~
+</div>
 
 `cd` doesn't print anything,
 but if we run `pwd` after it, we can see that we are now in `/users/vlad/data`.
@@ -244,30 +296,55 @@ If we run `ls` without parameters now,
 it lists the contents of `/users/vlad/data`,
 because that's where we now are:
 
+<div class="in" markdown="1">
 ~~~
 $ pwd
+~~~
+</div>
+<div class="out" markdown="1">
+~~~
 /users/vlad/data
-
+~~~
+</div>
+<div class="in" markdown="1">
+~~~
 $ ls
+~~~
+</div>
+<div class="out" markdown="1">
+~~~
 amino-acids.txt   elements/     morse.txt
 pdb/              planets.txt   sunspot.txt
 ~~~
+</div>
 
 We now know how to go down the directory tree:
 how do we go up?
 We could use an absolute path:
 
+<div class="in" markdown="1">
 ~~~
 $ cd /users/vlad
 ~~~
+</div>
 
 but it's almost always simpler to use `cd ..` to go up one level:
 
+<div class="in" markdown="1">
 ~~~
 $ pwd
+~~~
+</div>
+<div class="out" markdown="1">
+~~~
 /users/vlad/data
+~~~
+</div>
+<div class="in" markdown="1">
+~~~
 $ cd ..
 ~~~
+</div>
 
 `..` is a special directory name meaning
 "the directory containing this one",
@@ -276,20 +353,32 @@ the [parent](../../gloss.html#parent-directory) of the current directory.
 Sure enough,
 if we run `pwd` after running `cd ..`, we're back in `/users/vlad`:
 
+<div class="in" markdown="1">
 ~~~
 $ pwd
+~~~
+</div>
+<div class="out" markdown="1">
+~~~
 /users/vlad
 ~~~
+</div>
 
 The special directory `..` doesn't usually show up when we run `ls`.
 If we want to display it, we can give `ls` the `-a` flag:
 
+<div class="in" markdown="1">
 ~~~
 $ ls -F -a
+~~~
+</div>
+<div class="out" markdown="1">
+~~~
 ./           ../       bin/       data/
 mail/        music/    notes.txt  papers/
 pizza.cfg    solar/    solar.pdf    swc/
 ~~~
+</div>
 
 `-a` stands for "show all";
 it forces `ls` to show us file and directory names that begin with `.`,
@@ -348,24 +437,30 @@ All 1520 files will go into the same directory.
 If she is in her home directory,
 Nelle can see what files she has using the command:
 
+<div class="in" markdown="1">
 ~~~
 $ ls north-pacific-gyre/2012-07-03/
 ~~~
+</div>
 
 This is a lot to type,
 but she can let the shell do most of the work.
 If she types:
 
+<div class="in" markdown="1">
 ~~~
 $ ls no
 ~~~
+</div>
 
 and then presses tab,
 the shell automatically completes the directory name for her:
 
+<div class="in" markdown="1">
 ~~~
 $ ls north-pacific-gyre/
 ~~~
+</div>
 
 If she presses tab again,
 Bash will add `2012-07-03/` to the command,
@@ -428,4 +523,5 @@ and we will see it in many other tools as we go on.
     3.  It changes the working directory to the user's home directory.
     4.  It produces an error message.
 
+4.  What does the command `ls` do when used with the -s and -h arguments?
 </div>

@@ -2,8 +2,8 @@
 layout: lesson
 root: ../..
 title: Shell Reference
-level: novice
 ---
+
 #### Basic Commands
 
 *   `cat` displays the contents of its inputs.
