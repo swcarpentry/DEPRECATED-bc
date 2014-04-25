@@ -9,13 +9,25 @@ title: Title of Lesson
 *   Describe the lesson's objectives in observable ways.
 *   Not "understand X" (which isn't observable) but "Write a program that does X".
 *   Aim for 3-6 points.
+*   The `<div>` with `class="objectives"` gives this block the right style (and makes it findable),
+    the `markdown="1"` attribute tells Jekyll to process the content of the `div` as Markdown
+    rather than HTML.
 *   Keep the blank lines between the opening `<div ...>` and the closing `</div>` and these bullet points.
 
 </div>
 
 Write paragraphs of text here.
 When you need to show input, output, and errors,
-use `<div ...>` and triple tildes as shown below:
+put a triple tilde `~~~` before and after like this:
+
+~~~
+content of data file
+second line of data file
+yup, more data
+~~~
+
+If the block is input, output, or error text,
+add a class specifier as shown below:
 
 ~~~
 $ this is the input
@@ -30,9 +42,7 @@ error message
 ~~~
 {:class="err"}
 
-The `div`'s are needed because
-Jekyll's Markdown processor will not let us put classes on code blocks.
-We need these classes to be consistent with the HTML we produce for IPython Notebooks,
+We use these classes to be consistent with the HTML we produce for IPython Notebooks,
 and because novices find examples much easier to read
 when they can clearly distinguish input from output.
 
@@ -63,7 +73,7 @@ Please also include alternate text for accessibility aids and search engines:
 #### Key Points
 *   Every lesson should end with a summary of key points.
 *   We will stitch these together to create reference guides for learners.
-*   As with objectives, wrap this block in a `div` with the right style.
+*   As with objectives, wrap this block in a `div` with the right style and `markdown="1"`.
 
 </div>
 
