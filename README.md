@@ -4,12 +4,20 @@ Software Carpentry Bootcamps
 This repository's `gh-pages` branch is the starting point for a bootcamp website:
 it contains a template for your bootcamp's home page
 and the shared lesson materials we have developed.
-The sections below explain how GitHub turns a repository into a web site,
-how you can build a website for your bootcamp using this repo as a starting point,
-what lessons we have,
-and where they're located.
+The sections below explain:
+
+*   how GitHub turns a repository into a web site,
+*   how you can build a website for your bootcamp using this repo as a starting point,
+*   what lessons we have,
+*   where they're located, and
+*   how to add new lessons.
+
 To contribute corrections or additions to this repository, see the
 [contribution guidelines](CONTRIBUTING.md).
+You may also want to view these videos:
+
+*   [Setting Up a Software Carpentry Bootcamp Repository](https://vimeo.com/87241285)
+*   [Adding Lesson Material to the Software Carpentry Bootcamp Repository](https://vimeo.com/92273942)
 
 **Note:**
 If you are teaching Git in your bootcamp,
@@ -22,16 +30,15 @@ You should not try to use the same repo for both purposes because:
 2.  you don't want a learner accidentally overwriting your lessons
     while you're trying to teach.
 
-
 **Table of Contents**
 
 *   [Background](#background)  
 *   [Getting Started](#getting-started)  
 *   [Previewing the Site](#previewing-the-site)  
 *   [Variables](#variables)  
-*   [Include Files](#include-files)  
-*   [Page Content](#page-content)  
+*   [Website Content](#website-content)  
 *   [Lesson Material](#lesson-material)  
+*   [Building Things](#building-things)  
 *   [Site Map](#site-map)  
 *   [FAQ](#faq)
 
@@ -81,7 +88,7 @@ rather than Git itself.
     key: value
     other_key: other_value
     ---
-    Page Content
+    stuff in the page
     ~~~
 
     then GitHub doesn't just copy the file over verbatim.
@@ -127,14 +134,15 @@ rather than Git itself.
 
 We have created three standard layouts for bootcamp pages:
 
-*   `bootcamp.html` is used for bootcamps' home pages:
-    it is the layout for the `index.html` page in your repo's root directory.
-    Its header defines several variables (discussed below)
-    that *must* be present in order for your bootcamp to be included in our main website.
+*   `bootcamp.html` is used for bootcamps' home pages,
+    and is the layout for the `index.html` page in your repo's root directory.
+    That `index.html` page's header must
+    [define several variables](#variables)
+    in order for your bootcamp to be included in our main website.
 
 *   `lesson.html` is used to lay out pages for individual lessons.
-    You don't have to use it,
-    but all of the pages in this repo's `lessons` directory do.
+    All of the lessons in this repository use it
+    to ensure uniform look and feel.
 
 *   `slides.html` is used to format slideshows.
     It is still under development.
@@ -147,9 +155,9 @@ To create a website for a new bootcamp:
 1.  Create a [new repository on GitHub](https://github.com/new)
     with a name like YYYY-MM-DD-site, e.g., `2014-03-31-esu`.
     This repository must *not* be a fork of an existing repository
-    (because as mentioned earlier,
+    because as mentioned earlier,
     GitHub only allows a user to fork a repository once,
-    but many instructors are involved in several bootcamps).
+    but many instructors are involved in several bootcamps.
     Please use the same ID for your bootcamp
     that the Software Carpentry admins are using to identify it
     (i.e.,
@@ -162,49 +170,58 @@ To create a website for a new bootcamp:
     You can ignore the warning about cloning an empty repository:
     it won't stay empty long.
 
-![Alt text](img/readme/step1.png)
+![Step 1](img/readme/step1.png)
 
-3.  Add the template repository `https://github.com/swcarpentry/bc.git` as a remote named `swc`:
+3.  Add the repository `https://github.com/swcarpentry/bc.git` as a remote named `swc`:
 
     ~~~
-    git remote add swc https://github.com/swcarpentry/bc.git
+    $ git remote add swc https://github.com/swcarpentry/bc.git
     ~~~
 
-![Alt text](img/readme/step2.png)
+![Step 2](img/readme/step2.png)
 
 4.  Create a new branch in the local clone named `gh-pages`.
 
     ~~~
-    git checkout -b gh-pages
+    $ git checkout -b gh-pages
     ~~~
 
 5.  Pull content from the template repository's `gh-pages` branch into your desktop repository:
 
     ~~~
-    git pull swc gh-pages
+    $ git pull swc gh-pages
     ~~~
 
-6.  Delete the `swc` remote so that you don't accidentally try
+    This may take a minute or two.
+
+6.  Remove the `swc` remote so that you don't accidentally try
     to push your changes to the main `bc` repository:
 
     ~~~
-    git remote rm swc
+    $ git remote rm swc
     ~~~
 
-7.  Edit `index.html` to create the bootcamp home page (see below).
-    Please double-check the information in the page's header (described below),
-    as it is used to update the main website. You can run the script 
-    `swc_index_validator.py` in `./bin/` which parses the index.html and tells you of any problems.
+7.  Edit `index.html` to create the bootcamp home page.
+    In particular,
+    double-check
+    [the variables in the page's header](#variables),
+    as these are used to update the main website,
+    and make sure the [website content](#website-content) is correct.
+    You can use the script `./bin/swc_index_validator.py`
+    to check `index.html` for problems
+    by running the command `make check`.
 
-8.  Preview your changes (see below).
+8.  Edit `_includes/setup.html` to provide software installation instructions for bootcamp attendees.
+    This is described in more detail in the section on [website content](#website-content).
 
-9.  Delete these instructions from your bootcamp's `README.md` file
-    and replace them with a paragraph describing your bootcamp.
+9.  [Preview your changes](#previewing-the-site).
 
-10. Push content to your YYYY-MM-DD-site repository:
+10. Replace the content of this `README.md` file with a line or two describing your bootcamp.
+
+11. Push content to your YYYY-MM-DD-site repository:
 
     ~~~
-    git push origin gh-pages
+    $ git push origin gh-pages
     ~~~
 
 As soon as your repo has been pushed to GitHub, GitHub will render your pages
@@ -223,11 +240,12 @@ To preview your bootcamp's page(s),
 go into its root directory and run:
 
 ~~~
-make quick
+$ make site
 ~~~
 
-This will run `jekyll` to create the directory `./_site`;
-the `index.html` page in this directory
+This will run `jekyll` to create the directory `./_site`.
+The `index.html` page in this directory,
+`./_site/index.html`,
 should have the Software Carpentry look and feel
 and the information about your bootcamp.
 
@@ -237,41 +255,35 @@ If you have Ruby installed on your computer,
 this *should* be as simple as:
 
 ~~~
-gem install github-pages
+$ gem install github-pages
 ~~~
 
 or if that doesn't work:
 
 ~~~
-gem install jekyll
-gem install kramdown
+$ gem install jekyll
+$ gem install kramdown
 ~~~
 
 (We use Kramdown for translating Markdown instead of the default
 Redcarpet because Kramdown will handle Markdown inside HTML blocks).
-On OS X, we suggest you use a recent Ruby to get access to these.  If
-you don't have Homebrew or MacPorts installed, here's a quick recipe
-to get started using HomeBrew.
 
-```
-ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
-brew install ruby
-```
-
-and then `gem install` as above.  If you don't have `make` in your
-machine, you can build the preview with:
+On OS X, we suggest you use a recent Ruby to get access to these.
+If you don't have Homebrew or MacPorts installed,
+here's a quick recipe to get started using HomeBrew.
 
 ~~~
-jekyll -t build -d _site
+$ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+$ brew install ruby
 ~~~
 
-or run:
+and then `gem install` as above.
+If you don't have `make` in your machine,
+you can build the preview with:
 
 ~~~
-make quick
+$ jekyll -t build -d _site
 ~~~
-
-which executes the same command.
 
 Variables
 ---------
@@ -283,16 +295,16 @@ Your bootcamp's `index.html` page
 *   `layout` must be `bootcamp`.
 *   `root` is the path to the repository's root directory.
     This is '.' if the page is in the root directory
-    (which `index.html` is),
-    '..' if it is one directory down, and so on.
-    If you create subdirectories for different rooms in your bootcamp,
-    or for different lessons,
-    set `root` accordingly.
+    (which `index.html` is).
+    In other pages,
+    `root` is '..' if the page is one directory down,
+    '../..' if it is two levels down,
+    and so on.
 *   `venue` is the name of the institution or group hosting the bootcamp.
-*   `address` is the bootcamp venue's street address.
-*   `country` must be a hyphenated country name like 'United-States'.  This
-    is used to look up flags for display in the main web site; see the
-    `assets/flags` directory in the `site` repo for a full list of valid names.
+*   `address` is the bootcamp's street address.
+*   `country` must be a hyphenated country name like 'United-States'.
+    This is used to look up flags for display in the main web site;
+    see the `assets/flags` directory in the `site` repo for a full list of valid names.
 *   `latlng` is the latitude and longitude of the bootcamp site
     (so we can put a pin on our map).
 *   `humandate` is the human-friendly dates for the bootcamp (e.g., Jul 3-4, 2015).
@@ -301,29 +313,35 @@ Your bootcamp's `index.html` page
 *   `startdate` is the bootcamp's starting date in YYYY-MM-DD format.
 *   `enddate` is the bootcamp's ending date in the same format.
     If your bootcamp is only one day long,
-    this field can be deleted.
+    the `enddate` field can be deleted.
 *   `registration` is `open` (if anyone is allowed to sign up)
     or `restricted` (if only some people are allowed to take part).
     Please do *not* put HTML or links in here to explain
     who's allowed to enrol or how to go about doing it;
     that should go in the main body of your page.
 *   `instructor` is a comma-separated list of instructor names.
-    This *must* be enclosed in square brackets, as in
-    `["Alan Turing","Grace Hopper"]`
+    This must be enclosed in square brackets,
+    as in `["Alan Turing","Grace Hopper"]`
 *   `contact` is the contact email address to use for your bootcamp.
 
 The header may optionally define the following:
 
 *   `eventbrite` is the multi-digit Eventbrite registration key.
-    If you are using something else for registration,
-    it may be deleted.
     If you are using Eventbrite,
     the admins will set this key for you.
+    If you are using something else for registration,
+    it may be deleted.
 
-Include Files
--------------
+Website Content
+---------------
 
-The `_includes` directory contains the following `.html` files:
+The body of `index.html` contains
+an explanation of what a bootcamp is and how it runs,
+followed by setup instructions for our standard software.
+There is an explanatory comment for each section of this page;
+reorganize, rewrite, or delete the material as you think best.
+
+`index.html` depends on five HTML files in the `_includes` directory:
 
 *   `header.html`: material for the page's head.
 *   `banner.html`: the generic banner with the Software Carpentry logo.
@@ -333,28 +351,58 @@ The `_includes` directory contains the following `.html` files:
 
 You normally won't need to worry about the first four ---
 they're included in the right places by our standard layouts ---
-but you may want to edit the fifth,
-or inline it in `index.html`.
-
-Page Content
-------------
-
-The body of `index.html` contains
-an explanation of what a bootcamp is and how it runs,
-followed by setup instructions for our standard software.
-Reorganize, rewrite, or delete this material as you think best.
+but you will probably want to edit the fifth.
+In particular,
+if you are teaching a Python bootcamp,
+you should delete the instructions for installing R,
+and vice versa.
 
 Lesson Material
 ---------------
 
-*   Our old lesson material
-    is in the `lessons` directory.
-    We plan to retire it in Spring 2014,
-*   The new material for novices is in the directories under `novice`.
+1.  The current material for novices is in the directories under `novice`.
     The shell and Git materials are written in Markdown,
     while the Python and SQL use the IPython Notebook.
-*   New material for intermediate learners is currently under development
+2.  New material for intermediate learners is currently under development
     in directories under `intermediate`.
+3.  Our old lesson material
+    is in the `lessons` directory.
+    We plan to retire it in Spring 2014,
+
+As explained [below](#building-things),
+you can use `make` to compile this material in the way that GitHub does
+when changes are committed to the `gh-pages` branch.
+
+Building Things
+---------------
+
+GitHub automatically runs Jekyll
+to regenerate the pretty HTML versions of our content
+every time changes are pushed to the `gh-pages` branch of this repository.
+We use `make` to imitate that process locally
+so that people can preview changes before committing.
+We also use `make` to automate a handful of other tasks,
+such as converting IPython Notebooks from `.ipynb` format to Markdown (`.md`)
+so that Jekyll can convert them to HTML.
+
+Most of the commands to rebuild things are in `Makefile`;
+run the command `make` on its own to get a list of targets,
+and `make site` to re-run Jekyll to preview your site
+(which Jekyll will put in the `_site` directory).
+You can also run `make check` to run a Python script
+that checks whether `index.html`'s variables are formatted correctly,
+and `make clean` to clean up all generated files.
+
+The commands used to turn IPython Notebooks into Markdown files
+are stored in a separate Makefile called `ipynb.mk`.
+This separation ensures that people can rebuild the site
+even if they don't have IPython installed
+(which R instructors might not);
+it also guarantees that `make` won't try to regenerate Markdown after a Git pull
+(which might change the timestamps on files,
+but not actually change their contents).
+If we add more languages and file formats in future,
+we may also create separate Makefiles for them.
 
 Site Map
 --------
@@ -364,32 +412,35 @@ The most important files and directories are **highlighted**.
 *   CITATION - how to cite Software Carpentry.
 *   CONTRIBUTING.md - how to contribute new material.
 *   LICENSE.md - our license.
-*   Makefile - rebuild this site (type `make` on its own for a list of targets).
-*   README.md - how to use this site.
-*   bib.md - bibliography.
-*   contents.md - site map used in place of `index.html` on the main web site.
-*   etherpad.txt - starter text for the bootcamp's Etherpad.
-*   **gloss.md** - glossary of terms.
-*   **index.html** - template for bootcamp home pages.
-*   intro.md - introduction to book version of this site.
-*   rules.md - the rules of programming (used in the book version of this site).
-*   **team.md** - who we are.
+*   **Makefile** - rebuild this site (type `make` on its own for a list of targets).
+*   **README.md** - how to use this site.
 *   _config.yml - Jekyll configuration directives.
 *   _includes/ - snippets of HTML that can be included in other files by Jekyll.
 *   _layouts/ - Jekyll page layouts.
 *   **_site/** - output directory (created when building the site locally).
-*   _templates/ - template files for Pandoc conversion of IPython Notebooks.
+*   _templates/ - template files for conversion of IPython Notebooks to Markdown.
+    Templates for other conversion systems (e.g., Pandoc) should go here too.
+*   bib.md - bibliography.
 *   bin/ - miscellaneous tools used in building the site.
+*   book.md - generated when compiling the website locally.
+*   contents.md - site map used in place of `index.html` on the main web site.
 *   css/ - CSS files for this site.
 *   data/ - miscellaneous data files used by examples.
+*   etherpad.txt - starter text for the bootcamp's Etherpad.
+*   gloss.md - glossary of terms.
 *   img/ - images used throughout this site.
-*   **intermediate/** - intermediate lesson material (under development).
+*   **index.html** - template for bootcamp home pages.
+*   intermediate/ - intermediate lesson material (under development).
+*   intro.md - introduction to book version of this site.
+*   ipynb.mk - Makefile for turning IPython Notebooks into Markdown.
 *   js/ - Javascript files used in this site.
-*   **lessons/** - old lesson material.
-*   **novice/** - novice lesson material.
+*   lessons/ - old lesson material.
+*   novice/ - novice lesson material.
+*   rules.md - the rules of programming (used in the book version of this site).
+*   setup.md - placeholder for bootcamp setup instructions.
 *   setup/ - setup tools for installing bootcamp software.
-*   setup.md - setup instructions for software used in bootcamps.
 *   slides/ - slideshows (under construction).
+*   team.md - who we are.
 
 FAQ
 ---
@@ -397,6 +448,7 @@ FAQ
 *   *Where can I get help?*
     <br/>
     Mail us at [admin@software-carpentry.org](mailto:admin@software-carpentry.org),
+    come chat with us on [our IRC channel](irc://moznet/sciencelab),
     or join our [discussion list](http://software-carpentry.org/contrib/discuss.html)
     and ask for help there.
 
@@ -426,8 +478,8 @@ FAQ
     Declare the `en_US.UTF-8` locale in your shell:
 
     ~~~
-    export LC_ALL=en_US.UTF-8
-    export LANG=en_US.UTF-8
+    $ export LC_ALL=en_US.UTF-8
+    $ export LANG=en_US.UTF-8
     ~~~
 
 *   *What do I do if I see a `Conversion error` when I run `make check`?*
@@ -449,8 +501,8 @@ FAQ
     uninstall pygments 0.5.2 and restore version 0.5.0:
 
     ~~~    
-    gem uninstall pygments.rb --version "=0.5.2"
-    gem install pygments.rb --version "=0.5.0"
+    $ gem uninstall pygments.rb --version "=0.5.2"
+    $ gem install pygments.rb --version "=0.5.0"
     ~~~
 
 *   *What do I do if I see a `File not found: u'nbconvert'` when I run `make check`?*
@@ -467,13 +519,13 @@ FAQ
     Installing a local version can be done with:
     
     ~~~
-    pip install --upgrade --user ipython
+    $ pip install --upgrade --user ipython
     ~~~
 
     You might need `pip` that can be installed (under Ubuntu and alike) with:
 
     ~~~
-    sudo apt-get install python-pip
+    $ sudo apt-get install python-pip
     ~~~
 
 *   *What if I get some missing packages messages when I run `make check`?*
@@ -481,11 +533,10 @@ FAQ
     Some additional packages are required. They can be installed (under Ubuntu and alike) with:
     
     ~~~
-    sudo apt-get install pandoc
+    $ sudo apt-get install pandoc
     ~~~
 
 *   *Where should pages go if multiple boot camps are running at a site simultaneously?*
     <br/>
     Use subdirectories like `2013-07-01-esu/beginners`,
     so that main directory names always follow our four-part convention.
-
