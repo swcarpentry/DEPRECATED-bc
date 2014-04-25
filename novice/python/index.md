@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: Programming with Python
-level: novice
 ---
 The best way to learn how to program is to do something useful,
 so this introduction to Python is built around a common scientific task:
@@ -30,5 +29,6 @@ and to use that language *well*.
 4.  [Making Choices](04-cond.html)
 5.  [Defensive Programming](05-defensive.html)
 6.  [Command-Line Programs](06-cmdline.html)
+7.  [Working With Climate Data](07-climate.html)
 
 </div>

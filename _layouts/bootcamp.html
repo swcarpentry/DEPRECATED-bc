@@ -3,11 +3,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    {% if page.title %}
-      <title>{{ page.title }}</title>
-    {% else %}
-      <title>{{ page.venue }}</title>
-    {% endif %}
+    <title>Software Carpentry: {{ page.venue }}</title>
     {% include header.html %}
     <meta name="venue" content="{{page.venue}}" />
     <meta name="date" content="{{page.humandate}}" />

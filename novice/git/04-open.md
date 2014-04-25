@@ -2,7 +2,6 @@
 layout: lesson
 root: ../..
 title: Open Science
-level: novice
 ---
 <div class="objectives" markdown="1">
 
@@ -91,7 +90,7 @@ people can choose between the [GNU Public License](http://opensource.org/license
 and licenses like the [MIT](http://opensource.org/licenses/MIT)
 and [BSD](http://opensource.org/licenses/BSD-2-Clause) licenses on the other.
 All of these licenses allow unrestricted sharing and modification of programs,
-but the GPL is [infective](../gloss.html#infective-license):
+but the GPL is [infective](../../gloss.html#infective-license):
 anyone who distributes a modified version of the code
 (or anything that includes GPL'd code)
 must make *their* code freely available as well.
@@ -186,6 +185,7 @@ You may also want to include a file called `CITATION` or `CITATION.txt`
 that describes how to reference your project;
 the one for Software Carpentry states:
 
+<div class="file" markdown="1">
 ~~~
 To reference Software Carpentry in publications, please cite both of the following:
 
@@ -200,6 +200,7 @@ Greg Wilson: "Software Carpentry: Lessons Learned". arXiv:1307.5448, July 2013.
   eprint      = {1307.5448}
 }
 ~~~
+</div>
 
 #### Hosting
 

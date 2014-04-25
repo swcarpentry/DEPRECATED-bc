@@ -7,7 +7,7 @@ title: Glossary
 A [path](#path) that refers to a particular location in a file system.
 Absolute paths are usually written with respect to the file system's
 [root directory](#root-directory),
-and begin with either "/" (on Unix) or "\" (on Microsoft Windows).
+and begin with either "/" (on Unix) or "\\" (on Microsoft Windows).
 See also: [relative path](#relative-path).
 
 **additive color model**: <a name="additive-color-model"></a>
@@ -18,7 +18,7 @@ such as [red, green, and blue](#rgb).
 A function such as `sum` or `max` that combines many values to produce a single result.
 
 **alias** (a library): <a name="alias-library"></a>
-To give a library a nickname while importing it.
+To give a [library](#library) a nickname while importing it.
 
 **assertion**: <a name="assertion"></a>
 An expression which is supposed to be true at a particular point in a program.
@@ -221,7 +221,7 @@ The value of immutable data cannot be altered after it has been created.
 See also: [mutable](#mutable).
 
 **import**: <a name="import"></a>
-To load a library into a program.
+To load a [library](#library) into a program.
 
 **in-place operator**: <a name="in-place-operator"></a>
 An operator such as `+=` that provides a shorthand notation for
@@ -251,6 +251,10 @@ See also: [floating-point number](#float).
 An expression whose value doesn't change during the execution of a program,
 typically used in an [assertion](#assertion).
 See also: [precondition](#precondition), [postcondition](#postcondition).
+
+**library**: <a name="library"></a>
+A family of code units (functions, classes, variables) that implement a set of
+related tasks.
 
 **loop variable**: <a name="loop-variable"></a>
 The variable that keeps track of the progress of the loop.
@@ -381,7 +385,7 @@ A collection of data organized into [tables](#table-database).
 **relative path**: <a name="relative-path"></a>
 A [path](#path) that specifies the location of a file or directory
 with respect to the [current working directory](#current-working-directory).
-Any path that does not begin with a separator character ("/" or "\") is a relative path.
+Any path that does not begin with a separator character ("/" or "\\") is a relative path.
 See also: [absolute path](#absolute-path).
 
 **remote repository**: <a name="repository-remote"></a>
@@ -411,7 +415,7 @@ Each color's value is typically in the range 0..255
 
 **root directory**: <a name="root-directory"></a>
 The top-most directory in a [filesystem](#filesystem).
-Its name is "/" on Unix (including Linux and Mac OS X) and "\" on Microsoft Windows.
+Its name is "/" on Unix (including Linux and Mac OS X) and "\\" on Microsoft Windows.
 
 **sentinel value**: <a name="sentinel-value"></a>
 A value in a collection that has a special meaning,
