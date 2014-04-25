@@ -106,7 +106,7 @@ lessons for a couple of reasons like:
 
 Besides our suggestion students can use their favorite text editor (**please
 make this clear in the setting up part of the lesson**) and sometimes it could
-became a problem. Bellow you will find some tips that could help solving
+became a problem. Below you will find some tips that could help solving
 problems when using other text editor than `nano`.
 
 ##### Gedit
@@ -132,4 +132,4 @@ Aborting commit due to empty commit message.
 ~~~
 </div>
 
-that will happen if the student already has a window of Gedit.
+that will happen if the student already has a Gedit window open.
