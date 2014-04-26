@@ -17,12 +17,12 @@ when we begin to collaborate with other people.
 We already have most of the machinery we need to do this;
 the only thing missing is to copy changes from one repository to another.
 
-Systems like Git and Mercurial allow us to move work between any two repositories.
+Systems like Mercurial and Git allow us to move work between any two repositories.
 In practice,
 though,
 it's easiest to use one copy as a central hub,
 and to keep it on the web rather than on someone's laptop.
-Most programmers use hosting services like [GitHub](http://github.com) or [BitBucket](http://bitbucket.org)
+Most programmers use hosting services like [BitBucket](http://bitbucket.org) or [GitHub](http://github.com)
 to hold those master copies;
 we'll explore the pros and cons of this in the final section of this lesson.
 
