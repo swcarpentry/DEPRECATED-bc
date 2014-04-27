@@ -50,8 +50,14 @@ when that record is deleted.
 See also: [referential integrity](#referential-integrity).
 
 **case insensitive**: <a name="case-insensitive"></a>
-Treating text as if upper and lower case characters were the same.
-See also: [case sensitive](#case-sensitive).
+Treating text as if upper and lower case characters were the same
+(e.g., "apple" is treated the same way as "Apple"). See also:
+[case sensitive](#case-sensitive).
+
+**case sensitive**: <a name="case-sensitive"></a>
+Treating text as if upper and lower case characters were *not* the
+same (e.g., "apple" is treated differently from "Apple"). See also:
+[case insensitive](#case-insensitive).
 
 **change set**: <a name="change-set"></a>
 A group of changes to one or more files
@@ -504,6 +510,13 @@ against which the results of a test can be compared.
 
 **test-driven development** (TDD): <a name="test-driven-development"></a>
 The practice of writing unit tests *before* writing the code they test.
+
+**traceback**: <a name="traceback"></a>
+The text that is printed when a program encounters an error. It
+includes information about what the program had been executing when
+the error occurred (and in particular, the file name and line number),
+the name or category of the error, and a more detailed message about
+the error.
 
 **tuple**: <a name="tuple"></a>
 An [immutable](#immutable) [sequence](#sequence) of values.
