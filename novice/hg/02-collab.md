@@ -240,7 +240,7 @@ added 1 changesets with 1 changes to 1 files
 
 which gives us this:
 
-<img src="img/git-after-pulling-to-local-repo.svg" alt="After Pulling Change to Local Repository" />
+<img src="img/hg-after-pulling-to-local-repo.svg" alt="After Pulling Change to Local Repository" />
 
 In practice,
 we would probably never have two copies of the same remote repository
