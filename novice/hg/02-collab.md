@@ -41,18 +41,18 @@ BitBucket displays a page with a URL and some information on how to configure yo
 
 <img src="img/bitbucket-create-repo-03.png" width=800 alt="Creating a Repository on BitBucket (Step 3)" />
 
-This effectively does the following on GitHub's servers:
+This effectively does the following on BitBucket's servers:
 
 <div class="in" markdown="1">
 ~~~
 $ mkdir planets
 $ cd planets
-$ git init
+$ hg init
 ~~~
 </div>
 
 Our local repository still contains our earlier work on `mars.txt`,
-but the remote repository on GitHub doesn't contain any files yet:
+but the remote repository on BitBucket doesn't contain any files yet:
 
 <img src="img/git-freshly-made-github-repo.svg" alt="Freshly-Made GitHub Repository" />
 
