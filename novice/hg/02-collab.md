@@ -153,17 +153,17 @@ To do this,
 `cd` to the directory `/tmp`.
 (Note the absolute path:
 don't make `tmp` a subdirectory of the existing repository).
-Instead of creating a new repository here with `git init`,
-we will [clone](../../gloss.html#repository-clone) the existing repository from GitHub:
+Instead of creating a new repository here with `hg init`,
+we will [clone](../../gloss.html#repository-clone) the existing repository from BitBucket:
 
 <div class="in" markdown="1">
 ~~~
 $ cd /tmp
-$ git clone https://github.com/vlad/planets.git
+$ hg clone https://bitbucket.org/vlad/planets
 ~~~
 </div>
 
-`git clone` creates a fresh local copy of a remote repository.
+`hg clone` creates a fresh local copy of a remote repository.
 (We did it in `/tmp` or some other directory so that we don't overwrite our existing `planets` directory.)
 Our computer now has two copies of the repository:
 
