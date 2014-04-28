@@ -185,33 +185,26 @@ It is so a planet!
 </div>
 <div class="in" markdown="1">
 ~~~
-$ git add pluto.txt
-$ git commit -m "Some notes about Pluto"
-~~~
-</div>
-<div class="out" markdown="1">
-~~~
- 1 file changed, 1 insertion(+)
- create mode 100644 pluto.txt
+$ hg add pluto.txt
+$ hg commit -m "Some notes about Pluto"
 ~~~
 </div>
 
-then push the change to GitHub:
+then push the change to BitBucket:
 
 <div class="in" markdown="1">
 ~~~
-$ git push origin master
+$ hg push
 ~~~
 </div>
 <div class="out" markdown="1">
 ~~~
-Counting objects: 4, done.
-Delta compression using up to 4 threads.
-Compressing objects: 100% (2/2), done.
-Writing objects: 100% (3/3), 306 bytes, done.
-Total 3 (delta 0), reused 0 (delta 0)
-To https://github.com/vlad/planets.git
-   9272da5..29aba7c  master -> master
+pushing to https://bitbucket.org/vlad/planets
+searching for changes
+adding changesets
+adding manifests
+adding file changes
+added 1 changesets with 1 changes to 1 files
 ~~~
 </div>
 
