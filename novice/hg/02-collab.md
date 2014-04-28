@@ -57,18 +57,16 @@ but the remote repository on BitBucket doesn't contain any files yet:
 <img src="img/hg-freshly-made-bitbucket-repo.svg" alt="Freshly-Made BitBucket Repository" />
 
 The next step is to connect the two repositories.
-We do this by making the GitHub repository a [remote](../../gloss.html#repository-remote)
+We do this by making the BitBucket repository a [remote](../../gloss.html#repository-remote)
 for the local repository.
-The home page of the repository on GitHub includes
-the string we need to identify it:
+The home page of the repository on BitBucket includes
+the string we need to identify it after clicking on "I have an existing project to push up":
 
-<img src="img/github-find-repo-string.png" alt="Where to Find Repository URL on GitHub" />
+<img src="img/bitbucket-find-repo-string.png" width=800 alt="Where to Find Repository URL on BitBucket" />
 
-Click on the 'HTTPS' link to change the [protocol](../../gloss.html#protocol) from SSH to HTTPS.
+Change the 'ssh://' string to 'https://' in the url [protocol](../../gloss.html#protocol).
 It's slightly less convenient for day-to-day use,
-but much less work for beginners to set up:
-
-<img src="img/github-change-repo-string.png" alt="Changing the Repository URL on GitHub" />
+but much less work for beginners to set up.
 
 Copy that URL from the browser,
 go into the local `planets` repository,
@@ -76,7 +74,16 @@ and run this command:
 
 <div class="in" markdown="1">
 ~~~
-$ git remote add origin https://github.com/vlad/planets
+$ hg config --local (a shortcut for 'nano .hg/hgrc')
+~~~
+</div>
+
+and add the following lines:
+
+<div class="out" markdown="1">
+~~~
+  [paths]
+  default = https://bitbucket.org/vlad/planets
 ~~~
 </div>
 
