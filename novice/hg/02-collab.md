@@ -37,9 +37,9 @@ Name your repository "planets" and then click "Create Repository":
 <img src="img/bitbucket-create-repo-02.png" width=600 alt="Creating a Repository on BitBucket (Step 2)" />
 
 As soon as the repository is created,
-GitHub displays a page with a URL and some information on how to configure your local repository:
+BitBucket displays a page with a URL and some information on how to configure your local repository:
 
-<img src="img/github-create-repo-03.png" alt="Creating a Repository on GitHub (Step 3)" />
+<img src="img/bitbucket-create-repo-03.png" width=800 alt="Creating a Repository on BitBucket (Step 3)" />
 
 This effectively does the following on GitHub's servers:
 
