@@ -335,7 +335,7 @@ mv original-unicorn.dat original-unicorn
 > ~~~
 > 
 > Oops: each time through the loop the shell looks for a variable named `filenamebackup`, which doesn't exist.
-> To avoid confusing our `$filename` variable with the text ".backup",
+> To avoid confusing our `$filename` variable with the text "backup",
 > we can use curly braces:
 >
 > ~~~
