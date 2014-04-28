@@ -1,3 +1,9 @@
+---
+layout: lesson
+root: ../..
+---
+
+
 This lesson is written as an introduction to R,
 but its real purpose is to introduce the single most important idea in programming:
 how to solve problems by building functions,
