@@ -131,20 +131,20 @@ We can pull changes from the remote repository to the local one as well:
 
 <div class="in" markdown="1">
 ~~~
-$ git pull origin master
+$ hg pull
 ~~~
 </div>
 <div class="out" markdown="1">
 ~~~
-From https://github.com/vlad/planets
- * branch            master     -> FETCH_HEAD
-Already up-to-date.
+pulling from https://bitbucket.org/vlad/planets
+searching for changes
+no changes found
 ~~~
 </div>
 
 Pulling has no effect in this case
 because the two repositories are already synchronized.
-If someone else had pushed some changes to the repository on GitHub,
+If someone else had pushed some changes to the repository on BitBucket,
 though,
 this command would download them to our local repository.
 
