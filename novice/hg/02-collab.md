@@ -90,43 +90,36 @@ and add the following lines:
 Make sure to use the URL for your repository rather than Vlad's:
 the only difference should be your username instead of `vlad`.
 
-We can check that the command has worked by running `git remote -v`:
+We can check that the command has worked by running `hg paths`:
 
 <div class="in" markdown="1">
 ~~~
-$ git remote -v
+$ hg paths
 ~~~
 </div>
 <div class="out" markdown="1">
 ~~~
-origin   https://github.com/vlad/planets.git (push)
-origin   https://github.com/vlad/planets.git (fetch)
+default = https://bitbucket.org/vlad/planets
 ~~~
 </div>
 
-The name `origin` is a local nickname for your remote repository:
-we could use something else if we wanted to,
-but `origin` is by far the most common choice.
-
-Once the nickname `origin` is set up,
+Once the default path is set up,
 this command will push the changes from our local repository
-to the repository on GitHub:
+to the repository on BitBucket:
 
 <div class="in" markdown="1">
 ~~~
-$ git push origin master
+$ hg push
 ~~~
 </div>
 <div class="out" markdown="1">
 ~~~
-Counting objects: 9, done.
-Delta compression using up to 4 threads.
-Compressing objects: 100% (6/6), done.
-Writing objects: 100% (9/9), 821 bytes, done.
-Total 9 (delta 2), reused 0 (delta 0)
-To https://github.com/vlad/planets
- * [new branch]      master -> master
-Branch master set up to track remote branch master from origin.
+pushing to https://bitbucket.org/vlad/planets
+searching for changes
+adding changesets
+adding manifests
+adding file changes
+added 1 changesets with 1 changes to 1 files
 ~~~
 </div>
 
