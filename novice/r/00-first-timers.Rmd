@@ -5,7 +5,7 @@ root: ../..
 
 
 ```{r, echo=FALSE}
-opts_chunk$set(results='hide')
+opts_chunk$set(results="markup")
 ```
 # Novice R materials - following Python examples
 --------------------------------------------------

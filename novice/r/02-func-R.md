@@ -39,7 +39,18 @@ When we call the function, the values we pass to it are assigned to those variab
 
 ```r
 fahr_to_kelvin(32)
+```
+
+```
+## [1] 273.1
+```
+
+```r
 paste("boiling point of water:", fahr_to_kelvin(212))
+```
+
+```
+## [1] "boiling point of water: 373.15"
 ```
 
 
@@ -81,6 +92,10 @@ kelvin_to_celsius <- function(temp) {
 paste("absolute zero in Celsius:", kelvin_to_celsius(0))
 ```
 
+```
+## [1] "absolute zero in Celsius: -273.15"
+```
+
 
 What about converting Fahrenheit to Celsius? We could write out the formula, but we don't need to. Instead, we can compose the two functions we have already created:
 
@@ -93,6 +108,10 @@ fahr_to_celsius <- function(temp) {
 }
 
 paste("freezing point of water in Celsius:", fahr_to_celsius(32))
+```
+
+```
+## [1] "freezing point of water in Celsius: 0"
 ```
 
 
@@ -129,6 +148,11 @@ pangram <- "the quick brown fox jumps over the lazy dog"
 strsplit(pangram, " ")
 ```
 
+```
+## [[1]]
+## [1] "the"   "quick" "brown" "fox"   "jumps" "over"  "the"   "lazy"  "dog"
+```
+
                 
 The output from strsplit is in a list. 
 Notice that the unusual first line of `strsplit()`’s output consists of `[[1]]`. 
@@ -152,7 +176,18 @@ We can then pull out the different words using indexing, where `words[1]` is the
 
 ```r
 words[2]
+```
+
+```
+## [1] "quick"
+```
+
+```r
 words[9]
+```
+
+```
+## [1] "dog"
 ```
 
 
@@ -174,13 +209,28 @@ out <- function(word) {
 out("helium")
 ```
 
+```
+## [1] "hm"
+```
+
 
 __Making our function work with different inputs__. If we want just the last word, but we can't remember how long our sentence is, we can use `length()`
 
 
 ```r
 length(words)
+```
+
+```
+## [1] 9
+```
+
+```r
 words[length(words)]
+```
+
+```
+## [1] "dog"
 ```
 
 
@@ -223,6 +273,10 @@ f <- function() {
 f()
 ```
 
+```
+## [1] 50
+```
+
 There is no name `a` defined within the body of `f()`. Following lexical scoping rules, R will look in the *parent frame* of `f()` for a name `a`, which is found and has value `10`. As `f()` is defined in the workspace, the enclosing environment of `f()` is the *global environment*. Regardless of how functions are nested when called, R will always look for a name from the inside out until the global environment is reached.
 
 When we nest a call to `fahr_to_kelvin()` inside `fahr_to_celsius()`, R creates another local environment to hold the variables involved in the evaluation of `fahr_to_kelvin()`.
@@ -252,7 +306,7 @@ paste("final value of temp after all function calls:", temp)
 ```
 
 ```
-## Error: object 'temp' not found
+## [1] "final value of temp after all function calls: list(list(list()))"
 ```
 
 
@@ -273,6 +327,10 @@ Notice `span()` assigns a value to variable called `diff`. We might very well us
 ```r
 diff <- c(46, 55, 26, 64, 31, 68, 100, 79, 39, 95)
 span(diff)
+```
+
+```
+## [1] 74
 ```
 
 
@@ -315,6 +373,12 @@ z <- matrix(nrow = 2, ncol = 2)
 center(z, 3)
 ```
 
+```
+##      [,1] [,2]
+## [1,]   NA   NA
+## [2,]   NA   NA
+```
+
 
 That looks right, so let's try center on our real data:
 
@@ -331,10 +395,21 @@ It's hard to tell from the default output whether the result is correct, but the
 
 ```r
 paste("original min, mean, and max are:", min(mat), ",", mean(mat), ",", max(mat))
+```
+
+```
+## [1] "original min, mean, and max are: 1 , 800.5 , 1600"
+```
+
+```r
 centered <- center(mat, 0)
 
 paste("original min, mean, and max are:", min(centered), ",", mean(centered), 
     ",", max(centered))
+```
+
+```
+## [1] "original min, mean, and max are: -799.5 , 0 , 799.5"
 ```
 
 
@@ -345,6 +420,10 @@ That seems almost right: the original mean was about 6.1, so the lower bound fro
 paste("std dev before and after:", sd(mat), sd(centered))
 ```
 
+```
+## [1] "std dev before and after: 462.024530373298 462.024530373298"
+```
+
 
 Those values look the same, but we probably wouldn't notice if they were different in the sixth decimal place. Let's do this instead:
 
@@ -353,12 +432,20 @@ Those values look the same, but we probably wouldn't notice if they were differe
 paste("difference in standard deviations before and after:", sd(mat) - sd(centered))
 ```
 
+```
+## [1] "difference in standard deviations before and after: 0"
+```
+
 
 Sometimes, a very small difference can be detected. This could be due to rounding at very low decimal places. R has a useful function for comparing two objects allowing for rounding errors, `all.equal()`:
 
 
 ```r
 all.equal(sd(mat), sd(centered))
+```
+
+```
+## [1] TRUE
 ```
 
 
@@ -394,6 +481,12 @@ We have passed parameters to functions in two ways: directly, as in `dim(mat)`, 
 matrix(0, 2, 2)
 ```
 
+```
+##      [,1] [,2]
+## [1,]    0    0
+## [2,]    0    0
+```
+
 
 To understand what's going on, and make our own functions easier to use, let's re-define our `center()` function like this:
 
@@ -416,6 +509,12 @@ test_data <- matrix(0, 2, 2)
 center(test_data, 3)
 ```
 
+```
+##      [,1] [,2]
+## [1,]    3    3
+## [2,]    3    3
+```
+
 
 But we can also now call `center()` with just one parameter, in which case `desired` is automatically assigned the default value of `0`:
 
@@ -423,7 +522,22 @@ But we can also now call `center()` with just one parameter, in which case `desi
 ```r
 more_data <- matrix(0, 2, 2) + 5
 more_data
+```
+
+```
+##      [,1] [,2]
+## [1,]    5    5
+## [2,]    5    5
+```
+
+```r
 center(more_data)
+```
+
+```
+##      [,1] [,2]
+## [1,]    0    0
+## [2,]    0    0
 ```
 
 
@@ -446,9 +560,34 @@ display <- function(a = 1, b = 2, c = 3) {
 }
 
 paste("no parameters:", display())
+```
+
+```
+## [1] "no parameters: a: 1 b: 2 c: 3"
+```
+
+```r
 paste("one parameter:", display(55))
+```
+
+```
+## [1] "one parameter: a: 55 b: 2 c: 3"
+```
+
+```r
 paste("two parameters:", display(55, 66))
+```
+
+```
+## [1] "two parameters: a: 55 b: 66 c: 3"
+```
+
+```r
 paste("three parameters:", display(55, 66, 77))
+```
+
+```
+## [1] "three parameters: a: 55 b: 66 c: 77"
 ```
 
 
@@ -457,6 +596,10 @@ As this example shows, arguments are matched from left to right, and any that ha
 
 ```r
 paste("only setting the value of c", display(c = 77))
+```
+
+```
+## [1] "only setting the value of c a: 1 b: 2 c: 77"
 ```
 
 
