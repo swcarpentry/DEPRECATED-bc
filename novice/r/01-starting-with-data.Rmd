@@ -1,5 +1,11 @@
+---
+layout: lesson
+root: ../..
+---
+
+
 ```{r, echo=FALSE}
-opts_chunk$set(results='hide')
+opts_chunk$set(results="markup")
 ```
 # Analyzing Patient Data
 
