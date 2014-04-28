@@ -279,7 +279,7 @@ mv unicorn.dat original-unicorn.dat
 > you're still learning how loops work.
 
 Now that we have our files renamed with the prefix "original-",
-let's reverse course and take off the text.
+let's reverse course and take off the prefix.
 By placing the variable's name within curly braces, e.g., `${filename}`,
 you gain new powers&mdash;like the ability to modify the variable's value when you extract it.
 
@@ -302,7 +302,7 @@ mv original-unicorn.dat unicorn.dat
 ~~~
 </div>
 
-And by using `%` instead of `#` removes text from the end:
+And using `%` instead of `#` removes text from the end:
 
 <div class="in" markdown="1">
 ~~~
@@ -325,7 +325,7 @@ mv original-unicorn.dat original-unicorn
 > #### Avoid confusing variable names and text
 > 
 > Sometimes you may want to add something to the end of a variable's value.
-> For example, you might add "backup" to the end of your filenames:
+> For example, you might add "backup" to the end of your files' names:
 > 
 > ~~~
 > for filename in *.dat
