@@ -27,10 +27,10 @@ to hold those master copies;
 we'll explore the pros and cons of this in the final section of this lesson.
 
 Let's start by sharing the changes we've made to our current project with the world.
-Log in to GitHub,
+Log in to BitBucket,
 then click on the icon in the top right corner to create a new repository called `planets`:
 
-<img src="img/github-create-repo-01.png" alt="Creating a Repository on GitHub (Step 1)" />
+<img src="img/bitbucket-create-repo-01.png" width=600 alt="Creating a Repository on BitBucket (Step 1)" />
 
 Name your repository "planets" and then click "Create Repository":
 
