@@ -54,7 +54,7 @@ $ hg init
 Our local repository still contains our earlier work on `mars.txt`,
 but the remote repository on BitBucket doesn't contain any files yet:
 
-<img src="img/git-freshly-made-github-repo.svg" alt="Freshly-Made GitHub Repository" />
+<img src="img/hg-freshly-made-bitbucket-repo.svg" alt="Freshly-Made BitBucket Repository" />
 
 The next step is to connect the two repositories.
 We do this by making the GitHub repository a [remote](../../gloss.html#repository-remote)
