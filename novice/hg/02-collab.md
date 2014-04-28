@@ -267,11 +267,11 @@ to share work between different people and machines.
 
 #### Challenges
 
-1.  Create a repository on GitHub,
+1.  Create a repository on BitBucket,
     clone it,
     add a file,
-    push those changes to GitHub,
-    and then look at the [timestamp](../../gloss.html#timestamp) of the change on GitHub.
-    How does GitHub record times, and why?
+    push those changes to BitBucket,
+    and then look at the [timestamp](../../gloss.html#timestamp) of the change on BitBucket.
+    How does BitBucket record times, and why?
 
 </div>
