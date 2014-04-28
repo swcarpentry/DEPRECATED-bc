@@ -224,22 +224,17 @@ We can now download changes into the original repository on our machine:
 <div class="in" markdown="1">
 ~~~
 $ cd ~/planets
-$ git pull origin master
+$ hg pull
 ~~~
 </div>
 <div class="out" markdown="1">
 ~~~
-remote: Counting objects: 4, done.
-remote: Compressing objects: 100% (2/2), done.
-remote: Total 3 (delta 0), reused 3 (delta 0)
-Unpacking objects: 100% (3/3), done.
-From https://github.com/vlad/planets
- * branch            master     -> FETCH_HEAD
-Updating 9272da5..29aba7c
-Fast-forward
- pluto.txt | 1 +
- 1 file changed, 1 insertion(+)
- create mode 100644 pluto.txt
+pulling from https://bitbucket.org/vlad/planets
+searching for changes
+adding changesets
+adding manifests
+adding file changes
+added 1 changesets with 1 changes to 1 files
 ~~~
 </div>
 
