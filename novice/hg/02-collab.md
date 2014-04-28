@@ -167,7 +167,7 @@ $ hg clone https://bitbucket.org/vlad/planets
 (We did it in `/tmp` or some other directory so that we don't overwrite our existing `planets` directory.)
 Our computer now has two copies of the repository:
 
-<img src="img/git-after-duplicate-clone.svg" alt="After Creating Duplicate Clone of Repository" />
+<img src="img/hg-after-duplicate-clone.svg" alt="After Creating Duplicate Clone of Repository" />
 
 Let's make a change in the copy in `/tmp/planets`:
 
