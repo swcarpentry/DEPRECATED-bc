@@ -9,6 +9,7 @@ title: Loops
 *   Write a loop that applies one or more commands separately to each file in a set of files.
 *   Trace the values taken on by a loop variable during execution of the loop.
 *   Explain the difference between a variable's name and its value.
+*	Show how to easily modify a variable's value.
 *   Explain why spaces and some punctuation characters shouldn't be used in files' names.
 *   Demonstrate how to see what commands have recently been executed.
 *   Re-run recently executed commands without retyping them.
@@ -204,8 +205,8 @@ the `head` and `tail` combination selects lines 81-100 from whatever file is bei
 > ~~~
 >
 > That's a problem: `head` can't read files called `red` and `dragon.dat`
-> because they don't exist,
-> and won't be asked to read the file `red dragon.dat`.
+> because they don't exist;
+> so the shell won't be asked to read the desired file `red dragon.dat`.
 > 
 > We can make our script a little bit more robust
 > by [quoting](../../gloss.html#shell-quoting) our use of the variable:
@@ -276,6 +277,80 @@ mv unicorn.dat original-unicorn.dat
 > then press "enter" to run the loop with the actual `mv` commands. This
 > isn't foolproof, but it's a handy way to see what's going to happen when
 > you're still learning how loops work.
+
+Now that we have our files renamed with the prefix "original-",
+let's reverse course take off the text.
+By placing the variable's name within curly braces, `${filename}`,
+you gain new powers&mdash;like the ability to modify the contents of the variable.
+
+<div class="in" markdown="1">
+~~~
+for filename in *.dat
+do
+    echo mv $filename ${filename#original-}
+done
+~~~
+</div>
+
+The `#` notation removes text from the beginning of a variable's contents.
+So this loop would print:
+
+<div class="out" markdown="1">
+~~~
+mv original-basilisk.dat basilisk.dat
+mv original-unicorn.dat unicorn.dat
+~~~
+</div>
+
+And by using `%` instead of `#` we remove text from the end:
+
+<div class="in" markdown="1">
+~~~
+for filename in *.dat
+do
+    echo mv $filename ${filename%.dat}
+done
+~~~
+</div>
+
+prints:
+
+<div class="out" markdown="1">
+~~~
+mv original-basilisk.dat original-basilisk
+mv original-unicorn.dat original-unicorn
+~~~
+</div>
+
+> #### Avoid confusing variable names and text
+> 
+> Sometimes you may want to add something to the end of the contents of a variable.
+> For example, you might add backup to the end of your filenames:
+> 
+> ~~~
+> for filename in *.dat
+> do
+>     echo mv $filenamebackup
+> done
+> ~~~
+> 
+> Oops: each time through the loop the shell looks for a variable named `filenamebackup`, which doesn't exist.
+> To avoid confusing our `$filename` variable with the text ".backup",
+> we can use curly braces:
+>
+> ~~~
+> for filename in *.dat
+> do
+>     echo mv $filename ${filename}backup
+> done
+> ~~~
+>
+> which prints:
+>
+> ~~~
+> mv original-basilisk.dat original-basilisk.datbackup
+> mv original-unicorn.dat original-unicorn.datbackup
+> ~~~
 
 #### Nelle's Pipeline: Processing Files
 
@@ -424,7 +499,8 @@ so she decides to get some coffee and catch up on her reading.
 #### Key Points
 *   A `for` loop repeats commands once for every thing in a list.
 *   Every `for` loop needs a variable to refer to the current "thing".
-*   Use `$name` to expand a variable (i.e., get its value).
+*   Use `$name` to expand a variable (i.e., get its value), and `${name}` to avoid confusing variable names and text
+*	Remove text from the beginning `${name#text}` or end `${name%text}` of a variable's value.
 *   Do not use spaces, quotes, or wildcard characters such as '*' or '?' in filenames, as it complicates variable expansion.
 *   Give files consistent names that are easy to match with wildcard patterns to make it easy to select them for looping.
 *   Use the up-arrow key to scroll up through previous commands to edit and repeat them.
@@ -469,7 +545,24 @@ so she decides to get some coffee and catch up on her reading.
         `xylose.dat`, and copies `sucrose.dat` to create `xylose.dat`.
     4.  None of the above.
 
-3.  The `expr` does simple arithmetic using command-line parameters:
+	<br/>
+3. 	In the same directory, to replace the .dat extension in the filenames with .txt 
+	which of the following commands would you put in the body of this loop:
+
+    ~~~
+    for sugar in *.dat
+    do
+	
+    done
+    ~~~
+
+	1.	mv $sugar $sugar.txt
+	2.	mv $sugar ${sugar%.dat}.txt
+	3.	mv $sugar.dat $sugar.txt
+	4.	mv $sugar ${sugar#.dat}.txt
+	
+	<br/>
+4.  The `expr` does simple arithmetic using command-line parameters:
 
     ~~~
     $ expr 3 + 5
@@ -489,8 +582,7 @@ so she decides to get some coffee and catch up on her reading.
         done
     done
     ~~~
-
-4.  Describe in words what the following loop does.
+5.  Describe in words what the following loop does.
 
     ~~~
     for how in frog11 prcb redig
