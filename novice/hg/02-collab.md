@@ -208,16 +208,16 @@ added 1 changesets with 1 changes to 1 files
 ~~~
 </div>
 
-Note that we didn't have to create a remote called `origin`:
-Git does this automatically,
+Note that we didn't have to create a remote called `default`:
+Mercurial does this automatically,
 using that name,
 when we clone a repository.
-(This is why `origin` was a sensible choice earlier
+(This is why `default` was a sensible choice earlier
 when we were setting up remotes by hand.)
 
 Our three repositories now look like this:
 
-<img src="img/git-after-change-to-duplicate-repo.svg" alt="After Pushing Change from Duplicate Repository" />
+<img src="img/hg-after-change-to-duplicate-repo.svg" alt="After Pushing Change from Duplicate Repository" />
 
 We can now download changes into the original repository on our machine:
 
