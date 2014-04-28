@@ -125,7 +125,7 @@ added 1 changesets with 1 changes to 1 files
 
 Our local and remote repositories are now in this state:
 
-<img src="img/github-repo-after-first-push.svg" alt="GitHub Repository After First Push" />
+<img src="img/bitbucket-repo-after-first-push.svg" alt="BitBucket Repository After First Push" />
 
 > #### The '-u' Flag
 >
