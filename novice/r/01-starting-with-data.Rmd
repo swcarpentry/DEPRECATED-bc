@@ -414,17 +414,10 @@ plot(tempo, min_inflammation)
 
 The maximum value rises and falls perfectly smoothly, while the minimum seems to be a step function. Neither result seems particularly likely, so either there's a mistake in our calculations or something is wrong with our data.
 
-```{r}
-library(ggplot2)
-ggplot(d.summary, aes(tempo, avg_inflammation)) + geom_point()
-```
-
 __EXERCISES__
 
 1. Create a plot showing the standard deviation of the inflammation data 
 for each day across all patients.
-
-2. Create a ggplot that shows the data as a line. As a histogram. etc.
 
 ## Key Points
 
@@ -441,7 +434,7 @@ for each day across all patients.
 * Use `mean()`, `max()`, `min()` and `sd()` to calculate simple statistics.
 * Update vectors using `append()`
 <!-- * Write a simple for loop -->
-* Use base R and the **ggplot2** package for creating simple visualizations.
+* Use base R to create simple visualizations.
 
 ## Next Steps
 
