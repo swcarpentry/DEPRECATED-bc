@@ -397,7 +397,7 @@ d.summary <- data.frame(tempo, avg_inflammation, min_inflammation, max_inflammat
 ```
 
 ## Plotting  
-The mathematician Richard Hamming once said, "The purpose of computing is insight, not numbers," and the best way to develop insight is often to visualize data. Visualization deserves an entire lecture (or course) of its own, but we can explore a few features of R's base plotting package and **ggplot2** here. 
+The mathematician Richard Hamming once said, "The purpose of computing is insight, not numbers," and the best way to develop insight is often to visualize data. Visualization deserves an entire lecture (or course) of its own, but we can explore a few features of R's base plotting package. 
 
 Lets use the average inflammation data that we saved and plot it over the study time. 
 
