@@ -3,16 +3,14 @@ layout: lesson
 root: ../..
 ---
 
-
 ```{r, echo=FALSE}
-opts_chunk$set(results="markup")
+opts_chunk$set(results="markup", fig.path="figure/01-starting-with-data-")
 ```
 # Analyzing Patient Data
 
 We are studying inflammation in patients who have been given a new treatment for arthritis,
 and need to analyze the first dozen data sets. 
-The data sets are stored in .csv each row holds information for a single patient, 
-and the columns represent successive days. 
+The data sets are stored in `.csv` each row holds information for a single patient, and the columns represent successive days. 
 The first few rows of our first file look like this:
 
 	0,0,1,3,1,2,4,7,8,3,3,3,10,5,7,4,7,7,12,18,6,13,11,11,7,7,4,6,8,8,4,4,5,7,3,4,2,3,0,0
@@ -90,35 +88,57 @@ and do arithmetic with it:
 2.2 * weight_kg
 ```
 
-We can use the function `paste()` to print several things at once, if we separate them with commas.
+We can use the function `paste()` to strings made up from different objects, if we separate them with commas.
 
 ```{r}
 paste("weight in pounds:", 2.2 * weight_kg)
+```
+
+To write lines of text to the screen, we can use `cat()` or `writeLines()`
+
+
+```{r}
+string <- paste("weight in pounds:", 2.2 * weight_kg)
+cat(string)
+cat(string, "\n")
+writeLines(string)
+```
+
+In normal use however, R will print to the console an object returned by a function or operation *unless* we assign it to a variable. Remember, to view a variable just type the name of the variable and hit return
+
+```{r}
+string
 ```
 
 We can also change an object's value by assigning it a new value:
 
 ```{r}
 weight_kg <- 57.5
-paste("weight in kilograms is now:", weight_kg)
+# weight in kilograms is now
+weight_kg
 ```
 
 If we imagine the variable as a sticky note with a name written on it, 
-assignment is like putting the sticky note on a particular value:
-
+assignment is like putting the sticky note on a particular value
 This means that assigning a value to one object does not change the values of other variables. 
-For example, let's store the subject's weight in pounds in a variable:
+For example, let's store the subject's weight in pounds in a variable
 
 ```{r}
 weight_lb <- 2.2 * weight_kg
-paste('weight in kilograms:', weight_kg, 'and in pounds:', weight_lb)
+# weight in kg...
+weight_kg
+# ...and in pounds
+weight_lb
 ```
 
 and then change `weight_kg`:
 
 ```{r}
 weight_kg <- 100.0
-paste('weight in kilograms is now:', weight_kg, 'and weight in pounds is still:', weight_lb)
+# weight in kg now...
+weight_kg
+# ...and in weight pounds still
+weight_lb
 ```
 
 __Updating a Variable__
@@ -159,11 +179,16 @@ This statement doesn't produce any output because assignment doesn't display any
 dat
 ```
 
+For large data sets it is convenient to use the `head()` to display the first few rows of data
+
+```{r}
+head(dat)
+```
+
 __BREAK__
 * Make sure everyone has imported the data
 * How many rows and columns there are
 * What kind of data type is it?
-
 
 ## Manipulating Data
 
@@ -220,14 +245,16 @@ This tells us that data has `r nrow(dat)` rows and `r ncol(dat)` columns.
 If we want to get a single value from the data frame, we must provide an row and column indices for the value we want in square brackets:
 
 ```{r}
-paste('first value in data:', dat[1,1])
-paste('middle value in data:', dat[30,20])
+# first value in dat
+dat[1, 1]
+# middle value in dat
+dat[30, 20]
 ```
 
 R indexes starting at 1. Programming languages like Fortran, MATLAB, and R start counting at 1, because that's what human beings have done for thousands of years. 
 Languages in the C family (including C++, Java, Perl, and Python) count from 0 because that's simpler for computers to do. 
 
-An index like `[30, 20]` selects a single element of data framey, but we can select whole sections as well. 
+An index like `[30, 20]` selects a single element of data frame, but we can select whole sections as well. 
 For example, we can select the first ten days (columns) of values for the first four patients (rows) like this:
 
 ```{r}
@@ -326,14 +353,14 @@ One way to do this is to select the data we want to create a new temporary array
 
 ```{r}
 patient_1 <- dat[1, ] # first row, all of the columns
-paste('maximum inflammation for patient 1:', max(patient_1))
+max(patient_1)        # max inflammation for patient 1
 ```
 
 We don't actually need to store the row in a variable of its own. 
 Instead, we can combine the selection and the method call:
 
 ```{r}
-paste('maximum inflammation for patient 2:', max(dat[2,]))
+max(dat[2,])          # max inflammation for patient 2
 ```
 
 __EXERCISES__
@@ -352,7 +379,7 @@ As the diagram below shows, we want to perform the operation across an axis:
 To support this, in R we can use the `apply()` function:
 
 ```{r, eval=FALSE}
-help(apply) #or ?apply
+help(apply) # r ?apply
 ```
 
 `apply()` allows us to repeat a function on all of the rows (`MARGIN = 1`), columns (`2`), or both(`1:2`) of a matrix (or higher dimensions of an array).
@@ -382,7 +409,7 @@ We can also create a vector of our study days (the number of columns in data)
 
 ```{r}
 tempo <- 1:40
-#or
+# r
 tempo <- 1:ncol(dat)
 ```
 
@@ -395,21 +422,27 @@ d.summary <- data.frame(tempo, avg_inflammation, min_inflammation, max_inflammat
 ```
 
 ## Plotting  
-The mathematician Richard Hamming once said, "The purpose of computing is insight, not numbers," and the best way to develop insight is often to visualize data. Visualization deserves an entire lecture (or course) of its own, but we can explore a few features of R's base plotting package. 
+The mathematician Richard Hamming once said
+
+> The purpose of computing is insight, not numbers
+
+and the best way to develop insight is often to visualize data. Visualization deserves an entire lecture (or course) of its own, but we can explore a few features of R's base plotting package. 
 
 Lets use the average inflammation data that we saved and plot it over the study time. 
 
-```{r}
+```{r, plot-avg-inflammation}
 plot(tempo, avg_inflammation)
 ```
 
 The result is roughly a linear rise and fall, which is suspicious: based on other studies, we expect a sharper rise and slower fall. Let's have a look at two other statistics:
 
-```{r}
+```{r, plot-max-inflammation}
 plot(tempo, max_inflammation)
-plot(tempo, min_inflammation)
 ```
 
+```{r, plot-min-inflammation}
+plot(tempo, min_inflammation)
+```
 The maximum value rises and falls perfectly smoothly, while the minimum seems to be a step function. Neither result seems particularly likely, so either there's a mistake in our calculations or something is wrong with our data.
 
 __EXERCISES__
@@ -423,7 +456,7 @@ for each day across all patients.
 * The key data types in R?
 * Use `variable <- value` to assign a value to a variable in order to record it in memory.
 * Objects are created on demand whenever a value is assigned to them.
-* Use `print(something)` (or just `something`) to display the value of `something`.
+* Use `print(something)` (or just `something`) to display `something`.
 * The expression `dim()` gives the dimensions of a data frame or matrix.
 * Use `object[x, y]` to select a single element from an array.
 * Object indices start at 1.

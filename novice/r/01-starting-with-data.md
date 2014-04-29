@@ -5,13 +5,11 @@ root: ../..
 
 
 
-
 # Analyzing Patient Data
 
 We are studying inflammation in patients who have been given a new treatment for arthritis,
 and need to analyze the first dozen data sets. 
-The data sets are stored in .csv each row holds information for a single patient, 
-and the columns represent successive days. 
+The data sets are stored in `.csv` each row holds information for a single patient, and the columns represent successive days. 
 The first few rows of our first file look like this:
 
 	0,0,1,3,1,2,4,7,8,3,3,3,10,5,7,4,7,7,12,18,6,13,11,11,7,7,4,6,8,8,4,4,5,7,3,4,2,3,0,0
@@ -293,11 +291,53 @@ and do arithmetic with it:
 ```
 
 
-We can use the function `paste()` to print several things at once, if we separate them with commas.
+We can use the function `paste()` to strings made up from different objects, if we separate them with commas.
 
 
 ```r
 paste("weight in pounds:", 2.2 * weight_kg)
+```
+
+```
+## [1] "weight in pounds: 121"
+```
+
+
+To write lines of text to the screen, we can use `cat()` or `writeLines()`
+
+
+
+```r
+string <- paste("weight in pounds:", 2.2 * weight_kg)
+cat(string)
+```
+
+```
+## weight in pounds: 121
+```
+
+```r
+cat(string, "\n")
+```
+
+```
+## weight in pounds: 121
+```
+
+```r
+writeLines(string)
+```
+
+```
+## weight in pounds: 121
+```
+
+
+In normal use however, R will print to the console an object returned by a function or operation *unless* we assign it to a variable. Remember, to view a variable just type the name of the variable and hit return
+
+
+```r
+string
 ```
 
 ```
@@ -310,28 +350,38 @@ We can also change an object's value by assigning it a new value:
 
 ```r
 weight_kg <- 57.5
-paste("weight in kilograms is now:", weight_kg)
+# weight in kilograms is now
+weight_kg
 ```
 
 ```
-## [1] "weight in kilograms is now: 57.5"
+## [1] 57.5
 ```
 
 
 If we imagine the variable as a sticky note with a name written on it, 
-assignment is like putting the sticky note on a particular value:
-
+assignment is like putting the sticky note on a particular value
 This means that assigning a value to one object does not change the values of other variables. 
-For example, let's store the subject's weight in pounds in a variable:
+For example, let's store the subject's weight in pounds in a variable
 
 
 ```r
 weight_lb <- 2.2 * weight_kg
-paste("weight in kilograms:", weight_kg, "and in pounds:", weight_lb)
+# weight in kg...
+weight_kg
 ```
 
 ```
-## [1] "weight in kilograms: 57.5 and in pounds: 126.5"
+## [1] 57.5
+```
+
+```r
+# ...and in pounds
+weight_lb
+```
+
+```
+## [1] 126.5
 ```
 
 
@@ -340,12 +390,21 @@ and then change `weight_kg`:
 
 ```r
 weight_kg <- 100
-paste("weight in kilograms is now:", weight_kg, "and weight in pounds is still:", 
-    weight_lb)
+# weight in kg now...
+weight_kg
 ```
 
 ```
-## [1] "weight in kilograms is now: 100 and weight in pounds is still: 126.5"
+## [1] 100
+```
+
+```r
+# ...and in weight pounds still
+weight_lb
+```
+
+```
+## [1] 126.5
 ```
 
 
@@ -368,12 +427,12 @@ age <- age - 20
 
 
 We can also add to variable that are vectors, and update them by making them longer. 
-For example, if we are creating a vector of patient weights, we could update that vector using `append()`. `append()` takes two arguments, and adds the second item to the end of the first one.
+For example, if we are creating a vector of patient weights, we could update that vector using `c()`. `c()` takes any number of vectors as arguments, and combines or *concatenates* them, in the order supplied, into a single vector.
 
 
 ```r
 weights <- 100
-weights <- append(weights, 80)
+weights <- c(weights, 80)
 ```
 
 
@@ -581,11 +640,42 @@ dat
 ```
 
 
+For large data sets it is convenient to use the `head()` to display the first few rows of data
+
+
+```r
+head(dat)
+```
+
+```
+##   V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14 V15 V16 V17 V18 V19 V20
+## 1  0  0  1  3  1  2  4  7  8   3   3   3  10   5   7   4   7   7  12  18
+## 2  0  1  2  1  2  1  3  2  2   6  10  11   5   9   4   4   7  16   8   6
+## 3  0  1  1  3  3  2  6  2  5   9   5   7   4   5   4  15   5  11   9  10
+## 4  0  0  2  0  4  2  2  1  6   7  10   7   9  13   8   8  15  10  10   7
+## 5  0  1  1  3  3  1  3  5  2   4   4   7   6   5   3  10   8  10   6  17
+## 6  0  0  1  2  2  4  2  1  6   4   7   6   6   9   9  15   4  16  18  12
+##   V21 V22 V23 V24 V25 V26 V27 V28 V29 V30 V31 V32 V33 V34 V35 V36 V37 V38
+## 1   6  13  11  11   7   7   4   6   8   8   4   4   5   7   3   4   2   3
+## 2  18   4  12   5  12   7  11   5  11   3   3   5   4   4   5   5   1   1
+## 3  19  14  12  17   7  12  11   7   4   2  10   5   4   2   2   3   2   2
+## 4  17   4   4   7   6  15   6   4   9  11   3   5   6   3   3   4   2   3
+## 5   9  14   9   7  13   9  12   6   7   7   9   6   3   2   2   4   2   0
+## 6  12   5  18   9   5   3  10   3  12   7   8   4   7   3   5   4   4   3
+##   V39 V40
+## 1   0   0
+## 2   0   1
+## 3   1   1
+## 4   2   1
+## 5   1   1
+## 6   2   1
+```
+
+
 __BREAK__
 * Make sure everyone has imported the data
 * How many rows and columns there are
 * What kind of data type is it?
-
 
 ## Manipulating Data
 
@@ -661,8 +751,6 @@ Data frames can have additional attributes such as `rownames()`, which can be us
 
 Some additional information on data frames:
 
-Some additional information on data frames:
-
 * Usually created by `read.csv()` and `read.table()`.
 * Can convert to matrix with `data.matrix()` (preferred) or `as.matrix()`
 * Coercion will be forced and not always what you expect.
@@ -718,26 +806,28 @@ If we want to get a single value from the data frame, we must provide an row and
 
 
 ```r
-paste("first value in data:", dat[1, 1])
+# first value in dat
+dat[1, 1]
 ```
 
 ```
-## [1] "first value in data: 0"
+## [1] 0
 ```
 
 ```r
-paste("middle value in data:", dat[30, 20])
+# middle value in dat
+dat[30, 20]
 ```
 
 ```
-## [1] "middle value in data: 16"
+## [1] 16
 ```
 
 
 R indexes starting at 1. Programming languages like Fortran, MATLAB, and R start counting at 1, because that's what human beings have done for thousands of years. 
 Languages in the C family (including C++, Java, Perl, and Python) count from 0 because that's simpler for computers to do. 
 
-An index like `[30, 20]` selects a single element of data framey, but we can select whole sections as well. 
+An index like `[30, 20]` selects a single element of data frame, but we can select whole sections as well. 
 For example, we can select the first ten days (columns) of values for the first four patients (rows) like this:
 
 
@@ -991,11 +1081,11 @@ One way to do this is to select the data we want to create a new temporary array
 
 ```r
 patient_1 <- dat[1, ]  # first row, all of the columns
-paste("maximum inflammation for patient 1:", max(patient_1))
+max(patient_1)  # max inflammation for patient 1
 ```
 
 ```
-## [1] "maximum inflammation for patient 1: 18"
+## [1] 18
 ```
 
 
@@ -1004,11 +1094,11 @@ Instead, we can combine the selection and the method call:
 
 
 ```r
-paste("maximum inflammation for patient 2:", max(dat[2, ]))
+max(dat[2, ])  # max inflammation for patient 2
 ```
 
 ```
-## [1] "maximum inflammation for patient 2: 18"
+## [1] 18
 ```
 
 
@@ -1029,7 +1119,7 @@ To support this, in R we can use the `apply()` function:
 
 
 ```r
-help(apply)  #or ?apply
+help(apply)  # r ?apply
 ```
 
 
@@ -1076,7 +1166,7 @@ We can also create a vector of our study days (the number of columns in data)
 
 ```r
 tempo <- 1:40
-# or
+# r
 tempo <- 1:ncol(dat)
 ```
 
@@ -1087,12 +1177,16 @@ Now that we have all this summary information, we can put it back together into 
 
 
 ```r
-d.summary = data.frame(tempo, avg_inflammation, min_inflammation, max_inflammation)
+d.summary <- data.frame(tempo, avg_inflammation, min_inflammation, max_inflammation)
 ```
 
 
 ## Plotting  
-The mathematician Richard Hamming once said, "The purpose of computing is insight, not numbers," and the best way to develop insight is often to visualize data. Visualization deserves an entire lecture (or course) of its own, but we can explore a few features of R's base plotting package and **ggplot2** here. 
+The mathematician Richard Hamming once said
+
+> The purpose of computing is insight, not numbers
+
+and the best way to develop insight is often to visualize data. Visualization deserves an entire lecture (or course) of its own, but we can explore a few features of R's base plotting package. 
 
 Lets use the average inflammation data that we saved and plot it over the study time. 
 
@@ -1101,7 +1195,7 @@ Lets use the average inflammation data that we saved and plot it over the study 
 plot(tempo, avg_inflammation)
 ```
 
-![plot of chunk unnamed-chunk-38](figure/unnamed-chunk-38.png) 
+![plot of chunk plot-avg-inflammation](figure/01-starting-with-data-plot-avg-inflammation.png) 
 
 
 The result is roughly a linear rise and fall, which is suspicious: based on other studies, we expect a sharper rise and slower fall. Let's have a look at two other statistics:
@@ -1111,32 +1205,22 @@ The result is roughly a linear rise and fall, which is suspicious: based on othe
 plot(tempo, max_inflammation)
 ```
 
-![plot of chunk unnamed-chunk-39](figure/unnamed-chunk-391.png) 
+![plot of chunk plot-max-inflammation](figure/01-starting-with-data-plot-max-inflammation.png) 
+
+
 
 ```r
 plot(tempo, min_inflammation)
 ```
 
-![plot of chunk unnamed-chunk-39](figure/unnamed-chunk-392.png) 
-
+![plot of chunk plot-min-inflammation](figure/01-starting-with-data-plot-min-inflammation.png) 
 
 The maximum value rises and falls perfectly smoothly, while the minimum seems to be a step function. Neither result seems particularly likely, so either there's a mistake in our calculations or something is wrong with our data.
-
-
-```r
-library(ggplot2)
-ggplot(d.summary, aes(tempo, avg_inflammation)) + geom_point()
-```
-
-![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-40.png) 
-
 
 __EXERCISES__
 
 1. Create a plot showing the standard deviation of the inflammation data 
 for each day across all patients.
-
-2. Create a ggplot that shows the data as a line. As a histogram. etc.
 
 ## Key Points
 
@@ -1144,16 +1228,16 @@ for each day across all patients.
 * The key data types in R?
 * Use `variable <- value` to assign a value to a variable in order to record it in memory.
 * Objects are created on demand whenever a value is assigned to them.
-* Use `print(something)` to display the value of something.
+* Use `print(something)` (or just `something`) to display `something`.
 * The expression `dim()` gives the dimensions of a data frame or matrix.
 * Use `object[x, y]` to select a single element from an array.
 * Object indices start at 1.
-* Use `low:high` to specify a slice that includes the indices from `low` to `high`.
+* Use `from:to` to specify a sequence that includes the indices from `from` to `to`.
 * Use `#` to add comments to programs.
 * Use `mean()`, `max()`, `min()` and `sd()` to calculate simple statistics.
-* Update vectors using `append()`
+* Update vectors using `c()`
 <!-- * Write a simple for loop -->
-* Use base R and the **ggplot2** package for creating simple visualizations.
+* Use base R to create simple visualizations.
 
 ## Next Steps
 
