@@ -138,11 +138,11 @@ age  <- age - 20
 ```
 
 We can also add to variable that are vectors, and update them by making them longer. 
-For example, if we are creating a vector of patient weights, we could update that vector using `append()`. `append()` takes two arguments, and adds the second item to the end of the first one.
+For example, if we are creating a vector of patient weights, we could update that vector using `c()`. `c()` takes any number of vectors as arguments, and combines or *concatenates* them, in the order supplied, into a single vector.
 
 ```{r}
 weights <- 100
-weights <- append(weights, 80)
+weights <- c(weights, 80)
 ```
 
 What happens here is that we take the original vector weights, and we are adding the second item to the end of the first one. We can do this over and over again to build a vector or a dataset. As we program, this may be useful to autoupdate results that we are collecting or calculating.
@@ -430,7 +430,7 @@ for each day across all patients.
 * Use `from:to` to specify a sequence that includes the indices from `from` to `to`.
 * Use `#` to add comments to programs.
 * Use `mean()`, `max()`, `min()` and `sd()` to calculate simple statistics.
-* Update vectors using `append()`
+* Update vectors using `c()`
 <!-- * Write a simple for loop -->
 * Use base R to create simple visualizations.
 
