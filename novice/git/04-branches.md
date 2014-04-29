@@ -4,17 +4,20 @@ root: ../..
 title: Learning to Branch
 ---
 
+#####Objectives:
+*	Explain what branches and why they are helpful for individual and collaborative workflows.
+*	Explain how to make a branch and navigate between branches.
+*	Explain how to isolate work in a branch and merge it back to your main branch.
 
 
 #####Branches defined: 
 
 * Branching is a way for you to create a new working copy of a project without affecting the main project.
 
-
 #####Benefits of branching:
 
-* You can change a project radically and save it, but always have the ability to switch back to your stable copy.
-* Other people or collaborators can modify the project without affecting the main project. 
+* You can change a project radically and save it, but always have the ability to switch back to your stable copy. This can help you work with the project as you need solo.
+* Other people or collaborators can modify the project without affecting the main project. This serves as an advantage for the group.
 
 Let's explore how this tool can help with Dracula, Mummy and Wolfman's new home, `mars.txt`.
 
@@ -25,7 +28,6 @@ Follow along by typing the following into your terminal:
 <div class="in" markdown="1">
 ~~~
 $ Touch shelter.txt
-
 $ Nano shelter.txt
 ~~~
 </div>
@@ -50,13 +52,13 @@ ls
 ~~~
 </div>
 
-Wolfman isn't sure these dimensions will be agreeable, and Mummy and Dracula aren't the best people to upset when you're the only warm-blooded creature on Mars! So instead of pushing his changes to the main project, he can make his changes there to ask Dracula and Mummy for feedback before he without disrupting their other work.
+Wolfman isn't sure these dimensions will be agreeable, and Mummy and Dracula aren't the best people to upset when you're the only warm-blooded creature on Mars! So instead of pushing his changes to the main project, he can make his changes on a new "branch" to ask Dracula and Mummy for feedback before he without disrupting their other work.
 
-By using the following command, we can make a new branch so that Dracula and Mummy won't see Wolfman's changes, until he's ready to show them.
+By using the following command, we can make a new branch so that Dracula and Mummy won't need to worry with Wolfman's changes, until he's ready to show them.
 
 <div class="in" markdown="1">
 ~~~
-git branch shelter
+git branch shelter_plan
 ~~~
 </div>
 
@@ -64,7 +66,7 @@ We just created a new branch, now we need to switch to it to start working. We d
 
 <div class="in" markdown="1">
 ~~~
-git checkout shelter
+git checkout shelter_plan
 ~~~
 </div>
 
@@ -72,7 +74,7 @@ If we type `git branch` again, we should see what branch we're on. Let's give th
 
 <div class="out" markdown="1">
 ~~~
-* shelter
+* shelter_plan
   master
 ~~~
  </div>
@@ -101,10 +103,12 @@ We see that there are two branches possible:
 
 <div class="out" markdown="1">
 ~~~
-* shelter
+* shelter_plan
   master
 ~~~
 </div>
+
+We see that we are currently in our "shelter_plan" branch, currently, by observing the `*` next to it. 
 
 The master is our main project! We're not there so any changes we push won't be seen by Dracula or Mummy! Phew! That's a relief. 
 
@@ -148,8 +152,15 @@ We should see that we are back to the main project, known as the master in our o
 ~~~
 </div>
 
-Great! Now we can "push our changes to the master branch!"
+Now that we are in the master branch, we can merge the work we did in our shelter branch to the master, so Dracula and Mummy can suggest changes.
 
+<div class="out" markdown="1">
+~~~
+git merge shelter
+~~~
+</div>
+
+Great! Now we can "push our changes to the master branch!"
 
 <div class="in" markdown="1">
 ~~~
@@ -162,4 +173,4 @@ git push
 </div>
 
 Let's checkout our repository online to ensure we have added the right dimensions to shelter.txt!
-
+Fill in your github username in the following link to YOUR planets repo as so: https://github.com/yourusername/planets and navigate to shelter.txt. 
