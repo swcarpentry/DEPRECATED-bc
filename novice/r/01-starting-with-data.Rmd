@@ -393,7 +393,7 @@ Notice that the object was named `tempo` instead of `time`. `time` is a R built-
 Now that we have all this summary information, we can put it back together into a data frame that we can use for further analysis and plotting, provided they are the same length.
 
 ```{r}
-d.summary = data.frame(tempo, avg_inflammation, min_inflammation, max_inflammation)
+d.summary <- data.frame(tempo, avg_inflammation, min_inflammation, max_inflammation)
 ```
 
 ## Plotting  
