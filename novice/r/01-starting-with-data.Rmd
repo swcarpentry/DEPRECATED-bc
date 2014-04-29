@@ -186,8 +186,6 @@ Data frames can have additional attributes such as `rownames()`, which can be us
 
 Some additional information on data frames:
 
-Some additional information on data frames:
-
 * Usually created by `read.csv()` and `read.table()`.
 * Can convert to matrix with `data.matrix()` (preferred) or `as.matrix()`
 * Coercion will be forced and not always what you expect.
