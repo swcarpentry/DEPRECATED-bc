@@ -429,7 +429,7 @@ for each day across all patients.
 * The expression `dim()` gives the dimensions of a data frame or matrix.
 * Use `object[x, y]` to select a single element from an array.
 * Object indices start at 1.
-* Use `low:high` to specify a slice that includes the indices from `low` to `high`.
+* Use `from:to` to specify a sequence that includes the indices from `from` to `to`.
 * Use `#` to add comments to programs.
 * Use `mean()`, `max()`, `min()` and `sd()` to calculate simple statistics.
 * Update vectors using `append()`
