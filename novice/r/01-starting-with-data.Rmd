@@ -376,8 +376,8 @@ colMeans(dat)
 3. What is the length of your new variable?
 
 ```{r, echo=FALSE}
-min_inflammation = apply(dat, 2, min)
-max_inflammation = apply(dat, 2, max)
+min_inflammation <- apply(dat, 2, min)
+max_inflammation <- apply(dat, 2, max)
 ```
 
 We can also create a vector of our study days (the number of columns in data)
