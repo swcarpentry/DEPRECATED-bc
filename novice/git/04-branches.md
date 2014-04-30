@@ -5,7 +5,7 @@ title: Learning to Branch
 ---
 
 #####Objectives:
-*	Explain what branches and why they are helpful for individual and collaborative workflows.
+*	Explain what branches are and why they are helpful for individual and collaborative workflows.
 *	Explain how to make a branch and navigate between branches.
 *	Explain how to isolate work in a branch and merge it back to your main branch.
 
@@ -16,12 +16,18 @@ title: Learning to Branch
 
 #####Benefits of branching:
 
-* You can change a project radically and save it, but always have the ability to switch back to your stable copy. This can help you work with the project as you need solo.
-* Other people or collaborators can modify the project without affecting the main project. This serves as an advantage for the group.
+* Branches allow you to develop a complicated feature using a seriesprivately on his local machine, 
+  of commits, instead of lumping all the changes together in a single,
+  monster commit.
+* You can work on ideas while they are in their infancy, and commit them when you're ready.
+* By collecting the related commits in a branch, it's
+  easier to discuss them with your collaborator and incorporate their
+  feedback without polluting the master branch. 
+* Therefore, collaborators can modify the project without affecting the stable copy or each other.
 
 Let's explore how this tool can help with Dracula, Mummy and Wolfman's new home, `mars.txt`.
 
-While `mars.txt` is great for Dracula and Mummy, Wolfman is having a hard time with all the changes. The two moons are really cramping his style! He decides to fix the problem by proposing `shelter.txt`
+While `mars.txt` is great for Dracula and Mummy, Wolfman is having a hard time with all the changes. The two moons are really cramping his style!He decides to fix the problem by proposing a new living shelter as detailed in a new file 'shelter.txt'
 
 Follow along by typing the following into your terminal: 
 
@@ -52,6 +58,12 @@ ls
 ~~~
 </div>
 
+<div class="out" markdown="1">
+~~~
+README.md shelter.txt
+~~~
+</div>
+
 Wolfman isn't sure these dimensions will be agreeable, and Mummy and Dracula aren't the best people to upset when you're the only warm-blooded creature on Mars! So instead of pushing his changes to the main project, he can make his changes on a new "branch" to ask Dracula and Mummy for feedback before without disrupting their other work.
 
 By using the following command, we can make a new branch so that Dracula and Mummy won't need to worry with Wolfman's changes, until he's ready to show them.
@@ -79,7 +91,9 @@ If we type `git branch` again, we should see what branch we're on. Let's give th
 ~~~
  </div>
 
-Now, it's time to do our git workflow to add the `shelter.txt` file we made earlier to our new branch. This is how we do that:
+We see that we are currently in our "shelter_plan" branch, currently, by observing the `*` next to it. 
+
+Now that we're on our development branch `shelter_plan` we can make a commit and push the new branch to GitHub.
 
 <div class="in" markdown="1">
 ~~~
@@ -106,15 +120,15 @@ We see that there are two branches possible:
 ~~~
 </div>
 
-We see that we are currently in our "shelter_plan" branch, currently, by observing the `*` next to it. 
+The utility of creating the `shelter_plan` branch is that Wolfman can make changes without calling Dracula and Mummy's attention, until he's ready to do so. This is especially helpful for Wolfman because Dracula and Mummy are rough around the edges and they don't like being disturbed unnecessarily, while they work. If Wolfman did his work on the `master` branch, this would clutter the planet repository, and interrupt Dracula and Mummy's documentation.
 
-The utility of creating a branch serves a few purposes here: 
-1. This is a benefit for both Wolfman, as an individual contributor and for Dracula and Mummy as collaborators. 
-2. Wolfman has made changes without calling Dracula and Mummy's attention. (Which is good because Dracula and Mummy are rough around the edges!)
+Now that Wolfman's first draft of `shelter.txt` is complete. Let's run the floor plan by Dracula and Mummy and get their feeback.
 
-Now that our first draft for `shelter.txt` is complete, let's run our floor plan by Dracula and Mummy and get their feeback.
+The way we inform collaborators of the work we've done in our development branch is by using something called a **pull request.** A **pull request** notifies our collaborators that we've added or changed files. It prompts them to comment or modify the work before it is accepted to the master repository.
 
-*Introduce Pull Request Here!* 
+To open a pull request we will go to our GitHub planets repository by entering the following link into our browser: https://github.com/yourusername/planets where `yourusername` is your GitHub username.
+
+*Working on the screenshots right now*
 
 Let's make some changes that will be more fair to everyone:
 
@@ -147,7 +161,7 @@ git branch
 ~~~
 </div>
 
-We should see that we are back to the main project, known as the master in our output, as shown below:
+We should see that we are back to the main project, known as the `master` in our output, as shown below:
 
 <div class="out" markdown="1">
 ~~~
@@ -156,7 +170,7 @@ We should see that we are back to the main project, known as the master in our o
 ~~~
 </div>
 
-Now that we are in the master branch, we can merge the work we did in our shelter branch to the master, so Dracula and Mummy can suggest changes.
+Since Dracula and Mummy have given us 2 :thumbsup: we can now merge the two branches. This effectively takes what we have done in our development branch, `shelter_plan` and merges our commit history there with the `master` branch. 
 
 <div class="out" markdown="1">
 ~~~
@@ -170,7 +184,7 @@ Great! Now we can "push our changes to the master branch!"
 ~~~
 git add shelter.txt
 git commit sheter.txt
-git push
+git push origin master
 ~~~
 </div>
 
