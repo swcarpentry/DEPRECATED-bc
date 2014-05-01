@@ -154,7 +154,7 @@ Now, Dracula and Mummy have opportunities to comment about what Wolfman did. We 
 
 Oh my! That was quick...
 
-<img src="img/github-pull-request-collaborators" alt="The Collaborators Weigh In" (Step 7)" />
+<img src="img/github-pull-request-collaborators.png" alt="The Collaborators Weigh In" (Step 7)" />
 
 We can see the Dracula and Mummy would appreciate equal dimmensions for their rooms. 
 
