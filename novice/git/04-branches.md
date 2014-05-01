@@ -126,7 +126,7 @@ To open a pull request we will go to our GitHub planets repository by entering t
 
 The first thing we need to do once on our planets repository's URL is to switch branches on GitHub. 
 
-<img src="img/img/github-pull-request-switch-branches.png" alt="Switching Branches on Github" (Step 1)" />
+<img src="img/github-pull-request-switch-branches.png" alt="Switching Branches on Github" (Step 1)" />
 
 Click on the branch button and select the "shelter_plan" branch. The next step is to open the pull request. 
 
@@ -190,7 +190,7 @@ Click "Merge Pull Request" to merge the two branches.
 
 "Pull Request Successfully Merged and Closed" is what we should see.
 
-Challenge:
+#####Challenges:
 
 1. From your command line, navigate to the master branch of the planets repo.
 2. Pull from the master branch and check the contents of the file. Do they contain the right dimensions?
