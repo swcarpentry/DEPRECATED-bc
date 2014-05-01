@@ -16,13 +16,9 @@ title: Learning to Branch
 
 #####Benefits of branching:
 
-* Branches allow you to develop a complicated feature using a seriesprivately on his local machine, 
-  of commits, instead of lumping all the changes together in a single,
-  monster commit.
+* Branches allow you to develop a complicated feature privately on a local machine, using a series of commits, instead of lumping all the changes together in a single, monster commit.
 * You can work on ideas while they are in their infancy, and commit them when you're ready.
-* By collecting the related commits in a branch, it's
-  easier to discuss them with your collaborator and incorporate their
-  feedback without polluting the master branch. 
+* By collecting the related commits in a branch, it's easier to discuss them with your collaborator and incorporate their feedback without polluting the master branch. 
 * Therefore, collaborators can modify the project without affecting the stable copy or each other.
 
 Let's explore how this tool can help with Dracula, Mummy and Wolfman's new home, `mars.txt`.
@@ -120,15 +116,47 @@ We see that there are two branches possible:
 ~~~
 </div>
 
-The utility of creating the `shelter_plan` branch is that Wolfman can make changes without calling Dracula and Mummy's attention, until he's ready to do so. This is especially helpful for Wolfman because Dracula and Mummy are rough around the edges and they don't like being disturbed unnecessarily, while they work. If Wolfman did his work on the `master` branch, this would clutter the planet repository, and interrupt Dracula and Mummy's documentation.
+The utility of creating the `shelter_plan` branch is that Wolfman can make changes without calling Dracula and Mummy's attention, until he's ready to do so. This is especially helpful for Wolfman because Dracula and Mummy are rough around the edges and they don't like being disturbed unnecessarily. If Wolfman did his work on the `master` branch, this would clutter the planet repository, and interrupt Dracula and Mummy's documentation.
 
 Now that Wolfman's first draft of `shelter.txt` is complete. Let's run the floor plan by Dracula and Mummy and get their feeback.
 
-The way we inform collaborators of the work we've done in our development branch is by using something called a **pull request.** A **pull request** notifies our collaborators that we've added or changed files. It prompts them to comment or modify the work before it is accepted to the master repository.
+The way we inform collaborators of the work we've done in our development branch is by using something called a **pull request.** A pull request notifies our collaborators that we've added or changed files. It prompts them to comment or modify the work before it is accepted to the master repository.
 
 To open a pull request we will go to our GitHub planets repository by entering the following link into our browser: https://github.com/yourusername/planets where `yourusername` is your GitHub username.
 
-*Working on the screenshots right now*
+The first thing we need to do once on our planets repository's URL is to switch branches on GitHub. 
+
+<img src="img/img/github-pull-request-switch-branches.png" alt="Switching Branches on Github" (Step 1)" />
+
+Click on the branch button and select the "shelter_plan" branch. The next step is to open the pull request. 
+
+<img src="img/github-pull-request-01.png" alt="Creating a Pull Request" (Step 2)" />
+
+Click on the green button to the left of the branch button you just clicked in Step 1.
+
+<img src="img/github-pull-request-02.png" alt="Writing a Pull Request" (Step 3)" />
+
+For Dracula and Mummy to understand what Wolfman is up to, he has to describe what he is adding to the `planets` repository in detail. 
+
+<img src="img/github-pull-request-03.png" alt="Tagging Collaborators in the Pull Request" (Step 4)" />
+
+Wolfman wants to get Dracula and Mummy's input directly so he tags them in the Pull Request using an `@` sign and their respective GitHub usernames. 
+
+<img src="img/github-pull-request-04.png" alt="Previewing the Pull Request" (Step 5)" />
+
+Wolfman has given a good description here, and clearly, Wolfman likes emoji. We can see how the Pull Request will preview by clicking the `preview` tab.
+
+Everything looks great! Let's open the Pull Request.
+
+<img src="img/github-pull-request-05.png" alt="The Opened Pull Request" (Step 6)" />
+
+Now, Dracula and Mummy have opportunities to comment about what Wolfman did. We can wait and see what they have to say.
+
+Oh my! That was quick...
+
+<img src="img/github-pull-request-collaborators" alt="The Collaborators Weigh In" (Step 7)" />
+
+We can see the Dracula and Mummy would appreciate equal dimmensions for their rooms. 
 
 Let's make some changes that will be more fair to everyone:
 
@@ -152,23 +180,7 @@ Bedrooms:
 
 Ah, that's much more fair. Wolfman is now ready to commit these changes to the main project. So he needs to switch branches to do so by using the command `git checkout`.
 
-Let's try that on for size:
-
-<div class="in" markdown="1">
-~~~
-git checkout master
-git branch
-~~~
-</div>
-
-We should see that we are back to the main project, known as the `master` in our output, as shown below:
-
-<div class="out" markdown="1">
-~~~
-* master
-  shelter_plan
-~~~
-</div>
+.....................................
 
 Since Dracula and Mummy have given us 2 :thumbsup: we can now merge the two branches. This effectively takes what we have done in our development branch, `shelter_plan` and merges our commit history there with the `master` branch. 
 
