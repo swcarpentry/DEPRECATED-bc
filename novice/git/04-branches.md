@@ -12,7 +12,7 @@ title: Learning to Branch
 
 #####Branches defined: 
 
-* Branching is a way for you to create a new working copy of a project without affecting the main project.
+* **Branching** is a way for you to create a new working copy of a project without affecting the main project.
 
 #####Benefits of branching:
 
@@ -178,29 +178,21 @@ Bedrooms:
 ~~~
 </div>
 
-Ah, that's much more fair. Wolfman is now ready to commit these changes to the main project. So he needs to switch branches to do so by using the command `git checkout`.
+Ah, that's much more fair. Wolfman can commit these suggested changes to his branch. 
 
-.....................................
+After Dracula and Mummy approve, Wolfman can now **merge** the two branches. This takes what we have done in our development branch, `shelter_plan` and combines our commit history with the `master` branch. 
 
-Since Dracula and Mummy have given us 2 :thumbsup: we can now merge the two branches. This effectively takes what we have done in our development branch, `shelter_plan` and merges our commit history there with the `master` branch. 
+<img src="img/github-pull-request-05.png" alt="The Big Green Button Merges!" (Step 8)" />
 
-<div class="out" markdown="1">
-~~~
-git merge shelter_plan
-~~~
-</div>
+Click "Merge Pull Request" to merge the two branches.
 
-Great! Now we can "push our changes to the master branch!"
+<img src="img/github-pull-request-merged.png" alt="Purple Means Merged!" (Step 9)" />
 
-<div class="in" markdown="1">
-~~~
-git add shelter.txt
-git commit sheter.txt
-git push origin master
-~~~
-</div>
+"Pull Request Successfully Merged and Closed" is what we should see.
 
-Remember, you can always use `git status` to check in if there's anything in your working directory to commit. If your working directory is clean, git will tell you. 
+Challenge:
 
-Let's checkout our repository online to ensure we have added the right dimensions to shelter.txt!
-Fill in your github username in the following link to YOUR planets repo as so: https://github.com/yourusername/planets and navigate to shelter.txt. 
+1. From your command line, navigate to the master branch of the planets repo.
+2. Pull from the master branch and check the contents of the file. Do they contain the right dimensions?
+
+ 
