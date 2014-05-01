@@ -123,17 +123,19 @@ already executed [phred](http://www.phrap.org/phredphrapconsed.html) and extract
 your sequences.  Fire up your ipython notebook, if you've not done this already, and execute the
 following code in a cell.
 
-	!wget http://dl.dropboxusercontent.com/u/861789/swc/lessons/ipython_parallel/Archive.zip
+	!pip install wget
+	import wget
+	wget.download("http://dl.dropboxusercontent.com/u/861789/swc/lessons/ipython_parallel/Archive.zip")
 
-Note the `!` in front of the `wget` command. This tells the IPython notebook to execute
-the process in the shell (as if you were at the command line). For Windows users,
-you might have to just download the file manually and copy it to the directory
-where your notebook is running.  Then proceed with the rest of the lesson.
+Note the `!` in front of the `pip` command. This tells the IPython notebook to execute
+the process in the shell (as if you were at the command line). This process should be
+OS-agnostic.
 
 Unzip the files by entering the following into a new cell. You should see the output
 from the command creating the directories.
 
-	!unzip Archive.zip
+	import zipfile
+	zipfile.ZipFile("Archive.zip").extractall()
 
 Now that the directories are unzipped, let's store them into an array for
 accessing them later, in a variable named `dirs`.
