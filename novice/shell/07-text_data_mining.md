@@ -68,7 +68,7 @@ $ wc -l gene_exp.txt
 
 #### How many genes have enough data to perform the comparison (have 'OK' status)? How many had significantly different expression levels between samples?
 
-We can search for *OK* and *yes* in the file, then count how many lines are returned by ***grep***.  Note the use of ***|***.  ***wc -l*** is acting on the text printed by ***grep***, not the input file.
+We can search for *OK* and *yes* in the file, then count how many lines are returned by ***grep***.  Note the use of the pipe symbol '|'.  ***wc -l*** is acting on the text printed by ***grep***, not the input file.
 
 <pre>
 $ grep OK gene_exp.txt | wc -l
