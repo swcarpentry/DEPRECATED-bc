@@ -115,7 +115,7 @@ AT3G42720    WT		  hy5	 OK  0	19.4265	yes
 AT4G06530    WT		  hy5	 OK  0	20.3433	yes
 </pre>
 
-You may have noticed that cut and sort use different argumants for the same thing (column number).  The collection of tools in unix-like operating systems evolved over time from a variety of sources and authors, so their command line argumants are not always consistent.  If in doubt:
+You may have noticed that cut and sort use different arguments for the same thing (column number).  The collection of tools in unix-like operating systems evolved over time from a variety of sources and authors, so their command line arguments are not always consistent.  If in doubt:
 
 <pre>
 man cut
@@ -173,7 +173,9 @@ Consider the log file access_log.  The exact format of the file can be customize
 
 Your task is to find the top 10 users of the web site over the past hour.
 
-#### How many lines in the file (ie, how many times was the web site accesses in the time period covered by this file)?
+#### How many lines in the file?
+
+ie, how many times was the web site accessed in the time period covered by this file?
 
 <pre>
 $ wc -l access_log 
@@ -191,7 +193,7 @@ $ head -5 access_log
 165.246.204.254 - - [07/Apr/2014:00:01:28 -0400] "POST /ReactomeRESTfulAPI/RESTfulWS/queryByIds/DatabaseObject HTTP/1.1" 200 490
 </pre>
 
-Not much to look at but we can see that the IP address of the browser is the first part of the record and that consistent time stamps are used.
+Not much to look at but we can see that the IP address of the browser is the first part of the record and that consistent time stamps are used.  Note that the text does not appear to use tabs as field delimiters.
 
 #### It is 12 noon, April 7, 2014.  Isolate the records for the past hour.  
 
@@ -202,14 +204,14 @@ $ tail -1 access_log
 adsl-4.46.190.51.tellas.gr - - [07/Apr/2014:11:59:57 -0400] "GET /cgi-bin/images/search.gif HTTP/1.1" 404 301
 </pre>
 
-It ends at noon.  We just need to know what line number should we start at.  Use ***grep*** to find the first line that start as 11AM.
+It ends at noon.  We just need to know what line number should we start at.  Use ***grep -n*** to find the first line that start as 11AM.  The ***-n*** flag tell grep to print the line numbers for matches in the text.  ***head -1*** prints just the first line of the results.
 
 <pre>
-$ grep -n '07/Apr/2014:11:00' access_log | head -1
+$ grep -n '07/Apr/2014:11:' access_log | head -1
 33580:66.249.74.215 - - [07/Apr/2014:11:00:02 -0400] "GET /img-tmp/650.4537338364293990.png HTTP/1.1" 404 308
 </pre>
 
-OK, the first line for the past hour is 33580.  How can we isolate only records from line 33580 and below?  We know the file has  37554 lines.  We can use ***bc*** and ***tail*** to get the lines we need.  For the first pass we will use ***head -1*** to make the the first line is the one we want.
+OK, the first line for the 11AM and onward is 33580.  How can we isolate only records from line 33580 and below?  We know the file has  37554 lines.  We can use ***bc*** and ***tail*** to get the lines we need.  For the first pass we will use ***head -1*** to make the the first line is the one we want.
 
 <pre>
 $ tail -3974 access_log | head -1 
@@ -220,7 +222,7 @@ Now we have the text isolated.
 
 #### Who is accessing the site and how often?  
 
-Remember that the first section of each line is the the address of the browser.  The file is not tab-delimited, but we can use the ***-d' '*** argument for ***cut*** to tell it to use space as the delimiter.
+Remember that the first section of each line is the the address of the browser.  The file is not tab-delimited, but we can use ***cut -d' '*** to tell it to use space as the delimiter.
 
 Let's check first by piping the output to ***head***:
 
@@ -271,7 +273,7 @@ $ tail -3974 access_log | cut -d' ' -f1 | sort | uniq -c | head
 </pre>
 
 
-# Who are the the ten users between 11-12?
+# Who are the the ten users between 11 AM and -12 noon?
 We can find out with another round of sorting at the end. Note that the last sort is numeric, in reverse (descending) order.
 
 <pre>
@@ -288,4 +290,3 @@ $ tail -3974 access_log | cut -d' ' -f1 | sort | uniq -c | sort -n -r | head
   99 hx-dnat-249.ebi.ac.uk
 </pre>
 
-Now that we know who is using the site most heavily, we can do some more directed searching, based on the addresses, to see what part of the web site they are hitting.
