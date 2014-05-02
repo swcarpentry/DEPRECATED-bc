@@ -80,7 +80,7 @@ $ grep yes gene_exp.txt | wc -l
 For 33,567 genes, 4,112 had enough data to do a comparison and 1,403 had significantly different expression.
 
 
-### Question:  What is the strings *yes* or *OK* appear in other free-text columns of the file?  
+### Question:  What if the strings *yes* or *OK* appear in other columns of the file?  There is not a lot of room for free text in this example but it can't hurt to check.
 
 This sort of thing happens all the time in real life!  We can use ***cut*** to remove the normal column (for example, column 7 for 'yes').  Remove column 7, then search for *yes*.
 
