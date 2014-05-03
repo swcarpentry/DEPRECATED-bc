@@ -97,39 +97,35 @@ We close with material on licensing because:
 
 #### Text Editor
 
-We suggest instructors and students use `nano` as the text editor for this
-lessons for a couple of reasons like:
+We suggest instructors and students use `nano` as the text editor for this lessons because:
 
 *   it runs in all three major operating systems,
-*   it runs inside the shell (switching windows can be confusing to students),
-*   it has a shortcut help at the bottom of the window.
+*   it runs inside the shell (switching windows can be confusing to students), and
+*   it has shortcut help at the bottom of the window.
 
-Besides our suggestion students can use their favorite text editor (**please
-make this clear in the setting up part of the lesson**) and sometimes it could
-became a problem. Below you will find some tips that could help solving
-problems when using other text editor than `nano`.
+Please point out to students during setup
+that they can and should use another text editor
+if they're already familiar with it.
+Below you will find some tips that could help solving problems
+when using other editors.
 
 ##### Gedit
 
 You should use
 
-<div class="in" markdown="1">
 ~~~
 $ git config --global core.editor 'gedit --standalone'
 ~~~
-</div>
+{:class="in"}
 
-to avoid
+to avoid this error occurring
+if the student already has a Gedit window open:
 
-<div class="in" markdown="1">
 ~~~
 $ git commit
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 Aborting commit due to empty commit message.
 ~~~
-</div>
-
-that will happen if the student already has a Gedit window open.
+{:class="err"}
