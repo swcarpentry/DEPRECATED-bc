@@ -84,7 +84,7 @@ R programmers don't have to install the IPython Notebook).
 Sample Files
 ------------
 
-The directory `aux` contains files that can be used as starting points for lessons.
+The directory `misc` contains files that can be used as starting points for lessons.
 These files explain how to format titles,
 objectives,
 exercises,
