@@ -23,34 +23,30 @@ Dracula creates a repository on GitHub
 in exactly the same way as [we created the `planets` repository](../git/02-collab.html)
 and then [clones](../../gloss.html#repository-clone) it to his desktop:
 
-<div class="in" markdown="1">
 ~~~
 $ git clone https://github.com/vlad/undersea.git
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 Cloning into 'undersea'...
 warning: You appear to have cloned an empty repository.
 ~~~
-</div>
+{:class="out"}
 
 `git clone` automatically adds the original repository on GitHub
 as a remote of the local repository called `origin`&mdash;this is why
 we chose `origin` as a remote name in our previous example:
 
-<div class="in" markdown="1">
 ~~~
 $ cd undersea
 $ git remote -v
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 origin https://github.com/vlad/undersea.git (fetch)
 origin https://github.com/vlad/undersea.git (push)
 ~~~
-</div>
+{:class="out"}
 
 Dracula can now push and pull changes just as before.
 
