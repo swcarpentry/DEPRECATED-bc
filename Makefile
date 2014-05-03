@@ -48,30 +48,31 @@ all : commands
 # Source Markdown files.  These are listed in the order in which they
 # appear in the final book-format version of the notes.
 MOST_SRC = \
-	intro.md \
-	team.md \
-	novice/shell/index.md $(sort $(wildcard novice/shell/??-*.md)) \
-	novice/git/index.md $(sort $(wildcard novice/git/??-*.md)) \
-	novice/python/index.md $(sort $(wildcard novice/python/??-*.md)) \
-	novice/sql/index.md $(sort $(wildcard novice/sql/??-*.md)) \
-	novice/extras/index.md $(sort $(wildcard novice/extras/??-*.md)) \
-	novice/teaching/index.md  $(sort $(wildcard novice/teaching/??-*.md)) \
-	novice/ref/index.md  $(sort $(wildcard novice/ref/??-*.md)) \
-	bib.md \
-	gloss.md \
-	rules.md \
-	LICENSE.md
+	 intro.md \
+	 team.md \
+	 novice/shell/index.md $(sort $(wildcard novice/shell/??-*.md)) \
+	 novice/git/index.md $(sort $(wildcard novice/git/??-*.md)) \
+	 novice/python/index.md $(sort $(wildcard novice/python/??-*.md)) \
+	 novice/sql/index.md $(sort $(wildcard novice/sql/??-*.md)) \
+	 novice/extras/index.md $(sort $(wildcard novice/extras/??-*.md)) \
+	 novice/teaching/index.md  $(sort $(wildcard novice/teaching/??-*.md)) \
+	 novice/ref/index.md  $(sort $(wildcard novice/ref/??-*.md)) \
+	 bib.md \
+	 gloss.md \
+	 rules.md \
+	 LICENSE.md
 
 # All source pages (including things not in the book).
 ALL_SRC = \
 	contents.md \
 	$(wildcard intermediate/python/*.md) \
+	$(wildcard intermediate/doit/*.md) \
 	$(MOST_SRC)
 
 # Other files that the site depends on.
 EXTRAS = \
-	$(wildcard css/*.css) \
-	$(wildcard css/*/*.css)
+       $(wildcard css/*.css) \
+       $(wildcard css/*/*.css)
 
 # Principal target files
 INDEX = $(SITE)/index.html
@@ -81,7 +82,7 @@ INDEX = $(SITE)/index.html
 # having the output index.html file depend on all the page source
 # Markdown files triggers the desired build once and only once.
 $(INDEX) : $(ALL_SRC) $(CONFIG) $(EXTRAS)
-	jekyll -t build -d $(SITE)
+	 jekyll -t build -d $(SITE)
 
 #----------------------------------------------------------------------
 # Create all-in-one book version of notes.
@@ -94,7 +95,7 @@ BOOK_MD = ./book.md
 # sections of Markdown files and then patching glossary references and
 # image paths.
 $(BOOK_MD) : $(MOST_SRC) bin/make-book.py
-	python bin/make-book.py $(MOST_SRC) > $@
+	   python bin/make-book.py $(MOST_SRC) > $@
 
 #----------------------------------------------------------------------
 # Targets.
@@ -104,7 +105,7 @@ $(BOOK_MD) : $(MOST_SRC) bin/make-book.py
 
 ## commands : show all commands.
 commands :
-	@grep -E '^##' Makefile | sed -e 's/##//g'
+	 @grep -E '^##' Makefile | sed -e 's/##//g'
 
 ## ---------------------------------------
 
@@ -113,11 +114,11 @@ site : $(INDEX)
 
 ## check    : check that the index.html file is properly formatted.
 check :
-	@python bin/swc_index_validator.py ./index.html
+      @python bin/swc_index_validator.py ./index.html
 
 ## clean    : clean up all generated files.
 clean : tidy
-	rm -rf $(SITE)
+      rm -rf $(SITE)
 
 ## ---------------------------------------
 
@@ -125,7 +126,7 @@ clean : tidy
 #  To do this, we simply create the book Markdown file then build
 #  with Jekyll as usual.
 book : $(BOOK_MD)
-	make site
+     make site
 
 ## install  : install on the server.
 install : $(INDEX)
@@ -137,18 +138,18 @@ install : $(INDEX)
 ## contribs : list contributors.
 #  Relies on ./.mailmap to translate user IDs into names.
 contribs :
-	git log --pretty=format:%aN | sort | uniq
+	 git log --pretty=format:%aN | sort | uniq
 
 ## fixme    : find places where fixes are needed.
 fixme :
-	@grep -i -n FIXME $$(find novice -type f -print | grep -v .ipynb_checkpoints)
+      @grep -i -n FIXME $$(find novice -type f -print | grep -v .ipynb_checkpoints)
 
 ## tidy     : clean up odds and ends.
 tidy :
-	rm -rf \
-	$$(find . -name '*~' -print) \
-	$$(find . -name '*.pyc' -print) \
-	$(BOOK_MD)
+     rm -rf \
+     $$(find . -name '*~' -print) \
+     $$(find . -name '*.pyc' -print) \
+     $(BOOK_MD)
 
 #----------------------------------------------------------------------
 # Rules to launch builds of formats other than Markdown.
@@ -159,6 +160,6 @@ tidy :
 ## ipynb    : convert IPython Notebooks to Markdown files.
 #  This uses an auxiliary Makefile 'ipynb.mk'.
 ipynb :
-	make -f ipynb.mk
+      make -f ipynb.mk
 
 ## ---------------------------------------
