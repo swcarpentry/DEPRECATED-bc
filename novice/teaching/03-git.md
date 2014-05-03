@@ -94,3 +94,42 @@ We close with material on licensing because:
     primarily because of GitHub's growing popularity:
     CVS and Subversion are now seen as legacy systems,
     and Mercurial isn't nearly as widely used in the sciences right now.
+
+#### Text Editor
+
+We suggest instructors and students use `nano` as the text editor for this
+lessons for a couple of reasons like:
+
+*   it runs in all three major operating systems,
+*   it runs inside the shell (switching windows can be confusing to students),
+*   it has a shortcut help at the bottom of the window.
+
+Besides our suggestion students can use their favorite text editor (**please
+make this clear in the setting up part of the lesson**) and sometimes it could
+became a problem. Below you will find some tips that could help solving
+problems when using other text editor than `nano`.
+
+##### Gedit
+
+You should use
+
+<div class="in" markdown="1">
+~~~
+$ git config --global core.editor 'gedit --standalone'
+~~~
+</div>
+
+to avoid
+
+<div class="in" markdown="1">
+~~~
+$ git commit
+~~~
+</div>
+<div class="out" markdown="1">
+~~~
+Aborting commit due to empty commit message.
+~~~
+</div>
+
+that will happen if the student already has a Gedit window open.
