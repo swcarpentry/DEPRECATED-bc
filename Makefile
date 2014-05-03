@@ -114,11 +114,11 @@ site : $(INDEX)
 
 ## check    : check that the index.html file is properly formatted.
 check :
-      @python bin/swc_index_validator.py ./index.html
+	@python bin/swc_index_validator.py ./index.html
 
 ## clean    : clean up all generated files.
 clean : tidy
-      rm -rf $(SITE)
+	rm -rf $(SITE)
 
 ## ---------------------------------------
 
@@ -126,7 +126,7 @@ clean : tidy
 #  To do this, we simply create the book Markdown file then build
 #  with Jekyll as usual.
 book : $(BOOK_MD)
-     make site
+	make site
 
 ## install  : install on the server.
 install : $(INDEX)
@@ -138,18 +138,18 @@ install : $(INDEX)
 ## contribs : list contributors.
 #  Relies on ./.mailmap to translate user IDs into names.
 contribs :
-	 git log --pretty=format:%aN | sort | uniq
+	git log --pretty=format:%aN | sort | uniq
 
 ## fixme    : find places where fixes are needed.
 fixme :
-      @grep -i -n FIXME $$(find novice -type f -print | grep -v .ipynb_checkpoints)
+	grep -i -n FIXME $$(find novice -type f -print | grep -v .ipynb_checkpoints)
 
 ## tidy     : clean up odds and ends.
 tidy :
-     rm -rf \
-     $$(find . -name '*~' -print) \
-     $$(find . -name '*.pyc' -print) \
-     $(BOOK_MD)
+	rm -rf \
+	$$(find . -name '*~' -print) \
+	$$(find . -name '*.pyc' -print) \
+	$(BOOK_MD)
 
 #----------------------------------------------------------------------
 # Rules to launch builds of formats other than Markdown.
@@ -160,6 +160,6 @@ tidy :
 ## ipynb    : convert IPython Notebooks to Markdown files.
 #  This uses an auxiliary Makefile 'ipynb.mk'.
 ipynb :
-      make -f ipynb.mk
+	make -f ipynb.mk
 
 ## ---------------------------------------
