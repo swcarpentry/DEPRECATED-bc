@@ -69,28 +69,32 @@ as explained in [the README file](README.md),
 Jekyll (the tool GitHub uses to create websites)
 only knows how to handle Markdown and HTML.
 if some other format is used,
-the author of the lesson must:
-
-1.  add a rule to our Makefiles to generate the Markdown for those files, and
-2.  add the generated Markdown to the repository.
-
-This also ensures that people who *aren't* interested in some format
+the author of the lesson must
+add the generated Markdown to the repository.
+This ensures that people who *aren't* familiar with some format
 don't have to install the tools needed to work with it
 (e.g.,
 R programmers don't have to install the IPython Notebook).
 
+> If a lesson is in a format we don't already handle,
+> the author must also add something to the Makefile
+> to re-create the Markdown from the source.
+> Please check with us if you plan to do this.
+
 Sample Files
 ------------
 
-The directory `aux` contains files that can be used as starting points for lessons.
+The directory `misc` contains files that can be used as starting points for lessons.
 These files explain how to format titles,
 objectives,
 exercises,
 key points,
-and code fragments;
-in addition,
+and code fragments.
+In addition,
 the IPython Notebook file has metadata in various cells
 to ensure that the generated HTML pages have the right style.
+If you are creating a new lesson,
+please copy one of these files to use as a starting point.
 
 Previewing
 ----------
