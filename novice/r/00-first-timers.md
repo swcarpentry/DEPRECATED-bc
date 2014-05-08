@@ -59,7 +59,7 @@ __Package management__
 
 `install.packages("package-name")` will download a package from one of the CRAN mirrors assuming that a binary is available for your operating system. If you have not set a preferred CRAN mirror in your options(), then a menu will pop up asking you to choose a location.
 
-Use `old.packages()` to list all your locally installed packages that are now out of date. `update.packages()` will update all packages in the known libraries interactively. This can take a while if you haven't done it recently. To update everything without any user intervention, use the `ask = FALSE` argument.
+Use `old.packages()` to list all your locally installed packages that are now out of date. `update.packages()` will update all packages in the known libraries interactively. This can take a while if you haven't done it recently. To update everything without any user intervention, use the `ask = FALSE` parameter.
 
 
 ```r
@@ -365,7 +365,7 @@ rbind(x, y)
 ```
 
 
-You can also use the byrow argument to specify how the matrix is filled. From R's own documentation:
+You can also use the byrow parameter to specify how the matrix is filled. From R's own documentation:
 
 
 ```r

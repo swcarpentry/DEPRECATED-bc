@@ -40,7 +40,7 @@ grid1
 ![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
 
 
-We can see that this grid represents a vector. It is a single dimension and has 5 locations (which we gave to it in the first argument). We can see the summarized information in the grid:
+We can see that this grid represents a vector. It is a single dimension and has 5 locations (which we gave to it in the first parameter). We can see the summarized information in the grid:
 
 
 ```r
