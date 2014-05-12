@@ -594,7 +594,7 @@ We will need to manufacture our own oxygen
 ~~~
 </div>
 
-`hg status` now tells us that the file has been changed:
+`hg status` now tells us that the file has been changed,
 but those changes haven't been committed:
 
 <div class="in" markdown="1">
@@ -761,7 +761,7 @@ I results/b.out
     email address, editor, and other preferences once per machine.
 *   `hg init` initializes a repository.
 *   `hg status` shows the status of a repository.
-*   Files are be stored in a project's working directory (which users see),
+*   Files are stored in a project's working directory (which users see),
     and the local repository (where committed snapshots are permanently recorded).
 *   `hg add` tells Mercurial to track files.
 *   `hg commit` creates a snapshot of the changes to 1 or more files in the local repository.

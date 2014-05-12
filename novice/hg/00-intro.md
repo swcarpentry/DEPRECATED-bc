@@ -4,7 +4,7 @@ root: ../..
 title: Introducing Version Control
 ---
 Wolfman and Dracula have been hired by Universal Missions
-(a space services spinoff from Euphoric State University)
+(a space services spin-off from Euphoric State University)
 to figure out where the company should send its next planetary lander.
 They want to be able to work on the plans at the same time,
 but they have run into problems doing this in the past.
