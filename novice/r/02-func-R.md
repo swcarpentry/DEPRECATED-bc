@@ -68,8 +68,8 @@ Now that we've seen how to turn Fahrenheit into Kelvin, it's easy to turn Kelvin
 
 ```r
 kelvin_to_celsius <- function(temp) {
-    Celsius <- temp - 273.15
-    Celsius
+    celsius <- temp - 273.15
+    celsius
 }
 
 paste("absolute zero in Celsius:", kelvin_to_celsius(0))
