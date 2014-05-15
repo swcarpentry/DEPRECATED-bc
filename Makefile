@@ -67,6 +67,7 @@ ALL_SRC = \
 	contents.md \
 	$(wildcard intermediate/python/*.md) \
 	$(wildcard intermediate/doit/*.md) \
+	$(wildcard slides/*.html) \
 	$(MOST_SRC)
 
 # Other files that the site depends on.
