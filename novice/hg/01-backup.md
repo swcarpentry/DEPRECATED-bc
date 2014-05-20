@@ -639,6 +639,28 @@ $ hg revert --rev 0 mars.txt
 ~~~
 </div>
 
+Mercurial really doesn't want to cause us to lose our work,
+so it defaults to making a backup when we use `hg revert`:
+
+<div class="in" markdown="1">
+~~~
+  $ hg status
+~~~
+</div>
+<div class="out" markdown="1">
+~~~
+  ? mars.txt.orig
+~~~
+</div>
+
+The `mars.txt.orig` file is a copy of `mars.txt` as it stood before the `hg revert` command.
+It's not tracked by Mercurial.
+It's just there in case we made a mistake and really didn't want to revert,
+or in case there's some content from before the revert that we decide that we really do want to copy into `mars.txt`.
+When we're sure that we don't need `*.orig` files we can just go ahead and delete them.
+If we really don't want Mercurial to create `*.orig` files when we use `hg revert`,
+we can use the `-C` or `--no-backup` option.
+
 The fact that files can be reverted one by one
 tends to change the way people organize their work.
 If everything is in one large document,
