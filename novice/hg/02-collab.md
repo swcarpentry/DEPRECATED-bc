@@ -30,16 +30,16 @@ Let's start by sharing the changes we've made to our current project with the wo
 Log in to BitBucket,
 then click on the icon in the top right corner to create a new repository called `planets`:
 
-<img src="img/bitbucket-create-repo-01.png" width=600 alt="Creating a Repository on BitBucket (Step 1)" />
+<img src="img/bitbucket-create-repo-01.png" width="600px" alt="Creating a Repository on BitBucket (Step 1)" />
 
 Name your repository "planets" and then click "Create Repository":
 
-<img src="img/bitbucket-create-repo-02.png" width=600 alt="Creating a Repository on BitBucket (Step 2)" />
+<img src="img/bitbucket-create-repo-02.png" width="600px" alt="Creating a Repository on BitBucket (Step 2)" />
 
 As soon as the repository is created,
 BitBucket displays a page with a URL and some information on how to configure your local repository:
 
-<img src="img/bitbucket-create-repo-03.png" width=800 alt="Creating a Repository on BitBucket (Step 3)" />
+<img src="img/bitbucket-create-repo-03.png" width="800px" alt="Creating a Repository on BitBucket (Step 3)" />
 
 This effectively does the following on BitBucket's servers:
 
@@ -62,7 +62,7 @@ for the local repository.
 The home page of the repository on BitBucket includes
 the string we need to identify it after clicking on "I have an existing project to push up":
 
-<img src="img/bitbucket-find-repo-string.png" width=800 alt="Where to Find Repository URL on BitBucket" />
+<img src="img/bitbucket-find-repo-string.png" width="800px" alt="Where to Find Repository URL on BitBucket" />
 
 Change the 'ssh://' string to 'https://' in the url [protocol](../../gloss.html#protocol).
 It's slightly less convenient for day-to-day use,
