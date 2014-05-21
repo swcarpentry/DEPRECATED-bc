@@ -220,4 +220,5 @@ def main():
 
 
 if __name__ == '__main__':
+    print("Preparing your Software Carpentry awesomeness!")
     main()

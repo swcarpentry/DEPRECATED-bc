@@ -24,7 +24,7 @@ contact: admin@software-carpentry.org
       This page is a template for bootcamp home pages.
       <br/>
       Please see
-      <a href="https://github.com/swcarpentry/bc">https://github.com/swcarpentry/bc</a>
+      <a href="//github.com/swcarpentry/bc">github.com/swcarpentry/bc</a>
       for instructions on how to create
       a repository for your bootcamp.
   </em></strong></p>
@@ -34,13 +34,13 @@ contact: admin@software-carpentry.org
     This block includes the Eventbrite registration widget if 'eventbrite' has been set in the header.
 -->
 {% if page.eventbrite %}
-<iframe src="http://www.eventbrite.com/tickets-external?eid={{page.eventbrite}}&ref=etckt" frameborder="0" width="100%" scrolling="auto"></iframe>
+<iframe src="//www.eventbrite.com/tickets-external?eid={{page.eventbrite}}&ref=etckt" frameborder="0" width="100%" scrolling="auto"></iframe>
 {% endif %}
 
 <h2>General Information</h2>
 
 <p>
-  <a href="http://software-carpentry.org">Software Carpentry</a>'s mission
+  <a href="//software-carpentry.org">Software Carpentry</a>'s mission
   is to help scientists and engineers become more productive
   by teaching them basic lab skills for computing
   like program design, version control, data management, and task automation.
@@ -75,9 +75,9 @@ contact: admin@software-carpentry.org
   <strong>Where:</strong>
   {{ page.address }}.
   Get directions with
-  <a href="http://www.openstreetmap.org/?mlat={{ page.latlng | replace:',','&mlon=' }}&zoom=16">OpenStreetMap</a>
+  <a href="//www.openstreetmap.org/?mlat={{ page.latlng | replace:',','&mlon=' }}&zoom=16">OpenStreetMap</a>
   or
-  <a href="http://maps.google.com/maps?q={{ page.latlng }}">Google Maps</a>.
+  <a href="//maps.google.com/maps?q={{ page.latlng }}">Google Maps</a>.
 </p>
 {% endif %}
 
