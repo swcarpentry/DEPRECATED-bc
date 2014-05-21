@@ -80,7 +80,7 @@ added 1 changesets with 1 changes to 1 files
 
 Our repositories are now in this state:
 
-<img src="img/git-after-first-conflicting-change.svg" alt="After Making First Change" />
+<img src="img/hg-after-first-conflicting-change.svg" alt="After Making First Change" />
 
 Now let's switch to the copy under `/tmp`
 and make a different change there
@@ -337,7 +337,7 @@ $ hg commit -m "Merging changes from Bitbucket"
 
 Our repositories now look like this:
 
-<img src="img/git-after-second-conflicting-change.svg" alt="After Making Second (Conflicting) Change" />
+<img src="img/hg-after-second-conflicting-change.svg" alt="After Making Second (Conflicting) Change" />
 
 or in terms of the graph,
 
@@ -395,7 +395,7 @@ added 2 changesets with 2 changes to 1 files
 
 to get this:
 
-<img src="img/git-after-merging.svg" alt="After Merging Changes Locally" />
+<img src="img/hg-after-merging.svg" alt="After Merging Changes Locally" />
 
 Mercurial keeps track of what we've merged with what, so we don't have
 to fix things by hand again if we switch back to the repository in our
