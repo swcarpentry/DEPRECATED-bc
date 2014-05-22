@@ -103,10 +103,15 @@ def check_registration(registration):
     '''Legal registrations are defined in REGISTRATIONS'''
     return registration in REGISTRATIONS
 
-def check_namelist(namelist):
-    '''Checks whether instructor/helper list is of format ['First name', 'Second name', ...']'''
+def check_instructors(instructors):
+    '''Checks whether instructor list is of format ['First name', 'Second name', ...']'''
     # yaml automatically loads list-like strings as lists
-    return isinstance(namelist, list) and len(namelist) > 0
+    return isinstance(instructors, list) and len(instructors) > 0
+
+def check_helpers(helpers):
+    '''Checks whether helpers list is of format ['First name', 'Second name', ...']'''
+    # yaml automatically loads list-like strings as lists
+    return isinstance(helpers, list) and len(helpers) >= 0
 
 def check_email(email):
     '''A valid email has letters, then an @, followed by letters, followed by a dot, followed by letters.'''
@@ -130,8 +135,8 @@ HANDLERS = {
     'enddate' :      (False, check_date, 'enddate invalid. Must be of format year-month-day, i.e., 2014-01-31.'),
     'latlng' :       (True,  check_latitude_longitude, 'latlng invalid. Check that it is two floating point numbers, separated by a comma.'),
     'registration' : (True,  check_registration, 'registration can only be {0}.'.format(REGISTRATIONS)), 
-    'instructor' :   (True,  check_namelist, 'instructor list isn\'t a valid list of format ["First instructor", "Second instructor",..].'),
-    'helper' :       (True,  check_namelist, 'helper list isn\'t a valid list of format ["First instructor", "Second instructor",..].'),
+    'instructor' :   (True,  check_instructors, 'instructor list isn\'t a valid list of format ["First instructor", "Second instructor",..].'),
+    'helper' :       (True,  check_helpers, 'helper list isn\'t a valid list of format ["First helper", "Second helper",..].'),
     'contact' :      (True,  check_email, 'contact email invalid.'),
     'eventbrite' :   (False, check_eventbrite, 'Eventbrite key appears invalid.'),
     'venue' :        (False, check_pass, ''),
