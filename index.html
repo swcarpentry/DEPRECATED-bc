@@ -11,6 +11,7 @@ enddate: 2020-06-18
 latlng: 41.7901128,-87.6007318
 registration: restricted
 instructor: ["Grace Hopper", "Alan Turing"]
+helper: ["John von Neumann"]
 contact: admin@software-carpentry.org
 ---
 <!--
@@ -54,6 +55,14 @@ contact: admin@software-carpentry.org
 <p>
   <strong>Instructors:</strong>
   {{page.instructor | join: ', ' %}}
+</p>
+{% endif %}
+
+<!-- This block displays the helpers' names if they are available. -->
+{% if page.helper %}
+<p>
+  <strong>Helpers:</strong>
+  {{page.helper | join: ', ' %}}
 </p>
 {% endif %}
 
