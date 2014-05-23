@@ -1,6 +1,7 @@
-```{r, echo=FALSE}
-opts_chunk$set(results='hide')
-```
+---
+layout: lesson
+root: ../..
+---
 
 Making packages in R
 ====================
@@ -67,7 +68,7 @@ fahr_to_celsius <- function(temp) {
 }
 ```
 
-We will use the `devtools` and `roxygen2` packages, which make creating packages in R simple.
+We will use the `devtools` and `roxygen2` packages, which make creating packages in R relatively simple.
 First, install the `devtools` package, which will allow you to install the roxygen2 package from GitHub.
 
 ```{r, eval=FALSE}

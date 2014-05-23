@@ -1,5 +1,7 @@
-
-
+---
+layout: lesson
+root: ../..
+---
 
 Making packages in R
 ====================
@@ -73,7 +75,7 @@ fahr_to_celsius <- function(temp) {
 ```
 
 
-We will use the `devtools` and `roxygen2` packages, which make creating packages in R simple.
+We will use the `devtools` and `roxygen2` packages, which make creating packages in R relatively simple.
 First, install the `devtools` package, which will allow you to install the roxygen2 package from GitHub.
 
 
@@ -146,8 +148,26 @@ Choosing the tempConvert environment will show the functions associated with our
 
 ```r
 fahr_to_celsius(32)
+```
+
+```
+## [1] 0
+```
+
+```r
 fahr_to_kelvin(212)
+```
+
+```
+## [1] 373.1
+```
+
+```r
 kelvin_to_celsius(273.15)
+```
+
+```
+## [1] 0
 ```
 
 
