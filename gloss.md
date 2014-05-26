@@ -20,6 +20,10 @@ A function such as `sum` or `max` that combines many values to produce a single 
 **alias** (a library): <a name="alias-library"></a>
 To give a [library](#library) a nickname while importing it.
 
+**argument**: <a name="argument"></a>
+FIXME.
+See also: [parameter](#parameter).
+
 **assertion**: <a name="assertion"></a>
 An expression which is supposed to be true at a particular point in a program.
 Programmers typically put assertions in their code to check for errors;
@@ -294,6 +298,7 @@ See also: [inner loop](#inner-loop).
 A value passed into a function,
 or a variable named in the function's declaration
 that is used to hold such a value.
+See also: [argument](#argument).
 
 **parent directory**: <a name="parent-directory"></a>
 The directory that "contains" the one in question.
