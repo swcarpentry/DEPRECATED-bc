@@ -4,7 +4,7 @@ root: .
 title: Glossary
 ---
 **<a name="absolute-error">absolute error</a>**:
-the absolute value of the difference between a mathematical value
+The absolute value of the difference between a mathematical value
 and its finite approximation in a computer.
 
 **<a name="absolute-path">absolute path</a>**:
@@ -15,7 +15,7 @@ and begin with either "/" (on Unix) or "\\" (on Microsoft Windows).
 See also: [relative path](#relative-path).
 
 **<a name="access-control-list">access control list</a>** (ACL):
-a list of permissions attached to a file or directory
+A list of permissions attached to a file or directory
 that specifies who can do what with it.
 
 **<a name="additive-color-model">additive color model</a>**:
@@ -46,7 +46,7 @@ the number 12 is usually considered atomic
 in which case we might decompose it into tens and ones).
 
 **<a name="branch">branch</a>**:
-a "parallel universe" in a [version control](#version-control) [repository](#repository).
+A "parallel universe" in a [version control](#version-control) [repository](#repository).
 Programmers typically use branches to isolate different sets of changes from one another during development
 so that they can concentrate on one problem at a time.
 See also: [merge](#repository-merge).
@@ -81,7 +81,7 @@ To make a local copy of a [version control repository](#repository).
 See also: [fork](#repository-fork).
 
 **<a name="code-review">code review</a>**:
-a systematic peer review of a piece of software,
+A systematic peer review of a piece of software,
 or of changes to a piece of software.
 Peer review is often conducted on [pull requests](#pull-request)
 before they are [merged](#repository-merge) into a [repository](#repository).
@@ -168,7 +168,7 @@ so that the rest of a program can worry about *what* it does
 rather than *how* it does it.
 
 **<a name="exception">exception</a>**:
-an event that disrupts the normal or expected execution of a program.
+An event that disrupts the normal or expected execution of a program.
 Most modern languages record information about what went wrong
 in a piece of data (also called an exception).
 See also: [catch](#catch-exception), [raise](#raise-exception).
@@ -292,7 +292,7 @@ A family of code units (functions, classes, variables) that implement a set of
 related tasks.
 
 **<a name="loop-body">loop body</a>**:
-the set of statements or commands that are repeated inside a [for loop](#for-loop)
+The set of statements or commands that are repeated inside a [for loop](#for-loop)
 or [while loop](#while-loop).
 
 **<a name="loop-variable">loop variable</a>**:
@@ -400,7 +400,7 @@ To explicitly signal that an [exception](#exception) has occured in a program.
 See also: [catch](#catch-exception).
 
 **<a name="repl">read-eval-print loop</a>** (REPL):
-a [command-line interface](#cli) that reads a command from the user,
+A [command-line interface](#cli) that reads a command from the user,
 executes it,
 prints the result,
 and waits for another command.
@@ -522,7 +522,7 @@ The Secure Shell [protocol](#protocol) used for secure communication between com
 SSH is often used for [remote login](#remote-login) between computers.
 
 **<a name="ssh-key">SSH key</a>**:
-a digital key that identifies one computer or user to another.
+A digital key that identifies one computer or user to another.
 
 **<a name="stack-frame">stack frame</a>**:
 A data structure that provides storage for a function's local variables.
