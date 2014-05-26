@@ -144,6 +144,10 @@ contribs :
 fixme :
 	grep -i -n FIXME $$(find novice -type f -print | grep -v .ipynb_checkpoints)
 
+## gloss    : check the glossary.
+gloss : $(INDEX)
+	python bin/gloss.py gloss.md $(patsubst %.md,$(SITE)/%.html,$(MOST_SRC))
+
 ## tidy     : clean up odds and ends.
 tidy :
 	rm -rf \

@@ -98,7 +98,7 @@ though,
 Python compares the type of the exception to the type specified by the `except`.
 If they match, it executes the code in the `except` block.
 
-`IOError` is the particular kind of exception Python raises
+`IOError` is the particular kind of exception Python uses
 when there is a problem related to input and output,
 such as files not existing
 or the program not having the permissions it needs to read them.
@@ -251,7 +251,7 @@ the library doesn't know if the program that's calling it is being run from the
 command line or from a GUI.
 The library therefore shouldn't try to handle or report errors itself,
 because it has no way of knowing what the right way to do this is.
-It should instead just raise an exception,
+It should instead just [raise](../../gloss.html#raise-exception) an exception,
 and let its caller figure out how best to handle it.
 
 Finally,
