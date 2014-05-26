@@ -21,8 +21,8 @@ A function such as `sum` or `max` that combines many values to produce a single 
 To give a [library](#library) a nickname while importing it.
 
 **argument**: <a name="argument"></a>
-FIXME.
-See also: [parameter](#parameter).
+A value given to a function or program when it runs.
+The term is often used interchangeably (and inconsistently) with [parameter](#parameter).
 
 **assertion**: <a name="assertion"></a>
 An expression which is supposed to be true at a particular point in a program.
@@ -112,7 +112,7 @@ such as [integer](#integer) or [character string](#string).
 A program that manages a [relational database](#relational-database).
 
 **default parameter value**: <a name="default-parameter-value"></a>
-A value to use for a parameter if nothing is specified explicitly.
+A value to use for a [parameter](#parameter) if nothing is specified explicitly.
 
 **defensive programming**: <a name="defensive-programming"></a>
 The practice of writing programs that check their own operation to catch errors as early as possible.
@@ -295,10 +295,8 @@ A loop that contains another loop.
 See also: [inner loop](#inner-loop).
 
 **parameter**: <a name="parameter"></a>
-A value passed into a function,
-or a variable named in the function's declaration
-that is used to hold such a value.
-See also: [argument](#argument).
+A variable named in the function's declaration that is used to hold a value passed into the call.
+The term is often used interchangeably (and inconsistently) with [argument](#argument).
 
 **parent directory**: <a name="parent-directory"></a>
 The directory that "contains" the one in question.
