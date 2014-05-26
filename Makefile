@@ -97,8 +97,12 @@ BOOK_MD = ./book.md
 # Build the temporary input for the book by concatenating relevant
 # sections of Markdown files and then patching glossary references and
 # image paths.
+#
+# Need to fix anchors to glossary references since it now will be in the same
+# file as the lessons.
 $(BOOK_MD) : $(MOST_SRC) bin/make-book.py
-	   python bin/make-book.py $(MOST_SRC) > $@
+	python bin/make-book.py $(MOST_SRC) > $@
+	sed -i 's/\.\.\/\.\.\/gloss.html#/#g:/g' $@
 
 $(BOOK_HTML): $(BOOK_MD)
 	make -B site
@@ -111,7 +115,7 @@ $(BOOK_HTML): $(BOOK_MD)
 
 ## commands : show all commands.
 commands :
-	 @grep -E '^##' Makefile | sed -e 's/##//g'
+	@grep -E '^##' Makefile | sed -e 's/##//g'
 
 ## ---------------------------------------
 
