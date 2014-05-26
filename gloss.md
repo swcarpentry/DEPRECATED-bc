@@ -4,7 +4,8 @@ root: .
 title: Glossary
 ---
 **<a name="absolute-error">absolute error</a>**:
-FIXME (novice/extras/08-numbers).
+the absolute value of the difference between a mathematical value
+and its finite approximation in a computer.
 
 **<a name="absolute-path">absolute path</a>**:
 A [path](#path) that refers to a particular location in a file system.
@@ -14,7 +15,8 @@ and begin with either "/" (on Unix) or "\\" (on Microsoft Windows).
 See also: [relative path](#relative-path).
 
 **<a name="access-control-list">access control list</a>** (ACL):
-FIXME (novice/extras/04-permissions).
+a list of permissions attached to a file or directory
+that specifies who can do what with it.
 
 **<a name="additive-color-model">additive color model</a>**:
 A way to represent colors as the sum of contributions from primary colors
@@ -43,11 +45,11 @@ the number 12 is usually considered atomic
 (unless we are teaching addition to school children,
 in which case we might decompose it into tens and ones).
 
-**<a name="authentication-key">authentication key</a>**:
-FIXME (novice/extras/06-ssh).
-
 **<a name="branch">branch</a>**:
-FIXME (novice/extras/01-branching).
+a "parallel universe" in a [version control](#version-control) [repository](#repository).
+Programmers typically use branches to isolate different sets of changes from one another during development
+so that they can concentrate on one problem at a time.
+See also: [merge](#repository-merge).
 
 **<a name="call-stack">call stack</a>**:
 A data structure inside a running program that keeps track of active function calls.
@@ -65,16 +67,24 @@ See also: [referential integrity](#referential-integrity).
 Treating text as if upper and lower case characters were the same.
 See also: [case sensitive](#case-sensitive).
 
+**<a name="catch-exception">catch</a>** (an exception):
+To handle an [exception](#exception) that has been [raised](#raise-exception)
+somewhere else in a program.
+
 **<a name="change-set">change set</a>**:
 A group of changes to one or more files
 that are [committed](#commit) to a [version control](#version-control) [repository](#repository)
 in a single operation.
 
 **<a name="repository-clone">clone</a>** (a repository):
-To make a copy of a [version control repository](#repository).
+To make a local copy of a [version control repository](#repository).
+See also: [fork](#repository-fork).
 
 **<a name="code-review">code review</a>**:
-FIXME (novice/extras/02-review).
+a systematic peer review of a piece of software,
+or of changes to a piece of software.
+Peer review is often conducted on [pull requests](#pull-request)
+before they are [merged](#repository-merge) into a [repository](#repository).
 
 **<a name="csv">comma-separated values</a>** (CSV):
 A common textual representation for tables
@@ -158,7 +168,10 @@ so that the rest of a program can worry about *what* it does
 rather than *how* it does it.
 
 **<a name="exception">exception</a>**:
-FIXME (novice/extras/07-exceptions).
+an event that disrupts the normal or expected execution of a program.
+Most modern languages record information about what went wrong
+in a piece of data (also called an exception).
+See also: [catch](#catch-exception), [raise](#raise-exception).
 
 **<a name="field-database">field</a>** (of a database):
 A set of data values of a particular type,
@@ -211,7 +224,8 @@ One or more values in a [database table](#table-database)
 that identify a [records](#record-database) in another table.
 
 **<a name="repository-fork">fork</a>**:
-FIXME (novice/extras/02-review).
+To [clone](#repository-clone) a [version control](#version-control) [repository](#repository)
+on a server.
 
 **<a name="function-body">function body</a>**:
 The statements that are executed inside a function.
@@ -231,6 +245,10 @@ See also: [command-line interface](#cli).
 **<a name="home-directory">home directory</a>**:
 The default directory associated with an account on a computer system.
 By convention, all of a user's files are stored in or below her home directory.
+
+**<a name="http">HTTP</a>**:
+The Hypertext Transfer [Protocol](#protocol) used for sharing web pages and other data
+on the World Wide Web.
 
 **<a name="immutable">immutable</a>**:
 Unchangeable.
@@ -264,9 +282,6 @@ See also: [outer loop](#outer-loop).
 A whole number, such as -12343.
 See also: [floating-point number](#float).
 
-**<a name="isp">Internet Service Provider</a>** (ISP):
-FIXME (novice/git/04-open).
-
 **<a name="invariant">invariant</a>**:
 An expression whose value doesn't change during the execution of a program,
 typically used in an [assertion](#assertion).
@@ -277,7 +292,8 @@ A family of code units (functions, classes, variables) that implement a set of
 related tasks.
 
 **<a name="loop-body">loop body</a>**:
-FIXME (novice/shell/04-loop).
+the set of statements or commands that are repeated inside a [for loop](#for-loop)
+or [while loop](#while-loop).
 
 **<a name="loop-variable">loop variable</a>**:
 The variable that keeps track of the progress of the loop.
@@ -361,10 +377,12 @@ A character or characters display by a [REPL](#repl) to show that
 it is waiting for its next command.
 
 **<a name="protocol">protocol</a>**:
-FIXME (novice/git/02-collab).
+A set of rules that define how one computer communicates with another.
+Common protocols on the Internet include [HTTP](#http) and [SSH](#ssh).
 
 **<a name="pull-request">pull request</a>**:
-FIXME (novice/extras/02-review).
+A set of changes created in one [version control](#version-control) [repository](#repository)
+that is being offered to another for [merging](#repository-merge).
 
 **<a name="query">query</a>**:
 A database operation that reads values but does not modify anything.
@@ -376,6 +394,10 @@ For example,
 to pass the string `*.txt` to a program,
 it is usually necessary to write it as `'*.txt'` (with single quotes)
 so that the shell will not try to expand the `*` wildcard.
+
+**<a name="raise-exception">raise</a>** (an exception):
+To explicitly signal that an [exception](#exception) has occured in a program.
+See also: [catch](#catch-exception).
 
 **<a name="repl">read-eval-print loop</a>** (REPL):
 a [command-line interface](#cli) that reads a command from the user,
@@ -409,7 +431,8 @@ REs are most often used to find sequences of characters in strings.
 A collection of data organized into [tables](#table-database).
 
 **<a name="relative-error">relative error</a>**:
-FIXME (novice/extras/08-numbers).
+The ratio of the [absolute error](#absolute-error) in an approximation of a value
+to the value being approximated.
 
 **<a name="relative-path">relative path</a>**:
 A [path](#path) that specifies the location of a file or directory
@@ -418,7 +441,9 @@ Any path that does not begin with a separator character ("/" or "\\") is a relat
 See also: [absolute path](#absolute-path).
 
 **<a name="remote-login">remote login</a>**:
-FIXME (novice/extras/06-ssh).
+To connect to a computer over a network,
+e.g., to run a [shell](#shell) on it.
+See also: [SSH](#ssh).
 
 **<a name="repository-remote">remote repository</a>**:
 A version control [repository](#repository) other than the current one
@@ -450,7 +475,7 @@ The top-most directory in a [filesystem](#filesystem).
 Its name is "/" on Unix (including Linux and Mac OS X) and "\\" on Microsoft Windows.
 
 **<a name="search-path">search path</a>**:
-FIXME (novice/extras/05-shellvar).
+The list of directories in which the [shell](#shell) searches for programs when they are run.
 
 **<a name="sentinel-value">sentinel value</a>**:
 A value in a collection that has a special meaning,
@@ -472,7 +497,9 @@ A shell script is a program executed by the shell;
 the name "script" is used for historical reasons.
 
 **<a name="sign-and-magnitude">sign and magnitude</a>**:
-FIXME (novice/extras/08-numbers).
+A scheme for representing numbers in which one bit indicates the sign (positive or negative)
+and the other bits store the number's absolute value.
+See also: [two's complement](#twos-complement).
 
 **<a name="silent-failure">silent failure</a>**:
 Failing without producing any warning messages.
@@ -489,6 +516,13 @@ A special-purpose language for describing operations on [relational databases](#
 An attack on a program in which the user's input contains malicious SQL statements.
 If this text is copied directly into an SQL statement,
 it will be executed in the database.
+
+**<a name="ssh">SSH</a>**:
+The Secure Shell [protocol](#protocol) used for secure communication between computers.
+SSH is often used for [remote login](#remote-login) between computers.
+
+**<a name="ssh-key">SSH key</a>**:
+a digital key that identifies one computer or user to another.
 
 **<a name="stack-frame">stack frame</a>**:
 A data structure that provides storage for a function's local variables.
@@ -539,28 +573,32 @@ against which the results of a test can be compared.
 The practice of writing unit tests *before* writing the code they test.
 
 **<a name="timestamp">timestamp</a>**:
-FIXME (novice/git/02-collab).
+A record of when a particular event occurred.
 
 **<a name="tuple">tuple</a>**:
 An [immutable](#immutable) [sequence](#sequence) of values.
 
 **<a name="twos-complement">two's complement</a>**:
-FIXME (novice/extras/08-numbers).
+A scheme for representing numbers which wraps around like an odometer
+so that 111...111 represents -1.
+See also: [sign and magnitude](#sign-and-magnitude).
 
 **<a name="user-group">user group</a>**:
-FIXME (novice/extras/04-permissions).
+A set of users on a computer system.
 
 **<a name="user-group-id">user group ID</a>**:
-FIXME (novice/extras/04-permissions).
+A numerical ID that specifies a [user group](#user-group).
 
 **<a name="user-group-name">user group name</a>**:
-FIXME (novice/extras/04-permissions).
+A textual name for a [user group](#user-group).
 
 **<a name="user-id">user ID</a>**:
-FIXME (novice/extras/04-permissions).
+A numerical ID that specifies an individual user on a computer system.
+See also: [user name](#user-name).
 
 **<a name="user-name">user name</a>**:
-FIXME (novice/extras/04-permissions).
+A textual name for a user on a computer system.
+See also: [user ID](#user-id).
 
 **<a name="variable">variable</a>**:
 A name in a program that is associated with a value or a collection of values.
@@ -570,6 +608,10 @@ A tool for managing changes to a set of files.
 Each set of changes creates a new [revision](#revision) of the files;
 the version control system allows users to recover old revisions reliably,
 and helps manage conflicting changes made by different users.
+
+**<a name="while-loop">while loop</a>**:
+A loop that keeps executing as long as some condition is true.
+See also: [for loop](#for-loop).
 
 **<a name="wildcard">wildcard</a>**:
 A character used in pattern matching.
