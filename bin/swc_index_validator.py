@@ -12,7 +12,7 @@ Checks for:
     4. Latitute/longitude should be 2 floating point numbers separated by comma
     5. startdate should be a valid date; if enddate is present, it should be valid as well
     6. country should be a string with no spaces
-    7. instructor list should be a valid Python/Ruby list
+    7. instructor and helper lists should be valid Python/Ruby lists
     8. Template header should not exist
     9. humandate should have three-letter month and four-letter year
     10. layout should be 'bootcamp'
@@ -103,10 +103,15 @@ def check_registration(registration):
     '''Legal registrations are defined in REGISTRATIONS'''
     return registration in REGISTRATIONS
 
-def check_instructor(instructor):
-    '''Checks whether instructor list is of format ['First instructor', 'Second instructor', ...']'''
+def check_instructors(instructors):
+    '''Checks whether instructor list is of format ['First name', 'Second name', ...']'''
     # yaml automatically loads list-like strings as lists
-    return isinstance(instructor, list) and len(instructor) > 0
+    return isinstance(instructors, list) and len(instructors) > 0
+
+def check_helpers(helpers):
+    '''Checks whether helpers list is of format ['First name', 'Second name', ...']'''
+    # yaml automatically loads list-like strings as lists
+    return isinstance(helpers, list) and len(helpers) >= 0
 
 def check_email(email):
     '''A valid email has letters, then an @, followed by letters, followed by a dot, followed by letters.'''
@@ -121,17 +126,18 @@ def check_pass(value):
     return True
 
 HANDLERS = {
-    'layout' :       (True, check_layout, 'Layout isn\'t "bootcamp".'),
-    'root' :         (True, check_root, 'root can only be ".".'), 
-    'country' :      (True, check_country, 'Country invalid. Please check whether there are spaces inside the country-name.'),
-    'humandate' :    (True, check_humandate, 'Category "humandate" invalid. Please use a three-letter month like "Jan" and four-letter year like "2025".'),
-    'humantime' :    (True, check_humantime, '"humantime" doesn\'t include numbers.'),
-    'startdate' :    (True, check_date, '"startdate" invalid. Must be of format year-month-day, i.e., 2014-01-31.'),
-    'enddate' :      (False, check_date, '"enddate" invalid. Must be of format year-month-day, i.e., 2014-01-31.'),
-    'latlng' :       (True, check_latitude_longitude, 'Lat/long invalid. Check whether it\'s two floating point numbers, separated by a comma.'),
-    'registration' : (True, check_registration, 'registration can only be {0}.'.format(REGISTRATIONS)), 
-    'instructor' :   (True, check_instructor, 'Instructor string isn\'t a valid list of format ["First instructor", "Second instructor",..].'),
-    'contact' :      (True, check_email, 'Email invalid.'),
+    'layout' :       (True,  check_layout, 'layout isn\'t "bootcamp".'),
+    'root' :         (True,  check_root, 'root can only be ".".'), 
+    'country' :      (True,  check_country, 'country invalid. Please check whether there are spaces inside the country-name.'),
+    'humandate' :    (True,  check_humandate, 'humandate invalid. Please use three-letter months like "Jan" and four-letter years like "2025".'),
+    'humantime' :    (True,  check_humantime, 'humantime doesn\'t include numbers.'),
+    'startdate' :    (True,  check_date, 'startdate invalid. Must be of format year-month-day, i.e., 2014-01-31.'),
+    'enddate' :      (False, check_date, 'enddate invalid. Must be of format year-month-day, i.e., 2014-01-31.'),
+    'latlng' :       (True,  check_latitude_longitude, 'latlng invalid. Check that it is two floating point numbers, separated by a comma.'),
+    'registration' : (True,  check_registration, 'registration can only be {0}.'.format(REGISTRATIONS)), 
+    'instructor' :   (True,  check_instructors, 'instructor list isn\'t a valid list of format ["First instructor", "Second instructor",..].'),
+    'helper' :       (True,  check_helpers, 'helper list isn\'t a valid list of format ["First helper", "Second helper",..].'),
+    'contact' :      (True,  check_email, 'contact email invalid.'),
     'eventbrite' :   (False, check_eventbrite, 'Eventbrite key appears invalid.'),
     'venue' :        (False, check_pass, ''),
     'address' :      (False, check_pass, '')
