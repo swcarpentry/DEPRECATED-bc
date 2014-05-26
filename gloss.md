@@ -3,12 +3,18 @@ layout: lesson
 root: .
 title: Glossary
 ---
+**<a name="absolute-error">absolute error</a>**:
+FIXME (novice/extras/08-numbers).
+
 **<a name="absolute-path">absolute path</a>**:
 A [path](#path) that refers to a particular location in a file system.
 Absolute paths are usually written with respect to the file system's
 [root directory](#root-directory),
 and begin with either "/" (on Unix) or "\\" (on Microsoft Windows).
 See also: [relative path](#relative-path).
+
+**<a name="access-control-list">access control list</a>** (ACL):
+FIXME (novice/extras/04-permissions).
 
 **<a name="additive-color-model">additive color model</a>**:
 A way to represent colors as the sum of contributions from primary colors
@@ -37,6 +43,12 @@ the number 12 is usually considered atomic
 (unless we are teaching addition to school children,
 in which case we might decompose it into tens and ones).
 
+**<a name="authentication-key">authentication key</a>**:
+FIXME (novice/extras/06-ssh).
+
+**<a name="branch">branch</a>**:
+FIXME (novice/extras/01-branching).
+
 **<a name="call-stack">call stack</a>**:
 A data structure inside a running program that keeps track of active function calls.
 Each call's variables are stored in a [stack frame](#stack-frame);
@@ -60,6 +72,9 @@ in a single operation.
 
 **<a name="repository-clone">clone</a>** (a repository):
 To make a copy of a [version control repository](#repository).
+
+**<a name="code-review">code review</a>**:
+FIXME (novice/extras/02-review).
 
 **<a name="csv">comma-separated values</a>** (CSV):
 A common textual representation for tables
@@ -142,6 +157,9 @@ The practice of hiding something's implementation details
 so that the rest of a program can worry about *what* it does
 rather than *how* it does it.
 
+**<a name="exception">exception</a>**:
+FIXME (novice/extras/07-exceptions).
+
 **<a name="field-database">field</a>** (of a database):
 A set of data values of a particular type,
 one for each [record](#record-database) in a [table](#table-database).
@@ -191,6 +209,9 @@ See also: [while loop](#while-loop).
 **<a name="foreign-key">foreign key</a>**:
 One or more values in a [database table](#table-database)
 that identify a [records](#record-database) in another table.
+
+**<a name="repository-fork">fork</a>**:
+FIXME (novice/extras/02-review).
 
 **<a name="function-body">function body</a>**:
 The statements that are executed inside a function.
@@ -243,6 +264,9 @@ See also: [outer loop](#outer-loop).
 A whole number, such as -12343.
 See also: [floating-point number](#float).
 
+**<a name="isp">Internet Service Provider</a>** (ISP):
+FIXME (novice/git/04-open).
+
 **<a name="invariant">invariant</a>**:
 An expression whose value doesn't change during the execution of a program,
 typically used in an [assertion](#assertion).
@@ -251,6 +275,9 @@ See also: [precondition](#precondition), [postcondition](#postcondition).
 **<a name="library">library</a>**:
 A family of code units (functions, classes, variables) that implement a set of
 related tasks.
+
+**<a name="loop-body">loop body</a>**:
+FIXME (novice/shell/04-loop).
 
 **<a name="loop-variable">loop variable</a>**:
 The variable that keeps track of the progress of the loop.
@@ -333,6 +360,12 @@ to give the impression that they are executing simultaneously.
 A character or characters display by a [REPL](#repl) to show that
 it is waiting for its next command.
 
+**<a name="protocol">protocol</a>**:
+FIXME (novice/git/02-collab).
+
+**<a name="pull-request">pull request</a>**:
+FIXME (novice/extras/02-review).
+
 **<a name="query">query</a>**:
 A database operation that reads values but does not modify anything.
 Queries are expressed in a special-purpose language called [SQL](#sql).
@@ -375,11 +408,17 @@ REs are most often used to find sequences of characters in strings.
 **<a name="relational-database">relational database</a>**:
 A collection of data organized into [tables](#table-database).
 
+**<a name="relative-error">relative error</a>**:
+FIXME (novice/extras/08-numbers).
+
 **<a name="relative-path">relative path</a>**:
 A [path](#path) that specifies the location of a file or directory
 with respect to the [current working directory](#current-working-directory).
 Any path that does not begin with a separator character ("/" or "\\") is a relative path.
 See also: [absolute path](#absolute-path).
+
+**<a name="remote-login">remote login</a>**:
+FIXME (novice/extras/06-ssh).
 
 **<a name="repository-remote">remote repository</a>**:
 A version control [repository](#repository) other than the current one
@@ -410,6 +449,9 @@ Each color's value is typically in the range 0..255
 The top-most directory in a [filesystem](#filesystem).
 Its name is "/" on Unix (including Linux and Mac OS X) and "\\" on Microsoft Windows.
 
+**<a name="search-path">search path</a>**:
+FIXME (novice/extras/05-shellvar).
+
 **<a name="sentinel-value">sentinel value</a>**:
 A value in a collection that has a special meaning,
 such as 999 to mean "age unknown".
@@ -428,6 +470,9 @@ that allows a user to interact with the [operating system](#operating-system).
 A set of [shell](#shell) commands stored in a file for re-use.
 A shell script is a program executed by the shell;
 the name "script" is used for historical reasons.
+
+**<a name="sign-and-magnitude">sign and magnitude</a>**:
+FIXME (novice/extras/08-numbers).
 
 **<a name="silent-failure">silent failure</a>**:
 Failing without producing any warning messages.
@@ -493,8 +538,29 @@ against which the results of a test can be compared.
 **<a name="test-driven-development">test-driven development</a>** (TDD):
 The practice of writing unit tests *before* writing the code they test.
 
+**<a name="timestamp">timestamp</a>**:
+FIXME (novice/git/02-collab).
+
 **<a name="tuple">tuple</a>**:
 An [immutable](#immutable) [sequence](#sequence) of values.
+
+**<a name="twos-complement">two's complement</a>**:
+FIXME (novice/extras/08-numbers).
+
+**<a name="user-group">user group</a>**:
+FIXME (novice/extras/04-permissions).
+
+**<a name="user-group-id">user group ID</a>**:
+FIXME (novice/extras/04-permissions).
+
+**<a name="user-group-name">user group name</a>**:
+FIXME (novice/extras/04-permissions).
+
+**<a name="user-id">user ID</a>**:
+FIXME (novice/extras/04-permissions).
+
+**<a name="user-name">user name</a>**:
+FIXME (novice/extras/04-permissions).
 
 **<a name="variable">variable</a>**:
 A name in a program that is associated with a value or a collection of values.
