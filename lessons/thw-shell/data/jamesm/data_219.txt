@@ -1,9 +1,0 @@
-# 
-Reported: Wed Aug 24 14:44:27 2011
-Subject: beyonceHarrison181
-Year/month of birth: 1996/04
-Sex: F
-CI type: 15
-Volume: 9
-Range: 6
-Discrimination: 

@@ -569,7 +569,9 @@ plt.plot(data[&#39;year&#39;], data[&#39;mosquitos&#39;])</pre>
 </div>
 
 <div class="out">
-<pre>[&lt;matplotlib.lines.Line2D at 0x4a88590&gt;]</pre>
+<pre>[&lt;matplotlib.lines.Line2D at 0x4a88590&gt;]
+<img src="../../intermediate/python/01-intro-python_files/intermediate/python/01-intro-python_66_1.png">
+</pre>
 </div>
 
 
@@ -594,7 +596,9 @@ plt.show()</pre>
 </div>
 
 <div class="out">
-<pre></pre>
+<pre>
+<img src="../../intermediate/python/01-intro-python_files/intermediate/python/01-intro-python_68_0.png">
+</pre>
 </div>
 
 ### Challenge

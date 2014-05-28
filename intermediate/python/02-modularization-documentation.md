@@ -238,7 +238,9 @@ plt.plot([min_mosquitos, max_mosquitos], [min_mosquitos, max_mosquitos], &#39;k-
 </div>
 
 <div class="out">
-<pre>[&lt;matplotlib.lines.Line2D at 0x56eb950&gt;]</pre>
+<pre>[&lt;matplotlib.lines.Line2D at 0x56eb950&gt;]
+<img src="../../intermediate/python/02-modularization-documentation_files/intermediate/python/02-modularization-documentation_19_1.png">
+</pre>
 </div>
 
 
@@ -271,6 +273,8 @@ temperature     0.871943
 rainfall        0.696717
 dtype: float64
 R^2 =  0.996966873691
+
+<img src="../../intermediate/python/02-modularization-documentation_files/intermediate/python/02-modularization-documentation_21_1.png">
 </pre>
 </div>
 
@@ -726,6 +730,8 @@ print parameters</pre>
 temperature     0.871943
 rainfall        0.696717
 dtype: float64
+
+<img src="../../intermediate/python/02-modularization-documentation_files/intermediate/python/02-modularization-documentation_64_1.png">
 </pre>
 </div>
 

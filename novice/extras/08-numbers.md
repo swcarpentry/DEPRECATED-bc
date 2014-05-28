@@ -17,11 +17,10 @@ The first is that this scheme gives us two representations for zero (00000<sub>2
 This isn't necessarily fatal,
 but any claims this scheme has to being "natural" disappear when we have to write code like:
 
-<div class="in" markdown="1">
 ~~~
 if (length != +0) and (length != -0)
 ~~~
-</div>
+{:class="in"}
 
 As for the other problem,
 it turns out that the circuits needed to do addition and other arithmetic on this
@@ -52,7 +51,7 @@ numbers go from -8 to 7, or -16 to 15, and so on.
 As a result, even if `x` is a valid number, `-x` may not be.
 
 Finding a good representation for real numbers
-(called [floating point numbers](../../gloss.html#floating-point),
+(called [floating point numbers](../../gloss.html#float),
 since the decimal point can move around)
 is a much harder problem.
 The root of the problem is that
@@ -142,7 +141,6 @@ it makes little sense to say that we're off by a hundredth when the value in que
 
 To see why this matters, let's have a look at a little program:
 
-<div class="in" markdown="1">
 ~~~
 nines = []
 sums = []
@@ -156,7 +154,7 @@ for i in range(1, 10):
 for i in range(len(nines)):
     print '%.18f %.18f' % (nines[i], sums[i])
 ~~~
-</div>
+{:class="in"}
 
 The loop runs over the integers from 1 to 9 inclusive.
 Using those values, we create the numbers 0.9, 0.09, 0.009, and so on, and put them in the list `vals`.

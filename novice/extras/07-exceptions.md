@@ -17,7 +17,6 @@ here's a small piece of code that tries to read parameters and a grid from two
 separate files,
 and reports an error if either goes wrong:
 
-<div class="in" markdown="1">
 ~~~
 try:
     params = read_params(param_file)
@@ -26,7 +25,7 @@ except:
     log.error('Failed to read input file(s)')
     sys.exit(ERROR)
 ~~~
-</div>
+{:class="in"}
 
 We join the normal case and the error-handling code using the keywords `try` and
 `except`.
@@ -45,12 +44,10 @@ trying to open a nonexistent file triggers a type of exception called an
 while trying to access a list element that doesn't exist
 causes an `IndexError`:
 
-<div class="in" markdown="1">
 ~~~
 open('nonexistent-file.txt', 'r')
 ~~~
-</div>
-<div class="err" markdown="1">
+{:class="in"}
 ~~~
 ---------------------------------------------------------------------------
 IOError                                   Traceback (most recent call last)
@@ -60,14 +57,12 @@ IOError                                   Traceback (most recent call last)
 
 IOError: [Errno 2] No such file or directory: 'nonexistent-file.txt'
 ~~~
-</div>
-<div class="in" markdown="1">
+{:class="err"}
 ~~~
 values = [0, 1, 2]
 print values[999]
 ~~~
-</div>
-<div class="err" markdown="1">
+{:class="in"}
 ~~~
 ---------------------------------------------------------------------------
 IndexError                                Traceback (most recent call last)
@@ -78,20 +73,22 @@ IndexError                                Traceback (most recent call last)
 
 IndexError: list index out of range
 ~~~
-</div>
+{:class="err"}
 
 We can use `try` and `except` to deal with these errors ourselves
 if we don't want the program simply to fall over:
 
-<div class="in" markdown="1">
 ~~~
 try:
     reader = open('nonexistent-file.txt', 'r')
 except IOError:
     print 'Whoops!'
-<span class="err">Whoops!</span>
 ~~~
-</div>
+{:class="in"}
+~~~
+Whoops!
+~~~
+{:class="err"}
 
 When Python executes this code,
 it runs the statement inside the `try`.
@@ -101,7 +98,7 @@ though,
 Python compares the type of the exception to the type specified by the `except`.
 If they match, it executes the code in the `except` block.
 
-`IOError` is the particular kind of exception Python raises
+`IOError` is the particular kind of exception Python uses
 when there is a problem related to input and output,
 such as files not existing
 or the program not having the permissions it needs to read them.
@@ -111,7 +108,6 @@ We can also handle several different kinds of errors afterward.
 For example,
 here's some code to calculate the entropy at each point in a grid:
 
-<div class="in" markdown="1">
 ~~~
 try:
     params = read_params(param_file)
@@ -123,7 +119,7 @@ except IOError:
 except ArithmeticError:
     report_error_and_exit('Arithmetic error')
 ~~~
-</div>
+{:class="in"}
 
 Python tries to run the four functions inside the `try` as normal.
 If an error occurs in any of them,
@@ -144,7 +140,6 @@ which file caused the problem.
 We can do better if we capture and hang on to the object that Python creates
 to record information about the error:
 
-<div class="in" markdown="1">
 ~~~
 try:
     params = read_params(param_file)
@@ -156,7 +151,7 @@ except IOError as err:
 except ArithmeticError as err:
     report_error_and_exit(err.message)
 ~~~
-</div>
+{:class="in"}
 
 If something goes wrong in the `try`,
 Python creates an exception object,
@@ -181,26 +176,24 @@ For example,
 if this code can't read the grid file that the user has asked for,
 it creates a default grid instead:
 
-<div class="in" markdown="1">
 ~~~
 try:
     grid = read_grid(grid_file)
 except IOError:
     grid = default_grid()
 ~~~
-</div>
+{:class="in"}
 
 Other programmers would explicitly test for the grid file,
 and use `if` and `else` for control flow:
 
-<div class="in" markdown="1">
 ~~~
 if file_exists(grid_file):
     grid = read_grid(grid_file)
 else:
     grid = default_grid()
 ~~~
-</div>
+{:class="in"}
 
 It's mostly a matter of taste,
 but we prefer the second style.
@@ -220,7 +213,6 @@ Exceptions can actually be thrown a long way:
 they don't have to be handled immediately.
 Take another look at this code:
 
-<div class="in" markdown="1">
 ~~~
 try:
     params = read_params(param_file)
@@ -232,7 +224,7 @@ except IOError as err:
 except ArithmeticError as err:
     report_error_and_exit(err.message)
 ~~~
-</div>
+{:class="in"}
 
 The four lines in the `try` block are all function calls.
 They might catch and handle exceptions themselves,
@@ -259,7 +251,7 @@ the library doesn't know if the program that's calling it is being run from the
 command line or from a GUI.
 The library therefore shouldn't try to handle or report errors itself,
 because it has no way of knowing what the right way to do this is.
-It should instead just raise an exception,
+It should instead just [raise](../../gloss.html#raise-exception) an exception,
 and let its caller figure out how best to handle it.
 
 Finally,
@@ -271,7 +263,6 @@ Here,
 for example,
 is a function that reads a grid and checks its consistency:
 
-<div class="in" markdown="1">
 ~~~
 def read_grid(grid_file):
     data = read_raw_data(grid_file)
@@ -280,7 +271,7 @@ def read_grid(grid_file):
     result = normalize_grid(data)
     return result
 ~~~
-</div>
+{:class="in"}
 
 The `raise` statement creates a new exception with a meaningful error message.
 Since `read_grid` itself doesn't contain a `try`/`except` block,
