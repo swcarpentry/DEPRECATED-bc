@@ -76,14 +76,16 @@ fahr_to_celsius <- function(temp) {
 
 
 We will use the `devtools` and `roxygen2` packages, which make creating packages in R relatively simple.
-First, install the `devtools` package, which will allow you to install the roxygen2 package from GitHub.
+First, install the `devtools` package, which will allow you to install the `roxygen2` package from GitHub ([code][]).
+
+[code]: https://github.com/klutometis/roxygen
 
 
 ```r
 install.packages("devtools")
 library("devtools")
-devtools::install_github("klutometis/roxygen")
-library(roxygen2)
+install_github("klutometis/roxygen")
+library("roxygen2")
 ```
 
 
@@ -121,7 +123,7 @@ fahr_to_kelvin <- function(temp) {
 ```
 
 
-Now, we will use roxygen2 to convert our documentation to the standard R format.
+Now, we will use `roxygen2` to convert our documentation to the standard R format.
 
 
 ```r
@@ -173,4 +175,4 @@ kelvin_to_celsius(273.15)
 
 ## Challenges
 - Create some new functions for your tempConvert package to convert from Kelvin to Fahrenheit or from Celsius to Kelvin or Fahrenheit.
-- Create a package for our analyze function so that it will be easy to load when more data arrives.
+- Create a package for our `analyze` function so that it will be easy to load when more data arrives.
