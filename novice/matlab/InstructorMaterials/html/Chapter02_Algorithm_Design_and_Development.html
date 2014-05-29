@@ -1,0 +1,546 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Chapter 02 - Algorithm Design in MATLAB.</title><meta name="generator" content="MATLAB 8.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2014-03-14"><meta name="DC.source" content="Chapter02_Algorithm_Design_and_Development.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Chapter 02 - Algorithm Design in MATLAB.</h1><!--introduction--><p>Author: Ken Deeley, <a href="mailto:ken.deeley@mathworks.co.uk">ken.deeley@mathworks.co.uk</a></p><p>This chapter provides the necessary programming techniques for algorithm design and development using MATLAB. The idea is that we are now happy writing scripts to organise and collect sequences of MATLAB commands, but these become increasingly difficult to manage as the complexity of our algorithms grows. Moreover, a common requirement is to run scripts repeatedly using different values for certain parameters within the script. Functions are a more effective programming construct for managing these issues. In this chapter we will learn how to develop and structure an algorithm for performing simple preprocessing, model fitting and visualisation. The important concept here is how to modularise code so that it becomes reusable, maintainable, flexible and robust.</p><p>Outline:</p><div><ul><li>Formulating an algorithm for 1D model fitting</li><li>Linear regression models</li><li>Visualising the results</li><li>Generalising the algorithm to 2D model fitting</li><li>Anonymous function handles</li><li>Surface plots</li><li>Code modularisation: from scripts to functions</li><li>Local functions</li><li>Nested functions</li><li>Code robustness and flexibility</li><li>Parsing user-supplied input arguments</li><li>Defining flexible interfaces</li><li>Errors and error identifiers</li></ul></div><p>Reference files for this chapter:</p><div><ul><li>../Reference/S02_Algorithm.m</li><li>../Reference/F02_fitQuadModel.m</li><li>../Reference/S02_MedData.mat</li></ul></div><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Linear Regression Models.</a></li><li><a href="#2">Matrix Equations.</a></li><li><a href="#3">Slash and Backslash.</a></li><li><a href="#4">Matrix and Array Operators.</a></li><li><a href="#5">Generalising the Model.</a></li><li><a href="#6">Function Handles.</a></li><li><a href="#7">Creating Equally-Spaced Vectors.</a></li><li><a href="#8">Making Grids.</a></li><li><a href="#9">Surface Plots.</a></li><li><a href="#10">Creating a Function.</a></li><li><a href="#11">Workspaces.</a></li><li><a href="#12">Local Functions.</a></li><li><a href="#13">Defining Flexible Interfaces.</a></li><li><a href="#14">Checking Input Arguments.</a></li><li><a href="#15">Errors and Error Identifiers.</a></li></ul></div><h2>Linear Regression Models.<a name="1"></a></h2><p>The main example in this chapter is developing an algorithm to perform data preprocessing, fitting and visualisation. We will use a linear regression model with variables chosen from the biomedical data discussed in the first chapter of the course. The examples are fairly simple, but if attendees are unfamiliar with regression, the concepts can be explained in terms of inputs and outputs. For example, we have an input variable (e.g. Age) and we would like to model the dependency of an output variable (e.g. PulsePressure) on the input. It's easier to gather the commands in these sections into a single script, which can then be run section by section and then eventually converted into a properly structured function by the end of the chapter.</p><pre class="codeinput"><span class="comment">% Visualise the dependency of pulse pressure on age.</span>
+load(<span class="string">'S02_MedData.mat'</span>)
+x = MedData.Age;
+y = MedData.BPDiff;
+figure
+scatter(x, y, <span class="string">'bx'</span>)
+xlabel(<span class="string">'Age'</span>)
+ylabel(<span class="string">'Pulse Pressure'</span>)
+title(<span class="string">'\bfPulse Pressure vs. Age'</span>)
+
+<span class="comment">% This dependency looks as if it could be modelled using a quadratic curve</span>
+<span class="comment">% (i.e. using a model of the form PP ~ C0 + C1*Age + C2*Age.^2, where the</span>
+<span class="comment">% coefficients C0, C1 and C2 are unknown and to be determined).</span>
+</pre><img vspace="5" hspace="5" src="Chapter02_Algorithm_Design_and_Development_01.png" alt=""> <h2>Matrix Equations.<a name="2"></a></h2><p>Formulating a linear regression model leads to a system of linear equations A*x = b for the unknown vector of coefficients x. The design matrix A comprises the model terms, and the vector b is the data to be modelled (in this example, the vector of pulse pressure observations). Note carefully that solving such linear systems is a matrix operation, and so any missing values contained in the data must be dealt with in some way before attempting to solve the system. (High-level functionality in Statistics Toolbox can remove missing observations automatically before fitting, but here we use a core MATLAB solution.)</p><pre class="codeinput"><span class="comment">% Set up the system of equations for fitting a model to the pulse pressure</span>
+<span class="comment">% data.</span>
+missingIdx = isnan(x) | isnan(y);
+xClean = x(~missingIdx);
+yClean = y(~missingIdx);
+designMat = [ones(size(xClean)), xClean, xClean.^2];
+</pre><h2>Slash and Backslash.<a name="3"></a></h2><p>The least-squares solution of the system A*x = b in MATLAB is given by x = A\b. If the system is formulated as x*A = b, then its solution is x = b/A.</p><pre class="codeinput"><span class="comment">% Solve the linear system to find the best-fit coefficients for modelling</span>
+<span class="comment">% pulse pressure as a quadratic function of age.</span>
+modelCoeffs = designMat\yClean;
+
+<span class="comment">% Compute the fitted model.</span>
+pulseModel = designMat*modelCoeffs;
+
+<span class="comment">% Visualise the results.</span>
+hold <span class="string">on</span>
+plot(xClean, pulseModel, <span class="string">'r*'</span>)
+hold <span class="string">off</span>
+</pre><img vspace="5" hspace="5" src="Chapter02_Algorithm_Design_and_Development_02.png" alt=""> <h2>Matrix and Array Operators.<a name="4"></a></h2><p>Note that in the above computations we have used the operators * and \. A complete list of matrix, array and logical operators is available by entering the command &gt;&gt; doc ops.</p><pre class="codeinput">doc <span class="string">ops</span>
+<span class="comment">% It's useful to show this list at this point to point people in the right</span>
+<span class="comment">% direction for discovering matrix and array operators.</span>
+</pre><h2>Generalising the Model.<a name="5"></a></h2><p>We now have an algorithm for fitting a one-dimensional quadratic model to our data. We would like to generalise this to fit a two-dimensional quadratic surface to a single response variable given two input variables. For example, we might be interested in predicting a person's weight given knowledge of their height and waist measurements. We will follow similar steps to preprocess and clean the data before fitting.</p><pre class="codeinput"><span class="comment">% Extract input variables.</span>
+x1 = MedData.Height;
+x2 = MedData.Waist;
+
+<span class="comment">% Extract output variable.</span>
+y = MedData.Weight;
+
+<span class="comment">% Clean the data.</span>
+missingIdx = isnan(x1) | isnan(x2) | isnan(y);
+x1Clean = x1(~missingIdx);
+x2Clean = x2(~missingIdx);
+yClean = y(~missingIdx);
+
+<span class="comment">% Formulate the system of linear equations.</span>
+designMat = [ones(size(x1Clean)), x1Clean, x2Clean, x1Clean.^2, <span class="keyword">...</span>
+             x2Clean.^2, x1Clean.*x2Clean];
+
+<span class="comment">% Solve the system.</span>
+modelCoeffs = designMat\yClean;
+</pre><h2>Function Handles.<a name="6"></a></h2><p>Now that we have the second set of model coefficients for the 2D quadratic model, we would like to visualise the fitted results. To do this, we need to substitute the model coefficients into the model equation. One way to achieve this is to use a function handle, which is a variable containing a reference to a function. Using a function handle reduces the problem of calling a function to that of accessing a variable. The function handle contains all information necessary to evaluate the function at given input arguments. For further information on function handles, see MATLAB -&gt; Language Fundamentals -&gt; Data Types -&gt; Function Handles.</p><pre class="codeinput">modelFun = @(c, x1, x2) c(1) + c(2)*x1 + c(3)*x2 + c(4)*x1.^2 + <span class="keyword">...</span>
+                        c(5)*x2.^2 + c(6)*x1.*x2;
+<span class="comment">% It's helpful to draw the analogy with the mathematical notation:</span>
+<span class="comment">% f(c, x1, x2) = c(1) + c(2)*x1 + c(3)*x2 + c(4)*x1.^2 + ...</span>
+<span class="comment">%                       c(5)*x2.^2 + c(6)*x1.*x2</span>
+<span class="comment">% The only difference between the mathematical notation and the function</span>
+<span class="comment">% handle definition is the "@" symbol, signifying to MATLAB that a function</span>
+<span class="comment">% handle is being created.</span>
+<span class="comment">% This function handle can now be evaluated at any point or any series of</span>
+<span class="comment">% points, just like a normal mathematical function. For example:</span>
+disp(modelFun(modelCoeffs, 0, 0)) <span class="comment">% Evaluates the model function at (0,0).</span>
+</pre><pre class="codeoutput">       11.661
+</pre><h2>Creating Equally-Spaced Vectors.<a name="7"></a></h2><p>At this point, we are ready to visualise our quadratic surface. In MATLAB, surface plots can be created using a fairly straightforward step-by-step procedure. The first step of this process is to create equally-spaced vectors of points of "x" and "y" data (the data forming the horizontal plane). To achieve this, we could use either the colon operator (:) or the LINSPACE function.</p><pre class="codeinput">x1Vec = linspace(min(x1Clean), max(x1Clean));
+x2Vec = linspace(min(x2Clean), max(x2Clean));
+<span class="comment">% Note that 100 points in the vector is the default. The number of points</span>
+<span class="comment">% is optional and can be specified as the third input argument to LINSPACE.</span>
+</pre><h2>Making Grids.<a name="8"></a></h2><p>The second step in the procedure is to create matrices containing the coordinates of all grid points in the lattice. This can be achieved using MESHGRID.</p><pre class="codeinput">[X1Grid, X2Grid] = meshgrid(x1Vec, x2Vec);
+<span class="comment">% X1Grid contains all the "x" coordinates of all the lattice points.</span>
+<span class="comment">% X2Grid contains all the "y" coordinates of all the lattice points.</span>
+
+<span class="comment">% Now that we have all lattice points, our surface function can be</span>
+<span class="comment">% evaluated over the lattice using the function handle defined above.</span>
+YGrid = modelFun(modelCoeffs, X1Grid, X2Grid);
+</pre><h2>Surface Plots.<a name="9"></a></h2><p>Finally, we can visualise the surface. The basic function here is SURF, into which we provide the three matrices of surface data (the two coordinate matrices and the values of the surface function over the lattice).</p><pre class="codeinput">figure; surf(X1Grid, X2Grid, YGrid)
+<span class="comment">% We can customise this display by specifying name-value pairs.</span>
+surf(X1Grid, X2Grid, YGrid, <span class="string">'FaceColor'</span>, <span class="string">'interp'</span>, <span class="string">'EdgeAlpha'</span>, 0)
+<span class="comment">% This removes gridlines and uses interpolated shading for the surface,</span>
+<span class="comment">% instead of colouring each patch a uniform colour.</span>
+
+<span class="comment">% View the original data.</span>
+hold <span class="string">on</span>
+plot3(x1Clean, x2Clean, yClean, <span class="string">'kx'</span>)
+xlabel(<span class="string">'Height (cm)'</span>)
+ylabel(<span class="string">'Waist (cm)'</span>)
+zlabel(<span class="string">'Weight (kg)'</span>)
+title(<span class="string">'\bfModel for Weight vs. Height and Waist'</span>)
+
+<span class="comment">% Other 3D visualisation functions can be found in the Plot Gallery.</span>
+</pre><img vspace="5" hspace="5" src="Chapter02_Algorithm_Design_and_Development_03.png" alt=""> <h2>Creating a Function.<a name="10"></a></h2><p>At this point, we now have a script which we can run to perform our data clean-up, model fitting and visualisation. However, it is not straightforward to apply the algorithms in our script to another set of data. The next step in modularising our code is to create a function to automate the tasks or subtasks represented in our current script. Functions are created in text files with the .m extension, just like script files. However, functions must begin with a function declaration of the form: function [out1, out2, ...] = function_name(in1, in2, ...) The keyword "function" must be the first non-comment code in the file. Syntax for calling user-defined functions is identical to that used for calling existing MATLAB functions.</p><pre class="codeinput"><span class="comment">% Recommended activity: create a new function "fitQuadModel" with the</span>
+<span class="comment">% following declaration line:</span>
+<span class="comment">% function [modelCoeffs, fh] = fitQuadModel(X, y, showplot)</span>
+<span class="comment">%</span>
+<span class="comment">% See the file F02_fitQuadModel_001.</span>
+</pre><h2>Workspaces.<a name="11"></a></h2><p>Functions operate within their own function workspace, which is separate from the base workspace accessed at the prompt or from within scripts. If a function calls another function, each maintains its own separate workspace. Once a function has completed, its workspace is destroyed. Instructors may wish to demonstrate the concept of separate workspaces by setting breakpoints and entering debug mode.</p><h2>Local Functions.<a name="12"></a></h2><p>There may be times when we wish to outsource certain tasks in a function to another function. For example, if we think about our algorithm at a high-level, we are performing three distinct tasks: * we are cleaning up the data by removing NaNs; * we are performing the model fitting; * we are visualising the results of the fitted model.</p><p>We are performing these three tasks on two distinct sets of data. One possibility for structuring our main function is to have three local functions defined inside, each of which represents one of the three tasks above. This enables us to reuse the same function for multiple different sets of data.</p><pre class="codeinput"><span class="comment">% Recommended activity: write separate local functions removeNaNs, fitModel</span>
+<span class="comment">% and visualiseResults inside the main fitQuadModel function file.</span>
+<span class="comment">% See the file F02_fitQuadModel_002.</span>
+
+<span class="comment">% Next, start to move the code from the script into the appropriate places</span>
+<span class="comment">% in the function. We will need to deal with the cases of 1D data and 2D</span>
+<span class="comment">% separately, although some code is appropriate for both cases.</span>
+<span class="comment">%</span>
+<span class="comment">% See the file F02_fitQuadModel_003.</span>
+<span class="comment">%</span>
+<span class="comment">% Nested functions are another construct which could be introduced at this</span>
+<span class="comment">% stage of the course. These become more important when building</span>
+<span class="comment">% interactive user applications, so if this was the main interest of</span>
+<span class="comment">% audience members, then it makes logical sense to introduce them here.</span>
+<span class="comment">% Otherwise, they can be briefly mentioned or even just skipped, since we</span>
+<span class="comment">% don't need them for this particular example.</span>
+</pre><h2>Defining Flexible Interfaces.<a name="13"></a></h2><p>As we have written it, the fitQuadModel function requires three inputs, the X data, the y data, and a logical flag indicating whether or not the data should be plotted. MATLAB will return an error message unless exactly three inputs are provided whenever fitQuadModel is called. We can use the NARGIN function to determine how many input arguments were provided when the function was called. With this information, we can set default input values if necessary.</p><pre class="codeinput"><span class="comment">% Recommended activity: allow some flexibility for the end user by making</span>
+<span class="comment">% the showplot input argument optional (set its default value to false, for</span>
+<span class="comment">% example).</span>
+<span class="comment">%</span>
+<span class="comment">% See the file F02_fitQuadModel_004.</span>
+</pre><h2>Checking Input Arguments.<a name="14"></a></h2><p>Error conditions often arise because run-time values violate certain implicit assumptions made in code. When designing algorithms, especially those that will be used by others, it is important to catch any user-introduced errors. These may not become apparent until later on in the code. In a weakly-typed language such as MATLAB, checking types and attributes of user-supplied input data is particularly important. Recommended approaches include using the family of is* functions (see doc is*) and the more sophisticated function VALIDATEATTRIBUTES.</p><pre class="codeinput"><span class="comment">% Recommended activity: ask the audience to make a list of assumptions that</span>
+<span class="comment">% we are making about the X, y and showplot input arguments. Use</span>
+<span class="comment">% VALIDATEATTRIBUTES and if-statements to respond to errors introduced by</span>
+<span class="comment">% users and provide meaningful feedback. At the end of this activity we</span>
+<span class="comment">% should have a correct, robust functional interface. Also check that we</span>
+<span class="comment">% have between 2 and 3 input arguments using NARGINCHK.</span>
+<span class="comment">%</span>
+<span class="comment">% See the file F02_fitQuadModel_005.</span>
+</pre><h2>Errors and Error Identifiers.<a name="15"></a></h2><p>When unexpected conditions arise in a MATLAB program, the code may issue an error or a warning. Custom errors can be implemented using the ERROR function. Best practice here is to use an error identifier as part of the custom error, to enable users to diagnose and debug problems more readily. The error identifier is a string which should contain a colon (:), and is the first input argument to the error function. For example, an error identifier might be 'fitQuadModel:EmptyMatrix'.</p><pre class="codeinput"><span class="comment">% Recommended activity: implement custom errors with custom error</span>
+<span class="comment">% identifiers so that the input arguments satisfy the following criteria:</span>
+<span class="comment">%</span>
+<span class="comment">% * X has at least three rows.</span>
+<span class="comment">% * The number of elements of y coincides with the number of rows of X.</span>
+<span class="comment">% * X has either one or two columns.</span>
+<span class="comment">% * All values in both X and y should be finite.</span>
+<span class="comment">%</span>
+<span class="comment">% Implement the following robustness conditions as well.</span>
+<span class="comment">%</span>
+<span class="comment">% * If removing NaNs from the data results in empty arrays, issue a custom</span>
+<span class="comment">% error.</span>
+<span class="comment">% * If the design matrix resulting from the data has deficient rank, issue</span>
+<span class="comment">% a custom error.</span>
+<span class="comment">%</span>
+<span class="comment">% See the file F02_fitQuadModel_006.</span>
+<span class="comment">%</span>
+<span class="comment">% At the end of this chapter, we now have a completely robust, flexible</span>
+<span class="comment">% function which can be used to compute and visualise quadratic models for</span>
+<span class="comment">% any given 1D or 2D dataset with one response variable. This can be</span>
+<span class="comment">% contrasted with the script we started with after originally developing</span>
+<span class="comment">% the algorithm.</span>
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Chapter 02 - Algorithm Design in MATLAB.
+%
+% Author:
+% Ken Deeley, ken.deeley@mathworks.co.uk
+%
+% This chapter provides the necessary programming techniques for algorithm
+% design and development using MATLAB. The idea is that we are now happy
+% writing scripts to organise and collect sequences of MATLAB commands, but
+% these become increasingly difficult to manage as the complexity of our
+% algorithms grows. Moreover, a common requirement is to run scripts
+% repeatedly using different values for certain parameters within the
+% script. Functions are a more effective programming construct for managing
+% these issues. In this chapter we will learn how to develop and structure
+% an algorithm for performing simple preprocessing, model fitting and
+% visualisation. The important concept here is how to modularise code so
+% that it becomes reusable, maintainable, flexible and robust.
+% 
+% Outline:
+% 
+% * Formulating an algorithm for 1D model fitting
+% * Linear regression models
+% * Visualising the results
+% * Generalising the algorithm to 2D model fitting
+% * Anonymous function handles
+% * Surface plots
+% * Code modularisation: from scripts to functions
+% * Local functions
+% * Nested functions
+% * Code robustness and flexibility
+% * Parsing user-supplied input arguments
+% * Defining flexible interfaces
+% * Errors and error identifiers
+%
+% Reference files for this chapter:
+%
+% * ../Reference/S02_Algorithm.m
+% * ../Reference/F02_fitQuadModel.m
+% * ../Reference/S02_MedData.mat
+
+%% Linear Regression Models.
+% The main example in this chapter is developing an algorithm to perform
+% data preprocessing, fitting and visualisation. We will use a linear
+% regression model with variables chosen from the biomedical data discussed
+% in the first chapter of the course. The examples are fairly simple, but
+% if attendees are unfamiliar with regression, the concepts can be
+% explained in terms of inputs and outputs. For example, we have an input
+% variable (e.g. Age) and we would like to model the dependency of an
+% output variable (e.g. PulsePressure) on the input.
+% It's easier to gather the commands in these sections into a single
+% script, which can then be run section by section and then eventually
+% converted into a properly structured function by the end of the chapter.
+
+% Visualise the dependency of pulse pressure on age.
+load('S02_MedData.mat')
+x = MedData.Age;
+y = MedData.BPDiff;
+figure
+scatter(x, y, 'bx')
+xlabel('Age')
+ylabel('Pulse Pressure')
+title('\bfPulse Pressure vs. Age')
+
+% This dependency looks as if it could be modelled using a quadratic curve
+% (i.e. using a model of the form PP ~ C0 + C1*Age + C2*Age.^2, where the
+% coefficients C0, C1 and C2 are unknown and to be determined).
+
+%% Matrix Equations.
+% Formulating a linear regression model leads to a system of linear
+% equations A*x = b for the unknown vector of coefficients x. The design
+% matrix A comprises the model terms, and the vector b is the data to be
+% modelled (in this example, the vector of pulse pressure observations).
+% Note carefully that solving such linear systems is a matrix operation,
+% and so any missing values contained in the data must be dealt with in
+% some way before attempting to solve the system. (High-level
+% functionality in Statistics Toolbox can remove missing observations
+% automatically before fitting, but here we use a core MATLAB solution.)
+
+% Set up the system of equations for fitting a model to the pulse pressure
+% data.
+missingIdx = isnan(x) | isnan(y);
+xClean = x(~missingIdx);
+yClean = y(~missingIdx);
+designMat = [ones(size(xClean)), xClean, xClean.^2];
+
+%% Slash and Backslash.
+% The least-squares solution of the system A*x = b in MATLAB is given by 
+% x = A\b. If the system is formulated as x*A = b, then its solution is
+% x = b/A. 
+
+% Solve the linear system to find the best-fit coefficients for modelling
+% pulse pressure as a quadratic function of age.
+modelCoeffs = designMat\yClean;
+
+% Compute the fitted model.
+pulseModel = designMat*modelCoeffs;
+
+% Visualise the results.
+hold on
+plot(xClean, pulseModel, 'r*')
+hold off
+
+%% Matrix and Array Operators.
+% Note that in the above computations we have used the operators * and \.
+% A complete list of matrix, array and logical operators is available by
+% entering the command >> doc ops.
+doc ops
+% It's useful to show this list at this point to point people in the right
+% direction for discovering matrix and array operators.
+
+%% Generalising the Model.
+% We now have an algorithm for fitting a one-dimensional quadratic model to
+% our data. We would like to generalise this to fit a two-dimensional
+% quadratic surface to a single response variable given two input
+% variables. For example, we might be interested in predicting a person's
+% weight given knowledge of their height and waist measurements. We will
+% follow similar steps to preprocess and clean the data before fitting.
+
+% Extract input variables.
+x1 = MedData.Height;
+x2 = MedData.Waist;
+
+% Extract output variable.
+y = MedData.Weight;
+
+% Clean the data.
+missingIdx = isnan(x1) | isnan(x2) | isnan(y);
+x1Clean = x1(~missingIdx);
+x2Clean = x2(~missingIdx);
+yClean = y(~missingIdx);
+
+% Formulate the system of linear equations.
+designMat = [ones(size(x1Clean)), x1Clean, x2Clean, x1Clean.^2, ...
+             x2Clean.^2, x1Clean.*x2Clean];
+
+% Solve the system.                 
+modelCoeffs = designMat\yClean;
+
+%% Function Handles.
+% Now that we have the second set of model coefficients for the 2D
+% quadratic model, we would like to visualise the fitted results. To do
+% this, we need to substitute the model coefficients into the model
+% equation. One way to achieve this is to use a function handle, which is a
+% variable containing a reference to a function. Using a function handle
+% reduces the problem of calling a function to that of accessing a
+% variable. The function handle contains all information necessary to
+% evaluate the function at given input arguments. For further information
+% on function handles, see MATLAB -> Language Fundamentals -> Data Types ->
+% Function Handles.
+modelFun = @(c, x1, x2) c(1) + c(2)*x1 + c(3)*x2 + c(4)*x1.^2 + ...
+                        c(5)*x2.^2 + c(6)*x1.*x2;
+% It's helpful to draw the analogy with the mathematical notation:
+% f(c, x1, x2) = c(1) + c(2)*x1 + c(3)*x2 + c(4)*x1.^2 + ...
+%                       c(5)*x2.^2 + c(6)*x1.*x2
+% The only difference between the mathematical notation and the function
+% handle definition is the "@" symbol, signifying to MATLAB that a function
+% handle is being created.
+% This function handle can now be evaluated at any point or any series of
+% points, just like a normal mathematical function. For example: 
+disp(modelFun(modelCoeffs, 0, 0)) % Evaluates the model function at (0,0).
+
+%% Creating Equally-Spaced Vectors.
+% At this point, we are ready to visualise our quadratic surface. In
+% MATLAB, surface plots can be created using a fairly straightforward
+% step-by-step procedure. The first step of this process is to create
+% equally-spaced vectors of points of "x" and "y" data (the data forming
+% the horizontal plane). To achieve this, we could use either the colon
+% operator (:) or the LINSPACE function.
+x1Vec = linspace(min(x1Clean), max(x1Clean));
+x2Vec = linspace(min(x2Clean), max(x2Clean)); 
+% Note that 100 points in the vector is the default. The number of points
+% is optional and can be specified as the third input argument to LINSPACE.
+
+%% Making Grids.
+% The second step in the procedure is to create matrices containing the
+% coordinates of all grid points in the lattice. This can be achieved using
+% MESHGRID.
+[X1Grid, X2Grid] = meshgrid(x1Vec, x2Vec);
+% X1Grid contains all the "x" coordinates of all the lattice points.
+% X2Grid contains all the "y" coordinates of all the lattice points.
+
+% Now that we have all lattice points, our surface function can be
+% evaluated over the lattice using the function handle defined above.
+YGrid = modelFun(modelCoeffs, X1Grid, X2Grid);
+
+%% Surface Plots.
+% Finally, we can visualise the surface. The basic function here is SURF,
+% into which we provide the three matrices of surface data (the two
+% coordinate matrices and the values of the surface function over the
+% lattice).
+figure; surf(X1Grid, X2Grid, YGrid)
+% We can customise this display by specifying name-value pairs.
+surf(X1Grid, X2Grid, YGrid, 'FaceColor', 'interp', 'EdgeAlpha', 0)
+% This removes gridlines and uses interpolated shading for the surface,
+% instead of colouring each patch a uniform colour.
+
+% View the original data.
+hold on
+plot3(x1Clean, x2Clean, yClean, 'kx')
+xlabel('Height (cm)')
+ylabel('Waist (cm)')
+zlabel('Weight (kg)')
+title('\bfModel for Weight vs. Height and Waist')
+
+% Other 3D visualisation functions can be found in the Plot Gallery.
+
+%% Creating a Function.
+% At this point, we now have a script which we can run to perform our data
+% clean-up, model fitting and visualisation. However, it is not
+% straightforward to apply the algorithms in our script to another set of
+% data. The next step in modularising our code is to create a function to
+% automate the tasks or subtasks represented in our current script.
+% Functions are created in text files with the .m extension, just like
+% script files. However, functions must begin with a function declaration
+% of the form:
+% function [out1, out2, ...] = function_name(in1, in2, ...)
+% The keyword "function" must be the first non-comment code in the file.
+% Syntax for calling user-defined functions is identical to that used for
+% calling existing MATLAB functions.
+
+% Recommended activity: create a new function "fitQuadModel" with the
+% following declaration line:
+% function [modelCoeffs, fh] = fitQuadModel(X, y, showplot)
+%
+% See the file F02_fitQuadModel_001.
+
+%% Workspaces.
+% Functions operate within their own function workspace, which is separate
+% from the base workspace accessed at the prompt or from within scripts. If
+% a function calls another function, each maintains its own separate
+% workspace. Once a function has completed, its workspace is destroyed.
+% Instructors may wish to demonstrate the concept of separate workspaces by
+% setting breakpoints and entering debug mode. 
+
+%% Local Functions.
+% There may be times when we wish to outsource certain tasks in a function
+% to another function. For example, if we think about our algorithm at a
+% high-level, we are performing three distinct tasks:
+% * we are cleaning up the data by removing NaNs;
+% * we are performing the model fitting;
+% * we are visualising the results of the fitted model.
+%
+% We are performing these three tasks on two distinct sets of data. One
+% possibility for structuring our main function is to have three local
+% functions defined inside, each of which represents one of the three tasks
+% above. This enables us to reuse the same function for multiple different
+% sets of data.
+
+% Recommended activity: write separate local functions removeNaNs, fitModel
+% and visualiseResults inside the main fitQuadModel function file.
+% See the file F02_fitQuadModel_002.
+
+% Next, start to move the code from the script into the appropriate places
+% in the function. We will need to deal with the cases of 1D data and 2D
+% separately, although some code is appropriate for both cases.
+%
+% See the file F02_fitQuadModel_003.
+%
+% Nested functions are another construct which could be introduced at this
+% stage of the course. These become more important when building
+% interactive user applications, so if this was the main interest of
+% audience members, then it makes logical sense to introduce them here.
+% Otherwise, they can be briefly mentioned or even just skipped, since we
+% don't need them for this particular example.
+
+%% Defining Flexible Interfaces.
+% As we have written it, the fitQuadModel function requires three inputs,
+% the X data, the y data, and a logical flag indicating whether or not the
+% data should be plotted. MATLAB will return an error message unless
+% exactly three inputs are provided whenever fitQuadModel is called.
+% We can use the NARGIN function to determine how many input arguments were
+% provided when the function was called. With this information, we can set
+% default input values if necessary.
+
+% Recommended activity: allow some flexibility for the end user by making
+% the showplot input argument optional (set its default value to false, for
+% example).
+%
+% See the file F02_fitQuadModel_004.
+
+%% Checking Input Arguments.
+% Error conditions often arise because run-time values violate certain
+% implicit assumptions made in code. When designing algorithms, especially
+% those that will be used by others, it is important to catch any
+% user-introduced errors. These may not become apparent until later on in
+% the code. In a weakly-typed language such as MATLAB, checking types and
+% attributes of user-supplied input data is particularly important.
+% Recommended approaches include using the family of is* functions (see doc
+% is*) and the more sophisticated function VALIDATEATTRIBUTES.
+
+% Recommended activity: ask the audience to make a list of assumptions that
+% we are making about the X, y and showplot input arguments. Use
+% VALIDATEATTRIBUTES and if-statements to respond to errors introduced by
+% users and provide meaningful feedback. At the end of this activity we
+% should have a correct, robust functional interface. Also check that we
+% have between 2 and 3 input arguments using NARGINCHK.
+%
+% See the file F02_fitQuadModel_005.
+
+%% Errors and Error Identifiers.
+% When unexpected conditions arise in a MATLAB program, the code may issue
+% an error or a warning. Custom errors can be implemented using the ERROR
+% function. Best practice here is to use an error identifier as part of the
+% custom error, to enable users to diagnose and debug problems more
+% readily. The error identifier is a string which should contain a colon (:),
+% and is the first input argument to the error function. For example, an
+% error identifier might be 'fitQuadModel:EmptyMatrix'.
+
+% Recommended activity: implement custom errors with custom error
+% identifiers so that the input arguments satisfy the following criteria:
+%
+% * X has at least three rows.
+% * The number of elements of y coincides with the number of rows of X.
+% * X has either one or two columns.
+% * All values in both X and y should be finite.
+%
+% Implement the following robustness conditions as well.
+%
+% * If removing NaNs from the data results in empty arrays, issue a custom
+% error.
+% * If the design matrix resulting from the data has deficient rank, issue
+% a custom error.
+%
+% See the file F02_fitQuadModel_006.
+%
+% At the end of this chapter, we now have a completely robust, flexible
+% function which can be used to compute and visualise quadratic models for
+% any given 1D or 2D dataset with one response variable. This can be
+% contrasted with the script we started with after originally developing
+% the algorithm.
+##### SOURCE END #####
+--></body></html>
