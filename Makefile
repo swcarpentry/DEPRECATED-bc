@@ -65,8 +65,9 @@ MOST_SRC = \
 # All source pages (including things not in the book).
 ALL_SRC = \
 	contents.md \
-	$(wildcard intermediate/python/*.md) \
 	$(wildcard intermediate/doit/*.md) \
+	$(wildcard intermediate/python/*.md) \
+	$(wildcard intermediate/webdata/*.md) \
 	$(MOST_SRC)
 
 # Other files that the site depends on.
