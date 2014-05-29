@@ -30,6 +30,7 @@
     </p>
   </div>
   <div class="span6">
+{% if page.teachpython %}
     <h4>Python</h4>
     <p>
       Python is becoming very popular in scientific computing,
@@ -39,6 +40,8 @@
       Installing all the scientific packages for Python individually can be a bit difficult,
       so we recommend an all-in-one installer.
     </p>
+{% endif %}
+{% if page.teachR %}
     <h4>R</h4>
     <p>
       <a href="http://www.r-project.org">R</a> is a programming language that is especially powerful for
@@ -46,6 +49,7 @@
       use <a href="http://www.rstudio.com/">RStudio</a>, an interactive
       development environment (IDE).
     </p>
+{% endif %}
     <h4>SQL</h4>
     <p>
       SQL is a specialized programming language used with databases.
@@ -59,6 +63,7 @@
 
 <div class="row-fluid">
   <div class="span6">
+{% if page.teachpython %}
     <h4>Python</h4>
     <ul>
       <li>
@@ -70,6 +75,7 @@
         make sure to check <strong>Make Anaconda the default Python</strong>.
       </li>
     </ul>
+{% endif %}
     <h4>Git Bash</h4>
     <p>
       Install Git for Windows by download and running
@@ -106,6 +112,7 @@
       (or have other tools like Git launch it for you).
       Please ask your instructor to help you do this.
     </p>
+{% if page.teachR %}
     <h4>R</h4>
     <p>
       Install R by downloading and running
@@ -114,6 +121,7 @@
       Also, please install the
       <a href="http://www.rstudio.com/ide/download/desktop">RStudio IDE</a>.
     </p>
+{% endif %}
     <h4>SQLite</h4>
     <p>
       Download the <a href="http://files.software-carpentry.org/sqlite3.exe">sqlite3 program</a>
@@ -155,6 +163,7 @@
     </p>
   </div>
   <div class="span6">
+{% if page.teachpython %}
     <h4>Python</h4>
     <ul>
       <li>
@@ -166,6 +175,8 @@
         make sure to check <strong>Make Anaconda the default Python</strong>.
       </li>
     </ul>
+{% endif %}
+{% if page.teachR %}
     <h4>R</h4>
     <p>
       Install R by downloading and running
@@ -174,6 +185,7 @@
       Also, please install the
       <a href="http://www.rstudio.com/ide/download/desktop">RStudio IDE</a>.
     </p>
+{% endif %}
     <h4>SQLite</h4>
     <p>
       <code>sqlite3</code> comes pre-installed on Mac OS X.
@@ -206,6 +218,7 @@
       In a pinch, you can use <code>nano</code>,
       which should be pre-installed.
     </p>
+{% if page.teachR %}
     <h4>R</h4>
     <p>
       You can download the binary files for your distribution
@@ -215,6 +228,7 @@
       Also, please install the
       <a href="http://www.rstudio.com/ide/download/desktop">RStudio IDE</a>.
     </p>
+{% endif %}
     <h4>SQLite</h4>
     <p>
       <code>sqlite3</code> comes pre-installed on Linux.
@@ -223,6 +237,7 @@
     </p>
   </div>
   <div class="span6">
+{% if page.teachpython %}
     <h4>Python</h4>
     <p>
       We recommend the all-in-one scientific Python installer
@@ -257,6 +272,7 @@
         distribution the default Python).
       </li>
     </ol>
+{% endif %}
   </div>
 </div>
 
@@ -292,6 +308,7 @@
       </li>
     </ul>
   </div>
+{% if usevm %}
   <div class="span6">
     <h4>Virtual Machine</h4>
     <p>
@@ -316,4 +333,5 @@
       </li>
     </ol>
   </div>
+{% endif %}
 </div>
