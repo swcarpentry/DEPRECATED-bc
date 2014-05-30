@@ -1,10 +1,9 @@
 ---
+layout: lesson
+root: .
+title: Licenses
 ---
-Licenses
-========
-
-Instructional Material
-----------------------
+### Instructional Material
 
 All Software Carpentry instructional material is made available under
 the Creative Commons Attribution license. You are free:
@@ -37,8 +36,7 @@ With the understanding that:
 For the full legal text of this license, please see
 [http://creativecommons.org/licenses/by/3.0/legalcode](http://creativecommons.org/licenses/by/3.0/legalcode).
 
-Software
---------
+### Software
 
 Except where otherwise noted, the example programs and other software
 provided by Software Carpentry are made available under the
@@ -64,8 +62,7 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-Trademark
----------
+### Trademark
 
 "Software Carpentry" and the Software Carpentry logo are registered
 trademarks of Software Carpentry, Ltd.
