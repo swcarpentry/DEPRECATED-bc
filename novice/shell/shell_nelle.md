@@ -1,8 +1,14 @@
 The Shell
 =========
 
-Introduction
-------------
+> This file contains instructor's notes for a 3-4 hour shell session 
+> on the shell for beginners.  It requires the "North Pacific Gyre" directory 
+> with associated data files from the original SWC bootcamp repository.  Most 
+> of this document reads like a script, with what to say and which commands to use/demonstrate 
+> in the shell.  Student exercises and other instructor notes are indicated 
+> by blockquotes within the document.  
+
+##Introduction
 
 We're here to teach you about computers and computers really do four things:
 
@@ -50,19 +56,37 @@ I'll give you two quick examples of how we regularly use the shell in my group:
    this process and running it on someone elses computer much easier.
 
 Some of the things we'll learn this morning can be accomplished in R or Python,
-but in many cases this requires understanding how to do them in the shell.
+but in many cases this requires understanding how to do them in the shell.  
 
-**Open a terminal;
-Windows open GitBash;
-Mac type 'terminal' into the Finder;
-STICKIES**
+**Instructor**
+>Open a terminal;
+>
+>>Windows open GitBash;
+>
+>>Mac type 'terminal' into the Finder;
 
-Files and Directories
----------------------
+>Check that everyone has stickies
+
+##Files and Directories
+
+We'll start our shell lesson by exploring how we can use it to accomplish 
+the second item listed above - storing data.  Storing your data intelligently - 
+being able to navigate directories and manipulate data files - is an important 
+starting point to streamlining your research.  After this portion 
+of the lesson, you should be able to use the shell to:
+
+* Find where you are in your file system, move around, and see what files you have.
+* Make new files and directories.
+* Copy, move, and delete files and directories.
 
 ### Viewing the file system
 
-Now that we have a shell open let's see where we are.
+**Instructor**
+> Tab-completion is discussed after doing the first round of commands.  Try to 
+> refrain from tab-completion here, both to avoid potential confusion and to keep yourself 
+> from zipping along too fast at the beginning.  
+
+Let's see where we are.
 
     pwd
 
@@ -72,7 +96,7 @@ did. Specifically this output tells us that I'm in a directory named `ethan`
 that is a subdirectory of a directory named `home`. Windows users will probably
 see a letter `c` at the beginning.
 
-When we run `pwd` it works by:
+`pwd` is actually a program living in your computer.  When we run `pwd` in the shell, it works by:
 
 1. finding a program called `pwd`,
 2. running that program,
@@ -95,6 +119,9 @@ are directories and which are files by using the -F argument
 which adds a trailing slash to the directories.  Dash is how we pass options to
 commands, so this says "run ls in such a way that it shows me the folders".
 
+*Instructor*
+> Start a diagram (on the board and/or have students write themselves) of a typical shell command: 
+> program (first word) + options (indicated by a dash)
 
 ### Changing directories
 
@@ -106,11 +133,11 @@ Since `Desktop` is in our current directory we can just type it's name.
 
 If we now run
 
-    `pwd`
+    pwd
 
 and
 
-    `ls`
+    ls
 
 We see that we are in the Desktop folder and that it is the same as our
 computer's desktop. In other words, you're Desktop is just a special folder in
@@ -120,7 +147,7 @@ We can also specify the full path to allow us to jump anywhere.
 
     cd /home/ethan/
 	
-Windows users need to start full paths with the drive letter.
+Windows users may need to start full paths with the drive letter.
 
     cd /c/Users/username
 
@@ -128,17 +155,19 @@ If you want to move up one directory we can use
 
     cd ..
 
-### Example
+#### Example
 
 To help us learn the shell we're going to use an example that captures some of
-the common situations we run into when analyzing data.
+the common situations we run into when analyzing data.  We'll introduce the 
+data now, go back and learn some useful shell commands, and then 
+revisit this example with some more tools in our tool kit.  
 
 Nelle is a marine biologist. She recently returned from a survey collecting data
 on gelatinous marine life. She has 250 samples and has assayed them all to
 determine the relative abundance of 300 different proteins. Each assay results
 in a single file with one line for each protein.
 
-To analyze these data she needs to:
+To analyze this data she needs to:
 1. Calculate statistics for each of the proteins separately using a program her
    supervisor wrote called `goostat`.
 2. Compare the statistics for each protein with corresponding statistics for
@@ -149,39 +178,55 @@ Running the `goostat` program 250 times would be time consuming, but
 possible. Running the nearly 60K pairwise comparisons one at a time would take
 at least several hundred hours.
 
-**Let's practice what we've learned so far by looking at Nelle's data. Download
+**Student Exercise**
+>Let's practice what we've learned so far by looking at Nelle's data. Download
   and unzip the file on your Desktop. Use the shell to look at what is in the
-  north-pacific-gyre directory and any subdirectories that it contains.**
+  north-pacific-gyre directory and any subdirectories that it contains.
 
-**What did you find?**
+**Instructor**
+> Ask learners: What did you find?  
 
-Great. And if you don't want to have to `cd` into a directory just to see what
-is there you can always use `ls` with the directory name.
+Reminder: you don't have to `cd` into a directory just to see what
+is there; you can always use `ls` with the directory name.
 
     ls 2012-07-03
 
+**Student Exercise**
+> If you're in the North Pacific Gyre directory, what are (at least) three different ways to see the contents 
+of the directory Creatures (or comparable)?  
 
-### Naming
+**Instructor**
+> Go over previous exercise: use absolute path or relative path with `ls` or `cd` into creatures and then use `ls`.  
+
+> Complete the diagram of a typical shell command: program + options + arguments, which 
+> can be names of files or path names
+
+
+#### Naming
 
 Now Nelle's done a really nice job here with something. What do you think it is?
 
 That's right, she's used names that contain a lot of information. And this is
 
-**Rule #1. Always use meaningful, consistently structured, names.**.
+| Rule #1        |
+| ------------- |
+| Always use meaningful, consistently structured, names.  | 
 
 Her naming conventions do two things. First they help chunk information for
 us. By looking at the names of the directories we know what they
 contain. And in fact each of the file names contains her labs unique code for
 the location, time, depth, and other characteristics of the sample.
 
-Second, using consistently structured file names makes it easier automatically
-process the data, because it will be easy to identify the data files we want.
-
+Second, using consistently structured file names makes it easier to 
+process the data automatically, because it will be easy to identify the data files we want.
 
 #### Autocomplete / Up & Down Arrows
 
-These informative names are great, but does it seem to anyone else like they
-require a lot of typing.
+Before we move on to the rest of our data management tools, let's discuss a 
+few shortcuts that will allow you to get things done faster.  For example, 
+these informative names are great, but does it seem to anyone else like they
+require a lot of typing.  Instead of typing in full names, you can use the 
+tab key to complete them for you.  
 
     cd /h<tab>/e<tab>/D<tab>
 	
@@ -191,11 +236,11 @@ much. A second ``<tab>`` will show you the available options.
 You can also use the up and down arrows to cycle through commands and edit only
 the part of a command that you want to change.
 
-**Rule #2. If the computer can do it, let the computer do it.**
+|Rule #2|
+|--------|
+|If the computer can do it, let the computer do it.|
 
-
-**Challenge?**
-
+**Student Exercise?**
 
 ### Making directories
 
@@ -207,18 +252,19 @@ Running
 
     ls
 
-shows us that thesis exists,
+shows us that thesis exists, and
 
     ls thesis
 
-but that there's nothing in it.
-	
+shows us there's nothing in it.  Let's move into this directory and make some files.  
+
+	cd thesis
 
 ### Making files
 
 To make files in the shell we use simple text editors.
 I'm going to use `nano` today since it's one of the most basic and since it should
-work for everyone.
+work for everyone.   
 
 To make a new file we simply type ``nano`` and then the name of the file.
 Let's make a rough outline of our thesis:
@@ -246,7 +292,8 @@ now shows that we have created a file called `outline.txt`.
 You can also use your favorite text editor for this, just make sure to save your
 file in the right directory.
 
-*Demonstrate the same thing using gedit creating a new data2.txt file*
+**Student Exercise**
+> Make an additional document in the thesis folder called `references.txt`.  
 
 **RED LIGHT/GREEN LIGHT**
 
@@ -283,23 +330,47 @@ If we want to get rid of files we use `rm` for remove
 
     rm rough_draft.txt
 
+**Student Exercise**
+>Create a backup copy of your thesis, you do keep backups of your data right?;
 
-**Create a backup copy of your thesis, you do keep backups of your data right?;
-Make a new outline.txt file;
-Make a directory called backup;
-Make a copy of your outline.txt file;
-Move it into the backup folder;
-Change the backup file's name to include todays date**
+> Make a new outline.txt file (or rename copy_of_outline.txt);
 
+> Make a directory called backup inside your thesis directory;
 
+> Make a copy of your outline.txt file;
 
-**BREAK: When we come back we'll learn about how to combine different programs**
+> Move it into the backup folder;
 
+> Change the backup file's name to include todays date**
 
-### Shell Programs and Redirects
+This sums up our data management tools.  We'll take a break now.  
+After the break, we'll start looking at the other major task of computers - 
+running programs - and how we can combine and write our own using shell commands.  
+
+**Instructor**
+> Break
+
+***
+
+## Elements of Automation
+
+In this portion of the lesson, we'll move away from commands that manage our files and 
+directories and dive in to running programs and putting programs together.  In 
+particular, we'll discuss all the different tools you will probably use when 
+automating a process by writing a script.  After this lesson, you should be able to
+
+* Use built-in shell program(s).
+* Understand how to use the * wildcard to process multiple files.
+* Use the two different command line channels: redirects and pipes.
+* Describe how a for loop works.
+* Describe at least one benefit/reason to write a script.  
+
+We'll return to our friend Nelle to discuss these topics.  
+
+### Using a built-in program
 
 Now that we know how to work with the shell we can use it to do powerful things
-by combining lots of small built in programs.
+by combining lots of small built in programs. 
 
 Nelle's assays have now finished running, so she can get back to working with
 the data itself.
@@ -325,7 +396,6 @@ take multiple file names as input
 
 but that's a lot of typing even with the tab key.
 
-
 ### Wildcards
 
 We can use wildcards to work with multiple files at once. So
@@ -335,6 +405,8 @@ We can use wildcards to work with multiple files at once. So
 counts the lines for all of the files ending in .txt. The shell expands the
 wildcard before executing `wc`, so this is identical to typing out all of the
 filenames.
+
+### Redirects
 
 With a small number of files we could probably just look through the counts to
 see if there were any problems, but with hundreds or thousands of files that
@@ -367,11 +439,10 @@ there are any files with too many lines.
 
     tail sorted-lengths
 
-**Perform the same basic santity check, but only for the files that end in A.txt
-and use a command called head, which does the opposite of tail, to show the
-files with the fewest rows**
-
-**What did you see? Any problems**
+**Student Exercise**
+> Perform the same basic santity check, but only for the files that end in A.txt
+> and use a command called head, which does the opposite of tail, to show the
+> files with the fewest rows.  What did you see? Any problems
 
 When Nelle goes back and checks it, she sees that she did that assay at 8:00 on a
 Monday morning—someone was probably in using the machine on the weekend, and she
@@ -409,7 +480,9 @@ the real power of the piping in my every day life is piping my tools and other
 scientists tools together. This makes it easy to use tools written in languages
 you're not familiar with and to combine tools from different languages.
 
-**Rule #3. Don't reinvent the wheel.**
+|Rule #3 |
+|--------|
+| Don't reinvent the wheel.|
 
 So, recall that Nelle needs to calculate some statistics for each of her
 datasets. She could figure out how to do this herself, but one of her lab mates
@@ -428,14 +501,16 @@ on the total number of individuals:
 	
     python goostats.py NENE01729A.txt | head -1
 	
+**Student Exercise**
+>Using pipes run goostats on only the data from the first 50 rows of 
+>NENE01729A.txt and store the results to a file with a name indicating the 
+>analysis that the file contains.  Then make a directory called analysis and move 
+>the file into that directory.  
 
-**Using pipes run goostats on only the data from the first 50 rows of
-  NENE01729A.txt and store the results to a file with a name indicating the
-  analysis that the file contains. The make a directory called analysis and move
-  the file into that directory**
+**Instructor**
+> Break
 
-**BREAK**
-
+ ***
 
 ### Loops
 
@@ -460,7 +535,10 @@ NENE01729A.txt the first time through the loop, NENE01729B.txt the second, and s
 on. Finally, the command that's actually being run tells the shell to print, so
 this loop prints out the name of each data file in turn.
 
-There's nothing special about the word datafile...
+There's nothing special about the word `datafile`; we could use any variable name we 
+want, although its usually a good idea to stay away from funny characters.  
+Rule #1 applies here also; it's a good idea to use variable names that have some 
+meaning within the program.  
 
 Our for loop can include as many commands as we want
 
@@ -470,12 +548,16 @@ Our for loop can include as many commands as we want
 		head $datafile
 	done
 
+It's often a good idea to print commands (using `echo`) before actually 
+running them in a loop, to make sure the loop is doing what you think it is.  
+	
+**Student Exercise**
+> Write a for loop that, for each datafile, prints the name of the file and then
+runs goostats on it.
 
-**COPY TO ETHERPAD
-Write a for loop that, for each datafile, prints the name of the file and then
-runs goostats on it**
-
-Really want to store the output
+Maybe we don't just want to run `goostats`, we want to run it and save the data 
+in another file, one output file for each data file.  To do this, we just need to 
+add a redirect to the program we've already written.  
 
     for datafile in *.txt
 	do
@@ -485,6 +567,7 @@ Really want to store the output
 And so now we have all of the output of our statistics runs in a well named and
 structured format that is ready for further analysis.
 
+## Putting it all together
 
 ### Bash scripting
 
@@ -493,14 +576,23 @@ since if we needed to do it once, we'll probably need to do it again.  To do
 this easily we can store them in a shell script. We do this by adding the
 commands to a text file and then running that text file from the command line.
 
-**Who remembers all of the commands we used exactly to get to this point?**
+Who remembers all of the commands we used exactly to get to this point?  
+If you don't remember, you can use the `history` command to tell you.  (Hint: 
+it's a good idea to pipe this command to tail, as your history may be very 
+very long if you've been working for a couple of hours)
 
-History
+Recall from the first session - how do you create a new file?  
+
+	nano do-stats.sh
+	
+In your newly opened file, put in the shell code we've just developed.  
 
     for datafile in *.txt
 	do
         python goostats.py $datafile > stats-$datafile
 	done
+
+To run your new script, you'll need one more command.  
 
     bash do-stats.sh
 
@@ -509,13 +601,24 @@ directory and rerun this function and automatically update her analysis. In
 addition, if Nelle or her advisor ever change their minds about the details of
 the analysis, they can make a simple change and then rerun everything.
 
-**What's missing?** (docs)
+**Instructor**
+> What's missing?  Fish until you get "it's missing documentation."  
 
-**Rule #4 Document the purpose of your code** This will make it much easier for
-  other people (including your future self) to re-use the code
+###Documentation
 
-**Modify your shell script so that the output only includes the first line of
-output from goostats, the all important 'goo-coefficient'**
+|Rule #4  |
+----------
+|Document the purpose of your code| 
+
+This will make it much easier for other people (especially your future self) to re-use the code.  
+
+**Student Exercise**
+> Modify your shell script so that the output only includes the first line of
+output from goostats, the all important 'goo-coefficient'
+
+> Add some comments explaining what this code does.  
+
+###Arguments
 
 Let's add one more thing to our script before we're done. Often we don't want to
 store our raw data and the output from our analyses in the same directory.
@@ -532,7 +635,7 @@ first filename (or other parameter) on the command line".
         python goostats.py $datafile > $1/stats-$datafile
 	done
 
- We can now run our script like this:
+We can now run our script like this:
 
     bash do-stats.sh goostats-results
 
