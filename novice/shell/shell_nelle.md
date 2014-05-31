@@ -264,7 +264,7 @@ shows us there's nothing in it.  Let's move into this directory and make some fi
 
 To make files in the shell we use simple text editors.
 I'm going to use `nano` today since it's one of the most basic and since it should
-work for everyone.  A good option for Windows users is `notepad`.  
+work for everyone.   
 
 To make a new file we simply type ``nano`` and then the name of the file.
 Let's make a rough outline of our thesis:
@@ -504,8 +504,8 @@ on the total number of individuals:
 **Student Exercise**
 >Using pipes run goostats on only the data from the first 50 rows of 
 >NENE01729A.txt and store the results to a file with a name indicating the 
->analysis that the file contains. The make a directory called analysis and move 
->the file into that directory**
+>analysis that the file contains.  Then make a directory called analysis and move 
+>the file into that directory.  
 
 **Instructor**
 > Break
