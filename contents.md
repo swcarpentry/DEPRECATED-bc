@@ -17,8 +17,6 @@ in the last four years.
 *   [A Few Extras](novice/extras/index.html)
 *   [Instructor's Guide](novice/teaching/index.html)
 
-These lessons are also available in [book form](book.html).
-
 ## For the More Experienced
 
 Under development.

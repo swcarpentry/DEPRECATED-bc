@@ -83,17 +83,15 @@ This is its way of telling us that `setup` is executable,
 i.e.,
 that it's (probably) something the computer can run.
 
-<div class="in" markdown="1">
 ~~~
 $ cd labs
 $ ls -F
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 safety.txt    setup*     waiver.txt
 ~~~
-</div>
+{:class="out"}
 
 > #### Necessary But Not Sufficient
 > 
@@ -110,18 +108,16 @@ safety.txt    setup*     waiver.txt
 
 Now let's run the command `ls -l`:
 
-<div class="in" markdown="1">
 ~~~
 $ ls -l
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 -rw-rw-r-- 1 vlad bio  1158  2010-07-11 08:22 safety.txt
 -rwxr-xr-x 1 vlad bio 31988  2010-07-23 20:04 setup
 -rw-rw-r-- 1 vlad bio  2312  2010-07-11 08:23 waiver.txt
 ~~~
-</div>
+{:class="out"}
 
 The `-l` flag tells `ls` to give us a long-form listing.
 It's a lot of information, so let's go through the columns in turn.
@@ -160,16 +156,14 @@ To change permissions, we use the `chmod` command
 (whose name stands for "change mode").
 Here's a long-form listing showing the permissions on the final grades in the course Vlad is teaching:
 
-<div class="in" markdown="1">
 ~~~
 $ ls -l final.grd
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 -rwxrwxrwx 1 vlad bio  4215  2010-08-29 22:30 final.grd
 ~~~
-</div>
+{:class="out"}
 
 Whoops: everyone in the world can read it&mdash;and what's worse, 
 modify it!
@@ -178,11 +172,10 @@ which would almost certainly not work.)
 
 The command to change the owner's permissions to `rw-` is:
 
-<div class="in" markdown="1">
 ~~~
 $ chmod u=rw final.grd
 ~~~
-</div>
+{:class="in"}
 
 The 'u' signals that we're changing the privileges 
 of the user (i.e., the file's owner),
@@ -190,45 +183,39 @@ and `rw` is the new set of permissions.
 A quick `ls -l` shows us that it worked,
 because the owner's permissions are now set to read and write:
 
-<div class="in" markdown="1">
 ~~~
 $ ls -l final.grd
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 -rw-rwxrwx 1 vlad bio  4215  2010-08-30 08:19 final.grd
 ~~~
-</div>
+{:class="out"}
 
 Let's run `chmod` again to give the group read-only permission:
 
-<div class="in" markdown="1">
 ~~~
 $ chmod g=r final.grd
 $ ls -l final.grd
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 -rw-r--rw- 1 vlad bio  4215  2010-08-30 08:19 final.grd
 ~~~
-</div>
+{:class="out"}
 
 And finally,
 let's give "all" (everyone on the system who isn't the file's owner or in its group) no permissions at all:
 
-<div class="in" markdown="1">
 ~~~
 $ chmod a= final.grd
 $ ls -l final.grd
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 -rw-r----- 1 vlad bio  4215  2010-08-30 08:20 final.grd
 ~~~
-</div>
+{:class="out"}
 
 Here,
 the 'a' signals that we're changing permissions for "all",
@@ -239,28 +226,24 @@ We can search by permissions, too.
 Here, for example, we can use `-type f -perm -u=x` to find files
 that the user can execute:
 
-<div class="in" markdown="1">
 ~~~
 $ find . -type f -perm -u=x
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 ./tools/format
 ./tools/stats
 ~~~
-</div>
+{:class="out"}
 
 Before we go any further,
 let's run `ls -a -l`
 to get a long-form listing that includes directory entries that are normally hidden:
 
-<div class="in" markdown="1">
 ~~~
 $ ls -a -l
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 drwxr-xr-x 1 vlad bio     0  2010-08-14 09:55 .
 drwxr-xr-x 1 vlad bio  8192  2010-08-27 23:11 ..
@@ -268,7 +251,7 @@ drwxr-xr-x 1 vlad bio  8192  2010-08-27 23:11 ..
 -rwxr-xr-x 1 vlad bio 31988  2010-07-23 20:04 setup
 -rw-rw-r-- 1 vlad bio  2312  2010-07-11 08:23 waiver.txt
 ~~~
-</div>
+{:class="out"}
 
 The permissions for `.` and `..` (this directory and its parent) start with a 'd'.
 But look at the rest of their permissions:

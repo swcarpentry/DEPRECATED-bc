@@ -1,9 +1,0 @@
-# 
-Reported: Mon Jun 20 10:40:32 2011
-Subject: poshJonas189
-Year/month of birth: 1998/10
-Sex: M
-CI type: 18
-Volume: 2
-Range: 7
-Discrimination: 5

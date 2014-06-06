@@ -5,12 +5,10 @@ title: Branching in Git
 ---
 Here's where we are right now:
 
-<div class="in" markdown="1">
 ~~~
 $ git log
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 commit 005937fbe2a98fb83f0ade869025dc2636b4dad5
 Author: Vlad Dracula <vlad@tran.sylvan.ia>
@@ -35,7 +33,7 @@ Cold and dry, but everything is my favorite color
 The two moons may be a problem for Wolfman
 But the Mummy will appreciate the lack of humidity
 ~~~
-</div>
+{:class="out"}
 
 We can draw the history of the repository like this
 (we'll see in a second why there's a box called `master`):
@@ -44,26 +42,23 @@ We can draw the history of the repository like this
 
 Let's run this command:
 
-<div class="in" markdown="1">
 ~~~
 $ git branch moons
 ~~~
-</div>
+{:class="in"}
 
 It appears to do nothing,
 but behind the scenes it has created a new [branch](../../gloss.html#branch) called `moons`:
 
-<div class="in" markdown="1">
 ~~~
 $ git branch
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 * master
   moons
 ~~~
-</div>
+{:class="out"}
 
 <img src="img/git-branching-02.svg" alt="Immediately After Creating Branch" />
 
@@ -76,76 +71,65 @@ They both point to the same revision right now,
 but we can change that.
 Let's make `moons` the active branch:
 
-<div class="in" markdown="1">
 ~~~
 $ git checkout moons
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 Switched to branch 'moons'
 ~~~
-</div>
-<div class="in" markdown="1">
+{:class="out"}
 ~~~
 $ git branch
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
   master
 * moons
 ~~~
-</div>
+{:class="out"}
 
 <img src="img/git-branching-03.svg" alt="After Switching to Branch" />
 
 Our file looks the same:
 
-<div class="in" markdown="1">
 ~~~
 $ cat mars.txt
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 Cold and dry, but everything is my favorite color
 The two moons may be a problem for Wolfman
 But the Mummy will appreciate the lack of humidity
 ~~~
-</div>
+{:class="out"}
 
 because it *is* the same:
 Let's add another line to it:
 
-<div class="in" markdown="1">
 ~~~
 $ echo "Maybe we should put the base on one of the moons instead?" >> mars.txt
 ~~~
-</div>
+{:class="in"}
 
 and add an entirely new file:
 
-<div class="in" markdown="1">
 ~~~
 $ echo "Phobos is larger than Deimos" > moons.txt
 $ ls
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 mars.txt    moons.txt
 ~~~
-</div>
+{:class="out"}
 
 Git now tells us that we have one changed file and one new file:
 
-<div class="in" markdown="1">
 ~~~
 $ git status
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 # On branch moons
 # Changes not staged for commit:
@@ -160,18 +144,16 @@ $ git status
 #    moons.txt
 no changes added to commit (use "git add" and/or "git commit -a")
 ~~~
-</div>
+{:class="out"}
 
 Let's add and commit those changes
 (the `-A` flag to `git commit` means "add everything"):
 
-<div class="in" markdown="1">
 ~~~
 $ git add -A
 $ git status
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 # On branch moons
 # Changes to be committed:
@@ -181,19 +163,17 @@ $ git status
 #    new file:   moons.txt
 #
 ~~~
-</div>
-<div class="in" markdown="1">
+{:class="out"}
 ~~~
 $ git commit -m "Thinking about the moons"
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 [moons 62e7791] Thinking about the moons
  2 files changed, 2 insertions(+)
  create mode 100644 moons.txt
 ~~~
-</div>
+{:class="out"}
 
 Our repository is now in the state shown below:
 
@@ -203,36 +183,31 @@ The `moons` branch has advanced to record the changes we just made,
 but `master` is still where it was.
 If we switch back to `master`:
 
-<div class="in" markdown="1">
 ~~~
 $ git checkout master
 ~~~
-</div>
+{:class="in"}
 
 our changes seem to disappear:
 
-<div class="in" markdown="1">
 ~~~
 $ ls
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 mars.txt
 ~~~
-</div>
-<div class="in" markdown="1">
+{:class="out"}
 ~~~
 $ cat mars.txt
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 Cold and dry, but everything is my favorite color
 The two moons may be a problem for Wolfman
 But the Mummy will appreciate the lack of humidity
 ~~~
-</div>
+{:class="out"}
 
 They're still in the repository&mdash;they're just not in
 the revision that `master` is currently pointing to.
@@ -241,13 +216,11 @@ we've created a parallel timeline that shares some history with the original one
 
 Let's make some changes in the `master` branch to further illustrate this point:
 
-<div class="in" markdown="1">
 ~~~
 $ echo "Should we go with a classical name like Ares Base?" > names.txt
 $ git status
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 # On branch master
 # Untracked files:
@@ -256,20 +229,18 @@ $ git status
 #    names.txt
 nothing added to commit but untracked files present (use "git add" to track)
 ~~~
-</div>
-<div class="in" markdown="1">
+{:class="out"}
 ~~~
 $ git add names.txt
 $ git commit -m "We will need a cool name for our secret base"
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 [master dfcf908] We will need a cool name for our secret base
  1 file changed, 1 insertion(+)
  create mode 100644 names.txt
 ~~~
-</div>
+{:class="out"}
 
 Our repository is now in this state:
 
@@ -278,25 +249,22 @@ Our repository is now in this state:
 `master` and `moons` have both moved on from their original common state,
 but in different ways.
 They could continue independent existence indefinitely,
-but at some point we'll probably want to [merge](../../gloss.html#merge) our changes.
+but at some point we'll probably want to [merge](../../gloss.html#repository-merge) our changes.
 Let's do that now:
 
-<div class="in" markdown="1">
 ~~~
 $ git branch
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 * master
   moons
 ~~~
-</div>
-<div class="in" markdown="1">
+{:class="out"}
 ~~~
 $ git merge moons
 ~~~
-</div>
+{:class="in"}
 
 When we run the `git merge` command,
 Git opens an editor to let us write a log entry about what we're doing.
@@ -323,7 +291,6 @@ In this case,
 we'll stick with the default log message.
 When we save the file and exit the editor, Git displays this:
 
-<div class="out" markdown="1">
 ~~~
 Merge made by the 'recursive' strategy.
  mars.txt  | 1 +
@@ -331,20 +298,18 @@ Merge made by the 'recursive' strategy.
  2 files changed, 2 insertions(+)
  create mode 100644 moons.txt
 ~~~
-</div>
+{:class="out"}
 
 We now have all of our changes in one place:
 
-<div class="in" markdown="1">
 ~~~
 $ ls
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 mars.txt    moons.txt    names.txt
 ~~~
-</div>
+{:class="out"}
 
 and our repository looks like this:
 
@@ -352,12 +317,10 @@ and our repository looks like this:
 
 We can ask Git to draw a diagram of the repository's history with this command:
 
-<div class="in" markdown="1">
 ~~~
 $ git log --oneline --topo-order --graph
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 *   e0cf8ab Merge branch 'moons'
 |\
@@ -368,7 +331,7 @@ $ git log --oneline --topo-order --graph
 * 34961b1 Concerns about Mars's moons on my furry friend
 * f22b25e Starting to think about Mars
 ~~~
-</div>
+{:class="out"}
 
 This ASCII art is fine for small sets of changes,
 but for anything significant,

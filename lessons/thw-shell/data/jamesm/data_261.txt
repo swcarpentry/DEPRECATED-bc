@@ -1,9 +1,0 @@
-# 
-Reported: Mon Aug 15 10:28:56 2011
-Subject: paulBroccoli212
-Year/month of birth: 1997/10
-Sex: F
-CI type: 1
-Volume: 3
-Range: 8
-Discrimination: 2

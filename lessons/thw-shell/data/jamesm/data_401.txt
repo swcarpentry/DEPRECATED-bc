@@ -1,9 +1,0 @@
-# 
-Reported: Thu Sep 8 14:59:05 2011
-Subject: robynSpice324
-Year/month of birth: 1999/03
-Sex: F
-CI type: 10
-Volume: 3
-Range: 10
-Discrimination: 7

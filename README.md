@@ -322,6 +322,9 @@ Your bootcamp's `index.html` page
 *   `instructor` is a comma-separated list of instructor names.
     This must be enclosed in square brackets,
     as in `["Alan Turing","Grace Hopper"]`
+*   `helper` is a comma-separated list of helper names.
+    This must be enclosed in square brackets,
+    as in `["John von Neumann"]`
 *   `contact` is the contact email address to use for your bootcamp.
 
 The header may optionally define the following:

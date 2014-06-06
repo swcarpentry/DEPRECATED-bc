@@ -47,67 +47,55 @@ To make it clearer which machine is doing what,
 we'll indent the commands sent to the remote machine
 and their output.
 
-<div class="in" markdown="1">
 ~~~
 $ pwd
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 /users/vlad
 ~~~
-</div>
-<div class="in" markdown="1">
+{:class="out"}
 ~~~
 $ ssh vlad@moon.euphoric.edu
 Password: ********
 ~~~
-</div>
-<div class="in" markdown="1">
+{:class="in"}
 ~~~
     moon> hostname
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
     moon
 ~~~
-</div>
-<div class="in" markdown="1">
+{:class="out"}
 ~~~
     moon> pwd
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
     /home/vlad
 ~~~
-</div>
-<div class="in" markdown="1">
+{:class="out"}
 ~~~
     moon> ls -F
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
     bin/     cheese.txt   dark_side/   rocks.cfg
 ~~~
-</div>
-<div class="in" markdown="1">
+{:class="out"}
 ~~~
     moon> exit
 ~~~
-</div>
-<div class="in" markdown="1">
+{:class="in"}
 ~~~
 $ pwd
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 /users/vlad
 ~~~
-</div>
+{:class="out"}
 
 The secure shell is called "secure" to contrast it with an older program called `rsh`,
 which stood for "remote shell".
@@ -137,37 +125,33 @@ For example,
 this command copies our latest results to the backup server in the basement,
 printing out its progress as it does so:
 
-<div class="in" markdown="1">
 ~~~
 $ scp results.dat vlad@backupserver:backups/results-2011-11-11.dat
 Password: ********
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 results.dat              100%  9  1.0 MB/s 00:00
 ~~~
-</div>
+{:class="out"}
 
 Copying a whole directory is similar:
 we just use the `-r` option to signal that we want copying to be recursive.
 For example,
 this command copies all of our results from the backup server to our laptop:
 
-<div class="in" markdown="1">
 ~~~
 $ scp -r vlad@backupserver:backups ./backups
 Password: ********
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 results-2011-09-18.dat              100%  7  1.0 MB/s 00:00
 results-2011-10-04.dat              100%  9  1.0 MB/s 00:00
 results-2011-10-28.dat              100%  8  1.0 MB/s 00:00
 results-2011-11-11.dat              100%  9  1.0 MB/s 00:00
 ~~~
-</div>
+{:class="out"}
 
 Here's one more thing SSH can do for us.
 Suppose we want to check whether we have already created the file
@@ -175,18 +159,16 @@ Suppose we want to check whether we have already created the file
 Instead of logging in and then typing `ls`,
 we could do this:
 
-<div class="in" markdown="1">
 ~~~
 $ ssh vlad@backupserver "ls results"
 Password: ********
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 results-2011-09-18.dat  results-2011-10-28.dat
 results-2011-10-04.dat  results-2011-11-11.dat
 ~~~
-</div>
+{:class="out"}
 
 SSH takes the argument after our remote username
 and passes them to the shell on the remote computer.
@@ -200,7 +182,7 @@ and sends the output back to our local shell for display.
 > Typing our password over and over again is annoying,
 > especially if the commands we want to run remotely are in a loop.
 > To remove the need to do this,
-> we can create an [authentication key](../../gloss.html#authentication-key)
+> we can create an [SSH key](../../gloss.html#ssh-key)
 > to tell the remote machine
 > that it should always trust us.
-> We discuss authentication keys in our intermediate lessons.
+> We discuss SSH keys in our intermediate lessons.
