@@ -280,18 +280,34 @@ main()
 
 <div>
 <blockquote>
-<h4>The Right Way to Do It</h4>
-<p>If our programs can take complex parameters or multiple filenames, we shouldn't handle <code>sys.argv</code> directly. Instead, we should use Python's <code>argparse</code> library, which handles common cases in a systematic way, and also makes it easy for us to provide sensible error messages for our users.</p>
+<h4 id="the-right-way-to-do-it">The Right Way to Do It</h4>
+<p>If our programs can take complex parameters or multiple filenames,
+we shouldn&#39;t handle <code>sys.argv</code> directly.
+Instead,
+we should use Python&#39;s <code>argparse</code> library,
+which handles common cases in a systematic way,
+and also makes it easy for us to provide sensible error messages for our users.</p>
 </blockquote>
 </div>
 
 
 <div class="challenges">
 <h4 id="challenges">Challenges</h4>
-<ol style="list-style-type: decimal">
-<li><p>Write a command-line program that does addition and subtraction: <sub>~</sub> python arith.py 1 + 2 3 python arith.py 3 - 4 -1 <sub>~</sub></p>
-<p>What goes wrong if you try to add multiplication using '*' to the program?</p></li>
-<li><p>Using the <code>glob</code> module introduced <a href="earlier">03-loop.ipynb</a>, write a simple version of <code>ls</code> that shows files in the current directory with a particular suffix: <sub>~</sub> python my_ls.py py left.py right.py zero.py <sub>~</sub></p></li>
+<ol>
+<li><p>Write a command-line program that does addition and subtraction:</p>
+<pre><code>$ python arith.py 1 + 2
+3
+</code></pre><pre><code>$ python arith.py 3 - 4
+-1
+</code></pre><p>What goes wrong if you try to add multiplication using &#39;*&#39; to the program?</p>
+</li>
+<li><p>Using the <code>glob</code> module introduced <a href="earlier">03-loop.ipynb</a>,
+write a simple version of <code>ls</code> that shows files in the current directory with a particular suffix:</p>
+<pre><code>$ python my_ls.py py
+left.py
+right.py
+zero.py
+</code></pre></li>
 </ol>
 </div>
 
@@ -556,7 +572,7 @@ print count, &#39;lines in standard input&#39;
 
 
 <div class="in">
-<pre>%run count-stdin.py &lt; fractal_1.txt</pre>
+<pre>%run count-stdin.py &lt; small-01.csv</pre>
 </div>
 
 <div class="out">
@@ -568,7 +584,7 @@ print count, &#39;lines in standard input&#39;
 <div class="">
 <p>As you can see, <code>%run</code> doesn't understand file redirection: that's a shell thing.</p>
 <p>A common mistake is to try to run something that reads from standard input like this:</p>
-<pre><code>!ipython count_stdin.py fractal_1.txt</code></pre>
+<pre><code>!ipython count_stdin.py small-01.csv</code></pre>
 <p>i.e., to forget the <code>&lt;</code> character that redirect the file to standard input. In this case, there's nothing in standard input, so the program waits at the start of the loop for someone to type something on the keyboard. Since there's no way for us to do this, our program is stuck, and we have to halt it using the <code>Interrupt</code> option from the <code>Kernel</code> menu in the Notebook.</p>
 <p>We now need to rewrite the program so that it loads data from <code>sys.stdin</code> if no filenames are provided. Luckily, <code>numpy.loadtxt</code> can handle either a filename or an open file as its first parameter, so we don't actually need to change <code>process</code>. That leaves <code>main</code>:</p>
 </div>

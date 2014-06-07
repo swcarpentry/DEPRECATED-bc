@@ -1,0 +1,6 @@
+# Ignore doit's database file
+.doit.db
+
+# Ignore the data files, if the lesson works they should be automatically
+# downloaded anyway...
+*.txt

@@ -1,3 +1,9 @@
+---
+layout: lesson
+root: ../..
+---
+
+
 ```{r, echo=FALSE}
 opts_chunk$set(results='hide')
 ```

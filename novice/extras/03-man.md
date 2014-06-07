@@ -8,11 +8,10 @@ We can get help for any Unix command with the `man`
 For example,
 here is the command to look up information on `cp`:
 
-<div class="in" markdown="1">
 ~~~
 $ man cp
 ~~~
-</div>
+{:class="in"}
 
 The output displayed is referred to as the "man page".
 
@@ -50,23 +49,21 @@ AUTHOR, REPORTING BUGS, COPYRIGHT, HISTORY, (known) BUGS, and COMPATIBILITY.
 
 Here is the is synopsis for the `cp` command on Ubuntu Linux:
 
-<div class="out" markdown="1">
 ~~~
 SYNOPSIS
    cp [OPTION]... [-T] SOURCE DEST
    cp [OPTION]... SOURCE... DIRECTORY
    cp [OPTION]... -t DIRECTORY SOURCE...
 ~~~
-</div>
+{:class="out"}
 
 This tells the reader that there are three ways to use the command.
 Let's look at the first usage:
 
-<div class="out" markdown="1">
 ~~~
 cp [OPTION]... [-T] SOURCE DEST
 ~~~
-</div>
+{:class="out"}
 
 `[OPTION]` means the `cp` command can be followed by
 one or more optional [flags](../../gloss.html#command-line-flag).
@@ -90,7 +87,6 @@ Note that to use the last one, the `-t` option is mandatory
 The `DESCRIPTION` section starts with a few paragraphs explaining the command and its use,
 then expands on the possible options one by one:
 
-<div class="out" markdown="1">
 ~~~
      The following options are available:
 
@@ -107,7 +103,7 @@ then expands on the possible options one by one:
 
       ...  ...
 ~~~
-</div>
+{:class="out"}
 
 #### Finding Help on Specific Options
 
@@ -122,12 +118,11 @@ After that,
 we can use the 'n' key to navigate to the next match
 until we find the detailed information we need:
 
-<div class="out" markdown="1">
 ~~~
 -t, --target-directory=DIRECTORY
      copy all SOURCE arguments into DIRECTORY
 ~~~
-</div>
+{:class="out"}
 
 This means that this option has the short form `-t` and the long form `--target-directory`
 and that it takes an argument.

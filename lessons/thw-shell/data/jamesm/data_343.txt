@@ -1,9 +1,0 @@
-# 
-Reported: Mon Jul 4 09:54:35 2011
-Subject: princeHarrison273
-Year/month of birth: 1995/03
-Sex: F
-CI type: 2
-Volume: 4
-Range: 4
-Discrimination: 2

@@ -1,9 +1,0 @@
-# 
-Reported: Fri Jun 24 10:14:01 2011
-Subject: babyBackstreet413
-Year/month of birth: 1992/12
-Sex: F
-CI type: 15
-Volume: 4
-Range: 7
-Discrimination: 6

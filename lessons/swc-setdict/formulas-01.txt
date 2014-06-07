@@ -1,1 +1,0 @@
-helium : He 1
