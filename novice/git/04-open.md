@@ -220,7 +220,7 @@ would like to be sure that data will still be available ten years from now,
 but that's well beyond the lifespan of most of the grants that fund academic infrastructure.
 
 Another option is to purchase a domain
-and pay an [Internet service provider](../../gloss.html#isp) (ISP) to host it.
+and pay an Internet service provider (ISP) to host it.
 This gives the individual or group more control,
 and sidesteps problems that can arise when moving from one institution to another,
 but requires more time and effort to set up than either
@@ -273,18 +273,16 @@ or simply because what's new is often also frightening.
 
 </div>
 
-<div class="challenges" markdown="1">
+<div class="challenge" markdown="1">
+Find out whether you are allowed to apply an open license to your software.
+Can you do this unilaterally,
+or do you need permission from someone in your institution?
+If so, who?
+</div>
 
-#### Challenges
-
-1.  Find out whether you are allowed to apply an open license to your software.
-    Can you do this unilaterally,
-    or do you need permission from someone in your institution?
-    If so, who?
-
-2.  Find out whether you are allowed to host your work openly on a public forge.
-    Can you do this unilaterally,
-    or do you need permission from someone in your institution?
-    If so, who?
-
+<div class="challenge" markdown="1">
+Find out whether you are allowed to host your work openly on a public forge.
+Can you do this unilaterally,
+or do you need permission from someone in your institution?
+If so, who?
 </div>
