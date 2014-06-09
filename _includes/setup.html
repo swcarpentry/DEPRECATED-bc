@@ -53,6 +53,18 @@
       either directly or through a browser plugin.
     </p>
   </div>
+  <div class="span6">
+    <h4>Make</h4>
+    <p>
+      Originally invented to manage compilation of programs written in
+      languages like C, Make can be used to automatically update any set
+      of files that depend on another set of files. This makes it a good
+      solution for many data analysis and data management
+      problems. While there are many build tools now in existence
+      (e.g. ANT and CMake) they share the same fundamental concepts as
+      Make. 
+    </p>
+  </div>
 </div>
 
 <h3>Windows</h3>
@@ -122,6 +134,33 @@
       you may install the Firefox SQLite browser plugin described <a href="#firefox-sqlite">below</a>.
     </p>
   </div>
+  <div class="span6">
+    <h4>Make</h4>
+    <p>
+    Once you have installed Git Bash you can install Make by:
+    <ul>
+    <li>
+    Download <code>make.exe</code> from <a
+href="https://github.com/msysgit/msysgit/blob/master/bin/make.exe?raw=true">here</a>
+    </li>
+    <li>
+    Place it in the <code>bin</code> directory where you installed Git
+    Bash e.g. <code>C:\Program Files (x86)\Git\bin</code>.
+    </li>
+    <li> 
+    To test: open a Git Bash window, type <code>make</code>, and press
+    Enter.
+    </li>
+    <li> 
+    You should see the following message
+    <pre>make: *** No targets specified and no makefile found. Stop.</pre>
+    This means that Make was successfully installed.
+    Otherwise, you'll see this error message:
+    <pre>bash: make: command not found</pre>
+    </li>
+    </ul>
+    </p>
+  </div>
 </div>
 
 <h3>Mac OS X</h3>
@@ -179,6 +218,34 @@
       <code>sqlite3</code> comes pre-installed on Mac OS X.
       Alternatively,
       you may install the Firefox SQLite browser plugin described <a href="#firefox-sqlite">below</a>.
+    </p>
+  </div>
+  <div class="span6">
+    <h4>Make</h4>
+    <p>
+    If you do not already have access to <code>make</code> from within
+    your shell, you will need to install XCode (which is free, but
+    over a gigabyte to download). 
+    </p>
+    <ul>
+      <li>Go to the Apple app store</li>
+      <li>Search for XCode</li>
+      <li>Click <strong>Free</strong></li>
+      <li>Click <strong>Install App</strong></li>
+    </ul>
+    <p>
+    Once XCode has installed:
+    </p>
+    <ul>
+      <li>Click <strong>Applications</strong></li>
+      <li>Click <strong>XCode</strong></li>
+      <li>Select <strong>XCode&rarr;Preferences...</strong></li>
+      <li>Click <strong>Downloads</strong></li>
+      <li>Select <strong>Command Line Tools</strong></li>
+      <li>Click <strong>Install</strong></li>
+    </ul>
+    <p>
+    You will now be able to run <code>make</code> within your shell.
     </p>
   </div>
 </div>
@@ -257,6 +324,11 @@
         distribution the default Python).
       </li>
     </ol>
+    <h4>Make</h4>
+    <p>
+    Make is a standard tool on Linux systems and should already be
+    available.
+    </p>
   </div>
 </div>
 
