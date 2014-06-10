@@ -1,7 +1,7 @@
 Software Carpentry Bootcamps
 ============================
 
-The *bc* repository is the starting point for creating your own bootcamp website. It contains a template for the home page and lesson materials that we have developed. The web sites are built using [Jekyll](http://jekyllrb.com) and are designed to be hosted on [github](https://pages.github.com). Shell and Git materials are written in Markdown, while Python and SQL use the IPython Notebook. Current material for novices can be found in the directories under `novice and new material for intermediate learners will be found in directories under `intermediate` (currently under development). Our old lesson material is in the `lessons` directory, which we plan to retire in Spring 2014.
+The *bc* repository is the starting point for creating your own bootcamp website. It contains a template for the home page and lesson materials that we have developed. The web sites are built using [Jekyll](http://jekyllrb.com) and are designed to be hosted on [github](https://pages.github.com). Shell and Git materials are written in Markdown, while Python and SQL use the IPython Notebook. Current material for novices can be found in the directories under `novice` and new material for intermediate learners will be found in directories under `intermediate` (currently under development). Our old lesson material is in the `lessons` directory, which we plan to retire in Spring 2014.
 
 This document will explain how to build a bootcamp website and give more information about how the repository is organized. You may also want to view these videos for hands-on tutorials:
 
@@ -27,7 +27,7 @@ Please contribute corrections or additions to this repository! See the
 *   [Modify the website Content](#Modify-the-website-Content)  
 *   [Lesson Material](#lesson-material)  
 *   [Building Things](#building-things)  
-*   [Site Map](#site-map)  
+*   [Site Structure](#Site-Structure)  
 *   [FAQ](#faq)
 
 
@@ -272,9 +272,17 @@ The body of `index.html` contains an explanation of what a bootcamp is and how i
 You normally won't need to worry about the first four --- they're included in the right places by our standard layouts --- but you will probably want to edit the fifth. In particular, if you are teaching a Python bootcamp,
 you should delete the instructions for installing R, and vice versa.
 
-Lesson Material
+Building Things
 ---------------
+GitHub automatically runs Jekyll to regenerate the pretty HTML versions of our content every time changes are pushed to the `gh-pages` branch of this repository. We use `make` to imitate that process locally so that people can preview changes before committing. We also use `make` to automate a handful of other tasks, such as converting IPython Notebooks from `.ipynb` format to Markdown (`.md`) so that Jekyll can convert them to HTML.
 
+Most of the commands to rebuild things are in `Makefile`; run the command `make` on its own to get a list of targets, and `make site` to re-run Jekyll to preview your site (which Jekyll will put in the `_site` directory). You can also run `make check` to run a Python script that checks whether `index.html`'s variables are formatted correctly, and `make clean` to clean up all generated files.
+
+The commands used to turn IPython Notebooks into Markdown files are stored in a separate Makefile called `ipynb.mk`. This separation ensures that people can rebuild the site even if they don't have IPython installed (which R instructors might not); it also guarantees that `make` won't try to regenerate Markdown after a Git pull (which might change the timestamps on files, but not actually change their contents). If we add more languages and file formats in future, we may also create separate Makefiles for them.
+
+
+Site Structure
+--------------
 We have created three standard layouts for bootcamp pages:
 
 *   `bootcamp.html` is used for bootcamps' home pages, and is the layout for the `index.html` page in your repo's root directory. That `index.html` page's header must [define several variables](#variables) in order for your bootcamp to be included in our main website.
@@ -290,20 +298,10 @@ We have created three standard layouts for bootcamp pages:
     in directories under `intermediate`.
 3.  Our old lesson material is in the `lessons` directory. We plan to retire it in Spring 2014,
 
-As explained [below](#building-things), you can use `make` to compile this material in the way that GitHub does when changes are committed to the `gh-pages` branch.
+As explained [above](#building-things), you can use `make` to compile this material in the way that GitHub does when changes are committed to the `gh-pages` branch.
 
+###Site Map
 
-Building Things
----------------
-GitHub automatically runs Jekyll to regenerate the pretty HTML versions of our content every time changes are pushed to the `gh-pages` branch of this repository. We use `make` to imitate that process locally so that people can preview changes before committing. We also use `make` to automate a handful of other tasks, such as converting IPython Notebooks from `.ipynb` format to Markdown (`.md`) so that Jekyll can convert them to HTML.
-
-Most of the commands to rebuild things are in `Makefile`; run the command `make` on its own to get a list of targets, and `make site` to re-run Jekyll to preview your site (which Jekyll will put in the `_site` directory). You can also run `make check` to run a Python script that checks whether `index.html`'s variables are formatted correctly, and `make clean` to clean up all generated files.
-
-The commands used to turn IPython Notebooks into Markdown files are stored in a separate Makefile called `ipynb.mk`. This separation ensures that people can rebuild the site even if they don't have IPython installed (which R instructors might not); it also guarantees that `make` won't try to regenerate Markdown after a Git pull (which might change the timestamps on files, but not actually change their contents). If we add more languages and file formats in future, we may also create separate Makefiles for them.
-
-
-Site Map
---------
 The most important files and directories are **highlighted**.
 
 *   CITATION - how to cite Software Carpentry.
