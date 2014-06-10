@@ -150,9 +150,9 @@ To create a website for a new bootcamp:
 7.  Edit `index.html` to create the bootcamp home page.
     In particular,
     double-check
-    [the variables in the page's header](#variables),
+    [the variables in the page's header](#Edit-index.html),
     as these are used to update the main website,
-    and make sure the [website content](#website-content) is correct.
+    and make sure the [website content](#Modify-the-website-Content) is correct.
     You can use the script `./bin/swc_index_validator.py`
     to check `index.html` for problems
     by running the command `make check`.
@@ -160,7 +160,7 @@ To create a website for a new bootcamp:
 8.  Edit `_includes/setup.html` to provide software installation instructions for bootcamp attendees.
     This is described in more detail in the section on [website content](#website-content).
 
-9.  [Preview your changes](#previewing-the-site).
+9.  [Preview your changes](#Preview-Changes-to-the-Site).
 
 10. Replace the content of this `README.md` file with a line or two describing your bootcamp.
 
@@ -292,7 +292,7 @@ Site Structure
 --------------
 We have created three standard layouts for bootcamp pages:
 
-*   `bootcamp.html` is used for bootcamps' home pages, and is the layout for the `index.html` page in your repo's root directory. That `index.html` page's header must [define several variables](#variables) in order for your bootcamp to be included in our main website.
+*   `bootcamp.html` is used for bootcamps' home pages, and is the layout for the `index.html` page in your repo's root directory. That `index.html` page's header must [define several variables](#Edit-index.html) in order for your bootcamp to be included in our main website.
 
 *   `lesson.html` is used to lay out pages for individual lessons. All of the lessons in this repository use it to ensure uniform look and feel.
 
@@ -305,7 +305,7 @@ We have created three standard layouts for bootcamp pages:
     in directories under `intermediate`.
 3.  Our old lesson material is in the `lessons` directory. We plan to retire it in Spring 2014,
 
-As explained [above](#building-things), you can use `make` to compile this material in the way that GitHub does when changes are committed to the `gh-pages` branch.
+As explained [above](#Preview-Changes-to-the-Site), you can use `make` to compile this material in the way that GitHub does when changes are committed to the `gh-pages` branch.
 
 ###Site Map
 
