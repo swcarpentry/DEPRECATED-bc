@@ -7,12 +7,13 @@ root: ../..
 
 
 <div>
-<p>This material assumes that you have programmed before. This first lecture provides a quick introduction to programming in Python for those who either haven't used Python before or need a quick refresher.</p>
-<p>Let's start with a hypothetical problem we want to solve. We are interested in understanding the relationship between the weather and the number of mosquitos occuring in a particular year so that we can plan mosquito control measures accordingly. Since we want to apply these mosquito control measures at a number of different sites we need to understand both the relationship at a particular site and whether or not it is consistent across sites. The data we have to address this problem comes from the local government and are stored in tables in comma-separated values (CSV) files. Each file holds the data for a single location, each row holds the information for a single year at that location, and the columns hold the data on both mosquito numbers and the average temperature and rainfall from the beginning of mosquito breeding season. The first few rows of our first file look like:</p>
+<p>This material assumes that you have programmed before. This first lecture provides a quick introduction to programming in Python for those who either haven&#39;t used Python before or need a quick refresher.</p>
+<p>Let&#39;s start with a hypothetical problem we want to solve. We are interested in understanding the relationship between the weather and the number of mosquitos occuring in a particular year so that we can plan mosquito control measures accordingly. Since we want to apply these mosquito control measures at a number of different sites we need to understand both the relationship at a particular site and whether or not it is consistent across sites. The data we have to address this problem comes from the local government and are stored in tables in comma-separated values (CSV) files. Each file holds the data for a single location, each row holds the information for a single year at that location, and the columns hold the data on both mosquito numbers and the average temperature and rainfall from the beginning of mosquito breeding season. The first few rows of our first file look like:</p>
 <pre><code>year,temperature,rainfall,mosquitos
 2001,87,222,198
 2002,72,103,105
-2003,77,176,166</code></pre>
+2003,77,176,166
+</code></pre>
 </div>
 
 ## Objectives
@@ -32,13 +33,12 @@ root: ../..
 
 
 <div>
-<p>In order to load the data, we need to import a library called Pandas that knows how to operate on tables of data.</p>
+<p>In order to load the data, we need to import a library called Pandas that knows
+how to operate on tables of data.</p>
 </div>
 
 
-<div class="in">
-<pre>import pandas</pre>
-</div>
+<pre class="in"><code>import pandas</code></pre>
 
 
 <div>
@@ -46,12 +46,9 @@ root: ../..
 </div>
 
 
-<div class="in">
-<pre>pandas.read_csv(&#39;mosquito_data_A1.csv&#39;)</pre>
-</div>
+<pre class="in"><code>pandas.read_csv(&#39;mosquito_data_A1.csv&#39;)</code></pre>
 
-<div class="out">
-<pre>   year  temperature  rainfall  mosquitos
+<div class="out"><pre class='out'><code>   year  temperature  rainfall  mosquitos
 0  2001           87       222        198
 1  2002           72       103        105
 2  2003           77       176        166
@@ -61,33 +58,27 @@ root: ../..
 6  2007           71       121        117
 7  2008           88       267        232
 8  2009           85       211        191
-9  2010           75       101        106</pre>
-</div>
+9  2010           75       101        106</code></pre></div>
 
 
 <div>
 <p>The <code>read_csv()</code> function belongs to the <code>pandas</code> library. In order to run it we need to tell Python that it is part of <code>pandas</code> and we do this using the dot notation, which is used everywhere in Python to refer to parts of larger things.</p>
 <p>When we are finished typing and press Shift+Enter, the notebook runs our command and shows us its output. In this case, the output is the data we just loaded.</p>
-<p>Our call to <code>pandas.read_csv()</code> read data into memory, but didn't save it anywhere. To do that, we need to assign the array to a variable. In Python we use <code>=</code> to assign a new value to a variable like this:</p>
+<p>Our call to <code>pandas.read_csv()</code> read data into memory, but didn&#39;t save it anywhere. To do that, we need to assign the array to a variable. In Python we use <code>=</code> to assign a new value to a variable like this:</p>
 </div>
 
 
-<div class="in">
-<pre>data = pandas.read_csv(&#39;mosquito_data_A1.csv&#39;)</pre>
-</div>
+<pre class="in"><code>data = pandas.read_csv(&#39;mosquito_data_A1.csv&#39;)</code></pre>
 
 
 <div>
-<p>This statement doesn't produce any output because assignment doesn't display anything. If we want to check that our data has been loaded, we can print the variable's value:</p>
+<p>This statement doesn&#39;t produce any output because assignment doesn&#39;t display anything. If we want to check that our data has been loaded, we can print the variable&#39;s value:</p>
 </div>
 
 
-<div class="in">
-<pre>print data</pre>
-</div>
+<pre class="in"><code>print data</code></pre>
 
-<div class="out">
-<pre>   year  temperature  rainfall  mosquitos
+<div class="out"><pre class='out'><code>   year  temperature  rainfall  mosquitos
 0  2001           87       222        198
 1  2002           72       103        105
 2  2003           77       176        166
@@ -98,8 +89,7 @@ root: ../..
 7  2008           88       267        232
 8  2009           85       211        191
 9  2010           75       101        106
-</pre>
-</div>
+</code></pre></div>
 
 
 <div>
@@ -107,12 +97,9 @@ root: ../..
 </div>
 
 
-<div class="in">
-<pre>data</pre>
-</div>
+<pre class="in"><code>data</code></pre>
 
-<div class="out">
-<pre>   year  temperature  rainfall  mosquitos
+<div class="out"><pre class='out'><code>   year  temperature  rainfall  mosquitos
 0  2001           87       222        198
 1  2002           72       103        105
 2  2003           77       176        166
@@ -122,8 +109,7 @@ root: ../..
 6  2007           71       121        117
 7  2008           88       267        232
 8  2009           85       211        191
-9  2010           75       101        106</pre>
-</div>
+9  2010           75       101        106</code></pre></div>
 
 
 <div>
@@ -134,18 +120,14 @@ root: ../..
 
 
 <div>
-<p>Once we have imported the data we can start doing things with it. First, let's ask what type of thing <code>data</code> refers to:</p>
+<p>Once we have imported the data we can start doing things with it. First, let&#39;s ask what type of thing <code>data</code> refers to:</p>
 </div>
 
 
-<div class="in">
-<pre>print type(data)</pre>
-</div>
+<pre class="in"><code>print type(data)</code></pre>
 
-<div class="out">
-<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-</pre>
-</div>
+<div class="out"><pre class='out'><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+</code></pre></div>
 
 
 <div>
@@ -158,12 +140,9 @@ root: ../..
 </div>
 
 
-<div class="in">
-<pre>print data[&#39;year&#39;]</pre>
-</div>
+<pre class="in"><code>print data[&#39;year&#39;]</code></pre>
 
-<div class="out">
-<pre>0    2001
+<div class="out"><pre class='out'><code>0    2001
 1    2002
 2    2003
 3    2004
@@ -174,8 +153,7 @@ root: ../..
 8    2009
 9    2010
 Name: year, dtype: int64
-</pre>
-</div>
+</code></pre></div>
 
 
 <div>
@@ -183,12 +161,9 @@ Name: year, dtype: int64
 </div>
 
 
-<div class="in">
-<pre>print data[[&#39;rainfall&#39;, &#39;temperature&#39;]]</pre>
-</div>
+<pre class="in"><code>print data[[&#39;rainfall&#39;, &#39;temperature&#39;]]</code></pre>
 
-<div class="out">
-<pre>   rainfall  temperature
+<div class="out"><pre class='out'><code>   rainfall  temperature
 0       222           87
 1       103           72
 2       176           77
@@ -199,8 +174,7 @@ Name: year, dtype: int64
 7       267           88
 8       211           85
 9       101           75
-</pre>
-</div>
+</code></pre></div>
 
 
 <div>
@@ -208,35 +182,28 @@ Name: year, dtype: int64
 </div>
 
 
-<div class="in">
-<pre>print data[0:2]</pre>
-</div>
+<pre class="in"><code>print data[0:2]</code></pre>
 
-<div class="out">
-<pre>   year  temperature  rainfall  mosquitos
+<div class="out"><pre class='out'><code>   year  temperature  rainfall  mosquitos
 0  2001           87       222        198
 1  2002           72       103        105
-</pre>
-</div>
+</code></pre></div>
 
 
 <div>
-<p>There are a couple of important things to note here. First, Python indexing starts at zero. In contrast, programming languages like R and MATLAB start counting at 1, because that's what human beings have done for thousands of years. Languages in the C family (including C++, Java, Perl, and Python) count from 0 because that's simpler for computers to do. This means that if we have 5 things in Python they are numbered 0, 1, 2, 3, 4, and the first row in a data frame is always row 0.</p>
+<p>There are a couple of important things to note here. First, Python indexing starts at zero. In contrast, programming languages like R and MATLAB start counting at 1, because that&#39;s what human beings have done for thousands of years. Languages in the C family (including C++, Java, Perl, and Python) count from 0 because that&#39;s simpler for computers to do. This means that if we have 5 things in Python they are numbered 0, 1, 2, 3, 4, and the first row in a data frame is always row 0.</p>
 <p>The other thing to note is that the subset of rows starts at the first value and goes up to, but does not include, the second value. Again, the up-to-but-not-including takes a bit of getting used to, but the rule is that the difference between the upper and lower bounds is the number of values in the slice.</p>
 </div>
 
 
 <div>
-<p>One thing that we can't do with this syntax is directly ask for the data from a single row:</p>
+<p>One thing that we can&#39;t do with this syntax is directly ask for the data from a single row:</p>
 </div>
 
 
-<div class="in">
-<pre>data[1]</pre>
-</div>
+<pre class="in"><code>data[1]</code></pre>
 
-<div class="out">
-<pre>---------------------------------------------------------------------------
+<div class="out"><pre class='err'><code>---------------------------------------------------------------------------
 KeyError                                  Traceback (most recent call last)
 &lt;ipython-input-10-c805864c0d75&gt; in &lt;module&gt;()
 ----&gt; 1 data[1]
@@ -276,8 +243,7 @@ KeyError                                  Traceback (most recent call last)
    1943 
    1944     def reindex_axis(self, new_axis, method=None, axis=0, copy=True):
 
-KeyError: u&#39;no item named 1&#39;</pre>
-</div>
+KeyError: u&#39;no item named 1&#39;</code></pre></div>
 
 
 <div>
@@ -285,15 +251,11 @@ KeyError: u&#39;no item named 1&#39;</pre>
 </div>
 
 
-<div class="in">
-<pre>print data[1:2]</pre>
-</div>
+<pre class="in"><code>print data[1:2]</code></pre>
 
-<div class="out">
-<pre>   year  temperature  rainfall  mosquitos
+<div class="out"><pre class='out'><code>   year  temperature  rainfall  mosquitos
 1  2002           72       103        105
-</pre>
-</div>
+</code></pre></div>
 
 
 <div>
@@ -301,18 +263,14 @@ KeyError: u&#39;no item named 1&#39;</pre>
 </div>
 
 
-<div class="in">
-<pre>print data.iloc[1]</pre>
-</div>
+<pre class="in"><code>print data.iloc[1]</code></pre>
 
-<div class="out">
-<pre>year           2002
+<div class="out"><pre class='out'><code>year           2002
 temperature      72
 rainfall        103
 mosquitos       105
 Name: 1, dtype: int64
-</pre>
-</div>
+</code></pre></div>
 
 
 <div>
@@ -320,16 +278,12 @@ Name: 1, dtype: int64
 </div>
 
 
-<div class="in">
-<pre>print data.iloc[1:3]</pre>
-</div>
+<pre class="in"><code>print data.iloc[1:3]</code></pre>
 
-<div class="out">
-<pre>   year  temperature  rainfall  mosquitos
+<div class="out"><pre class='out'><code>   year  temperature  rainfall  mosquitos
 1  2002           72       103        105
 2  2003           77       176        166
-</pre>
-</div>
+</code></pre></div>
 
 
 <div>
@@ -337,19 +291,15 @@ Name: 1, dtype: int64
 </div>
 
 
-<div class="in">
-<pre>print data[&#39;temperature&#39;][data[&#39;year&#39;] &gt; 2005]</pre>
-</div>
+<pre class="in"><code>print data[&#39;temperature&#39;][data[&#39;year&#39;] &gt; 2005]</code></pre>
 
-<div class="out">
-<pre>5    89
+<div class="out"><pre class='out'><code>5    89
 6    71
 7    88
 8    85
 9    75
 Name: temperature, dtype: int64
-</pre>
-</div>
+</code></pre></div>
 
 
 <div>
@@ -357,18 +307,14 @@ Name: temperature, dtype: int64
 </div>
 
 
-<div class="in">
-<pre>print data.mean()</pre>
-</div>
+<pre class="in"><code>print data.mean()</code></pre>
 
-<div class="out">
-<pre>year           2005.5
+<div class="out"><pre class='out'><code>year           2005.5
 temperature      82.1
 rainfall        187.1
 mosquitos       171.4
 dtype: float64
-</pre>
-</div>
+</code></pre></div>
 
 
 <div>
@@ -376,38 +322,26 @@ dtype: float64
 </div>
 
 
-<div class="in">
-<pre>print data.max()</pre>
-</div>
+<pre class="in"><code>print data.max()</code></pre>
 
-<div class="out">
-<pre>year           2010
+<div class="out"><pre class='out'><code>year           2010
 temperature      89
 rainfall        283
 mosquitos       242
 dtype: int64
-</pre>
-</div>
+</code></pre></div>
 
 
-<div class="in">
-<pre>print data[&#39;temperature&#39;].min()</pre>
-</div>
+<pre class="in"><code>print data[&#39;temperature&#39;].min()</code></pre>
 
-<div class="out">
-<pre>71
-</pre>
-</div>
+<div class="out"><pre class='out'><code>71
+</code></pre></div>
 
 
-<div class="in">
-<pre>print data[&#39;mosquitos&#39;][1:3].std()</pre>
-</div>
+<pre class="in"><code>print data[&#39;mosquitos&#39;][1:3].std()</code></pre>
 
-<div class="out">
-<pre>43.1335136524
-</pre>
-</div>
+<div class="out"><pre class='out'><code>43.1335136524
+</code></pre></div>
 
 ### Challenge
 
@@ -420,22 +354,20 @@ dtype: int64
 
 
 <div>
-<p>Once we have some data we often want to be able to loop over it to perform the same operation repeatedly. A <code>for</code> loop in Python takes the general form</p>
+<p>Once we have some data we often want to be able to loop over it to perform the same operation repeatedly.
+A <code>for</code> loop in Python takes the general form</p>
 <pre><code>for item in list:
-    do_something</code></pre>
-<p>So if we want to loop over the temperatures and print out there values in degrees Celcius (instead of Farenheit) we can use:</p>
+    do_something
+</code></pre><p>So if we want to loop over the temperatures and print out there values in degrees Celcius (instead of Farenheit) we can use:</p>
 </div>
 
 
-<div class="in">
-<pre>temps = data[&#39;temperature&#39;]
+<pre class="in"><code>temps = data[&#39;temperature&#39;]
 for temp_in_f in temps:
     temp_in_c = (temp_in_f - 32) * 5 / 9.0
-    print temp_in_c</pre>
-</div>
+    print temp_in_c</code></pre>
 
-<div class="out">
-<pre>30.5555555556
+<div class="out"><pre class='out'><code>30.5555555556
 22.2222222222
 25.0
 31.6666666667
@@ -445,23 +377,18 @@ for temp_in_f in temps:
 31.1111111111
 29.4444444444
 23.8888888889
-</pre>
-</div>
+</code></pre></div>
 
 
 <div>
-<p>That looks good, but why did we use 9.0 instead of 9? The reason is that computers store integers and numbers with decimals as different types: integers and floating point numbers (or floats). Addition, subtraction and multiplication work on both as we'd expect, but division works differently. If we divide one integer by another, we get the quotient without the remainder:</p>
+<p>That looks good, but why did we use 9.0 instead of 9? The reason is that computers store integers and numbers with decimals as different types: integers and floating point numbers (or floats). Addition, subtraction and multiplication work on both as we&#39;d expect, but division works differently. If we divide one integer by another, we get the quotient without the remainder:</p>
 </div>
 
 
-<div class="in">
-<pre>print &#39;10/3 is:&#39;, 10 / 3</pre>
-</div>
+<pre class="in"><code>print &#39;10/3 is:&#39;, 10 / 3</code></pre>
 
-<div class="out">
-<pre>10/3 is: 3
-</pre>
-</div>
+<div class="out"><pre class='out'><code>10/3 is: 3
+</code></pre></div>
 
 
 <div>
@@ -469,18 +396,14 @@ for temp_in_f in temps:
 </div>
 
 
-<div class="in">
-<pre>print &#39;10/3.0 is:&#39;, 10 / 3.0</pre>
-</div>
+<pre class="in"><code>print &#39;10/3.0 is:&#39;, 10 / 3.0</code></pre>
 
-<div class="out">
-<pre>10/3.0 is: 3.33333333333
-</pre>
-</div>
+<div class="out"><pre class='out'><code>10/3.0 is: 3.33333333333
+</code></pre></div>
 
 
 <div>
-<p>The computer does this for historical reasons: integer operations were much faster on early machines, and this behavior is actually useful in a lot of situations. However, it's still confusing, so Python 3 produces a floating-point answer when dividing integers if it needs to. We're still using Python 2.7 in this class, so if we want 5/9 to give us the right answer, we have to write it as 5.0/9, 5/9.0, or some other variation.</p>
+<p>The computer does this for historical reasons: integer operations were much faster on early machines, and this behavior is actually useful in a lot of situations. However, it&#39;s still confusing, so Python 3 produces a floating-point answer when dividing integers if it needs to. We&#39;re still using Python 2.7 in this class, so if we want 5/9 to give us the right answer, we have to write it as 5.0/9, 5/9.0, or some other variation.</p>
 </div>
 
 ## Conditionals
@@ -488,22 +411,19 @@ for temp_in_f in temps:
 
 <div>
 <p>The other standard thing we need to know how to do in Python is conditionals, or if/then/else statements. In Python the basic syntax is:</p>
-<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">if</span> condition:
-    do_something</code></pre>
+<pre><code class="language-python"><span class="keyword">if</span> condition:
+    do_something
+</code></pre>
 <p>So if we want to loop over the temperatures and print out only those temperatures that are greater than 80 degrees we would use:</p>
 </div>
 
 
-<div class="in">
-<pre>temp = data[&#39;temperature&#39;][0]
+<pre class="in"><code>temp = data[&#39;temperature&#39;][0]
 if temp &gt; 80:
-    print &#34;The temperature is greater than 80&#34;</pre>
-</div>
+    print &#34;The temperature is greater than 80&#34;</code></pre>
 
-<div class="out">
-<pre>The temperature is greater than 80
-</pre>
-</div>
+<div class="out"><pre class='out'><code>The temperature is greater than 80
+</code></pre></div>
 
 
 <div>
@@ -512,20 +432,16 @@ if temp &gt; 80:
 </div>
 
 
-<div class="in">
-<pre>temp = data[&#39;temperature&#39;][0]
+<pre class="in"><code>temp = data[&#39;temperature&#39;][0]
 if temp &lt; 87:
     print &#34;The temperature is &lt; 87&#34;
 elif temp &gt; 87:
     print &#34;The temperature is &gt; 87&#34;
 else:
-    print &#34; The temperature is equal to 87&#34;</pre>
-</div>
+    print &#34; The temperature is equal to 87&#34;</code></pre>
 
-<div class="out">
-<pre> The temperature is equal to 87
-</pre>
-</div>
+<div class="out"><pre class='out'><code> The temperature is equal to 87
+</code></pre></div>
 
 ### Challenge
 
@@ -538,50 +454,41 @@ else:
 
 
 <div>
-<p>The mathematician Richard Hamming once said, &quot;The purpose of computing is insight, not numbers,&quot; and the best way to develop insight is often to visualize data. The main plotting library in Python is <code>matplotlib</code>. To get started, let's tell the IPython Notebook that we want our plots displayed inline, rather than in a separate viewing window:</p>
+<p>The mathematician Richard Hamming once said, &quot;The purpose of computing is insight, not numbers,&quot; and the best way to develop insight is often to visualize data. The main plotting library in Python is <code>matplotlib</code>. To get started, let&#39;s tell the IPython Notebook that we want our plots displayed inline, rather than in a separate viewing window:</p>
 </div>
 
 
-<div class="in">
-<pre>%matplotlib inline</pre>
-</div>
+<pre class="in"><code>%matplotlib inline</code></pre>
 
 
 <div>
-<p>The <code>%</code> at the start of the line signals that this is a command for the notebook, rather than a statement in Python. Next, we will import the <code>pyplot</code> module from <code>matplotlib</code>, but since <code>pyplot</code> is a fairly long name to type repeatedly let's give it an alias.</p>
+<p>The <code>%</code> at the start of the line signals that this is a command for the notebook, rather than a statement in Python. Next, we will import the <code>pyplot</code> module from <code>matplotlib</code>, but since <code>pyplot</code> is a fairly long name to type repeatedly let&#39;s give it an alias.</p>
 </div>
 
 
-<div class="in">
-<pre>from matplotlib import pyplot as plt</pre>
-</div>
+<pre class="in"><code>from matplotlib import pyplot as plt</code></pre>
 
 
 <div>
 <p>This import statement shows two new things. First, we can import part of a library by using the <code>from library import submodule</code> syntax. Second, we can use a different name to refer to the imported library by using <code>as newname</code>.</p>
-<p>Now, let's make a simple plot showing how the number of mosquitos varies over time. We'll use the site you've been doing exercises with since it has a longer time-series.</p>
+<p>Now, let&#39;s make a simple plot showing how the number of mosquitos varies over time. We&#39;ll use the site you&#39;ve been doing exercises with since it has a longer time-series.</p>
 </div>
 
 
-<div class="in">
-<pre>data = pandas.read_csv(&#39;mosquito_data_A2.csv&#39;)
-plt.plot(data[&#39;year&#39;], data[&#39;mosquitos&#39;])</pre>
-</div>
+<pre class="in"><code>data = pandas.read_csv(&#39;mosquito_data_A2.csv&#39;)
+plt.plot(data[&#39;year&#39;], data[&#39;mosquitos&#39;])</code></pre>
 
-<div class="out">
-<pre>[&lt;matplotlib.lines.Line2D at 0x4a88590&gt;]
+<div class="out"><pre class='out'><code>[&lt;matplotlib.lines.Line2D at 0x4a88590&gt;]</code></pre>
 <img src="../../intermediate/python/01-intro-python_files/intermediate/python/01-intro-python_66_1.png">
-</pre>
 </div>
 
 
 <div>
-<p>More complicated plots can be created by adding a little additional information. Let's say we want to look at how the different weather variables vary over time.</p>
+<p>More complicated plots can be created by adding a little additional information. Let&#39;s say we want to look at how the different weather variables vary over time.</p>
 </div>
 
 
-<div class="in">
-<pre>plt.figure(figsize=(10.0, 3.0))
+<pre class="in"><code>plt.figure(figsize=(10.0, 3.0))
 
 plt.subplot(1, 2, 1)
 plt.plot(data[&#39;year&#39;], data[&#39;temperature&#39;], &#39;ro-&#39;)
@@ -592,13 +499,10 @@ plt.subplot(1, 2, 2)
 plt.plot(data[&#39;year&#39;], data[&#39;rainfall&#39;], &#39;bs-&#39;)
 plt.xlabel(&#39;Year&#39;)
 plt.ylabel(&#39;Rain Fall&#39;)
-plt.show()</pre>
-</div>
+plt.show()</code></pre>
 
 <div class="out">
-<pre>
 <img src="../../intermediate/python/01-intro-python_files/intermediate/python/01-intro-python_68_0.png">
-</pre>
 </div>
 
 ### Challenge
@@ -617,7 +521,7 @@ plt.show()</pre>
 <li>Use the <code>pandas</code> library to work with data tables in Python.</li>
 <li>Use <code>variable = value</code> to assign a value to a variable.</li>
 <li>Use <code>print something</code> to display the value of <code>something</code>.</li>
-<li>Use <code>dataframe['columnname']</code> to select a column of data.</li>
+<li>Use <code>dataframe[&#39;columnname&#39;]</code> to select a column of data.</li>
 <li>Use <code>dataframe[start_row:stop_row]</code> to select rows from a data frame.</li>
 <li>Indices start at 0, not 1.</li>
 <li>Use <code>dataframe.mean()</code>, <code>dataframe.max()</code>, and <code>dataframe.min()</code> to calculate simple statistics.</li>
@@ -631,5 +535,5 @@ plt.show()</pre>
 
 
 <div>
-<p>With the requisite Python background out of the way, now we're ready to dig in to analyzing our data, and along the way learn how to write better code, more efficiently, that is more likely to be correct.</p>
+<p>With the requisite Python background out of the way, now we&#39;re ready to dig in to analyzing our data, and along the way learn how to write better code, more efficiently, that is more likely to be correct.</p>
 </div>
