@@ -51,7 +51,6 @@ The GitHub workflow looks like this:
 
 5.  Send a pull request to the `master` branch of `[swcarpentry/bc](http://github.com/swcarpentry/bc)`.
 
-
 Locations
 ---------
 
