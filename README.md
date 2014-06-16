@@ -1,27 +1,31 @@
 Software Carpentry Bootcamps
 ============================
 
-The *bc* repository is the starting point for creating your own bootcamp website and accessing/modifying Software Carpentry lesson material. It contains a template for the bootcamp home page and related pages, including lesson materials that we have developed.  
+The *bc* repository is the starting point for creating your own bootcamp website and accessing/modifying the latest version of Software Carpentry lesson material. It contains a template for the bootcamp home page and related pages, including the lesson materials that we have developed.  
 
 ##Repository Contents
 
-The web sites are built using [Jekyll](http://jekyllrb.com) and are designed to be hosted on [github](https://pages.github.com). Shell and Git materials are written in Markdown, while Python and SQL use the IPython Notebook.  Current learning material for novices can be found in the `novice` directory and new material for intermediate learners will be found the `intermediate` directory (currently under development).  Other teaching related material is found in the `slides`, `data`, and `extras` directories.  Most other directories and files relate to building the bootcamp website.  
+Current learning material for novices can be found in the `novice` directory and new material for intermediate learners will be found the `intermediate` directory (currently under development).  Each topic covered in a bootcamp (shell, git, python, r, sequel) is in its own directory within these two directories.  Other bootcamp related material is found in the `extras`, `data`, `slides`, and `setup` directories.  
+
+Most other directories and files relate to building the bootcamp website.  
+
+The web sites are built using [Jekyll](http://jekyllrb.com) and are designed to be hosted on [github](https://pages.github.com). Shell and Git materials are written in Markdown, while Python and SQL use the IPython Notebook.  
 
 This repository has two branches.  The `master` branch reflects the latest version of the site and its materials.  The `gh-pages` branch reflects a stable release of `master`.  Contributions should always be made in the `master` branch, while setting up bootcamp pages and material should use `gh-pages`.  
 
-##Possible Actions
+##Repository Use
 
 There are several ways to interact with this repository.  See which heading below matches what you want to do.  
 
 ###I want to access lesson materials as a learner or instructor
 
-If you're simply looking for the lessons to learn and read through, see the [Software Carpentry website](http://software-carpentry.org/lessons.html).  If you want the source files in order to learn and/or prepare lessons for teaching, fork this repository and clone it to your local machine.  Once the repository is on your machine, you'll find lesson materials in the `novice`, `intermediate`, `extras` and `data` directories.  
+If you're simply looking for the lessons to learn and read through, see the [Software Carpentry website](http://software-carpentry.org/lessons.html).  If you want the source files in order to learn and/or prepare lessons for teaching, fork this repository and clone it to your local machine.  Once the repository is on your machine, you'll find lesson materials in directories as listed above.  
 
 If you want to preview lesson materials as a web page, follow the instructions below for [Previewing the Site Locally](#Preview-Changes-to-the-Site).  
 
 ###I want to contribute to lesson materials or site changes
 
-See the contribution guidelines](CONTRIBUTING.md) or this video [Adding Lesson Material to the Software Carpentry Bootcamp Repository](https://vimeo.com/92273942) for more information.  
+See the contribution guidelines](CONTRIBUTING.md) or this video [Adding Lesson Material to the Software Carpentry Bootcamp Repository](https://vimeo.com/92273942) for more information.  Not sure what to contribute?  Try scrolling through open pull requests or the issues list to find open projects.  Requests for changes also frequently pop up on our "discuss" mailing list.  Sign up for that mailing list on [the Software Carpentry website](http://software-carpentry.org/pages/discuss.html).  
 
 ###I want to set up a bootcamp website
 
@@ -29,10 +33,10 @@ See our detailed [Building a Bootcamp Website](#Building-a-Bootcamp-Website) bel
 
 ###Where can I get help?
 
-    Mail us at [admin@software-carpentry.org](mailto:admin@software-carpentry.org),
-    come chat with us on [our IRC channel](irc://moznet/sciencelab),
-    or join our [discussion list](http://software-carpentry.org/contrib/discuss.html)
-    and ask for help there.
+Mail us at [admin@software-carpentry.org](mailto:admin@software-carpentry.org),
+come chat with us on [our IRC channel](irc://moznet/sciencelab),
+or join our [discussion list](http://software-carpentry.org/contrib/discuss.html)
+and ask for help there.
 
 ##Building a Bootcamp Website
 
