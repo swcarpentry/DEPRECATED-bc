@@ -1,36 +1,53 @@
 Software Carpentry Bootcamps
 ============================
 
-The *bc* repository is the starting point for creating your own bootcamp website. It contains a template for the home page and lesson materials that we have developed. The web sites are built using [Jekyll](http://jekyllrb.com) and are designed to be hosted on [github](https://pages.github.com). Shell and Git materials are written in Markdown, while Python and SQL use the IPython Notebook. Current material for novices can be found in the directories under `novice` and new material for intermediate learners will be found in directories under `intermediate` (currently under development). Our old lesson material is in the `lessons` directory, which we plan to retire in Spring 2014.
+The *bc* repository is the starting point for creating your own bootcamp website and accessing/modifying Software Carpentry lesson material. It contains a template for the bootcamp home page and related pages, including lesson materials that we have developed.  
 
-This document will explain how to build a bootcamp website and give more information about how the repository is organized. You may also want to view these videos for hands-on tutorials:
+#Repository Contents
 
-*   [Setting Up a Software Carpentry Bootcamp Repository](https://vimeo.com/87241285)
-*   [Adding Lesson Material to the Software Carpentry Bootcamp Repository](https://vimeo.com/92273942)
+The web sites are built using [Jekyll](http://jekyllrb.com) and are designed to be hosted on [github](https://pages.github.com). Shell and Git materials are written in Markdown, while Python and SQL use the IPython Notebook.  Current learning material for novices can be found in the `novice` directory and new material for intermediate learners will be found the `intermediate` directory (currently under development).  Other teaching related material is found in the `slides`, `data`, and `extras` directories.  Most other directories and files relate to building the bootcamp website.  
 
-**Note:**
-If you are teaching Git in your bootcamp,you should create *two* repositories: one for your bootcamp's website, and one for learners to clone and update during your lessons. You should not try to use the same repo for both purposes because:
+This repository has two branches.  The `master` branch reflects the latest version of the site and its materials.  The `gh-pages` branch reflects a stable release of `master`.  Contributions should always be made in the `master` branch, while setting up bootcamp pages and material should use `gh-pages`.  
 
-1.  your website repo is probably going to be fairly large, and
-2.  you don't want a learner accidentally overwriting your lessons
-    while you're trying to teach.
-    
-Please contribute corrections or additions to this repository! See the
-[contribution guidelines](CONTRIBUTING.md) for more information.
-    
+#Possible Actions
+
+There are several ways to interact with this repository.  See which heading below matches what you want to do.  
+
+###I want to access lesson materials as a learner or instructor
+
+If you're simply looking for the lessons to learn and read through, see the [Software Carpentry website](http://software-carpentry.org/lessons.html).  If you want the source files in order to learn and/or prepare lessons for teaching, simply fork this repository and clone it to your local machine.  Once on your machine, you'll find lesson materials in the `novice`, `intermediate`, `extras` and `data` directories.  
+
+If you want to preview lesson materials as a web page, follow the instructions below for [Previewing the Site Locally](#Preview-Changes-to-the-Site).  
+
+###I want to contribute to lesson materials or site changes
+
+See the contribution guidelines](CONTRIBUTING.md) or this video [Adding Lesson Material to the Software Carpentry Bootcamp Repository](https://vimeo.com/92273942) for more information.  
+
+###I want to set up a bootcamp website
+
+See our detailed [Building a Bootcamp Website](#Building-a-Bootcamp-Website) below.  
+
+###Where can I get help?
+
+    Mail us at [admin@software-carpentry.org](mailto:admin@software-carpentry.org),
+    come chat with us on [our IRC channel](irc://moznet/sciencelab),
+    or join our [discussion list](http://software-carpentry.org/contrib/discuss.html)
+    and ask for help there.
+
+#Building a Bootcamp Website
 
 **Table of Contents**
 *   [Overview](#Overview)
 *   [Use Github and Jekyll](#Use-Github-and-Jekyll)  
 *   [Create a new bootcamp site](#Create-a-new-bootcamp-site)  
 *   [Preview Changes to the Site](#Preview-Changes-to-the-Site)  
-*   [Configure index.html](#Edit-index.html)  
+*  [Configure index.html](#Edit-index.html)  
 *   [Modify the website Content](#Modify-the-website-Content)  
 *   [Site Structure](#Site-Structure)  
 *   [FAQ](#faq)
 
-Overview
---------
+##Overview
+
 You need to go through the following steps to create a functioning bootcamp site:
 
 1. [Clone the template to a new repo](#Create-a-new-bootcamp-site))
@@ -39,9 +56,17 @@ You need to go through the following steps to create a functioning bootcamp site
 
 You can always [preview changes](#Preview-Changes-to-the-Site) to the site locally while editing.
 
+To watch the process, see this video: [Setting Up a Software Carpentry Bootcamp Repository](https://vimeo.com/87241285).
 
-Use Github and Jekyll
----------------------
+**Note:**
+If you are teaching Git in your bootcamp,you should create *two* repositories: one for your bootcamp's website, and one for learners to clone and update during your lessons. You should not try to use the same repo for both purposes because:
+
+1.  your website repo is probably going to be fairly large, and
+2.  you don't want a learner accidentally overwriting your lessons
+    while you're trying to teach.
+
+##Use Github and Jekyll
+
 There are a few things you need to know in order to understand why we do things the way we do. Most of them are specific to GitHub, rather than Git itself.
 
 1.  Git uses the term "clone" to mean "a copy of a repository". GitHub uses the term "fork" to mean, "a copy of a GitHub-hosted repo that is also hosted on GitHub", and the term "clone" to mean "a copy of a GitHub-hosted repo that's located on someone else's machine". In both cases, the duplicate has a remote called `origin` that points to the original repo; other remotes can be added manually.
@@ -96,8 +121,8 @@ There are a few things you need to know in order to understand why we do things 
     This is used to give the pages in a site a uniform appearance.
 
 
-Create a new bootcamp site
---------------------------
+##Create a new bootcamp site
+
 To create a website for a new bootcamp:
 
 1.  Create a [new repository on GitHub](https://github.com/new) with a name like YYYY-MM-DD-site, e.g., `2014-03-31-esu`. This repository must *not* be a fork of an existing repository
@@ -180,8 +205,8 @@ http://{your-github-username}.github.io/YYYY-MM-DD-site/
 You may update your bootcamp's website whenever you want.
 
 
-Preview Changes to the Site
----------------------------
+#Preview Changes to the Site
+
 GitHub automatically runs Jekyll to regenerate the pretty HTML versions of our content every time changes are pushed to the `gh-pages` branch of this repository. We use `make` to imitate that process locally so that people can preview changes before committing. We also use `make` to automate a handful of other tasks, such as converting IPython Notebooks from `.ipynb` format to Markdown (`.md`) so that Jekyll can convert them to HTML.
 
 To preview your bootcamp's page(s), go into its root directory and run:
@@ -225,8 +250,8 @@ Most of the commands to rebuild things are in `Makefile`; run the command `make`
 
 The commands used to turn IPython Notebooks into Markdown files are stored in a separate Makefile called `ipynb.mk`. This separation ensures that people can rebuild the site even if they don't have IPython installed (which R instructors might not); it also guarantees that `make` won't try to regenerate Markdown after a Git pull (which might change the timestamps on files, but not actually change their contents). If we add more languages and file formats in future, we may also create separate Makefiles for them.
 
-Configure index.html
---------------------
+##Configure index.html
+
 Your bootcamp's `index.html` page (which uses the `bootcamp.html` layout from the `_layouts` directory) *must* define the following values in its YAML header:
 
 *   `layout` must be `bootcamp`.
@@ -272,8 +297,8 @@ The header may optionally define the following:
     If you are using something else for registration,
     it may be deleted.
 
-Modify the website Content
---------------------------
+##Modify the website Content
+
 The body of `index.html` contains an explanation of what a bootcamp is and how it runs, followed by setup instructions for our standard software. There is an explanatory comment for each section of this page; reorganize, rewrite, or delete the material as you think best.
 
 `index.html` depends on five HTML files in the `_includes` directory:
@@ -288,8 +313,8 @@ You normally won't need to worry about the first four --- they're included in th
 you should delete the instructions for installing R, and vice versa.
 
 
-Site Structure
---------------
+##Site Structure
+
 We have created three standard layouts for bootcamp pages:
 
 *   `bootcamp.html` is used for bootcamps' home pages, and is the layout for the `index.html` page in your repo's root directory. That `index.html` page's header must [define several variables](#Edit-index.html) in order for your bootcamp to be included in our main website.
@@ -307,7 +332,7 @@ We have created three standard layouts for bootcamp pages:
 
 As explained [above](#Preview-Changes-to-the-Site), you can use `make` to compile this material in the way that GitHub does when changes are committed to the `gh-pages` branch.
 
-###Site Map
+#Site Map
 
 The most important files and directories are **highlighted**.
 
@@ -344,15 +369,7 @@ The most important files and directories are **highlighted**.
 *   slides/ - slideshows (under construction).
 *   team.md - who we are.
 
-FAQ
----
-
-*   *Where can I get help?*
-    <br/>
-    Mail us at [admin@software-carpentry.org](mailto:admin@software-carpentry.org),
-    come chat with us on [our IRC channel](irc://moznet/sciencelab),
-    or join our [discussion list](http://software-carpentry.org/contrib/discuss.html)
-    and ask for help there.
+#FAQ
 
 *   *Why does the bootcamp repository have to be created from scratch? Why not fork `bc` on GitHub?*
     <br/>
