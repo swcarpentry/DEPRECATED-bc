@@ -3,19 +3,19 @@ Software Carpentry Bootcamps
 
 The *bc* repository is the starting point for creating your own bootcamp website and accessing/modifying Software Carpentry lesson material. It contains a template for the bootcamp home page and related pages, including lesson materials that we have developed.  
 
-#Repository Contents
+##Repository Contents
 
 The web sites are built using [Jekyll](http://jekyllrb.com) and are designed to be hosted on [github](https://pages.github.com). Shell and Git materials are written in Markdown, while Python and SQL use the IPython Notebook.  Current learning material for novices can be found in the `novice` directory and new material for intermediate learners will be found the `intermediate` directory (currently under development).  Other teaching related material is found in the `slides`, `data`, and `extras` directories.  Most other directories and files relate to building the bootcamp website.  
 
 This repository has two branches.  The `master` branch reflects the latest version of the site and its materials.  The `gh-pages` branch reflects a stable release of `master`.  Contributions should always be made in the `master` branch, while setting up bootcamp pages and material should use `gh-pages`.  
 
-#Possible Actions
+##Possible Actions
 
 There are several ways to interact with this repository.  See which heading below matches what you want to do.  
 
 ###I want to access lesson materials as a learner or instructor
 
-If you're simply looking for the lessons to learn and read through, see the [Software Carpentry website](http://software-carpentry.org/lessons.html).  If you want the source files in order to learn and/or prepare lessons for teaching, simply fork this repository and clone it to your local machine.  Once on your machine, you'll find lesson materials in the `novice`, `intermediate`, `extras` and `data` directories.  
+If you're simply looking for the lessons to learn and read through, see the [Software Carpentry website](http://software-carpentry.org/lessons.html).  If you want the source files in order to learn and/or prepare lessons for teaching, fork this repository and clone it to your local machine.  Once the repository is on your machine, you'll find lesson materials in the `novice`, `intermediate`, `extras` and `data` directories.  
 
 If you want to preview lesson materials as a web page, follow the instructions below for [Previewing the Site Locally](#Preview-Changes-to-the-Site).  
 
@@ -34,7 +34,7 @@ See our detailed [Building a Bootcamp Website](#Building-a-Bootcamp-Website) bel
     or join our [discussion list](http://software-carpentry.org/contrib/discuss.html)
     and ask for help there.
 
-#Building a Bootcamp Website
+##Building a Bootcamp Website
 
 **Table of Contents**
 *   [Overview](#Overview)
@@ -46,11 +46,11 @@ See our detailed [Building a Bootcamp Website](#Building-a-Bootcamp-Website) bel
 *   [Site Structure](#Site-Structure)  
 *   [FAQ](#faq)
 
-##Overview
+###Overview
 
 You need to go through the following steps to create a functioning bootcamp site:
 
-1. [Clone the template to a new repo](#Create-a-new-bootcamp-site))
+1. [Clone the template to a new repo](#Create-a-new-bootcamp-site)
 2. [Configure the new site](#Edit-index.html)
 3. [Possibly edit the home page content](#Modify-the-website-Content)
 
@@ -65,7 +65,7 @@ If you are teaching Git in your bootcamp,you should create *two* repositories: o
 2.  you don't want a learner accidentally overwriting your lessons
     while you're trying to teach.
 
-##Use Github and Jekyll
+###Use Github and Jekyll
 
 There are a few things you need to know in order to understand why we do things the way we do. Most of them are specific to GitHub, rather than Git itself.
 
@@ -77,7 +77,7 @@ There are a few things you need to know in order to understand why we do things 
 
 4.  If a repository has a branch called `gh-pages` (which stands for "GitHub pages"), then GitHub uses the HTML and Markdown files in that branch to create a website for the repository. If the repository's URL is `http://github.com/darwin/finches`, the URL for the website is `http://darwin.github.io/finches`.
 
-### Jekyll
+#### Jekyll
 
 5.  If an HTML or Markdown file has a header consisting of three dashes, some data about the page, and three more dashes:
 
@@ -121,7 +121,7 @@ There are a few things you need to know in order to understand why we do things 
     This is used to give the pages in a site a uniform appearance.
 
 
-##Create a new bootcamp site
+###Create a new bootcamp site
 
 To create a website for a new bootcamp:
 
@@ -205,7 +205,7 @@ http://{your-github-username}.github.io/YYYY-MM-DD-site/
 You may update your bootcamp's website whenever you want.
 
 
-#Preview Changes to the Site
+###Preview Changes to the Site
 
 GitHub automatically runs Jekyll to regenerate the pretty HTML versions of our content every time changes are pushed to the `gh-pages` branch of this repository. We use `make` to imitate that process locally so that people can preview changes before committing. We also use `make` to automate a handful of other tasks, such as converting IPython Notebooks from `.ipynb` format to Markdown (`.md`) so that Jekyll can convert them to HTML.
 
@@ -297,7 +297,7 @@ The header may optionally define the following:
     If you are using something else for registration,
     it may be deleted.
 
-##Modify the website Content
+###Modify the website Content
 
 The body of `index.html` contains an explanation of what a bootcamp is and how it runs, followed by setup instructions for our standard software. There is an explanatory comment for each section of this page; reorganize, rewrite, or delete the material as you think best.
 
@@ -313,7 +313,7 @@ You normally won't need to worry about the first four --- they're included in th
 you should delete the instructions for installing R, and vice versa.
 
 
-##Site Structure
+###Site Structure
 
 We have created three standard layouts for bootcamp pages:
 
@@ -332,7 +332,7 @@ We have created three standard layouts for bootcamp pages:
 
 As explained [above](#Preview-Changes-to-the-Site), you can use `make` to compile this material in the way that GitHub does when changes are committed to the `gh-pages` branch.
 
-#Site Map
+###Site Map
 
 The most important files and directories are **highlighted**.
 
@@ -369,7 +369,7 @@ The most important files and directories are **highlighted**.
 *   slides/ - slideshows (under construction).
 *   team.md - who we are.
 
-#FAQ
+###FAQ
 
 *   *Why does the bootcamp repository have to be created from scratch? Why not fork `bc` on GitHub?*
     <br/>
