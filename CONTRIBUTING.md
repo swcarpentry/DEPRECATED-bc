@@ -75,6 +75,7 @@ Therefore, we require every lesson to be available in Markdown.
 But this does not mean that you have to write it in Markdown as well.
 
 The following list contains more detailed instructions for different formats:
+
 *   Markdown: Nothing to do.
 *   IPython Notebook: Generate and provide a Markdown version in addition
     to the IPython Notebook.
@@ -84,7 +85,7 @@ The following list contains more detailed instructions for different formats:
     to the file in the original format.
     In order to be able to recreate the Markdown from source,
     include the conversion from this other format to Markdown
-    in the Makefile as well. This ensures that people who *aren't* familiar
+    in the `Makefile` as well. This ensures that people who *aren't* familiar
     with some format don't have to install the tools needed to work with it
     (e.g., R programmers don't have to install the IPython Notebook).
     **Please check with us if you plan to do this.**
@@ -112,7 +113,7 @@ run the command `make site`.
 This runs Jekyll with the same flags that GitHub uses when things are committed to the `gh-pages` branch.
 Jekyll's output is stored in a directory called `_site`.
 
-Other useful commands in the main Makefile are:
+Other useful commands in the main `Makefile` are:
 
 *   `make commands` (or just `make` on its own): list available commands.
 *   `make check`: check that the repository's `index.html` file is properly formatted.
@@ -120,9 +121,9 @@ Other useful commands in the main Makefile are:
 *   `make fixme`: list uses of the word `FIXME` in source files.
 
 The commands to convert IPython Notebooks to Markdown
-are stored in a separate Makefile called `ipynb.mk`
+are stored in a separate `Makefile` called `ipynb.mk`
 to simplify maintenance
-and ensure that the main Makefile only does what Jekyll on GitHub will do.
+and ensure that the main `Makefile` only does what Jekyll on GitHub will do.
 To re-do conversion of notebooks to Markdown files,
 use `make ipynb`.
 
@@ -130,13 +131,11 @@ FAQ
 ---
 
 *   *Where can I get help?*
-    <br/>
     Mail us at [admin@software-carpentry.org](mailto:admin@software-carpentry.org),
     come chat with us on [our IRC channel](irc://moznet/sciencelab),
     or join our [discussion list](http://software-carpentry.org/pages/discuss.html)
     and ask for help there.
 *   *Is there a list of open issues to tackle?*
-    <br/>
     The [open issues for the bc repository](https://github.com/swcarpentry/bc/issues)
     and also the [related projects](http://www.software-carpentry.org/pages/create.html#related)
     listed on the create page are a good starting point.
