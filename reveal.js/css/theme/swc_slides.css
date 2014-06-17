@@ -320,10 +320,10 @@ div.reveal div.slides section div.code p, div.reveal div.slides section div.code
  * CLOSING SLIDE
  *********************************************/
 
-div.slides section:last-child h1 {
+/*div.slides section:last-child h1 {
   font-size:3em;
   margin-bottom:50px;
-}
+}*/
 
 ul.closer a {
   text-decoration: none;
