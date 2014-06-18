@@ -7,7 +7,7 @@ We are currently updating our lessons
 to incorporate what we've learned from our learners
 in the last four years.
 
-## For Novices
+### For Novices
 
 *   [Introduction](intro.html)
 *   [The Unix Shell](novice/shell/index.html)
@@ -17,11 +17,11 @@ in the last four years.
 *   [A Few Extras](novice/extras/index.html)
 *   [Instructor's Guide](novice/teaching/index.html)
 
-## For the More Experienced
+### For the More Experienced
 
 Under development.
 
-## Other Materials
+### Other Materials
 
 *   [Setup Instructions](setup.html)
 *   [Recommended Reading](bib.html)
