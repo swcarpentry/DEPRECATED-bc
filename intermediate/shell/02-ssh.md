@@ -5,11 +5,9 @@ title: Working Remotely
 level: intermediate
 ---
 <div class="objectives" markdown="1">
-## Objectives
+#### Objectives
 *   FIXME
 </div>
-
-## Lesson
 
 Let's take a closer look at what happens when we use a desktop or laptop
 computer. The first step is to log in so that the operating system knows
@@ -287,12 +285,8 @@ $ exit
 ~~~
 
 <div class="keypoints" markdown="1">
-## Key Points
+
+#### Key Points
 *   FIXME
-</div>
 
-<div class="challenges" markdown="1">
-## Challenges
-
-1.  FIXME
 </div>
