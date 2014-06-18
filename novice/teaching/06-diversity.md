@@ -79,4 +79,14 @@ The video is short and basically just says: Don’t tell someone they are racist
 
 2. Probably the most useful thing we did related to this was a set of role-playing activities related to difficult classroom situations (e.g., one student responding to a role call asking for Lynda by saying ‘I would prefer to be called Justin and please use the pronoun he/him when referring to me’, followed by another student laughing in response to Justin’s request). I have to say that I’ve never been a big fan of role-playing (and am a terrible actor), but I found this set really useful in terms of thinking things through. Part of why it probably worked so well, though, was that everyone in the group had a lot of teaching experience. It might need to be tweaked for new instructors. I imagine CRLT would be able to help with this. 
 
+----------------------------------------
 
+Meghan Duffy:
+
+http://m.motherjones.com/media/2014/06/computer-science-programming-code-diversity-sexism-education
+
+----------------------------------------
+
+Randy Olson:
+
+https://twitter.com/randal_olson/status/477970297815965697
