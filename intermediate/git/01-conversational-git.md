@@ -41,7 +41,7 @@ Please keep in mind, though,
 that Git uses some of its verbs and nouns
 very differently from other revision control systems.
 
-## Copying Repositories (git clone)
+### Copying Repositories (git clone)
 
 The first concept we introduce
 is the [repository](../../gloss.html#repository).
