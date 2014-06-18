@@ -19,14 +19,24 @@ to get feedback on your ideas and coordinate with other developers.
 
 **Table of Contents**
 
-*   [Working With GitHub](#working-with-github)  
-*   [Locations and Formats](#locations-and-formats)
+*   [Working With GitHub](#working-with-github)
+*   [Locations](#locations)
+*   [Formats](#formats)
 *   [Sample Files](#sample-files)
 *   [Previewing](#previewing)
 *   [FAQ](#faq)
 
 Working With GitHub
 -------------------
+
+In general, we are using Git and GitHub for almost everything.
+But if it is easier for you to send your contributions to us some other way,
+please mail us at
+[admin@software-carpentry.org](mailto:admin@software-carpentry.org).
+Given a choice between you creating content or wrestling with Git,
+we'd rather have you doing the former.
+
+The GitHub workflow looks like this:
 
 1.  Fork the `swcarpentry/bc` repository on GitHub.
 
@@ -41,14 +51,8 @@ Working With GitHub
 
 5.  Send a pull request to the `master` branch of `[swcarpentry/bc](http://github.com/swcarpentry/bc)`.
 
-If it is easier for you to send them to us some other way,
-please mail us at
-[admin@software-carpentry.org](mailto:admin@software-carpentry.org).
-Given a choice between you creating content or wrestling with Git,
-we'd rather have you doing the former.
-
-Locations and Formats
----------------------
+Locations
+---------
 
 Every subject has a sub-directory of its own,
 while individual topics are files in that directory.
@@ -61,25 +65,30 @@ and so on.
 (We use two digits followed by a one-word topic key
 to ensure files appear in the right order when listed.)
 
-Lessons may be written in Markdown,
-as IPython Notebooks,
-or in other formats.
-However,
-as explained in [the README file](README.md),
-Jekyll (the tool GitHub uses to create websites)
-only knows how to handle Markdown and HTML.
-if some other format is used,
-the author of the lesson must
-add the generated Markdown to the repository.
-This ensures that people who *aren't* familiar with some format
-don't have to install the tools needed to work with it
-(e.g.,
-R programmers don't have to install the IPython Notebook).
+Formats
+-------
 
-> If a lesson is in a format we don't already handle,
-> the author must also add something to the Makefile
-> to re-create the Markdown from the source.
-> Please check with us if you plan to do this.
+We are using [Jekyll](https://en.wikipedia.org/wiki/Jekyll_%28software%29)
+to convert lessons in [Markdown](https://en.wikipedia.org/wiki/Markdown)
+to [HTML](https://en.wikipedia.org/wiki/HTML).
+Therefore, we require every lesson to be available in Markdown.
+But this does not mean that you have to write it in Markdown as well.
+
+The following list contains more detailed instructions for different formats:
+
+*   Markdown: Nothing to do.
+*   IPython Notebook: Generate and provide a Markdown version in addition
+    to the IPython Notebook.
+    Look at our existing files to get an idea how the IPython Notebook
+    should look like.
+*   Other formats: Generate and provide a Markdown version in addition
+    to the file in the original format.
+    In order to be able to recreate the Markdown from source,
+    include the conversion from this other format to Markdown
+    in the `Makefile` as well. This ensures that people who *aren't* familiar
+    with some format don't have to install the tools needed to work with it
+    (e.g., R programmers don't have to install the IPython Notebook).
+    **Please check with us if you plan to do this.**
 
 Sample Files
 ------------
@@ -104,7 +113,7 @@ run the command `make site`.
 This runs Jekyll with the same flags that GitHub uses when things are committed to the `gh-pages` branch.
 Jekyll's output is stored in a directory called `_site`.
 
-Other useful commands in the main Makefile are:
+Other useful commands in the main `Makefile` are:
 
 *   `make commands` (or just `make` on its own): list available commands.
 *   `make check`: check that the repository's `index.html` file is properly formatted.
@@ -112,9 +121,9 @@ Other useful commands in the main Makefile are:
 *   `make fixme`: list uses of the word `FIXME` in source files.
 
 The commands to convert IPython Notebooks to Markdown
-are stored in a separate Makefile called `ipynb.mk`
+are stored in a separate `Makefile` called `ipynb.mk`
 to simplify maintenance
-and ensure that the main Makefile only does what Jekyll on GitHub will do.
+and ensure that the main `Makefile` only does what Jekyll on GitHub will do.
 To re-do conversion of notebooks to Markdown files,
 use `make ipynb`.
 
@@ -122,8 +131,12 @@ FAQ
 ---
 
 *   *Where can I get help?*
-    <br/>
     Mail us at [admin@software-carpentry.org](mailto:admin@software-carpentry.org),
     come chat with us on [our IRC channel](irc://moznet/sciencelab),
     or join our [discussion list](http://software-carpentry.org/pages/discuss.html)
     and ask for help there.
+*   *Is there a list of open issues to tackle?*
+    The [open issues for the bc repository](https://github.com/swcarpentry/bc/issues)
+    and also the [related projects](http://www.software-carpentry.org/pages/create.html#related)
+    listed on the create page are a good starting point.
+
