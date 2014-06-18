@@ -72,7 +72,7 @@ def extract_title(filename, lines):
     return None
 
 def format_title(filename, title):
-    title = '## {0}'.format(title)
+    title = '## {0}\n'.format(title)
     f = os.path.split(filename)[-1]
     if f in ('index.md', 'intro.md'):
         return '\n'.join(['<div class="chapter" markdown="1">', title, '</div>'])
