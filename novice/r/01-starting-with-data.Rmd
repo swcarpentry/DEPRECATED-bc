@@ -464,7 +464,6 @@ for each day across all patients.
 * Use `#` to add comments to programs.
 * Use `mean()`, `max()`, `min()` and `sd()` to calculate simple statistics.
 * Update vectors using `c()`
-<!-- * Write a simple for loop -->
 * Use base R to create simple visualizations.
 
 ## Next Steps
