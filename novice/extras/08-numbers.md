@@ -72,22 +72,22 @@ and we'll only use 3 for the magnitude and 2 for the exponent.
 
 <!--- Remove this when colspan is an option -->
 <style>
-.table-exponent th {
+.table-exponent td {
     width:17%;
 }
 </style>
 
 <table class="table table-striped table-exponent">
-<tr><th></th>        <th>   </th><th></th><th>Exponent</th><th></th><th></th></tr>
-<tr><th></th>        <th>   </th><th>00</th><th>01</th><th>10</th><th>11</th></tr>
-<tr><th></th>        <th>000</th><td> 0</td><td> 0</td><td> 0</td><td> 0</td></tr>
-<tr><th></th>        <th>001</th><td> 1</td><td> 2</td><td> 4</td><td> 8</td></tr>
-<tr><th></th>        <th>010</th><td> 2</td><td> 4</td><td> 8</td><td>16</td></tr>
-<tr><th>Mantissa</th><th>011</th><td> 3</td><td> 6</td><td>12</td><td>24</td></tr>
-<tr><th></th>        <th>100</th><td> 4</td><td> 8</td><td>16</td><td>32</td></tr>
-<tr><th></th>        <th>101</th><td> 5</td><td>10</td><td>20</td><td>40</td></tr>
-<tr><th></th>        <th>110</th><td> 6</td><td>12</td><td>24</td><td>48</td></tr>
-<tr><th></th>        <th>111</th><td> 7</td><td>14</td><td>28</td><td>56</td></tr>
+<tr><td></td>        <td>   </td><td></td><td>Exponent</td><td></td><td></td></tr>
+<tr><td></td>        <td>   </td><td>00</td><td>01</td><td>10</td><td>11</td></tr>
+<tr><td></td>        <td>000</td><td> 0</td><td> 0</td><td> 0</td><td> 0</td></tr>
+<tr><td></td>        <td>001</td><td> 1</td><td> 2</td><td> 4</td><td> 8</td></tr>
+<tr><td></td>        <td>010</td><td> 2</td><td> 4</td><td> 8</td><td>16</td></tr>
+<tr><td>Mantissa</td><td>011</td><td> 3</td><td> 6</td><td>12</td><td>24</td></tr>
+<tr><td></td>        <td>100</td><td> 4</td><td> 8</td><td>16</td><td>32</td></tr>
+<tr><td></td>        <td>101</td><td> 5</td><td>10</td><td>20</td><td>40</td></tr>
+<tr><td></td>        <td>110</td><td> 6</td><td>12</td><td>24</td><td>48</td></tr>
+<tr><td></td>        <td>111</td><td> 7</td><td>14</td><td>28</td><td>56</td></tr>
 </table>
 
 The table above
