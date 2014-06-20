@@ -70,8 +70,15 @@ we'll use a much dumber representation:
 we'll only worry about positive values without fractional parts,
 and we'll only use 3 for the magnitude and 2 for the exponent.
 
-<table class="table table-striped">
-<tr><th></th>        <th>   </th><th>Exponent</th><th></th><th></th><th></th></tr>
+<!--- Remove this when colspan is an option -->
+<style>
+.table-exponent th {
+    width:17%;
+}
+</style>
+
+<table class="table table-striped table-exponent">
+<tr><th></th>        <th>   </th><th></th><th>Exponent</th><th></th><th></th></tr>
 <tr><th></th>        <th>   </th><th>00</th><th>01</th><th>10</th><th>11</th></tr>
 <tr><th></th>        <th>000</th><td> 0</td><td> 0</td><td> 0</td><td> 0</td></tr>
 <tr><th></th>        <th>001</th><td> 1</td><td> 2</td><td> 4</td><td> 8</td></tr>
