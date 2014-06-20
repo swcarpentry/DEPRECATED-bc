@@ -89,7 +89,7 @@ now, when we want to move our Makefile from one machine to another, we only have
 However, while we no longer have to worry about consistency,
 we're still making changes to a file that's under version control that we *don't* want written back to the repository.
 
-> ### Parenthesizing Macros in Make
+> #### Parenthesizing Macros in Make
 >
 > We have to put curly brackets or parentheses around a macro's name when we use it&mdash;we can't just write `$MACRO`.
 > If we do, Make will interpret it as `$M` (a reference to the macro `M`) followed by "ACRO".

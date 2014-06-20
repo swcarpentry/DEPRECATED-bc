@@ -77,6 +77,9 @@ EXTRAS = \
 # Principal target files
 INDEX = $(SITE)/index.html
 
+# All in one HTML target
+BOOK_HTML = $(SITE)/book.html
+
 # Convert from Markdown to HTML.  This builds *all* the pages (Jekyll
 # only does batch mode), and erases the SITE directory first, so
 # having the output index.html file depend on all the page source
@@ -96,6 +99,9 @@ BOOK_MD = ./book.md
 # image paths.
 $(BOOK_MD) : $(MOST_SRC) bin/make-book.py
 	   python bin/make-book.py $(MOST_SRC) > $@
+
+$(BOOK_HTML): $(BOOK_MD)
+	make -B site
 
 #----------------------------------------------------------------------
 # Targets.
@@ -125,8 +131,7 @@ clean : tidy
 ## book     : build the site including the all-in-one book.
 #  To do this, we simply create the book Markdown file then build
 #  with Jekyll as usual.
-book : $(BOOK_MD)
-	make site
+book : $(BOOK_HTML)
 
 ## install  : install on the server.
 install : $(INDEX)

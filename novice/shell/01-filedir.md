@@ -381,7 +381,7 @@ but we'll see some uses for it soon.
 > Orthogonal systems tend to be easier for people to learn
 > because there are fewer special cases and exceptions to keep track of.
 
-#### Nelle's Pipeline: Organizing Files
+### Nelle's Pipeline: Organizing Files
 
 Knowing just this much about files and directories,
 Nelle is ready to organize the files that the protein assay machine will create.
@@ -473,6 +473,7 @@ and we will see it in many other tools as we go on.
 
 <div class="challenge" markdown="1">
 If `pwd` displays `/users/thing`, what will `ls ../backup` display?
+
 1.  `../backup: No such file or directory`
 2.  `2012-12-01 2013-01-08 2013-01-27`
 3.  `2012-12-01/ 2013-01-08/ 2013-01-27/`
@@ -496,6 +497,7 @@ pnas-sub/ pnas-final/ original/
 
 <div class="challenge" markdown="1">
 What does the command `cd` without a directory name do?
+
 1.  It has no effect.
 2.  It changes the working directory to `/`.
 3.  It changes the working directory to the user's home directory.
