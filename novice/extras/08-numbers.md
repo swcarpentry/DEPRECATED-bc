@@ -70,24 +70,27 @@ we'll use a much dumber representation:
 we'll only worry about positive values without fractional parts,
 and we'll only use 3 for the magnitude and 2 for the exponent.
 
-<!--- Remove this when colspan is an option -->
+<!--- Remove this when colspan is an option and vertical headers -->
 <style>
 .table-exponent td {
     width:17%;
 }
+.table-exponent td.table-exponent-header {
+    font-weight: bold;
+}
 </style>
 
 <table class="table table-striped table-exponent">
-<tr><td></td>        <td>   </td><td></td><td>Exponent</td><td></td><td></td></tr>
-<tr><td></td>        <td>   </td><td>00</td><td>01</td><td>10</td><td>11</td></tr>
-<tr><td></td>        <td>000</td><td> 0</td><td> 0</td><td> 0</td><td> 0</td></tr>
-<tr><td></td>        <td>001</td><td> 1</td><td> 2</td><td> 4</td><td> 8</td></tr>
-<tr><td></td>        <td>010</td><td> 2</td><td> 4</td><td> 8</td><td>16</td></tr>
-<tr><td>Mantissa</td><td>011</td><td> 3</td><td> 6</td><td>12</td><td>24</td></tr>
-<tr><td></td>        <td>100</td><td> 4</td><td> 8</td><td>16</td><td>32</td></tr>
-<tr><td></td>        <td>101</td><td> 5</td><td>10</td><td>20</td><td>40</td></tr>
-<tr><td></td>        <td>110</td><td> 6</td><td>12</td><td>24</td><td>48</td></tr>
-<tr><td></td>        <td>111</td><td> 7</td><td>14</td><td>28</td><td>56</td></tr>
+<tr><td></td>        <td>   </td><td></td><td class="table-exponent-header">Exponent</td><td></td><td></td></tr>
+<tr><td></td>        <td>   </td><td class="table-exponent-header">00</td><td class="table-exponent-header">01</td><td class="table-exponent-header">10</td><td class="table-exponent-header">11</td></tr>
+<tr><td></td>        <td class="table-exponent-header">000</td><td> 0</td><td> 0</td><td> 0</td><td> 0</td></tr>
+<tr><td></td>        <td class="table-exponent-header">001</td><td> 1</td><td> 2</td><td> 4</td><td> 8</td></tr>
+<tr><td></td>        <td class="table-exponent-header">010</td><td> 2</td><td> 4</td><td> 8</td><td>16</td></tr>
+<tr><td class="table-exponent-header">Mantissa</td><td class="table-exponent-header">011</td><td> 3</td><td> 6</td><td>12</td><td>24</td></tr>
+<tr><td></td>        <td class="table-exponent-header">100</td><td> 4</td><td> 8</td><td>16</td><td>32</td></tr>
+<tr><td></td>        <td class="table-exponent-header">101</td><td> 5</td><td>10</td><td>20</td><td>40</td></tr>
+<tr><td></td>        <td class="table-exponent-header">110</td><td> 6</td><td>12</td><td>24</td><td>48</td></tr>
+<tr><td></td>        <td class="table-exponent-header">111</td><td> 7</td><td>14</td><td>28</td><td>56</td></tr>
 </table>
 
 The table above
