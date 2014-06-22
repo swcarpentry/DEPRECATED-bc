@@ -32,4 +32,6 @@ and why they insist on structuring data in certain ways.
 8.  [Creating and Modifying Data](08-create.html)
 9.  [Programming with Databases](09-prog.html)
 
+[Reference](../ref/04-sql.html)
+
 </div>
