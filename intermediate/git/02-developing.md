@@ -12,7 +12,8 @@ lesson, you'll learn a third use for the checkout command, how to work
 with development branches, and then how to save revisions in the
 staging area.
 
-## Objectives
+<div class="objectives" markdown="1">
+#### Objectives
 
 After this lesson, students should be able to:
 
@@ -23,8 +24,9 @@ After this lesson, students should be able to:
 * Add and remove changes from the staging area using `git add`, `git
   reset`, and `git rm`.
 * Save versions of their work using `git commit`.
+</div>
 
-## Development Branches
+### Development Branches
 
 In the last lesson we cloned a repository and explored its history.
 We also learned about HEAD, a special *pointer* to the revision of our
@@ -72,8 +74,12 @@ commits.
 
 ~~~
 $ git checkout master
+~~~
+{:class="in"}
+~~~
 Switched to branch 'master'
 ~~~
+{:class="out"}
 
 We can create and activate a branch in the same step by adding the
 `-b` flag to `git checkout`.  Since later we'll be fixing an error
@@ -82,8 +88,12 @@ in the  file `python_pipeline.ipy`, we'll name the branch
 
 ~~~
 $ git checkout -b pipeline_fix
+~~~
+{:class="in"}
+~~~
 Switched to a new branch 'pipeline_fix'
 ~~~
+{:class="out"}
 
 We can see the current branches available with `git branch`, but this
 command is much more useful if we add the `-v` flag (for verbose).
@@ -93,14 +103,18 @@ Note that `git branch` lists the local branches in our repository,
 
 ~~~
 $ git branch -v
+~~~
+{:class="in"}
+~~~ 
   master       61fd2bc Made fixes to Python pipeline
 * pipeline_fix 61fd2bc Made fixes to Python pipeline
 ~~~
+{:class="out"}
 
 Now that we've created our development branch, let's start preparing
 some changes to our repository.
 
-### Checkpoint 1
+#### Checkpoint 1
 
 * **[1A]** Why do `master` and `pipeline_fix` point to the same
   revision even though they are different branches?
@@ -118,7 +132,7 @@ some changes to our repository.
   calling `git branch -D master`.
 
 
-## Seeing Changes
+### Seeing Changes
 
 In the previous lesson, we used `git checkout` to undo some changes
 we had made to a file.  We also learned about `diff` output, which is
@@ -133,9 +147,13 @@ and delete an important data file from the repository!
 
 ~~~
 $ rm Lumi.2763.csv
-$ ls Lumi.2763.csv                                                                            ✖
+$ ls Lumi.2763.csv
+~~~
+{:class="in"}
+~~~
 ls: Lumi.2763.csv: No such file or directory
 ~~~
+{:class="err"}
 
 Now that the file is gone, we'd like to ask Git if it was paying
 attention and knows something is missing.  We're going to do that now
@@ -144,6 +162,9 @@ status` command.
 
 ~~~
 $ git status
+~~~
+{:class="in"}
+~~~
 On branch pipeline_fix
 Changes not staged for commit:
   (use "git add/rm <file>..." to update what will be committed)
@@ -153,6 +174,7 @@ Changes not staged for commit:
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ~~~
+{:class="out"}
 
 Whew, that's a lot of output.  Let's take it line by line.  First,
 the `git status` command reports that we're on the `pipeline_fix`
@@ -172,12 +194,16 @@ line of text to the end of `python_pipeline.ipy` from the command line.
 ~~~
 $ echo "# This is a comment." >> python_pipeline.ipy
 ~~~
+{:class="in"}
 
 We call `git status` to see the effects of modifying
 `python_pipeline.ipy`.
 
 ~~~
 $ git status
+~~~
+{:class="in"}
+~~~
 On branch pipeline_fix
 Changes not staged for commit:
   (use "git add/rm <file>..." to update what will be committed)
@@ -188,6 +214,7 @@ Changes not staged for commit:
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ~~~
+{:class="out"}
 
 Okay!  Now we're going to show you one other type of change you might
 make to a repository, creating a new file.  Let's call this file,
@@ -198,11 +225,15 @@ script for the purposes of this example.
 ~~~
 echo "TODO" > documentation.txt
 ~~~
+{:class="in"}
 
 We're going to call `git status` one more time.
 
 ~~~
 $ git status
+~~~
+{:class="in"}
+~~~
 On branch pipeline_fix
 Changes not staged for commit:
   (use "git add/rm <file>..." to update what will be committed)
@@ -218,6 +249,7 @@ Untracked files:
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ~~~
+{:class="out"}
 
 When we deleted and modified files already in the repository, `git
 status` reported these as *unstaged* changes.  New files, however, are
@@ -231,6 +263,9 @@ the *differences* in the working directory:
 
 ~~~
 $ git diff
+~~~
+{:class="in"}
+~~~
 diff --git a/Lumi.2763.csv b/Lumi.2763.csv
 deleted file mode 100755
 index fb57a5b..0000000
@@ -257,6 +292,7 @@ index 2ecc443..1c43ea6 100644
 
 +# This is a comment.
 ~~~
+{:class="out"}
 
 We discussed `diff` output in the previous lesson.  Here `git diff`
 is showing us the changes in our
@@ -271,7 +307,7 @@ it about.  How do you tell Git that you'd like to track a new file?
 We do this with the `git add` command, which we'll cover in the next
 section.
 
-### Checkpoint 2
+#### Checkpoint 2
 
 * **[2A]** What is the difference between the way Git uses the words
   *unstaged* and *untracked*?  Try explaining this to your partner.
@@ -289,7 +325,7 @@ section.
   for some gory details.
 
 
-## Staging Changes
+### Staging Changes
 
 So far, we have made three changes to the working directory.  We
 deleted a file, we modified a file, and we created a new one.  Let's
@@ -319,11 +355,15 @@ untracked-until-right-now `documentation.txt`.
 ~~~
 $ git add documentation.txt
 ~~~
+{:class="in"}
 
 Let's see what's changed in `git status`:
 
 ~~~
 $ git status
+~~~
+{:class="in"}
+~~~
 On branch pipeline_fix
 Changes to be committed:
   (use "git reset HEAD <file>..." to unstage)
@@ -337,6 +377,7 @@ Changes not staged for commit:
 	deleted:    Lumi.2763.csv
 	modified:   python_pipeline.ipy
 ~~~
+{:class="out"}
 
 `documentation.txt` has graduated from an untracked file to a change
 ready to be saved in our next revision!  We can also use `git add` to
@@ -345,6 +386,9 @@ stage changes to modified files.
 ~~~
 $ git add python_pipeline.ipy
 $ git status
+~~~
+{:class="in"}
+~~~
 On branch pipeline_fix
 Changes to be committed:
   (use "git reset HEAD <file>..." to unstage)
@@ -358,11 +402,15 @@ Changes not staged for commit:
 
 	deleted:    Lumi.2763.csv
 ~~~
+{:class="out"}
 
 Let's see how this affected the output of `git diff`.
 
 ~~~
 $ git diff
+~~~
+{:class="in"}
+~~~
 diff --git a/Lumi.2763.csv b/Lumi.2763.csv
 deleted file mode 100755
 index fb57a5b..0000000
@@ -380,6 +428,7 @@ index fb57a5b..0000000
 -  H , 1476 , 1025 , 1164 , 1120 , 1312 , 1310 , 1916 , 1559 , 1711 , 1040 ,  888 ,  927
 -
 ~~~
+{:class="out"}
 
 Why do our staged changes no longer appear in the output of `git
 diff`?  The answer to this question is subtle.  When we change
@@ -392,6 +441,9 @@ history after they've been commited, we add the `--staged` flag to the
 
 ~~~
 $ git diff --staged
+~~~
+{:class="in"}
+~~~
 diff --git a/documentation.txt b/documentation.txt
 new file mode 100644
 index 0000000..1333ed7
@@ -409,6 +461,7 @@ index 2ecc443..1c43ea6 100644
 
 +# This is a comment.
 ~~~
+{:class="out"}
 
 Sometimes we make a mistake and stage some changes we didn't mean to.
 It would be easy to remember how to undo changes if Git just used the
@@ -423,6 +476,9 @@ the changes will go from staged to unstaged:
 
 ~~~
 $ git reset python_pipeline.ipy
+~~~
+{:class="in"}
+~~~
 Unstaged changes after reset:
 D	Lumi.2763.csv
 M	python_pipeline.ipy
@@ -440,9 +496,10 @@ Changes not staged for commit:
 	deleted:    Lumi.2763.csv
 	modified:   python_pipeline.ipy
 ~~~
+{:class="out"}
 
 
-### Checkpoint 3
+#### Checkpoint 3
 
 * **[3A]** The `--` flag is used to separate filenames and paths from
   the other parameters in a `git` command line argument.  What is the
@@ -460,7 +517,7 @@ Changes not staged for commit:
   with `git status` and `git diff`.
 
 
-## Committing Changes
+### Committing Changes
 
 * Walk through `git commit` using the `nano` editor.
 * Use email metaphor for `git commit`.
@@ -474,13 +531,13 @@ Changes not staged for commit:
 	always commit at the end of the day, even if it's something you
 	will throw away later.
 
-### Integrative Exercise
+#### Integrative Exercise
 
 * Checkout master.  Make a commit.  Now swap the positions of the two
   branches, by either moving the branches with `git reset` or by
   deleting them and recreating them in the appropriate positions.
 
-## Review
+### Review
 
 * branches
 * viewing changes
