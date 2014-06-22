@@ -601,7 +601,14 @@ It's just there in case we made a mistake and really didn't want to revert,
 or in case there's some content from before the revert that we decide that we really do want to copy into `mars.txt`.
 When we're sure that we don't need `*.orig` files we can just go ahead and delete them.
 If we really don't want Mercurial to create `*.orig` files when we use `hg revert`,
-we can use the `-C` or `--no-backup` option.
+we can use the `--no-backup` option, it short version `-C` or add
+
+~~~
+[alias]
+revert = revert --no-backup
+~~~
+
+at your `~/.hgrc` (or`%USERPROFILE%\Mercurial.ini` if you are using Windows).
 
 The fact that files can be reverted one by one
 tends to change the way people organize their work.
