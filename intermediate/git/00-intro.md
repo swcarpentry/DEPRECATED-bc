@@ -85,6 +85,7 @@ is still asserted in the future.
 $ git config --global user.name "Barbara Biologist"
 $ git config --global user.email "barbara@biologist.net"
 ~~~
+{:class="in"}
 
 Why does Git need your name and email?
 It turns out that email addresses
@@ -103,6 +104,7 @@ and prefer colored output.
 ~~~
 $ git config --global color.ui "auto"
 ~~~
+{:class="in"}
 
 In newer versions of Git,
 this option has already been set for you.
@@ -112,7 +114,10 @@ For now, we'll use `nano`,
 but feel free to change this
 if you prefer a different editor.
 
+~~~
 $ git config --global core.editor "nano"
+~~~
+{:class="in"}
 
 Git commands are written `git verb`,
 where `verb` is a command you want Git to do.

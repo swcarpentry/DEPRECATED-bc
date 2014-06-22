@@ -63,6 +63,9 @@ should look similar to this:
 
 ~~~
 $ git clone https://github.com/ahmadia/bio-pipeline.git
+~~~
+{:class="in"}
+~~~
 Cloning into 'bio-pipeline'...
 remote: Counting objects: 41, done.
 remote: Compressing objects: 100% (36/36), done.
@@ -70,6 +73,8 @@ remote: Total 41 (delta 19), reused 23 (delta 4)
 Unpacking objects: 100% (41/41), done.
 Checking connectivity... done
 ~~~
+{:class="out"}
+
 You can now enter the repository
 (which is also a directory on your file system)
 by typing:
@@ -77,6 +82,7 @@ by typing:
 ~~~
 $ cd bio-pipeline
 ~~~
+{:class="in"}
 
 If we now type `ls`,
 we see that the repository
@@ -85,19 +91,27 @@ and a few data files.
 
 ~~~
 $ ls
+~~~
+{:class="in"}
+~~~
 2013-05-24-2760-2763.txt Lumi.2761.csv            Lumi.2763.csv
 Lumi.2760.csv            Lumi.2762.csv            python_pipeline.ipy
 ~~~
+{:class="out"}
 
 If we add the `-a` flag to show everything,
 we can see that Git has created a hidden directory called `.git`:
 
 ~~~
 $ ls -a
+~~~
+{:class="in"}
+~~~
 .                        2013-05-24-2760-2763.txt Lumi.2762.csv
 ..                       Lumi.2760.csv            Lumi.2763.csv
 .git                     Lumi.2761.csv            python_pipeline.ipy
 ~~~
+{:class="out"}
 
 Git stores information about the project
 in this special sub-directory.
@@ -123,12 +137,16 @@ to inform Git that we only want to see the current one.
 
 ~~~
 $ git log --max-count 1
+~~~
+{:class="in"}
+~~~
 commit 61fd2bcece2126cdd8ee24f40a04c18d39403022
 Author: Aron Ahmadia <aron@ahmadia.net>
 Date:   Tue Jun 4 10:59:21 2013 -0400
 
 	Made fixes to Python pipeline
 ~~~
+{:class="out"}
 
 Our fingers are starting to get sore from all of this typing.
 Luckily, `-n` is a common shortcut for *number of things*
@@ -138,6 +156,7 @@ To save a few keystrokes, we will instead type:
 ~~~
 $ git log -n 1
 ~~~
+{:class="in"}
 
 which is equivalent to the previous command.
 
@@ -165,13 +184,17 @@ as output from `git log`
 by adding the `--parents` flag.
 
 ~~~
-$❯ git log --parents -n 1
+$ git log --parents -n 1
+~~~
+{:class="in"}
+~~~
 commit 61fd2bcece2126cdd8ee24f40a04c18d39403022 8595b710e3be4b2bf01d51a1c55842510b82ff87
 Author: Aron Ahmadia <aron@ahmadia.net>
 Date:   Tue Jun 4 10:59:21 2013 -0400
 
 	Made fixes to Python pipeline
 ~~~
+{:class="out"}
 
 Notice that the parent revision is referred to only by its hash.
 Since the hash uniquely identifies this revision,
@@ -198,6 +221,9 @@ just press `q`.
 
 ~~~
 $ git log -n 1 -p
+~~~
+{:class="in"}
+~~~
 commit 61fd2bcece2126cdd8ee24f40a04c18d39403022
 Author: Aron Ahmadia <aron@ahmadia.net>
 Date:   Tue Jun 4 10:59:21 2013 -0400
@@ -218,6 +244,7 @@ index 0000000..ab9e62b
 +f.close()
 ...
 ~~~
+{:class="out"}
 
 The output is slightly cryptic
 because it is intended to be read by machines
@@ -291,6 +318,9 @@ since it was created.
 
 ~~~
 $ git log --stat --oneline
+~~~
+{:class="in"}
+~~~
 61fd2bc Made fixes to Python pipeline
  python_pipeline.ipy | 44 ++++++++++++++++++++++++++++++++++++++++++++
  python_pipeline.py  | 49 -------------------------------------------------
@@ -313,6 +343,7 @@ cbd6ff5 Added data file
  Lumi.2760.csv            | 10 ++++++++++
  2 files changed, 60 insertions(+)
 ~~~
+{:class="out"}
 
 ## Time travel (git checkout)
 
@@ -337,6 +368,9 @@ of the oldest commit in our history:
 
 ~~~
 $ git checkout cbd6
+~~~
+{:class="in"}
+~~~
 Note: checking out 'cbd6'.
 
 You are in 'detached HEAD' state. You can look around, make experimental
@@ -349,9 +383,16 @@ do so (now or later) by using `-b` with the checkout command again. Example:
   git checkout -b new_branch_name
 
 HEAD is now at cbd6ff5... Added data file
+~~~
+{:class="out"}
+~~~
 $ ls
+~~~
+{:class="in"}
+~~~
 2013-05-24-2760-2763.txt Lumi.2760.csv
 ~~~
+{:class="out"}
 
 We'll explain the `detached HEAD` message in the next section.
 For now, note that the contents of the directory have changed.
@@ -362,8 +403,12 @@ in `git log`.
 
 ~~~
 $ git log --oneline
+~~~
+{:class="in"}
+~~~
 cbd6ff5 Added data file
 ~~~
+{:class="out"}
 
 Uh-oh.  `git log`, by default,
 only tells us the history of our current revision.
@@ -374,6 +419,9 @@ to see all of a repository's available history:
 
 ~~~
 $ git log --oneline --all
+~~~
+{:class="in"}
+~~~
 61fd2bc Made fixes to Python pipeline
 8595b71 first pass at making a pipeline
 d7c2a9d Merge branch 'add_2763'
@@ -382,6 +430,7 @@ ef023fe added Lumi 2762
 779f888 Added Lumi 2761
 cbd6ff5 Added data file
 ~~~
+{:class="out"}
 
 This is enough to go back to where we were,
 but let's use this as an opportunity
@@ -414,9 +463,13 @@ in the history of our repository.
 
 ~~~
 $ git reflog
+~~~
+{:class="in"}
+~~~
 cbd6ff5 HEAD@{0}: checkout: moving from master to cbd6
 61fd2bc HEAD@{1}: clone: from https://github.com/ahmadia/bio-pipeline.git
 ~~~
+{:class="out"}
 
 By default, `git reflog` outputs one line of text
 for each time HEAD has moved.
@@ -436,9 +489,13 @@ Lets we go back to the revision we started at.
 
 ~~~
 $ git checkout 61fd
+~~~
+{:class="in"}
+~~~
 Previous HEAD position was cbd6ff5... Added data file
 HEAD is now at 61fd2bc... Made fixes to Python pipeline
 ~~~
+{:class="out"}
 
 ### Checkpoint 1
 
@@ -476,14 +533,19 @@ First, let's make sure you're on the most recent revision.
 ~~~
 $ git checkout 61fd
 ~~~
+{:class="in"}
 
 Then, go ahead and remove Lumi.2763.csv.
 
 ~~~
 $ rm Lumi.2763.csv
-$ ls Lumi.2763.csv                                                                            ✖
+$ ls Lumi.2763.csv
+~~~
+{:class="in"}
+~~~
 ls: Lumi.2763.csv: No such file or directory
 ~~~
+{:class="err"}
 
 There are a number of ways
 to accidentally corrupt, modify, overwrite, or destroy files.
@@ -498,8 +560,12 @@ it is as easy as pie to restore it.
 ~~~
 $ git checkout Lumi.2763.csv
 $ ls Lumi.2763.csv
+~~~
+{:class="in"}
+~~~
 Lumi.2763.csv
 ~~~
+{:class="out"}
 
 In fact, so long as an undamaged copy of our Git repository
 exists *somewhere*,
