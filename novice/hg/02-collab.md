@@ -72,11 +72,11 @@ go into the local `planets` repository,
 and run this command:
 
 ~~~
-$ hg config --local (a shortcut for 'nano .hg/hgrc')
+$ hg config --local
 ~~~
 {:class="in"}
 
-and add the following lines:
+that is a shortcut for open `.hg/hgrc` with your text editor and add the following lines:
 
 ~~~
   [paths]
