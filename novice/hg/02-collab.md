@@ -43,13 +43,12 @@ BitBucket displays a page with a URL and some information on how to configure yo
 
 This effectively does the following on BitBucket's servers:
 
-<div class="in" markdown="1">
 ~~~
 $ mkdir planets
 $ cd planets
 $ hg init
 ~~~
-</div>
+{:class="in"}
 
 Our local repository still contains our earlier work on `mars.txt`,
 but the remote repository on BitBucket doesn't contain any files yet:
@@ -72,47 +71,40 @@ Copy that URL from the browser,
 go into the local `planets` repository,
 and run this command:
 
-<div class="in" markdown="1">
 ~~~
 $ hg config --local (a shortcut for 'nano .hg/hgrc')
 ~~~
-</div>
+{:class="in"}
 
 and add the following lines:
 
-<div class="out" markdown="1">
 ~~~
   [paths]
   default = https://bitbucket.org/vlad/planets
 ~~~
-</div>
 
 Make sure to use the URL for your repository rather than Vlad's:
 the only difference should be your username instead of `vlad`.
 
 We can check that the command has worked by running `hg paths`:
 
-<div class="in" markdown="1">
 ~~~
 $ hg paths
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 default = https://bitbucket.org/vlad/planets
 ~~~
-</div>
+{:class="out"}
 
 Once the default path is set up,
 this command will push the changes from our local repository
 to the repository on BitBucket:
 
-<div class="in" markdown="1">
 ~~~
 $ hg push
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 pushing to https://bitbucket.org/vlad/planets
 searching for changes
@@ -121,7 +113,7 @@ adding manifests
 adding file changes
 added 1 changesets with 1 changes to 1 files
 ~~~
-</div>
+{:class="out"}
 
 Our local and remote repositories are now in this state:
 
@@ -129,18 +121,16 @@ Our local and remote repositories are now in this state:
 
 We can pull changes from the remote repository to the local one as well:
 
-<div class="in" markdown="1">
 ~~~
 $ hg pull
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 pulling from https://bitbucket.org/vlad/planets
 searching for changes
 no changes found
 ~~~
-</div>
+{:class="out"}
 
 Pulling has no effect in this case
 because the two repositories are already synchronized.
@@ -156,12 +146,11 @@ don't make `tmp` a subdirectory of the existing repository).
 Instead of creating a new repository here with `hg init`,
 we will [clone](../../gloss.html#repository-clone) the existing repository from BitBucket:
 
-<div class="in" markdown="1">
 ~~~
 $ cd /tmp
 $ hg clone https://bitbucket.org/vlad/planets
 ~~~
-</div>
+{:class="in"}
 
 `hg clone` creates a fresh local copy of a remote repository.
 (We did it in `/tmp` or some other directory so that we don't overwrite our existing `planets` directory.)
@@ -171,33 +160,28 @@ Our computer now has two copies of the repository:
 
 Let's make a change in the copy in `/tmp/planets`:
 
-<div class="in" markdown="1">
 ~~~
 $ cd /tmp/planets
 $ nano pluto.txt
 $ cat pluto.txt
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 It is so a planet!
 ~~~
-</div>
-<div class="in" markdown="1">
+{:class="out"}
 ~~~
 $ hg add pluto.txt
 $ hg commit -m "Some notes about Pluto"
 ~~~
-</div>
+{:class="in"}
 
 then push the change to BitBucket:
 
-<div class="in" markdown="1">
 ~~~
 $ hg push
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 pushing to https://bitbucket.org/vlad/planets
 searching for changes
@@ -206,7 +190,7 @@ adding manifests
 adding file changes
 added 1 changesets with 1 changes to 1 files
 ~~~
-</div>
+{:class="out"}
 
 Note that we didn't have to create a remote called `default`:
 Mercurial does this automatically,
@@ -221,13 +205,11 @@ Our three repositories now look like this:
 
 We can now download changes into the original repository on our machine:
 
-<div class="in" markdown="1">
 ~~~
 $ cd ~/planets
 $ hg pull
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 pulling from https://bitbucket.org/vlad/planets
 searching for changes
@@ -236,7 +218,7 @@ adding manifests
 adding file changes
 added 1 changesets with 1 changes to 1 files
 ~~~
-</div>
+{:class="out"}
 
 which gives us this:
 
