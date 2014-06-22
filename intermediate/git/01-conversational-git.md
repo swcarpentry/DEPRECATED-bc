@@ -29,7 +29,8 @@ Please keep in mind, though,
 that Git uses some of its verbs and nouns
 very differently from other revision control systems.
 
-## Objectives
+<div class="objectives" markdown="1">
+#### Objectives
 
 After this lesson, students should be able to:
 
@@ -39,8 +40,9 @@ After this lesson, students should be able to:
 * Navigate the history of their Git repositories using `git reflog` and
   `git checkout`.
 * Restore saved versions of files using `git checkout`.
+</div>
 
-## Copying Repositories (git clone)
+### Copying Repositories (git clone)
 
 The first concept we introduce
 is the [repository](../../gloss.html#repository).
@@ -120,7 +122,7 @@ we will lose our local copy of the project's history,
 and any changes or commits
 we had not published yet.
 
-## Viewing History (git log)
+### Viewing History (git log)
 
 We are looking
 at the latest *revision*,
@@ -345,7 +347,7 @@ cbd6ff5 Added data file
 ~~~
 {:class="out"}
 
-## Time travel (git checkout)
+### Time travel (git checkout)
 
 Git can't really travel through time,
 but it does allow us to inspect its repositories
@@ -497,7 +499,7 @@ HEAD is now at 61fd2bc... Made fixes to Python pipeline
 ~~~
 {:class="out"}
 
-### Checkpoint 1
+#### Checkpoint 1
 
 * **[1A]** Explain the the two lines of output from `git checkout` to
   your neighbor.
@@ -506,7 +508,7 @@ HEAD is now at 61fd2bc... Made fixes to Python pipeline
   does to your neighbor?  (You may need to call it multiple times and
   inspect the reflog each time).
 
-### Checkpoint 2
+#### Checkpoint 2
 
 At some point in the project's history,
 Aron replaced the file `python_pipeline.py`
@@ -516,7 +518,7 @@ with `python_pipeline.ipy`.
 where Aron added `python_pipeline.py`
 * **[2B]** Check out that commit and view `python_pipeline.py` in an editor.
 
-## Undoing Mistakes (git checkout)
+### Undoing Mistakes (git checkout)
 
 `git checkout` is Git's Swiss Army Knife.
 It does slightly different things,
@@ -571,7 +573,7 @@ In fact, so long as an undamaged copy of our Git repository
 exists *somewhere*,
 we will always be able to recover lost or damaged files.
 
-### Checkpoint 3
+#### Checkpoint 3
 
 * **[3A]** Modify a file, save the changes, then use `git checkout`
 to recover the version stored in history.

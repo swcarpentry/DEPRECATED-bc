@@ -12,7 +12,8 @@ lesson, you'll learn a third use for the checkout command, how to work
 with development branches, and then how to save revisions in the
 staging area.
 
-## Objectives
+<div class="objectives" markdown="1">
+#### Objectives
 
 After this lesson, students should be able to:
 
@@ -23,8 +24,9 @@ After this lesson, students should be able to:
 * Add and remove changes from the staging area using `git add`, `git
   reset`, and `git rm`.
 * Save versions of their work using `git commit`.
+</div>
 
-## Development Branches
+### Development Branches
 
 In the last lesson we cloned a repository and explored its history.
 We also learned about HEAD, a special *pointer* to the revision of our
@@ -112,7 +114,7 @@ $ git branch -v
 Now that we've created our development branch, let's start preparing
 some changes to our repository.
 
-### Checkpoint 1
+#### Checkpoint 1
 
 * **[1A]** Why do `master` and `pipeline_fix` point to the same
   revision even though they are different branches?
@@ -130,7 +132,7 @@ some changes to our repository.
   calling `git branch -D master`.
 
 
-## Seeing Changes
+### Seeing Changes
 
 In the previous lesson, we used `git checkout` to undo some changes
 we had made to a file.  We also learned about `diff` output, which is
@@ -305,7 +307,7 @@ it about.  How do you tell Git that you'd like to track a new file?
 We do this with the `git add` command, which we'll cover in the next
 section.
 
-### Checkpoint 2
+#### Checkpoint 2
 
 * **[2A]** What is the difference between the way Git uses the words
   *unstaged* and *untracked*?  Try explaining this to your partner.
@@ -323,7 +325,7 @@ section.
   for some gory details.
 
 
-## Staging Changes
+### Staging Changes
 
 So far, we have made three changes to the working directory.  We
 deleted a file, we modified a file, and we created a new one.  Let's
@@ -497,7 +499,7 @@ Changes not staged for commit:
 {:class="out"}
 
 
-### Checkpoint 3
+#### Checkpoint 3
 
 * **[3A]** The `--` flag is used to separate filenames and paths from
   the other parameters in a `git` command line argument.  What is the
@@ -515,7 +517,7 @@ Changes not staged for commit:
   with `git status` and `git diff`.
 
 
-## Committing Changes
+### Committing Changes
 
 * Walk through `git commit` using the `nano` editor.
 * Use email metaphor for `git commit`.
@@ -529,13 +531,13 @@ Changes not staged for commit:
 	always commit at the end of the day, even if it's something you
 	will throw away later.
 
-### Integrative Exercise
+#### Integrative Exercise
 
 * Checkout master.  Make a commit.  Now swap the positions of the two
   branches, by either moving the branches with `git reset` or by
   deleting them and recreating them in the appropriate positions.
 
-## Review
+### Review
 
 * branches
 * viewing changes
