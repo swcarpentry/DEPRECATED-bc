@@ -659,13 +659,13 @@ results/
 ~~~
 {:class="out"}
 
-These patterns tell Mercurial to ignore any file whose name ends in `.dat`
-and everything in the `results` directory.
-(If any of these files were already being tracked,
-Mercurial would continue to track them.)
 The `syntax: glob` line at the top of the file tells Mercurial that
 we want to use the same kind of pattern matching that we use in the shell
 (which is known as "globbing" and the patterns as "globs").
+The second line tells Mercurial to ignore any file whose name ends in `.dat`
+and the third one to ignore everything in the `results` directory.
+(If any of these files were already being tracked,
+Mercurial would continue to track them.)
 
 Once we have created this file,
 the output of `hg status` is much cleaner:
