@@ -66,7 +66,7 @@ cp [OPTION]... [-T] SOURCE DEST
 {:class="out"}
 
 `[OPTION]` means the `cp` command can be followed by
-one or more optional [flags](../../gloss.html#command-line-flag).
+one or more optional [flags](../../gloss.html#command).
 We can tell they're optional because of the square brackets,
 and we can tell that one or more are welcome because of the ellipsis (...).
 For example,

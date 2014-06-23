@@ -51,7 +51,7 @@ numbers go from -8 to 7, or -16 to 15, and so on.
 As a result, even if `x` is a valid number, `-x` may not be.
 
 Finding a good representation for real numbers
-(called [floating point numbers](../../gloss.html#float),
+(called [floating point numbers](../../gloss.html#float-point-number),
 since the decimal point can move around)
 is a much harder problem.
 The root of the problem is that

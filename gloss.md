@@ -25,7 +25,7 @@ such as [red, green, and blue](#rgb).
 **<a name="aggregation-function">aggregation function</a>**:
 A function such as `sum` or `max` that combines many values to produce a single result.
 
-**<a name="alias-library">alias</a>** (a library):
+**<a name="alias">alias</a>** (a library):
 To give a [library](#library) a nickname while importing it.
 
 **<a name="argument">argument</a>**:
@@ -71,7 +71,7 @@ See also: [referential integrity](#referential-integrity).
 Treating text as if upper and lower case characters were the same.
 See also: [case sensitive](#case-sensitive).
 
-**<a name="catch-exception">catch</a>** (an exception):
+**<a name="catch">catch</a>** (an exception):
 To handle an [exception](#exception) that has been [raised](#raise-exception)
 somewhere else in a program.
 
@@ -80,7 +80,7 @@ A group of changes to one or more files
 that are [committed](#commit) to a [version control](#version-control) [repository](#repository)
 in a single operation.
 
-**<a name="repository-clone">clone</a>** (a repository):
+**<a name="clone">clone</a>** (a repository):
 To make a local copy of a [version control repository](#repository).
 See also: [fork](#repository-fork).
 
@@ -90,11 +90,11 @@ or of changes to a piece of software.
 Peer review is often conducted on [pull requests](#pull-request)
 before they are [merged](#repository-merge) into a [repository](#repository).
 
-**<a name="csv">comma-separated values</a>** (CSV):
+**<a name="comma-separeted-values">comma-separated values</a>** (CSV):
 A common textual representation for tables
 in which the values in each row are separated by commas.
 
-**<a name="cli">command-line interface</a>** (CLI):
+**<a name="command-line-interface">command-line interface</a>** (CLI):
 An interface based on typing commands,
 usually at a [REPL](#repl).
 See also: [graphical user interface](#gui).
@@ -177,7 +177,7 @@ Most modern languages record information about what went wrong
 in a piece of data (also called an exception).
 See also: [catch](#catch-exception), [raise](#raise-exception).
 
-**<a name="field-database">field</a>** (of a database):
+**<a name="field">field</a>** (of a database):
 A set of data values of a particular type,
 one for each [record](#record-database) in a [table](#table-database).
 
@@ -205,7 +205,7 @@ they read data from [standard input](#standard-input),
 process it,
 and write the result to [standard output](#standard-output).
 
-**<a name="command-line-flag">flag</a>**:
+**<a name="flag">flag</a>**:
 A terse way to specify an option or setting to a command-line program.
 By convention Unix applications use a dash followed by a single letter,
 such as `-v`,
@@ -215,7 +215,7 @@ while DOS applications use a slash,
 such as `/V`.
 Depending on the application, a flag may be followed by a single argument, as in `-o /tmp/output.txt`.
 
-**<a name="float">floating point number</a>** (float):
+**<a name="float-point-number">floating point number</a>** (float):
 A number containing a fractional part and an exponent.
 See also: [integer](#integer).
 
@@ -227,7 +227,7 @@ See also: [while loop](#while-loop).
 One or more values in a [database table](#table-database)
 that identify a [records](#record-database) in another table.
 
-**<a name="repository-fork">fork</a>**:
+**<a name="fork">fork</a>**:
 To [clone](#repository-clone) a [version control](#version-control) [repository](#repository)
 on a server.
 
@@ -241,7 +241,7 @@ A use of a function in another piece of software.
 The immediate application of one function to the result of another,
 such as `f(g(x))`.
 
-**<a name="gui">graphical user interface</a>** (GUI):
+**<a name="graphical-user-interface">graphical user interface</a>** (GUI):
 A graphical user interface,
 usually controlled by using a mouse.
 See also: [command-line interface](#cli).
@@ -305,7 +305,7 @@ The variable that keeps track of the progress of the loop.
 **<a name="member">member</a>**:
 A variable contained within an [object](#object).
 
-**<a name="repository-merge">merge</a>** (a repository):
+**<a name="merge">merge</a>** (a repository):
 To reconcile two sets of change to a [repository](#repository).
 
 **<a name="method">method</a>**:
@@ -391,24 +391,24 @@ that is being offered to another for [merging](#repository-merge).
 A database operation that reads values but does not modify anything.
 Queries are expressed in a special-purpose language called [SQL](#sql).
 
-**<a name="shell-quoting">quoting</a>** (in the shell):
+**<a name="quoting">quoting</a>** (in the shell):
 Using quotation marks of various kinds to prevent the shell from interpreting special characters.
 For example,
 to pass the string `*.txt` to a program,
 it is usually necessary to write it as `'*.txt'` (with single quotes)
 so that the shell will not try to expand the `*` wildcard.
 
-**<a name="raise-exception">raise</a>** (an exception):
+**<a name="raise">raise</a>** (an exception):
 To explicitly signal that an [exception](#exception) has occured in a program.
 See also: [catch](#catch-exception).
 
-**<a name="repl">read-eval-print loop</a>** (REPL):
+**<a name="read-eval-print-loop">read-eval-print loop</a>** (REPL):
 A [command-line interface](#cli) that reads a command from the user,
 executes it,
 prints the result,
 and waits for another command.
 
-**<a name="record-database">record</a>** (in a database):
+**<a name="record">record</a>** (in a database):
 A set of related values making up a single entry in a [database table](#table-database),
 typically shown as a row.
 See also: [field](#field-database).
@@ -448,7 +448,7 @@ To connect to a computer over a network,
 e.g., to run a [shell](#shell) on it.
 See also: [SSH](#ssh).
 
-**<a name="repository-remote">remote repository</a>**:
+**<a name="remote-repository">remote repository</a>**:
 A version control [repository](#repository) other than the current one
 that the current one is somehow connected to or mirroring.
 
@@ -563,7 +563,7 @@ A directory contained within another directory.
 A feature provided by many interactive systems in which
 pressing the Tab key triggers automatic completion of the current word or command.
 
-**<a name="table-database">table</a>** (in a database):
+**<a name="table">table</a>** (in a database):
 A set of data in a [relational database](#relational-database)
 organized into a set of [records](#record-database),
 each having the same named [fields](#field-database).
