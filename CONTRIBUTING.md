@@ -20,9 +20,9 @@ to get feedback on your ideas and coordinate with other developers.
 **Table of Contents**
 
 *   [Working With GitHub](#working-with-github)  
+*   [Previewing](#previewing)
 *   [Locations and Formats](#locations-and-formats)
 *   [Sample Files](#sample-files)
-*   [Previewing](#previewing)
 *   [FAQ](#faq)
 
 Working With GitHub
@@ -46,6 +46,41 @@ please mail us at
 [admin@software-carpentry.org](mailto:admin@software-carpentry.org).
 Given a choice between you creating content or wrestling with Git,
 we'd rather have you doing the former.
+
+Previewing
+----------
+
+To preview changes before committing,
+run the command `make site`.
+This runs Jekyll with the same flags that GitHub uses when things are committed to the `gh-pages` branch
+and puts the results in a directory called `_site`.
+
+
+You should also run `make check` before pushing changes to your `index.html` home page
+to your repository.
+If you don't have Make installed,
+you can run the same checks using:
+
+~~~
+python bin/swc_index_validator.py ./index.html
+~~~
+
+This checks that the bootcamp's instructors are listed,
+that a contact email address has been set up,
+and so on.
+
+Other useful commands in the main Makefile are:
+
+*   `make commands` (or just `make` on its own): list available commands.
+*   `make clean`: remove editor backup files and the `_site` directory.
+*   `make fixme`: list uses of the word `FIXME` in source files.
+
+The commands to convert IPython Notebooks to Markdown
+are stored in a separate Makefile called `ipynb.mk`
+to simplify maintenance
+and ensure that the main Makefile only does what Jekyll on GitHub will do.
+To re-do conversion of notebooks to Markdown files,
+use `make ipynb`.
 
 Locations and Formats
 ---------------------
@@ -95,28 +130,6 @@ the IPython Notebook file has metadata in various cells
 to ensure that the generated HTML pages have the right style.
 If you are creating a new lesson,
 please copy one of these files to use as a starting point.
-
-Previewing
-----------
-
-To preview changes before committing,
-run the command `make site`.
-This runs Jekyll with the same flags that GitHub uses when things are committed to the `gh-pages` branch.
-Jekyll's output is stored in a directory called `_site`.
-
-Other useful commands in the main Makefile are:
-
-*   `make commands` (or just `make` on its own): list available commands.
-*   `make check`: check that the repository's `index.html` file is properly formatted.
-*   `make clean`: remove editor backup files and the `_site` directory.
-*   `make fixme`: list uses of the word `FIXME` in source files.
-
-The commands to convert IPython Notebooks to Markdown
-are stored in a separate Makefile called `ipynb.mk`
-to simplify maintenance
-and ensure that the main Makefile only does what Jekyll on GitHub will do.
-To re-do conversion of notebooks to Markdown files,
-use `make ipynb`.
 
 FAQ
 ---
