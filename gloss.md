@@ -25,7 +25,7 @@ such as [red, green, and blue](#rgb).
 **<a name="aggregation-function">aggregation function</a>**:
 A function such as `sum` or `max` that combines many values to produce a single result.
 
-**<a name="alias-library">alias</a>** (a library):
+**<a name="alias">alias</a>** (a library):
 To give a [library](#library) a nickname while importing it.
 
 **<a name="argument">argument</a>**:
@@ -53,7 +53,7 @@ in which case we might decompose it into tens and ones).
 A "parallel universe" in a [version control](#version-control) [repository](#repository).
 Programmers typically use branches to isolate different sets of changes from one another during development
 so that they can concentrate on one problem at a time.
-See also: [merge](#repository-merge).
+See also: [merge](#merge).
 
 **<a name="call-stack">call stack</a>**:
 A data structure inside a running program that keeps track of active function calls.
@@ -71,8 +71,8 @@ See also: [referential integrity](#referential-integrity).
 Treating text as if upper and lower case characters were the same.
 See also: [case sensitive](#case-sensitive).
 
-**<a name="catch-exception">catch</a>** (an exception):
-To handle an [exception](#exception) that has been [raised](#raise-exception)
+**<a name="catch">catch</a>** (an exception):
+To handle an [exception](#exception) that has been [raised](#raise)
 somewhere else in a program.
 
 **<a name="change-set">change set</a>**:
@@ -80,24 +80,24 @@ A group of changes to one or more files
 that are [committed](#commit) to a [version control](#version-control) [repository](#repository)
 in a single operation.
 
-**<a name="repository-clone">clone</a>** (a repository):
+**<a name="clone">clone</a>** (a repository):
 To make a local copy of a [version control repository](#repository).
-See also: [fork](#repository-fork).
+See also: [fork](#fork).
 
 **<a name="code-review">code review</a>**:
 A systematic peer review of a piece of software,
 or of changes to a piece of software.
 Peer review is often conducted on [pull requests](#pull-request)
-before they are [merged](#repository-merge) into a [repository](#repository).
+before they are [merged](#merge) into a [repository](#repository).
 
-**<a name="csv">comma-separated values</a>** (CSV):
+**<a name="comma-separeted-values">comma-separated values</a>** (CSV):
 A common textual representation for tables
 in which the values in each row are separated by commas.
 
-**<a name="cli">command-line interface</a>** (CLI):
+**<a name="command-line-interface">command-line interface</a>** (CLI):
 An interface based on typing commands,
-usually at a [REPL](#repl).
-See also: [graphical user interface](#gui).
+usually at a [REPL](#read-eval-print-loop).
+See also: [graphical user interface](#graphical-user-interface).
 
 **<a name="comment">comment</a>**:
 A remark in a program that is intended to help human readers understand what is going on,
@@ -144,7 +144,7 @@ The practice of writing programs that check their own operation to catch errors 
 
 **<a name="delimiter">delimiter</a>**:
 A character or characters used to separate individual values,
-such as the commas between columns in a [CSV](#csv) file.
+such as the commas between columns in a [CSV](#comma-separeted-values) file.
 
 **<a name="docstring">docstring</a>**:
 Short for "documentation string",
@@ -175,11 +175,11 @@ rather than *how* it does it.
 An event that disrupts the normal or expected execution of a program.
 Most modern languages record information about what went wrong
 in a piece of data (also called an exception).
-See also: [catch](#catch-exception), [raise](#raise-exception).
+See also: [catch](#catch), [raise](#raise).
 
-**<a name="field-database">field</a>** (of a database):
+**<a name="field">field</a>** (of a database):
 A set of data values of a particular type,
-one for each [record](#record-database) in a [table](#table-database).
+one for each [record](#record) in a [table](#table).
 
 **<a name="filename-extension">filename extension</a>**:
 The portion of a file's name that comes after the final "." character.
@@ -205,7 +205,7 @@ they read data from [standard input](#standard-input),
 process it,
 and write the result to [standard output](#standard-output).
 
-**<a name="command-line-flag">flag</a>**:
+**<a name="flag">flag</a>**:
 A terse way to specify an option or setting to a command-line program.
 By convention Unix applications use a dash followed by a single letter,
 such as `-v`,
@@ -215,7 +215,7 @@ while DOS applications use a slash,
 such as `/V`.
 Depending on the application, a flag may be followed by a single argument, as in `-o /tmp/output.txt`.
 
-**<a name="float">floating point number</a>** (float):
+**<a name="float-point-number">floating point number</a>** (float):
 A number containing a fractional part and an exponent.
 See also: [integer](#integer).
 
@@ -224,11 +224,11 @@ A loop that is executed once for each value in some kind of set, list, or range.
 See also: [while loop](#while-loop).
 
 **<a name="foreign-key">foreign key</a>**:
-One or more values in a [database table](#table-database)
-that identify a [records](#record-database) in another table.
+One or more values in a [database table](#table)
+that identify a [records](#record) in another table.
 
-**<a name="repository-fork">fork</a>**:
-To [clone](#repository-clone) a [version control](#version-control) [repository](#repository)
+**<a name="fork">fork</a>**:
+To [clone](#clone) a [version control](#version-control) [repository](#repository)
 on a server.
 
 **<a name="function-body">function body</a>**:
@@ -241,10 +241,10 @@ A use of a function in another piece of software.
 The immediate application of one function to the result of another,
 such as `f(g(x))`.
 
-**<a name="gui">graphical user interface</a>** (GUI):
+**<a name="graphical-user-interface">graphical user interface</a>** (GUI):
 A graphical user interface,
 usually controlled by using a mouse.
-See also: [command-line interface](#cli).
+See also: [command-line interface](#command-line-interface).
 
 **<a name="home-directory">home directory</a>**:
 The default directory associated with an account on a computer system.
@@ -284,7 +284,7 @@ See also: [outer loop](#outer-loop).
 
 **<a name="integer">integer</a>**:
 A whole number, such as -12343.
-See also: [floating-point number](#float).
+See also: [floating-point number](#float-point-number).
 
 **<a name="invariant">invariant</a>**:
 An expression whose value doesn't change during the execution of a program,
@@ -305,7 +305,7 @@ The variable that keeps track of the progress of the loop.
 **<a name="member">member</a>**:
 A variable contained within an [object](#object).
 
-**<a name="repository-merge">merge</a>** (a repository):
+**<a name="merge">merge</a>** (a repository):
 To reconcile two sets of change to a [repository](#repository).
 
 **<a name="method">method</a>**:
@@ -360,8 +360,8 @@ A condition that must be true in order for a function (or other block of code) t
 A template for an [SQL](#sql) query in which some values can be filled in.
 
 **<a name="primary-key">primary key</a>**:
-One or more [fields](#field-database) in a [database table](#table-database)
-whose values are guaranteed to be unique for each [record](#record-database),
+One or more [fields](#field) in a [database table](#table)
+whose values are guaranteed to be unique for each [record](#record),
 i.e.,
 whose values uniquely identify the entry.
 
@@ -376,7 +376,7 @@ it typically runs each process for a few milliseconds at a time
 to give the impression that they are executing simultaneously.
 
 **<a name="prompt">prompt</a>**:
-A character or characters display by a [REPL](#repl) to show that
+A character or characters display by a [REPL](#read-eval-print-loop) to show that
 it is waiting for its next command.
 
 **<a name="protocol">protocol</a>**:
@@ -385,33 +385,33 @@ Common protocols on the Internet include [HTTP](#http) and [SSH](#ssh).
 
 **<a name="pull-request">pull request</a>**:
 A set of changes created in one [version control](#version-control) [repository](#repository)
-that is being offered to another for [merging](#repository-merge).
+that is being offered to another for [merging](#merge).
 
 **<a name="query">query</a>**:
 A database operation that reads values but does not modify anything.
 Queries are expressed in a special-purpose language called [SQL](#sql).
 
-**<a name="shell-quoting">quoting</a>** (in the shell):
+**<a name="quoting">quoting</a>** (in the shell):
 Using quotation marks of various kinds to prevent the shell from interpreting special characters.
 For example,
 to pass the string `*.txt` to a program,
 it is usually necessary to write it as `'*.txt'` (with single quotes)
 so that the shell will not try to expand the `*` wildcard.
 
-**<a name="raise-exception">raise</a>** (an exception):
+**<a name="raise">raise</a>** (an exception):
 To explicitly signal that an [exception](#exception) has occured in a program.
-See also: [catch](#catch-exception).
+See also: [catch](#catch).
 
-**<a name="repl">read-eval-print loop</a>** (REPL):
-A [command-line interface](#cli) that reads a command from the user,
+**<a name="read-eval-print-loop">read-eval-print loop</a>** (REPL):
+A [command-line interface](#command-line-interface) that reads a command from the user,
 executes it,
 prints the result,
 and waits for another command.
 
-**<a name="record-database">record</a>** (in a database):
-A set of related values making up a single entry in a [database table](#table-database),
+**<a name="record">record</a>** (in a database):
+A set of related values making up a single entry in a [database table](#table),
 typically shown as a row.
-See also: [field](#field-database).
+See also: [field](#field).
 
 **<a name="redirect">redirect</a>**:
 To send a command's output to a file rather than to the screen or another command,
@@ -420,7 +420,7 @@ or equivalently to read a command's input from a file.
 **<a name="referential-integrity">referential integrity</a>**:
 The internal consistency of values in a database.
 If an entry in one table contains a [foreign key](#foreign-key),
-but the corresponding [records](#record-database) don't exist,
+but the corresponding [records](#record) don't exist,
 referential integrity has been violated.
 
 **<a name="regression">regression</a>**:
@@ -431,7 +431,7 @@ A pattern that specifies a set of character strings.
 REs are most often used to find sequences of characters in strings.
 
 **<a name="relational-database">relational database</a>**:
-A collection of data organized into [tables](#table-database).
+A collection of data organized into [tables](#table).
 
 **<a name="relative-error">relative error</a>**:
 The ratio of the [absolute error](#absolute-error) in an approximation of a value
@@ -448,7 +448,7 @@ To connect to a computer over a network,
 e.g., to run a [shell](#shell) on it.
 See also: [SSH](#ssh).
 
-**<a name="repository-remote">remote repository</a>**:
+**<a name="remote-repository">remote repository</a>**:
 A version control [repository](#repository) other than the current one
 that the current one is somehow connected to or mirroring.
 
@@ -489,7 +489,7 @@ An array's dimensions, represented as a vector.
 For example, a 5&times;3 array's shape is `(5,3)`.
 
 **<a name="shell">shell</a>**:
-A [command-line interface](#cli)
+A [command-line interface](#command-line-interface)
 such as Bash (the Bourne-Again Shell)
 or the Microsoft Windows DOS shell
 that allows a user to interact with the [operating system](#operating-system).
@@ -563,10 +563,10 @@ A directory contained within another directory.
 A feature provided by many interactive systems in which
 pressing the Tab key triggers automatic completion of the current word or command.
 
-**<a name="table-database">table</a>** (in a database):
+**<a name="table">table</a>** (in a database):
 A set of data in a [relational database](#relational-database)
-organized into a set of [records](#record-database),
-each having the same named [fields](#field-database).
+organized into a set of [records](#record),
+each having the same named [fields](#field).
 
 **<a name="test-oracle">test oracle</a>**:
 A program, device, data set, or human being
