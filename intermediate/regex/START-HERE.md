@@ -1,3 +1,5 @@
+# Contents
+
 1.  [Simple Patterns](#s:basic)
 2.  [Operators](#s:operators)
 3.  [Under the Hood](#s:mechanics)
@@ -78,8 +80,8 @@ or less the same way in almost every programming language. We will
 present examples in Python, but the ideas and notation transfer directly
 to Perl, Java, MATLAB, C\#, and Fortran.
 
-Simple Patterns
----------------
+## Simple Patterns
+
 
 Let's start by reading data from two files, discarding the headers, and
 keeping the first few lines of each:
