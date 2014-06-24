@@ -13,42 +13,27 @@ of the site where the reading was taken, the date the reading was taken
 on, and of course the background evil level in millivaders. The problem
 is, these files are formatted in different ways. Here is the first one:
 
-~~~~ {fixme="replace with diagram showing characters"}
-Site    Date    Evil (millivaders)
-----    ----    ------------------
-Baker 1 2009-11-17      1223.0
-Baker 1 2010-06-24      1122.7
-Baker 2 2009-07-24      2819.0
-Baker 2 2010-08-25      2971.6
-Baker 1 2011-01-05      1410.0
-Baker 2 2010-09-04      4671.6
-⋮        ⋮               ⋮
-~~~~
+
+![image](img/01-intro-notebook-1.png) 
 
 A single tab character divides the fields in each row into columns. The
 site names contain spaces, and the dates are in international standard
 format: four digits for the year, two for the month, and two for the
 day.
 
-Tabs vs. Spaces
+Here is that same table with those characters visualised. Note how we have a not-too-helpful mix of tabs and spaces in the different lines of the file.
+
+![image](img/01-intro-notebook-1-metachars.png) 
+
+## Tabs vs. Spaces
 
 Explain tabs and spaces.
 
 Let's have a look at the second notebook:
 
-~~~~ {fixme="replace with diagram showing characters"}
-Site/Date/Evil
-Davison/May 22, 2010/1721.3
-Davison/May 23, 2010/1724.7
-Pertwee/May 24, 2010/2103.8
-Davison/June 19, 2010/1731.9
-Davison/July 6, 2010/2010.7
-Pertwee/Aug 4, 2010/1731.3
-Pertwee/Sept 3, 2010/4981.0
-⋮        ⋮            ⋮
-~~~~
+![image](img/01-intro-notebook-2.png) 
 
-It uses slashes as separators. There don't appear to be spaces in the
+Clearly this is very different to the first. It uses slashes as separators. There don't appear to be spaces in the
 site names, but the month names and day numbers vary in length. What's
 worse, the months are text, and the order is month-day-year rather than
 year-month-day.
