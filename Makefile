@@ -100,6 +100,7 @@ BOOK_MD = ./book.md
 $(BOOK_MD) : $(MOST_SRC) bin/make-book.py
 	python bin/make-book.py $(MOST_SRC) > $@
 	sed -i 's/\.\.\/\.\.\/gloss.html#/#g:/g' $@
+	sed -i 's/\.\.\/\.\.\/rules.html#/#/g' $@
 
 #----------------------------------------------------------------------
 # Targets.
