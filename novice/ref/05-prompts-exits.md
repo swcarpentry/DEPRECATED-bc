@@ -3,9 +3,9 @@ layout: lesson
 root: ../..
 title: Recognising prompts and how to exit
 ---
-When starting work at the command line, sometimes you can not recognise your
-prompt. At this session you will find tips to discovery where you are and how
-exit of the unrecognised prompt.
+When working at the command line, you might not recognise your
+prompt.  On this page you will find tips to discover where you are and how to
+exit if you are not where you want to be.
 
 ### Shell
 
@@ -51,7 +51,7 @@ exit of the unrecognised prompt.
   To exit from `nano` press `CTRL-X`. If you have unsaved changes, you will be
   asked to save these - press `y` to save, or `n` to quit without saving.
 
-- If your shell window shows `~` at the begin of many lines you are in the `vi`
+- If your shell window shows `~` at the beginning of each lines you are in the `vi`
   text editor.
 
   <img src="img/vim.png" />
@@ -71,7 +71,7 @@ exit of the unrecognised prompt.
   > #### Calling GUI from console
   >
   > Emacs has a graphical user interface mode. When you call it from the prompt,
-  > the prompt will stop responding your commands until you close Emacs.
+  > the prompt will stop responding to your commands until you close Emacs.
   >
   > <img src="img/emacs-gui.png" />
 
@@ -83,7 +83,7 @@ exit of the unrecognised prompt.
 
   To exit from `python` type `exit()` or `CTRL-D`.
 
-- If your shell prompt is `...` you have a unclosed environment inside
+- If your shell prompt is `...` you have an unclosed environment inside
   `python`.
 
   <img src="img/python-unclosed.png" />
@@ -96,7 +96,7 @@ exit of the unrecognised prompt.
 
   To exit from `ipython` type `exit()`, or `CTRL-D` then press `y`.
 
-- If your shell prompt is `...:` you have a unclosed environment inside
+- If your shell prompt is `...:` you have an unclosed environment inside
   `ipython`.
 
   <img src="img/ipython-unclosed.png" />
