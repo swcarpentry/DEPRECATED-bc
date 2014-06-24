@@ -27,7 +27,16 @@ Here is that same table with those characters visualised. Note how we have a not
 
 ## Tabs vs. Spaces
 
-Explain tabs and spaces.
+Remember typewriters? Heavy mechanical devices that used physical force to ram a piece of type on the end of a stick at a page, squashing down an inky ribbon to leave a stamped image of a letter or number. Laying out tables on these machines was a time consuming task that required a lot of patient and accurate use of the space and backspace keys. Pretty soon, typewriter manufacturers invented the `tabulate` or `tab` key, a single button that moved the current printing position a specified distance and really reduced the work that was done to layout a rudimentary table. The `tab` lives on in modern computer keyboards and has pretty much the same function: it represents a the gap between columns in a table and (usually) moves the cursor a much greater number of pixels than the space bar does. The tab key usually lives in the upper left of the keyboard.
+
+![image](img/Keyboard-left_keys.jpg)
+
+(source: [Wikipedia](http://commons.wikimedia.org/wiki/File:Keyboard-left_keys.jpg#mediaviewer/File:Keyboard-left_keys.jpg))
+
+Since `tab` and `space` are two different keys on the keyboard, the coded message the keyboard sends through to the computer when each key is pressed is completely different, the code for the `tab` key is represented `\t` while the code for the space character is usually represented `\s` (the slashes differentiate them from the usual `t` and `s` characters). This means that in strings `tabs` and `spaces` are different things to the computer. 
+
+A fly in this ointment is that the program that is showing the text strings through the screen is able to render the `\t` and `\s` however it likes. Sometimes the program will show the `\t` as say, 40 empty pixels and the  `\s` as 10 pixels but could display them both as 10. It could even choose to show them as completely different characters, a common thing is to show `\t` as arrows. So we can't trust what we see on screen, until we *really* know the program we are using to edit text. When we need to process the programatically we need to be very aware of the encoding differences between `tab` - `\t` and `space` - `\s` to express clearly what we want of the computer program.   
+
 
 Let's have a look at the second notebook:
 
