@@ -72,7 +72,8 @@ ALL_SRC = \
 # Other files that the site depends on.
 EXTRAS = \
        $(wildcard css/*.css) \
-       $(wildcard css/*/*.css)
+       $(wildcard css/*/*.css) \
+       $(wildcard _layouts/*.html)
 
 # Principal target files
 INDEX = $(SITE)/index.html
