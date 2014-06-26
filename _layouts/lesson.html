@@ -15,6 +15,21 @@
 
       <div class="row-fluid">
         <div class="span10 offset1">
+          {% if page.prev or page.next %}
+          <!-- start nav -->
+          <nav>
+            <ul class="pager">
+              {% if page.prev %}
+              <li class="previous"><a href="{{ page.prev | replace: ".md", ".html" }}">Previous</a></li>
+              {% endif %}
+              <li class="uplink"><a href="index.html">Index</a></li>
+              {% if page.next %}
+              <li class="next"><a href="{{ page.next | replace: ".md", ".html" }}">Next</a></li>
+              {% endif %}
+            </ul>
+          </nav>
+          <!-- end nav -->
+          {% endif %}
 	  <!-- start content -->
           {% if page.title %}
           <h1>{{page.title}}</h1>

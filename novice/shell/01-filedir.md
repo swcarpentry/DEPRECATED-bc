@@ -2,6 +2,8 @@
 layout: lesson
 root: ../..
 title: Files and Directories
+prev: 00-intro.md
+next: 02-create.md
 ---
 <div class="objectives" markdown="1">
 

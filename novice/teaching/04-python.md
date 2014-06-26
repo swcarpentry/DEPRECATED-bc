@@ -2,6 +2,8 @@
 layout: lesson
 root: ../..
 title: Programming with Python
+prev: 03-git.md
+next: 05-sql.md
 ---
 This lesson is written as an introduction to Python,
 but its real purpose is to introduce the single most important idea in programming:

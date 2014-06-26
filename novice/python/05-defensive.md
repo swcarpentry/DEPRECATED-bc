@@ -1,6 +1,8 @@
 ---
 layout: lesson
 root: ../..
+prev: 04-cond.md
+next: 06-cmdline.md
 ---
 
 ## Defensive Programming

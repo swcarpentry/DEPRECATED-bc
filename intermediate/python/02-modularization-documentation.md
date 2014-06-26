@@ -1,6 +1,8 @@
 ---
 layout: lesson
 root: ../..
+prev: 01-intro-python.md
+next: 03-qa.md
 ---
 
 # Modularization and Documentation

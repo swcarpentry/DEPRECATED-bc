@@ -1,6 +1,8 @@
 ---
 layout: lesson
 root: ../..
+prev: 02-sort-dup.md
+next: 04-calc.md
 ---
 
 ## Filtering

@@ -1,6 +1,8 @@
 ---
 layout: lesson
 root: ../..
+prev: 07-join.md
+next: 09-prog.md
 ---
 
 ## Creating and Modifying Data

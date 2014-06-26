@@ -2,6 +2,7 @@
 layout: lesson
 root: ../..
 title: Shell Reference
+next: 02-git.md
 ---
 
 #### Basic Commands

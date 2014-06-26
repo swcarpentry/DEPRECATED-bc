@@ -2,6 +2,8 @@
 layout: lesson
 root: ../..
 title: Version Control with Git
+prev: 02-shell.md
+next: 04-python.md
 ---
 Version control might be the most important topic we teach,
 but Git is definitely the most complicated tool.

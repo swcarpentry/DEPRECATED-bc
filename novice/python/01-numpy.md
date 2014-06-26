@@ -1,6 +1,7 @@
 ---
 layout: lesson
 root: ../..
+next: 02-func.md
 ---
 
 ## Analyzing Patient Data

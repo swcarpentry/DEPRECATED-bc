@@ -1,6 +1,8 @@
 ---
 layout: lesson
 root: ../..
+prev: 01-numpy.md
+next: 03-loop.md
 ---
 
 ## Creating Functions

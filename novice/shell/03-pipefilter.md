@@ -2,6 +2,8 @@
 layout: lesson
 root: ../..
 title: Pipes and Filters
+prev: 02-create.md
+next: 04-loop.md
 ---
 <div class="objectives" markdown="1">
 

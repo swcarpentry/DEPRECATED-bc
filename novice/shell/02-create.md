@@ -2,6 +2,8 @@
 layout: lesson
 root: ../..
 title: Creating Things
+prev: 01-filedir.md
+next: 03-pipefilter.md
 ---
 <div class="objectives" markdown="1">
 

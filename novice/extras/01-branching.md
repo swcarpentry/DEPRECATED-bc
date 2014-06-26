@@ -2,6 +2,7 @@
 layout: lesson
 root: ../..
 title: Branching in Git
+next: 02-review.md
 ---
 Here's where we are right now:
 

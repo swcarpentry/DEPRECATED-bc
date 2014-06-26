@@ -2,6 +2,7 @@
 layout: lesson
 root: ../..
 title: SQL Reference
+prev: 03-python.md
 ---
 
 #### Basic Queries

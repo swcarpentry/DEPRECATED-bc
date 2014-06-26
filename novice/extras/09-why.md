@@ -2,6 +2,7 @@
 layout: lesson
 root: ../..
 title: Why I Teach
+prev: 08-numbers.md
 ---
 This is my daughter Madeline:
 

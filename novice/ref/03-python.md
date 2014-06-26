@@ -2,6 +2,8 @@
 layout: lesson
 root: ../..
 title: Python Reference
+prev: 02-git.md
+next: 04-sql.md
 ---
 
 #### Basic Operations

@@ -2,6 +2,8 @@
 layout: lesson
 root: ../..
 title: Working Remotely
+prev: 05-shellvar.md
+next: 07-exceptions.md
 ---
 Let's take a closer look at what happens when we use the shell
 on a desktop or laptop computer.

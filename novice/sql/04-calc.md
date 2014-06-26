@@ -1,6 +1,8 @@
 ---
 layout: lesson
 root: ../..
+prev: 03-filter.md
+next: 05-null.md
 ---
 
 ## Calculating New Values

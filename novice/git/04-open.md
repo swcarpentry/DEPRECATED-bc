@@ -2,6 +2,7 @@
 layout: lesson
 root: ../..
 title: Open Science
+prev: 03-conflict.md
 ---
 <div class="objectives" markdown="1">
 

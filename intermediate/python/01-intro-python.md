@@ -1,6 +1,7 @@
 ---
 layout: lesson
 root: ../..
+next: 02-modularization-documentation.md
 ---
 
 # Introduction

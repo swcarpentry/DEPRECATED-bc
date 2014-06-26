@@ -2,6 +2,7 @@
 layout: lesson
 root: ../..
 title: Finding Things
+prev: 05-script.md
 ---
 <div class="objectives" markdown="1">
 

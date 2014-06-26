@@ -2,6 +2,8 @@
 layout: lesson
 root: ../..
 title: Loops
+prev: 03-pipefilter.md
+next: 05-script.md
 ---
 <div class="objectives" markdown="1">
 

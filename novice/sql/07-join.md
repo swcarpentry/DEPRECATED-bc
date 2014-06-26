@@ -1,6 +1,8 @@
 ---
 layout: lesson
 root: ../..
+prev: 06-agg.md
+next: 08-create.md
 ---
 
 ## Combining Data
