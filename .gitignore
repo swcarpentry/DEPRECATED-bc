@@ -1,0 +1,8 @@
+*.pyc
+*~
+.DS_Store
+.ipynb_checkpoints
+_site
+book.md
+*/*/*_files/*/*/*.text
+*/*/*_files/*/*/*.html

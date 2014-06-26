@@ -1,0 +1,55 @@
+/* pre blocks inherit color from parent */
+pre {
+    color: inherit;
+}
+
+/* Comments in code. */
+.comment {
+    color: purple;
+}
+
+/* Highlighted changes in code. */
+.highlight {
+    background-color: mistyrose;
+}
+
+/* Manual input. */
+.in {
+    color: darkgreen;
+    margin-left: 20px;
+}
+
+/* Program output. */
+.out {
+    color: darkblue;
+    margin-left: 20px;
+}
+
+/* Error output. */
+.err {
+    color: darkred;
+    margin-left: 20px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+/* Files. */
+.file {
+    margin-left: 20px;
+}
+
+/* Explanatory call-out boxes. */
+div.box {
+    background-color: lightgray;
+}
+
+/* Challenge questions. */
+div.challenge {
+    background-color: lightblue;
+}
+
+/* Key points in summary. */
+div.keypoints {}
+
+/* Learning objectives. */
+div.objectives {}

@@ -1,0 +1,54 @@
+---
+---
+<!DOCTYPE html>
+<html>
+  <head>
+    {% if page.title %}
+      <title>{{ page.title }}</title>
+    {% endif %}
+    {% include header.html %}
+    <link rel="stylesheet" type="text/css" href="{{page.root}}/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="{{page.root}}/css/book.css" />
+  </head>
+  <body>
+    <div class="container">
+      {% include banner.html %}
+
+      <div class="row-fluid">
+        <div class="span10 offset1">
+
+	  <div align="center">
+	    <h1 class="title">Software Carpentry
+              <span class="subtitle">Volume 1: Basics</span>
+              <span class="subtitle">edited by Greg Wilson</span>
+            </h1>
+	  </div>
+
+	  <div class="toc">
+	    <ul>
+	      <li><a href="#introduction">Introduction</a></li>
+	      <li><a href="#our-team">Our Team</a></li>
+	      <li><a href="#the-unix-shell">The Unix Shell</a></li>
+	      <li><a href="#version-control-with-git">Version Control with Git</a></li>
+	      <li><a href="#programming-with-python">Programming with Python</a></li>
+	      <li><a href="#using-databases-and-sql">Using Databases and SQL</a></li>
+	      <li><a href="#a-few-extras">A Few Extras</a></li>
+	      <li><a href="#instructors-guide">Instructor's Guide</a></li>
+	      <li><a href="#reference">Reference</a></li>
+	      <li><a href="#recommended-reading">Recommended Reading</a></li>
+	      <li><a href="#glossary">Glossary</a></li>
+	      <li><a href="#the-rules">The Rules</a></li>
+	      <li><a href="#licenses">Licenses</a></li>
+	    </ul>
+	  </div>
+
+          {{content}}
+
+	</div>
+      </div>
+
+      {% include footer.html %}
+    </div>
+    {% include javascript.html %}
+  </body>
+</html>

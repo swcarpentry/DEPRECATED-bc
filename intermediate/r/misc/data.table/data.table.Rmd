@@ -1,0 +1,138 @@
+# Introduction to data.table
+
+What is the `data.table` package for and why would you want to use it?  Doesn't base R come with data frames build in already? Turns out that there are some things that can be done MUCH faster and more easily with data.table. 
+
+## Installation
+
+```{r install, eval=FALSE}
+install.packages(c("data.table", "microbenchmark"))
+```
+
+```{r load}
+library(data.table)
+library(microbenchmark)
+```
+
+## Read in a file
+
+Almost every analysis project in R will require the loading of data. `data.table` can read in files more efficiently than the standard functions in R, including `read.csv()`, `read.table()`, or `scan()`. This means that large files load fast.  Let's take a look at the function `fread()`. 
+
+```{r fread}
+# First we make a data frame (10,000 rows long) and write it to a csv file, which we'll read in in the next step
+df <- data.frame(a = 1:10^4, b = 1:10^4)
+write.table(df, file="test.csv", sep=",", row.names=FALSE)
+
+# instead of using read.csv(), we use fread(), a function provided in the data.frame library
+fread("test.csv")
+
+# We can track the amount of time a command takes to execute using the microbenchmark() function
+(op <- microbenchmark(
+  read.csv("test.csv"),
+  fread("test.csv"),
+  times=100))
+
+# Visualize the difference in timing
+plot(op)
+
+# much faster!
+
+# and, just to prove they're identical once read in, we compare the two data sets to one another with identical()
+identical(data.frame(fread("test.csv")), read.csv("test.csv"))
+```
+
+If you did this with a larger dataset, say 10^6 rows long (ca. 13.8 MB), then the speed up becomes really meaningful (almost 60x faster):
+
+```
+(op <- microbenchmark(
+  read.csv("test.csv"),
+  fread("test.csv")))
+
+Unit: milliseconds
+                 expr        min         lq    median        uq       max neval
+ read.csv("test.csv") 2844.94893 3282.67950 3440.3038 3708.6769 5758.1040   100
+    fread("test.csv")   87.05953   94.19449  131.1998  169.6652  429.7068   100
+```
+
+## Combine data.frames
+
+`data.table` can do more than just read in files though.  Another often-completed task is combining two data.frames.  Let compare the base R approach to the `data.table` version.
+
+```{r rbindlist}
+# First we'll create two distinct data frames to join together 
+df1 <- data.frame(a = 1:4, b = letters[1:4])
+df2 <- data.frame(a = 5:8, b = letters[5:8])
+
+# put them into a list 
+l <- list(df1, df2)
+
+# first, the base R version:
+do.call(rbind, l)
+
+# then the data.table version, rbindlist()
+rbindlist(l)
+```
+
+This too is much faster with the data.table `rbindlist()` than with the base R `rbind()`.  To show the difference, we'll do the same procedure with data.frames 1 million rows long.
+
+```{r rbindlisttiming}
+df3 <- data.frame(a = 1:10^6, b = 1:10^6)
+df4 <- data.frame(a = 1:10^6, b = 1:10^6)
+l <- list(df3, df4)
+
+system.time( do.call(rbind, l) )
+system.time( rbindlist(l) )
+
+microbenchmark(
+  do.call(rbind, l),
+  rbindlist(l))
+# as you can see, rbindlist() is many times faster than base R's rbind() function
+```
+
+## Fast manipulation
+
+Data table inherits from data.frame.  That means that `data.table` objects can also be used in functions that require data frames.  In addition, however, data.table objects can also be accessed with a completely different syntax, that is in many ways similar to SQL queries.  
+
+The general syntax is (where DT is a data.table):    
+`DT[where,select|update,group by][having][order by][ ]...[ ]`
+
+This syntax enables all sorts of powerful manipulations and subsetting of data.tables, but one simple application of this that we describe here is that using this `data.table` syntax, you can perform fast manipulation of subsets of `data.table` objects.  In base R, the `tapply()` function is often used to calculate sums, means, or other statistics on the data in one column based on the categorical values in a second column, but in `data.table` this is built in to the syntax.  You can check out [this link](http://datatable.r-forge.r-project.org/datatable-faq.pdf) for more info.
+
+We'll need the `diamonds` dataset from the `ggplot2` package.
+
+```{r eval=FALSE}
+install.packages("ggplot2")
+```
+
+
+```{r grouping}
+# first we make a data.table object and fill it with some random numbers
+library(ggplot2)
+data(diamonds)
+head(diamonds)
+diamonds_dt <- data.table(diamonds)
+# DT <- data.table(x = rep(letters, 3847), v = rnorm(100022)) 
+
+# calculate the sum of the Sepal.Length column (leaving the first argument blank applies the sum() function over all rows)
+diamonds_dt[,sum(price)]
+
+# calculate the sum of the values in the Sepal.Length column, grouped by the categorical values in the Species column
+diamonds_dt[,sum(price),by=color]
+
+# More than 3 times faster than tapply(). Because both functions are pretty fast, we replicate sthe function calls 100 times to show the difference.
+microbenchmark(
+  tapply=tapply(diamonds$price, diamonds$color, sum),
+  data.table=diamonds_dt[,sum(price),by=color],
+  times=100)
+```
+
+
+## Some common tasks in both Base R and data.table
+
+Task | Base R  | data.table
+------------- | ------------- | -------------
+Creation | data.frame(...) | data.table(...)
+Select column | x[,"column"]  | x[,column]
+First 6 rows | head(x)  | head(x)
+Grouping | tapply(x$col1,x$col2,sum) | x[,sum(col1),by=col2]
+Combine two data.frame's | rbind(df1,df2) | rbindlist(list(df1,df2))
+Merge data.frame's | merge(df1,df2) | DT1[DT2]

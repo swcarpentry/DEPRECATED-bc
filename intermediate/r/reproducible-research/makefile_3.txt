@@ -1,0 +1,29 @@
+all: pdf word
+
+pdf: $(patsubst %.Rmd, %.pdf, $(wildcard *.Rmd))	
+word: $(patsubst %.Rmd, %.docx, $(wildcard *.Rmd))	
+
+
+%.md: %.Rmd
+	Rscript -e "library(knitr); knit('$<')"	
+
+%.pdf:	%.md citations.bib
+	pandoc $< -o $@ --bibliography citations.bib 
+
+%.docx:	%.md citations.bib
+	pandoc $< -o $@ --bibliography citations.bib 
+
+
+clean: 
+	#rm temp_files.md	
+
+
+# Notes
+# $< are the input files. I.e the .md file in a pandoc command
+# $@ is the output file.
+
+
+# If I don't want to use wildcard and just want to list files. 
+# then the following example also works
+#           $(patsubst %.c,%.o,x.c.c bar.c)
+# produces the value ‘x.c.o bar.o’.

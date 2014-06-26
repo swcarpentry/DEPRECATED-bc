@@ -1,0 +1,232 @@
+---
+layout: bootcamp
+root: .
+venue: Euphoric State University
+address: 123 College Street, Euphoria
+country: United-States
+humandate: Feb 17-18, 2020
+humantime: 9:00 am - 4:30 pm
+startdate: 2020-06-17
+enddate: 2020-06-18
+latlng: 41.7901128,-87.6007318
+registration: restricted
+instructor: ["Grace Hopper", "Alan Turing"]
+helper: ["John von Neumann"]
+contact: admin@software-carpentry.org
+---
+<!--
+    Edit the values in the parameter block above to be appropriate for your bootcamp.
+    Please use three-letter month names for the 'humandate' field.
+-->
+
+<!-- Remove the block below. -->
+<div align="center">
+  <p><strong><em>
+      This page is a template for bootcamp home pages.
+      <br/>
+      Please see
+      <a href="//github.com/swcarpentry/bc">github.com/swcarpentry/bc</a>
+      for instructions on how to create
+      a repository for your bootcamp.
+  </em></strong></p>
+</div>
+
+<!--
+    This block includes the Eventbrite registration widget if 'eventbrite' has been set in the header.
+-->
+{% if page.eventbrite %}
+<iframe src="//www.eventbrite.com/tickets-external?eid={{page.eventbrite}}&ref=etckt" frameborder="0" width="100%" scrolling="auto"></iframe>
+{% endif %}
+
+<h2>General Information</h2>
+
+<p>
+  <a href="//software-carpentry.org">Software Carpentry</a>'s mission
+  is to help scientists and engineers become more productive
+  by teaching them basic lab skills for computing
+  like program design, version control, data management, and task automation.
+  This two-day hands-on bootcamp will cover basic concepts and tools;
+  participants will be encouraged to help one another
+  and to apply what they have learned to their own research problems.
+</p>
+
+<!-- This block displays the instructors' names if they are available. -->
+{% if page.instructor %}
+<p>
+  <strong>Instructors:</strong>
+  {{page.instructor | join: ', ' %}}
+</p>
+{% endif %}
+
+<!-- This block displays the helpers' names if they are available. -->
+{% if page.helper %}
+<p>
+  <strong>Helpers:</strong>
+  {{page.helper | join: ', ' %}}
+</p>
+{% endif %}
+
+<!--
+    Modify this block to reflect the target audience for your bootcamp.
+    In particular, if it is only open to people from a particular institution,
+    or if specialized prerequisite knowledge is required, please mention that.
+-->
+<p>
+  <strong>Who:</strong>
+  The course is aimed at graduate students and other researchers.
+</p>
+
+<!--
+    This block displays the address and links to a map showing directions.
+-->
+{% if page.latlng %}
+<p>
+  <strong>Where:</strong>
+  {{ page.address }}.
+  Get directions with
+  <a href="//www.openstreetmap.org/?mlat={{ page.latlng | replace:',','&mlon=' }}&zoom=16">OpenStreetMap</a>
+  or
+  <a href="//maps.google.com/maps?q={{ page.latlng }}">Google Maps</a>.
+</p>
+{% endif %}
+
+<!--
+    Modify the block below if there are any special requirements.
+-->
+<p>
+  <strong>Requirements:</strong>
+  Participants must bring a laptop with a few specific software packages installed
+  (listed below).
+</p>
+
+<!--
+    This block automatically inserts a contact email address if one has been specified for the page.
+    If one hasn't, this block inserts the generic contact address for Software Carpentry.
+-->
+<p>
+  <strong>Contact</strong>:
+  Please mail
+  {% if page.contact %}
+    <a href='mailto:{{page.contact}}'>{{page.contact}}</a>
+  {% else %}
+    <a href='mailto:{{site.contact}}'>{{site.contact}}</a>
+  {% endif %}
+  for more information.
+</p>
+
+<hr/>
+
+<!--
+    Edit this block to show the schedule for your bootcamp.
+-->
+<h2>Schedule</h2>
+
+<div class="row-fluid">
+  <div class="span6">
+    <h3>Day 1</h3>
+    <table class="table table-striped">
+      <tr> <td>09:00</td> <td>Automating tasks with the Unix shell</td> </tr>
+      <tr> <td><em>10:30</em></td> <td><em>Coffee break</em></td> </tr>
+      <tr> <td>12:00</td> <td>Lunch break</td> </tr>
+      <tr> <td>13:00</td> <td>Building programs with Python</td> </tr>
+      <tr> <td><em>14:30</em></td> <td><em>Coffee break</em></td> </tr>
+      <tr> <td>16:00</td> <td>Wrap-up</td> </tr>
+    </table>
+  </div>
+  <div class="span6">
+    <h3>Day 2</h3>
+    <table class="table table-striped">
+      <tr> <td>09:00</td> <td>Version control with Git</td> </tr>
+      <tr> <td><em>10:30</em></td> <td><em>Coffee break</em></td> </tr>
+      <tr> <td>12:00</td> <td>Lunch break</td> </tr>
+      <tr> <td>13:00</td> <td>Managing data with SQL</td> </tr>
+      <tr> <td><em>14:30</em></td> <td><em>Coffee break</em></td> </tr>
+      <tr> <td>16:00</td> <td>Wrap-up</td> </tr>
+    </table>
+  </div>
+</div>
+
+<hr/>
+
+<!--
+    Edit this block to show what topics will be covered.
+-->
+<h2>Syllabus</h2>
+
+<div class="row-fluid">
+  <div class="span6">
+    <h3>The Unix Shell</h3>
+    <ul>
+      <li>Files and directories: <code>pwd</code>, <code>cd</code>, <code>ls</code>, <code>mkdir</code>, ...</li>
+      <li>History and tab completion</li>
+      <li>Pipes and redirection</li>
+      <li>Looping over files</li>
+      <li>Creating and running shell scripts</li>
+      <li>Finding things: <code>grep</code>, <code>find</code>, ...</li>
+      <li><a href="novice/ref/01-shell.html">Reference...</a></li>
+    </ul>
+  </div>
+  <div class="span6">
+    <h3>Programming in Python</h3>
+    <ul>
+      <li>Using libraries</li>
+      <li>Working with arrays</li>
+      <li>Reading and plotting data</li>
+      <li>Creating and using functions</li>
+      <li>Loops and conditionals: <code>for</code>, <code>if</code>, <code>else</code>, ...</li>
+      <li>Defensive programming</li>
+      <li>Using Python from the command line</li>
+      <li><a href="novice/ref/03-python.html">Reference...</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span6">
+    <h3>Version Control with Git</h3>
+    <ul>
+      <li>Creating a repository</li>
+      <li>Recording changes to files: <code>add</code>, <code>commit</code>, ...</li>
+      <li>Viewing changes: <code>status</code>, <code>diff</code>, ...</li>
+      <li>Ignoring files</li>
+      <li>Working on the web: <code>clone</code>, <code>pull</code>, <code>push</code>, ...</li>
+      <li>Resolving conflicts</li>
+      <li>Open licenses</li>
+      <li>Where to host work, and why</li>
+      <li><a href="novice/ref/02-git.html">Reference...</a></li>
+    </ul>
+  </div>
+  <div class="span6">
+    <h3>Managing Data with SQL</h3>
+    <ul>
+      <li>Reading and sorting data</li>
+      <li>Filtering with <code>where</code></li>
+      <li>Calculating new values on the fly</li>
+      <li>Handling missing values</li>
+      <li>Combining values using aggregation</li>
+      <li>Combining information from multiple tables using <code>join</code></li>
+      <li>Creating, modifying, and deleting data</li>
+      <li>Programming with databases</li>
+      <li><a href="novice/ref/04-sql.html">Reference...</a></li>
+    </ul>
+  </div>
+</div>
+
+<hr/>
+
+<!--
+    Edit the setup instructions in _includes/setup.html to reflect your bootcamp.
+    (In particular, most bootcamps teach either Python or R, not both.)
+-->
+
+<h2>Setup</h2>
+
+<p>
+  To participate in a Software Carpentry bootcamp, 
+  you will need working copies of the software described below.
+  Please make sure to install everything
+  (or at least to download the installers)
+  <em>before</em> the start of your bootcamp.
+</p>
+
+{% include setup.html %}
