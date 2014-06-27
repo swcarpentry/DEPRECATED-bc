@@ -3,232 +3,227 @@ layout: lesson
 root: ../..
 ---
 
-## A note to students and instructors
+## Visualizing Spatial Data
 
-This lesson requires the [Basemap](http://matplotlib.org/basemap) toolkit for
-Matplotlib. This library is not distributed with Matplotlib directly. If you are
-using Continuum's Anaconda distribution, you can obtain the library using:
 
-    conda install basemap
+<div>
+<h2 id="objectives">Objectives</h2>
+<ul>
+<li>Explain what a library is, and what libraries are used for.</li>
+<li>Load a Python library and use the things it contains.</li>
+<li>Read tabular data from a file into a program.</li>
+<li>Display simple visualizations of the data</li>
+</ul>
+</div>
 
-If you are using Enthought Canopy and have the full version or an academic
-license, Basemap should already be installed on your system. Otherwise, you will
-need to follow the [installation
-instructions](http://matplotlib.org/basemap/users/installing.html) on the
-Basemap documentation. Using one of the two scientific distributions is
-preferred in most instances.
+
+<div>
+<blockquote>
+<h2>A note to students and instructors</h2>
+<p>This lesson requires the <a href="http://matplotlib.org/basemap">Basemap</a> toolkit for Matplotlib. This library is not distributed with Matplotlib; if you are using Continuum's Anaconda distribution, you can obtain it by running:</p>
+<pre><code>conda install basemap</code></pre>
+<p>If you are using Enthought Canopy and have the full version or an academic license, Basemap should already be installed on your system. Otherwise, you will need to follow the <a href="http://matplotlib.org/basemap/users/installing.html">installation instructions</a> in the Basemap documentation. Using one of the two scientific distributions is preferred in most instances.</p>
+</blockquote>
+</div>
 
 ## Visualizing spatial data
 
-Original materials by <a href="https://github.com/synapticarbors">Joshua
-Adelman</a>; modified by <a href="http://www.randalolson.com/">Randy Olson</a>
-
-We are examining some simple spatial coordinate data, specifically the location
-of all of the previous Software Carpentry bootcamps. The data set is stored in
-[comma-separated values](../../gloss.html#csv) (CSV) format. After the header
-line (marked with a `#`), each row contains the latitude and longitude for each
-bootcamp, separated by a comma.
-
-    # Latitude, Longitude
-    43.661476,-79.395189
-    39.332604,-76.623190
-    45.703255, 13.718013
-    43.661476,-79.395189
-    39.166381,-86.526621
-    ...
 
-We want to:
-
-* Load the data into our analysis environment
-* Inspect the data
-* Visualize it in a meaningful context
+<div>
+<p>We are examining some simple spatial coordinate data, specifically the location of all of the previous Software Carpentry bootcamps. The data set is stored in <a href="../../gloss.html#csv">comma-separated values</a> (CSV) format. After the header line marked with a <code>#</code>, each row contains the latitude and longitude for each bootcamp, separated by a comma:</p>
+<pre><code># Latitude, Longitude
+43.661476,-79.395189
+39.332604,-76.623190
+45.703255, 13.718013
+43.661476,-79.395189
+39.166381,-86.526621
+...</code></pre>
+<p>We want to:</p>
+<ul>
+<li>load the data into our analysis environment;</li>
+<li>inspect the data; and</li>
+<li>visualize it.</li>
+</ul>
+</div>
+
+### Loading the Data
+
+
+<div>
+<p>In order to work with the coordinates stored in the file, we need to <a href="../../gloss.html#import">import</a> a library called NumPy that is designed to handle arrays of data.</p>
+</div>
+
+
+<div class="in">
+<pre>import numpy as np</pre>
+</div>
+
+
+<div>
+<p>It's very common to create an <a href="../../gloss.html#alias-library">alias</a> for a library when importing it in order to reduce the amount of typing we have to do. We can now refer to this library in the code as <code>np</code> instead of typing out <code>numpy</code> each time we want to use it.</p>
+<p>We can now ask NumPy to read our data file:</p>
+</div>
+
 
-To do this, we'll begin to delve into working with Python and do a bit of
-programming.
+<div class="in">
+<pre>lat, lon = np.loadtxt(&#39;swc_bc_coords.csv&#39;, delimiter=&#39;,&#39;, unpack=True)</pre>
+</div>
 
-## Objectives
 
-*   Explain what a library is, and what libraries are used for.
-*   Load a Python library and use the things it contains.
-*   Read tabular data from a file into a program.
-*   Display simple visualizations of the data
+<div>
+<p>The expression <code>np.loadtxt(...)</code> means, &quot;Run the function <code>loadtxt</code> that belongs to the <code>numpy</code> library.&quot; This <a href="../../gloss.html#dotted-notation">dotted notation</a> is used everywhere in Python to refer to the parts of larger things.</p>
+<p><code>np.loadtxt</code> has three <a href="../../gloss.html#parameter">parameters</a>:</p>
+<ol style="list-style-type: decimal">
+<li>the name of the file we want to read,</li>
+<li>the <a href="../../gloss.html#delimiter">delimiter</a> that separates values on a line, and</li>
+<li>a <a href="../../gloss.html#flag">flag</a> called <code>unpack</code>.</li>
+</ol>
+<p>The first two parameters both need to be <a href="../../gloss.html#string">character strings</a> (or strings for short), so we put them in quotes. Setting <code>unpack</code> to <code>True</code> tells <code>np.loadtxt</code> to take the first and second column of data and give them back to us separately so that we can <a href="../../gloss.html#assignment">assign</a> them to the two <a href="../../gloss.html#variable">variables</a> <code>lat</code> and <code>lon</code>.</p>
+<blockquote>
+<h4>Trying to be Helpful</h4>
+<p><code>np.loadtxt</code> automatically skips the line with the header information (the one starting with '#'), since it recognizes that this line is a <a href="../../gloss.html#comment">comment</a> and does not contain numerical data.</p>
+</blockquote>
+<p>When we are finished typing and press Shift+Enter, the notebook runs our command. <code>lat</code> and <code>lon</code> now contain our data, which we can inspect by printing either of the variables:</p>
+</div>
 
-### Loading the data
 
-In order to work with the coordinates stored in the file, we need to
-[import](../../gloss.html#import) a library called NumPy that is designed to
-easily handle arrays of data.
+<div class="in">
+<pre>print lat</pre>
+</div>
 
+<div class="out">
+<pre>[ 43.661476  39.332604  45.703255  43.661476  39.166381  36.802151
+  37.808381  41.790113  41.744949  51.559882  42.727288  54.980095
+  53.523454  49.261715  39.32758   48.831673  42.359133  43.47013
+  44.632261  43.783551  53.948193  59.939959  40.808078  40.428267
+  37.875928  49.261715  37.8695    54.980095  34.141411  38.831513
+  51.757137  43.261328  38.648056  32.89533   34.227425  21.300662
+  55.945328  30.283599  49.261715  41.790113  45.417417  43.469128
+  49.261715  48.264934  43.647118  48.53698   40.808078  37.228384
+  49.261715 -33.773636 -37.825328  47.655965  37.875928  38.031441
+  33.900058  41.744949  22.3101    32.236358  51.524789 -33.929492
+  53.467102  37.8695    53.478349  48.82629   39.291389  43.07718   52.33399
+  54.32707   39.07141   37.42949   37.875928  43.64712   51.759865
+  38.54926   36.00803   50.060833  36.00283   40.03131   42.388889
+  53.52345   50.937716  42.35076   41.789722  49.276765  32.887151
+  41.790113  42.3625    30.283599 -43.523333  35.20859   59.939959
+  30.538978  39.166381  51.377743  37.228384  41.7408    41.70522   47.655
+  40.443322  44.968657  38.958455  32.30192   43.07718   41.66293
+  51.457971  43.468889  42.724085 -34.919159  49.261111 -37.9083    34.052778
+  41.526667]
+</pre>
+</div>
 
-    import numpy as np
 
-It's very common to create an [alias](../../gloss.html#alias-library) for a
-library when importing it
-in order to reduce the amount of typing we have to do. We can now refer to this
-library in the code as `np` instead of typing out `numpy` each time we want to
-use it.
+<div>
+<h2 id="visualizing-the-data">Visualizing the Data</h2>
+</div>
 
-We can now ask numpy to read our data file:
 
+<div>
+<p>A lot of tools for working with data are built into NumPy's arrays. We'll explore some of them in later lessons, but for now let's just make a simple plot of the data using another library called <code>matplotlib</code>. First, let's tell the IPython Notebook that we want our plots displayed inline, rather than in a separate viewing window:</p>
+</div>
 
-    lat, lon = np.loadtxt('swc_bc_coords.csv', delimiter=',', unpack=True)
 
-The expression `np.loadtxt(...)` means,
-"Run the function `loadtxt` that belongs to the `numpy` library."
-This [dotted notation](../../gloss.html#dotted-notation) is used everywhere in
-Python
-to refer to the parts of larger things.
+<div class="in">
+<pre>%matplotlib inline</pre>
+</div>
+
 
-`np.loadtxt` has three [parameters](../../gloss.html#parameter):
-the name of the file we want to read,
-and the [delimiter](../../gloss.html#delimiter) that separates values on a line.
-These both need to be character strings (or [strings](../../gloss.html#string)
-for short),
-so we put them in quotes.
-Finally, passing the `unpack` paramter the boolean value, `True` tells
-`np.loadtxt` to take the first and second column of data and
-[assign](../../gloss.html#assignment) them to the
-[variables](../../gloss.html#variable)  `lat` and `lon`, respectively.
-A variable is just a name for some data.
-Also note that `np.loadtxt` automatically skipped the line with the header
-information, since it recognizes that
-this line is a [comment](../../gloss.html#comment) and does not contain
-numerical data.
+<div>
+<p>The <code>%</code> at the start of the line signals that this is a command for the notebook, rather than a statement in Python. Next, we will import the <code>pyplot</code> module from <code>matplotlib</code> (again using an alias to cut down on typing) and use one of the commands it defines to make plot a point for each latitude, longitude pair of data.</p>
+</div>
 
-When we are finished typing and press Shift+Enter,
-the notebook runs our command.
 
-`lat` and `lon` now contain our data, which we can inspect by just executing a
-cell with the name of a variable:
+<div class="in">
+<pre>from matplotlib import pyplot as plt
+plt.plot(lon, lat, &#39;o&#39;)</pre>
+</div>
 
+<div class="out">
+<pre>[&lt;matplotlib.lines.Line2D at 0x1060c9190&gt;]</pre>
+</div>
 
-    lat
 
+<div>
+<h4 id="challenges">Challenges</h4>
+<ol style="list-style-type: decimal">
+<li>Plot the dots with a different color according to the continent they would be on.</li>
+</ol>
+</div>
 
+## Mapping the Data
 
 
-    array([ 43.661476,  39.332604,  45.703255,  43.661476,  39.166381,
-            36.802151,  37.808381,  41.790113,  41.744949,  51.559882,
-            42.727288,  54.980095,  53.523454,  49.261715,  39.32758 ,
-            48.831673,  42.359133,  43.47013 ,  44.632261,  43.783551,
-            53.948193,  59.939959,  40.808078,  40.428267,  37.875928,
-            49.261715,  37.8695  ,  54.980095,  34.141411,  38.831513,
-            51.757137,  43.261328,  38.648056,  32.89533 ,  34.227425,
-            21.300662,  55.945328,  30.283599,  49.261715,  41.790113,
-            45.417417,  43.469128,  49.261715,  48.264934,  43.647118,
-            48.53698 ,  40.808078,  37.228384,  49.261715, -33.773636,
-           -37.825328,  47.655965,  37.875928,  38.031441,  33.900058,
-            41.744949,  22.3101  ,  32.236358,  51.524789, -33.929492,
-            53.467102,  37.8695  ,  53.478349,  48.82629 ,  39.291389,
-            43.07718 ,  52.33399 ,  54.32707 ,  39.07141 ,  37.42949 ,
-            37.875928,  43.64712 ,  51.759865,  38.54926 ,  36.00803 ,
-            50.060833,  36.00283 ,  40.03131 ,  42.388889,  53.52345 ,
-            50.937716,  42.35076 ,  41.789722,  49.276765,  32.887151,
-            41.790113,  42.3625  ,  30.283599, -43.523333,  35.20859 ,
-            59.939959,  30.538978,  39.166381,  51.377743,  37.228384,
-            41.7408  ,  41.70522 ,  47.655   ,  40.443322,  44.968657,
-            38.958455,  32.30192 ,  43.07718 ,  41.66293 ,  51.457971,
-            43.468889,  42.724085, -34.919159,  49.261111, -37.9083  ,
-            34.052778,  41.526667])
+<div>
+<p>While matplotlib provides a simple facility for visualizing numerical data in a variety of ways, we will use a supplementary toolkit called <code>Basemap</code> that enhances matplotlib to specifically deal with spatial data. We need to import this library and can do so using:</p>
+</div>
 
 
+<div class="in">
+<pre>from mpl_toolkits.basemap import Basemap</pre>
+</div>
 
-## Visualizing the data
 
-The array is a type of container defined by numpy to hold values. We will
-discuss how to manipulate arrays in more detail in another lesson.
-For now let's just make a simple plot of the data. For this, we will use another
-library called `matplotlib`. First, let's tell the IPython Notebook that we want
-our plots displayed inline, rather than in a separate viewing window:
+<div>
+<p>Now let's create a Basemap object that will allow us to project the coordinates onto map. For this example we will use a <a href="http://en.wikipedia.org/wiki/Robinson_projection">Robinson Projection</a>:</p>
+</div>
 
 
-    %matplotlib inline
+<div class="in">
+<pre>bmap = Basemap(projection=&#39;robin&#39;, lat_0=0.0, lon_0=0.0)</pre>
+</div>
 
-The `%` at the start of the line signals that this is a command for the
-notebook,
-rather than a statement in Python.
-Next,
-we will import the `pyplot` module from `matplotlib` and use one of the commands
-it defines to make plot a point for each latitude, longitude pair of data.
 
+<div>
+<p>The <code>projection</code> parameter is self-explanatory; the parameters <code>lat_0</code> and <code>lon_0</code> define the center of the map.</p>
+<p>Now that we have a map, we can use <code>pyplot</code> to create a figure to display things in, and then tell the map which features to display: coastlines, country borders, shaded continents, and so on. We do this by calling <a href="../../gloss.html#method">methods</a> of the <code>Basemap</code> object assigned to the variable <code>bmap</code>. Once we have done that, we do a bit of magic (which we'll explain below) to get the (x,y) coordinates of the cities we want to add to the plot, and then use <code>bmap.plot</code> to add markers for these cities to the map:</p>
+</div>
 
-    from matplotlib import pyplot
-    pyplot.plot(lon, lat, 'o')
 
+<div class="in">
+<pre>plt.figure(figsize=(12,12))
+bmap.drawcoastlines()
+bmap.drawcountries()
+bmap.fillcontinents()
+bmap.drawmeridians(np.arange(-180,180,20))
+bmap.drawparallels(np.arange(-90,90,20))
 
+x, y = bmap(lon, lat)
+bmap.plot(x, y, &#39;o&#39;, markersize=4, color=&#39;red&#39;)</pre>
+</div>
 
+<div class="out">
+<pre>[&lt;matplotlib.lines.Line2D at 0x108dcc2d0&gt;]</pre>
+</div>
 
-    [<matplotlib.lines.Line2D at 0x10690d490>]
 
+<div>
+<p>The bit of magic we mentioned above is the line:</p>
+<pre><code>x, y = bmap(lon, lat)</code></pre>
+<p>If we give <code>bmap</code> the longitudes and latitudes of a set of points, it will give us back their (x,y) locations in meters. We can then ask <code>bmap</code> to plot those.</p>
+<blockquote>
+<h4>Room for Improvement</h4>
+<p>Using the <code>bmap</code> object as if it were a function is confusing: a better design would have been to give it another method for coordinate conversion. What's even more confusing is that we have to pass longitude and latitude instead of the usual latitude and longitude. This actually does correspond to X and Y, which is presumably why the authors of this code chose to do things this way, but it's still a rich source of errors.</p>
+</blockquote>
+</div>
 
 
+<div>
+<h4 id="challenges">Challenges</h4>
+<ol style="list-style-type: decimal">
+<li><p>Integrate the coloring scheme from Exercise 1 into the Basemap projection.</p></li>
+<li><p>Try out a different projection that better shows the boot camp locations in North America. (You can find a list of projections in the <a href="http://matplotlib.org/basemap/users/mapsetup.html">Basemap documentation</a>.)</p></li>
+</ol>
+</div>
 
-![png](spatial-intro_files/spatial-intro_17_1.png)
 
-
-### Exercise 1
-
-Plot the dots with a different color according to the continent they would be
-on.
-
-
-    
-
-While matplotlib provides a simple facility for visualizing numerical data in a
-variety of ways, we will use a supplementary toolkit called *Basemap* that
-enhances matplotlib to specifically deal with spatial data. We need to import
-this library and can do so using:
-
-
-    from mpl_toolkits.basemap import Basemap
-
-Now let's create a Basemap object that will allow us to project the coordinates
-onto map. For this example we are going to use a [Robinson
-Projection](http://en.wikipedia.org/wiki/Robinson_projection).
-
-
-    basemap_graph = Basemap(projection='robin', lat_0=0.0, lon_0=0.0)
-
-The parameters `lat_0` and `lon_0` define the center of the map. Now let's add
-some features to our map using methods defined by the `bm` object. We will also
-use the object itself to get the coordinates of the bootcamps in the projection
-given our original longitudes and latitudes. We will also tell pyplot to make
-the figure 12 inches by 12 inches to make it more legible.
-
-
-    pyplot.figure(figsize=(12,12))
-    basemap_graph.drawcoastlines()
-    basemap_graph.drawcountries()
-    basemap_graph.fillcontinents()
-    basemap_graph.drawmeridians(np.arange(-180,180,20))
-    basemap_graph.drawparallels(np.arange(-90,90,20))
-    
-    x, y = basemap_graph(lon, lat)
-    basemap_graph.plot(x, y, 'o', markersize=4, color='red')
-
-
-
-
-    [<matplotlib.lines.Line2D at 0x107f94d90>]
-
-
-
-
-![png](spatial-intro_files/spatial-intro_26_1.png)
-
-
-The final line of the above code cell mimics matplotlib's built-in `plot` method
-to plot our projected coordinates onto the map.
-
-With just a handful of lines of code, you see that we can create a rich
-visualization of our data.
-
-### Exercise 2
-
-1. Integrate the coloring scheme from Exercise 1 into the Basemap projection.
-2. Try out a different projection that better shows the boot camp locations in
-North America. Here is the list of projections in Basemap:
-http://matplotlib.org/basemap/users/mapsetup.html
-
-
-    
+<div>
+<h4 id="key-points">Key Points</h4>
+<ul>
+<li>Import a library into a program using <code>import libraryname</code>.</li>
+<li>Use the <code>numpy</code> library to work with arrays in Python.</li>
+<li>Use the <code>pyplot</code> library from <code>matplotlib</code> for creating simple visualizations.</li>
+<li>The <code>basemap</code> library can be used to augment <code>matplotlib</code> to visualize spatial data.</li>
+</ul>
+</div>
