@@ -98,7 +98,6 @@ Place each function into a separate R script and add documentation like this:
 #'
 #' This function converts input temperatures in Fahrenheit to Kelvin.
 #' @param temp The input temperature.
-#' @keywords fahrenheit kelvin temperature
 #' @export
 #' @examples
 #' fahr_to_kelvin(32)
@@ -110,6 +109,8 @@ fahr_to_kelvin <- function(temp) {
 }
 ```
 
+The `roxygen2` package reads lines that begin with `#'` as comments to create the documentation for your package.
+Descriptive tags are preceded with the `@` symbol. For example, `@param` has information about the input parameters for the function.
 Now, we will use `roxygen2` to convert our documentation to the standard R format.
 
 ```{r, eval=FALSE}
@@ -120,15 +121,22 @@ document()
 Take a look at the package directory now.
 The /man directory has a .Rd file for each .R file with properly formatted documentation.
 
-Now, let's load the package and try out the functions.
+Now, let's load the package and take a look at the documentation.
 
 ```{r, eval=FALSE}
 setwd("..")
 install("tempConvert")
+
+?fahr_to_kelvin
 ```
 
 Notice there is now a tempConvert environment that is the parent environment to the global environment.
-Choosing the tempConvert environment will show the functions associated with our new package.
+
+```{r, eval=FALSE}
+search()
+```
+
+Now that our package is loaded, let's try out some of the functions.
 
 ```{r}
 fahr_to_celsius(32)
