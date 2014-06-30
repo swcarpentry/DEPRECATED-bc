@@ -6,13 +6,22 @@ title: Recognising prompts and how to exit
 
 #### I don't recognise my prompt...where am I?
 
-If the top of your shell window shows...
+-----
+
+**If the top of your shell window shows...**
 
     GNU nano
 
 ...you are in the `nano` text editor.
 
-If your shell window shows...
+**To exit `nano`:**
+
+* Press `CTRL-X`
+* If you have unsaved changes, you will be asked to save these - press `y` to save, or `n` to quit without saving.
+
+-----
+
+**If your shell window shows...**
 
     ~
     ~
@@ -22,100 +31,80 @@ If your shell window shows...
 
 ...you are in the `vi` text editor.
 
-If the bottom of your shell window shows...
+**To exit `vi`:**
+
+* Press `ESC` then type `:q!` to exit without saving.
+* To save your changes, after `ESC`, type `:wq`
+-----
+
+**If the bottom of your shell window shows...**
 
     filename.txt  (Fundamental) ----
-
-...you are in the `emacs` or `xemacs` text editor.
-
-If the bottom of your shell window shows...
+or:
 
     XEmacs: filename.txt  (Fundamental) ----
 
-...you are in the `xemacs` text editor.
+...you are in the `emacs` or `xemacs` text editor.
 
-If your shell prompt is...
+**To exit `emacs` or `xemacs`:**
+
+* Press `CTRL-X CTRL-C`
+* If you have unsaved changes, you will be asked to save these - press `y` to save, or `n` then type `yes` to quit without saving.
+
+-----
+
+**If your shell prompt is...**
 
     >>>
 
 ... you are in `python`.
 
-If your shell prompt is...
+**To exit `python`:**
+
+* Type `exit()` or `CTRL-D`
+
+-----
+
+**If your shell prompt is...**
 
     In [123]:
 
 ...you are in `ipython`.
 
-If your shell prompt is...
-
-    >
-
-...you may have typed `'` or `"`, to specify a string, as part of a shell command but have not typed another `'` or `"` to close the string.
-
-If the bottom-left of your shell window shows...
-
-    --More--(...%)
-
-...you are viewing a file using `more`.
-
-If the bottom-left of your shell window shows...
-
-    filename.txt
-
-...you may be viewing a file using `less`.
-
-If the bottom-left of your shell window shows...
-
-    (END)
-
-...you may be viewing a file using `less`.
-
-If the bottom-left of your shell window shows...
-
-    :
-
-...you may be viewing a file using `less` or viewing a `man` page.
-
-If the bottom-left of your shell window shows...
-
-    Manual page...
-
-...you are viewing  a `man` page.
-
-#### How do I exit from...
-
-`nano`:
-
-* Press `CTRL-X`
-* If you have unsaved changes, you will be asked to save these - press `y` to save, or `n` to quit without saving.
-
-`vi`:
-
-* Type `:q!` to exit without saving.
-* If this text just appears on screen then press `ESC` then type `:q!`
-
-`emacs` or `xemacs`:
-
-* Press `CTRL-X CTRL-C`
-* If you have unsaved changes, you will be asked to save these - press `y` to save, or `n` then type `yes` to quit without saving.
-
-`python`:
-
-* Type `exit()` or `CTRL-D`
-
-`ipython`:
+**To exit `ipython`**:
 
 * Type `exit()`, or `CTRL-D` then press `y`
 
-`man` page:
+------
 
-* Press `q`
+**If your shell prompt is...**
 
-`more` or `less`:
+    >
 
-* Press `q`
+...you may have typed `'` or `"`, to specify a string, as part of a shell command but have not typed another `'` or `"` to close the string. You may also have an open parenthesis `(`
 
-An open string in a shell, denoted by a `>` prompt:
+**To recover from an unterminated expression:** 
 
-* If you can see on screen what the character you used to open the strin g was (`'` or `""`) then type the same character again to close the string.
+* If you can see on screen what the character you used to open the string was (`'` or `""`) then type the same character again to close the string.
 * Or, press `CTRL-C`
+
+------
+**If the bottom-left of your shell window shows...**
+
+    --More--(...%)
+or
+
+    filename.txt
+or
+
+    (END)
+or
+
+    :
+
+...you may be viewing a file using `more` or `less` or viewing a `man` page.
+
+**To exit** `more` or `less` or a `man` page:
+
+* Press `q`
+
