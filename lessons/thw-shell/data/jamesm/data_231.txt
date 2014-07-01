@@ -1,9 +1,0 @@
-# 
-Reported: Mon Jun 27 10:30:07 2011
-Subject: scarySync192
-Year/month of birth: 1997/02
-Sex: N
-CI type: 6
-Volume: 5
-Range: 7
-Discrimination: 3

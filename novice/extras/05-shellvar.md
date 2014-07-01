@@ -10,12 +10,10 @@ you can change how the shell and other programs behave.
 
 Let's start by running the command `set` and looking at some of the variables in a typical shell session:
 
-<div class="in" markdown="1">
 ~~~
 $ set
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 COMPUTERNAME=TURING
 HOME=/home/vlad
@@ -30,7 +28,7 @@ UID=1000
 USERNAME=vlad
 ...
 ~~~
-</div>
+{:class="out"}
 
 As you can see, there are quite a few&mdash;in fact, four or five times more than what's shown here.
 And yes,
@@ -69,7 +67,6 @@ As soon as it finds a match, it stops searching and runs the program.
 To show how this works,
 here are the components of `PATH` listed one per line:
 
-<div class="out" markdown="1">
 ~~~
 /Users/vlad/bin
 /usr/local/git/bin
@@ -79,7 +76,7 @@ here are the components of `PATH` listed one per line:
 /sbin
 /usr/local/bin
 ~~~
-</div>
+{:class="out"}
 
 On our computer,
 there are actually three programs called `analyze`
@@ -97,31 +94,27 @@ since the directory `/users/vlad` isn't in `PATH`.
 
 Let's show the value of the variable `HOME`:
 
-<div class="in" markdown="1">
 ~~~
 $ echo HOME
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 HOME
 ~~~
-</div>
+{:class="out"}
 
 That just prints "HOME", which isn't what we wanted
 (though it is what we actually asked for).
 Let's try this instead:
 
-<div class="in" markdown="1">
 ~~~
 $ echo $HOME
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 /home/vlad
 ~~~
-</div>
+{:class="out"}
 
 The dollar sign tells the shell that we want the *value* of the variable
 rather than its name.
@@ -134,31 +127,27 @@ which displays the right thing.
 
 Creating a variable is easy&mdash;we just assign a value to a name using "=":
 
-<div class="in" markdown="1">
 ~~~
 $ SECRET_IDENTITY=Dracula
 $ echo $SECRET_IDENTITY
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 Dracula
 ~~~
-</div>
+{:class="out"}
 
 To change the value, just assign a new one:
 
-<div class="in" markdown="1">
 ~~~
 $ SECRET_IDENTITY=Camilla
 $ echo $SECRET_IDENTITY
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 Camilla
 ~~~
-</div>
+{:class="out"}
 
 If we want to set some variables automatically every time we run a shell,
 we can put commands to do this in a file called `.bashrc` in our home directory.

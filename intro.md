@@ -75,7 +75,7 @@ and if you'd like to write lessons or exercises,
 please [let us know](mailto:admin@software-carpentry.org).
 
 To find out more,
-please visit the [http://software-carpentry.org](Software Carpentry web site)
+please visit the [Software Carpentry web site](http://software-carpentry.org)
 or read
 [these](http://www.plosbiology.org/article/info%3Adoi%2F10.1371%2Fjournal.pbio.1001745)
 [papers](http://arxiv.org/abs/1307.5448)

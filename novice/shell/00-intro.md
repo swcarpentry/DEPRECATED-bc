@@ -16,7 +16,7 @@ has just returned from a six-month survey of the
 [North Pacific Gyre](http://en.wikipedia.org/wiki/North_Pacific_Gyre),
 where she has been sampling gelatinous marine life in the
 [Great Pacific Garbage Patch](http://en.wikipedia.org/wiki/Great_Pacific_Garbage_Patch).
-She has 1520 samples in all, and now needs to:
+She has 300 samples in all, and now needs to:
 
 1.  Run each sample through an assay machine
     that will measure the relative abundance of 300 different proteins.
@@ -54,7 +54,7 @@ As a bonus,
 once she has put a processing pipeline together,
 she will be able to use it again whenever she collects more data.
 
-#### What and Why
+### What and Why
 
 At a high level, computers do four things:
 
@@ -81,11 +81,11 @@ These devices only allowed input and output of the letters, numbers, and punctua
 so programming languages and interfaces had to be designed around that constraint.
 
 This kind of interface is called a
-[command-line interface](../../gloss.html#cli), or CLI,
+[command-line interface](../../gloss.html#command-line-interface), or CLI,
 to distinguish it from the
-[graphical user interface](../../gloss.html#gui), or GUI,
+[graphical user interface](../../gloss.html#graphical-user-interface), or GUI,
 that most people now use.
-The heart of a CLI is a [read-evaluate-print loop](../../gloss.html#repl), or REPL:
+The heart of a CLI is a [read-evaluate-print loop](../../gloss.html#read-eval-print-loop), or REPL:
 when the user types a command and then presses the enter (or return) key,
 the computer reads it,
 executes it,

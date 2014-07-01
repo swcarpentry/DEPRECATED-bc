@@ -79,7 +79,7 @@ However,
 people who want to work this way need to make some decisions
 about what exactly "open" means in practice.
 
-#### Licensing
+### Licensing
 
 The first question is licensing.
 Broadly speaking,
@@ -144,11 +144,10 @@ without needing to cite the original
 or restrict further re-use.
 The table below shows how the six Creative Commons licenses and PD relate to one another:
 
+<!--- Replace the caption with colspan when it was supported by pandoc:
+https://github.com/jgm/pandoc/issues/1340 -->
 <table border="1">
-  <tr>
-    <td></td>
-    <td colspan="7" align="center">Licenses that can be used for derivative work or adaptation</td>
-  </tr>
+  <caption>Licenses that can be used for derivative work or adaptation</caption>
   <tr>
     <td>Original work</td> <td>by</td> <td>by-nc</td> <td>by-nc-nd</td> <td>by-nc-sa</td> <td>by-nd</td> <td>by-sa</td> <td>pd</td>
   </tr>
@@ -202,7 +201,7 @@ Greg Wilson: "Software Carpentry: Lessons Learned". arXiv:1307.5448, July 2013.
 ~~~
 </div>
 
-#### Hosting
+### Hosting
 
 The second big question for groups that want to open up their work
 is where to host their code and data.
@@ -220,7 +219,7 @@ would like to be sure that data will still be available ten years from now,
 but that's well beyond the lifespan of most of the grants that fund academic infrastructure.
 
 Another option is to purchase a domain
-and pay an [Internet service provider](../../../gloss.html#isp) (ISP) to host it.
+and pay an Internet service provider (ISP) to host it.
 This gives the individual or group more control,
 and sidesteps problems that can arise when moving from one institution to another,
 but requires more time and effort to set up than either
@@ -273,18 +272,16 @@ or simply because what's new is often also frightening.
 
 </div>
 
-<div class="challenges" markdown="1">
+<div class="challenge" markdown="1">
+Find out whether you are allowed to apply an open license to your software.
+Can you do this unilaterally,
+or do you need permission from someone in your institution?
+If so, who?
+</div>
 
-#### Challenges
-
-1.  Find out whether you are allowed to apply an open license to your software.
-    Can you do this unilaterally,
-    or do you need permission from someone in your institution?
-    If so, who?
-
-2.  Find out whether you are allowed to host your work openly on a public forge.
-    Can you do this unilaterally,
-    or do you need permission from someone in your institution?
-    If so, who?
-
+<div class="challenge" markdown="1">
+Find out whether you are allowed to host your work openly on a public forge.
+Can you do this unilaterally,
+or do you need permission from someone in your institution?
+If so, who?
 </div>

@@ -1,3 +1,9 @@
+---
+layout: lesson
+root: ../..
+---
+
+
 # R Objects / Data Structure
 
 R has many different structures for storing the data you want to
