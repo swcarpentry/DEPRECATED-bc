@@ -51,12 +51,12 @@ And note that we said "most widely used", not "most popular".
 Make was invented by a summer intern at Bell Labs in 1975.
 (He went on to become a vice president at IBM and Google, which shows you how far a good program can take you.)
 Over 35 years, Make has grown into a little programming language.
-A very cryptic little language, without a debugger, whose conventions and rules only make sense if you understand the Unix shell.
+It is a cryptic language, with no debugger, whose syntactical conventions and naming schemes only make sense to those familiar with the long history of the Unix operating system.
 
-The good news is, GNU Make (the de facto standard version of Make) is fast, free, and well-documented.
-And many other tools know how to work with Make.
+GNU Make is a fast, open-source, well-documented version of Make that, outside of proprietary Unix platforms, has become the de facto standard.
+Many other tools know how to work with Make.
 In particular, many integrated development environments can manage Make's build files more or less automatically,
-shielding users from the ugly details.
+sparing developers from having to deal with its cryptic syntax.
 
 In this chapter, we'll look at Make's basic features, and a few of its advanced facilities as well.
 A companion lecture to this one explores a newer build manager called SCons.
