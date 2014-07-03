@@ -150,7 +150,7 @@ We have created three standard layouts for bootcamp pages:
 Getting Started
 ---------------
 
-**These instructions only need to be followed if you are creating a new bootcamp repo, for contributing lessons or changes to lessons see CONTRIBUTING.md**
+**These instructions only need to be followed if you are creating a new bootcamp repo, for contributing lessons or changes to lessons see [CONTRIBUTING.md](CONTRIBUTING.md)**
 
 To create a website for a new bootcamp:
 
