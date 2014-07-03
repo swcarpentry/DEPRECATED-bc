@@ -241,6 +241,10 @@ A use of a function in another piece of software.
 The immediate application of one function to the result of another,
 such as `f(g(x))`.
 
+**<a name="graph">graph</a>**:
+A data structure in software consisting of nodes (containing useful data)
+connected by edges (implying relationships between nodes).
+
 **<a name="gui">graphical user interface</a>** (GUI):
 A graphical user interface,
 usually controlled by using a mouse.
