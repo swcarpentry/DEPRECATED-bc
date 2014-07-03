@@ -150,6 +150,8 @@ We have created three standard layouts for bootcamp pages:
 Getting Started
 ---------------
 
+**These instructions only need to be followed if you are creating a new bootcamp repo, for contributing lessons or changes to lessons see CONTRIBUTING.md**
+
 To create a website for a new bootcamp:
 
 1.  Create a [new repository on GitHub](https://github.com/new)
