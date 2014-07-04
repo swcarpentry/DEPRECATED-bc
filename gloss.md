@@ -146,6 +146,10 @@ The practice of writing programs that check their own operation to catch errors 
 A character or characters used to separate individual values,
 such as the commas between columns in a [CSV](#csv) file.
 
+**<a name="dependency">dependency</a>**:
+Something, usually an input file or software package, that must be available in order to continue a build or install
+See [prerequisite](#prerequisite)
+
 **<a name="docstring">docstring</a>**:
 Short for "documentation string",
 this refers to textual documentation embedded in Python programs.
@@ -306,6 +310,12 @@ or [while loop](#while-loop).
 **<a name="loop-variable">loop variable</a>**:
 The variable that keeps track of the progress of the loop.
 
+**<a name="macro">macro</a>**:
+In [Makefiles](#makefile), [variables](#variable) are often referred to as macros because they are expanded when read.
+
+**<a name="makefile">makefile</a>**:
+An input file to the `make` program. It tells `make` what to do.
+
 **<a name="member">member</a>**:
 A variable contained within an [object](#object).
 
@@ -363,6 +373,10 @@ A condition that must be true in order for a function (or other block of code) t
 **<a name="prepared-statement">prepared statement</a>**:
 A template for an [SQL](#sql) query in which some values can be filled in.
 
+**<a name="prerequisite">prerequisite</a>**:
+An input file (or list of input files) defined in a [rule](#make-rule) required to create a [target](#make-target)
+See [dependency](#dependency)
+
 **<a name="primary-key">primary key</a>**:
 One or more [fields](#field-database) in a [database table](#table-database)
 whose values are guaranteed to be unique for each [record](#record-database),
@@ -411,6 +425,9 @@ A [command-line interface](#cli) that reads a command from the user,
 executes it,
 prints the result,
 and waits for another command.
+
+**<a name="recipe">recipe</a>**:
+In a [Makefile](#makefile), a recipe is part of a [rule](#make-rule) that describes programs to run in order to create the [target](#make-target) from the [prerequisites](#prerequisite)
 
 **<a name="record-database">record</a>** (in a database):
 A set of related values making up a single entry in a [database table](#table-database),
@@ -480,6 +497,9 @@ Each color's value is typically in the range 0..255
 **<a name="root-directory">root directory</a>**:
 The top-most directory in a [filesystem](#filesystem).
 Its name is "/" on Unix (including Linux and Mac OS X) and "\\" on Microsoft Windows.
+
+**<a name="make-rule">rule</a>**:
+A series of related lines in a [Makefile](#makefile) that define a [recipe](#recipe) to turn a set of [prerequisites](#prerequisite) into a desired [target](#make-target)
 
 **<a name="search-path">search path</a>**:
 The list of directories in which the [shell](#shell) searches for programs when they are run.
@@ -571,6 +591,9 @@ pressing the Tab key triggers automatic completion of the current word or comman
 A set of data in a [relational database](#relational-database)
 organized into a set of [records](#record-database),
 each having the same named [fields](#field-database).
+
+**<a name="make-target">target</a>**:
+The goal of a [rule](#make-rule) in a [Makefile](#makefile).
 
 **<a name="test-oracle">test oracle</a>**:
 A program, device, data set, or human being
