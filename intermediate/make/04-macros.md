@@ -20,7 +20,7 @@ How should we handle this difference?
 If we start with the Makefile we've written so far,
 the brute-force approach is to just add the style files to our commands:
 
-```make
+```Makefile
 paper.pdf : paper.wdp figure-1.svg figure-2.svg
     wdp2pdf --style c:/papers/euphoric.wps $<
 
