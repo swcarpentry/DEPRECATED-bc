@@ -20,19 +20,17 @@ How should we handle this difference?
 If we start with the Makefile we've written so far,
 the brute-force approach is to just add the style files to our commands:
 
-```Makefile
-paper.pdf : paper.wdp figure-1.svg figure-2.svg
-    wdp2pdf --style c:/papers/euphoric.wps $<
+    paper.pdf : paper.wdp figure-1.svg figure-2.svg
+            wdp2pdf --style c:/papers/euphoric.wps $<
 
-figure-%.svg : summary-%.dat
-    sgr -N -r -s c:/papers/euphoric.fig $@ $^
+    figure-%.svg : summary-%.dat
+            sgr -N -r -s c:/papers/euphoric.fig $@ $^
 
-summary-%.dat : data-%-*.dat
-    stats.py $@ $^
+    summary-%.dat : data-%-*.dat
+            stats.py $@ $^
 
-data-*-*.dat : stats.py
-    touch $@
-```
+    data-*-*.dat : stats.py
+            touch $@
 
 There's some redundancy here, though: we are specifying the same directory twice.
 And notice that we haven't explicitly listed `euphoric.wps` or `euphoric.fig`
