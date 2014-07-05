@@ -1,6 +1,7 @@
 from __future__ import print_function
 import sys
 import os.path
+import re
 
 # Header required to make this a Jekyll file.
 HEADER = '''---
@@ -49,9 +50,19 @@ def fix_image_paths(filename, lines):
     '''Modify image paths to include directory.'''
     front, _ = os.path.split(filename)
     front = front.replace('cached/', '')
+
+    # Regex for Markdown
+    md_regex = r'(!\[.*\]\()(.*\))'
+    md_regex_replace = r'\1{0}/\2'.format(front)
+
+    # "Regex" for img HTML tag
     src = '<img src="'
     dst = '<img src="{0}/'.format(front)
     for (i, ln) in enumerate(lines):
+        # If using Markdown extension
+        ln = re.sub(md_regex, md_regex_replace, ln)
+
+        # If using img HTML tag
         lines[i] = ln.replace(src, dst)
     return lines
 

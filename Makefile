@@ -85,7 +85,7 @@ BOOK_HTML = $(SITE)/book.html
 # having the output index.html file depend on all the page source
 # Markdown files triggers the desired build once and only once.
 $(INDEX) : ./index.html $(ALL_SRC) $(CONFIG) $(EXTRAS)
-	 jekyll -t build -d $(SITE)
+	 jekyll build -t -d $(SITE)
 
 #----------------------------------------------------------------------
 # Create all-in-one book version of notes.
