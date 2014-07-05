@@ -48,7 +48,7 @@ In particular, it keeps track of what's up to date, and what's ready to be updat
 
 The most widely used build manager on Unix and its derivatives is called Make.
 And note that we said "most widely used", not "most popular".
-Make was invented by a summer intern at Bell Labs in 1975.
+It was invented by a summer intern at Bell Labs in 1975.
 (He went on to become a vice president at IBM and Google, which shows you how far a good program can take you.)
 Over 35 years, Make has grown into a little programming language.
 A very cryptic little language, without a debugger, whose conventions and rules only make sense if you understand the Unix shell.
