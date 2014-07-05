@@ -90,3 +90,12 @@ http://m.motherjones.com/media/2014/06/computer-science-programming-code-diversi
 Randy Olson:
 
 https://twitter.com/randal_olson/status/477970297815965697
+
+----------------------------------------
+
+http://whatever.scalzi.com/2014/04/17/the-four-levels-of-discrimination-and-you-and-me-too/
+
+http://sappingattention.blogspot.ca/2014/05/mind-gap-incomes-college-majors-gender.html
+
+http://alyssafrazee.com/gender-and-github-code.html
+
