@@ -53,13 +53,13 @@ It was invented by a summer intern at Bell Labs in 1975.
 Over 35 years, Make has grown into a little programming language.
 A very cryptic little language, without a debugger, whose conventions and rules only make sense if you understand the Unix shell.
 
-The good news is, GNU Make (the de facto standard version of Make) is fast, free, and well-documented.
+The good news is, [GNU Make](http://www.gnu.org/software/make/) (the de facto standard version of Make) is fast, free, and well-documented.
 And many other tools know how to work with Make.
 In particular, many integrated development environments can manage Make's build files more or less automatically,
 shielding users from the ugly details.
 
 In this chapter, we'll look at Make's basic features, and a few of its advanced facilities as well.
-A companion lecture to this one explores a newer build manager called SCons.
+A companion lecture to this one explores a newer build manager called [SCons](http://www.scons.org/).
 It is more powerful and more flexible than Make, but isn't nearly as widely used (yet).
-Java users should also look at Apache Ant, the standard build manager for Java.
+Java users should also look at [Apache Ant](http://ant.apache.org/), the standard build manager for Java.
 It hides many of the platform-specific details that bedevil Make, but requires users to write XML files to get things done.
