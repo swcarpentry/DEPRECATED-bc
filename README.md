@@ -264,8 +264,15 @@ and the information about your bootcamp.
 
 **Note:**
 you will need to install Jekyll 1.0.3 or later in order to preview things locally.
-If you have Ruby installed on your computer,
-this *should* be as simple as:
+
+If you are using Debian or Ubuntu or a derivative, this is as simple as:
+
+~~~
+apt-get install jekyll ruby-kramdown ruby-colored make python ipython-notebook unzip pandoc
+~~~
+
+Otherwise, to install it as a user, if you have Ruby installed on your
+computer, this *should* be as simple as:
 
 ~~~
 $ gem install github-pages
