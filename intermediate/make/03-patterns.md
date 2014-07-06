@@ -1,7 +1,7 @@
 ---
 layout: lesson
 root: ../..
-title: Rules
+title: Patterns
 level: intermediate
 ---
 Our Makefile is better than it was, but still contains a lot of redundancy.
