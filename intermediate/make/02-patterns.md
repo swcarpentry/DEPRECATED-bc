@@ -12,7 +12,7 @@ Writing a rule for exactly three files is easy&mdash;we just have one target and
     # multiple.mk
 
     summary-1.dat : data-1-1.dat data-1-2.dat data-1-3.dat
-            stats.py summary-1.dat data-1-1.dat data-1-2.dat data-1-3.dat
+        python stats.py summary-1.dat data-1-1.dat data-1-2.dat data-1-3.dat
 
 But how do we generalize that to any number of files?
 And how can we get rid of the repeated filenames?
@@ -33,7 +33,7 @@ We'd like to do better, though, so let's replace the action in the rule:
     # target-variable.mk
 
     summary-1.dat : data-1-1.dat data-1-2.dat data-1-3.dat
-            stats.py $@ data-1-1.dat data-1-2.dat data-1-3.dat
+        python stats.py $@ $^ #data-1-1.dat data-1-2.dat data-1-3.dat
 
 Instead of naming `summary-1.dat` in the rule's action, we use the rather cryptic shorthand `$@`.
 This is one of Make's [automatic variables](../../gloss.html#automatic-variable),
@@ -48,7 +48,8 @@ Let's fix that by replacing our shortened rule command like this:
     # variables.mk
 
     summary-1.dat : data-1-1.dat data-1-2.dat data-1-3.dat
-            stats.py $@ $^
+        python stats.py $@ $^
+
 
 `$^` is another automatic variable: it means "all the prerequisites of this rule".
 In this case it's the three raw data files,
@@ -70,7 +71,7 @@ What we really want is something like the shell's `*` wildcard, which matches an
     # wildcard.mk
 
     summary-1.dat : data-1-*.dat
-            stats.py $@ $^
+        python stats.py $@ $^
 
 This actually works:
 if use `data-1-*.dat` as the rule's prerequisite, it behaves just like the corresponding shell wildcard.
@@ -80,20 +81,20 @@ so we have to rely on Make to put them in an automatic variable for us on a rule
 
 Here are our dependency tree and our entire Makefile so far:
 
-    paper.pdf : paper.wdp figure-1.svg figure-2.svg
-            wdp2pdf $<
+    paper.pdf : paper.tex figure-1.svg figure-2.svg
+            cat $^ > $@
 
     figure-1.svg : summary-1.dat
-            sgr -N -r $@ $^
+        python create_figure.py $@ $^
 
     figure-2.svg : summary-2.dat
-            sgr -N -r $@ $^
+        python create_figure.py $@ $^
 
     summary-1.dat : data-1-*.dat
-            stats.py $@ $^
+        python stats.py $@ $^
 
     summary-2.dat : data-2-*.dat
-            stats.py $@ $^
+        python stats.py $@ $^
 
 There is still some redundancy:
 we have exactly the same logical rules for our two data series,
@@ -106,19 +107,19 @@ depend on `stats.py` as well as on their corresponding raw data files.
 We could try to fix this by adding `stats.py` to their prerequisite lists:
 
     paper.pdf : paper.wdp figure-1.svg figure-2.svg
-            wdp2pdf $<
+            cat $^ > $@
 
     figure-1.svg : summary-1.dat
-            sgr -N -r $@ $^
+        python create_figure.py $@ $^
 
     figure-2.svg : summary-2.dat
-            sgr -N -r $@ $^
+        python create_figure.py $@ $^
 
     summary-1.dat : stats.py data-1-*.dat
-            stats.py $@ $^
+        python stats.py $@ $^
 
     summary-2.dat : stats.py data-2-*.dat
-            stats.py $@ $^
+        python stats.py $@ $^
 
 If we do this, though, `stats.py` will appear in the value of the automatic variable `$^` for those two rules.
 This means that when we run `stats.py`,
@@ -128,14 +129,17 @@ We could "fix" this by having `stats.py` ignore files that end in `.py`, but it 
 
 A second option would be to move the dependency down, and pretend that the raw data files depend on `stats.py`:
 
+    figure-1.svg : summary-1.dat
+        python create_figure.py $@ $^
+
     figure-2.svg : summary-2.dat
-            sgr -N -r $@ $^
+        python create_figure.py $@ $^
 
     summary-1.dat : data-1-*.dat
-            stats.py $@ $^
+        python stats.py $@ $^
 
     summary-2.dat : data-2-*.dat
-            stats.py $@ $^
+        python stats.py $@ $^
 
     data-1-1.dat : stats.py
             touch $@
@@ -156,20 +160,20 @@ to add additional rules for `summary-1.dat` and `summary-2.dat`
 that add `stats.py` as a prerequisite,
 but don't have any actions:
 
-    paper.pdf : paper.wdp figure-1.svg figure-2.svg
-            wdp2pdf $<
+    paper.pdf : paper.tex figure-1.svg figure-2.svg
+            cat $^ > $@
 
     figure-1.svg : summary-1.dat
-            sgr -N -r $@ $^
+        python create_figure.py $@ $^
 
     figure-2.svg : summary-2.dat
-            sgr -N -r $@ $^
+        python create_figure.py $@ $^
 
     summary-1.dat : data-1-*.dat
-            stats.py $@ $^
+        python stats.py $@ $^
 
     summary-2.dat : data-2-*.dat
-            stats.py $@ $^
+        python stats.py $@ $^
 
     summary-1.dat : stats.py
     summary-2.dat : stats.py
@@ -177,4 +181,7 @@ but don't have any actions:
 When Make sees multiple rules for the same target,
 it uses the union of all those rules' prerequisites as the target's actual set of prerequisites.
 However, the automatic variable `$^` in the rule is still just that rule's prerequisite list.
+
+FIXME: I don't think this is correct. Make will pass the entire union as `$^`
+
 It's a bit of a hack, but it means that our command line has exactly what we want it to have.

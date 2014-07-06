@@ -5,18 +5,20 @@ title: Basic Tasks
 level: intermediate
 ---
 To illustrate how Make works, here's the dependency tree for the paper that the robot is working on.
-`paper.pdf` depends on `paper.wdp` (the raw word processor file),
+`paper.pdf` depends on `paper.tex` (the raw Latex file),
 and on `figure-1.svg` and `figure-2.svg`.
 `figure-1.svg` depends on `summary-1.dat`,
 which in turn depends on `data-1-1.dat`, `data-1-2.dat`, and so on,
 while `figure-2.svg` depends on files with similar names.
 
-In order to create `paper.pdf`, we have to run the command `wdp2pdf paper.wdp`.
-For the purpose of this lecture, it doesn't matter what `wdp2pdf` actually does.
-All we need to know is that if `paper.wdp` or either of the figure SVG's change, we need to re-run this command.
+In order to create `paper.pdf`, we have to run some command (maybe `latexmk`).
+For the purpose of this lecture, it doesn't matter what `latexmk` actually does
+and we will not use this command further.
+All we need to know is that if `paper.tex` or either of the figure SVG's change, we need to
+re-build `paper.pdf`.
 
-To create `figure-1.svg`, we run `sgr -N -r summary-1.dat` and send the output to `figure-1.svg`.
-Again, it doesn't matter for now what the `sgr` command actually is.
+To create `figure-1.svg`, we run `python create_figure.py figure-1.svg summary-1.dat`.
+Again, it doesn't matter for now what `create_figure.py` command actually is.
 What matters is that we need to run it whenever `figure-1.svg` is out of date,
 i.e., whenever it is older than the `summary-1.dat` file it depends on.
 Finally, in order to update `summary-1.dat`, we need to run our own little script, `stats.py`,
@@ -47,7 +49,7 @@ Using our favorite editor, let's create a file called `hello.mk` and put these t
 
     # hello.mk
     figure-1.svg : summary-1.dat
-            sgr -N -r summary-1.dat > figure-1.svg 
+        python create_figure.py figure-1.svg summary-1.dat
 
 A configuration file for Make like this one is called a [Makefile](../../gloss.html#makefile).
 The first line, starting with `#`, is a comment.
@@ -70,7 +72,7 @@ Make will not accept spaces, or mixes of spaces and tabs.
 Now that we've created our Makefile, we can tell Make to obey its instructions by running `gmake` from the command line:
 
     $ gmake -f hello.mk
-    sgr -N -r summary-1.dat > figure-1.svg
+    python create_figure.py figure-1.svg summary-1.dat
 
 Many systems make `make` an alias for `gmake`,
 so if the latter doesn't work for you, try the former name as well.
@@ -102,10 +104,10 @@ These rules are identical except for the 1's and 2's in the filenames; we'll see
 
     # double.mk
     figure-1.svg : summary-1.dat
-            sgr -N -r summary-1.dat > figure-1.svg
+        python create_figure.py figure-1.svg summary-1.dat
 
     figure-2.svg : summary-2.dat
-            sgr -N -r summary-2.dat > figure-2.svg
+        python create_figure.py figure-2.svg summary-2.dat
 
 Let's pretend we've just updated our data files by running `touch *.dat`.
 (The Unix `touch` command doesn't change the contents of files, but updates their timestamps as if they had been modified.)
@@ -113,7 +115,7 @@ Now, when we run Make, it re-creates `figure-1.svg` again&mdash;and then stops:
 
     $ touch *.dat
     $ gmake -f double.mk
-    sgr -N -r summary-1.dat > figure-1.svg
+    python create_figure.py figure-1.svg summary-1.dat
 
 Why wasn't `figure-2.svg` re-created?
 The answer is that Make uses the first rule in the Makefile as its [default rule](../../gloss.html#default-rule).
@@ -123,7 +125,7 @@ We use `-f double.mk` to tell Make what Makefile to use,
 and then give it the name of the target we want it to handle:
 
     $ gmake -f double.mk figure-2.svg
-    sgr -N -r summary-2.dat > figure-2.svg
+    python create_figure.py figure-2.svg summary-2.dat
 
 Again, building things one at a time like this is slightly better than typing individual commands, but only slightly.
 To get Make to build everything at once, we have to introduce a [phony target](../../gloss.html#phony-target).
@@ -136,10 +138,10 @@ Here's our third Makefile, `phony.mk`:
     all : figure-1.svg figure-2.svg
 
     figure-1.svg : summary-1.dat
-            sgr -N -r summary-1.dat > figure-1.svg
+        python create_figure.py figure-1.svg summary-1.dat
 
     figure-2.svg : summary-2.dat
-            sgr -N -r summary-2.dat > figure-2.svg
+        python create_figure.py figure-2.svg summary-2.dat
 
 We've introduced a phony target called `all`, which depends on `figure-1.svg` and `figure-2.svg`.
 Since there's no file called `all` in the current directory,
@@ -153,8 +155,8 @@ Sure enough, Make runs the `sgr` command twice to re-create both figures:
 
     $ touch *.dat
     $ gmake -f phony.mk
-    sgr -N -r summary-1.dat > figure-1.svg
-    sgr -N -r summary-2.dat > figure-2.svg
+    python create_figure.py figure-1.svg summary-1.dat
+    python create_figure.py figure-2.svg summary-2.dat
 
 One thing to note is that the order in which commands are executed is arbitrary.
 Make could decide to update `figure-2.svg` first, rather than `figure-1.svg`,

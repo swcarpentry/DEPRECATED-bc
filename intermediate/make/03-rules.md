@@ -20,13 +20,13 @@ Here's our Makefile rewritten to use such a rule:
     # pattern-rule.mk
 
     figure-%.svg : summary-%.dat
-            sgr -N -r $@ $^
+        python create_figure.py $@ $^
 
     summary-1.dat : data-1-*.dat
-            stats.py $@ $^
+        python stats.py $@ $^
 
     summary-2.dat : data-2-*.dat
-            stats.py $@ $^
+        python stats.py $@ $^
 
     summary-1.dat : stats.py
     summary-2.dat : stats.py
@@ -41,7 +41,7 @@ So in the action, we have to use the automatic variables `$@` and `$^` as before
 Let's try running our modified Makefile:
 
     $ make -f pattern-rule.mk
-    stats.py summary-1.dat data-1-1.dat data-1-2.dat data-1-3.dat
+    python stats.py summary-1.dat data-1-1.dat data-1-2.dat data-1-3.dat
 
 `summary-1.dat` is updated, but not `summary-2.dat` or either of the figure files.
 The reason the other commands didn't run is that pattern rules don't create dependencies:
@@ -52,20 +52,21 @@ Let's do this by putting the rule for `paper.pdf` back in our Makefile:
 
     # use-pattern.mk
 
-    paper.pdf : paper.wdp figure-1.svg figure-2.svg
-            wdp2pdf $<
+    paper.pdf : paper.tex figure-1.svg figure-2.svg
+        cat $^ > $@
 
     figure-%.svg : summary-%.dat
-            sgr -N -r $@ $^
+        python create_figure.py $@ $^
 
     summary-1.dat : data-1-*.dat
-            stats.py $@ $^
+        python stats.py $@ $^
 
     summary-2.dat : data-2-*.dat
-            stats.py $@ $^
+        python stats.py $@ $^
 
     summary-1.dat : stats.py
     summary-2.dat : stats.py
+
 
 Here, `paper.pdf` depends on `figure-1.svg` and `figure-2.svg`.
 Make now knows that it needs these figures.
@@ -74,12 +75,12 @@ Since there aren't specific rules for them, it uses the pattern rule instead.
 It's tempting to go one step further, and make `paper.pdf` depend on `figure-*.svg`:
 
     paper.pdf : paper.wdp figure-*.svg
-            wdp2pdf $<
+            cat $^ > $@
 
 This doesn't work, though.
 The reason is that the figure files may not exist when Make starts to run&mdash;after all, Make creates them.
 In that case, `figure-*.svg` will expand to nothing,
-so Make would mistakenly believe that `paper.pdf` depended only on `paper.wdp`.
+so Make would mistakenly believe that `paper.pdf` depended only on `paper.tex`.
 This kind of bug can be very hard to figure out,
 and while Make does have a debugger called [GMD](http://gmd.sourceforge.net/),
 it's not an easy tool for beginners to use.
@@ -89,14 +90,14 @@ using the `*` wildcard:
 
     # all-patterns.mk
 
-    paper.pdf : paper.wdp figure-1.svg figure-2.svg
-            wdp2pdf $<
+    paper.pdf : paper.tex figure-1.svg figure-2.svg
+        cat $^ > $@
 
     figure-%.svg : summary-%.dat
-            sgr -N -r $@ $^
+        python create_figure.py $@ $^
 
     summary-%.dat : data-%-*.dat
-            stats.py $@ $^
+        python stats.py $@ $^
 
     summary-1.dat : stats.py
     summary-2.dat : stats.py
@@ -122,14 +123,14 @@ Doing this indirectly triggers the re-creation of the summary files&mdash;it doe
 
     # false-dependencies.mk
 
-    paper.pdf : paper.wdp figure-1.svg figure-2.svg
-            wdp2pdf $<
+    paper.pdf : paper.tex figure-1.svg figure-2.svg
+        cat $^ > $@
 
     figure-%.svg : summary-%.dat
-            sgr -N -r $@ $^
+        python create_figure.py $@ $^
 
     summary-%.dat : data-%-*.dat
-            stats.py $@ $^
+        python stats.py $@ $^
 
     data-*-*.dat : stats.py
-            touch $@
+        touch $@
