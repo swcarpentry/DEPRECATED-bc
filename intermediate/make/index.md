@@ -24,7 +24,7 @@ Topics
 *   [Basic Tasks](01-basics.html)
 *   [Automatic Variables and Wildcards](02-automatic-variables.html)
 *   [Patterns](03-patterns.html)
-*   [Macros](04-macros.html)
+*   [Variables](04-variables.html)
 
 See Also
 --------
