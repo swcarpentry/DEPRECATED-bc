@@ -17,6 +17,7 @@ Objectives
 * show the basic `Makefile` syntax
 * show how to run `make` from the commandline
 * explain how rules and targets determine commands to be executed
+* show the default target and the default Makefile
 
 To illustrate how `make` works, here's the dependency tree for the paper that the robot is working on.
 `paper.pdf` depends on `paper.wdp` (the raw word processor file),
@@ -171,7 +172,7 @@ Let's `touch` our data files again, and run `make -f phony.mk all`.
 Sure enough, `make` runs the `sgr` command twice to re-create both figures:
 
     $ touch *.dat
-    $ make -f phony.mk
+    $ make -f phony.mk all
     sgr -N -r summary-1.dat > figure-1.svg
     sgr -N -r summary-2.dat > figure-2.svg
 
@@ -188,3 +189,25 @@ everything depends on something else, so there is nothing `make` can build first
 If it detects a cycle in a Makefile, `make` will print an error message and stop.
 Unfortunately, whether or not a cycle exists depends on which files exist,
 and `make`'s error message is usually not particularly informative.
+
+The default target and the default Makefile
+-------------------------------------------
+
+In the previous section, a phony target `all` was added to make it
+easy to remake "all" targets. It turns out that many Makefiles have a
+target with this meaning and this name. If a target is not specified
+on the command line, `make` will use `all` as the default:
+
+    $ make -f phony.mk
+    make: Nothing to be done for 'all'.
+
+Does the name make it special?
+No, target `all` is special simply because it specified *first*
+in the Makefile. Nevertheless, it is customary to call it just that.
+
+What happens if the Makefile name is not specified using the `-f`
+switch? `make` by default will use `Makefile` as the name of the
+Makefile. This means that our Makefile should usually be called just
+that. Combining the use of the default target and the default Makefile
+allows us to remake everything by simply saying `make` (without
+further parameters).
