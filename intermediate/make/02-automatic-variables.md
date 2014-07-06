@@ -1,7 +1,7 @@
 ---
 layout: lesson
 root: ../..
-title: Patterns
+title: Automatic variables and wildcards
 level: intermediate
 ---
 Let's go back to our paper and look at another part of our dependency graph.

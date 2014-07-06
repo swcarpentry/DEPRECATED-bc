@@ -22,7 +22,7 @@ Topics
 ------
 *   [Introduction](00-intro.html)
 *   [Basic Tasks](01-basics.html)
-*   [Patterns](02-patterns.html)
+*   [Automatic Variables and Wildcards](02-automatic-variables.html)
 *   [Rules](03-rules.html)
 *   [Macros](04-macros.html)
 
