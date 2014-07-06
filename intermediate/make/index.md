@@ -25,11 +25,7 @@ Topics
 *   [Automatic Variables and Wildcards](02-automatic-variables.html)
 *   [Patterns](03-patterns.html)
 *   [Variables](04-variables.html)
-
-See Also
---------
-*   [Instructor's Guide](guide.html)
-*   [Reference](ref.html)
+*   [Futher reading](05-futher-reading.html)
 
 Resources
 ---------
