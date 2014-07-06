@@ -164,8 +164,6 @@ These two files are only changed when they need to be (i.e., when the style file
 We then copy one or the other on the machine we're using to create the file `config.mk`
 that our main Makefile actually includes.
 
-FIXME: only need to do this once per machine when things change
-
 For example, here's what we have in the `paper` directory on our home machine when we do a fresh checkout from version control.
 Along with our data files and the word processor file, we have our main Makefile and the two machine-specific configuration makefiles.
 So we copy `config-home.mk` to create `config.mk`.
@@ -178,10 +176,10 @@ To do this, we set the variable on the command line when invoking `make`:
 
     $ make STYLE_DIR=/lib/styles -f Makefile
 
-This is almost always a bad idea, though.
+This is often a bad idea, though.
 We have to remember to type the definition each time,
-and we have to type it *correctly* each time.
-This isn't too bad with just one definition, but is infeasible when there are half a dozen.
-There's also no record in the Makefile itself of the flag,
+and we have to type it *correctly* each time, or rely on shell history to retrieve the
+right invocation.
+The biggest problem is that it leaves no record in the Makefile itself of the settings used,
 which makes life harder for other people who want to re-create our paper:
 how do they know what to type?
