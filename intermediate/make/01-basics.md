@@ -7,6 +7,17 @@ level: intermediate
 The program name is actually lowercase: `make`, even though it reads a
 `Makefile`, which is capitalized.
 
+This chapter shows how `make` determines when files should be
+regenerated, and which commands to run. Examples shown here do not use
+more advanced `make` features, those will be presented in subsequent
+chapters.
+
+Objectives
+----------
+* show the basic `Makefile` syntax
+* show how to run `make` from the commandline
+* explain how rules and targets determine commands to be executed
+
 To illustrate how `make` works, here's the dependency tree for the paper that the robot is working on.
 `paper.pdf` depends on `paper.wdp` (the raw word processor file),
 and on `figure-1.svg` and `figure-2.svg`.

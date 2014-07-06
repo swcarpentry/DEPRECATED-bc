@@ -4,6 +4,18 @@ root: ../..
 title: Variables
 level: intermediate
 ---
+This chapter describes yet another way to make Makefiles rules more
+generic. Make *variables* can contain be used to specify any part of a
+rule (the target, the prerequisites, the commands to run, parts of
+file names, etc.). They can also be specified externally when invoking
+`make`, adapting the rules without modifying the Makefile.
+
+Objectives
+----------
+* show the general syntax for using Makefile variables
+* show how variables can be defined in the Makefile
+* show how variables can be specified when invoking `make`
+
 Just when we thought we were done writing our Makefile,
 our supervisor reminded us that all papers must conform to the university's new style rules.
 That means that `paper.pdf` has one more dependency: the official university style file `euphoric.wps`.
@@ -99,7 +111,10 @@ we're still making changes to a file that's under version control that we *don't
 > To make a long story short, it's another wart left over from history.
 > Almost everyone trips over it occasionally, and as with other bugs, it can be very hard to track down.
 
-It's common practice to use macros to define all the flags that tools need,
+Using variables for program parameters
+--------------------------------------
+
+It's common practice to use variables to define all the flags that tools need,
 so that if a tool is invoked in two or more actions,
 it's passed a consistent set of flags.
 Here, for example, we're defining `STYLE_DIR` to point to the directory holding our style files,
