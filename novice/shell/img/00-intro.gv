@@ -1,0 +1,9 @@
+digraph g{
+  shell [label="shell (also command line)"];
+  CLI [label="CLI (Command Line Interface)"];
+  GUI [label="GUI (Graphical User Interface)"];
+  shell -> CLI [label="is a"];
+  CLI -> shell [label="runs from"];
+  program -> GUI [label="either"];
+  program -> CLI [label="either"];
+}

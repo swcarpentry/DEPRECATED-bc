@@ -1,0 +1,14 @@
+graph G {
+  script [label="shell script"];
+  running [shape=rect, label="$ bash script.sh"];
+  positional_args [label="$1, $2, ..."];
+  positional_example [shape=rect, label="$ bash middle.sh -5 -10 file.txt"];
+  all_args [label="$*"];
+  all_example [shape=rect, label="$ bash stats.sh ../data/*.dat"];
+  comment [shape=rect, label="# comment"];
+
+  script -- running;
+  script -- positional_args -- positional_example;
+  script -- all_args -- all_example;
+  script -- comment;
+}

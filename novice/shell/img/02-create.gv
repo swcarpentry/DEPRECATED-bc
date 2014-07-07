@@ -1,0 +1,35 @@
+graph G {
+  subgraph cluster_0 {
+    label = "create";
+    color=green;
+    nano;
+    mkdir;
+    cp;
+  }
+  subgraph cluster_1 {
+    label = "delete";
+    color=red;
+    dangerous [style=filled fillcolor="#ff8888"];
+    rm;
+    "rm -r";
+    rmdir;
+    rm -- dangerous;
+    "rm -r" -- dangerous;
+  }
+  subgraph cluster_3 {
+    label = "navigate";
+    color=blue;
+    cd;
+  }
+  cp_params [style=filled fillcolor="#88ff88" label="file file | file dir | file file [..] dir"];
+  file [style=filled fillcolor="#88ff88"];
+  directory [style=filled fillcolor="#88ff88"];
+  cd -- directory;
+  mkdir -- directory;
+  nano [label="text editor (e.g. nano)"];
+  nano -- file;
+  cp -- cp_params;
+  rm -- file;
+  rmdir -- directory;
+  "rm -r" -- directory;
+}

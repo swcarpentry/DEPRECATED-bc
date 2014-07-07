@@ -1,0 +1,13 @@
+graph g{
+  label="$ ls -F /etc";
+  fontsize=20;
+  shell [label="shell: $"];
+  program [label="program: ls"];
+  paths [label="paths: /etc"];
+  flags [label="flags: -F"];
+  shell -- command;
+  command -- program;
+  command -- arguments;
+  arguments -- paths;
+  arguments -- flags;
+}
