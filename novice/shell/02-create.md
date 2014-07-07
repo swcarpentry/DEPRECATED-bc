@@ -366,6 +366,12 @@ thesis/quotations.txt
 
 </div>
 
+#### Concept Map
+
+<img src="img/02-create.gv.svg" alt="File Operation Concept Map" />
+
+#### Challenges
+
 <div class="challenge" markdown="1">
 What is the output of the closing `ls` command in the sequence shown below?
 

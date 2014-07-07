@@ -230,6 +230,10 @@ rather than from the root of the file system.
 > most people use them interchangeably or inconsistently,
 > so we will too.
 
+#### Concept Map
+
+<img src="img/01-filedir-command.gv.svg" alt="Command Concept Map" />
+
 If we run `ls -F /data` (*with* a leading slash) we get a different answer,
 because `/data` is an [absolute path](../../gloss.html#absolute-path):
 
@@ -468,6 +472,12 @@ and we will see it in many other tools as we go on.
 *   Most commands take options (flags) which begin with a '-'.
 
 </div>
+
+#### Concept Map
+
+<img src="img/01-filedir-path.gv.svg" alt="Path Concept Map" />
+
+#### Challenges
 
 <img src="img/filesystem-challenge.svg" alt="Filesystem for Challenge Questions" />
 

@@ -385,6 +385,12 @@ Of course, this introduces another tradeoff between flexibility and complexity.
 
 </div>
 
+#### Concept Map
+
+<img src="img/05-script.gv.svg" alt="Script Concept Map" />
+
+#### Challenges
+
 <div class="challenge" markdown="1">
 Leah has several hundred data files, each of which is formatted like this:
 

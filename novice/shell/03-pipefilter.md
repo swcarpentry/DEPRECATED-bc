@@ -398,6 +398,16 @@ so this matches all the valid data files she has.
 
 </div>
 
+#### Wildcards Concept Map
+
+<img src="img/03-pipefilter-wildcard.gv.svg" alt="Wildcards Concept Map" />
+
+#### Pipes and Filters Concept Map
+
+<img src="img/03-pipefilter.gv.svg" alt="Pipes and Filters Concept Map" />
+
+#### Challenges
+
 <div class="challenge" markdown="1">
 If we run `sort` on this file:
 

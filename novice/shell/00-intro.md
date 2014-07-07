@@ -135,3 +135,7 @@ being able to drive them is becoming a necessary skill.
     and how cryptic its commands and operation can be.
 
 </div>
+
+#### Concept Map
+
+<img src="img/00-intro.gv.svg" alt="Intro Concept Map" />

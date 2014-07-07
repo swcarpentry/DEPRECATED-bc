@@ -444,6 +444,12 @@ about them."
 
 </div>
 
+#### Concept Map
+
+<img src="img/06-find.gv.svg" alt="grep and find Concept Map" />
+
+#### Challenges
+
 <div class="challenge" markdown="1">
 Write a short explanatory comment for the following shell script:
 
