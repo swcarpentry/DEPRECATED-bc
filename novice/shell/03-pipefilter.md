@@ -400,7 +400,7 @@ so this matches all the valid data files she has.
 
 #### Wildcards Concept Map
 
-<img src="img/03-pipefilter-wildcard.gv.svg" alt="Wildcards Concept Map" />
+<img src="img/03-pipefilter-wildcards.gv.svg" alt="Wildcards Concept Map" />
 
 #### Pipes and Filters Concept Map
 
