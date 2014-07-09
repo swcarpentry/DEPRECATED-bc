@@ -11,3 +11,5 @@ summary-%.dat : data-%-*.dat
 
 data-*-*.dat : stats.py
 	touch $@
+
+.SECONDARY :
