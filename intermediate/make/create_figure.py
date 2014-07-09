@@ -1,10 +1,15 @@
 import numpy as np
 import pandas as pd
+# Ensure matplotlib doesn't try to open windows
+# From http://matplotlib.org/faq/howto_faq.html#generate-images-without-having-a-window-appear
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import sys
 import time
 
 """ Makes a bar plot based on summary data """
+
 
 # Command line arguments
 figure_name = sys.argv[1]
