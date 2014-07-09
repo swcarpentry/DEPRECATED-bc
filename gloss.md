@@ -353,6 +353,11 @@ The directory that "contains" the one in question.
 Every directory in a file system except the [root directory](#root-directory) has a parent.
 A directory's parent is usually referred to using the shorthand notation `..` (pronounced "dot dot").
 
+**<a name="phony-target">phony target</a>**:
+A type of [target](#target) within a [Makefile](#makefile) [rule](#make-rule) that does not correspond
+to an actual file that needs to be created, but instead serves as a place holder to ensure
+[dependencies](#dependencies) get run
+
 **<a name="pipe">pipe</a>**:
 A connection from the output of one program to the input of another.
 When two or more programs are connected in this way, they are called a "pipeline".
