@@ -8,6 +8,7 @@ import time
 
 """ Makes a bar plot based on summary data """
 
+
 # Command line arguments
 figure_name = sys.argv[1]
 summary_data = sys.argv[2]
