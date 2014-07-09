@@ -264,6 +264,12 @@ to share work between different people and machines.
 
 </div>
 
+#### Concept Map
+
+<img src="img/02-collab.gv.svg" alt="Collaboration Concept Map" />
+
+#### Challenges
+
 <div class="challenge" markdown="1">
 Create a repository on GitHub,
 clone it,

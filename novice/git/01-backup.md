@@ -870,6 +870,12 @@ nothing to commit, working directory clean
 
 </div>
 
+#### Concept Map
+
+<img src="img/01-backup.gv.svg" alt="Git Concept Map" />
+
+#### Challenges
+
 <div class="challenge" markdown="1">
 Create a new Git repository on your computer called `bio`.
 Write a three-line biography for yourself in a file called `me.txt`,
