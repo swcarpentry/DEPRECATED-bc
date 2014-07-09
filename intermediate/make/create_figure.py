@@ -1,5 +1,7 @@
 import numpy as np
 import pandas as pd
+# Ensure matplotlib doesn't try to open windows
+# From http://matplotlib.org/faq/howto_faq.html#generate-images-without-having-a-window-appear
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
