@@ -6,7 +6,13 @@ help :
 	@echo 'To create all the necessary files for this lesson, run'
 	@echo ' make lesson'
 
-lesson : summary-1.dat summary-2.dat
+lesson : paper.pdf
+
+paper.pdf : paper.tex figure-1.svg figure-2.svg
+	cat $^ > $@
+
+figure-%.svg : summary-%.dat
+	python create_figure.py $@ $^
 
 figure-%.svg : summary-%.dat
 	python create_figure.py $@ $^
@@ -18,4 +24,6 @@ data-%.dat : generate_dataset.py
 	python $^
 
 clean :
-	rm -f *.dat *.svg
+	rm -f *.dat *.svg paper.pdf
+
+.SECONDARY :
