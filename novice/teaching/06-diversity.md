@@ -99,3 +99,17 @@ http://sappingattention.blogspot.ca/2014/05/mind-gap-incomes-college-majors-gend
 
 http://alyssafrazee.com/gender-and-github-code.html
 
+----------------------------------------
+
+Matt Davis:
+
+http://www.adainitiative.org/what-we-do/workshops-and-training/
+http://www.juliepagano.com/blog/2014/05/10/so-you-want-to-be-an-ally/
+http://womeninastronomy.blogspot.com/2014/07/stop-interrupting-me-gender.html
+http://www.hopejahrensurecanwrite.com/2013/10/23/3-ways-to-be-an-ally/
+
+----------------------------------------
+
+Several:
+
+https://medium.com/@nkkl/ride-like-a-girl-1d5524e25d3a
