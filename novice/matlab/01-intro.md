@@ -8,7 +8,7 @@ root: ../..
 
 We are studying inflammation in patients who have been given a new treatment for arthritis,
 and need to analyze the first dozen data sets.
-The data sets are stored in <a href="../../gloss.html#csv">comma-separated values</a> (CSV) format:
+The data sets are stored in [CSV](../../gloss.html#comma-separated-values) format:
 each row holds information for a single patient,
 and the columns represent successive days.
 The first few rows of our first file, 
@@ -33,11 +33,8 @@ We want to:
 
 To do all that, we'll have to learn a little bit about programming.
 
-
-<!-- FIXME: add gloss entries for terms like "array" -->
-
-
 <div class="objectives" markdown="1">
+#### Objectives
 * Learn about Matlab arrays.
 * Read tabular data from a file into a program.
 * Assign values to variables.
@@ -48,13 +45,12 @@ To do all that, we'll have to learn a little bit about programming.
 
 ### Loading Data
 
-<!-- FIXME: high level -->
-
-I/O, or reading and writing data, is essential to scientific computing, 
+Reading data from files and writing data to them
+are essential tasks in scientific computing, 
 and admittedly, something that we'd rather not spend a lot of time 
-thinking about. Matlab spares us the work by providing a number 
-of high-level functions that accomplish these 
-tasks efficiently, while hiding the grisly details.
+thinking about. Fortunately, Matlab comes with a number of high-level
+tools to do these things 
+efficiently, sparing us the grisly detail.
 
 To fetch the data from our CSV file into Matlab, type following 
 command into the Matlab shell, and press Enter:
@@ -64,6 +60,10 @@ csvread('inflammation-01.csv')
 ~~~
 {:class="in"}
 
+You should see a wall of numbers on the screen---these are the values
+from the CSV file.
+It can sometimes
+be useful to see the output from Matlab commands, but it is often not.
 To suppress the
 output, simply put a semicolon at the end of your commnd:
 
@@ -71,8 +71,6 @@ output, simply put a semicolon at the end of your commnd:
 csvread('inflammation-01.csv');
 ~~~
 {:class="in"}
-
-<!-- FIXME: gloss function call, parameters, -->
 
 The expression `csvread(...)` is a 
 [function call](../../gloss.html#function-call). 
@@ -82,8 +80,6 @@ In the case of the `csvread` function, we need to provide a single
 parameter: the name of the file we want to read data from. This 
 parameter needs to be a character string or 
 [string](../../gloss.html#string), so we put it in quotes.
-
-<!-- FIXME: below not entirely true, maybe footnote required? -->
 
 Our call to `csvread` read our file, and printed the data inside 
 to the screen. But we still have no way to modify those values
@@ -141,7 +137,7 @@ If we imagine the variable as a sticky note with a name written on
 it, assignment is like putting the sticky note on a particular value: 
 
 
-div>
+<div>
   <img src="img/matlab-sticky-note-variables-01.svg" alt="Variables as Sticky Notes" />
 </div>
 
@@ -165,7 +161,7 @@ Weight in pounds: 126.5
 {:class="out"}
 
 
-v<div>
+<div>
   <img src="img/matlab-sticky-note-variables-02.svg" alt="Creating another variable" />
 </div>
 
@@ -220,26 +216,11 @@ patient_data
 ~~~
 {:class="out"}
 
-<div class="challenges">
-#### Challenges
-
-* Draw diagrams showing what varuables refer to what values 
-after each statement in the following program:
-
-~~~
-mass = 47.5;
-age = 122;
-mass = mass*2;
-age = age - 20;
-~~~
-
-</div>
-
 
 ### Manipulating Data
 
 Now that our data is in memory, we can start doing things with it.
-First, let's find out its [shape](../../gloss.html#shape):
+First, let's find out its size or [shape](../../gloss.html#shape):
 
 ~~~
 size(patient_data)
@@ -312,7 +293,7 @@ ans = 16
 and the value corresponding to the 30th row and 20th column, is `16`.
 
 
-What may surprise you is that when matlab displays an array, it shows
+What may surprise you is that when Matlab displays an array, it shows
 the element with index `(1, 1)` position in the upper left corner rather
 than the lower left. This is consistent with the way mathematicians draw 
 matrices, but different from the Cartesian coordinates.
@@ -445,6 +426,7 @@ mean(patient_data(:))
 ~~~
 ans = 6.1487
 ~~~
+{:class="out"}
 
 The reason we couldn't just do `mean(patient_data)` is because, that 
 would compute the mean of *each column* in our table, and return a list
@@ -496,9 +478,9 @@ help mean
 
 
 ~~~
-disp('Maximum inflammation: ', num2str(max(patient_data(:))));
-disp('Minimum inflammation: ', num2str(min(patient_data(:))));
-disp('Standard deviation: ', num2str(std(patient_data(:))));
+disp(['Maximum inflammation: ', num2str(max(patient_data(:)))]);
+disp(['Minimum inflammation: ', num2str(min(patient_data(:)))]);
+disp(['Standard deviation: ', num2str(std(patient_data(:)))]);
 ~~~
 {:class="in"}
 
@@ -509,6 +491,298 @@ Standard deviation: 4.6148
 ~~~
 {:class="out"}
 
+When analyzing data, though, we often want to look at partial statistics,
+such as the maximum value per patient or the average value per day.
+One way to do this is to assign the data we want to a new temporary 
+array, then ask it to do the calculation:
+
+~~~
+patient_1 = patient_data(1, :)
+disp(["Maximum inflation for patient 1: ", max(patient_1));
+~~~
+{:class="in"}
+
+~~~
+Maximum inflation for patient 1: 18
+~~~
+{:class="out"}
+
+We don't actually need to store the row in a variable of its own.
+Instead, we can combine the selection and the function call:
+
+~~~
+max(patient_data(1, :))
+~~~
+{:class="in"}
+
+~~~
+ans = 18
+~~~
+{:class="out"}
 
 
+What if we need the maximum inflammation for *all* patients, or the
+average for each day?
+As the diagram below shows, we want to perform the operation across an
+axis:
+
+<div>
+  <img src="img/matlab-operations-across-axes.svg" alt="Operations Across Axes" />
+</div>
+
+To support this, Matlab allows us to specify the *dimension* we 
+want to work on. If we ask for the average across the dimension 1, 
+we get:
+
+~~~
+mean(patient_data, 1)
+~~~
+{:class="in"}
+
+
+~~~
+ans =
+
+ Columns 1 through 13:
+
+    0.00000    0.45000    1.11667    1.75000    2.43333    3.15000    3.80000    3.88333    5.23333    5.51667    5.95000    5.90000    8.35000
+
+ Columns 14 through 26:
+
+    7.73333    8.36667    9.50000    9.58333   10.63333   11.56667   12.35000   13.25000   11.96667   11.03333   10.16667   10.00000    8.66667
+
+ Columns 27 through 39:
+
+    9.15000    7.25000    7.33333    6.58333    6.06667    5.95000    5.11667    3.60000    3.30000    3.56667    2.48333    1.50000    1.13333
+
+ Column 40:
+
+    0.56667
+
+~~~
+{:class="out"}
+
+
+As a quick check, we can ask this array what its shape is:
+
+~~~
+size(mean(patient_data, 1))
+~~~
+{:class="in"}
+
+~~~
+ans = 
+    1    40
+~~~
+{:class="out"}
+
+The shape tells us we have a 1-by-40 vector, so this is the average
+inflammation per day for all patients. If we average across axis 2, we
+get:
+
+
+~~~
+mean(patient_data, 2)
+~~~
+{:class="in"}
+
+~~~
+ans =
+
+   5.4500
+   5.4250
+   6.1000
+   5.9000
+   5.5500
+   6.2250
+   5.9750
+   6.6500
+   6.6250
+   6.5250
+   6.7750
+   5.8000
+   6.2250
+   5.7500
+   5.2250
+   6.3000
+   6.5500
+   5.7000
+   5.8500
+   6.5500
+   5.7750
+   5.8250
+   6.1750
+   6.1000
+   5.8000
+   6.4250
+   6.0500
+   6.0250
+   6.1750
+   6.5500
+   6.1750
+   6.3500
+   6.7250
+   6.1250
+   7.0750
+   5.7250
+   5.9250
+   6.1500
+   6.0750
+   5.7500
+   5.9750
+   5.7250
+   6.3000
+   5.9000
+   6.7500
+   5.9250
+   7.2250
+   6.1500
+   5.9500
+   6.2750
+   5.7000
+   6.1000
+   6.8250
+   5.9750
+   6.7250
+   5.7000
+   6.2500
+   6.4000
+   7.0500
+   5.9000
+~~~
+{:class="out"}
+
+which is the average inflammation per patient across
+all days. 
+
+
+### Plotting
+
+The mathematician Richard Hamming once said,
+"The purpose of computing is insight, not numbers," and the best
+way to develop insight is often to visualize data. Visualization
+deserves an entire lecture (or course) of its own, but we can 
+explore a few features of Matlab here.
+
+Let's display a heat map of our data:
+
+~~~
+imagesc(patient_data)
+~~~
+{:class="in"}
+
+<div class="out">
+<img src="img/01-intro_1.png" style="height:250px">
+</div>
+
+The `imagesc` function represents the matrix as a color image. Every
+value in the matrix is *mapped* to a color. Blue regions in this heat map
+are low values, while red shows high values.
+As we can see,
+inflammation rises and falls over a 40 day period.
+Let's take a look at the average inflammation over time:
+
+~~~
+ave_inflammation = mean(patient_data, 1);
+plot(ave_inflammation);
+~~~
+{:class="in"}
+
+<div class="out">
+<img src="img/01-intro_2.png" style="height:250px">
+</div>
+
+Here, we have put the average per day across all patients in the 
+variable `ave_inflammation`, then used the `plot` function to display
+a line graph of those values.
+The result is roughly a linear rise and fall,
+which is suspicious:
+based on other studies, we expect a sharper rise and slower fall.
+Let's have a look at two other statistics: the maximum and minimum
+inflammation per day across all patients.
+
+~~~
+plot(max(data, [], 1));
+title("Maximum inflammation per day");
+plot(min(data, [], 1));
+title("Minimum inflammation per day");
+~~~
+{:class="in"}
+
+<div class="out">
+<img src="img/01-intro_3.png" style="height:300px">
+</div>
+
+<div class="out">
+<img src="img/01-intro_4.png" style="height:300px">
+</div>
+
+Like `mean()`, the functions
+`max()` and `min()` can also operate across a specified dimension of
+the matrix. However, the syntax is slightly different. To see why, 
+run a `help` on each of these functions.
+
+From the figures, we see that the maximum value rises and falls perfectly
+smoothly, while the minimum seems to be a step function. Neither result
+seems particularly likely, so either there 's a mistake in our 
+calculations or something is wrong with our data.
+
+
+#### Wrapping up
+
+It's common to put multiple figures "side-by-side" in a single 
+window for presentation and convenience. Here's how to use
+the `subplot` function to do this:
+
+~~~
+subplot(1, 2, 1);
+plot(max(patient_data, [], 1));
+ylabel('max')
+
+subplot(1, 2, 2);
+plot(min(patient_data, [], 2));
+ylabel('min')
+~~~
+{:class="in"}
+
+<div class="out">
+<img src="img/01-intro_5.png" style="width:750px; height:250px">
+</div>
+
+
+<div class="keypoints" markdown="1">
+#### Key Points
+
+* A value is a piece of data that a program works with. In Matlab,
+values are always stored as arrays. Values can be numbers, vectors,
+matrices, characters, strings, or a number of other things, but they are
+*always* represented by an array.
+* The "size" of an array is the number of elements it has in each
+dimension.
+* Use `variable = value` to assign a value to a variable. The "value"
+is always an array in Matlab, and can contain different kinds 
+of data, like integers, floats or characters.
+* Use the `disp()` function to print things to screen. If you want
+to print many things on the same line, print an array of things.
+* Use `array(x, y)` to select a single element from an array.
+* Array indices in Matlab start at 1, not 0 like in C or Python.
+* Use `low:high` to specify a slice that includes the indices
+from `low` to `high`.
+* `mean()`, `max()` and `min()` can be used to calculate simple
+statistics about an array, or along specified dimensions of that
+array.
+* The `imagesc()` function produces a heat map 
+from a matrix (2-D array), and the `plot()` function can 
+be used to produce a line graph from a vector (1-D array).
+
+</div>
+
+#### Next Steps
+Our work so far has convinced us that something is wrong with our
+first data file. We would like to check the other 11 the same way,
+but typing in the same commands repeatedly is tedious and error-prone.
+Since computers don't get bored (that we know of), we should create a
+way to do a complete analysis with a single command, and then figure out
+how to repeat that step once for each file. These operations are the 
+subjects of the next two lessons.
 
