@@ -13,7 +13,7 @@ but to teach you the basic concepts that all programming depends on.
 
 <div class="toc" markdown="1">
 
-1.  [Analyzing Patient Data](01-simple.html)
+1.  [Analyzing Patient Data](01-intro.html)
 2.  [Creating Functions](02-func.html)
 3.  [Analyzing Multiple Data Sets](03-loop.html)
 4.  [Making Choices](04-cond.html)

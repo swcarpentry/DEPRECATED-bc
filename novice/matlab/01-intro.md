@@ -248,6 +248,9 @@ characters,
 * Even character strings, like sentences, are stored as an "array
 of characters".
 
+Normal Matlab arrays can't store elements of different data types. For
+instance, a normal Matlab array can't store both an `int` and a `char`. To do that, you have to use a [Cell Array](http://www.mathworks.com/help/matlab/cell-arrays.html). 
+
 We can use the `class` function to find out what kind of data lives
 inside an array:
 
