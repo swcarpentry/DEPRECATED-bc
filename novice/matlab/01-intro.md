@@ -197,10 +197,10 @@ automatically updated when `weight_kg` changes. This is important to
 remember, and different from the way spreadsheets work.
 
 Now that we know how to assign things to variables, let's re-run
-`csvread` and save its result"
+`csvread` and save its result.
 
 ~~~
-data = csvread('inflammation-01.csv');
+patient_data = csvread('inflammation-01.csv');
 ~~~
 {:class="in"}
 
@@ -216,10 +216,9 @@ who
 Variables in the current scope:
 
 
-data
+patient_data
 ~~~
 {:class="out"}
-
 
 <div class="challenges">
 #### Challenges
@@ -239,7 +238,276 @@ age = age - 20;
 
 ### Manipulating Data
 
+Now that our data is in memory, we can start doing things with it.
+First, let's find out its [shape](../../gloss.html#shape):
 
+~~~
+size(patient_data)
+~~~
+{:class="in"}
+
+
+~~~
+ans =
+    
+    60 40
+~~~
+{:class="out"}
+
+The output tells us that the variable `patient_data` 
+refers to a table of values
+that has 60 rows and 40 columns.
+
+Matlab stores *all* data in the form of arrays. For example:
+
+* Numbers, or *scalars* are arrays of zero dimensions, as are single 
+characters,
+* Lists of numbers, or *vectors* are arrays of one dimension,
+* Tables of numbers, or *matrices* are arrays of two dimensions,
+* Even character strings, like sentences, are stored as an "array
+of characters".
+
+We can use the `class` function to find out what kind of data lives
+inside an array:
+
+~~~
+class(patient_data)
+~~~
+{:class="in"}
+
+~~~
+ans = double
+~~~
+{:class="out"}
+
+This output tells us that `patient_data` refers to an array of 
+double precision floating-point numbers.
+
+If we want to get a single value from the matrix, we must provide
+an [index](../../gloss.html#index) in brackets, just as we do in math:
+
+~~~
+patient_data(1, 1)
+~~~
+{:class="in"}
+
+~~~
+ans = 0
+~~~
+{:class="out"}
+
+This means that the value sitting at the `(1, 1)` position of the table,
+i.e., the first row and first column, is `0`,
+
+~~~
+patient_data(30, 20)
+~~~
+{:class="in"}
+
+~~~
+ans = 16
+~~~
+{:class="out"}
+
+and the value corresponding to the 30th row and 20th column, is `16`.
+
+
+What may surprise you is that when matlab displays an array, it shows
+the element with index `(1, 1)` position in the upper left corner rather
+than the lower left. This is consistent with the way mathematicians draw 
+matrices, but different from the Cartesian coordinates.
+The indices are (row, column) instead of (column, row) for the same
+reason.
+
+An index like `(30, 20)` selects a single element of 
+an array, but we can select whole sections as well. For example,
+we can select the first ten days (columns) of values for the first
+four (rows) patients like this:
+
+~~~
+patient_data(1:4, 1:10)
+~~~
+{:class="in"}
+
+~~~
+ans =
+
+   0   0   1   3   1   2   4   7   8   3
+   0   1   2   1   2   1   3   2   2   6
+   0   1   1   3   3   2   6   2   5   9
+   0   0   2   0   4   2   2   1   6   7
+~~~
+{:class="out"}
+
+The [slice](../../gloss.html#slice) `(1:4)` means, "Start at index
+1 and go up to 4". 
+
+We don't have to start slices at 1:
+
+~~~
+patient_data(6:10, 1:10)
+~~~
+{:class="in"}
+
+~~~
+ans =
+
+   0   0   1   2   2   4   2   1   6   4
+   0   0   2   2   4   2   2   5   5   8
+   0   0   1   2   3   1   2   3   5   3
+   0   0   0   3   1   5   6   5   5   8
+   0   1   1   2   1   3   5   3   5   8
+~~~
+{:class="out"}
+
+and we don't have to take all the values in the slice---if we provide
+a [stride](../../gloss.html#stride),
+
+~~~
+patient_data(1:3:10, 1:2:10)
+~~~
+{:class="in"}
+
+~~~
+ans =
+
+   0   1   1   4   8
+   0   2   4   2   6
+   0   2   4   2   5
+   0   1   1   5   5
+~~~
+{:class="out"}
+
+The index`(1:3:10, 1:2:10)` means "Rows 1 through 10 in steps of 
+3 and columns 1 through 10 in steps of 2". Matlab will stop when we 
+reach or cross the upper bounds of this index, i.e., it will
+access columns 1, 3, 5, 7, and 9, but not 11.
+
+
+<!-- keyword -->
+
+The `:` by itself can be used to to slice an entire row or column. For
+example, to get the fifth row of `patient_data`, we can do:
+
+~~~
+patient_data(5, :)
+~~~
+{:class="in"}
+
+
+~~~
+ Columns 1 through 30:
+
+    0    1    1    3    3    1    3    5    2    4    4    7    6    5    3   10    8   10    6   17    9   14    9    7   13    9   12    6    7    7
+
+ Columns 31 through 40:
+
+    9    6    3    2    2    4    2    0    1    1
+~~~
+{:class="out"}
+
+
+Finally, we can use the `end` keyword to refer to the end of a row
+or column:
+
+~~~
+patient_data(50:end, 7)
+~~~
+{:class="in"}
+
+~~~
+ans =
+
+   3
+   1
+   3
+   4
+   1
+   1
+   2
+   2
+   4
+   4
+   3
+~~~
+{:class="out"}
+
+Matlab knows how to perform common mathematical operations on arrays.
+If we want to find the average inflammation for all patients on all days,
+we can just ask the array for its mean value
+
+
+~~~
+mean(patient_data(:))
+~~~
+{:class="in"}
+
+~~~
+ans = 6.1487
+~~~
+
+The reason we couldn't just do `mean(patient_data)` is because, that 
+would compute the mean of *each column* in our table, and return a list
+of mean values. `patient_data(:)` *flattens* the table to a
+one-dimensional array.
+
+To get details about what a function, like `mean`,
+does and the parameters it requires, use Matlab's `help` command.
+
+
+~~~
+help mean
+~~~
+{:class="in"}
+
+~~~
+ -- Function File: mean (X)
+ -- Function File: mean (X, DIM)
+ -- Function File: mean (X, OPT)
+ -- Function File: mean (X, DIM, OPT)
+     Compute the mean of the elements of the vector X.
+
+          mean (x) = SUM_i x(i) / N
+
+     If X is a matrix, compute the mean for each column and return them
+     in a row vector.
+
+     The optional argument OPT selects the type of mean to compute.  The
+     following options are recognized:
+
+     "a"
+          Compute the (ordinary) arithmetic mean.  [default]
+
+     "g"
+          Compute the geometric mean.
+
+     "h"
+          Compute the harmonic mean.
+
+     If the optional argument DIM is given, operate along this
+     dimension.
+
+     Both DIM and OPT are optional.  If both are supplied, either may
+     appear first.
+
+     See also: median, mode.
+~~~
+{:class="out"}
+
+
+~~~
+disp('Maximum inflammation: ', num2str(max(patient_data(:))));
+disp('Minimum inflammation: ', num2str(min(patient_data(:))));
+disp('Standard deviation: ', num2str(std(patient_data(:))));
+~~~
+{:class="in"}
+
+~~~
+Maximum inflammation: 20
+Minimum inflammation: 0
+Standard deviation: 4.6148
+~~~
+{:class="out"}
 
 
 
