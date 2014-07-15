@@ -7,11 +7,17 @@ title: Forking a Repository
 The model shown in the [main lesson](../git/02-collab.html)
 in which everyone pushes and pulls from a single repository,
 is perfectly usable,
-but what if you don't have write access to the repository?
+but it will only work if you have write access to the repository.
+Sometimes you will want to contribute to someone else's repository
+and you won't be able to push your changes to it.
+Instead, you can create your own copy of the repository on Github,
+push your changes to your copy,
+and ask the original author to review and possibly accept your changes
+back into the original repository.
 
 Suppose Wolfman wants to be able to make changes to Dracula's project on Github.
 Instead of creating a new project,
-Wolfman [forks](../../gloss.html#repository-fork) it,
+Wolfman [forks](../../gloss.html#fork) it,
 i.e., clones it on GitHub. He does this using the GitHub web interface:
 
 <img src="img/git-fork-ui.png" alt="The Fork Button" />
