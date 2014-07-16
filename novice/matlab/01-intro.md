@@ -65,7 +65,7 @@ from the CSV file.
 It can sometimes
 be useful to see the output from Matlab commands, but it is often not.
 To suppress the
-output, simply put a semicolon at the end of your commnd:
+output, simply put a semicolon at the end of your command:
 
 ~~~
 csvread('inflammation-01.csv');
@@ -87,14 +87,14 @@ or compute with them. To do that, we need to assign the array to a
 [variable](../../gloss.html#variable).
 
 ~~~
-a = csvread('inflammation-01.csv');
+patient_data = csvread('inflammation-01.csv');
 ~~~
 {:class="in"}
 
 A variable is just a name for a piece of data or *value*. 
 Variable names must begin with a letter, and can contain 
 numbers or underscores. Examples of valid variable names are 
-`x`, `current_temperature` and `subject_id`. 
+`x`, `f_0` or `current_temperature`.
 
 We can create a new variable simply by assigning a value to it using
 `=`:
@@ -200,7 +200,7 @@ patient_data = csvread('inflammation-01.csv');
 ~~~
 {:class="in"}
 
-Matlab provides a function
+Matlab provides a command
 to list all variables that have been assigned data:
 
 ~~~
@@ -248,8 +248,9 @@ characters,
 * Even character strings, like sentences, are stored as an "array
 of characters".
 
-Normal Matlab arrays can't store elements of different data types. For
-instance, a normal Matlab array can't store both an `int` and a `char`. To do that, you have to use a [Cell Array](http://www.mathworks.com/help/matlab/cell-arrays.html). 
+Normally, Matlab arrays can't store elements of different data types. For
+instance, a Matlab array can't store both an `int` and a `char`. To do that, 
+you have to use a [Cell Array](http://www.mathworks.com/help/matlab/cell-arrays.html). 
 
 We can use the `class` function to find out what kind of data lives
 inside an array:
@@ -363,8 +364,8 @@ ans =
 {:class="out"}
 
 The index`(1:3:10, 1:2:10)` means "Rows 1 through 10 in steps of 
-3 and columns 1 through 10 in steps of 2". Matlab will stop when we 
-reach or cross the upper bounds of this index, i.e., it will
+3 and columns 1 through 10 in steps of 2". Matlab will stop when it 
+reaches or crosses the upper bounds of this index, i.e., it will
 access columns 1, 3, 5, 7, and 9, but not 11.
 
 
@@ -418,7 +419,7 @@ ans =
 
 Matlab knows how to perform common mathematical operations on arrays.
 If we want to find the average inflammation for all patients on all days,
-we can just ask the array for its mean value
+we can just ask for the mean of the array:
 
 
 ~~~
@@ -433,11 +434,11 @@ ans = 6.1487
 
 The reason we couldn't just do `mean(patient_data)` is because, that 
 would compute the mean of *each column* in our table, and return a list
-of mean values. `patient_data(:)` *flattens* the table to a
+of mean values. The expression `patient_data(:)` *flattens* the table intto a
 one-dimensional array.
 
 To get details about what a function, like `mean`,
-does and the parameters it requires, use Matlab's `help` command.
+does and how to use it, use Matlab's `help` command.
 
 
 ~~~
