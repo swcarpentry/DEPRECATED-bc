@@ -1,16 +1,15 @@
 # Operators
 
-
-Let's go back to those measurements. Notebook \#1 has the site, date,
+Let's go back to those measurements. Notebook number 1 has the site, date,
 and background evil level with single tabs as separators. Some of the
 site names have spaces, and the dates are in the international standard
-format YYYY-MM-DD. However, the fields in Notebook \#2 are separated by
-slashes, and use months' names instead of numbers. What's more, some of
+format YYYY-MM-DD. However, the fields in Notebook number 2 are separated by
+slashes, and use month names instead of numbers. What's more, some of
 the month names are three characters long, while others are four, and
 the days are either one or two digits.
 
 Before looking at how to use regular expressions to extract data from
-Notebook \#2, let's see how we would do it with simple string
+Notebook 2, let's see how we would do it with simple string
 operations. If our records look like `'Davison/May 22, 2010/1721.3'`, we
 can split on slashes to separate the site, date, and reading. We could
 then split the middle field on spaces to get the month, day, and year,
@@ -23,17 +22,18 @@ step to get an answer. In contrast, regular expressions are
 [declarative](glossary.html#declarative-programming): we declare, "This
 is what we want," and let the computer figure out how to calculate it.
 
+Good definitions rely on us being able to define characters that stand in place for others. Having to explicitly define the exact string usually isn't a big help, what we want is someway of defining the general pattern. This is where operators in regular expressions come in handy. 
+
 Our first attempt to parse this data will rely on the `*` operator. It
-is a [postfix](glossary.html#postfix-operator) operator, just like the 2
-in x^2^, and means, "Zero or more repetitions of the pattern that comes
-before it". For example, `'a*'` matches zero or more 'a' characters,
-while `'.*'` matches any sequence of characters (including the empty
-string) because `'.'` matches anything and `'*'` repeats. Note that the
+is a [postfix](glossary.html#postfix-operator) operator, and means "Zero or more repetitions of the pattern that comes
+before it". For example, `a*` matches zero or more `a` characters,
+while `.*` matches any sequence of characters (including the empty
+string) because `.` matches anything and `*` repeats. Note that the
 characters matched by `'.*'` do *not* all have to be the same: the rule
 is not, "Match a character against the dot, then repeat that match zero
 or more times," but rather, "Zero or more times, match any character."
 
-Here's a test of a simple pattern using `'.*'`:
+Here's a test of a simple pattern using `.*`:
 
     match = re.search('(.*)/(.*)/(.*)',
                       'Davison/May 22, 2010/1721.3')
@@ -168,7 +168,7 @@ this record:
 
 because somebody mis-typed the year, entering three digits instead of
 four. (Either that, or whoever took this reading was also using the
-physics department's time machine.) We could use four dots in a row to
+TARDIS.) We could use four dots in a row to
 force the pattern to match exactly four digits:
 
     (.+)/(.+) (.+),? (....)/(.+)
@@ -261,7 +261,7 @@ thing for the case where there is no day, and also for the case where
 there is one. It works because we have used `[0-9]` instead of `'.'`.
 
 In regular expressions, square brackets `[]` are used to create sets of
-characters. For example, the expression `[aeiou]` matches exactly one
+characters (sometimes called character classes). For example, the expression `[aeiou]` matches exactly one
 vowel, i.e., exactly one occurrence of any character in the set. We can
 either write these sets out character by character, as we've done with
 vowels, or as "first character '-' last character" if the characters are
