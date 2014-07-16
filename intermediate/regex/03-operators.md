@@ -8,6 +8,8 @@ slashes, and use month names instead of numbers. What's more, some of
 the month names are three characters long, while others are four, and
 the days are either one or two digits.
 
+## Using simple string operations gets tedious quickly
+
 Before looking at how to use regular expressions to extract data from
 Notebook 2, let's see how we would do it with simple string
 operations. If our records look like `'Davison/May 22, 2010/1721.3'`, we
@@ -23,6 +25,22 @@ step to get an answer. In contrast, regular expressions are
 is what we want," and let the computer figure out how to calculate it.
 
 Good definitions rely on us being able to define characters that stand in place for others. Having to explicitly define the exact string usually isn't a big help, what we want is someway of defining the general pattern. This is where operators in regular expressions come in handy. 
+
+## Operators specify patterns that simplify regular expressions
+
+Operators are the bread and butter of regular expressions. They are simply characters that specify other different (sometimes of varying length) patterns of characters.
+
+You'll have seen operators in use before. The `*` operator familiar from many a GUI's find box or command-line wildcards is a very common operator. Many combinations of characters such as `\s` are operators too.
+
+Here is a quick quiz. What happens if I try to use this pattern `txt/files/(*.txt)`  on this text `txt/files/file.txt`?
+
+ 1. It matches `file.txt`
+ 2. It matches the whole string
+ 3. It won't work at all (the regex won't compile)
+
+Perhaps surprisingly, the answer is `3`. The regex won't compile because the `.` and `*` are operators that don't mean the same as they do in GUI search boxes and are a source of gotcha's when building regular expressions.
+
+## Using operators
 
 Our first attempt to parse this data will rely on the `*` operator. It
 is a [postfix](glossary.html#postfix-operator) operator, and means "Zero or more repetitions of the pattern that comes
@@ -323,3 +341,70 @@ matches, we return what we found, and if it doesn't, we move on to the
 next pattern. Writing our code this way make it easier to understand
 than using a single monster pattern, and easier to extend if we have to
 handle more data formats.
+
+## More operators
+
+Let's have a look at some different operators that can come in useful in different contexts.
+
+### Anchors
+
+It is possible to 'anchor' the pattern to a particular part of the string, so that it can only match in one region, like at the start or end of the string. the `^` anchor will match the subsequent pattern only at the start of a string. Likewise the `$` operator will match the previous pattern only at the end of a line. Let's look at a contrived example and imagine that we're only interested in data from one site. 
+
+    m = re.search('(^Davison.*)', 'Davison/May 22, 2010/1721.3')
+    print m.group(1)
+
+Gives us:
+
+    Davison/May 22, 2010/1721.3
+
+Whereas,
+
+    m = re.search('(^Baker.*)', 'Davison/May 22, 2010/1721.3')
+    print m
+
+Gives: 
+
+    None
+
+Likewise, if we switch the order of columns:
+
+    m = re.search('(^Davison)', '1721.3/May 22, 2010/Davison')
+    print m
+    
+    None
+
+Since `^Davison` will only match the occurrence at the beginning of the string. Matching the end of the string behaves similarly:
+
+    m = re.search('(.*Davison$)', '1721.3/May 22, 2010/Davison')
+    print m.group(1)
+    
+
+
+### Metacharacters
+
+A common thing in regular expressions are metacharacters. These are special pairs of characters that denote non-printing or classes of characters and help make regular expressions more readable. There is no special syntax for using them, they're just like single characters so here's a table.
+
+    | Metacharacter | Represents         |
+    |:-------------:|:-------------------|
+    |    \t         |  a tab             |
+    |    \s         |  any space         |
+    |    \w         | any word character |
+    |               | ie [aA-zZ0-9_]     |
+    |    \d         | any digit [0-9]    |
+    |    \W         | any non-word char  |
+    |    \D         | any non-digit char |
+
+
+### Review
+
+So now we have enough knowledge to try a quick quiz. What does this pattern match `(wo.+d)` return, when applied to this string `How much would, would a woodchuck chuck?`, that is to say what does this print out:
+
+     m = re.search('(wo.+d)', "How much would, would a woodchuck chuck?")
+     print m.group(1)
+
+Select an answer:
+
+    1. `wood`
+    2. `would, would a wood`
+    3. `would, would`
+
