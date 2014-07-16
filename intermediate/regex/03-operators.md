@@ -190,7 +190,7 @@ this record:
 
 because somebody mis-typed the year, entering three digits instead of
 four. (Either that, or whoever took this reading was also using the
-TARDIS.) We could use four dots in a row to
+physics departments time machine.) We could use four dots in a row to
 force the pattern to match exactly four digits:
 
     (.+)/(.+) (.+),? (....)/(.+)
