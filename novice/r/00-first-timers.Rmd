@@ -3,11 +3,11 @@ layout: lesson
 root: ../..
 ---
 
-
-```{r, echo=FALSE}
-opts_chunk$set(results="markup")
+```{r, include = FALSE}
+source("chunk_options.R")
 ```
-# Novice R materials - following Python examples
+
+Novice R materials - following Python examples
 --------------------------------------------------
 
 * Draw concept map of where we are headed towards best scientific practices, and reproducibility.

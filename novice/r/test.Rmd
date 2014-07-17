@@ -1,0 +1,13 @@
+---
+layout: lesson
+root: ../..
+---
+
+text
+
+```{r}
+# code
+string <- "string"
+string
+```
+
