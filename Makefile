@@ -180,3 +180,9 @@ ipynb :
 	make -f ipynb.mk
 
 ## ---------------------------------------
+
+## rmarkdown    : convert R Markdown to html files.
+#  This uses an auxiliary Makefile 'rmarkdown.mk'.
+rmarkdown :
+	make -f rmarkdown.mk
+## ---------------------------------------
