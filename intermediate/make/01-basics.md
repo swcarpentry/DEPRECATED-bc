@@ -81,6 +81,13 @@ The arguments `-f hello.mk` tell Make that we want it to use the commands in the
 If we don't tell it what file to look in,
 it looks for a file called `Makefile` in the current directory and uses that if it exists.
 
+>### Exercise 1
+
+>You have recently got a lab mate excited about using Make files. However,they
+>send you the file `make_dissertation_figure.mk` and it is not working. Run the
+>make file to see the error and correct it so that `dissertation_figure.svg` is
+>produced.
+
 Make's output shows us that it has run the command we wanted it to.
 It did this because at least one prerequisite for `figure-1.svg` was newer than `figure-1.svg` itself.
 By default, Make uses the time a file was last modified as its age.
@@ -158,6 +165,13 @@ Sure enough, Make runs the `sgr` command twice to re-create both figures:
     $ gmake -f phony.mk
     python create_figure.py figure-1.svg summary-1.dat
     python create_figure.py figure-2.svg summary-2.dat
+
+>### Exercise 2
+
+>You decide that you want to make another figure called `figure-2-copy.svg` that
+>is a copy of `figure-2.svg`.  Create a make file that has `figure-2-copy.svg`
+>depend on `figure-2.svg` and updates `figure-2-copy.svg` appropriately.
+>*Hint*:`cp` is copy in the Unix shell.
 
 One thing to note is that the order in which commands are executed is arbitrary.
 Make could decide to update `figure-2.svg` first, rather than `figure-1.svg`,
