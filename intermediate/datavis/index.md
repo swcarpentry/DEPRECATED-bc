@@ -11,7 +11,7 @@ the basic elements of Python.
 <div class="toc" markdown="1">
 
 1.  [Sparcs](01-datavis_sparcs.html)
-2.  [Health Indicators Scatterplot](02-datavis-scatter.html)
+2.  [Health Indicators Scatterplot](02-datavis_scatter.html)
 3.  [Hospital Infections](03-datavis_infections.html)
 4.  [FDA data](04-dataviz-fda.html)
 
