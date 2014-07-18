@@ -5,6 +5,7 @@ title: Basic Tasks
 level: intermediate
 ---
 To illustrate how Make works, here's the dependency tree for the paper that the robot is working on.
+![Dependency Graph](img/example-dependencies.png)
 `paper.pdf` depends on `paper.tex` (the raw Latex file),
 and on `figure-1.svg` and `figure-2.svg`.
 `figure-1.svg` depends on `summary-1.dat`,
