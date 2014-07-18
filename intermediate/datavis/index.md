@@ -1,6 +1,6 @@
 ---
 layout: lesson
-root: ../../..
+root: ../..
 title: Datavisualization with Python and matplotlib
 ---
 This lesson assumes that you already understand basic programming concepts
