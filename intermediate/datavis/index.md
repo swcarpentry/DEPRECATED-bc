@@ -14,5 +14,6 @@ the basic elements of Python.
 2.  [Health Indicators Scatterplot](02-datavis_scatter.html)
 3.  [Hospital Infections](03-datavis_infections.html)
 4.  [FDA data](04-dataviz-fda.html)
+4.  [FDA data part 2](05-dataviz_fda_part2.html)
 
 </div>
