@@ -3,10 +3,8 @@ layout: lesson
 root: ../..
 title: Programming with MATLAB
 ---
-
 The best way to learn how to program is to do something useful,
-so this 
-introduction to MATLAB is built around a common scientific task:
+so this introduction to MATLAB is built around a common scientific task:
 data analysis.
 Our real goal isn't to teach you MATLAB,
 but to teach you the basic concepts that all programming depends on.
