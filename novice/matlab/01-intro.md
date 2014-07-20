@@ -197,8 +197,6 @@ Now that we know how to assign things to variables, let's re-run
 `csvread` and save its result.
 
 ~~~
-weight_lb
-weight_kg
 patient_data = csvread('inflammation-01.csv');
 ~~~
 {:class="in"}
