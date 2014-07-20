@@ -8,7 +8,8 @@ root: ../..
 
 We are studying inflammation in patients who have been given a new treatment for arthritis,
 and need to analyze the first dozen data sets.
-The data sets are stored in [CSV](../../gloss.html#comma-separated-values) format:
+The data sets are stored in
+[Comma Separated Values (CSV)](../../gloss.html#comma-separated-values) format:
 each row holds information for a single patient,
 and the columns represent successive days.
 The first few rows of our first file, 
@@ -52,8 +53,8 @@ thinking about. Fortunately, Matlab comes with a number of high-level
 tools to do these things 
 efficiently, sparing us the grisly detail.
 
-To fetch the data from our CSV file into Matlab, type following 
-command into the Matlab shell, and press Enter:
+To load the data from our CSV file into Matlab, type following 
+command into the Matlab shell, and press `Enter`:
 
 ~~~
 csvread('inflammation-01.csv')
@@ -196,12 +197,14 @@ Now that we know how to assign things to variables, let's re-run
 `csvread` and save its result.
 
 ~~~
+weight_lb
+weight_kg
 patient_data = csvread('inflammation-01.csv');
 ~~~
 {:class="in"}
 
 Matlab provides a command
-to list all variables that have been assigned data:
+to list all variables that have been assigned data.
 
 ~~~
 who
@@ -211,10 +214,30 @@ who
 ~~~
 Variables in the current scope:
 
-
 patient_data
+weight_kg
+weight_lb
+
 ~~~
 {:class="out"}
+
+To remove a variable from Matlab, use the `clear` command:
+
+~~~
+clear weight_lb
+who
+~~~
+{:class="in"}
+
+
+~~~
+Variables in the current scope:
+
+patient_data
+weight_kg
+~~~
+{:class="out"}
+
 
 
 ### Manipulating Data
@@ -249,7 +272,7 @@ characters,
 of characters".
 
 Normally, Matlab arrays can't store elements of different data types. For
-instance, a Matlab array can't store both an `int` and a `char`. To do that, 
+instance, a Matlab array can't store both a `float` and a `char`. To do that, 
 you have to use a [Cell Array](http://www.mathworks.com/help/matlab/cell-arrays.html). 
 
 We can use the `class` function to find out what kind of data lives
@@ -266,10 +289,19 @@ ans = double
 {:class="out"}
 
 This output tells us that `patient_data` refers to an array of 
-double precision floating-point numbers.
+double precision floating-point numbers. This is the default numeric
+data type in Matlab. If you want to store other numeric data types, 
+you need to tell Matlab explicitly. For example, the command,
+
+~~~
+x = int16(325);
+~~~
+
+assigns the value `325` to the name `x`, storing it as a 16-bit signed
+integer.
 
 If we want to get a single value from the matrix, we must provide
-an [index](../../gloss.html#index) in brackets, just as we do in math:
+an [index](../../gloss.html#index) in brackets:
 
 ~~~
 patient_data(1, 1)
@@ -324,7 +356,7 @@ ans =
 ~~~
 {:class="out"}
 
-The [slice](../../gloss.html#slice) `(1:4)` means, "Start at index
+The [slice](../../gloss.html#slice) `1:4` means, "Start at index
 1 and go up to 4". 
 
 We don't have to start slices at 1:
@@ -440,7 +472,6 @@ one-dimensional array.
 To get details about what a function, like `mean`,
 does and how to use it, use Matlab's `help` command.
 
-
 ~~~
 help mean
 ~~~
@@ -480,6 +511,8 @@ help mean
 ~~~
 {:class="out"}
 
+We can also compute other statistics, like the maximum, minimum and
+standard deviation.
 
 ~~~
 disp(['Maximum inflammation: ', num2str(max(patient_data(:)))]);
@@ -544,6 +577,9 @@ mean(patient_data, 1)
 {:class="in"}
 
 
+
+
+
 ~~~
 ans =
 
@@ -567,7 +603,7 @@ ans =
 {:class="out"}
 
 
-As a quick check, we can ask this array what its shape is:
+As a quick check, we can check the shape of this array:
 
 ~~~
 size(mean(patient_data, 1))
@@ -708,14 +744,18 @@ inflammation per day across all patients.
 ~~~
 plot(max(data, [], 1));
 title("Maximum inflammation per day");
-plot(min(data, [], 1));
-title("Minimum inflammation per day");
 ~~~
 {:class="in"}
 
 <div class="out">
 <img src="img/01-intro_3.png" style="height:300px">
 </div>
+
+~~~
+plot(min(data, [], 1));
+title("Minimum inflammation per day");
+~~~
+{:class="in"}
 
 <div class="out">
 <img src="img/01-intro_4.png" style="height:300px">
