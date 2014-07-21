@@ -191,6 +191,27 @@ Let's be more strict and require 50% of overlap.
 
 \
 
+Do exons and CPG islands overlap significantly?
+===============================================
+
+Going back to base pairs overlap
+--------------------------------
+
+    bedtools intersect -a cpg.bed -b exons.bed -wo \
+    | head -10
+    chr1    28735   29810   CpG:_116    chr1    29320   29370   NR  _024540_exon_10_0_chr1_29321_r    0   -   50
+    chr1    135124  135563  CpG:_30 chr1    134772  139696  NR_ 039983_exon_0_0_chr1_134773_r    0   -   439
+    chr1    327790  328229  CpG:_29 chr1    324438  328581  NR_ 028322_exon_2_0_chr1_324439_f    0   +   439
+    chr1    327790  328229  CpG:_29 chr1    327035  328581  NR_ 028327_exon_3_0_chr1_327036_f    0   +   439
+    chr1    327790  328229  CpG:_29 chr1    324438  328581  NR_ 028325_exon_2_0_chr1_324439_f    0   +   439
+    chr1    713984  714547  CpG:_60 chr1    713663  714068  NR_ 033908_exon_6_0_chr1_713664_r    0   -   84
+    chr1    762416  763445  CpG:_115    chr1    762970  763155  NR  _015368_exon_0_0_chr1_762971_f    0   +   185
+    chr1    762416  763445  CpG:_115    chr1    763177  763229  NR  _047525_exon_0_0_chr1_763178_f    0   +   52
+    chr1    762416  763445  CpG:_115    chr1    762970  763155  NR  _047524_exon_0_0_chr1_762971_f    0   +   185
+    chr1    762416  763445  CpG:_115    chr1    762970  763155  NR_047523_exon_0_0_chr1_762971_f    0   +   185
+
+
+
 
 bedtools "merge"
 ====================
@@ -243,5 +264,119 @@ Let's try again.
 
 The result is a new set of intervals representing the merged set of intervals in the input. That is, if a base pair in the genome is covered by 10 features, it will now only be represented once in the output file.
 
+Or alternatively:
+
+    bedtools sort -i exons.bed | bedtools merge > exons.merged.bed
+
+Now the overlap with merged exons:
 
 
+    bedtools intersect -a cpg.bed -b exons.merged.bed -wo \
+    | head -n 10
+    chr1    28735   29810   CpG:_116    chr1    29320   29370   50
+    chr1    135124  135563  CpG:_30 chr1    134772  139696  439
+    chr1    327790  328229  CpG:_29 chr1    324438  328581  439
+    chr1    713984  714547  CpG:_60 chr1    713663  714068  84
+    chr1    762416  763445  CpG:_115    chr1    761585  762902  486
+    chr1    762416  763445  CpG:_115    chr1    762970  763155  185
+    chr1    762416  763445  CpG:_115    chr1    763177  763229  52
+    chr1    788863  789211  CpG:_28 chr1    788770  794826  348
+    chr1    854765  854973  CpG:_16 chr1    854714  854817  52
+    chr1    858970  861632  CpG:_257    chr1    861120  861180  60
+
+All we want is the very last column:
+
+    bedtools intersect -a cpg.bed -b exons.merged.bed -wo \
+    | cut -f 8,8 | head -n 10
+    50
+    439
+    439
+    84
+    486
+    185
+    52
+    348
+    52
+    60
+
+Then we want the total bp overlap, using a slight alteration of the readings.py from the novice python lessons:
+
+    bedtools intersect -a cpg.bed -b exons.merged.bed -wo \
+    | cut -f 8,8 | python readings.py --sum
+    7235722.0
+
+How do we know if this overlap is significant? Shuffle one of the files.
+
+    bedtools shuffle -i cpg.bed -g genome.txt \
+    | head -n 10 
+    chr7    154365006   154366081   CpG:_116
+    chr2    104893603   104894042   CpG:_30
+    chr11   11786369    11786808    CpG:_29
+    chr1    116263073   116264086   CpG:_84
+    chr10   10674197    10675468    CpG:_99
+    chrX    7680868 7681763 CpG:_94
+    chr6    34093178    34095089    CpG:_171
+    chr1    88263374    88263937    CpG:_60
+    chr1    150416635   150417664   CpG:_115
+    chr6    39650957    39651305    CpG:_28
+
+But keep the intervals on the same chromosome...
+
+    bedtools shuffle -chrom -i cpg.bed -g genome.txt \
+    | head -n 10 
+    chr1    2367858 2368933 CpG:_116
+    chr1    225323760   225324199   CpG:_30
+    chr1    37368198    37368637    CpG:_29
+    chr1    13872987    13874000    CpG:_84
+    chr1    91280571    91281842    CpG:_99
+    chr1    74656135    74657030    CpG:_94
+    chr1    64079046    64080957    CpG:_171
+    chr1    54034535    54035098    CpG:_60
+    chr1    237633659   237634688   CpG:_115
+    chr1    51954093    51954441    CpG:_28
+
+Save to a file, and count the overlap for the shuffled features
+
+    bedtools shuffle -chrom -i cpg.bed -g genome.txt \
+    > cpg.shuffled.bed
+    bedtools intersect -a cpg.shuffled.bed -b exons.merged.bed -wo \
+    | cut -f 8,8 | python readings.py --sum
+    681980.0
+
+Do this lots of times to get a p-value
+
+    mkdir shuffled_cpg
+
+
+    #! /bin/bash
+
+
+    for i in {1..100}
+    do
+        bedtools shuffle -chrom -i cpg.bed -g genome.txt > shuffled_cpg/cpg.shuffled${i}.bed
+    done
+
+And then:
+
+    for f in shuffled_cpg/*; 
+    do bedtools intersect -a $f -b exons.merged.bed -wo \
+    | cut -f 8,8 | python readings.py --sum; done | head -n 10
+    651838.0
+    655178.0
+    633355.0
+    636853.0
+    668339.0
+    651838.0
+    655178.0
+    633355.0
+    636853.0
+    668339.0
+
+Save that to a file:
+
+    for f in shuffled_cpg/*; 
+    do bedtools intersect -a $f -b exons.merged.bed -wo \
+    | cut -f 8,8 | python readings.py --sum; done > shuffled_results.txt
+
+
+TODO: Write a python program to plot the distribution of shuffled results, and the real result
