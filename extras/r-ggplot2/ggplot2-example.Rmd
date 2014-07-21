@@ -118,8 +118,6 @@ What we've done here in addition to faceting is map a feature of the data (here,
 
 FIXME: Now, install the `xx` package, and load the `xx` dataset. Using the techniques we've learned here, use faceting and scaling options to explore how xx, xx, and xx affect the relationship between xx and xx.
 
-***Note:** This is where the *Teaching Software Carpentry* exercise ends, and where the future expansion begins.*
-
 ### ggplot2 and the *Grammar of Graphics*
 
 The **ggplot2** package provides an R implementation of Leland Wilkinson's *Grammar of Graphics* (1999). The *Grammar of Graphics* challenges data analysts to think beyond the garden variety plot types (e.g. scatter-plot, barplot) and the consider the components that make up a plot or graphic, such as how data are represented on the plot (as lines, points, etc.), how variables are mapped to coordinates or plotting shape or colour, what transformation or statistical summary is required, and so on. Specifically, **ggplot2** allows users to build a plot layer-by-layer by specifying:
@@ -132,6 +130,8 @@ The **ggplot2** package provides an R implementation of Leland Wilkinson's *Gram
 Because **ggplot2** implements a *layered* grammar of graphics, data points and additional information (scatterplot smoothers, confidence bands, etc.) can be added to the plot via additional layers, each of which utilize further geoms, aesthetics, and stats.
 
 To make the best use of **ggplot2** it helps to understand the grammar and how it affects how plots are produced. In addition, it is important to note that **ggplot2** is not a general-purpose plotting tool-kit; you may not be able to achieve certain plots or additions to a figure of they do not map onto concepts included in the layered grammar.
+
+#### Same plots as before, but using `ggplot`
 
 In the examples above, we used **ggplot2**'s convenience function, `qplot`, because it's syntax should be familiar if you've already used base graphics. The `qplot` function did a lot of stuff for us: it created the plot object, added layers, plotted geoms, mapped features to aesthetics, created facets, and displayed the result. From here out, we'll use the `ggplot` function to build everything ourselves. 
 
