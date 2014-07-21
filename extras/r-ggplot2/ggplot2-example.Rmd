@@ -187,6 +187,8 @@ We can also create a faceted plot as we did above using the `ggplot` function ad
 ggplot(diamonds, aes(carat, price)) + geom_point() + facet_grid(clarity ~ color)
 ```
 
+#### Expanding your graphical repertoire
+
 By combining multiple layers with aesthetic mappings to different scales, **ggplot2** provides a foundation for producing a wide range of statistical graphics beyond simple "named" plots like scatter plots, histograms, bar plots, etc.
 
 How about a stacked histogram, mapping the fill color of the stacked histogram to levels of the *clarity* variable:
@@ -218,7 +220,7 @@ Finally, we can save the plot created using the `ggsave` function:
 ggsave(filename="~/Desktop/table-depth-density.png", plot=g)
 ```
 
-There are endless ways to combine aesthetic mappings with different geoms and multiple layers. Read about other **geom**s, mappings, scales, and other layer options at the links below.
+There are endless ways to combine aesthetic mappings with different geoms and multiple layers. Read about other **geom**s, mappings, scales, and other layer options at the links at the bottom of the lesson. Just remember - just because you *can* produce a figure doesn't necessarily mean you *should*. The stacked histogram above was just a demonstration of how you might map a categorical variable to colors in a histogram, but this probably isn't the best way to display this data. Always think about what you're trying to show and the best way to display the data to support your claims before toying around with non-traditional mappings, scales, faceting, and aesthetics.
 
 ## Further **ggplot2** resources
 
