@@ -1,15 +1,8 @@
 # Data visualization with ggplot2
 
-```{r, echo=FALSE, message=FALSE, eval=FALSE}
-# Set eval=TRUE to hide all results and figures.
-# This sets defaults. Can change this manually in individual chunks.
-# Must load knitr so opts_chunk is in search path.
-library(knitr)
-opts_chunk$set(results="hide", fig.show="hide", fig.keep="none")
-```
-
 ```{r, echo=FALSE, message=FALSE, eval=TRUE}
 library(knitr)
+# opts_chunk$set(results="hide", fig.show="hide", fig.keep="none")
 opts_chunk$set(message=FALSE)
 ```
 
