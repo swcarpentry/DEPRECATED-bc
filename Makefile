@@ -54,7 +54,7 @@ MOST_SRC = \
 	 novice/git/index.md $(sort $(wildcard novice/git/??-*.md)) \
 	 novice/python/index.md $(sort $(wildcard novice/python/??-*.md)) \
 	 novice/matlab/index.md $(sort $(wildcard novice/matlab/??-*.md)) \
-     novice/sql/index.md $(sort $(wildcard novice/sql/??-*.md)) \
+	 novice/sql/index.md $(sort $(wildcard novice/sql/??-*.md)) \
 	 novice/extras/index.md $(sort $(wildcard novice/extras/??-*.md)) \
 	 novice/teaching/index.md  $(sort $(wildcard novice/teaching/??-*.md)) \
 	 novice/ref/index.md  $(sort $(wildcard novice/ref/??-*.md)) \
@@ -62,6 +62,7 @@ MOST_SRC = \
 	 gloss.md \
 	 rules.md \
 	 LICENSE.md
+
 # All source pages (including things not in the book).
 ALL_SRC = \
 	contents.md \

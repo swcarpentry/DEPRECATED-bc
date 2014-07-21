@@ -22,8 +22,6 @@ The first few rows of our first file,
 0,0,2,0,4,2,2,1,6,7,10,7,9,13,8,8,15,10,10,7,17,4,4,7,6,15,6,4,9,11,3,5,6,3,3,4,2,3,2,1
 0,1,1,3,3,1,3,5,2,4,4,7,6,5,3,10,8,10,6,17,9,14,9,7,13,9,12,6,7,7,9,6,3,2,2,4,2,0,1,1
 ~~~
-{:class="out"}
-
 
 
 We want to:
@@ -36,7 +34,7 @@ To do all that, we'll have to learn a little bit about programming.
 
 <div class="objectives" markdown="1">
 #### Objectives
-* Learn about Matlab arrays.
+* Learn about MATLAB arrays.
 * Read tabular data from a file into a program.
 * Assign values to variables.
 * Select individual values and subsections from data.
@@ -49,12 +47,12 @@ To do all that, we'll have to learn a little bit about programming.
 Reading data from files and writing data to them
 are essential tasks in scientific computing, 
 and admittedly, something that we'd rather not spend a lot of time 
-thinking about. Fortunately, Matlab comes with a number of high-level
+thinking about. Fortunately, MATLAB comes with a number of high-level
 tools to do these things 
 efficiently, sparing us the grisly detail.
 
-To load the data from our CSV file into Matlab, type following 
-command into the Matlab shell, and press `Enter`:
+To load the data from our CSV file into MATLAB, type following 
+command into the MATLAB shell, and press `Enter`:
 
 ~~~
 csvread('inflammation-01.csv')
@@ -64,7 +62,7 @@ csvread('inflammation-01.csv')
 You should see a wall of numbers on the screen---these are the values
 from the CSV file.
 It can sometimes
-be useful to see the output from Matlab commands, but it is often not.
+be useful to see the output from MATLAB commands, but it is often not.
 To suppress the
 output, simply put a semicolon at the end of your command:
 
@@ -112,6 +110,11 @@ disp(weight_kg);
 ~~~
 {:class="in"}
 
+~~~
+55
+~~~
+{:class="out"}
+
 and do arithmetic with it:
 
 ~~~
@@ -132,7 +135,7 @@ we want to print a string and a numerical value together, we *have* to
 convert that numerical value to a string with the `num2str` function.
 
 
-#### Understanding Assignment
+### Understanding Assignment
 
 If we imagine the variable as a sticky note with a name written on 
 it, assignment is like putting the sticky note on a particular value: 
@@ -201,7 +204,7 @@ patient_data = csvread('inflammation-01.csv');
 ~~~
 {:class="in"}
 
-Matlab provides a command
+MATLAB provides a command
 to list all variables that have been assigned data.
 
 ~~~
@@ -219,7 +222,7 @@ weight_lb
 ~~~
 {:class="out"}
 
-To remove a variable from Matlab, use the `clear` command:
+To remove a variable from MATLAB, use the `clear` command:
 
 ~~~
 clear weight_lb
@@ -260,7 +263,7 @@ The output tells us that the variable `patient_data`
 refers to a table of values
 that has 60 rows and 40 columns.
 
-Matlab stores *all* data in the form of arrays. For example:
+MATLAB stores *all* data in the form of arrays. For example:
 
 * Numbers, or *scalars* are arrays of zero dimensions, as are single 
 characters,
@@ -269,8 +272,8 @@ characters,
 * Even character strings, like sentences, are stored as an "array
 of characters".
 
-Normally, Matlab arrays can't store elements of different data types. For
-instance, a Matlab array can't store both a `float` and a `char`. To do that, 
+Normally, MATLAB arrays can't store elements of different data types. For
+instance, a MATLAB array can't store both a `float` and a `char`. To do that, 
 you have to use a [Cell Array](http://www.mathworks.com/help/matlab/cell-arrays.html). 
 
 We can use the `class` function to find out what kind of data lives
@@ -288,8 +291,8 @@ ans = double
 
 This output tells us that `patient_data` refers to an array of 
 double precision floating-point numbers. This is the default numeric
-data type in Matlab. If you want to store other numeric data types, 
-you need to tell Matlab explicitly. For example, the command,
+data type in MATLAB. If you want to store other numeric data types, 
+you need to tell MATLAB explicitly. For example, the command,
 
 ~~~
 x = int16(325);
@@ -327,7 +330,7 @@ ans = 16
 and the value corresponding to the 30th row and 20th column, is `16`.
 
 
-What may surprise you is that when Matlab displays an array, it shows
+What may surprise you is that when MATLAB displays an array, it shows
 the element with index `(1, 1)` position in the upper left corner rather
 than the lower left. This is consistent with the way mathematicians draw 
 matrices, but different from the Cartesian coordinates.
@@ -394,7 +397,7 @@ ans =
 {:class="out"}
 
 The index`(1:3:10, 1:2:10)` means "Rows 1 through 10 in steps of 
-3 and columns 1 through 10 in steps of 2". Matlab will stop when it 
+3 and columns 1 through 10 in steps of 2". MATLAB will stop when it 
 reaches or crosses the upper bounds of this index, i.e., it will
 access columns 1, 3, 5, 7, and 9, but not 11.
 
@@ -447,7 +450,7 @@ ans =
 ~~~
 {:class="out"}
 
-Matlab knows how to perform common mathematical operations on arrays.
+MATLAB knows how to perform common mathematical operations on arrays.
 If we want to find the average inflammation for all patients on all days,
 we can just ask for the mean of the array:
 
@@ -468,7 +471,7 @@ of mean values. The expression `patient_data(:)` *flattens* the table intto a
 one-dimensional array.
 
 To get details about what a function, like `mean`,
-does and how to use it, use Matlab's `help` command.
+does and how to use it, use MATLAB's `help` command.
 
 ~~~
 help mean
@@ -565,7 +568,7 @@ axis:
   <img src="img/matlab-operations-across-axes.svg" alt="Operations Across Axes" />
 </div>
 
-To support this, Matlab allows us to specify the *dimension* we 
+To support this, MATLAB allows us to specify the *dimension* we 
 want to work on. If we ask for the average across the dimension 1, 
 we get:
 
@@ -700,7 +703,7 @@ The mathematician Richard Hamming once said,
 "The purpose of computing is insight, not numbers," and the best
 way to develop insight is often to visualize data. Visualization
 deserves an entire lecture (or course) of its own, but we can 
-explore a few features of Matlab here.
+explore a few features of MATLAB here.
 
 Let's display a heat map of our data:
 
@@ -770,7 +773,7 @@ seems particularly likely, so either there 's a mistake in our
 calculations or something is wrong with our data.
 
 
-#### Wrapping up
+### Wrapping up
 
 It's common to put multiple figures "side-by-side" in a single 
 window for presentation and convenience. Here's how to use
@@ -795,19 +798,19 @@ ylabel('min')
 <div class="keypoints" markdown="1">
 #### Key Points
 
-* A value is a piece of data that a program works with. In Matlab,
+* A value is a piece of data that a program works with. In MATLAB,
 values are always stored as arrays. Values can be numbers, vectors,
 matrices, characters, strings, or a number of other things, but they are
 *always* represented by an array.
 * The "size" of an array is the number of elements it has in each
 dimension.
 * Use `variable = value` to assign a value to a variable. The "value"
-is always an array in Matlab, and can contain different kinds 
+is always an array in MATLAB, and can contain different kinds 
 of data, like integers, floats or characters.
 * Use the `disp()` function to print things to screen. If you want
 to print many things on the same line, print an array of things.
 * Use `array(x, y)` to select a single element from an array.
-* Array indices in Matlab start at 1, not 0 like in C or Python.
+* Array indices in MATLAB start at 1, not 0 like in C or Python.
 * Use `low:high` to specify a slice that includes the indices
 from `low` to `high`.
 * `mean()`, `max()` and `min()` can be used to calculate simple
