@@ -29,14 +29,14 @@ Now let's look at a bigger dataset. We're going to be using a data visualization
 
 Recall how to install and load packages. Install the package if you haven't already:
 
-```{r installggplot2, eval=FALSE}
+```{r installggplot2}
 # Only need to do this once
 install.packages("ggplot2")
 ```
 
 Then load it:
 
-```{r loadggplot2, message=FALSE}
+```{r loadggplot2}
 library(ggplot2)
 ```
 
@@ -145,7 +145,7 @@ The `ggplot` function has two required arguments: the *data* used for creating t
 ggplot(diamonds, aes(carat, price)) + geom_point()
 ```
 
-Here, we've built our plot in layers. First, we create a canvas for plotting layers to come using the `ggplot` function, specifying which **data** to use (here, the *diamonds* data frame), and an **aesthetic mapping** of *carat* to the x-axis and *price* to the y-axis. We next add a layer to the plot, specifying a **geom**, or a way of visually representing the aesthetic mapping. Here we're using a point. Instead of using a point, we could use a different geom. Here, let's use [hexagonal binning](http://cran.r-project.org/web/packages/hexbin/vignettes/hexagon_binning.pdf) instead of a point.
+Here, we've built our plot in layers. First, we create a canvas for plotting layers to come using the `ggplot` function, specifying which **data** to use (here, the *diamonds* data frame), and an **aesthetic mapping** of *carat* to the x-axis and *price* to the y-axis. We next add a layer to the plot, specifying a **geom**, or a way of visually representing the aesthetic mapping. Here we're using a point. Instead of using a point, we could use a different geom. Here, let's use [hexagonal binning](http://cran.r-project.org/web/packages/hexbin/vignettes/hexagon_binning.pdf) instead of a point (you'll need the **hexbin** package installed for this to work).
 
 ```{r gghexbin}
 ggplot(diamonds, aes(carat, price)) + geom_hex()
