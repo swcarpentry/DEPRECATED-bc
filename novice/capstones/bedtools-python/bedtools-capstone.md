@@ -379,4 +379,174 @@ Save that to a file:
     | cut -f 8,8 | python readings.py --sum; done > shuffled_results.txt
 
 
-TODO: Write a python program to plot the distribution of shuffled results, and the real result
+Plotting our results with python
+--------------------------------
+
+Let's copy the readings.py script and alter it to read in our results files:
+
+    import sys
+    import numpy as np
+
+
+    def main():
+        script = sys.argv[0]
+        shuffled_results_file = sys.argv[1]
+        real_results_file = sys.argv[2]
+
+        process(shuffled_results_file, real_results_file)
+
+
+    def process(shuffled_results_file, real_results_file):
+        shuffled_data = np.loadtxt(shuffled_results_file)
+        real_data = np.loadtxt(real_results_file)
+
+        print 'Real data:'
+        print real_data
+        print
+        print 'Shuffled data:'
+        print shuffled_data
+
+    main()
+
+Which prints:
+
+    Real data:
+    7235722.0
+
+    Shuffled data:
+    [ 640473.  638611.  644321.  642422.  634641.  660745.  645816.  635427.
+      595615.  644916.  662412.  645489.  666141.  674597.  637099.  621515.
+      647847.  653944.  641051.  685423.  658610.  686554.  618233.  655932.
+      670053.  641412.  617865.  651189.  639806.  658123.  639381.  644652.
+      667240.  689363.  627791.  625137.  635577.  643151.  616453.  633041.
+      629223.  645209.  629201.  639179.  649602.  638849.  667827.  637550.
+      652560.  647235.  710669.  626332.  689819.  646094.  631575.  633863.
+      657661.  642538.  648691.  660292.  649780.  643179.  615128.  653863.
+      610901.  613489.  624788.  680903.  617416.  654761.  663484.  672619.
+      615038.  630960.  622431.  634951.  659257.  649931.  633901.  612363.
+      639325.  683887.  656753.  690935.  661310.  692022.  633441.  644006.
+      652187.  643428.  643711.  682621.  607918.  674996.  674909.  625800.
+      642090.  662203.  667386.  660448.]
+
+What happens if we call the script with no arguments?
+
+    python results.py
+
+    Traceback (most recent call last):
+      File "results.py", line 23, in <module>
+        main()
+      File "results.py", line 7, in main
+        shuffled_results_file = sys.argv[1]
+    IndexError: list index out of range
+
+Not very helpful. Let's add a usage description:
+
+    import sys
+    import numpy as np
+
+    usage_string = """
+    Results.py plots the real overlap between two bed files
+    versus the overlap when one of the results files is randomly
+    shuffled.
+
+    Usage: python random.py shuffled_results.txt real_results.txt
+    """
+
+    def main():
+
+        if not len(sys.argv) == 3:
+            sys.exit(usage_string)
+
+Now we can plot a histogram of the shuffled data:
+
+    plt.hist(shuffled_data, color='black')
+    plt.show()
+
+And we can plot the real result as a vertical red line:
+
+    import sys 
+    import numpy as np
+    from matplotlib import pyplot as plt 
+
+    usage_string = """ 
+    Results.py plots the real overlap between two bed files
+    versus the overlap when one of the results files is randomly
+    shuffled.
+
+    Usage: python random.py shuffled_results.txt real_results.txt
+    """
+
+    def main():
+
+        if not len(sys.argv) == 3:
+            sys.exit(usage_string)
+
+        script = sys.argv[0]
+        shuffled_results_file = sys.argv[1]
+        real_results_file = sys.argv[2]
+
+        process(shuffled_results_file, real_results_file)
+
+
+    def process(shuffled_results_file, real_results_file):
+        shuffled_data = np.loadtxt(shuffled_results_file)
+        real_data = np.loadtxt(real_results_file)
+
+        print 'Real data:'
+        print real_data
+        print
+        print 'Shuffled data:'
+        print shuffled_data
+
+        plt.hist(shuffled_data, color='black')
+        plt.axvline(real_data, color='red', ls='--', lw=2)
+        plt.show()
+
+    main()
+
+Finally, let's add some axis labels and a legend:
+
+    import sys
+    import numpy as np
+    from matplotlib import pyplot as plt
+
+    usage_string = """
+    Results.py plots the real overlap between two bed files
+    versus the overlap when one of the results files is randomly
+    shuffled.
+
+    Usage: python random.py shuffled_results.txt real_results.txt
+    """
+
+    def main():
+
+        if not len(sys.argv) == 3:
+            sys.exit(usage_string)
+
+        script = sys.argv[0]
+        shuffled_results_file = sys.argv[1]
+        real_results_file = sys.argv[2]
+
+        process(shuffled_results_file, real_results_file)
+
+
+    def process(shuffled_results_file, real_results_file):
+        shuffled_data = np.loadtxt(shuffled_results_file)
+        real_data = np.loadtxt(real_results_file)
+
+        print 'Real data:'
+        print real_data
+        print
+        print 'Shuffled data:'
+        print shuffled_data
+
+        plt.hist(shuffled_data, color='black', label='Shuffled Data')
+        plt.axvline(real_data, color='red', ls='--', lw=2, label='Real Data')
+        plt.xlabel('Nucleotides overlap')
+        plt.ylabel('Number of shuffled results')
+        plt.legend()
+        plt.show()
+
+    main()
+
+
