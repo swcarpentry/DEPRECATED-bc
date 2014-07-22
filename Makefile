@@ -181,3 +181,6 @@ ipynb :
 	make -f ipynb.mk
 
 ## ---------------------------------------
+
+
+.PHONY: all book check clean commands contribs epub fixme gloss install ipynb site tidy
