@@ -22,8 +22,8 @@ def get_gloss_entries(filename):
     (initially all 0).  Checks along the way that internal definitions
     resolve.'''
 
-    # Entry pattern: 0 = key, 1 = abbrev, 2 = term
-    p_entry = re.compile(r'\*\*([^\*]+)\*\*(\s+\(.+\))?:\s+<a\s+name="([^"]+)"></a>')
+    # Entry pattern: 1 = key, 2 = term, optional 3 = abbrev
+    p_entry = re.compile(r'\*\*<a\s+name="([^"]+)">(.+)</a>\*\*(\s+\((.+)\))?:')
 
     # Use pattern: 0 = key
     p_use = re.compile(r'\([^\)]+\)\[\#([^\]]+)\]')
@@ -38,14 +38,12 @@ def get_gloss_entries(filename):
         for line in reader:
             m = p_entry.search(line)
             if m:
-                text = m.group(1)
-                if text == 'FIXME':
-                    undone += 1
-                else:
-                    if text.lower() < last_seen:
-                        out_of_order.append(text)
-                    last_seen = text.lower()
-                key = m.group(3)
+                key = m.group(1)
+                text = m.group(2)
+                abbrev = m.group(3)
+                if text.lower() < last_seen:
+                    out_of_order.append(text)
+                last_seen = text.lower()
                 if key in result:
                     print 'Duplicate key {0} in {1}'.format(key, filename)
                 result[key] = 0

@@ -1,9 +1,0 @@
-# 
-Reported: Fri Aug 19 13:12:34 2011
-Subject: scaryBeet297
-Year/month of birth: 1994/02
-Sex: F
-CI type: 3
-Volume: 1
-Range: 10
-Discrimination: 2

@@ -4,6 +4,18 @@ root: ../..
 title: Conversational Git
 level: intermediate
 ---
+<div class="objectives" markdown="1">
+
+#### Objectives
+
+* Participate in collaborative development by copying Git repositories
+  using the `git clone` command.
+* View historical changes in their Git repositories using `git log`.
+* Navigate the history of their Git repositories using `git reflog` and
+  `git checkout`.
+* Restore saved versions of files using `git checkout`.
+
+</div>
 
 When you travel to a country
 where you don't speak the native language,
@@ -29,18 +41,7 @@ Please keep in mind, though,
 that Git uses some of its verbs and nouns
 very differently from other revision control systems.
 
-## Objectives
-
-After this lesson, students should be able to:
-
-* Participate in collaborative development by copying Git repositories
-  using the `git clone` command.
-* View historical changes in their Git repositories using `git log`.
-* Navigate the history of their Git repositories using `git reflog` and
-  `git checkout`.
-* Restore saved versions of files using `git checkout`.
-
-## Copying Repositories (git clone)
+### Copying Repositories (git clone)
 
 The first concept we introduce
 is the [repository](../../gloss.html#repository).
@@ -106,7 +107,7 @@ we will lose our local copy of the project's history,
 and any changes or commits
 we had not published yet.
 
-## Viewing History (git log)
+### Viewing History (git log)
 
 We are looking
 at the latest *revision*,
@@ -314,7 +315,7 @@ cbd6ff5 Added data file
  2 files changed, 60 insertions(+)
 ~~~
 
-## Time travel (git checkout)
+### Time travel (git checkout)
 
 Git can't really travel through time,
 but it does allow us to inspect its repositories

@@ -5,22 +5,18 @@ root: ../..
 {% extends 'markdown.tpl' %}
 
 {% block input %}
-<div class="in">
-<pre>{{ cell.input | escape }}</pre>
-</div>
+<pre class="in"><code>{{ cell.input | escape }}</code></pre>
 {% endblock input %}
 
 {% block output_group %}
-<div class="out">
-<pre>{{- super() -}}</pre>
-</div>
+<div class="out">{{- super() -}}</div>
 {% endblock output_group %}
 
-{%- block stream -%}{{- output.text | escape -}}{%- endblock stream -%}
+{%- block stream -%}<pre class='out'><code>{{- output.text | escape -}}</code></pre>{%- endblock stream -%}
 
-{%- block pyout -%}{{- output.text | escape -}}{%- endblock pyout -%}
+{%- block pyout -%}<pre class='out'><code>{{- output.text | escape -}}</code></pre>{%- endblock pyout -%}
 
-{%- block pyerr -%}{{- output.traceback | join('\n') | strip_ansi | escape -}}{%- endblock pyerr -%}
+{%- block pyerr -%}<pre class='err'><code>{{- output.traceback | join('\n') | strip_ansi | escape -}}</code></pre>{%- endblock pyerr -%}
 
 {%- block data_svg -%}<img src="../../{{ output.svg_filename | path2url }}">{%- endblock data_svg -%}
 
@@ -28,7 +24,15 @@ root: ../..
 
 {%- block data_jpg -%}<img src="../../{{ output.jpeg_filename | path2url }}">{%- endblock data_jpg -%}
 
-{%- block display_data -%}{{- output.html -}}{%- endblock display_data -%}
+{%- block data_text -%}{{ output.html }}{%- endblock data_text -%}
+
+{%- block display_data -%}
+{%- if output.html -%}
+{{- output.html -}}
+{%- else -%}
+{{- super() -}}
+{%- endif -%}
+{%- endblock display_data -%}
 
 {% block markdowncell %}
 {% if 'cell_tags' in cell.metadata %}

@@ -1,0 +1,15 @@
+<metadata
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:dc="http://purl.org/dc/elements/1.1/">
+<dc:title>Software Carpentry - Volume 1: Basics</dc:title>
+<dc:creator>Greg Wilson (editor)</dc:creator>
+<dc:subject>Programming</dc:subject>
+<dc:description>Basic lab skills for scientific computing: the tools and techniques that will help them get more done in less time, and with less pain.</dc:description>
+<dc:publisher>Software Carpentry</dc:publisher>
+<dc:date>2014-04-11</dc:date>
+<dc:type>Text</dc:type>
+<dc:format>EPUB</dc:format>
+<dc:language>English</dc:language>
+<dc:rights>CC-BY</dc:rights>
+<dc:identifier id="BookId">daad3330da93f8fcce22751285014e7144555209</dc:identifier>
+</metadata>

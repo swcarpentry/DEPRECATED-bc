@@ -5,11 +5,9 @@ title: Job Control
 level: intermediate
 ---
 <div class="objectives" markdown="1">
-## Objectives
+#### Objectives
 *   FIXME
 </div>
-
-## Lesson
 
 Our next topic is how to control programs *once they're running*. This
 is called [job control](glossary.html#job-control), and while it's less
@@ -157,12 +155,6 @@ to run and control programs on remote computers elsewhere on the
 network. We'll look at how to do this [later in this chapter](#s:ssh).
 
 <div class="keypoints" markdown="1">
-## Key Points
+#### Key Points
 *   FIXME
-</div>
-
-<div class="challenges" markdown="1">
-## Challenges
-
-1.  FIXME
 </div>

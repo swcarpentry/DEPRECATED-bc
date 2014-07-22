@@ -117,17 +117,22 @@ as long as learners using Windows do not run into roadblocks such as:
 
 *   On Windows, it appears that:
 
-    <div class="in" markdown="1">
     ~~~
     $ cd
     $ cd Desktop
     ~~~
-    </div>
+    {:class="in"}
 
     will always put someone on their desktop.
     Have them create the example directory for the shell exercises there
     so that they can find it easily
     and watch it evolve.
+
+*  Stay within POSIX-compliant commands, as all the teaching materials do.
+   Your particular shell may have extensions beyond POSIX that are not available
+   on other machines, especially the default OSX bash and Windows bash emulators.
+   For example, POSIX `ls` does not have an `--ignore=` or `-I` option, and POSIX
+   `head` takes `-n 10` or `-10`, but not the long form of `--lines=10`.
 
 #### Windows
 

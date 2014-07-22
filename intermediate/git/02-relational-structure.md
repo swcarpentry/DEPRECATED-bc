@@ -5,7 +5,7 @@ title: Basic Relational Structure of Git Repositories
 level: intermediate
 ---
 
-##The Bones of Git
+### The Bones of Git
 
 In earlier lessons, we've explored some of the basic procedures for creating and navigating a git repository; in this lesson, we'll start learning about the formal structure of a git repo, so that we can understand some of git's more advanced uses when we come to them in later lessons.
 
@@ -98,7 +98,7 @@ A new revision has been created which records the changes you staged to new.txt 
 
 Now that we understand this basic relational structure, we're ready to learn about a new tool for walking around our chain of commits: `git reset`.
 
-##`git reset`
+### `git reset`
 
 Let's suppose that in the course of our work, we make some kind of mistake, and we want to rewind the project to an earlier point - `git reset` might be the right tool for the job; think of it as git's big 'undo' button.  `git reset` has three options to choose from: `--hard`, `--mixed`, or `--soft`.  The simplest to understand is the most drastic: `git reset --hard HEAD` will empty the index, change everything in the working tree to match the version recorded at `HEAD`, and move the `HEAD` pointer to point at whatever revision we pointed at (which in the example of `git reset --hard HEAD` of course doesn't move `HEAD` at all, but it would if we did something like `git reset --hard HEAD~1`, or used an earlier revision hash instead of `HEAD`).  So continuing our example from the last section, if we did `git reset --hard HEAD~1`, our repo would look something like:
 
