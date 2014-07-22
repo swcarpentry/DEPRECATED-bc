@@ -87,6 +87,7 @@ BOOK_SRC = \
 # All source pages (including things not in the book).
 PAGES_SRC = \
 	contents.md \
+	$(wildcard novice/capstones/*/*.md) \
 	$(wildcard intermediate/python/*.md) \
 	$(BOOK_SRC)
 

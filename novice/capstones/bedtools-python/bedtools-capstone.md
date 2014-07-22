@@ -1,7 +1,8 @@
-% bedtools Tutorial
-% Aaron Quinlan
-% November 22, 2013
-
+---
+layout: lesson
+root: ../../..
+title: Capstone example Python and Bedtools
+---
 
 Synopsis
 ========
