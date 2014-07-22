@@ -69,14 +69,7 @@ but much less work for beginners to set up.
 
 Copy that URL from the browser,
 go into the local `planets` repository,
-and run this command:
-
-~~~
-$ hg config --local
-~~~
-{:class="in"}
-
-that is a shortcut for open `.hg/hgrc` with your text editor and add the following lines:
+and use your text editor to add the following lines to `.hg/hgrc`:
 
 ~~~
 [paths]
