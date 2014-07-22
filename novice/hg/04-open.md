@@ -251,7 +251,7 @@ they may have to pay.
 Sharing might seem like the only valid choice for science,
 but many institutions may not allow researchers to do this,
 either because they want to protect future patent applications
-or simply because what's new is often also frightening.
+or simply because what's new is frightening.
 
 <div class="keypoints" markdown="1">
 

@@ -33,6 +33,7 @@ version control is much better for that than this:
 
 The first time we use Mercurial on a new machine,
 we need to configure a few things.
+
 Dracula sets up his new Windows laptop by using his editor to create
 a new file called `%USERPROFILE%\Mercurial.ini` containing the following
 lines:
@@ -61,7 +62,7 @@ the same contents:
 
 (Please use your own name and email address instead of Dracula's
 or Wolfman's,
-and please make sure you choose an editor that's actually on your system,
+and make sure you choose an editor that's actually on your system,
 such as `notepad` on Windows.)
 
 Those configuration file settings tell Mercurial:
@@ -522,7 +523,7 @@ diff -r 72ab25fa99a1 -r 9b3b65e50b8c mars.txt
 +++ b/mars.txt  Mon Apr 14 15:52:43 2014 -0400
 @@ -1,1 +1,2 @@
  Cold and dry, but everything is my favorite color
-+The two moons may be a problem for Wolfman~~~
++The two moons may be a problem for Wolfman
 ~~~
 {:class="out"}
 
@@ -623,7 +624,7 @@ moving backward and forward in time becomes much easier.
 
 What if we have files that we do not want Mercurial to track for us,
 like backup files created by our editor
-or intermediate files created during data analysis.
+or intermediate files created during data analysis?
 Let's create a few dummy files:
 
 ~~~
