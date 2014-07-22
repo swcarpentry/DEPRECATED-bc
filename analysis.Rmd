@@ -1,0 +1,281 @@
+---
+title: "RNAseq Analysis Example"
+output:
+  html_document:
+    keep_md: yes
+---
+
+This is an introduction to RNAseq analysis for use at Software Carpentry bootcamps that have covered novice R. It involves reading in some count data from an RNAseq experiment, exploring the data using base R functions and then analysis with the package DESeq2.
+
+## Install required CRAN packages
+
+First, install some packages that you'll use.
+
+```{r install_packages, eval=FALSE}
+install.packages("gplots")
+install.packages("ggplot2")
+install.packages("calibrate")
+```
+
+Import the data as a `data.frame` and examine it. The data is stored in a text file with the first line being a header giving the column names, and the row names in the first column. 
+
+```{r data_input}
+## Filename with output from featureCounts
+countfile <- "data/counts.txt"
+## Read in the data
+countdata <- read.table(countfile, header=TRUE, row.names=1)
+head(countdata)
+colnames(countdata)
+class(countdata)
+```
+It contains information about genes (one gene per row) with the gene positions in the first five columns and then information about the number of reads aligning to the gene in each experimental sample. We don't need the information on gene position, so we can remove it from the data frame.
+
+```{r}
+# Remove first five columns (chr, start, end, strand, length)
+countdata <- countdata[ ,-(1:5)]
+head(countdata)
+colnames(countdata)
+```
+
+We can rename the columns to something a bit more readable.
+```{r eval=FALSE}
+## Manually
+c("ctl1", "ctl2", "ctl3", "uvb1", "uvb2", "uvb3")
+## Using paste
+?paste
+paste("ctl", 1:3)
+paste("ctl", 1:3, sep="")
+?paste0
+paste0("ctl", 1:3)
+c(paste0("ctl", 1:4), paste0("uvb", 1:5))
+```
+
+Using `gsub` is a more reproducible way to do this.
+```{r rename_cols}
+## Using gsub -- reproducible
+?gsub
+gsub(pattern=".fastq_tophat.accepted_hits.bam", replacement="", x=colnames(countdata))
+colnames(countdata) <- gsub(pattern=".fastq_tophat.accepted_hits.bam", replacement="", x=colnames(countdata))
+head(countdata)
+```
+
+### Exercise 1
+Find the gene with the highest expression in any sample. Extract  the expression data for this gene for all samples. In which sample does it have the highest expression? What is the function of the gene? Can you suggest why this is the top expressed gene?
+
+```{r exercise_1}
+max(apply(countdata, 1, max)) #max expression is 7013
+which.max(apply(countdata, 1, max)) #gene is EEF1A1P9
+countdata[13514, ] #get other sample data - max is in uvb1
+
+#this is a pseudogene - maybe an artefact of only aligning reads to a single chromosome?
+```
+
+## Data investigation using base R
+
+We can investigate this data a bit more using some of the basic R functions before going on to use more sophisticated analysis tools.
+
+We will calculate the mean for each gene for each condition. First make a copy of the data, because we'll need it later. We will work on the copy.
+
+```{r get_means}
+countdata2 <- countdata
+
+#get Control columns
+colnames(countdata2)
+grep("ctl", colnames(countdata2))
+ctlCols <- grep("ctl", colnames(countdata2))
+head(countdata2[,ctlCols])
+countdata2$ctlMean <- apply(countdata2[, ctlCols], 1, mean)
+
+#same for uvb
+uvbCols <- grep("uvb", colnames(countdata2))
+countdata2$uvbMean <- apply(countdata2[, uvbCols], 1, mean)
+```
+
+Plot the mean expression of each gene in control against the UVB sample mean. Look for outliers.
+
+```{r plot_means}
+plot(countdata2$ctlMean, countdata2$uvbMean)
+```
+
+```{r ggplot_means}
+library(ggplot2)
+ggplot(countdata2, aes(x=ctlMean, y=uvbMean)) + geom_point()
+```
+
+### Exercise 2
+How could you make this plot more informative and look more professional? Hint: try using a log scale. Try changing colours, transparencies, sizes, or shapes of points. 
+
+`help(par)` will give you information on lots of graphical parameters that can be set. Help for ggplot2 can be found [here](http://docs.ggplot2.org/current/).
+
+```{r exercise2_1}
+plot(countdata2$ctlMean, countdata2$uvbMean, log="xy")
+```
+
+```{r exercise2_2}
+ggplot(countdata2, aes(x=ctlMean, y=uvbMean)) + geom_point() + scale_x_log10() + scale_y_log10() + theme_bw()
+```
+There are lots more options you can use to alter the appearance of these plots.
+
+##Find candidate differentially expressed genes
+
+We can find candidate differentially expressed genes by looking for genes with a large change between control and UVB samples. A common threshold used is log2 fold change more than 2 fold. We will calculate log2 fold change for all the genes and colour the genes with log2 fold change more than 2 fold on the plot.
+
+```{r remove_unexpressed}
+sum(countdata2$ctlMean > 0)
+sum(countdata2$uvbMean > 0)
+
+nrow(countdata2)
+countdata2 <- subset(countdata2, (countdata2$ctlMean > 0 | countdata2$uvbMean > 0))
+#explain | operator meaning OR in this context?
+nrow(countdata2)
+```
+
+```{r log2FC}
+countdata2$log2FC <- log2(countdata2$uvbMean / countdata2$ctlMean)
+sum(countdata2$log2FC > 2)
+sum(countdata2$log2FC < -2)
+```
+Make a new column to store this information in.
+
+```{r outliers}
+countdata2$outlier <- FALSE
+countdata2$outlier[countdata2$log2FC > 2] <- TRUE
+countdata2$outlier[countdata2$log2FC < -2] <- TRUE
+```
+
+```{r plot_outliers}
+plot(countdata2$ctlMean, countdata2$uvbMean, log="xy")
+points(countdata2$ctlMean[countdata2$outlier==TRUE], countdata2$uvbMean[countdata2$outlier==TRUE], col="red")
+```
+
+```{r ggplot_outliers}
+ggplot(countdata2, aes(x=ctlMean, y=uvbMean, colour=outlier)) + geom_point() + scale_x_log10() + scale_y_log10() 
+```
+
+## DESeq2 analysis
+
+DESeq2 is an R package for analysis of RNAseq data. It is available from [Bioconductor](http://www.bioconductor.org/). Bioconductor is a project to provide tools for analysing high-throughput genomic data including RNA-seq, ChIP-seq and arrays. You can explore Bioconductor packages [here](http://www.bioconductor.org/packages/release/BiocViews.html#___Software). 
+
+```{r install_deseq2, eval=FALSE}
+#install and have a break to check everyone is up to date?
+#explain bioconductor?
+source("http://bioconductor.org/biocLite.R")
+biocLite("DESeq2")
+```
+
+```{r load_deseq2}
+library(DESeq2)
+citation("DESeq2")
+```
+
+It requires the count data to be in matrix form, and an additional dataframe describing the structure of the experiment.
+
+```{r convert_to_matrix}
+# Convert to matrix
+class(countdata)
+countdata <- as.matrix(countdata)
+class(countdata)
+head(countdata)
+
+# construct coldata dataframe
+#three replicates of control and UVB.
+coldata <- data.frame(condition=c(rep("ctl", 3), rep("uvb",3)), row.names=colnames(countdata))
+```
+
+DESeq works on a particular type of object called a DESeqDataSet.
+
+```{r make_deseqdataset}
+#introduce how DESeq2 works - type of object it works on etc
+# instantiate the DESeqDataSet
+dds <- DESeqDataSetFromMatrix(countData=countdata, colData=coldata, design=~condition)
+dds
+```
+
+Run the DESeq pipeline on this object. [Describe pipeline steps?]
+Get results and have a look at them
+
+```{r run_deseq}
+dds <- DESeq(dds)
+
+# Get differential expression results
+res <- results(dds)
+head(res)
+table(res$padj<0.05)
+## Order by adjusted p-value
+res <- res[order(res$padj), ]
+head(res)
+```
+
+Combine DEseq results with the original counts data. Write significant results to a file.
+
+```{r write_results}
+resdata <- merge(as.data.frame(res), as.data.frame(counts(dds, normalized=TRUE)), by="row.names", sort=FALSE)
+head(resdata)
+names(resdata)[1] <- "GeneID"
+head(resdata)
+
+sig <- subset(resdata, padj<0.05)
+write.table(sig, file="results/sig.txt", sep="\t") #tab delim data
+```
+
+## Data Visualization
+
+We can also do some exploratory plotting of the data.
+
+```{r plot_dispersion}
+plotDispEsts(dds, main="Dispersion plot")
+```
+
+```{r plot_heatmaps}
+## Regularized log transformation for clustering/heatmaps, etc
+rld <- rlogTransformation(dds)
+plotPCA(rld)
+
+# Sample distance heatmap
+head(assay(rld))
+assay(rld)[1:5,1:5]
+t(assay(rld))[1:5,1:5]
+dist(t(assay(rld)))
+as.matrix(dist(t(assay(rld))))
+sampleDists <- as.matrix(dist(t(assay(rld))))
+heatmap(sampleDists)
+## better heatmap with gplots
+library(gplots)
+heatmap.2(sampleDists)
+heatmap.2(sampleDists, col=colorpanel(64, "steelblue", "white"), key=FALSE, trace="none")
+heatmap.2(sampleDists, col=colorpanel(64, "black", "white"), key=FALSE, trace="none")
+heatmap.2(sampleDists, col=colorpanel(64, "red", "black", "green"), key=FALSE, trace="none")
+heatmap.2(sampleDists, col=colorpanel(64, "red", "white", "blue"), key=FALSE, trace="none")
+```
+
+```{r plot_pval_hist}
+## Examine plot of p-values
+hist(res$pvalue, breaks=50, col="grey")
+```
+
+
+```{r MA_plot}
+#These are the plots that are most recognisable from papers
+# MA Plot
+par(pch=16)
+with(res, plot(baseMean, log2FoldChange, pch=20, cex=.5, log="x"))
+with(subset(res, padj<.05), points(baseMean, log2FoldChange, col="red", pch=16))
+library(calibrate)
+?textxy
+res$Gene <- rownames(res)
+with(subset(res, padj<.05), textxy(baseMean, log2FoldChange, labs=Gene, cex=1, col=2))
+```
+
+```{r volcano_plot}
+# Volcano plot
+## Set point character
+par(pch=16)
+with(res, plot(log2FoldChange, -log10(pvalue), main="Volcano plot"))
+with(subset(res, padj<.05 ), points(log2FoldChange, -log10(pvalue), col="red"))
+with(subset(res, abs(log2FoldChange)>1), points(log2FoldChange, -log10(pvalue), col="orange"))
+with(subset(res, padj<.05 & abs(log2FoldChange)>1), points(log2FoldChange, -log10(pvalue), col="green"))
+## Add legend
+legend("topleft", legend=c("FDR<0.05", "|LFC|>1", "both"), pch=16, col=c("red","orange","green"))
+## Label points
+with(subset(res, padj<.05 & abs(log2FoldChange)>1), textxy(log2FoldChange, -log10(pvalue), labs=Gene, cex=1))
+```
