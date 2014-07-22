@@ -1,108 +1,66 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
-    <link href="./css/bootstrap/bootstrap.css" rel="stylesheet" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="./css/bootstrap/bootstrap-responsive.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="./css/swc.css" />
-    <link rel="stylesheet" type="text/css" href="./css/swc-bootstrap.css" />
-    <meta charset="UTF-8">
-    <meta http-equiv="last-modified" content="{{site.timestamp}}" />
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body class="container">
-    <div class="span10 offset1">
+---
+layout: plain
+root: .
+---
+<div class="row-fluid" align="center">
+  <div class="span10">
+    <a href="http://software-carpentry.org" title="Software Carpentry">
+      <img alt="Software Carpentry banner" src="./img/software-carpentry-banner-large.png" />
+    </a>
+    <p>
+      Do you spend too much time wrestling with computers,
+      <br/>
+      and not enough doing research?
+      <br/>
+      We can help.
+    </p>
+  </div>
+</div>
 
-      <div class="row-fluid" align="center">
-	<div class="span10">
-	  <a href="http://software-carpentry.org" title="Software Carpentry">
-	    <img alt="Software Carpentry banner" src="./img/software-carpentry-banner-large.png" />
-	  </a>
-	  <br/>
-	  Do you spend too much time wrestling with computers,
-	  <br/>
-	  and not enough doing research?
-	  <br/>
-	  We can help.
-	</div>
-      </div>
+<div class="row-fluid">
+  <div class="span10">
+    <p>
+      Our mission is to teach basic lab skills for research computing
+      so that scientists, engineers, librarians, and others can get more done in less time.
+      Our volunteer instructors deliver over a hundred two-day events a year for thousands of of people,
+      and cover:
+    </p>
+  </div>
+</div>
 
-      <div class="row-fluid">
-	<div class="span10">
-	  <p>
-	    Our mission is to teach researchers basic lab skills for scientific computing
-	    so that they can get more done in less time and with less pain.
-	    In the past year alone,
-	    we have run almost one hundred two-day workshops
-	    for more than 3500 scientists
-	    on:
-	  </p>
-	</div>
-      </div>
+<div class="row-fluid">
+  <div class="span4 offset1">
+    <ul>
+      <li>
+	The Unix Shell for automating repetitive tasks
+      </li>
+      <li>
+	Git and GitHub for tracking and sharing work
+      </li>
+    </ul>
+  </div>
+  <div class="span4">
+    <ul>
+      <li>
+	Python or R for building programs reliably
+      </li>
+      <li>
+	Databases, SQL, and data management
+      </li>
+    </ul>
+  </div>
+</div>
 
-      <div class="row-fluid">
-	<div class="span5" align="center">
-	  <p>
-	    The Unix Shell for automating repetitive tasks
-	  </p>
-	  <p>
-	    Git and GitHub for tracking and sharing work
-	  </p>
-	</div>
-	<div class="span5" align="center">
-	  <p>
-	    Python or R for building programs reliably
-	  </p>
-	  <p>
-	    Databases, SQL, and data management
-	  </p>
-	</div>
-      </div>
-
-      <div class="row-fluid">
-	<div class="span10">
-	  <p>
-	    All our lessons are freely available
-	    under the Creative Commons - Attribution license,
-	    and all our instructors are volunteers,
-	    so the only cost to host a workshop is travel and accommodation
-	    (though donations to help cover administration, instructor training, and curriculum development are always welcome).
-	    To find out more,
-	    look for <a href="http://software-carpentry.org/bootcamps/">a workshop near you</a>,
-	    or contact us at:
-	  </p>
-	</div>
-      </div>
-
-      <div class="row-fluid">
-	<div class="span5" align="center">
-	  <p>
-	    Web: <a href="http://software-carpentry.org">http://software-carpentry.org</a>
-	  </p>
-	  <p>
-	    Email: <a href="mailto:admin@software-carpentry.org">admin@software-carpentry.org</a>
-	  </p>
-	</div>
-	<div class="span5" align="center">
-	  <p>
-	    Twitter: <a href="https://twitter.com/swcarpentry">@swcarpentry</a>
-	  </p>
-	  <p>
-	    Github: <a href="https://github.com/swcarpentry">https://github.com/swcarpentry</a>
-	  </p>
-	</div>
-      </div>
-
-      <div class="footer">
-	<a href="http://mozillascience.org"><img src="img/mozilla-science-lab.png" alt="Mozilla Science Lab" /></a>
-      </div>
-
-    </div>
-    <script src="./js/jquery-1.9.1.min.js"></script>
-    <script src="./js/bootstrap/bootstrap.min.js"></script>
-  </body>
-</html>
+<div class="row-fluid">
+  <div class="span10">
+    <p>
+      Our lessons are freely available
+      under the Creative Commons - Attribution license,
+      and we'd be happy to talk about how we could help you:
+      please check out <a href="http://software-carpentry.org/">our web site</a>,
+      <a href="{{site.contact}}">send us email</a>,
+      follow us on Twitter as <a href="https://twitter.com/swcarpentry">@swcarpentry</a>,
+      or fork us on <a href="https://github.com/swcarpentry/bc">GitHub</a>.
+    </p>
+  </div>
+</div>
