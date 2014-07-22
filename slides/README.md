@@ -1,7 +1,7 @@
 README
 ===
 
-To create a new slideshow, copy `pitch.html` and edit as necessary.
+To create a new slideshow, copy `slides/pitch.html` and edit as necessary.
 
 ## Previewing the slides
 From the top level directory for the `bc` repository, simply run:
