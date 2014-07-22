@@ -3,29 +3,6 @@ layout: lesson
 root: ../..
 title: Instructor's Guide
 ---
-
-> *1997*
->
-> P: Hi, I'm a programmer. I'm starting an online retail company. What do you do?
-> 
-> G: Hi, I'm a graphic designer. I know how to select and arrange text and images in ways that are appealing, informative, and usable.
-> 
-> P: Huh. That seems much simpler to me than programming. I don't think I need to hire you.
->
-> *2003*
-> 
-> G: So, how did your startup do?
-> 
-> P: It tanked. People kept saying the site was ugly and confusing. I guess I should have hired you back in '97 after all.
->
-> *2014*
-> 
-> P: Hi, I'm a programmer. I'm starting an online education company. What do you do?
-> 
-> T: Hi, I'm a teacher. I know how to create and deliver learning materials in ways that are appealing, informative, and usable.
-> 
-> P: Huh. That seems much simpler to me than programming...
-
 As a species,
 we know a lot about how brains learn,
 how effective various teaching practices are,

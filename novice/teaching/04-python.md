@@ -65,3 +65,12 @@ but it's crucial they realize this is a difference of scale rather than kind.
 *   The discussion of command-line scripts
     assumes that students understand standard I/O and building filters,
     which are covered in the lesson on the shell.
+
+*   Do *not* start the notebook with:
+
+    ~~~
+    ipython notebook --pylab [backend]
+    ~~~
+
+    The `--pylab` option has been deprecated for a long time,
+    and is being removed soon.
