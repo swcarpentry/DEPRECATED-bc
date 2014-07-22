@@ -6,8 +6,8 @@ title: Conflicts
 <div class="objectives" markdown="1">
 
 #### Objectives
-*   Explain what conflicts are and when they can occur.
-*   Resolve conflicts resulting from a merge.
+* Explain what conflicts are and when they can occur.
+* Resolve conflicts resulting from a merge.
 
 </div>
 
@@ -226,7 +226,7 @@ kdiff3 and will look like this:
 
 <img src="img/hg-kdiff3-conflict-windows.png" alt="Kdiff3 on Windows" />
 
-On Mac OS X... <!-- something missing here? --ARB -->
+On Mac OS X...
 
 The pane labelled `base` refers to how this file looked like at
 revision `4`, where our conflicting revisions `5` and `6` are based
@@ -256,7 +256,7 @@ $ hg summary
 ~~~
 {:class="in"}
 ~~~
-parent: 5:9f82bc5a1e80 
+parent: 5:9f82bc5a1e80
  Adding a line in the temporary copy
 parent: 6:721158ca243d tip
  Adding a line in our home copy
@@ -404,7 +404,7 @@ $ hg update
 we get the merged file:
 
 ~~~
-$ cat mars.txt 
+$ cat mars.txt
 ~~~
 {:class="in"}
 ~~~
@@ -429,12 +429,11 @@ way to divide the work up differently.
 <div class="keypoints" markdown="1">
 
 #### Key Points
-*   Conflicts occur when two or more people change the same file(s) at
-    the same time.
-
-*   The version control system does not allow people to blindly
-    overwrite each other's changes. Instead, it highlights conflicts
-    so that they can be resolved.
+* Conflicts occur when two or more people change the same file(s) at
+  the same time.
+* The version control system does not allow people to blindly
+  overwrite each other's changes. Instead, it highlights conflicts
+  so that they can be resolved.
 
 </div>
 

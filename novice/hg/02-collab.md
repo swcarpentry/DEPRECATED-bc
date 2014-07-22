@@ -6,9 +6,9 @@ title: Collaborating
 <div class="objectives" markdown="1">
 
 #### Objectives
-*   Explain what remote repositories are and why they are useful.
-*   Explain what happens when a remote repository is cloned.
-*   Explain what happens when changes are pushed to or pulled from a remote repository.
+* Explain what remote repositories are and why they are useful.
+* Explain what happens when a remote repository is cloned.
+* Explain what happens when changes are pushed to or pulled from a remote repository.
 
 </div>
 
@@ -79,8 +79,8 @@ $ hg config --local
 that is a shortcut for open `.hg/hgrc` with your text editor and add the following lines:
 
 ~~~
-  [paths]
-  default = https://bitbucket.org/vlad/planets
+[paths]
+default = https://bitbucket.org/vlad/planets
 ~~~
 
 Make sure to use the URL for your repository rather than Vlad's;
@@ -237,11 +237,11 @@ to share work between different people and machines.
 <div class="keypoints" markdown="1">
 
 #### Key Points
-*   A local Mercurial repository can be connected to one or more remote repositories.
-*   Use the HTTPS protocol to connect to remote repositories until you have learned how to set up SSH.
-*   `hg push` copies changes from a local repository to a remote repository.
-*   `hg pull` copies changes from a remote repository to a local repository.
-*   `hg clone` copies a remote repository to create a local repository with a remote called `default` automatically set up.
+* A local Mercurial repository can be connected to one or more remote repositories.
+* Use the HTTPS protocol to connect to remote repositories until you have learned how to set up SSH.
+* `hg push` copies changes from a local repository to a remote repository.
+* `hg pull` copies changes from a remote repository to a local repository.
+* `hg clone` copies a remote repository to create a local repository with a remote called `default` automatically set up.
 
 </div>
 

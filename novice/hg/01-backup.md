@@ -6,16 +6,16 @@ title: A Better Kind of Backup
 <div class="objectives" markdown="1">
 
 #### Objectives
-*   Explain which initialization and configuration steps are required once per machine,
-    and which are required once per repository.
-*   Add files to Mercurial's collection of tracked files.
-*   Go through the modify-commit cycle for single and multiple files
-    and explain where information is stored before and after the commit.
-*   Identify and use Mercurial revision numbers and changeset identifiers.
-*   Compare files with old versions of themselves.
-*   Restore old versions of files.
-*   Configure Mercurial to ignore specific files,
-    and explain why it is sometimes useful to do so.
+* Explain which initialization and configuration steps are required once per machine,
+  and which are required once per repository.
+* Add files to Mercurial's collection of tracked files.
+* Go through the modify-commit cycle for single and multiple files
+  and explain where information is stored before and after the commit.
+* Identify and use Mercurial revision numbers and changeset identifiers.
+* Compare files with old versions of themselves.
+* Restore old versions of files.
+* Configure Mercurial to ignore specific files,
+  and explain why it is sometimes useful to do so.
 
 </div>
 
@@ -39,12 +39,12 @@ a new file called `%USERPROFILE%\Mercurial.ini` containing the following
 lines:
 
 ~~~
-  [ui]
-  username = Vlad Dracula <vlad@tran.sylvan.ia>
-  editor = nano
+[ui]
+username = Vlad Dracula <vlad@tran.sylvan.ia>
+editor = nano
 
-  [extensions]
-  color =
+[extensions]
+color =
 ~~~
 
 Wolfman has both a Mac laptop and a Linux one and he uses his editor
@@ -52,12 +52,12 @@ to create a new file called `~/.hgrc` on both of those machines with
 the same contents:
 
 ~~~
-  [ui]
-  username = Jack Wolfman <jack@cali.forn.ia>
-  editor = nano
+[ui]
+username = Jack Wolfman <jack@cali.forn.ia>
+editor = nano
 
-  [extensions]
-  color =
+[extensions]
+color =
 ~~~
 
 (Please use your own name and email address instead of Dracula's
@@ -67,9 +67,9 @@ such as `notepad` on Windows.)
 
 Those configuration file settings tell Mercurial:
 
-*   our name and email address,
-*   what our favorite text editor is, and
-*   to colorize output.
+* our name and email address,
+* what our favorite text editor is, and
+* to colorize output.
 
 The fact that these settings are in the Mercurial configuration file in
 our home directory means that they will be used for every project on this
@@ -588,11 +588,11 @@ Mercurial really doesn't want to cause us to lose our work,
 so it defaults to making a backup when we use `hg revert`:
 
 ~~~
-  $ hg status
+$ hg status
 ~~~
 {:class="in"}
 ~~~
-  ? mars.txt.orig
+? mars.txt.orig
 ~~~
 {:class="out"}
 
@@ -718,19 +718,19 @@ I results/b.out
 <div class="keypoints" markdown="1">
 
 #### Key Points
-*   Create a `~/.hgrc`
-    (or `%USERPROFILE%\Mercurial.ini` on Windows) to configure a user name,
-    email address, editor, and other preferences once per machine.
-*   `hg init` initializes a repository.
-*   `hg status` shows the status of a repository.
-*   Files are stored in a project's working directory (which users see),
-    and the local repository (where committed snapshots are permanently recorded).
-*   `hg add` tells Mercurial to track files.
-*   `hg commit` creates a snapshot of the changes to 1 or more files in the local repository.
-*   Always write a log message when committing changes.
-*   `hg diff` displays differences between revisions.
-*   `hg revert` recovers old versions of files.
-*   The `.hgignore` file tells Mercurial what files to ignore.
+* Create a `~/.hgrc`
+  (or `%USERPROFILE%\Mercurial.ini` on Windows) to configure a user name,
+  email address, editor, and other preferences once per machine.
+* `hg init` initializes a repository.
+* `hg status` shows the status of a repository.
+* Files are stored in a project's working directory (which users see),
+  and the local repository (where committed snapshots are permanently recorded).
+* `hg add` tells Mercurial to track files.
+* `hg commit` creates a snapshot of the changes to 1 or more files in the local repository.
+* Always write a log message when committing changes.
+* `hg diff` displays differences between revisions.
+* `hg revert` recovers old versions of files.
+* The `.hgignore` file tells Mercurial what files to ignore.
 
 </div>
 
