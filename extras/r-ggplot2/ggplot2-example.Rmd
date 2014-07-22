@@ -145,29 +145,7 @@ The `ggplot` function has two required arguments: the *data* used for creating t
 ggplot(diamonds, aes(carat, price)) + geom_point()
 ```
 
-Here, we've built our plot in layers. First, we create a canvas for plotting layers to come using the `ggplot` function, specifying which **data** to use (here, the *diamonds* data frame), and an **aesthetic mapping** of *carat* to the x-axis and *price* to the y-axis. We next add a layer to the plot, specifying a **geom**, or a way of visually representing the aesthetic mapping. Here we're using a point. Instead of using a point, we could use a different geom. Here, let's use [hexagonal binning](http://cran.r-project.org/web/packages/hexbin/vignettes/hexagon_binning.pdf) instead of a point (you'll need the **hexbin** package installed for this to work).
-
-```{r gghexbin}
-ggplot(diamonds, aes(carat, price)) + geom_hex()
-```
-
-Here, each bin represents a segment of the plotting surface with lighter blue colors representing more density in that segment. The number of bins can be adjusted as an argument to the `geom_hex()` function. This is one method of solving the overplotting problem we have in this plot without doing any faceting. Another method, here using points again, is to lower the opacity of each point. Here, `alpha=1/5` sets the opacity of each point to 20%. In other words, 5 points would have to overlap to result in a completely solid point. Note that in this case we're not *mapping* the alpha level aesthetic to some other variable as we did above with color -- we're setting it to a static value of 0.20 for all points in the layer.
-
-```{r gghexbin2}
-ggplot(diamonds, aes(carat, price)) + geom_point(alpha=1/5)
-```
-
-We can easily add more layers to the plot. For instance, we could add another layer displaying a smoothed conditional mean using the `geom_smooth()` function.
-
-```{r smoothgam}
-ggplot(diamonds, aes(carat, price)) + geom_point() + geom_smooth()
-```
-
-We'll get a message telling us that because we have >1,000 observations we will default to using a generalized additive model. We could easily plot a straight line by specifying that we want a linear model (`method="lm"`) instead of a generalized additive model, the default for large datasets.
-
-```{r smoothlinear}
-ggplot(diamonds, aes(carat, price)) + geom_point() + geom_smooth(method="lm")
-```
+Here, we've built our plot in layers. First, we create a canvas for plotting layers to come using the `ggplot` function, specifying which **data** to use (here, the *diamonds* data frame), and an **aesthetic mapping** of *carat* to the x-axis and *price* to the y-axis. We next add a layer to the plot, specifying a **geom**, or a way of visually representing the aesthetic mapping. Here we're using a point. Instead of using a point, we could use a different geom. We'll discuss that in more detail later on.
 
 Getting back to our examples above, using the `ggplot` syntax we can map the color of the points (an aesthetic) onto one of the variables in our dataset.
 
@@ -187,7 +165,77 @@ We can also create a faceted plot as we did above using the `ggplot` function ad
 ggplot(diamonds, aes(carat, price)) + geom_point() + facet_grid(clarity ~ color)
 ```
 
-#### Expanding your graphical repertoire
+#### Dealing with overplotting
+
+In the examples above we used colors and facets to help get around the overplotting problem when we used point geoms. A simpler way to try to tackle this problem is to lower the opacity of each point. Here, `alpha=1/5` sets the opacity of each point to 20%. In other words, 5 points would have to overlap to result in a completely solid point. Note that in this case we're not *mapping* the alpha level aesthetic to some other variable as we did above with color -- we're setting it to a static value of 0.20 for all points in the layer.
+
+```{r ggalpha}
+ggplot(diamonds, aes(carat, price)) + geom_point(alpha=1/5)
+```
+
+Alternatively, we might choose to use a different geom instead of points. Here, let's use [hexagonal binning](http://cran.r-project.org/web/packages/hexbin/vignettes/hexagon_binning.pdf) instead of a point (you'll need the **hexbin** package installed for this to work).
+
+```{r gghexbin}
+ggplot(diamonds, aes(carat, price)) + geom_hex()
+```
+
+Here, each bin represents a segment of the plotting surface with lighter blue colors representing more density in that segment. The number of bins can be adjusted as an argument to the `geom_hex()` function. This is one method of solving the overplotting problem we have in this plot without doing any faceting. Another way to accomplish this by plotting a **stat** rather than a geom itself. Here, we'll plot a two-dimensional histogram representing the density of points in a given area (think of this like contour lines on a map).
+
+```{r density2d}
+ggplot(diamonds, aes(carat, price)) + stat_density2d()
+```
+
+#### Expanding your graphical repertoire 
+
+FIXME: get back here
+
+```{r}
+# Histogram
+ggplot(diamonds, aes(price)) + geom_histogram(binwidth=100)
+
+# Boxplots and stip plots
+ggplot(iris, aes(Species, Sepal.Length)) + geom_point()
+ggplot(iris, aes(Species, Sepal.Length)) + geom_jitter()
+ggplot(iris, aes(Species, Sepal.Length)) + geom_jitter(aes(shape=Species), size=3)
+ggplot(iris, aes(Species, Sepal.Length, colour=Species)) + geom_jitter()
+ggplot(iris, aes(Species, Sepal.Length, colour=Species)) + geom_jitter(aes(shape=Species), size=3)
+ggplot(iris, aes(Species, Sepal.Length)) + geom_boxplot()
+ggplot(iris, aes(Species, Sepal.Length, colour=Species)) + geom_boxplot() + geom_jitter()
+ggplot(iris, aes(Species, Sepal.Length, colour=Species)) + geom_boxplot(alpha=.5) + geom_jitter()
+ggplot(iris, aes(Species, Sepal.Length, colour=Species)) + geom_boxplot(alpha=.5) + geom_jitter(aes(shape=Species), size=3)
+# Fix this one below
+# ggplot(iris, aes(Species, Sepal.Length, colour=Species)) + geom_jitter(aes(shape=Species), size=3) + geom_smooth(aes(group=Species))
+
+# Adding layers to plots
+ggplot(diamonds, aes(carat, price)) + facet_wrap(~cut) + geom_point() + geom_smooth()
+
+# Adding statistics
+library(plyr)
+str(baseball)
+# first a dot plot
+ggplot(baseball, aes(year, hr)) + geom_point()
+# multiple values, use a statistic
+ggplot(baseball, aes(year, hr)) + stat_summary(fun.y=mean, geom="line")
+# plot multiple stats http://sharpstatistics.co.uk/r/ggplot2-guide/
+mystats <- function(x) {
+  result = c(mean(x) - sd(x), mean(x) + sd(x))
+  names(result) = c("ymin", "ymax")
+  result
+}
+ggplot(baseball, aes(year, hr)) + stat_summary(fun.y=mean, geom="line") + stat_summary(fun.data="mystats", geom="ribbon", alpha=.2, fill="steelblue")
+```
+
+Let's facet the plot by levels of **clarity**, and add multiple layers to the plot. Here, let's add another layer displaying a smoothed conditional mean using the `geom_smooth()` function.
+
+```{r smoothgam}
+ggplot(diamonds, aes(carat, price)) + facet_wrap(~clarity) + geom_point() + geom_smooth()
+```
+
+We'll get a message telling us that because we have >1,000 observations we will default to using a generalized additive model. We could easily plot a straight line by specifying that we want a linear model (`method="lm"`) instead of a generalized additive model, the default for large datasets.
+
+
+
+#### Non-traditional graphics
 
 By combining multiple layers with aesthetic mappings to different scales, **ggplot2** provides a foundation for producing a wide range of statistical graphics beyond simple "named" plots like scatter plots, histograms, bar plots, etc.
 
@@ -221,6 +269,12 @@ ggsave(filename="~/Desktop/table-depth-density.png", plot=g)
 ```
 
 There are endless ways to combine aesthetic mappings with different geoms and multiple layers. Read about other **geom**s, mappings, scales, and other layer options at the links at the bottom of the lesson. Just remember - just because you *can* produce a figure doesn't necessarily mean you *should*. The stacked histogram above was just a demonstration of how you might map a categorical variable to colors in a histogram, but this probably isn't the best way to display this data. Always think about what you're trying to show and the best way to display the data to support your claims before toying around with non-traditional mappings, scales, faceting, and aesthetics.
+
+#### More examples
+
+```{r}
+ggplot(diamonds, aes(carat, price, colour=cut)) + geom_point() + facet_wrap(~cut)
+```
 
 ## Further **ggplot2** resources
 
