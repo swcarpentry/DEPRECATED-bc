@@ -3,6 +3,10 @@ layout: lesson
 root: ../..
 ---
 
+```{r, include = FALSE}
+source("chunk_options.R")
+```
+
 Making packages in R
 ====================
 
