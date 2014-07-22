@@ -1,9 +1,0 @@
-# 
-Reported: Sun May 1 14:41:09 2011
-Subject: ringoSpice318
-Year/month of birth: 1993/12
-Sex: M
-CI type: 25
-Volume: 2
-Range: 7
-Discrimination: 7
