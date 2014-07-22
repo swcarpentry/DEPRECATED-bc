@@ -74,6 +74,7 @@ BOOK_SRC = \
 	team.md \
 	novice/shell/index.md $(sort $(wildcard novice/shell/??-*.md)) \
 	novice/git/index.md $(sort $(wildcard novice/git/??-*.md)) \
+	novice/hg/index.md $(sort $(wildcard novice/hg/??-*.md)) \
 	novice/python/index.md $(IPYNB_TX_PYTHON) \
 	novice/sql/index.md $(IPYNB_TX_SQL) \
 	novice/extras/index.md $(sort $(wildcard novice/extras/??-*.md)) \
