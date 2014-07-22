@@ -193,7 +193,7 @@ FIXME: get back here
 # Histogram
 ggplot(diamonds, aes(price)) + geom_histogram(binwidth=100)
 
-# Boxplots and stip plots
+# Boxplots and stip plots, adding layers to plots
 ggplot(iris, aes(Species, Sepal.Length)) + geom_point()
 ggplot(iris, aes(Species, Sepal.Length)) + geom_jitter()
 ggplot(iris, aes(Species, Sepal.Length)) + geom_jitter(aes(shape=Species), size=3)
@@ -203,11 +203,15 @@ ggplot(iris, aes(Species, Sepal.Length)) + geom_boxplot()
 ggplot(iris, aes(Species, Sepal.Length, colour=Species)) + geom_boxplot() + geom_jitter()
 ggplot(iris, aes(Species, Sepal.Length, colour=Species)) + geom_boxplot(alpha=.5) + geom_jitter()
 ggplot(iris, aes(Species, Sepal.Length, colour=Species)) + geom_boxplot(alpha=.5) + geom_jitter(aes(shape=Species), size=3)
-# Fix this one below
-# ggplot(iris, aes(Species, Sepal.Length, colour=Species)) + geom_jitter(aes(shape=Species), size=3) + geom_smooth(aes(group=Species))
 
-# Adding layers to plots
-ggplot(diamonds, aes(carat, price)) + facet_wrap(~cut) + geom_point() + geom_smooth()
+# Adding layers to scatter plots
+ggplot(iris, aes(Sepal.Width, Sepal.Length)) + geom_point()
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color=Species)) + geom_point() + geom_smooth()
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color=Species)) + geom_point() + facet_wrap(~Species)
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color=Species)) + geom_point() + facet_wrap(~Species) + geom_smooth()
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color=Species)) + geom_point() + facet_wrap(~Species) + geom_smooth("lm")
+# Figure out where to put this one:
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color=Species)) + geom_point()
 
 # Adding statistics
 library(plyr)
