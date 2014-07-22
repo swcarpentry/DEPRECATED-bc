@@ -15,7 +15,7 @@ title: Collaborating
 Version control really comes into its own
 when we begin to collaborate with other people.
 We already have most of the machinery we need to do this;
-the only thing missing is to copy changes from one repository to another.
+the only thing missing is to copy changes from one person's repository to another.
 
 Systems like Mercurial and Git allow us to move work between any two repositories.
 In practice,
@@ -87,7 +87,7 @@ and add the following lines:
 ~~~
 </div>
 
-Make sure to use the URL for your repository rather than Vlad's:
+Make sure to use the URL for your repository rather than Vlad's;
 the only difference should be your username instead of `vlad`.
 
 We can check that the command has worked by running `hg paths`:

@@ -126,8 +126,8 @@ abort: push creates new remote head 9f82bc5a1e80!
 ~~~
 </div>
 
-Mercurial detects that our changes diverge from the line of
-development in the remote server and stops us from creating a
+Mercurial detects that our changes conflict with the changes
+in the remote server and stops us from creating a
 confusing situation in that server. What we have to do is pull the
 changes from Bitbucket, [merge](../../gloss.html#repository-merge)
 them into the copy we're currently working in, and then push that.
@@ -246,7 +246,7 @@ kdiff3 and will look like this:
 
 <img src="img/hg-kdiff3-conflict-windows.png" alt="Kdiff3 on Windows" />
 
-On Mac OS X...
+On Mac OS X... <!-- something missing here? --ARB -->
 
 The pane labelled `base` refers to how this file looked like at
 revision `4`, where our conflicting revisions `5` and `6` are based
@@ -288,11 +288,11 @@ update: (current)
 ~~~
 </div>
 
-This tells us that our working dirctory right now is in a merge state.
+This tells us that right now our working directory is in a merge state.
 We see that the working directory has two parents, and one file is
 about to get merged.
 
-Let us look at the graph again,
+Let us look at the graph again:
 
 <div class="in" markdown="1">
 ~~~
