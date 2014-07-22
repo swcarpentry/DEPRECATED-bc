@@ -102,7 +102,8 @@ BOOK_MD = ./book.md
 # file as the lessons.
 $(BOOK_MD) : $(MOST_SRC) bin/make-book.py
 	python bin/make-book.py $(MOST_SRC) > $@
-	sed -i 's/\.\.\/\.\.\/gloss.html#/#g:/g' $@
+	sed -i.bak 's/\.\.\/\.\.\/gloss.html#/#g:/g' $@
+	rm book.md.bak
 
 $(BOOK_HTML): $(BOOK_MD)
 	make -B site
