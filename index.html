@@ -50,22 +50,6 @@ contact: admin@software-carpentry.org
   and to apply what they have learned to their own research problems.
 </p>
 
-<!-- This block displays the instructors' names if they are available. -->
-{% if page.instructor %}
-<p>
-  <strong>Instructors:</strong>
-  {{page.instructor | join: ', ' %}}
-</p>
-{% endif %}
-
-<!-- This block displays the helpers' names if they are available. -->
-{% if page.helper %}
-<p>
-  <strong>Helpers:</strong>
-  {{page.helper | join: ', ' %}}
-</p>
-{% endif %}
-
 <!--
     Modify this block to reflect the target audience for your bootcamp.
     In particular, if it is only open to people from a particular institution,
