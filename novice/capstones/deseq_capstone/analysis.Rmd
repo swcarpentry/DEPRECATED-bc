@@ -17,7 +17,9 @@ install.packages("ggplot2")
 install.packages("calibrate")
 ```
 
-Import the data as a `data.frame` and examine it. The data is stored in a text file with the first line being a header giving the column names, and the row names in the first column. 
+The data is provided in a .txt file. Have a look at this file in the shell, using `head`.
+
+Import the data as a `data.frame` and examine it again. You can set the arguments of `read.table` to import the first row as a header giving the column names, and the first column as row names. 
 
 ```{r data_input}
 # Filename with output from featureCounts
@@ -47,7 +49,7 @@ paste("ctl", 1:3)
 paste("ctl", 1:3, sep="")
 ?paste0
 paste0("ctl", 1:3)
-c(paste0("ctl", 1:4), paste0("uvb", 1:5))
+c(paste0("ctl", 1:3), paste0("uvb", 1:3))
 ```
 
 An easier way to do this, especially for files with many columns, is to use the `gsub` command to strip out the extra information. This is also more robust to introduced errors, for example if the column order changes at some point in the future.
@@ -60,7 +62,12 @@ head(countData)
 ```
 
 ## Exercise 1
-Find the gene with the highest expression in any sample. Extract  the expression data for this gene for all samples. In which sample does it have the highest expression? What is the function of the gene? Can you suggest why this is the top expressed gene?
+Find the gene with the highest expression in any sample. Extract the expression data for this gene for all samples. In which sample does it have the highest expression? 
+
+What is the function of the gene? Can you suggest why this is the top expressed gene?
+
+Hint 1: use the `apply` function from the introductory R lessons.
+Hint 2: try `?which.max`.
 
 ```{r exercise_1}
 max(apply(countData, 1, max)) # max expression is 7013
@@ -84,8 +91,8 @@ colnames(countData2)
 grep("ctl", colnames(countData2))
 ctlCols <- grep("ctl", colnames(countData2))
 head(countData2[,ctlCols])
-apply(countData2[, ctlCols], 1, mean) 
-# here we'll use rowMeans instead, its a convenient shortcut, and also faster!
+head(apply(countData2[, ctlCols], 1, mean))
+# here we'll use rowMeans instead, it's a convenient shortcut, and also faster!
 countData2$ctlMean <- rowMeans(countData2[, ctlCols])
 
 # same for uvb
@@ -93,7 +100,7 @@ uvbCols <- grep("uvb", colnames(countData2))
 countData2$uvbMean <- rowMeans(countData2[, uvbCols])
 ```
 
-Plot the mean expression of each gene in control against the UVB sample mean. Look for outliers.
+Plot the mean expression of each gene in control against the UVB sample mean. Are there any outliers?
 
 ```{r plot_means}
 plot(countData2$ctlMean, countData2$uvbMean)
@@ -105,12 +112,14 @@ ggplot(countData2, aes(x=ctlMean, y=uvbMean)) + geom_point()
 ```
 
 ## Exercise 2
-How could you make this plot more informative and look more professional? Hint: try using a log scale. Try changing colours, transparencies, sizes, or shapes of points. 
+How could you make this plot more informative and look more professional? 
+
+Hint: try using a log scale. You can also changing colours, transparencies, sizes, or shapes of points. 
 
 `help(par)` will give you information on lots of graphical parameters that can be set. Help for ggplot2 can be found [here](http://docs.ggplot2.org/current/).
 
 ```{r exercise2_1}
-plot(countData2$ctlMean, countData2$uvbMean, log="xy")
+plot(countData2$ctlMean, countData2$uvbMean, log="xy", pch=16)
 ```
 
 ```{r exercise2_2}
@@ -120,9 +129,10 @@ There are lots more options you can use to alter the appearance of these plots.
 
 #Find candidate differentially expressed genes
 
-We can find candidate differentially expressed genes by looking for genes with a large change between control and UVB samples. A common threshold used is log2 fold change more than 2 fold. We will calculate log2 fold change for all the genes and colour the genes with log2 fold change more than 2 fold on the plot.
+We can find candidate differentially expressed genes by looking for genes with a large change between control and UVB samples. A common threshold used is log2 fold change more than 2 or less than -2. We will calculate log2 fold change for all the genes and colour the genes with log2 fold change of more than 2 or less than -2 on the plot.
 
 ```{r remove_unexpressed}
+# discuss: why to remove zeroes (NAs produced)
 # explain: whats happening here, is for each ctlMean there is a TRUE/FALSE for 
 # if it is greater than 0. TRUE and FALSE can be summed: FALSE is typically 
 # considered a 0, and TRUE is considered to be 1. So when we call
@@ -139,6 +149,7 @@ nrow(countData2)
 
 ```{r log2FC}
 # explain: what is fold change? why do we use log2 to quantify the fold change?
+# discuss: Inf / -Inf may be produced in some cases. Concept of adding pseudocounts.
 countData2$log2FC <- log2(countData2$uvbMean / countData2$ctlMean)
 # again, reinforce that summing a logical vector gives you the number of 
 # occurences of TRUE.
@@ -154,13 +165,15 @@ countData2$outlier[countData2$log2FC < -2] <- TRUE
 ```
 
 ```{r plot_outliers}
-plot(countData2$ctlMean, countData2$uvbMean, log="xy")
-points(countData2$ctlMean[countData2$outlier==TRUE], countData2$uvbMean[countData2$outlier==TRUE], col="red")
+plot(countData2$ctlMean, countData2$uvbMean, log="xy", pch=16)
+points(countData2$ctlMean[countData2$outlier==TRUE], countData2$uvbMean[countData2$outlier==TRUE], col="red", pch=16)
 ```
 
 ```{r ggplot_outliers}
-ggplot(countData2, aes(x=ctlMean, y=uvbMean, colour=outlier)) + geom_point() + scale_x_log10() + scale_y_log10() 
+ggplot(countData2, aes(x=ctlMean, y=uvbMean, colour=outlier)) + geom_point() + scale_x_log10() + scale_y_log10() + theme_bw()
 ```
+
+What do you notice about the positions of the outliers on these plots? How would you interpret this?
 
 # DESeq2 analysis
 
@@ -229,6 +242,8 @@ sig <- subset(resData, padj<0.05)
 dir.create("results")
 write.table(sig, file="results/sig.txt", sep="\t") # tab delim data
 ```
+
+You can open this file in Excel or any text editor (try it now).
 
 # Data Visualization
 

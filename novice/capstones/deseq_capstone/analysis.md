@@ -2,7 +2,7 @@
 
 This is an introduction to RNAseq analysis for use at Software Carpentry bootcamps that have covered novice R. It involves reading in some count data from an RNAseq experiment, exploring the data using base R functions and then analysis with the package DESeq2.
 
-## Install required CRAN packages
+# Install required CRAN packages
 
 First, install some packages that you'll use.
 
@@ -13,13 +13,15 @@ install.packages("ggplot2")
 install.packages("calibrate")
 ```
 
-Import the data as a `data.frame` and examine it. The data is stored in a text file with the first line being a header giving the column names, and the row names in the first column. 
+The data is provided in a .txt file. Have a look at this file in the shell, using `head`.
+
+Import the data as a `data.frame` and examine it again. You can set the arguments of `read.table` to import the first row as a header giving the column names, and the first column as row names. 
 
 
 ```r
-## Filename with output from featureCounts
+# Filename with output from featureCounts
 countFile <- "data/counts.txt"
-## Read in the data
+# Read in the data
 countData <- read.table(countFile, header=TRUE, row.names=1)
 head(countData)
 ```
@@ -54,47 +56,47 @@ head(countData)
 ## OR4G4P                           +;+    947
 ## OR4G11P                            +    940
 ##            ctl1.fastq_tophat.accepted_hits.bam
-## DDX11L1                                    337
-## WASH7P                                     319
-## MIR1302-10                                 313
-## FAM138A                                    321
-## OR4G4P                                     322
-## OR4G11P                                    343
+## DDX11L1                                      0
+## WASH7P                                       0
+## MIR1302-10                                   0
+## FAM138A                                      0
+## OR4G4P                                       0
+## OR4G11P                                      0
 ##            ctl2.fastq_tophat.accepted_hits.bam
-## DDX11L1                                    322
-## WASH7P                                     377
-## MIR1302-10                                 348
-## FAM138A                                    333
-## OR4G4P                                     311
-## OR4G11P                                    339
+## DDX11L1                                      0
+## WASH7P                                       0
+## MIR1302-10                                   0
+## FAM138A                                      0
+## OR4G4P                                       0
+## OR4G11P                                      0
 ##            ctl3.fastq_tophat.accepted_hits.bam
-## DDX11L1                                    325
-## WASH7P                                     299
-## MIR1302-10                                 328
-## FAM138A                                    340
-## OR4G4P                                     364
-## OR4G11P                                    335
+## DDX11L1                                      0
+## WASH7P                                       0
+## MIR1302-10                                   0
+## FAM138A                                      0
+## OR4G4P                                       0
+## OR4G11P                                      0
 ##            uvb1.fastq_tophat.accepted_hits.bam
-## DDX11L1                                    131
-## WASH7P                                     213
-## MIR1302-10                                 250
-## FAM138A                                    253
-## OR4G4P                                     378
-## OR4G11P                                    418
+## DDX11L1                                      0
+## WASH7P                                       0
+## MIR1302-10                                   0
+## FAM138A                                      0
+## OR4G4P                                       0
+## OR4G11P                                      0
 ##            uvb2.fastq_tophat.accepted_hits.bam
-## DDX11L1                                    158
-## WASH7P                                     194
-## MIR1302-10                                 247
-## FAM138A                                    234
-## OR4G4P                                     315
-## OR4G11P                                    450
+## DDX11L1                                      0
+## WASH7P                                       0
+## MIR1302-10                                   0
+## FAM138A                                      0
+## OR4G4P                                       0
+## OR4G11P                                      0
 ##            uvb3.fastq_tophat.accepted_hits.bam
-## DDX11L1                                    136
-## WASH7P                                     203
-## MIR1302-10                                 263
-## FAM138A                                    276
-## OR4G4P                                     405
-## OR4G11P                                    437
+## DDX11L1                                      0
+## WASH7P                                       0
+## MIR1302-10                                   0
+## FAM138A                                      0
+## OR4G4P                                       0
+## OR4G11P                                      0
 ```
 
 ```r
@@ -133,47 +135,47 @@ head(countData)
 
 ```
 ##            ctl1.fastq_tophat.accepted_hits.bam
-## DDX11L1                                    337
-## WASH7P                                     319
-## MIR1302-10                                 313
-## FAM138A                                    321
-## OR4G4P                                     322
-## OR4G11P                                    343
+## DDX11L1                                      0
+## WASH7P                                       0
+## MIR1302-10                                   0
+## FAM138A                                      0
+## OR4G4P                                       0
+## OR4G11P                                      0
 ##            ctl2.fastq_tophat.accepted_hits.bam
-## DDX11L1                                    322
-## WASH7P                                     377
-## MIR1302-10                                 348
-## FAM138A                                    333
-## OR4G4P                                     311
-## OR4G11P                                    339
+## DDX11L1                                      0
+## WASH7P                                       0
+## MIR1302-10                                   0
+## FAM138A                                      0
+## OR4G4P                                       0
+## OR4G11P                                      0
 ##            ctl3.fastq_tophat.accepted_hits.bam
-## DDX11L1                                    325
-## WASH7P                                     299
-## MIR1302-10                                 328
-## FAM138A                                    340
-## OR4G4P                                     364
-## OR4G11P                                    335
+## DDX11L1                                      0
+## WASH7P                                       0
+## MIR1302-10                                   0
+## FAM138A                                      0
+## OR4G4P                                       0
+## OR4G11P                                      0
 ##            uvb1.fastq_tophat.accepted_hits.bam
-## DDX11L1                                    131
-## WASH7P                                     213
-## MIR1302-10                                 250
-## FAM138A                                    253
-## OR4G4P                                     378
-## OR4G11P                                    418
+## DDX11L1                                      0
+## WASH7P                                       0
+## MIR1302-10                                   0
+## FAM138A                                      0
+## OR4G4P                                       0
+## OR4G11P                                      0
 ##            uvb2.fastq_tophat.accepted_hits.bam
-## DDX11L1                                    158
-## WASH7P                                     194
-## MIR1302-10                                 247
-## FAM138A                                    234
-## OR4G4P                                     315
-## OR4G11P                                    450
+## DDX11L1                                      0
+## WASH7P                                       0
+## MIR1302-10                                   0
+## FAM138A                                      0
+## OR4G4P                                       0
+## OR4G11P                                      0
 ##            uvb3.fastq_tophat.accepted_hits.bam
-## DDX11L1                                    136
-## WASH7P                                     203
-## MIR1302-10                                 263
-## FAM138A                                    276
-## OR4G4P                                     405
-## OR4G11P                                    437
+## DDX11L1                                      0
+## WASH7P                                       0
+## MIR1302-10                                   0
+## FAM138A                                      0
+## OR4G4P                                       0
+## OR4G11P                                      0
 ```
 
 ```r
@@ -192,21 +194,21 @@ colnames(countData)
 We can rename the columns to something a bit more readable.
 
 ```r
-## Manually
+# Manually
 c("ctl1", "ctl2", "ctl3", "uvb1", "uvb2", "uvb3")
-## Using paste
+# Using paste
 ?paste
 paste("ctl", 1:3)
 paste("ctl", 1:3, sep="")
 ?paste0
 paste0("ctl", 1:3)
-c(paste0("ctl", 1:4), paste0("uvb", 1:5))
+c(paste0("ctl", 1:3), paste0("uvb", 1:3))
 ```
 
 An easier way to do this, especially for files with many columns, is to use the `gsub` command to strip out the extra information. This is also more robust to introduced errors, for example if the column order changes at some point in the future.
 
 ```r
-## Using gsub -- reproducible
+# Using gsub -- reproducible
 ?gsub
 gsub(pattern=".fastq_tophat.accepted_hits.bam", replacement="", x=colnames(countData))
 ```
@@ -222,41 +224,46 @@ head(countData)
 
 ```
 ##            ctl1 ctl2 ctl3 uvb1 uvb2 uvb3
-## DDX11L1     337  322  325  131  158  136
-## WASH7P      319  377  299  213  194  203
-## MIR1302-10  313  348  328  250  247  263
-## FAM138A     321  333  340  253  234  276
-## OR4G4P      322  311  364  378  315  405
-## OR4G11P     343  339  335  418  450  437
+## DDX11L1       0    0    0    0    0    0
+## WASH7P        0    0    0    0    0    0
+## MIR1302-10    0    0    0    0    0    0
+## FAM138A       0    0    0    0    0    0
+## OR4G4P        0    0    0    0    0    0
+## OR4G11P       0    0    0    0    0    0
 ```
 
-### Exercise 1
-Find the gene with the highest expression in any sample. Extract  the expression data for this gene for all samples. In which sample does it have the highest expression? What is the function of the gene? Can you suggest why this is the top expressed gene?
+## Exercise 1
+Find the gene with the highest expression in any sample. Extract the expression data for this gene for all samples. In which sample does it have the highest expression? 
 
+What is the function of the gene? Can you suggest why this is the top expressed gene?
 
-```r
-max(apply(countData, 1, max)) #max expression is 7013
-```
+Hint 1: use the `apply` function from the introductory R lessons.
+Hint 2: try `?which.max`.
 
-```
-## [1] 450
-```
 
 ```r
-topGene <- which.max(apply(countData, 1, max)) #gene is EEF1A1P9
-countData[topGene, ] #get other sample data - max is in uvb1
+max(apply(countData, 1, max)) # max expression is 7013
 ```
 
 ```
-##         ctl1 ctl2 ctl3 uvb1 uvb2 uvb3
-## OR4G11P  343  339  335  418  450  437
+## [1] 7013
 ```
 
 ```r
-#this is a pseudogene - maybe an artefact of only aligning reads to a single chromosome?
+topGene <- which.max(apply(countData, 1, max)) # gene is EEF1A1P9
+countData[topGene, ] # get other sample data - max is in uvb1
 ```
 
-## Data investigation using base R
+```
+##          ctl1 ctl2 ctl3 uvb1 uvb2 uvb3
+## EEF1A1P9 3570 3788 4345 7013 4217 3630
+```
+
+```r
+# this is a pseudogene - maybe an artefact of only aligning reads to a single chromosome?
+```
+
+# Data investigation using base R
 
 We can investigate this data a bit more using some of the basic R functions before going on to use more sophisticated analysis tools.
 
@@ -266,7 +273,7 @@ We will calculate the mean for each gene for each condition. First make a copy o
 ```r
 countData2 <- countData
 
-#get Control columns
+# get Control columns
 colnames(countData2)
 ```
 
@@ -289,33 +296,33 @@ head(countData2[,ctlCols])
 
 ```
 ##            ctl1 ctl2 ctl3
-## DDX11L1     337  322  325
-## WASH7P      319  377  299
-## MIR1302-10  313  348  328
-## FAM138A     321  333  340
-## OR4G4P      322  311  364
-## OR4G11P     343  339  335
+## DDX11L1       0    0    0
+## WASH7P        0    0    0
+## MIR1302-10    0    0    0
+## FAM138A       0    0    0
+## OR4G4P        0    0    0
+## OR4G11P       0    0    0
 ```
 
 ```r
-apply(countData2[, ctlCols], 1, mean) 
+head(apply(countData2[, ctlCols], 1, mean))
 ```
 
 ```
 ##    DDX11L1     WASH7P MIR1302-10    FAM138A     OR4G4P    OR4G11P 
-##      328.0      331.7      329.7      331.3      332.3      339.0
+##          0          0          0          0          0          0
 ```
 
 ```r
-# here we'll use rowMeans instead, its a convenient shortcut, and also faster!
+# here we'll use rowMeans instead, it's a convenient shortcut, and also faster!
 countData2$ctlMean <- rowMeans(countData2[, ctlCols])
 
-#same for uvb
+# same for uvb
 uvbCols <- grep("uvb", colnames(countData2))
 countData2$uvbMean <- rowMeans(countData2[, uvbCols])
 ```
 
-Plot the mean expression of each gene in control against the UVB sample mean. Look for outliers.
+Plot the mean expression of each gene in control against the UVB sample mean. Are there any outliers?
 
 
 ```r
@@ -332,14 +339,21 @@ ggplot(countData2, aes(x=ctlMean, y=uvbMean)) + geom_point()
 
 ![plot of chunk ggplot_means](./analysis_files/figure-html/ggplot_means.png) 
 
-### Exercise 2
-How could you make this plot more informative and look more professional? Hint: try using a log scale. Try changing colours, transparencies, sizes, or shapes of points. 
+## Exercise 2
+How could you make this plot more informative and look more professional? 
+
+Hint: try using a log scale. You can also changing colours, transparencies, sizes, or shapes of points. 
 
 `help(par)` will give you information on lots of graphical parameters that can be set. Help for ggplot2 can be found [here](http://docs.ggplot2.org/current/).
 
 
 ```r
-plot(countData2$ctlMean, countData2$uvbMean, log="xy")
+plot(countData2$ctlMean, countData2$uvbMean, log="xy", pch=16)
+```
+
+```
+## Warning: 56164 x values <= 0 omitted from logarithmic plot
+## Warning: 56110 y values <= 0 omitted from logarithmic plot
 ```
 
 ![plot of chunk exercise2_1](./analysis_files/figure-html/exercise2_1.png) 
@@ -352,17 +366,23 @@ ggplot(countData2, aes(x=ctlMean, y=uvbMean)) + geom_point() + scale_x_log10() +
 ![plot of chunk exercise2_2](./analysis_files/figure-html/exercise2_2.png) 
 There are lots more options you can use to alter the appearance of these plots.
 
-##Find candidate differentially expressed genes
+#Find candidate differentially expressed genes
 
-We can find candidate differentially expressed genes by looking for genes with a large change between control and UVB samples. A common threshold used is log2 fold change more than 2 fold. We will calculate log2 fold change for all the genes and colour the genes with log2 fold change more than 2 fold on the plot.
+We can find candidate differentially expressed genes by looking for genes with a large change between control and UVB samples. A common threshold used is log2 fold change more than 2 or less than -2. We will calculate log2 fold change for all the genes and colour the genes with log2 fold change of more than 2 or less than -2 on the plot.
 
 
 ```r
+# discuss: why to remove zeroes (NAs produced)
+# explain: whats happening here, is for each ctlMean there is a TRUE/FALSE for 
+# if it is greater than 0. TRUE and FALSE can be summed: FALSE is typically 
+# considered a 0, and TRUE is considered to be 1. So when we call
+# `sum(countData2$ctlMean > 0)`, we're really asking, "how many genes have a 
+# mean above 0 in the control group?"
 sum(countData2$ctlMean > 0)
 ```
 
 ```
-## [1] 6
+## [1] 474
 ```
 
 ```r
@@ -370,7 +390,7 @@ sum(countData2$uvbMean > 0)
 ```
 
 ```
-## [1] 6
+## [1] 528
 ```
 
 ```r
@@ -378,27 +398,31 @@ nrow(countData2)
 ```
 
 ```
-## [1] 6
+## [1] 56638
 ```
 
 ```r
 countData2 <- subset(countData2, (countData2$ctlMean > 0 | countData2$uvbMean > 0))
-#explain | operator meaning OR in this context?
+# explain: | operator meaning OR in this context?
 nrow(countData2)
 ```
 
 ```
-## [1] 6
+## [1] 565
 ```
 
 
 ```r
+# explain: what is fold change? why do we use log2 to quantify the fold change?
+# discuss: Inf / -Inf may be produced in some cases. Concept of adding pseudocounts.
 countData2$log2FC <- log2(countData2$uvbMean / countData2$ctlMean)
+# again, reinforce that summing a logical vector gives you the number of 
+# occurences of TRUE.
 sum(countData2$log2FC > 2)
 ```
 
 ```
-## [1] 0
+## [1] 170
 ```
 
 ```r
@@ -406,7 +430,7 @@ sum(countData2$log2FC < -2)
 ```
 
 ```
-## [1] 0
+## [1] 46
 ```
 Make a new column to store this information in.
 
@@ -419,27 +443,37 @@ countData2$outlier[countData2$log2FC < -2] <- TRUE
 
 
 ```r
-plot(countData2$ctlMean, countData2$uvbMean, log="xy")
-points(countData2$ctlMean[countData2$outlier==TRUE], countData2$uvbMean[countData2$outlier==TRUE], col="red")
+plot(countData2$ctlMean, countData2$uvbMean, log="xy", pch=16)
+```
+
+```
+## Warning: 91 x values <= 0 omitted from logarithmic plot
+## Warning: 37 y values <= 0 omitted from logarithmic plot
+```
+
+```r
+points(countData2$ctlMean[countData2$outlier==TRUE], countData2$uvbMean[countData2$outlier==TRUE], col="red", pch=16)
 ```
 
 ![plot of chunk plot_outliers](./analysis_files/figure-html/plot_outliers.png) 
 
 
 ```r
-ggplot(countData2, aes(x=ctlMean, y=uvbMean, colour=outlier)) + geom_point() + scale_x_log10() + scale_y_log10() 
+ggplot(countData2, aes(x=ctlMean, y=uvbMean, colour=outlier)) + geom_point() + scale_x_log10() + scale_y_log10() + theme_bw()
 ```
 
 ![plot of chunk ggplot_outliers](./analysis_files/figure-html/ggplot_outliers.png) 
 
-## DESeq2 analysis
+What do you notice about the positions of the outliers on these plots? How would you interpret this?
+
+# DESeq2 analysis
 
 DESeq2 is an R package for analysis of RNAseq data. It is available from [Bioconductor](http://www.bioconductor.org/). Bioconductor is a project to provide tools for analysing high-throughput genomic data including RNA-seq, ChIP-seq and arrays. You can explore Bioconductor packages [here](http://www.bioconductor.org/packages/release/BiocViews.html#___Software). 
 
 
 ```r
-#install and have a break to check everyone is up to date?
-#explain bioconductor?
+# install and have a break to check everyone is up to date?
+# explain bioconductor?
 source("http://bioconductor.org/biocLite.R")
 biocLite("DESeq2")
 ```
@@ -481,6 +515,10 @@ library(DESeq2)
 ## Loading required package: RcppArmadillo
 ```
 
+```
+## Warning: package 'RcppArmadillo' was built under R version 3.1.1
+```
+
 ```r
 citation("DESeq2")
 ```
@@ -507,7 +545,8 @@ It requires the count data to be in matrix form, and an additional dataframe des
 
 
 ```r
-# Convert to matrix
+# countData is currently a data.frame, but DESeq2 expects its input to be in 
+# matrix format, so we will convert our countData to a matrix.
 class(countData)
 ```
 
@@ -530,17 +569,17 @@ head(countData)
 
 ```
 ##            ctl1 ctl2 ctl3 uvb1 uvb2 uvb3
-## DDX11L1     337  322  325  131  158  136
-## WASH7P      319  377  299  213  194  203
-## MIR1302-10  313  348  328  250  247  263
-## FAM138A     321  333  340  253  234  276
-## OR4G4P      322  311  364  378  315  405
-## OR4G11P     343  339  335  418  450  437
+## DDX11L1       0    0    0    0    0    0
+## WASH7P        0    0    0    0    0    0
+## MIR1302-10    0    0    0    0    0    0
+## FAM138A       0    0    0    0    0    0
+## OR4G4P        0    0    0    0    0    0
+## OR4G11P       0    0    0    0    0    0
 ```
 
 ```r
 # construct colData dataframe
-#three replicates of control and UVB.
+# three replicates of control and UVB.
 colData <- data.frame(condition=c(rep("ctl", 3), rep("uvb",3)), row.names=colnames(countData))
 ```
 
@@ -548,26 +587,18 @@ DESeq works on a particular type of object called a DESeqDataSet.
 
 
 ```r
-#introduce how DESeq2 works - type of object it works on etc
+# introduce how DESeq2 works - type of object it works on etc
 # instantiate the DESeqDataSet
 dds <- DESeqDataSetFromMatrix(countData=countData, colData=colData, design=~condition)
-```
-
-```
-## Warning: some variables in design formula are characters, converting to
-## factors
-```
-
-```r
 dds
 ```
 
 ```
 ## class: DESeqDataSet 
-## dim: 6 6 
+## dim: 56638 6 
 ## exptData(0):
 ## assays(1): counts
-## rownames(6): DDX11L1 WASH7P ... OR4G4P OR4G11P
+## rownames(56638): DDX11L1 WASH7P ... MT-TT MT-TP
 ## rowData metadata column names(0):
 ## colnames(6): ctl1 ctl2 ... uvb2 uvb3
 ## colData names(1): condition
@@ -586,21 +617,6 @@ dds <- DESeq(dds)
 ## estimating dispersions
 ## gene-wise dispersion estimates
 ## mean-dispersion relationship
-```
-
-```
-## Warning: the parametric fit of dispersion estimates over the mean of counts
-## failed, which occurs when the trend is not well captured by the
-## function y = a/x + b. A local regression fit is automatically performed,
-## and the analysis can continue. You can specify fitType='local' or 'mean'
-## to avoid this message if re-running the same data.
-## When using local regression fit, the user should examine plotDispEsts(dds)
-## to make sure the fitted line is not sharply curving up or down based on
-## the position of individual points.
-## Warning: Estimated rdf < 1.0; not estimating variance
-```
-
-```
 ## final dispersion estimates
 ## fitting model and testing
 ```
@@ -617,20 +633,20 @@ head(res)
 ## DataFrame with 6 rows and 6 columns
 ##             baseMean log2FoldChange     lfcSE      stat    pvalue
 ##            <numeric>      <numeric> <numeric> <numeric> <numeric>
-## DDX11L1        225.4      -0.800662   0.11188  -7.15620 8.295e-13
-## WASH7P         261.6      -0.316571   0.10258  -3.08609 2.028e-03
-## MIR1302-10     289.2      -0.001925   0.09442  -0.02039 9.837e-01
-## FAM138A        290.4      -0.005237   0.09441  -0.05546 9.558e-01
-## OR4G4P         354.2       0.498655   0.09741   5.11892 3.073e-07
-## OR4G11P        397.6       0.725214   0.07570   9.58062 9.647e-22
+## DDX11L1            0             NA        NA        NA        NA
+## WASH7P             0             NA        NA        NA        NA
+## MIR1302-10         0             NA        NA        NA        NA
+## FAM138A            0             NA        NA        NA        NA
+## OR4G4P             0             NA        NA        NA        NA
+## OR4G11P            0             NA        NA        NA        NA
 ##                 padj
 ##            <numeric>
-## DDX11L1    2.488e-12
-## WASH7P     3.042e-03
-## MIR1302-10 9.837e-01
-## FAM138A    9.837e-01
-## OR4G4P     6.146e-07
-## OR4G11P    5.788e-21
+## DDX11L1           NA
+## WASH7P            NA
+## MIR1302-10        NA
+## FAM138A           NA
+## OR4G4P            NA
+## OR4G11P           NA
 ```
 
 ```r
@@ -640,11 +656,11 @@ table(res$padj<0.05)
 ```
 ## 
 ## FALSE  TRUE 
-##     2     4
+##   337    50
 ```
 
 ```r
-## Order by adjusted p-value
+# Order by adjusted p-value
 res <- res[order(res$padj), ]
 head(res)
 ```
@@ -653,22 +669,14 @@ head(res)
 ## log2 fold change (MAP): condition uvb vs ctl 
 ## Wald test p-value: condition uvb vs ctl 
 ## DataFrame with 6 rows and 6 columns
-##             baseMean log2FoldChange     lfcSE      stat    pvalue
-##            <numeric>      <numeric> <numeric> <numeric> <numeric>
-## OR4G11P        397.6       0.725214   0.07570   9.58062 9.647e-22
-## DDX11L1        225.4      -0.800662   0.11188  -7.15620 8.295e-13
-## OR4G4P         354.2       0.498655   0.09741   5.11892 3.073e-07
-## WASH7P         261.6      -0.316571   0.10258  -3.08609 2.028e-03
-## MIR1302-10     289.2      -0.001925   0.09442  -0.02039 9.837e-01
-## FAM138A        290.4      -0.005237   0.09441  -0.05546 9.558e-01
-##                 padj
-##            <numeric>
-## OR4G11P    5.788e-21
-## DDX11L1    2.488e-12
-## OR4G4P     6.146e-07
-## WASH7P     3.042e-03
-## MIR1302-10 9.837e-01
-## FAM138A    9.837e-01
+##         baseMean log2FoldChange     lfcSE      stat    pvalue      padj
+##        <numeric>      <numeric> <numeric> <numeric> <numeric> <numeric>
+## ANXA3     312.32          3.910    0.3475    11.251 2.287e-29 8.849e-27
+## SFRP2    1711.27         -3.356    0.3407    -9.852 6.735e-23 1.303e-20
+## MT2P1     167.36          4.067    0.4582     8.878 6.834e-19 8.816e-17
+## IL8        31.70          5.976    0.9456     6.320 2.620e-10 2.535e-08
+## PTPN13    358.34         -1.386    0.2362    -5.869 4.388e-09 3.396e-07
+## CXCL1      42.47          3.691    0.6448     5.724 1.040e-08 6.705e-07
 ```
 
 Combine DEseq results with the original counts data. Write significant results to a file.
@@ -680,20 +688,20 @@ head(resData)
 ```
 
 ```
-##    Row.names baseMean log2FoldChange   lfcSE     stat    pvalue      padj
-## 1    OR4G11P    397.6       0.725214 0.07570  9.58062 9.647e-22 5.788e-21
-## 2    DDX11L1    225.4      -0.800662 0.11188 -7.15620 8.295e-13 2.488e-12
-## 3     OR4G4P    354.2       0.498655 0.09741  5.11892 3.073e-07 6.146e-07
-## 4     WASH7P    261.6      -0.316571 0.10258 -3.08609 2.028e-03 3.042e-03
-## 5 MIR1302-10    289.2      -0.001925 0.09442 -0.02039 9.837e-01 9.837e-01
-## 6    FAM138A    290.4      -0.005237 0.09441 -0.05546 9.558e-01 9.837e-01
-##    ctl1  ctl2  ctl3  uvb1  uvb2  uvb3
-## 1 313.1 288.2 292.5 480.9 541.6 469.3
-## 2 307.6 273.7 283.8 150.7 190.2 146.1
-## 3 293.9 264.4 317.9 434.9 379.1 435.0
-## 4 291.2 320.5 261.1 245.1 233.5 218.0
-## 5 285.7 295.8 286.4 287.6 297.3 282.5
-## 6 293.0 283.1 296.9 291.1 281.6 296.4
+##   Row.names baseMean log2FoldChange  lfcSE   stat    pvalue      padj
+## 1     ANXA3   312.32          3.910 0.3475 11.251 2.287e-29 8.849e-27
+## 2     SFRP2  1711.27         -3.356 0.3407 -9.852 6.735e-23 1.303e-20
+## 3     MT2P1   167.36          4.067 0.4582  8.878 6.834e-19 8.816e-17
+## 4       IL8    31.70          5.976 0.9456  6.320 2.620e-10 2.535e-08
+## 5    PTPN13   358.34         -1.386 0.2362 -5.869 4.388e-09 3.396e-07
+## 6     CXCL1    42.47          3.691 0.6448  5.724 1.040e-08 6.705e-07
+##      ctl1     ctl2    ctl3   uvb1   uvb2   uvb3
+## 1   26.33   35.131   48.83 378.95 783.44 601.27
+## 2 1847.65 4865.598 2683.82 382.63 325.05 162.88
+## 3   19.02    8.107   23.63 438.34 373.97 141.08
+## 4    0.00    0.000    0.00  66.12  44.18  79.93
+## 5  485.69  535.067  538.65 203.25 205.13 182.26
+## 6   11.70    2.702    0.00  89.99  50.49  99.91
 ```
 
 ```r
@@ -702,20 +710,20 @@ head(resData)
 ```
 
 ```
-##       GeneID baseMean log2FoldChange   lfcSE     stat    pvalue      padj
-## 1    OR4G11P    397.6       0.725214 0.07570  9.58062 9.647e-22 5.788e-21
-## 2    DDX11L1    225.4      -0.800662 0.11188 -7.15620 8.295e-13 2.488e-12
-## 3     OR4G4P    354.2       0.498655 0.09741  5.11892 3.073e-07 6.146e-07
-## 4     WASH7P    261.6      -0.316571 0.10258 -3.08609 2.028e-03 3.042e-03
-## 5 MIR1302-10    289.2      -0.001925 0.09442 -0.02039 9.837e-01 9.837e-01
-## 6    FAM138A    290.4      -0.005237 0.09441 -0.05546 9.558e-01 9.837e-01
-##    ctl1  ctl2  ctl3  uvb1  uvb2  uvb3
-## 1 313.1 288.2 292.5 480.9 541.6 469.3
-## 2 307.6 273.7 283.8 150.7 190.2 146.1
-## 3 293.9 264.4 317.9 434.9 379.1 435.0
-## 4 291.2 320.5 261.1 245.1 233.5 218.0
-## 5 285.7 295.8 286.4 287.6 297.3 282.5
-## 6 293.0 283.1 296.9 291.1 281.6 296.4
+##   GeneID baseMean log2FoldChange  lfcSE   stat    pvalue      padj    ctl1
+## 1  ANXA3   312.32          3.910 0.3475 11.251 2.287e-29 8.849e-27   26.33
+## 2  SFRP2  1711.27         -3.356 0.3407 -9.852 6.735e-23 1.303e-20 1847.65
+## 3  MT2P1   167.36          4.067 0.4582  8.878 6.834e-19 8.816e-17   19.02
+## 4    IL8    31.70          5.976 0.9456  6.320 2.620e-10 2.535e-08    0.00
+## 5 PTPN13   358.34         -1.386 0.2362 -5.869 4.388e-09 3.396e-07  485.69
+## 6  CXCL1    42.47          3.691 0.6448  5.724 1.040e-08 6.705e-07   11.70
+##       ctl2    ctl3   uvb1   uvb2   uvb3
+## 1   35.131   48.83 378.95 783.44 601.27
+## 2 4865.598 2683.82 382.63 325.05 162.88
+## 3    8.107   23.63 438.34 373.97 141.08
+## 4    0.000    0.00  66.12  44.18  79.93
+## 5  535.067  538.65 203.25 205.13 182.26
+## 6    2.702    0.00  89.99  50.49  99.91
 ```
 
 ```r
@@ -728,10 +736,12 @@ dir.create("results")
 ```
 
 ```r
-write.table(sig, file="results/sig.txt", sep="\t") #tab delim data
+write.table(sig, file="results/sig.txt", sep="\t") # tab delim data
 ```
 
-## Data Visualization
+You can open this file in Excel or any text editor (try it now).
+
+# Data Visualization
 
 We can also do some exploratory plotting of the data.
 
@@ -744,7 +754,7 @@ plotDispEsts(dds, main="Dispersion plot")
 
 
 ```r
-## Regularized log transformation for clustering/heatmaps, etc
+# Regularized log transformation for clustering/heatmaps, etc
 rld <- rlogTransformation(dds)
 plotPCA(rld)
 ```
@@ -757,13 +767,13 @@ head(assay(rld))
 ```
 
 ```
-##             ctl1  ctl2  ctl3  uvb1  uvb2  uvb3
-## DDX11L1    7.947 7.888 7.906 7.636 7.724 7.624
-## WASH7P     8.078 8.126 8.026 7.998 7.977 7.947
-## MIR1302-10 8.170 8.187 8.171 8.173 8.189 8.165
-## FAM138A    8.186 8.170 8.192 8.183 8.167 8.191
-## OR4G4P     8.369 8.321 8.406 8.565 8.493 8.565
-## OR4G11P    8.500 8.463 8.470 8.718 8.785 8.705
+##            ctl1 ctl2 ctl3 uvb1 uvb2 uvb3
+## DDX11L1       0    0    0    0    0    0
+## WASH7P        0    0    0    0    0    0
+## MIR1302-10    0    0    0    0    0    0
+## FAM138A       0    0    0    0    0    0
+## OR4G4P        0    0    0    0    0    0
+## OR4G11P       0    0    0    0    0    0
 ```
 
 ```r
@@ -771,12 +781,12 @@ assay(rld)[1:5,1:5]
 ```
 
 ```
-##             ctl1  ctl2  ctl3  uvb1  uvb2
-## DDX11L1    7.947 7.888 7.906 7.636 7.724
-## WASH7P     8.078 8.126 8.026 7.998 7.977
-## MIR1302-10 8.170 8.187 8.171 8.173 8.189
-## FAM138A    8.186 8.170 8.192 8.183 8.167
-## OR4G4P     8.369 8.321 8.406 8.565 8.493
+##            ctl1 ctl2 ctl3 uvb1 uvb2
+## DDX11L1       0    0    0    0    0
+## WASH7P        0    0    0    0    0
+## MIR1302-10    0    0    0    0    0
+## FAM138A       0    0    0    0    0
+## OR4G4P        0    0    0    0    0
 ```
 
 ```r
@@ -785,11 +795,11 @@ t(assay(rld))[1:5,1:5]
 
 ```
 ##      DDX11L1 WASH7P MIR1302-10 FAM138A OR4G4P
-## ctl1   7.947  8.078      8.170   8.186  8.369
-## ctl2   7.888  8.126      8.187   8.170  8.321
-## ctl3   7.906  8.026      8.171   8.192  8.406
-## uvb1   7.636  7.998      8.173   8.183  8.565
-## uvb2   7.724  7.977      8.189   8.167  8.493
+## ctl1       0      0          0       0      0
+## ctl2       0      0          0       0      0
+## ctl3       0      0          0       0      0
+## uvb1       0      0          0       0      0
+## uvb2       0      0          0       0      0
 ```
 
 ```r
@@ -797,12 +807,12 @@ dist(t(assay(rld)))
 ```
 
 ```
-##         ctl1    ctl2    ctl3    uvb1    uvb2
-## ctl2 0.10004                                
-## ctl3 0.08184 0.13488                        
-## uvb1 0.43456 0.45264 0.40115                
-## uvb2 0.39578 0.42692 0.37861 0.13597        
-## uvb3 0.44902 0.46984 0.40809 0.05509 0.15427
+##       ctl1  ctl2  ctl3  uvb1  uvb2
+## ctl2 12.18                        
+## ctl3 12.49 13.61                  
+## uvb1 15.07 16.22 17.29            
+## uvb2 20.01 19.73 20.43 15.05      
+## uvb3 18.70 18.94 20.21 13.75 11.83
 ```
 
 ```r
@@ -810,13 +820,13 @@ as.matrix(dist(t(assay(rld))))
 ```
 
 ```
-##         ctl1   ctl2    ctl3    uvb1   uvb2    uvb3
-## ctl1 0.00000 0.1000 0.08184 0.43456 0.3958 0.44902
-## ctl2 0.10004 0.0000 0.13488 0.45264 0.4269 0.46984
-## ctl3 0.08184 0.1349 0.00000 0.40115 0.3786 0.40809
-## uvb1 0.43456 0.4526 0.40115 0.00000 0.1360 0.05509
-## uvb2 0.39578 0.4269 0.37861 0.13597 0.0000 0.15427
-## uvb3 0.44902 0.4698 0.40809 0.05509 0.1543 0.00000
+##       ctl1  ctl2  ctl3  uvb1  uvb2  uvb3
+## ctl1  0.00 12.18 12.49 15.07 20.01 18.70
+## ctl2 12.18  0.00 13.61 16.22 19.73 18.94
+## ctl3 12.49 13.61  0.00 17.29 20.43 20.21
+## uvb1 15.07 16.22 17.29  0.00 15.05 13.75
+## uvb2 20.01 19.73 20.43 15.05  0.00 11.83
+## uvb3 18.70 18.94 20.21 13.75 11.83  0.00
 ```
 
 ```r
@@ -827,8 +837,12 @@ heatmap(sampleDists)
 ![plot of chunk plot_heatmaps](./analysis_files/figure-html/plot_heatmaps2.png) 
 
 ```r
-## better heatmap with gplots
+# better heatmap with gplots
 library(gplots)
+```
+
+```
+## Warning: package 'gplots' was built under R version 3.1.1
 ```
 
 ```
@@ -878,7 +892,7 @@ heatmap.2(sampleDists, col=colorpanel(64, "red", "white", "blue"), key=FALSE, tr
 
 
 ```r
-## Examine plot of p-values
+# Examine plot of p-values
 hist(res$pvalue, breaks=50, col="grey")
 ```
 
@@ -887,10 +901,17 @@ hist(res$pvalue, breaks=50, col="grey")
 
 
 ```r
-#These are the plots that are most recognisable from papers
+# These are the plots that are most recognisable from papers
 # MA Plot
 par(pch=16)
 with(res, plot(baseMean, log2FoldChange, pch=20, cex=.5, log="x"))
+```
+
+```
+## Warning: 56073 x values <= 0 omitted from logarithmic plot
+```
+
+```r
 with(subset(res, padj<.05), points(baseMean, log2FoldChange, col="red", pch=16))
 library(calibrate)
 ```
@@ -910,19 +931,16 @@ with(subset(res, padj<.05), textxy(baseMean, log2FoldChange, labs=Gene, cex=1, c
 
 ```r
 # Volcano plot
-## Set point character
+# Set point character
 par(pch=16)
 with(res, plot(log2FoldChange, -log10(pvalue), main="Volcano plot"))
 with(subset(res, padj<.05 ), points(log2FoldChange, -log10(pvalue), col="red"))
 with(subset(res, abs(log2FoldChange)>1), points(log2FoldChange, -log10(pvalue), col="orange"))
 with(subset(res, padj<.05 & abs(log2FoldChange)>1), points(log2FoldChange, -log10(pvalue), col="green"))
-## Add legend
+# Add legend
 legend("topleft", legend=c("FDR<0.05", "|LFC|>1", "both"), pch=16, col=c("red","orange","green"))
+# Label points
+with(subset(res, padj<.05 & abs(log2FoldChange)>1), textxy(log2FoldChange, -log10(pvalue), labs=Gene, cex=1))
 ```
 
 ![plot of chunk volcano_plot](./analysis_files/figure-html/volcano_plot.png) 
-
-```r
-## Label points
-with(subset(res, padj<.05 & abs(log2FoldChange)>1), textxy(log2FoldChange, -log10(pvalue), labs=Gene, cex=1))
-```
