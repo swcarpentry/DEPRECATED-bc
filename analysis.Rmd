@@ -84,11 +84,13 @@ colnames(countdata2)
 grep("ctl", colnames(countdata2))
 ctlCols <- grep("ctl", colnames(countdata2))
 head(countdata2[,ctlCols])
-countdata2$ctlMean <- apply(countdata2[, ctlCols], 1, mean)
+apply(countdata2[, ctlCols], 1, mean) 
+# here we'll use rowMeans instead, its a convenient shortcut, and also faster!
+countdata2$ctlMean <- rowMeans(countdata2[, ctlCols])
 
 #same for uvb
 uvbCols <- grep("uvb", colnames(countdata2))
-countdata2$uvbMean <- apply(countdata2[, uvbCols], 1, mean)
+countdata2$uvbMean <- rowMeans(countdata2[, uvbCols]
 ```
 
 Plot the mean expression of each gene in control against the UVB sample mean. Look for outliers.
