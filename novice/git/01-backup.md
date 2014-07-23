@@ -141,7 +141,7 @@ $ nano mars.txt
 ~~~
 </div>
 
-Type 
+Type
 
 <div class="in" markdown="1">
 ~~~
@@ -243,22 +243,18 @@ $ git commit -m "Starting to think about Mars"
 ~~~
 </div>
 
-#####Let's break down what we just did-
-
-If we think about the command we just ran like a sentence the 'git commit', part tells git what to store:
+The 'git commit', part of this command tells git what to store:
 Git takes everything we have told it to save by using `git add`
 and stores a copy permanently inside the special `.git` directory.
 This permanent copy is called a [revision](../../../gloss.html#revision)
 and its short identifier is `f22b25e`.
 (Your revision may have another identifier.)
 
-The other part of our sentence attaches a message to the commit so we (or others) can refer back to what we changed and why. To do this, we use the `-m` flag (for "message")
+The commit message is helpful so we (or others) can refer back to what we changed and why. To do this, we use the `-m` flag (for "message")
 to record a comment that will help us remember later on what we did and why.
 If we just run `git commit` without the `-m` option,
 Git will launch `nano` (or whatever other editor we configured at the start)
 so that we can write a longer message.
-
-
 
 If we run `git status` now:
 
@@ -352,7 +348,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 The last line is the key phrase:
 "no changes added to commit".
-We have changed this file in our working tree, but we haven't promoted those changes to the index or saved them as as commit. 
+We have changed this file in our working tree, but we haven't promoted those changes to the index or saved them as as commit.
 Let's double-check our work using `git diff`,
 which shows us the differences between
 the current state of the file
