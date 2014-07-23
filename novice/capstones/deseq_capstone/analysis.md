@@ -238,17 +238,10 @@ Find the gene with the highest expression in any sample. Extract the expression 
 What is the function of the gene? Can you suggest why this is the top expressed gene?
 
 Hint 1: use the `apply` function from the introductory R lessons.
+
 Hint 2: try `?which.max`.
 
 
-```
-## [1] 7013
-```
-
-```
-##          ctl1 ctl2 ctl3 uvb1 uvb2 uvb3
-## EEF1A1P9 3570 3788 4345 7013 4217 3630
-```
 
 # Data investigation using base R
 
@@ -331,17 +324,11 @@ How could you make this plot more informative and look more professional?
 
 Hint: try using a log scale. You can also changing colours, transparencies, sizes, or shapes of points. 
 
-`help(par)` will give you information on lots of graphical parameters that can be set. Help for ggplot2 can be found [here](http://docs.ggplot2.org/current/).
+`?par` will give you information on lots of graphical parameters that can be set. Help for ggplot2 can be found [here](http://docs.ggplot2.org/current/).
 
 
-```
-## Warning: 56164 x values <= 0 omitted from logarithmic plot
-## Warning: 56110 y values <= 0 omitted from logarithmic plot
-```
 
-![plot of chunk exercise2_1](./analysis_files/figure-html/exercise2_1.png) 
 
-![plot of chunk exercise2_2](./analysis_files/figure-html/exercise2_2.png) 
 There are lots more options you can use to alter the appearance of these plots.
 
 #Find candidate differentially expressed genes
