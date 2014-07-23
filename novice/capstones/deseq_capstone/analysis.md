@@ -241,26 +241,13 @@ Hint 1: use the `apply` function from the introductory R lessons.
 Hint 2: try `?which.max`.
 
 
-```r
-max(apply(countData, 1, max)) # max expression is 7013
-```
-
 ```
 ## [1] 7013
-```
-
-```r
-topGene <- which.max(apply(countData, 1, max)) # gene is EEF1A1P9
-countData[topGene, ] # get other sample data - max is in uvb1
 ```
 
 ```
 ##          ctl1 ctl2 ctl3 uvb1 uvb2 uvb3
 ## EEF1A1P9 3570 3788 4345 7013 4217 3630
-```
-
-```r
-# this is a pseudogene - maybe an artefact of only aligning reads to a single chromosome?
 ```
 
 # Data investigation using base R
@@ -347,21 +334,12 @@ Hint: try using a log scale. You can also changing colours, transparencies, size
 `help(par)` will give you information on lots of graphical parameters that can be set. Help for ggplot2 can be found [here](http://docs.ggplot2.org/current/).
 
 
-```r
-plot(countData2$ctlMean, countData2$uvbMean, log="xy", pch=16)
-```
-
 ```
 ## Warning: 56164 x values <= 0 omitted from logarithmic plot
 ## Warning: 56110 y values <= 0 omitted from logarithmic plot
 ```
 
 ![plot of chunk exercise2_1](./analysis_files/figure-html/exercise2_1.png) 
-
-
-```r
-ggplot(countData2, aes(x=ctlMean, y=uvbMean)) + geom_point() + scale_x_log10() + scale_y_log10() + theme_bw()
-```
 
 ![plot of chunk exercise2_2](./analysis_files/figure-html/exercise2_2.png) 
 There are lots more options you can use to alter the appearance of these plots.

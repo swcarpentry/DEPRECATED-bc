@@ -69,7 +69,7 @@ What is the function of the gene? Can you suggest why this is the top expressed 
 Hint 1: use the `apply` function from the introductory R lessons.
 Hint 2: try `?which.max`.
 
-```{r exercise_1}
+```{r exercise_1, echo=FALSE}
 max(apply(countData, 1, max)) # max expression is 7013
 topGene <- which.max(apply(countData, 1, max)) # gene is EEF1A1P9
 countData[topGene, ] # get other sample data - max is in uvb1
@@ -118,11 +118,11 @@ Hint: try using a log scale. You can also changing colours, transparencies, size
 
 `help(par)` will give you information on lots of graphical parameters that can be set. Help for ggplot2 can be found [here](http://docs.ggplot2.org/current/).
 
-```{r exercise2_1}
+```{r exercise2_1, echo=FALSE}
 plot(countData2$ctlMean, countData2$uvbMean, log="xy", pch=16)
 ```
 
-```{r exercise2_2}
+```{r exercise2_2, echo=FALSE}
 ggplot(countData2, aes(x=ctlMean, y=uvbMean)) + geom_point() + scale_x_log10() + scale_y_log10() + theme_bw()
 ```
 There are lots more options you can use to alter the appearance of these plots.
