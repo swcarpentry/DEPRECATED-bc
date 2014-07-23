@@ -3,12 +3,11 @@ layout: lesson
 root: ../..
 ---
 
-
-```{r, echo=FALSE}
-opts_chunk$set(results="markup")
+```{r, include = FALSE}
+source("chunk_options.R")
 ```
+
 # Novice R materials - following Python examples
---------------------------------------------------
 
 * Draw concept map of where we are headed towards best scientific practices, and reproducibility.
 * Its really important that you know what you did. More journals/grants/etc. are also making it important for them to know what you did.

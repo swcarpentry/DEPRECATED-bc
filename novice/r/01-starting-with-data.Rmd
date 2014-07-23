@@ -3,9 +3,10 @@ layout: lesson
 root: ../..
 ---
 
-```{r, echo=FALSE}
-opts_chunk$set(results="markup", fig.path="figure/01-starting-with-data-")
+```{r, include = FALSE}
+source("chunk_options.R")
 ```
+
 # Analyzing Patient Data
 
 We are studying inflammation in patients who have been given a new treatment for arthritis,
