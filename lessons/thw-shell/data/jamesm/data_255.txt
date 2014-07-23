@@ -1,9 +1,0 @@
-# 
-Reported: Sat Jun 4 11:10:28 2011
-Subject: johnLennon210
-Year/month of birth: 1993/11
-Sex: N
-CI type: 18
-Volume: 6
-Range: 6
-Discrimination: 7
