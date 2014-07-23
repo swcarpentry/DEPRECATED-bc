@@ -6,75 +6,111 @@ from netCDF4 import Dataset
 
 
 def main():
+    # Read command line arguments
     script = sys.argv[0]
     inFile = sys.argv[1]
     uVar = sys.argv[2]
     vVar = sys.argv[3]
     outfile_name = sys.argv[4]
 
+    # Read input data 
     uData, vData, input_DATA = read_data(inFile, uVar, vVar)
-    wspData = calc_wsp(uData, vData)
-    write_output(wsp_data, input_DATA, outfile_name)
-
+    
+    # Calculate the current speed
+    spData = calc_speed(uData, vData)
+    
+    # Write the output file
+    outfile = Dataset(outfile_name, 'w', format='NETCDF4')
+    set_global_atts(input_DATA, outfile)
+    copy_dimensions(input_DATA, outfile)
+    copy_variables(input_DATA, outfile)
+    write_speed(input_DATA, outfile, spData) 
+    
+    outfile.close()
+    
 
 def read_data(ifile, uVar, vVar):
     """Read data from ifile corresponding to the U and V variable"""
 
-    input_DATA = Dataset(acorn_URL)
+    input_DATA = Dataset(ifile)
     uData = input_DATA.variables[uVar][:]
     vData = input_DATA.variables[vVar][:]
 
     return uData, vData, input_DATA
 
 
-def calc_wsp(uwnd, vwnd):
-    """Calculate the wind speed"""
+def calc_speed(u, v):
+    """Calculate the speed"""
 
-    wsp = (uwnd**2 + vwnd**2)**0.5
+    speed = (u**2 + v**2)**0.5
 
-    return wsp
+    return speed
 
 
-def write_output(spcurData, input_DATA, outfile_name):
-    """Write the output file"""
-
-    outfile = Dataset(outfile_name, 'w', format='NETCDF4')
-
-    # Create file dimensions (by copying from input file)
-    for dimName, dimData in input_DATA.dimensions.iteritems():
+def copy_dimensions(infile, outfile):
+    """Copy the dimensions of the infile to the outfile"""
+        
+    for dimName, dimData in infile.dimensions.iteritems():
         outfile.createDimension(dimName, len(dimData))
 
-    # Create variables corresponding to those dimensions (by copying)    
-    for var_name in ['TIME', 'LATITUDE', 'LONGITUDE']:
-        varin = input_DATA.variables[var_name]
-        outVar = outfile.createVariable(var_name, varin.datatype, varin.dimensions)
-        outVar[:] = varin[:]
-    
-    # Create the speed variable
-    uData = input_DATA.variables['UCUR']   
-    spcur = outfile.createVariable(varname, uData.datatype, uData.dimensions)
-    spcur[:,:,:] = spcurData    
-    
-    # Global file attributes
+
+def set_global_atts(infile, outfile):
+    """Set the global attributes for outfile.
+        
+    Note that the global attributes are simply copied from
+    infile and the history attribute updated accordingly.
+        
+    """
+        
     global_atts = {}
-    for att in input_DATA.ncattrs():
-        global_atts[att] = input_DATA.att  
+    for att in infile.ncattrs():
+        global_atts[att] = eval('infile.'+att)  
+        
     new_history = create_history()
     global_atts['history'] = """%s\n%s""" %(new_history,  global_atts['history'])
     outfile.setncatts(global_atts)
-    
-    outfile.close()
 
 
 def create_history():
     """Create the new entry for the global history file attribute"""
 
-    time_stamp = datetime.datetime.now().strftime("%a %b %d %H:%M:%S %Y")
+    time_stamp = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
     exe = sys.executable
     args = " ".join(sys.argv)
-    git_hash = Repo(os.getcwd()).head.commit.hexsha
+    git_hash = Repo(os.getcwd()).heads[0].commit
 
-    return """%s: %s %s (Git hash: %s)""" %(time_stamp, exe, args, git_hash[0:7])
+    return """%s: %s %s (Git hash: %s)""" %(time_stamp, exe, args, str(git_hash)[0:7])
 
+
+def copy_variables(infile, outfile):
+    """Create variables corresponding to the file dimensions 
+    by copying from infile"""
+            
+    for var_name in ['TIME', 'LATITUDE', 'LONGITUDE']:
+        varin = infile.variables[var_name]
+        outVar = outfile.createVariable(var_name, varin.datatype, 
+                                        varin.dimensions, 
+                                        fill_value=varin._FillValue)
+        outVar[:] = varin[:]
+            
+        var_atts = {}
+        for att in varin.ncattrs():
+            if not att == '_FillValue':
+                var_atts[att] = eval('varin.'+att) 
+        outVar.setncatts(var_atts)
+
+
+def write_speed(infile, outfile, spData):
+    """Write the current speed data to outfile"""
+        
+    u = infile.variables['UCUR']   
+    spcur = outfile.createVariable('SPCUR', u.datatype, u.dimensions, fill_value=u._FillValue)
+    spcur[:,:,:] = spData    
+    
+    spcur.standard_name = 'sea_water_speed'
+    spcur.long_name = 'sea water speed'
+    spcur.units = u.units
+    spcur.coordinates = u.coordinates
+    
 
 main()
