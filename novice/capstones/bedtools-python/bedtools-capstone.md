@@ -7,8 +7,9 @@ title: Capstone example Python and Bedtools
 Synopsis
 ========
 
-Our goal is to work through examples that demonstrate how to 
-explore, process and manipulate genomic interval files (e.g., BED, VCF, BAM) with the `bedtools` software package.
+Our goal is to work through examples that demonstrate how to explore, process and manipulate bed files with the `bedtools` software package.
+
+Bed files are commonly used to represent features in genomes, for example promotors, genes, centromeres etc. - essentially anything that can be identified with a particular genomic location. If you are working with published data from other groups (for example, transcription factor binding sites identified by ChIP-seq) you will likely find that the data is provided in bed format. One of the most commonly asked questions of bioinformaticians is whether two different sets of features overlap with each other, so today we'll be showing you how to answer that question.
 
 This tutorial is meant as an introduction to whet your appetite. There are many, many more tools and options than presented here. We therefore encourage you to read the bedtools [documentation](http://bedtools.readthedocs.org/en/latest/).
 
@@ -17,11 +18,11 @@ During this lesson, you'll be working on some scripts and data which are in thei
 Forking the github repository
 =============================
 
-The data and code that you need to work on are located at [](git@github.com:rbeagrie/bedtools-example.git). You are going to want to make changes to the code, but this repository is owned by someone else. Instead of creating a new project, you want to [fork](../../gloss.html#fork) it; i.e., clone it on GitHub. You can do this using the GitHub web interface:
+The data and code that you need to work on are located at <http://github.com/rbeagrie/bedtools-example>. You are going to want to make changes to the code, but this repository is owned by someone else. Instead of creating a new project, you want to [fork](../../gloss.html#fork) it; i.e., clone it on GitHub. You can do this using the GitHub web interface:
 
 <img src="img/git-fork-ui.png" alt="The Fork Button" />
 
-If you visit the [bedtools-example repository](git@github.com:rbeagrie/bedtools-example.git) and click the "fork" button, you will have your own copy of the repository under your own github account - so there should now be a page that looks like https://github.com/YOUR_USERNAME/bedtools-example.
+If you visit the [bedtools-example repository](http://github.com/rbeagrie/bedtools-example) and click the "fork" button, you will have your own copy of the repository under your own github account - so there should now be a page that looks like https://github.com/YOUR_USERNAME/bedtools-example.
 
 Setup
 =====
@@ -45,28 +46,24 @@ $ cd bedtools-example
 Let's take a look at what files we now have.
 
 ~~~
-$ ls -1
+$ ls
 ~~~
 {:class="in"}
 
 ~~~
-data
-scripts
+data scripts
 ~~~
 {:class="out"}
 
 So we have two directories, one containing data and the other containing some scripts. We're going to start with the data folder, so lets look at what's in there.
 
 ~~~
-$ ls -1 data
+$ ls data
 ~~~
 {:class="in"}
 
 ~~~
-cpg.bed
-exons.bed
-genome.txt
-gwas.bed
+cpg.bed exons.bed genome.txt gwas.bed
 ~~~
 {:class="out"}
 
@@ -83,8 +80,7 @@ These 4 files were extracted from the UCSC Genome Browser's [Table Browser](http
 Introducing BedTools
 ====================
 
-We're going to be exploring these files using a suite of tools called BedTools. As the name suggests, these tools all work on a particular type of file called a bed file. Bed files are commonly used to represent features in genomes, for example promotors, genes, centromeres etc. - essentially anything that can be identified with a particular genomic location. All bed files contain three columns which list the chromosome, the starting coordinate and the end co-ordinate. They may also include some other information, such as a name for each region, but the first three columns are always the same. For example, have a look at `data/cpg.bed`:
-
+All bed files contain three columns which list the chromosome, the starting coordinate and the end co-ordinate. They may also include some other information, such as a name for each region, but the first three columns are always the same. For example, have a look at `data/cpg.bed`:
 ~~~
 head data/cpg.bed 
 ~~~
@@ -277,7 +273,7 @@ chr1    762416  763445  CpG:_115    chr1    762970  763155  NR_047523_exon_0_0_c
 Do exons and CpG islands overlap significantly?
 ===============================================
 
-OK, now we've explored the capabilities of BedTools a little, let's use it to answer a biological question. Let's try to answer if CpG islands and exons overlap significantly - that is, do the overlap more than we would expect by random chance?
+OK, now we've explored the capabilities of BedTools a little, let's use it to answer a biological question. Let's try to answer if CpG islands and exons overlap significantly - that is, do they overlap more than we would expect by random chance?
 
 Going back to base pairs overlap
 --------------------------------
@@ -307,7 +303,7 @@ Can you spot anything odd about this output? Lines 3-5 indicate that one of our 
 bedtools "merge"
 ====================
 
-Many datasets of genomic features have many individual features that overlap one another (e.g. aligments from a ChiP seq experiment). It is often useful to just cobine the overlapping into a single, contiguous interval. The bedtools `merge` command will do this for you.
+Many datasets of genomic features have many individual features that overlap one another (e.g. alignments from a ChiP seq experiment). It is often useful to just combine the overlapping into a single, contiguous interval. The bedtools `merge` command will do this for you.
 
 ![](http://bedtools.readthedocs.org/en/latest/_images/merge-glyph.png)
 
@@ -551,20 +547,23 @@ Run the script, and then check to make sure you have some shiny new files in the
 
 ~~~
 $ scripts/do_suffle.sh
-$ ls -1 shuffled_cpg | head
+$ ls shuffled_cpg
 ~~~
 {:class="in"}
 ~~~
-cpg.shuffled100.bed
-cpg.shuffled10.bed
-cpg.shuffled11.bed
-cpg.shuffled12.bed
-cpg.shuffled13.bed
-cpg.shuffled14.bed
-cpg.shuffled15.bed
-cpg.shuffled16.bed
-cpg.shuffled17.bed
-cpg.shuffled18.bed
+cpg.shuffled100.bed  cpg.shuffled21.bed  cpg.shuffled33.bed  cpg.shuffled45.bed  cpg.shuffled57.bed  cpg.shuffled69.bed  cpg.shuffled80.bed  cpg.shuffled92.bed
+cpg.shuffled10.bed   cpg.shuffled22.bed  cpg.shuffled34.bed  cpg.shuffled46.bed  cpg.shuffled58.bed  cpg.shuffled6.bed   cpg.shuffled81.bed  cpg.shuffled93.bed
+cpg.shuffled11.bed   cpg.shuffled23.bed  cpg.shuffled35.bed  cpg.shuffled47.bed  cpg.shuffled59.bed  cpg.shuffled70.bed  cpg.shuffled82.bed  cpg.shuffled94.bed
+cpg.shuffled12.bed   cpg.shuffled24.bed  cpg.shuffled36.bed  cpg.shuffled48.bed  cpg.shuffled5.bed   cpg.shuffled71.bed  cpg.shuffled83.bed  cpg.shuffled95.bed
+cpg.shuffled13.bed   cpg.shuffled25.bed  cpg.shuffled37.bed  cpg.shuffled49.bed  cpg.shuffled60.bed  cpg.shuffled72.bed  cpg.shuffled84.bed  cpg.shuffled96.bed
+cpg.shuffled14.bed   cpg.shuffled26.bed  cpg.shuffled38.bed  cpg.shuffled4.bed   cpg.shuffled61.bed  cpg.shuffled73.bed  cpg.shuffled85.bed  cpg.shuffled97.bed
+cpg.shuffled15.bed   cpg.shuffled27.bed  cpg.shuffled39.bed  cpg.shuffled50.bed  cpg.shuffled62.bed  cpg.shuffled74.bed  cpg.shuffled86.bed  cpg.shuffled98.bed
+cpg.shuffled16.bed   cpg.shuffled28.bed  cpg.shuffled3.bed   cpg.shuffled51.bed  cpg.shuffled63.bed  cpg.shuffled75.bed  cpg.shuffled87.bed  cpg.shuffled99.bed
+cpg.shuffled17.bed   cpg.shuffled29.bed  cpg.shuffled40.bed  cpg.shuffled52.bed  cpg.shuffled64.bed  cpg.shuffled76.bed  cpg.shuffled88.bed  cpg.shuffled9.bed
+cpg.shuffled18.bed   cpg.shuffled2.bed   cpg.shuffled41.bed  cpg.shuffled53.bed  cpg.shuffled65.bed  cpg.shuffled77.bed  cpg.shuffled89.bed
+cpg.shuffled19.bed   cpg.shuffled30.bed  cpg.shuffled42.bed  cpg.shuffled54.bed  cpg.shuffled66.bed  cpg.shuffled78.bed  cpg.shuffled8.bed
+cpg.shuffled1.bed    cpg.shuffled31.bed  cpg.shuffled43.bed  cpg.shuffled55.bed  cpg.shuffled67.bed  cpg.shuffled79.bed  cpg.shuffled90.bed
+cpg.shuffled20.bed   cpg.shuffled32.bed  cpg.shuffled44.bed  cpg.shuffled56.bed  cpg.shuffled68.bed  cpg.shuffled7.bed   cpg.shuffled91.bed
 ~~~
 {:class="out"}
 
@@ -606,9 +605,9 @@ Save that to a file:
 
 ~~~
 $ for filename in shuffled_cpg/*; 
-do
-    bedtools intersect -a $filename -b exons.merged.bed -wo | cut -f 8 | python readings.py --sum
-done > shuffled_results.txt
+> do
+>     bedtools intersect -a $filename -b data/exons.merged.bed -wo | cut -f 8 | python scripts/readings.py --sum
+> done > shuffled_results.txt
 ~~~
 {:class="in"}
 
@@ -616,10 +615,10 @@ done > shuffled_results.txt
 Plotting our results with python
 --------------------------------
 
-Let's copy the readings.py script and alter it to read in our results files:
+Also in your `scripts` directory, there should be a file called results.py. Open it and have a look.
 
 ~~~
-cat results.py
+$ cat scripts/results.py
 ~~~
 {:class="in"}
 ~~~
@@ -679,7 +678,7 @@ Shuffled data:
 What happens if we call the script with no arguments?
 
 ~~~
-python results.py
+$ python scripts/results.py
 ~~~
 {:class="in"}
 ~~~
@@ -692,7 +691,7 @@ IndexError: list index out of range
 ~~~
 {:class="err"}
 
-Not very helpful. Let's add a usage description:
+Not very helpful. Let's add a usage description. Modify the python file so that it looks like this:
 
 ~~~
 import sys
@@ -703,7 +702,7 @@ Results.py plots the real overlap between two bed files
 versus the overlap when one of the results files is randomly
 shuffled.
 
-Usage: python random.py shuffled_results.txt real_results.txt
+Usage: python results.py shuffled_results.txt real_results.txt
 """
 
 def main():
@@ -712,14 +711,17 @@ def main():
         sys.exit(usage_string)
 ~~~
 
-Now we can plot a histogram of the shuffled data:
+Let's try plotting a histogram of the shuffled data, first you'll need to add `from matplotlib import pyplot as plt` at the top of the file, then add this at the bottom of the process function.
 
 ~~~
-plt.hist(shuffled_data, color='black')
-plt.show()
+    print 'Shuffled data:'
+    print shuffled_data
+
+    plt.hist(shuffled_data, color='black')
+    plt.savefig('cpg_overlap_exons.png')
 ~~~
 
-And we can plot the real result as a vertical red line:
+Have a look at the image you just made. At the moment we're only plotting the shuffled results, so let's add the real overlap as a vertical red line. Update your results.py file so that it looks like this: 
 
 ~~~
 import sys 
@@ -731,7 +733,7 @@ Results.py plots the real overlap between two bed files
 versus the overlap when one of the results files is randomly
 shuffled.
 
-Usage: python random.py shuffled_results.txt real_results.txt
+Usage: python results.py shuffled_results.txt real_results.txt
 """
 
 def main():
@@ -758,7 +760,7 @@ def process(shuffled_results_file, real_results_file):
 
     plt.hist(shuffled_data, color='black')
     plt.axvline(real_data, color='red', ls='--', lw=2)
-    plt.show()
+    plt.savefig('cpg_overlap_exons.png')
 
 main()
 ~~~
@@ -775,7 +777,7 @@ Results.py plots the real overlap between two bed files
 versus the overlap when one of the results files is randomly
 shuffled.
 
-Usage: python random.py shuffled_results.txt real_results.txt
+Usage: python results.py shuffled_results.txt real_results.txt
 """
 
 def main():
@@ -805,7 +807,7 @@ def process(shuffled_results_file, real_results_file):
     plt.xlabel('Nucleotides overlap')
     plt.ylabel('Number of shuffled results')
     plt.legend()
-    plt.show()
+    plt.savefig('cpg_overlap_exons.png')
 
 main()
 ~~~
