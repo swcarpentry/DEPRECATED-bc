@@ -132,7 +132,8 @@ class(countData)
 ```
 ## [1] "data.frame"
 ```
-It contains information about genes (one gene per row) with the gene positions in the first five columns and then information about the number of reads aligning to the gene in each experimental sample. We don't need the information on gene position, so we can remove it from the data frame.
+
+The data.frame contains information about genes (one gene per row) with the gene positions in the first five columns and then information about the number of reads aligning to the gene in each experimental sample. We don't need the information on gene position, so we can remove it from the data frame.
 
 
 ```r
@@ -201,6 +202,7 @@ colnames(countData)
 
 We can rename the columns to something a bit more readable.
 
+
 ```r
 # Manually
 c("ctl1", "ctl2", "ctl3", "uvb1", "uvb2", "uvb3")
@@ -214,6 +216,7 @@ c(paste0("ctl", 1:3), paste0("uvb", 1:3))
 ```
 
 An easier way to do this, especially for files with many columns, is to use the `gsub` command to strip out the extra information. This is also more robust to introduced errors, for example if the column order changes at some point in the future.
+
 
 ```r
 # Using gsub -- reproducible
@@ -255,11 +258,11 @@ Hint 2: try `?which.max`.
 
 We can investigate this data a bit more using some of the basic R functions before going on to use more sophisticated analysis tools.
 
-We will calculate the mean for each gene for each condition. First make a copy of the data, because we'll need it later. We will work on the copy.
+First make a copy of the data, because we'll need it later. We will work on the copy. We will calculate the mean for each gene for each condition and plot them.
 
 
 ```r
-countData2 <- countData
+countData2 <- countData #make a copy
 
 # get Control columns
 colnames(countData2)
@@ -337,20 +340,74 @@ Hint: try using a log scale. You can also changing colours, transparencies, size
 
 
 
-There are lots more options you can use to alter the appearance of these plots.
+
+There are many more options you can use to alter the appearance of these plots.
 
 #Find candidate differentially expressed genes
 
 We can find candidate differentially expressed genes by looking for genes with a large change between control and UVB samples. A common threshold used is log2 fold change more than 2 or less than -2. We will calculate log2 fold change for all the genes and colour the genes with log2 fold change of more than 2 or less than -2 on the plot.
 
+First, check for genes with a mean expression of 0. Putting zeroes into the log2 fold change calculation will produce NAs, so we might want to remove these genes.
+
+`TRUE` and `FALSE` can also be represented as 1 and 0. This is useful for getting the total number of observations for which a condition is true. 
+
+
+```r
+TRUE == 0
+```
+
+```
+## [1] FALSE
+```
+
+```r
+TRUE == 1
+```
+
+```
+## [1] TRUE
+```
+
+```r
+FALSE == 0
+```
+
+```
+## [1] TRUE
+```
+
+This can be applied to testing whether genes have a mean expression of more than zero.
+
+
+```r
+head(countData2$ctlMean)
+```
+
+```
+## [1] 0 0 0 0 0 0
+```
+
+```r
+head(countData2$ctlMean > 0)
+```
+
+```
+## [1] FALSE FALSE FALSE FALSE FALSE FALSE
+```
+
+```r
+head(as.numeric(countData2$ctlMean > 0))
+```
+
+```
+## [1] 0 0 0 0 0 0
+```
+
+When we call `sum(countData2$ctlMean > 0)`, we're really asking, "how many genes have a mean above 0 in the control group?"
+
 
 ```r
 # discuss: why to remove zeroes (NAs produced)
-# explain: whats happening here, is for each ctlMean there is a TRUE/FALSE for 
-# if it is greater than 0. TRUE and FALSE can be summed: FALSE is typically 
-# considered a 0, and TRUE is considered to be 1. So when we call
-# `sum(countData2$ctlMean > 0)`, we're really asking, "how many genes have a 
-# mean above 0 in the control group?"
 sum(countData2$ctlMean > 0)
 ```
 
@@ -405,6 +462,7 @@ sum(countData2$log2FC < -2)
 ```
 ## [1] 46
 ```
+
 Make a new column to store this information in.
 
 
