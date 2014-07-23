@@ -81,6 +81,7 @@ Introducing BedTools
 ====================
 
 All bed files contain three columns which list the chromosome, the starting coordinate and the end co-ordinate. They may also include some other information, such as a name for each region, but the first three columns are always the same. For example, have a look at `data/cpg.bed`:
+
 ~~~
 head data/cpg.bed 
 ~~~
@@ -99,18 +100,21 @@ chr1    788863  789211  CpG:_28
 ~~~
 {:class="out"}
 
+The fourth column here is the name of each CpG island - which in this case is just a numerical ID assigned by the folks at UCSC.
+
 The bedtools help
 -----------------
 
-To bring up the help, just type
+You should have installed bedtools as part of the setup for this bootcamp. In which case, you can bring up the help by typing:
 
 ~~~
 $ bedtools
 ~~~
 {:class="in"}
 
-As you can see, there are multiple "subcommands" and for bedtools to
-work you must tell it which subcommand you want to use. Examples:
+If that didn't work, you probably don't have bedtools installed properly. Have a look at <http://bedtools.readthedocs.org/en/latest/content/installation.html> for some help.
+
+If it did work, you should see that there are multiple "subcommands". For bedtools to work you must tell it which subcommand you want to use. Examples:
 
 ~~~
 $ bedtools intersect
@@ -130,10 +134,10 @@ The `intersect` command is the workhorse of the `bedtools` suite. It compares tw
 
 Default behavior
 ----------------
-By default, `intersect` reports the intervals that represent overlaps between your two files.  To demonstrate, let's identify all of the CpG islands that overlap exons. For example, let's list the first five overlaps between CpG islands and exons.
+By default, `intersect` reports the intervals that represent overlaps between your two files. This is represented by the top line of the image above (the one which reads "A intersect B"). As an example, you may know that CpG islands often mark transcription start sites. Imagine that we want to find all the exons in the genome which might contain a promotor. One way of doing this would be to identify all of the CpG islands that overlap exons. For example, let's list the first five overlaps between CpG islands and exons.
 
 ~~~
-$ bedtools intersect -a cpg.bed -b exons.bed | head -5
+$ bedtools intersect -a data/cpg.bed -b data/exons.bed | head
 ~~~
 {:class="in"}
 ~~~
@@ -142,28 +146,38 @@ chr1    135124  135563  CpG:_30
 chr1    327790  328229  CpG:_29
 chr1    327790  328229  CpG:_29
 chr1    327790  328229  CpG:_29
+chr1    713984  714068  CpG:_60
+chr1    762970  763155  CpG:_115
+chr1    763177  763229  CpG:_115
+chr1    762970  763155  CpG:_115
+chr1    762970  763155  CpG:_115
 ~~~
 {:class="out"}
 
-Notice how the new file we create lists the name of the CpG island which is overlapping, but not the name of the exon. If we switch the order of files, we get the exon name instead:
+Notice how the output lists the name of the CpG island which is overlapping, but not the name of the exon. If we switch the order of files, we get all the extra columns from the exons.bed file, including the name (fourth column). The fifth column is a score (not used in this context) and the sixth is the strand.
 
 ~~~
 $ bedtools intersect -a data/exons.bed -b data/cpg.bed | head -5 
 ~~~
 {:class="in"}
 ~~~
-chr1    50489434    50489626    NM_032785_exon_13_0_chr1_50489435_r 0   -
-chr1    16767166    16767348    NM_018090_exon_0_0_chr1_16767167_f  0   +
-chr1    33546713    33546895    NM_052998_exon_0_0_chr1_33546714_f  0   +
-chr1    33546988    33547109    NM_052998_exon_1_0_chr1_33546989_f  0   +
-chr1    33547201    33547243    NM_052998_exon_2_0_chr1_33547202_f  0   +
+chr1  50489434  50489626  NM_032785_exon_13_0_chr1_50489435_r    0  -
+chr1  16767166  16767348  NM_018090_exon_0_0_chr1_16767167_f     0  +
+chr1  33546713  33546895  NM_052998_exon_0_0_chr1_33546714_f     0  +
+chr1  33546988  33547109  NM_052998_exon_1_0_chr1_33546989_f     0  +
+chr1  33547201  33547243  NM_052998_exon_2_0_chr1_33547202_f     0  +
+chr1  16767166  16767270  NM_001145278_exon_0_0_chr1_16767167_f  0  +
+chr1  16767166  16767348  NM_001145277_exon_0_0_chr1_16767167_f  0  +
+chr1  8384389   8384719   NM_001080397_exon_0_0_chr1_8384390_f   0  +
+chr1  8385895   8386102   NM_001080397_exon_2_0_chr1_8385878_f   0  +
+chr1  8390268   8390800   NM_001080397_exon_3_0_chr1_8390269_f   0  +
 ~~~
 {:class="out"}
 
 
 Reporting the original feature in each file.
 --------------------------------------------
-The `-wa` (write A) and `-wb` (write B) options allow one to see the original records from the A and B files that overlapped.  As such, instead of only showing you *where* the intersections occurred, it shows you *what* intersected.
+The `-wa` (write A) and `-wb` (write B) options allow one to see the original records from the A and B files that overlapped.  As such, instead of only showing you *where* the intersections occurred, it shows you *what* intersected. This is represented by the second line of the image above (the one which reads "A intersect B (-wa)"). A
 
 ~~~
 $ bedtools intersect -a cpg.bed -b exons.bed -wa -wb | head -5
@@ -178,12 +192,14 @@ chr1    327790  328229  CpG:_29 chr1    324438  328581  NR_028325_exon_2_0_chr1_
 ~~~
 {:class="out"}
 
+The first three columns of the output show us where there are overlaps between exons and cpg islands. The fourth column contains the name of the CpG island which is overlapping. The rest of the output is the full line from the exons.bed file.
+
 Counting the number of overlapping features.
 --------------------------------------------
 We can also count, for each feature in the "A" file, the number of overlapping features in the "B" file. This is handled with the `-c` option.
 
 ~~~
-$ bedtools intersect -a cpg.bed -b exons.bed -c  | head
+$ bedtools intersect -a data/cpg.bed -b data/exons.bed -c  | head
 ~~~
 {:class="in"}
 ~~~
@@ -200,7 +216,27 @@ chr1    788863  789211  CpG:_28 9
 ~~~
 {:class="out"}
 
-Again, we see that the order of the bed files is important. We get an output line for every feature in `data/cpg.bed`, even if there is no overlap with `data/exons.bed`.
+Again, we see that the order of the bed files is important. We get an output line for every feature in `data/cpg.bed`, even if there is no overlap with `data/exons.bed`. If we reverse the order of the two files again, we get a different output:
+
+~~~
+$ bedtools intersect -a data/exons.bed -b data/cpg.bed -c  | head
+~~~
+{:class="in"}
+~~~
+chr1    66999824    67000051    NM_032291_exon_0_0_chr1_66999825_f  0   +   0
+chr1    67091529    67091593    NM_032291_exon_1_0_chr1_67091530_f  0   +   0
+chr1    67098752    67098777    NM_032291_exon_2_0_chr1_67098753_f  0   +   0
+chr1    67101626    67101698    NM_032291_exon_3_0_chr1_67101627_f  0   +   0
+chr1    67105459    67105516    NM_032291_exon_4_0_chr1_67105460_f  0   +   0
+chr1    67108492    67108547    NM_032291_exon_5_0_chr1_67108493_f  0   +   0
+chr1    67109226    67109402    NM_032291_exon_6_0_chr1_67109227_f  0   +   0
+chr1    67126195    67126207    NM_032291_exon_7_0_chr1_67126196_f  0   +   0
+chr1    67133212    67133224    NM_032291_exon_8_0_chr1_67133213_f  0   +   0
+chr1    67136677    67136702    NM_032291_exon_9_0_chr1_67136678_f  0   +   0
+~~~
+{:class="out"}
+
+Now we get one line for every exon. In this case, the first ten exons actually don't overlap with any CpG islands.
 
 Require a minimal fraction of overlap.
 --------------------------------------------
@@ -226,9 +262,11 @@ chr1    788863  789211  CpG:_28 7
 ~~~
 {:class="out"}
 
+If you compare this to the result you see without the -f flag you will see that the very first CpG island is now reported as having 0 overlaps. This means it must have overlapped an exon by less than 50%.
+
 Find features that DO NOT overlap
 --------------------------------------------
-Often we want to identify those features in our A file that **do not** overlap features in the B file. The `-v` option is your friend in this case.
+Often we want to identify those features in our A file that **do not** overlap features in the B file. The `-v` option is your friend in this case. This is represented in the last line of the image above.
 
 ~~~
 $ bedtools intersect -a cpg.bed -b exons.bed -v  | head
