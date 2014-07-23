@@ -13,9 +13,17 @@ install.packages("ggplot2")
 install.packages("calibrate")
 ```
 
-The data is provided in a .txt file. Have a look at this file in the shell, using `head`.
+# Introduction and data import
 
-Import the data as a `data.frame` and examine it again. You can set the arguments of `read.table` to import the first row as a header giving the column names, and the first column as row names. 
+The analysis of an RNAseq experiment begins with sequencing reads in the form of FASTQ files with reads and quality scores. These then need to be aligned to a reference genome or transcriptome. There are many different alignment tools available, but the process of alignment is both computationally intensive and time-consuming, so we won't cover it today. Once reads are aligned, the number of reads mapped to each gene can be counted to produce a counts matrix. Again, there are several ways of doing this. The best way to find out about the tools that are available and suitable for your research is to look for recent review papers that comapre the different tools.
+
+The data for this tutorial comes from a PLOS ONE paper, [Genome-Wide Transcriptional Profiling of Skin and Dorsal Root Ganglia after Ultraviolet-B-Induced Inflammation](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0093338)[1], and the raw data can be downloaded from [GEO](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE54413). 
+
+This data has already been downloaded and aligned. The command line tool [featureCounts](http://bioinf.wehi.edu.au/featureCounts/) was used to count reads mapped to human genes from the Ensembl annotation (available for download [here](http://www.ensembl.org/info/data/ftp/index.html)). 
+
+The output from this tool is provided in the `counts.txt` file. Have a look at this file in the shell, using `head`.
+
+Import the data into R as a `data.frame` and examine it again. You can set the arguments of `read.table` to import the first row as a header giving the column names, and the first column as row names. 
 
 
 ```r
@@ -909,3 +917,7 @@ with(subset(res, padj<.05 & abs(log2FoldChange)>1), textxy(log2FoldChange, -log1
 ```
 
 ![plot of chunk volcano_plot](./analysis_files/figure-html/volcano_plot.png) 
+
+# References
+
+1. Dawes JM, Antunes-Martins A, Perkins JR, Paterson KJ, Sisignano M, et al. (2014) Genome-Wide Transcriptional Profiling of Skin and Dorsal Root Ganglia after Ultraviolet-B-Induced Inflammation. PLoS ONE 9(4): e93338. doi: 10.1371/journal.pone.0093338 
