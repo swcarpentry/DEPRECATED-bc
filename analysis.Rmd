@@ -21,20 +21,20 @@ Import the data as a `data.frame` and examine it. The data is stored in a text f
 
 ```{r data_input}
 ## Filename with output from featureCounts
-countfile <- "data/counts.txt"
+countFile <- "data/counts.txt"
 ## Read in the data
-countdata <- read.table(countfile, header=TRUE, row.names=1)
-head(countdata)
-colnames(countdata)
-class(countdata)
+countData <- read.table(countFile, header=TRUE, row.names=1)
+head(countData)
+colnames(countData)
+class(countData)
 ```
 It contains information about genes (one gene per row) with the gene positions in the first five columns and then information about the number of reads aligning to the gene in each experimental sample. We don't need the information on gene position, so we can remove it from the data frame.
 
 ```{r}
 # Remove first five columns (chr, start, end, strand, length)
-countdata <- countdata[ ,-(1:5)]
-head(countdata)
-colnames(countdata)
+countData <- countData[ ,-(1:5)]
+head(countData)
+colnames(countData)
 ```
 
 We can rename the columns to something a bit more readable.
@@ -54,18 +54,18 @@ An easier way to do this, especially for files with many columns, is to use the 
 ```{r rename_cols}
 ## Using gsub -- reproducible
 ?gsub
-gsub(pattern=".fastq_tophat.accepted_hits.bam", replacement="", x=colnames(countdata))
-colnames(countdata) <- gsub(pattern=".fastq_tophat.accepted_hits.bam", replacement="", x=colnames(countdata))
-head(countdata)
+gsub(pattern=".fastq_tophat.accepted_hits.bam", replacement="", x=colnames(countData))
+colnames(countData) <- gsub(pattern=".fastq_tophat.accepted_hits.bam", replacement="", x=colnames(countData))
+head(countData)
 ```
 
 ### Exercise 1
 Find the gene with the highest expression in any sample. Extract  the expression data for this gene for all samples. In which sample does it have the highest expression? What is the function of the gene? Can you suggest why this is the top expressed gene?
 
 ```{r exercise_1}
-max(apply(countdata, 1, max)) #max expression is 7013
-top.gene <- which.max(apply(countdata, 1, max)) #gene is EEF1A1P9
-countdata[top.gene, ] #get other sample data - max is in uvb1
+max(apply(countData, 1, max)) #max expression is 7013
+topGene <- which.max(apply(countData, 1, max)) #gene is EEF1A1P9
+countData[topGene, ] #get other sample data - max is in uvb1
 
 #this is a pseudogene - maybe an artefact of only aligning reads to a single chromosome?
 ```
@@ -77,31 +77,31 @@ We can investigate this data a bit more using some of the basic R functions befo
 We will calculate the mean for each gene for each condition. First make a copy of the data, because we'll need it later. We will work on the copy.
 
 ```{r get_means}
-countdata2 <- countdata
+countData2 <- countData
 
 #get Control columns
-colnames(countdata2)
-grep("ctl", colnames(countdata2))
-ctlCols <- grep("ctl", colnames(countdata2))
-head(countdata2[,ctlCols])
-apply(countdata2[, ctlCols], 1, mean) 
+colnames(countData2)
+grep("ctl", colnames(countData2))
+ctlCols <- grep("ctl", colnames(countData2))
+head(countData2[,ctlCols])
+apply(countData2[, ctlCols], 1, mean) 
 # here we'll use rowMeans instead, its a convenient shortcut, and also faster!
-countdata2$ctlMean <- rowMeans(countdata2[, ctlCols])
+countData2$ctlMean <- rowMeans(countData2[, ctlCols])
 
 #same for uvb
-uvbCols <- grep("uvb", colnames(countdata2))
-countdata2$uvbMean <- rowMeans(countdata2[, uvbCols]
+uvbCols <- grep("uvb", colnames(countData2))
+countData2$uvbMean <- rowMeans(countData2[, uvbCols])
 ```
 
 Plot the mean expression of each gene in control against the UVB sample mean. Look for outliers.
 
 ```{r plot_means}
-plot(countdata2$ctlMean, countdata2$uvbMean)
+plot(countData2$ctlMean, countData2$uvbMean)
 ```
 
 ```{r ggplot_means}
 library(ggplot2)
-ggplot(countdata2, aes(x=ctlMean, y=uvbMean)) + geom_point()
+ggplot(countData2, aes(x=ctlMean, y=uvbMean)) + geom_point()
 ```
 
 ### Exercise 2
@@ -110,11 +110,11 @@ How could you make this plot more informative and look more professional? Hint: 
 `help(par)` will give you information on lots of graphical parameters that can be set. Help for ggplot2 can be found [here](http://docs.ggplot2.org/current/).
 
 ```{r exercise2_1}
-plot(countdata2$ctlMean, countdata2$uvbMean, log="xy")
+plot(countData2$ctlMean, countData2$uvbMean, log="xy")
 ```
 
 ```{r exercise2_2}
-ggplot(countdata2, aes(x=ctlMean, y=uvbMean)) + geom_point() + scale_x_log10() + scale_y_log10() + theme_bw()
+ggplot(countData2, aes(x=ctlMean, y=uvbMean)) + geom_point() + scale_x_log10() + scale_y_log10() + theme_bw()
 ```
 There are lots more options you can use to alter the appearance of these plots.
 
@@ -123,35 +123,35 @@ There are lots more options you can use to alter the appearance of these plots.
 We can find candidate differentially expressed genes by looking for genes with a large change between control and UVB samples. A common threshold used is log2 fold change more than 2 fold. We will calculate log2 fold change for all the genes and colour the genes with log2 fold change more than 2 fold on the plot.
 
 ```{r remove_unexpressed}
-sum(countdata2$ctlMean > 0)
-sum(countdata2$uvbMean > 0)
+sum(countData2$ctlMean > 0)
+sum(countData2$uvbMean > 0)
 
-nrow(countdata2)
-countdata2 <- subset(countdata2, (countdata2$ctlMean > 0 | countdata2$uvbMean > 0))
+nrow(countData2)
+countData2 <- subset(countData2, (countData2$ctlMean > 0 | countData2$uvbMean > 0))
 #explain | operator meaning OR in this context?
-nrow(countdata2)
+nrow(countData2)
 ```
 
 ```{r log2FC}
-countdata2$log2FC <- log2(countdata2$uvbMean / countdata2$ctlMean)
-sum(countdata2$log2FC > 2)
-sum(countdata2$log2FC < -2)
+countData2$log2FC <- log2(countData2$uvbMean / countData2$ctlMean)
+sum(countData2$log2FC > 2)
+sum(countData2$log2FC < -2)
 ```
 Make a new column to store this information in.
 
 ```{r outliers}
-countdata2$outlier <- FALSE
-countdata2$outlier[countdata2$log2FC > 2] <- TRUE
-countdata2$outlier[countdata2$log2FC < -2] <- TRUE
+countData2$outlier <- FALSE
+countData2$outlier[countData2$log2FC > 2] <- TRUE
+countData2$outlier[countData2$log2FC < -2] <- TRUE
 ```
 
 ```{r plot_outliers}
-plot(countdata2$ctlMean, countdata2$uvbMean, log="xy")
-points(countdata2$ctlMean[countdata2$outlier==TRUE], countdata2$uvbMean[countdata2$outlier==TRUE], col="red")
+plot(countData2$ctlMean, countData2$uvbMean, log="xy")
+points(countData2$ctlMean[countData2$outlier==TRUE], countData2$uvbMean[countData2$outlier==TRUE], col="red")
 ```
 
 ```{r ggplot_outliers}
-ggplot(countdata2, aes(x=ctlMean, y=uvbMean, colour=outlier)) + geom_point() + scale_x_log10() + scale_y_log10() 
+ggplot(countData2, aes(x=ctlMean, y=uvbMean, colour=outlier)) + geom_point() + scale_x_log10() + scale_y_log10() 
 ```
 
 ## DESeq2 analysis
@@ -174,14 +174,14 @@ It requires the count data to be in matrix form, and an additional dataframe des
 
 ```{r convert_to_matrix}
 # Convert to matrix
-class(countdata)
-countdata <- as.matrix(countdata)
-class(countdata)
-head(countdata)
+class(countData)
+countData <- as.matrix(countData)
+class(countData)
+head(countData)
 
-# construct coldata dataframe
+# construct colData dataframe
 #three replicates of control and UVB.
-coldata <- data.frame(condition=c(rep("ctl", 3), rep("uvb",3)), row.names=colnames(countdata))
+colData <- data.frame(condition=c(rep("ctl", 3), rep("uvb",3)), row.names=colnames(countData))
 ```
 
 DESeq works on a particular type of object called a DESeqDataSet.
@@ -189,7 +189,7 @@ DESeq works on a particular type of object called a DESeqDataSet.
 ```{r make_deseqdataset}
 #introduce how DESeq2 works - type of object it works on etc
 # instantiate the DESeqDataSet
-dds <- DESeqDataSetFromMatrix(countData=countdata, colData=coldata, design=~condition)
+dds <- DESeqDataSetFromMatrix(countData=countData, colData=colData, design=~condition)
 dds
 ```
 
@@ -211,12 +211,12 @@ head(res)
 Combine DEseq results with the original counts data. Write significant results to a file.
 
 ```{r write_results}
-resdata <- merge(as.data.frame(res), as.data.frame(counts(dds, normalized=TRUE)), by="row.names", sort=FALSE)
-head(resdata)
-names(resdata)[1] <- "GeneID"
-head(resdata)
+resData <- merge(as.data.frame(res), as.data.frame(counts(dds, normalized=TRUE)), by="row.names", sort=FALSE)
+head(resData)
+names(resData)[1] <- "GeneID"
+head(resData)
 
-sig <- subset(resdata, padj<0.05)
+sig <- subset(resData, padj<0.05)
 dir.create("results")
 write.table(sig, file="results/sig.txt", sep="\t") #tab delim data
 ```
