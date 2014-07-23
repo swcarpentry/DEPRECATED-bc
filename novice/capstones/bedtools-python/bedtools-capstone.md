@@ -83,10 +83,28 @@ These 4 files were extracted from the UCSC Genome Browser's [Table Browser](http
 Introducing BedTools
 ====================
 
-We're going to be exploring these files using a suite of tools called BedTools. As the name suggests, these tools all work on a particular type of file called a bed file. Bed files are commonly used to represent features in genomes, for example promotors, genes, centromeres etc. - essentially anything that can be identified with a particular genomic location. All bed files contain three columns which list the chromosome, the starting coordinate and the end co-ordinate
+We're going to be exploring these files using a suite of tools called BedTools. As the name suggests, these tools all work on a particular type of file called a bed file. Bed files are commonly used to represent features in genomes, for example promotors, genes, centromeres etc. - essentially anything that can be identified with a particular genomic location. All bed files contain three columns which list the chromosome, the starting coordinate and the end co-ordinate. They may also include some other information, such as a name for each region, but the first three columns are always the same. For example, have a look at `data/cpg.bed`:
+
+~~~
+head data/cpg.bed 
+~~~
+{:class="in"}
+~~~
+chr1    28735   29810   CpG:_116
+chr1    135124  135563  CpG:_30
+chr1    327790  328229  CpG:_29
+chr1    437151  438164  CpG:_84
+chr1    449273  450544  CpG:_99
+chr1    533219  534114  CpG:_94
+chr1    544738  546649  CpG:_171
+chr1    713984  714547  CpG:_60
+chr1    762416  763445  CpG:_115
+chr1    788863  789211  CpG:_28
+~~~
+{:class="out"}
 
 The bedtools help
-==================
+-----------------
 
 To bring up the help, just type
 
@@ -110,7 +128,7 @@ This should bring up the specific help text associated with each tool.
 bedtools "intersect"
 ====================
 
-The `intersect` command is the workhorse of the `bedtools` suite. It compares two BED/VCF/GFF files (or a BAM file and one of the aforementioned files) and identifies all the regions in the genome where the features in the two files overlap (that is, share at least one base pair in common).
+The `intersect` command is the workhorse of the `bedtools` suite. It compares two bed files and identifies all the regions in the genome where the features in the two files overlap (that is, share at least one base pair in common).
 
 ![](http://bedtools.readthedocs.org/en/latest/_images/intersect-glyph.png)
 
@@ -131,9 +149,25 @@ chr1    327790  328229  CpG:_29
 ~~~
 {:class="out"}
 
+Notice how the new file we create lists the name of the CpG island which is overlapping, but not the name of the exon. If we switch the order of files, we get the exon name instead:
+
+~~~
+$ bedtools intersect -a data/exons.bed -b data/cpg.bed | head -5 
+~~~
+{:class="in"}
+~~~
+chr1    50489434    50489626    NM_032785_exon_13_0_chr1_50489435_r 0   -
+chr1    16767166    16767348    NM_018090_exon_0_0_chr1_16767167_f  0   +
+chr1    33546713    33546895    NM_052998_exon_0_0_chr1_33546714_f  0   +
+chr1    33546988    33547109    NM_052998_exon_1_0_chr1_33546989_f  0   +
+chr1    33547201    33547243    NM_052998_exon_2_0_chr1_33547202_f  0   +
+~~~
+{:class="out"}
+
+
 Reporting the original feature in each file.
 --------------------------------------------
-The `-wa` (write A) and `-wb` (write B) options allow one to see the original records from the A and B files that overlapped.  As such, instead of not only showing you *where* the intersections occurred, it shows you *what* intersected.
+The `-wa` (write A) and `-wb` (write B) options allow one to see the original records from the A and B files that overlapped.  As such, instead of only showing you *where* the intersections occurred, it shows you *what* intersected.
 
 ~~~
 $ bedtools intersect -a cpg.bed -b exons.bed -wa -wb | head -5
@@ -145,28 +179,6 @@ chr1    135124  135563  CpG:_30 chr1    134772  139696  NR_039983_exon_0_0_chr1_
 chr1    327790  328229  CpG:_29 chr1    324438  328581  NR_028322_exon_2_0_chr1_324439_f    0   +
 chr1    327790  328229  CpG:_29 chr1    327035  328581  NR_028327_exon_3_0_chr1_327036_f    0   +
 chr1    327790  328229  CpG:_29 chr1    324438  328581  NR_028325_exon_2_0_chr1_324439_f    0   +
-~~~
-{:class="out"}
-
-How many base pairs of overlap were there?
-------------------------------------------
-The `-wo` (write overlap) option allows one to also report the *number* of base pairs of overlap between the features that overlap between each of the files.
-
-~~~
-$ bedtools intersect -a cpg.bed -b exons.bed -wo  | head -10
-~~~
-{:class="in"}
-~~~
-chr1    28735   29810   CpG:_116    chr1    29320   29370   NR_024540_exon_10_0_chr1_29321_r    0   -   50
-chr1    135124  135563  CpG:_30 chr1    134772  139696  NR_039983_exon_0_0_chr1_134773_r    0   -   439
-chr1    327790  328229  CpG:_29 chr1    324438  328581  NR_028322_exon_2_0_chr1_324439_f    0   +   439
-chr1    327790  328229  CpG:_29 chr1    327035  328581  NR_028327_exon_3_0_chr1_327036_f    0   +   439
-chr1    327790  328229  CpG:_29 chr1    324438  328581  NR_028325_exon_2_0_chr1_324439_f    0   +   439
-chr1    713984  714547  CpG:_60 chr1    713663  714068  NR_033908_exon_6_0_chr1_713664_r    0   -   84
-chr1    762416  763445  CpG:_115    chr1    762970  763155  NR_015368_exon_0_0_chr1_762971_f    0   +   185
-chr1    762416  763445  CpG:_115    chr1    763177  763229  NR_047525_exon_0_0_chr1_763178_f    0   +   52
-chr1    762416  763445  CpG:_115    chr1    762970  763155  NR_047524_exon_0_0_chr1_762971_f    0   +   185
-chr1    762416  763445  CpG:_115    chr1    762970  763155  NR_047523_exon_0_0_chr1_762971_f    0   +   185
 ~~~
 {:class="out"}
 
@@ -192,6 +204,32 @@ chr1    788863  789211  CpG:_28 9
 ~~~
 {:class="out"}
 
+Again, we see that the order of the bed files is important. We get an output line for every feature in `data/cpg.bed`, even if there is no overlap with `data/exons.bed`.
+
+Require a minimal fraction of overlap.
+--------------------------------------------
+Recall that the default is to report overlaps between features in A and B so long as *at least one basepair* of overlap exists. However, the `-f` option allows you to specify what fraction of each feature in A should be overlapped by a feature in B before it is reported.
+
+Let's be more strict and require 50% of overlap.
+
+~~~
+$ bedtools intersect -a data/cpg.bed -b data/exons.bed -c -f 0.50 | head
+~~~
+{:class="in"}
+~~~
+chr1    28735   29810   CpG:_116    0
+chr1    135124  135563  CpG:_30 1
+chr1    327790  328229  CpG:_29 3
+chr1    437151  438164  CpG:_84 0
+chr1    449273  450544  CpG:_99 0
+chr1    533219  534114  CpG:_94 0
+chr1    544738  546649  CpG:_171    0
+chr1    713984  714547  CpG:_60 0
+chr1    762416  763445  CpG:_115    0
+chr1    788863  789211  CpG:_28 7
+~~~
+{:class="out"}
+
 Find features that DO NOT overlap
 --------------------------------------------
 Often we want to identify those features in our A file that **do not** overlap features in the B file. The `-v` option is your friend in this case.
@@ -214,28 +252,25 @@ chr1    919726  919927  CpG:_15
 ~~~
 {:class="out"}
 
-
-Require a minimal fraction of overlap.
---------------------------------------------
-Recall that the default is to report overlaps between features in A and B so long as *at least one basepair* of overlap exists. However, the `-f` option allows you to specify what fraction of each feature in A should be overlapped by a feature in B before it is reported.
-
-Let's be more strict and require 50% of overlap.
+How many base pairs of overlap were there?
+------------------------------------------
+The `-wo` (write overlap) option allows one to also report the *number* of base pairs of overlap between the features that overlap between each of the files.
 
 ~~~
-$ bedtools intersect -a cpg.bed -b exons.bed -wo -f 0.50 | head
+$ bedtools intersect -a cpg.bed -b exons.bed -wo  | head -10
 ~~~
 {:class="in"}
 ~~~
+chr1    28735   29810   CpG:_116    chr1    29320   29370   NR_024540_exon_10_0_chr1_29321_r    0   -   50
 chr1    135124  135563  CpG:_30 chr1    134772  139696  NR_039983_exon_0_0_chr1_134773_r    0   -   439
 chr1    327790  328229  CpG:_29 chr1    324438  328581  NR_028322_exon_2_0_chr1_324439_f    0   +   439
 chr1    327790  328229  CpG:_29 chr1    327035  328581  NR_028327_exon_3_0_chr1_327036_f    0   +   439
 chr1    327790  328229  CpG:_29 chr1    324438  328581  NR_028325_exon_2_0_chr1_324439_f    0   +   439
-chr1    788863  789211  CpG:_28 chr1    788770  794826  NR_047525_exon_4_0_chr1_788771_f    0   +   348
-chr1    788863  789211  CpG:_28 chr1    788770  794826  NR_047524_exon_3_0_chr1_788771_f    0   +   348
-chr1    788863  789211  CpG:_28 chr1    788770  794826  NR_047523_exon_3_0_chr1_788771_f    0   +   348
-chr1    788863  789211  CpG:_28 chr1    788858  794826  NR_047522_exon_5_0_chr1_788859_f    0   +   348
-chr1    788863  789211  CpG:_28 chr1    788770  794826  NR_047521_exon_4_0_chr1_788771_f    0   +   348
-chr1    788863  789211  CpG:_28 chr1    788858  794826  NR_047520_exon_6_0_chr1_788859_f    0   +   348
+chr1    713984  714547  CpG:_60 chr1    713663  714068  NR_033908_exon_6_0_chr1_713664_r    0   -   84
+chr1    762416  763445  CpG:_115    chr1    762970  763155  NR_015368_exon_0_0_chr1_762971_f    0   +   185
+chr1    762416  763445  CpG:_115    chr1    763177  763229  NR_047525_exon_0_0_chr1_763178_f    0   +   52
+chr1    762416  763445  CpG:_115    chr1    762970  763155  NR_047524_exon_0_0_chr1_762971_f    0   +   185
+chr1    762416  763445  CpG:_115    chr1    762970  763155  NR_047523_exon_0_0_chr1_762971_f    0   +   185
 ~~~
 {:class="out"}
 
@@ -324,7 +359,7 @@ ERROR: input file: (exons.bed) is not sorted by chrom then start.
 To correct this, you need to sort your BED. We could use the UNIX `sort` utility that we already covered, which would look like this:
 
 ~~~
-$ sort -k1,1 -k2,2n exons.bed | head -n 5
+$ sort -k1,1 -k2,2n exons.bed | head
 ~~~
 {:class="in"}
 ~~~
@@ -339,7 +374,7 @@ chr1    14969   15038   NR_024540_exon_1_0_chr1_14970_r 0   -
 But if you can't remember the right arguments to use for sort, the command `bedtools sort` will also do what we want:
 
 ~~~
-$ bedtools sort -i exons.bed | head -n 5
+$ bedtools sort -i exons.bed | head
 ~~~
 {:class="in"}
 ~~~
@@ -354,7 +389,7 @@ chr1    14969   15038   NR_024540_exon_1_0_chr1_14970_r 0   -
 Now instead of saving the sorted results to a separate file, we can actually pipe the result into bedtools merge:
     
 ~~~
-$ bedtools sort -i exons.bed | bedtools merge | head -n 5
+$ bedtools sort -i exons.bed | bedtools merge | head
 ~~~
 {:class="in"}
 ~~~
@@ -366,13 +401,13 @@ chr1    15795   15947
 ~~~
 {:class="out"}
 
-The result is a new set of intervals representing the merged set of intervals in the input. That is, if a base pair in the genome is covered by 10 features, it will now only be represented once in the output file.
+The result is a new set of intervals representing the merged set of intervals in the input. That is, if a base pair in the genome is covered by 10 features, it will now only be represented once in the output file. Notice how the merged file has less columns than the original file - we've lost the name of the exon and the strand.
 
 Let's save the output of bedtools merge to a file and recalculate the overlap:
 
 ~~~
 $ bedtools sort -i exons.bed | bedtools merge > exons.merged.bed
-$ bedtools intersect -a cpg.bed -b exons.merged.bed -wo | head -n 10
+$ bedtools intersect -a cpg.bed -b exons.merged.bed -wo | head
 ~~~
 {:class="in"}
 ~~~
@@ -389,10 +424,14 @@ chr1    858970  861632  CpG:_257    chr1    861120  861180  60
 ~~~
 {:class="out"}
 
-This gives us the coordinates of the overlap, the name of the CpG island, the coordinates of the CpG island and the overlap in base pairs. But all we actually need is the overlap column. We can use the unix `cut` command to extract just the 8th column.
+This gives us the coordinates of the overlap, the name of the CpG island, the coordinates of the CpG island and the overlap in base pairs. Notice how the repetition in line 3-5 is now gone.
+
+#Challenge: stranded merge
+
+All we actually need from the output of `bedtools intersect` is the overlap column. We can use the unix `cut` command to extract just the 8th field (or column) using the -f flag.
 
 ~~~
-$ bedtools intersect -a cpg.bed -b exons.merged.bed -wo | cut -f 8,8 | head -n 10
+$ bedtools intersect -a cpg.bed -b exons.merged.bed -wo | cut -f 8 | head
 ~~~
 {:class="in"}
 ~~~
@@ -409,10 +448,10 @@ $ bedtools intersect -a cpg.bed -b exons.merged.bed -wo | cut -f 8,8 | head -n 1
 ~~~
 {:class="out"}
 
-Now we need a program to read in this column of numbers and give us the sum. The `readings.py` program we wrote earlier will do this with a few small changes.
+Now we need a program to read in this column of numbers and give us the sum. Hopefully this should ring some bells - The `readings.py` program we wrote earlier will do this with a few small changes.
 
 ~~~
-$ bedtools intersect -a cpg.bed -b exons.merged.bed -wo | cut -f 8,8 | python readings.py --sum
+$ bedtools intersect -a cpg.bed -b exons.merged.bed -wo | cut -f 8 | python readings.py --sum
 ~~~
 {:class="in"}
 ~~~
@@ -420,12 +459,20 @@ $ bedtools intersect -a cpg.bed -b exons.merged.bed -wo | cut -f 8,8 | python re
 ~~~
 {:class="out"}
 
+Let's save this result to a file so that we remember it later:
+
+~~~
+$ bedtools intersect -a cpg.bed -b exons.merged.bed -wo | cut -f 8 | python readings.py --sum > cpg_result.txt
+~~~
+{:class="in"}
+
+
 So we know what the overlap is between CpG islands and exons. How do we know whether this is significant? How do we know what we would expect by random chance?
 
 BedTools includes a command called shuffle which will randomize one of our input files. Let's try randomizing the CpG islands:
 
 ~~~
-bedtools shuffle -i cpg.bed -g genome.txt  | head -n 10 
+bedtools shuffle -i cpg.bed -g genome.txt  | head 
 ~~~
 {:class="in"}
 ~~~
@@ -442,11 +489,10 @@ chr6    39650957    39651305    CpG:_28
 ~~~
 {:class="out"}
 
-But keep the intervals on the same chromosome...
+Notice how the CpG islands have been shuffled to random chromosomes. This means that each chromosome will have roughly the same number of CpG islands, regardless of length. A better random model would be to keep the distribution of CpG islands over chromosomes and just shuffle the positions of each CpG on each chromosome. We can do this using the -chrom flag.
 
 ~~~
-bedtools shuffle -chrom -i cpg.bed -g genome.txt \
-| head -n 10 
+$ bedtools shuffle -chrom -i cpg.bed -g genome.txt | head 
 ~~~
 {:class="in"}
 ~~~
@@ -463,13 +509,11 @@ chr1    51954093    51954441    CpG:_28
 ~~~
 {:class="out"}
 
-Save to a file, and count the overlap for the shuffled features
+Now let's save that result to a file, and count the overlap for the shuffled features.
 
 ~~~
-bedtools shuffle -chrom -i cpg.bed -g genome.txt \
-> cpg.shuffled.bed
-bedtools intersect -a cpg.shuffled.bed -b exons.merged.bed -wo \
-| cut -f 8,8 | python readings.py --sum
+$ bedtools shuffle -chrom -i cpg.bed -g genome.txt > cpg.shuffled.bed
+$ bedtools intersect -a cpg.shuffled.bed -b exons.merged.bed -wo | cut -f 8 | python readings.py --sum
 ~~~
 {:class="in"}
 ~~~
@@ -477,17 +521,19 @@ bedtools intersect -a cpg.shuffled.bed -b exons.merged.bed -wo \
 ~~~
 {:class="out"}
 
-Do this lots of times to get a p-value
+Great, so our shuffled file overlaps much less with exons than real CpG islands do. How do we know if the difference is significant? One approach is to make lots of different randomly shuffled files, and count the overlap for each one. If we do this 100 times, and we never see an overlap that is as big as the one we see for the original `data/cpg.bed` file, then we can say that the overlap between exons and CpG islands is significant with a P-value (roughly) < 0.01.
+
+First, prepare a directory to hold our shuffled results:
 
 ~~~
-mkdir shuffled_cpg
+$ mkdir shuffled_cpg
 ~~~
 {:class="in"}
 
-We have a script for that:
+In the `scripts` folder, you should see a file called `scripts/do_shuffle.sh`. This is a bash script that contains a loop from 1 to 100. It runs bedtools shuffle 100 times, and saves the results to a folder. Have a look at the contents of the file:
 
 ~~~
-cat do_shuffle.sh
+$ cat scripts/do_shuffle.sh
 ~~~
 {:class="in"}
 ~~~
@@ -496,26 +542,50 @@ cat do_shuffle.sh
 
 for i in {1..100}
 do
-    bedtools shuffle -chrom -i cpg.bed -g genome.txt > shuffled_cpg/cpg.shuffled${i}.bed
+    bedtools shuffle -chrom -i data/cpg.bed -g data/genome.txt > shuffled_cpg/cpg.shuffled${i}.bed
 done
 ~~~
 {:class="out"}
 
-Run the script:
+Run the script, and then check to make sure you have some shiny new files in the `shuffled_cpg` folder:
 
 ~~~
-./do_suffle.sh
-ls -l shuffled_cpg | head -n 5
+$ scripts/do_suffle.sh
+$ ls -1 shuffled_cpg | head
 ~~~
 {:class="in"}
+~~~
+cpg.shuffled100.bed
+cpg.shuffled10.bed
+cpg.shuffled11.bed
+cpg.shuffled12.bed
+cpg.shuffled13.bed
+cpg.shuffled14.bed
+cpg.shuffled15.bed
+cpg.shuffled16.bed
+cpg.shuffled17.bed
+cpg.shuffled18.bed
+~~~
+{:class="out"}
 
-
-And then:
+Now we need to calculate the overlap between `data/exons.bed` and each of our shuffled bed files. The command for the first file is:
 
 ~~~
-for f in shuffled_cpg/*; 
-do bedtools intersect -a $f -b exons.merged.bed -wo \
-| cut -f 8,8 | python readings.py --sum; done | head -n 10
+$ bedtools intersect -a shuffled_cpg/cpg.shuffled1.bed -b data/exons.merged.bed -wo | cut -f 8 | python scripts/readings.py --sum
+~~~
+{:class="in"}
+~~~
+630845.0
+~~~
+{:class="out"}
+
+See if you can adapt this command and turn it into a for loop which runs over all of our shuffled results.
+
+~~~
+$ for filename in shuffled_cpg/*
+> do
+>     bedtools intersect -a $filename -b data/exons.merged.bed -wo | cut -f 8 | python scripts/readings.py --sum
+> done | head
 ~~~
 {:class="in"}
 ~~~
@@ -535,9 +605,10 @@ do bedtools intersect -a $f -b exons.merged.bed -wo \
 Save that to a file:
 
 ~~~
-for f in shuffled_cpg/*; 
-do bedtools intersect -a $f -b exons.merged.bed -wo \
-| cut -f 8,8 | python readings.py --sum; done > shuffled_results.txt
+$ for filename in shuffled_cpg/*; 
+do
+    bedtools intersect -a $filename -b exons.merged.bed -wo | cut -f 8 | python readings.py --sum
+done > shuffled_results.txt
 ~~~
 {:class="in"}
 
