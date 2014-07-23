@@ -123,6 +123,11 @@ There are lots more options you can use to alter the appearance of these plots.
 We can find candidate differentially expressed genes by looking for genes with a large change between control and UVB samples. A common threshold used is log2 fold change more than 2 fold. We will calculate log2 fold change for all the genes and colour the genes with log2 fold change more than 2 fold on the plot.
 
 ```{r remove_unexpressed}
+# explain: whats happening here, is for each ctlMean there is a TRUE/FALSE for 
+# if it is greater than 0. TRUE and FALSE can be summed: FALSE is typically 
+# considered a 0, and TRUE is considered to be 1. So when we call
+# `sum(countData2$ctlMean > 0)`, we're really asking, "how many genes have a 
+# mean above 0 in the control group?"
 sum(countData2$ctlMean > 0)
 sum(countData2$uvbMean > 0)
 
