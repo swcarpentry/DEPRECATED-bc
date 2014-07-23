@@ -181,7 +181,8 @@ citation("DESeq2")
 It requires the count data to be in matrix form, and an additional dataframe describing the structure of the experiment.
 
 ```{r convert_to_matrix}
-# Convert to matrix
+# countData is currently a data.frame, but DESeq2 expects its input to be in 
+# matrix format, so we will convert our countData to a matrix.
 class(countData)
 countData <- as.matrix(countData)
 class(countData)
