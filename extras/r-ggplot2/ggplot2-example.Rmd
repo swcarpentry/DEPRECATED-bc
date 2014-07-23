@@ -29,7 +29,7 @@ Now let's look at a bigger dataset. We're going to be using a data visualization
 
 Recall how to install and load packages. Install the package if you haven't already:
 
-```{r installggplot2}
+```{r installggplot2, eval=FALSE}
 # Only need to do this once
 install.packages("ggplot2")
 ```
@@ -165,7 +165,7 @@ We can also create a faceted plot as we did above using the `ggplot` function ad
 ggplot(diamonds, aes(carat, price)) + geom_point() + facet_grid(clarity ~ color)
 ```
 
-#### Dealing with overplotting
+#### Other ways of dealing with overplotting
 
 In the examples above we used colors and facets to help get around the overplotting problem when we used point geoms. A simpler way to try to tackle this problem is to lower the opacity of each point. Here, `alpha=1/5` sets the opacity of each point to 20%. In other words, 5 points would have to overlap to result in a completely solid point. Note that in this case we're not *mapping* the alpha level aesthetic to some other variable as we did above with color -- we're setting it to a static value of 0.20 for all points in the layer.
 
@@ -187,63 +187,96 @@ ggplot(diamonds, aes(carat, price)) + stat_density2d()
 
 #### Expanding your graphical repertoire 
 
-FIXME: get back here
+Now that we've got a basic understanding of the `ggplot` syntax, let's explore different geoms for different types of data, and adding additional layers to our plots. Let's get back to our example with the iris dataset. Let's create a simple plot looking at sepal length by the three species.
 
-```{r}
-# Histogram
-ggplot(diamonds, aes(price)) + geom_histogram(binwidth=100)
-
-# Boxplots and stip plots, adding layers to plots
+```{r stripplot}
 ggplot(iris, aes(Species, Sepal.Length)) + geom_point()
+```
+
+In this simple "strip plot" of a continuous variable by a categorical variable, points stack up on one another, and the density of the points and over-plotting may obscure the relationship. Let's try jittering the points (spreading them out horizontally in each direction by some random amount). In the first example we'll use the jitter geom. In the second example, we'll change the shape of the point depending on the Species. Finally, because points near each other for each species look similar, we'll further color the points by Species.
+
+```{r jitter}
 ggplot(iris, aes(Species, Sepal.Length)) + geom_jitter()
 ggplot(iris, aes(Species, Sepal.Length)) + geom_jitter(aes(shape=Species), size=3)
-ggplot(iris, aes(Species, Sepal.Length, colour=Species)) + geom_jitter()
-ggplot(iris, aes(Species, Sepal.Length, colour=Species)) + geom_jitter(aes(shape=Species), size=3)
+ggplot(iris, aes(Species, Sepal.Length)) + geom_jitter(aes(shape=Species, colour=Species), size=3)
+```
+
+There are other geoms that allow you to summarize the distribution of a continuous variable by levels of a categorical variable. You're probably most familiar with a box plot. In the first plot, let's add the boxplot geom. 
+
+```{r boxplot}
 ggplot(iris, aes(Species, Sepal.Length)) + geom_boxplot()
-ggplot(iris, aes(Species, Sepal.Length, colour=Species)) + geom_boxplot() + geom_jitter()
-ggplot(iris, aes(Species, Sepal.Length, colour=Species)) + geom_boxplot(alpha=.5) + geom_jitter()
-ggplot(iris, aes(Species, Sepal.Length, colour=Species)) + geom_boxplot(alpha=.5) + geom_jitter(aes(shape=Species), size=3)
+```
 
-# Adding layers to scatter plots
-ggplot(iris, aes(Sepal.Width, Sepal.Length)) + geom_point()
+Alternatively, we could create a [violin plot](http://en.wikipedia.org/wiki/Violin_plot) with the violin geom. A violin plot is a sort of like a box plot, but also displays the density of the data  at different values. The violin plot shows an abundance of sepal lengths of around 5cm for the *Iris setosa* species. 
+
+```{r violinplot}
+ggplot(iris, aes(Species, Sepal.Length)) + geom_violin()
+```
+
+Box plots and violin plots are great for summarizing the distribution of a continuous variable by a categorical variable, but what if we wanted to simultaneously view both a summary as well as the actual data? No problem - with **ggplot2** we can simply add more geoms as layers to the plot we've already created. Here, let's combine  jittered strip plots (showing the actual data points) with the violin plots (showing the summary). As above, let's map the color and shape of the points to the species, and lets reduce the opacity of the violin plot to make it less visually prominent.
+
+```{r violinpoints}
+ggplot(iris, aes(Species, Sepal.Length)) + geom_violin(alpha=.5) + geom_jitter(aes(shape=Species, colour=Species), size=3)
+```
+
+In the first part of this lesson, we created scatter plots of two continuous variables. We can also add multiple layers to scatter plots. Here, let's plot sepal length by width, coloring by Species. Let's add another layer with a smoothed conditional mean to summarize the relationship:
+
+```{r irisloess}
 ggplot(iris, aes(Sepal.Width, Sepal.Length, color=Species)) + geom_point() + geom_smooth()
-ggplot(iris, aes(Sepal.Width, Sepal.Length, color=Species)) + geom_point() + facet_wrap(~Species)
-ggplot(iris, aes(Sepal.Width, Sepal.Length, color=Species)) + geom_point() + facet_wrap(~Species) + geom_smooth()
-ggplot(iris, aes(Sepal.Width, Sepal.Length, color=Species)) + geom_point() + facet_wrap(~Species) + geom_smooth("lm")
-# Figure out where to put this one:
-ggplot(iris, aes(Sepal.Width, Sepal.Length, color=Species)) + geom_point()
+```
 
-# Adding statistics
+We're told that since we didn't specify which method to use with `geom_smooth`, because we had less than 1000 samples, **ggplot2** defaulted to [loess](http://en.wikipedia.org/wiki/Local_regression) (LOcally wEighted Scatterplot Smoothing). We could specify "loess" manually or choose another method. Let's use a linear model instead:
+
+```{r irislm}
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color=Species)) + geom_point() + geom_smooth(method="lm")
+```
+
+Even with a small amount of data this plot becomes crowded. Let's make the same plot but this time facet by Species as well.
+
+```{r irisfacet}
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color=Species)) + geom_point() + facet_wrap(~Species) + geom_smooth(method="lm")
+```
+
+Finally, let's demonstrate an advanced use case where instead of plotting data directly, we plot our own summary statistics derived from the data. First, we'll need to load the **plyr** package to get access to the `baseball` dataset. Take a look with `str` and `head`, and see what the columns mean with `?baseball`.
+
+```{r}
 library(plyr)
 str(baseball)
-# first a dot plot
+head(baseball)
+```
+
+This data frame has batting statistics from a subset of players from 1871 through 2007. Let's take a look at the number of home runs that were hit over the years.
+
+```{r hrpoints}
 ggplot(baseball, aes(year, hr)) + geom_point()
-# multiple values, use a statistic
+```
+
+This plot isn't so useful because there are multiple records for each year corresponding to the number of players recorded for that year. If we were interested in the trend of the number of home runs hit averaging across all players, we would normally have to do some analysis on the data and plot the results of that analysis. However, **ggplot2** allows us to plot a statistic derived from the data directly. Here let's plot a line plot where the value plotted will be the mean number of home runs where the value plotted will be the mean of y for each value of x.
+
+```{r baseballmean}
 ggplot(baseball, aes(year, hr)) + stat_summary(fun.y=mean, geom="line")
-# plot multiple stats http://sharpstatistics.co.uk/r/ggplot2-guide/
+```
+
+We can get even fancier with `stat_summary` by adding even more summary statistics. In this example, we'll plot the same line as above using the mean of y for each value of x. We'll add another layer with `stat_summary`, this time passing in a function that produces a data frame with a minimum and maximum value to plot. These max and min values will be the mean number of home runs that year plus/minus the standard deviation. We'll make this geom a ribbon, color it blue, and reduce the transparency. From this we can see that the average number of home runs has increased, but the standard deviation is probably still too high in this subset of data to draw any inferences about that trend.
+
+```{r baseballmeansd}
 mystats <- function(x) {
-  result = c(mean(x) - sd(x), mean(x) + sd(x))
-  names(result) = c("ymin", "ymax")
-  result
+  data.frame(ymin=mean(x)-sd(x), ymax=mean(x)+sd(x))
 }
 ggplot(baseball, aes(year, hr)) + stat_summary(fun.y=mean, geom="line") + stat_summary(fun.data="mystats", geom="ribbon", alpha=.2, fill="steelblue")
 ```
-
-Let's facet the plot by levels of **clarity**, and add multiple layers to the plot. Here, let's add another layer displaying a smoothed conditional mean using the `geom_smooth()` function.
-
-```{r smoothgam}
-ggplot(diamonds, aes(carat, price)) + facet_wrap(~clarity) + geom_point() + geom_smooth()
-```
-
-We'll get a message telling us that because we have >1,000 observations we will default to using a generalized additive model. We could easily plot a straight line by specifying that we want a linear model (`method="lm"`) instead of a generalized additive model, the default for large datasets.
-
-
 
 #### Non-traditional graphics
 
 By combining multiple layers with aesthetic mappings to different scales, **ggplot2** provides a foundation for producing a wide range of statistical graphics beyond simple "named" plots like scatter plots, histograms, bar plots, etc.
 
-How about a stacked histogram, mapping the fill color of the stacked histogram to levels of the *clarity* variable:
+First, we could create a simple histogram of the price of diamonds in the `diamonds` data.frame:
+
+```{r pricehisto}
+ggplot(diamonds, aes(price)) + geom_histogram(binwidth=200)
+```
+
+But what about a stacked histogram, mapping the fill color of the stacked histogram to levels of the *clarity* variable?
 
 ```{r ggfillhisto}
 ggplot(diamonds, aes(price, fill=clarity)) + geom_histogram(position="fill", binwidth=200)
@@ -272,13 +305,7 @@ Finally, we can save the plot created using the `ggsave` function:
 ggsave(filename="~/Desktop/table-depth-density.png", plot=g)
 ```
 
-There are endless ways to combine aesthetic mappings with different geoms and multiple layers. Read about other **geom**s, mappings, scales, and other layer options at the links at the bottom of the lesson. Just remember - just because you *can* produce a figure doesn't necessarily mean you *should*. The stacked histogram above was just a demonstration of how you might map a categorical variable to colors in a histogram, but this probably isn't the best way to display this data. Always think about what you're trying to show and the best way to display the data to support your claims before toying around with non-traditional mappings, scales, faceting, and aesthetics.
-
-#### More examples
-
-```{r}
-ggplot(diamonds, aes(carat, price, colour=cut)) + geom_point() + facet_wrap(~cut)
-```
+**Important:** There are endless ways to combine aesthetic mappings with different geoms and multiple layers. Read about other **geom**s, mappings, scales, and other layer options at the links at the bottom of the lesson. Just remember - just because you *can* produce a figure doesn't necessarily mean you *should*. The stacked histogram above was just a demonstration of how you might map a categorical variable to colors in a histogram, but this probably isn't the best way to display this data. Always think about what you're trying to show and the best way to display the data to support your claims before toying around with non-traditional mappings, scales, faceting, and aesthetics.
 
 ## Further **ggplot2** resources
 
