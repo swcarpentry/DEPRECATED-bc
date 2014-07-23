@@ -217,6 +217,7 @@ names(resdata)[1] <- "GeneID"
 head(resdata)
 
 sig <- subset(resdata, padj<0.05)
+dir.create("results")
 write.table(sig, file="results/sig.txt", sep="\t") #tab delim data
 ```
 
