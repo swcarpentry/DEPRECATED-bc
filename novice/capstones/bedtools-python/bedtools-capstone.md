@@ -12,14 +12,25 @@ explore, process and manipulate genomic interval files (e.g., BED, VCF, BAM) wit
 
 This tutorial is meant as an introduction to whet your appetite. There are many, many more tools and options than presented here. We therefore encourage you to read the bedtools [documentation](http://bedtools.readthedocs.org/en/latest/).
 
+During this lesson, you'll be working on some scripts and data which are in their own github repository. In our git lesson, we covered the situation where you have been given write access to a repository. Now we're going to cover what to do if you don't have write access to a repository - this is called forking.
+
+Forking the github repository
+=============================
+
+The data and code that you need to work on are located at [](git@github.com:rbeagrie/bedtools-example.git). You are going to want to make changes to the code, but this repository is owned by someone else. Instead of creating a new project, you want to [fork](../../gloss.html#fork) it; i.e., clone it on GitHub. You can do this using the GitHub web interface:
+
+<img src="img/git-fork-ui.png" alt="The Fork Button" />
+
+If you visit the [bedtools-example repository](git@github.com:rbeagrie/bedtools-example.git) and click the "fork" button, you will have your own copy of the repository under your own github account - so there should now be a page that looks like https://github.com/YOUR_USERNAME/bedtools-example.
+
 Setup
 =====
 
-From the Terminal, create a new directory on your Desktop called "bedtools-demo".
+From the Terminal, clone your fork of the repository into a new folder on your Desktop called "bedtools-example".
 
 ~~~
 $ cd ~/Desktop
-$ mkdir bedtools-demo
+$ git clone git@github.com:YOUR_USERNAME_GOES_HERE/bedtools-example.git
 ~~~
 {:class="in"}
 
@@ -27,17 +38,7 @@ $ mkdir bedtools-demo
 Navigate into that directory.
 
 ~~~
-$ cd bedtools-demo
-~~~
-{:class="in"}
-
-Download the sample BED files.
-
-~~~
-$ curl -O http://quinlanlab.cs.virginia.edu/cshl2013/cpg.bed
-$ curl -O http://quinlanlab.cs.virginia.edu/cshl2013/exons.bed
-$ curl -O http://quinlanlab.cs.virginia.edu/cshl2013/gwas.bed
-$ curl -O http://quinlanlab.cs.virginia.edu/cshl2013/genome.txt
+$ cd bedtools-example
 ~~~
 {:class="in"}
 
@@ -45,6 +46,19 @@ Let's take a look at what files we now have.
 
 ~~~
 $ ls -1
+~~~
+{:class="in"}
+
+~~~
+data
+scripts
+~~~
+{:class="out"}
+
+So we have two directories, one containing data and the other containing some scripts. We're going to start with the data folder, so lets look at what's in there.
+
+~~~
+$ ls -1 data
 ~~~
 {:class="in"}
 
@@ -58,15 +72,22 @@ gwas.bed
 
 
 What are these files?
-=========================
-Your directory should now contain 3 BED files and 1 genome file. 
+---------------------
 
-`cpg.bed` represents CpG islands in the human genome; `exons.bed` represents RefSeq exons from human genes; and `gwas.bed` represents human disease-associated SNPs that were identified in genome-wide association studies (GWAS).
+The data directory should contain 3 BED files and 1 genome file. 
 
-These 3 files were extracted from the UCSC Genome Browser's [Table Browser](http://genome.ucsc.edu/cgi-bin/hgTables?command=start).
+`data/cpg.bed` represents CpG islands in the human genome; `data/exons.bed` represents RefSeq exons from human genes; and `data/gwas.bed` represents human disease-associated SNPs that were identified in genome-wide association studies (GWAS). `data/genome.txt` file contains the lengths of all the human chromosomes.
+
+These 4 files were extracted from the UCSC Genome Browser's [Table Browser](http://genome.ucsc.edu/cgi-bin/hgTables?command=start).
+
+Introducing BedTools
+====================
+
+We're going to be exploring these files using a suite of tools called BedTools. As the name suggests, these tools all work on a particular type of file called a bed file. Bed files are commonly used to represent features in genomes, for example promotors, genes, centromeres etc. - essentially anything that can be identified with a particular genomic location. All bed files contain three columns which list the chromosome, the starting coordinate and the end co-ordinate
 
 The bedtools help
 ==================
+
 To bring up the help, just type
 
 ~~~
