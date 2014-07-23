@@ -138,7 +138,10 @@ nrow(countData2)
 ```
 
 ```{r log2FC}
+# explain: what is fold change? why do we use log2 to quantify the fold change?
 countData2$log2FC <- log2(countData2$uvbMean / countData2$ctlMean)
+# again, reinforce that summing a logical vector gives you the number of 
+# occurences of TRUE.
 sum(countData2$log2FC > 2)
 sum(countData2$log2FC < -2)
 ```
