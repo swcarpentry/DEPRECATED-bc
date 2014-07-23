@@ -1,4 +1,8 @@
-# More Patterns
+---
+layout: lesson
+root: ../..
+title: More Patterns
+---
 
 Now that we know how regular expressions work, let's have a look at
 Notebook \#3:

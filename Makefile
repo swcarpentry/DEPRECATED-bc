@@ -52,6 +52,7 @@ MOST_SRC = \
 	 team.md \
 	 novice/shell/index.md $(sort $(wildcard novice/shell/??-*.md)) \
 	 novice/git/index.md $(sort $(wildcard novice/git/??-*.md)) \
+	 novice/hg/index.md $(sort $(wildcard novice/hg/??-*.md)) \
 	 novice/python/index.md $(sort $(wildcard novice/python/??-*.md)) \
 	 novice/sql/index.md $(sort $(wildcard novice/sql/??-*.md)) \
 	 novice/extras/index.md $(sort $(wildcard novice/extras/??-*.md)) \
@@ -67,12 +68,14 @@ ALL_SRC = \
 	contents.md \
 	$(wildcard intermediate/python/*.md) \
 	$(wildcard intermediate/doit/*.md) \
+	$(wildcard slides/*.html) \
 	$(MOST_SRC)
 
 # Other files that the site depends on.
 EXTRAS = \
        $(wildcard css/*.css) \
-       $(wildcard css/*/*.css)
+       $(wildcard css/*/*.css) \
+       $(wildcard _layouts/*.html)
 
 # Principal target files
 INDEX = $(SITE)/index.html

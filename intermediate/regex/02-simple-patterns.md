@@ -1,32 +1,39 @@
-# Simple Patterns
-
+---
+layout: lesson
+root: ../..
+title: Simple Patterns
+---
 
 Let's start by reading data from two files, discarding the headers, and
 keeping the first few lines of each:
 
-    readings = []
-    for filename in ('data-1.txt', 'data-2.txt'):
-      lines = open(filename, 'r').read().strip().split('\n')
-      readings += lines[2:8]
+~~~
+readings = []
+for filename in ('data-1.txt', 'data-2.txt'):
+    lines = open(filename, 'r').read().strip().split('\n')
+    readings += lines[2:8]
 
     for r in readings:
-      print r
+        print r
+~~~
 
 This puts six lines from the first data file and six from the second
 into the list `readings`:
 
-    Baker 1 2009-11-17      1223.0
-    Baker 1 2010-06-24      1122.7
-    Baker 2 2009-07-24      2819.0
-    Baker 2 2010-08-25      2971.6
-    Baker 1 2011-01-05      1410.0
-    Baker 2 2010-09-04      4671.6
-    Davison/May 23, 2010/1724.7
-    Pertwee/May 24, 2010/2103.8
-    Davison/June 19, 2010/1731.9
-    Davison/July 6, 2010/2010.7
-    Pertwee/Aug 4, 2010/1731.3
-    Pertwee/Sept 3, 2010/4981.0
+~~~
+Baker 1 2009-11-17      1223.0
+Baker 1 2010-06-24      1122.7
+Baker 2 2009-07-24      2819.0
+Baker 2 2010-08-25      2971.6
+Baker 1 2011-01-05      1410.0
+Baker 2 2010-09-04      4671.6
+Davison/May 23, 2010/1724.7
+Pertwee/May 24, 2010/2103.8
+Davison/June 19, 2010/1731.9
+Davison/July 6, 2010/2010.7
+Pertwee/Aug 4, 2010/1731.3
+Pertwee/Sept 3, 2010/4981.0
+~~~
 
 We will test our regular expressions against this data to see how well
 we are matching different record formats as we go along.
@@ -34,10 +41,14 @@ we are matching different record formats as we go along.
 Without regular expressions, we can select records that have the month
 "06" using `if '06' in record`:
 
-    for r in readings:
-      if '06' in r:
-        print r
-    Baker 1 2010-06-24      1122.7
+~~~
+for r in readings:
+    if '06' in r:
+         print r
+~~~{:class="in"}
+~~~
+Baker 1 2010-06-24      1122.7
+~~~{:class="out"}
 
 If we want to select data for two months we have to use
 `if ('06' in record) or ('07' in record)`.
