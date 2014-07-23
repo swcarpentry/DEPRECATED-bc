@@ -1,249 +1,103 @@
 ---
 layout: slides
-title: Software Carpentry in Two Minutes
+title: Why should I use Python?
 root: ..
 ---
 <section>
-  <h1>{{page.title}}</h1>
-  <img src="{{page.root}}/img/software-carpentry-banner.png" alt="Software Carpentry logo" />
+<h1>{{page.title}}</h1>
+<aside class="notes">
+  Hello, and welcome to the Python section of the Software Carpentry bootcamp.
+</aside>
+</section>
+
+<section>
+  <h2>Python is...</h2>
+  <p class="fragment">
+    a popular and easy to learn scripting language
+  </p>
+  <p class="fragment">
+    a tool to generate figures
+  </p>
+  <p class="fragment">
+    a readable, whitespace delimited, programming language
+  </p>
+  <p class="fragment">
+    <strong>Free!</strong>
+  </p>
   <aside class="notes">
-    Hello, and welcome to Software Carpentry.
+    So for those of you who have never encountered Python before, what is it? Python is a programming language which is used to:
+     - develop analysis pipelines
+     - process and analyse data
+     - visualise data, and generate publication quality graphics
+     - develop new statistical methods
+    It is also a free open-source project, making it completely free to download and extend.
   </aside>
 </section>
 
 <section>
-  <p>
-    We make scientists and engineering more productive
-    by teaching them basic computing skills.
+  <h2>Tasks that Python could help you do:</h2>
+  <p class="fragment">
+    Transform your data files from one arbitraty format to another.
+  </p>
+  <p class="fragment">
+    Analyze image files.
+  </p>
+  <p class="fragment">
+    Loop through all the files in a driectory, perform an analysis on them, and plot the results.
+  </p>
+  <p class="fragment">
+    <strong>Almost anything!</strong>
   </p>
   <aside class="notes">
-    Our goal is to make scientists and engineers more productive by teaching them fundamental computational skills.
   </aside>
 </section>
 
 <section>
-  <h1>Problem</h1>
-  <p>
-    Surveyed 1972 scientists in 2008.
+  <h2>Why Python and not &lt;Perl&gt; (or something else)?</h2>
+  <p class="fragment">
+    It is easy to learn, and easy to use!
   </p>
   <p class="fragment">
-    "How do you use computers?"
+    Popularity matters! If it is what your collaborators are using it, may be a good idea for you to learn it too.
   </p>
   <p class="fragment">
-    "How did you learn what you know?"
-  </p>
+    People are actively developing packages and tools.
   <aside class="notes">
-    Let's start with a few facts.
-    In 2008, almost 2000 scientists responded to an online survey that we organized.
-    We asked them, "How do you use computers?"
-    And, "How did you learn what you know?"
+    Python has been widely adopted and is continuing to gain in popularity.
   </aside>
 </section>
 
 <section>
-  <h1>Problem</h1>
-  <p>
-    Scientists spend 40% of their time building or using software.
-  </p>
-  <p class="fragment">
-    55% say this figure is rising.
-  </p>
-  <p class="fragment">
-    <em>96% are mostly self-taught.</em>
+  <h1>Packages</h1>
+  <p>Contain extensions to the language for specific tasks</p>
+  <ul class="fragment">
+    <li>46537 in the Python Package Index</li>
+    <li>Includes packages for analyzing biological sequence data, numerical analyses, plotting and much more </li>
+  </ul>
   </p>
   <aside class="notes">
-    They told us that on average they spend about 40% of their time building or using software.
-    53% told us that this number is going up.
-    And an astonishing 96% told us that they are mostly self-taught.
   </aside>
 </section>
 
 <section>
-  <h1>Problem</h1>
-  <p>
-    No hard data on how <em>well</em> they do things.
-  </p>
-  <p class="fragment">
-    But anecdotal evidence suggests "not very".
-  </p>
-  <aside class="notes">
-    We weren't able to get any data on how productive or effective they are.
-    But the evidence we do have suggests that everything seems to take longer and hurt more than it should.
-  </aside>
-</section>
-
-<section>
-  <h1>Solution</h1>
-  <p>
-    Intensive hands-on training.
-  </p>
-  <div class="fragment">
-    <img src="{{page.root}}/img/mozilla-science-lab.png" alt="Mozilla Science Lab logo" />
-  </div>
-  <aside class="notes">
-    Software Carpentry is the solution.
-    We run intensive two-day classes that give scientists and engineers those fundamental skills
-    as part of the <a href="http://mozillascience.org/">Mozilla Science Lab</a>.
-  </aside>
-</section>
-
-<section>
-  <h1>Solution</h1>
-  <p>
-    Two full days of instruction.
-  </p>
-  <div class="container">
-    <div class="fragment span5">
-      the Unix shell
-      <br/>
-      Git and GitHub
-      <br/>
-      Python or R
-      <br/>
-      SQL
-    </div>
-    <div class="fragment">
-      <div class="span1">
-	&rArr;
-	<br/>
-	&rArr;
-	<br/>
-	&rArr;
-	<br/>
-	&rArr;
-      </div>
-      <div class="span6">
-	automate repetitive tasks
-	<br/>
-	track and share work
-	<br/>
-	build modular code
-	<br/>
-	manage data
-      </div>
-    </div>
-  </div>
-  <aside class="notes">
-    Two full days covers the basics of the Unix shell, version control with Git, programming in Python or R, and using SQL.
-    What we're really showing them though, is how to automate repetitive tasks,
-    how to track and share their work,
-    how to grow a program in a modular, testable, reusable way,
-    and the difference between structured and unstructured data.
-  </aside>
-</section>
-
-<section>
-  <h1>Outcomes</h1>
-  <p>
-    20% improvement in productivity is common.
-  </p>
-  <p class="fragment">
-    10X isn't rare.
+  <h1>IPython</h1>
+  <p> An interactive shell for using python</p>
+  <ul class="fragment">
+    <li>Browser based notebooks to organize and display code </li>
+    <li>Simplifies data visualization</li>
+  </ul>
+    <img src="ipython-notbook.png">
   </p>
   <aside class="notes">
-    We can often save people 20% of their time - a day a week -
-    and it's not unusual for attendees to report a tenfold savings.
-  </aside>
-</section>
-
-<section>
-  <h1>Outcomes</h1>
-  <p>
-    Empowers people.
-  </p>
-  <p class="fragment">
-    HPC, the cloud, web services, big data, ...
-  </p>
-  <p class="fragment">
-    Reproducible research, open science, ...
-  </p>
-  <aside class="notes">
-    We also give people the technical skills they need to make use of
-    high-performance computing, the cloud, and other new possibilities,
-    and to play an active role in changing the way science itself is done.
-  </aside>
-</section>
-
-<section>
-  <h1>The Details</h1>
-  <p>
-    Materials are all open access.
-  </p>
-  <p class="fragment">
-    Instructors are volunteers.
-  </p>
-  <p class="fragment">
-    Only cost is travel and accommodation
-  </p>
-  <p class="fragment">
-    (but contributions to central costs are welcome).
-  </p>
-  <aside class="notes">
-    Our notes and examples are all freely reusable under open licenses,
-    and our instructors are all volunteers,
-    so the only cost to host sites is travel and accommodation
-    (though we are grateful for contributions to central costs).
-  </aside>
-</section>
-
-<section>
-  <h1>Scope</h1>
-  <div class="container">
-    <div class="span6" align="center">
-      <img src="{{page.root}}/img/slides/workshops.png" alt="Workshops" />
-      <br/>
-      Workshops
-    </div>
-    <div class="span6" align="center">
-      <img src="{{page.root}}/img/slides/enrolment.png" alt="Enrolment" />
-      <br/>
-      Enrolment
-    </div>
-  </div>
-  <p class="fragment">
-    Increase both numbers 50% in 2014.
-  </p>
-  <aside class="notes">
-    We ran almost 100 two-day workshops for over 3500 people in 2013 alone,
-    and hope to increase both numbers by half in 2014.
-  </aside>
-</section>
-
-<section>
-  <h1>How To Help</h1>
-  <p>
-    Come and learn.
-  </p>
-  <p class="fragment">
-    Join the discussion.
-  </p>
-  <p class="fragment">
-    Host a workshop.
-  </p>
-  <p class="fragment">
-    Become an instructor.
-  </p>
-  <p class="fragment">
-    Create new teaching materials.
-  </p>
-  <aside class="notes">
-    There are many ways you can help:
-    take part in a workshop,
-    join our discussions,
-    host a workshop,
-    become an instructor,
-    or help us create new teaching materials.
   </aside>
 </section>
 
 <section>
   <h1>Learn More</h1>
-  <p>
-    <a href="http://software-carpentry.org">http://software-carpentry.org</a>
-  </p>
-  <p class="fragment">
-    <a href="mailto:admin@software-carpentry.org">admin@software-carpentry.org</a>
-  </p>
+  <a href="https://www.python.org/" alt="python.org">https://www.python.org//</a>
+  <br />
+  <a href="http://ipython.org/" alt="Link to IPython" class="fragment">http://ipython.org/</a>
   <aside class="notes">
   </aside>
 </section>
+
