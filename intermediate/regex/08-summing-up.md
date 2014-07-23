@@ -1,4 +1,9 @@
-# Summing Up
+---
+layout: lesson
+root: ../..
+title: Summing Up
+---
+
 Every regular expressions is actually a little program: a piece of data
 that tells a computer how to behave. The steps the computer goes through
 when executing a Python or Fortran program are more complicated than the

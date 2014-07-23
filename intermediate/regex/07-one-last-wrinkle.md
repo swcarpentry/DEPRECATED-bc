@@ -1,5 +1,8 @@
-# One last Wrinkle
-
+---
+layout: lesson
+root: ../..
+title: One last Wrinkle
+---
 
 Let's have one last look at the function we wrote to extract data from
 lab notebooks:
@@ -96,10 +99,7 @@ braces following the word 'cite':
 
     m = re.search('cite{(.+)}', 'a \\cite{X} b')
     print m.groups()
-
-~~~~ {.out}
-('X',)
-~~~~
+    ('X',)
 
 It seems to work in one simple case, but what if there are multiple
 citations on a single line?

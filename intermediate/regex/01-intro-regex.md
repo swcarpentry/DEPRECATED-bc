@@ -1,4 +1,8 @@
-# Introduction to Regular Expressions
+---
+layout: lesson
+root: ../..
+title: Introduction to Regular Expressions
+---
 
 A couple of years after the Death Star exploded, a hot-shot reporter at
 the Daily Planet heard that children in the Shire were starting to act

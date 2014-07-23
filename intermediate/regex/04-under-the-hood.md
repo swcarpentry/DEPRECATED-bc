@@ -1,4 +1,8 @@
-# Under the Hood
+---
+layout: lesson
+root: ../..
+title: Under the Hood
+---
 
 The regular expression `'([A-Z][a-z]+) ([0-9]{1,2}),? ([0-9]{4})'`
 matches a single upper-case character and one or more lower-case
