@@ -145,16 +145,16 @@ $ hg heads
 ~~~
 {:class="in"}
 ~~~
-changeset:   6:9f82bc5a1e80
+changeset:   6:721158ca243d
 user:        Vlad Dracula <vlad@tran.sylvan.ia>
-date:        Tues Apr 15 12:40:33 2014 -0400
+date:        Sun May 18 12:40:33 2014 -0400
 summary:     Adding a line in our home copy
 
-changeset:   5:7e1a537895e5
+changeset:   5:9f82bc5a1e80
 tag:         tip
 parent:      4:2e9c23a9090d
 user:        Vlad Dracula <vlad@tran.sylvan.ia>
-date:        Tues Apr 15 12:41:10 2014 -0400
+date:        Sun May 18 12:41:10 2014 -0400
 summary:     Adding a line in the temporary copy
 ~~~
 {:class="out"}
@@ -195,7 +195,7 @@ o  changeset:   3:4f37bac61e73
 
 With the graph, we can see more details at a glance. The `@` marker
 shows the commit we're currently standing on, `5:9f82bc5a1e80`. We
-have just pulled changeset `6:7e1a537895e5`, which added a head to our
+have just pulled changeset `6:721158ca243d`, which added a head to our
 clone, because it was also based off `4:2e9c23a9090d`. Herein lies the
 potential conflict, since two different changesets branched off from
 the same starting commit.
@@ -204,7 +204,7 @@ It is important to note something about revision numbers here (the `5`
 and the `6` before the `:`). The same commits may have different
 revision numbers in different clones. These revision numbers are
 assigned in the order that a clone acquires new commits. On the other
-hand, the identifiers (`9f82bc5a1e80` and `7e1a537895e5` in this case)
+hand, the identifiers (`9f82bc5a1e80` and `721158ca243d` in this case)
 uniquely identify the changeset no matter in which clone it is. When
 we communicate with other people, it is important to use identifiers.
 When we work alone, however, we may use revision numbers as a
