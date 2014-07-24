@@ -210,10 +210,13 @@ we communicate with other people, it is important to use identifiers.
 When we work alone, however, we may use revision numbers as a
 convenience that is local to a clone.
 
-Let us now proceed to resolve this situation by merging the two heads:
+Let us now proceed to resolve this situation by merging the two heads.
+To do that we'll use the [`kdiff3`](http://kdiff3.sourceforge.net/)
+merge tool which gives us an interface that makes it easier to
+understand what it happening.
 
 ~~~
-$ hg merge
+$ hg merge --tool=kdiff3
 ~~~
 {:class="in"}
 ~~~
@@ -221,24 +224,22 @@ merging mars.txt
 ~~~
 {:class="out"}
 
-Mercurial will now open a merge tool. On Windows this defaults to
-kdiff3 and will look like this:
+It may take a few seconds for Mercurial to pass the necessary information
+to `kdiff3`, but soon you should see a window that looks like this:
 
 <img src="img/hg-kdiff3-conflict-windows.png" alt="Kdiff3 on Windows" />
-
-On Mac OS X...
 
 The pane labelled `base` refers to how this file looked like at
 revision `4`, where our conflicting revisions `5` and `6` are based
 on. Since we were standing on `5` when we started the merge, that is
 the pane labelled `local`. We're attempting to merge this with
-revision `6`, which is labelled `other`. The merge tool, kdiff3 (...
-or on Mac OS X ...) has buttons for moving from one conflict to
+revision `6`, which is labelled `other`. kdiff3
+has buttons for moving from one conflict to
 another. In this case, there is only one conflict. At each conflict we
 can select either the `local` or the `other` change or to write
 something completely different in the result at the bottom.
 
-It is now up to us to edit this file to remove these markers and
+It is now up to us to edit this file to
 reconcile the changes. We can do anything we want: keep the change in
 this branch, keep the change made in the other, write something new to
 replace both, or get rid of the change entirely. Let's resolve the
@@ -246,10 +247,8 @@ conflict so it looks like this:
 
 <img src="img/hg-kdiff3-conflict-windows-resolved.png" alt="Resolving on Windows" />
 
-Or this, on Mac OS X...
-
 Once we've finished merging, let us inspect the working directory
-before we finalise the merge:
+before we finalize the merge:
 
 ~~~
 $ hg summary
