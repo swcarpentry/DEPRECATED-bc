@@ -5,6 +5,7 @@ root: ../..
 
 ```{r, include = FALSE}
 source("chunk_options.R")
+opts_chunk$set(fig.path = "figure/01-starting-with-data-")
 ```
 
 # Analyzing Patient Data
