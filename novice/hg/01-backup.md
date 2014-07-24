@@ -47,6 +47,9 @@ editor = nano
 
 [extensions]
 color =
+
+[color]
+mode = win32
 ~~~
 
 Wolfman has both a Mac laptop and a Linux one and he uses his editor
