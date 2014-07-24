@@ -1,7 +1,7 @@
 # Makefile
 # Creates all files necessary for Intermediate Make lesson
 
-help : 
+help :
 	@echo 'Did you mean to run make with no arguments?'
 	@echo 'To create all the necessary files for this lesson, run'
 	@echo ' make lesson'

@@ -4,6 +4,7 @@ root: ../..
 title: Introduction
 level: intermediate
 ---
+ 
 Here's a typical working day for our robot.
 The first thing it wants to do when it sits down in the morning is re-draw Figure 8 for the paper it's writing.
 In order to do that, it needs to re-calculate the data (since it has some new numbers from a colleague back home).
@@ -63,3 +64,7 @@ A companion lecture to this one explores a newer build manager called SCons.
 It is more powerful and more flexible than Make, but isn't nearly as widely used (yet).
 Java users should also look at Apache Ant, the standard build manager for Java.
 It hides many of the platform-specific details that bedevil Make, but requires users to write XML files to get things done.
+
+## Before getting started
+
+Run `make lesson` in the directory where this introduction lives
