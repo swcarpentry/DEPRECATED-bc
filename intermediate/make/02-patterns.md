@@ -9,10 +9,14 @@ Let's go back to our paper and look at another part of our dependency graph.
 The number of files isn't fixed: there could be one, a dozen, or a thousand.
 Writing a rule for exactly three files is easy&mdash;we just have one target and multiple prerequisites on a single line:
 
-    # multiple.mk
+~~~
+# multiple.mk
+~~~{:class="in"}
 
-    summary-1.dat : data-1-1.dat data-1-2.dat data-1-3.dat
-        python stats.py summary-1.dat data-1-1.dat data-1-2.dat data-1-3.dat
+~~~
+summary-1.dat : data-1-1.dat data-1-2.dat data-1-3.dat
+    python stats.py summary-1.dat data-1-1.dat data-1-2.dat data-1-3.dat
+~~~{:class="in"}
 
 But how do we generalize that to any number of files?
 And how can we get rid of the repeated filenames?
@@ -30,10 +34,14 @@ it's easy to write a Make rule to update `summary-1.dat` whenever any of these o
 
 We'd like to do better, though, so let's replace the action in the rule:
 
-    # target-variable.mk
+~~~
+# target-variable.mk
+~~~{:class="in"}
 
-    summary-1.dat : data-1-1.dat data-1-2.dat data-1-3.dat
-        python stats.py $@ $^ #data-1-1.dat data-1-2.dat data-1-3.dat
+~~~
+summary-1.dat : data-1-1.dat data-1-2.dat data-1-3.dat
+    python stats.py $@ $^ #data-1-1.dat data-1-2.dat data-1-3.dat
+~~~{:class="in"}
 
 Instead of naming `summary-1.dat` in the rule's action, we use the rather cryptic shorthand `$@`.
 This is one of Make's [automatic variables](../../gloss.html#automatic-variable),
@@ -45,10 +53,14 @@ Using `$@` instead of repeating the target's name shortens our rule somewhat,
 but writing the many prerequisite filenames twice is still redundant.
 Let's fix that by replacing our shortened rule command like this:
 
-    # variables.mk
+~~~
+# variables.mk
+~~~{:class="in"}
 
-    summary-1.dat : data-1-1.dat data-1-2.dat data-1-3.dat
-        python stats.py $@ $^
+~~~
+summary-1.dat : data-1-1.dat data-1-2.dat data-1-3.dat
+    python stats.py $@ $^
+~~~{:class="in"}
 
 
 `$^` is another automatic variable: it means "all the prerequisites of this rule".
@@ -68,10 +80,14 @@ We expect to have more than three data files before this project is done, and as
 we don't want to have to rewrite our Makefile each time we run our experiment.
 What we really want is something like the shell's `*` wildcard, which matches any number of characters:
 
-    # wildcard.mk
+~~~
+# wildcard.mk
+~~~{:class="in"}
 
-    summary-1.dat : data-1-*.dat
-        python stats.py $@ $^
+~~~
+summary-1.dat : data-1-*.dat
+    python stats.py $@ $^
+~~~{:class="in"}
 
 This actually works:
 if use `data-1-*.dat` as the rule's prerequisite, it behaves just like the corresponding shell wildcard.
@@ -81,20 +97,30 @@ so we have to rely on Make to put them in an automatic variable for us on a rule
 
 Here are our dependency tree and our entire Makefile so far:
 
-    paper.pdf : paper.tex figure-1.svg figure-2.svg
-            cat $^ > $@
+~~~
+paper.pdf : paper.tex figure-1.svg figure-2.svg
+        cat $^ > $@
+~~~{:class="in"}
 
-    figure-1.svg : summary-1.dat
-        python create_figure.py $@ $^
+~~~
+figure-1.svg : summary-1.dat
+    python create_figure.py $@ $^
+~~~{:class="in"}
 
-    figure-2.svg : summary-2.dat
-        python create_figure.py $@ $^
+~~~
+figure-2.svg : summary-2.dat
+    python create_figure.py $@ $^
+~~~{:class="in"}
 
-    summary-1.dat : data-1-*.dat
-        python stats.py $@ $^
+~~~
+summary-1.dat : data-1-*.dat
+    python stats.py $@ $^
+~~~{:class="in"}
 
-    summary-2.dat : data-2-*.dat
-        python stats.py $@ $^
+~~~
+summary-2.dat : data-2-*.dat
+    python stats.py $@ $^
+~~~{:class="in"}
 
 There is still some redundancy:
 we have exactly the same logical rules for our two data series,
@@ -106,20 +132,30 @@ Our existing Makefile doesn't capture the fact that `summary-1.dat` and `summary
 depend on `stats.py` as well as on their corresponding raw data files.
 We could try to fix this by adding `stats.py` to their prerequisite lists:
 
-    paper.pdf : paper.wdp figure-1.svg figure-2.svg
-            cat $^ > $@
+~~~
+paper.pdf : paper.wdp figure-1.svg figure-2.svg
+        cat $^ > $@
+~~~{:class="in"}
 
-    figure-1.svg : summary-1.dat
-        python create_figure.py $@ $^
+~~~
+figure-1.svg : summary-1.dat
+    python create_figure.py $@ $^
+~~~{:class="in"}
 
-    figure-2.svg : summary-2.dat
-        python create_figure.py $@ $^
+~~~
+figure-2.svg : summary-2.dat
+    python create_figure.py $@ $^
+~~~{:class="in"}
 
-    summary-1.dat : stats.py data-1-*.dat
-        python stats.py $@ $^
+~~~
+summary-1.dat : stats.py data-1-*.dat
+    python stats.py $@ $^
+~~~{:class="in"}
 
-    summary-2.dat : stats.py data-2-*.dat
-        python stats.py $@ $^
+~~~
+summary-2.dat : stats.py data-2-*.dat
+    python stats.py $@ $^
+~~~{:class="in"}
 
 If we do this, though, `stats.py` will appear in the value of the automatic variable `$^` for those two rules.
 This means that when we run `stats.py`,
@@ -129,23 +165,35 @@ We could "fix" this by having `stats.py` ignore files that end in `.py`, but it 
 
 A second option would be to move the dependency down, and pretend that the raw data files depend on `stats.py`:
 
-    figure-1.svg : summary-1.dat
-        python create_figure.py $@ $^
+~~~
+figure-1.svg : summary-1.dat
+    python create_figure.py $@ $^
+~~~{:class="in"}
 
-    figure-2.svg : summary-2.dat
-        python create_figure.py $@ $^
+~~~
+figure-2.svg : summary-2.dat
+    python create_figure.py $@ $^
+~~~{:class="in"}
 
-    summary-1.dat : data-1-*.dat
-        python stats.py $@ $^
+~~~
+summary-1.dat : data-1-*.dat
+    python stats.py $@ $^
+~~~{:class="in"}
 
-    summary-2.dat : data-2-*.dat
-        python stats.py $@ $^
+~~~
+summary-2.dat : data-2-*.dat
+    python stats.py $@ $^
+~~~{:class="in"}
 
-    data-1-1.dat : stats.py
-            touch $@
+~~~
+data-1-1.dat : stats.py
+        touch $@
+~~~{:class="in"}
 
-    data-1-2.dat : stats.py
-            touch $@
+~~~
+data-1-2.dat : stats.py
+        touch $@
+~~~{:class="in"}
 
 This is called a [false dependency](../../gloss.html#false-dependency).
 The raw data files don't really have to be updated when `stats.py` is changed,
@@ -160,23 +208,35 @@ to add additional rules for `summary-1.dat` and `summary-2.dat`
 that add `stats.py` as a prerequisite,
 but don't have any actions:
 
-    paper.pdf : paper.tex figure-1.svg figure-2.svg
-            cat $^ > $@
+~~~
+paper.pdf : paper.tex figure-1.svg figure-2.svg
+        cat $^ > $@
+~~~{:class="in"}
 
-    figure-1.svg : summary-1.dat
-        python create_figure.py $@ $^
+~~~
+figure-1.svg : summary-1.dat
+    python create_figure.py $@ $^
+~~~{:class="in"}
 
-    figure-2.svg : summary-2.dat
-        python create_figure.py $@ $^
+~~~
+figure-2.svg : summary-2.dat
+    python create_figure.py $@ $^
+~~~{:class="in"}
 
-    summary-1.dat : data-1-*.dat
-        python stats.py $@ $^
+~~~
+summary-1.dat : data-1-*.dat
+    python stats.py $@ $^
+~~~{:class="in"}
 
-    summary-2.dat : data-2-*.dat
-        python stats.py $@ $^
+~~~
+summary-2.dat : data-2-*.dat
+    python stats.py $@ $^
+~~~{:class="in"}
 
-    summary-1.dat : stats.py
-    summary-2.dat : stats.py
+~~~
+summary-1.dat : stats.py
+summary-2.dat : stats.py
+~~~{:class="in"}
 
 When Make sees multiple rules for the same target,
 it uses the union of all those rules' prerequisites as the target's actual set of prerequisites.
