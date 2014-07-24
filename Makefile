@@ -191,4 +191,4 @@ rmarkdown :
 ## ---------------------------------------
 
 
-.PHONY: all book check clean commands contribs epub fixme gloss install ipynb site tidy
+.PHONY: all book check clean commands contribs epub fixme gloss install ipynb site tidy rmarkdown
