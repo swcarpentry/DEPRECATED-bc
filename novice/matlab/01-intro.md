@@ -240,8 +240,7 @@ weight_kg
 {:class="out"}
 
 
-
-### Manipulating Data
+### MATLAB Arrays
 
 Now that our data is in memory, we can start doing things with it.
 First, let's find out its size or [shape](../../gloss.html#shape):
@@ -301,159 +300,200 @@ x = int16(325);
 assigns the value `325` to the name `x`, storing it as a 16-bit signed
 integer.
 
-If we want to get a single value from the matrix, we must provide
-an [index](../../gloss.html#index) in brackets:
+### Accessing Array Elements
+
+Let's create an 8-by-8 "magic" Matrix:
 
 ~~~
-patient_data(1, 1)
-~~~
-{:class="in"}
-
-~~~
-ans = 0
-~~~
-{:class="out"}
-
-This means that the value sitting at the `(1, 1)` position of the table,
-i.e., the first row and first column, is `0`,
-
-~~~
-patient_data(30, 20)
-~~~
-{:class="in"}
-
-~~~
-ans = 16
-~~~
-{:class="out"}
-
-and the value corresponding to the 30th row and 20th column, is `16`.
-
-
-What may surprise you is that when MATLAB displays an array, it shows
-the element with index `(1, 1)` position in the upper left corner rather
-than the lower left. This is consistent with the way mathematicians draw 
-matrices, but different from the Cartesian coordinates.
-The indices are (row, column) instead of (column, row) for the same
-reason.
-
-An index like `(30, 20)` selects a single element of 
-an array, but we can select whole sections as well. For example,
-we can select the first ten days (columns) of values for the first
-four (rows) patients like this:
-
-~~~
-patient_data(1:4, 1:10)
+M = magic(8)
 ~~~
 {:class="in"}
 
 ~~~
 ans =
 
-   0   0   1   3   1   2   4   7   8   3
-   0   1   2   1   2   1   3   2   2   6
-   0   1   1   3   3   2   6   2   5   9
-   0   0   2   0   4   2   2   1   6   7
+   64    2    3   61   60    6    7   57
+    9   55   54   12   13   51   50   16
+   17   47   46   20   21   43   42   24
+   40   26   27   37   36   30   31   33
+   32   34   35   29   28   38   39   25
+   41   23   22   44   45   19   18   48
+   49   15   14   52   53   11   10   56
+    8   58   59    5    4   62   63    1
 ~~~
 {:class="out"}
 
-The [slice](../../gloss.html#slice) `1:4` means, "Start at index
-1 and go up to 4". 
+We want to access a single value from the matrix:
 
-We don't have to start slices at 1:
+<div>
+  <img src="img/matrix-single-element.svg" style="height:350px" alt="Accessing a single value"/>
+</div>
+
+To do that, we must provide
+its [index](../../gloss.html#index) in brackets:
 
 ~~~
-patient_data(6:10, 1:10)
+M(5, 6)
+~~~
+{:class="in"}
+
+~~~
+ans = 38
+~~~
+{:class="out"}
+
+Indices are provided as (row, column). So the index `(5, 6)` selects the element
+on the fifth row and sixth column.
+
+An index like `(5, 6)` selects a single element of 
+an array, but we can also access sections of the matrix, or [slices](../../gloss.html#slice). 
+To access a row of values:
+
+<div>
+  <img src="img/matrix-row.svg" style="height:350px" alt="Accessing a single value"/>
+</div>
+
+we can do:
+
+~~~
+M(5, :)
 ~~~
 {:class="in"}
 
 ~~~
 ans =
 
-   0   0   1   2   2   4   2   1   6   4
-   0   0   2   2   4   2   2   5   5   8
-   0   0   1   2   3   1   2   3   5   3
-   0   0   0   3   1   5   6   5   5   8
-   0   1   1   2   1   3   5   3   5   8
+   32   34   35   29   28   38   39   25
+
 ~~~
 {:class="out"}
 
-and we don't have to take all the values in the slice---if we provide
-a [stride](../../gloss.html#stride),
+Providing `:` as the index for a dimension selects *all* elements 
+along that dimension.
+So, the index `(5, :)` selects
+the elements on row `5`, and *all* columns---effectively, the entire row. 
+We can also 
+select multiple rows,
+
+<div>
+  <img src="img/matrix-multi-rows.svg" style="height:350px" alt="Accessing multiple rows"/>
+</div>
 
 ~~~
-patient_data(1:3:10, 1:2:10)
+M(1:4, :)
 ~~~
 {:class="in"}
 
 ~~~
 ans =
 
-   0   1   1   4   8
-   0   2   4   2   6
-   0   2   4   2   5
-   0   1   1   5   5
+   64    2    3   61   60    6    7   57
+    9   55   54   12   13   51   50   16
+   17   47   46   20   21   43   42   24
+   40   26   27   37   36   30   31   33
 ~~~
 {:class="out"}
 
-The index`(1:3:10, 1:2:10)` means "Rows 1 through 10 in steps of 
-3 and columns 1 through 10 in steps of 2". MATLAB will stop when it 
-reaches or crosses the upper bounds of this index, i.e., it will
-access columns 1, 3, 5, 7, and 9, but not 11.
+and columns:
 
-
-<!-- keyword -->
-
-The `:` by itself can be used to to slice an entire row or column. For
-example, to get the fifth row of `patient_data`, we can do:
+<div>
+  <img src="img/matrix-multi-cols.svg" style="height:350px" alt="Accessing multiple columns"/>
+</div>
 
 ~~~
-patient_data(5, :)
-~~~
-{:class="in"}
-
-
-~~~
- Columns 1 through 30:
-
-    0    1    1    3    3    1    3    5    2    4    4    7    6    5    3   10    8   10    6   17    9   14    9    7   13    9   12    6    7    7
-
- Columns 31 through 40:
-
-    9    6    3    2    2    4    2    0    1    1
-~~~
-{:class="out"}
-
-
-Finally, we can use the `end` keyword to refer to the end of a row
-or column:
-
-~~~
-patient_data(50:end, 7)
+M(:, 6:end)
 ~~~
 {:class="in"}
 
 ~~~
 ans =
 
-   3
-   1
-   3
-   4
-   1
-   1
-   2
-   2
-   4
-   4
-   3
+    6    7   57
+   51   50   16
+   43   42   24
+   30   31   33
+   38   39   25
+   19   18   48
+   11   10   56
+   62   63    1
 ~~~
 {:class="out"}
 
-MATLAB knows how to perform common mathematical operations on arrays.
+To select a submatrix,
+
+<div>
+  <img src="img/matrix-submatrix.svg" style="height:350px" alt="Accessing a submatrix"/>
+</div>
+
+we have to take slices in both dimensions:
+
+~~~
+M(4:6, 5:7)
+~~~
+{:class="in"}
+
+~~~
+ans =
+
+   36   30   31
+   28   38   39
+   45   19   18
+
+~~~
+{:class="out"}
+
+We don't have to take all the values in the slice---if we provide
+a [stride](../../gloss.html#stride). Let's say we want to start with row `2`,
+and subsequently select every third row:
+
+<div>
+  <img src="img/matrix-strided-rows.svg" style="height:350px" alt="Accessing strided columns"/>
+</div>
+
+
+~~~
+M(2:3:end, :)
+~~~
+{:class="in"}
+
+~~~
+ans =
+
+    9   55   54   12   13   51   50   16
+   32   34   35   29   28   38   39   25
+    8   58   59    5    4   62   63    1
+~~~
+{:class="out"}
+
+And we can also select values in a "checkerboard",
+
+<div>
+  <img src="img/matrix-strided-rowncols.svg" style="height:350px" alt="Accessing strided rows and columns"/>
+</div>
+
+by taking appropriate strides in both dimensions:
+
+~~~
+M(1:3:end, 2:2:end)
+~~~
+{:class="in"}
+
+~~~
+ans =
+
+    2   61    6   57
+   26   37   30   33
+   15   52   11   56
+~~~
+{:class="out"}
+
+### Analyzing the Data
+
+Now that we know how to access data we want to compute with, we're
+ready to analyze `patient_data`. MATLAB knows how to perform common mathematical 
+operations on arrays.
 If we want to find the average inflammation for all patients on all days,
 we can just ask for the mean of the array:
-
 
 ~~~
 mean(patient_data(:))
@@ -576,10 +616,6 @@ we get:
 mean(patient_data, 1)
 ~~~
 {:class="in"}
-
-
-
-
 
 ~~~
 ans =
@@ -713,7 +749,7 @@ imagesc(patient_data)
 {:class="in"}
 
 <div class="out">
-<img src="img/01-intro_1.png" style="height:250px">
+<img src="img/01-intro_1.png" style="height:350px">
 </div>
 
 The `imagesc` function represents the matrix as a color image. Every
@@ -730,7 +766,7 @@ plot(ave_inflammation);
 {:class="in"}
 
 <div class="out">
-<img src="img/01-intro_2.png" style="height:250px">
+<img src="img/01-intro_2.png" style="height:350px">
 </div>
 
 Here, we have put the average per day across all patients in the 
@@ -749,7 +785,7 @@ title("Maximum inflammation per day");
 {:class="in"}
 
 <div class="out">
-<img src="img/01-intro_3.png" style="height:300px">
+<img src="img/01-intro_3.png" style="height:350px">
 </div>
 
 ~~~
@@ -759,7 +795,7 @@ title("Minimum inflammation per day");
 {:class="in"}
 
 <div class="out">
-<img src="img/01-intro_4.png" style="height:300px">
+<img src="img/01-intro_4.png" style="height:350px">
 </div>
 
 Like `mean()`, the functions
@@ -791,7 +827,7 @@ ylabel('min')
 {:class="in"}
 
 <div class="out">
-<img src="img/01-intro_5.png" style="width:750px; height:250px">
+<img src="img/01-intro_5.png" style="width:750px; height:350px">
 </div>
 
 
