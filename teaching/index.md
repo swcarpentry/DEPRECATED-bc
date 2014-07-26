@@ -1,0 +1,91 @@
+## Intro
+
+"The safest general characterization of the European philosophical tradition is that it consists of a series of footnotes to Plato."
+- Alfred North Whitehead, *Process and Reality*
+
+Much of what follows is footnotes to Guzdial...
+
+"For every complex problem there is an answer that is clear, simple, and wrong."
+- H. L. Mencken 
+
+## Roadmap
+
+1. Concept Maps
+2. Motivation and Demotivation
+X. Wrap-Up Post
+
+## Books
+
+Susan Ambrose et al: How Learning Works
+http://www.amazon.com/How-Learning-Works-Research-Based-Jossey-Bass/dp/0470484101/
+
+Ken Bain: What the Best College Teachers Do
+http://www.amazon.com/What-Best-College-Teachers-Do/dp/0674013255/
+
+Larry Cuban: Oversold and Underused
+http://www.amazon.com/Oversold-Underused-Computers-Larry-Cuban/dp/0674011090/
+
+## Links
+
+Dunning-Kruger Effect:
+http://en.wikipedia.org/wiki/Dunning%E2%80%93Kruger_effect
+
+Guzdial blog post about teaching computing when people are ready:
+http://computinged.wordpress.com/2012/09/07/teaching-cs-in-schools-with-meaning-contexts-and-problems-come-first/
+
+Michael Pershan: what if Khan Academy was made in Japan?
+https://www.youtube.com/watch?v=CHoXRvGTtAQ#t=284
+
+Dan Meyer on what Silicon Valley gets wrong about math education:
+http://blog.mrmeyer.com/2012/what-silicon-valley-gets-wrong-about-math-education-again-and-again/
+
+Alex Reinhart: Shut up and listen to your students
+http://www.refsmmat.com/articles/shutup.html
+
+Mark Chu-Carroll: Everyone should learn to program and programming is hard
+http://scientopia.org/blogs/goodmath/2012/10/05/everyone-should-program-or-programming-is-hard-both/
+
+Chris Long: Flipped Classrooms: ASQ Before You Teach
+http://learning.instructure.com/2012/10/flipped-asq/
+
+Guzdial on the need for PCK
+http://computinged.wordpress.com/2012/02/24/doubts-of-my-students-expert-teaching-is-no-better-than-good-enough-teaching/
+
+Guzdial on culture and pedagogy
+http://computinged.wordpress.com/2012/12/21/the-bigger-issues-in-learning-to-code-culture-and-pedagogy/
+
+On beyond sticky notes
+http://teaching.software-carpentry.org/2013/01/18/when-the-sticky-goes/
+
+Pickens on writing learning objectives
+http://michigancomputes.wordpress.com/2013/01/16/how-to-write-good-learning-objectives/
+
+What Americans keep ignoring about Finland's School Success
+http://www.theatlantic.com/national/archive/2011/12/what-americans-keep-ignoring-about-finlands-school-success/250564/
+
+The Myth of Learning Styles
+http://www.changemag.org/Archives/Back%20Issues/September-October%202010/the-myth-of-learning-full.html
+
+## My Posts
+
+Organizing Knowledge: http://teaching.software-carpentry.org/2012/09/03/week-1-organizing-knowledge/
+
+Motivation: http://teaching.software-carpentry.org/2012/09/09/week-2-motivation/
+
+Example of a good teaching tip: http://teaching.software-carpentry.org/2012/11/09/an-example-of-a-good-teaching-tip/
+
+Examples of in-class questions from Elizabeth Patitsas
+http://teaching.software-carpentry.org/2013/02/24/some-notes-on-assessment-questions/
+
+From How to What:
+http://teaching.software-carpentry.org/2013/04/18/from-how-to-what/
+
+Welcome, Goals, and Concept Maps
+http://teaching.software-carpentry.org/2013/05/25/round-5-1-welcome-goals-and-concept-maps/
+
+Screencast advice
+http://teaching.software-carpentry.org/2013/09/14/round-6-3-screencasts/
+
+What Sir Ken Got Wrong
+http://teaching.software-carpentry.org/2013/10/27/reading-what-sir-ken-got-wrong/
+
