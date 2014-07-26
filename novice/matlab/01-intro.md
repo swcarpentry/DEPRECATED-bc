@@ -250,7 +250,6 @@ size(patient_data)
 ~~~
 {:class="in"}
 
-
 ~~~
 ans =
     
@@ -487,7 +486,7 @@ ans =
 ~~~
 {:class="out"}
 
-### Analyzing the Data
+### Computing With Arrays
 
 Now that we know how to access data we want to compute with, we're
 ready to analyze `patient_data`. MATLAB knows how to perform common mathematical 
