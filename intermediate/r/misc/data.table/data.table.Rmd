@@ -115,7 +115,7 @@ diamonds_dt <- data.table(diamonds)
 # calculate the sum of the price column (leaving the first argument blank applies the sum() function over all rows)
 diamonds_dt[,sum(price)]
 
-# calculate the sum of the values in the Sepal.Length column, grouped by the categorical values in the color column
+# calculate the sum of the values in the price column, grouped by the categorical values in the color column
 diamonds_dt[,sum(price),by=color]
 
 # More than 3 times faster than tapply(). Because both functions are pretty fast, we replicate sthe function calls 100 times to show the difference.
