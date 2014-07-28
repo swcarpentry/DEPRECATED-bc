@@ -42,79 +42,35 @@ when it comes to assembling and organizing that.
 What Software Carpentry has is in [our teaching guide]({{page.root}}/novice/teaching/index.html);
 additions and corrections would be very welcome.
 
-## What Does It Mean to Understand Computing?
+## Stages of Cognitive Development
 
-Our starting point is the most basic question of all:
-what do we want people to understand when we're finished teaching?
-"How to write a loop" and "how to fetch records from a database"
-are the practical skills we want them to be able to apply,
-but these aren't useful on their own.
-Without some higher-level understanding of computing,
-people will still be stuck in a tweak-and-pray world.
+The next piece of background we need is
+how learners' mastery of a subject changes.
+In the 1980s,
+Patricia Brenner developed
+[a five-stage model of skill acquisition](http://www.amazon.com/From-Novice-Expert-Excellence-Commemorative/dp/0130325228/)
+that has been applied successfully in many fields.
+For our purposes,
+we can simplify that model to three stages:
 
-Most definitions of what it means to understanding computing aren't very useful.
-In particular,
-the term "computational thinking" has been adopted by so many people that it now means little more than,
-"Whatever the speaker thinks is important about computing."
-For a better answer,
-we need to turn to Mark Guzdial,
-who has been studying computing and education for almost two decades.
+- A *novice* is someone who doesn't know what she doesn't know.
+  She doesn't yet have a mental model of the field,
+  so she accomplishes specific tasks by rote,
+  and is unable to compensate for even small differences in tasks.
 
-[His answer](http://computinged.wordpress.com/2012/05/24/defining-what-does-it-mean-to-understand-computing/)
-depends on two definitions.
-First,
-a *mental model* is a person's internal mental representation of something in the real world.
-My mental model of how airplanes fly,
-for example,
-includes things like lift, thrust, banking, and fuel consumption.
-It isn't physically accurate,
-but it's close enough that I can predict what planes can and can't do well enough for my everyday needs.
+- A *competent practitioner* is someone whose mental model is robust enough
+  to allow her to accomplish normal tasks successfully under normal circumstances.
+  Most drivers,
+  for example,
+  are competent:
+  they can handle a car in normal city traffic without worrying about crashing.
 
-Second,
-a *notional machine* is the general properties of the computer that one is learning to control.
-For example,
-a notional machine for basic Python includes the idea of variables as sticky notes attached to values,
-while one for C includes the notion of variables as names for locations in memory.
-Neither is accurate,
-but both are useful.
+- An *expert* is someone who can handle abnormal tasks and abnormal circumstances.
+  As we discuss below,
+  she doesn't just know more than a competent practitioner:
+  her mental model contains many more links between facts.
 
-Given these definitions,
-we can say that,
-"To understand computing is to have a robust mental model of a notional machine."
-In other words,
-someone understands computing when their mental model of what the computer is doing
-allows them to (more or less) predict how computers will behave.
-For example,
-if someone understands why this bit of code:
-
-~~~
-def change():
-  var = 2
-
-var = 1
-change()
-print var
-~~~
-
-prints 1 instead of 2,
-then they understand call stacks in Python well enough to do most things,
-even if they can't explain what a [closure](https://en.wikipedia.org/wiki/Closure_%28computer_programming%29) is
-or define the term "lexical scoping".
-
-Coming at it from another direction,
-if someone has a robust mental model of a notional machine,
-they can debug problems systematically rather than simply making random changes until it appears to work.
-
-## There Are No Blank Slates
-
-If understanding is where we're going, what's our starting point?
-The answer is not "a blank slate" because there is no such thing.
-Everyone has some mental model of the world, even at birth:
-our visual cortex is wired for edge detection,
-and other parts of our brain are wired for face recognition,
-so we cannot help but put things in those mental boxes.
-
-This fact explains the key difference between novice and competent practitioners in any field.
+This model explains the key difference between novice and competent practitioners in any field.
 To paraphrase Tolstoy,
 everyone who understands something understands it the same way,
 but everyone who misunderstands,
@@ -123,10 +79,21 @@ The reason is that by definition,
 novices don't yet have the right conceptual categories for what they're learning,
 so they are putting new knowledge into old boxes,
 and those boxes are the wrong ones for this domain.
-Everyone who has taught novices has seen first-hand that their questions often don't make sense;
-this is the reason.
+Everyone who has taught novices has seen this first-hand:
+their questions often don't make sense because they've put what they know into the wrong boxes.
 
-As an example of this idea's practical implications,
+As mentioned above,
+the key difference between competent practitioners and experts isn't that the latter know more facts:
+it's that there are many more linkages *between* facts in an expert's mind.
+If we imagine the brain storing knowledge as a graph
+(which it emphatically doesn't, but it's a useful metaphor),
+then the expert's graph is much more densely connected than that of someone who's "merely competent".
+As a result,
+the expert is able to jump directly from A to E
+when a competent practitioner would have to reason her way through B, C, and D.
+
+This three-stage model has several implications for teaching.
+As an example of the first,
 our introduction to the Unix shell only introduces 15 commands in two and a half hours.
 Ten minutes per command may seem glacially slow,
 but that's because our real goal is
@@ -138,33 +105,34 @@ That model includes things like:
 - Lots of little tools, freely combined,
   are more productive than a handful of "kitchen sink" programs.
 
-These two example illustrate something else as well.
-Learning consists of more than "just" conveying facts and techniques:
-creating linkages between concepts is as least as important.
+As the points above illustrate,
+learning consists of more than "just" conveying facts and techniques:
+it's just as important to create linkages between concepts.
 Telling people that they shouldn't repeat things,
 and that they should try to think in terms of little pieces loosely joined,
 both set the stage for the introduction of functions in our programming lesson;
 explicitly referring back to the shell lesson at that point helps solidify both.
 
-### If You Use Robots To Teach, You Teach People To Be Robots
+Second,
+this model explains why experts are often poor teachers.
+Their "knowledge graphs" are so densely connected that they can jump directly to a solution:
+it really *is* "obvious" to them.
+They then have to struggle to reverse engineer a step-by-step explanation of their thinking
+for the novices or competent practitioners they're teaching,
+who don't have those links,
+and those post hoc rationalizations are often not how people at earlier stages of development
+would actually think their way through the problem.
 
+This model also explains why "broadcast mode" teaching is so ineffective.
 The transition from novice to competent practitioner
-is no more and no less than the construction of correct (enough) categories,
-i.e.,
-the construction of a new mental model of this new intellectual domain.
-The goal of education for novices is therefore
-to help them form the right categories.
-Until they've done that,
-trying to impart "mere information" just confuses them.
-
-This is one of the reasons most online courses don't work well.
+requires the construction of a working mental model of the problem.
 Replaying recorded content is as ineffective for most learners as watching TV,
 or as a professor standing in front of 400 people in a lecture hall,
 because neither can intervene to clear up specific learners' misconceptions.
-Some people happen to already have the right conceptual categories for a subject,
-or happen to form them correctly early on;
-these are the ones who stick with most massive online courses,
-but many discussions of the effectiveness of such courses ignore this survivor bias.
+People who happen to have good enough conceptual categories for a subject
+or form them early on
+are able to progress through such instruction,
+but most others are not.
 
 ### The Documentation Is Useless
 
