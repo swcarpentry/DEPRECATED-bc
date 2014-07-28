@@ -67,6 +67,7 @@ The Myth of Learning Styles
 http://www.changemag.org/Archives/Back%20Issues/September-October%202010/the-myth-of-learning-full.html
 
 Guzdial on Victor
+http://worrydream.com/LearnableProgramming/
 http://computinged.wordpress.com/2012/09/28/learnable-programming-thinking-about-programming-languages-and-systems-in-a-new-way/
 
 ## My Posts
@@ -115,5 +116,3 @@ Motivation Lecture
 http://teaching.software-carpentry.org/2014/05/22/motivation-and-screencasts-2/
 http://teaching.software-carpentry.org/2014/06/06/motivation-and-live-teaching/
 http://teaching.software-carpentry.org/2014/06/26/from-concept-maps-to-motivation/
-
-
