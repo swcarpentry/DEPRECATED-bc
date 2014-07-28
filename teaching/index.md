@@ -5,13 +5,13 @@ title: Teaching Software Carpentry
 ---
 ## Roadmap
 
-1. [Introduction](intro.html)
+1. [Introduction](01-intro.html)
 2. Cognitive Development and Concept Mapping
 3. Motivation and Demotivation
 4. Assessment and Reverse Instructional Design
 5. Collaborative Lesson Development
 6. Wrapping Up
-7. [Reading](reading.html)
+7. [Reading](07-reading.html)
 
 "For every complex problem there is an answer that is clear, simple, and wrong."
 - H. L. Mencken 
