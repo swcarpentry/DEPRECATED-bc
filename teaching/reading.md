@@ -1,5 +1,8 @@
-# Reading
-
+---
+layout: lesson
+root: ..
+title: Readings
+---
 Students are required to read:
 
 - Mark Guzdial:

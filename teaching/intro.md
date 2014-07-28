@@ -1,3 +1,8 @@
+---
+layout: lesson
+root: ..
+title: Introduction
+---
 Broadly speaking, teachers need three kinds of knowledge:
 
 - *content knowledge*, such as the "what" of programming;
