@@ -6,8 +6,7 @@
 4. Assessment and Reverse Instructional Design
 5. Collaborative Lesson Development
 6. Wrapping Up
-
-*  [Reading](reading.html)
+7. [Reading](reading.html)
 
 "For every complex problem there is an answer that is clear, simple, and wrong."
 - H. L. Mencken 
@@ -61,6 +60,9 @@ http://www.theatlantic.com/national/archive/2011/12/what-americans-keep-ignoring
 
 The Myth of Learning Styles
 http://www.changemag.org/Archives/Back%20Issues/September-October%202010/the-myth-of-learning-full.html
+
+Guzdial on Victor
+http://computinged.wordpress.com/2012/09/28/learnable-programming-thinking-about-programming-languages-and-systems-in-a-new-way/
 
 ## My Posts
 
