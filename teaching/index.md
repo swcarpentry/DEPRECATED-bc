@@ -1,29 +1,25 @@
-## Intro
+## Roadmap
 
-"The safest general characterization of the European philosophical tradition is that it consists of a series of footnotes to Plato."
-- Alfred North Whitehead, *Process and Reality*
+1. Introduction
+2. Cognitive Development and Concept Mapping
+3. Motivation and Demotivation
+4. Assessment and Reverse Instructional Design
+5. Collaborative Lesson Development
+6. Wrapping Up
 
-Much of what follows is footnotes to Guzdial...
+*  [Reading](reading.html)
 
 "For every complex problem there is an answer that is clear, simple, and wrong."
 - H. L. Mencken 
 
-## Roadmap
+## Intro
 
-1. Concept Maps
-2. Motivation and Demotivation
-X. Wrap-Up Post
+> "The safest general characterization of the European philosophical tradition is that it consists of a series of footnotes to Plato."
+> - Alfred North Whitehead, *Process and Reality*
 
-## Books
-
-Susan Ambrose et al: How Learning Works
-http://www.amazon.com/How-Learning-Works-Research-Based-Jossey-Bass/dp/0470484101/
-
-Ken Bain: What the Best College Teachers Do
-http://www.amazon.com/What-Best-College-Teachers-Do/dp/0674013255/
-
-Larry Cuban: Oversold and Underused
-http://www.amazon.com/Oversold-Underused-Computers-Larry-Cuban/dp/0674011090/
+* Much of what follows is footnotes to [Mark Guzdial's blog](http://computinged.wordpress.com/)
+  * Leads a Computer Science education research group at Georgia Tech that has produced top-notch work for over 15 years
+  * Frequent, well-informed commenter on that topic, and on education in general
 
 ## Links
 
@@ -88,4 +84,29 @@ http://teaching.software-carpentry.org/2013/09/14/round-6-3-screencasts/
 
 What Sir Ken Got Wrong
 http://teaching.software-carpentry.org/2013/10/27/reading-what-sir-ken-got-wrong/
+
+Wrapping Up Round 7 (nice image)
+http://teaching.software-carpentry.org/2014/02/07/wrapping-up-round-7/
+
+A Few Short Guides
+http://teaching.software-carpentry.org/2014/02/03/a-few-short-guides/
+
+Helping Teachers Think Like the Web
+http://teaching.software-carpentry.org/2014/03/28/helping-teachers-think-like-the-web/
+
+Screencast Questions
+http://teaching.software-carpentry.org/2014/03/25/round-8-4-wrap-up/
+
+Opening Lecture
+http://teaching.software-carpentry.org/2014/04/25/round-9-1-concept-maps/
+http://teaching.software-carpentry.org/2014/06/13/round-10-introductions-and-concept-maps/
+
+What Everyone in Tech Really Ought to Know About Education
+http://teaching.software-carpentry.org/2014/05/07/absolutely-positively/
+
+Motivation Lecture
+http://teaching.software-carpentry.org/2014/05/22/motivation-and-screencasts-2/
+http://teaching.software-carpentry.org/2014/06/06/motivation-and-live-teaching/
+http://teaching.software-carpentry.org/2014/06/26/from-concept-maps-to-motivation/
+
 
