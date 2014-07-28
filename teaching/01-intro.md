@@ -3,30 +3,53 @@ layout: lesson
 root: ..
 title: Introduction
 ---
-Broadly speaking, teachers need three kinds of knowledge:
+Let's start by defining a few terms.
+The first is *educational psychology*,
+which is the study of how people learn.
+This touches on everything from the neuropsychology of perception and the mechanisms of memory
+to the sociology of school systems
+and the philosophical question of what we actually mean by "learning"
+(which turns out to be pretty complicated once you start looking beyond
+the standardized Western classroom).
+
+What we know about educational psychology constrains teaching,
+but doesn't dictate it.
+In particular,
+there are often several plausible approaches to teaching
+that are consistent with what we know about how brains learn.
+In order to decide between them,
+we need to explore *instructional design*,
+which is the study of how to create learning materials.
+If ed psych is science,
+ID is engineering:
+it's how understanding is put into practice.
+
+Another way of looking at what teachers (ought to) know
+divides knowledge into three parts:
 
 - *content knowledge*, such as the "what" of programming;
 - *general pedagogical knowledge*, i.e., an understanding of the
   psychology of learning; and
-- the *pedagogical content knowledge* that connects the two, which is
-  things like when to teach the notion of a call stack and what
-  examples to use when doing so.
+- the *pedagogical content knowledge* (PCK) that connects the two,
+  which is things like when to teach the notion of a call stack
+  and what examples to use when doing so.
 
-In this training course,
-we will assume you know enough about programming to teach it,
-and will talk about general pedagogical principles.
-We hope that this will help you make sense of the pedagogical content knowledge
-that is implicitly presented in everything that has come before.
+This training course will focus on general pedagogical knowledge,
+and will assume you know as much as you need to about basic programming (our content knowledge).
+We *wish* the course could include a lot more material on PCK than it does,
+but computing education lags 20-30 years behind fields like mathematics
+when it comes to assembling and organizing that.
+What Software Carpentry has is in [our teaching guide]({{page.root}}/novice/teaching/index.html);
+additions and corrections would be very welcome.
 
 ## What Does It Mean to Understand Computing?
 
 Our starting point is the most basic question of all:
-what are we trying to accomplish?
-What do we want people to understand when we're finished teaching?
+what do we want people to understand when we're finished teaching?
 "How to write a loop" and "how to fetch records from a database"
 are the practical skills we want them to be able to apply,
 but these aren't useful on their own.
-Without some higher-level understanding of what computing *is*,
+Without some higher-level understanding of computing,
 people will still be stuck in a tweak-and-pray world.
 
 Most definitions of what it means to understanding computing aren't very useful.
@@ -40,7 +63,7 @@ who has been studying computing and education for almost two decades.
 [His answer](http://computinged.wordpress.com/2012/05/24/defining-what-does-it-mean-to-understand-computing/)
 depends on two definitions.
 First,
-a mental model is a person's internal mental representation of something in the real world.
+a *mental model* is a person's internal mental representation of something in the real world.
 My mental model of how airplanes fly,
 for example,
 includes things like lift, thrust, banking, and fuel consumption.
@@ -48,12 +71,12 @@ It isn't physically accurate,
 but it's close enough that I can predict what planes can and can't do well enough for my everyday needs.
 
 Second,
-a notional machine is the general properties of the computer that one is learning to control.
+a *notional machine* is the general properties of the computer that one is learning to control.
 For example,
 a notional machine for basic Python includes the idea of variables as sticky notes attached to values,
 while one for C includes the notion of variables as names for locations in memory.
-Neither is completely accurate,
-but both are workable.
+Neither is accurate,
+but both are useful.
 
 Given these definitions,
 we can say that,
@@ -62,27 +85,25 @@ In other words,
 someone understands computing when their mental model of what the computer is doing
 allows them to (more or less) predict how computers will behave.
 For example,
-people don't need to know how pipes work in the shell in order to understand the shell;
-what they need to know is how pipes behave.
-One way to test this is to check that they understand the difference between:
+if someone understands why this bit of code:
 
 ~~~
-$ head -10 data.txt | wc
+def change():
+  var = 2
+
+var = 1
+change()
+print var
 ~~~
 
-and:
+prints 1 instead of 2,
+then they understand call stacks in Python well enough to do most things,
+even if they can't explain what a [closure](https://en.wikipedia.org/wiki/Closure_%28computer_programming%29) is
+or define the term "lexical scoping".
 
-~~~
-$ head -10 | wc data.txt
-~~~
-
-If they can explain why the answers are different,
-and why the second will never finish if left undisturbed,
-then they understand pipes.
-Putting it another way,
-if someone can identify the mistakes in something,
-and debug something systematically rather than simply making random changes until it appears to work,
-they probably understand it.
+Coming at it from another direction,
+if someone has a robust mental model of a notional machine,
+they can debug problems systematically rather than simply making random changes until it appears to work.
 
 ## There Are No Blank Slates
 

@@ -3,29 +3,50 @@ layout: lesson
 root: ..
 title: Teaching Software Carpentry
 ---
-## Roadmap
+As a species,
+we know a lot about how brains learn,
+how effective various teaching practices are,
+and how society's needs and expectations shape how and how well we learn.
+As individuals,
+though,
+most people who teach at college and university either don't know this knowledge exists,
+or haven't incorporated it into their teaching.
+
+The goal of this short training course is
+to introduce people to the basics of educational psychology and instructional design,
+and show them how to use those ideas to teach programming to free-range adult learners.
+We can only touch a few scattered highlights,
+but we hope that will be enough to convince you that it's worth learning more.
+
+Throughout,
+it's important to remember what H.L. Mencken wrote almost a century ago:
+"For every complex problem there is an answer that is clear, simple, and wrong."
+People are complicated,
+and no general rule applies to everyone and all the time.
+You should always use your own best judgment
+when applying the ideas discussed below to your learners.
+
+If you find this course useful,
+please also have a look at [the teaching guide]({{page.root}}/novice/teaching/index.html)
+for Software Carpentry itself.
+And if you discover something you think others would want to know,
+please send it to us:
+we are always grateful for contributions and corrections.
 
 1. [Introduction](01-intro.html)
-2. Cognitive Development and Concept Mapping
-3. Motivation and Demotivation
-4. Assessment and Reverse Instructional Design
-5. Collaborative Lesson Development
-6. Wrapping Up
+2. [Cognitive Development and Concept Mapping](02-concepts.html)
+3. [Motivation and Demotivation](03-motivation.html)
+4. [Assessment and Reverse Instructional Design](04-assessment.html)
+5. [Collaborative Lesson Development](05-collab.html)
+6. [Wrapping Up](06-conclusion.html)
 7. [Reading](07-reading.html)
 
-"For every complex problem there is an answer that is clear, simple, and wrong."
-- H. L. Mencken 
-
-## Intro
-
-> "The safest general characterization of the European philosophical tradition is that it consists of a series of footnotes to Plato."
-> - Alfred North Whitehead, *Process and Reality*
-
-* Much of what follows is footnotes to [Mark Guzdial's blog](http://computinged.wordpress.com/)
-  * Leads a Computer Science education research group at Georgia Tech that has produced top-notch work for over 15 years
-  * Frequent, well-informed commenter on that topic, and on education in general
-
 ## Links
+
+* differences between novice, competent practitioner, and expert understanding
+* cognitive limits to learning (seven plus or minus two, attention fatigue, sleep deprivation)
+* cognitive load theory and faded examples
+* fixed vs. growth mindset
 
 Dunning-Kruger Effect:
 http://en.wikipedia.org/wiki/Dunning%E2%80%93Kruger_effect
