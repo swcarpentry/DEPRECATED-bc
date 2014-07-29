@@ -15,11 +15,11 @@ install.packages("calibrate")
 
 # Introduction and data import
 
-The analysis of an RNAseq experiment begins with sequencing reads in the form of FASTQ files with reads and quality scores. These then need to be aligned to a reference genome or transcriptome. There are many different alignment tools available, but the process of alignment is both computationally intensive and time-consuming, so we won't cover it today. Once reads are aligned, the number of reads mapped to each gene can be counted to produce a counts matrix. Again, there are several ways of doing this. The best way to find out about the tools that are available and suitable for your research is to look for recent review papers that comapre the different tools.
+The analysis of an RNAseq experiment begins with sequencing reads. These then need to be aligned to a reference genome or transcriptome. There are many different alignment tools available, but the process of alignment is both computationally intensive and time-consuming, so we won't cover it today. Once reads are aligned, the number of reads mapped to each gene can be counted. Again, there are several ways of doing this. The best way to find out about the tools that are available and suitable for your research is to look for recent review papers that compare the different tools.
 
-The data for this tutorial comes from a PLOS ONE paper, [Genome-Wide Transcriptional Profiling of Skin and Dorsal Root Ganglia after Ultraviolet-B-Induced Inflammation](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0093338)[1], and the raw data can be downloaded from [GEO](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE54413). 
+The data for this tutorial comes from a PLOS ONE paper, [Genome-Wide Transcriptional Profiling of Skin and Dorsal Root Ganglia after Ultraviolet-B-Induced Inflammation](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0093338)[1], and the raw data can be downloaded from the [Gene Expression Omnibus database (GEO)](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE54413). 
 
-This data has already been downloaded and aligned. The command line tool [featureCounts](http://bioinf.wehi.edu.au/featureCounts/) was used to count reads mapped to human genes from the Ensembl annotation (available for download [here](http://www.ensembl.org/info/data/ftp/index.html)). 
+This data has already been downloaded and aligned to the human genome. The command line tool [featureCounts](http://bioinf.wehi.edu.au/featureCounts/) was used to count reads mapped to human genes from the Ensembl annotation (available for download [here](http://www.ensembl.org/info/data/ftp/index.html)). 
 
 The output from this tool is provided in the `counts.txt` file. Have a look at this file in the shell, using `head`.
 
@@ -133,7 +133,7 @@ class(countData)
 ## [1] "data.frame"
 ```
 
-The data.frame contains information about genes (one gene per row) with the gene positions in the first five columns and then information about the number of reads aligning to the gene in each experimental sample. We don't need the information on gene position, so we can remove it from the data frame.
+The data.frame contains information about genes (one gene per row) with the gene positions in the first five columns and then information about the number of reads aligning to the gene in each experimental sample. There are three replicates for control (column names starting with "ctl") and three for samples treated with ultraviolet-B light (starting "uvb"). We don't need the information on gene position for this analysis, just the counts for each gene and sample, so we can remove it from the data frame.
 
 
 ```r
@@ -200,7 +200,7 @@ colnames(countData)
 ## [6] "uvb3.fastq_tophat.accepted_hits.bam"
 ```
 
-We can rename the columns to something a bit more readable.
+We can rename the columns to something shorter and a bit more readable.
 
 
 ```r
@@ -215,11 +215,11 @@ paste0("ctl", 1:3)
 c(paste0("ctl", 1:3), paste0("uvb", 1:3))
 ```
 
-An easier way to do this, especially for files with many columns, is to use the `gsub` command to strip out the extra information. This is also more robust to introduced errors, for example if the column order changes at some point in the future.
+An easier way to do this, especially for files with many columns, is to use the `gsub` command to strip out the extra information. This is also more robust to introduced errors, for example if the column order changes at some point in the future or you add additional replicates.
 
 
 ```r
-# Using gsub -- reproducible
+# Using gsub -- robust
 ?gsub
 gsub(pattern=".fastq_tophat.accepted_hits.bam", replacement="", x=colnames(countData))
 ```
@@ -244,7 +244,7 @@ head(countData)
 ```
 
 ## Exercise 1
-Find the gene with the highest expression in any sample. Extract the expression data for this gene for all samples. In which sample does it have the highest expression? 
+Find the gene with the highest expression in any sample -- remember, each row is a gene. Extract the expression data for this gene for all samples. In which sample does it have the highest expression? 
 
 What is the function of the gene? Can you suggest why this is the top expressed gene?
 
@@ -273,6 +273,7 @@ colnames(countData2)
 ```
 
 ```r
+?grep #grep searches for matches to a pattern 
 grep("ctl", colnames(countData2))
 ```
 
@@ -324,7 +325,7 @@ plot(countData2$ctlMean, countData2$uvbMean)
 
 
 ```r
-library(ggplot2)
+library("ggplot2")
 ggplot(countData2, aes(x=ctlMean, y=uvbMean)) + geom_point()
 ```
 
@@ -343,11 +344,11 @@ Hint: try using a log scale. You can also changing colours, transparencies, size
 
 There are many more options you can use to alter the appearance of these plots.
 
-#Find candidate differentially expressed genes
+# Find candidate differentially expressed genes
 
 We can find candidate differentially expressed genes by looking for genes with a large change between control and UVB samples. A common threshold used is log2 fold change more than 2 or less than -2. We will calculate log2 fold change for all the genes and colour the genes with log2 fold change of more than 2 or less than -2 on the plot.
 
-First, check for genes with a mean expression of 0. Putting zeroes into the log2 fold change calculation will produce NAs, so we might want to remove these genes.
+First, check for genes with a mean expression of 0. Putting zeroes into the log2 fold change calculation will produce NAs, so we might want to remove these genes. Note: this is for mathematical reasons, although different software may produce different results when you try to do `log2(0)`
 
 `TRUE` and `FALSE` can also be represented as 1 and 0. This is useful for getting the total number of observations for which a condition is true. 
 
@@ -511,7 +512,7 @@ biocLite("DESeq2")
 
 
 ```r
-library(DESeq2)
+library("DESeq2")
 ```
 
 ```
@@ -869,7 +870,7 @@ heatmap(sampleDists)
 
 ```r
 # better heatmap with gplots
-library(gplots)
+library("gplots")
 ```
 
 ```
@@ -944,7 +945,7 @@ with(res, plot(baseMean, log2FoldChange, pch=20, cex=.5, log="x"))
 
 ```r
 with(subset(res, padj<.05), points(baseMean, log2FoldChange, col="red", pch=16))
-library(calibrate)
+library("calibrate")
 ```
 
 ```
