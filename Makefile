@@ -184,7 +184,7 @@ ipynb :
 	make -f ipynb.mk
 
 ## rmd      : convert R Markdown files to Markdown.
-#  This uses an auxiliary Makefile 'rmarkdown.mk'.
+#  This uses an auxiliary Makefile 'rmd.mk'.
 rmd :
 	make -f rmd.mk
 
