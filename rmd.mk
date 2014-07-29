@@ -4,8 +4,8 @@
 # This is stored in a separate file so that rebuilding the site won't
 # inadvertently trigger an attempt to turn R Markdown files into
 # Markdown for people who don't want to install R and knitr. Run this
-# using 'make -f rmarkdown.mk' (which runs this directly) or 'make
-# rmarkdown' (which triggers a run from the main Makefile).
+# using 'make -f rmd.mk' (which runs this directly) or 'make rmd'
+# (which triggers a run from the main Makefile).
 # ======================================================================
 
 #----------------------------------------------------------------------
@@ -13,7 +13,7 @@
 # that we're sure which one Make will choose.
 #----------------------------------------------------------------------
 
-all : rmarkdown
+all : rmd
 
 #----------------------------------------------------------------------
 # Rules.
@@ -24,11 +24,11 @@ CHUNK_OPTS = novice/r/chunk_options.R
 
 # R Markdown files.  Add patterns here to convert files stored in
 # other locations.
-RMARKDOWN_SRC = \
+RMD_SRC = \
 	$(wildcard novice/r/??-*.Rmd)
 
 # Files converted to Markdown.
-RMARKDOWN_TX = $(patsubst %.Rmd,%.md,$(RMARKDOWN_SRC))
+RMD_TX = $(patsubst %.Rmd,%.md,$(RMD_SRC))
 
 # Convert a .Rmd to .md.
 %.md: %.Rmd $(CHUNK_OPTS)
@@ -37,4 +37,4 @@ RMARKDOWN_TX = $(patsubst %.Rmd,%.md,$(RMARKDOWN_SRC))
                                 output = '$$(basename $@)')"
 
 # Target.
-rmarkdown : $(RMARKDOWN_TX)
+rmd : $(RMD_TX)

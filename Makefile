@@ -183,12 +183,12 @@ tidy :
 ipynb :
 	make -f ipynb.mk
 
-## rmarkdown : convert R Markdown files to Markdown.
+## rmd      : convert R Markdown files to Markdown.
 #  This uses an auxiliary Makefile 'rmarkdown.mk'.
-rmarkdown :
-	make -f rmarkdown.mk
+rmd :
+	make -f rmd.mk
 
 ## ---------------------------------------
 
 
-.PHONY: all book check clean commands contribs epub fixme gloss install ipynb site tidy rmarkdown
+.PHONY: all book check clean commands contribs epub fixme gloss install ipynb site tidy rmd
