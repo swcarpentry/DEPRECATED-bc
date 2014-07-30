@@ -397,9 +397,9 @@ A common thing in regular expressions are metacharacters. These are special pair
 
 ### Review
 
-So now we have enough knowledge to try a quick quiz. What does this pattern match `(wo.+d)` return, when applied to this string `How much would, would a woodchuck chuck?`, that is to say what does this print out:
+So now we have enough knowledge to try a quick quiz. What does this pattern match `(wo.+d)` return, when applied to this string `How much wood, would a woodchuck chuck?`, that is to say what does this print out:
 
-     m = re.search('(wo.+d)', "How much would, would a woodchuck chuck?")
+     m = re.search('(wo.+d)', "How much wood, would a woodchuck chuck?")
      print m.group(1)
 
 Select an answer:
