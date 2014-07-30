@@ -4,10 +4,12 @@ root: ../..
 title: Operators
 ---
 
-Let's go back to those measurements. Notebook 1 has the site, date,
+
+Let's go back to those measurements. Notebook  1 has the site, date,
+changes as suggested by @ctjacobs
 and background evil level with single tabs as separators. Some of the
 site names have spaces, and the dates are in the international standard
-format YYYY-MM-DD. However, the fields in Notebook number 2 are separated by
+format YYYY-MM-DD. However, the fields in Notebook  2 are separated by
 slashes, and use month names instead of numbers. What's more, some of
 the month names are three characters long, while others are four, and
 the days are either one or two digits.
@@ -22,13 +24,13 @@ then split the middle field on spaces to get the month, day, and year,
 and then remove the comma from the day if it is present (because some of
 our readings don't have a comma after the day).
 
-This is a [procedural](glossary.html#procedural-programming) way to
+This is a [procedural](../../gloss.html#procedural-programming) way to
 solve the problem: we tell the computer what procedure to follow step by
 step to get an answer. In contrast, regular expressions are
-[declarative](glossary.html#declarative-programming): we declare, "This
+[declarative](../../gloss.html#declarative-programming): we declare, "This
 is what we want," and let the computer figure out how to calculate it.
 
-Good definitions rely on us being able to define characters that stand in place for others. Having to explicitly define the exact string usually isn't a big help, what we want is someway of defining the general pattern. This is where operators in regular expressions come in handy. 
+Good definitions rely on us being able to define characters that stand in place for others. Having to explicitly define the literal string usually isn't a big help, what we want is someway of defining the general pattern. This is where operators in regular expressions come in handy. 
 
 ## Operators specify patterns that simplify regular expressions
 
@@ -190,7 +192,7 @@ this record:
 
 because somebody mis-typed the year, entering three digits instead of
 four. (Either that, or whoever took this reading was also using the
-physics departments time machine.) We could use four dots in a row to
+physics department's time machine.) We could use four dots in a row to
 force the pattern to match exactly four digits:
 
     (.+)/(.+) (.+),? (....)/(.+)
@@ -357,7 +359,7 @@ It is possible to 'anchor' the pattern to a particular part of the string, so th
     m = re.search('(^Davison.*)', 'Davison/May 22, 2010/1721.3')
     print m.group(1)
 
-Gives us:
+gives us:
 
     Davison/May 22, 2010/1721.3
 
@@ -366,7 +368,7 @@ Whereas,
     m = re.search('(^Baker.*)', 'Davison/May 22, 2010/1721.3')
     print m
 
-Gives: 
+gives: 
 
     None
 
@@ -386,7 +388,7 @@ Since `^Davison` will only match the occurrence at the beginning of the string. 
 
 ### Metacharacters
 
-A common thing in regular expressions are metacharacters. These are special pairs of characters that denote non-printing or classes of characters and help make regular expressions more readable. There is no special syntax for using them, they're just like single characters so here's a table.
+A common thing in regular expressions are metacharacters. These are special pairs of characters that denote classes of characters and help make regular expressions more readable. There is no special syntax for using them, they're just like single characters so here's a table.
 
     | Metacharacter | Represents         |
     |:-------------:|:-------------------|
@@ -401,9 +403,9 @@ A common thing in regular expressions are metacharacters. These are special pair
 
 ### Review
 
-So now we have enough knowledge to try a quick quiz. What does this pattern match `(wo.+d)` return, when applied to this string `How much would, would a woodchuck chuck?`, that is to say what does this print out:
+So now we have enough knowledge to try a quick quiz. What does this pattern match `(wo.+d)` return, when applied to this string `How much wood, would a woodchuck chuck?`, that is to say what does this print out:
 
-     m = re.search('(wo.+d)', "How much would, would a woodchuck chuck?")
+     m = re.search('(wo.+d)', "How much wood, would a woodchuck chuck?")
      print m.group(1)
 
 Select an answer:
