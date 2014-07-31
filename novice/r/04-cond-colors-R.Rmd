@@ -3,10 +3,10 @@ layout: lesson
 root: ../..
 ---
 
-
-```{r, echo=FALSE}
-opts_chunk$set(results='hide')
+```{r, include = FALSE}
+source("chunk_options.R")
 ```
+
 # Making Choices
 
 Our previous lessons have shown us how to manipulate data, define our own functions, and repeat things. 
