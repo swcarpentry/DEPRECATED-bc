@@ -230,7 +230,26 @@ any time you say, "Don't worry about this just now,"
 or they say, "Wait, how did you do that?" or, 
 "Can you please slow down, I can't keep up,"
 you're no longer actually helping them.
-  
+
+**Don't take over the keyboard.**
+
+When you go around helping people out as they work
+on the material, never put your hands on a learner's
+computer.  It's too easy to step in and do a few
+quick changes that they can't follow and certain
+groups of learners will never say that this makes them
+uncomfortable - or ask questions.
+
+**Never copy and paste.**
+
+It's easy to find code snippets on the web
+but impress upon learners that part of what
+they are learning is the muscle memory of 
+doing the text input.  To drive this home, you
+could show them an example of `rm -rf /` in a sandbox
+just to make it clear that there are risks
+to running code you don't understand.
+
 **Don't ignore feedback.**
 
 The feedback you get from learners on sticky notes or through
