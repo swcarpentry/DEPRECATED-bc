@@ -1,3 +1,4 @@
+~~~{:class="in"}
 ---
 layout: lesson
 root: ../..
@@ -20,17 +21,25 @@ How should we handle this difference?
 If we start with the Makefile we've written so far,
 the brute-force approach is to just add the style files to our commands:
 
-    paper.pdf : paper.wdp figure-1.svg figure-2.svg
-            wdp2pdf --style c:/papers/euphoric.wps $<
+~~~
+paper.pdf : paper.wdp figure-1.svg figure-2.svg
+        wdp2pdf --style c:/papers/euphoric.wps $<
+~~~{:class="in"}
 
-    figure-%.svg : summary-%.dat
-            sgr -N -r -s c:/papers/euphoric.fig $@ $^
+~~~
+figure-%.svg : summary-%.dat
+        sgr -N -r -s c:/papers/euphoric.fig $@ $^
+~~~{:class="in"}
 
-    summary-%.dat : data-%-*.dat
-            stats.py $@ $^
+~~~
+summary-%.dat : data-%-*.dat
+        stats.py $@ $^
+~~~{:class="in"}
 
-    data-*-*.dat : stats.py
-            touch $@
+~~~
+data-*-*.dat : stats.py
+        touch $@
+~~~{:class="in"}
 
 There's some redundancy here, though: we are specifying the same directory twice.
 And notice that we haven't explicitly listed `euphoric.wps` or `euphoric.fig`
@@ -63,21 +72,33 @@ The third option&mdash;the right one&mdash;is to refactor our Makefile to make t
 We can do this by defining a [macro](../../gloss.html#macro), just as we would define a constant or variable in a program.
 Here's our Makefile with a macro defined and used:
 
-    # with-macro.mk
+~~~
+# with-macro.mk
+~~~{:class="in"}
 
-    STYLE_DIR=c:/papers/
+~~~
+STYLE_DIR=c:/papers/
+~~~{:class="in"}
 
-    paper.pdf : paper.wdp figure-1.svg figure-2.svg
-            wdp2pdf --style ${STYLE_DIR}/euphoric.wps $<
+~~~
+paper.pdf : paper.wdp figure-1.svg figure-2.svg
+        wdp2pdf --style ${STYLE_DIR}/euphoric.wps $<
+~~~{:class="in"}
 
-    figure-%.svg : summary-%.dat
-            sgr -N -r -s ${STYLE_DIR}/euphoric.fig $@ $^
+~~~
+figure-%.svg : summary-%.dat
+        sgr -N -r -s ${STYLE_DIR}/euphoric.fig $@ $^
+~~~{:class="in"}
 
-    summary-%.dat : data-%-*.dat
-            stats.py $@ $^
+~~~
+summary-%.dat : data-%-*.dat
+        stats.py $@ $^
+~~~{:class="in"}
 
-    data-*-*.dat : stats.py
-            touch $@
+~~~
+data-*-*.dat : stats.py
+        touch $@
+~~~{:class="in"}
 
 The definition looks like definitions in most programming languages:
 the macro is called `STYLE_DIR`, and its value is `c:/papers/`.
@@ -105,23 +126,35 @@ it's passed a consistent set of flags.
 Here, for example, we're defining `STYLE_DIR` to point to the directory holding our style files,
 then using that definition in two other macros:
 
-    # with-lots-of-macros.mk
+~~~
+# with-lots-of-macros.mk
+~~~{:class="in"}
 
-    STYLE_DIR=c:/papers/
-    WDP2PDF_FLAGS=--style ${STYLE_DIR}/euphoric.wps
-    SGR_FLAGS=-N -r -s ${STYLE_DIR}/euphoric.fig
+~~~
+STYLE_DIR=c:/papers/
+WDP2PDF_FLAGS=--style ${STYLE_DIR}/euphoric.wps
+SGR_FLAGS=-N -r -s ${STYLE_DIR}/euphoric.fig
+~~~{:class="in"}
 
-    paper.pdf : paper.wdp figure-1.svg figure-2.svg
-            wdp2pdf ${WDP2PDF_FLAGS} $<
+~~~
+paper.pdf : paper.wdp figure-1.svg figure-2.svg
+        wdp2pdf ${WDP2PDF_FLAGS} $<
+~~~{:class="in"}
 
-    figure-%.svg : summary-%.dat
-            sgr ${SGR_FLAGS} $@ $^
+~~~
+figure-%.svg : summary-%.dat
+        sgr ${SGR_FLAGS} $@ $^
+~~~{:class="in"}
 
-    summary-%.dat : data-%-*.dat
-            stats.py $@ $^
+~~~
+summary-%.dat : data-%-*.dat
+        stats.py $@ $^
+~~~{:class="in"}
 
-    data-*-*.dat : stats.py
-            touch $@
+~~~
+data-*-*.dat : stats.py
+        touch $@
+~~~{:class="in"}
 
 The first, `WPD2PDF_FLAGS`,
 is the single flag and argument we want to pass to the tool that turns our word processor file into a PDF.
@@ -132,30 +165,46 @@ We are now ready to solve our original problem.
 Let's move the definition of `STYLE_DIR`&mdash;the macro that changes from machine to machine&mdash;out of our main Makefile,
 and into a Makefile of its own called `config.mk`:
 
-    # config.mk
+~~~
+# config.mk
+~~~{:class="in"}
 
-    STYLE_DIR=c:/papers/
+~~~
+STYLE_DIR=c:/papers/
+~~~{:class="in"}
 
 We can then include that file in our main Makefile using Make's `include` command.
 Our other macros and commands can then use the definition of `STYLE_DIR` just as if it had been defined in the main Makefile:
 
-    # with-include.mk
-    include config.mk
+~~~
+# with-include.mk
+include config.mk
+~~~{:class="in"}
 
-    WDP2PDF_FLAGS=--style ${STYLE_DIR}/euphoric.wps
-    SGR_FLAGS=-N -r -s ${STYLE_DIR}/euphoric.fig
+~~~
+WDP2PDF_FLAGS=--style ${STYLE_DIR}/euphoric.wps
+SGR_FLAGS=-N -r -s ${STYLE_DIR}/euphoric.fig
+~~~{:class="in"}
 
-    paper.pdf : paper.wdp figure-1.svg figure-2.svg
-            wdp2pdf ${WDP2PDF_FLAGS} $<
+~~~
+paper.pdf : paper.wdp figure-1.svg figure-2.svg
+        wdp2pdf ${WDP2PDF_FLAGS} $<
+~~~{:class="in"}
 
-    figure-%.svg : summary-%.dat
-            sgr ${SGR_FLAGS} $@ $^
+~~~
+figure-%.svg : summary-%.dat
+        sgr ${SGR_FLAGS} $@ $^
+~~~{:class="in"}
 
-    summary-%.dat : data-%-*.dat
-            stats.py $@ $^
+~~~
+summary-%.dat : data-%-*.dat
+        stats.py $@ $^
+~~~{:class="in"}
 
-    data-*-*.dat : stats.py
-            touch $@
+~~~
+data-*-*.dat : stats.py
+        touch $@
+~~~{:class="in"}
 
 Once we've tested this to make sure it works, we can copy `config.mk` to create two files that we'll put in version control.
 The first, `config-home.mk`, defines `STYLE_DIR` for use on our laptop.
@@ -176,7 +225,9 @@ and has the right definition of `STYLE_DIR`.
 We can also solve this problem by defining `STYLE_DIR` on the command line each time we run Make.
 To do this, we set the variable on the command line when invoking `make`:
 
-    $ make STYLE_DIR=/lib/styles -f Makefile
+~~~
+$ make STYLE_DIR=/lib/styles -f Makefile
+~~~{:class="in"}
 
 This is almost always a bad idea, though.
 We have to remember to type the definition each time,

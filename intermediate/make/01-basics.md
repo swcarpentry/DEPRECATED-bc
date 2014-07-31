@@ -5,18 +5,21 @@ title: Basic Tasks
 level: intermediate
 ---
 To illustrate how Make works, here's the dependency tree for the paper that the robot is working on.
-`paper.pdf` depends on `paper.wdp` (the raw word processor file),
+![Dependency Graph](img/example-dependencies.png)
+`paper.pdf` depends on `paper.tex` (the raw Latex file),
 and on `figure-1.svg` and `figure-2.svg`.
 `figure-1.svg` depends on `summary-1.dat`,
 which in turn depends on `data-1-1.dat`, `data-1-2.dat`, and so on,
 while `figure-2.svg` depends on files with similar names.
 
-In order to create `paper.pdf`, we have to run the command `wdp2pdf paper.wdp`.
-For the purpose of this lecture, it doesn't matter what `wdp2pdf` actually does.
-All we need to know is that if `paper.wdp` or either of the figure SVG's change, we need to re-run this command.
+In order to create `paper.pdf`, we have to run some command (maybe `latexmk`).
+For the purpose of this lecture, it doesn't matter what `latexmk` actually does
+and we will not use this command further.
+All we need to know is that if `paper.tex` or either of the figure SVG's change, we need to
+re-build `paper.pdf`.
 
-To create `figure-1.svg`, we run `sgr -N -r summary-1.dat` and send the output to `figure-1.svg`.
-Again, it doesn't matter for now what the `sgr` command actually is.
+To create `figure-1.svg`, we run `python create_figure.py figure-1.svg summary-1.dat`.
+Again, it doesn't matter for now what `create_figure.py` command actually is.
 What matters is that we need to run it whenever `figure-1.svg` is out of date,
 i.e., whenever it is older than the `summary-1.dat` file it depends on.
 Finally, in order to update `summary-1.dat`, we need to run our own little script, `stats.py`,
@@ -38,16 +41,20 @@ Let's start by going into the directory containing the files we're using in the 
 and use the `ls` command to get a listing of what's there.
 The `-t` flag to `ls` tells it to list things by age, with the youngest file first and the oldest last:
 
-    $ ls -t *.dat *.svg
-    summary-1.dat    figure-1.svg
+~~~
+$ ls -t *.dat *.svg
+summary-1.dat    figure-1.svg
+~~~{:class="in"}
 
 This listing tells us that our data file `summary-1.dat` is newer than the SVG file that depends on it,
 so the SVG file needs to be re-created.
 Using our favorite editor, let's create a file called `hello.mk` and put these three lines in it.
 
-    # hello.mk
-    figure-1.svg : summary-1.dat
-            sgr -N -r summary-1.dat > figure-1.svg 
+~~~
+# hello.mk
+figure-1.svg : summary-1.dat
+    python create_figure.py figure-1.svg summary-1.dat
+~~~{:class="in"}
 
 A configuration file for Make like this one is called a [Makefile](../../gloss.html#makefile).
 The first line, starting with `#`, is a comment.
@@ -69,14 +76,23 @@ Make will not accept spaces, or mixes of spaces and tabs.
 
 Now that we've created our Makefile, we can tell Make to obey its instructions by running `gmake` from the command line:
 
-    $ gmake -f hello.mk
-    sgr -N -r summary-1.dat > figure-1.svg
+~~~
+$ gmake -f hello.mk
+python create_figure.py figure-1.svg summary-1.dat
+~~~{:class="in"}
 
 Many systems make `make` an alias for `gmake`,
 so if the latter doesn't work for you, try the former name as well.
 The arguments `-f hello.mk` tell Make that we want it to use the commands in the file `hello.mk`.
 If we don't tell it what file to look in,
 it looks for a file called `Makefile` in the current directory and uses that if it exists.
+
+>### Exercise 1
+
+>You have recently got a lab mate excited about using Make files. However,they
+>send you the file `make_dissertation_figure.mk` and it is not working. Run the
+>make file to see the error and correct it so that `dissertation_figure.svg` is
+>produced.
 
 Make's output shows us that it has run the command we wanted it to.
 It did this because at least one prerequisite for `figure-1.svg` was newer than `figure-1.svg` itself.
@@ -87,7 +103,9 @@ Make ran the shell command we gave it and created a new version of `figure-1.svg
 
 Let's run Make again:
 
-    $ gmake -f hello.mk
+~~~
+$ gmake -f hello.mk
+~~~{:class="in"}
 
 This time, it doesn't execute any commands.
 This happened&mdash;or didn't&mdash;because the target is newer than its prerequisites.
@@ -100,20 +118,26 @@ Here is another Makefile called `double.mk` with rules to re-create
 both `figure-1.svg` and `figure-2.svg`.
 These rules are identical except for the 1's and 2's in the filenames; we'll see later how to combine these rules into one.
 
-    # double.mk
-    figure-1.svg : summary-1.dat
-            sgr -N -r summary-1.dat > figure-1.svg
+~~~
+# double.mk
+figure-1.svg : summary-1.dat
+    python create_figure.py figure-1.svg summary-1.dat
+~~~{:class="in"}
 
-    figure-2.svg : summary-2.dat
-            sgr -N -r summary-2.dat > figure-2.svg
+~~~
+figure-2.svg : summary-2.dat
+    python create_figure.py figure-2.svg summary-2.dat
+~~~{:class="in"}
 
 Let's pretend we've just updated our data files by running `touch *.dat`.
 (The Unix `touch` command doesn't change the contents of files, but updates their timestamps as if they had been modified.)
 Now, when we run Make, it re-creates `figure-1.svg` again&mdash;and then stops:
 
-    $ touch *.dat
-    $ gmake -f double.mk
-    sgr -N -r summary-1.dat > figure-1.svg
+~~~
+$ touch *.dat
+$ gmake -f double.mk
+python create_figure.py figure-1.svg summary-1.dat
+~~~{:class="in"}
 
 Why wasn't `figure-2.svg` re-created?
 The answer is that Make uses the first rule in the Makefile as its [default rule](../../gloss.html#default-rule).
@@ -122,8 +146,10 @@ If we want Make to rebuild `figure-2.svg`, we have to tell it so explicitly.
 We use `-f double.mk` to tell Make what Makefile to use,
 and then give it the name of the target we want it to handle:
 
-    $ gmake -f double.mk figure-2.svg
-    sgr -N -r summary-2.dat > figure-2.svg
+~~~
+$ gmake -f double.mk figure-2.svg
+python create_figure.py figure-2.svg summary-2.dat
+~~~{:class="in"}
 
 Again, building things one at a time like this is slightly better than typing individual commands, but only slightly.
 To get Make to build everything at once, we have to introduce a [phony target](../../gloss.html#phony-target).
@@ -131,15 +157,23 @@ This is just a target name that doesn't correspond to any actual file.
 Since it doesn't actually exist, it can't ever be up to date, but other things can still depend on it.
 Here's our third Makefile, `phony.mk`:
 
-    # phony.mk
+~~~
+# phony.mk
+~~~{:class="in"}
 
-    all : figure-1.svg figure-2.svg
+~~~
+all : figure-1.svg figure-2.svg
+~~~{:class="in"}
 
-    figure-1.svg : summary-1.dat
-            sgr -N -r summary-1.dat > figure-1.svg
+~~~
+figure-1.svg : summary-1.dat
+    python create_figure.py figure-1.svg summary-1.dat
+~~~{:class="in"}
 
-    figure-2.svg : summary-2.dat
-            sgr -N -r summary-2.dat > figure-2.svg
+~~~
+figure-2.svg : summary-2.dat
+    python create_figure.py figure-2.svg summary-2.dat
+~~~{:class="in"}
 
 We've introduced a phony target called `all`, which depends on `figure-1.svg` and `figure-2.svg`.
 Since there's no file called `all` in the current directory,
@@ -151,10 +185,19 @@ Make will go and update them both, which is exactly what we want.
 Let's `touch` our data files again, and run `make -f phony.mk all`.
 Sure enough, Make runs the `sgr` command twice to re-create both figures:
 
-    $ touch *.dat
-    $ gmake -f phony.mk
-    sgr -N -r summary-1.dat > figure-1.svg
-    sgr -N -r summary-2.dat > figure-2.svg
+~~~
+$ touch *.dat
+$ gmake -f phony.mk
+python create_figure.py figure-1.svg summary-1.dat
+python create_figure.py figure-2.svg summary-2.dat
+~~~{:class="in"}
+
+>### Exercise 2
+
+>You decide that you want to make another figure called `figure-2-copy.svg` that
+>is a copy of `figure-2.svg`.  Create a make file that has `figure-2-copy.svg`
+>depend on `figure-2.svg` and updates `figure-2-copy.svg` appropriately.
+>*Hint*:`cp` is copy in the Unix shell.
 
 One thing to note is that the order in which commands are executed is arbitrary.
 Make could decide to update `figure-2.svg` first, rather than `figure-1.svg`,
