@@ -491,7 +491,15 @@ A common thing in regular expressions are metacharacters. These are special pair
     |    \W         | any non-word char  |
     |    \D         | any non-digit char |
 
+<div class="keypoints" markdown="1">
+### Key Points
+* Operators specify patterns that simplify regular expressions
+* Operators are simply characters that specify other more general patterns
+* Metacharacters are special pairs of characters that denote classes of characters
+* Anchors match the pattern _only_ when it occurs at the start or end of a string
+</div>
 
+<div class="challenge" markdown="1">
 ### Review
 
 So now we have enough knowledge to try a quick quiz. What does this pattern match `(wo.+d)` return, when applied to this string `How much wood, would a woodchuck chuck?`, that is to say what does this print out:
@@ -508,4 +516,7 @@ Select an answer:
     2. `would, would a wood`
     3. `would, would`
 
+
+
+</div>
 
