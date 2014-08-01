@@ -43,7 +43,7 @@ Perhaps surprisingly, the answer is `3`. The regex won't compile because the `.`
 ## Using operators
 
 Our first attempt to parse this data will rely on the `*` operator. It
-is a [postfix](glossary.html#postfix-operator) operator, and means "Zero or more repetitions of the pattern that comes
+is a [postfix](../../gloss.html#postfix-operator) operator, and means "Zero or more repetitions of the pattern that comes
 before it". For example, `a*` matches zero or more `a` characters,
 while `.*` matches any sequence of characters (including the empty
 string) because `.` matches anything and `*` repeats. Note that the
