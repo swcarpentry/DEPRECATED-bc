@@ -72,7 +72,7 @@ fahr_to_kelvin(32)
 {:class="in"}
 
 ~~~
-273.15
+ans = 273.15
 ~~~
 {:class="out"}
 
@@ -110,6 +110,35 @@ kelvin_to_celsius(0.0)
 {:class="in"}
 
 ~~~
-
-{:class="out"}
+ans = -273.15
 ~~~
+{:class="out"}
+
+What about converting Fahrenheit to Celsius?
+We could write out the formula, but we don't need to.
+Instead, we can [compose](../../gloss.html#function-composition) the two
+functions we have already created:
+
+~~~
+% file fahr_to_celsius.m
+
+function ctemp = fahr_to_celsius(ftemp)
+    ktemp = fahr_to_kelvin(ftemp);
+    ctemp = kelvin_to_celsius(ktemp);
+end
+~~~
+{:class="in"}
+
+Calling this function,
+
+~~~
+kelvin_to_celsius(0.0)
+~~~
+
+we get, as expected:
+
+~~~
+ans = -273.15
+~~~
+
+
