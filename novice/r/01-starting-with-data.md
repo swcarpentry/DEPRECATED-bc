@@ -51,8 +51,14 @@ Now we could load the data into R using `read.table`:
 
 <pre class='in'><code>read.table(file = "inflammation-01.csv", sep = ",")</code></pre>
 
+The expression `read.table(...)` is a [function call](../../gloss.html#function-call) that asks R to run the function `read.table`. 
+
 `read.table` has two [parameters](../../gloss.html#parameter): the name of the file we want to read, and the [delimiter](../../gloss.html#delimiter) that separates values on a line.
 These both need to be character strings (or [strings](../../gloss.html#string) for short), so we put them in quotes.
+
+The utility of a function is that it will perform its given action on whatever value is passed to the named parameter(s).
+For example, in this case if we provided the name of a different file to the parameter `file`, `read.table` would read it instead.
+We'll learn more of the details about functions and their parameters in the next lesson.
 
 Since we didn't tell it to do anything else with the function's output, the console will display the full contents of the file `inflammation-01.csv`.
 Try it out.
