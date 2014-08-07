@@ -223,7 +223,7 @@ This is similar to a spreadsheet in MS Excel that many of us are familiar with u
 Data frames are very useful for storing data because you can have a continuous variable, e.g. rainfall, in one column and a categorical variable, e.g. month, in another.
 However, since we saw that every column of our data contains continuous data, the inflammation level of the patients on a given day, we can store the data as a matrix, which requires that all the columns contain the same type of data.
 Our motivation for converting to a matrix is because some mathematical operations only work on a matrix of numbers and not a data frame.
-There are other differences between a data.frame and a matrix, but this is a topic that will be more meaningful to you once you have a better udnertanding of how R works.
+There are other differences between a data.frame and a matrix, but this is a topic that will be more meaningful to you once you have a better understanding of how R works.
 
 
 <pre class='in'><code>dat <- as.matrix(dat)
@@ -465,7 +465,7 @@ And to obtain the average inflammation of each day we will need to calculate the
 <pre class='in'><code>avg_day_inflammation <- apply(dat, 2, mean)</code></pre>
 
 > **Tip:** Some common operations have more efficient alternatives.
-For example, you can calculate the the row-wise or column-wise means wtih `rowMeans` and `colMeans`, respectively.
+For example, you can calculate the row-wise or column-wise means with `rowMeans` and `colMeans`, respectively.
 
 #### Challenge
 
@@ -513,7 +513,7 @@ First, let's create a heatmap of the inflammation data using the function `heatm
 
 <img src="figure/01-starting-with-data-heatmap.png" title="plot of chunk heatmap" alt="plot of chunk heatmap" style="display: block; margin: auto;" />
 
-This automatically peforms hierarchical clustering of the data.
+This automatically performs hierarchical clustering of the data.
 We can clearly see some large differences between the days of the treatment.
 To get a better sense of how the inflammation levels change over time, let's disable the clustering.
 
