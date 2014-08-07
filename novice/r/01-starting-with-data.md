@@ -172,7 +172,7 @@ Now that we know how to assign things to variables, let's re-run `read.table` an
 
 This statement doesn't produce any output because assignment doesn't display anything.
 If we want to check that our data has been loaded, we can print the variable's value.
-However, for large data sets it is convenient to use the function `head()` to display only the first few rows of data.
+However, for large data sets it is convenient to use the function `head` to display only the first few rows of data.
 
 
 <pre class='in'><code>head(dat)</code></pre>
@@ -572,7 +572,7 @@ for each day across all patients.
 * Use `from:to` to specify a sequence that includes the indices from `from` to `to`.
 * All the indexing and slicing that works on matrices also works on vectors.
 * Use `#` to add comments to programs.
-* Use `mean()`, `max()`, `min()` and `sd()` to calculate simple statistics.
+* Use `mean`, `max`, `min` and `sd` to calculate simple statistics.
 * Use `apply` to calculate statistics across the rows or columns of a matrix.
 * Use `plot` to create simple visualizations.
 
