@@ -3,135 +3,112 @@ layout: lesson
 root: ../..
 title: Code Review
 ---
-The model shown in the [main lesson](../git/02-collab.html)
-in which everyone pushes and pulls from a single repository,
-is perfectly usable,
-but there's one thing it *doesn't* let us do:
-[code review](../../gloss.html#code-review).
-Suppose Dracula wants to be able to look at Wolfman's changes before merging them into the master copy on GitHub,
-just as he would review Wolfman's paper before publishing it
-(or perhaps even before submitting it for publication).
-We need to arrange things so that Wolfman can commit his changes and Dracula can compare them with the master copy;
-in fact,
-we want Wolfman to be able to commit many times,
-so that he can incorporate Dracula's feedback and get further review as often as necessary.
 
-To allow code review,
-most programmers take a slightly more roundabout route to merging.
-When the project starts,
-Dracula creates a repository on GitHub
-in exactly the same way as [we created the `planets` repository](../git/02-collab.html)
-and then [clones](../../gloss.html#clone) it to his desktop:
+There are many ways to improve the quality of software,
+and the most effective of them is [code review](../../gloss.html#code-review).
+GitHub uses the [pull request](../../gloss.html#pull-request)
+to facilitate code review within and between projects.
 
-~~~
-$ git clone https://github.com/vlad/undersea.git
-~~~
-{:class="in"}
-~~~
-Cloning into 'undersea'...
-warning: You appear to have cloned an empty repository.
-~~~
-{:class="out"}
+Pull requests are a way of proposing a merge,
+from one [branch](../../gloss.html#branch) to another.
+These branches can be in the same repository
+or in different [forks](../../gloss.html#fork) of the same project.
+It's an enhancement of the [branching lesson](../extras/01-branching.html)
+for working effectively with other people.
 
-`git clone` automatically adds the original repository on GitHub
-as a remote of the local repository called `origin`&mdash;this is why
-we chose `origin` as a remote name in our previous example:
+Let's revisit Wolfman,
+who has made some changes locally
+in a branch
+that he wants to contribute back
+into Dracula's project.
+He pushes the branch with the changes to GitHub.
+He could push them to the original repository,
+or to his fork
+if he doesn't have access to the original repository.
+Wolfman can then load the repository's page in a web browser,
+and open a pull request.
+If Wolfman does this within a few minutes,
+recently modified branches will be highlighted in the header of the repository
+with a button to open a pull request.
 
-~~~
-$ cd undersea
-$ git remote -v
-~~~
-{:class="in"}
-~~~
-origin https://github.com/vlad/undersea.git (fetch)
-origin https://github.com/vlad/undersea.git (push)
-~~~
-{:class="out"}
+<img src="img/github-recently-pushed-branches-ui.png" alt="recently pushed branches are highlighted in the UI" />
 
-Dracula can now push and pull changes just as before.
+If Wolfman wants to open a pull request
+from a branch that is no longer highlighted
+he can use the link in the repository header
+to load an overview of all the branches.
 
-Wolfman doesn't clone Dracula's GitHub repository directly.
-Instead,
-he [forks](../../gloss.html#fork) it,
-i.e., clones it on GitHub. He does this using the GitHub web interface:
+<img src="img/github-summary-header.png" alt="the repository header fields are links" />
 
-<img src="img/git-fork-ui.png" alt="The Fork Button" />
+From the branch overview, each branch will have a button
+that can be used to open a pull request.
 
-He then clones his own GitHub repository,
-not Dracula's,
-to give himself a desktop copy:
+<img src="img/github-branch-ui.png" alt="an individual branch row" />
 
-<img src="img/git-forking-01.svg" alt="After Forking on GitHub" />
+When Dracula views the pull request online,
+he will be able to see the changes Wolfman wants to make.
+Dracula can leave comments on individual lines of the code,
+or make comments on the larger pull request
+to give feedback to Wolfman.
+Wolfman can make changes to his local code,
+and push them to the branch.
+The pull request will automatically update to reflect the changes.
 
-This may seem like unnecessary work,
-but it allows Wolfman and Dracula to collaborate much more effectively.
-Suppose Wolfman makes a change to the project.
-He commits it to his local repository,
-then uses `git push` to copy those changes to GitHub:
+The feedback you receive on a pull request
+may be extensive, or minimal.
+Initially it may be focused on elements of style --
+where to put your line breaks,
+naming conventions for variables,
+or idiomatic code transformations.
+Later it could cover your implementation --
+how your code is organized
+into functions and modules.
+Importantly,
+the reviewer may ask you to break up your work
+into smaller, logical pieces.
+This makes your changes easier to review,
+easier integrate into the project,
+and less likely to cause bugs.
 
-<img src="img/git-forking-02.svg" alt="After Pushing to Fork" />
+Reviewing code be complex.
+There are a number of tools that can assist in the task:
+software linters are tools to verify that code complies with a style guide,
+and automatic tests can ensure no old bugs have resurfaced.
+No tool is as effective as having a careful review by a peer, though.
+A good heuristic is to look for and scrutinize sources of surprise
+as you read through the changes.
+Reviews are more difficult than initially writing the code,
+and a reviewer's effectiveness diminishes rapidly after the first hour.
+Lines of code are a good approximate measure
+for how long a patch will take to review.
 
-He then creates a [pull request](../../gloss.html#pull-request),
-which notifies Dracula that Wolfman wants to merge some changes into Dracula's repository:
-
-<img src="img/git-forking-03.svg" alt="After Creating Pull Request" />
-
-A pull request is a merge waiting to happen.
-When Dracula views it online,
-he can see and comment on the changes Wolfman wants to make.
-Commenting is the crucial step here,
-and half the reason Wolfman went to the trouble of forking the repository on GitHub.
-Dracula,
-or anyone else involved in the project,
-can now give Wolfman feedback on what he is trying to do:
-this function is too long,
-that one contains a bug,
-there's a special case that isn't being handled anywhere,
-and so on.
-Wolfman can then update his code,
-commit locally,
-and push those changes to GitHub to update the pull request.
-
-This process is exactly like peer review of papers, though usually much faster.
-In large open source projects like Firefox,
+The process is similar to peer review of scientific publications,
+though usually much faster.
+In large open source projects
 it's very common for a pull request to be updated several times before finally being accepted and merged.
 Working this way not only helps maintain the quality of the code,
 it is also a very effective way to transfer knowledge.
 
-If Wolfman wants to do more work while he's waiting for Dracula to review his first modification,
-he creates a new branch in his local repository,
-pushes it to GitHub, and then issues a pull request from that.
-We can now see why Git, Mercurial, and other modern version control systems use branching so much:
-it helps people work together,
+While Wolfman waits for review to his first modification,
+he can continue to work by creating a new branch in his local repository.
+From this new branch,
+he can make new changes,
+push them to GitHub,
+and issue a second pull request from that.
+This is an important way that Git, Mercurial, and other modern version control systems use branching.
+It helps people work together,
 but on their own time.
 It might take Dracula several days to get around to reviewing Wolfman's changes.
 Rather than being stalled until then,
 Wolfman can just switch to another branch and work on something else,
 then switch back when Dracula's review finally comes in.
-Once the changes in a particular branch have been accepted,
-Wolfman can delete it; provided it has been merged into `master` (or some other branch),
-the only thing that will be lost is the pointer with the branch name,
-not the changes themselves.
+When Dracula likes the changes
+and wants to merge them into his project
+he can do so with the click of a button:
 
-We said above that code review is half the reason every developer should have their own repository on GitHub
-(or whatever service is being used).
-The other reason is that working this way allows people to explore ideas
-without needing permission from any central authority.
-If you want to change this tutorial,
-you can fork the [Software Carpentry repository on GitHub](https://github.com/swcarpentry/bc)
-and start rewriting things in your repository.
-You can send us a pull request if you want to share you changes with us,
-but you don't have to.
-And if other people like your version better than ours,
-they can start forking your repository and sending pull requests to you instead of to us.
+<img src="img/github-merge-ui.png" alt="Mergeing a Pull Request" />
 
-If this sounds familiar, it's because it is the way science itself works.
-When someone publishes a new method or result,
-other scientists can immediately start building on top of it&mdash;essentially,
-they can create their own fork of the work and start committing changes to it.
-If the first scientist likes the second's work,
-she can incorporate those findings into her next paper,
-which is analogous to merging a pull request.
-If she doesn't,
-then it's up to other scientists to decide whose work to build on,
-or whether to try to combine both approaches.
+Once the changes in a particular branch have been accepted
+and merged into `master` (or some other branch),
+Wolfman can delete the branch.
+The changes themselves will be preserved where they have been merged.

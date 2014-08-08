@@ -76,6 +76,10 @@ which notifies Dracula that Wolfman wants to merge some changes into Wolfman's r
 A pull request is a merge waiting to happen.
 When Dracula views it online,
 he can see and comment on the changes Wolfman wants to make.
+Wolfman and Dracula can go through several rounds of discussion,
+updating the branch as necessary,
+before the pull request is accepted.
+
 Wolfman can update his branch on his fork
 and the pull request will automatically update with the changes.
 Likewise, Dracula can update his branch
@@ -86,12 +90,13 @@ he can do so with the click of a button:
 
 <img src="img/github-merge-ui.png" alt="Mergeing a Pull Request" />
 
-Dracula may take several days to get around to reviewing Wolfman's Pull Request.
-Rather than being stalled until then,
-Wolfman can switch to another branch and work on something else,
-then switch back to make modifications if necessary.
-Once the changes are accepted,
-Wolfman can delete the branch; provided it has been merged into `master`
-(or some other branch),
-the only thing that will be lost is the pointer with the branch name,
-not the changes themselves.
+If this sounds familiar, it's because it is the way science itself works.
+When someone publishes a new method or result,
+other scientists can immediately start building on top of it&mdash;essentially,
+they can create their own fork of the work and start committing changes to it.
+If the first scientist likes the second's work,
+she can incorporate those findings into her next paper,
+which is analogous to merging a pull request.
+If she doesn't,
+then it's up to other scientists to decide whose work to build on,
+or whether to try to combine both approaches.
