@@ -295,6 +295,8 @@ you need to tell MATLAB explicitly. For example, the command,
 ~~~
 x = int16(325);
 ~~~
+{:class="in"}
+
 
 assigns the value `325` to the name `x`, storing it as a 16-bit signed
 integer.
@@ -778,7 +780,7 @@ Let's have a look at two other statistics: the maximum and minimum
 inflammation per day across all patients.
 
 ~~~
-plot(max(data, [], 1));
+plot(max(patient_data, [], 1));
 title("Maximum inflammation per day");
 ~~~
 {:class="in"}

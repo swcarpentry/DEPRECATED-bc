@@ -66,6 +66,7 @@ Anything following the function definition line is called the *body* of the
 function.
 
 We can call our function from the command line like any other function:
+
 ~~~
 fahr_to_kelvin(32)
 ~~~
@@ -141,4 +142,166 @@ we get, as expected:
 ans = -273.15
 ~~~
 
+This is our first taste of how larger programs are built:
+we define basic operations,
+then combine them in ever-large chunks to get the effect we want.
+Real-life functions will usually be larger than the ones shown 
+here---typically half a dozen to a few dozen lines---but
+they shouldn't ever be much longer than that,
+or the next person who reads it won't be able to understand what's going on.
 
+### The Call Stack
+
+
+Let's take a closer look at what happens when we call 
+`fahr_to_celcius(32.0)`.
+To make things clearer, we'll start by putting the initial value 32.0
+in a variable and store the final result in one as well:
+
+~~~
+original = 32.0;
+final = fahr_to_celcius(original);
+~~~
+{:class="in"}
+
+The diagram below shows what memory looks like after the
+first line has beene executed:
+
+<!-- FIXME: Writeup about Call Stacks -->
+
+
+
+### Testing and Documentation
+
+Once we start putting things in functions so that we can
+re-use them, we need to start testing that those functions are 
+working correctly.
+To see how to do this, let's write a function to center a 
+dataset around a particular value:
+
+~~~
+function out = center(data, desired)
+    out = (data - mean(data)) + desired
+~~~
+{:class="in"}
+
+We could test this on our actual data, but since we
+don't know what the values ought to be,
+it will be hard to tell if the result was correct,
+Instead, let's use to create a matrix of 0's, and then center that
+around 3:
+
+~~~
+z = zeros(2,2);
+center(z, 3)
+~~~
+{:class="in"}
+
+~~~
+ans =
+
+   3   3
+   3   3
+~~~
+{:class="out"}
+
+That looks right, let's try center on our real data:
+
+~~~
+data = csvread('inflammation-01.csv');
+centered = center(data(:), 0)
+~~~
+{:class="in"}
+
+It's hard to tell from the default output whether the
+result is correct--this is often the case when working with
+fairly large arrays--but, there are a few simple tests that
+will reassure us.
+
+Let's calculate some simple statistics:
+
+~~~
+disp([min(data(:)), mean(data(:)), max(data(:))])
+~~~
+{:class="in"}
+
+~~~
+0.00000    6.14875   20.00000
+~~~
+{:class="out"}
+
+And let's do the same after applying our `center` function
+to the data:
+
+~~~
+disp([min(centered(:)), mean(centered(:)), max(centered(:))])
+~~~
+{:class="in"}
+
+~~~
+-6.1487e+00  -2.2962e-14   1.3851e+01
+~~~
+{:class="out"}
+
+<!-- FIXME: challenge -->
+
+That seems almost right, the original mean
+was about 6.1, so the lower bound from zero is now about -6.1.
+The mean of the centered data isn't quite zero--we'll explore
+why not in the challenges--but it's pretty close. We can even
+go further and check that the standard
+deviation hasn't changed:
+
+
+~~~
+std(data(:)) - std(centered)
+~~~
+{:class="in"}
+
+~~~
+5.3291e-15
+~~~
+{:class="out"}
+
+
+The difference is very small. It's still possible that our function
+is wrong, but it seems unlikely enough that we should probable
+get back to doing our analysis. We have one more task first, though:
+we should write some [documentation](../../gloss.html#documentation)
+for our function to remind ourselves later what it's for and
+how to use it.
+
+~~~
+function out = center(data, desired)
+    %   Center data around a desired value.
+    %
+    %       center(DATA, DESIRED) 
+    %
+    %   Returns a new array containing the values in
+    %   DATA centered around the value.
+
+    out = (data  - mean(data)) + desired;
+~~~
+{:class="in"}
+
+Comment lines immediately below the function definition line
+are called "help text". Typing `help (function name)` brings
+up the help text for that function:
+
+~~~
+help center
+~~~
+{:class="in"}
+
+~~~
+Center data around a desired value.
+
+    center(DATA, DESIRED) 
+
+Returns a new array containing the values in
+DATA centered around the value.
+~~~
+{:class="out"}
+
+<!-- The Defining Defaults section should appear after loops
+     and conditionals -->
