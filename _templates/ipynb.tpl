@@ -35,13 +35,11 @@ root: ../..
 {%- endblock display_data -%}
 
 {% block markdowncell %}
-{% if 'cell_tags' in cell.metadata %}
-<div class="{{ cell.metadata['cell_tags'][0] }}">
-{{ cell.source  | markdown2html | strip_files_prefix }}
+{% if 'cell_tags' in cell.metadata and cell.metadata['cell_tags'] %}
+<div class="{{ cell.metadata['cell_tags'][0] }}" markdown="1">
+{{ cell.source | strip_files_prefix }}
 </div>
 {% else %}
-<div>
-{{ cell.source  | markdown2html | strip_files_prefix }}
-</div>
+{{ cell.source | strip_files_prefix }}
 {% endif %}
 {%- endblock markdowncell %}
