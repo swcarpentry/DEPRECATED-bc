@@ -67,9 +67,15 @@ that depend on a record
 when that record is deleted.
 See also: [referential integrity](#referential-integrity).
 
-**<a name="case-insensitive">case insensitive</a>**:
-Treating text as if upper and lower case characters were the same.
-See also: [case sensitive](#case-sensitive).
+**case insensitive**: <a name="case-insensitive"></a>
+Treating text as if upper and lower case characters were the same
+(e.g., "apple" is treated the same way as "Apple"). See also:
+[case sensitive](#case-sensitive).
+
+**case sensitive**: <a name="case-sensitive"></a>
+Treating text as if upper and lower case characters were *not* the
+same (e.g., "apple" is treated differently from "Apple"). See also:
+[case insensitive](#case-insensitive).
 
 **<a name="catch">catch</a>** (an exception):
 To handle an [exception](#exception) that has been [raised](#raise)
@@ -578,7 +584,14 @@ The practice of writing unit tests *before* writing the code they test.
 **<a name="timestamp">timestamp</a>**:
 A record of when a particular event occurred.
 
-**<a name="tuple">tuple</a>**:
+**traceback**: <a name="traceback"></a>
+The text that is printed when a program encounters an error. It
+includes information about what the program had been executing when
+the error occurred (and in particular, the file name and line number),
+the name or category of the error, and a more detailed message about
+the error.
+
+**tuple**: <a name="tuple"></a>
 An [immutable](#immutable) [sequence](#sequence) of values.
 
 **<a name="twos-complement">two's complement</a>**:

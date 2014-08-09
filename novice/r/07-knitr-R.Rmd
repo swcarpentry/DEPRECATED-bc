@@ -3,10 +3,10 @@ layout: lesson
 root: ../..
 ---
 
-
-```{r, echo=FALSE}
-opts_chunk$set(results='hide')
+```{r, include = FALSE}
+source("chunk_options.R")
 ```
+
 # Taking notes and creating reports:
 
 ## Introducing Knitr

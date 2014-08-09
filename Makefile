@@ -52,6 +52,7 @@ MOST_SRC = \
 	 team.md \
 	 novice/shell/index.md $(sort $(wildcard novice/shell/??-*.md)) \
 	 novice/git/index.md $(sort $(wildcard novice/git/??-*.md)) \
+	 novice/hg/index.md $(sort $(wildcard novice/hg/??-*.md)) \
 	 novice/python/index.md $(sort $(wildcard novice/python/??-*.md)) \
 	 novice/sql/index.md $(sort $(wildcard novice/sql/??-*.md)) \
 	 novice/extras/index.md $(sort $(wildcard novice/extras/??-*.md)) \
@@ -65,14 +66,17 @@ MOST_SRC = \
 # All source pages (including things not in the book).
 ALL_SRC = \
 	contents.md \
+        $(wildcard intermediate/regex/*.md) \
 	$(wildcard intermediate/python/*.md) \
 	$(wildcard intermediate/doit/*.md) \
+	$(wildcard slides/*.html) \
 	$(MOST_SRC)
 
 # Other files that the site depends on.
 EXTRAS = \
        $(wildcard css/*.css) \
-       $(wildcard css/*/*.css)
+       $(wildcard css/*/*.css) \
+       $(wildcard _layouts/*.html)
 
 # Principal target files
 INDEX = $(SITE)/index.html
@@ -102,7 +106,8 @@ BOOK_MD = ./book.md
 # file as the lessons.
 $(BOOK_MD) : $(MOST_SRC) bin/make-book.py
 	python bin/make-book.py $(MOST_SRC) > $@
-	sed -i 's/\.\.\/\.\.\/gloss.html#/#g:/g' $@
+	sed -i.bak 's/\.\.\/\.\.\/gloss.html#/#g:/g' $@
+	rm book.md.bak
 
 $(BOOK_HTML): $(BOOK_MD)
 	make -B site
@@ -179,4 +184,12 @@ tidy :
 ipynb :
 	make -f ipynb.mk
 
+## rmd      : convert R Markdown files to Markdown.
+#  This uses an auxiliary Makefile 'rmd.mk'.
+rmd :
+	make -f rmd.mk
+
 ## ---------------------------------------
+
+
+.PHONY: all book check clean commands contribs epub fixme gloss install ipynb site tidy rmd

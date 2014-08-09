@@ -1,0 +1,260 @@
+---
+layout: slides
+title: "Software Carpentry: Introduction"
+root: ..
+datetime: June 2014
+website: http://software-carpentry.org
+---
+<section>
+  <h2>&nbsp;</h2>
+  <img src="{{page.root}}/img/software-carpentry-large.png" alt="Software Carpentry logo" />
+  <h1>Welcome</h1>
+  <aside class="notes">
+    Hello, and welcome to Software Carpentry.
+  </aside>
+</section>
+
+<section>
+  <h1>Our Mission</h1>
+  <p>
+    Teach basic lab skills for scientific computing
+    <br/>
+    to make researchers more productive.
+  </p>
+  <aside class="notes">
+    Our goal is to teach basic lab skills for scientific computing
+    to researchers in fields as diverse as cosmology, oncology, and economics.
+  </aside>
+</section>
+
+<section>
+  <h1>What We Teach</h1>
+  <div class="container">
+    <div class="fragment span5">
+      the Unix shell
+      <br/>
+      Git and GitHub
+      <br/>
+      Python or R
+      <br/>
+      SQL
+    </div>
+    <div class="fragment">
+      <div class="span1">
+	&rArr;
+	<br/>
+	&rArr;
+	<br/>
+	&rArr;
+	<br/>
+	&rArr;
+      </div>
+      <div class="span6">
+	automate repetitive tasks
+	<br/>
+	track and share work
+	<br/>
+	build modular code
+	<br/>
+	manage data
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    We will cover the basics of the Unix shell, version control with Git, programming in Python or R, and using SQL.
+    What we're really teaching, though, is how to automate repetitive tasks,
+    how to track and share work,
+    how to grow a program in a modular, testable, reusable way,
+    and how to structure data.
+  </aside>
+</section>
+
+<section>
+  <h1>Science!</h1>
+  <ul>
+    <li>
+      We actually know a lot about both learning and software development.
+    </li>
+    <li class="fragment">
+      Base what and how we teach on the best available evidence.
+      <ul class="fragment">
+	<li><a href="http://www.amazon.com/How-Learning-Works-Research-Based-Principles/dp/0470484101/"><em>How Learning Works</em></a></li>
+	<li><a href="http://www.amazon.com/Making-Software-Really-Works-Believe/dp/0596808321/"><em>Making Software</em></a></li>
+      </ul>
+    </li>
+  </ul>
+  <aside class="notes">
+    Three themes will run through our teaching.
+    The first is that we actually know a fair bit about learning and software development&mdash;not everything,
+    but more than most people realize.
+    As far as possible,
+    what we teach and how we teach it is based on the best available evidence,
+    because that's what scientists are supposed to do.
+  </aside>
+</section>
+
+<section>
+  <h1>Hands On</h1>
+  <ul>
+    <li>
+      <strike>Slides</strike>
+    </li>
+    <li class="fragment">
+      Use sticky notes to show us how you're doing.
+    </li>
+    <li class="fragment">
+      And for feedback at breaks.
+    </li>
+  </ul>
+  <aside class="notes">
+    In particular,
+    we don't teach with slides:
+    we do everything live in front of you,
+    using the same tools we use in real life.
+    In turn,
+    we rely on you to put a green or red sticky on your laptop
+    to tell us when things are going well and when they're not.
+    We'd also be grateful if you could use them to give us feedback at each break:
+    write one thing that's gone well,
+    or one thing you've learned that you think is useful,
+    on the green sticky,
+    and one thing that confused you or didn't work on the red one,
+    and hand them in when you go out for coffee or lunch.
+  </aside>
+</section>
+
+<section>
+  <h1>Seven Plus or Minus Two</h1>
+  <ul>
+    <li>
+      Short-term memory can only hold 7&plusmn;2 items at once.
+    </li>
+    <li class="fragment">
+      Must structure programs and programming to fit this limit.
+    </li>
+  </ul>
+  <aside class="notes">
+    The second theme is that human short-term memory can only keep about seven things straight at once.
+    If the number of facts you need to hold in your head to write or understand the next line of code crosses this threshold,
+    your error rate will go up and your productivity will go down.
+    The most important thing in programming is therefore to structure software so that
+    you only need to pay attention to a few things at once.
+  </aside>
+</section>
+
+<section>
+  <h1>Mental Fatigue</h1>
+  <ul>
+    <li>
+      Brains get tired after 45-90 minutes of concentration.
+    </li>
+    <li class="fragment">
+      Must structure tasks so that they can be completed in this time or less.
+    </li>
+    <li class="fragment">
+      And move around in between to re-oxygenate.
+    </li>
+  </ul>
+  <aside class="notes">
+    The third theme is that your brain gets tired just like any other part of your body.
+    More specifically, under most circumstances you can only concentrate for 45-90 minutes
+    before you stop absorbing new information.
+    The second most important thing in programming is therefore to break down programming (and other things)
+    so that every task can be completed in this much time or less,
+    and to get up and move around for a few minutes between each work sprint
+    in order to flush fatigue poisons from your brain.
+    (Catching up on email and Facebook doesn't count.)
+  </aside>
+</section>
+
+<section>
+  <h1>Mental Fatigue</h1>
+  <ul>
+    <li>
+      Five 8-hour days per week maximizes total productivity<br/>(not just productivity per hour).
+      <ul class="fragment">
+	<li>
+	  See <a href="http://legacy.igda.org/why-crunch-modes-doesnt-work-six-lessons">Why Crunch Mode Doesn't Work</a> for a summary.
+	</li>
+      </ul>
+    </li>
+    <li class="fragment">
+      So the best way to finish your thesis is to get some rest.
+    </li>
+  </ul>
+  <aside class="notes">
+    In addition,
+    a century of research on sleep deprivation has shown that
+    forty hours of work per week, spaced out, maximizes total productivity.
+    Any more than this,
+    and the errors you're making don't just cancel out the extra time:
+    they actually set you back.
+    If you really want to get things done,
+    you should take a walk, read a book, cook a meal, and most importantly, get some sleep.
+  </aside>
+</section>
+
+<section>
+  <h1>Schedule</h1>
+  <div class="row-fluid">
+    <div class="span6">
+      <h3>Day 1</h3>
+      <table class="table table-striped">
+	<tr> <td>09:00</td> <td>Unix shell</td> </tr>
+	<tr> <td>12:00</td> <td>Lunch break</td> </tr>
+	<tr> <td>13:00</td> <td>Python</td> </tr>
+	<tr> <td>16:00</td> <td>Wrap-up</td> </tr>
+      </table>
+    </div>
+    <div class="span6">
+      <h3>Day 2</h3>
+      <table class="table table-striped">
+	<tr> <td>09:00</td> <td>Git and GitHub</td> </tr>
+	<tr> <td>12:00</td> <td>Lunch break</td> </tr>
+	<tr> <td>13:00</td> <td>Databases and SQL</td> </tr>
+	<tr> <td>16:00</td> <td>Wrap-up</td> </tr>
+      </table>
+    </div>
+  </div>
+  <aside class="notes">
+    We will run to 4:30 each day with breaks mid-morning and mid-afternoon for coffee,
+    and an hour for lunch around noon.
+  </aside>
+</section>
+
+<section>
+  <h1>To Learn More</h1>
+  <table class="table">
+    <tr>
+      <td>Our web site:</td>
+      <td><a href="http://software-carpentry.org">http://software-carpentry.org</a></td>
+    </tr>
+    <tr>
+      <td>Our blog:</td>
+      <td><a href="http://software-carpentry.org/blog/">http://software-carpentry.org/blog/</a></td>
+    </tr>
+    <tr>
+      <td>Follow us on Twitter:</td>
+      <td><a href="https://twitter.com/swcarpentry">https://twitter.com/swcarpentry</a></td>
+    </tr>
+    <tr>
+      <td>Contact us:</td>
+      <td><a href="mailto:admin@software-carpentry.org">admin@software-carpentry.org</a></td>
+    </tr>
+    <tr>
+      <td>Become an instructor:</td>
+      <td><a href="http://teaching.software-carpentry.org">http://teaching.software-carpentry.org</a></td>
+    </tr>
+  </table>
+  <img src="{{page.root}}/img/software-carpentry-banner.png" alt="Software Carpentry logo" />
+  <aside class="notes">
+    If you'd like to learn more,
+    please check out our web site,
+    subscribe to our blog,
+    follow us on Twitter,
+    or send us email.
+    And if you'd like to help us teach,
+    we run an instructor training course online&mdash;you'd be welcome on our team.
+    Now, let's get started...
+  </aside>
+</section>

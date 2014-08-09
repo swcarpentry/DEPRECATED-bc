@@ -1,5 +1,8 @@
-# Operators
-
+---
+layout: lesson
+root: ../..
+title: Operators
+---
 
 Let's go back to those measurements. Notebook \#1 has the site, date,
 and background evil level with single tabs as separators. Some of the
