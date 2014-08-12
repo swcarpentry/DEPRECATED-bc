@@ -379,6 +379,20 @@ she could modify her script to check for command-line parameters,
 and use `*[AB].txt` if none were provided.
 Of course, this introduces another tradeoff between flexibility and complexity.
 
+> #### Shell scripts aren't the only way to save and repeat commands - you can also create one-liners using an `alias`.
+> 
+> The `alias` command creates "shortcut" to another command.
+> The usage is simple:
+>	alias name='command'
+> For example:
+> 	alias ll='ls -alh'
+> This will create an alias called `ll`, which will use the `ls` command to print a long-style (`-l`) listing of all (`-a`) files in the current directory in human-readable (`-h`) size format.
+> `alias` is very useful when we want to simplify writing commonly used commands. Simple example: we can create alias for previously used command `history | tail -5`:
+>	alias lh='history | tail -5'
+> From now if we put in terminal where `alias` was set `lh`, we can see last 5 commands we have used.
+> `alias` command with no parameters list all aliases that are set.
+> `alias` can be used only in terminal where it was set.
+
 <div class="keypoints" markdown="1">
 
 #### Key Points
@@ -460,5 +474,9 @@ done
 # Script 3
 echo $*.dat
 ~~~
+
+</div>
+<div class="challenge" markdown="1">
+Create shortcut `..` using `alias` to simplify going up one directory.
 
 </div>
