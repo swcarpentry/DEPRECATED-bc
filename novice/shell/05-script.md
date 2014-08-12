@@ -401,6 +401,7 @@ Of course, this introduces another tradeoff between flexibility and complexity.
 > `alias` command with no parameters list all aliases that are set.
 > `alias` can be used only in terminal where it was set.
 
+
 <div class="keypoints" markdown="1">
 
 #### Key Points
@@ -484,6 +485,7 @@ echo $*.dat
 ~~~
 
 </div>
+
 <div class="challenge" markdown="1">
 Create shortcut `..` using `alias` to simplify going up one directory.
 
