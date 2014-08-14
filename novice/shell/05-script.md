@@ -6,6 +6,8 @@ title: Shell Scripts
 <div class="objectives" markdown="1">
 
 #### Objectives
+*   Introduce 2 ways to simplify complex commands
+*   Write a shell alias to run a command with complex switches
 *   Write a shell script that runs a command or series of commands for a fixed set of files.
 *   Run a shell script from the command line.
 *   Write a shell script that operates on a set of files defined by the user on the command line.
@@ -14,12 +16,35 @@ title: Shell Scripts
 </div>
 
 We are finally ready to see what makes the shell such a powerful programming environment.
-We are going to take the commands we repeat frequently and save them in files
-so that we can re-run all those operations again later by typing a single command.
+We are going to take the commands we repeat frequently and make them simpler to remember
+There are 2 ways to do do this, aliases and shell scripts.
 For historical reasons,
 a bunch of commands saved in a file is usually called a [shell script](../../gloss.html#shell-script),
 but make no mistake:
 these are actually small programs.
+
+Lets start with the simple ls command:
+
+<div class="file" markdown="1">
+~~~
+ls .
+~~~
+</div>
+
+This lists the files and directories in the current folder.
+There are many switches to the ls comman which can be found by examining the man page.
+For example:
+
+<div class="file" markdown="1">
+~~~
+ls -Shl . |more
+~~~
+</div>
+
+Gives full information on the files, sorted by file size, displayed in human readable format. If the output is longer than one page the display is paused at the end of each page.
+This is a lot of typing and switches are often forgotten.
+#Creating an alias saves typing and saves remembering all the switches we use often
+
 
 Let's start by going back to `molecules/` and putting the following line in the file `middle.sh`:
 
