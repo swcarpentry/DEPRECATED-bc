@@ -2,6 +2,23 @@
 
 <div class="row-fluid">
   <div class="span6">
+    <h4>Editor</h4>
+    <p>
+      Please install <a href="http://notepad-plus-plus.org/">Notepad++</a>, which is a
+      popular free code editor for Windows.
+      Be aware that you must add its installation directory to your system path
+      in order to launch it from the command line
+      (or have other tools like Git launch it for you).
+      Please ask your instructor to help you do this.
+    </p>
+    <h4>Git Bash</h4>
+    <p>
+      Install Git for Windows by download and running
+      <a href="http://msysgit.github.io/">the installer</a>.
+      This will provide you with both Git and Bash in the Git Bash program.
+    </p>
+  </div>
+  <div class="span6">
     <h4>Python</h4>
     <ul>
       <li>
@@ -13,46 +30,12 @@
         make sure to check <strong>Make Anaconda the default Python</strong>.
       </li>
     </ul>
-    <h4>Git Bash</h4>
-    <p>
-      Install Git for Windows by download and running
-      <a href="http://msysgit.github.io/">the installer</a>.
-      This will provide you with both Git and Bash in the Git Bash program.
-    </p>
-    <h4>Software Carpentry Installer</h4>
-    <p>This installer requires an active internet connection</p>
-    <p>After installing Python and Git Bash:</p>
-    <ul>
-      <li>
-        Download the <a href="{{site.windows_installer_path}}">installer</a>.
-      </li>
-      <li>
-        If the file opens directly in the browser select <strong>File&rarr;Save Page As</strong>
-        to download it to your computer.
-      </li>
-      <li>
-        Double click on the file to run it.
-      </li>
-    </ul>
-  </div>
-  <div class="span6">
-    <h4>Editor</h4>
-    <p>
-      <code>nano</code> is the editor installed by the Software Carpentry Installer,
-      it is a basic editor integrated into the lesson material.
-    </p>
-    <p>
-      Please also install <a href="http://notepad-plus-plus.org/">Notepad++</a>, which is a
-      popular free code editor for Windows.
-      Be aware that you must add its installation directory to your system path
-      in order to launch it from the command line
-      (or have other tools like Git launch it for you).
-      Please ask your instructor to help you do this.
-    </p>
     <h4>PostgreSQL</h4>
     <p>
       Install <a href="http://www.enterprisedb.com/products-services-training/pgdownload"> PostgreSQL9.3.5.1.</a>.
-      You will find the PostgreSQL documentation here: http://www.postgresql.org/ 
+      You will find the PostgreSQL documentation here: http://www.postgresql.org/
+      
+      To enable Python to work with PostgreSQL you need to install Psycopg2. For this download the appropriate release file from this site <a href="http://www.stickpeople.com/projects/python/win-psycopg/"> win-psycopg</a> and execute it. The proper Python version is 2.7. If you have a 64-bit architecture, you will probably need the 64 bit version.
     </p>
   </div>
 </div>
@@ -61,6 +44,13 @@
 
 <div class="row-fluid">
   <div class="span6">
+    <h4>Editor</h4>
+    <p>
+      We recommend
+      <a href="http://www.barebones.com/products/textwrangler/"> Text Wrangler</a>.
+      In a pinch, you can use <code>nano</code>,
+      which should be pre-installed.
+    </p>
     <h4>Bash</h4>
     <p>
       The default shell in all versions of Mac OS X is bash,
@@ -68,13 +58,6 @@
       the Terminal (found
       in <code>/Applications/Utilities</code>).  You may want
       to keep Terminal in your dock for this workshop.
-    </p>
-    <h4>Editor</h4>
-    <p>
-      We recommend
-      <a href="http://www.barebones.com/products/textwrangler/"> Text Wrangler</a>.
-      In a pinch, you can use <code>nano</code>,
-      which should be pre-installed.
     </p>
     <h4>Git</h4>
     <p>
@@ -132,13 +115,6 @@
       In a pinch, you can use <code>nano</code>,
       which should be pre-installed.
     </p>
-    <h4>PostgreSQL</h4>
-    <p>
-      Install PostgreSQL9.3.5.1. using "sudo apt-get install postgresql-9.3".
-      You will find the PostgreSQL documentation here: http://www.postgresql.org/  
-      To enable Python to interact with PostgreSQL you then need to "apt-get install python-dev", 
-      "apt-get install libq-dev" and "pip install psycopg2" in the Terminal. Pip install only works if you have Python - Pip installed.
-    </p>
   </div>
   <div class="span6">
     <h4>Python</h4>
@@ -174,6 +150,13 @@
         your <code>PATH</code> (this makes the Anaconda
         distribution the default Python).
       </li>
+    <h4>PostgreSQL</h4>
+    <p>
+      Install PostgreSQL9.3.5.1. using "sudo apt-get install postgresql-9.3".
+      You will find the PostgreSQL documentation here: http://www.postgresql.org/  
+      To enable Python to interact with PostgreSQL you then need to "apt-get install python-dev", 
+      "apt-get install libq-dev" and "pip install psycopg2" in the Terminal. Pip install only works if you have Python - Pip installed.
+    </p>
     </ol>
   </div>
 </div>
