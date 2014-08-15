@@ -30,13 +30,13 @@ You should not try to use the same repo for both purposes because:
 2.  you don't want a learner accidentally overwriting your lessons
     while you're trying to teach.
 
-You should also run `make check` before pushing changes to your `index.html` home page
+You should also run `make check` before pushing changes to your `index-en.html` home page
 to your repository.
 If you don't have Make installed,
 you can run the same checks using:
 
 ~~~
-python bin/swc_index_validator.py ./index.html
+python bin/swc_index_validator.py ./index-en.html
 ~~~
 
 This checks that the bootcamp's instructors are listed,

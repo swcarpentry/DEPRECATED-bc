@@ -9,4 +9,4 @@ For up-to-date information about software installation and configuration problem
 and their solutions,
 see [this wiki page](https://github.com/swcarpentry/bc/wiki/Configuration-Problems-and-Solutions).
 
-{% include setup.html %}
+{% include setup-en.html %}
