@@ -26,6 +26,17 @@ library(vegan)
 
 3. Set your working directory. Avoid changing the working directory once a script is underway. Use `setwd()` first . Do it at the beginning of a R session. Better yet, start R inside a project folder.
 
+Note: one should exercise caution when using `setwd()`. Setting the working directory in your script limits reproducibility because it prevents others from reusing your code on their machines if they are on different platforms or have different directory structures. A few additional things to watch out for when using `setwd()`: 
+
+* If/when your script crashes in the middle due to a bug, you leave the user in a different directory to where they started.
+* Does the directory you're changing to exist? Do you have the correct permissions to access it? What happens if that fails? Getting the following error usually indicates that the directory you're setting doesn't exist.
+
+```
+Error in setwd("~/path/to/working/directory") : cannot change working directory
+```
+
+As an alternative to using `setwd()`, consider using the convention that the user running the script should begin in the relevant directory on their machine and then use relative file paths (see below).
+
 4. Use `#` or `#-` to set off sections of your code so you can easily scroll through it and find things.
 
 5. If you have only one or a few functions, put them at the top of your code, so they are among the first things run. If you written many functions, put them all in their own .R file, and `source` them. Source will run all of these functions so that you can use them as you need them.
