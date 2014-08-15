@@ -26,13 +26,15 @@ Let's start by defining a function `fahr_to_kelvin` that converts temperatures f
 
 
 <pre class='in'><code>fahr_to_kelvin <- function(temp) {
-    kelvin <- ((temp - 32) * (5 / 9)) + 273.15
-    return(kelvin)
+  kelvin <- ((temp - 32) * (5 / 9)) + 273.15
+  return(kelvin)
 }</code></pre>
 
 We define `fahr_to_kelvin` by assigning it to the output of `function`.
 The list of parameter names are containted within parentheses.
 Next, the [body](../../gloss.html#function-body) of the function--the statements that are executed when it runs--is contained within curly braces (`{}`).
+The statements in the body are indented by two spaces.
+This makes the code easier to read but does not affect how the code operates. 
 
 When we call the function, the values we pass to it are assigned to those variables so that we can use them inside the function.
 Inside the function, we use a [return statement](../../gloss.html#return-statement) to send a result back to whoever asked for it.
@@ -68,7 +70,7 @@ However, it the function was redefined as follows
 
 
 <pre class='in'><code>fahr_to_kelvin <- function(temp) {
-    kelvin <- ((temp - 32) * (5/9)) + 273.15
+  kelvin <- ((temp - 32) * (5/9)) + 273.15
 }</code></pre>
 
 Now typing
@@ -88,8 +90,8 @@ Now that we've seen how to turn Fahrenheit into Kelvin, it's easy to turn Kelvin
 
 
 <pre class='in'><code>kelvin_to_celsius <- function(temp) {
-    celsius <- temp - 273.15
-        celsius
+  celsius <- temp - 273.15
+  celsius
 }
 
 paste('absolute zero in Celsius:', kelvin_to_celsius(0))</code></pre>
@@ -103,9 +105,9 @@ What about converting Fahrenheit to Celsius? We could write out the formula, but
 
 
 <pre class='in'><code>fahr_to_celsius <- function(temp) {
-    temp_k <- fahr_to_kelvin(temp)
-    result <- kelvin_to_celsius(temp_k)
-    result
+  temp_k <- fahr_to_kelvin(temp)
+  result <- kelvin_to_celsius(temp_k)
+  result
 }
 
 paste('freezing point of water in Celsius:', fahr_to_celsius(32.0))</code></pre>
@@ -191,9 +193,9 @@ We can then pull out the different words using indexing, where `words[1]` is the
 
 
 <pre class='in'><code>out <- function(word) {
-    letter  <- strsplit(word, "")[[1]]
-    abbrev  <- paste(letter[1], letter[length(letter)], sep="")
-    abbrev
+  letter  <- strsplit(word, "")[[1]]
+  abbrev  <- paste(letter[1], letter[length(letter)], sep="")
+  abbrev
 }
 
 out('helium')</code></pre>
@@ -293,8 +295,8 @@ Why go to all this trouble? Well, here's a function called `span()` that calcula
 
 
 <pre class='in'><code>span <- function(a) {
-    diff <- max(a) - min(a)
-    diff
+  diff <- max(a) - min(a)
+  diff
 }</code></pre>
 
 Notice `span()` assigns a value to variable called `diff`. We might very well use a variable with the same name (`diff`) to hold data:
@@ -327,8 +329,8 @@ Once we start putting things in functions so that we can re-use them, we need to
 
 
 <pre class='in'><code>center <- function(data, desired) {
-    new <- (data - mean(data)) + desired
-    new
+  new <- (data - mean(data)) + desired
+  new
 }</code></pre>
 
 We could test this on our actual data, but since we don't know what the values ought to be, it will be hard to tell if the result was correct. Instead, let's create a matrix of 0s and then center that around 3. This will make it simple to see if our function is working as expected:
@@ -408,8 +410,8 @@ A common way to put documentation in software is to add comments like this:
 
 <pre class='in'><code># return a new matrix containing the original data centered around the desired value.
 center <- function(data, desired){
-    new <- (data - mean(data)) + desired
-    new
+  new <- (data - mean(data)) + desired
+  new
 }</code></pre>
 
 Formal documentation for R functions is written in separate `.Rd` using a markup language similar to LaTeX. The **roxygen2** package allows R coders to write documentation alongside the function code and then process it into the appropriate `.Rd` files.
@@ -438,9 +440,9 @@ To understand what's going on, and make our own functions easier to use, let's r
 
 
 <pre class='in'><code>center <- function(data, desired = 0){
-    #return a new matrix containing the original data centered around the desired value.
-    new <- (data - mean(data)) + desired
-    new
+  #return a new matrix containing the original data centered around the desired value.
+  new <- (data - mean(data)) + desired
+  new
 }</code></pre>
 
 The key change is that the second argument is now written `desired = 0` instead of just `desired`. If we call the function with two arguments, it works as it did before:
@@ -494,7 +496,7 @@ The example below shows how R matches values to arguments
 
 
 <pre class='in'><code>display <- function(a=1, b=2, c=3) {
-    paste('a:', a, 'b:', b, 'c:', c)
+  paste('a:', a, 'b:', b, 'c:', c)
 }
 
 paste('no parameters:', display())</code></pre>

@@ -28,14 +28,16 @@ Let's start by defining a function `fahr_to_kelvin` that converts temperatures f
 
 ```{r}
 fahr_to_kelvin <- function(temp) {
-    kelvin <- ((temp - 32) * (5 / 9)) + 273.15
-    return(kelvin)
+  kelvin <- ((temp - 32) * (5 / 9)) + 273.15
+  return(kelvin)
 }
 ```
 
 We define `fahr_to_kelvin` by assigning it to the output of `function`.
 The list of parameter names are containted within parentheses.
 Next, the [body](../../gloss.html#function-body) of the function--the statements that are executed when it runs--is contained within curly braces (`{}`).
+The statements in the body are indented by two spaces.
+This makes the code easier to read but does not affect how the code operates. 
 
 When we call the function, the values we pass to it are assigned to those variables so that we can use them inside the function.
 Inside the function, we use a [return statement](../../gloss.html#return-statement) to send a result back to whoever asked for it.
@@ -59,7 +61,7 @@ However, it the function was redefined as follows
 
 ```{r}
 fahr_to_kelvin <- function(temp) {
-    kelvin <- ((temp - 32) * (5/9)) + 273.15
+  kelvin <- ((temp - 32) * (5/9)) + 273.15
 }
 ```
 
@@ -81,8 +83,8 @@ Now that we've seen how to turn Fahrenheit into Kelvin, it's easy to turn Kelvin
 
 ```{r}
 kelvin_to_celsius <- function(temp) {
-    celsius <- temp - 273.15
-        celsius
+  celsius <- temp - 273.15
+  celsius
 }
 
 paste('absolute zero in Celsius:', kelvin_to_celsius(0))
@@ -92,9 +94,9 @@ What about converting Fahrenheit to Celsius? We could write out the formula, but
 
 ```{r}
 fahr_to_celsius <- function(temp) {
-    temp_k <- fahr_to_kelvin(temp)
-    result <- kelvin_to_celsius(temp_k)
-    result
+  temp_k <- fahr_to_kelvin(temp)
+  result <- kelvin_to_celsius(temp_k)
+  result
 }
 
 paste('freezing point of water in Celsius:', fahr_to_celsius(32.0))
@@ -112,7 +114,7 @@ As we've seen in our print statements, we can use `paste` to concatenate strings
 
 ```{r, echo=FALSE, eval=TRUE}
 fence  <-  function(original, wrapper) {
-    paste(wrapper, original, wrapper, sep="")
+  paste(wrapper, original, wrapper, sep="")
 }
 ```
 
@@ -160,9 +162,9 @@ words[9]
 
 ```{r}
 out <- function(word) {
-    letter  <- strsplit(word, "")[[1]]
-    abbrev  <- paste(letter[1], letter[length(letter)], sep="")
-    abbrev
+  letter  <- strsplit(word, "")[[1]]
+  abbrev  <- paste(letter[1], letter[length(letter)], sep="")
+  abbrev
 }
 
 out('helium')
@@ -239,8 +241,8 @@ Why go to all this trouble? Well, here's a function called `span()` that calcula
 
 ```{r}
 span <- function(a) {
-    diff <- max(a) - min(a)
-    diff
+  diff <- max(a) - min(a)
+  diff
 }
 ```
 
@@ -271,8 +273,8 @@ Once we start putting things in functions so that we can re-use them, we need to
 
 ```{r}
 center <- function(data, desired) {
-    new <- (data - mean(data)) + desired
-    new
+  new <- (data - mean(data)) + desired
+  new
 }
 ```
 
@@ -326,8 +328,8 @@ A common way to put documentation in software is to add comments like this:
 ```{r}
 # return a new matrix containing the original data centered around the desired value.
 center <- function(data, desired){
-    new <- (data - mean(data)) + desired
-    new
+  new <- (data - mean(data)) + desired
+  new
 }
 ```
 
@@ -351,9 +353,9 @@ To understand what's going on, and make our own functions easier to use, let's r
 
 ```{r}
 center <- function(data, desired = 0){
-    #return a new matrix containing the original data centered around the desired value.
-    new <- (data - mean(data)) + desired
-    new
+  #return a new matrix containing the original data centered around the desired value.
+  new <- (data - mean(data)) + desired
+  new
 }
 ```
 
@@ -386,7 +388,7 @@ The example below shows how R matches values to arguments
 
 ```{r}
 display <- function(a=1, b=2, c=3) {
-    paste('a:', a, 'b:', b, 'c:', c)
+  paste('a:', a, 'b:', b, 'c:', c)
 }
 
 paste('no parameters:', display())
