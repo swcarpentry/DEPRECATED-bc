@@ -1,235 +1,240 @@
-+---
- +layout: slides
- +title: "Why should I use R?"
- +root: ..
- +datetime: July 2014
- +website: http://software-carpentry.org
- +---
- +<section>
- +  <h2>&nbsp;</h2>
- +  <img src="{{page.root}}/img/software-carpentry-large.png" alt="Software Carpentry logo" />
- +  <h1>{{page.title}}</h1>
- +  <aside class="notes">
- +    Hello, and welcome to the R section of the Software Carpentry bootcamp.
- +    We will introduce you to the R Statistical programming environment.
- +  </aside>
- +</section>
- +
- +<section>
- +  <h2>What It Is?</h2>
- +  <p class="fragment">
- +     A statistical analysis package, a language, and a way of life.
- +  </p>
- +  <p class="fragment">
- +     A number of sophisticated analyses are available straight out of the box.
- +  </p>    
- +  <p class="fragment">
- +    Software for data visualisation
- +  </p>
- +  <p class="fragment">
- +    A Full-featured programming language that allows development of more specialized packages.
- +  </p>
- +  <p class="fragment">
- +    A staggering number of free, specialized packages that extend core functionality.
- +  </p>   
- +  <p class="fragment">
- +    <strong>Free!</strong>
- +  </p>
- +  <p class="fragment">
- +    <strong>R has a great community - R Geeks everywhere!</strong>
- +  </p>
- +  <aside class="notes">
- +    So for those of you who have never encountered R before, what is it? R is a statistical programming language which is used to:
- +     - process and analyse data
- +     - visualise data, and generate publication quality graphics
- +    It is also a programming language, allowing you to:
- +     - develop analysis pipelines
- +     - develop new statistical methods
- +    It is also a free open-source project, making it completely free to download and extend.
- +  </aside>
- +</section>
- +
- +<section>
- +  <h2>Why R and not &lt;X&gt;?</h2>
- +  <p class="fragment">
- +    Prepackaged with common statistics and methods
- +  </p>
- +  <p class="fragment">
- +    If something is missing, there's a package for that!
- +  </p>
- +  <aside class="notes">
- +    So why use or learn R for data analysis, instead of another language or platform?
- +    Not only does R come prepackage with pretty much any statistical model or test you can think of,
- +    but its also easy to extend and install add-on packages making it one of the most flexible and sophisticated options available
- +    for statistical analysis.
- +    The learning curve can be a bit steep at first, but once
- +    you master the basics you will be amazed at what you can do!
- +  </aside>
- +</section>
- +
- +<section>
- +  <h1>Packages</h1>
- +  <p>Contains cutting edge research</p>
- +  <ol class="fragment"> 
- +    <li>5000+ add on packages in CRAN</li>
- +    <li>800+ on Bioconductor</li>
- +    <li>100+ on github</li>
- +  </ol>
- +  <br />
- +  <br />
- +  <p class="fragment">
- +    <a href="http://cran.r-project.org/web/views/" alt="CRAN Task views">CRAN Task views</a>
- +  </p>
- +  <aside class="notes">
- +    As a result its used by researchers and industry all over the world, 
- +    not only for their analyses, but also for method development. This means that R is cutting edge, new methods are often available
- +    in R long before they're implemented in other languages or platforms.
- +    In November last year, there were more than 5000 statistical and general purpose packages available in CRAN, along with many domain specific
- +    packages like those specific to life sciences research.
- +    <a href="http://www.r-bloggers.com/cran-now-has-5000-r-packages/" alt="Source for Statistics">source</a>
- +    Now this might seem like an intimidating number of packages, but there is a central list called "CRAN Task views" which maintains a list
- +    of packages grouped by task, so you can often go there if you only have a vague idea of what you need, or are exploring options in terms of
- +    functionality you need to solve a given problem.
- +  </aside>
- +</section>
- +
- +<section>
- +  <h1>Learn More</h1>
- +  <a href="http://cran.r-project.org/" alt="Link to CRAN for R download">http://cran.r-project.org/</a>
- +  <br />
- +  <a href="http://www.rstudio.com/" alt="Link to RStudio" class="fragment">http://www.rstudio.com/</a>
- +  <aside class="notes">
- +    So if you haven't done so already, you can download R, or find out more from CRAN,
- +    And for the bootcamp we'll also be using RStudio, a popular and powerful front end platform for R.
- +  </aside>
- +</section>
- +
- +<section>
- +  <h1>Basic functionality</h1>
- +  <ul>
- +    <li>
- +      Import and manipulate common data formats such as .txt, .csv. xls
- +    </li>
- +    <li class="fragment">
- +      Transform and analyze data using a broad array of built-in functionality
- +    </li>
- +    <li class="fragment">
- +      Basic data summaries and visualization, often in a single command
- +    </li>
- +  </ul>
- +  <aside class="notes">
- +    Basic R skills will eliminate the need for other statistical or data management
- +    software, giving you access to common analyses and visualization methods with no
- +    additional packages needed.  The learning curve can be somewhat steep for users
- +    who have never done any programming before, but the added flexibility and repeatability
- +    afforded by a more "hands-on" approach to stats are well worth the effort, even
- +    if you don't take advantage of R's extended functionality.
- +  </aside>
- +</section>
- +
- +<section>
- +  <h1>Extended functionality</h1>
- +  <ul>
- +    <li>
- +      Import and manipulate less common data formats (e.g., GIS data formats, image 
- +      stacks from medical imaging systems) using freely available libraries
- +    </li>
- +    <li class="fragment">
- +      Huge base of user-created packages for specialized applications
- +    </li>
- +    <li class="fragment">
- +      Generate publication-ready plots of any type you can imagine using
- +      extensive plotting and visualization libraries
- +    </li>
- +    <li class="fragment">
- +      Automate, innovate, and share with the community
- +    </li>
- +  </ul>
- +  <aside class="notes">
- +    Learning to code R well can open up a wealth of new opportunities for you.  You can
- +    do a better job of analyzing your own data, and save yourself time and money. When 
- +    you start to get really good at it, you can also contribute to the endlessly-growing 
- +    capabilities of R itself, allowing other scientists to use your home-grown
- +    analytical methods on their own data.
- +  </aside>
- +</section>
- +
- +<section>
- +  <h1>R as a programming language</h1>
- +  <ul>
- +    <li>
- +      New tools/ procedures can be written in R, shared and used by others.
- +    </li>
- +    <li class="fragment">
- +      Open-source and R packages
- +    </li>
- +    <li class="fragment">
- +      Integration with other tools
- +    </li>
- +  </ul>
- +  <aside class="notes">
- +    Don't know what a function does? Look at code yourself!
- +    Don't agree with how a function works? Re-write it!
- +    Extend R with more functions, data and graphics. CRAN (Comprehensive R archive network) 
- +    has >5000 packages and Bioconductor has almost 1000 packages.
- +    <a href="http://rpy.sourceforge.net/">Call R from Python.</a>
- +    <a href="http://rpython.r-forge.r-project.org/">Call Python from R.</a>
- +    Access MySQL database (RMySQL).
- +    Google Maps API (RGoogleMaps).
- + </aside>
- +</section>
- +
- +<section>
- +  <h1>Reproducible Research</h1>
- +  <ul>
- +  	<li>
- +		What if someone questions your analysis five years from now?  
- +		Will you remember what you did?
- +    </li>
- +    <li class="fragment">
- +      R scripts record the commands you use to analyze your data, so you can inspect and repeat them later.
- +    </li>
- +    <li class="fragment">
- +      Analyses done in GUIs are usually NOT reproducible - maybe you can 
- +      get a result easily, but will you remember HOW you did it when it comes
- +      time to write the paper or reanalyze the data?
- +    </li>
- +    
- +  </ul>
- +  <aside class="notes">
- +    R code is written in a plain text file. Running the same code on the same data should reproduce
- +    the exact same results. R "scripts" are easily shared. "Latex, Knitr, Sweave" etc allow seamless 
- +    integration of R code into a self-documenting report.
- +  </aside>
- +</section>
- +
- +<section>
- +  <h1>Syllabus</h1>
- +  <div class="row-fluid">
- +    <div class="span6">
- +      <ol>
- +	<li>R data types and objects</li>
- +	<li>Starting with data and data analysis</li>
- +	<li>R programming: Loops, Functions and Flow control</li>
- +	<li>R Visualisation</li>
- +	<li>R Packaging: Creating packages</li>
- +	<li>Testing</li>
- +	<li>knitr</li>
- +      </ol>
- +    </div>
- +    <div class="span6 fragment">
- +      <img src="{{page.root}}/img/books/The-R-Series.png" alt="Reproducible Reserch with R and RStudio Cover Page" />
- +    </div>
- +  </div>
- +  <aside class="notes">
- +    We will only explore a dozen or so commands in this lesson.
- +    Our real goal is to teach you how R works
- +    and how best to use it as a tool for reproducible research and data/ statistical analysis language.
- +    If you'd like to know more,
- +    we recommend C Gandrud's
- +    <em>Reproducible Research with R and RStudio</em>,
- +    which is good both as a tutorial and as a reference.
- +    and Y Xie's
- +    <em>Dynamic documents with R and knitr</em>
- +  </aside>
- +</section>
+---
+layout: slides
+title: "Why should I use R?"
+root: ..
+datetime: July 2014
+website: http://software-carpentry.org
+---
+<section>
+  <h2>&nbsp;</h2>
+  <img src="{{page.root}}/img/software-carpentry-large.png" alt="Software Carpentry logo" />
+  <h1>{{page.title}}</h1>
+  <aside class="notes">
+    Hello, and welcome to the R section of the Software Carpentry bootcamp.
+    We will introduce you to the R Statistical programming environment.
+  </aside>
+</section>
+
+<section>
+  <h2>What Is It?</h2>
+  <p class="fragment">
+     A statistical analysis package, a language, and a way of life.
+  </p>
+  <p class="fragment">
+     A number of sophisticated analyses are available straight out of the box.
+  </p>    
+  <p class="fragment">
+    Software for data visualisation
+  </p>
+  <p class="fragment">
+    A full-featured programming language that allows development of more specialized packages.
+  </p>
+</section>
+
+<section>
+  <h2>Continued.. </h2>
+  <p class="fragment">
+    A staggering number of free, specialized packages that extend core functionality.
+  </p>   
+  <p class="fragment">
+    <strong>Free!</strong>
+  </p>
+  <p class="fragment">
+    <strong>R has a great community - R Geeks everywhere!</strong>
+  </p>
+  <aside class="notes">
+    So for those of you who have never encountered R before, what is it? R is a statistical programming language which is used to:
+     - process and analyse data
+     - visualise data, and generate publication quality graphics
+    It is also a programming language, allowing you to:
+     - develop analysis pipelines
+     - develop new statistical methods
+    It is also a free open-source project, making it completely free to download and extend.
+  </aside>
+</section>
+
+<section>
+  <h2>Why R and not &lt;X&gt;?</h2>
+  <p class="fragment">
+    Prepackaged with common statistics and methods
+  </p>
+  <p class="fragment">
+    If something is missing, there's a package for that!
+  </p>
+  <aside class="notes">
+    So why use or learn R for data analysis, instead of another language or platform?
+    Not only does R come prepackage with pretty much any statistical model or test you can think of,
+    but its also easy to extend and install add-on packages making it one of the most flexible and sophisticated options available
+    for statistical analysis.
+    The learning curve can be a bit steep at first, but once
+    you master the basics you will be amazed at what you can do!
+  </aside>
+</section>
+
+<section>
+  <h1>Packages</h1>
+  <p>Contains cutting edge research</p>
+  <ol class="fragment"> 
+    <li>5000+ add on packages in CRAN</li>
+    <li>800+ on Bioconductor</li>
+    <li>100+ on github</li>
+  </ol>
+  <br />
+  <br />
+  <p class="fragment">
+    <a href="http://cran.r-project.org/web/views/" alt="CRAN Task views">CRAN Task views</a>
+  </p>
+  <aside class="notes">
+    As a result its used by researchers and industry all over the world, 
+    not only for their analyses, but also for method development. This means that R is cutting edge, new methods are often available
+    in R long before they're implemented in other languages or platforms.
+    In November last year, there were more than 5000 statistical and general purpose packages available in CRAN, along with many domain specific
+    packages like those specific to life sciences research.
+    <a href="http://www.r-bloggers.com/cran-now-has-5000-r-packages/" alt="Source for Statistics">source</a>
+    Now this might seem like an intimidating number of packages, but there is a central list called "CRAN Task views" which maintains a list
+    of packages grouped by task, so you can often go there if you only have a vague idea of what you need, or are exploring options in terms of
+    functionality you need to solve a given problem.
+  </aside>
+</section>
+
+<section>
+  <h1>Basic functionality</h1>
+  <ul>
+    <li>
+      Import and manipulate common data formats such as .txt, .csv. xls
+    </li>
+    <li class="fragment">
+      Transform and analyze data using a broad array of built-in functionality
+    </li>
+    <li class="fragment">
+      Basic data summaries and visualization, often in a single command
+    </li>
+  </ul>
+  <aside class="notes">
+    Basic R skills will eliminate the need for other statistical or data management
+    software, giving you access to common analyses and visualization methods with no
+    additional packages needed.  The learning curve can be somewhat steep for users
+    who have never done any programming before, but the added flexibility and repeatability
+    afforded by a more "hands-on" approach to stats are well worth the effort, even
+    if you don't take advantage of R's extended functionality.
+  </aside>
+</section>
+
+<section>
+  <h1>Extended functionality</h1>
+  <ul>
+    <li>
+      Import and manipulate less common data formats (e.g., GIS data formats, image 
+      stacks from medical imaging systems) using freely available libraries
+    </li>
+    <li class="fragment">
+      Huge base of user-created packages for specialized applications
+    </li>
+    <li class="fragment">
+      Generate publication-ready plots of any type you can imagine using
+      extensive plotting and visualization libraries
+    </li>
+    <li class="fragment">
+      Automate, innovate, and share with the community
+    </li>
+  </ul>
+  <aside class="notes">
+    Learning to code R well can open up a wealth of new opportunities for you.  You can
+    do a better job of analyzing your own data, and save yourself time and money. When 
+    you start to get really good at it, you can also contribute to the endlessly-growing 
+    capabilities of R itself, allowing other scientists to use your home-grown
+    analytical methods on their own data.
+  </aside>
+</section>
+
+<section>
+  <h1>R as a programming language</h1>
+  <ul>
+    <li>
+      New tools/ procedures can be written in R, shared and used by others.
+    </li>
+    <li class="fragment">
+      Open-source and R packages
+    </li>
+    <li class="fragment">
+      Integration with other tools
+    </li>
+  </ul>
+  <aside class="notes">
+    Don't know what a function does? Look at code yourself!
+    Don't agree with how a function works? Re-write it!
+    Extend R with more functions, data and graphics. CRAN (Comprehensive R archive network) 
+    has >5000 packages and Bioconductor has almost 1000 packages.
+    <a href="http://rpy.sourceforge.net/">Call R from Python.</a>
+    <a href="http://rpython.r-forge.r-project.org/">Call Python from R.</a>
+    Access MySQL database (RMySQL).
+    Google Maps API (RGoogleMaps).
+ </aside>
+</section>
+
+<section>
+  <h1>Reproducible Research</h1>
+  <ul>
+  	<li>
+		What if someone questions your analysis five years from now?  
+		Will you remember what you did?
+    </li>
+    <li class="fragment">
+      R scripts record the commands you use to analyze your data, so you can inspect and repeat them later.
+    </li>
+    <li class="fragment">
+      Analyses done in GUIs are usually NOT reproducible - maybe you can 
+      get a result easily, but will you remember HOW you did it when it comes
+      time to write the paper or reanalyze the data?
+    </li>
+    
+  </ul>
+  <aside class="notes">
+    R code is written in a plain text file. Running the same code on the same data should reproduce
+    the exact same results. R "scripts" are easily shared. "Latex, Knitr, Sweave" etc allow seamless 
+    integration of R code into a self-documenting report.
+  </aside>
+</section>
+
+<section>
+  <h1>Syllabus</h1>
+  <div class="row-fluid">
+    <div class="span6">
+      <ol>
+	<li>R data types and objects</li>
+	<li>Starting with data and data analysis</li>
+	<li>R programming: Loops, Functions and Flow control</li>
+	<li>R visualisation</li>
+	<li>R packaging: Creating packages</li>
+	<li>Testing</li>
+	<li>knitr</li>
+      </ol>
+    </div>
+    <div class="span6 fragment">
+      <img src="{{page.root}}/img/books/The-R-Series.png" alt="Reproducible Reserch with R and RStudio Cover Page" />
+    </div>
+  </div>
+  <aside class="notes">
+    We will only explore a dozen or so commands in this lesson.
+    Our real goal is to teach you how R works
+    and how best to use it as a tool for reproducible research and data/ statistical analysis language.
+    If you'd like to know more,
+    we recommend C Gandrud's
+    <em>Reproducible Research with R and RStudio</em>,
+    which is good both as a tutorial and as a reference.
+    and Y Xie's
+    <em>Dynamic documents with R and knitr</em>
+  </aside>
+</section>
+
+<section>
+  <h1>Learn More</h1>
+  <a href="http://cran.r-project.org/" alt="Link to CRAN for R download">http://cran.r-project.org/</a>
+  <br />
+  <a href="http://www.rstudio.com/" alt="Link to RStudio" class="fragment">http://www.rstudio.com/</a>
+  <aside class="notes">
+    So if you haven't done so already, you can download R, or find out more from CRAN,
+    And for the bootcamp we'll also be using RStudio, a popular and powerful front end platform for R.
+  </aside>
+</section>
+
