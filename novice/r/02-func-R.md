@@ -27,15 +27,26 @@ Let's start by defining a function `fahr_to_kelvin` that converts temperatures f
 
 <pre class='in'><code>fahr_to_kelvin <- function(temp) {
     kelvin <- ((temp - 32) * (5 / 9)) + 273.15
-    kelvin
+    return(kelvin)
 }</code></pre>
 
-The definition opens with the name of your new function, which is followed by the call to make it a `function` and a parenthesized list of parameters. You can have as many input parameters as you would like (but too many might be bad style). The body, or implementation, is surrounded by curly braces `{ }`. In many languages, the body of the function - the statements that are executed when it runs - must be indented, typically using 4 spaces. While this is not a mandatory requirement in R coding, we strongly recommend you to adopt this as good practice.
+We define `fahr_to_kelvin` by assigning it to the output of `function`.
+The list of parameter names are containted within parentheses.
+Next, the [body](../../gloss.html#function-body) of the function--the statements that are executed when it runs--is contained within curly braces (`{}`).
 
-When we call the function, the values we pass to it are assigned to those variables so that we can use them inside the function. The last line within the function is what R will evaluate as a returning value. Remember that the last line has to be a command that will print to the screen, and not an object definition, otherwise the function will return nothing - it will work, but will provide no output. For example, let's try running our function. Calling our own function is no different from calling any other function:
+When we call the function, the values we pass to it are assigned to those variables so that we can use them inside the function.
+Inside the function, we use a [return statement](../../gloss.html#return-statement) to send a result back to whoever asked for it.
+
+> **Tip:** One feature unique to R is that the return statement is not required.
+R automatically returns whichever variable is on the last line of the body of the function.
+Since we are just learning, we will explicitly define the return statement.
+
+Let's try running our function.
+Calling our own function is no different from calling any other function:
 
 
-<pre class='in'><code>fahr_to_kelvin(32)</code></pre>
+<pre class='in'><code># freezing point of water
+fahr_to_kelvin(32)</code></pre>
 
 
 
@@ -44,14 +55,16 @@ When we call the function, the values we pass to it are assigned to those variab
 
 
 
-<pre class='in'><code>paste('boiling point of water:', fahr_to_kelvin(212))</code></pre>
+<pre class='in'><code># boiling point of water
+fahr_to_kelvin(212)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] "boiling point of water: 373.15"
+<div class='out'><pre class='out'><code>[1] 373.1
 </code></pre></div>
 
-We've successfully called the function that we defined, and we have access to the value that we returned. However, it the function was redefined as follows
+We've successfully called the function that we defined, and we have access to the value that we returned.
+However, it the function was redefined as follows
 
 
 <pre class='in'><code>fahr_to_kelvin <- function(temp) {
