@@ -91,35 +91,38 @@ Now that we've seen how to turn Fahrenheit into Kelvin, it's easy to turn Kelvin
 
 <pre class='in'><code>kelvin_to_celsius <- function(temp) {
   celsius <- temp - 273.15
-  celsius
+  return(celsius)
 }
 
-paste('absolute zero in Celsius:', kelvin_to_celsius(0))</code></pre>
+#absolute zero in Celsius
+kelvin_to_celsius(0)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] "absolute zero in Celsius: -273.15"
+<div class='out'><pre class='out'><code>[1] -273.1
 </code></pre></div>
 
-What about converting Fahrenheit to Celsius? We could write out the formula, but we don't need to. Instead, we can compose the two functions we have already created:
+What about converting Fahrenheit to Celsius?
+We could write out the formula, but we don't need to.
+Instead, we can [compose](../../gloss.html#function-composition) the two functions we have already created:
 
 
 <pre class='in'><code>fahr_to_celsius <- function(temp) {
   temp_k <- fahr_to_kelvin(temp)
   result <- kelvin_to_celsius(temp_k)
-  result
+  return(result)
 }
 
-paste('freezing point of water in Celsius:', fahr_to_celsius(32.0))</code></pre>
+# freezing point of water in Celsius
+fahr_to_celsius(32.0)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] "freezing point of water in Celsius: 0"
+<div class='out'><pre class='out'><code>[1] 0
 </code></pre></div>
 
 This is our first taste of how larger programs are built: we define basic operations, then combine them in ever-large chunks to get the effect we want. 
-Real-life functions will usually be larger than the ones shown here - typically half a dozen to a few dozen lines - but they shouldn't ever be much longer than that, or the next person who reads it won't be able to understand what's going on. __Modular programming__
-
+Real-life functions will usually be larger than the ones shown here--typically half a dozen to a few dozen lines--but they shouldn't ever be much longer than that, or the next person who reads it won't be able to understand what's going on.
 
 #### Challenges
 
