@@ -20,18 +20,20 @@ library(reshape)
 library(vegan)
 ```
 
-3. Set your working directory. Avoid changing the working directory once a script is underway. Use `setwd()` first . Do it at the beginning of a R session. Better yet, start R inside a project folder.
+3. Set your working directory before `source()`ing a script, or start `R` inside your project folder:
 
-Note: one should exercise caution when using `setwd()`. Setting the working directory in your script limits reproducibility because it prevents others from reusing your code on their machines if they are on different platforms or have different directory structures. A few additional things to watch out for when using `setwd()`: 
+One should exercise caution when using `setwd()`. Changing directories in your script can limit reproducibility:
 
-* If/when your script crashes in the middle due to a bug, you leave the user in a different directory to where they started.
-* Does the directory you're changing to exist? Do you have the correct permissions to access it? What happens if that fails? Getting the following error usually indicates that the directory you're setting doesn't exist.
+* If/when your script crashes due to a bug, you might leave the user in a different directory to where they started, and if they call the script again this will cause further problems.
+* `setwd()` will fail and crash your script if the directory you're trying to change to doesn't exit, or the user doesn't have the correct permissions to access it.
+* It is not cross-platform compatible. File paths on Mac or Linux machines use `/` to denote a directory, while Windows uses `\`, so if your script will not work as expected if you share between Windows and Mac/Linux, or vice versa.
 
+The following error message indicates that your script is crashing due to a problem encountered by `setwd()`:
 ```
 Error in setwd("~/path/to/working/directory") : cannot change working directory
 ```
 
-As an alternative to using `setwd()`, consider using the convention that the user running the script should begin in the relevant directory on their machine and then use relative file paths (see below).
+Consider using the convention that the user running the script should begin in the relevant directory on their machine and then use relative file paths (see below). 
 
 4. Use `#` or `#-` to set off sections of your code so you can easily scroll through it and find things.
 
