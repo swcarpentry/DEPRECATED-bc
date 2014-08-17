@@ -26,7 +26,7 @@ One should exercise caution when using `setwd()`. Changing directories in your s
 
 * If/when your script crashes due to a bug, you might leave the user in a different directory to where they started, and if they call the script again this will cause further problems.
 * `setwd()` will fail and crash your script if the directory you're trying to change to doesn't exit, or the user doesn't have the correct permissions to access it.
-* It is not cross-platform compatible. File paths on Mac or Linux machines use `/` to denote a directory, while Windows uses `\`, so if your script will not work as expected if you share between Windows and Mac/Linux, or vice versa.
+* It is not cross-platform compatible. File paths on Mac or Linux machines use `/` to denote a directory, while Windows uses `\`, so your script will not work as expected if you share between Windows and Mac/Linux, or vice versa.
 
 The following error message indicates that your script is crashing due to a problem encountered by `setwd()`:
 ```
