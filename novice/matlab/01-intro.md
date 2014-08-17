@@ -790,7 +790,7 @@ title("Maximum inflammation per day");
 </div>
 
 ~~~
-plot(min(data, [], 1));
+plot(min(patient_data, [], 1));
 title("Minimum inflammation per day");
 ~~~
 {:class="in"}
