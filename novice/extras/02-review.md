@@ -76,6 +76,12 @@ which notifies Dracula that Wolfman wants to merge some changes into Dracula's r
 
 <img src="img/git-forking-03.svg" alt="After Creating Pull Request" />
 
+## TODO: explain why it is a pull request ("Wolfman requests Dracula to pull
+## Wolfman's changes into his repository")
+
+## TODO: should we put a screenshot from the GitHub interface, showing how to
+## start a pull request (click on the green button, select repos...)
+
 A pull request is a merge waiting to happen.
 When Dracula views it online,
 he can see and comment on the changes Wolfman wants to make.
@@ -91,6 +97,8 @@ and so on.
 Wolfman can then update his code,
 commit locally,
 and push those changes to GitHub to update the pull request.
+
+## TODO: Explain how to comment on a pull request
 
 This process is exactly like peer review of papers, though usually much faster.
 In large open source projects like Firefox,
