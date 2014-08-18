@@ -239,6 +239,49 @@ The diagram below shows what memory looks like after the first line has been exe
 
 <img src="../python/img/python-call-stack-01.svg" alt="Call Stack (Initial State)" />
 
+When we call `fahr_to_celsius`, R *doesn't* create the variable `temp` right away.
+Instead, it creates something called a [stack frame](../../gloss.html#stack-frame) to keep track of the variables defined by `fahr_to_kelvin`.
+Initially, this stack frame only holds the value of `temp`:
+
+<img src="../python/img/python-call-stack-02.svg" alt="Call Stack Immediately After First Function Call" />
+
+When we call `fahr_to_kelvin` inside `fahr_to_celsius`, R creates another stack frame to hold `fahr_to_kelvin`'s variables:
+
+<img src="../python/img/python-call-stack-03.svg" alt="Call Stack During First Nested Function Call" />
+
+It does this because there are now two variables in play called `temp`: the parameter to `fahr_to_celsius`, and the parameter to `fahr_to_kelvin`.
+Having two variables with the same name in the same part of the program would be ambiguous, so R (and every other modern programming language) creates a new stack frame for each function call to keep that function's variables separate from those defined by other functions.
+
+When the call to `fahr_to_kelvin` returns a value, R throws away `fahr_to_kelvin`'s stack frame and creates a new variable in the stack frame for `fahr_to_celsius` to hold the temperature in Kelvin:
+
+<img src="../python/img/python-call-stack-04.svg" alt="Call Stack After Return From First Nested Function Call" />
+
+It then calls `kelvin_to_celsius`, which means it creates a stack frame to hold that function's variables:
+
+<img src="../python/img/python-call-stack-05.svg" alt="Call Stack During Call to Second Nested Function" />
+
+Once again, R throws away that stack frame when `kelvin_to_celsius` is done
+and creates the variable `result` in the stack frame for `fahr_to_celsius`:
+
+<img src="../python/img/python-call-stack-06.svg" alt="Call Stack After Second Nested Function Returns" />
+
+Finally, when `fahr_to_celsius` is done, R throws away *its* stack frame and puts its result in a new variable called `final` that lives in the stack frame we started with:
+
+<img src="../python/img/python-call-stack-07.svg" alt="Call Stack After All Functions Have Finished" />
+
+This final stack frame is always there;
+it holds the variables we defined outside the functions in our code.
+What it *doesn't* hold is the variables that were in the various stack frames.
+If we try to get the value of `temp` after our functions have finished running, R tells us that there's no such thing:
+
+
+<pre class='in'><code>temp</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>Error: object 'temp' not found
+</code></pre></div>
+
 _Discuss and draw a diagram showing what memory looks like after the first line has been executed. Point to the environment_
 
 When we call `fahr_to_celsius()`, R creates a new environment called the *evaluation environment* that is *local* to the function. This environment consists of two things
