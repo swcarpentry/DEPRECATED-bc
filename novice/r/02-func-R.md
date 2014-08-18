@@ -292,28 +292,41 @@ For context, R uses the terminology "environments" instead of frames.
 [chapter]: http://adv-r.had.co.nz/Environments.html
 [adv-r]: http://adv-r.had.co.nz/
 
-Why go to all this trouble? Well, here's a function called `span()` that calculates the difference between the mininum and maximum values in an array:
+Why go to all this trouble? Well, here's a function called `span` that calculates the difference between the mininum and maximum values in an array:
 
 
 <pre class='in'><code>span <- function(a) {
   diff <- max(a) - min(a)
-  diff
-}</code></pre>
+  return(diff)
+}
 
-Notice `span()` assigns a value to variable called `diff`. We might very well use a variable with the same name (`diff`) to hold data:
+dat <- read.table(file = "inflammation-01.csv", sep = ",")
+# span of inflammation data
+span(dat)</code></pre>
 
 
-<pre class='in'><code>diff <- c(46, 55, 26, 64, 31, 68, 100, 79, 39, 95)
+
+<div class='out'><pre class='out'><code>[1] 20
+</code></pre></div>
+
+Notice `span` assigns a value to variable called `diff`. We might very well use a variable with the same name (`diff`) to hold the inflammation data:
+
+
+<pre class='in'><code>diff <- read.table(file = "inflammation-01.csv", sep = ",")
+# span of inflammation data
 span(diff)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] 74
+<div class='out'><pre class='out'><code>[1] 20
 </code></pre></div>
 
-We don't expect the variable `diff` to have the value 74 after this function call, so the name `diff` cannot refer to the same variable defined inside `span()` as it does in your workspace (the global environment). And yes, we could probably choose a different name than `diff` for our variable in this case, but we don't want to have to read every line of R code we write that we use to see what variable names its functions use before calling any of those functions, just in case they change the values of our variables.
+We don't expect the variable `diff` to have the value 20 after this function call, so the name `diff` cannot refer to the same variable defined inside `span` as it does in as it does in the main body of our program (which R refers to as the global environment).
+And yes, we could probably choose a different name than `diff` for our variable in this case, but we don't want to have to read every line of code of the R functions we call to see what variable names they use, just in case they change the values of our variables.
 
-The big idea here is __encapsulation__, and it's the key to writing correct, comprehensible programs. A function's job is to turn several operations into one so that we can think about a single function call instead of a dozen or a hundred statements each time we want to do something. That only works if functions don't interfere with each other; if they do, we have to pay attention to the details once again, which quickly overloads our short-term memory.
+The big idea here is [encapsulation](../../gloss.html#encapsulation), and it's the key to writing correct, comprehensible programs.
+A function's job is to turn several operations into one so that we can think about a single function call instead of a dozen or a hundred statements each time we want to do something.
+That only works if functions don't interfere with each other; if they do, we have to pay attention to the details once again, which quickly overloads our short-term memory.
 
 #### Challenges
 
