@@ -189,6 +189,10 @@ original <- 32
 final    <- fahr_to_celsius(original)
 ```
 
+The diagram below shows what memory looks like after the first line has been executed:
+
+<img src="../python/img/python-call-stack-01.svg" alt="Call Stack (Initial State)" />
+
 _Discuss and draw a diagram showing what memory looks like after the first line has been executed. Point to the environment_
 
 When we call `fahr_to_celsius()`, R creates a new environment called the *evaluation environment* that is *local* to the function. This environment consists of two things
