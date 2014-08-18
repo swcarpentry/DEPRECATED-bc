@@ -282,64 +282,15 @@ If we try to get the value of `temp` after our functions have finished running, 
 <div class='out'><pre class='out'><code>Error: object 'temp' not found
 </code></pre></div>
 
-_Discuss and draw a diagram showing what memory looks like after the first line has been executed. Point to the environment_
+> **Tip:** The explanation of the stack frame above was very general and the basic concept will help you understand most languages you try to program with.
+However, R has some unique aspects that can be exploited when performing more complicated operations.
+We will not be writing anything that requires knowledge of these more advanced concepts.
+In the future when you are comfortable writing functions in R, you can learn more by reading the [R Language Manual][man] or this [chapter][] from [Advanced R Programming][adv-r] by Hadley Wickham.
+For context, R uses the terminology "environments" instead of frames.
 
-When we call `fahr_to_celsius()`, R creates a new environment called the *evaluation environment* that is *local* to the function. This environment consists of two things
-
- 1. a *frame*, which contains the symbol-value pairs (the assignment, called *binding*, of a value to a variable),
- 2. an *enclosure*, which points to the enclosing environment, i.e. the environment where the function was called.
-
-Initially, the *frame* only holds the object `temp`. Until is is used, `temp` in *unevaluated*; in effect it is a placeholder for whatever value we passed to the `temp` argument, which gets resolved as needed. This is known as *lazy evaluation*.
-
-*Scoping* refers to the rules by which languages look up the value of a variable (symbol). R has two type of scoping rules
-
- 1. *lexically* scoping, and
- 2. *dynamic* scoping.
-
-We won't discuss *dynamic* scoping heres. Basically, *lexical* scoping means that R looks up values for variables (symbols) based on how functions were nested when they were *called*. If a name isn't defined inside a function, R will look for the name in in the *parent frame*, the frame in the calling environment that is one where the function was called
-
-
-<pre class='in'><code>a <- 10
-f <- function() {
-  b <- 5
-  a * b
-}
-f()</code></pre>
-
-
-
-<div class='out'><pre class='out'><code>[1] 50
-</code></pre></div>
-There is no name `a` defined within the body of `f()`. Following lexical scoping rules, R will look in the *parent frame* of `f()` for a name `a`, which is found and has value `10`. As `f()` is defined in the workspace, the enclosing environment of `f()` is the *global environment*. Regardless of how functions are nested when called, R will always look for a name from the inside out until the global environment is reached.
-
-When we nest a call to `fahr_to_kelvin()` inside `fahr_to_celsius()`, R creates another local environment to hold the variables involved in the evaluation of `fahr_to_kelvin()`.
-
-When `fahr_to_celsius()` is called, it in turn calls `fahr_to_kelvin()`. As `temp` is passed to `fahr_to_kelvin()`, R evaluates `temp` to derive its value and this variable is passed to `fahr_to_kelvin()`. Now there are two `temp`s in play
-
- 1. the `temp` local to `fahr_to_kelvin()`, and
- 2. the `temp` local to `fahr_to_celcius()`.
-
-As far as `fahr_to_kelvin()` is concerned there is only one `temp`; the `temp` local to it *masks* the other `temp`. That R knows which versions of variables with the same name belong to which function is due to environments.
-
-When the call to `fahr_to_kelvin()` returns a value R throws away `fahr_to_kelvin()`'s frame and creates a new variable `temp_k` in the frame for `fahr_to_celsius()` to hold the temperature in Kelvin.
-
-`kelvin_to_celsius()` is then called and a new environment to hold that function's variables is created.
-
-Once again, R throws away that stack frame when `kelvin_to_celsius()` is done and creates the variable `result` in the frame of `fahr_to_celsius()`
-
-Finally, when `fahr_to_celsius()` returns, R throws away its environment and puts `result` in a new variable called `final` that lives in the *global environment* where we called `fahr_to_celcius()` in the first place.
-
-The summary of this is that the parent frame (the global environment is the parent frame of `fahr_to_celsius()`, the local environment of `fahr_to_celsius()` is the parent frame of `fahr_to_kelvin()`) is the environment where a function was defined (lexical scoping), the parent frame is the frame/environment from which the function was called.
-
-The *global environment* is the final environment/frame and is always present; it holds the variables we defined outside the functions in our code. What it doesn't hold are the variables created during function calls. If we try to get the value of `temp` *after* our functions have finished running, R tells us that there's no such thing:
-
-
-<pre class='in'><code>paste('final value of temp after all function calls:', temp)</code></pre>
-
-
-
-<div class='out'><pre class='out'><code>Error: object 'temp' not found
-</code></pre></div>
+[man]: http://cran.r-project.org/doc/manuals/r-release/R-lang.html#Environment-objects
+[chapter]: http://adv-r.had.co.nz/Environments.html
+[adv-r]: http://adv-r.had.co.nz/
 
 Why go to all this trouble? Well, here's a function called `span()` that calculates the difference between the mininum and maximum values in an array:
 
