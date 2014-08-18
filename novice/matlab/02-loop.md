@@ -3,7 +3,21 @@ layout: lesson
 root: ../..
 ---
 
+<div class="Objectives">
 
+### Objectives
+
+    * Learn how to write and save MATLAB scripts.
+    * Learn how to save MATLAB plots to disk.
+    * Explain what a for loop does.
+    * Correctly write for loops that repeat simple commands.
+    * Trace changes to a loop variable as the loop runs.
+    * Use a for loop to process multiple files.
+
+</div>
+
+<!-- FIXME: The 0 lesson should talk about the colon operator -->
+<!-- FIXME: Need to mention that strings are arrays -->
 <!-- FIXME: Decide on consistent string---single or double quotes? -->
 
 ## Saving Our Work
@@ -120,16 +134,13 @@ above commands each time. To do that we'll have to learn how to
 get the computer to repeat things.
 
 
-
-<!-- FIXME: The 0 lesson should talk about the colon operator -->
-
 ### For loops
 
 Suppose we want to print each character in the word "lead" on 
 a line of its own. One way is to use four `disp` statements:
 
 ~~~
-word = "lead";
+word = 'lead';
 
 disp(word(1));
 disp(word(2));
@@ -160,7 +171,7 @@ it produces an error, because we're asking for characters
 that don't exist.
 
 ~~~
-word = "tin"
+word = 'tin'
 
 disp(word(1));
 disp(word(2));
@@ -223,7 +234,7 @@ For our loop to deal appropriately with shorter or longer words,
 we have to change the first line of our loop by hand:
 
 ~~~
-word = "tin";
+word = 'tin';
 
 for i in 3
     disp(word(i));
@@ -239,7 +250,7 @@ n
 {:class="out"}
 
 
-Although this works, it's a bad way to write our loop:
+Although this works, it's not the best way to write our loop:
 
 * We might update `word` and forget to modify the loop to reflect that
   change.
@@ -251,7 +262,7 @@ Fortunately, MATLAB provides us with a convenient function to
 write a better loop:
 
 ~~~
-word = "aluminium"
+word = 'aluminium'
 
 for i = 1:length(word)
     disp(word(i));
@@ -272,18 +283,17 @@ m
 ~~
 {:class="out"}
 
-This is a much more robust loop, as it can deal indentically with
-words of arbitrary length. 
-
-Here's another loop that repeatedly updates the variable `len`.:
+This is much more robust code, as it can deal indentically with
+words of arbitrary length. Here's another loop that repeatedly 
+updates the variable `len`.:
 
 ~~~
 len = 0
-for vowel = "aeiou"
+for vowel = 'aeiou'
     len = len + 1;
 end
 
-disp(["Number of vowels: ", num2str(len)])
+disp(['Number of vowels: ', num2str(len)])
 ~~~
 {:class="in"}
 
@@ -295,7 +305,7 @@ value assigned to it before the loop. The loop body adds 1 to the old
 value of `len`, producing 1, and updates `len` to refer to that new
 value.
 The next time around, `vowel` is `e`, and `len` is `, so `len` is
-updated to be 2.
+updated to 2.
 After three more updates, `len` is 5; since thre's nothing left in
 `aeiou` for MATLAB to process, the loop finishes and the
 `disp` statement tells us our final answer.
@@ -314,7 +324,7 @@ u
 ~~~
 {:class="out"}
 
-After the loop, `vowel` refers to the last value in `"aeiou"`, i.e., `"u"`.
+After the loop, `vowel` refers to the last value in `'aeiou'`, i.e., `'u'`.
 
 ## Processing Multiple Files
 
@@ -326,7 +336,7 @@ our files:
 
 ~~~
 for i = 1:12
-    file_name = sprintf("inflammation-%d.csv", i);
+    file_name = sprintf('inflammation-%d.csv', i);
     disp(file_name);
 end
 ~~~
@@ -351,33 +361,34 @@ inflammation-12.csv
 This is close, but not quite right. The `sprintf` function works a
 lot like the `printf` function that you might have used if you've
 programmed in C. The `sprintf` function is useful when we want to
-generate MATLAB strings based on a _template_. In our case, that template is the string `inflammation-%d.csv`. `sprintf`
+generate MATLAB strings based on a _template_. In our case, 
+that template is the string `inflammation-%d.csv`. `sprintf`
 generates a new string from our template by replacing the `%d` with
 the data referred to by our second argument, `i`.
 
-Again, let's trace the execution of our loop: `i` begins with 
-referring to the value 1. So, when MATLAB executes the command
+Again, let's trace the execution of our loop: in the beginning of our 
+loop, `i` starts by referring to
+the value 1. So, when MATLAB executes the command
 
 ~~~
-file_name = sprintf("inflammation-%d.csv", i);
+file_name = sprintf('inflammation-%d.csv', i);
 ~~~
 
-it substitutes the `%d` in the template `"inflammation-%d.csv", with the
-value of `i`, i.e., 1. The resulting string is `"inflammation-1.csv"`,
-which is assigned to the variable `file_name`. The next line in our loop 
-prints that string to screen. The second time around, the 
-string `"inflammation-2.csv" is returned
-by `sprintf`, assigned to the variable
- `file_name`, and printed to screen. And
+it substitutes the `%d` in the template `'inflammation-%d.csv'`, with the
+value of `i`, i.e., 1. The resulting string is `'inflammation-1.csv'`,
+which is assigned to the variable `file_name`. The `disp` command 
+prints that string to screen. The second time around, `sprintf`
+generates the string `inflammation-2.csv`, which is assigned to the 
+variable `file_name`, and printed to screen. And
 so on, till `i` finally refers to the value 12. 
 
 Remember that there's a mistake. Our files are actually 
-named `"inflammation-01.csv"`, `"inflammation-02.csv", etc. To get it
+named `inflammation-01.csv`, `inflammation-02.csv`, etc. To get it
 right, we have to modify our template:
 
 ~~~
 for i = 1:12
-    file_name = sprintf("inflammation-%02d.csv", i);
+    file_name = sprintf('inflammation-%02d.csv', i);
     disp(file_name);
 end
 ~~~
@@ -404,31 +415,62 @@ we're specifying that we want our data to be displayed with a minimum
 width of 2 characters, and that we want to _pad_ with 0 for data that
 isn't at least 2 digits long.
 
+We're now ready to modify `analyze.m` to process multiple data files:
+
+~~~
 for i = 1:3
     
-    file_name = sprintf("inflammation-%02d.csv", i);
-    patient_data = csvread(file_name);
+    % Generate strings for file and image names:
+    file_name = sprintf('inflammation-%02d.csv', i);
+    img_name = sprintf ('patient_data-%02d.svg', i);
 
+    patient_data = csvread(file_name);
     ave_inflammation = mean(patient_data, 1);
 
     figure()
 
     subplot(1, 3, 1);
     plot(ave_inflammation);
-    ylabel("average")
+    ylabel('average')
 
     subplot(1, 3, 2);
     plot(max(patient_data, [], 1));
-    ylabel("max")
+    ylabel('max')
 
     subplot(1, 3, 3);
     plot(min(patient_data, [], 1));
-    ylabel("min")
+    ylabel('min')
+
+    print(img_name);
+    close();
 
 end
+~~~
+
+Remember that to run our script, we simply type in its name in the
+command line:
+
+~~~
+analyze
+~~~
+{:class="in"}
 
 <!-- FIXME: put the plots here -->
 
 Sure enough, the maxima of these data sets show exactly the same ramp
-as thr first, and their minima show the same staircase structure.
+as the first, and their minima show the same staircase structure.
+
+Key Points
+
+* Write _scripts_ that store related MATLAB commands, and make
+their results more reproducible.
+
+* Save images generated by MATLAB using the `print` function.
+
+* Use `for variable = collection` to process the elements
+  of a collection (a MATLAB array), one at a time.
+
+* Use the `length` command to determine the length of a MATLAB array.
+
+* Use the `sprintf` function to generate a string based on a template.
 
