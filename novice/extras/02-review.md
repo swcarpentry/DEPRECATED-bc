@@ -80,7 +80,7 @@ which notifies Dracula that Wolfman wants to merge some changes into Dracula's r
      Wolfman's changes into his repository") -->
 
 To create a pull request on GitHub,
-click on the green button near the branch selector.
+Wolfman clicks on the green button near the branch selector.
 
 <img src="img/git-pr-compare.png" alt="Compare changes for Pull Request" />
 
@@ -107,8 +107,9 @@ that one contains a bug,
 there's a special case that isn't being handled anywhere,
 and so on.
 
-Suppose you are Dracula,
+Now suppose you are Dracula,
 and you want to add a comment to Wolfman's pull request.
+This is the initial page for a pull request:
 
 <img src="img/git-pr-initial.png" alt="After clicking on Pull Request" />
 
@@ -116,15 +117,21 @@ and you want to add a comment to Wolfman's pull request.
 <img src="img/git-pr-commits.png" alt="Pull Request commit tab" />
 -->
 
+You go to the "Files changed" tab,
+and we can see which files Wolfman changed,
+and what he removed or added to them.
+In this case, there is only one change to a single word:
+
 <img src="img/git-pr-files-changed.png" alt="Pull Request Files changed tab" />
 
 Move your mouse over the lines.
 Notice the blue icon on the left.
+It indicates you can add a comment on that line.
 
-<img src="img/git-pr-comment-icon.png" alt="Click in this icon to create a Pull Request inline comment" />
+<img src="img/git-pr-comment-icon.png" alt="Pull Request line comment indicator" />
 
 Click on a line to add a comment,
-and when you finish it click on the green "Comment on this line" button
+and when you finish it you click on the green "Comment on this line" button:
 
 <img src="img/git-pr-comment-box.png" alt="Edit a Pull Request inline comment" />
 
