@@ -261,17 +261,13 @@ That only works if functions don't interfere with each other; if they do, we hav
 
 #### Challenges
 
-1. We previously wrote functions called `fence()` and `out()`. Walk your neighbor step-by-step through what happens when we call
+  + We previously wrote functions called `fence` and `outer`.
+    Draw a diagram showing how the call stack changes when we run the following:
 
 
-<pre class='in'><code>abbrev <- out(fence("carbon", '+'))</code></pre>
-
-
-
-<div class='out'><pre class='out'><code>Error: no se pudo encontrar la función "out"
-</code></pre></div>
-
-Use words or a diagram to explain how the variables change, and how the stack/environment changes. Look at the environment tab in RStudio.
+<pre class='in'><code>inside <- "carbon"
+outside <- "+"
+result <- outer(fence(inside, outside))</code></pre>
 
 ### Testing and Documenting
 
