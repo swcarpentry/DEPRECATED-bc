@@ -76,9 +76,6 @@ which notifies Dracula that Wolfman wants to merge some changes into Dracula's r
 
 <img src="img/git-forking-03.svg" alt="After Creating Pull Request" />
 
-<!-- TODO: explain why it is a pull request ("Wolfman requests Dracula to pull
-     Wolfman's changes into his repository") -->
-
 To create a pull request on GitHub,
 Wolfman clicks on the green button near the branch selector.
 
