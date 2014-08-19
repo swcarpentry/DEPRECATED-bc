@@ -121,10 +121,10 @@ In this case, there is only one change to a single word:
 <img src="img/github-pr-files-changed.png" alt="Pull Request Files changed tab" />
 
 Move your mouse over the lines.
-Notice the blue icon on the left.
-It indicates you can add a comment on that line.
-
+Notice the blue icon
 <img src="img/github-pr-comment-icon.png" alt="Pull Request line comment indicator" />
+on the left.
+It indicates you can add a comment on that line.
 
 Click on a line to add a comment,
 and when you finish it you click on the green "Comment on this line" button:
