@@ -126,105 +126,36 @@ Real-life functions will usually be larger than the ones shown here--typically h
 
 #### Challenges
 
-As we've seen in our print statements, we can use `paste` to concatenate strings, `paste(a, b, sep = "")` is `ab`. __Note__: the `sep` can be an important value to define! What is the default? What can `sep` be?
+  + In the last lesson, we learned to **c**oncatenate elements into a vector using the `c` function, e.g. `x <- c("A", "B", "C")` creates a vector `x` with three elements.
+  Furthermore, we can extend that vector again using `c`, e.g. `y <- c(x, "D")` creates a vector `y` with four elements.
+  Write a function called `fence` that takes two vectors as parameters, called `original` and `wrapper`, and returns a new vector that has the wrapper vector at the beginning and end of the original:
+  
 
-1. Write a function called `fence` that takes two arguments called `original` and `wrapper` and returns a new string that has the `wrapper` character at the beginning and end of the `original`:
+  
+
+<pre class='in'><code>best_practice <- c("Write", "programs", "for", "people", "not", "computers")
+asterisk <- "***"  # R interprets a variable with a single value as a vector
+                   # with one element.
+fence(best_practice, asterisk)</code></pre>
 
 
 
-
-<pre class='in'><code>fence("name", "*")</code></pre>
-
-
-
-<div class='out'><pre class='out'><code>[1] "*name*"
+<div class='out'><pre class='out'><code>[1] "***"       "Write"     "programs"  "for"       "people"    "not"      
+[7] "computers" "***"      
 </code></pre></div>
 
-## String splits
-
-If the variable s refers to a string, then we can parse the string into its separate components - each of the characters. Base R has a function called `strsplit` that can be used to break up strings, into smaller chunks. 
-
-
-<pre class='in'><code>pangram <- "the quick brown fox jumps over the lazy dog"
-strsplit(pangram, " ")</code></pre>
+  + If the variable `v` refers to a vector, then `v[1]` is the vector's first element and `v[length(v)]` is its last (the function `length` returns the number of elements in a vector).
+    Write a function called `outer` that returns a vector made up of just the first and last elements of its input:
+    
 
 
 
-<div class='out'><pre class='out'><code>[[1]]
-[1] "the"   "quick" "brown" "fox"   "jumps" "over"  "the"   "lazy"  "dog"  
-</code></pre></div>
-                
-The output from strsplit is in a list. 
-Notice that the unusual first line of `strsplit()`’s output consists of `[[1]]`. 
-Similar to the way that R displays vectors, `[[1]]` means that R is showing the first element of a list. 
-Lists are extremely important concepts in R; they allow you to combine all kinds of variables.
-For example, a list can be made up of many elements, and elements could be vectors, data frames, matrices, or further lists. 
-
-In this example, this list has only a single element. Yes, that’s right: The list has one element, but that element is a vector.
-
-To extract an element from a list, you have to use double square brackets: `[[`. 
-Split your pangram into words, and assign the first element to a new variable called words, using double-square-brackets `[[]]` subsetting, as follows:
-
-
-<pre class='in'><code>words <- strsplit(pangram, " ")[[1]]</code></pre>
-
-We can then pull out the different words using indexing, where `words[1]` is the first element in the vector of `words` and `words[9]` would be the last:
-
-
-<pre class='in'><code>words[2]</code></pre>
+<pre class='in'><code>dry_principle <- c("Don't", "repeat", "yourself", "or", "others")
+outer(dry_principle)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] "quick"
-</code></pre></div>
-
-
-
-<pre class='in'><code>words[9]</code></pre>
-
-
-
-<div class='out'><pre class='out'><code>[1] "dog"
-</code></pre></div>
-
-1. Write a function `out()` that returns a string made up of just the first and last characters of its input.
-    a. Outline the steps you need to take to write this function. Discuss with the person sitting next you.
-    b. Write part of the code, make sure it works.
-    c. Write the next step.
-    d. Test your function.
-    e. Can your function handle words of different lengths?
-
-
-<pre class='in'><code>out <- function(word) {
-  letter  <- strsplit(word, "")[[1]]
-  abbrev  <- paste(letter[1], letter[length(letter)], sep="")
-  abbrev
-}
-
-out('helium')</code></pre>
-
-
-
-<div class='out'><pre class='out'><code>[1] "hm"
-</code></pre></div>
-
-__Making our function work with different inputs__. If we want just the last word, but we can't remember how long our sentence is, we can use `length()`
-
-
-<pre class='in'><code>length(words)</code></pre>
-
-
-
-<div class='out'><pre class='out'><code>[1] 9
-</code></pre></div>
-
-
-
-<pre class='in'><code>words[length(words)]</code></pre>
-
-
-
-<div class='out'><pre class='out'><code>[1] "dog"
+<div class='out'><pre class='out'><code>[1] "Don't"  "others"
 </code></pre></div>
 
 ### The Call Stack
@@ -279,7 +210,7 @@ If we try to get the value of `temp` after our functions have finished running, 
 
 
 
-<div class='out'><pre class='out'><code>Error: object 'temp' not found
+<div class='out'><pre class='out'><code>Error: objeto 'temp' no encontrado
 </code></pre></div>
 
 > **Tip:** The explanation of the stack frame above was very general and the basic concept will help you understand most languages you try to program with.
@@ -334,6 +265,11 @@ That only works if functions don't interfere with each other; if they do, we hav
 
 
 <pre class='in'><code>abbrev <- out(fence("carbon", '+'))</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>Error: no se pudo encontrar la función "out"
+</code></pre></div>
 
 Use words or a diagram to explain how the variables change, and how the stack/environment changes. Look at the environment tab in RStudio.
 
@@ -575,7 +511,7 @@ This tells us that `read.csv()` has one argument, `file`, that doesn't have a de
 
 
 
-<div class='out'><pre class='out'><code>Error: invalid argument type
+<div class='out'><pre class='out'><code>Error: argumento de tipo inválido
 </code></pre></div>
 
 the filename is assigned to`file` (which is what we want), but the delimiter string `","` is assigned to the argument `header` rather than `sep`, because `header` is the second parameter in the list. That's why we don't have to provide `file =` for the filename, but do have to provide `sep =` for the second parameter.

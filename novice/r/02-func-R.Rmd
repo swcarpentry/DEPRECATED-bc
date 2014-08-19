@@ -111,73 +111,39 @@ Real-life functions will usually be larger than the ones shown here--typically h
 
 #### Challenges
 
-As we've seen in our print statements, we can use `paste` to concatenate strings, `paste(a, b, sep = "")` is `ab`. __Note__: the `sep` can be an important value to define! What is the default? What can `sep` be?
+  + In the last lesson, we learned to **c**oncatenate elements into a vector using the `c` function, e.g. `x <- c("A", "B", "C")` creates a vector `x` with three elements.
+  Furthermore, we can extend that vector again using `c`, e.g. `y <- c(x, "D")` creates a vector `y` with four elements.
+  Write a function called `fence` that takes two vectors as parameters, called `original` and `wrapper`, and returns a new vector that has the wrapper vector at the beginning and end of the original:
+  
+```{r, include=FALSE}
+fence <- function(original, wrapper) {
+  answer <- c(wrapper, original, wrapper)
+  return(answer)
+}
+```
+  
+```{r}
+best_practice <- c("Write", "programs", "for", "people", "not", "computers")
+asterisk <- "***"  # R interprets a variable with a single value as a vector
+                   # with one element.
+fence(best_practice, asterisk)
+```
 
-1. Write a function called `fence` that takes two arguments called `original` and `wrapper` and returns a new string that has the `wrapper` character at the beginning and end of the `original`:
-
-```{r, echo=FALSE, eval=TRUE}
-fence  <-  function(original, wrapper) {
-  paste(wrapper, original, wrapper, sep="")
+  + If the variable `v` refers to a vector, then `v[1]` is the vector's first element and `v[length(v)]` is its last (the function `length` returns the number of elements in a vector).
+    Write a function called `outer` that returns a vector made up of just the first and last elements of its input:
+    
+```{r, include=FALSE}
+outer <- function(v) {
+  first <- v[1]
+  last <- v[length(v)]
+  answer <- c(first, last)
+  return(answer)
 }
 ```
 
-```{r, results="markup"}
-fence("name", "*")
-```
-
-## String splits
-
-If the variable s refers to a string, then we can parse the string into its separate components - each of the characters. Base R has a function called `strsplit` that can be used to break up strings, into smaller chunks. 
-
 ```{r}
-pangram <- "the quick brown fox jumps over the lazy dog"
-strsplit(pangram, " ")
-```
-                
-The output from strsplit is in a list. 
-Notice that the unusual first line of `strsplit()`’s output consists of `[[1]]`. 
-Similar to the way that R displays vectors, `[[1]]` means that R is showing the first element of a list. 
-Lists are extremely important concepts in R; they allow you to combine all kinds of variables.
-For example, a list can be made up of many elements, and elements could be vectors, data frames, matrices, or further lists. 
-
-In this example, this list has only a single element. Yes, that’s right: The list has one element, but that element is a vector.
-
-To extract an element from a list, you have to use double square brackets: `[[`. 
-Split your pangram into words, and assign the first element to a new variable called words, using double-square-brackets `[[]]` subsetting, as follows:
-
-```{r}
-words <- strsplit(pangram, " ")[[1]]
-```
-
-We can then pull out the different words using indexing, where `words[1]` is the first element in the vector of `words` and `words[9]` would be the last:
-
-```{r}
-words[2]
-words[9]
-```
-
-1. Write a function `out()` that returns a string made up of just the first and last characters of its input.
-    a. Outline the steps you need to take to write this function. Discuss with the person sitting next you.
-    b. Write part of the code, make sure it works.
-    c. Write the next step.
-    d. Test your function.
-    e. Can your function handle words of different lengths?
-
-```{r}
-out <- function(word) {
-  letter  <- strsplit(word, "")[[1]]
-  abbrev  <- paste(letter[1], letter[length(letter)], sep="")
-  abbrev
-}
-
-out('helium')
-```
-
-__Making our function work with different inputs__. If we want just the last word, but we can't remember how long our sentence is, we can use `length()`
-
-```{r}
-length(words)
-words[length(words)]
+dry_principle <- c("Don't", "repeat", "yourself", "or", "others")
+outer(dry_principle)
 ```
 
 ### The Call Stack
