@@ -53,13 +53,13 @@ is a [postfix](../../gloss.html#postfix-operator) operator, and means "Zero or m
 before it". For example, `a*` matches zero or more `a` characters,
 while `.*` matches any sequence of characters (including the empty
 string) because `.` matches anything and `*` repeats. Note that the
-characters matched by `'.*'` do *not* all have to be the same: the rule
+characters matched by `.*` do *not* all have to be the same: the rule
 is not, "Match a character against the dot, then repeat that match zero
 or more times," but rather, "Zero or more times, match any character."
 
 Here's a test of a simple pattern using `.*`:
 
-{:class="in"}
+
 ~~~
     match = re.search('(.*)/(.*)/(.*)',
                       'Davison/May 22, 2010/1721.3')
@@ -67,24 +67,25 @@ Here's a test of a simple pattern using `.*`:
     print match.group(2)
     print match.group(3)
 ~~~
+{:class="in"}
 
-In order for the entire pattern to match, the slashes '/' have to line
+In order for the entire pattern to match, the slashes `/` have to line
 up exactly, because '/' only matches against itself. That constraint
-ought to make the three uses of `'.*'` match the site name, date, and
+ought to make the three uses of `.*` match the site name, date, and
 reading. Sure enough, the output is:
 
-{:class="out"}
+
 ~~~
     Davison
     May 22, 2010
     1271.3
 ~~~
+{:class="out"}
 
 Unfortunately, we've been over-generous. Let's put brackets around each
 group in our output to make matches easier to see, then apply this
 pattern to the string `'//'`:
 
-{:class="in"}
 ~~~
     match = re.search('(.*)/(.*)/(.*)',
                       '//')
@@ -95,6 +96,7 @@ pattern to the string `'//'`:
     []
     []
 ~~~
+{:class="in"}
 
 We don't want our pattern to match invalid records like this (remember,
 "Fail early, fail often"). However, `'.*'` can match the empty string
@@ -104,24 +106,24 @@ Let's try a variation that uses `+` instead of `*`. `+` is also a
 postfix operator, but it means "one or more", i.e., it has to match at
 least one occurrence of the pattern that comes before it.
 
-{:class="in"}
 ~~~
     match = re.search('(.+)/(.+)/(.+)',
                       '//')
     print match
 ~~~
+{:class="in"}
 
-{:class="out"}
 ~~~
     None
 ~~~
+{:class="out"}
 
 As we can see, the pattern `(.+)/(.+)/(.+)` *doesn't* match a string
 containing only slashes because there aren't characters before, between,
 or after the slashes. And if we go back and check it against valid data,
 it seems to do the right thing:
 
-{:class="in"}
+
 ~~~
     print re.search('(.+)/(.+)/(.+)',
                     'Davison/May 22, 2010/1721.3')
@@ -129,17 +131,19 @@ it seems to do the right thing:
     print '[' + m.group(2) + ']'
     print '[' + m.group(3) + ']'
 ~~~
-{:class="out"}
+{:class="in"}
+
+~~~
     [Davison]
     [May 22, 2010]
     [1721.3]
 ~~~
+{:class="out"}
 
 We're going to match a lot of patterns against a lot of strings, so
 let's write a function to apply a pattern to a piece of text, report
 whether it matches or not, and print out the match groups if it does:
 
-{:class="in"}
 ~~~
     def show_groups(pattern, text):
       m = re.search(pattern, text)
@@ -149,98 +153,110 @@ whether it matches or not, and print out the match groups if it does:
       for i in range(1, 1 + len(m.groups())):
         print '%2d: %s' % (i, m.group(i))
 ~~~
+{:class="in"}
+
 
 We'll test our function against the two records we were just using:
 
-{:class="in"}
 ~~~
     show_groups('(.+)/(.+)/(.+)',
                 'Davison/May 22, 2010/1721.3')
 ~~~
+{:class="in"}
 
-{:class="out"}
 ~~~
     1: Davison
     2: May 22, 2010
     3: 1721.3
 ~~~
+{:class="out"}
 
-{:class="in"}
-~~~~
+~~~
     show_groups('(.+)/(.+)/(.+)',
                 '//)
 ~~~
-{:class="out"}
+{:class="in"}
+
 ~~~
     NO MATCH
 ~~~
+{:class="out"}
 
 All right: if we're using regular expressions to extract the site, date,
 and reading, why not add more groups to break up the date while we're at
 it?
-{:class="in"}
-~~~~
+
+~~~
     show_groups('(.+)/(.+) (.+), (.+)/(.+)',
                 'Davison/May 22, 2010/1721.3')
 ~~~
-{:class="out"}
-~~~~
+{:class="in"}
+
+~~~
     1: Davison
     2: May
     3: 22
     4: 2010
     5: 1721.3
 ~~~
+{:class="out"}
+
 But wait a second: why doesn't this work?
-{:class="in"}
-~~~~
+
+~~~
     show_groups('(.+)/(.+) (.+), (.+)/(.+)',
                 'Davison/May 22 2010/1721.3')
 ~~~
-{:class="out"}
-~~~~
+{:class="in"}
+
+~~~
     None
 ~~~
+{:class="out"}
 
 The problem is that the string we're trying to match doesn't have a
 comma after the day. There is one in the pattern, so matching fails.
 
-We could try to fix this by putting `'*'` after the comma in the
+We could try to fix this by putting `*` after the comma in the
 pattern, but that would match any number of consecutive commas in the
 data, which we don't want either. Instead, let's use a question mark
-`'?'`, which is yet another postfix operator meaning, "0 or 1 of
+`?`, which is yet another postfix operator meaning, "0 or 1 of
 whatever comes before it". Another way of saying this is that the
 pattern that comes before the question mark is optional. If we try our
 tests again, we get the right answer in both cases:
 
-{:class="in"}
-~~~~
+~~~
     # with comma in data
     show_groups('(.+)/(.+) (.+),? (.+)/(.+)',
                 'Davison/May 22, 2010/1721.3')
 ~~~
-{:class="out"}
-~~~~
+{:class="in"}
+
+~~~
     1: Davison
     2: May
     3: 22
     4: 2010
     5: 1721.3
 ~~~
-{:class="in"}
+{:class="out"}
+
 ~~~~
     # without comma in data
     show_groups('(.+)/(.+) (.+),? (.+)/(.+)',
                 'Davison/May 22 2010/1721.3')
 ~~~
-{:class="out"}
-~~~~
+{:class="in"}
+
+~~~
     1: Davison
     2: May
     3: 22
     4: 2010
     5: 1721.3
 ~~~
+{:class="out"}
+
 Let's tighten up our pattern a little bit more. We *don't* want to match
 this record:
 
@@ -265,8 +281,8 @@ character, `.{4}` means "match any four characters".
 Let's do a few more tests. Here are some records in which the dates are
 either correct or mangled:
 
-{:class="in"}
-~~~~
+
+~~~
     tests = (
         'Davison/May , 2010/1721.3',
         'Davison/May 2, 2010/1721.3',
@@ -278,13 +294,15 @@ either correct or mangled:
         'Davison/May 22, 2010/'
     )
 ~~~
+{:class="in"}
 
 And here's a pattern that should match all the records that are correct,
 but should fail to match all the records that have been mangled:
-{:class="in"}
-~~~~
+
+~~~
     pattern = '(.+)/(.+) (.{1,2}),? (.{4})/(.+)'
 ~~~
+{:class="in"}
 
 We are expecting four digits for the year, and we are allowing 1 or 2
 digits for the day, since the expression `{M,N}` matches a pattern from
@@ -292,7 +310,12 @@ M to N times.
 
 When we run this pattern against our test data, three records match:
 
+~~~
     show_matches(pattern, tests)
+~~~
+{:class_in}
+
+~~~
     ** Davison/May , 2010/1721.3
     ** Davison/May 2, 2010/1721.3
     ** Davison/May 22, 2010/1721.3
@@ -301,99 +324,105 @@ When we run this pattern against our test data, three records match:
        Davison/ 22, 2010/1721.3
        /May 22, 2010/1721.3
        Davison/May 22, 2010/
+~~~
+{:class_out}
 
-The second and third matches make sense: 'May 2' and 'May 22' are both
-valid. But why does 'May' with no date at all match this pattern? Let's
+The second and third matches make sense: `May 2` and `May 22` are both
+valid. But why does `May` with no date at all match this pattern? Let's
 look at that test case more closely:
 
-{:class="in"}
-~~~~
+~~~
     show_groups('(.+)/(.+) (.{1,2}),? (.{4})/(.+)',
                 'Davison/May , 2010/1721.3')
 ~~~
-{:class="out"}
-~~~~
+{:class="in"}
+
+~~~
     1: Davison
     2: May
     3: ,
     4: 2010
     5: 1721.3
 ~~~
+{:class="out"}
 
-The groups are 'Davison' (that looks right), 'May' (ditto), a ',' on its
+The groups are `Davison` (that looks right), `May` (ditto), a `,` on its
 own (which is clearly wrong), and then the right year and the right
 reading.
 
-Here's what's happened. The space ' ' after 'May' matches the space ' '
-in the pattern. The expression "1 or 2 occurrences of any character"
-matches the comma ',' because ',' is a character and it occurs once. The
-expression ', ' is then not matched against anything, because it's
-allowed to match zero characters. '?' means "optional", and in this
+Here's what's happened. The space ` `  after `May` matches the space ` ` in the pattern. The expression "1 or 2 occurrences of any character"
+matches the comma `,` because `,` is a character and it occurs once. The
+expression `, ` is then not matched against anything, because it's
+allowed to match zero characters. `?` means "optional", and in this
 case, the regular expression pattern matcher is deciding not to match it
 against anything, because that's the only way to get the whole pattern
 to match the whole string. After that, the second space matches the
 second space in our data. This is obviously not what we want, so let's
 modify our pattern again:
 
-{:class="in"}
-~~~~
+~~~
     show_groups('(.+)/(.+) ([0-9]{1,2}),? (.{4})/(.+)',
                 'Davison/May , 2010/1721.3')
 ~~~
-{:class="out"}
-~~~~
+{:class="in"}
+
+~~~
     None
 ~~~
-{:class="in"}
-~~~~
+{:class="out"}
+
+
+~~~
     show_groups('(.+)/(.+) ([0-9]{1,2}),? (.{4})/(.+)',
                 'Davison/May 22, 2010/1721.3')
 ~~~
-{:class="out"}
-~~~~
+{:class="in"}
+
+~~~
     1: Davison
     2: May
     3: 22
     4: 2010
     5: 1721.3
 ~~~
+{:class="out"}
 
-The pattern `'(.+)/(.+) ([0-9]{1,2}),? (.{4})/(.+)'` does the right
+The pattern `(.+)/(.+) ([0-9]{1,2}),? (.{4})/(.+)` does the right
 thing for the case where there is no day, and also for the case where
-there is one. It works because we have used `[0-9]` instead of `'.'`.
+there is one. It works because we have used `[0-9]` instead of `.`.
 
 In regular expressions, square brackets `[]` are used to create sets of
 characters (sometimes called character classes). For example, the expression `[aeiou]` matches exactly one
 vowel, i.e., exactly one occurrence of any character in the set. We can
 either write these sets out character by character, as we've done with
-vowels, or as "first character '-' last character" if the characters are
-in a contiguous range. This is why `'[0-9]'` matches exactly one digit.
+vowels, or as "first character `-` last character" if the characters are
+in a contiguous range. This is why `[0-9]` matches exactly one digit.
 
 Here's our completed pattern:
 
-    (.+)/([A-Z][a-z]+) ([0-9]{1,2}),? ([0-9]{4})/(.+)'
+    (.+)/([A-Z][a-z]+) ([0-9]{1,2}),? ([0-9]{4})/(.+)
 
 We have added one more feature to it: the name of the month has to begin
 with an upper-case letter, i.e., a character in the set `[A-Z]`, which
 must followed by one or more lower-case characters in the set `[a-z]`.
 
 This pattern still isn't perfect: the day is one or more occurrences of
-the digits 0 through 9, which will allow "days" like '0', '00', and
-'99'. It's easiest to check for mistakes like this after we convert the
+the digits `0` through `9`, which will allow "days" like `0`, `00`, and
+`99`. It's easiest to check for mistakes like this after we convert the
 day to an integer, since trying to handle things like leap years with
 regular expressions would be like trying to build a house with a Swiss
 army knife.
 
 Finally, the year in our final pattern is exactly four digits, so it's
 the set of characters `[0-9]` repeated four times. Again, we will check
-for invalid values like '0000' after we convert to integer.
+for invalid values like `0000` after we convert to integer.
 
 Using the tools we've seen so far, we can write a simple function that
 will extract the date from either of the notebooks we have seen so far
 and return the year, the month, and the day as strings:
 
-{:class="in"}
-~~~~
+
+~~~
     def get_date(record):
       '''Return (Y, M, D) as strings, or None.'''
 
@@ -411,6 +440,7 @@ and return the year, the month, and the day as strings:
 
       return None
 ~~~
+{:class="in"}
 
 We start by testing whether the record contains an ISO-formatted date
 YYYY-MM-DD. If it does, then we return those three fields right away.
@@ -437,45 +467,55 @@ Let's have a look at some different operators that can come in useful in differe
 
 It is possible to 'anchor' the pattern to a particular part of the string, so that it can only match in one region, like at the start or end of the string. the `^` anchor will match the subsequent pattern only at the start of a string. Likewise the `$` operator will match the previous pattern only at the end of a line. Let's look at a contrived example and imagine that we're only interested in data from one site. 
 
-{:class="in"}
-~~~~
+
+~~~
     m = re.search('(^Davison.*)', 'Davison/May 22, 2010/1721.3')
     print m.group(1)
-~~~~
+~~~
+{:class="in"}
+
 gives us:
-{:class="out"}
-~~~~
+
+~~~
     Davison/May 22, 2010/1721.3
 ~~~
-Whereas,
 {:class="in"}
-~~~~
+
+Whereas,
+
+~~~
     m = re.search('(^Baker.*)', 'Davison/May 22, 2010/1721.3')
     print m
-~~~~
+~~~
+{:class="in"}
+
 gives: 
-{:class="out"}
-~~~~
+
+~~~
     None
 ~~~
+{:class="out"}
+
 Likewise, if we switch the order of columns:
-{:class="in"}
+
 ~~~~
     m = re.search('(^Davison)', '1721.3/May 22, 2010/Davison')
     print m
 ~~~
-{:class="out"}
+{:class="in"}
+
 ~~~~    
     None
 ~~~
+{:class="out"}
+
 Since `^Davison` will only match the occurrence at the beginning of the string. Matching the end of the string behaves similarly:
 
-{:class="in"}
 ~~~~
     m = re.search('(.*Davison$)', '1721.3/May 22, 2010/Davison')
     print m.group(1)
 ~~~
-
+{:class="in"}
 
 ### Metacharacters
 
@@ -504,11 +544,11 @@ A common thing in regular expressions are metacharacters. These are special pair
 
 So now we have enough knowledge to try a quick quiz. What does this pattern match `(wo.+d)` return, when applied to this string `How much wood, would a woodchuck chuck?`, that is to say what does this print out:
 
-{:class="in"}
 ~~~~
      m = re.search('(wo.+d)', "How much wood, would a woodchuck chuck?")
      print m.group(1)
 ~~~
+{:class="in"}
 
 Select an answer:
 
