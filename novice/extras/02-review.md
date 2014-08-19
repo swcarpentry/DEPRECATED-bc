@@ -82,17 +82,17 @@ which notifies Dracula that Wolfman wants to merge some changes into Dracula's r
 To create a pull request on GitHub,
 Wolfman clicks on the green button near the branch selector.
 
-<img src="img/git-pr-compare.png" alt="Compare changes for Pull Request" />
+<img src="img/github-pr-compare.png" alt="Compare changes for Pull Request" />
 
 This will open the compare interface.
 After checking that everything is OK,
 Wolfman clicks on the big green "Create pull request" button,
 
-<img src="img/git-pr-changes.png" alt="Show changes for Pull Request" />
+<img src="img/github-pr-changes.png" alt="Show changes for Pull Request" />
 
 and provides more information about the change:
 
-<img src="img/git-pr-create.png" alt="Create a new Pull Request" />
+<img src="img/github-pr-create.png" alt="Create a new Pull Request" />
 
 A pull request is a merge waiting to happen.
 When Dracula views it online,
@@ -111,32 +111,28 @@ Now suppose you are Dracula,
 and you want to add a comment to Wolfman's pull request.
 This is the initial page for a pull request:
 
-<img src="img/git-pr-initial.png" alt="After clicking on Pull Request" />
-
-<!-- I don't think we need this image, it is not very informative
-<img src="img/git-pr-commits.png" alt="Pull Request commit tab" />
--->
+<img src="img/github-pr-initial.png" alt="After clicking on Pull Request" />
 
 You go to the "Files changed" tab,
 and we can see which files Wolfman changed,
 and what he removed or added to them.
 In this case, there is only one change to a single word:
 
-<img src="img/git-pr-files-changed.png" alt="Pull Request Files changed tab" />
+<img src="img/github-pr-files-changed.png" alt="Pull Request Files changed tab" />
 
 Move your mouse over the lines.
 Notice the blue icon on the left.
 It indicates you can add a comment on that line.
 
-<img src="img/git-pr-comment-icon.png" alt="Pull Request line comment indicator" />
+<img src="img/github-pr-comment-icon.png" alt="Pull Request line comment indicator" />
 
 Click on a line to add a comment,
 and when you finish it you click on the green "Comment on this line" button:
 
-<img src="img/git-pr-comment-box.png" alt="Edit a Pull Request inline comment" />
+<img src="img/github-pr-comment-box.png" alt="Edit a Pull Request inline comment" />
 
 Dracula submitted a comment for Wolfman,
-<img src="img/git-pr-comment-submitted.png" alt="A comment in a Pull Request" />
+<img src="img/github-pr-comment-submitted.png" alt="A comment in a Pull Request" />
 
 and now Wolfman can post new comments,
 update his code,
