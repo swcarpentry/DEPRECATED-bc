@@ -84,12 +84,13 @@ click on the green button near the branch selector.
 
 <img src="img/git-pr-compare.png" alt="Compare changes for Pull Request" />
 
-This will open the compare interface:
+This will open the compare interface.
+After checking that everything is OK,
+Wolfman clicks on the big green "Create pull request" button,
 
 <img src="img/git-pr-changes.png" alt="Show changes for Pull Request" />
 
-After checking that everything is OK,
-Wolfman clicks on the "Create Pull Request" button:
+and provides more information about the change:
 
 <img src="img/git-pr-create.png" alt="Create a new Pull Request" />
 
@@ -105,21 +106,35 @@ this function is too long,
 that one contains a bug,
 there's a special case that isn't being handled anywhere,
 and so on.
-Wolfman can then update his code,
-commit locally,
-and push those changes to GitHub to update the pull request.
+
+Suppose you are Dracula,
+and you want to add a comment to Wolfman's pull request.
 
 <img src="img/git-pr-initial.png" alt="After clicking on Pull Request" />
 
+<!-- I don't think we need this image, it is not very informative
 <img src="img/git-pr-commits.png" alt="Pull Request commit tab" />
+-->
 
 <img src="img/git-pr-files-changed.png" alt="Pull Request Files changed tab" />
 
+Move your mouse over the lines.
+Notice the blue icon on the left.
+
 <img src="img/git-pr-comment-icon.png" alt="Click in this icon to create a Pull Request inline comment" />
+
+Click on a line to add a comment,
+and when you finish it click on the green "Comment on this line" button
 
 <img src="img/git-pr-comment-box.png" alt="Edit a Pull Request inline comment" />
 
+Dracula submitted a comment for Wolfman,
 <img src="img/git-pr-comment-submitted.png" alt="A comment in a Pull Request" />
+
+and now Wolfman can post new comments,
+update his code,
+commit locally,
+and push those changes to GitHub to update the pull request.
 
 This process is exactly like peer review of papers, though usually much faster.
 In large open source projects like Firefox,
