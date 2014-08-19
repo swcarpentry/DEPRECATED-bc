@@ -12,8 +12,8 @@ but to teach you the basic concepts that all programming depends on.
 <div class="toc" markdown="1">
 
 1.  [Analyzing Patient Data](01-intro.html)
-2.  [Creating Functions](02-func.html)
-3.  [Analyzing Multiple Data Sets](03-loop.html)
+2.  [Analyzing Multiple Data Sets](02-loop.html)
+3.  [Creating Functions](03-func.html)
 4.  [Making Choices](04-cond.html)
 5.  [Defensive Programming](05-defensive.html)
 6.  [Command-Line Programs](06-cmdline.html)

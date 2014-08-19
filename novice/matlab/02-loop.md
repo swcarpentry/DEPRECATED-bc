@@ -3,6 +3,43 @@ layout: lesson
 root: ../..
 ---
 
+## Reusing Code
+
+We've written MATLAB commands to compute statistics about our
+data and generate some plots to visualize the results. We're now
+faced with the following problems:
+
+#### Problem 1
+
+So far, we've typed in commands one-by-one on the command line
+to get MATLAB to do things for us. But what if we want to repeat 
+our analysis? Sure, it's only a handful of commands, 
+and typing them in shouldn't take
+us more than a few minutes. But if we forget a step or make a mistake,
+we'll waste time rewriting commands. Also, we'll quickly find ourselves
+doing more complex analyses, and we'll need our results to
+be more easily reproducible. 
+
+#### Problem 2
+
+We also have to do this analysis for every one of our dozen
+datasets. And we need a better way than typing out commands
+for each one, because we'll find ourselves writing a lot
+of duplicate code. Remember, code that is repeated in 
+two or more places will eventually be wrong in at least one. 
+If we  make changes in the way we analyze our datasets,
+we have to introduce that change in every copy of our code.
+
+There's a common theme in the two problems presented above---duplicate code.
+In problem 1, we're rewriting code every time we want
+to perform an analysis. In problem 2, we're rewriting code for
+several analyses that differ only slightly from each other. 
+To avoid writing all this duplicate code, we have to teach MATLAB to
+
+* Remember our commands
+
+* Repeat our commands
+
 <div class="Objectives">
 
 ### Objectives
@@ -22,23 +59,15 @@ root: ../..
 
 ## Saving Our Work
 
-So far, we've been entering commands one-by-one to get
-MATLAB to do things for us. But what if we want to repeat 
-our analysis?
-
-Sure, it's only a handful of commands, and it shouldn't take
-us more than a few minutes. But we'll quickly find ourselves
-doing more complex analyses, and we'll need our results to
-be more easily reproducible.
-
 ### Writing Scipts
 
-In addition to running MATLAB commands one-by-one, we can 
+In addition to running MATLAB commands one-by-one on the
+command line, we can 
 also write several commands in a _script_. A MATLAB scipt
 is just a text file with a `.m` extension. We've written 
 commands to load data from a `.csv` file and
 dsiplays some statisitics about that data. Let's 
-put those commands in a script:
+put those commands in a script called `analyze.m`:
 
 ~~~
 % script analyze.m
@@ -51,11 +80,19 @@ disp(['Minimum inflammation: ', num2str(min(patient_data(:)))]);
 disp(['Standard deviation: ', num2str(std(patient_data(:)))]);
 ~~~
 
-This script needs to be visible to MATLAB. MATLAB keeps an eye
-on several locations on your [filesystem](../../gloss.html#filesystem).
-The most convenient of these places to save
-a script is generally in the _current directory_.
-To find out the current directory, use the `pwd` command:
+Before we can use it, we need to make sure that this file is
+visible to MATLAB. MATLAB doesn't know about all the files on your
+computer, but it keeps an eye on several directories (folders). 
+The most convenient of these directories is generally the 
+"working directory", or "current directory". To find out the
+working directory, use the `pwd` command:
+
+~~~
+pwd
+~~~
+{:class="in"}
+
+As you might have guessed, `pwd` stands for "print working directory". 
 
 Once you have a script saved in a location that MATLAB knows about,
 you can get MATLAB to run those commands by typing in the name
@@ -81,27 +118,19 @@ images on disk.
 ~~~
 ave_inflammation = mean(patient_data, 1);
 
-subplot(1, 3, 1);
 plot(ave_inflammation);
 ylabel("average")
 
-subplot(1, 3, 2);
-plot(max(patient_data, [], 1));
-ylabel("max")
-
-subplot(1, 3, 3);
-plot(min(patient_data, [], 1));
-ylabel("min")
-
 % save plot to disk as png image:
-print -dpng "inflammation-01-analysis.png"
+print -dpng "average.png"
 ~~~
-
 {:class="in"}
 
-Let's extend our `analyze` script with these commands.
+Let's extend our `analyze` script:
 
 ~~~
+% script analyze.m
+
 patient_data = csvread('inflammation-01.csv');
 
 disp(['Maximum inflammation: ', num2str(max(patient_data(:)))]);
@@ -122,8 +151,8 @@ subplot(1, 3, 3);
 plot(min(patient_data, [], 1));
 ylabel("min")
 
-% save plot to disk as png image:
-print -dpng "inflammation-01-analysis.png"
+% save plot to disk as svg image:
+print -dpng "patient_data-01.svg"
 ~~~
 
 ## Analyzing Multiple Datasets
@@ -134,7 +163,7 @@ above commands each time. To do that we'll have to learn how to
 get the computer to repeat things.
 
 
-### For loops
+### for loops
 
 Suppose we want to print each character in the word "lead" on 
 a line of its own. One way is to use four `disp` statements:
@@ -270,7 +299,7 @@ end
 ~~~
 {:class="in"}
 
-~~
+~~~
 a
 l
 u
@@ -280,7 +309,7 @@ n
 i
 u
 m
-~~
+~~~
 {:class="out"}
 
 This is much more robust code, as it can deal indentically with
@@ -304,9 +333,9 @@ executed five times. The first time around, `len` is zero (the
 value assigned to it before the loop. The loop body adds 1 to the old
 value of `len`, producing 1, and updates `len` to refer to that new
 value.
-The next time around, `vowel` is `e`, and `len` is `, so `len` is
+The next time around, `vowel` is `e`, and `len` is 1, so `len` is
 updated to 2.
-After three more updates, `len` is 5; since thre's nothing left in
+After three more updates, `len` is 5; since there's nothing left in
 `aeiou` for MATLAB to process, the loop finishes and the
 `disp` statement tells us our final answer.
 
@@ -326,7 +355,7 @@ u
 
 After the loop, `vowel` refers to the last value in `'aeiou'`, i.e., `'u'`.
 
-## Processing Multiple Files
+### Processing Multiple Files
 
 We now have almost everything we need to process
 multiple data files with our `analyze` script. You'll notice that our
@@ -418,6 +447,8 @@ isn't at least 2 digits long.
 We're now ready to modify `analyze.m` to process multiple data files:
 
 ~~~
+% script analyze.m
+
 for i = 1:3
     
     % Generate strings for file and image names:
@@ -462,12 +493,11 @@ as the first, and their minima show the same staircase structure.
 
 Key Points
 
-* Write _scripts_ that store related MATLAB commands, and make
-their results more reproducible.
+* Write MATLAB scripts to reuse code and make your results reproducible.
 
 * Save images generated by MATLAB using the `print` function.
 
-* Use `for variable = collection` to process the elements
+* Use a for loop: `for variable = collection`, to process the elements
   of a collection (a MATLAB array), one at a time.
 
 * Use the `length` command to determine the length of a MATLAB array.
