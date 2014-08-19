@@ -109,7 +109,17 @@ Wolfman can then update his code,
 commit locally,
 and push those changes to GitHub to update the pull request.
 
-<!-- TODO: Explain how to comment on a pull request -->
+<img src="img/git-pr-initial.png" alt="After clicking on Pull Request" />
+
+<img src="img/git-pr-commits.png" alt="Pull Request commit tab" />
+
+<img src="img/git-pr-files-changed.png" alt="Pull Request Files changed tab" />
+
+<img src="img/git-pr-comment-icon.png" alt="Click in this icon to create a Pull Request inline comment" />
+
+<img src="img/git-pr-comment-box.png" alt="Edit a Pull Request inline comment" />
+
+<img src="img/git-pr-comment-submitted.png" alt="A comment in a Pull Request" />
 
 This process is exactly like peer review of papers, though usually much faster.
 In large open source projects like Firefox,
