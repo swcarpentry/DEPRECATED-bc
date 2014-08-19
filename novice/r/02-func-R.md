@@ -271,102 +271,201 @@ result <- outer(fence(inside, outside))</code></pre>
 
 ### Testing and Documenting
 
-Once we start putting things in functions so that we can re-use them, we need to start testing that those functions are working correctly. To see how to do this, let's write a function to center a dataset around a particular value:
+Once we start putting things in functions so that we can re-use them, we need to start testing that those functions are working correctly.
+To see how to do this, let's write a function to center a dataset around a particular value:
 
 
 <pre class='in'><code>center <- function(data, desired) {
-  new <- (data - mean(data)) + desired
-  new
+  new_data <- (data - mean(data)) + desired
+  return(new_data)
 }</code></pre>
 
-We could test this on our actual data, but since we don't know what the values ought to be, it will be hard to tell if the result was correct. Instead, let's create a matrix of 0s and then center that around 3. This will make it simple to see if our function is working as expected:
+We could test this on our actual data, but since we don't know what the values ought to be, it will be hard to tell if the result was correct.
+Instead, let's create a matrix of 0s and then center that around 3.
+This will make it simple to see if our function is working as expected:
 
 
-<pre class='in'><code>z <- matrix(nrow = 2, ncol = 2)
-center(z, 3)</code></pre>
+<pre class='in'><code>z <- matrix(0, nrow = 2, ncol = 2)
+z</code></pre>
 
 
 
 <div class='out'><pre class='out'><code>     [,1] [,2]
-[1,]   NA   NA
-[2,]   NA   NA
+[1,]    0    0
+[2,]    0    0
+</code></pre></div>
+
+
+
+<pre class='in'><code>center(z, 3)</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>     [,1] [,2]
+[1,]    3    3
+[2,]    3    3
 </code></pre></div>
 
 That looks right, so let's try center on our real data:
 
 
+<pre class='in'><code>dat <- read.table("inflammation-01.csv", sep = ",")
+dat <- as.matrix(dat)  # convert to matrix
+centered <- center(dat, 0)
+centered[1:10, 1:5]</code></pre>
 
-<pre class='in'><code>center(mat, 0)</code></pre>
+
+
+<div class='out'><pre class='out'><code>          V1     V2     V3     V4     V5
+ [1,] -6.149 -6.149 -5.149 -3.149 -5.149
+ [2,] -6.149 -5.149 -4.149 -5.149 -4.149
+ [3,] -6.149 -5.149 -5.149 -3.149 -3.149
+ [4,] -6.149 -6.149 -4.149 -6.149 -2.149
+ [5,] -6.149 -5.149 -5.149 -3.149 -3.149
+ [6,] -6.149 -6.149 -5.149 -4.149 -4.149
+ [7,] -6.149 -6.149 -4.149 -4.149 -2.149
+ [8,] -6.149 -6.149 -5.149 -4.149 -3.149
+ [9,] -6.149 -6.149 -6.149 -3.149 -5.149
+[10,] -6.149 -5.149 -5.149 -4.149 -5.149
+</code></pre></div>
 
 It's hard to tell from the default output whether the result is correct, but there are a few simple tests that will reassure us:
 
 
-<pre class='in'><code>paste("original min, mean, and max are:", min(mat), ",", mean(mat), ",", max(mat))</code></pre>
+<pre class='in'><code># original min
+min(dat)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] "original min, mean, and max are: 1 , 800.5 , 1600"
+<div class='out'><pre class='out'><code>[1] 0
 </code></pre></div>
 
 
 
-<pre class='in'><code>centered <- center(mat, 0)
-
-paste("original min, mean, and max are:", min(centered), ",", mean(centered), ",", max(centered))</code></pre>
-
+<pre class='in'><code># original mean
+mean(dat)</code></pre>
 
 
-<div class='out'><pre class='out'><code>[1] "original min, mean, and max are: -799.5 , 0 , 799.5"
+
+<div class='out'><pre class='out'><code>[1] 6.149
 </code></pre></div>
 
-That seems almost right: the original mean was about 6.1, so the lower bound from zero is how about -6.1. The mean of the centered data isn't quite zero --- we'll explore why not in the challenges --- but it's pretty close. We can even go further and check that the standard deviation hasn't changed:
 
 
-<pre class='in'><code>paste('std dev before and after:', sd(mat), sd(centered))</code></pre>
+<pre class='in'><code># original max
+max(dat)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] "std dev before and after: 462.024530373298 462.024530373298"
+<div class='out'><pre class='out'><code>[1] 20
 </code></pre></div>
 
-Those values look the same, but we probably wouldn't notice if they were different in the sixth decimal place. Let's do this instead:
 
 
-<pre class='in'><code>paste('difference in standard deviations before and after:', sd(mat) - sd(centered))</code></pre>
+<pre class='in'><code># centered min
+min(centered)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] "difference in standard deviations before and after: 0"
+<div class='out'><pre class='out'><code>[1] -6.149
 </code></pre></div>
 
-Sometimes, a very small difference can be detected. This could be due to rounding at very low decimal places. R has a useful function for comparing two objects allowing for rounding errors, `all.equal()`:
 
 
-<pre class='in'><code>all.equal(sd(mat), sd(centered))</code></pre>
+<pre class='in'><code># centered mean
+mean(centered)</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 2.589e-16
+</code></pre></div>
+
+
+
+<pre class='in'><code># centered max
+max(centered)</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 13.85
+</code></pre></div>
+
+That seems almost right: the original mean was about 6.1, so the lower bound from zero is now about -6.1.
+The mean of the centered data isn't quite zero --- we'll explore why not in the challenges --- but it's pretty close.
+We can even go further and check that the standard deviation hasn't changed:
+
+
+<pre class='in'><code># original standard deviation
+sd(dat)</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 4.615
+</code></pre></div>
+
+
+
+<pre class='in'><code># centerted standard deviation
+sd(centered)</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 4.615
+</code></pre></div>
+
+Those values look the same, but we probably wouldn't notice if they were different in the sixth decimal place.
+Let's do this instead:
+
+
+<pre class='in'><code># difference in standard deviations before and after
+sd(dat) - sd(centered)</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 0
+</code></pre></div>
+
+Sometimes, a very small difference can be detected due to rounding at very low decimal places.
+R has a useful function for comparing two objects allowing for rounding errors, `all.equal`:
+
+
+<pre class='in'><code>all.equal(sd(dat), sd(centered))</code></pre>
 
 
 
 <div class='out'><pre class='out'><code>[1] TRUE
 </code></pre></div>
 
-It's still possible that our function is wrong, but it seems unlikely enough that we should probably get back to doing our analysis. We have one more task first, though: we should write some documentation for our function to remind ourselves later what it's for and how to use it.
+It's still possible that our function is wrong, but it seems unlikely enough that we should probably get back to doing our analysis.
+We have one more task first, though: we should write some [documentation](../../gloss.html#documentation) for our function to remind ourselves later what it's for and how to use it.
 
-A common way to put documentation in software is to add comments like this:
+A common way to put documentation in software is to add [comments](../../gloss.html#comment) like this:
 
 
-<pre class='in'><code># return a new matrix containing the original data centered around the desired value.
-center <- function(data, desired){
-  new <- (data - mean(data)) + desired
-  new
+<pre class='in'><code>center <- function(data, desired) {
+  # return a new matrix containing the original data centered around the
+  # desired value.
+  new_data <- (data - mean(data)) + desired
+  return(new_data)
 }</code></pre>
 
-Formal documentation for R functions is written in separate `.Rd` using a markup language similar to LaTeX. The **roxygen2** package allows R coders to write documentation alongside the function code and then process it into the appropriate `.Rd` files.
+> **Tip:** Formal documentation for R functions is written in separate `.Rd` using a markup language similar to [LaTeX][].
+You see the result of this documentation when you look at the help file for a given function, e.g. `?read.table`.
+The [roxygen2][] package allows R coders to write documentation alongside the function code and then process it into the appropriate `.Rd` files.
+You will want to switch to this more formal method of writing documentation when you start writing more complicated R projects.
+
+[LaTeX]: http://www.latex-project.org/
+[roxygen2]: http://cran.r-project.org/web/packages/roxygen2/vignettes/rd.html
 
 #### Challenges
 
-This next challenge has several steps. Think about how you break down a difficult problem into manageable pieces.
+This next challenge has several steps.
+Think about how you break down a difficult problem into manageable pieces.
 
-1. Write a function called `analyze()` that takes a filename as a parameter and displays the 3 graphs you made earlier (average, min and max inflammation over time). i.e., `analyze("inflammation-01.csv")` should produce the graphs already shown, while `analyze("inflammation-02.csv")` should produce corresponding graphs for the second data set. Be sure to give your function a docstring.
+  + Write a function called `analyze` that takes a filename as a parameter and displays the 3 graphs you made earlier (average, min and max inflammation over time). i.e., `analyze("inflammation-01.csv")` should produce the graphs already shown, while `analyze("inflammation-02.csv")` should produce corresponding graphs for the second data set.
+  Be sure to document your function with comments.
+
+
 
 ### Defining Defaults
 
