@@ -28,8 +28,8 @@ library(vegan)
 
 One should exercise caution when using `setwd()`. Changing directories in your script can limit reproducibility:
 
-* If/when your script terminates with an error, you might leave the user in a different directory to where they started, and if they call the script again this will cause further problems.
 * `setwd()` will throw an error if the directory you're trying to change to doesn't exit, or the user doesn't have the correct permissions to access it. This becomes a problem when sharing scripts between users who have organized their directories differently.
+* If/when your script terminates with an error, you might leave the user in a different directory to where they started, and if they call the script again this will cause further problems. If you must use `setwd()`, it is best to put it at the top of the script to avoid this problem.
 
 The following error message indicates that R has failed to set the working directory you specified:
 
