@@ -28,11 +28,12 @@ library(vegan)
 
 One should exercise caution when using `setwd()`. Changing directories in your script can limit reproducibility:
 
-* If/when your script crashes due to a bug, you might leave the user in a different directory to where they started, and if they call the script again this will cause further problems.
-* `setwd()` will fail and crash your script if the directory you're trying to change to doesn't exit, or the user doesn't have the correct permissions to access it.
+* If/when your script terminates with an error, you might leave the user in a different directory to where they started, and if they call the script again this will cause further problems.
+* `setwd()` will throw an error if the directory you're trying to change to doesn't exit, or the user doesn't have the correct permissions to access it. This becomes a problem when sharing scripts between users who have organized their directories differently.
 * It is not cross-platform compatible. File paths on Mac or Linux machines use `/` to denote a directory, while Windows uses `\`, so your script will not work as expected if you share between Windows and Mac/Linux, or vice versa.
 
-The following error message indicates that your script is crashing due to a problem encountered by `setwd()`:
+The following error message indicates that R has failed to set the working directory you specified:
+
 ```
 Error in setwd("~/path/to/working/directory") : cannot change working directory
 ```
