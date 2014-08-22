@@ -46,24 +46,26 @@ For example, if the CSV files are located in a directory named `swc` in our home
 Just like in the Unix Shell, we type the command and then press `Enter` (or `return`).
 Alternatively you can change the working directory using the RStudio GUI using the menu option `Session` -> `Set Working Directory` -> `Choose Directory...`
 
-Now we could load the data into R using `read.table`:
+Now we could load the data into R using `read.csv`:
 
 
-<pre class='in'><code>read.table(file = "inflammation-01.csv", sep = ",")</code></pre>
+<pre class='in'><code>read.csv(file = "inflammation-01.csv", header = FALSE)</code></pre>
 
-The expression `read.table(...)` is a [function call](../../gloss.html#function-call) that asks R to run the function `read.table`. 
+The expression `read.csv(...)` is a [function call](../../gloss.html#function-call) that asks R to run the function `read.csv`. 
 
-`read.table` has two [parameters](../../gloss.html#parameter): the name of the file we want to read, and the [delimiter](../../gloss.html#delimiter) that separates values on a line.
-These both need to be character strings (or [strings](../../gloss.html#string) for short), so we put them in quotes.
+`read.csv` has two [parameters](../../gloss.html#parameter): the name of the file we want to read, and whether the first line of the file contains names for the columns of data.
+The filename needs to be a character string (or [string](../../gloss.html#string) for short), so we put it in quotes.
+Assigning the second argument, `header`, to be `FALSE` indicates that the data file does not have column headers.
+We'll talk more about the value `FALSE`, and its converse `TRUE`, in lesson 04.
 
 The utility of a function is that it will perform its given action on whatever value is passed to the named parameter(s).
-For example, in this case if we provided the name of a different file to the parameter `file`, `read.table` would read it instead.
+For example, in this case if we provided the name of a different file to the parameter `file`, `read.csv` would read it instead.
 We'll learn more of the details about functions and their parameters in the next lesson.
 
 Since we didn't tell it to do anything else with the function's output, the console will display the full contents of the file `inflammation-01.csv`.
 Try it out.
 
-`read.table` read the file, but didn't save the data in memory.
+`read.csv` read the file, but didn't save the data in memory.
 To do that, we need to assign the data frame to a variable.
 A variable is just a name for a value, such as `x`, `current_temperature`, or `subject_id`.
 We can create a new variable simply by assigning a value to it using `<-`
@@ -165,10 +167,10 @@ weight_lb</code></pre>
 Since `weight_lb` doesn't "remember" where its value came from, it isn't automatically updated when `weight_kg` changes. 
 This is different from the way spreadsheets work.
 
-Now that we know how to assign things to variables, let's re-run `read.table` and save its result:
+Now that we know how to assign things to variables, let's re-run `read.csv` and save its result:
 
 
-<pre class='in'><code>dat <- read.table(file = "inflammation-01.csv", sep = ",")</code></pre>
+<pre class='in'><code>dat <- read.csv(file = "inflammation-01.csv", header = FALSE)</code></pre>
 
 This statement doesn't produce any output because assignment doesn't display anything.
 If we want to check that our data has been loaded, we can print the variable's value.
