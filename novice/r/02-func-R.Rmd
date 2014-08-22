@@ -335,7 +335,6 @@ analyze <- function(fname) {
   # Plots the average, min, and max inflammation over time.
   # Input is character string of a csv file.
   dat <- read.table(file = fname, sep = ",")
-  dat <- as.matrix(dat)
   avg_day_inflammation <- apply(dat, 2, mean)
   plot(avg_day_inflammation)
   max_day_inflammation <- apply(dat, 2, min)
@@ -343,6 +342,30 @@ analyze <- function(fname) {
   min_day_inflammation <- apply(dat, 2, max)
   plot(min_day_inflammation)
 }
+```
+
+  + Write a function `rescale` that takes a vector as input and returns a corresponding vector of values scaled to lie in the range 0.0 to 1.0.
+  (If $L$ and $H$ are the lowest and highest values in the original vector, then the replacement for a value $v$ should be $(v-L) / (H-L)$.)
+  Be sure to document your function with comments.
+
+```{r, include=FALSE}
+rescale <- function(v) {
+  L <- min(v)
+  H <- max(v)
+  result <- (v - L) / (H - L)
+  return(result)
+}
+```
+
+  + Test that your `rescale` function is working properly using `min`, `max`, and `plot`.
+
+```{r, include=FALSE}
+answer <- rescale(dat[, 4])
+min(answer)
+max(answer)
+plot(answer)
+plot(dat[, 4], answer)  # This hasn't been introduced yet, but it may be
+                        # useful to show when explaining the answer.
 ```
 
 ### Defining Defaults

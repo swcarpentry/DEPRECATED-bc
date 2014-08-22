@@ -434,6 +434,16 @@ You will want to switch to this more formal method of writing documentation when
 
 
 
+  + Write a function `rescale` that takes a vector as input and returns a corresponding vector of values scaled to lie in the range 0.0 to 1.0.
+  (If $L$ and $H$ are the lowest and highest values in the original vector, then the replacement for a value $v$ should be $(v-L) / (H-L)$.)
+  Be sure to document your function with comments.
+
+
+
+  + Test that your `rescale` function is working properly using `min`, `max`, and `plot`.
+
+
+
 ### Defining Defaults
 
 We have passed parameters to functions in two ways: directly, as in `dim(mat)`, and by name, as in `matrix(data = 0, nrow = 2, ncol = 2)`. We can pass arguments to functions without naming them
