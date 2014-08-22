@@ -53,14 +53,14 @@ Now we could load the data into R using `read.csv`:
 
 The expression `read.csv(...)` is a [function call](../../gloss.html#function-call) that asks R to run the function `read.csv`. 
 
-`read.csv` has two [parameters](../../gloss.html#parameter): the name of the file we want to read, and whether the first line of the file contains names for the columns of data.
+`read.csv` has two [arguments](../../gloss.html#argument): the name of the file we want to read, and whether the first line of the file contains names for the columns of data.
 The filename needs to be a character string (or [string](../../gloss.html#string) for short), so we put it in quotes.
 Assigning the second argument, `header`, to be `FALSE` indicates that the data file does not have column headers.
 We'll talk more about the value `FALSE`, and its converse `TRUE`, in lesson 04.
 
-The utility of a function is that it will perform its given action on whatever value is passed to the named parameter(s).
-For example, in this case if we provided the name of a different file to the parameter `file`, `read.csv` would read it instead.
-We'll learn more of the details about functions and their parameters in the next lesson.
+The utility of a function is that it will perform its given action on whatever value is passed to the named argument(s).
+For example, in this case if we provided the name of a different file to the argument `file`, `read.csv` would read it instead.
+We'll learn more of the details about functions and their arguments in the next lesson.
 
 Since we didn't tell it to do anything else with the function's output, the console will display the full contents of the file `inflammation-01.csv`.
 Try it out.
