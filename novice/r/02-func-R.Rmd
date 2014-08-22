@@ -58,10 +58,6 @@ fahr_to_kelvin(212)
 
 We've successfully called the function that we defined, and we have access to the value that we returned.
 
---> In Python lessons, now would come debugging…
-==============================
-
-
 ### Composing Functions
 
 Now that we've seen how to turn Fahrenheit into Kelvin, it's easy to turn Kelvin into Celsius:
