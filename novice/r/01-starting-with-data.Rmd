@@ -288,19 +288,22 @@ To support this, we can use the `apply` function.
 
 > **Tip:** To learn about a function in R, e.g. `apply`, we can read its help documention by running `help(apply)` or `?apply`.
 
-`apply` allows us to repeat a function on all of the rows (`MARGIN = 1`) or columns (`2`) of a data frame.
+`apply` allows us to repeat a function on all of the rows (`MARGIN = 1`) or columns (`MARGIN = 2`) of a data frame.
 
-Thus, to obtain the average inflammation of each patient we will need to calculate the mean of all of the rows of the data frame.
+Thus, to obtain the average inflammation of each patient we will need to calculate the mean of all of the rows (`MARGIN = 1`) of the data frame.
 
 ```{r}
 avg_patient_inflammation <- apply(dat, 1, mean)
 ```
 
-And to obtain the average inflammation of each day we will need to calculate the mean of all of the columns of the data frame.
+And to obtain the average inflammation of each day we will need to calculate the mean of all of the columns (`MARGIN = 2`) of the data frame.
 
 ```{r}
 avg_day_inflammation <- apply(dat, 2, mean)
 ```
+
+Since the second argument to `apply` is `MARGIN`, the above command is equivalent to `apply(dat, MARGIN = 2, mean)`.
+We'll learn why this is so in the next lesson.
 
 > **Tip:** Some common operations have more efficient alternatives.
 For example, you can calculate the row-wise or column-wise means with `rowMeans` and `colMeans`, respectively.
