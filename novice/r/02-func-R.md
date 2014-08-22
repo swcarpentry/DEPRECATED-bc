@@ -413,6 +413,7 @@ A common way to put documentation in software is to add [comments](../../gloss.h
 <pre class='in'><code>center <- function(data, desired) {
   # return a new vector containing the original data centered around the
   # desired value.
+  # Example: center(c(1, 2, 3), 0) => c(-1, 0, 1)
   new_data <- (data - mean(data)) + desired
   return(new_data)
 }</code></pre>
@@ -446,51 +447,54 @@ You will want to switch to this more formal method of writing documentation when
 
 ### Defining Defaults
 
-We have passed parameters to functions in two ways: directly, as in `dim(mat)`, and by name, as in `matrix(data = 0, nrow = 2, ncol = 2)`. We can pass arguments to functions without naming them
+We have passed parameters to functions in two ways: directly, as in `dim(dat)`, and by name, as in `read.csv(file = "inflammation-01.csv", header = FALSE)`.
+In fact, we can pass the arguments to `read.csv` without naming them:
 
 
-<pre class='in'><code>matrix(0, 2, 2)</code></pre>
+<pre class='in'><code>dat <- read.csv("inflammation-01.csv", FALSE)</code></pre>
+
+However, the position of the arguments matters if they are not named.
+
+
+<pre class='in'><code>dat <- read.csv(header = FALSE, file = "inflammation-01.csv")
+dat <- read.csv(FALSE, "inflammation-01.csv")</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>     [,1] [,2]
-[1,]    0    0
-[2,]    0    0
+<div class='out'><pre class='out'><code>Error: 'file' must be a character string or connection
 </code></pre></div>
 
-To understand what's going on, and make our own functions easier to use, let's re-define our `center()` function like this:
+To understand what's going on, and make our own functions easier to use, let's re-define our `center` function like this:
 
 
-<pre class='in'><code>center <- function(data, desired = 0){
-  #return a new matrix containing the original data centered around the desired value.
-  new <- (data - mean(data)) + desired
-  new
+<pre class='in'><code>center <- function(data, desired = 0) {
+  # return a new vector containing the original data centered around the
+  # desired value (0 by default).
+  # Example: center(c(1, 2, 3), 0) => c(-1, 0, 1)
+  new_data <- (data - mean(data)) + desired
+  return(new_data)
 }</code></pre>
 
 The key change is that the second argument is now written `desired = 0` instead of just `desired`. If we call the function with two arguments, it works as it did before:
 
 
-<pre class='in'><code>test_data <- matrix(0, 2, 2)
+<pre class='in'><code>test_data <- c(0, 0, 0, 0)
 center(test_data, 3)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>     [,1] [,2]
-[1,]    3    3
-[2,]    3    3
+<div class='out'><pre class='out'><code>[1] 3 3 3 3
 </code></pre></div>
 
 But we can also now call `center()` with just one parameter, in which case `desired` is automatically assigned the default value of `0`:
 
 
-<pre class='in'><code>more_data <- matrix(0, 2, 2) + 5
+<pre class='in'><code>more_data <- 5 + test_data
 more_data</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>     [,1] [,2]
-[1,]    5    5
-[2,]    5    5
+<div class='out'><pre class='out'><code>[1] 5 5 5 5
 </code></pre></div>
 
 
@@ -499,97 +503,106 @@ more_data</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>     [,1] [,2]
-[1,]    0    0
-[2,]    0    0
+<div class='out'><pre class='out'><code>[1] 0 0 0 0
 </code></pre></div>
 
-This is handy: if we usually want a function to work one way, but occasionally need it to do something else, we can allow people to pass a parameter when they need to but provide a default to make the normal case easier.
-
-R has three ways that arguments supplied by you are matched to the *formal arguments * of the function definition
-
- 1. by complete name, 
- 2. by partial name (matching on initial *n* characters of the argument name), and
- 3. by position.
-
-Arguments are matched in the manner outlined above in *that order*, by complete name, then by partial matching of names, and finally by position.
+This is handy: if we usually want a function to work one way, but occasionally need it to do something else, we can allow people to pass an argument when they need to but provide a default to make the normal case easier.
 
 The example below shows how R matches values to arguments
 
 
-<pre class='in'><code>display <- function(a=1, b=2, c=3) {
-  paste('a:', a, 'b:', b, 'c:', c)
+<pre class='in'><code>display <- function(a = 1, b = 2, c = 3) {
+  result <- c(a, b, c)
+  names(result) <- c("a", "b", "c")  # This names each element of the vector
+  return(result)
 }
 
-paste('no parameters:', display())</code></pre>
+# no parameters
+display()</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] "no parameters: a: 1 b: 2 c: 3"
+<div class='out'><pre class='out'><code>a b c 
+1 2 3 
 </code></pre></div>
 
 
 
-<pre class='in'><code>paste('one parameter:', display(55))</code></pre>
+<pre class='in'><code># one parameter
+display(55)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] "one parameter: a: 55 b: 2 c: 3"
+<div class='out'><pre class='out'><code> a  b  c 
+55  2  3 
 </code></pre></div>
 
 
 
-<pre class='in'><code>paste('two parameters:', display(55, 66))</code></pre>
+<pre class='in'><code># two parameters
+display(55, 66)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] "two parameters: a: 55 b: 66 c: 3"
+<div class='out'><pre class='out'><code> a  b  c 
+55 66  3 
 </code></pre></div>
 
 
 
-<pre class='in'><code>paste('three parameters:', display (55, 66, 77))</code></pre>
+<pre class='in'><code># three parameters
+display (55, 66, 77)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] "three parameters: a: 55 b: 66 c: 77"
+<div class='out'><pre class='out'><code> a  b  c 
+55 66 77 
 </code></pre></div>
 
-As this example shows, arguments are matched from left to right, and any that haven't been given a value explicitly get their default value. We can override this behavior by naming the value as we pass it in:
+As this example shows, arguments are matched from left to right, and any that haven't been given a value explicitly get their default value.
+We can override this behavior by naming the value as we pass it in:
 
 
-<pre class='in'><code>paste('only setting the value of c', display(c = 77))</code></pre>
+<pre class='in'><code># only setting the value of c
+display(c = 77)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] "only setting the value of c a: 1 b: 2 c: 77"
+<div class='out'><pre class='out'><code> a  b  c 
+ 1  2 77 
 </code></pre></div>
+
+> **Tip:** To be precise, R has three ways that arguments supplied by you are matched to the *formal arguments* of the function definition
+>
+> 1. by complete name, 
+> 2. by partial name (matching on initial *n* characters of the argument name), and
+> 3. by position.
+>
+> Arguments are matched in the manner outlined above in *that order*: by complete name, then by partial matching of names, and finally by position.
 
 With that in hand, let's look at the help for `read.csv()`:
 
 
 <pre class='in'><code>?read.csv</code></pre>
 
-There's a lot of information here, but the most important part is the first couple of lines:
+There's a lot of information there, but the most important part is the first couple of lines:
 
 
 <pre class='in'><code>read.csv(file, header = TRUE, sep = ",", quote = "\"",
          dec = ".", fill = TRUE, comment.char = "", ...)</code></pre>
 
-This tells us that `read.csv()` has one argument, `file`, that doesn't have a default value, and eight others that do. If we call the function like this:
+This tells us that `read.csv()` has one argument, `file`, that doesn't have a default value, and six others that do.
+Now we understand why the following gives an error:
 
 
-<pre class='in'><code>read.csv("inflammation-01.csv", ",")</code></pre>
+<pre class='in'><code>dat <- read.csv(FALSE, "inflammation-01.csv")</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>Error: invalid argument type
+<div class='out'><pre class='out'><code>Error: 'file' must be a character string or connection
 </code></pre></div>
 
-the filename is assigned to`file` (which is what we want), but the delimiter string `","` is assigned to the argument `header` rather than `sep`, because `header` is the second parameter in the list. That's why we don't have to provide `file =` for the filename, but do have to provide `sep =` for the second parameter.
-
-
-<pre class='in'><code>read.csv("inflammation-01.csv", sep = ",")</code></pre>
+It fails because `FALSE` is assigned to `file` and the filename is assigned to the argument `header`.
 
 #### Challenges
 
