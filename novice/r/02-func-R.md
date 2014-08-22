@@ -214,7 +214,7 @@ Why go to all this trouble? Well, here's a function called `span` that calculate
   return(diff)
 }
 
-dat <- read.table(file = "inflammation-01.csv", sep = ",")
+dat <- read.csv(file = "inflammation-01.csv", header = FALSE)
 # span of inflammation data
 span(dat)</code></pre>
 
@@ -226,7 +226,7 @@ span(dat)</code></pre>
 Notice `span` assigns a value to variable called `diff`. We might very well use a variable with the same name (`diff`) to hold the inflammation data:
 
 
-<pre class='in'><code>diff <- read.table(file = "inflammation-01.csv", sep = ",")
+<pre class='in'><code>diff <- read.csv(file = "inflammation-01.csv", header = FALSE)
 # span of inflammation data
 span(diff)</code></pre>
 

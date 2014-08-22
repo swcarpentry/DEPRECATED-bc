@@ -197,7 +197,7 @@ span <- function(a) {
   return(diff)
 }
 
-dat <- read.table(file = "inflammation-01.csv", sep = ",")
+dat <- read.csv(file = "inflammation-01.csv", header = FALSE)
 # span of inflammation data
 span(dat)
 ```
@@ -205,7 +205,7 @@ span(dat)
 Notice `span` assigns a value to variable called `diff`. We might very well use a variable with the same name (`diff`) to hold the inflammation data:
 
 ```{r}
-diff <- read.table(file = "inflammation-01.csv", sep = ",")
+diff <- read.csv(file = "inflammation-01.csv", header = FALSE)
 # span of inflammation data
 span(diff)
 ```
@@ -335,7 +335,7 @@ You will want to switch to this more formal method of writing documentation when
 analyze <- function(fname) {
   # Plots the average, min, and max inflammation over time.
   # Input is character string of a csv file.
-  dat <- read.table(file = fname, sep = ",")
+  dat <- read.csv(file = fname, header = FALSE)
   avg_day_inflammation <- apply(dat, 2, mean)
   plot(avg_day_inflammation)
   max_day_inflammation <- apply(dat, 2, min)
