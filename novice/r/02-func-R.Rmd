@@ -277,7 +277,7 @@ max(centered)
 ```
 
 That seems almost right: the original mean was about `r round(mean(dat[, 4]), 2)`, so the lower bound from zero is now about `r -round(mean(dat[, 4]), 2)`.
-The mean of the centered data isn't quite zero --- we'll explore why not in the challenges --- but it's pretty close.
+The mean of the centered data is `r mean(centered)`.
 We can even go further and check that the standard deviation hasn't changed:
 
 ```{r}

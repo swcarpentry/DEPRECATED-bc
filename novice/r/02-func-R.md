@@ -359,7 +359,7 @@ max(centered)</code></pre>
 </code></pre></div>
 
 That seems almost right: the original mean was about 1.75, so the lower bound from zero is now about -1.75.
-The mean of the centered data isn't quite zero --- we'll explore why not in the challenges --- but it's pretty close.
+The mean of the centered data is 0.
 We can even go further and check that the standard deviation hasn't changed:
 
 
