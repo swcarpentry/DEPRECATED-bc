@@ -31,7 +31,7 @@ To do all that, we'll have to learn a little bit about programming.
 * Read tabular data from a file into a program.
 * Assign values to variables.
 * Select individual values and subsections from data.
-* Perform operations on a matrix of data.
+* Perform operations on a data frame of data.
 * Display simple graphs.
 
 ### Loading Data
@@ -229,20 +229,8 @@ First, let's ask what type of thing `dat` *is*:
 The output tells us that data currently is a data frame in R. 
 This is similar to a spreadsheet in MS Excel that many of us are familiar with using.
 Data frames are very useful for storing data because you can have a continuous variable, e.g. rainfall, in one column and a categorical variable, e.g. month, in another.
-However, since we saw that every column of our data contains continuous data, the inflammation level of the patients on a given day, we can store the data as a matrix, which requires that all the columns contain the same type of data.
-Our motivation for converting to a matrix is because some mathematical operations only work on a matrix of numbers and not a data frame.
-There are other differences between a data.frame and a matrix, but this is a topic that will be more meaningful to you once you have a better understanding of how R works.
 
-
-<pre class='in'><code>dat <- as.matrix(dat)
-class(dat)</code></pre>
-
-
-
-<div class='out'><pre class='out'><code>[1] "matrix"
-</code></pre></div>
-
-We can see the dimensions, or [shape](../../gloss.html#shape), of the matrix like this:
+We can see the dimensions, or [shape](../../gloss.html#shape), of the data frame like this:
 
 
 <pre class='in'><code>dim(dat)</code></pre>
@@ -252,9 +240,9 @@ We can see the dimensions, or [shape](../../gloss.html#shape), of the matrix lik
 <div class='out'><pre class='out'><code>[1] 60 40
 </code></pre></div>
 
-This tells us that our matrix, `dat`, has 60 rows and 40 columns.
+This tells us that our data frame, `dat`, has 60 rows and 40 columns.
 
-If we want to get a single value from the matrix, we can provide an [index](../../gloss.html#index) in square brackets, just as we do in math:
+If we want to get a single value from the data frame, we can provide an [index](../../gloss.html#index) in square brackets, just as we do in math:
 
 
 <pre class='in'><code># first value in dat
@@ -262,8 +250,7 @@ dat[1, 1]</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>V1 
- 0 
+<div class='out'><pre class='out'><code>[1] 0
 </code></pre></div>
 
 
@@ -273,11 +260,10 @@ dat[30, 20]</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>V20 
- 16 
+<div class='out'><pre class='out'><code>[1] 16
 </code></pre></div>
 
-An index like `[30, 20]` selects a single element of a matrix, but we can select whole sections as well. 
+An index like `[30, 20]` selects a single element of a data frame, but we can select whole sections as well. 
 For example, we can select the first ten days (columns) of values for the first four patients (rows) like this:
 
 
@@ -285,11 +271,11 @@ For example, we can select the first ten days (columns) of values for the first 
 
 
 
-<div class='out'><pre class='out'><code>     V1 V2 V3 V4 V5 V6 V7 V8 V9 V10
-[1,]  0  0  1  3  1  2  4  7  8   3
-[2,]  0  1  2  1  2  1  3  2  2   6
-[3,]  0  1  1  3  3  2  6  2  5   9
-[4,]  0  0  2  0  4  2  2  1  6   7
+<div class='out'><pre class='out'><code>  V1 V2 V3 V4 V5 V6 V7 V8 V9 V10
+1  0  0  1  3  1  2  4  7  8   3
+2  0  1  2  1  2  1  3  2  2   6
+3  0  1  1  3  3  2  6  2  5   9
+4  0  0  2  0  4  2  2  1  6   7
 </code></pre></div>
 
 The [slice](../../gloss.html#slice) `1:4` means, "Start at index 1 and go to index 4."
@@ -301,13 +287,13 @@ The slice does not need to start at 1, e.g. the line below selects rows 5 throug
 
 
 
-<div class='out'><pre class='out'><code>     V1 V2 V3 V4 V5 V6 V7 V8 V9 V10
-[1,]  0  1  1  3  3  1  3  5  2   4
-[2,]  0  0  1  2  2  4  2  1  6   4
-[3,]  0  0  2  2  4  2  2  5  5   8
-[4,]  0  0  1  2  3  1  2  3  5   3
-[5,]  0  0  0  3  1  5  6  5  5   8
-[6,]  0  1  1  2  1  3  5  3  5   8
+<div class='out'><pre class='out'><code>   V1 V2 V3 V4 V5 V6 V7 V8 V9 V10
+5   0  1  1  3  3  1  3  5  2   4
+6   0  0  1  2  2  4  2  1  6   4
+7   0  0  2  2  4  2  2  5  5   8
+8   0  0  1  2  3  1  2  3  5   3
+9   0  0  0  3  1  5  6  5  5   8
+10  0  1  1  2  1  3  5  3  5   8
 </code></pre></div>
 
 And we don't have to take all the values in the slice---if we provide a [stride](../../gloss.html#stride), we can select evenly spaced values.
@@ -336,11 +322,11 @@ The notation `1:10` is shorthand for creating a vector of numbers from 1 to 10 a
 
 
 
-<div class='out'><pre class='out'><code>     V1 V3 V5 V7 V9
-[1,]  0  1  1  4  8
-[2,]  0  2  4  2  6
-[3,]  0  2  4  2  5
-[4,]  0  1  1  5  5
+<div class='out'><pre class='out'><code>   V1 V3 V5 V7 V9
+1   0  1  1  4  8
+4   0  2  4  2  6
+7   0  2  4  2  5
+10  0  1  1  5  5
 </code></pre></div>
 
 Here we have taken rows 1, 4, 7, and 10, and columns 1, 3, 5, 7, and 9.
@@ -352,16 +338,16 @@ We can use the function `c`, which stands for **c**ombine, to select non-contigu
 
 
 
-<div class='out'><pre class='out'><code>     V10 V14 V29
-[1,]   9   5   4
-[2,]   3   5   6
-[3,]   6   9  10
-[4,]   7  11   9
+<div class='out'><pre class='out'><code>   V10 V14 V29
+3    9   5   4
+8    3   5   6
+37   6   9  10
+56   7  11   9
 </code></pre></div>
 
 We also don't have to provide a slice for either the rows or the columns.
 If we don't include a slice for the rows, R returns all the rows; if we don't include a slice for the columns, R returns all the columns.
-If we don't provide a slice for either rows or columns, e.g. `dat[, ]`, R returns the full matrix.
+If we don't provide a slice for either rows or columns, e.g. `dat[, ]`, R returns the full data frame.
 
 
 <pre class='in'><code># All columns from row 5
@@ -369,12 +355,12 @@ dat[5, ]</code></pre>
 
 
 
-<div class='out'><pre class='out'><code> V1  V2  V3  V4  V5  V6  V7  V8  V9 V10 V11 V12 V13 V14 V15 V16 V17 V18 
-  0   1   1   3   3   1   3   5   2   4   4   7   6   5   3  10   8  10 
-V19 V20 V21 V22 V23 V24 V25 V26 V27 V28 V29 V30 V31 V32 V33 V34 V35 V36 
-  6  17   9  14   9   7  13   9  12   6   7   7   9   6   3   2   2   4 
-V37 V38 V39 V40 
-  2   0   1   1 
+<div class='out'><pre class='out'><code>  V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14 V15 V16 V17 V18 V19 V20
+5  0  1  1  3  3  1  3  5  2   4   4   7   6   5   3  10   8  10   6  17
+  V21 V22 V23 V24 V25 V26 V27 V28 V29 V30 V31 V32 V33 V34 V35 V36 V37 V38
+5   9  14   9   7  13   9  12   6   7   7   9   6   3   2   2   4   2   0
+  V39 V40
+5   1   1
 </code></pre></div>
 
 
@@ -390,17 +376,8 @@ dat[, 16]</code></pre>
 </code></pre></div>
 
 Now let's perform some common mathematical operations to learn about our inflammation data.
-If we want to find the average inflammation for all patients on all days, for example, we can calculate the mean value of the matrix:
-
-
-<pre class='in'><code>mean(dat)</code></pre>
-
-
-
-<div class='out'><pre class='out'><code>[1] 6.149
-</code></pre></div>
-
-R also has functions for other commons calculations, e.g. finding the maximum, minimum, and standard deviation of the data.
+If we want to find the average inflammation for all patients on all days,
+For example, we can calculate the maximum and minimum inflammation value of all the patients across all the days:
 
 
 <pre class='in'><code>max(dat)</code></pre>
@@ -419,9 +396,38 @@ R also has functions for other commons calculations, e.g. finding the maximum, m
 <div class='out'><pre class='out'><code>[1] 0
 </code></pre></div>
 
+R also has functions for other commons calculations, e.g. finding the mean, median, and standard deviation of the data.
+Unfortunately these functions do not work on a data frame.
+In order to calculate these statistics across the entire data set, we'll first need to convert the data from a data frame to a matrix.
+It is okay that this does not make sense to you now.
+The majority of the operations we'll perform in these lessons work on both data frames and matrices.
+
+> **Tip:** To learn more about the different structures R has for storing data, you can read [An Introduction to R][intro] and the [chapter][adv-r] on data structurs from Advanced R by Hadley Wickham.
+
+[intro]: http://cran.r-project.org/doc/manuals/r-release/R-intro.html
+[adv-r]: http://adv-r.had.co.nz/Data-structures.html
 
 
-<pre class='in'><code>sd(dat)</code></pre>
+<pre class='in'><code>mat <- as.matrix(dat)
+mean(mat)</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 6.149
+</code></pre></div>
+
+
+
+<pre class='in'><code>median(mat)</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 5
+</code></pre></div>
+
+
+
+<pre class='in'><code>sd(mat)</code></pre>
 
 
 
@@ -429,7 +435,7 @@ R also has functions for other commons calculations, e.g. finding the maximum, m
 </code></pre></div>
 
 When analyzing data we often want to look at partial statistics, such as the maximum value per patient or the average value per day. 
-One way to do this is to select the data we want to create a new temporary matrix, and then perform the calculation on this subset:
+One way to do this is to select the data we want to create a new temporary data frame, and then perform the calculation on this subset:
 
 
 <pre class='in'><code>patient_1 <- dat[1, ] # first row, all of the columns
@@ -452,7 +458,7 @@ Instead, we can combine the selection and the function call:
 </code></pre></div>
 
 What if we need the maximum inflammation for all patients, or the average for each day?
-As the diagram below shows, we want to perform the operation across a margin of the matrix:
+As the diagram below shows, we want to perform the operation across a margin of the data frame:
 
 <img src="figure/r-operations-across-axes.svg" alt="Operations Across Axes" />
 
@@ -460,14 +466,14 @@ To support this, we can use the `apply` function.
 
 > **Tip:** To learn about a function in R, e.g. `apply`, we can read its help documention by running `help(apply)` or `?apply`.
 
-`apply` allows us to repeat a function on all of the rows (`MARGIN = 1`) or columns (`2`) of a matrix.
+`apply` allows us to repeat a function on all of the rows (`MARGIN = 1`) or columns (`2`) of a data frame.
 
-Thus, to obtain the average inflammation of each patient we will need to calculate the mean of all of the rows of the matrix.
+Thus, to obtain the average inflammation of each patient we will need to calculate the mean of all of the rows of the data frame.
 
 
 <pre class='in'><code>avg_patient_inflammation <- apply(dat, 1, mean)</code></pre>
 
-And to obtain the average inflammation of each day we will need to calculate the mean of all of the columns of the matrix.
+And to obtain the average inflammation of each day we will need to calculate the mean of all of the columns of the data frame.
 
 
 <pre class='in'><code>avg_day_inflammation <- apply(dat, 2, mean)</code></pre>
@@ -477,7 +483,7 @@ For example, you can calculate the row-wise or column-wise means with `rowMeans`
 
 #### Challenge
 
-A subsection of an matrix is called a [slice](../../gloss.html#slice).
+A subsection of a data frame is called a [slice](../../gloss.html#slice).
 We can take slices of character vectors as well:
 
 
@@ -514,24 +520,6 @@ element[4:6]</code></pre>
 The mathematician Richard Hamming once said, "The purpose of computing is insight, not numbers," and the best way to develop insight is often to visualize data.
 Visualization deserves an entire lecture (or course) of its own, but we can explore a few of R's plotting features. 
 
-First, let's create a heatmap of the inflammation data using the function `heatmap`.
-
-
-<pre class='in'><code>heatmap(dat)</code></pre>
-
-<img src="figure/01-starting-with-data-heatmap.png" title="plot of chunk heatmap" alt="plot of chunk heatmap" style="display: block; margin: auto;" />
-
-This automatically performs hierarchical clustering of the data.
-We can clearly see some large differences between the days of the treatment.
-To get a better sense of how the inflammation levels change over time, let's disable the clustering.
-
-
-<pre class='in'><code>heatmap(dat, Rowv = NA, Colv = NA)</code></pre>
-
-<img src="figure/01-starting-with-data-heatmap-no-clustering.png" title="plot of chunk heatmap-no-clustering" alt="plot of chunk heatmap-no-clustering" style="display: block; margin: auto;" />
-
-Red regions in this heat map are low values, while yellow/white shows high values.
-As we can see, inflammation rises and falls over a 40-day period.
 Let's take a look at the average inflammation over time.
 Recall that we already calculated these values above using `apply(dat, 2, mean)` and saved them in the variable `avg_day_inflammation`.
 Plotting the values is done with the function `plot`.
@@ -569,13 +557,13 @@ for each day across all patients.
 
 * Use `variable <- value` to assign a value to a variable in order to record it in memory.
 * Objects are created on demand whenever a value is assigned to them.
-* The function `dim` gives the dimensions of a matrix.
-* Use `object[x, y]` to select a single element from a matrix.
+* The function `dim` gives the dimensions of a data frame.
+* Use `object[x, y]` to select a single element from a data frame.
 * Use `from:to` to specify a sequence that includes the indices from `from` to `to`.
-* All the indexing and slicing that works on matrices also works on vectors.
+* All the indexing and slicing that works on data frames also works on vectors.
 * Use `#` to add comments to programs.
 * Use `mean`, `max`, `min` and `sd` to calculate simple statistics.
-* Use `apply` to calculate statistics across the rows or columns of a matrix.
+* Use `apply` to calculate statistics across the rows or columns of a data frame.
 * Use `plot` to create simple visualizations.
 
 #### Next Steps
