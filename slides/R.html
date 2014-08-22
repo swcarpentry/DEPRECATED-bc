@@ -11,90 +11,68 @@ website: http://software-carpentry.org
   <h1>{{page.title}}</h1>
   <aside class="notes">
     Hello, and welcome to the R section of the Software Carpentry bootcamp.
-    We will introduce you to the R Statistical programming environment.
+    In this section, we will introduce you to the R Statistical programming environment.
   </aside>
 </section>
 
 <section>
   <h2>What Is It?</h2>
   <p class="fragment">
-     A statistical analysis package, a language, and a way of life.
+     A <strong>free</strong>, open source statistical analysis package, a language, and a way of life.
   </p>
   <p class="fragment">
      A number of sophisticated analyses are available straight out of the box.
   </p>    
   <p class="fragment">
-    Software for data visualisation
+    A full-featured programming language that allows development of cusomized analysis pipelines and more specialized packages.
   </p>
-  <p class="fragment">
-    A full-featured programming language that allows development of more specialized packages.
-  </p>
-</section>
-
-<section>
-  <h2>Continued.. </h2>
   <p class="fragment">
     A staggering number of free, specialized packages that extend core functionality.
   </p>   
   <p class="fragment">
-    <strong>Free!</strong>
+    A rich environment for data visualisation
   </p>
   <p class="fragment">
-    <strong>R has a great community - R Geeks everywhere!</strong>
+    A great community - R Geeks are everywhere!
   </p>
-  <aside class="notes">
-    So for those of you who have never encountered R before, what is it? R is a statistical programming language which is used to:
-     - process and analyse data
-     - visualise data, and generate publication quality graphics
-    It is also a programming language, allowing you to:
-     - develop analysis pipelines
-     - develop new statistical methods
-    It is also a free open-source project, making it completely free to download and extend.
-  </aside>
 </section>
 
+
 <section>
-  <h2>Why R and not &lt;X&gt;?</h2>
-  <p class="fragment">
-    Prepackaged with common statistics and methods
-  </p>
-  <p class="fragment">
-    If something is missing, there's a package for that!
-  </p>
-  <aside class="notes">
-    So why use or learn R for data analysis, instead of another language or platform?
-    Not only does R come prepackage with pretty much any statistical model or test you can think of,
-    but its also easy to extend and install add-on packages making it one of the most flexible and sophisticated options available
-    for statistical analysis.
-    The learning curve can be a bit steep at first, but once
+  <h2>Why R and not another language or platform?</h2>
+  <aside>
+    Not only does R come prepackaged with pretty much any statistical model or test you can think of,
+    it's also easy to extend and install add-on packages.  R is used by researchers and industry all over the world, 
+    not only for their analyses, but also for method development. This means that R is cutting edge, and new methods are often available
+    in R long before they're implemented in other languages or platforms.
+<br><br>
+    As of November 2013, there were more than 5000 statistical and general purpose packages available in CRAN, along with many domain specific
+    packages like those specific to life sciences research.
+    [<a href="http://www.r-bloggers.com/cran-now-has-5000-r-packages/" alt="Source for Statistics">source</a>]
+    This might seem like an intimidating number of packages, but there is a central list called "CRAN Task views" which maintains a list
+    of packages grouped by task. You can often go there if you only have a vague idea of what you need, or are exploring options in terms of functionality you need to solve a given problem. 
+<br><br>
+    All of this makes R one of the most flexible and sophisticated options available
+    for statistical analysis. The learning curve can be a bit steep at first, but once
     you master the basics you will be amazed at what you can do!
   </aside>
 </section>
 
 <section>
   <h1>Packages</h1>
-  <p>Contains cutting edge research</p>
+  <p>Contain cutting edge statistical methods</p>
   <ol class="fragment"> 
     <li>5000+ add on packages in CRAN</li>
     <li>800+ on Bioconductor</li>
     <li>100+ on github</li>
   </ol>
-  <br />
-  <br />
+  
+  <aside class="notes">
+    
+  </aside>
   <p class="fragment">
     <a href="http://cran.r-project.org/web/views/" alt="CRAN Task views">CRAN Task views</a>
   </p>
-  <aside class="notes">
-    As a result its used by researchers and industry all over the world, 
-    not only for their analyses, but also for method development. This means that R is cutting edge, new methods are often available
-    in R long before they're implemented in other languages or platforms.
-    In November last year, there were more than 5000 statistical and general purpose packages available in CRAN, along with many domain specific
-    packages like those specific to life sciences research.
-    <a href="http://www.r-bloggers.com/cran-now-has-5000-r-packages/" alt="Source for Statistics">source</a>
-    Now this might seem like an intimidating number of packages, but there is a central list called "CRAN Task views" which maintains a list
-    of packages grouped by task, so you can often go there if you only have a vague idea of what you need, or are exploring options in terms of
-    functionality you need to solve a given problem.
-  </aside>
 </section>
 
 <section>
@@ -192,7 +170,7 @@ website: http://software-carpentry.org
   <aside class="notes">
     R code is written in a plain text file. Running the same code on the same data should reproduce
     the exact same results. R "scripts" are easily shared. "Latex, Knitr, Sweave" etc allow seamless 
-    integration of R code into a self-documenting report.
+    integration of R output into a self-documenting report.
   </aside>
 </section>
 
@@ -203,9 +181,9 @@ website: http://software-carpentry.org
       <ol>
 	<li>R data types and objects</li>
 	<li>Starting with data and data analysis</li>
-	<li>R programming: Loops, Functions and Flow control</li>
+	<li>R programming: loops, functions and flow control</li>
 	<li>R visualisation</li>
-	<li>R packaging: Creating packages</li>
+	<li>R packaging: creating packages</li>
 	<li>Testing</li>
 	<li>knitr</li>
       </ol>
@@ -214,7 +192,7 @@ website: http://software-carpentry.org
   <aside class="notes">
     We will only explore a dozen or so commands in this lesson.
     Our real goal is to teach you how R works
-    and how best to use it as a tool for reproducible research and data/ statistical analysis language.
+    and how best to use it as a tool for reproducible research and statistical analysis.
     There are many online tutorials available for R.
     If you'd like to know more,
     we recommend
