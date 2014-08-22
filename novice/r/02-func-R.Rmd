@@ -5,6 +5,7 @@ root: ../..
 
 ```{r, include = FALSE}
 source("chunk_options.R")
+opts_chunk$set(fig.path = "figure/02-func-R-")
 ```
 
 ## Creating Functions
@@ -361,7 +362,7 @@ rescale <- function(v) {
 
   + Test that your `rescale` function is working properly using `min`, `max`, and `plot`.
 
-```{r, include=FALSE}
+```{r rescale-test, include=FALSE}
 answer <- rescale(dat[, 4])
 min(answer)
 max(answer)
