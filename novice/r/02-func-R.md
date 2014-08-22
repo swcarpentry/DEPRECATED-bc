@@ -13,11 +13,11 @@ In this lesson, we'll learn how to write a function so that we can repeat severa
 
 #### Objectives
 
-* Define a function that takes parameters.
+* Define a function that takes arguments.
 * Return a value from a function.
 * Test a function.
 * Explain what a call stack is, and trace changes to the call stack as functions are called.
-* Set default values for function parameters.
+* Set default values for function arguments.
 * Explain why we should divide programs into small, single-purpose functions.
 
 ### Defining a function
@@ -31,7 +31,7 @@ Let's start by defining a function `fahr_to_kelvin` that converts temperatures f
 }</code></pre>
 
 We define `fahr_to_kelvin` by assigning it to the output of `function`.
-The list of parameter names are containted within parentheses.
+The list of argument names are containted within parentheses.
 Next, the [body](../../gloss.html#function-body) of the function--the statements that are executed when it runs--is contained within curly braces (`{}`).
 The statements in the body are indented by two spaces.
 This makes the code easier to read but does not affect how the code operates. 
@@ -111,7 +111,7 @@ Real-life functions will usually be larger than the ones shown here--typically h
 
   + In the last lesson, we learned to **c**oncatenate elements into a vector using the `c` function, e.g. `x <- c("A", "B", "C")` creates a vector `x` with three elements.
   Furthermore, we can extend that vector again using `c`, e.g. `y <- c(x, "D")` creates a vector `y` with four elements.
-  Write a function called `fence` that takes two vectors as parameters, called `original` and `wrapper`, and returns a new vector that has the wrapper vector at the beginning and end of the original:
+  Write a function called `fence` that takes two vectors as arguments, called `original` and `wrapper`, and returns a new vector that has the wrapper vector at the beginning and end of the original:
   
 
   
@@ -163,7 +163,7 @@ When we call `fahr_to_kelvin` inside `fahr_to_celsius`, R creates another stack 
 
 <img src="../python/img/python-call-stack-03.svg" alt="Call Stack During First Nested Function Call" />
 
-It does this because there are now two variables in play called `temp`: the parameter to `fahr_to_celsius`, and the parameter to `fahr_to_kelvin`.
+It does this because there are now two variables in play called `temp`: the argument to `fahr_to_celsius`, and the argument to `fahr_to_kelvin`.
 Having two variables with the same name in the same part of the program would be ambiguous, so R (and every other modern programming language) creates a new stack frame for each function call to keep that function's variables separate from those defined by other functions.
 
 When the call to `fahr_to_kelvin` returns a value, R throws away `fahr_to_kelvin`'s stack frame and creates a new variable in the stack frame for `fahr_to_celsius` to hold the temperature in Kelvin:
@@ -428,7 +428,7 @@ You will want to switch to this more formal method of writing documentation when
 
 #### Challenges
 
-  + Write a function called `analyze` that takes a filename as a parameter and displays the three graphs produced in the [previous lesson][01] (average, min and max inflammation over time).
+  + Write a function called `analyze` that takes a filename as a argument and displays the three graphs produced in the [previous lesson][01] (average, min and max inflammation over time).
   `analyze("inflammation-01.csv")` should produce the graphs already shown, while `analyze("inflammation-02.csv")` should produce corresponding graphs for the second data set. Be sure to document your function with comments.
 
 [01]: 01-starting-with-data.html
@@ -447,7 +447,7 @@ You will want to switch to this more formal method of writing documentation when
 
 ### Defining Defaults
 
-We have passed parameters to functions in two ways: directly, as in `dim(dat)`, and by name, as in `read.csv(file = "inflammation-01.csv", header = FALSE)`.
+We have passed arguments to functions in two ways: directly, as in `dim(dat)`, and by name, as in `read.csv(file = "inflammation-01.csv", header = FALSE)`.
 In fact, we can pass the arguments to `read.csv` without naming them:
 
 
@@ -486,7 +486,7 @@ center(test_data, 3)</code></pre>
 <div class='out'><pre class='out'><code>[1] 3 3 3 3
 </code></pre></div>
 
-But we can also now call `center()` with just one parameter, in which case `desired` is automatically assigned the default value of `0`:
+But we can also now call `center()` with just one argument, in which case `desired` is automatically assigned the default value of `0`:
 
 
 <pre class='in'><code>more_data <- 5 + test_data
@@ -517,7 +517,7 @@ The example below shows how R matches values to arguments
   return(result)
 }
 
-# no parameters
+# no arguments
 display()</code></pre>
 
 
@@ -528,7 +528,7 @@ display()</code></pre>
 
 
 
-<pre class='in'><code># one parameter
+<pre class='in'><code># one argument
 display(55)</code></pre>
 
 
@@ -539,7 +539,7 @@ display(55)</code></pre>
 
 
 
-<pre class='in'><code># two parameters
+<pre class='in'><code># two arguments
 display(55, 66)</code></pre>
 
 
@@ -550,7 +550,7 @@ display(55, 66)</code></pre>
 
 
 
-<pre class='in'><code># three parameters
+<pre class='in'><code># three arguments
 display (55, 66, 77)</code></pre>
 
 
@@ -613,16 +613,16 @@ It fails because `FALSE` is assigned to `file` and the filename is assigned to t
 
 #### Key Points
 
-* Define a function using `fname <- function(...params...)`.
+* Define a function using `fname <- function(...args...)`.
 * The body of a function should be surrounded by curly braces (`{}`).
 * Call a function using `fname(...values...)`.
-* Each time a function is called, a new stack frame is created on the [call stack](../../gloss.html#call-stack) to hold its parameters and local variables.
+* Each time a function is called, a new stack frame is created on the [call stack](../../gloss.html#call-stack) to hold its arguments and local variables.
 * R looks for variables in the current stack frame before looking for them at the top level.
 * Use `help(thing)` to view help for something.
 * Put comments at the beginning of functions to provide help for that function.
 * Annotate your code!
-* Specify default values for parameters when defining a function using `name = value` in the parameter list.
-* Parameters can be passed by matching based on name, by position, or by omitting them (in which case the default value is used).
+* Specify default values for arguments when defining a function using `name = value` in the argument list.
+* arguments can be passed by matching based on name, by position, or by omitting them (in which case the default value is used).
 
 #### Next Steps
 
