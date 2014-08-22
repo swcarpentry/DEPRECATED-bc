@@ -66,19 +66,6 @@ fahr_to_kelvin(212)</code></pre>
 </code></pre></div>
 
 We've successfully called the function that we defined, and we have access to the value that we returned.
-However, it the function was redefined as follows
-
-
-<pre class='in'><code>fahr_to_kelvin <- function(temp) {
-  kelvin <- ((temp - 32) * (5/9)) + 273.15
-}</code></pre>
-
-Now typing
-
-
-<pre class='in'><code>fahr_to_kelvin(32)</code></pre>
-
-Will return nothing. Why?
 
 --> In Python lessons, now would come debugging…
 ==============================
@@ -210,7 +197,7 @@ If we try to get the value of `temp` after our functions have finished running, 
 
 
 
-<div class='out'><pre class='out'><code>Error: objeto 'temp' no encontrado
+<div class='out'><pre class='out'><code>Error: object 'temp' not found
 </code></pre></div>
 
 > **Tip:** The explanation of the stack frame above was very general and the basic concept will help you understand most languages you try to program with.
@@ -605,7 +592,7 @@ This tells us that `read.csv()` has one argument, `file`, that doesn't have a de
 
 
 
-<div class='out'><pre class='out'><code>Error: argumento de tipo inválido
+<div class='out'><pre class='out'><code>Error: invalid argument type
 </code></pre></div>
 
 the filename is assigned to`file` (which is what we want), but the delimiter string `","` is assigned to the argument `header` rather than `sep`, because `header` is the second parameter in the list. That's why we don't have to provide `file =` for the filename, but do have to provide `sep =` for the second parameter.

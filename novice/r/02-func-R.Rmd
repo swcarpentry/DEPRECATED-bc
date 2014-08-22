@@ -57,21 +57,6 @@ fahr_to_kelvin(212)
 ```
 
 We've successfully called the function that we defined, and we have access to the value that we returned.
-However, it the function was redefined as follows
-
-```{r}
-fahr_to_kelvin <- function(temp) {
-  kelvin <- ((temp - 32) * (5/9)) + 273.15
-}
-```
-
-Now typing
-
-```{r}
-fahr_to_kelvin(32)
-```
-
-Will return nothing. Why?
 
 --> In Python lessons, now would come debugging…
 ==============================
