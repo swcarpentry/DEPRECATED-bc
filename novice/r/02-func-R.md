@@ -264,18 +264,16 @@ To see how to do this, let's write a function to center a dataset around a parti
 }</code></pre>
 
 We could test this on our actual data, but since we don't know what the values ought to be, it will be hard to tell if the result was correct.
-Instead, let's create a matrix of 0s and then center that around 3.
+Instead, let's create a vector of 0s and then center that around 3.
 This will make it simple to see if our function is working as expected:
 
 
-<pre class='in'><code>z <- matrix(0, nrow = 2, ncol = 2)
+<pre class='in'><code>z <- c(0, 0, 0, 0)
 z</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>     [,1] [,2]
-[1,]    0    0
-[2,]    0    0
+<div class='out'><pre class='out'><code>[1] 0 0 0 0
 </code></pre></div>
 
 
@@ -284,39 +282,26 @@ z</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>     [,1] [,2]
-[1,]    3    3
-[2,]    3    3
+<div class='out'><pre class='out'><code>[1] 3 3 3 3
 </code></pre></div>
 
-That looks right, so let's try center on our real data:
+That looks right, so let's try center on our real data. We'll center the inflammation data from day 4 around 0:
 
 
-<pre class='in'><code>dat <- read.table("inflammation-01.csv", sep = ",")
-dat <- as.matrix(dat)  # convert to matrix
-centered <- center(dat, 0)
-centered[1:10, 1:5]</code></pre>
+<pre class='in'><code>dat <- read.csv(file = "inflammation-01.csv", header = FALSE)
+centered <- center(dat[, 4], 0)
+head(centered)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>          V1     V2     V3     V4     V5
- [1,] -6.149 -6.149 -5.149 -3.149 -5.149
- [2,] -6.149 -5.149 -4.149 -5.149 -4.149
- [3,] -6.149 -5.149 -5.149 -3.149 -3.149
- [4,] -6.149 -6.149 -4.149 -6.149 -2.149
- [5,] -6.149 -5.149 -5.149 -3.149 -3.149
- [6,] -6.149 -6.149 -5.149 -4.149 -4.149
- [7,] -6.149 -6.149 -4.149 -4.149 -2.149
- [8,] -6.149 -6.149 -5.149 -4.149 -3.149
- [9,] -6.149 -6.149 -6.149 -3.149 -5.149
-[10,] -6.149 -5.149 -5.149 -4.149 -5.149
+<div class='out'><pre class='out'><code>[1]  1.25 -0.75  1.25 -1.75  1.25  0.25
 </code></pre></div>
 
 It's hard to tell from the default output whether the result is correct, but there are a few simple tests that will reassure us:
 
 
 <pre class='in'><code># original min
-min(dat)</code></pre>
+min(dat[, 4])</code></pre>
 
 
 
@@ -326,21 +311,21 @@ min(dat)</code></pre>
 
 
 <pre class='in'><code># original mean
-mean(dat)</code></pre>
+mean(dat[, 4])</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] 6.149
+<div class='out'><pre class='out'><code>[1] 1.75
 </code></pre></div>
 
 
 
 <pre class='in'><code># original max
-max(dat)</code></pre>
+max(dat[, 4])</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] 20
+<div class='out'><pre class='out'><code>[1] 3
 </code></pre></div>
 
 
@@ -350,7 +335,7 @@ min(centered)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] -6.149
+<div class='out'><pre class='out'><code>[1] -1.75
 </code></pre></div>
 
 
@@ -360,7 +345,7 @@ mean(centered)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] 2.589e-16
+<div class='out'><pre class='out'><code>[1] 0
 </code></pre></div>
 
 
@@ -370,20 +355,20 @@ max(centered)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] 13.85
+<div class='out'><pre class='out'><code>[1] 1.25
 </code></pre></div>
 
-That seems almost right: the original mean was about 6.1, so the lower bound from zero is now about -6.1.
+That seems almost right: the original mean was about 1.75, so the lower bound from zero is now about -1.75.
 The mean of the centered data isn't quite zero --- we'll explore why not in the challenges --- but it's pretty close.
 We can even go further and check that the standard deviation hasn't changed:
 
 
 <pre class='in'><code># original standard deviation
-sd(dat)</code></pre>
+sd(dat[, 4])</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] 4.615
+<div class='out'><pre class='out'><code>[1] 1.068
 </code></pre></div>
 
 
@@ -393,7 +378,7 @@ sd(centered)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] 4.615
+<div class='out'><pre class='out'><code>[1] 1.068
 </code></pre></div>
 
 Those values look the same, but we probably wouldn't notice if they were different in the sixth decimal place.
@@ -401,7 +386,7 @@ Let's do this instead:
 
 
 <pre class='in'><code># difference in standard deviations before and after
-sd(dat) - sd(centered)</code></pre>
+sd(dat[, 4]) - sd(centered)</code></pre>
 
 
 
@@ -412,7 +397,7 @@ Sometimes, a very small difference can be detected due to rounding at very low d
 R has a useful function for comparing two objects allowing for rounding errors, `all.equal`:
 
 
-<pre class='in'><code>all.equal(sd(dat), sd(centered))</code></pre>
+<pre class='in'><code>all.equal(sd(dat[, 4]), sd(centered))</code></pre>
 
 
 
@@ -426,14 +411,14 @@ A common way to put documentation in software is to add [comments](../../gloss.h
 
 
 <pre class='in'><code>center <- function(data, desired) {
-  # return a new matrix containing the original data centered around the
+  # return a new vector containing the original data centered around the
   # desired value.
   new_data <- (data - mean(data)) + desired
   return(new_data)
 }</code></pre>
 
 > **Tip:** Formal documentation for R functions is written in separate `.Rd` using a markup language similar to [LaTeX][].
-You see the result of this documentation when you look at the help file for a given function, e.g. `?read.table`.
+You see the result of this documentation when you look at the help file for a given function, e.g. `?read.csv`.
 The [roxygen2][] package allows R coders to write documentation alongside the function code and then process it into the appropriate `.Rd` files.
 You will want to switch to this more formal method of writing documentation when you start writing more complicated R projects.
 

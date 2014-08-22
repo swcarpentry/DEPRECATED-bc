@@ -241,33 +241,32 @@ center <- function(data, desired) {
 ```
 
 We could test this on our actual data, but since we don't know what the values ought to be, it will be hard to tell if the result was correct.
-Instead, let's create a matrix of 0s and then center that around 3.
+Instead, let's create a vector of 0s and then center that around 3.
 This will make it simple to see if our function is working as expected:
 
 ```{r, }
-z <- matrix(0, nrow = 2, ncol = 2)
+z <- c(0, 0, 0, 0)
 z
 center(z, 3)
 ```
 
-That looks right, so let's try center on our real data:
+That looks right, so let's try center on our real data. We'll center the inflammation data from day 4 around 0:
 
 ```{r}
-dat <- read.table("inflammation-01.csv", sep = ",")
-dat <- as.matrix(dat)  # convert to matrix
-centered <- center(dat, 0)
-centered[1:10, 1:5]
+dat <- read.csv(file = "inflammation-01.csv", header = FALSE)
+centered <- center(dat[, 4], 0)
+head(centered)
 ```
 
 It's hard to tell from the default output whether the result is correct, but there are a few simple tests that will reassure us:
 
 ```{r}
 # original min
-min(dat)
+min(dat[, 4])
 # original mean
-mean(dat)
+mean(dat[, 4])
 # original max
-max(dat)
+max(dat[, 4])
 # centered min
 min(centered)
 # centered mean
@@ -276,13 +275,13 @@ mean(centered)
 max(centered)
 ```
 
-That seems almost right: the original mean was about 6.1, so the lower bound from zero is now about -6.1.
+That seems almost right: the original mean was about `r round(mean(dat[, 4]), 2)`, so the lower bound from zero is now about `r -round(mean(dat[, 4]), 2)`.
 The mean of the centered data isn't quite zero --- we'll explore why not in the challenges --- but it's pretty close.
 We can even go further and check that the standard deviation hasn't changed:
 
 ```{r}
 # original standard deviation
-sd(dat)
+sd(dat[, 4])
 # centerted standard deviation
 sd(centered)
 ```
@@ -292,14 +291,14 @@ Let's do this instead:
 
 ```{r}
 # difference in standard deviations before and after
-sd(dat) - sd(centered)
+sd(dat[, 4]) - sd(centered)
 ```
 
 Sometimes, a very small difference can be detected due to rounding at very low decimal places.
 R has a useful function for comparing two objects allowing for rounding errors, `all.equal`:
 
 ```{r}
-all.equal(sd(dat), sd(centered))
+all.equal(sd(dat[, 4]), sd(centered))
 ```
 
 It's still possible that our function is wrong, but it seems unlikely enough that we should probably get back to doing our analysis.
@@ -309,7 +308,7 @@ A common way to put documentation in software is to add [comments](../../gloss.h
 
 ```{r}
 center <- function(data, desired) {
-  # return a new matrix containing the original data centered around the
+  # return a new vector containing the original data centered around the
   # desired value.
   new_data <- (data - mean(data)) + desired
   return(new_data)
@@ -317,7 +316,7 @@ center <- function(data, desired) {
 ```
 
 > **Tip:** Formal documentation for R functions is written in separate `.Rd` using a markup language similar to [LaTeX][].
-You see the result of this documentation when you look at the help file for a given function, e.g. `?read.table`.
+You see the result of this documentation when you look at the help file for a given function, e.g. `?read.csv`.
 The [roxygen2][] package allows R coders to write documentation alongside the function code and then process it into the appropriate `.Rd` files.
 You will want to switch to this more formal method of writing documentation when you start writing more complicated R projects.
 
