@@ -133,7 +133,7 @@ Let's take a closer look at what happens when we call `fahr_to_celsius(32)`. To 
 
 ```{r}
 original <- 32
-final    <- fahr_to_celsius(original)
+final <- fahr_to_celsius(original)
 ```
 
 The diagram below shows what memory looks like after the first line has been executed:
@@ -398,7 +398,8 @@ center <- function(data, desired = 0) {
 }
 ```
 
-The key change is that the second argument is now written `desired = 0` instead of just `desired`. If we call the function with two arguments, it works as it did before:
+The key change is that the second argument is now written `desired = 0` instead of just `desired`.
+If we call the function with two arguments, it works as it did before:
 
 ```{r}
 test_data <- c(0, 0, 0, 0)
@@ -504,17 +505,19 @@ max(answer)
 * Put comments at the beginning of functions to provide help for that function.
 * Annotate your code!
 * Specify default values for arguments when defining a function using `name = value` in the argument list.
-* arguments can be passed by matching based on name, by position, or by omitting them (in which case the default value is used).
+* Arguments can be passed by matching based on name, by position, or by omitting them (in which case the default value is used).
 
 #### Next Steps
 
-We now have a function called analyze to visualize a single data set. We could use it to explore all 12 of our current data sets like this:
+We now have a function called analyze to visualize a single data set.
+We could use it to explore all 12 of our current data sets like this:
 
 ```{r, eval=FALSE}
-analyze('inflammation-01.csv')
-analyze('inflammation-02.csv')
+analyze("inflammation-01.csv")
+analyze("inflammation-02.csv")
 #...
-analyze('inflammation-12.csv')
+analyze("inflammation-12.csv")
 ```
 
-but the chances of us typing all 12 filenames correctly aren't great, and we'll be even worse off if we get another hundred files. What we need is a way to tell R to do something once for each file, and that will be the subject of the next lesson.
+but the chances of us typing all 12 filenames correctly aren't great, and we'll be even worse off if we get another hundred files.
+What we need is a way to tell R to do something once for each file, and that will be the subject of the next lesson.
