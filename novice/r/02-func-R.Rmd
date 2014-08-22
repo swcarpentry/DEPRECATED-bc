@@ -345,12 +345,13 @@ analyze <- function(fname) {
 }
 ```
 
-  + Write a function `rescale` that takes a vector as input and returns a corresponding vector of values scaled to lie in the range 0.0 to 1.0.
+  + Write a function `rescale` that takes a vector as input and returns a corresponding vector of values scaled to lie in the range 0 to 1.
   (If $L$ and $H$ are the lowest and highest values in the original vector, then the replacement for a value $v$ should be $(v-L) / (H-L)$.)
   Be sure to document your function with comments.
 
 ```{r, include=FALSE}
 rescale <- function(v) {
+  # Rescales a vector, v, to lie in the range 0 to 1.
   L <- min(v)
   H <- max(v)
   result <- (v - L) / (H - L)
@@ -473,7 +474,24 @@ It fails because `FALSE` is assigned to `file` and the filename is assigned to t
 
 #### Challenges
 
-Rewrite the `center()` function so that it scales data to lie between 0.0 and 1.0 by default, but will allow the caller to specify lower and upper bounds if they want. Compare your implementation to your neighbor's: do the two functions always behave the same way?
+  + Rewrite the `rescale` function so that it scales a vector to lie between 0 and 1 by default, but will allow the caller to specify lower and upper bounds if they want.
+  Compare your implementation to your neighbor's: do the two functions always behave the same way?
+
+```{r, include=FALSE}
+rescale <- function(v, lower = 0, upper = 1) {
+  # Rescales a vector, v, to lie in the range lower to upper.
+  L <- min(v)
+  H <- max(v)
+  result <- (v - L) / (H - L) * (upper - lower) + lower
+  return(result)
+}
+answer <- rescale(dat[, 4], lower = 2, upper = 5)
+min(answer)
+max(answer)
+answer <- rescale(dat[, 4], lower = -5, upper = -2)
+min(answer)
+max(answer)
+```
 
 #### Key Points
 

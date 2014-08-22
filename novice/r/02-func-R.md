@@ -435,7 +435,7 @@ You will want to switch to this more formal method of writing documentation when
 
 
 
-  + Write a function `rescale` that takes a vector as input and returns a corresponding vector of values scaled to lie in the range 0.0 to 1.0.
+  + Write a function `rescale` that takes a vector as input and returns a corresponding vector of values scaled to lie in the range 0 to 1.
   (If $L$ and $H$ are the lowest and highest values in the original vector, then the replacement for a value $v$ should be $(v-L) / (H-L)$.)
   Be sure to document your function with comments.
 
@@ -606,7 +606,10 @@ It fails because `FALSE` is assigned to `file` and the filename is assigned to t
 
 #### Challenges
 
-Rewrite the `center()` function so that it scales data to lie between 0.0 and 1.0 by default, but will allow the caller to specify lower and upper bounds if they want. Compare your implementation to your neighbor's: do the two functions always behave the same way?
+  + Rewrite the `rescale` function so that it scales a vector to lie between 0 and 1 by default, but will allow the caller to specify lower and upper bounds if they want.
+  Compare your implementation to your neighbor's: do the two functions always behave the same way?
+
+
 
 #### Key Points
 
