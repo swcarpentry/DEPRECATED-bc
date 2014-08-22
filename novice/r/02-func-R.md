@@ -459,11 +459,10 @@ You will want to switch to this more formal method of writing documentation when
 
 #### Challenges
 
-This next challenge has several steps.
-Think about how you break down a difficult problem into manageable pieces.
+  + Write a function called `analyze` that takes a filename as a parameter and displays the three graphs produced in the [previous lesson][01] (average, min and max inflammation over time).
+  `analyze("inflammation-01.csv")` should produce the graphs already shown, while `analyze("inflammation-02.csv")` should produce corresponding graphs for the second data set. Be sure to document your function with comments.
 
-  + Write a function called `analyze` that takes a filename as a parameter and displays the 3 graphs you made earlier (average, min and max inflammation over time). i.e., `analyze("inflammation-01.csv")` should produce the graphs already shown, while `analyze("inflammation-02.csv")` should produce corresponding graphs for the second data set.
-  Be sure to document your function with comments.
+[01]: 01-starting-with-data.html
 
 
 
