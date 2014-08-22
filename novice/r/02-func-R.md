@@ -15,7 +15,7 @@ In this lesson, we'll learn how to write a function so that we can repeat severa
 
 * Define a function that takes parameters.
 * Return a value from a function.
-* Test and debug a function.
+* Test a function.
 * Explain what a call stack is, and trace changes to the call stack as functions are called.
 * Set default values for function parameters.
 * Explain why we should divide programs into small, single-purpose functions.
@@ -613,16 +613,15 @@ It fails because `FALSE` is assigned to `file` and the filename is assigned to t
 
 #### Key Points
 
-* Define a function using `function` name(...params...).
-* The body of a function should be indented.
-* Call a function using name(...values...).
-* Numbers are stored as integers or floating-point numbers.
-* Each time a function is called, a new stack frame is created on the call stack to hold its parameters and local variables.
-* R looks for variables in the current environment before looking for them at the top level.
-* Use help(thing) to view help for something.
-* Put docstrings in functions to provide help for that function.
+* Define a function using `fname <- function(...params...)`.
+* The body of a function should be surrounded by curly braces (`{}`).
+* Call a function using `fname(...values...)`.
+* Each time a function is called, a new stack frame is created on the [call stack](../../gloss.html#call-stack) to hold its parameters and local variables.
+* R looks for variables in the current stack frame before looking for them at the top level.
+* Use `help(thing)` to view help for something.
+* Put comments at the beginning of functions to provide help for that function.
 * Annotate your code!
-* Specify default values for parameters when defining a function using name=value in the parameter list.
+* Specify default values for parameters when defining a function using `name = value` in the parameter list.
 * Parameters can be passed by matching based on name, by position, or by omitting them (in which case the default value is used).
 
 #### Next Steps
