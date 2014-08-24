@@ -1,10 +1,8 @@
 ---
 layout: lesson
 root: ../..
+title: Creating Functions
 ---
-
-
-## Creating Functions
 
 If we only had one data set to analyze,
 it would probably be faster to load the file into a spreadsheet
@@ -15,8 +13,8 @@ In this lesson,
 we'll learn how to write a function
 so that we can repeat several operations with a single command.
 
-<div class="objectives">
-### Objectives
+<div class="objectives" markdown="1">
+#### Objectives
 * Explain a Matlab function file
 * Define a function that takes parameters
 * Test and debug a function.
@@ -39,7 +37,8 @@ end
 ~~~
 {:class="in"}
 
-A Matlab function *must* be saved in a text file with a `.m` extension. The name of that file must be the same as the function defined
+A Matlab function *must* be saved in a text file with a `.m` extension. 
+The name of that file must be the same as the function defined
 inside it. So, you will need to save the above code in a file called
 `fahr_to_kelvin.m`.
 
@@ -58,14 +57,19 @@ function ktemp = fahr_to_kelvin(ftemp)
 ~~~
 
 is called the *function definition*, and it declares that we're 
-writing a function named
-`fahr_to_kelvin`, that accepts a single parameter, `ftemp`, and outputs a 
-single value, `ktemp`. 
+writing a function named `fahr_to_kelvin`, that accepts a single parameter, 
+`ftemp`, and outputs a  single value, `ktemp`.  Anything following the 
+function definition line is called the *body* of the
+function. The keyword `end` marks the end of the function body, and the
+function won't know about any code after `end`.
 
-Anything following the function definition line is called the *body* of the
-function.
+Just as we saw with scripts, functions must be _visible_ to MATLAB, i.e.,
+a file containing a function has to be placed in a directory that 
+MATLAB knows  about. The most convenient of those directories is the
+current working directory. 
 
-We can call our function from the command line like any other function:
+We can call our function from the command line 
+like any other MATLAB function:
 
 ~~~
 fahr_to_kelvin(32)
@@ -285,7 +289,7 @@ function out = center(data, desired)
 {:class="in"}
 
 Comment lines immediately below the function definition line
-are called "help text". Typing `help (function name)` brings
+are called "help text". Typing `help function_name` brings
 up the help text for that function:
 
 ~~~
@@ -302,6 +306,3 @@ Returns a new array containing the values in
 DATA centered around the value.
 ~~~
 {:class="out"}
-
-<!-- The Defining Defaults section should appear after loops
-     and conditionals -->

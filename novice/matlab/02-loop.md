@@ -1,15 +1,15 @@
 ---
 layout: lesson
 root: ../..
+title: Reusing Code
 ---
 
-## Reusing Code
 
 We've written MATLAB commands to compute statistics about our
 data and generate some plots to visualize the results. We're now
 faced with the following problems:
 
-#### Problem 1
+**Problem 1**
 
 So far, we've typed in commands one-by-one on the command line
 to get MATLAB to do things for us. But what if we want to repeat 
@@ -20,7 +20,7 @@ we'll waste time rewriting commands. Also, we'll quickly find ourselves
 doing more complex analyses, and we'll need our results to
 be more easily reproducible. 
 
-#### Problem 2
+**Problem 2**
 
 We also have to do this analysis for every one of our dozen
 datasets. And we need a better way than typing out commands
@@ -40,7 +40,7 @@ To avoid writing all this duplicate code, we have to teach MATLAB to
 
 * Repeat our commands
 
-<div class="Objectives">
+<div class="objectives" markdown="1">
 
 ### Objectives
 
@@ -57,16 +57,16 @@ To avoid writing all this duplicate code, we have to teach MATLAB to
 <!-- FIXME: Need to mention that strings are arrays -->
 <!-- FIXME: Decide on consistent string---single or double quotes? -->
 
-## Saving Our Work
+### Saving Our Work
 
-### Writing Scipts
+### Writing Scripts
 
 In addition to running MATLAB commands one-by-one on the
 command line, we can 
-also write several commands in a _script_. A MATLAB scipt
+also write several commands in a _script_. A MATLAB script
 is just a text file with a `.m` extension. We've written 
 commands to load data from a `.csv` file and
-dsiplays some statisitics about that data. Let's 
+displays some statistics about that data. Let's 
 put those commands in a script called `analyze.m`:
 
 ~~~
@@ -82,7 +82,7 @@ disp(['Standard deviation: ', num2str(std(patient_data(:)))]);
 
 Before we can use it, we need to make sure that this file is
 visible to MATLAB. MATLAB doesn't know about all the files on your
-computer, but it keeps an eye on several directories (folders). 
+computer, but it keeps an eye on several directories. 
 The most convenient of these directories is generally the 
 "working directory", or "current directory". To find out the
 working directory, use the `pwd` command:
@@ -112,21 +112,28 @@ Standard deviation: 4.7219
 
 ### Saving Images
 
-We've also written commands to create plots. MATLAB let's us save those as
-images on disk.
+We've also written commands to create plots:
 
 ~~~
 ave_inflammation = mean(patient_data, 1);
 
 plot(ave_inflammation);
 ylabel("average")
+~~~
+{:class="in"}
 
+
+MATLAB let's us save those as
+images on disk:
+
+~~~
 % save plot to disk as png image:
 print -dpng "average.png"
 ~~~
 {:class="in"}
 
-Let's extend our `analyze` script:
+Let's extend our `analyze` script with commands to 
+create and save plots:
 
 ~~~
 % script analyze.m
@@ -152,10 +159,10 @@ plot(min(patient_data, [], 1));
 ylabel("min")
 
 % save plot to disk as svg image:
-print -dpng "patient_data-01.svg"
+print -dpng "patient_data-01.png"
 ~~~
 
-## Analyzing Multiple Datasets
+### Analyzing Multiple Datasets
 
 We have a dozen data sets right now, and more on the way. We want
 to create plots for all our data sets without repeating the
@@ -218,8 +225,8 @@ error: A(I): index out of bounds; value 4 out of bound 3
 There's a better approach:
 
 ~~~
-for i = 1:4
-    word(i)
+for letter = 1:4
+    disp word(letter)
 end
 ~~~
 {:class="in"}
@@ -249,7 +256,7 @@ The for loop executes the commands in the
 for every value in the array `collection`. This
 value is called the [loop variable](../../gloss.html#loop-variable),
 and we can call it whatever we like. In our example, we gave it
-the name `i`.
+the name `letter`.
 
 We have to terminate the loop body with the `end` keyword, and
 we can have as many commands as we like in the loop body. But we
@@ -265,8 +272,8 @@ we have to change the first line of our loop by hand:
 ~~~
 word = 'tin';
 
-for i in 3
-    disp(word(i));
+for letter = 1:3
+    disp(word(letter));
 end
 ~~~
 {:class="in"}
@@ -293,8 +300,8 @@ write a better loop:
 ~~~
 word = 'aluminium'
 
-for i = 1:length(word)
-    disp(word(i));
+for letter = 1:length(word)
+    disp(word(letter));
 end
 ~~~
 {:class="in"}
@@ -314,7 +321,7 @@ m
 
 This is much more robust code, as it can deal indentically with
 words of arbitrary length. Here's another loop that repeatedly 
-updates the variable `len`.:
+updates the variable `len`:
 
 ~~~
 len = 0
@@ -329,7 +336,7 @@ disp(['Number of vowels: ', num2str(len)])
 
 It's worth tracing the execution of this little program step by step.
 Since there are five characters in "aeiou", the loop body will be
-executed five times. The first time around, `len` is zero (the
+executed five times. The first time around, `len` is zero - the
 value assigned to it before the loop. The loop body adds 1 to the old
 value of `len`, producing 1, and updates `len` to refer to that new
 value.
@@ -340,7 +347,7 @@ After three more updates, `len` is 5; since there's nothing left in
 `disp` statement tells us our final answer.
 
 Note that a loop variable is just a variable that's being used to record
-progrss in aloop. It still exists after the loop is over, and we can re-use
+progress in a loop. It still exists after the loop is over, and we can re-use
 variables previously defined as loop variables as well:
 
 ~~~
@@ -353,7 +360,7 @@ u
 ~~~
 {:class="out"}
 
-After the loop, `vowel` refers to the last value in `'aeiou'`, i.e., `'u'`.
+After the loop, `vowel` refers to the last value in `aeiou`, i.e., `u`.
 
 ### Processing Multiple Files
 
@@ -387,9 +394,8 @@ inflammation-12.csv
 ~~~
 {:class="out"}
 
-This is close, but not quite right. The `sprintf` function works a
-lot like the `printf` function that you might have used if you've
-programmed in C. The `sprintf` function is useful when we want to
+This is close, but not quite right.
+The `sprintf` function is useful when we want to
 generate MATLAB strings based on a _template_. In our case, 
 that template is the string `inflammation-%d.csv`. `sprintf`
 generates a new string from our template by replacing the `%d` with
@@ -403,8 +409,8 @@ the value 1. So, when MATLAB executes the command
 file_name = sprintf('inflammation-%d.csv', i);
 ~~~
 
-it substitutes the `%d` in the template `'inflammation-%d.csv'`, with the
-value of `i`, i.e., 1. The resulting string is `'inflammation-1.csv'`,
+it substitutes the `%d` in the template `inflammation-%d.csv`, with the
+value of `i`, i.e., 1. The resulting string is `inflammation-1.csv`,
 which is assigned to the variable `file_name`. The `disp` command 
 prints that string to screen. The second time around, `sprintf`
 generates the string `inflammation-2.csv`, which is assigned to the 
@@ -491,7 +497,8 @@ analyze
 Sure enough, the maxima of these data sets show exactly the same ramp
 as the first, and their minima show the same staircase structure.
 
-Key Points
+<div class="keypoints" markdown="1">
+#### Key Points
 
 * Write MATLAB scripts to reuse code and make your results reproducible.
 
@@ -503,4 +510,4 @@ Key Points
 * Use the `length` command to determine the length of a MATLAB array.
 
 * Use the `sprintf` function to generate a string based on a template.
-
+</div

@@ -1,9 +1,9 @@
 ---
 layout: lesson
 root: ../..
+title: Analyzing Patient Data
 ---
 
-## Analyzing Patient Data
 
 
 We are studying inflammation in patients who have been given a new treatment for arthritis,
@@ -236,6 +236,7 @@ Variables in the current scope:
 
 patient_data
 weight_kg
+
 ~~~
 {:class="out"}
 
