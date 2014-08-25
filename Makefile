@@ -54,6 +54,7 @@ MOST_SRC = \
 	 novice/git/index.md $(sort $(wildcard novice/git/??-*.md)) \
 	 novice/hg/index.md $(sort $(wildcard novice/hg/??-*.md)) \
 	 novice/python/index.md $(sort $(wildcard novice/python/??-*.md)) \
+	 novice/matlab/index.md $(sort $(wildcard novice/matlab/??-*.md)) \
 	 novice/sql/index.md $(sort $(wildcard novice/sql/??-*.md)) \
 	 novice/extras/index.md $(sort $(wildcard novice/extras/??-*.md)) \
 	 novice/teaching/index.md  $(sort $(wildcard novice/teaching/??-*.md)) \
