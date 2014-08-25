@@ -1,4 +1,5 @@
-~~~{:class="in"}
+~~~
+{:class="in"}
 ---
 layout: lesson
 root: ../..
@@ -24,22 +25,26 @@ the brute-force approach is to just add the style files to our commands:
 ~~~
 paper.pdf : paper.wdp figure-1.svg figure-2.svg
         wdp2pdf --style c:/papers/euphoric.wps $<
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 figure-%.svg : summary-%.dat
         sgr -N -r -s c:/papers/euphoric.fig $@ $^
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 summary-%.dat : data-%-*.dat
         stats.py $@ $^
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 data-*-*.dat : stats.py
         touch $@
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 There's some redundancy here, though: we are specifying the same directory twice.
 And notice that we haven't explicitly listed `euphoric.wps` or `euphoric.fig`
@@ -74,31 +79,37 @@ Here's our Makefile with a macro defined and used:
 
 ~~~
 # with-macro.mk
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 STYLE_DIR=c:/papers/
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 paper.pdf : paper.wdp figure-1.svg figure-2.svg
         wdp2pdf --style ${STYLE_DIR}/euphoric.wps $<
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 figure-%.svg : summary-%.dat
         sgr -N -r -s ${STYLE_DIR}/euphoric.fig $@ $^
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 summary-%.dat : data-%-*.dat
         stats.py $@ $^
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 data-*-*.dat : stats.py
         touch $@
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 The definition looks like definitions in most programming languages:
 the macro is called `STYLE_DIR`, and its value is `c:/papers/`.
@@ -128,33 +139,39 @@ then using that definition in two other macros:
 
 ~~~
 # with-lots-of-macros.mk
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 STYLE_DIR=c:/papers/
 WDP2PDF_FLAGS=--style ${STYLE_DIR}/euphoric.wps
 SGR_FLAGS=-N -r -s ${STYLE_DIR}/euphoric.fig
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 paper.pdf : paper.wdp figure-1.svg figure-2.svg
         wdp2pdf ${WDP2PDF_FLAGS} $<
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 figure-%.svg : summary-%.dat
         sgr ${SGR_FLAGS} $@ $^
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 summary-%.dat : data-%-*.dat
         stats.py $@ $^
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 data-*-*.dat : stats.py
         touch $@
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 The first, `WPD2PDF_FLAGS`,
 is the single flag and argument we want to pass to the tool that turns our word processor file into a PDF.
@@ -167,11 +184,13 @@ and into a Makefile of its own called `config.mk`:
 
 ~~~
 # config.mk
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 STYLE_DIR=c:/papers/
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 We can then include that file in our main Makefile using Make's `include` command.
 Our other macros and commands can then use the definition of `STYLE_DIR` just as if it had been defined in the main Makefile:
@@ -179,32 +198,38 @@ Our other macros and commands can then use the definition of `STYLE_DIR` just as
 ~~~
 # with-include.mk
 include config.mk
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 WDP2PDF_FLAGS=--style ${STYLE_DIR}/euphoric.wps
 SGR_FLAGS=-N -r -s ${STYLE_DIR}/euphoric.fig
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 paper.pdf : paper.wdp figure-1.svg figure-2.svg
         wdp2pdf ${WDP2PDF_FLAGS} $<
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 figure-%.svg : summary-%.dat
         sgr ${SGR_FLAGS} $@ $^
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 summary-%.dat : data-%-*.dat
         stats.py $@ $^
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 data-*-*.dat : stats.py
         touch $@
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 Once we've tested this to make sure it works, we can copy `config.mk` to create two files that we'll put in version control.
 The first, `config-home.mk`, defines `STYLE_DIR` for use on our laptop.
@@ -227,7 +252,8 @@ To do this, we set the variable on the command line when invoking `make`:
 
 ~~~
 $ make STYLE_DIR=/lib/styles -f Makefile
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 This is almost always a bad idea, though.
 We have to remember to type the definition each time,

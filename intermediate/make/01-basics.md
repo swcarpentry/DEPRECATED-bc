@@ -44,7 +44,8 @@ The `-t` flag to `ls` tells it to list things by age, with the youngest file fir
 ~~~
 $ ls -t *.dat *.svg
 summary-1.dat    figure-1.svg
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 This listing tells us that our data file `summary-1.dat` is newer than the SVG file that depends on it,
 so the SVG file needs to be re-created.
@@ -54,7 +55,8 @@ Using our favorite editor, let's create a file called `hello.mk` and put these t
 # hello.mk
 figure-1.svg : summary-1.dat
     python create_figure.py figure-1.svg summary-1.dat
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 A configuration file for Make like this one is called a [Makefile](../../gloss.html#makefile).
 The first line, starting with `#`, is a comment.
@@ -79,7 +81,8 @@ Now that we've created our Makefile, we can tell Make to obey its instructions b
 ~~~
 $ gmake -f hello.mk
 python create_figure.py figure-1.svg summary-1.dat
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 Many systems make `make` an alias for `gmake`,
 so if the latter doesn't work for you, try the former name as well.
@@ -105,7 +108,8 @@ Let's run Make again:
 
 ~~~
 $ gmake -f hello.mk
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 This time, it doesn't execute any commands.
 This happened&mdash;or didn't&mdash;because the target is newer than its prerequisites.
@@ -122,12 +126,14 @@ These rules are identical except for the 1's and 2's in the filenames; we'll see
 # double.mk
 figure-1.svg : summary-1.dat
     python create_figure.py figure-1.svg summary-1.dat
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 figure-2.svg : summary-2.dat
     python create_figure.py figure-2.svg summary-2.dat
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 Let's pretend we've just updated our data files by running `touch *.dat`.
 (The Unix `touch` command doesn't change the contents of files, but updates their timestamps as if they had been modified.)
@@ -137,7 +143,8 @@ Now, when we run Make, it re-creates `figure-1.svg` again&mdash;and then stops:
 $ touch *.dat
 $ gmake -f double.mk
 python create_figure.py figure-1.svg summary-1.dat
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 Why wasn't `figure-2.svg` re-created?
 The answer is that Make uses the first rule in the Makefile as its [default rule](../../gloss.html#default-rule).
@@ -149,7 +156,8 @@ and then give it the name of the target we want it to handle:
 ~~~
 $ gmake -f double.mk figure-2.svg
 python create_figure.py figure-2.svg summary-2.dat
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 Again, building things one at a time like this is slightly better than typing individual commands, but only slightly.
 To get Make to build everything at once, we have to introduce a [phony target](../../gloss.html#phony-target).
@@ -159,21 +167,25 @@ Here's our third Makefile, `phony.mk`:
 
 ~~~
 # phony.mk
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 all : figure-1.svg figure-2.svg
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 figure-1.svg : summary-1.dat
     python create_figure.py figure-1.svg summary-1.dat
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 figure-2.svg : summary-2.dat
     python create_figure.py figure-2.svg summary-2.dat
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 We've introduced a phony target called `all`, which depends on `figure-1.svg` and `figure-2.svg`.
 Since there's no file called `all` in the current directory,
@@ -190,7 +202,8 @@ $ touch *.dat
 $ gmake -f phony.mk
 python create_figure.py figure-1.svg summary-1.dat
 python create_figure.py figure-2.svg summary-2.dat
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 >### Exercise 2
 
