@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!doctype html>
 <html>
   <head>
@@ -43,3 +44,171 @@
 		
   </body>
 </html>
+=======
+---
+layout: bootcamp
+root: .
+venue: Christian Albrechts University, Kiel
+address: Am Botanischen Garten 7, R.E49 - PC-room, Kiel
+country: Germany
+humandate: Aug 21-22, 2014
+humantime: 9:00 am - 4:00 pm
+startdate: 2014-08-21
+enddate: 2014-08-22
+latlng: 54.346504, 10.115453
+registration: restricted
+instructor: ["Rainer Kiko", "Bernhard Konrad"]
+helper: ["Pieter Vandromme", "Pina Springer"]
+contact: rkiko@geomar.de
+---
+<!--
+    Edit the values in the parameter block above to be appropriate for your bootcamp.
+    Please use three-letter month names for the 'humandate' field.
+-->
+
+
+<!--
+    This block includes the Eventbrite registration widget if 'eventbrite' has been set in the header.
+-->
+{% if page.eventbrite %}
+<iframe src="//www.eventbrite.com/tickets-external?eid={{page.eventbrite}}&ref=etckt" frameborder="0" width="100%" scrolling="auto"></iframe>
+{% endif %}
+
+<h2>General Information</h2>
+
+<p>
+  <a href="//software-carpentry.org">Software Carpentry</a>'s mission
+  is to help scientists and engineers become more productive
+  by teaching them basic lab skills for computing
+  like program design, version control, data management, and task automation.
+  In this two-day boot camp, short tutorials will alternate with hands-on practical exercises. Participants will be encouraged both to help one another, and to apply what they have learned to their own research problems during and between sessions.
+  At the end of the bootcamp you should be able to conduct the following tasks with two python scripts:
+      1.) read in data from a file and load the data into a sql-database
+      2.) read out data from a sql-database and generate different outputs (summarized data, figures)
+      Furthermore, you should be able to better organize your file system and to keep your work under version control
+
+</p>
+
+<!-- This block displays the instructors' names if they are available. -->
+{% if page.instructor %}
+<p>
+  <strong>Instructors:</strong>
+  {{page.instructor | join: ', ' %}}
+</p>
+{% endif %}
+
+<!-- This block displays the helpers' names if they are available. -->
+{% if page.helper %}
+<p>
+  <strong>Helpers:</strong>
+  {{page.helper | join: ', ' %}}
+</p>
+{% endif %}
+
+<!--
+    Modify this block to reflect the target audience for your bootcamp.
+    In particular, if it is only open to people from a particular institution,
+    or if specialized prerequisite knowledge is required, please mention that.
+-->
+<p>
+  <strong>Who:</strong>
+  The course is aimed at postgraduate students and other scientists who are not or only slightly familiar with scripting or writing programs.
+  Registration is now open for members of the Kiel scientific community.
+</p>
+
+<!--
+    This block displays the address and links to a map showing directions.
+-->
+{% if page.latlng %}
+<p>
+  <strong>Where:</strong>
+  {{ page.address }}.
+  Get directions with
+  <a href="//www.openstreetmap.org/?mlat={{ page.latlng | replace:',','&mlon=' }}&zoom=16">OpenStreetMap</a>
+  or
+  <a href="//maps.google.com/maps?q={{ page.latlng }}">Google Maps</a>.
+</p>
+{% endif %}
+
+<!--
+    Modify the block below if there are any special requirements.
+-->
+<p>
+  <strong>Requirements:</strong>
+  Participants must bring a laptop with a few specific software packages installed
+  (listed below).
+</p>
+
+<!--
+    This block automatically inserts a contact email address if one has been specified for the page.
+    If one hasn't, this block inserts the generic contact address for Software Carpentry.
+-->
+<p>
+  <strong>Contact</strong>:
+  Please mail
+  {% if page.contact %}
+    <a href='mailto:{{page.contact}}'>{{page.contact}}</a>
+  {% else %}
+    <a href='mailto:{{site.contact}}'>{{site.contact}}</a>
+  {% endif %}
+  for more information.
+</p>
+
+<p>
+  <strong>Etherpad</strong>:
+  <a href="https://etherpad.mozilla.org/2014-08-21-Kiel">Click here.</a>
+</p>
+
+<hr/>
+
+<!--
+    Edit this block to show the schedule for your bootcamp.
+-->
+<h2>Schedule</h2>
+
+<div class="row-fluid">
+  <div class="span6">
+    <h3>Day 1</h3>
+    <table class="table table-striped">
+      <tr> <td>09:00</td> <td>Welcome, Set up and installation check</td> </tr>
+      <tr> <td>10:00</td> <td>Automating tasks with the Unix shell</td> </tr>
+      <tr> <td>11:00</td> <td>Version control with Git</td> </tr>
+      <tr> <td>12:00</td> <td>Lunch break</td> </tr>
+      <tr> <td>13:00</td> <td>Version control with Git</td> </tr>
+      <tr> <td>14:30</td> <td>Managing data with SQL</td> </tr>
+      <tr> <td>15:30</td> <td>Wrap-up</td> </tr>
+    </table>
+  </div>
+  <div class="span6">
+    <h3>Day 2</h3>
+    <table class="table table-striped">
+      <tr> <td>09:00</td> <td>Introduction to Python</td> </tr>
+      <tr> <td>11:00</td> <td>Managing SQL with Python</td> </tr>
+      <tr> <td>12:00</td> <td>Lunch break</td> </tr>
+      <tr> <td>13:00</td> <td>Data analysis with Python</td> </tr>
+      <tr> <td>14:00</td> <td>Extracting Data from SQL and plotting with Python</td> </tr>
+      <tr> <td>15:30</td> <td>Wrap-up</td> </tr>
+    </table>
+  </div>
+</div>
+
+<hr/>
+
+
+<!--
+    Edit the setup instructions in _includes/setup.html to reflect your bootcamp.
+    (In particular, most bootcamps teach either Python or R, not both.)
+-->
+
+<h2>Setup</h2>
+
+<p>
+  To participate in a Software Carpentry bootcamp, 
+  you will need working copies of the software described below.
+  Please make sure to install everything
+  (or at least to download the installers)
+  <em>before</em> the start of your bootcamp.
+</p>
+
+{% include setup.html %}
+>>>>>>> 2382bab671765e6986927e72fb24c5545f3bced9
