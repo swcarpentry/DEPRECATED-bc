@@ -8,6 +8,8 @@ Those variables control its execution,
 so by changing their values
 you can change how the shell and other programs behave.
 
+The shell that we will be using is called `bash`, or the **B**ourne **A**gain **SH**ell. There are other types of shell program, such as `sh`, `ksh` (Korn shell), and `csh` (C-shell). Be mindful that each shell has its own commands and they may differ from the ones you see here.
+
 Let's start by running the command `set` and looking at some of the variables in a typical shell session:
 
 ~~~
@@ -58,6 +60,8 @@ when you type in a program name without specifying what directory it is in.
 
 For example,
 when we type a command like `analyze`,
+there might be more than one program with this name.
+In such a case, 
 the shell needs to decide whether to run `./analyze` or `/bin/analyze`.
 The rule it uses is simple:
 the shell checks each directory in the `PATH` variable in turn,
@@ -151,12 +155,14 @@ Camilla
 
 If we want to set some variables automatically every time we run a shell,
 we can put commands to do this in a file called `.bashrc` in our home directory.
-(The '.' character at the front prevents `ls` from listing this file
+(The '.' character at the front hides files and directories, preventing 
+`ls` from listing 
+them
 unless we specifically ask it to using `-a`:
 we normally don't want to worry about it.
 The "rc" at the end is an abbreviation for "run control",
 which meant something really important decades ago,
-and is now just a convention everyone follows without understanding why.)
+and is now just a convention everyone follows without understanding why).
 
 For example,
 here are two lines in `/home/vlad/.bashrc`:
@@ -177,9 +183,20 @@ Notice that `BACKUP_DIR`'s definition relies on the value of `TEMP_DIR`,
 so that if we change where we put temporary files,
 our backups will be relocated automatically.
 
+#### Aliases
+
 While we're here,
-it's also common to use the `alias` command to create shortcuts for things we frequently type.
-For example, we can define the alias `backup`
+it's also common to use the `alias` command to create shortcuts for things we frequently type. 
+They can be relatively simple or complex commands, and any program that you run in the shell can be assigned to an alias.
+A simple example would be defining an alias for listing the contents of your home directory:
+
+<div class="file" markdown="1">
+~~~
+alias lh=ls ~
+~~~
+</div>
+
+For a more complex example, we can define the alias `backup`
 to run `/bin/zback` with a specific set of arguments:
 
 <div class="file" markdown="1">
@@ -193,3 +210,17 @@ aliases can save us a lot of typing, and hence a lot of typing mistakes.
 You can find interesting suggestions for other aliases 
 and other bash tricks by searching for "sample bashrc" 
 in your favorite search engine.
+
+#### Questions
+
+1. Are there any characters you *cannot* use in a variable name? Try creating variables with names like `VAR-1`, `MYVAR!`, and `123_FOO`. What happens? Why do you think this is?
+
+2. Can you create two variables and print out one after the other (concatenate them)?
+
+3. Can you find out how to add two numeric variables together? Hint: any searching you do, make sure you search for answers that you can use in bash, and not one of the other shells!
+
+4. Can you create an alias of an alias?
+ 
+5a. There is another similar command for interacting with shell variables called `env`. Open two shell windows. In one, create a variable with `set`, and then type `set` in the other window. What do you see? What does `env` show you in each window?
+
+5b. So, it seems the shell has at least two variable types. The ones we've covered here include `local` and `environment` variables. Can you relate these concepts to the `set` and `env` commands?
