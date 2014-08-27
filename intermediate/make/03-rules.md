@@ -19,27 +19,32 @@ Here's our Makefile rewritten to use such a rule:
 
 ~~~
 # pattern-rule.mk
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 figure-%.svg : summary-%.dat
     python create_figure.py $@ $^
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 summary-1.dat : data-1-*.dat
     python stats.py $@ $^
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 summary-2.dat : data-2-*.dat
     python stats.py $@ $^
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 summary-1.dat : stats.py
 summary-2.dat : stats.py
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 In this rule, `%` is a wildcard.
 When it is expanded, it has the same value on both sides of the rule:
@@ -53,7 +58,8 @@ Let's try running our modified Makefile:
 ~~~
 $ make -f pattern-rule.mk
 python stats.py summary-1.dat data-1-1.dat data-1-2.dat data-1-3.dat
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 `summary-1.dat` is updated, but not `summary-2.dat` or either of the figure files.
 The reason the other commands didn't run is that pattern rules don't create dependencies:
@@ -64,32 +70,38 @@ Let's do this by putting the rule for `paper.pdf` back in our Makefile:
 
 ~~~
 # use-pattern.mk
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 paper.pdf : paper.tex figure-1.svg figure-2.svg
     cat $^ > $@
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 figure-%.svg : summary-%.dat
     python create_figure.py $@ $^
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 summary-1.dat : data-1-*.dat
     python stats.py $@ $^
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 summary-2.dat : data-2-*.dat
     python stats.py $@ $^
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 summary-1.dat : stats.py
 summary-2.dat : stats.py
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 
 Here, `paper.pdf` depends on `figure-1.svg` and `figure-2.svg`.
@@ -101,7 +113,8 @@ It's tempting to go one step further, and make `paper.pdf` depend on `figure-*.s
 ~~~
 paper.pdf : paper.wdp figure-*.svg
         cat $^ > $@
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 This doesn't work, though.
 The reason is that the figure files may not exist when Make starts to run&mdash;after all, Make creates them.
@@ -116,27 +129,32 @@ using the `*` wildcard:
 
 ~~~
 # all-patterns.mk
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 paper.pdf : paper.tex figure-1.svg figure-2.svg
     cat $^ > $@
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 figure-%.svg : summary-%.dat
     python create_figure.py $@ $^
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 summary-%.dat : data-%-*.dat
     python stats.py $@ $^
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 summary-1.dat : stats.py
 summary-2.dat : stats.py
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 It's safe to do this because Make isn't responsible for creating `data-1-whatever.dat` and `data-2-whatever.dat`:
 there's no possibility of the `*` missing things because it's evaluated when Make starts running.
@@ -159,22 +177,26 @@ Doing this indirectly triggers the re-creation of the summary files&mdash;it doe
 
 ~~~
 # false-dependencies.mk
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 paper.pdf : paper.tex figure-1.svg figure-2.svg
     cat $^ > $@
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 figure-%.svg : summary-%.dat
     python create_figure.py $@ $^
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 summary-%.dat : data-%-*.dat
     python stats.py $@ $^
-~~~{:class="in"}
+~~~
+{:class="in"}
 
 ~~~
 data-*-*.dat : stats.py
