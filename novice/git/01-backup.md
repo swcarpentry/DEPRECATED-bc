@@ -28,7 +28,7 @@ version control is much better for this than this:
   <p>"Piled Higher and Deeper" by Jorge Cham, http://www.phdcomics.com</p>
 </div>
 
-#### Setting Up
+### Setting Up
 
 The first time we use Git on a new machine,
 we need to configure a few things.
@@ -59,7 +59,7 @@ we're telling Git:
 The four commands above only need to be run once:
 the flag `--global` tells Git to use the settings for every project on this machine.
 
-#### Creating a Repository
+### Creating a Repository
 
 Once Git is configured,
 we can start using it.
@@ -119,7 +119,7 @@ nothing to commit (create/copy files and use "git add" to track)
 ~~~
 {:class="out"}
 
-#### Tracking Changes to Files
+### Tracking Changes to Files
 
 Let's create a file called `mars.txt` that contains some notes
 about the Red Planet's suitability as a base.
@@ -281,7 +281,7 @@ and the log message Git was given when the revision was created.
 > so that our filesystem doesn't become cluttered
 > (and so that we can't accidentally edit or delete an old version).
 
-#### Changing a File
+### Changing a File
 
 Now suppose Dracula adds more information to the file.
 (Again, we'll edit with `nano` and then `cat` the file to show its contents;
@@ -348,8 +348,8 @@ it is actually a series of commands for tools like editors and `patch`
 telling them how to reconstruct one file given the other.
 If we can break it down into pieces:
 
-1.  The first line tells us that Git is using the Unix `diff` command
-    to compare the old and new versions of the file.
+1.  The first line tells us that Git is producing output similar to the Unix `diff` command
+    comparing the old and new versions of the file.
 2.  The second line tells exactly which [revisions](../../gloss.html#revision) of the file
     Git is comparing;
     `df0654a` and `315bf3a` are unique computer-generated labels for those revisions.
@@ -534,7 +534,7 @@ Date:   Thu Aug 22 09:51:46 2013 -0400
 ~~~
 {:class="out"}
 
-#### Exploring History
+### Exploring History
 
 If we want to see what we changed when,
 we use `git diff` again,
@@ -627,7 +627,7 @@ index df0654a..b36abfd 100644
 ~~~
 {:class="out"}
 
-#### Recovering Old Versions
+### Recovering Old Versions
 
 All right:
 we can save changes to files and see what we've changed---how
@@ -725,7 +725,7 @@ If the introduction and conclusion are stored in separate files,
 on the other hand,
 moving backward and forward in time becomes much easier.
 
-#### Ignoring Things
+### Ignoring Things
 
 What if we have files that we do not want Git to track for us,
 like backup files created by our editor
@@ -870,29 +870,27 @@ nothing to commit, working directory clean
 
 </div>
 
-<div class="challenges" markdown="1">
+<div class="challenge" markdown="1">
+Create a new Git repository on your computer called `bio`.
+Write a three-line biography for yourself in a file called `me.txt`,
+commit your changes,
+then modify one line and add a fourth and display the differences
+between its updated state and its original state.
+</div>
 
-#### Challenges
+<div class="challenge" markdown="1">
+The following sequence of commands creates one Git repository inside another:
 
-1.  Create a new Git repository on your computer called `bio`.
-    Write a three-line biography for yourself in a file called `me.txt`,
-    commit your changes,
-    then modify one line and add a fourth and display the differences
-    between its updated state and its original state.
+~~~
+cd           # return to home directory
+mkdir alpha  # make a new directory alpha
+cd alpha     # go into alpha
+git init     # make the alpha directory a Git repository
+mkdir beta   # make a sub-directory alpha/beta
+cd beta      # go into alpha/beta
+git init     # make the beta sub-directory a Git repository
+~~~
+{:class="in"}
 
-2.  The following sequence of commands creates one Git repository inside another:
-
-    ~~~
-    cd           # return to home directory
-    mkdir alpha  # make a new directory alpha
-    cd alpha     # go into alpha
-    git init     # make the alpha directory a Git repository
-    mkdir beta   # make a sub-directory alpha/beta
-    cd beta      # go into alpha/beta
-    git init     # make the beta sub-directory a Git repository
-    ~~~
-    {:class="in"}
-
-    Why is it a bad idea to do this?
-
+Why is it a bad idea to do this?
 </div>

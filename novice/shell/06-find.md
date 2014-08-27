@@ -208,7 +208,7 @@ to show how the simplest ones work, we'll use the directory tree shown below.
 
 <img src="img/find-file-tree.svg" alt="File Tree for Find Example" />
 
-Vlad's home directory contains one file called `notes.txt` and four subdirectories:
+Nelle's home directory contains one file called `notes.txt` and four subdirectories:
 `thesis` (which is sadly empty),
 `data` (which contains two files `one.txt` and `two.txt`),
 a `tools` directory that contains the programs `format` and `stats`,
@@ -422,7 +422,7 @@ $ grep FE $(find . -name '*.pdb' -print)
 > modern programming languages, Python included, have borrowed a lot of
 > ideas from it, and imitation is also the sincerest form of praise.
 
-#### Conclusion
+### Conclusion
 
 The Unix shell is older than most of the people who use it. It has
 survived so long because it is one of the most productive programming
@@ -444,30 +444,28 @@ about them."
 
 </div>
 
-<div class="challenges" markdown="1">
+<div class="challenge" markdown="1">
+Write a short explanatory comment for the following shell script:
 
-#### Challenges
+<div class="file" markdown="1">
+~~~
+find . -name '*.dat' -print | wc -l | sort -n
+~~~
+</div>
+</div>
 
-1.  Write a short explanatory comment for the following shell script:
+<div class="challenge" markdown="1">
+The `-v` flag to `grep` inverts pattern matching, so that only lines
+which do *not* match the pattern are printed. Given that, which of
+the following commands will find all files in `/data` whose names
+end in `ose.dat` (e.g., `sucrose.dat` or `maltose.dat`), but do
+*not* contain the word `temp`?
 
-    <div class="file" markdown="1">
-    ~~~
-    find . -name '*.dat' -print | wc -l | sort -n
-    ~~~
-    </div>
+1. `find /data -name '*.dat' -print | grep ose | grep -v temp`
 
-2.  The `-v` flag to `grep` inverts pattern matching, so that only lines
-    which do *not* match the pattern are printed. Given that, which of
-    the following commands will find all files in `/data` whose names
-    end in `ose.dat` (e.g., `sucrose.dat` or `maltose.dat`), but do
-    *not* contain the word `temp`?
+2. `find /data -name ose.dat -print | grep -v temp`
 
-    1. `find /data -name '*.dat' -print | grep ose | grep -v temp`
+3. `grep -v temp $(find /data -name '*ose.dat' -print)`
 
-    2. `find /data -name ose.dat -print | grep -v temp`
-
-    3. `grep -v temp $(find /data -name '*ose.dat' -print)`
-
-    4. None of the above.
-
+4. None of the above.
 </div>

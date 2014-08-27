@@ -251,7 +251,7 @@ the library doesn't know if the program that's calling it is being run from the
 command line or from a GUI.
 The library therefore shouldn't try to handle or report errors itself,
 because it has no way of knowing what the right way to do this is.
-It should instead just [raise](../../gloss.html#raise-exception) an exception,
+It should instead just [raise](../../gloss.html#raise) an exception,
 and let its caller figure out how best to handle it.
 
 Finally,

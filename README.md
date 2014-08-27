@@ -30,6 +30,19 @@ You should not try to use the same repo for both purposes because:
 2.  you don't want a learner accidentally overwriting your lessons
     while you're trying to teach.
 
+You should also run `make check` before pushing changes to your `index.html` home page
+to your repository.
+If you don't have Make installed,
+you can run the same checks using:
+
+~~~
+python bin/swc_index_validator.py ./index.html
+~~~
+
+This checks that the bootcamp's instructors are listed,
+that a contact email address has been set up,
+and so on.
+
 **Table of Contents**
 
 *   [Background](#background)  
@@ -543,3 +556,15 @@ FAQ
     <br/>
     Use subdirectories like `2013-07-01-esu/beginners`,
     so that main directory names always follow our four-part convention.
+
+*   *What is the "Windows installer"?*
+    <br/>
+    We have built a small installation helper for Windows
+    that installs `nano` and `sqlite`,
+    adds R to the path,
+    and so on.
+    It is maintained in [this repository](https://github.com/swcarpentry/windows-installer),
+    which also has an up-to-date description of what it actually does.
+    The latest version is always available at
+    [http://files.software-carpentry.org/SWCarpentryInstaller.exe](http://files.software-carpentry.org/SWCarpentryInstaller.exe),
+    and contributions are always welcome.

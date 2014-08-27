@@ -3,9 +3,11 @@ layout: lesson
 root: ../..
 ---
 
-```{r, echo=FALSE}
-opts_chunk$set(results="markup", fig.path="figure/01-starting-with-data-")
+```{r, include = FALSE}
+source("chunk_options.R")
+opts_chunk$set(fig.path = "figure/01-starting-with-data-")
 ```
+
 # Analyzing Patient Data
 
 We are studying inflammation in patients who have been given a new treatment for arthritis,
@@ -464,7 +466,6 @@ for each day across all patients.
 * Use `#` to add comments to programs.
 * Use `mean()`, `max()`, `min()` and `sd()` to calculate simple statistics.
 * Update vectors using `c()`
-<!-- * Write a simple for loop -->
 * Use base R to create simple visualizations.
 
 ## Next Steps

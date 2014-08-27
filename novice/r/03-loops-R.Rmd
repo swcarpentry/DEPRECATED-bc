@@ -3,9 +3,10 @@ layout: lesson
 root: ../..
 ---
 
-```{r, echo=FALSE}
-opts_chunk$set(results='markup')
+```{r, include = FALSE}
+source("chunk_options.R")
 ```
+
 # Analyzing Multiple Data Sets
 
 We have created a function called analyze that creates graphs of the minimum, average, and maximum daily inflammation rates for a single data set:

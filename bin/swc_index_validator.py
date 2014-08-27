@@ -35,6 +35,7 @@ REGISTRATIONS = set(['open', 'restricted', 'closed'])
 LESSONS = set(['git','mercurial','SQL','shell','R','Python'])
 
 EMAIL_PATTERN = r'[^@]+@[^@]+\.[^@]+'
+DEFAULT_CONTACT_EMAIL = 'admin@software-carpentry.org'
 HUMANTIME_PATTERN = r'((0?\d|1[0-1]):[0-5]\d(am|pm)(-|to)(0?\d|1[0-1]):[0-5]\d(am|pm))|((0?\d|1\d|2[0-3]):[0-5]\d(-|to)(0?\d|1\d|2[0-3]):[0-5]\d)'
 EVENTBRITE_PATTERN = r'\d{9,10}'
 
@@ -125,7 +126,7 @@ def check_helpers(helpers):
 
 def check_email(email):
     '''A valid email has letters, then an @, followed by letters, followed by a dot, followed by letters.'''
-    return bool(re.match(EMAIL_PATTERN, email))
+    return bool(re.match(EMAIL_PATTERN, email)) and email != DEFAULT_CONTACT_EMAIL
 
 def check_eventbrite(eventbrite):
     '''A valid EventBrite key is 9 or more digits.'''
@@ -148,9 +149,9 @@ HANDLERS = {
     'registration' : (True,  check_registration, 'registration can only be {0}.'.format(REGISTRATIONS)), 
     'instructor' :   (True,  check_instructors, 'instructor list isn\'t a valid list of format ["First instructor", "Second instructor",..].'),
     'helper' :       (True,  check_helpers, 'helper list isn\'t a valid list of format ["First helper", "Second helper",..].'),
-    'contact' :      (True,  check_email, 'contact email invalid.'),
     'lessons':       (True,  check_lessons, 'invalid lesson'),
     'usevm':         (True,  check_usevm, 'invalid entry, plese use true or false'),
+    'contact' :      (True,  check_email, 'contact email invalid or still set to "{0}".'.format(DEFAULT_CONTACT_EMAIL)),
     'eventbrite' :   (False, check_eventbrite, 'Eventbrite key appears invalid.'),
     'venue' :        (False, check_pass, ''),
     'address' :      (False, check_pass, '')

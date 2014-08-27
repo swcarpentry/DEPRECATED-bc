@@ -7,7 +7,7 @@ root: ../..
 
 
 <div class="">
-<p>We are studying inflammation in patients who have been given a new treatment for arthritis, and need to analyze the first dozen data sets. The data sets are stored in <a href="../../gloss.html#csv">comma-separated values</a> (CSV) format: each row holds information for a single patient, and the columns represent successive days. The first few rows of our first file look like this:</p>
+<p>We are studying inflammation in patients who have been given a new treatment for arthritis, and need to analyze the first dozen data sets. The data sets are stored in <a href="../../gloss.html#comma-separeted-values">comma-separated values</a> (CSV) format: each row holds information for a single patient, and the columns represent successive days. The first few rows of our first file look like this:</p>
 <pre><code>0,0,1,3,1,2,4,7,8,3,3,3,10,5,7,4,7,7,12,18,6,13,11,11,7,7,4,6,8,8,4,4,5,7,3,4,2,3,0,0
 0,1,2,1,2,1,3,2,2,6,10,11,5,9,4,4,7,16,8,6,18,4,12,5,12,7,11,5,11,3,3,5,4,4,5,5,1,1,0,1
 0,1,1,3,3,2,6,2,5,9,5,7,4,5,4,15,5,11,9,10,19,14,12,17,7,12,11,7,4,2,10,5,4,2,2,3,2,2,1,1
@@ -49,9 +49,7 @@ root: ../..
 </div>
 
 
-<div class="in">
-<pre>import numpy</pre>
-</div>
+<pre class="in"><code>import numpy</code></pre>
 
 
 <div class="">
@@ -59,25 +57,21 @@ root: ../..
 </div>
 
 
-<div class="in">
-<pre>numpy.loadtxt(fname=&#39;inflammation-01.csv&#39;, delimiter=&#39;,&#39;)</pre>
-</div>
+<pre class="in"><code>numpy.loadtxt(fname=&#39;inflammation-01.csv&#39;, delimiter=&#39;,&#39;)</code></pre>
 
-<div class="out">
-<pre>array([[ 0.,  0.,  1., ...,  3.,  0.,  0.],
+<div class="out"><pre class='out'><code>array([[ 0.,  0.,  1., ...,  3.,  0.,  0.],
        [ 0.,  1.,  2., ...,  1.,  0.,  1.],
        [ 0.,  1.,  1., ...,  2.,  1.,  1.],
        ..., 
        [ 0.,  1.,  1., ...,  1.,  1.,  1.],
        [ 0.,  0.,  0., ...,  0.,  2.,  0.],
-       [ 0.,  0.,  1., ...,  1.,  1.,  0.]])</pre>
-</div>
+       [ 0.,  0.,  1., ...,  1.,  1.,  0.]])</code></pre></div>
 
 
 <div class="">
 <p>The expression <code>numpy.loadtxt(...)</code> is a <a href="../../gloss.html#function-call">function call</a> that asks Python to run the function <code>loadtxt</code> that belongs to the <code>numpy</code> library. This <a href="../../gloss.html#dotted-notation">dotted notation</a> is used everywhere in Python to refer to the parts of things as <code>whole.part</code>.</p>
 <p><code>numpy.loadtxt</code> has two <a href="../../gloss.html#parameter">parameters</a>: the name of the file we want to read, and the <a href="../../gloss.html#delimiter">delimiter</a> that separates values on a line. These both need to be character strings (or <a href="../../gloss.html#string">strings</a> for short), so we put them in quotes.</p>
-<p>When we are finished typing and press Shift+Enter, the notebook runs our command. Since we haven't told it to do anything else with the function's output, the notebook displays it. In this case, that output is the data we just loaded. By default, only a few rows and columns are shown (with <code>...</code> displayed to mark missing data). To save space, Python displays numbers as <code>1.</code> instead of <code>1.0</code> when there's nothing interesting after the decimal point.</p>
+<p>When we are finished typing and press Shift+Enter, the notebook runs our command. Since we haven't told it to do anything else with the function's output, the notebook displays it. In this case, that output is the data we just loaded. By default, only a few rows and columns are shown (with <code>...</code> to omit elements when displaying big arrays). To save space, Python displays numbers as <code>1.</code> instead of <code>1.0</code> when there's nothing interesting after the decimal point.</p>
 </div>
 
 
@@ -86,9 +80,7 @@ root: ../..
 </div>
 
 
-<div class="in">
-<pre>weight_kg = 55</pre>
-</div>
+<pre class="in"><code>weight_kg = 55</code></pre>
 
 
 <div class="">
@@ -96,14 +88,10 @@ root: ../..
 </div>
 
 
-<div class="in">
-<pre>print weight_kg</pre>
-</div>
+<pre class="in"><code>print weight_kg</code></pre>
 
-<div class="out">
-<pre>55
-</pre>
-</div>
+<div class="out"><pre class='out'><code>55
+</code></pre></div>
 
 
 <div class="">
@@ -111,14 +99,10 @@ root: ../..
 </div>
 
 
-<div class="in">
-<pre>print &#39;weight in pounds:&#39;, 2.2 * weight_kg</pre>
-</div>
+<pre class="in"><code>print &#39;weight in pounds:&#39;, 2.2 * weight_kg</code></pre>
 
-<div class="out">
-<pre>weight in pounds: 121.0
-</pre>
-</div>
+<div class="out"><pre class='out'><code>weight in pounds: 121.0
+</code></pre></div>
 
 
 <div class="">
@@ -126,15 +110,11 @@ root: ../..
 </div>
 
 
-<div class="in">
-<pre>weight_kg = 57.5
-print &#39;weight in kilograms is now:&#39;, weight_kg</pre>
-</div>
+<pre class="in"><code>weight_kg = 57.5
+print &#39;weight in kilograms is now:&#39;, weight_kg</code></pre>
 
-<div class="out">
-<pre>weight in kilograms is now: 57.5
-</pre>
-</div>
+<div class="out"><pre class='out'><code>weight in kilograms is now: 57.5
+</code></pre></div>
 
 
 <div class="">
@@ -153,15 +133,11 @@ print &#39;weight in kilograms is now:&#39;, weight_kg</pre>
 </div>
 
 
-<div class="in">
-<pre>weight_lb = 2.2 * weight_kg
-print &#39;weight in kilograms:&#39;, weight_kg, &#39;and in pounds:&#39;, weight_lb</pre>
-</div>
+<pre class="in"><code>weight_lb = 2.2 * weight_kg
+print &#39;weight in kilograms:&#39;, weight_kg, &#39;and in pounds:&#39;, weight_lb</code></pre>
 
-<div class="out">
-<pre>weight in kilograms: 57.5 and in pounds: 126.5
-</pre>
-</div>
+<div class="out"><pre class='out'><code>weight in kilograms: 57.5 and in pounds: 126.5
+</code></pre></div>
 
 
 <div>
@@ -174,15 +150,11 @@ print &#39;weight in kilograms:&#39;, weight_kg, &#39;and in pounds:&#39;, weigh
 </div>
 
 
-<div class="in">
-<pre>weight_kg = 100.0
-print &#39;weight in kilograms is now:&#39;, weight_kg, &#39;and weight in pounds is still:&#39;, weight_lb</pre>
-</div>
+<pre class="in"><code>weight_kg = 100.0
+print &#39;weight in kilograms is now:&#39;, weight_kg, &#39;and weight in pounds is still:&#39;, weight_lb</code></pre>
 
-<div class="out">
-<pre>weight in kilograms is now: 100.0 and weight in pounds is still: 126.5
-</pre>
-</div>
+<div class="out"><pre class='out'><code>weight in kilograms is now: 100.0 and weight in pounds is still: 126.5
+</code></pre></div>
 
 
 <div>
@@ -196,9 +168,7 @@ print &#39;weight in kilograms is now:&#39;, weight_kg, &#39;and weight in pound
 </div>
 
 
-<div class="in">
-<pre>data = numpy.loadtxt(fname=&#39;inflammation-01.csv&#39;, delimiter=&#39;,&#39;)</pre>
-</div>
+<pre class="in"><code>data = numpy.loadtxt(fname=&#39;inflammation-01.csv&#39;, delimiter=&#39;,&#39;)</code></pre>
 
 
 <div class="">
@@ -206,20 +176,16 @@ print &#39;weight in kilograms is now:&#39;, weight_kg, &#39;and weight in pound
 </div>
 
 
-<div class="in">
-<pre>print data</pre>
-</div>
+<pre class="in"><code>print data</code></pre>
 
-<div class="out">
-<pre>[[ 0.  0.  1. ...,  3.  0.  0.]
+<div class="out"><pre class='out'><code>[[ 0.  0.  1. ...,  3.  0.  0.]
  [ 0.  1.  2. ...,  1.  0.  1.]
  [ 0.  1.  1. ...,  2.  1.  1.]
  ..., 
  [ 0.  1.  1. ...,  1.  1.  1.]
  [ 0.  0.  0. ...,  0.  2.  0.]
  [ 0.  0.  1. ...,  1.  1.  0.]]
-</pre>
-</div>
+</code></pre></div>
 
 
 <div class="challenges">
@@ -245,14 +211,10 @@ third, fourth = second, first
 </div>
 
 
-<div class="in">
-<pre>print type(data)</pre>
-</div>
+<pre class="in"><code>print type(data)</code></pre>
 
-<div class="out">
-<pre>&lt;type &#39;numpy.ndarray&#39;&gt;
-</pre>
-</div>
+<div class="out"><pre class='out'><code>&lt;type &#39;numpy.ndarray&#39;&gt;
+</code></pre></div>
 
 
 <div class="">
@@ -260,14 +222,10 @@ third, fourth = second, first
 </div>
 
 
-<div class="in">
-<pre>print data.shape</pre>
-</div>
+<pre class="in"><code>print data.shape</code></pre>
 
-<div class="out">
-<pre>(60, 40)
-</pre>
-</div>
+<div class="out"><pre class='out'><code>(60, 40)
+</code></pre></div>
 
 
 <div class="">
@@ -280,24 +238,16 @@ third, fourth = second, first
 </div>
 
 
-<div class="in">
-<pre>print &#39;first value in data:&#39;, data[0, 0]</pre>
-</div>
+<pre class="in"><code>print &#39;first value in data:&#39;, data[0, 0]</code></pre>
 
-<div class="out">
-<pre>first value in data: 0.0
-</pre>
-</div>
+<div class="out"><pre class='out'><code>first value in data: 0.0
+</code></pre></div>
 
 
-<div class="in">
-<pre>print &#39;middle value in data:&#39;, data[30, 20]</pre>
-</div>
+<pre class="in"><code>print &#39;middle value in data:&#39;, data[30, 20]</code></pre>
 
-<div class="out">
-<pre>middle value in data: 13.0
-</pre>
-</div>
+<div class="out"><pre class='out'><code>middle value in data: 13.0
+</code></pre></div>
 
 
 <div class="">
@@ -314,17 +264,13 @@ third, fourth = second, first
 </div>
 
 
-<div class="in">
-<pre>print data[0:4, 0:10]</pre>
-</div>
+<pre class="in"><code>print data[0:4, 0:10]</code></pre>
 
-<div class="out">
-<pre>[[ 0.  0.  1.  3.  1.  2.  4.  7.  8.  3.]
+<div class="out"><pre class='out'><code>[[ 0.  0.  1.  3.  1.  2.  4.  7.  8.  3.]
  [ 0.  1.  2.  1.  2.  1.  3.  2.  2.  6.]
  [ 0.  1.  1.  3.  3.  2.  6.  2.  5.  9.]
  [ 0.  0.  2.  0.  4.  2.  2.  1.  6.  7.]]
-</pre>
-</div>
+</code></pre></div>
 
 
 <div class="">
@@ -333,18 +279,14 @@ third, fourth = second, first
 </div>
 
 
-<div class="in">
-<pre>print data[5:10, 0:10]</pre>
-</div>
+<pre class="in"><code>print data[5:10, 0:10]</code></pre>
 
-<div class="out">
-<pre>[[ 0.  0.  1.  2.  2.  4.  2.  1.  6.  4.]
+<div class="out"><pre class='out'><code>[[ 0.  0.  1.  2.  2.  4.  2.  1.  6.  4.]
  [ 0.  0.  2.  2.  4.  2.  2.  5.  5.  8.]
  [ 0.  0.  1.  2.  3.  1.  2.  3.  5.  3.]
  [ 0.  0.  0.  3.  1.  5.  6.  5.  5.  8.]
  [ 0.  1.  1.  2.  1.  3.  5.  3.  5.  8.]]
-</pre>
-</div>
+</code></pre></div>
 
 
 <div class="">
@@ -352,17 +294,13 @@ third, fourth = second, first
 </div>
 
 
-<div class="in">
-<pre>print data[0:10:3, 0:10:2]</pre>
-</div>
+<pre class="in"><code>print data[0:10:3, 0:10:2]</code></pre>
 
-<div class="out">
-<pre>[[ 0.  1.  1.  4.  8.]
+<div class="out"><pre class='out'><code>[[ 0.  1.  1.  4.  8.]
  [ 0.  2.  4.  2.  6.]
  [ 0.  2.  4.  2.  5.]
  [ 0.  1.  1.  5.  5.]]
-</pre>
-</div>
+</code></pre></div>
 
 
 <div class="">
@@ -375,19 +313,15 @@ third, fourth = second, first
 </div>
 
 
-<div class="in">
-<pre>small = data[:3, 36:]
+<pre class="in"><code>small = data[:3, 36:]
 print &#39;small is:&#39;
-print small</pre>
-</div>
+print small</code></pre>
 
-<div class="out">
-<pre>small is:
+<div class="out"><pre class='out'><code>small is:
 [[ 2.  3.  0.  0.]
  [ 1.  1.  0.  1.]
  [ 2.  2.  1.  1.]]
-</pre>
-</div>
+</code></pre></div>
 
 
 <div class="">
@@ -395,14 +329,10 @@ print small</pre>
 </div>
 
 
-<div class="in">
-<pre>print data.mean()</pre>
-</div>
+<pre class="in"><code>print data.mean()</code></pre>
 
-<div class="out">
-<pre>6.14875
-</pre>
-</div>
+<div class="out"><pre class='out'><code>6.14875
+</code></pre></div>
 
 
 <div class="">
@@ -411,18 +341,14 @@ print small</pre>
 </div>
 
 
-<div class="in">
-<pre>print &#39;maximum inflammation:&#39;, data.max()
+<pre class="in"><code>print &#39;maximum inflammation:&#39;, data.max()
 print &#39;minimum inflammation:&#39;, data.min()
-print &#39;standard deviation:&#39;, data.std()</pre>
-</div>
+print &#39;standard deviation:&#39;, data.std()</code></pre>
 
-<div class="out">
-<pre>maximum inflammation: 20.0
+<div class="out"><pre class='out'><code>maximum inflammation: 20.0
 minimum inflammation: 0.0
 standard deviation: 4.61383319712
-</pre>
-</div>
+</code></pre></div>
 
 
 <div class="">
@@ -430,15 +356,11 @@ standard deviation: 4.61383319712
 </div>
 
 
-<div class="in">
-<pre>patient_0 = data[0, :] # 0 on the first axis, everything on the second
-print &#39;maximum inflammation for patient 0:&#39;, patient_0.max()</pre>
-</div>
+<pre class="in"><code>patient_0 = data[0, :] # 0 on the first axis, everything on the second
+print &#39;maximum inflammation for patient 0:&#39;, patient_0.max()</code></pre>
 
-<div class="out">
-<pre>maximum inflammation for patient 0: 18.0
-</pre>
-</div>
+<div class="out"><pre class='out'><code>maximum inflammation for patient 0: 18.0
+</code></pre></div>
 
 
 <div class="">
@@ -446,14 +368,10 @@ print &#39;maximum inflammation for patient 0:&#39;, patient_0.max()</pre>
 </div>
 
 
-<div class="in">
-<pre>print &#39;maximum inflammation for patient 2:&#39;, data[2, :].max()</pre>
-</div>
+<pre class="in"><code>print &#39;maximum inflammation for patient 2:&#39;, data[2, :].max()</code></pre>
 
-<div class="out">
-<pre>maximum inflammation for patient 2: 19.0
-</pre>
-</div>
+<div class="out"><pre class='out'><code>maximum inflammation for patient 2: 19.0
+</code></pre></div>
 
 
 <div class="">
@@ -471,12 +389,9 @@ print &#39;maximum inflammation for patient 0:&#39;, patient_0.max()</pre>
 </div>
 
 
-<div class="in">
-<pre>print data.mean(axis=0)</pre>
-</div>
+<pre class="in"><code>print data.mean(axis=0)</code></pre>
 
-<div class="out">
-<pre>[  0.           0.45         1.11666667   1.75         2.43333333   3.15
+<div class="out"><pre class='out'><code>[  0.           0.45         1.11666667   1.75         2.43333333   3.15
    3.8          3.88333333   5.23333333   5.51666667   5.95         5.9
    8.35         7.73333333   8.36666667   9.5          9.58333333
   10.63333333  11.56666667  12.35        13.25        11.96666667
@@ -484,8 +399,7 @@ print &#39;maximum inflammation for patient 0:&#39;, patient_0.max()</pre>
    7.33333333   6.58333333   6.06666667   5.95         5.11666667   3.6
    3.3          3.56666667   2.48333333   1.5          1.13333333
    0.56666667]
-</pre>
-</div>
+</code></pre></div>
 
 
 <div class="">
@@ -493,14 +407,10 @@ print &#39;maximum inflammation for patient 0:&#39;, patient_0.max()</pre>
 </div>
 
 
-<div class="in">
-<pre>print data.mean(axis=0).shape</pre>
-</div>
+<pre class="in"><code>print data.mean(axis=0).shape</code></pre>
 
-<div class="out">
-<pre>(40,)
-</pre>
-</div>
+<div class="out"><pre class='out'><code>(40,)
+</code></pre></div>
 
 
 <div class="">
@@ -508,19 +418,15 @@ print &#39;maximum inflammation for patient 0:&#39;, patient_0.max()</pre>
 </div>
 
 
-<div class="in">
-<pre>print data.mean(axis=1)</pre>
-</div>
+<pre class="in"><code>print data.mean(axis=1)</code></pre>
 
-<div class="out">
-<pre>[ 5.45   5.425  6.1    5.9    5.55   6.225  5.975  6.65   6.625  6.525
+<div class="out"><pre class='out'><code>[ 5.45   5.425  6.1    5.9    5.55   6.225  5.975  6.65   6.625  6.525
   6.775  5.8    6.225  5.75   5.225  6.3    6.55   5.7    5.85   6.55
   5.775  5.825  6.175  6.1    5.8    6.425  6.05   6.025  6.175  6.55
   6.175  6.35   6.725  6.125  7.075  5.725  5.925  6.15   6.075  5.75
   5.975  5.725  6.3    5.9    6.75   5.925  7.225  6.15   5.95   6.275  5.7
   6.1    6.825  5.975  6.725  5.7    6.25   6.4    7.05   5.9  ]
-</pre>
-</div>
+</code></pre></div>
 
 
 <div class="">
@@ -534,17 +440,13 @@ print &#39;maximum inflammation for patient 0:&#39;, patient_0.max()</pre>
 </div>
 
 
-<div class="in">
-<pre>element = &#39;oxygen&#39;
+<pre class="in"><code>element = &#39;oxygen&#39;
 print &#39;first three characters:&#39;, element[0:3]
-print &#39;last three characters:&#39;, element[3:6]</pre>
-</div>
+print &#39;last three characters:&#39;, element[3:6]</code></pre>
 
-<div class="out">
-<pre>first three characters: oxy
+<div class="out"><pre class='out'><code>first three characters: oxy
 last three characters: gen
-</pre>
-</div>
+</code></pre></div>
 
 
 <div class="challenges">
@@ -563,9 +465,7 @@ last three characters: gen
 </div>
 
 
-<div class="in">
-<pre>%matplotlib inline</pre>
-</div>
+<pre class="in"><code>%matplotlib inline</code></pre>
 
 
 <div class="">
@@ -573,16 +473,12 @@ last three characters: gen
 </div>
 
 
-<div class="in">
-<pre>from matplotlib import pyplot
+<pre class="in"><code>from matplotlib import pyplot
 pyplot.imshow(data)
-pyplot.show()</pre>
-</div>
+pyplot.show()</code></pre>
 
 <div class="out">
-<pre>
 <img src="../../novice/python/01-numpy_files/novice/python/01-numpy_74_0.png">
-</pre>
 </div>
 
 
@@ -591,16 +487,12 @@ pyplot.show()</pre>
 </div>
 
 
-<div class="in">
-<pre>ave_inflammation = data.mean(axis=0)
+<pre class="in"><code>ave_inflammation = data.mean(axis=0)
 pyplot.plot(ave_inflammation)
-pyplot.show()</pre>
-</div>
+pyplot.show()</code></pre>
 
 <div class="out">
-<pre>
 <img src="../../novice/python/01-numpy_files/novice/python/01-numpy_76_0.png">
-</pre>
 </div>
 
 
@@ -609,24 +501,20 @@ pyplot.show()</pre>
 </div>
 
 
-<div class="in">
-<pre>print &#39;maximum inflammation per day&#39;
+<pre class="in"><code>print &#39;maximum inflammation per day&#39;
 pyplot.plot(data.max(axis=0))
 pyplot.show()
 
 print &#39;minimum inflammation per day&#39;
 pyplot.plot(data.min(axis=0))
-pyplot.show()</pre>
-</div>
+pyplot.show()</code></pre>
 
-<div class="out">
-<pre>maximum inflammation per day
-
+<div class="out"><pre class='out'><code>maximum inflammation per day
+</code></pre>
 <img src="../../novice/python/01-numpy_files/novice/python/01-numpy_78_1.png">
-minimum inflammation per day
-
+<pre class='out'><code>minimum inflammation per day
+</code></pre>
 <img src="../../novice/python/01-numpy_files/novice/python/01-numpy_78_3.png">
-</pre>
 </div>
 
 
@@ -638,7 +526,7 @@ minimum inflammation per day
 <div class="challenges">
 <h4 id="challenges">Challenges</h4>
 <ol style="list-style-type: decimal">
-<li><p>Why do all of our plots stop just short of the upper end of our graph? Why are the vertical lines in our plot of the minimum inflammation per day not vertical?</p></li>
+<li><p>Why do all of our plots stop just short of the upper end of our graph? Why are the vertical lines in our plot of the minimum inflammation per day not perfectly vertical?</p></li>
 <li><p>Create a plot showing the standard deviation of the inflammation data for each day across all patients.</p></li>
 </ol>
 </div>
@@ -647,12 +535,11 @@ minimum inflammation per day
 
 
 <div class="">
-<p>It's very common to create an <a href="../../gloss.html#alias-library">alias</a> for a library when importing it in order to reduce the amount of typing we have to do. Here are our three plots side by side using aliases for <code>numpy</code> and <code>pyplot</code>:</p>
+<p>It's very common to create an <a href="../../gloss.html#alias">alias</a> for a library when importing it in order to reduce the amount of typing we have to do. Here are our three plots side by side using aliases for <code>numpy</code> and <code>pyplot</code>:</p>
 </div>
 
 
-<div class="in">
-<pre>import numpy as np
+<pre class="in"><code>import numpy as np
 from matplotlib import pyplot as plt
 
 data = np.loadtxt(fname=&#39;inflammation-01.csv&#39;, delimiter=&#39;,&#39;)
@@ -672,13 +559,10 @@ plt.ylabel(&#39;min&#39;)
 plt.plot(data.min(0))
 
 plt.tight_layout()
-plt.show()</pre>
-</div>
+plt.show()</code></pre>
 
 <div class="out">
-<pre>
 <img src="../../novice/python/01-numpy_files/novice/python/01-numpy_83_0.png">
-</pre>
 </div>
 
 

@@ -21,7 +21,7 @@ most programmers take a slightly more roundabout route to merging.
 When the project starts,
 Dracula creates a repository on GitHub
 in exactly the same way as [we created the `planets` repository](../git/02-collab.html)
-and then [clones](../../gloss.html#repository-clone) it to his desktop:
+and then [clones](../../gloss.html#clone) it to his desktop:
 
 ~~~
 $ git clone https://github.com/vlad/undersea.git
@@ -52,7 +52,7 @@ Dracula can now push and pull changes just as before.
 
 Wolfman doesn't clone Dracula's GitHub repository directly.
 Instead,
-he [forks](../../gloss.html#repository-fork) it,
+he [forks](../../gloss.html#fork) it,
 i.e., clones it on GitHub. He does this using the GitHub web interface:
 
 <img src="img/git-fork-ui.png" alt="The Fork Button" />

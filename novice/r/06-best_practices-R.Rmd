@@ -3,10 +3,10 @@ layout: lesson
 root: ../..
 ---
 
-
-```{r, echo=FALSE}
-opts_chunk$set(results='hide')
+```{r, include = FALSE}
+source("chunk_options.R")
 ```
+
 # Some best practices for using R and designing programs
 
 1. Start your code with a description of what it is:
