@@ -23,6 +23,7 @@ to get feedback on your ideas and coordinate with other developers.
 *   [Previewing](#previewing)
 *   [Locations and Formats](#locations-and-formats)
 *   [Sample Files](#sample-files)
+*   [Labels](#labels)
 *   [FAQ](#faq)
 
 Working With GitHub
@@ -130,6 +131,22 @@ the IPython Notebook file has metadata in various cells
 to ensure that the generated HTML pages have the right style.
 If you are creating a new lesson,
 please copy one of these files to use as a starting point.
+
+Labels
+------
+
+When you create a new Issue or send a Pull Request, please add some informative
+labels. This will help other contributors that are interested in the same
+material find your work. For example, if you make an edit to a lesson on Python,
+add the "Python" label. See the list below for descriptions of other labels you
+may find useful:
+
+*   work in progress - the pull request is not ready to be merged
+*   getting-started - the task is suited for a newcomer, e.g. someone in instructor training
+*   novice - concerns the novice set of teaching material
+*   intermediate - concerns the intermediate set of teaching material
+*   tools - concerns the tools used to build and manage lesson material
+*   question - when you are looking for an answer
 
 FAQ
 ---
