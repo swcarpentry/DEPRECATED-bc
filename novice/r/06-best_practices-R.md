@@ -1,4 +1,7 @@
-
+---
+layout: lesson
+root: ../..
+---
 
 # Some best practices for using R and designing programs
 
