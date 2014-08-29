@@ -1,9 +1,12 @@
-
+---
+layout: lesson
+root: ../..
+---
 
 # Some best practices for using R and designing programs
 
 1. Start your code with a description of what it is:
-	
+
 
 ```r
 # This is code to replicate the analyses and figures from my 2014 Science
@@ -11,7 +14,7 @@
 ```
 
 
-2. Run all of your import statments (`library` or `require`):
+2. Run all of your import statments (`library`):
 
 
 ```r
@@ -33,7 +36,7 @@ source("my_genius_fxns.R")
 ```
 
 
-6. Use consistent style within your code. 
+6. Use consistent style within your code.
 
 7. Keep your code modular. If a single function or loop gets too long, consider breaking it into smaller pieces.
 
@@ -51,7 +54,7 @@ rather than:
 
 
 ```r
-dat <- read.csv(file = "/Users/Karthik/Documents/sannic-project/files/dataset-2013-01.csv", 
+dat <- read.csv(file = "/Users/Karthik/Documents/sannic-project/files/dataset-2013-01.csv",
     header = TRUE)
 ```
 
@@ -68,6 +71,5 @@ dat <- read.csv(file = "/Users/Karthik/Documents/sannic-project/files/dataset-20
 
 1. What other suggestions do you have?
 2. How could we restructure the code we worked on today, to make it easier to read? Discsuss with your neighbor.
-3. Make two new R scripts called inflammation.R and inflammation_fxns.R 
+3. Make two new R scripts called inflammation.R and inflammation_fxns.R
 4. Copy and paste the code so that inflammation.R "does stuff" and inflammation_fxns.R holds all of your functions. __Hint__: you will need to add `source` code to one of the files.
-
