@@ -378,70 +378,14 @@ dat[, 16]</code></pre>
 </code></pre></div>
 
 Now let's perform some common mathematical operations to learn about our inflammation data.
-If we want to find the average inflammation for all patients on all days,
-For example, we can calculate the maximum and minimum inflammation value of all the patients across all the days:
-
-
-<pre class='in'><code>max(dat)</code></pre>
-
-
-
-<div class='out'><pre class='out'><code>[1] 20
-</code></pre></div>
-
-
-
-<pre class='in'><code>min(dat)</code></pre>
-
-
-
-<div class='out'><pre class='out'><code>[1] 0
-</code></pre></div>
-
-R also has functions for other commons calculations, e.g. finding the mean, median, and standard deviation of the data.
-Unfortunately these functions do not work on a data frame.
-In order to calculate these statistics across the entire data set, we'll first need to convert the data from a data frame to a matrix.
-It is okay that this does not make sense to you now.
-The majority of the operations we'll perform in these lessons work on both data frames and matrices.
-
-> **Tip:** To learn more about the different structures R has for storing data, you can read [An Introduction to R][intro] and the [chapter][adv-r] on data structurs from Advanced R by Hadley Wickham.
-
-[intro]: http://cran.r-project.org/doc/manuals/r-release/R-intro.html
-[adv-r]: http://adv-r.had.co.nz/Data-structures.html
-
-
-<pre class='in'><code>mat <- as.matrix(dat)
-mean(mat)</code></pre>
-
-
-
-<div class='out'><pre class='out'><code>[1] 6.149
-</code></pre></div>
-
-
-
-<pre class='in'><code>median(mat)</code></pre>
-
-
-
-<div class='out'><pre class='out'><code>[1] 5
-</code></pre></div>
-
-
-
-<pre class='in'><code>sd(mat)</code></pre>
-
-
-
-<div class='out'><pre class='out'><code>[1] 4.615
-</code></pre></div>
-
 When analyzing data we often want to look at partial statistics, such as the maximum value per patient or the average value per day. 
 One way to do this is to select the data we want to create a new temporary data frame, and then perform the calculation on this subset:
 
 
-<pre class='in'><code>patient_1 <- dat[1, ] # first row, all of the columns
-max(patient_1)        # max inflammation for patient 1</code></pre>
+<pre class='in'><code># first row, all of the columns
+patient_1 <- dat[1, ]
+# max inflammation for patient 1
+max(patient_1)</code></pre>
 
 
 
@@ -452,11 +396,53 @@ We don't actually need to store the row in a variable of its own.
 Instead, we can combine the selection and the function call:
 
 
-<pre class='in'><code>max(dat[2, ])          # max inflammation for patient 2</code></pre>
+<pre class='in'><code># max inflammation for patient 2
+max(dat[2, ])</code></pre>
 
 
 
 <div class='out'><pre class='out'><code>[1] 18
+</code></pre></div>
+
+R also has functions for other commons calculations, e.g. finding the minimum, mean, median, and standard deviation of the data:
+
+
+<pre class='in'><code># minimum inflammation on day 7
+min(dat[, 7])</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 1
+</code></pre></div>
+
+
+
+<pre class='in'><code># mean inflammation on day 7
+mean(dat[, 7])</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 3.8
+</code></pre></div>
+
+
+
+<pre class='in'><code># median inflammation on day 7
+median(dat[, 7])</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 4
+</code></pre></div>
+
+
+
+<pre class='in'><code># standard deviation of inflammation on day 7
+sd(dat[, 7])</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 1.725
 </code></pre></div>
 
 What if we need the maximum inflammation for all patients, or the average for each day?
