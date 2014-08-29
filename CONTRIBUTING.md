@@ -135,11 +135,17 @@ please copy one of these files to use as a starting point.
 Labels
 ------
 
-When you create a new Issue or send a Pull Request, please add some informative
-labels. This will help other contributors that are interested in the same
-material find your work. For example, if you make an edit to a lesson on Python,
-add the "Python" label. See the list below for descriptions of other labels you
-may find useful:
+We use labels to categorize new Issues and Pull Requests. If you are searching
+for Issues to help resolve or Pull Requests to review, you can filter with these
+labels to help find subjects you are interested in. For example, if you are
+interested in improving the novice Python lessons, you can filter with the
+labels "Python" and "novice".
+
+If you have "Contributor" status for `swcarpentry/bc`, please help organize
+everything by adding informative labels to Issues and Pull Requests you create
+as well as Issues and Pull Requests made by others.
+
+See the list below for descriptions of some common labels:
 
 *   work in progress - the pull request is not ready to be merged
 *   getting-started - the task is suited for a newcomer, e.g. someone in instructor training
