@@ -25,7 +25,7 @@ characters: they have created groups.
 The way we solve this problem—i.e., the way we match a literal left
 parenthesis '(' or right parenthesis ')'—is to put a backslash in front
 of it. This is another example of an [escape
-sequence](glossary.html#escape-sequence): just as we use the
+sequence](../../gloss.html#escape-sequence): just as we use the
 two-character sequence `'\t'` in a string to represent a literal tab
 character, we use the two-character sequence `'\('` or `'\)'` in a
 regular expression to match the literal character '(' or ')'.
@@ -39,26 +39,16 @@ look at the various layers involved.
 
 Our program text—i.e., what's stored in our `.py` file—looks like this:
 
-    # find '()' in text
-    m = re.search('\\(\\)', text)
+~~~
+# find '()' in text
+m = re.search('\\(\\)', text)
     ⋮    ⋮    ⋮
+~~~
 
 The file has two backslashes, an open parenthesis, two backslashes, and
-a close parenthesis inside quotes:
-
-  ---- ---- --- ---- ---- ---
-  \\   \\   (   \\   \\   )
-  ---- ---- --- ---- ---- ---
-
-When Python reads that file in, it turns the two-character sequence
+a close parenthesis inside quotes. When Python reads that file in, it turns the two-character sequence
 '\\\\' into a single '\\' character in the string in memory. This is the
-first round of escaping.
-
-  ---- --- ---- ---
-  \\   (   \\   )
-  ---- --- ---- ---
-
-When we hand that string '\\(\\)' to the regular expression library, it
+first round of escaping. When we hand that string '\\(\\)' to the regular expression library, it
 takes the two-character sequence '\\(' and turns it into an arc in the
 finite state machine that matches a literal parenthesis:
 
@@ -131,7 +121,7 @@ pattern, it matches the end of the line rather than a literal '\$', so
 'temp\$' will match the string 'high-temp', but not the string
 'temperature'.
 
-Regular Expressions and Newlines
+### Regular Expressions and Newlines
 
 The full rule is slightly more complicated. By default, regular
 expressions act as if newline characters were the ends of records. For
