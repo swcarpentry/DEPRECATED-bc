@@ -67,6 +67,7 @@ MOST_SRC = \
 # All source pages (including things not in the book).
 ALL_SRC = \
 	contents.md \
+        $(wildcard intermediate/regex/*.md) \
 	$(wildcard intermediate/python/*.md) \
 	$(wildcard intermediate/doit/*.md) \
 	$(wildcard slides/*.html) \
@@ -184,7 +185,12 @@ tidy :
 ipynb :
 	make -f ipynb.mk
 
+## rmd      : convert R Markdown files to Markdown.
+#  This uses an auxiliary Makefile 'rmd.mk'.
+rmd :
+	make -f rmd.mk
+
 ## ---------------------------------------
 
 
-.PHONY: all book check clean commands contribs epub fixme gloss install ipynb site tidy
+.PHONY: all book check clean commands contribs epub fixme gloss install ipynb site tidy rmd

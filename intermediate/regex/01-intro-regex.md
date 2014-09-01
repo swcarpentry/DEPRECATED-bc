@@ -7,16 +7,15 @@ title: Introduction to Regular Expressions
 A couple of years after the Death Star exploded, a hot-shot reporter at
 the Daily Planet heard that children in the Shire were starting to act
 strangely. Our supervisor sent some grad students off to find out what
-was going on. Things didn't go so well for them, but their notebooks
-were recovered and later transcribed.
+was going on. Every student's notebook containing measurements of background evil levels (in milliVaders)
+at various locations in the Shire was later transcribed and stored as a data file.
 
-Our job is to read 20 or 30 files, each of which contains several
+Our job is to read 20 or 30 of these data files, each of which contains several
 hundred measurements of background evil levels, and convert them into a
 uniform format for further processing. Each of the readings has the name
 of the site where the reading was taken, the date the reading was taken
-on, and of course the background evil level in millivaders. The problem
+on, and of course the background evil level in milliVaders. The problem
 is, these files are formatted in different ways. Here is the first one:
-
 
 ![image](img/01-intro-notebook-1.png) 
 
@@ -53,7 +52,7 @@ year-month-day.
 
 We could parse these files using basic string operations, but it would
 be difficult. A better approach is to use [regular
-expressions](glossary.html#regular-expression). A regular expression is
+expressions](../../gloss.html#regular-expression). A regular expression is
 just a pattern that can match a string. They are actually very common:
 when we say `*.txt` to a computer, we mean, "Match all of the filenames
 that end in `.txt`." The `*` is a regular expression: it matches any
