@@ -152,7 +152,7 @@ See the list below for descriptions of some common labels:
 *   novice - concerns the novice set of teaching material
 *   intermediate - concerns the intermediate set of teaching material
 *   tools - concerns the tools used to build and manage lesson material
-*   question - when you are looking for an answer
+*   question - asking for help or getting feedback on an idea
 
 FAQ
 ---
