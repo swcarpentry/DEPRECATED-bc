@@ -6,38 +6,31 @@ root: ../..
 # Modularization and Documentation
 
 
-<div>
-<p>Now that we&#39;ve covered some of the basic syntax and libraries in Python we can start to tackle our data analysis problem.
+Now that we've covered some of the basic syntax and libraries in Python we can start to tackle our data analysis problem.
 We are interested in understanding the relationship between the weather and the number of mosquitos so that we can plan mosquito control measures.
 Since we want to apply these mosquito control measures at a number of different sites we need to understand how the relationship varies across sites.
-Remember that we have a series of CSV files with each file containing the data for a single location.</p>
-</div>
+Remember that we have a series of CSV files with each file containing the data for a single location.
 
 ## Objectives
 
 
-<div>
-<ul>
-<li>Write code for people, not computers</li>
-<li>Break a program into chunks</li>
-<li>Write and use functions in Python</li>
-<li>Write useful documentation</li>
-</ul>
-</div>
+* Write code for people, not computers
+* Break a program into chunks
+* Write and use functions in Python
+* Write useful documentation
 
 ## Starting small
 
 
-<div>
-<p>When approaching computational tasks like this one it is typically best to start small,
+When approaching computational tasks like this one it is typically best to start small,
 check each piece of code as you go,
 and make incremental changes.
 This helps avoid marathon debugging sessions
-because it&#39;s much easier to debug one small piece of the code at a time than to write 100 lines of code and
-then try to figure out all of the different bugs in it.</p>
-<p>Let&#39;s start by reading in the data from a single file and conducting a simple regression analysis on it.
-In fact, I would actually start by just importing the data and making sure that everything is coming in OK.</p>
-</div>
+because it's much easier to debug one small piece of the code at a time than to write 100 lines of code and
+then try to figure out all of the different bugs in it.
+
+Let's start by reading in the data from a single file and conducting a simple regression analysis on it.
+In fact, I would actually start by just importing the data and making sure that everything is coming in OK.
 
 
 <pre class="in"><code>import pandas as pd
@@ -100,17 +93,16 @@ print d</code></pre>
 </code></pre></div>
 
 
-<div>
-<p>The import seems to be working properly, so that&#39;s good news,
-but does anyone have anyone see anything about the code that they don&#39;t like?</p>
-<p>That&#39;s right.
-The variable name I&#39;ve chosen for the data doesn&#39;t really communicate any information to anyone about what it&#39;s holding,
-which means that when I come back to my code next month to change something I&#39;m going to have a more difficult time understanding what the code is actually doing.
+The import seems to be working properly, so that's good news,
+but does anyone have anyone see anything about the code that they don't like?
+
+That's right.
+The variable name I've chosen for the data doesn't really communicate any information to anyone about what it's holding,
+which means that when I come back to my code next month to change something I'm going to have a more difficult time understanding what the code is actually doing.
 This brings us to one of our first major lessons for the morning,
 which is that in order to understand what our code is doing so that we can quickly make changes in the future,
-we need to <em>write code for people, not computers</em>,
-and an important first step is to <em>use meaningful varible names</em>.</p>
-</div>
+we need to *write code for people, not computers*,
+and an important first step is to *use meaningful varible names*.
 
 
 <pre class="in"><code>import pandas as pd
@@ -127,17 +119,17 @@ print data.head()</code></pre>
 </code></pre></div>
 
 
-<div>
-<p>The <code>.head()</code> method lets us just look at the first few rows of the data.
+The `.head()` method lets us just look at the first few rows of the data.
 A method is a function attached to an object that operates on that object.
-So in this case we can think of it as being equivalent to <code>head(data)</code>.</p>
-<p>Everything looks good,
-but either global warming has gotten <em>really</em> out of control or the temperatures are in degrees Fahrenheit.
-Let&#39;s convert them to Celcius before we get started.</p>
-<p>We don&#39;t need to reimport the data in our new cell because all of the executed cells in IPython Notebook share the same workspace.
-However, it&#39;s worth noting that if we close the notebook and then open it again it is necessary to rerun all of the individual blocks of code that a code block relies on before continuing.
-To rerun all of the cells in a notebook you can select <code>Cell -&gt; Run All</code> from the menu.</p>
-</div>
+So in this case we can think of it as being equivalent to `head(data)`.
+
+Everything looks good,
+but either global warming has gotten *really* out of control or the temperatures are in degrees Fahrenheit.
+Let's convert them to Celcius before we get started.
+
+We don't need to reimport the data in our new cell because all of the executed cells in IPython Notebook share the same workspace.
+However, it's worth noting that if we close the notebook and then open it again it is necessary to rerun all of the individual blocks of code that a code block relies on before continuing.
+To rerun all of the cells in a notebook you can select `Cell -> Run All` from the menu.
 
 
 <pre class="in"><code>data[&#39;temperature&#39;] = (data[&#39;temperature&#39;] - 32) * 5 / 9.0
@@ -152,11 +144,9 @@ print data.head()</code></pre>
 </code></pre></div>
 
 
-<div>
-<p>That&#39;s better.
-Now let&#39;s go ahead and conduct a regression on the data.
-We&#39;ll use the <code>statsmodels</code> library to conduct the regression.</p>
-</div>
+That's better.
+Now let's go ahead and conduct a regression on the data.
+We'll use the `statsmodels` library to conduct the regression.
 
 
 <pre class="in"><code>import statsmodels.api as sm
@@ -195,16 +185,14 @@ strong multicollinearity or other numerical problems.
 &#34;&#34;&#34;</code></pre></div>
 
 
-<div>
-<p>As you can see <code>statsmodels</code> lets us use the names of the columns in our dataframe
+As you can see `statsmodels` lets us use the names of the columns in our dataframe
 to clearly specify the form of the statistical model we want to fit.
 This also makes the code more readable since the model we are fitting is written in a nice,
 human readable, manner.
-The <code>summary</code> method gives us a visual representation of the results.
-This summary is nice to look at, but it isn&#39;t really useful for doing more computation,
-so we can look up particular values related to the regression using the <code>regr_results</code> attributes.
-These are variables that are attached to <code>regr_results</code>.</p>
-</div>
+The `summary` method gives us a visual representation of the results.
+This summary is nice to look at, but it isn't really useful for doing more computation,
+so we can look up particular values related to the regression using the `regr_results` attributes.
+These are variables that are attached to `regr_results`.
 
 
 <pre class="in"><code>print regr_results.params
@@ -218,19 +206,15 @@ dtype: float64
 </code></pre></div>
 
 
-<div>
-<p>If we want to hold onto these values for later we can assign them to variables:</p>
-</div>
+If we want to hold onto these values for later we can assign them to variables:
 
 
 <pre class="in"><code>parameters = regr_results.params
 rsquared = regr_results.rsquared</code></pre>
 
 
-<div>
-<p>And then we can plot the observed data against the values predicted by our regression to visualize the results.
-First, remember to tell the notebook that we want our plots to appear in the notebook itself.</p>
-</div>
+And then we can plot the observed data against the values predicted by our regression to visualize the results.
+First, remember to tell the notebook that we want our plots to appear in the notebook itself.
 
 
 <pre class="in"><code>%matplotlib inline</code></pre>
@@ -248,12 +232,10 @@ plt.plot([min_mosquitos, max_mosquitos], [min_mosquitos, max_mosquitos], &#39;k-
 </div>
 
 
-<div>
-<p>OK, great.
+OK, great.
 So putting this all together we now have a piece of code that imports the modules we need,
 loads the data into memory, fits a regression to the data,
-and stores the parameters and fit of data.</p>
-</div>
+and stores the parameters and fit of data.
 
 
 <pre class="in"><code>import pandas as pd
@@ -284,21 +266,23 @@ R^2 =  0.996966873691
 ## Functions
 
 
-<div>
-<p>The next thing we need to do is loop over all of the possible data files,
-but in order to do that we&#39;re going to need to grow our code some more.
+The next thing we need to do is loop over all of the possible data files,
+but in order to do that we're going to need to grow our code some more.
 Since our brain can only easily hold 5-7 pieces of information at once,
 and our code already has more than that many pieces,
 we need to start breaking our code into manageable sized chunks.
 This will let us read and understand the code more easily and make it easier to reuse pieces of our code.
-We&#39;ll do this using functions.</p>
-<p>Functions in Python take the general form</p>
-<pre><code class="language-python"><span class="function"><span class="keyword">def</span> <span class="title">function_name</span><span class="params">(inputs)</span>:</span>
+We'll do this using functions.
+
+Functions in Python take the general form
+
+~~~python
+def function_name(inputs):
     do stuff
-    <span class="keyword">return</span> output
-</code></pre>
-<p>So, if we want to write a function that returns the value of a number squared we could use:</p>
-</div>
+    return output
+~~~
+
+So, if we want to write a function that returns the value of a number squared we could use:
 
 
 <pre class="in"><code>def square(x):
@@ -313,9 +297,7 @@ Five squared is 25
 </code></pre></div>
 
 
-<div>
-<p>We can also just return the desired value directly.</p>
-</div>
+We can also just return the desired value directly.
 
 
 <pre class="in"><code>def square(x):
@@ -327,9 +309,7 @@ print square(3)</code></pre>
 </code></pre></div>
 
 
-<div>
-<p>And remember, if we want to use the result of the function later we need to store it somewhere.</p>
-</div>
+And remember, if we want to use the result of the function later we need to store it somewhere.
 
 
 <pre class="in"><code>two_squared = square(2)
@@ -341,24 +321,25 @@ print two_squared</code></pre>
 ### Challenges
 
 
-<div>
-<p>1. Write a function that converts temperature from Fahrenheit to Celcius and use it to replace</p>
-<pre><code class="language-python">data[<span class="string">'temperature'</span>] = (data[<span class="string">'temperature'</span>] - <span class="number">32</span>) * <span class="number">5</span> / <span class="number">9.0</span>
-</code></pre>
-<p>in our program.</p>
-<p>2. Write a function called <code>analyze()</code> that takes <code>data</code> as an input, performs the regression, makes the observed-predicted plot, and returns <code>parameters</code>.</p>
-<p><em>Walk through someone&#39;s result.
+1\. Write a function that converts temperature from Fahrenheit to Celcius and use it to replace
+
+~~~python
+data['temperature'] = (data['temperature'] - 32) * 5 / 9.0
+~~~
+
+in our program.
+
+2\. Write a function called `analyze()` that takes `data` as an input, performs the regression, makes the observed-predicted plot, and returns `parameters`.
+
+*Walk through someone's result.
 When discussing talk about different names.
 E.g., fahr_to_celcius is better than temp_to_celcius since it is explicit both the input and the output.
-Talk about the fact that even though this doesn&#39;t save us any lines of code it&#39;s still easier to read.</em></p>
-</div>
+Talk about the fact that even though this doesn't save us any lines of code it's still easier to read.*
 
 ## The call stack
 
 
-<div>
-<p>Let&#39;s take a closer look at what happens when we call fahr_to_celsius(32.0). To make things clearer, we&#39;ll start by putting the initial value 32.0 in a variable and store the final result in one as well:</p>
-</div>
+Let's take a closer look at what happens when we call fahr_to_celsius(32.0). To make things clearer, we'll start by putting the initial value 32.0 in a variable and store the final result in one as well:
 
 
 <pre class="in"><code>def fahr_to_celsius(tempF):
@@ -369,35 +350,41 @@ original = 32.0
 final = fahr_to_celsius(original)</code></pre>
 
 
-<div>
-<h4 id="call-stack-initial-state-">Call Stack (Initial State)</h4>
-<p>When the first three lines of this function are executed the function is created,
+#### Call Stack (Initial State)
+
+When the first three lines of this function are executed the function is created,
 but nothing happens.
 The function is like a recipe,
 it contains the information about how to do something,
-but it doesn&#39;t do so until you explicitly ask it to.
-We then create the variable <code>original</code> and assign the value 32.0 to it.
-The values <code>tempF</code> and <code>tempC</code> don&#39;t currently exist. </p>
-<h4 id="call-stack-immediately-after-function-call">Call Stack Immediately After Function Call</h4>
-<p>When we call <code>fahr_to_celsius</code>,
-Python creates another stack frame to hold fahr_to_celsius&#39;s variables.
+but it doesn't do so until you explicitly ask it to.
+We then create the variable `original` and assign the value 32.0 to it.
+The values `tempF` and `tempC` don't currently exist. 
+
+#### Call Stack Immediately After Function Call
+
+When we call `fahr_to_celsius`,
+Python creates another stack frame to hold fahr_to_celsius's variables.
 Upon creation this stack frame only includes the inputs being passed to the function,
-so in our case <code>tempF</code>.
+so in our case `tempF`.
 As the function is executed variables created by the function are stored in the functions stack frame,
-so <code>tempC</code> is created in the <code>fahr_to_celsius</code> stack frame.</p>
-<h4 id="call-stack-at-end-of-function-call">Call Stack At End Of Function Call</h4>
-<p>When the call to <code>fahr_to_celsius</code> returns a value,
-Python throws away <code>fahr_to_celsius</code>&#39;s stack frame,
+so `tempC` is created in the `fahr_to_celsius` stack frame.
+
+#### Call Stack At End Of Function Call
+
+When the call to `fahr_to_celsius` returns a value,
+Python throws away `fahr_to_celsius`'s stack frame,
 including all of the variables it contains,
 and creates a new variable
-in the original stack frame to hold the temperature in Celsius.</p>
-<h4 id="call-stack-after-end">Call Stack After End</h4>
-<p>This final stack frame is always there;
+in the original stack frame to hold the temperature in Celsius.
+
+#### Call Stack After End
+
+This final stack frame is always there;
 it holds the variables we defined outside the functions in our code.
-What it doesn&#39;t hold is the variables that were in the other stack frames.
-If we try to get the value of <code>tempF</code> or <code>tempC</code> after our functions have finished running,
-Python tells us that there&#39;s no such thing:</p>
-</div>
+What it doesn't hold is the variables that were in the other stack frames.
+If we try to get the value of `tempF` or `tempC` after our functions have finished running,
+Python tells us that there's no such thing:
+
 
 
 <pre class="in"><code>print tempC</code></pre>
@@ -410,38 +397,32 @@ NameError                                 Traceback (most recent call last)
 NameError: name &#39;tempC&#39; is not defined</code></pre></div>
 
 
-<div>
-<p>The reason for this is encapsulation,
-and it&#39;s one of the key to writing correct, comprehensible programs.
-A function&#39;s job is to turn several operations into one so that we can think about
+The reason for this is encapsulation,
+and it's one of the key to writing correct, comprehensible programs.
+A function's job is to turn several operations into one so that we can think about
 a single function call instead of a dozen or a hundred statements each time we want to do something.
-That only works if functions don&#39;t interfere with each other by potentially changing the same variables;
+That only works if functions don't interfere with each other by potentially changing the same variables;
 if they do, we have to pay attention to the details once again,
-which quickly overloads our short-term memory.</p>
-</div>
+which quickly overloads our short-term memory.
 
 ## Testing Functions
 
 
-<div class="">
-<p>Once we start putting things into functions so that we can re-use them,
+Once we start putting things into functions so that we can re-use them,
 we need to start testing that those functions are working correctly.
 The most basic thing we can do is some informal testing to make sure the function is doing what it is supposed to do.
-To see how to do this, let&#39;s write a function to center the values in a dataset prior to conducting statistical analysis. 
-Centering means setting the mean of each variable to be the same value, typically zero.</p>
-</div>
+To see how to do this, let's write a function to center the values in a dataset prior to conducting statistical analysis. 
+Centering means setting the mean of each variable to be the same value, typically zero.
 
 
 <pre class="in"><code>def center(data):
     return data - data.mean()</code></pre>
 
 
-<div class="">
-<p>We could test this on our actual data,
-but since we don&#39;t know what the values ought to be,
+We could test this on our actual data,
+but since we don't know what the values ought to be,
 it will be hard to tell if the result was correct.
-Instead, let&#39;s create a made up data frame where we know what the result should look like.</p>
-</div>
+Instead, let's create a made up data frame where we know what the result should look like.
 
 
 <pre class="in"><code>import pandas as pd
@@ -455,15 +436,14 @@ print test_data</code></pre>
 </code></pre></div>
 
 
-<div>
-<p>Now that we&#39;ve made some test data we need to figure out what we think the result should be
-and we need to do this <em>before</em> we run the test.
+Now that we've made some test data we need to figure out what we think the result should be
+and we need to do this *before* we run the test.
 This is important because we are biased to believe that any result we get back is correct,
 and we want to avoid that bias.
 This also helps make sure that we are confident in what we want the code to do.
-So, what should the result of running <code>center(data)</code> be?</p>
-<p>OK, let&#39;s go ahead and run the function.</p>
-</div>
+So, what should the result of running `center(data)` be?
+
+OK, let's go ahead and run the function.
 
 
 <pre class="in"><code>print center(test_data)</code></pre>
@@ -474,10 +454,8 @@ So, what should the result of running <code>center(data)</code> be?</p>
 </code></pre></div>
 
 
-<div class="">
-<p>That looks right,
-so let&#39;s try <code>center</code> on our real data:</p>
-</div>
+That looks right,
+so let's try `center` on our real data:
 
 
 <pre class="in"><code>data = pd.read_csv(&#39;A2_mosquito_data.csv&#39;)
@@ -538,10 +516,8 @@ print center(data)</code></pre>
 </code></pre></div>
 
 
-<div class="">
-<p>It&#39;s hard to tell from the default output whether the result is correct,
-but there are a few simple tests that will reassure us:</p>
-</div>
+It's hard to tell from the default output whether the result is correct,
+but there are a few simple tests that will reassure us:
 
 
 <pre class="in"><code>print &#39;original mean:&#39;
@@ -566,12 +542,10 @@ mosquitos     -1.337492e-14
 dtype: float64</code></pre></div>
 
 
-<div class="">
-<p>The mean of the centered data is very close to zero;
-it&#39;s not quite zero because of floating point precision issues.
-We can even go further and check that the standard deviation hasn&#39;t changed
-(which it shouldn&#39;t if we&#39;ve just centered the data):</p>
-</div>
+The mean of the centered data is very close to zero;
+it's not quite zero because of floating point precision issues.
+We can even go further and check that the standard deviation hasn't changed
+(which it shouldn't if we've just centered the data):
 
 
 <pre class="in"><code>print &#39;std dev before and after:&#39;
@@ -594,26 +568,24 @@ dtype: float64
 </code></pre></div>
 
 
-<div class="">
-<p>The standard deviations look the same.
-It&#39;s still possible that our function is wrong,
-but it seems unlikely enough that we we&#39;re probably in good shape for now.</p>
-</div>
+The standard deviations look the same.
+It's still possible that our function is wrong,
+but it seems unlikely enough that we we're probably in good shape for now.
 
 ## Documentation
 
 
-<div>
-<p>OK, the <code>center</code> function seems to be working fine.
-Does anyone else see anything that&#39;s missing before we move on?</p>
-<p>Yes, we should write some <a href="../../gloss.html#documentation">documentation</a>
-to remind ourselves later what it&#39;s for and how to use it.
+OK, the `center` function seems to be working fine.
+Does anyone else see anything that's missing before we move on?
+
+Yes, we should write some [documentation](../../gloss.html#documentation)
+to remind ourselves later what it's for and how to use it.
 This function may be fairly straightforward,
-but in most cases it won&#39;t be so easy to remember exactly what a function is doing in a few months.
-Just imagine looking at our <code>analyze</code> function a few months in the future
-and trying to remember exactly what it was doing just based on the code.</p>
-<p>The usual way to put documentation in code is to add <a href="../../gloss.html#comment">comments</a> like this:</p>
-</div>
+but in most cases it won't be so easy to remember exactly what a function is doing in a few months.
+Just imagine looking at our `analyze` function a few months in the future
+and trying to remember exactly what it was doing just based on the code.
+
+The usual way to put documentation in code is to add [comments](../../gloss.html#comment) like this:
 
 
 <pre class="in"><code># center(data): return a new DataFrame containing the original data centered around zero.
@@ -621,11 +593,9 @@ def center(data, desired):
     return data - data.mean()</code></pre>
 
 
-<div class="">
-<p>There&#39;s a better way to do this in Python.
-If the first thing in a function is a string that isn&#39;t assigned to a variable,
-that string is attached to the function as its documentation:</p>
-</div>
+There's a better way to do this in Python.
+If the first thing in a function is a string that isn't assigned to a variable,
+that string is attached to the function as its documentation:
 
 
 <pre class="in"><code>def center(data, desired):
@@ -633,9 +603,7 @@ that string is attached to the function as its documentation:</p>
     return data - data.mean()</code></pre>
 
 
-<div class="">
-<p>This is better because we can now ask Python&#39;s built-in help system to show us the documentation for the function.</p>
-</div>
+This is better because we can now ask Python's built-in help system to show us the documentation for the function.
 
 
 <pre class="in"><code>help(center)</code></pre>
@@ -648,12 +616,10 @@ center(data, desired)
 </code></pre></div>
 
 
-<div class="">
-<p>A string like this is called a <a href="../../gloss.html#docstring">docstring</a>
+A string like this is called a [docstring](../../gloss.html#docstring)
 and there are also automatic documentation generators that use these docstrings to produce documentation for users.
 We use triple quotes because
-it allows us to include multiple lines of text and because it is considered good Python style.</p>
-</div>
+it allows us to include multiple lines of text and because it is considered good Python style.
 
 
 <pre class="in"><code>def center(data):
@@ -691,20 +657,14 @@ center(data)
 ### Challenge
 
 
-<div>
-<ol>
-<li>Test your temperature conversion function to make sure it&#39;s working
-(think about some temperatures that you easily know the conversion for).</li>
-<li>Add documentation to both the temperature conversation function and the analysis function.</li>
-</ol>
-</div>
+1. Test your temperature conversion function to make sure it's working
+   (think about some temperatures that you easily know the conversion for).
+2. Add documentation to both the temperature conversation function and the analysis function.
 
 ## Looping over files
 
 
-<div>
-<p>So now our code looks something like this:</p>
-</div>
+So now our code looks something like this:
 
 
 <pre class="in"><code>import pandas as pd
@@ -750,13 +710,11 @@ dtype: float64
 </div>
 
 
-<div>
-<p>Now we want to loop over all of the possible data files,
+Now we want to loop over all of the possible data files,
 and to do that we need to know their names.
 If we only had a dozen files we could write them all down,
-but if we have hundreds of files or the filenames change then that won&#39;t really work.
-Fortunately Python has a built in library to help us find the files we want to work with called <code>glob</code>.</p>
-</div>
+but if we have hundreds of files or the filenames change then that won't really work.
+Fortunately Python has a built in library to help us find the files we want to work with called `glob`.
 
 
 <pre class="in"><code>import glob
@@ -768,12 +726,10 @@ print filenames</code></pre>
 </code></pre></div>
 
 
-<div>
-<p>The object returned by <code>glob</code> is a list of strings.
+The object returned by `glob` is a list of strings.
 A list is a Python data type that holds a group of potentially heterogenous values.
 That means it can hold pretty much anything,
-including functions.</p>
-</div>
+including functions.
 
 
 <pre class="in"><code>mylist = [1, &#39;a&#39;, center]
@@ -783,14 +739,13 @@ print mylist</code></pre>
 </code></pre></div>
 
 
-<div>
-<p>In this case all of the values are strings
-that contain the names of all of the files that match the expression given to <code>glob</code>,
-so in this case all of the files with the <code>.csv</code> extension.</p>
-<p>Let&#39;s restrict the filenames a little more finely,
-so that we don&#39;t accidentally get any data we don&#39;t want,
-and print out the filenames one at a time.</p>
-</div>
+In this case all of the values are strings
+that contain the names of all of the files that match the expression given to `glob`,
+so in this case all of the files with the `.csv` extension.
+
+Let's restrict the filenames a little more finely,
+so that we don't accidentally get any data we don't want,
+and print out the filenames one at a time.
 
 
 <pre class="in"><code>filenames =glob.glob(&#39;*data.csv&#39;)
@@ -807,7 +762,5 @@ A2_mosquito_data.csv
 ### Challenge
 
 
-<div>
-<p>Modify your code to loop over all of the files in your directory,
-making an observed-predicted plot for each file and printing the parameters.</p>
-</div>
+Modify your code to loop over all of the files in your directory,
+making an observed-predicted plot for each file and printing the parameters.
