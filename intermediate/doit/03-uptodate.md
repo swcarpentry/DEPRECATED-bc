@@ -8,19 +8,13 @@ root: ../..
 ### Objectives:
 
 
-<div>
-<ul>
-<li>Explain how doit decides if a task is up to date when that task depends on another file</li>
-<li>Explain how this is decided if a task does not have any dependencies</li>
-<li>Explain how we configure a task to change the way doit will decide if it is up to date</li>
-<li>Explain how doit decides which functions are tasks, and which are not</li>
-</ul>
-</div>
+- Explain how doit decides if a task is up to date when that task depends on another file
+- Explain how this is decided if a task does not have any dependencies
+- Explain how we configure a task to change the way doit will decide if it is up to date
+- Explain how doit decides which functions are tasks, and which are not
 
 
-<div>
-<p>Here is one version of the script, which now downloads both the raw data files. The download_data task was a bit long, so I refactored the part which calculates all the correct file names into a new python function.</p>
-</div>
+Here is one version of the script, which now downloads both the raw data files. The download_data task was a bit long, so I refactored the part which calculates all the correct file names into a new python function.
 
 
 <pre class="in"><code>%load_ext doitmagic</code></pre>
@@ -91,13 +85,15 @@ Saving to: ‘UK_Sunshine_data.txt’
 </code></pre></div>
 
 
-<div>
-<p>There are two things to notice here. Firstly, my new python function <code>get_data_file_parameters</code> doesn&#39;t start with <code>task_</code>, so doit doesn&#39;t try to run it as a task.</p>
-<p>Secondly, no matter how many times we run this script, doit always re-downloads the data files. Since they don&#39;t depend on anything, doit doesn&#39;t know how to check that they are up to date. This is why it always re-downloads them.</p>
-<p>If we were trying to do all these tasks ourselves, we would probably want to update our monthly temperature data every month. Doit lets us define another parameter in our task configuration dictionary, called <code>uptodate</code>. This should define a python function which will tell doit whether our task needs to be re-run.</p>
-<p>This is one of the big advantages of doit: any python you can write is valid. In fact, even using task generators to create sub-tasks is just a convention. Any python script you can write to make your task configuration dictionaries can be made to work with doit.</p>
-<p>Back to our problem about keeping our raw data files fresh. You could write your own function that checks how old the raw data files are, but thankfully doit comes with a utility function for doing just this. Lets set our data files to expire after four weeks:</p>
-</div>
+There are two things to notice here. Firstly, my new python function `get_data_file_parameters` doesn't start with `task_`, so doit doesn't try to run it as a task.
+
+Secondly, no matter how many times we run this script, doit always re-downloads the data files. Since they don't depend on anything, doit doesn't know how to check that they are up to date. This is why it always re-downloads them.
+
+If we were trying to do all these tasks ourselves, we would probably want to update our monthly temperature data every month. Doit lets us define another parameter in our task configuration dictionary, called `uptodate`. This should define a python function which will tell doit whether our task needs to be re-run.
+
+This is one of the big advantages of doit: any python you can write is valid. In fact, even using task generators to create sub-tasks is just a convention. Any python script you can write to make your task configuration dictionaries can be made to work with doit.
+
+Back to our problem about keeping our raw data files fresh. You could write your own function that checks how old the raw data files are, but thankfully doit comes with a utility function for doing just this. Lets set our data files to expire after four weeks:
 
 
 <pre class="in"><code>%%doit
@@ -170,10 +166,9 @@ Saving to: ‘UK_Sunshine_data.txt’
 </code></pre></div>
 
 
-<div>
-<p>When we run this new script for the second time, doit knows that the raw data files are less than four weeks old, so it doesn&#39;t download them again.</p>
-<p>The big advantage of defining all our tasks in this way, is that it becomes much easier to add a new dataset. Lets download some rainfall data by adding <code>Rainfall</code> to our list of datasets:</p>
-</div>
+When we run this new script for the second time, doit knows that the raw data files are less than four weeks old, so it doesn't download them again.
+
+The big advantage of defining all our tasks in this way, is that it becomes much easier to add a new dataset. Lets download some rainfall data by adding `Rainfall` to our list of datasets:
 
 
 <pre class="in"><code>%%doit
@@ -237,9 +232,7 @@ Saving to: ‘UK_Rainfall_data.txt’
 </code></pre></div>
 
 
-<div>
-<p>Now we have some shiny new rainfall data, properly formatted for further analysis:</p>
-</div>
+Now we have some shiny new rainfall data, properly formatted for further analysis:
 
 
 <pre class="in"><code>!head UK_Rainfall_data.reformatted.txt</code></pre>
@@ -259,10 +252,6 @@ Saving to: ‘UK_Rainfall_data.txt’
 ### Challenges:
 
 
-<div>
-<ul>
-<li>Edit the rainfall_data.py file so that doit downloads the raw data files if they are older than 20 seconds</li>
-<li>What will happen if we move the &#39;uptodate&#39; configuration line from the download_data task to the reformat_data task?</li>
-<li>Try it out and see if you were right!</li>
-</ul>
-</div>
+- Edit the rainfall_data.py file so that doit downloads the raw data files if they are older than 20 seconds
+- What will happen if we move the 'uptodate' configuration line from the download_data task to the reformat_data task?
+- Try it out and see if you were right!

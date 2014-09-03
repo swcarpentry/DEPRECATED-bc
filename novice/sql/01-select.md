@@ -6,20 +6,20 @@ root: ../..
 ## Selecting Data
 
 
-<div>
-<p>In the late 1920s and early 1930s,
+In the late 1920s and early 1930s,
 William Dyer,
 Frank Pabodie,
 and Valentina Roerich led expeditions to the
-<a href="http://en.wikipedia.org/wiki/Pole_of_inaccessibility">Pole of Inaccessibility</a>
+[Pole of Inaccessibility](http://en.wikipedia.org/wiki/Pole_of_inaccessibility)
 in the South Pacific,
 and then onward to Antarctica.
 Two years ago,
 their expeditions were found in a storage locker at Miskatonic University.
-We have scanned and OCR&#39;d the data they contain,
+We have scanned and OCR'd the data they contain,
 and we now want to store that information
-in a way that will make search and analysis easy.</p>
-<p>We basically have three options:
+in a way that will make search and analysis easy.
+
+We basically have three options:
 text files,
 a spreadsheet,
 or a database.
@@ -27,63 +27,60 @@ Text files are easiest to create,
 and work well with version control,
 but then we would then have to build search and analysis tools ourselves.
 Spreadsheets are good for doing simple analysis,
-they don&#39;t handle large or complex data sets very well.
+they don't handle large or complex data sets very well.
 We would therefore like to put this data in a database,
-and these lessons will show how to do that.</p>
-</div>
+and these lessons will show how to do that.
 
 
-<div class="objectives">
-<h4 id="objectives">Objectives</h4>
-<ul>
-<li>Explain the difference between a table, a record, and a field.</li>
-<li>Explain the difference between a database and a database manager.</li>
-<li>Write a query to select all values for specific fields from a single table.</li>
-</ul>
+<div class="objectives" markdown="1">
+#### Objectives
+
+*   Explain the difference between a table, a record, and a field.
+*   Explain the difference between a database and a database manager.
+*   Write a query to select all values for specific fields from a single table.
 </div>
 
 ### A Few Definitions
 
 
-<div>
-<p>A <a href="../../gloss.html#relational-database">relational database</a>
+A [relational database](../../gloss.html#relational-database)
 is a way to store and manipulate information
-that is arranged as <a href="../../gloss.html#table-database">tables</a>.
-Each table has columns (also known as <a href="../../gloss.html#field-database">fields</a>) which describe the data,
-and rows (also known as <a href="../../gloss.html#record-database">records</a>) which contain the data.</p>
-<p>When we are using a spreadsheet,
+that is arranged as [tables](../../gloss.html#table).
+Each table has columns (also known as [fields](../../gloss.html#field)) which describe the data,
+and rows (also known as [records](../../gloss.html#record)) which contain the data.
+  
+When we are using a spreadsheet,
 we put formulas into cells to calculate new values based on old ones.
 When we are using a database,
 we send commands
-(usually called <a href="../../gloss.html#query">queries</a>)
-to a <a href="../../gloss.html#database-manager">database manager</a>:
+(usually called [queries](../../gloss.html#query))
+to a [database manager](../../gloss.html#database-manager):
 a program that manipulates the database for us.
 The database manager does whatever lookups and calculations the query specifies,
 returning the results in a tabular form
-that we can then use as a starting point for further queries.</p>
-<blockquote>
-<p>Every database manager&mdash;Oracle,
-IBM DB2, PostgreSQL, MySQL, Microsoft Access, and SQLite&mdash;stores
-data in a different way,
-so a database created with one cannot be used directly by another.
-However,
-every database manager can import and export data in a variety of formats,
-so it <em>is</em> possible to move information from one to another.</p>
-</blockquote>
-<p>Queries are written in a language called <a href="../../gloss.html#sql">SQL</a>,
-which stands for &quot;Structured Query Language&quot;.
+that we can then use as a starting point for further queries.
+  
+> Every database manager&mdash;Oracle,
+> IBM DB2, PostgreSQL, MySQL, Microsoft Access, and SQLite&mdash;stores
+> data in a different way,
+> so a database created with one cannot be used directly by another.
+> However,
+> every database manager can import and export data in a variety of formats,
+> so it *is* possible to move information from one to another.
+
+Queries are written in a language called [SQL](../../gloss.html#sql),
+which stands for "Structured Query Language".
 SQL provides hundreds of different ways to analyze and recombine data;
 we will only look at a handful,
-but that handful accounts for most of what scientists do.</p>
-<p>The tables below show the database we will use in our examples:</p>
-</div>
+but that handful accounts for most of what scientists do.
+
+The tables below show the database we will use in our examples:
 
 
-<div>
 <table>
 <tr>
 <td valign="top">
-<strong>Person</strong>: people who took readings.
+**Person**: people who took readings.
 
 <table>
   <tr> <th>ident</th> <th>personal</th> <th>family</th> </tr>
@@ -94,7 +91,8 @@ but that handful accounts for most of what scientists do.</p>
   <tr> <td>danforth</td> <td>Frank</td> <td>Danforth</td> </tr>
 </table>
 
-<p><strong>Site</strong>: locations where readings were taken.</p>
+**Site**: locations where readings were taken.
+
 <table>
   <tr> <th>name</th> <th>lat</th> <th>long</th> </tr>
   <tr> <td>DR-1</td> <td>-49.85</td> <td>-128.57</td> </tr>
@@ -102,7 +100,8 @@ but that handful accounts for most of what scientists do.</p>
   <tr> <td>MSK-4</td> <td>-48.87</td> <td>-123.4</td> </tr>
 </table>
 
-<p><strong>Visited</strong>: when readings were taken at specific sites.</p>
+**Visited**: when readings were taken at specific sites.
+
 <table>
   <tr> <th>ident</th> <th>site</th> <th>dated</th> </tr>
   <tr> <td>619</td> <td>DR-1</td> <td>1927-02-08</td> </tr>
@@ -116,7 +115,7 @@ but that handful accounts for most of what scientists do.</p>
 </table>
 </td>
 <td valign="top">
-<strong>Survey</strong>: the actual readings.
+**Survey**: the actual readings.
 
 <table>
   <tr> <th>taken</th> <th>person</th> <th>quant</th> <th>reading</th> </tr>
@@ -145,20 +144,17 @@ but that handful accounts for most of what scientists do.</p>
 </td>
 </tr>
 </table>
-</div>
 
 
-<div>
-<p>Notice that three entries&mdash;one in the <code>Visited</code> table,
-and two in the <code>Survey</code> table&mdash;are shown in red
-because they don&#39;t contain any actual data:
-we&#39;ll return to these missing values <a href="#s:null">later</a>.
+Notice that three entries&mdash;one in the `Visited` table,
+and two in the `Survey` table&mdash;are shown in red
+because they don't contain any actual data:
+we'll return to these missing values [later](#s:null).
 For now,
-let&#39;s write an SQL query that displays scientists&#39; names.
-We do this using the SQL command <code>select</code>,
+let's write an SQL query that displays scientists' names.
+We do this using the SQL command `select`,
 giving it the names of the columns we want and the table we want them from.
-Our query and its output look like this:</p>
-</div>
+Our query and its output look like this:
 
 
 <pre class="in"><code>%load_ext sqlitemagic</code></pre>
@@ -176,15 +172,13 @@ select family, personal from Person;</code></pre>
 </table></div>
 
 
-<div>
-<p>The semi-colon at the end of the query
+The semi-colon at the end of the query
 tells the database manager that the query is complete and ready to run.
 We have written our commands and column names in lower case,
 and the table name in Title Case,
-but we don&#39;t have to:
+but we don't have to:
 as the example below shows,
-SQL is <a href="../../gloss.html#case-insensitive">case insensitive</a>.</p>
-</div>
+SQL is [case insensitive](../../gloss.html#case-insensitive).
 
 
 <pre class="in"><code>%%sqlite survey.db
@@ -199,22 +193,18 @@ SeLeCt FaMiLy, PeRsOnAl FrOm PeRsOn;</code></pre>
 </table></div>
 
 
-<div>
-<p>Whatever casing convention you choose,
+Whatever casing convention you choose,
 please be consistent:
-complex queries are hard enough to read without the extra cognitive load of random capitalization.</p>
-</div>
+complex queries are hard enough to read without the extra cognitive load of random capitalization.
 
 
-<div>
-<p>Going back to our query,
-it&#39;s important to understand that
-the rows and columns in a database table aren&#39;t actually stored in any particular order.
-They will always be <em>displayed</em> in some order,
+Going back to our query,
+it's important to understand that
+the rows and columns in a database table aren't actually stored in any particular order.
+They will always be *displayed* in some order,
 but we can control that in various ways.
 For example,
-we could swap the columns in the output by writing our query as:</p>
-</div>
+we could swap the columns in the output by writing our query as:
 
 
 <pre class="in"><code>%%sqlite survey.db
@@ -229,9 +219,7 @@ select personal, family from Person;</code></pre>
 </table></div>
 
 
-<div>
-<p>or even repeat columns:</p>
-</div>
+or even repeat columns:
 
 
 <pre class="in"><code>%%sqlite survey.db
@@ -246,10 +234,8 @@ select ident, ident, ident from Person;</code></pre>
 </table></div>
 
 
-<div>
-<p>As a shortcut,
-we can select all of the columns in a table using <code>*</code>:</p>
-</div>
+As a shortcut,
+we can select all of the columns in a table using `*`:
 
 
 <pre class="in"><code>%%sqlite survey.db
@@ -264,28 +250,31 @@ select * from Person;</code></pre>
 </table></div>
 
 
-<div>
-<h4 id="challenges">Challenges</h4>
-<ol>
-<li><p>Write a query that selects only site names from the <code>Site</code> table.</p>
-</li>
-<li><p>Many people format queries as:</p>
-<pre><code>SELECT personal, family FROM person;
-</code></pre><p>or as:</p>
-<pre><code>select Personal, Family from PERSON;
-</code></pre><p>What style do you find easiest to read, and why?</p>
-</li>
-</ol>
-</div>
+#### Challenges
+
+1.  Write a query that selects only site names from the `Site` table.
+
+2.  Many people format queries as:
+
+    ~~~
+    SELECT personal, family FROM person;
+    ~~~
+
+    or as:
+
+    ~~~
+    select Personal, Family from PERSON;
+    ~~~
+
+    What style do you find easiest to read, and why?
 
 
-<div class="keypoints">
-<h4 id="key-points">Key Points</h4>
-<ul>
-<li>A relational database stores information in tables,
-each of which has a fixed set of columns and a variable number of records.</li>
-<li>A database manager is a program that manipulates information stored in a database.</li>
-<li>We write queries in a specialized language called SQL to extract information from databases.</li>
-<li>SQL is case-insensitive.</li>
-</ul>
+<div class="keypoints" markdown="1">
+#### Key Points
+
+*   A relational database stores information in tables,
+    each of which has a fixed set of columns and a variable number of records.
+*   A database manager is a program that manipulates information stored in a database.
+*   We write queries in a specialized language called SQL to extract information from databases.
+*   SQL is case-insensitive.
 </div>
