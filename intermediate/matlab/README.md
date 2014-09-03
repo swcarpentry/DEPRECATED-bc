@@ -1,4 +1,4 @@
-# MATLAB teaching content (intermediate)
+# MATLAB teaching materials (intermediate)
 
 ## History
 
