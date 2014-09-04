@@ -32,8 +32,9 @@ we have to introduce that change in every copy of our code.
 
 There's a common theme in the two problems presented above---duplicate code.
 In problem 1, we're rewriting code every time we want
-to perform an analysis. In problem 2, we're rewriting code for
-several analyses that differ only slightly from each other. 
+to perform the same analysis several times. In problem 2, 
+we're rewriting code
+every time we want to perform several similar analyses.
 To avoid writing all this duplicate code, we have to teach MATLAB to
 
 * Remember our commands
