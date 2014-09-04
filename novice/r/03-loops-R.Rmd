@@ -5,13 +5,14 @@ root: ../..
 
 ```{r, include = FALSE}
 source("chunk_options.R")
+opts_chunk$set(fig.path = "figure/03-loops-R-")
 ```
 
 # Analyzing Multiple Data Sets
 
 We have created a function called analyze that creates graphs of the minimum, average, and maximum daily inflammation rates for a single data set:
 
-```{r}
+```{r inflammation-01}
 analyze <- function(filename) {
     fdata <- read.csv(filename)
         
@@ -30,7 +31,7 @@ analyze("inflammation-01.csv")
 
 We can use it to analyze other data sets one by one:
 
-```{r}
+```{r inflammation-02}
 analyze("inflammation-02.csv")
 ```
 

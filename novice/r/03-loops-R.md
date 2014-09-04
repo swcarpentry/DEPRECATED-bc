@@ -25,14 +25,14 @@ We have created a function called analyze that creates graphs of the minimum, av
       
 analyze("inflammation-01.csv")</code></pre>
 
-<img src="figure/unnamed-chunk-21.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" style="display: block; margin: auto;" /><img src="figure/unnamed-chunk-22.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" style="display: block; margin: auto;" /><img src="figure/unnamed-chunk-23.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" style="display: block; margin: auto;" />
+<img src="figure/03-loops-R-inflammation-011.png" title="plot of chunk inflammation-01" alt="plot of chunk inflammation-01" style="display: block; margin: auto;" /><img src="figure/03-loops-R-inflammation-012.png" title="plot of chunk inflammation-01" alt="plot of chunk inflammation-01" style="display: block; margin: auto;" /><img src="figure/03-loops-R-inflammation-013.png" title="plot of chunk inflammation-01" alt="plot of chunk inflammation-01" style="display: block; margin: auto;" />
 
 We can use it to analyze other data sets one by one:
 
 
 <pre class='in'><code>analyze("inflammation-02.csv")</code></pre>
 
-<img src="figure/unnamed-chunk-31.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" style="display: block; margin: auto;" /><img src="figure/unnamed-chunk-32.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" style="display: block; margin: auto;" /><img src="figure/unnamed-chunk-33.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" style="display: block; margin: auto;" />
+<img src="figure/03-loops-R-inflammation-021.png" title="plot of chunk inflammation-02" alt="plot of chunk inflammation-02" style="display: block; margin: auto;" /><img src="figure/03-loops-R-inflammation-022.png" title="plot of chunk inflammation-02" alt="plot of chunk inflammation-02" style="display: block; margin: auto;" /><img src="figure/03-loops-R-inflammation-023.png" title="plot of chunk inflammation-02" alt="plot of chunk inflammation-02" style="display: block; margin: auto;" />
 
 but we have a dozen data sets right now and more on the way. We want to create plots for all our data sets with a single statement. To do that, we'll have to teach the computer how to repeat things.
 
@@ -399,7 +399,7 @@ el directorio
 
 
 
-<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0 
+<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0.001 
 </code></pre></div>
 
 Note how we add a new column to `out` at each iteration? This is a cardinal sin of writing a `for()` loop in R.
@@ -433,7 +433,7 @@ el directorio
 
 
 
-<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0.001 
+<div class='out'><pre class='out'><code>Timing stopped at: 0.004 0 0.001 
 </code></pre></div>
 In this simple example there is little difference in the compute time of `analyze2()` and `analyze3()`. This is because we are only iterating over 3 files and hence we only incur 3 copy/grow operations. If we were doing this over more files or the data objects we were growing were larger, the penalty for copying/growing would be much larger.
 
