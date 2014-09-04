@@ -38,8 +38,8 @@ but we have a dozen data sets right now and more on the way. We want to create p
 
 #### Objectives
 
-* Explain what a `for()` loop does.
-* Correctly write `for()` loops to repeat simple calculations.
+* Explain what a `for` loop does.
+* Correctly write `for` loops to repeat simple calculations.
 * Trace changes to a loop variable as the loop runs.
 * Trace changes to other variables as they are updated by a for loop.
 * Explain what a list is.
@@ -112,14 +112,14 @@ This is shorter---certainly shorter than something that prints every character i
 <div class='out'><pre class='out'><code>[1] "oxygen"
 </code></pre></div>
 
-The improved version of `print_words()` uses a `for()` loop to repeat an operation---in this case, printing---once for each thing in a collection. The general form of a loop is:
+The improved version of `print_words` uses a `for` loop to repeat an operation---in this case, printing---once for each thing in a collection. The general form of a loop is:
 
 
 <pre class='in'><code>for (variable in collection) {
     do things with variable
 }</code></pre>
 
-We can name the loop variable anything (syntactically valid). `in` is part of the `for()` syntax. Note that the body of the loop is enclosed in braces `{`. For a single-line loop body, as here, the braces aren't needed, but it is good practice to include them as we did.
+We can name the loop variable anything (syntactically valid). `in` is part of the `for` syntax. Note that the body of the loop is enclosed in braces `{`. For a single-line loop body, as here, the braces aren't needed, but it is good practice to include them as we did.
 
 Here's another loop that repeatedly updates a variable:
 
@@ -139,7 +139,7 @@ for (vowel in seq_len(nchar("aeiou"))) {
 [1] "There are 5 vowels"
 </code></pre></div>
 
-It's worth tracing the execution of this little program step by step. Since there are five characters in `"aeiou"`, the `print()` statement will be executed five times. The first time around, length is zero (the value assigned to it on line 1) and vowel is `"a"`. The statement adds 1 to the old value of length, producing 1, and updates length to refer to that new value. The next time around, vowel is `"e"` and length is 1, so length is updated to be 2. After three more updates, length is 5; since there is nothing left in `"aeiou"` for R to process, the loop finishes and the `print()` statement tells us our final answer.
+It's worth tracing the execution of this little program step by step. Since there are five characters in `"aeiou"`, the `print` statement will be executed five times. The first time around, length is zero (the value assigned to it on line 1) and vowel is `"a"`. The statement adds 1 to the old value of length, producing 1, and updates length to refer to that new value. The next time around, vowel is `"e"` and length is 1, so length is updated to be 2. After three more updates, length is 5; since there is nothing left in `"aeiou"` for R to process, the loop finishes and the `print` statement tells us our final answer.
 
 Note that a loop variable is just a variable that's being used to record progress in a loop. It still exists after the loop is over, and we can re-use variables previously defined as loop variables as well:
 
@@ -160,7 +160,7 @@ for (letter in seq_len(nchar("abc"))) {
 [1] "after the loop, letter is 3"
 </code></pre></div>
 
-Note also that finding the length of a string is such a common operation that R actually has a built-in function to do it called `nchar()`:
+Note also that finding the length of a string is such a common operation that R actually has a built-in function to do it called `nchar`:
 
 
 <pre class='in'><code>nchar("aeiou")</code></pre>
@@ -170,11 +170,11 @@ Note also that finding the length of a string is such a common operation that R 
 <div class='out'><pre class='out'><code>[1] 5
 </code></pre></div>
 
-`nchar()` is much faster than any R function we could write ourselves, and much easier to read than a two-line loop. We can also use `length()` to tell use the number of elements in a vector, the number of columns in a data frame, or the number of cells in a matrix.
+`nchar` is much faster than any R function we could write ourselves, and much easier to read than a two-line loop. We can also use `length` to tell use the number of elements in a vector, the number of columns in a data frame, or the number of cells in a matrix.
 
 #### Challenges
 
-1. R has a built-in function called `seq()` that creates a list of numbers: `seq(3)` produces `[1] 1, 2, 3`, `seq(2, 5)` produces [1] 2, 3, 4, 5, and `seq(2, 10, 3)` produces `[1] 2, 5, 8`. Using `seq()`, write a function that prints the _n_ natural numbers:
+1. R has a built-in function called `seq` that creates a list of numbers: `seq(3)` produces `[1] 1, 2, 3`, `seq(2, 5)` produces [1] 2, 3, 4, 5, and `seq(2, 10, 3)` produces `[1] 2, 5, 8`. Using `seq`, write a function that prints the _n_ natural numbers:
     
 
 <pre class='in'><code>print_numbers <- function(N) {
@@ -184,9 +184,9 @@ Note also that finding the length of a string is such a common operation that R 
     }
 }</code></pre>
 
-2. Exponentiation is built into R: `2^4`. Write a function called `expo()` that uses a loop to calculate the same result.
+2. Exponentiation is built into R: `2^4`. Write a function called `expo` that uses a loop to calculate the same result.
 
-3. We can also apply some simple methods to R vectors. One of these is called `sort()`. It works on numbers or letters: 
+3. We can also apply some simple methods to R vectors. One of these is called `sort`. It works on numbers or letters: 
 
 
 <pre class='in'><code>sort(words)</code></pre>
@@ -205,7 +205,7 @@ Note also that finding the length of a string is such a common operation that R 
 <div class='out'><pre class='out'><code>[1] "the"   "the"   "quick" "over"  "lazy"  "jumps" "fox"   "dog"   "brown"
 </code></pre></div>
 
-Write a function called `rsort()` that does the same thing. <!-- This seems an odd thing to ask in a section on for loops -->
+Write a function called `rsort` that does the same thing. <!-- This seems an odd thing to ask in a section on for loops -->
 
 #### Ch-Ch-Ch-Changes
 
@@ -223,7 +223,7 @@ odds <- sort(odds, decreasing = TRUE)</code></pre>
 
 #### Challenges
 
-1. Write a function called total that calculates the sum of the values in a vector. (R has a built-in function called `sum()` that does this for you. Please don't use it for this exercise.)
+1. Write a function called total that calculates the sum of the values in a vector. (R has a built-in function called `sum` that does this for you. Please don't use it for this exercise.)
 
 
 <pre class='in'><code>total <- function(vector) {
@@ -268,7 +268,7 @@ or to get the names of all our `.csv` data files:
 <div class='out'><pre class='out'><code>character(0)
 </code></pre></div>
 
-As these examples show, `list.files()` result is a list of strings, which means we can loop over it to do *something* with each filename in turn. In our case, the *something* we want is our `analyze()` function. Let's test it by analyzing the first three files in the list:
+As these examples show, `list.files` result is a list of strings, which means we can loop over it to do *something* with each filename in turn. In our case, the *something* we want is our `analyze` function. Let's test it by analyzing the first three files in the list:
 
 
 <pre class='in'><code>filenames <- list.files(path = "./data", pattern = "*.csv", recursive = TRUE)[1:3]
@@ -298,12 +298,12 @@ Sure enough, the maxima of these data sets show exactly the same ramp as the fir
 
 #### Challenges
 
-1. Write a function called `analyze_all()` that takes a filename pattern as its sole argument and runs analyze for each file whose name matches the pattern.
+1. Write a function called `analyze_all` that takes a filename pattern as its sole argument and runs analyze for each file whose name matches the pattern.
 
 ### To loop or not to loop...?
 Intro sentence
 #### Vectorized operations
-A key difference between R and many other languages is a topic known as *vectorization*. When you wrote the `total()` function, we mentioned that R already has `sum()` to do this; `sum()` is *much* faster than the interpreted `for()` loop because `sum()` is coded in C to work with a vector of numbers. Many of R's functions work this way; the loop is hidden from you in C.
+A key difference between R and many other languages is a topic known as *vectorization*. When you wrote the `total` function, we mentioned that R already has `sum` to do this; `sum` is *much* faster than the interpreted `for` loop because `sum` is coded in C to work with a vector of numbers. Many of R's functions work this way; the loop is hidden from you in C.
 Learning to use vectorized operations is a key skill in R.
 
 For example, to add pairs of numbers contained in two vectors
@@ -332,17 +332,17 @@ all.equal(res, res2)</code></pre>
 <div class='out'><pre class='out'><code>[1] TRUE
 </code></pre></div>
 
-#### `for()` or `apply()`?
-A `for()` loop is used to apply the same function calls to a collection of objects.
-R has a family of function, the `apply()` family, which can be used in much the same way. You've already used one of the family, `apply()` in lesson *01 Starting with data*.
-The `apply()` family members include
+#### `for` or `apply`?
+A `for` loop is used to apply the same function calls to a collection of objects.
+R has a family of function, the `apply` family, which can be used in much the same way. You've already used one of the family, `apply` in lesson *01 Starting with data*.
+The `apply` family members include
 
- * `apply()`  - apply over the margins of an array (e.g. the rows or columns of a matrix)
- * `lapply()` - apply over an object and return list
- * `sapply()` - apply over an object and return a simplified object (an array) if possible
- * `vapply()` - similar to `sapply()` but you specify the type of object returned by the iterations
+ * `apply`  - apply over the margins of an array (e.g. the rows or columns of a matrix)
+ * `lapply` - apply over an object and return list
+ * `sapply` - apply over an object and return a simplified object (an array) if possible
+ * `vapply` - similar to `sapply` but you specify the type of object returned by the iterations
 
-Each of these has an argument `FUN` which takes a function to apply to each element of the object. Instead of looping over `filenames` and calling `analyze()`, as you did earlier, you could `sapply()` over `filenames` with `FUN = analyze`
+Each of these has an argument `FUN` which takes a function to apply to each element of the object. Instead of looping over `filenames` and calling `analyze`, as you did earlier, you could `sapply` over `filenames` with `FUN = analyze`
 
 
 <pre class='in'><code>sapply(filenames, FUN = analyze)</code></pre>
@@ -358,16 +358,16 @@ directorio
 <div class='out'><pre class='out'><code>Error: no se puede abrir la conexión
 </code></pre></div>
 
-Deciding whether to use `for()` or one of the `apply()` family is really personal preference. Using an `apply()` family function forces to you encapsulate your operations as a function rather than separate calls with `for()`. `for()` loops are often more natural in some circumstances; for several related operations, a `for()` loop will avoid you having to pass in a lot of extra arguments to your function.
+Deciding whether to use `for` or one of the `apply` family is really personal preference. Using an `apply` family function forces to you encapsulate your operations as a function rather than separate calls with `for`. `for` loops are often more natural in some circumstances; for several related operations, a `for` loop will avoid you having to pass in a lot of extra arguments to your function.
 
 #### Loops in R are slow
 No, they are not! *If* you follow some golden rules.
 
  1. Don't use a loop when a vectorised alternative exists
- 2. Don't grow objects (via `c()`, `cbind()`, etc) during the loop - R has to create a new object and copy across the information just to add a new element or row/column
+ 2. Don't grow objects (via `c`, `cbind`, etc) during the loop - R has to create a new object and copy across the information just to add a new element or row/column
  3. Allocate an object to hold the results and fill it in during the loop
 
-As an example, we'll create a new version of `analyze()` that will return the minimum, maximum, and mean of the data from a file.
+As an example, we'll create a new version of `analyze` that will return the minimum, maximum, and mean of the data from a file.
 
 
 <pre class='in'><code>analyze2 <- function(filenames) {
@@ -398,10 +398,10 @@ el directorio
 
 
 
-<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0.001 
+<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0 
 </code></pre></div>
 
-Note how we add a new column to `out` at each iteration? This is a cardinal sin of writing a `for()` loop in R.
+Note how we add a new column to `out` at each iteration? This is a cardinal sin of writing a `for` loop in R.
 
 Instead, we can create an empty matrix with the right dimensions (rows/columns) to hold the results.
 Then we loop over the files but this time we fill in the `f`th column of our results matrix `out`.
@@ -432,11 +432,11 @@ el directorio
 
 
 
-<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0 
+<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0.001 
 </code></pre></div>
-In this simple example there is little difference in the compute time of `analyze2()` and `analyze3()`. This is because we are only iterating over 3 files and hence we only incur 3 copy/grow operations. If we were doing this over more files or the data objects we were growing were larger, the penalty for copying/growing would be much larger.
+In this simple example there is little difference in the compute time of `analyze2` and `analyze3`. This is because we are only iterating over 3 files and hence we only incur 3 copy/grow operations. If we were doing this over more files or the data objects we were growing were larger, the penalty for copying/growing would be much larger.
 
-Note that `apply()` handles these memory allocation issues for you, but then you have to write the loop part as a function to pass to `apply()`. At its heart, `apply()` is just a `for()` loop with extra convenience.
+Note that `apply` handles these memory allocation issues for you, but then you have to write the loop part as a function to pass to `apply`. At its heart, `apply` is just a `for` loop with extra convenience.
 
 #### Key Points
 
