@@ -5,7 +5,7 @@ root: ../..
 
 
 
-# Analyzing Multiple Data Sets
+## Analyzing Multiple Data Sets
 
 We have created a function called analyze that creates graphs of the minimum, average, and maximum daily inflammation rates for a single data set:
 
@@ -36,7 +36,7 @@ We can use it to analyze other data sets one by one:
 
 but we have a dozen data sets right now and more on the way. We want to create plots for all our data sets with a single statement. To do that, we'll have to teach the computer how to repeat things.
 
-## Objectives
+#### Objectives
 
 * Explain what a `for()` loop does.
 * Correctly write `for()` loops to repeat simple calculations.
@@ -47,7 +47,7 @@ but we have a dozen data sets right now and more on the way. We want to create p
 * Use a function to get a list of filenames that match a simple wildcard pattern.
 * Use a `for` loop to process multiple files.
 
-## For Loops
+### For Loops
 
 Suppose we want to print each word in our sentence we defined earlier on a line of its own. One way is to use four print statements:
 
@@ -172,7 +172,7 @@ Note also that finding the length of a string is such a common operation that R 
 
 `nchar()` is much faster than any R function we could write ourselves, and much easier to read than a two-line loop. We can also use `length()` to tell use the number of elements in a vector, the number of columns in a data frame, or the number of cells in a matrix.
 
-### Challenges
+#### Challenges
 
 1. R has a built-in function called `seq()` that creates a list of numbers: `seq(3)` produces `[1] 1, 2, 3`, `seq(2, 5)` produces [1] 2, 3, 4, 5, and `seq(2, 10, 3)` produces `[1] 2, 5, 8`. Using `seq()`, write a function that prints the _n_ natural numbers:
     
@@ -207,7 +207,7 @@ Note also that finding the length of a string is such a common operation that R 
 
 Write a function called `rsort()` that does the same thing. <!-- This seems an odd thing to ask in a section on for loops -->
 
-# Ch-Ch-Ch-Changes
+#### Ch-Ch-Ch-Changes
 
 Data that can be changed is called *mutable*, while data that cannot be is called *immutable*. Like strings, numbers are immutable: there's no way to make the number 0 have the value 1 or vice versa (at least, not in R---there actually are languages that will let people do this, with predictably confusing results). Vectors, data frames, and matrices, on the other hand, are mutable: they can be modified after they have been created.
 
@@ -221,8 +221,7 @@ odds <- odds + 1
 odds <- odds[-1]
 odds <- sort(odds, decreasing = TRUE)</code></pre>
 
-Challenges
-----------
+#### Challenges
 
 1. Write a function called total that calculates the sum of the values in a vector. (R has a built-in function called `sum()` that does this for you. Please don't use it for this exercise.)
 
@@ -236,7 +235,7 @@ Challenges
 	sum
 }</code></pre>
 
-# Processing Multiple Files
+### Processing Multiple Files
 
 We now have almost everything we need to process all our data files. 
 
@@ -297,7 +296,7 @@ el directorio
 
 Sure enough, the maxima of these data sets show exactly the same ramp as the first, and their minima show the same staircase structure.
 
-### Challenges
+#### Challenges
 
 1. Write a function called `analyze_all()` that takes a filename pattern as its sole argument and runs analyze for each file whose name matches the pattern.
 
@@ -433,13 +432,13 @@ el directorio
 
 
 
-<div class='out'><pre class='out'><code>Timing stopped at: 0.004 0 0.001 
+<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0 
 </code></pre></div>
 In this simple example there is little difference in the compute time of `analyze2()` and `analyze3()`. This is because we are only iterating over 3 files and hence we only incur 3 copy/grow operations. If we were doing this over more files or the data objects we were growing were larger, the penalty for copying/growing would be much larger.
 
 Note that `apply()` handles these memory allocation issues for you, but then you have to write the loop part as a function to pass to `apply()`. At its heart, `apply()` is just a `for()` loop with extra convenience.
 
-## Key Points
+#### Key Points
 
 * Use `for (variable in collection)` to process the elements of a collection one at a time.
 * The body of a for loop does not have to be indented, but should be for clarity.
@@ -451,7 +450,7 @@ Note that `apply()` handles these memory allocation issues for you, but then you
 * Use `*` in a pattern to match zero or more characters.
 
 
-## Next Steps
+#### Next Steps
 
 We have now solved our original problem: we can analyze any number of data files with a single command. More importantly, we have met two of the most important ideas in programming:
 
