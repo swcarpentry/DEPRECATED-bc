@@ -50,68 +50,98 @@ To do that, we'll have to teach the computer how to repeat things.
 
 ### For Loops
 
-Suppose we want to print each word in our sentence we defined earlier on a line of its own.
-One way is to use four `print` statements:
+Suppose we want to print each word in a sentence.
+One way is to use six `print` statements:
 
 
-<pre class='in'><code>pangram <- "the quick brown fox jumps over the lazy dog"
-words   <-  words <- strsplit(pangram, " ")[[1]]</code></pre>
-
-<pre class='in'><code>print_words <- function(sentence){
-    print(sentence[1])
-    print(sentence[2])
-    print(sentence[3])
-    print(sentence[4])
-    print(sentence[5])
+<pre class='in'><code>best_practice <- c("Let", "the", "computer", "do", "the", "work")
+print_words <- function(sentence) {
+  print(sentence[1])
+  print(sentence[2])
+  print(sentence[3])
+  print(sentence[4])
+  print(sentence[5])
+  print(sentence[6])
 }
 
-print_words(words)</code></pre>
+print_words(best_practice)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] "the"
-[1] "quick"
-[1] "brown"
-[1] "fox"
-[1] "jumps"
+<div class='out'><pre class='out'><code>[1] "Let"
+[1] "the"
+[1] "computer"
+[1] "do"
+[1] "the"
+[1] "work"
 </code></pre></div>
 
 but that's a bad approach for two reasons:
 
  1. It doesn't scale: if we want to print the elements in a vector that's hundreds long, we'd be better off just typing them in.
 
- 2. It's fragile: if we give it a longer vector, it only prints part of the data, and if we give it a shorter input, it produces an error or returns `NA` values because we're asking for elements that don't exist!
+ 2. It's fragile: if we give it a longer vector, it only prints part of the data, and if we give it a shorter input, it returns `NA` values because we're asking for elements that don't exist!
 
 
-<pre class='in'><code>hello <- c("I", "was", "here")
-print_words(hello)</code></pre>
+<pre class='in'><code>best_practice[-6]</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] "I"
-[1] "was"
-[1] "here"
-[1] NA
+<div class='out'><pre class='out'><code>[1] "Let"      "the"      "computer" "do"       "the"     
+</code></pre></div>
+
+
+
+<pre class='in'><code>print_words(best_practice[-6])</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] "Let"
+[1] "the"
+[1] "computer"
+[1] "do"
+[1] "the"
 [1] NA
 </code></pre></div>
+
+> **Tip:** R has has a special variable, `NA`, for designating **M**issing **V**alues in a data set.
+See `?NA` and [An Introduction to R][na] for more details.
+
+[na]: http://cran.r-project.org/doc/manuals/r-release/R-intro.html#Missing-values
 
 Here's a better approach:
 
 
 <pre class='in'><code>print_words <- function(sentence) {
-    for (i in seq_along(sentence)) {
-        print(sentence[i])
+    for (word in sentence) {
+        print(word)
     }
-}</code></pre>
+}
 
-This is shorter---certainly shorter than something that prints every character in a hundred-letter string---and more robust as well!
-
-
-<pre class='in'><code>print_words("oxygen")</code></pre>
+print_words(best_practice)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] "oxygen"
+<div class='out'><pre class='out'><code>[1] "Let"
+[1] "the"
+[1] "computer"
+[1] "do"
+[1] "the"
+[1] "work"
+</code></pre></div>
+
+This is shorter---certainly shorter than something that prints every character in a hundred-letter string---and more robust as well:
+
+
+<pre class='in'><code>print_words(best_practice[-6])</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] "Let"
+[1] "the"
+[1] "computer"
+[1] "do"
+[1] "the"
 </code></pre></div>
 
 The improved version of `print_words` uses a `for` loop to repeat an operation---in this case, printing---once for each thing in a collection. The general form of a loop is:
@@ -195,7 +225,7 @@ Note also that finding the length of a string is such a common operation that R 
 
 
 
-<div class='out'><pre class='out'><code>[1] "brown" "dog"   "fox"   "jumps" "lazy"  "over"  "quick" "the"   "the"  
+<div class='out'><pre class='out'><code>Error: object 'words' not found
 </code></pre></div>
 
 
@@ -204,7 +234,7 @@ Note also that finding the length of a string is such a common operation that R 
 
 
 
-<div class='out'><pre class='out'><code>[1] "the"   "the"   "quick" "over"  "lazy"  "jumps" "fox"   "dog"   "brown"
+<div class='out'><pre class='out'><code>Error: object 'words' not found
 </code></pre></div>
 
 Write a function called `rsort` that does the same thing. <!-- This seems an odd thing to ask in a section on for loops -->

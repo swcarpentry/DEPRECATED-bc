@@ -51,50 +51,55 @@ To do that, we'll have to teach the computer how to repeat things.
 
 ### For Loops
 
-Suppose we want to print each word in our sentence we defined earlier on a line of its own.
-One way is to use four `print` statements:
+Suppose we want to print each word in a sentence.
+One way is to use six `print` statements:
 
 ```{r}
-pangram <- "the quick brown fox jumps over the lazy dog"
-words   <-  words <- strsplit(pangram, " ")[[1]]
-```
-```{r}
-print_words <- function(sentence){
-    print(sentence[1])
-    print(sentence[2])
-    print(sentence[3])
-    print(sentence[4])
-    print(sentence[5])
+best_practice <- c("Let", "the", "computer", "do", "the", "work")
+print_words <- function(sentence) {
+  print(sentence[1])
+  print(sentence[2])
+  print(sentence[3])
+  print(sentence[4])
+  print(sentence[5])
+  print(sentence[6])
 }
 
-print_words(words)
+print_words(best_practice)
 ```
 
 but that's a bad approach for two reasons:
 
  1. It doesn't scale: if we want to print the elements in a vector that's hundreds long, we'd be better off just typing them in.
 
- 2. It's fragile: if we give it a longer vector, it only prints part of the data, and if we give it a shorter input, it produces an error or returns `NA` values because we're asking for elements that don't exist!
+ 2. It's fragile: if we give it a longer vector, it only prints part of the data, and if we give it a shorter input, it returns `NA` values because we're asking for elements that don't exist!
 
 ```{r}
-hello <- c("I", "was", "here")
-print_words(hello)
+best_practice[-6]
+print_words(best_practice[-6])
 ```
+
+> **Tip:** R has has a special variable, `NA`, for designating **M**issing **V**alues in a data set.
+See `?NA` and [An Introduction to R][na] for more details.
+
+[na]: http://cran.r-project.org/doc/manuals/r-release/R-intro.html#Missing-values
 
 Here's a better approach:
 
 ```{r}
 print_words <- function(sentence) {
-    for (i in seq_along(sentence)) {
-        print(sentence[i])
+    for (word in sentence) {
+        print(word)
     }
 }
+
+print_words(best_practice)
 ```
 
-This is shorter---certainly shorter than something that prints every character in a hundred-letter string---and more robust as well!
+This is shorter---certainly shorter than something that prints every character in a hundred-letter string---and more robust as well:
 
 ```{r}
-print_words("oxygen")
+print_words(best_practice[-6])
 ```
 
 The improved version of `print_words` uses a `for` loop to repeat an operation---in this case, printing---once for each thing in a collection. The general form of a loop is:
