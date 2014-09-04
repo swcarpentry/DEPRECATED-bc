@@ -10,35 +10,29 @@ root: ../..
 We have created a function called analyze that creates graphs of the minimum, average, and maximum daily inflammation rates for a single data set:
 
 
-```r
-analyze <- function(filename) {
+<pre class='in'><code>analyze <- function(filename) {
     fdata <- read.csv(filename)
-    
-    avg_inflammation <- apply(fdata, 2, mean)  ## or colMeans(fdata)
+        
+    avg_inflammation <- apply(fdata, 2, mean) ## or colMeans(fdata)
     max_inflammation <- apply(fdata, 2, max)
     min_inflammation <- apply(fdata, 2, min)
     tempo <- seq_len(ncol(fdata))
-    
+  
     plot(tempo, avg_inflammation)
     plot(tempo, min_inflammation)
     plot(tempo, max_inflammation)
 }
+      
+analyze("inflammation-01.csv")</code></pre>
 
-analyze("data/inflammation-01.csv")
-```
-
-![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-21.png) ![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-22.png) ![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-23.png) 
-
+<img src="figure/unnamed-chunk-21.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" style="display: block; margin: auto;" /><img src="figure/unnamed-chunk-22.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" style="display: block; margin: auto;" /><img src="figure/unnamed-chunk-23.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" style="display: block; margin: auto;" />
 
 We can use it to analyze other data sets one by one:
 
 
-```r
-analyze("data/inflammation-02.csv")
-```
+<pre class='in'><code>analyze("inflammation-02.csv")</code></pre>
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-31.png) ![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-32.png) ![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-33.png) 
-
+<img src="figure/unnamed-chunk-31.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" style="display: block; margin: auto;" /><img src="figure/unnamed-chunk-32.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" style="display: block; margin: auto;" /><img src="figure/unnamed-chunk-33.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" style="display: block; margin: auto;" />
 
 but we have a dozen data sets right now and more on the way. We want to create plots for all our data sets with a single statement. To do that, we'll have to teach the computer how to repeat things.
 
@@ -58,14 +52,10 @@ but we have a dozen data sets right now and more on the way. We want to create p
 Suppose we want to print each word in our sentence we defined earlier on a line of its own. One way is to use four print statements:
 
 
-```r
-pangram <- "the quick brown fox jumps over the lazy dog"
-words <- words <- strsplit(pangram, " ")[[1]]
-```
+<pre class='in'><code>pangram <- "the quick brown fox jumps over the lazy dog"
+words   <-  words <- strsplit(pangram, " ")[[1]]</code></pre>
 
-
-```r
-print_words <- function(sentence) {
+<pre class='in'><code>print_words <- function(sentence){
     print(sentence[1])
     print(sentence[2])
     print(sentence[3])
@@ -73,17 +63,16 @@ print_words <- function(sentence) {
     print(sentence[5])
 }
 
-print_words(words)
-```
+print_words(words)</code></pre>
 
-```
-## [1] "the"
-## [1] "quick"
-## [1] "brown"
-## [1] "fox"
-## [1] "jumps"
-```
 
+
+<div class='out'><pre class='out'><code>[1] "the"
+[1] "quick"
+[1] "brown"
+[1] "fox"
+[1] "jumps"
+</code></pre></div>
 
 but that's a bad approach for two reasons:
 
@@ -92,110 +81,94 @@ but that's a bad approach for two reasons:
  2. **It's fragile** if we give it a longer vector, it only prints part of the data, and if we give it a shorter input, it produces an error or returns `NA` values because we're asking for elements that don't exist!
 
 
-```r
-hello <- c("I", "was", "here")
-print_words(hello)
-```
+<pre class='in'><code>hello <- c("I", "was", "here")
+print_words(hello)</code></pre>
 
-```
-## [1] "I"
-## [1] "was"
-## [1] "here"
-## [1] NA
-## [1] NA
-```
 
+
+<div class='out'><pre class='out'><code>[1] "I"
+[1] "was"
+[1] "here"
+[1] NA
+[1] NA
+</code></pre></div>
 
 Here's a better approach:
 
 
-```r
-print_words <- function(sentence) {
+<pre class='in'><code>print_words <- function(sentence) {
     for (i in seq_along(sentence)) {
         print(sentence[i])
     }
-}
-```
-
+}</code></pre>
 
 This is shorter---certainly shorter than something that prints every character in a hundred-letter string---and more robust as well!
 
 
-```r
-print_words("oxygen")
-```
+<pre class='in'><code>print_words("oxygen")</code></pre>
 
-```
-## [1] "oxygen"
-```
 
+
+<div class='out'><pre class='out'><code>[1] "oxygen"
+</code></pre></div>
 
 The improved version of `print_words()` uses a `for()` loop to repeat an operation---in this case, printing---once for each thing in a collection. The general form of a loop is:
 
 
-```r
-for (variable in collection) {
+<pre class='in'><code>for (variable in collection) {
     do things with variable
-}
-```
-
+}</code></pre>
 
 We can name the loop variable anything (syntactically valid). `in` is part of the `for()` syntax. Note that the body of the loop is enclosed in braces `{`. For a single-line loop body, as here, the braces aren't needed, but it is good practice to include them as we did.
 
 Here's another loop that repeatedly updates a variable:
 
 
-```r
-len <- 0
+<pre class='in'><code>len <- 0
 for (vowel in seq_len(nchar("aeiou"))) {
     len <- len + 1
     print(paste("There are", len, "vowels"))
-}
-```
+}</code></pre>
 
-```
-## [1] "There are 1 vowels"
-## [1] "There are 2 vowels"
-## [1] "There are 3 vowels"
-## [1] "There are 4 vowels"
-## [1] "There are 5 vowels"
-```
 
+
+<div class='out'><pre class='out'><code>[1] "There are 1 vowels"
+[1] "There are 2 vowels"
+[1] "There are 3 vowels"
+[1] "There are 4 vowels"
+[1] "There are 5 vowels"
+</code></pre></div>
 
 It's worth tracing the execution of this little program step by step. Since there are five characters in `"aeiou"`, the `print()` statement will be executed five times. The first time around, length is zero (the value assigned to it on line 1) and vowel is `"a"`. The statement adds 1 to the old value of length, producing 1, and updates length to refer to that new value. The next time around, vowel is `"e"` and length is 1, so length is updated to be 2. After three more updates, length is 5; since there is nothing left in `"aeiou"` for R to process, the loop finishes and the `print()` statement tells us our final answer.
 
 Note that a loop variable is just a variable that's being used to record progress in a loop. It still exists after the loop is over, and we can re-use variables previously defined as loop variables as well:
 
 
-```r
-letter <- "z"
+<pre class='in'><code>letter <- "z"
 for (letter in seq_len(nchar("abc"))) {
     print(substr("abc", letter, letter))
     print(paste("after the loop, letter is", letter))
-}
-```
+}</code></pre>
 
-```
-## [1] "a"
-## [1] "after the loop, letter is 1"
-## [1] "b"
-## [1] "after the loop, letter is 2"
-## [1] "c"
-## [1] "after the loop, letter is 3"
-```
 
+
+<div class='out'><pre class='out'><code>[1] "a"
+[1] "after the loop, letter is 1"
+[1] "b"
+[1] "after the loop, letter is 2"
+[1] "c"
+[1] "after the loop, letter is 3"
+</code></pre></div>
 
 Note also that finding the length of a string is such a common operation that R actually has a built-in function to do it called `nchar()`:
 
 
-```r
-nchar("aeiou")
-```
+<pre class='in'><code>nchar("aeiou")</code></pre>
 
-```
-## [1] 5
-```
 
+
+<div class='out'><pre class='out'><code>[1] 5
+</code></pre></div>
 
 `nchar()` is much faster than any R function we could write ourselves, and much easier to read than a two-line loop. We can also use `length()` to tell use the number of elements in a vector, the number of columns in a data frame, or the number of cells in a matrix.
 
@@ -204,37 +177,33 @@ nchar("aeiou")
 1. R has a built-in function called `seq()` that creates a list of numbers: `seq(3)` produces `[1] 1, 2, 3`, `seq(2, 5)` produces [1] 2, 3, 4, 5, and `seq(2, 10, 3)` produces `[1] 2, 5, 8`. Using `seq()`, write a function that prints the _n_ natural numbers:
     
 
-```r
-print_numbers <- function(N) {
+<pre class='in'><code>print_numbers <- function(N) {
     nseq <- seq(N)
     for (i in seq_along(nseq)) {
         print(nseq[i])
     }
-}
-```
-
+}</code></pre>
 
 2. Exponentiation is built into R: `2^4`. Write a function called `expo()` that uses a loop to calculate the same result.
 
 3. We can also apply some simple methods to R vectors. One of these is called `sort()`. It works on numbers or letters: 
 
 
-```r
-sort(words)
-```
+<pre class='in'><code>sort(words)</code></pre>
 
-```
-## [1] "brown" "dog"   "fox"   "jumps" "lazy"  "over"  "quick" "the"   "the"
-```
 
-```r
-sort(words, decreasing = TRUE)
-```
 
-```
-## [1] "the"   "the"   "quick" "over"  "lazy"  "jumps" "fox"   "dog"   "brown"
-```
+<div class='out'><pre class='out'><code>[1] "brown" "dog"   "fox"   "jumps" "lazy"  "over"  "quick" "the"   "the"  
+</code></pre></div>
 
+
+
+<pre class='in'><code>sort(words, decreasing = TRUE)</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] "the"   "the"   "quick" "over"  "lazy"  "jumps" "fox"   "dog"   "brown"
+</code></pre></div>
 
 Write a function called `rsort()` that does the same thing. <!-- This seems an odd thing to ask in a section on for loops -->
 
@@ -246,14 +215,11 @@ Programs that modify data in place can be harder to understand than ones that do
 There are many ways to change the contents besides assigning to elements:
 
 
-```r
-odds <- c(1, 3, 5, 7, 9)
+<pre class='in'><code>odds <- c(1,3,5,7,9)
 odds <- append(odds, 13)
 odds <- odds + 1
 odds <- odds[-1]
-odds <- sort(odds, decreasing = TRUE)
-```
-
+odds <- sort(odds, decreasing = TRUE)</code></pre>
 
 Challenges
 ----------
@@ -261,17 +227,14 @@ Challenges
 1. Write a function called total that calculates the sum of the values in a vector. (R has a built-in function called `sum()` that does this for you. Please don't use it for this exercise.)
 
 
-```r
-total <- function(vector) {
-    # calculates the sum of the values in a vector
-    sum <- 0
-    for (i in seq_along(vector)) {
-        sum <- sum + vector[i]
-    }
-    sum
-}
-```
-
+<pre class='in'><code>total <- function(vector) {
+	#calculates the sum of the values in a vector
+	sum <- 0
+	for (i in seq_along(vector)) {
+		sum <- sum + vector[i]
+	}
+	sum
+}</code></pre>
 
 # Processing Multiple Files
 
@@ -280,67 +243,57 @@ We now have almost everything we need to process all our data files.
 What we need is a function that finds files whose names match a pattern. We provide those patterns as strings: the character `*` matches zero or more characters, while `?` matches any one character. We can use this to get the names of all the R files we have created so far:
 
 
-```r
-list.files(pattern = "*.R")
-```
+<pre class='in'><code>list.files(pattern = "*.R")</code></pre>
 
-```
-##  [1] "00-first-timers.Rmd"       "01-starting-with-data.Rmd"
-##  [3] "02-func-R.md"              "02-func-R.Rmd"            
-##  [5] "03-loops-R.md"             "03-loops-R.Rmd"           
-##  [7] "04-cond-colors-R.md"       "04-cond-colors-R.Rmd"     
-##  [9] "05-testing-R.md"           "05-testing-R.Rmd"         
-## [11] "06-best_practices-R.md"    "06-best_practices-R.Rmd"  
-## [13] "07-knitr-R.md"             "07-knitr-R.Rmd"           
-## [15] "guide.Rmd"                 "rblocks.R"
-```
 
+
+<div class='out'><pre class='out'><code> [1] "00-first-timers.Rmd"       "01-starting-with-data.Rmd"
+ [3] "02-func-R.md"              "02-func-R.Rmd"            
+ [5] "03-loops-R.md"             "03-loops-R.Rmd"           
+ [7] "04-cond-colors-R.md"       "04-cond-colors-R.Rmd"     
+ [9] "05-testing-R.md"           "05-testing-R.Rmd"         
+[11] "06-best_practices-R.md"    "06-best_practices-R.Rmd"  
+[13] "07-knitr-R.md"             "07-knitr-R.Rmd"           
+[15] "08-making_packages-R.md"   "08-making_packages-R.Rmd" 
+[17] "chunk_options.R"           "guide.Rmd"                
+[19] "rblocks.R"                
+</code></pre></div>
 
 or to get the names of all our `.csv` data files:
 
 
-```r
-list.files(path = "./data", pattern = "*.csv", recursive = TRUE)
-```
+<pre class='in'><code>list.files(path = "./data", pattern="*.csv", recursive = TRUE)</code></pre>
 
-```
-##  [1] "inflammation-01.csv" "inflammation-02.csv" "inflammation-03.csv"
-##  [4] "inflammation-04.csv" "inflammation-05.csv" "inflammation-06.csv"
-##  [7] "inflammation-07.csv" "inflammation-08.csv" "inflammation-09.csv"
-## [10] "inflammation-10.csv" "inflammation-11.csv" "inflammation-12.csv"
-```
 
+
+<div class='out'><pre class='out'><code>character(0)
+</code></pre></div>
 
 As these examples show, `list.files()` result is a list of strings, which means we can loop over it to do *something* with each filename in turn. In our case, the *something* we want is our `analyze()` function. Let's test it by analyzing the first three files in the list:
 
 
-```r
-filenames <- list.files(path = "./data", pattern = "*.csv", recursive = TRUE)[1:3]
+<pre class='in'><code>filenames <- list.files(path = "./data", pattern = "*.csv", recursive = TRUE)[1:3]
 
 for (f in seq_along(filenames)) {
     print(filenames[f])
     analyze(file.path("data", filenames[f]))
-}
-```
+}</code></pre>
 
-```
-## [1] "inflammation-01.csv"
-```
 
-![plot of chunk unnamed-chunk-19](figure/unnamed-chunk-191.png) ![plot of chunk unnamed-chunk-19](figure/unnamed-chunk-192.png) ![plot of chunk unnamed-chunk-19](figure/unnamed-chunk-193.png) 
 
-```
-## [1] "inflammation-02.csv"
-```
+<div class='out'><pre class='out'><code>[1] NA
+</code></pre></div>
 
-![plot of chunk unnamed-chunk-19](figure/unnamed-chunk-194.png) ![plot of chunk unnamed-chunk-19](figure/unnamed-chunk-195.png) ![plot of chunk unnamed-chunk-19](figure/unnamed-chunk-196.png) 
 
-```
-## [1] "inflammation-03.csv"
-```
 
-![plot of chunk unnamed-chunk-19](figure/unnamed-chunk-197.png) ![plot of chunk unnamed-chunk-19](figure/unnamed-chunk-198.png) ![plot of chunk unnamed-chunk-19](figure/unnamed-chunk-199.png) 
+<div class='out'><pre class='out'><code>Warning: no fue posible abrir el archivo 'data/NA': No existe el archivo o
+el directorio
+</code></pre></div>
 
+
+
+<div class='out'><pre class='out'><code>Error: no se puede abrir la conexión
+</code></pre></div>
 
 Sure enough, the maxima of these data sets show exactly the same ramp as the first, and their minima show the same staircase structure.
 
@@ -356,36 +309,29 @@ Learning to use vectorized operations is a key skill in R.
 
 For example, to add pairs of numbers contained in two vectors
 
-```r
-a <- 1:10
-b <- 1:10
-```
-
+<pre class='in'><code>a <- 1:10
+b <- 1:10</code></pre>
 you could loop over the pairs adding each in turn, but that would be very inefficient in R
 
-```r
-res <- numeric(length = length(a))
+<pre class='in'><code>res <- numeric(length = length(a))
 for (i in seq_along(a)) {
     res[i] <- a[i] + b[i]
 }
-res
-```
+res</code></pre>
 
-```
-##  [1]  2  4  6  8 10 12 14 16 18 20
-```
 
+
+<div class='out'><pre class='out'><code> [1]  2  4  6  8 10 12 14 16 18 20
+</code></pre></div>
 Instead, `+` is a *vectorized* function which can operate on entire vectors at once
 
-```r
-res2 <- a + b
-all.equal(res, res2)
-```
+<pre class='in'><code>res2 <- a + b
+all.equal(res, res2)</code></pre>
 
-```
-## [1] TRUE
-```
 
+
+<div class='out'><pre class='out'><code>[1] TRUE
+</code></pre></div>
 
 #### `for()` or `apply()`?
 A `for()` loop is used to apply the same function calls to a collection of objects.
@@ -400,18 +346,18 @@ The `apply()` family members include
 Each of these has an argument `FUN` which takes a function to apply to each element of the object. Instead of looping over `filenames` and calling `analyze()`, as you did earlier, you could `sapply()` over `filenames` with `FUN = analyze`
 
 
-```r
-sapply(filenames, FUN = analyze)
-```
+<pre class='in'><code>sapply(filenames, FUN = analyze)</code></pre>
 
-```
-## Warning: cannot open file 'inflammation-01.csv': No such file or directory
-```
 
-```
-## Error: cannot open the connection
-```
 
+<div class='out'><pre class='out'><code>Warning: no fue posible abrir el archivo 'NA': No existe el archivo o el
+directorio
+</code></pre></div>
+
+
+
+<div class='out'><pre class='out'><code>Error: no se puede abrir la conexión
+</code></pre></div>
 
 Deciding whether to use `for()` or one of the `apply()` family is really personal preference. Using an `apply()` family function forces to you encapsulate your operations as a function rather than separate calls with `for()`. `for()` loops are often more natural in some circumstances; for several related operations, a `for()` loop will avoid you having to pass in a lot of extra arguments to your function.
 
@@ -425,13 +371,12 @@ No, they are not! *If* you follow some golden rules.
 As an example, we'll create a new version of `analyze()` that will return the minimum, maximum, and mean of the data from a file.
 
 
-```r
-analyze2 <- function(filenames) {
+<pre class='in'><code>analyze2 <- function(filenames) {
     for (f in seq_along(filenames)) {
         fdata <- read.csv(file.path("data", filenames[f]), header = FALSE)
         res <- apply(fdata, 2, mean)
         if (f == 1) {
-            out <- res
+           out <- res
         } else {
             out <- cbind(out, res)
         }
@@ -439,14 +384,23 @@ analyze2 <- function(filenames) {
     out
 }
 
-system.time(avg2 <- analyze2(filenames))
-```
+system.time(avg2 <- analyze2(filenames))</code></pre>
 
-```
-##    user  system elapsed 
-##   0.009   0.000   0.009
-```
 
+
+<div class='out'><pre class='out'><code>Warning: no fue posible abrir el archivo 'data/NA': No existe el archivo o
+el directorio
+</code></pre></div>
+
+
+
+<div class='out'><pre class='out'><code>Error: no se puede abrir la conexión
+</code></pre></div>
+
+
+
+<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0 
+</code></pre></div>
 
 Note how we add a new column to `out` at each iteration? This is a cardinal sin of writing a `for()` loop in R.
 
@@ -455,9 +409,8 @@ Then we loop over the files but this time we fill in the `f`th column of our res
 This time there is no copying/growing for R to deal with.
 
 
-```r
-analyze3 <- function(filenames) {
-    out <- matrix(ncol = length(filenames), nrow = 40)  ## assuming 40 here from files 
+<pre class='in'><code>analyze3 <- function(filenames) {
+    out <- matrix(ncol = length(filenames), nrow = 40) ## assuming 40 here from files 
     for (f in seq_along(filenames)) {
         fdata <- read.csv(file.path("data", filenames[f]), header = FALSE)
         out[, f] <- apply(fdata, 2, mean)
@@ -465,14 +418,23 @@ analyze3 <- function(filenames) {
     out
 }
 
-system.time(avg3 <- analyze3(filenames))
-```
+system.time(avg3 <- analyze3(filenames))</code></pre>
 
-```
-##    user  system elapsed 
-##   0.009   0.000   0.009
-```
 
+
+<div class='out'><pre class='out'><code>Warning: no fue posible abrir el archivo 'data/NA': No existe el archivo o
+el directorio
+</code></pre></div>
+
+
+
+<div class='out'><pre class='out'><code>Error: no se puede abrir la conexión
+</code></pre></div>
+
+
+
+<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0.001 
+</code></pre></div>
 In this simple example there is little difference in the compute time of `analyze2()` and `analyze3()`. This is because we are only iterating over 3 files and hence we only incur 3 copy/grow operations. If we were doing this over more files or the data objects we were growing were larger, the penalty for copying/growing would be much larger.
 
 Note that `apply()` handles these memory allocation issues for you, but then you have to write the loop part as a function to pass to `apply()`. At its heart, `apply()` is just a `for()` loop with extra convenience.

@@ -25,13 +25,13 @@ analyze <- function(filename) {
     plot(tempo, max_inflammation)
 }
       
-analyze("data/inflammation-01.csv")
+analyze("inflammation-01.csv")
 ```
 
 We can use it to analyze other data sets one by one:
 
 ```{r}
-analyze("data/inflammation-02.csv")
+analyze("inflammation-02.csv")
 ```
 
 but we have a dozen data sets right now and more on the way. We want to create plots for all our data sets with a single statement. To do that, we'll have to teach the computer how to repeat things.
