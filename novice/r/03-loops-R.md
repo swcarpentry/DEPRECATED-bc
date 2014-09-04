@@ -33,7 +33,9 @@ We can use it to analyze other data sets one by one:
 
 <img src="figure/03-loops-R-inflammation-021.png" title="plot of chunk inflammation-02" alt="plot of chunk inflammation-02" style="display: block; margin: auto;" /><img src="figure/03-loops-R-inflammation-022.png" title="plot of chunk inflammation-02" alt="plot of chunk inflammation-02" style="display: block; margin: auto;" /><img src="figure/03-loops-R-inflammation-023.png" title="plot of chunk inflammation-02" alt="plot of chunk inflammation-02" style="display: block; margin: auto;" />
 
-but we have a dozen data sets right now and more on the way. We want to create plots for all our data sets with a single statement. To do that, we'll have to teach the computer how to repeat things.
+but we have a dozen data sets right now and more on the way.
+We want to create plots for all our data sets with a single statement.
+To do that, we'll have to teach the computer how to repeat things.
 
 #### Objectives
 
@@ -48,7 +50,8 @@ but we have a dozen data sets right now and more on the way. We want to create p
 
 ### For Loops
 
-Suppose we want to print each word in our sentence we defined earlier on a line of its own. One way is to use four print statements:
+Suppose we want to print each word in our sentence we defined earlier on a line of its own.
+One way is to use four `print` statements:
 
 
 <pre class='in'><code>pangram <- "the quick brown fox jumps over the lazy dog"
@@ -75,9 +78,9 @@ print_words(words)</code></pre>
 
 but that's a bad approach for two reasons:
 
- 1. **It doesn't scale** if we want to print the elements in a vector that's hundreds long, we'd be better off just typing them in.
+ 1. It doesn't scale: if we want to print the elements in a vector that's hundreds long, we'd be better off just typing them in.
 
- 2. **It's fragile** if we give it a longer vector, it only prints part of the data, and if we give it a shorter input, it produces an error or returns `NA` values because we're asking for elements that don't exist!
+ 2. It's fragile: if we give it a longer vector, it only prints part of the data, and if we give it a shorter input, it produces an error or returns `NA` values because we're asking for elements that don't exist!
 
 
 <pre class='in'><code>hello <- c("I", "was", "here")
@@ -284,13 +287,12 @@ for (f in seq_along(filenames)) {
 
 
 
-<div class='out'><pre class='out'><code>Warning: no fue posible abrir el archivo 'data/NA': No existe el archivo o
-el directorio
+<div class='out'><pre class='out'><code>Warning: cannot open file 'data/NA': No such file or directory
 </code></pre></div>
 
 
 
-<div class='out'><pre class='out'><code>Error: no se puede abrir la conexión
+<div class='out'><pre class='out'><code>Error: cannot open the connection
 </code></pre></div>
 
 Sure enough, the maxima of these data sets show exactly the same ramp as the first, and their minima show the same staircase structure.
@@ -348,13 +350,12 @@ Each of these has an argument `FUN` which takes a function to apply to each elem
 
 
 
-<div class='out'><pre class='out'><code>Warning: no fue posible abrir el archivo 'NA': No existe el archivo o el
-directorio
+<div class='out'><pre class='out'><code>Warning: cannot open file 'NA': No such file or directory
 </code></pre></div>
 
 
 
-<div class='out'><pre class='out'><code>Error: no se puede abrir la conexión
+<div class='out'><pre class='out'><code>Error: cannot open the connection
 </code></pre></div>
 
 Deciding whether to use `for` or one of the `apply` family is really personal preference. Using an `apply` family function forces to you encapsulate your operations as a function rather than separate calls with `for`. `for` loops are often more natural in some circumstances; for several related operations, a `for` loop will avoid you having to pass in a lot of extra arguments to your function.
@@ -386,18 +387,17 @@ system.time(avg2 <- analyze2(filenames))</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>Warning: no fue posible abrir el archivo 'data/NA': No existe el archivo o
-el directorio
+<div class='out'><pre class='out'><code>Warning: cannot open file 'data/NA': No such file or directory
 </code></pre></div>
 
 
 
-<div class='out'><pre class='out'><code>Error: no se puede abrir la conexión
+<div class='out'><pre class='out'><code>Error: cannot open the connection
 </code></pre></div>
 
 
 
-<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0.001 
+<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0 
 </code></pre></div>
 
 Note how we add a new column to `out` at each iteration? This is a cardinal sin of writing a `for` loop in R.
@@ -420,13 +420,12 @@ system.time(avg3 <- analyze3(filenames))</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>Warning: no fue posible abrir el archivo 'data/NA': No existe el archivo o
-el directorio
+<div class='out'><pre class='out'><code>Warning: cannot open file 'data/NA': No such file or directory
 </code></pre></div>
 
 
 
-<div class='out'><pre class='out'><code>Error: no se puede abrir la conexión
+<div class='out'><pre class='out'><code>Error: cannot open the connection
 </code></pre></div>
 
 

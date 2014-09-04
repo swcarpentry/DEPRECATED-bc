@@ -34,7 +34,9 @@ We can use it to analyze other data sets one by one:
 analyze("inflammation-02.csv")
 ```
 
-but we have a dozen data sets right now and more on the way. We want to create plots for all our data sets with a single statement. To do that, we'll have to teach the computer how to repeat things.
+but we have a dozen data sets right now and more on the way.
+We want to create plots for all our data sets with a single statement.
+To do that, we'll have to teach the computer how to repeat things.
 
 #### Objectives
 
@@ -49,7 +51,8 @@ but we have a dozen data sets right now and more on the way. We want to create p
 
 ### For Loops
 
-Suppose we want to print each word in our sentence we defined earlier on a line of its own. One way is to use four print statements:
+Suppose we want to print each word in our sentence we defined earlier on a line of its own.
+One way is to use four `print` statements:
 
 ```{r}
 pangram <- "the quick brown fox jumps over the lazy dog"
@@ -69,9 +72,9 @@ print_words(words)
 
 but that's a bad approach for two reasons:
 
- 1. **It doesn't scale** if we want to print the elements in a vector that's hundreds long, we'd be better off just typing them in.
+ 1. It doesn't scale: if we want to print the elements in a vector that's hundreds long, we'd be better off just typing them in.
 
- 2. **It's fragile** if we give it a longer vector, it only prints part of the data, and if we give it a shorter input, it produces an error or returns `NA` values because we're asking for elements that don't exist!
+ 2. It's fragile: if we give it a longer vector, it only prints part of the data, and if we give it a shorter input, it produces an error or returns `NA` values because we're asking for elements that don't exist!
 
 ```{r}
 hello <- c("I", "was", "here")
