@@ -10,20 +10,19 @@ opts_chunk$set(fig.path = "figure/03-loops-R-")
 
 ## Analyzing Multiple Data Sets
 
-We have created a function called analyze that creates graphs of the minimum, average, and maximum daily inflammation rates for a single data set:
+We have created a function called `analyze` that creates graphs of the minimum, average, and maximum daily inflammation rates for a single data set:
 
 ```{r inflammation-01}
 analyze <- function(filename) {
-    fdata <- read.csv(filename)
-        
-    avg_inflammation <- apply(fdata, 2, mean) ## or colMeans(fdata)
-    max_inflammation <- apply(fdata, 2, max)
-    min_inflammation <- apply(fdata, 2, min)
-    tempo <- seq_len(ncol(fdata))
-  
-    plot(tempo, avg_inflammation)
-    plot(tempo, min_inflammation)
-    plot(tempo, max_inflammation)
+  # Plots the average, min, and max inflammation over time.
+  # Input is character string of a csv file.
+  dat <- read.csv(file = filename, header = FALSE)
+  avg_day_inflammation <- apply(dat, 2, mean)
+  plot(avg_day_inflammation)
+  max_day_inflammation <- apply(dat, 2, min)
+  plot(max_day_inflammation)
+  min_day_inflammation <- apply(dat, 2, max)
+  plot(min_day_inflammation)
 }
       
 analyze("inflammation-01.csv")

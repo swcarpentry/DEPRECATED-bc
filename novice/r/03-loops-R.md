@@ -7,20 +7,19 @@ root: ../..
 
 ## Analyzing Multiple Data Sets
 
-We have created a function called analyze that creates graphs of the minimum, average, and maximum daily inflammation rates for a single data set:
+We have created a function called `analyze` that creates graphs of the minimum, average, and maximum daily inflammation rates for a single data set:
 
 
 <pre class='in'><code>analyze <- function(filename) {
-    fdata <- read.csv(filename)
-        
-    avg_inflammation <- apply(fdata, 2, mean) ## or colMeans(fdata)
-    max_inflammation <- apply(fdata, 2, max)
-    min_inflammation <- apply(fdata, 2, min)
-    tempo <- seq_len(ncol(fdata))
-  
-    plot(tempo, avg_inflammation)
-    plot(tempo, min_inflammation)
-    plot(tempo, max_inflammation)
+  # Plots the average, min, and max inflammation over time.
+  # Input is character string of a csv file.
+  dat <- read.csv(file = filename, header = FALSE)
+  avg_day_inflammation <- apply(dat, 2, mean)
+  plot(avg_day_inflammation)
+  max_day_inflammation <- apply(dat, 2, min)
+  plot(max_day_inflammation)
+  min_day_inflammation <- apply(dat, 2, max)
+  plot(min_day_inflammation)
 }
       
 analyze("inflammation-01.csv")</code></pre>
@@ -398,7 +397,7 @@ el directorio
 
 
 
-<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0 
+<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0.001 
 </code></pre></div>
 
 Note how we add a new column to `out` at each iteration? This is a cardinal sin of writing a `for` loop in R.
