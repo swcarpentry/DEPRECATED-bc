@@ -19,9 +19,9 @@ analyze <- function(filename) {
   dat <- read.csv(file = filename, header = FALSE)
   avg_day_inflammation <- apply(dat, 2, mean)
   plot(avg_day_inflammation)
-  max_day_inflammation <- apply(dat, 2, min)
+  max_day_inflammation <- apply(dat, 2, max)
   plot(max_day_inflammation)
-  min_day_inflammation <- apply(dat, 2, max)
+  min_day_inflammation <- apply(dat, 2, min)
   plot(min_day_inflammation)
 }
       
@@ -225,27 +225,40 @@ total(ex_vec)
 ### Processing Multiple Files
 
 We now have almost everything we need to process all our data files. 
+The only thing that's missing is a function that finds files whose names match a pattern.
+We do not need to write it ourselves because R already has a function to do this called `list.files`.
 
-What we need is a function that finds files whose names match a pattern. We provide those patterns as strings: the character `*` matches zero or more characters, while `?` matches any one character. We can use this to get the names of all the R files we have created so far:
+If we run the function without any arguments, `list.files()`, it returns every file in the current working directory.
+We can understand this result by reading the help file (`?list.files`).
+The first argument, `path`, is the path to the directory to be searched, and it has the default value of `"."` (recall from the [lesson](../shell/01-filedir.html) on the Unix Shell that `"."` is shorthand for the current working directory).
+The second argument, `pattern`, is the pattern being searched, and it has the default value of `NULL`.
+Since no pattern is specified to filter the files, all files are returned.
+
+So to list all the csv files, we could run either of the following:
 
 ```{r}
-list.files(pattern = "*.R")
+list.files(pattern = "csv")
+list.files(pattern = "inflammation")
 ```
 
-or to get the names of all our `.csv` data files:
+We have to name the argument `pattern` because we are using the default option for the first argument `path` (see the previous [lesson](02-func-R.html) to review default function arguments).
 
-```{r}
-list.files(path = "./data", pattern="*.csv", recursive = TRUE)
-```
+> **Tip:** Since this is just a small example, we have the data and code in the same directory.
+For larger projects, it is recommended to organize separate parts of the analysis into multiple subdirectories, e.g. one subdirectory for the raw data, one for the code, and one for the results like figures.
+For more advice on this topic, you can read [A quick guide to organizing computational biology projects][Noble2009] by William Stafford Noble.
 
-As these examples show, `list.files` result is a list of strings, which means we can loop over it to do *something* with each filename in turn. In our case, the *something* we want is our `analyze` function. Let's test it by analyzing the first three files in the list:
+[Noble2009]: http://www.ploscompbiol.org/article/info%3Adoi%2F10.1371%2Fjournal.pcbi.1000424
 
-```{r, fig=FALSE}
-filenames <- list.files(path = "./data", pattern = "*.csv", recursive = TRUE)[1:3]
+As these examples show, `list.files` result is a vector of strings, which means we can loop over it to do something with each filename in turn.
+In our case, the "something" we want is our `analyze` function.
+Let's test it by analyzing the first three files in the vector:
 
-for (f in seq_along(filenames)) {
-    print(filenames[f])
-    analyze(file.path("data", filenames[f]))
+```{r loop-analyze, fig=FALSE}
+filenames <- list.files(pattern = "csv")
+filenames <- filenames[1:3]
+for (f in filenames) {
+    print(f)
+    analyze(f)
 }
 ```
 
@@ -253,7 +266,20 @@ Sure enough, the maxima of these data sets show exactly the same ramp as the fir
 
 #### Challenges
 
-1. Write a function called `analyze_all` that takes a filename pattern as its sole argument and runs analyze for each file whose name matches the pattern.
+1. Write a function called `analyze_all` that takes a filename pattern as its sole argument and runs `analyze` for each file whose name matches the pattern.
+
+```{r analyze_all, include=FALSE}
+analyze_all <- function(pattern) {
+  # Runs the function analyze for each file in the current working directory
+  # that contains the given pattern.
+  filenames <- list.files(pattern = pattern)
+  for (f in filenames) {
+    analyze(f)
+  }
+}
+
+# analyze_all("csv")
+```
 
 ### To loop or not to loop...?
 Intro sentence

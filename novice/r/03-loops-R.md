@@ -16,9 +16,9 @@ We have created a function called `analyze` that creates graphs of the minimum, 
   dat <- read.csv(file = filename, header = FALSE)
   avg_day_inflammation <- apply(dat, 2, mean)
   plot(avg_day_inflammation)
-  max_day_inflammation <- apply(dat, 2, min)
+  max_day_inflammation <- apply(dat, 2, max)
   plot(max_day_inflammation)
-  min_day_inflammation <- apply(dat, 2, max)
+  min_day_inflammation <- apply(dat, 2, min)
   plot(min_day_inflammation)
 }
       
@@ -286,66 +286,84 @@ total(ex_vec)</code></pre>
 ### Processing Multiple Files
 
 We now have almost everything we need to process all our data files. 
+The only thing that's missing is a function that finds files whose names match a pattern.
+We do not need to write it ourselves because R already has a function to do this called `list.files`.
 
-What we need is a function that finds files whose names match a pattern. We provide those patterns as strings: the character `*` matches zero or more characters, while `?` matches any one character. We can use this to get the names of all the R files we have created so far:
+If we run the function without any arguments, `list.files()`, it returns every file in the current working directory.
+We can understand this result by reading the help file (`?list.files`).
+The first argument, `path`, is the path to the directory to be searched, and it has the default value of `"."` (recall from the [lesson](../shell/01-filedir.html) on the Unix Shell that `"."` is shorthand for the current working directory).
+The second argument, `pattern`, is the pattern being searched, and it has the default value of `NULL`.
+Since no pattern is specified to filter the files, all files are returned.
+
+So to list all the csv files, we could run either of the following:
 
 
-<pre class='in'><code>list.files(pattern = "*.R")</code></pre>
+<pre class='in'><code>list.files(pattern = "csv")</code></pre>
 
 
 
-<div class='out'><pre class='out'><code> [1] "00-first-timers.Rmd"       "01-starting-with-data.Rmd"
- [3] "02-func-R.md"              "02-func-R.Rmd"            
- [5] "03-loops-R.md"             "03-loops-R.Rmd"           
- [7] "04-cond-colors-R.md"       "04-cond-colors-R.Rmd"     
- [9] "05-testing-R.md"           "05-testing-R.Rmd"         
-[11] "06-best_practices-R.md"    "06-best_practices-R.Rmd"  
-[13] "07-knitr-R.md"             "07-knitr-R.Rmd"           
-[15] "08-making_packages-R.md"   "08-making_packages-R.Rmd" 
-[17] "chunk_options.R"           "guide.Rmd"                
-[19] "rblocks.R"                
+<div class='out'><pre class='out'><code> [1] "inflammation-01.csv" "inflammation-02.csv" "inflammation-03.csv"
+ [4] "inflammation-04.csv" "inflammation-05.csv" "inflammation-06.csv"
+ [7] "inflammation-07.csv" "inflammation-08.csv" "inflammation-09.csv"
+[10] "inflammation-10.csv" "inflammation-11.csv" "inflammation-12.csv"
 </code></pre></div>
 
-or to get the names of all our `.csv` data files:
 
 
-<pre class='in'><code>list.files(path = "./data", pattern="*.csv", recursive = TRUE)</code></pre>
+<pre class='in'><code>list.files(pattern = "inflammation")</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>character(0)
+<div class='out'><pre class='out'><code> [1] "inflammation-01.csv" "inflammation-02.csv" "inflammation-03.csv"
+ [4] "inflammation-04.csv" "inflammation-05.csv" "inflammation-06.csv"
+ [7] "inflammation-07.csv" "inflammation-08.csv" "inflammation-09.csv"
+[10] "inflammation-10.csv" "inflammation-11.csv" "inflammation-12.csv"
 </code></pre></div>
 
-As these examples show, `list.files` result is a list of strings, which means we can loop over it to do *something* with each filename in turn. In our case, the *something* we want is our `analyze` function. Let's test it by analyzing the first three files in the list:
+We have to name the argument `pattern` because we are using the default option for the first argument `path` (see the previous [lesson](02-func-R.html) to review default function arguments).
+
+> **Tip:** Since this is just a small example, we have the data and code in the same directory.
+For larger projects, it is recommended to organize separate parts of the analysis into multiple subdirectories, e.g. one subdirectory for the raw data, one for the code, and one for the results like figures.
+For more advice on this topic, you can read [A quick guide to organizing computational biology projects][Noble2009] by William Stafford Noble.
+
+[Noble2009]: http://www.ploscompbiol.org/article/info%3Adoi%2F10.1371%2Fjournal.pcbi.1000424
+
+As these examples show, `list.files` result is a vector of strings, which means we can loop over it to do something with each filename in turn.
+In our case, the "something" we want is our `analyze` function.
+Let's test it by analyzing the first three files in the vector:
 
 
-<pre class='in'><code>filenames <- list.files(path = "./data", pattern = "*.csv", recursive = TRUE)[1:3]
-
-for (f in seq_along(filenames)) {
-    print(filenames[f])
-    analyze(file.path("data", filenames[f]))
+<pre class='in'><code>filenames <- list.files(pattern = "csv")
+filenames <- filenames[1:3]
+for (f in filenames) {
+    print(f)
+    analyze(f)
 }</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] NA
+<div class='out'><pre class='out'><code>[1] "inflammation-01.csv"
 </code></pre></div>
 
+<img src="figure/03-loops-R-loop-analyze1.png" title="plot of chunk loop-analyze" alt="plot of chunk loop-analyze" style="display: block; margin: auto;" /><img src="figure/03-loops-R-loop-analyze2.png" title="plot of chunk loop-analyze" alt="plot of chunk loop-analyze" style="display: block; margin: auto;" /><img src="figure/03-loops-R-loop-analyze3.png" title="plot of chunk loop-analyze" alt="plot of chunk loop-analyze" style="display: block; margin: auto;" />
 
-
-<div class='out'><pre class='out'><code>Warning: cannot open file 'data/NA': No such file or directory
+<div class='out'><pre class='out'><code>[1] "inflammation-02.csv"
 </code></pre></div>
 
+<img src="figure/03-loops-R-loop-analyze4.png" title="plot of chunk loop-analyze" alt="plot of chunk loop-analyze" style="display: block; margin: auto;" /><img src="figure/03-loops-R-loop-analyze5.png" title="plot of chunk loop-analyze" alt="plot of chunk loop-analyze" style="display: block; margin: auto;" /><img src="figure/03-loops-R-loop-analyze6.png" title="plot of chunk loop-analyze" alt="plot of chunk loop-analyze" style="display: block; margin: auto;" />
 
-
-<div class='out'><pre class='out'><code>Error: cannot open the connection
+<div class='out'><pre class='out'><code>[1] "inflammation-03.csv"
 </code></pre></div>
+
+<img src="figure/03-loops-R-loop-analyze7.png" title="plot of chunk loop-analyze" alt="plot of chunk loop-analyze" style="display: block; margin: auto;" /><img src="figure/03-loops-R-loop-analyze8.png" title="plot of chunk loop-analyze" alt="plot of chunk loop-analyze" style="display: block; margin: auto;" /><img src="figure/03-loops-R-loop-analyze9.png" title="plot of chunk loop-analyze" alt="plot of chunk loop-analyze" style="display: block; margin: auto;" />
 
 Sure enough, the maxima of these data sets show exactly the same ramp as the first, and their minima show the same staircase structure.
 
 #### Challenges
 
-1. Write a function called `analyze_all` that takes a filename pattern as its sole argument and runs analyze for each file whose name matches the pattern.
+1. Write a function called `analyze_all` that takes a filename pattern as its sole argument and runs `analyze` for each file whose name matches the pattern.
+
+
 
 ### To loop or not to loop...?
 Intro sentence
@@ -394,14 +412,16 @@ Each of these has an argument `FUN` which takes a function to apply to each elem
 
 <pre class='in'><code>sapply(filenames, FUN = analyze)</code></pre>
 
+<img src="figure/03-loops-R-unnamed-chunk-221.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" style="display: block; margin: auto;" /><img src="figure/03-loops-R-unnamed-chunk-222.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" style="display: block; margin: auto;" /><img src="figure/03-loops-R-unnamed-chunk-223.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" style="display: block; margin: auto;" /><img src="figure/03-loops-R-unnamed-chunk-224.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" style="display: block; margin: auto;" /><img src="figure/03-loops-R-unnamed-chunk-225.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" style="display: block; margin: auto;" /><img src="figure/03-loops-R-unnamed-chunk-226.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" style="display: block; margin: auto;" /><img src="figure/03-loops-R-unnamed-chunk-227.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" style="display: block; margin: auto;" /><img src="figure/03-loops-R-unnamed-chunk-228.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" style="display: block; margin: auto;" /><img src="figure/03-loops-R-unnamed-chunk-229.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" style="display: block; margin: auto;" />
 
+<div class='out'><pre class='out'><code>$`inflammation-01.csv`
+NULL
 
-<div class='out'><pre class='out'><code>Warning: cannot open file 'NA': No such file or directory
-</code></pre></div>
+$`inflammation-02.csv`
+NULL
 
-
-
-<div class='out'><pre class='out'><code>Error: cannot open the connection
+$`inflammation-03.csv`
+NULL
 </code></pre></div>
 
 Deciding whether to use `for` or one of the `apply` family is really personal preference. Using an `apply` family function forces to you encapsulate your operations as a function rather than separate calls with `for`. `for` loops are often more natural in some circumstances; for several related operations, a `for` loop will avoid you having to pass in a lot of extra arguments to your function.
@@ -433,7 +453,8 @@ system.time(avg2 <- analyze2(filenames))</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>Warning: cannot open file 'data/NA': No such file or directory
+<div class='out'><pre class='out'><code>Warning: cannot open file 'data/inflammation-01.csv': No such file or
+directory
 </code></pre></div>
 
 
@@ -466,7 +487,8 @@ system.time(avg3 <- analyze3(filenames))</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>Warning: cannot open file 'data/NA': No such file or directory
+<div class='out'><pre class='out'><code>Warning: cannot open file 'data/inflammation-01.csv': No such file or
+directory
 </code></pre></div>
 
 
@@ -476,7 +498,7 @@ system.time(avg3 <- analyze3(filenames))</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0 
+<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0.001 
 </code></pre></div>
 In this simple example there is little difference in the compute time of `analyze2` and `analyze3`. This is because we are only iterating over 3 files and hence we only incur 3 copy/grow operations. If we were doing this over more files or the data objects we were growing were larger, the penalty for copying/growing would be much larger.
 
