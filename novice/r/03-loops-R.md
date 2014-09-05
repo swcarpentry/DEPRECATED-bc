@@ -268,20 +268,6 @@ Write a function called `expo` that uses a loop to calculate the same result.
 <div class='out'><pre class='out'><code>[1] 16
 </code></pre></div>
 
-#### Ch-Ch-Ch-Changes
-
-Data that can be changed is called *mutable*, while data that cannot be is called *immutable*. Like strings, numbers are immutable: there's no way to make the number 0 have the value 1 or vice versa (at least, not in R---there actually are languages that will let people do this, with predictably confusing results). Vectors, data frames, and matrices, on the other hand, are mutable: they can be modified after they have been created.
-
-Programs that modify data in place can be harder to understand than ones that don't because readers may have to mentally sum up many lines of code in order to figure out what the value of something actually is. On the other hand, programs that modify data in place instead of creating copies that are almost identical to the original every time they want to make a small change are much more efficient.
-There are many ways to change the contents besides assigning to elements:
-
-
-<pre class='in'><code>odds <- c(1,3,5,7,9)
-odds <- append(odds, 13)
-odds <- odds + 1
-odds <- odds[-1]
-odds <- sort(odds, decreasing = TRUE)</code></pre>
-
 #### Challenges
 
 1. Write a function called total that calculates the sum of the values in a vector. (R has a built-in function called `sum` that does this for you. Please don't use it for this exercise.)
