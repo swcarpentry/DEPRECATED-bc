@@ -367,7 +367,7 @@ Sure enough, the maxima of these data sets show exactly the same ramp as the fir
 
 ### To loop or not to loop...?
 
-Intro sentence
+In R you have multiple options when repeating calculations: vectorized operations, `for` loops, and `apply` functions.
 
 #### Vectorized operations
 

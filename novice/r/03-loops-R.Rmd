@@ -283,7 +283,7 @@ analyze_all <- function(pattern) {
 
 ### To loop or not to loop...?
 
-Intro sentence
+In R you have multiple options when repeating calculations: vectorized operations, `for` loops, and `apply` functions.
 
 #### Vectorized operations
 
