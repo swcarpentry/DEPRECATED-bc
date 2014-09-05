@@ -268,27 +268,6 @@ Write a function called `expo` that uses a loop to calculate the same result.
 <div class='out'><pre class='out'><code>[1] 16
 </code></pre></div>
 
-3. We can also apply some simple methods to R vectors. One of these is called `sort`. It works on numbers or letters: 
-
-
-<pre class='in'><code>sort(words)</code></pre>
-
-
-
-<div class='out'><pre class='out'><code>Error: object 'words' not found
-</code></pre></div>
-
-
-
-<pre class='in'><code>sort(words, decreasing = TRUE)</code></pre>
-
-
-
-<div class='out'><pre class='out'><code>Error: object 'words' not found
-</code></pre></div>
-
-Write a function called `rsort` that does the same thing. <!-- This seems an odd thing to ask in a section on for loops -->
-
 #### Ch-Ch-Ch-Changes
 
 Data that can be changed is called *mutable*, while data that cannot be is called *immutable*. Like strings, numbers are immutable: there's no way to make the number 0 have the value 1 or vice versa (at least, not in R---there actually are languages that will let people do this, with predictably confusing results). Vectors, data frames, and matrices, on the other hand, are mutable: they can be modified after they have been created.
@@ -510,7 +489,7 @@ system.time(avg3 <- analyze3(filenames))</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0.001 
+<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0 
 </code></pre></div>
 In this simple example there is little difference in the compute time of `analyze2` and `analyze3`. This is because we are only iterating over 3 files and hence we only incur 3 copy/grow operations. If we were doing this over more files or the data objects we were growing were larger, the penalty for copying/growing would be much larger.
 
