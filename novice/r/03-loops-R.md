@@ -222,15 +222,29 @@ Note also that finding the length of a vector is such a common operation that R 
 
 #### Challenges
 
-1. R has a built-in function called `seq` that creates a list of numbers: `seq(3)` produces `[1] 1, 2, 3`, `seq(2, 5)` produces [1] 2, 3, 4, 5, and `seq(2, 10, 3)` produces `[1] 2, 5, 8`. Using `seq`, write a function that prints the _n_ natural numbers:
-    
+1. R has a built-in function called `seq` that creates a list of numbers:
 
-<pre class='in'><code>print_numbers <- function(N) {
-    nseq <- seq(N)
-    for (i in seq_along(nseq)) {
-        print(nseq[i])
-    }
-}</code></pre>
+
+<pre class='in'><code>seq(3)</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 1 2 3
+</code></pre></div>
+
+Using `seq`, write a function that prints the **N** natural numbers, one per line:
+
+
+
+
+<pre class='in'><code>print_N(3)</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 1
+[1] 2
+[1] 3
+</code></pre></div>
 
 2. Exponentiation is built into R: `2^4`. Write a function called `expo` that uses a loop to calculate the same result.
 
@@ -443,7 +457,7 @@ system.time(avg2 <- analyze2(filenames))</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>Timing stopped at: 0.004 0 0.001 
+<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0.001 
 </code></pre></div>
 
 Note how we add a new column to `out` at each iteration? This is a cardinal sin of writing a `for` loop in R.
