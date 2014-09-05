@@ -366,16 +366,24 @@ Sure enough, the maxima of these data sets show exactly the same ramp as the fir
 
 
 ### To loop or not to loop...?
+
 Intro sentence
+
 #### Vectorized operations
-A key difference between R and many other languages is a topic known as *vectorization*. When you wrote the `total` function, we mentioned that R already has `sum` to do this; `sum` is *much* faster than the interpreted `for` loop because `sum` is coded in C to work with a vector of numbers. Many of R's functions work this way; the loop is hidden from you in C.
+
+A key difference between R and many other languages is a topic known as *vectorization*.
+When you wrote the `total` function, we mentioned that R already has `sum` to do this; `sum` is *much* faster than the interpreted `for` loop because `sum` is coded in C to work with a vector of numbers.
+Many of R's functions work this way; the loop is hidden from you in C.
 Learning to use vectorized operations is a key skill in R.
 
 For example, to add pairs of numbers contained in two vectors
 
+
 <pre class='in'><code>a <- 1:10
 b <- 1:10</code></pre>
-you could loop over the pairs adding each in turn, but that would be very inefficient in R
+
+you could loop over the pairs adding each in turn, but that would be very inefficient in R.
+
 
 <pre class='in'><code>res <- numeric(length = length(a))
 for (i in seq_along(a)) {
@@ -387,7 +395,9 @@ res</code></pre>
 
 <div class='out'><pre class='out'><code> [1]  2  4  6  8 10 12 14 16 18 20
 </code></pre></div>
+
 Instead, `+` is a *vectorized* function which can operate on entire vectors at once
+
 
 <pre class='in'><code>res2 <- a + b
 all.equal(res, res2)</code></pre>
@@ -398,8 +408,10 @@ all.equal(res, res2)</code></pre>
 </code></pre></div>
 
 #### `for` or `apply`?
+
 A `for` loop is used to apply the same function calls to a collection of objects.
-R has a family of function, the `apply` family, which can be used in much the same way. You've already used one of the family, `apply` in lesson *01 Starting with data*.
+R has a family of functions, the `apply` family, which can be used in much the same way.
+You've already used one of the family, `apply` in the first [lesson](../01-starting-with-data.html).
 The `apply` family members include
 
  * `apply`  - apply over the margins of an array (e.g. the rows or columns of a matrix)
@@ -407,27 +419,19 @@ The `apply` family members include
  * `sapply` - apply over an object and return a simplified object (an array) if possible
  * `vapply` - similar to `sapply` but you specify the type of object returned by the iterations
 
-Each of these has an argument `FUN` which takes a function to apply to each element of the object. Instead of looping over `filenames` and calling `analyze`, as you did earlier, you could `sapply` over `filenames` with `FUN = analyze`
+Each of these has an argument `FUN` which takes a function to apply to each element of the object.
+Instead of looping over `filenames` and calling `analyze`, as you did earlier, you could `sapply` over `filenames` with `FUN = analyze`:
 
 
 <pre class='in'><code>sapply(filenames, FUN = analyze)</code></pre>
 
-<img src="figure/03-loops-R-unnamed-chunk-221.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" style="display: block; margin: auto;" /><img src="figure/03-loops-R-unnamed-chunk-222.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" style="display: block; margin: auto;" /><img src="figure/03-loops-R-unnamed-chunk-223.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" style="display: block; margin: auto;" /><img src="figure/03-loops-R-unnamed-chunk-224.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" style="display: block; margin: auto;" /><img src="figure/03-loops-R-unnamed-chunk-225.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" style="display: block; margin: auto;" /><img src="figure/03-loops-R-unnamed-chunk-226.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" style="display: block; margin: auto;" /><img src="figure/03-loops-R-unnamed-chunk-227.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" style="display: block; margin: auto;" /><img src="figure/03-loops-R-unnamed-chunk-228.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" style="display: block; margin: auto;" /><img src="figure/03-loops-R-unnamed-chunk-229.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" style="display: block; margin: auto;" />
-
-<div class='out'><pre class='out'><code>$`inflammation-01.csv`
-NULL
-
-$`inflammation-02.csv`
-NULL
-
-$`inflammation-03.csv`
-NULL
-</code></pre></div>
-
-Deciding whether to use `for` or one of the `apply` family is really personal preference. Using an `apply` family function forces to you encapsulate your operations as a function rather than separate calls with `for`. `for` loops are often more natural in some circumstances; for several related operations, a `for` loop will avoid you having to pass in a lot of extra arguments to your function.
+Deciding whether to use `for` or one of the `apply` family is really personal preference.
+Using an `apply` family function forces to you encapsulate your operations as a function rather than separate calls with `for`.
+`for` loops are often more natural in some circumstances; for several related operations, a `for` loop will avoid you having to pass in a lot of extra arguments to your function.
 
 #### Loops in R are slow
-No, they are not! *If* you follow some golden rules.
+
+No, they are not! *If* you follow some golden rules:
 
  1. Don't use a loop when a vectorised alternative exists
  2. Don't grow objects (via `c`, `cbind`, etc) during the loop - R has to create a new object and copy across the information just to add a new element or row/column
@@ -438,7 +442,7 @@ As an example, we'll create a new version of `analyze` that will return the mini
 
 <pre class='in'><code>analyze2 <- function(filenames) {
     for (f in seq_along(filenames)) {
-        fdata <- read.csv(file.path("data", filenames[f]), header = FALSE)
+        fdata <- read.csv(filenames[f], header = FALSE)
         res <- apply(fdata, 2, mean)
         if (f == 1) {
            out <- res
@@ -453,21 +457,12 @@ system.time(avg2 <- analyze2(filenames))</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>Warning: cannot open file 'data/inflammation-01.csv': No such file or
-directory
+<div class='out'><pre class='out'><code>   user  system elapsed 
+  0.012   0.000   0.012 
 </code></pre></div>
 
-
-
-<div class='out'><pre class='out'><code>Error: cannot open the connection
-</code></pre></div>
-
-
-
-<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0 
-</code></pre></div>
-
-Note how we add a new column to `out` at each iteration? This is a cardinal sin of writing a `for` loop in R.
+Note how we add a new column to `out` at each iteration?
+This is a cardinal sin of writing a `for` loop in R.
 
 Instead, we can create an empty matrix with the right dimensions (rows/columns) to hold the results.
 Then we loop over the files but this time we fill in the `f`th column of our results matrix `out`.
@@ -477,7 +472,7 @@ This time there is no copying/growing for R to deal with.
 <pre class='in'><code>analyze3 <- function(filenames) {
     out <- matrix(ncol = length(filenames), nrow = 40) ## assuming 40 here from files 
     for (f in seq_along(filenames)) {
-        fdata <- read.csv(file.path("data", filenames[f]), header = FALSE)
+        fdata <- read.csv(filenames[f], header = FALSE)
         out[, f] <- apply(fdata, 2, mean)
     }
     out
@@ -487,22 +482,16 @@ system.time(avg3 <- analyze3(filenames))</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>Warning: cannot open file 'data/inflammation-01.csv': No such file or
-directory
+<div class='out'><pre class='out'><code>   user  system elapsed 
+  0.012   0.000   0.011 
 </code></pre></div>
 
+In this simple example there is little difference in the compute time of `analyze2` and `analyze3`.
+This is because we are only iterating over 3 files and hence we only incur 3 copy/grow operations.
+If we were doing this over more files or the data objects we were growing were larger, the penalty for copying/growing would be much larger.
 
-
-<div class='out'><pre class='out'><code>Error: cannot open the connection
-</code></pre></div>
-
-
-
-<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0.001 
-</code></pre></div>
-In this simple example there is little difference in the compute time of `analyze2` and `analyze3`. This is because we are only iterating over 3 files and hence we only incur 3 copy/grow operations. If we were doing this over more files or the data objects we were growing were larger, the penalty for copying/growing would be much larger.
-
-Note that `apply` handles these memory allocation issues for you, but then you have to write the loop part as a function to pass to `apply`. At its heart, `apply` is just a `for` loop with extra convenience.
+Note that `apply` handles these memory allocation issues for you, but then you have to write the loop part as a function to pass to `apply`.
+At its heart, `apply` is just a `for` loop with extra convenience.
 
 #### Key Points
 
