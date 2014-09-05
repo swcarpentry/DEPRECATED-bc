@@ -81,7 +81,8 @@ parameter needs to be a character string or
 [string](../../gloss.html#string), so we put it in quotes.
 
 Our call to `csvread` read our file, and printed the data inside 
-to the screen. But we still have no way to modify those values
+to the screen. And adding a semicolon rendered it even less useful--- 
+we have no way to modify those values
 or compute with them. To do that, we need to assign the array to a
 [variable](../../gloss.html#variable).
 
