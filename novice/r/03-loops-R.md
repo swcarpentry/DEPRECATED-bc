@@ -113,9 +113,9 @@ Here's a better approach:
 
 
 <pre class='in'><code>print_words <- function(sentence) {
-    for (word in sentence) {
-        print(word)
-    }
+  for (word in sentence) {
+    print(word)
+  }
 }
 
 print_words(best_practice)</code></pre>
@@ -144,34 +144,43 @@ This is shorter---certainly shorter than something that prints every character i
 [1] "the"
 </code></pre></div>
 
-The improved version of `print_words` uses a `for` loop to repeat an operation---in this case, printing---once for each thing in a collection. The general form of a loop is:
+The improved version of `print_words` uses a [for loop](../../gloss.html#for-loop) to repeat an operation---in this case, printing---once for each thing in a collection.
+The general form of a loop is:
 
 
 <pre class='in'><code>for (variable in collection) {
     do things with variable
 }</code></pre>
 
-We can name the loop variable anything (syntactically valid). `in` is part of the `for` syntax. Note that the body of the loop is enclosed in braces `{`. For a single-line loop body, as here, the braces aren't needed, but it is good practice to include them as we did.
+We can name the [loop variable](../../gloss.html#loop-variable) anything we like (with a few [restrictions][], e.g. the name of the variable cannot start with a digit).
+`in` is part of the `for` syntax.
+Note that the body of the loop is enclosed in braces `{`.
+For a single-line loop body, as here, the braces aren't needed, but it is good practice to include them as we did.
+
+[restrictions]: http://cran.r-project.org/doc/manuals/R-intro.html#R-commands_003b-case-sensitivity-etc
 
 Here's another loop that repeatedly updates a variable:
 
 
 <pre class='in'><code>len <- 0
-for (vowel in seq_len(nchar("aeiou"))) {
+vowels <- c("a", "e", "i", "o", "u")
+for (v in vowels) {
     len <- len + 1
-    print(paste("There are", len, "vowels"))
-}</code></pre>
+}
+# Number of vowels
+len</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>[1] "There are 1 vowels"
-[1] "There are 2 vowels"
-[1] "There are 3 vowels"
-[1] "There are 4 vowels"
-[1] "There are 5 vowels"
+<div class='out'><pre class='out'><code>[1] 5
 </code></pre></div>
 
-It's worth tracing the execution of this little program step by step. Since there are five characters in `"aeiou"`, the `print` statement will be executed five times. The first time around, length is zero (the value assigned to it on line 1) and vowel is `"a"`. The statement adds 1 to the old value of length, producing 1, and updates length to refer to that new value. The next time around, vowel is `"e"` and length is 1, so length is updated to be 2. After three more updates, length is 5; since there is nothing left in `"aeiou"` for R to process, the loop finishes and the `print` statement tells us our final answer.
+It's worth tracing the execution of this little program step by step.
+Since there are five elements in the vector `vowels`, the statement inside the loop will be executed five times.
+The first time around, `len` is zero (the value assigned to it on line 1) and `v` is `"a"`.
+The statement adds 1 to the old value of `len`, producing 1, and updates `len` to refer to that new value.
+The next time around, `v` is `"e"` and `len` is 1, so `len` is updated to be 2.
+After three more updates, `len` is 5; since there is nothing left in the vector `vowels` for R to process, the loop finishes.
 
 Note that a loop variable is just a variable that's being used to record progress in a loop. It still exists after the loop is over, and we can re-use variables previously defined as loop variables as well:
 
@@ -460,7 +469,7 @@ system.time(avg3 <- analyze3(filenames))</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0.001 
+<div class='out'><pre class='out'><code>Timing stopped at: 0.004 0 0 
 </code></pre></div>
 In this simple example there is little difference in the compute time of `analyze2` and `analyze3`. This is because we are only iterating over 3 files and hence we only incur 3 copy/grow operations. If we were doing this over more files or the data objects we were growing were larger, the penalty for copying/growing would be much larger.
 
