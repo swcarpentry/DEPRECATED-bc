@@ -147,12 +147,16 @@ as well as Issues and Pull Requests made by others.
 
 See the list below for descriptions of some common labels:
 
-*   work in progress - the pull request is not ready to be merged
-*   getting-started - the task is suited for a newcomer, e.g. someone in instructor training
-*   novice - concerns the novice set of teaching material
-*   intermediate - concerns the intermediate set of teaching material
-*   tools - concerns the tools used to build and manage lesson material
-*   question - asking for help or getting feedback on an idea
+*   bug: something's wrong and needs to be fixed
+*   discussion: this issue is being used as a mini-mailing list to discuss something of specialized interest
+*   enhancement: identifies improvements to existing material (rather than bug fixes)
+*   getting-started: the task is suited for a newcomer, e.g. someone in instructor training
+*   intermediate: concerns the intermediate set of teaching material
+*   lessons: anything related to lessons that doesn't fit into a more specific category
+*   novice: concerns the novice set of teaching material
+*   question: asking for help or getting feedback on an idea
+*   tools: concerns the tools used to build and manage lesson material
+*   work in progress: the pull request is not ready to be merged
 
 FAQ
 ---
