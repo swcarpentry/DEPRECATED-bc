@@ -246,7 +246,27 @@ Using `seq`, write a function that prints the **N** natural numbers, one per lin
 [1] 3
 </code></pre></div>
 
-2. Exponentiation is built into R: `2^4`. Write a function called `expo` that uses a loop to calculate the same result.
+2. Exponentiation is built into R:
+
+
+<pre class='in'><code>2^4</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 16
+</code></pre></div>
+
+Write a function called `expo` that uses a loop to calculate the same result.
+
+
+
+
+<pre class='in'><code>expo(2, 4)</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 16
+</code></pre></div>
 
 3. We can also apply some simple methods to R vectors. One of these is called `sort`. It works on numbers or letters: 
 
@@ -457,7 +477,7 @@ system.time(avg2 <- analyze2(filenames))</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0.001 
+<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0 
 </code></pre></div>
 
 Note how we add a new column to `out` at each iteration? This is a cardinal sin of writing a `for` loop in R.
@@ -490,7 +510,7 @@ system.time(avg3 <- analyze3(filenames))</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0 
+<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0.001 
 </code></pre></div>
 In this simple example there is little difference in the compute time of `analyze2` and `analyze3`. This is because we are only iterating over 3 files and hence we only incur 3 copy/grow operations. If we were doing this over more files or the data objects we were growing were larger, the penalty for copying/growing would be much larger.
 

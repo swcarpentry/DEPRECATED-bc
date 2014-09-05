@@ -180,7 +180,27 @@ print_N <- function(N) {
 print_N(3)
 ```
 
-2. Exponentiation is built into R: `2^4`. Write a function called `expo` that uses a loop to calculate the same result.
+2. Exponentiation is built into R:
+
+```{r}
+2^4
+```
+
+Write a function called `expo` that uses a loop to calculate the same result.
+
+```{r include=FALSE}
+expo <- function(base, power) {
+  result <- 1
+  for (i in seq(power)) {
+    result <- result * base
+  }
+  return(result)
+}
+```
+
+```{r}
+expo(2, 4)
+```
 
 3. We can also apply some simple methods to R vectors. One of these is called `sort`. It works on numbers or letters: 
 
