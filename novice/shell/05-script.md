@@ -63,6 +63,10 @@ $ alias ll='ls -Shl . |more'
 ~~~
 {:class="in"}
 
+<!---
+Not sure this is the best example as the |more breaks ll from accepting more arguments. See sencond alias challenge. Possibly better to use a simpler command e.g. ls -Fa (which is also used in lesson 1 or 2)
+-->
+
 This will create an alias called `ll` which is a shortcut to the command above.
 
 #### Alias is very useful when we want to simplify writing commonly used commands. 
@@ -90,6 +94,16 @@ From now if we put in terminal where `alias` was set `lh`, we can see last 5 com
 <div class="challenge" markdown="1">
 
 Create shortcut `..` using `alias` to simplify going up one directory.
+
+</div>
+
+<div class="challenge" markdown="1">
+
+If you entered the command `alias ll='ls -Shl . |more'` in a terminal. What would you expect the output from `ll ..` to show?
+
+1. Directory listing of the current directory
+2. Directory listing of the directory one level up from the current directory
+3. An error
 
 </div>
 
