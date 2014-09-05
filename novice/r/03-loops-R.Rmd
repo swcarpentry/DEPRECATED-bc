@@ -137,23 +137,25 @@ The statement adds 1 to the old value of `len`, producing 1, and updates `len` t
 The next time around, `v` is `"e"` and `len` is 1, so `len` is updated to be 2.
 After three more updates, `len` is 5; since there is nothing left in the vector `vowels` for R to process, the loop finishes.
 
-Note that a loop variable is just a variable that's being used to record progress in a loop. It still exists after the loop is over, and we can re-use variables previously defined as loop variables as well:
+Note that a loop variable is just a variable that's being used to record progress in a loop.
+It still exists after the loop is over, and we can re-use variables previously defined as loop variables as well:
 
 ```{r}
 letter <- "z"
-for (letter in seq_len(nchar("abc"))) {
-    print(substr("abc", letter, letter))
-    print(paste("after the loop, letter is", letter))
+for (letter in c("a", "b", "c")) {
+  print(letter)
 }
+# after the loop, letter is
+letter
 ```
 
-Note also that finding the length of a string is such a common operation that R actually has a built-in function to do it called `nchar`:
+Note also that finding the length of a vector is such a common operation that R actually has a built-in function to do it called `length`:
 
 ```{r}
-nchar("aeiou")
+length(vowels)
 ```
 
-`nchar` is much faster than any R function we could write ourselves, and much easier to read than a two-line loop. We can also use `length` to tell use the number of elements in a vector, the number of columns in a data frame, or the number of cells in a matrix.
+`length` is much faster than any R function we could write ourselves, and much easier to read than a two-line loop; it will also give us the length of many other things that we haven't met yet, so we should always use it when we can (see this [lesson](00-first-timers.html) to learn more about the different ways to store data in R).
 
 #### Challenges
 

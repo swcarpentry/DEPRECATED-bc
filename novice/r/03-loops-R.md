@@ -182,36 +182,43 @@ The statement adds 1 to the old value of `len`, producing 1, and updates `len` t
 The next time around, `v` is `"e"` and `len` is 1, so `len` is updated to be 2.
 After three more updates, `len` is 5; since there is nothing left in the vector `vowels` for R to process, the loop finishes.
 
-Note that a loop variable is just a variable that's being used to record progress in a loop. It still exists after the loop is over, and we can re-use variables previously defined as loop variables as well:
+Note that a loop variable is just a variable that's being used to record progress in a loop.
+It still exists after the loop is over, and we can re-use variables previously defined as loop variables as well:
 
 
 <pre class='in'><code>letter <- "z"
-for (letter in seq_len(nchar("abc"))) {
-    print(substr("abc", letter, letter))
-    print(paste("after the loop, letter is", letter))
+for (letter in c("a", "b", "c")) {
+  print(letter)
 }</code></pre>
 
 
 
 <div class='out'><pre class='out'><code>[1] "a"
-[1] "after the loop, letter is 1"
 [1] "b"
-[1] "after the loop, letter is 2"
 [1] "c"
-[1] "after the loop, letter is 3"
 </code></pre></div>
 
-Note also that finding the length of a string is such a common operation that R actually has a built-in function to do it called `nchar`:
 
 
-<pre class='in'><code>nchar("aeiou")</code></pre>
+<pre class='in'><code># after the loop, letter is
+letter</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] "c"
+</code></pre></div>
+
+Note also that finding the length of a vector is such a common operation that R actually has a built-in function to do it called `length`:
+
+
+<pre class='in'><code>length(vowels)</code></pre>
 
 
 
 <div class='out'><pre class='out'><code>[1] 5
 </code></pre></div>
 
-`nchar` is much faster than any R function we could write ourselves, and much easier to read than a two-line loop. We can also use `length` to tell use the number of elements in a vector, the number of columns in a data frame, or the number of cells in a matrix.
+`length` is much faster than any R function we could write ourselves, and much easier to read than a two-line loop; it will also give us the length of many other things that we haven't met yet, so we should always use it when we can (see this [lesson](00-first-timers.html) to learn more about the different ways to store data in R).
 
 #### Challenges
 
@@ -436,7 +443,7 @@ system.time(avg2 <- analyze2(filenames))</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0 
+<div class='out'><pre class='out'><code>Timing stopped at: 0.004 0 0.001 
 </code></pre></div>
 
 Note how we add a new column to `out` at each iteration? This is a cardinal sin of writing a `for` loop in R.
@@ -469,7 +476,7 @@ system.time(avg3 <- analyze3(filenames))</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>Timing stopped at: 0.004 0 0 
+<div class='out'><pre class='out'><code>Timing stopped at: 0 0 0 
 </code></pre></div>
 In this simple example there is little difference in the compute time of `analyze2` and `analyze3`. This is because we are only iterating over 3 files and hence we only incur 3 copy/grow operations. If we were doing this over more files or the data objects we were growing were larger, the penalty for copying/growing would be much larger.
 
