@@ -163,6 +163,12 @@ ylabel("min")
 print -dpng "patient_data-01.png"
 ~~~
 
+
+#### The Colon Operator
+
+
+
+
 ### Analyzing Multiple Datasets
 
 We have a dozen data sets right now, and more on the way. We want

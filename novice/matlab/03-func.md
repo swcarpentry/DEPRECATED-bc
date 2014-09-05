@@ -154,6 +154,15 @@ here---typically half a dozen to a few dozen lines---but
 they shouldn't ever be much longer than that,
 or the next person who reads it won't be able to understand what's going on.
 
+#### Challenges
+
+1. You can use the `strcat` function to  concatenate two strings,
+i.e., strcat('a', 'b') = 'ab'. Write a function called `fence` 
+that takes two parameters: `original` and `wrapper`, and returns
+a new string that has the wrapper character at the beginning
+and at the end.
+
+
 ### The Call Stack
 
 
@@ -306,3 +315,13 @@ Returns a new array containing the values in
 DATA centered around the value.
 ~~~
 {:class="out"}
+
+
+#### Challenges
+
+1. Write a function `run_analysis` that accepts a filename
+as parameter, and displays the three graphs produced in the
+previous lesson, i.e., `run_analysis('inflammation-01.csv')`
+should produce the corresponding graphs for the first
+data set. Be sure to give your function help text.
+
