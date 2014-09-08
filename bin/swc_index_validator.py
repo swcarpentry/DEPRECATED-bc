@@ -32,6 +32,8 @@ __version__ = '0.4'
 
 REGISTRATIONS = set(['open', 'restricted', 'closed'])
 
+LESSONS = set(['git','mercurial','SQL','shell','R','Python'])
+
 EMAIL_PATTERN = r'[^@]+@[^@]+\.[^@]+'
 DEFAULT_CONTACT_EMAIL = 'admin@software-carpentry.org'
 HUMANTIME_PATTERN = r'((0?\d|1[0-1]):[0-5]\d(am|pm)(-|to)(0?\d|1[0-1]):[0-5]\d(am|pm))|((0?\d|1\d|2[0-3]):[0-5]\d(-|to)(0?\d|1\d|2[0-3]):[0-5]\d)'
@@ -109,6 +111,14 @@ def check_instructors(instructors):
     # yaml automatically loads list-like strings as lists
     return isinstance(instructors, list) and len(instructors) > 0
 
+def check_lessons(lessons):
+    ''' Checks whether lessons list is of format ['python','sql','git','shell',...] '''
+    return isinstance(lessons, list) and len(lessons) > 0 and set(lessons).issubset(LESSONS)
+
+def check_usevm(usevm):
+    ''' Checks if the usevm key/value pair is a valid boolean type '''
+    return isinstance(usevm,bool)
+
 def check_helpers(helpers):
     '''Checks whether helpers list is of format ['First name', 'Second name', ...']'''
     # yaml automatically loads list-like strings as lists
@@ -126,6 +136,7 @@ def check_pass(value):
     '''A test that always passes, used for things like addresses.'''
     return True
 
+
 HANDLERS = {
     'layout' :       (True,  check_layout, 'layout isn\'t "bootcamp".'),
     'root' :         (True,  check_root, 'root can only be ".".'), 
@@ -138,6 +149,8 @@ HANDLERS = {
     'registration' : (True,  check_registration, 'registration can only be {0}.'.format(REGISTRATIONS)), 
     'instructor' :   (True,  check_instructors, 'instructor list isn\'t a valid list of format ["First instructor", "Second instructor",..].'),
     'helper' :       (True,  check_helpers, 'helper list isn\'t a valid list of format ["First helper", "Second helper",..].'),
+    'lessons':       (True,  check_lessons, 'invalid lesson'),
+    'usevm':         (True,  check_usevm, 'invalid entry, plese use true or false'),
     'contact' :      (True,  check_email, 'contact email invalid or still set to "{0}".'.format(DEFAULT_CONTACT_EMAIL)),
     'eventbrite' :   (False, check_eventbrite, 'Eventbrite key appears invalid.'),
     'venue' :        (False, check_pass, ''),
