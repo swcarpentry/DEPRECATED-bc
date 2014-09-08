@@ -244,3 +244,18 @@ main()
   
 
 
+  + Using the function `list.files` introduced in a previous [lesson](03-loops-R.html), write a command-line program that lists all the files in the current directory that contain a specific pattern:
+
+
+<pre class='in'><code>Rscript find-pattern.R inflammation</code></pre>
+
+
+
+
+<div class='out'><pre class='out'><code> [1] "inflammation-01.csv" "inflammation-02.csv" "inflammation-03.csv"
+ [4] "inflammation-04.csv" "inflammation-05.csv" "inflammation-06.csv"
+ [7] "inflammation-07.csv" "inflammation-08.csv" "inflammation-09.csv"
+[10] "inflammation-10.csv" "inflammation-11.csv" "inflammation-12.csv"
+</code></pre></div>
+
+

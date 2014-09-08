@@ -176,3 +176,12 @@ The * is a wildcard character in the Unix Shell.
 Thus all the files in the current working directory are included as arguments to  arith.R.
 ```
 
+  + Using the function `list.files` introduced in a previous [lesson](03-loops-R.html), write a command-line program that lists all the files in the current directory that contain a specific pattern:
+
+```{r, engine='bash'}
+Rscript find-pattern.R inflammation
+```
+
+```{r third-answer, include=FALSE, engine='bash'}
+cat find-patern.R
+```
