@@ -12,10 +12,11 @@ you are agreeing that Software Carpentry may redistribute your work under
 [these licenses](LICENSE.md).
 
 Before beginning anything major,
-read the [README.md](README.md) file in this directory.
-It explains how this repository is used to create websites for bootcamps.
-We also recommend that you open an issue in the `swcarpentry/bc` Issue Tracker
-to get feedback on your ideas and coordinate with other developers.
+please read the [README.md](README.md) file in this directory,
+which explains how this repository is used to create websites for bootcamps.
+We also recommend that you look through [open issues](https://github.com/swcarpentry/bc/issues)
+and [pull requests](https://github.com/swcarpentry/bc/pulls) to see what other people could use help with,
+and then open an issue of your own to get feedback on your ideas and coordinate with other developers.
 
 **Table of Contents**
 

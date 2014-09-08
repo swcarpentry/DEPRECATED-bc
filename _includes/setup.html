@@ -15,7 +15,7 @@
       then hitting Return
       to return to the shell.
     </p>
-{% if page.lessons contains 'shell' %}
+{% if page.lessons contains 'Bash' %}
     <h4>The Bash Shell</h4>
     <p>
       Bash is a commonly-used shell. Using a shell gives you
@@ -23,7 +23,7 @@
       computer.
     </p>
 {% endif %}
-{% if page.lessons contains 'git' %}
+{% if page.lessons contains 'Git' %}
     <h4>Git</h4>
     <p>
       Git is a state-of-the-art version control system. It
@@ -31,8 +31,8 @@
       options for easily updating a shared or public version of
       your code on <a href="https://github.com/">github.com</a>.
     </p>
-  </div>
 {% endif %}
+  </div>
   <div class="span6">
 {% if page.lessons contains 'Python' %}
     <h4>Python</h4>
@@ -82,7 +82,7 @@
       </li>
     </ul>
 {% endif %}
-{% if page.lessons contains 'git' %}
+{% if page.lessons contains 'Git' %}
     <h4>Git Bash</h4>
     <p>
       Install Git for Windows by download and running
@@ -146,7 +146,7 @@
 
 <div class="row-fluid">
   <div class="span6">
-{% if page.lessons contains 'shell' %}
+{% if page.lessons contains 'Bash' %}
     <h4>Bash</h4>
     <p>
       The default shell in all versions of Mac OS X is bash,
@@ -164,7 +164,7 @@
       In a pinch, you can use <code>nano</code>,
       which should be pre-installed.
     </p>
-{% if page.lessons contains 'git' %}
+{% if page.lessons contains 'Git' %}
     <h4>Git</h4>
     <p>
       Install Git for Mac by downloading and running
@@ -215,7 +215,7 @@
 
 <div class="row-fluid">
   <div class="span6">
-{% if page.lessons contains 'shell' %}
+{% if page.lessons contains 'Bash' %}
     <h4>Bash</h4>
     <p>
       The default shell is usually <code>bash</code>,
@@ -224,7 +224,7 @@
       There is no need to install anything.
     </p>
 {% endif %}
-{% if page.lessons contains 'git' %}
+{% if page.lessons contains 'Git' %}
     <h4>Git</h4>
     <p>
       If Git is not already available on your machine you can try
@@ -332,8 +332,8 @@
     </ul>
 {% endif %}
   </div>
-{% if page.usevm %}
   <div class="span6">
+{% if page.lessons contains 'VM' %}
     <h4>Virtual Machine</h4>
     <p>
       Some instructors prefer to have learners use a virtual machine (VM)
@@ -356,6 +356,6 @@
 	and loading the <code>.ova</code> file.
       </li>
     </ol>
-  </div>
 {% endif %}
+  </div>
 </div>
