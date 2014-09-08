@@ -5,11 +5,28 @@ root: ../..
 
 
 
-
-
 ### To loop or not to loop...?
 
 In R you have multiple options when repeating calculations: vectorized operations, `for` loops, and `apply` functions.
+
+This lesson is an extension of [Analyzing Multiple Data Sets](03-loops-R.html).
+In that lesson, we introduced how to run a custom function, `analyze`, over multiple data files:
+
+
+<pre class='in'><code>analyze <- function(filename) {
+  # Plots the average, min, and max inflammation over time.
+  # Input is character string of a csv file.
+  dat <- read.csv(file = filename, header = FALSE)
+  avg_day_inflammation <- apply(dat, 2, mean)
+  plot(avg_day_inflammation)
+  max_day_inflammation <- apply(dat, 2, max)
+  plot(max_day_inflammation)
+  min_day_inflammation <- apply(dat, 2, min)
+  plot(min_day_inflammation)
+}</code></pre>
+
+
+<pre class='in'><code>filenames <- list.files(pattern = "csv")</code></pre>
 
 #### Vectorized operations
 
@@ -100,7 +117,7 @@ system.time(avg2 <- analyze2(filenames))</code></pre>
 
 
 <div class='out'><pre class='out'><code>   user  system elapsed 
-  0.016   0.000   0.013 
+  0.040   0.004   0.045 
 </code></pre></div>
 
 Note how we add a new column to `out` at each iteration?
@@ -125,11 +142,11 @@ system.time(avg3 <- analyze3(filenames))</code></pre>
 
 
 <div class='out'><pre class='out'><code>   user  system elapsed 
-  0.012   0.000   0.011 
+  0.044   0.000   0.046 
 </code></pre></div>
 
 In this simple example there is little difference in the compute time of `analyze2` and `analyze3`.
-This is because we are only iterating over 3 files and hence we only incur 3 copy/grow operations.
+This is because we are only iterating over 12 files and hence we only incur 12 copy/grow operations.
 If we were doing this over more files or the data objects we were growing were larger, the penalty for copying/growing would be much larger.
 
 Note that `apply` handles these memory allocation issues for you, but then you have to write the loop part as a function to pass to `apply`.
