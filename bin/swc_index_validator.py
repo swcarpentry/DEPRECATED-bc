@@ -30,9 +30,9 @@ from collections import Counter
 
 __version__ = '0.4'
 
-REGISTRATIONS = set(['open', 'restricted', 'closed'])
+REGISTRATIONS = set('closed open restricted'.split())
 
-LESSONS = set(['git','mercurial','SQL','shell','R','Python'])
+LESSONS = set('Bash Git Mercurial Python R SQL Shell VM'.split())
 
 EMAIL_PATTERN = r'[^@]+@[^@]+\.[^@]+'
 DEFAULT_CONTACT_EMAIL = 'admin@software-carpentry.org'
@@ -112,12 +112,8 @@ def check_instructors(instructors):
     return isinstance(instructors, list) and len(instructors) > 0
 
 def check_lessons(lessons):
-    ''' Checks whether lessons list is of format ['python','sql','git','shell',...] '''
+    ''' Checks whether lessons list is of format ['Python','SQL','Git','Bash',...] '''
     return isinstance(lessons, list) and len(lessons) > 0 and set(lessons).issubset(LESSONS)
-
-def check_usevm(usevm):
-    ''' Checks if the usevm key/value pair is a valid boolean type '''
-    return isinstance(usevm,bool)
 
 def check_helpers(helpers):
     '''Checks whether helpers list is of format ['First name', 'Second name', ...']'''
@@ -150,7 +146,6 @@ HANDLERS = {
     'instructor' :   (True,  check_instructors, 'instructor list isn\'t a valid list of format ["First instructor", "Second instructor",..].'),
     'helper' :       (True,  check_helpers, 'helper list isn\'t a valid list of format ["First helper", "Second helper",..].'),
     'lessons':       (True,  check_lessons, 'invalid lesson'),
-    'usevm':         (True,  check_usevm, 'invalid entry, plese use true or false'),
     'contact' :      (True,  check_email, 'contact email invalid or still set to "{0}".'.format(DEFAULT_CONTACT_EMAIL)),
     'eventbrite' :   (False, check_eventbrite, 'Eventbrite key appears invalid.'),
     'venue' :        (False, check_pass, ''),
