@@ -52,3 +52,75 @@ We'll tackle these questions in turn below.
 *   Handle flags and files separately in a command-line program.
 *   Read data from standard input in a program so that it can be used in a pipeline.
 </div>
+
+### Command-Line Arguments
+
+Using the text editor of your choice, save the following line of code in a text file called `session-info.R `:
+
+```{r echo=FALSE, engine='bash'}
+cat session-info.R
+```
+
+The function, `sessionInfo`, outputs the version of R you are running as well as the type of computer you are using (as well as the versions of the packages that have been loaded).
+This is very useful information to include when asking others for help with your R code.
+
+Now we can run the code in the file we created from the Unix Shell using `Rscript`:
+
+```{r engine='bash'}
+Rscript session-info.R
+```
+
+> **Tip:** If that did not work, remember that you must be in the correct directory.
+You can determine which directory you are currently in using `pwd` and change to a different directory using `cd`.
+For a review, see this [lesson](../shell/01-filedir.html) or the [Unix Shell Reference](../ref/01-shell.html).
+
+Now let's create another script that does something more interesting. Write the following lines in a file named `print-args.R`:
+
+```{r echo=FALSE, engine='bash'}
+cat print-args.R
+```
+
+The function `commandArgs` extracts all the command line arguments and returns them as a vector.
+Let's see what happens when we run this program in the Unix Shell:
+
+```{r engine='bash'}
+Rscript print-args.R
+```
+
+From this output, we learn that `Rscript` is just a convenience command for running R scripts.
+The first argument in the vector is the path to the `R` executable.
+The following are all command-line arguments that affect the behavior of R.
+From the R help file:
+
+*  `--slave`: Make R run as quietly as possible
+*  `--no-restore`:  Don't restore anything that was created during the R session
+*  `--file`: Run this file
+*  `--args`: Pass these argments to the file being run
+
+Thus running a file with Rscript is an easier way to run the following:
+
+```{r engine='bash'}
+R --slave --no-restore --file=print-args.R --args
+```
+
+If we run it with a few arguments, however:
+
+```{r engine='bash'}
+Rscript print-args.R first second third
+```
+
+then `commandArgs` adds each of those arguments to the vector it returns.
+Since the first elements of the vector are always the same, we can tell `commandArgs` to only return the arguments that come after `--args`.
+Let's update `print-args.R` and save it as `print-args-trailing.R`:
+
+```{r echo=FALSE, engine='bash'}
+cat print-args-trailing.R
+```
+
+And then run `print-args-trailing` from the Unix Shell:
+
+```{r engine='bash'}
+Rscript print-args-trailing.R first second third
+```
+
+Now `commandArgs` returns only the arguments that we listed after `print-args-trailing.R`.
