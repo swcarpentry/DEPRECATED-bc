@@ -362,7 +362,7 @@ Sure enough, the maxima of these data sets show exactly the same ramp as the fir
 > **Tip:** In this lesson we saw how to use a simple `for` loop to repeat an operation.
 As you progress with R, you will learn that there are multiple ways to accomplish this.
 Sometimes the choice of one method over another is more a matter of personal style, but other times it can have consequences for the speed of your code.
-For instruction on best practices, see this supplementary [lesson](loops-in-depth.html) that demonstrates how to properly repeat operations in R.
+For instruction on best practices, see this supplementary [lesson](03-supp-loops-in-depth.html) that demonstrates how to properly repeat operations in R.
 
 #### Challenges
 

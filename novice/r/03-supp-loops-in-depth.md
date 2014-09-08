@@ -21,14 +21,10 @@ Learning to use vectorized operations is a key skill in R.
 For example, to add pairs of numbers contained in two vectors
 
 
-
 <pre class='in'><code>a <- 1:10
 b <- 1:10</code></pre>
 
-
-
 you could loop over the pairs adding each in turn, but that would be very inefficient in R.
-
 
 
 <pre class='in'><code>res <- numeric(length = length(a))
@@ -42,10 +38,7 @@ res</code></pre>
 <div class='out'><pre class='out'><code> [1]  2  4  6  8 10 12 14 16 18 20
 </code></pre></div>
 
-
-
 Instead, `+` is a *vectorized* function which can operate on entire vectors at once
-
 
 
 <pre class='in'><code>res2 <- a + b
@@ -55,8 +48,6 @@ all.equal(res, res2)</code></pre>
 
 <div class='out'><pre class='out'><code>[1] TRUE
 </code></pre></div>
-
-
 
 #### `for` or `apply`?
 
@@ -74,10 +65,7 @@ Each of these has an argument `FUN` which takes a function to apply to each elem
 Instead of looping over `filenames` and calling `analyze`, as you did earlier, you could `sapply` over `filenames` with `FUN = analyze`:
 
 
-
 <pre class='in'><code>sapply(filenames, FUN = analyze)</code></pre>
-
-
 
 Deciding whether to use `for` or one of the `apply` family is really personal preference.
 Using an `apply` family function forces to you encapsulate your operations as a function rather than separate calls with `for`.
@@ -92,7 +80,6 @@ No, they are not! *If* you follow some golden rules:
  3. Allocate an object to hold the results and fill it in during the loop
 
 As an example, we'll create a new version of `analyze` that will return the minimum, maximum, and mean of the data from a file.
-
 
 
 <pre class='in'><code>analyze2 <- function(filenames) {
@@ -113,10 +100,8 @@ system.time(avg2 <- analyze2(filenames))</code></pre>
 
 
 <div class='out'><pre class='out'><code>   user  system elapsed 
-  0.012   0.000   0.013 
+  0.016   0.000   0.013 
 </code></pre></div>
-
-
 
 Note how we add a new column to `out` at each iteration?
 This is a cardinal sin of writing a `for` loop in R.
@@ -124,7 +109,6 @@ This is a cardinal sin of writing a `for` loop in R.
 Instead, we can create an empty matrix with the right dimensions (rows/columns) to hold the results.
 Then we loop over the files but this time we fill in the `f`th column of our results matrix `out`.
 This time there is no copying/growing for R to deal with.
-
 
 
 <pre class='in'><code>analyze3 <- function(filenames) {
@@ -141,10 +125,8 @@ system.time(avg3 <- analyze3(filenames))</code></pre>
 
 
 <div class='out'><pre class='out'><code>   user  system elapsed 
-  0.012   0.000   0.012 
+  0.012   0.000   0.011 
 </code></pre></div>
-
-
 
 In this simple example there is little difference in the compute time of `analyze2` and `analyze3`.
 This is because we are only iterating over 3 files and hence we only incur 3 copy/grow operations.
