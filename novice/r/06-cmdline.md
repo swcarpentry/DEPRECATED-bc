@@ -331,6 +331,6 @@ and here it is in action:
 [1] 13.66667 11.00000
 </code></pre></div>
 
-**Note**: at this point, we have created three versions of our script called `readings-01.py`, `readings-02.py`, and `readings-03.py`.
-We wouldn't do this in real life: instead, we would have one file called `readings.py` that we committed to version control every time we got an enhancement working.
+**Note**: at this point, we have created three versions of our script called `readings-01.R`, `readings-02.R`, and `readings-03.R`.
+We wouldn't do this in real life: instead, we would have one file called `readings.R` that we committed to version control every time we got an enhancement working.
 For teaching, though, we need all the successive versions side by side.
