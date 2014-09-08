@@ -96,7 +96,7 @@ No, they are not! *If* you follow some golden rules:
  2. Don't grow objects (via `c`, `cbind`, etc) during the loop - R has to create a new object and copy across the information just to add a new element or row/column
  3. Allocate an object to hold the results and fill it in during the loop
 
-As an example, we'll create a new version of `analyze` that will return the minimum, maximum, and mean of the data from a file.
+As an example, we'll create a new version of `analyze` that will return the mean inflammation per day (column) of each file.
 
 
 <pre class='in'><code>analyze2 <- function(filenames) {
@@ -117,7 +117,7 @@ system.time(avg2 <- analyze2(filenames))</code></pre>
 
 
 <div class='out'><pre class='out'><code>   user  system elapsed 
-  0.040   0.004   0.045 
+  0.044   0.000   0.045 
 </code></pre></div>
 
 Note how we add a new column to `out` at each iteration?
@@ -142,7 +142,7 @@ system.time(avg3 <- analyze3(filenames))</code></pre>
 
 
 <div class='out'><pre class='out'><code>   user  system elapsed 
-  0.044   0.000   0.046 
+  0.052   0.000   0.053 
 </code></pre></div>
 
 In this simple example there is little difference in the compute time of `analyze2` and `analyze3`.

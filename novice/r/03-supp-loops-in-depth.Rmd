@@ -94,7 +94,7 @@ No, they are not! *If* you follow some golden rules:
  2. Don't grow objects (via `c`, `cbind`, etc) during the loop - R has to create a new object and copy across the information just to add a new element or row/column
  3. Allocate an object to hold the results and fill it in during the loop
 
-As an example, we'll create a new version of `analyze` that will return the minimum, maximum, and mean of the data from a file.
+As an example, we'll create a new version of `analyze` that will return the mean inflammation per day (column) of each file.
 
 ```{r}
 analyze2 <- function(filenames) {
