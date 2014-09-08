@@ -1,0 +1,44 @@
+---
+layout: lesson
+root: ../..
+---
+
+
+
+## Command-Line Programs
+
+The R Console and other interactive tools like RStudio are great for prototyping code and exploring data, but sooner or later we will want to use our program in a pipeline or run it in a shell script to process thousands of data files.
+In order to do that, we need to make our programs work like other Unix command-line tools.
+For example, we may want a program that reads a data set and prints the average inflammation per patient:
+
+~~~
+$ Rscript readings.R --mean inflammation-01.csv
+5.45
+5.425
+6.1
+...
+6.4
+7.05
+5.9
+~~~
+
+but we might also want to look at the minimum of the first four lines
+
+~~~
+$ head -4 inflammation-01.csv | Rscript readings.R --min
+~~~
+
+or the maximum inflammations in several files one after another:
+
+~~~
+$ Rscript readings.py --max inflammation-*.csv
+~~~
+
+Our overall requirements are:
+
+1. If no filename is given on the command line, read data from [standard input](../../gloss.html#standard-input).
+2. If one or more filenames are given, read data from them and report statistics for each file separately.
+3. Use the `--min`, `--mean`, or `--max` flag to determine what statistic to print.
+
+To make this work, we need to know how to handle command-line arguments in a program, and how to get at standard input.
+We'll tackle these questions in turn below.
