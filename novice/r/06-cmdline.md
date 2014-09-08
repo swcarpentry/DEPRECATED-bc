@@ -334,3 +334,12 @@ and here it is in action:
 **Note**: at this point, we have created three versions of our script called `readings-01.R`, `readings-02.R`, and `readings-03.R`.
 We wouldn't do this in real life: instead, we would have one file called `readings.R` that we committed to version control every time we got an enhancement working.
 For teaching, though, we need all the successive versions side by side.
+
+#### Challenges
+
+  + Write a program called `check.R` that takes the names of one or more inflammation data files as arguments and checks that all the files have the same number of rows and columns.
+  What is the best way to test your program?
+
+
+
+
