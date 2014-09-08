@@ -37,6 +37,7 @@ but we have a dozen data sets right now and more on the way.
 We want to create plots for all our data sets with a single statement.
 To do that, we'll have to teach the computer how to repeat things.
 
+<div class="objectives" markdown="1">
 #### Objectives
 
 * Explain what a `for` loop does.
@@ -47,6 +48,7 @@ To do that, we'll have to teach the computer how to repeat things.
 * Create and index lists of simple values.
 * Use a function to get a list of filenames that match a simple wildcard pattern.
 * Use a `for` loop to process multiple files.
+</div>
 
 ### For Loops
 
@@ -370,6 +372,7 @@ For instruction on best practices, see this supplementary [lesson](03-supp-loops
 
 
 
+<div class="keypoints" markdown="1">
 #### Key Points
 
 * Use `for (variable in collection)` to process the elements of a collection one at a time.
@@ -380,6 +383,7 @@ For instruction on best practices, see this supplementary [lesson](03-supp-loops
 * vectors are mutable (i.e., their values can be changed in place).
 * Use `list.files(pattern)` to create a list of files whose names match a pattern.
 * Use `*` in a pattern to match zero or more characters.
+</div>
 
 #### Next Steps
 
