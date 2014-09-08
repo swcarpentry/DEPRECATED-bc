@@ -42,3 +42,11 @@ Our overall requirements are:
 
 To make this work, we need to know how to handle command-line arguments in a program, and how to get at standard input.
 We'll tackle these questions in turn below.
+
+<div class="objectives" markdown="1">
+#### Objectives
+
+*   Use the values of command-line arguments in a program.
+*   Handle flags and files separately in a command-line program.
+*   Read data from standard input in a program so that it can be used in a pipeline.
+</div>
