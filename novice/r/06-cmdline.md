@@ -259,3 +259,78 @@ main()
 </code></pre></div>
 
 
+
+### Handling Multiple Files
+
+The next step is to teach our program how to handle multiple files.
+Since 60 lines of output per file is a lot to page through, we'll start by using three smaller files, each of which has three days of data for two patients.
+Let's investigate them from the Unix Shell:
+
+
+<pre class='in'><code>ls small-*.csv</code></pre>
+
+
+
+
+<div class='out'><pre class='out'><code>small-01.csv
+small-02.csv
+small-03.csv
+</code></pre></div>
+
+
+<pre class='in'><code>cat small-01.csv</code></pre>
+
+
+
+
+<div class='out'><pre class='out'><code>0,0,1
+0,1,2
+</code></pre></div>
+
+
+<pre class='in'><code>Rscript readings-02.R small-01.csv</code></pre>
+
+
+
+
+<div class='out'><pre class='out'><code>[1] 0.3333333 1.0000000
+</code></pre></div>
+
+Using small data files as input also allows us to check our results more easily: here, for example, we can see that our program is calculating the mean correctly for each line, whereas we were really taking it on faith before.
+This is yet another rule of programming: "[test the simple things first](../../rules.html#test-simple-first)".
+
+We want our program to process each file separately, so we need a loop that executes once for each filename.
+If we specify the files on the command line, the filenames will be returned by `commandArgs(trailingOnly = TRUE)`.
+We'll need to handle an unknown number of filenames, since our program could be run for any number of files.
+
+The solution is to loop over the vector returned by `commandArgs(trailingOnly = TRUE)`.
+Here's our changed program:
+
+
+<div class='out'><pre class='out'><code>main <- function() {
+  args <- commandArgs(trailingOnly = TRUE)
+  for (filename in args) {
+    dat <- read.csv(file = filename, header = FALSE)
+    mean_per_patient <- apply(dat, 1, mean)
+    print(mean_per_patient)
+  }
+}
+
+main()
+</code></pre></div>
+
+and here it is in action:
+
+
+<pre class='in'><code>Rscript readings-03.R small-01.csv small-02.csv</code></pre>
+
+
+
+
+<div class='out'><pre class='out'><code>[1] 0.3333333 1.0000000
+[1] 13.66667 11.00000
+</code></pre></div>
+
+**Note**: at this point, we have created three versions of our script called `readings-01.py`, `readings-02.py`, and `readings-03.py`.
+We wouldn't do this in real life: instead, we would have one file called `readings.py` that we committed to version control every time we got an enhancement working.
+For teaching, though, we need all the successive versions side by side.
