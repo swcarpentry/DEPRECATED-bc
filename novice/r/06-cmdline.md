@@ -165,3 +165,53 @@ And then run `print-args-trailing` from the Unix Shell:
 </code></pre></div>
 
 Now `commandArgs` returns only the arguments that we listed after `print-args-trailing.R`.
+
+With this in hand, let's build a version of `readings.py` that always prints the per-patient (per-row) mean of a single data file.
+The first step is to write a function that outlines our implementation, and a placeholder for the function that does the actual work.
+By convention this function is usually called `main`, though we can call it whatever we want.
+Write the following code in a file called `readings-01.R`:
+
+
+<div class='out'><pre class='out'><code>main <- function() {
+  args <- commandArgs(trailingOnly = TRUE)
+  filename <- args[1]
+  dat <- read.csv(file = filename, header = FALSE)
+  mean_per_patient <- apply(dat, 1, mean)
+  return(mean_per_patient)
+}
+</code></pre></div>
+
+
+This function gets the name of the file to process from the first element returned by `commandArgs`.
+Here's a simple test to run from the Unix Shell:
+
+
+<pre class='in'><code>Rscript readings-01.R inflammation-01.csv</code></pre>
+
+There is no output because we have defined a function, but haven't actually called it.
+Let's add a call to `main` and save it as `readings-02.R`:
+
+
+<div class='out'><pre class='out'><code>main <- function() {
+  args <- commandArgs(trailingOnly = TRUE)
+  filename <- args[1]
+  dat <- read.csv(file = filename, header = FALSE)
+  mean_per_patient <- apply(dat, 1, mean)
+  return(mean_per_patient)
+}
+
+main()
+</code></pre></div>
+
+
+<pre class='in'><code>Rscript readings-02.R inflammation-01.csv</code></pre>
+
+
+
+
+<div class='out'><pre class='out'><code> [1] 5.450 5.425 6.100 5.900 5.550 6.225 5.975 6.650 6.625 6.525 6.775 5.800
+[13] 6.225 5.750 5.225 6.300 6.550 5.700 5.850 6.550 5.775 5.825 6.175 6.100
+[25] 5.800 6.425 6.050 6.025 6.175 6.550 6.175 6.350 6.725 6.125 7.075 5.725
+[37] 5.925 6.150 6.075 5.750 5.975 5.725 6.300 5.900 6.750 5.925 7.225 6.150
+[49] 5.950 6.275 5.700 6.100 6.825 5.975 6.725 5.700 6.250 6.400 7.050 5.900
+</code></pre></div>

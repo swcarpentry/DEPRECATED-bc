@@ -124,3 +124,31 @@ Rscript print-args-trailing.R first second third
 ```
 
 Now `commandArgs` returns only the arguments that we listed after `print-args-trailing.R`.
+
+With this in hand, let's build a version of `readings.py` that always prints the per-patient (per-row) mean of a single data file.
+The first step is to write a function that outlines our implementation, and a placeholder for the function that does the actual work.
+By convention this function is usually called `main`, though we can call it whatever we want.
+Write the following code in a file called `readings-01.R`:
+
+```{r echo=FALSE, engine='bash'}
+cat readings-01.R
+```
+
+
+This function gets the name of the file to process from the first element returned by `commandArgs`.
+Here's a simple test to run from the Unix Shell:
+
+```{r engine='bash'}
+Rscript readings-01.R inflammation-01.csv
+```
+
+There is no output because we have defined a function, but haven't actually called it.
+Let's add a call to `main` and save it as `readings-02.R`:
+
+```{r echo=FALSE, engine='bash'}
+cat readings-02.R
+```
+
+```{r engine='bash'}
+Rscript readings-02.R inflammation-01.csv
+```
