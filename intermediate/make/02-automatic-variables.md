@@ -1,9 +1,25 @@
 ---
 layout: lesson
 root: ../..
-title: Patterns
+title: Automatic variables and wildcards
 level: intermediate
 ---
+Rules shown in previous chapter were almost like commands one would
+run from the shell: the names of the input and output files were
+listed explicitly for each command. This chapter shows how to use
+special shorthand notation to avoid repeating file name in rules,
+making them much shorter and easier to read.
+
+Objectives
+----------
+* show the shorthand notation for the target of a rule, the first prerequisite, and
+  all prerequisites
+* show how wildcards match a group of files
+* explain how both are used to simplify rule writing
+
+Shorthand for the output of a rule
+----------------------------------
+
 Let's go back to our paper and look at another part of our dependency graph.
 `summary-1.dat` depends on all of the files `data-1-1.dat`, `data-1-2.dat`, and so on.
 The number of files isn't fixed: there could be one, a dozen, or a thousand.
@@ -52,6 +68,9 @@ This is one of Make's [automatic variables](../../gloss.html#automatic-variable)
 and it means "the target of the current rule".
 In this rule, for example, it means `summary-1.dat`.
 (And no, there isn't a more readable long form of the name: it's just another of Make's many warts.)
+
+Wildcards and the shorthand for the prerequisites of a rule
+-----------------------------------------------------------
 
 Using `$@` instead of repeating the target's name shortens our rule somewhat,
 but writing the many prerequisite filenames twice is still redundant.
@@ -138,8 +157,11 @@ summary-2.dat : data-2-*.dat
 There is still some redundancy:
 we have exactly the same logical rules for our two data series,
 but have to write them down separately because the '1' and '2' in their names are different.
-
 We'll see how to fix this in the next section.
+
+Additional dependencies which should not be listed in the automatic list of prerequisites
+-----------------------------------------------------------------------------------------
+
 Before then, though, we have one more problem to address.
 Our existing Makefile doesn't capture the fact that `summary-1.dat` and `summary-2.dat`
 depend on `stats.py` as well as on their corresponding raw data files.
