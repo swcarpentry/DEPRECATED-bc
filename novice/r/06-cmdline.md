@@ -215,3 +215,32 @@ main()
 [37] 5.925 6.150 6.075 5.750 5.975 5.725 6.300 5.900 6.750 5.925 7.225 6.150
 [49] 5.950 6.275 5.700 6.100 6.825 5.975 6.725 5.700 6.250 6.400 7.050 5.900
 </code></pre></div>
+
+#### Challenges
+
+  + Write a command-line program that does addition and subtraction:
+
+
+<pre class='in'><code>Rscript arith.R 1 + 2</code></pre>
+
+
+
+
+<div class='out'><pre class='out'><code>[1] 3
+</code></pre></div>
+
+
+<pre class='in'><code>Rscript arith.R 3 - 4</code></pre>
+
+
+
+
+<div class='out'><pre class='out'><code>[1] -1
+</code></pre></div>
+
+
+
+  + What goes wrong if you try to add multiplication using `*` to the program?
+  
+
+

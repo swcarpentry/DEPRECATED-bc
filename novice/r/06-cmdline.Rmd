@@ -152,3 +152,27 @@ cat readings-02.R
 ```{r engine='bash'}
 Rscript readings-02.R inflammation-01.csv
 ```
+
+#### Challenges
+
+  + Write a command-line program that does addition and subtraction:
+
+```{r, engine='bash'}
+Rscript arith.R 1 + 2
+```
+
+```{r, engine='bash'}
+Rscript arith.R 3 - 4
+```
+
+```{r first-answer, include=FALSE, engine='bash'}
+cat arith.R
+```
+
+  + What goes wrong if you try to add multiplication using `*` to the program?
+  
+```{r second-answer, include=FALSE, eval=FALSE}
+The * is a wildcard character in the Unix Shell.
+Thus all the files in the current working directory are included as arguments to  arith.R.
+```
+
