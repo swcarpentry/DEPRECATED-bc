@@ -17,7 +17,7 @@ Topics
 See Also
 --------
 *   [Instructor's Guide](guide.html)
-*   [Reference](ref.html)
+*   [Reference](reference.html)
 
 Resources
 ---------

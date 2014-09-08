@@ -17,19 +17,34 @@ and then waste time trying to figure out why some of our commands aren't running
 The way to do this in Make is to use a [pattern rule](../../gloss.html#pattern-rule) to capture the common idea.
 Here's our Makefile rewritten to use such a rule:
 
-    # pattern-rule.mk
+~~~
+# pattern-rule.mk
+~~~
+{:class="in"}
 
-    figure-%.svg : summary-%.dat
-            sgr -N -r $@ $^
+~~~
+figure-%.svg : summary-%.dat
+    python create_figure.py $@ $^
+~~~
+{:class="in"}
 
-    summary-1.dat : data-1-*.dat
-            stats.py $@ $^
+~~~
+summary-1.dat : data-1-*.dat
+    python stats.py $@ $^
+~~~
+{:class="in"}
 
-    summary-2.dat : data-2-*.dat
-            stats.py $@ $^
+~~~
+summary-2.dat : data-2-*.dat
+    python stats.py $@ $^
+~~~
+{:class="in"}
 
-    summary-1.dat : stats.py
-    summary-2.dat : stats.py
+~~~
+summary-1.dat : stats.py
+summary-2.dat : stats.py
+~~~
+{:class="in"}
 
 In this rule, `%` is a wildcard.
 When it is expanded, it has the same value on both sides of the rule:
@@ -40,8 +55,11 @@ So in the action, we have to use the automatic variables `$@` and `$^` as before
 
 Let's try running our modified Makefile:
 
-    $ make -f pattern-rule.mk
-    stats.py summary-1.dat data-1-1.dat data-1-2.dat data-1-3.dat
+~~~
+$ make -f pattern-rule.mk
+python stats.py summary-1.dat data-1-1.dat data-1-2.dat data-1-3.dat
+~~~
+{:class="in"}
 
 `summary-1.dat` is updated, but not `summary-2.dat` or either of the figure files.
 The reason the other commands didn't run is that pattern rules don't create dependencies:
@@ -50,22 +68,41 @@ In other words, *if* Make decides it wants to create `figure-1.svg`, it can use 
 but we still have to tell Make to care about `figure-1.svg`.
 Let's do this by putting the rule for `paper.pdf` back in our Makefile:
 
-    # use-pattern.mk
+~~~
+# use-pattern.mk
+~~~
+{:class="in"}
 
-    paper.pdf : paper.wdp figure-1.svg figure-2.svg
-            wdp2pdf $<
+~~~
+paper.pdf : paper.tex figure-1.svg figure-2.svg
+    cat $^ > $@
+~~~
+{:class="in"}
 
-    figure-%.svg : summary-%.dat
-            sgr -N -r $@ $^
+~~~
+figure-%.svg : summary-%.dat
+    python create_figure.py $@ $^
+~~~
+{:class="in"}
 
-    summary-1.dat : data-1-*.dat
-            stats.py $@ $^
+~~~
+summary-1.dat : data-1-*.dat
+    python stats.py $@ $^
+~~~
+{:class="in"}
 
-    summary-2.dat : data-2-*.dat
-            stats.py $@ $^
+~~~
+summary-2.dat : data-2-*.dat
+    python stats.py $@ $^
+~~~
+{:class="in"}
 
-    summary-1.dat : stats.py
-    summary-2.dat : stats.py
+~~~
+summary-1.dat : stats.py
+summary-2.dat : stats.py
+~~~
+{:class="in"}
+
 
 Here, `paper.pdf` depends on `figure-1.svg` and `figure-2.svg`.
 Make now knows that it needs these figures.
@@ -73,13 +110,16 @@ Since there aren't specific rules for them, it uses the pattern rule instead.
 
 It's tempting to go one step further, and make `paper.pdf` depend on `figure-*.svg`:
 
-    paper.pdf : paper.wdp figure-*.svg
-            wdp2pdf $<
+~~~
+paper.pdf : paper.wdp figure-*.svg
+        cat $^ > $@
+~~~
+{:class="in"}
 
 This doesn't work, though.
 The reason is that the figure files may not exist when Make starts to run&mdash;after all, Make creates them.
 In that case, `figure-*.svg` will expand to nothing,
-so Make would mistakenly believe that `paper.pdf` depended only on `paper.wdp`.
+so Make would mistakenly believe that `paper.pdf` depended only on `paper.tex`.
 This kind of bug can be very hard to figure out,
 and while Make does have a debugger called [GMD](http://gmd.sourceforge.net/),
 it's not an easy tool for beginners to use.
@@ -87,19 +127,34 @@ it's not an easy tool for beginners to use.
 Our raw data files *do* always exist, though, so we can get rid of some more redundancy by folding these two rules into one
 using the `*` wildcard:
 
-    # all-patterns.mk
+~~~
+# all-patterns.mk
+~~~
+{:class="in"}
 
-    paper.pdf : paper.wdp figure-1.svg figure-2.svg
-            wdp2pdf $<
+~~~
+paper.pdf : paper.tex figure-1.svg figure-2.svg
+    cat $^ > $@
+~~~
+{:class="in"}
 
-    figure-%.svg : summary-%.dat
-            sgr -N -r $@ $^
+~~~
+figure-%.svg : summary-%.dat
+    python create_figure.py $@ $^
+~~~
+{:class="in"}
 
-    summary-%.dat : data-%-*.dat
-            stats.py $@ $^
+~~~
+summary-%.dat : data-%-*.dat
+    python stats.py $@ $^
+~~~
+{:class="in"}
 
-    summary-1.dat : stats.py
-    summary-2.dat : stats.py
+~~~
+summary-1.dat : stats.py
+summary-2.dat : stats.py
+~~~
+{:class="in"}
 
 It's safe to do this because Make isn't responsible for creating `data-1-whatever.dat` and `data-2-whatever.dat`:
 there's no possibility of the `*` missing things because it's evaluated when Make starts running.
@@ -120,16 +175,29 @@ the only way is to go back to using false dependencies.
 This Makefile tells Make to update the timestamps on the raw data files using `touch` whenever `stats.py` changes.
 Doing this indirectly triggers the re-creation of the summary files&mdash;it does what we want, just in a roundabout way.
 
-    # false-dependencies.mk
+~~~
+# false-dependencies.mk
+~~~
+{:class="in"}
 
-    paper.pdf : paper.wdp figure-1.svg figure-2.svg
-            wdp2pdf $<
+~~~
+paper.pdf : paper.tex figure-1.svg figure-2.svg
+    cat $^ > $@
+~~~
+{:class="in"}
 
-    figure-%.svg : summary-%.dat
-            sgr -N -r $@ $^
+~~~
+figure-%.svg : summary-%.dat
+    python create_figure.py $@ $^
+~~~
+{:class="in"}
 
-    summary-%.dat : data-%-*.dat
-            stats.py $@ $^
+~~~
+summary-%.dat : data-%-*.dat
+    python stats.py $@ $^
+~~~
+{:class="in"}
 
-    data-*-*.dat : stats.py
-            touch $@
+~~~
+data-*-*.dat : stats.py
+    touch $@
