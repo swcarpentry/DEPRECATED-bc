@@ -43,10 +43,8 @@ To do that, we'll have to teach the computer how to repeat things.
 * Explain what a `for` loop does.
 * Correctly write `for` loops to repeat simple calculations.
 * Trace changes to a loop variable as the loop runs.
-* Trace changes to other variables as they are updated by a for loop.
-* Explain what a list is.
-* Create and index lists of simple values.
-* Use a function to get a list of filenames that match a simple wildcard pattern.
+* Trace changes to other variables as they are updated by a `for` loop.
+* Use a function to get a list of filenames that match a simple pattern.
 * Use a `for` loop to process multiple files.
 </div>
 
