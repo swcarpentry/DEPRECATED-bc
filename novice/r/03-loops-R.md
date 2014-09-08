@@ -381,9 +381,10 @@ For instruction on best practices, see this supplementary [lesson](03-supp-loops
 
 #### Next Steps
 
-We have now solved our original problem: we can analyze any number of data files with a single command. More importantly, we have met two of the most important ideas in programming:
+We have now solved our original problem: we can analyze any number of data files with a single command.
+More importantly, we have met two of the most important ideas in programming:
 
 * Use functions to make code easier to re-use and easier to understand.
-* Use vectors and arrays to store related values, and loops to repeat operations on them.
+* Use vectors and data frames to store related values, and loops to repeat operations on them.
 
 We have one more big idea to introduce...
