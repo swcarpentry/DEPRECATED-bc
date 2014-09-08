@@ -374,13 +374,9 @@ For instruction on best practices, see this supplementary [lesson](03-supp-loops
 #### Key Points
 
 * Use `for (variable in collection)` to process the elements of a collection one at a time.
-* The body of a for loop does not have to be indented, but should be for clarity.
+* The body of a `for` loop is surrounded by curly braces (`{}`).
 * Use `length(thing)` to determine the length of something that contains other values.
-* `c(value1, value2, value3`) creates a vector
-* Vectors are indexed and sliced in the same way as strings and arrays.
-* vectors are mutable (i.e., their values can be changed in place).
-* Use `list.files(pattern)` to create a list of files whose names match a pattern.
-* Use `*` in a pattern to match zero or more characters.
+* Use `list.files(pattern = "pattern")` to create a list of files whose names match a pattern.
 </div>
 
 #### Next Steps
