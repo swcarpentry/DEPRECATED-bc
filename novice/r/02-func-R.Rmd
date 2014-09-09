@@ -497,9 +497,9 @@ max(answer)
 
 #### Key Points
 
-* Define a function using `fname <- function(...args...)`.
+* Define a function using `name <- function(...args...)`.
 * The body of a function should be surrounded by curly braces (`{}`).
-* Call a function using `fname(...values...)`.
+* Call a function using `name(...values...)`.
 * Each time a function is called, a new stack frame is created on the [call stack](../../gloss.html#call-stack) to hold its arguments and local variables.
 * R looks for variables in the current stack frame before looking for them at the top level.
 * Use `help(thing)` to view help for something.
