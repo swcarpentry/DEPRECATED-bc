@@ -343,3 +343,89 @@ For teaching, though, we need all the successive versions side by side.
 
 
 
+
+### Handling Command-Line Flags
+
+The next step is to teach our program to pay attention to the `--min`, `--mean`, and `--max` flags.
+These always appear before the names of the files, so let's save the following in `readings-04.R`:
+
+
+<div class='out'><pre class='out'><code>main <- function() {
+  args <- commandArgs(trailingOnly = TRUE)
+  action <- args[1]
+  filenames <- args[-1]
+  
+  for (f in filenames) {
+    dat <- read.csv(file = f, header = FALSE)
+    
+    if (action == "--min") {
+      values <- apply(dat, 1, min)
+    } else if (action == "--mean") {
+      values <- apply(dat, 1, mean)
+    } else if (action == "--max") {
+      values <- apply(dat, 1, max)
+    }
+    print(values)
+  }
+}
+
+main()
+</code></pre></div>
+
+And we can confirm this works by running it from the Unix Shell:
+
+
+<pre class='in'><code>Rscript readings-04.R --max small-01.csv</code></pre>
+
+
+
+
+<div class='out'><pre class='out'><code>[1] 1 2
+</code></pre></div>
+
+but there are seveal things wrong with it:
+
+1.  `main` is too large to read comfortably.
+
+2.  If `action` isn't one of the three recognized flags, the program loads each file but does nothing with it (because none of the branches in the conditional match).
+    [Silent failures](../../gloss.html#silent-failure) like this are always hard to debug.
+
+This version pulls the processing of each file out of the loop into a function of its own.
+It also checks that `action` is one of the allowed flags before doing any processing, so that the program fails fast. We'll save it as `readings-05.R`:
+
+
+<div class='out'><pre class='out'><code>main <- function() {
+  args <- commandArgs(trailingOnly = TRUE)
+  action <- args[1]
+  filenames <- args[-1]
+  stopifnot(action %in% c("--min", "--mean", "--max"))
+  
+  for (f in filenames) {
+    process(f, action)
+  }
+}
+
+process <- function(filename, action) {
+  dat <- read.csv(file = filename, header = FALSE)
+  
+  if (action == "--min") {
+    values <- apply(dat, 1, min)
+  } else if (action == "--mean") {
+    values <- apply(dat, 1, mean)
+  } else if (action == "--max") {
+    values <- apply(dat, 1, max)
+  }
+  print(values)
+}
+
+main()
+</code></pre></div>
+
+This is four lines longer than its predecessor, but broken into more digestible chunks of 8 and 12 lines.
+
+> **Tip:** R has a package named [argparse][argparse-r] that helps handle complex command-line flags (it utilizes a [Python module][argparse-py] of the same name).
+We will not cover this package in this lesson but when you start writing programs with multiple parameters you'll want to read through the package's [vignette][].
+
+[argparse-r]: http://cran.r-project.org/web/packages/argparse/index.html
+[argparse-py]: http://docs.python.org/dev/library/argparse.html
+[vignette]: http://cran.r-project.org/web/packages/argparse/vignettes/argparse.pdf
