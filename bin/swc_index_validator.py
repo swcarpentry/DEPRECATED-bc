@@ -30,9 +30,12 @@ from collections import Counter
 
 __version__ = '0.4'
 
-REGISTRATIONS = set(['open', 'restricted', 'closed'])
+REGISTRATIONS = set('closed open restricted'.split())
+
+LESSONS = set('Bash Git Mercurial Python R SQL Shell VM'.split())
 
 EMAIL_PATTERN = r'[^@]+@[^@]+\.[^@]+'
+DEFAULT_CONTACT_EMAIL = 'admin@software-carpentry.org'
 HUMANTIME_PATTERN = r'((0?\d|1[0-1]):[0-5]\d(am|pm)(-|to)(0?\d|1[0-1]):[0-5]\d(am|pm))|((0?\d|1\d|2[0-3]):[0-5]\d(-|to)(0?\d|1\d|2[0-3]):[0-5]\d)'
 EVENTBRITE_PATTERN = r'\d{9,10}'
 
@@ -108,6 +111,10 @@ def check_instructors(instructors):
     # yaml automatically loads list-like strings as lists
     return isinstance(instructors, list) and len(instructors) > 0
 
+def check_lessons(lessons):
+    ''' Checks whether lessons list is of format ['Python','SQL','Git','Bash',...] '''
+    return isinstance(lessons, list) and len(lessons) > 0 and set(lessons).issubset(LESSONS)
+
 def check_helpers(helpers):
     '''Checks whether helpers list is of format ['First name', 'Second name', ...']'''
     # yaml automatically loads list-like strings as lists
@@ -115,7 +122,7 @@ def check_helpers(helpers):
 
 def check_email(email):
     '''A valid email has letters, then an @, followed by letters, followed by a dot, followed by letters.'''
-    return bool(re.match(EMAIL_PATTERN, email))
+    return bool(re.match(EMAIL_PATTERN, email)) and email != DEFAULT_CONTACT_EMAIL
 
 def check_eventbrite(eventbrite):
     '''A valid EventBrite key is 9 or more digits.'''
@@ -124,6 +131,7 @@ def check_eventbrite(eventbrite):
 def check_pass(value):
     '''A test that always passes, used for things like addresses.'''
     return True
+
 
 HANDLERS = {
     'layout' :       (True,  check_layout, 'layout isn\'t "bootcamp".'),
@@ -137,7 +145,8 @@ HANDLERS = {
     'registration' : (True,  check_registration, 'registration can only be {0}.'.format(REGISTRATIONS)), 
     'instructor' :   (True,  check_instructors, 'instructor list isn\'t a valid list of format ["First instructor", "Second instructor",..].'),
     'helper' :       (True,  check_helpers, 'helper list isn\'t a valid list of format ["First helper", "Second helper",..].'),
-    'contact' :      (True,  check_email, 'contact email invalid.'),
+    'lessons':       (True,  check_lessons, 'invalid lesson'),
+    'contact' :      (True,  check_email, 'contact email invalid or still set to "{0}".'.format(DEFAULT_CONTACT_EMAIL)),
     'eventbrite' :   (False, check_eventbrite, 'Eventbrite key appears invalid.'),
     'venue' :        (False, check_pass, ''),
     'address' :      (False, check_pass, '')

@@ -15,8 +15,8 @@ title: Creating Things
 
 We now know how to explore files and directories,
 but how do we create them in the first place?
-Let's go back to Vlad's home directory,
-`/users/vlad`,
+Let's go back to Nelle's home directory,
+`/users/nelle`,
 and use `ls -F` to see what it contains:
 
 ~~~
@@ -24,7 +24,7 @@ $ pwd
 ~~~
 {:class="in"}
 ~~~
-/users/vlad
+/users/nelle
 ~~~
 {:class="out"}
 ~~~
@@ -32,9 +32,9 @@ $ ls -F
 ~~~
 {:class="in"}
 ~~~
-bin/         data/     mail/      music/
-notes.txt    papers/   pizza.cfg  solar/
-solar.pdf    swc/
+creatures/  molecules/           pizza.cfg
+data/       north-pacific-gyre/  solar.pdf
+Desktop/    notes.txt            writing/
 ~~~
 {:class="out"}
 
@@ -57,9 +57,10 @@ $ ls -F
 ~~~
 {:class="in"}
 ~~~
-bin/         data/     mail/      music/
-notes.txt    papers/   pizza.cfg  solar/
-solar.pdf    swc/      thesis/
+creatures/  north-pacific-gyre/  thesis/
+data/       notes.txt            writing/
+Desktop/    pizza.cfg
+molecules/  solar.pdf
 ~~~
 {:class="out"}
 
@@ -145,14 +146,14 @@ $ ls
 > computer may recycle the file's disk space right away.
 
 Let's re-create that file
-and then move up one directory to `/users/vlad` using `cd ..`:
+and then move up one directory to `/users/nelle` using `cd ..`:
 
 ~~~
 $ pwd
 ~~~
 {:class="in"}
 ~~~
-/users/vlad/thesis
+/users/nelle/thesis
 ~~~
 {:class="out"}
 ~~~
@@ -236,7 +237,7 @@ $ pwd
 ~~~
 {:class="in"}
 ~~~
-/users/vlad
+/users/nelle
 ~~~
 {:class="out"}
 ~~~
@@ -352,10 +353,10 @@ thesis/quotations.txt
 > #### Another Useful Abbreviation
 > 
 > The shell interprets the character `~` (tilde) at the start of a path to
-> mean "the current user's home directory". For example, if Vlad's home
-> directory is `/home/vlad`, then `~/data` is equivalent to
-> `/home/vlad/data`. This only works if it is the first character in the
-> path: `here/there/~/elsewhere` is *not* `/home/vlad/elsewhere`.
+> mean "the current user's home directory". For example, if Nelle's home
+> directory is `/home/nelle`, then `~/data` is equivalent to
+> `/home/nelle/data`. This only works if it is the first character in the
+> path: `here/there/~/elsewhere` is *not* `/home/nelle/elsewhere`.
 
 <div class="keypoints" markdown="1">
 
@@ -371,7 +372,7 @@ What is the output of the closing `ls` command in the sequence shown below?
 
 ~~~
 $ pwd
-/home/thing/data
+/home/jamie/data
 $ ls
 proteins.dat
 $ mkdir recombine

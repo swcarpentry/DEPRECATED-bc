@@ -5,1240 +5,561 @@ root: ../..
 
 
 
-# Analyzing Patient Data
+## Analyzing Patient Data
 
 We are studying inflammation in patients who have been given a new treatment for arthritis,
 and need to analyze the first dozen data sets. 
-The data sets are stored in `.csv` each row holds information for a single patient, and the columns represent successive days. 
+The data sets are stored in [comma-separated values](../../gloss.html#comma-separeted-values) (CSV) format: each row holds information for a single patient, and the columns represent successive days. 
 The first few rows of our first file look like this:
 
-	0,0,1,3,1,2,4,7,8,3,3,3,10,5,7,4,7,7,12,18,6,13,11,11,7,7,4,6,8,8,4,4,5,7,3,4,2,3,0,0
-	0,1,2,1,2,1,3,2,2,6,10,11,5,9,4,4,7,16,8,6,18,4,12,5,12,7,11,5,11,3,3,5,4,4,5,5,1,1,0,1
-	0,1,1,3,3,2,6,2,5,9,5,7,4,5,4,15,5,11,9,10,19,14,12,17,7,12,11,7,4,2,10,5,4,2,2,3,2,2,1,1
-	0,0,2,0,4,2,2,1,6,7,10,7,9,13,8,8,15,10,10,7,17,4,4,7,6,15,6,4,9,11,3,5,6,3,3,4,2,3,2,1
-	0,1,1,3,3,1,3,5,2,4,4,7,6,5,3,10,8,10,6,17,9,14,9,7,13,9,12,6,7,7,9,6,3,2,2,4,2,0,1,1`
 
-### We want to:
+<div class='out'><pre class='out'><code>0,0,1,3,1,2,4,7,8,3,3,3,10,5,7,4,7,7,12,18,6,13,11,11,7,7,4,6,8,8,4,4,5,7,3,4,2,3,0,0
+0,1,2,1,2,1,3,2,2,6,10,11,5,9,4,4,7,16,8,6,18,4,12,5,12,7,11,5,11,3,3,5,4,4,5,5,1,1,0,1
+0,1,1,3,3,2,6,2,5,9,5,7,4,5,4,15,5,11,9,10,19,14,12,17,7,12,11,7,4,2,10,5,4,2,2,3,2,2,1,1
+0,0,2,0,4,2,2,1,6,7,10,7,9,13,8,8,15,10,10,7,17,4,4,7,6,15,6,4,9,11,3,5,6,3,3,4,2,3,2,1
+0,1,1,3,3,1,3,5,2,4,4,7,6,5,3,10,8,10,6,17,9,14,9,7,13,9,12,6,7,7,9,6,3,2,2,4,2,0,1,1
+</code></pre></div>
+
+We want to:
 
 * load that data into memory,
 * calculate the average inflammation per day across all patients, and
 * plot the result.
+
 To do all that, we'll have to learn a little bit about programming.
 
-### Objectives
-* Explain what a library is, and what libraries are used for.
-* Load an R library and use the things it contains.
+#### Objectives
+
 * Read tabular data from a file into a program.
 * Assign values to variables.
-* Learn about data types
 * Select individual values and subsections from data.
-* Perform operations on arrays of data.
+* Perform operations on a data frame of data.
 * Display simple graphs.
 
-## Loading Data
+### Loading Data
 
-Words are useful, but what's more useful are the sentences and stories we use them to build. 
-Similarly, while a lot of powerful tools are built into languages like R, even more lives in the libraries they are used to build.
-Importing a library is like getting a piece of lab equipment out of a storage locker and setting it up on the bench. 
-Once it's done, we can ask the library to do things for us.
-
-To load our inflammation data, we need to locate our data.
-We will use `setwd()` and `read.csv()`. These are built-in functions in R. Let's check out the help screen.
-
-* download the inflammation file
-* put it in your working directory for these exercises
-
-Change the current working directory to the location of the CSV file, e.g.
+To load our inflammation data, first we need to locate our data.
+We can change the current working directory to the location of the CSV files using the function `setwd`.
+For example, if the CSV files are located in a directory named `swc` in our home directory, we would change the working directory using the following command:
 
 
-```r
-setwd("pathname")
-```
+<pre class='in'><code>setwd("~/swc")</code></pre>
 
-then load the data into R
+Just like in the Unix Shell, we type the command and then press `Enter` (or `return`).
+Alternatively you can change the working directory using the RStudio GUI using the menu option `Session` -> `Set Working Directory` -> `Choose Directory...`
 
-```r
-read.csv("data/inflammation-01.csv", header = FALSE)
-```
-
-```
-##    V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14 V15 V16 V17 V18 V19 V20
-## 1   0  0  1  3  1  2  4  7  8   3   3   3  10   5   7   4   7   7  12  18
-## 2   0  1  2  1  2  1  3  2  2   6  10  11   5   9   4   4   7  16   8   6
-## 3   0  1  1  3  3  2  6  2  5   9   5   7   4   5   4  15   5  11   9  10
-## 4   0  0  2  0  4  2  2  1  6   7  10   7   9  13   8   8  15  10  10   7
-## 5   0  1  1  3  3  1  3  5  2   4   4   7   6   5   3  10   8  10   6  17
-## 6   0  0  1  2  2  4  2  1  6   4   7   6   6   9   9  15   4  16  18  12
-## 7   0  0  2  2  4  2  2  5  5   8   6   5  11   9   4  13   5  12  10   6
-## 8   0  0  1  2  3  1  2  3  5   3   7   8   8   5  10   9  15  11  18  19
-## 9   0  0  0  3  1  5  6  5  5   8   2   4  11  12  10  11   9  10  17  11
-## 10  0  1  1  2  1  3  5  3  5   8   6   8  12   5  13   6  13   8  16   8
-## 11  0  1  0  0  4  3  3  5  5   4   5   8   7  10  13   3   7  13  15  18
-## 12  0  1  0  0  3  4  2  7  8   5   2   8  11   5   5   8  14  11   6  11
-## 13  0  0  2  1  4  3  6  4  6   7   9   9   3  11   6  12   4  17  13  15
-## 14  0  0  0  0  1  3  1  6  6   5   5   6   3   6  13   3  10  13   9  16
-## 15  0  1  2  1  1  1  4  1  5   2   3   3  10   7  13   5   7  17   6   9
-## 16  0  1  1  0  1  2  4  3  6   4   7   5   5   7   5  10   7   8  18  17
-## 17  0  0  0  0  2  3  6  5  7   4   3   2  10   7   9  11  12   5  12   9
-## 18  0  0  0  1  2  1  4  3  6   7   4   2  12   6  12   4  14   7   8  14
-## 19  0  0  2  1  2  5  4  2  7   8   4   7  11   9   8  11  15  17  11  12
-## 20  0  1  2  0  1  4  3  2  2   7   3   3  12  13  11  13   6   5   9  16
-## 21  0  1  1  3  1  4  4  1  8   2   2   3  12  12  10  15  13   6   5   5
-## 22  0  0  2  3  2  3  2  6  3   8   7   4   6   6   9   5  12  12   8   5
-## 23  0  0  0  3  4  5  1  7  7   8   2   5  12   4  10  14   5   5  17  13
-## 24  0  1  1  1  1  3  3  2  6   3   9   7   8   8   4  13   7  14  11  15
-## 25  0  1  1  1  2  3  5  3  6   3   7  10   3   8  12   4  12   9  15   5
-## 26  0  0  2  1  3  3  2  7  4   4   3   8  12   9  12   9   5  16   8  17
-## 27  0  0  1  2  4  2  2  3  5   7  10   5   5  12   3  13   4  13   7  15
-## 28  0  0  1  1  1  5  1  5  2   2   4  10   4   8  14   6  15   6  12  15
-## 29  0  0  2  2  3  4  6  3  7   6   4   5   8   4   7   7   6  11  12  19
-## 30  0  0  0  1  4  4  6  3  8   6   4  10  12   3   3   6   8   7  17  16
-## 31  0  1  1  0  3  2  4  6  8   6   2   3  11   3  14  14  12   8   8  16
-## 32  0  0  2  3  3  4  5  3  6   7  10   5  10  13  14   3   8  10   9   9
-## 33  0  1  2  2  2  3  6  6  6   7   6   3  11  12  13  15  15  10  14  11
-## 34  0  0  2  1  3  5  6  7  5   8   9   3  12  10  12   4  12   9  13  10
-## 35  0  0  1  2  4  1  5  5  2   3   4   8   8  12   5  15   9  17   7  19
-## 36  0  0  0  3  1  3  6  4  3   4   8   3   4   8   3  11   5   7  10   5
-## 37  0  1  2  2  2  5  5  1  4   6   3   6   5   9   6   7   4   7  16   7
-## 38  0  1  1  2  3  1  5  1  2   2   5   7   6   6   5  10   6   7  17  13
-## 39  0  1  0  3  2  4  1  1  5   9  10   7  12  10   9  15  12  13  13   6
-## 40  0  1  1  3  1  1  5  5  3   7   2   2   3  12   4   6   8  15  16  16
-## 41  0  0  0  2  2  1  3  4  5   5   6   5   5  12  13   5   7   5  11  15
-## 42  0  0  1  3  3  1  2  1  8   9   2   8  10   3   8   6  10  13  11  17
-## 43  0  1  1  3  4  5  2  1  3   7   9   6  10   5   8  15  11  12  15   6
-## 44  0  0  1  3  1  4  3  6  7   8   5   7  11   3   6  11   6  10   6  19
-## 45  0  1  1  3  3  4  4  6  3   4   9   9   7   6   8  15  12  15   6  11
-## 46  0  1  2  2  4  3  1  4  8   9   5  10  10   3   4   6   7  11  16   6
-## 47  0  0  2  3  4  5  4  6  2   9   7   4   9  10   8  11  16  12  15  17
-## 48  0  1  1  3  1  4  6  2  8   2  10   3  11   9  13  15   5  15   6  10
-## 49  0  0  1  3  2  5  1  2  7   6   6   3  12   9   4  14   4   6  12   9
-## 50  0  0  1  2  3  4  5  7  5   4  10   5  12  12   5   4   7   9  18  16
-## 51  0  1  2  1  1  3  5  3  6   3  10  10  11  10  13  10  13   6   6  14
-## 52  0  1  2  2  3  5  2  4  5   6   8   3   5   4   3  15  15  12  16   7
-## 53  0  0  0  2  4  4  5  3  3   3  10   4   4   4  14  11  15  13  10  14
-## 54  0  0  2  1  1  4  4  7  2   9   4  10  12   7   6   6  11  12   9  15
-## 55  0  1  2  1  1  4  5  4  4   5   9   7  10   3  13  13   8   9  17  16
-## 56  0  0  1  3  2  3  6  4  5   7   2   4  11  11   3   8   8  16   5  13
-## 57  0  1  1  2  2  5  1  7  4   2   5   5   4   6   6   4  16  11  14  16
-## 58  0  1  1  1  4  1  6  4  6   3   6   5   6   4  14  13  13   9  12  19
-## 59  0  0  0  1  4  5  6  3  8   7   9  10   8   6   5  12  15   5  10   5
-## 60  0  0  1  0  3  2  5  4  8   2   9   3   3  10  12   9  14  11  13   8
-##    V21 V22 V23 V24 V25 V26 V27 V28 V29 V30 V31 V32 V33 V34 V35 V36 V37 V38
-## 1    6  13  11  11   7   7   4   6   8   8   4   4   5   7   3   4   2   3
-## 2   18   4  12   5  12   7  11   5  11   3   3   5   4   4   5   5   1   1
-## 3   19  14  12  17   7  12  11   7   4   2  10   5   4   2   2   3   2   2
-## 4   17   4   4   7   6  15   6   4   9  11   3   5   6   3   3   4   2   3
-## 5    9  14   9   7  13   9  12   6   7   7   9   6   3   2   2   4   2   0
-## 6   12   5  18   9   5   3  10   3  12   7   8   4   7   3   5   4   4   3
-## 7    9  17  15   8   9   3  13   7   8   2   8   8   4   2   3   5   4   1
-## 8   20   8   5  13  15  10   6  10   6   7   4   9   3   5   2   5   3   2
-## 9    6  16  12   6   8  14   6  13  10  11   4   6   4   7   6   3   2   1
-## 10  18  15  16  14  12   7   3   8   9  11   2   5   4   5   1   4   1   2
-## 11   8  15  15  16  11  14  12   4  10  10   4   3   4   5   5   3   3   2
-## 12   9  16  18   6  12   5   4   3   5   7   8   3   5   4   5   5   4   0
-## 13  13  12   8   7   4   7  12   9   5   6   5   4   7   3   5   4   2   3
-## 14  15   9  11   4   6   4  11  11  12   3   5   8   7   4   6   4   1   3
-## 15  12  13  10   4  12   4   6   7   6  10   8   2   5   1   3   4   2   0
-## 16   9   8  12  11  11  11  14   6  11   2  10   9   5   6   5   3   4   2
-## 17  13  19  14  17   5  13   8  11   5  10   9   8   7   5   3   1   4   0
-## 18  13  19   6   9  12   6   4  13   6   7   2   3   6   5   4   2   3   0
-## 19   7  12   7   6   7   4  13   5   7   6   6   9   2   1   1   2   2   0
-## 20   9  19  16  11   8   9  14  12  11   9   6   6   6   1   1   2   4   3
-## 21  18  19   9   6  11  12   7   6   3   6   3   2   4   3   1   5   4   2
-## 22  12  10  16   7  14  12   5   4   6   9   8   5   6   6   1   4   3   0
-## 23  16  15  13   6  12   9  10   3   3   7   4   4   8   2   6   5   1   0
-## 24  14  13   5  13   7  14   9  10   5  11   5   3   5   1   1   4   4   1
-## 25  17  16   5  10  10  15   7   5   3  11   5   5   6   1   1   1   1   0
-## 26   7  11  14   7  13  11   7  12  12   7   8   5   7   2   2   4   1   1
-## 27   9  12  18  14  16  12   3  11   3   2   7   4   8   2   2   1   3   0
-## 28  15  13   7  17   4   5  11   4   8   7   9   4   5   3   2   5   4   3
-## 29  20  18   9   5   4   7  14   8   4   3   7   7   8   3   5   4   1   3
-## 30  14  15  17   4  14  13   4   4  12  11   6   9   5   5   2   5   2   1
-## 31  13   7   6   9  15   7   6   4  10   8  10   4   2   6   5   5   2   3
-## 32  19  15  15   6   8   8  11   5   5   7   3   6   6   4   5   2   2   3
-## 33  11   8   6  12  10   5  12   7   7  11   5   8   5   2   5   5   2   0
-## 34  10   6  10  11   4  15  13   7   3   4   2   9   7   2   4   2   1   2
-## 35  14  18  12  17  14   4  13  13   8  11   5   6   6   2   3   5   2   1
-## 36  15   9  16  17  16   3   8   9   8   3   3   9   5   1   6   5   4   2
-## 37  16  13   9  16  12   6   7   9  10   3   6   4   5   4   6   3   4   3
-## 38  15  16  17  14   4   4  10  10  10  11   9   9   5   4   4   2   1   0
-## 39  19   9  10   6  13   5  13   6   7   2   5   5   2   1   1   1   1   3
-## 40  15   4  14   5  13  10   7  10   6   3   2   3   6   3   3   5   4   3
-## 41  18   7   9  10  14  12  11   9  10   3   2   9   6   2   2   5   3   0
-## 42  19   6   4  11   6  12   7   5   5   4   4   8   2   6   6   4   2   2
-## 43  12  16   6   4  14   3  12   9   6  11   5   8   5   5   6   1   2   1
-## 44  18  14   6  10   7   9   8   5   8   3  10   2   5   1   5   4   2   1
-## 45   6  18   5  14  15  12   9   8   3   6  10   6   8   7   2   5   4   3
-## 46  14   9  11  10  10   7  10   8   8   4   5   8   4   4   5   2   4   1
-## 47  19  10  18  13  15  11   8   4   7  11   6   7   6   5   1   3   1   0
-## 48  10   5  14  15  12   7   4   5  11   4   6   9   5   6   1   1   2   1
-## 49  12   7  11   7  16   8  13   6   7   6  10   7   6   3   1   5   4   3
-## 50  16  10  15  15  10   4   3   7   5   9   4   6   2   4   1   4   2   2
-## 51   5   4   5   5   9   4  12   7   7   4   7   9   3   3   6   3   4   1
-## 52  20  15  12   8   9   6  12   5   8   3   8   5   4   1   3   2   1   3
-## 53  11  17   9  11  11   7  10  12  10  10  10   8   7   5   2   2   4   1
-## 54  15   6   6  13   5  12   9   6   4   7   7   6   5   4   1   4   2   2
-## 55  16  15  12  13   5  12  10   9  11   9   4   5   5   2   2   5   1   0
-## 56  16   5   8   8   6   9  10  10   9   3   3   5   3   5   4   5   3   3
-## 57  14  14   8  17   4  14  13   7   6   3   7   7   5   6   3   4   2   2
-## 58   9  10  15  10   9  10  10   7   5   6   8   6   6   4   3   5   2   1
-## 59   8  13  18  17  14   9  13   4  10  11  10   8   8   6   5   5   2   0
-## 60   6  18  11   9  13  11   8   5   5   2   8   5   3   5   4   1   3   1
-##    V39 V40
-## 1    0   0
-## 2    0   1
-## 3    1   1
-## 4    2   1
-## 5    1   1
-## 6    2   1
-## 7    1   1
-## 8    2   1
-## 9    0   0
-## 10   0   0
-## 11   2   1
-## 12   1   1
-## 13   0   1
-## 14   0   0
-## 15   2   0
-## 16   2   0
-## 17   2   1
-## 18   1   0
-## 19   1   0
-## 20   1   1
-## 21   2   0
-## 22   2   0
-## 23   1   0
-## 24   2   0
-## 25   2   1
-## 26   1   0
-## 27   1   1
-## 28   2   1
-## 29   1   0
-## 30   0   1
-## 31   2   1
-## 32   0   0
-## 33   2   1
-## 34   1   1
-## 35   1   1
-## 36   2   0
-## 37   2   1
-## 38   1   0
-## 39   0   1
-## 40   2   1
-## 41   0   1
-## 42   0   0
-## 43   2   0
-## 44   0   1
-## 45   1   1
-## 46   1   0
-## 47   0   0
-## 48   2   1
-## 49   0   0
-## 50   2   1
-## 51   2   0
-## 52   1   0
-## 53   2   1
-## 54   2   1
-## 55   0   1
-## 56   0   1
-## 57   1   1
-## 58   1   1
-## 59   2   0
-## 60   1   0
-```
+Now we could load the data into R using `read.csv`:
 
 
-The expression `read.csv()` is a function call that asks R to run the function `read.csv()` that belongs to base R. 
+<pre class='in'><code>read.csv(file = "inflammation-01.csv", header = FALSE)</code></pre>
 
-`read.csv()` has many arguments including the name of the file we want to read, and the delimiter that separates values on a line. 
+The expression `read.csv(...)` is a [function call](../../gloss.html#function-call) that asks R to run the function `read.csv`. 
 
-When we are finished typing and press `Control+Enter` on Windows or `Cmd + Return` on Mac, the console runs our command. 
-Since we haven't told it to do anything else with the function's output, the console displays it.
-In this case, that output is the data we just loaded. 
+`read.csv` has two [arguments](../../gloss.html#argument): the name of the file we want to read, and whether the first line of the file contains names for the columns of data.
+The filename needs to be a character string (or [string](../../gloss.html#string) for short), so we put it in quotes.
+Assigning the second argument, `header`, to be `FALSE` indicates that the data file does not have column headers.
+We'll talk more about the value `FALSE`, and its converse `TRUE`, in lesson 04.
 
-Our call to `read.csv()` read the file, but didn't save the data as an object. 
-To do that, we need to assign the data frame to a variable. 
-A variable is just a name for a value, such as `x`, `current_temperature`, or `subject_id`. 
+The utility of a function is that it will perform its given action on whatever value is passed to the named argument(s).
+For example, in this case if we provided the name of a different file to the argument `file`, `read.csv` would read it instead.
+We'll learn more of the details about functions and their arguments in the next lesson.
+
+Since we didn't tell it to do anything else with the function's output, the console will display the full contents of the file `inflammation-01.csv`.
+Try it out.
+
+`read.csv` read the file, but didn't save the data in memory.
+To do that, we need to assign the data frame to a variable.
+A variable is just a name for a value, such as `x`, `current_temperature`, or `subject_id`.
 We can create a new variable simply by assigning a value to it using `<-`
 
 
-```r
-weight_kg <- 55
-```
+<pre class='in'><code>weight_kg <- 55</code></pre>
+
+Once a variable has a value, we can print it by typing the name of the variable and hitting `Enter` (or `return`).
+In general, R will print to the console any object returned by a function or operation *unless* we assign it to a variable.
 
 
-Once a variable has a value, we can print it:
-
-
-```r
-weight_kg
-```
-
-```
-## [1] 55
-```
-
-
-and do arithmetic with it:
-
-
-```r
-2.2 * weight_kg
-```
-
-```
-## [1] 121
-```
-
-
-We can use the function `paste()` to strings made up from different objects, if we separate them with commas.
-
-
-```r
-paste("weight in pounds:", 2.2 * weight_kg)
-```
-
-```
-## [1] "weight in pounds: 121"
-```
-
-
-To write lines of text to the screen, we can use `cat()` or `writeLines()`
+<pre class='in'><code>weight_kg</code></pre>
 
 
 
-```r
-string <- paste("weight in pounds:", 2.2 * weight_kg)
-cat(string)
-```
+<div class='out'><pre class='out'><code>[1] 55
+</code></pre></div>
 
-```
-## weight in pounds: 121
-```
-
-```r
-cat(string, "\n")
-```
-
-```
-## weight in pounds: 121
-```
-
-```r
-writeLines(string)
-```
-
-```
-## weight in pounds: 121
-```
+We can do arithmetic with the variable:
 
 
-In normal use however, R will print to the console an object returned by a function or operation *unless* we assign it to a variable. Remember, to view a variable just type the name of the variable and hit return
+<pre class='in'><code># weight in pounds:
+2.2 * weight_kg</code></pre>
 
 
-```r
-string
-```
 
-```
-## [1] "weight in pounds: 121"
-```
+<div class='out'><pre class='out'><code>[1] 121
+</code></pre></div>
 
+> **Tip:** We can add comments to our code using the `#` character.
+It is useful to document our code in this way so that others (and us the next time we read it) have an easier time following what the code is doing.
 
 We can also change an object's value by assigning it a new value:
 
 
-```r
-weight_kg <- 57.5
+<pre class='in'><code>weight_kg <- 57.5
 # weight in kilograms is now
-weight_kg
-```
+weight_kg</code></pre>
 
-```
-## [1] 57.5
-```
 
+
+<div class='out'><pre class='out'><code>[1] 57.5
+</code></pre></div>
 
 If we imagine the variable as a sticky note with a name written on it, 
-assignment is like putting the sticky note on a particular value
+assignment is like putting the sticky note on a particular value:
+
+<img src="../python/img/python-sticky-note-variables-01.svg" alt="Variables as Sticky Notes" />
+
 This means that assigning a value to one object does not change the values of other variables. 
-For example, let's store the subject's weight in pounds in a variable
+For example, let's store the subject's weight in pounds in a variable:
 
 
-```r
-weight_lb <- 2.2 * weight_kg
+<pre class='in'><code>weight_lb <- 2.2 * weight_kg
 # weight in kg...
-weight_kg
-```
+weight_kg</code></pre>
 
-```
-## [1] 57.5
-```
 
-```r
-# ...and in pounds
-weight_lb
-```
 
-```
-## [1] 126.5
-```
+<div class='out'><pre class='out'><code>[1] 57.5
+</code></pre></div>
 
+
+
+<pre class='in'><code># ...and in pounds
+weight_lb</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 126.5
+</code></pre></div>
+
+<img src="../python/img/python-sticky-note-variables-02.svg" alt="Creating Another Variable" />
 
 and then change `weight_kg`:
 
 
-```r
-weight_kg <- 100
+<pre class='in'><code>weight_kg <- 100.0
 # weight in kg now...
-weight_kg
-```
-
-```
-## [1] 100
-```
-
-```r
-# ...and in weight pounds still
-weight_lb
-```
-
-```
-## [1] 126.5
-```
+weight_kg</code></pre>
 
 
-__Updating a Variable__
+
+<div class='out'><pre class='out'><code>[1] 100
+</code></pre></div>
+
+
+
+<pre class='in'><code># ...and in weight pounds still
+weight_lb</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 126.5
+</code></pre></div>
+
+<img src="../python/img/python-sticky-note-variables-03.svg" alt="Updating a Variable" />
 
 Since `weight_lb` doesn't "remember" where its value came from, it isn't automatically updated when `weight_kg` changes. 
 This is different from the way spreadsheets work.
 
-__Challenges__
-
-Draw diagrams showing what variables refer to what values after each statement in the following program:
-
-
-```r
-mass <- 47.5
-age <- 122
-mass <- mass * 2
-age <- age - 20
-```
-
-
-We can also add to variable that are vectors, and update them by making them longer. 
-For example, if we are creating a vector of patient weights, we could update that vector using `c()`. `c()` takes any number of vectors as arguments, and combines or *concatenates* them, in the order supplied, into a single vector.
-
-
-```r
-weights <- 100
-weights <- c(weights, 80)
-```
-
-
-What happens here is that we take the original vector weights, and we are adding the second item to the end of the first one. We can do this over and over again to build a vector or a dataset. As we program, this may be useful to autoupdate results that we are collecting or calculating.
-
 Now that we know how to assign things to variables, let's re-run `read.csv` and save its result:
 
 
-```r
-dat <- read.csv("data/inflammation-01.csv", header = FALSE)
-```
+<pre class='in'><code>dat <- read.csv(file = "inflammation-01.csv", header = FALSE)</code></pre>
+
+This statement doesn't produce any output because assignment doesn't display anything.
+If we want to check that our data has been loaded, we can print the variable's value.
+However, for large data sets it is convenient to use the function `head` to display only the first few rows of data.
 
 
-This statement doesn't produce any output because assignment doesn't display anything. If we want to check that our data has been loaded, we can print the variable's value:
+<pre class='in'><code>head(dat)</code></pre>
 
 
-```r
-dat
-```
 
-```
-##    V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14 V15 V16 V17 V18 V19 V20
-## 1   0  0  1  3  1  2  4  7  8   3   3   3  10   5   7   4   7   7  12  18
-## 2   0  1  2  1  2  1  3  2  2   6  10  11   5   9   4   4   7  16   8   6
-## 3   0  1  1  3  3  2  6  2  5   9   5   7   4   5   4  15   5  11   9  10
-## 4   0  0  2  0  4  2  2  1  6   7  10   7   9  13   8   8  15  10  10   7
-## 5   0  1  1  3  3  1  3  5  2   4   4   7   6   5   3  10   8  10   6  17
-## 6   0  0  1  2  2  4  2  1  6   4   7   6   6   9   9  15   4  16  18  12
-## 7   0  0  2  2  4  2  2  5  5   8   6   5  11   9   4  13   5  12  10   6
-## 8   0  0  1  2  3  1  2  3  5   3   7   8   8   5  10   9  15  11  18  19
-## 9   0  0  0  3  1  5  6  5  5   8   2   4  11  12  10  11   9  10  17  11
-## 10  0  1  1  2  1  3  5  3  5   8   6   8  12   5  13   6  13   8  16   8
-## 11  0  1  0  0  4  3  3  5  5   4   5   8   7  10  13   3   7  13  15  18
-## 12  0  1  0  0  3  4  2  7  8   5   2   8  11   5   5   8  14  11   6  11
-## 13  0  0  2  1  4  3  6  4  6   7   9   9   3  11   6  12   4  17  13  15
-## 14  0  0  0  0  1  3  1  6  6   5   5   6   3   6  13   3  10  13   9  16
-## 15  0  1  2  1  1  1  4  1  5   2   3   3  10   7  13   5   7  17   6   9
-## 16  0  1  1  0  1  2  4  3  6   4   7   5   5   7   5  10   7   8  18  17
-## 17  0  0  0  0  2  3  6  5  7   4   3   2  10   7   9  11  12   5  12   9
-## 18  0  0  0  1  2  1  4  3  6   7   4   2  12   6  12   4  14   7   8  14
-## 19  0  0  2  1  2  5  4  2  7   8   4   7  11   9   8  11  15  17  11  12
-## 20  0  1  2  0  1  4  3  2  2   7   3   3  12  13  11  13   6   5   9  16
-## 21  0  1  1  3  1  4  4  1  8   2   2   3  12  12  10  15  13   6   5   5
-## 22  0  0  2  3  2  3  2  6  3   8   7   4   6   6   9   5  12  12   8   5
-## 23  0  0  0  3  4  5  1  7  7   8   2   5  12   4  10  14   5   5  17  13
-## 24  0  1  1  1  1  3  3  2  6   3   9   7   8   8   4  13   7  14  11  15
-## 25  0  1  1  1  2  3  5  3  6   3   7  10   3   8  12   4  12   9  15   5
-## 26  0  0  2  1  3  3  2  7  4   4   3   8  12   9  12   9   5  16   8  17
-## 27  0  0  1  2  4  2  2  3  5   7  10   5   5  12   3  13   4  13   7  15
-## 28  0  0  1  1  1  5  1  5  2   2   4  10   4   8  14   6  15   6  12  15
-## 29  0  0  2  2  3  4  6  3  7   6   4   5   8   4   7   7   6  11  12  19
-## 30  0  0  0  1  4  4  6  3  8   6   4  10  12   3   3   6   8   7  17  16
-## 31  0  1  1  0  3  2  4  6  8   6   2   3  11   3  14  14  12   8   8  16
-## 32  0  0  2  3  3  4  5  3  6   7  10   5  10  13  14   3   8  10   9   9
-## 33  0  1  2  2  2  3  6  6  6   7   6   3  11  12  13  15  15  10  14  11
-## 34  0  0  2  1  3  5  6  7  5   8   9   3  12  10  12   4  12   9  13  10
-## 35  0  0  1  2  4  1  5  5  2   3   4   8   8  12   5  15   9  17   7  19
-## 36  0  0  0  3  1  3  6  4  3   4   8   3   4   8   3  11   5   7  10   5
-## 37  0  1  2  2  2  5  5  1  4   6   3   6   5   9   6   7   4   7  16   7
-## 38  0  1  1  2  3  1  5  1  2   2   5   7   6   6   5  10   6   7  17  13
-## 39  0  1  0  3  2  4  1  1  5   9  10   7  12  10   9  15  12  13  13   6
-## 40  0  1  1  3  1  1  5  5  3   7   2   2   3  12   4   6   8  15  16  16
-## 41  0  0  0  2  2  1  3  4  5   5   6   5   5  12  13   5   7   5  11  15
-## 42  0  0  1  3  3  1  2  1  8   9   2   8  10   3   8   6  10  13  11  17
-## 43  0  1  1  3  4  5  2  1  3   7   9   6  10   5   8  15  11  12  15   6
-## 44  0  0  1  3  1  4  3  6  7   8   5   7  11   3   6  11   6  10   6  19
-## 45  0  1  1  3  3  4  4  6  3   4   9   9   7   6   8  15  12  15   6  11
-## 46  0  1  2  2  4  3  1  4  8   9   5  10  10   3   4   6   7  11  16   6
-## 47  0  0  2  3  4  5  4  6  2   9   7   4   9  10   8  11  16  12  15  17
-## 48  0  1  1  3  1  4  6  2  8   2  10   3  11   9  13  15   5  15   6  10
-## 49  0  0  1  3  2  5  1  2  7   6   6   3  12   9   4  14   4   6  12   9
-## 50  0  0  1  2  3  4  5  7  5   4  10   5  12  12   5   4   7   9  18  16
-## 51  0  1  2  1  1  3  5  3  6   3  10  10  11  10  13  10  13   6   6  14
-## 52  0  1  2  2  3  5  2  4  5   6   8   3   5   4   3  15  15  12  16   7
-## 53  0  0  0  2  4  4  5  3  3   3  10   4   4   4  14  11  15  13  10  14
-## 54  0  0  2  1  1  4  4  7  2   9   4  10  12   7   6   6  11  12   9  15
-## 55  0  1  2  1  1  4  5  4  4   5   9   7  10   3  13  13   8   9  17  16
-## 56  0  0  1  3  2  3  6  4  5   7   2   4  11  11   3   8   8  16   5  13
-## 57  0  1  1  2  2  5  1  7  4   2   5   5   4   6   6   4  16  11  14  16
-## 58  0  1  1  1  4  1  6  4  6   3   6   5   6   4  14  13  13   9  12  19
-## 59  0  0  0  1  4  5  6  3  8   7   9  10   8   6   5  12  15   5  10   5
-## 60  0  0  1  0  3  2  5  4  8   2   9   3   3  10  12   9  14  11  13   8
-##    V21 V22 V23 V24 V25 V26 V27 V28 V29 V30 V31 V32 V33 V34 V35 V36 V37 V38
-## 1    6  13  11  11   7   7   4   6   8   8   4   4   5   7   3   4   2   3
-## 2   18   4  12   5  12   7  11   5  11   3   3   5   4   4   5   5   1   1
-## 3   19  14  12  17   7  12  11   7   4   2  10   5   4   2   2   3   2   2
-## 4   17   4   4   7   6  15   6   4   9  11   3   5   6   3   3   4   2   3
-## 5    9  14   9   7  13   9  12   6   7   7   9   6   3   2   2   4   2   0
-## 6   12   5  18   9   5   3  10   3  12   7   8   4   7   3   5   4   4   3
-## 7    9  17  15   8   9   3  13   7   8   2   8   8   4   2   3   5   4   1
-## 8   20   8   5  13  15  10   6  10   6   7   4   9   3   5   2   5   3   2
-## 9    6  16  12   6   8  14   6  13  10  11   4   6   4   7   6   3   2   1
-## 10  18  15  16  14  12   7   3   8   9  11   2   5   4   5   1   4   1   2
-## 11   8  15  15  16  11  14  12   4  10  10   4   3   4   5   5   3   3   2
-## 12   9  16  18   6  12   5   4   3   5   7   8   3   5   4   5   5   4   0
-## 13  13  12   8   7   4   7  12   9   5   6   5   4   7   3   5   4   2   3
-## 14  15   9  11   4   6   4  11  11  12   3   5   8   7   4   6   4   1   3
-## 15  12  13  10   4  12   4   6   7   6  10   8   2   5   1   3   4   2   0
-## 16   9   8  12  11  11  11  14   6  11   2  10   9   5   6   5   3   4   2
-## 17  13  19  14  17   5  13   8  11   5  10   9   8   7   5   3   1   4   0
-## 18  13  19   6   9  12   6   4  13   6   7   2   3   6   5   4   2   3   0
-## 19   7  12   7   6   7   4  13   5   7   6   6   9   2   1   1   2   2   0
-## 20   9  19  16  11   8   9  14  12  11   9   6   6   6   1   1   2   4   3
-## 21  18  19   9   6  11  12   7   6   3   6   3   2   4   3   1   5   4   2
-## 22  12  10  16   7  14  12   5   4   6   9   8   5   6   6   1   4   3   0
-## 23  16  15  13   6  12   9  10   3   3   7   4   4   8   2   6   5   1   0
-## 24  14  13   5  13   7  14   9  10   5  11   5   3   5   1   1   4   4   1
-## 25  17  16   5  10  10  15   7   5   3  11   5   5   6   1   1   1   1   0
-## 26   7  11  14   7  13  11   7  12  12   7   8   5   7   2   2   4   1   1
-## 27   9  12  18  14  16  12   3  11   3   2   7   4   8   2   2   1   3   0
-## 28  15  13   7  17   4   5  11   4   8   7   9   4   5   3   2   5   4   3
-## 29  20  18   9   5   4   7  14   8   4   3   7   7   8   3   5   4   1   3
-## 30  14  15  17   4  14  13   4   4  12  11   6   9   5   5   2   5   2   1
-## 31  13   7   6   9  15   7   6   4  10   8  10   4   2   6   5   5   2   3
-## 32  19  15  15   6   8   8  11   5   5   7   3   6   6   4   5   2   2   3
-## 33  11   8   6  12  10   5  12   7   7  11   5   8   5   2   5   5   2   0
-## 34  10   6  10  11   4  15  13   7   3   4   2   9   7   2   4   2   1   2
-## 35  14  18  12  17  14   4  13  13   8  11   5   6   6   2   3   5   2   1
-## 36  15   9  16  17  16   3   8   9   8   3   3   9   5   1   6   5   4   2
-## 37  16  13   9  16  12   6   7   9  10   3   6   4   5   4   6   3   4   3
-## 38  15  16  17  14   4   4  10  10  10  11   9   9   5   4   4   2   1   0
-## 39  19   9  10   6  13   5  13   6   7   2   5   5   2   1   1   1   1   3
-## 40  15   4  14   5  13  10   7  10   6   3   2   3   6   3   3   5   4   3
-## 41  18   7   9  10  14  12  11   9  10   3   2   9   6   2   2   5   3   0
-## 42  19   6   4  11   6  12   7   5   5   4   4   8   2   6   6   4   2   2
-## 43  12  16   6   4  14   3  12   9   6  11   5   8   5   5   6   1   2   1
-## 44  18  14   6  10   7   9   8   5   8   3  10   2   5   1   5   4   2   1
-## 45   6  18   5  14  15  12   9   8   3   6  10   6   8   7   2   5   4   3
-## 46  14   9  11  10  10   7  10   8   8   4   5   8   4   4   5   2   4   1
-## 47  19  10  18  13  15  11   8   4   7  11   6   7   6   5   1   3   1   0
-## 48  10   5  14  15  12   7   4   5  11   4   6   9   5   6   1   1   2   1
-## 49  12   7  11   7  16   8  13   6   7   6  10   7   6   3   1   5   4   3
-## 50  16  10  15  15  10   4   3   7   5   9   4   6   2   4   1   4   2   2
-## 51   5   4   5   5   9   4  12   7   7   4   7   9   3   3   6   3   4   1
-## 52  20  15  12   8   9   6  12   5   8   3   8   5   4   1   3   2   1   3
-## 53  11  17   9  11  11   7  10  12  10  10  10   8   7   5   2   2   4   1
-## 54  15   6   6  13   5  12   9   6   4   7   7   6   5   4   1   4   2   2
-## 55  16  15  12  13   5  12  10   9  11   9   4   5   5   2   2   5   1   0
-## 56  16   5   8   8   6   9  10  10   9   3   3   5   3   5   4   5   3   3
-## 57  14  14   8  17   4  14  13   7   6   3   7   7   5   6   3   4   2   2
-## 58   9  10  15  10   9  10  10   7   5   6   8   6   6   4   3   5   2   1
-## 59   8  13  18  17  14   9  13   4  10  11  10   8   8   6   5   5   2   0
-## 60   6  18  11   9  13  11   8   5   5   2   8   5   3   5   4   1   3   1
-##    V39 V40
-## 1    0   0
-## 2    0   1
-## 3    1   1
-## 4    2   1
-## 5    1   1
-## 6    2   1
-## 7    1   1
-## 8    2   1
-## 9    0   0
-## 10   0   0
-## 11   2   1
-## 12   1   1
-## 13   0   1
-## 14   0   0
-## 15   2   0
-## 16   2   0
-## 17   2   1
-## 18   1   0
-## 19   1   0
-## 20   1   1
-## 21   2   0
-## 22   2   0
-## 23   1   0
-## 24   2   0
-## 25   2   1
-## 26   1   0
-## 27   1   1
-## 28   2   1
-## 29   1   0
-## 30   0   1
-## 31   2   1
-## 32   0   0
-## 33   2   1
-## 34   1   1
-## 35   1   1
-## 36   2   0
-## 37   2   1
-## 38   1   0
-## 39   0   1
-## 40   2   1
-## 41   0   1
-## 42   0   0
-## 43   2   0
-## 44   0   1
-## 45   1   1
-## 46   1   0
-## 47   0   0
-## 48   2   1
-## 49   0   0
-## 50   2   1
-## 51   2   0
-## 52   1   0
-## 53   2   1
-## 54   2   1
-## 55   0   1
-## 56   0   1
-## 57   1   1
-## 58   1   1
-## 59   2   0
-## 60   1   0
-```
+<div class='out'><pre class='out'><code>  V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14 V15 V16 V17 V18 V19 V20
+1  0  0  1  3  1  2  4  7  8   3   3   3  10   5   7   4   7   7  12  18
+2  0  1  2  1  2  1  3  2  2   6  10  11   5   9   4   4   7  16   8   6
+3  0  1  1  3  3  2  6  2  5   9   5   7   4   5   4  15   5  11   9  10
+4  0  0  2  0  4  2  2  1  6   7  10   7   9  13   8   8  15  10  10   7
+5  0  1  1  3  3  1  3  5  2   4   4   7   6   5   3  10   8  10   6  17
+6  0  0  1  2  2  4  2  1  6   4   7   6   6   9   9  15   4  16  18  12
+  V21 V22 V23 V24 V25 V26 V27 V28 V29 V30 V31 V32 V33 V34 V35 V36 V37 V38
+1   6  13  11  11   7   7   4   6   8   8   4   4   5   7   3   4   2   3
+2  18   4  12   5  12   7  11   5  11   3   3   5   4   4   5   5   1   1
+3  19  14  12  17   7  12  11   7   4   2  10   5   4   2   2   3   2   2
+4  17   4   4   7   6  15   6   4   9  11   3   5   6   3   3   4   2   3
+5   9  14   9   7  13   9  12   6   7   7   9   6   3   2   2   4   2   0
+6  12   5  18   9   5   3  10   3  12   7   8   4   7   3   5   4   4   3
+  V39 V40
+1   0   0
+2   0   1
+3   1   1
+4   2   1
+5   1   1
+6   2   1
+</code></pre></div>
 
+#### Challenge
 
-For large data sets it is convenient to use the `head()` to display the first few rows of data
+Draw diagrams showing what variables refer to what values after each statement in the following program:
 
+	mass <- 47.5
+	age <- 122
+	mass <- mass * 2.0
+	age <- age - 20
 
-```r
-head(dat)
-```
-
-```
-##   V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14 V15 V16 V17 V18 V19 V20
-## 1  0  0  1  3  1  2  4  7  8   3   3   3  10   5   7   4   7   7  12  18
-## 2  0  1  2  1  2  1  3  2  2   6  10  11   5   9   4   4   7  16   8   6
-## 3  0  1  1  3  3  2  6  2  5   9   5   7   4   5   4  15   5  11   9  10
-## 4  0  0  2  0  4  2  2  1  6   7  10   7   9  13   8   8  15  10  10   7
-## 5  0  1  1  3  3  1  3  5  2   4   4   7   6   5   3  10   8  10   6  17
-## 6  0  0  1  2  2  4  2  1  6   4   7   6   6   9   9  15   4  16  18  12
-##   V21 V22 V23 V24 V25 V26 V27 V28 V29 V30 V31 V32 V33 V34 V35 V36 V37 V38
-## 1   6  13  11  11   7   7   4   6   8   8   4   4   5   7   3   4   2   3
-## 2  18   4  12   5  12   7  11   5  11   3   3   5   4   4   5   5   1   1
-## 3  19  14  12  17   7  12  11   7   4   2  10   5   4   2   2   3   2   2
-## 4  17   4   4   7   6  15   6   4   9  11   3   5   6   3   3   4   2   3
-## 5   9  14   9   7  13   9  12   6   7   7   9   6   3   2   2   4   2   0
-## 6  12   5  18   9   5   3  10   3  12   7   8   4   7   3   5   4   4   3
-##   V39 V40
-## 1   0   0
-## 2   0   1
-## 3   1   1
-## 4   2   1
-## 5   1   1
-## 6   2   1
-```
-
-
-__BREAK__
-* Make sure everyone has imported the data
-* How many rows and columns there are
-* What kind of data type is it?
-
-## Manipulating Data
+### Manipulating Data
 
 Now that our data is in memory, we can start doing things with it. 
 First, let's ask what type of thing `dat` *is*:
 
 
-```r
-class(dat)
-```
+<pre class='in'><code>class(dat)</code></pre>
 
-```
-## [1] "data.frame"
-```
 
-```r
-str(dat)
-```
 
-```
-## 'data.frame':	60 obs. of  40 variables:
-##  $ V1 : int  0 0 0 0 0 0 0 0 0 0 ...
-##  $ V2 : int  0 1 1 0 1 0 0 0 0 1 ...
-##  $ V3 : int  1 2 1 2 1 1 2 1 0 1 ...
-##  $ V4 : int  3 1 3 0 3 2 2 2 3 2 ...
-##  $ V5 : int  1 2 3 4 3 2 4 3 1 1 ...
-##  $ V6 : int  2 1 2 2 1 4 2 1 5 3 ...
-##  $ V7 : int  4 3 6 2 3 2 2 2 6 5 ...
-##  $ V8 : int  7 2 2 1 5 1 5 3 5 3 ...
-##  $ V9 : int  8 2 5 6 2 6 5 5 5 5 ...
-##  $ V10: int  3 6 9 7 4 4 8 3 8 8 ...
-##  $ V11: int  3 10 5 10 4 7 6 7 2 6 ...
-##  $ V12: int  3 11 7 7 7 6 5 8 4 8 ...
-##  $ V13: int  10 5 4 9 6 6 11 8 11 12 ...
-##  $ V14: int  5 9 5 13 5 9 9 5 12 5 ...
-##  $ V15: int  7 4 4 8 3 9 4 10 10 13 ...
-##  $ V16: int  4 4 15 8 10 15 13 9 11 6 ...
-##  $ V17: int  7 7 5 15 8 4 5 15 9 13 ...
-##  $ V18: int  7 16 11 10 10 16 12 11 10 8 ...
-##  $ V19: int  12 8 9 10 6 18 10 18 17 16 ...
-##  $ V20: int  18 6 10 7 17 12 6 19 11 8 ...
-##  $ V21: int  6 18 19 17 9 12 9 20 6 18 ...
-##  $ V22: int  13 4 14 4 14 5 17 8 16 15 ...
-##  $ V23: int  11 12 12 4 9 18 15 5 12 16 ...
-##  $ V24: int  11 5 17 7 7 9 8 13 6 14 ...
-##  $ V25: int  7 12 7 6 13 5 9 15 8 12 ...
-##  $ V26: int  7 7 12 15 9 3 3 10 14 7 ...
-##  $ V27: int  4 11 11 6 12 10 13 6 6 3 ...
-##  $ V28: int  6 5 7 4 6 3 7 10 13 8 ...
-##  $ V29: int  8 11 4 9 7 12 8 6 10 9 ...
-##  $ V30: int  8 3 2 11 7 7 2 7 11 11 ...
-##  $ V31: int  4 3 10 3 9 8 8 4 4 2 ...
-##  $ V32: int  4 5 5 5 6 4 8 9 6 5 ...
-##  $ V33: int  5 4 4 6 3 7 4 3 4 4 ...
-##  $ V34: int  7 4 2 3 2 3 2 5 7 5 ...
-##  $ V35: int  3 5 2 3 2 5 3 2 6 1 ...
-##  $ V36: int  4 5 3 4 4 4 5 5 3 4 ...
-##  $ V37: int  2 1 2 2 2 4 4 3 2 1 ...
-##  $ V38: int  3 1 2 3 0 3 1 2 1 2 ...
-##  $ V39: int  0 0 1 2 1 2 1 2 0 0 ...
-##  $ V40: int  0 1 1 1 1 1 1 1 0 0 ...
-```
-
+<div class='out'><pre class='out'><code>[1] "data.frame"
+</code></pre></div>
 
 The output tells us that data currently is a data frame in R. 
-This is similar to a spreadsheet in MS Excel, that many of us are familiar with using.
+This is similar to a spreadsheet in MS Excel that many of us are familiar with using.
+Data frames are very useful for storing data because you can have a continuous variable, e.g. rainfall, in one column and a categorical variable, e.g. month, in another.
 
-### data frames
-<!-- FIXME: Repeats verbatim the 00-first-timers/.Rmd content. Keep? -->
-The *de facto* data structure for most tabular data and what we use for statistics.
-
-Data frames can have additional attributes such as `rownames()`, which can be useful for annotating data, like `subject_id` or `sample_id`. But most of the time they are not used.
-
-Some additional information on data frames:
-
-* Usually created by `read.csv()` and `read.table()`.
-* Can convert to matrix with `data.matrix()` (preferred) or `as.matrix()`
-* Coercion will be forced and not always what you expect.
-* Can also create with `data.frame()` function.
-* Find the number of rows and columns with `nrow(dat)` and `ncol(dat)`, respectively.
-* Rownames are usually 1, 2, ..., n.
-
-#### Useful data frame functions
-
-* `head()` - shown first 6 rows
-* `tail()` - show last 6 rows
-* `dim()` - returns the dimensions
-* `nrow()` - number of rows
-* `ncol()` - number of columns
-* `str()` - structure of each column
-* `names()` - shows the `names` attribute for a data frame, which gives the column names.
-
-`str` output tells us the dimensions and the data types (int is integer) of each column.
-
-We can see what its shape is like this:
+We can see the dimensions, or [shape](../../gloss.html#shape), of the data frame like this:
 
 
-```r
-dim(dat)
-```
-
-```
-## [1] 60 40
-```
-
-```r
-nrow(dat)
-```
-
-```
-## [1] 60
-```
-
-```r
-ncol(dat)
-```
-
-```
-## [1] 40
-```
+<pre class='in'><code>dim(dat)</code></pre>
 
 
-This tells us that data has 60 rows and 40 columns.
 
-### Indexing
+<div class='out'><pre class='out'><code>[1] 60 40
+</code></pre></div>
 
-If we want to get a single value from the data frame, we must provide an row and column indices for the value we want in square brackets:
+This tells us that our data frame, `dat`, has 60 rows and 40 columns.
 
-
-```r
-# first value in dat
-dat[1, 1]
-```
-
-```
-## [1] 0
-```
-
-```r
-# middle value in dat
-dat[30, 20]
-```
-
-```
-## [1] 16
-```
+If we want to get a single value from the data frame, we can provide an [index](../../gloss.html#index) in square brackets, just as we do in math:
 
 
-R indexes starting at 1. Programming languages like Fortran, MATLAB, and R start counting at 1, because that's what human beings have done for thousands of years. 
-Languages in the C family (including C++, Java, Perl, and Python) count from 0 because that's simpler for computers to do. 
+<pre class='in'><code># first value in dat
+dat[1, 1]</code></pre>
 
-An index like `[30, 20]` selects a single element of data frame, but we can select whole sections as well. 
+
+
+<div class='out'><pre class='out'><code>[1] 0
+</code></pre></div>
+
+
+
+<pre class='in'><code># middle value in dat
+dat[30, 20]</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 16
+</code></pre></div>
+
+An index like `[30, 20]` selects a single element of a data frame, but we can select whole sections as well. 
 For example, we can select the first ten days (columns) of values for the first four patients (rows) like this:
 
 
-```r
-dat[1:4, 1:10]
-```
-
-```
-##   V1 V2 V3 V4 V5 V6 V7 V8 V9 V10
-## 1  0  0  1  3  1  2  4  7  8   3
-## 2  0  1  2  1  2  1  3  2  2   6
-## 3  0  1  1  3  3  2  6  2  5   9
-## 4  0  0  2  0  4  2  2  1  6   7
-```
-
-
-The notation `1:4` means, "Start at index 1 and go to index 4." 
-We don't start slices at 0:
-
-
-```r
-dat[5:10, 0:10]
-```
-
-```
-##    V1 V2 V3 V4 V5 V6 V7 V8 V9 V10
-## 5   0  1  1  3  3  1  3  5  2   4
-## 6   0  0  1  2  2  4  2  1  6   4
-## 7   0  0  2  2  4  2  2  5  5   8
-## 8   0  0  1  2  3  1  2  3  5   3
-## 9   0  0  0  3  1  5  6  5  5   8
-## 10  0  1  1  2  1  3  5  3  5   8
-```
-
-
-and we don't have to take all the values in the slice, we can use `c()` to select certain values or groups of values:
-
-
-```r
-dat[c(1:10, 20:30), c(1:10, 20:30)]
-```
-
-```
-##    V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V20 V21 V22 V23 V24 V25 V26 V27 V28 V29
-## 1   0  0  1  3  1  2  4  7  8   3  18   6  13  11  11   7   7   4   6   8
-## 2   0  1  2  1  2  1  3  2  2   6   6  18   4  12   5  12   7  11   5  11
-## 3   0  1  1  3  3  2  6  2  5   9  10  19  14  12  17   7  12  11   7   4
-## 4   0  0  2  0  4  2  2  1  6   7   7  17   4   4   7   6  15   6   4   9
-## 5   0  1  1  3  3  1  3  5  2   4  17   9  14   9   7  13   9  12   6   7
-## 6   0  0  1  2  2  4  2  1  6   4  12  12   5  18   9   5   3  10   3  12
-## 7   0  0  2  2  4  2  2  5  5   8   6   9  17  15   8   9   3  13   7   8
-## 8   0  0  1  2  3  1  2  3  5   3  19  20   8   5  13  15  10   6  10   6
-## 9   0  0  0  3  1  5  6  5  5   8  11   6  16  12   6   8  14   6  13  10
-## 10  0  1  1  2  1  3  5  3  5   8   8  18  15  16  14  12   7   3   8   9
-## 20  0  1  2  0  1  4  3  2  2   7  16   9  19  16  11   8   9  14  12  11
-## 21  0  1  1  3  1  4  4  1  8   2   5  18  19   9   6  11  12   7   6   3
-## 22  0  0  2  3  2  3  2  6  3   8   5  12  10  16   7  14  12   5   4   6
-## 23  0  0  0  3  4  5  1  7  7   8  13  16  15  13   6  12   9  10   3   3
-## 24  0  1  1  1  1  3  3  2  6   3  15  14  13   5  13   7  14   9  10   5
-## 25  0  1  1  1  2  3  5  3  6   3   5  17  16   5  10  10  15   7   5   3
-## 26  0  0  2  1  3  3  2  7  4   4  17   7  11  14   7  13  11   7  12  12
-## 27  0  0  1  2  4  2  2  3  5   7  15   9  12  18  14  16  12   3  11   3
-## 28  0  0  1  1  1  5  1  5  2   2  15  15  13   7  17   4   5  11   4   8
-## 29  0  0  2  2  3  4  6  3  7   6  19  20  18   9   5   4   7  14   8   4
-## 30  0  0  0  1  4  4  6  3  8   6  16  14  15  17   4  14  13   4   4  12
-##    V30
-## 1    8
-## 2    3
-## 3    2
-## 4   11
-## 5    7
-## 6    7
-## 7    2
-## 8    7
-## 9   11
-## 10  11
-## 20   9
-## 21   6
-## 22   9
-## 23   7
-## 24  11
-## 25  11
-## 26   7
-## 27   2
-## 28   7
-## 29   3
-## 30  11
-```
-
-
-Here we have taken rows and columns 1 through 10 and 20 through 30.
-
-
-```r
-dat[seq(1, 12, 3), seq(1, 20, 3)]
-```
-
-```
-##    V1 V4 V7 V10 V13 V16 V19
-## 1   0  3  4   3  10   4  12
-## 4   0  0  2   7   9   8  10
-## 7   0  2  2   8  11  13  10
-## 10  0  2  5   8  12   6  16
-```
+<pre class='in'><code>dat[1:4, 1:10]</code></pre>
 
 
-Here we have used the built-in function `seq()` to take regularly spaced rows and columns.
-For example, we have taken rows 1, 4, 7, and 10, and columns 1, 4, 7, 10, 13, 16, and 19. 
-(Again, we always include the lower bound, but stop when we reach or cross the upper bound.).
-Remember, `1:10` is shorthand for `seq(from = 1, to = 10, by = 1)`.
 
-If we want to know the average inflammation for all patients on all days, we cannot directly take the mean of a data frame. But we can take it from a matrix.
+<div class='out'><pre class='out'><code>  V1 V2 V3 V4 V5 V6 V7 V8 V9 V10
+1  0  0  1  3  1  2  4  7  8   3
+2  0  1  2  1  2  1  3  2  2   6
+3  0  1  1  3  3  2  6  2  5   9
+4  0  0  2  0  4  2  2  1  6   7
+</code></pre></div>
 
-### Matrix
-<!-- FIXME: Repeats verbatim the 00-first-timers/.Rmd content. Keep? -->
-Matrices are a special vector in R. They are not a separate type of object but simply an atomic vector with dimensions; the number of rows and columns.
+The [slice](../../gloss.html#slice) `1:4` means, "Start at index 1 and go to index 4."
 
+The slice does not need to start at 1, e.g. the line below selects rows 5 through 10:
 
-```r
-m <- matrix(nrow = 2, ncol = 2)
-m
-```
 
-```
-##      [,1] [,2]
-## [1,]   NA   NA
-## [2,]   NA   NA
-```
+<pre class='in'><code>dat[5:10, 1:10]</code></pre>
 
-```r
-dim(m)
-```
 
-```
-## [1] 2 2
-```
 
+<div class='out'><pre class='out'><code>   V1 V2 V3 V4 V5 V6 V7 V8 V9 V10
+5   0  1  1  3  3  1  3  5  2   4
+6   0  0  1  2  2  4  2  1  6   4
+7   0  0  2  2  4  2  2  5  5   8
+8   0  0  1  2  3  1  2  3  5   3
+9   0  0  0  3  1  5  6  5  5   8
+10  0  1  1  2  1  3  5  3  5   8
+</code></pre></div>
 
-Matrices are filled column-wise.
+And we don't have to take all the values in the slice---if we provide a [stride](../../gloss.html#stride), we can select evenly spaced values.
+We can accomplish this with the function `seq`.
+The notation `1:10` is shorthand for creating a vector of numbers from 1 to 10 and it can also be created using `seq`:
 
 
-```r
-m <- matrix(1:6, nrow = 2, ncol = 3)
-```
+<pre class='in'><code>1:10</code></pre>
 
 
-Other ways to construct a matrix
 
+<div class='out'><pre class='out'><code> [1]  1  2  3  4  5  6  7  8  9 10
+</code></pre></div>
 
-```r
-m <- 1:10
-dim(m) <- c(2, 5)
-```
 
 
-This takes a vector and transform into a matrix with 2 rows and 5 columns.
+<pre class='in'><code>seq(from = 1, to = 10, by = 1)</code></pre>
 
-Another way is to bind columns or rows using `cbind()` and `rbind()`.
 
 
-```r
-x <- 1:3
-y <- 10:12
-cbind(x, y)
-```
+<div class='out'><pre class='out'><code> [1]  1  2  3  4  5  6  7  8  9 10
+</code></pre></div>
 
-```
-##      x  y
-## [1,] 1 10
-## [2,] 2 11
-## [3,] 3 12
-```
 
-```r
-rbind(x, y)
-```
+<pre class='in'><code>dat[seq(from = 1, to = 10, by = 3), seq(from = 1, to = 10, by = 2)]</code></pre>
 
-```
-##   [,1] [,2] [,3]
-## x    1    2    3
-## y   10   11   12
-```
 
 
-You can also use the `byrow` argument to specify how the matrix is filled. From R's own documentation:
+<div class='out'><pre class='out'><code>   V1 V3 V5 V7 V9
+1   0  1  1  4  8
+4   0  2  4  2  6
+7   0  2  4  2  5
+10  0  1  1  5  5
+</code></pre></div>
 
+Here we have taken rows 1, 4, 7, and 10, and columns 1, 3, 5, 7, and 9.
 
-```r
-mdat <- matrix(c(1, 2, 3, 11, 12, 13), nrow = 2, ncol = 3, byrow = TRUE)
-mdat
-```
+We can use the function `c`, which stands for **c**ombine, to select non-contiguous values:
 
-```
-##      [,1] [,2] [,3]
-## [1,]    1    2    3
-## [2,]   11   12   13
-```
 
+<pre class='in'><code>dat[c(3, 8, 37, 56), c(10, 14, 29)]</code></pre>
 
-Lets convert our data frame to a matrix, but give it a new name:
 
 
-```r
-mat <- data.matrix(dat)
-```
+<div class='out'><pre class='out'><code>   V10 V14 V29
+3    9   5   4
+8    3   5   6
+37   6   9  10
+56   7  11   9
+</code></pre></div>
 
+We also don't have to provide a slice for either the rows or the columns.
+If we don't include a slice for the rows, R returns all the rows; if we don't include a slice for the columns, R returns all the columns.
+If we don't provide a slice for either rows or columns, e.g. `dat[, ]`, R returns the full data frame.
 
-And then take the mean of all the values:
 
+<pre class='in'><code># All columns from row 5
+dat[5, ]</code></pre>
 
-```r
-mean(mat)
-```
 
-```
-## [1] 6.149
-```
 
+<div class='out'><pre class='out'><code>  V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14 V15 V16 V17 V18 V19 V20
+5  0  1  1  3  3  1  3  5  2   4   4   7   6   5   3  10   8  10   6  17
+  V21 V22 V23 V24 V25 V26 V27 V28 V29 V30 V31 V32 V33 V34 V35 V36 V37 V38
+5   9  14   9   7  13   9  12   6   7   7   9   6   3   2   2   4   2   0
+  V39 V40
+5   1   1
+</code></pre></div>
 
-There are lots of useful built-in commands that we can use in R:
 
 
-```r
-paste("maximum inflammation:", max(mat))
-```
+<pre class='in'><code># All rows from column 16
+dat[, 16]</code></pre>
 
-```
-## [1] "maximum inflammation: 20"
-```
 
-```r
-paste("minimum inflammation:", min(mat))
-```
 
-```
-## [1] "minimum inflammation: 0"
-```
+<div class='out'><pre class='out'><code> [1]  4  4 15  8 10 15 13  9 11  6  3  8 12  3  5 10 11  4 11 13 15  5 14
+[24] 13  4  9 13  6  7  6 14  3 15  4 15 11  7 10 15  6  5  6 15 11 15  6
+[47] 11 15 14  4 10 15 11  6 13  8  4 13 12  9
+</code></pre></div>
 
-```r
-paste("standard deviation:", sd(mat))
-```
+Now let's perform some common mathematical operations to learn about our inflammation data.
+When analyzing data we often want to look at partial statistics, such as the maximum value per patient or the average value per day. 
+One way to do this is to select the data we want to create a new temporary data frame, and then perform the calculation on this subset:
 
-```
-## [1] "standard deviation: 4.61479471285207"
-```
 
+<pre class='in'><code># first row, all of the columns
+patient_1 <- dat[1, ]
+# max inflammation for patient 1
+max(patient_1)</code></pre>
 
-When analyzing data, though, we often want to look at partial statistics, such as the maximum value per patient or the average value per day. 
-One way to do this is to select the data we want to create a new temporary array, then ask it to do the calculation:
 
 
-```r
-patient_1 <- dat[1, ]  # first row, all of the columns
-max(patient_1)  # max inflammation for patient 1
-```
-
-```
-## [1] 18
-```
-
+<div class='out'><pre class='out'><code>[1] 18
+</code></pre></div>
 
 We don't actually need to store the row in a variable of its own. 
-Instead, we can combine the selection and the method call:
+Instead, we can combine the selection and the function call:
 
 
-```r
-max(dat[2, ])  # max inflammation for patient 2
-```
-
-```
-## [1] 18
-```
-
-
-__EXERCISES__
-
-1. If `dat` holds our data frame of patient data, what does `dat[3:3, 4:4]` produce? 
-What about `dat[3:3, 4:1]`? Explain the results to the person sitting next to you
-
-
-## Functions - Operations Across Axes
-
-What if we need the maximum inflammation for all patients, or the average for each day? 
-As the diagram below shows, we want to perform the operation across an axis:
-
-<!-- FIXME: needs I presume the rBlocks code here to produce the figure? -->
-
-To support this, in R we can use the `apply()` function:
-
-
-```r
-help(apply)  # r ?apply
-```
-
-
-`apply()` allows us to repeat a function on all of the rows (`MARGIN = 1`), columns (`2`), or both(`1:2`) of a matrix (or higher dimensions of an array).
-
-If each row is a patient, and we want to know each patient's average inflammation, we will need to iterate our method across all of the rows. 
-	
-
-```r
-avg_inflammation <- apply(dat, 2, mean)
-```
-
-
-Some operations, such as the column-wise means have more efficient alternatives. For example `rowMeans()` and `colMeans()`.
-
-```r
-colMeans(dat)
-```
-
-```
-##      V1      V2      V3      V4      V5      V6      V7      V8      V9 
-##  0.0000  0.4500  1.1167  1.7500  2.4333  3.1500  3.8000  3.8833  5.2333 
-##     V10     V11     V12     V13     V14     V15     V16     V17     V18 
-##  5.5167  5.9500  5.9000  8.3500  7.7333  8.3667  9.5000  9.5833 10.6333 
-##     V19     V20     V21     V22     V23     V24     V25     V26     V27 
-## 11.5667 12.3500 13.2500 11.9667 11.0333 10.1667 10.0000  8.6667  9.1500 
-##     V28     V29     V30     V31     V32     V33     V34     V35     V36 
-##  7.2500  7.3333  6.5833  6.0667  5.9500  5.1167  3.6000  3.3000  3.5667 
-##     V37     V38     V39     V40 
-##  2.4833  1.5000  1.1333  0.5667
-```
-
-
-### Challenge  
-1. Find the maximum and minimum values for inflammation at each day (rows are patients, and columns are days).
-2. Save these values to a varible.
-3. What is the length of your new variable?
+<pre class='in'><code># max inflammation for patient 2
+max(dat[2, ])</code></pre>
 
 
 
+<div class='out'><pre class='out'><code>[1] 18
+</code></pre></div>
 
-We can also create a vector of our study days (the number of columns in data)
-
-
-```r
-tempo <- 1:40
-# r
-tempo <- 1:ncol(dat)
-```
+R also has functions for other commons calculations, e.g. finding the minimum, mean, median, and standard deviation of the data:
 
 
-Notice that the object was named `tempo` instead of `time`. `time` is a R built-in function, and as good practice avoid giving existing function names to your objects. 
-
-Now that we have all this summary information, we can put it back together into a data frame that we can use for further analysis and plotting, provided they are the same length.
-
-
-```r
-d.summary <- data.frame(tempo, avg_inflammation, min_inflammation, max_inflammation)
-```
-
-
-## Plotting  
-The mathematician Richard Hamming once said
-
-> The purpose of computing is insight, not numbers
-
-and the best way to develop insight is often to visualize data. Visualization deserves an entire lecture (or course) of its own, but we can explore a few features of R's base plotting package. 
-
-Lets use the average inflammation data that we saved and plot it over the study time. 
-
-
-```r
-plot(tempo, avg_inflammation)
-```
-
-![plot of chunk plot-avg-inflammation](figure/01-starting-with-data-plot-avg-inflammation.png) 
-
-
-The result is roughly a linear rise and fall, which is suspicious: based on other studies, we expect a sharper rise and slower fall. Let's have a look at two other statistics:
-
-
-```r
-plot(tempo, max_inflammation)
-```
-
-![plot of chunk plot-max-inflammation](figure/01-starting-with-data-plot-max-inflammation.png) 
+<pre class='in'><code># minimum inflammation on day 7
+min(dat[, 7])</code></pre>
 
 
 
-```r
-plot(tempo, min_inflammation)
-```
+<div class='out'><pre class='out'><code>[1] 1
+</code></pre></div>
 
-![plot of chunk plot-min-inflammation](figure/01-starting-with-data-plot-min-inflammation.png) 
+
+
+<pre class='in'><code># mean inflammation on day 7
+mean(dat[, 7])</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 3.8
+</code></pre></div>
+
+
+
+<pre class='in'><code># median inflammation on day 7
+median(dat[, 7])</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 4
+</code></pre></div>
+
+
+
+<pre class='in'><code># standard deviation of inflammation on day 7
+sd(dat[, 7])</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 1.725
+</code></pre></div>
+
+What if we need the maximum inflammation for all patients, or the average for each day?
+As the diagram below shows, we want to perform the operation across a margin of the data frame:
+
+<img src="figure/r-operations-across-axes.svg" alt="Operations Across Axes" />
+
+To support this, we can use the `apply` function.
+
+> **Tip:** To learn about a function in R, e.g. `apply`, we can read its help documention by running `help(apply)` or `?apply`.
+
+`apply` allows us to repeat a function on all of the rows (`MARGIN = 1`) or columns (`MARGIN = 2`) of a data frame.
+
+Thus, to obtain the average inflammation of each patient we will need to calculate the mean of all of the rows (`MARGIN = 1`) of the data frame.
+
+
+<pre class='in'><code>avg_patient_inflammation <- apply(dat, 1, mean)</code></pre>
+
+And to obtain the average inflammation of each day we will need to calculate the mean of all of the columns (`MARGIN = 2`) of the data frame.
+
+
+<pre class='in'><code>avg_day_inflammation <- apply(dat, 2, mean)</code></pre>
+
+Since the second argument to `apply` is `MARGIN`, the above command is equivalent to `apply(dat, MARGIN = 2, mean)`.
+We'll learn why this is so in the next lesson.
+
+> **Tip:** Some common operations have more efficient alternatives.
+For example, you can calculate the row-wise or column-wise means with `rowMeans` and `colMeans`, respectively.
+
+#### Challenge
+
+A subsection of a data frame is called a [slice](../../gloss.html#slice).
+We can take slices of character vectors as well:
+
+
+<pre class='in'><code>element <- c("o", "x", "y", "g", "e", "n")
+# first three characters
+element[1:3]</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] "o" "x" "y"
+</code></pre></div>
+
+
+
+<pre class='in'><code># last three characters
+element[4:6]</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] "g" "e" "n"
+</code></pre></div>
+
+1.  If the first four characters are selected using the slice `element[1:4]`, how can we obtain the first four characters in reverse order?
+    
+1.  What is `element[-1]`?
+    What is `element[-4]`?
+    Given those answers,
+    explain what `element[-1:-4]` does.
+
+1.  Use a slice of `element` to create a new character vector that spells the word "eon", e.g. `c("e", "o", "n")`.
+
+### Plotting
+
+The mathematician Richard Hamming once said, "The purpose of computing is insight, not numbers," and the best way to develop insight is often to visualize data.
+Visualization deserves an entire lecture (or course) of its own, but we can explore a few of R's plotting features. 
+
+Let's take a look at the average inflammation over time.
+Recall that we already calculated these values above using `apply(dat, 2, mean)` and saved them in the variable `avg_day_inflammation`.
+Plotting the values is done with the function `plot`.
+
+
+<pre class='in'><code>plot(avg_day_inflammation)</code></pre>
+
+<img src="figure/01-starting-with-data-plot-avg-inflammation.png" title="plot of chunk plot-avg-inflammation" alt="plot of chunk plot-avg-inflammation" style="display: block; margin: auto;" />
+
+Above, we gave the function `plot` a vector of numbers corresponding to the average inflammation per day across all patients.
+`plot` created a scatter plot where the y-axis is the average inflammation level and the x-axis is the order, or index, of the values in the vector, which in this case correspond to the 40 days of treatment.
+The result is roughly a linear rise and fall, which is suspicious: based on other studies, we expect a sharper rise and slower fall.
+Let's have a look at two other statistics: the maximum and minimum inflammation per day.
+
+
+<pre class='in'><code>max_day_inflammation <- apply(dat, 2, max)
+plot(max_day_inflammation)</code></pre>
+
+<img src="figure/01-starting-with-data-plot-max-inflammation.png" title="plot of chunk plot-max-inflammation" alt="plot of chunk plot-max-inflammation" style="display: block; margin: auto;" />
+
+
+<pre class='in'><code>min_day_inflammation <- apply(dat, 2, min)
+plot(min_day_inflammation)</code></pre>
+
+<img src="figure/01-starting-with-data-plot-min-inflammation.png" title="plot of chunk plot-min-inflammation" alt="plot of chunk plot-min-inflammation" style="display: block; margin: auto;" />
 
 The maximum value rises and falls perfectly smoothly, while the minimum seems to be a step function. Neither result seems particularly likely, so either there's a mistake in our calculations or something is wrong with our data.
 
-__EXERCISES__
+#### Challenge
 
-1. Create a plot showing the standard deviation of the inflammation data 
+Create a plot showing the standard deviation of the inflammation data 
 for each day across all patients.
 
-## Key Points
+#### Key Points
 
-* Import a package into your workspace using `library("pkgname")`.
-* The key data types in R?
 * Use `variable <- value` to assign a value to a variable in order to record it in memory.
 * Objects are created on demand whenever a value is assigned to them.
-* Use `print(something)` (or just `something`) to display `something`.
-* The expression `dim()` gives the dimensions of a data frame or matrix.
-* Use `object[x, y]` to select a single element from an array.
-* Object indices start at 1.
+* The function `dim` gives the dimensions of a data frame.
+* Use `object[x, y]` to select a single element from a data frame.
 * Use `from:to` to specify a sequence that includes the indices from `from` to `to`.
+* All the indexing and slicing that works on data frames also works on vectors.
 * Use `#` to add comments to programs.
-* Use `mean()`, `max()`, `min()` and `sd()` to calculate simple statistics.
-* Update vectors using `c()`
-<!-- * Write a simple for loop -->
-* Use base R to create simple visualizations.
+* Use `mean`, `max`, `min` and `sd` to calculate simple statistics.
+* Use `apply` to calculate statistics across the rows or columns of a data frame.
+* Use `plot` to create simple visualizations.
 
-## Next Steps
+#### Next Steps
 
-Our work so far has convinced us that something's wrong with our first data file. We would like to check the other 11 the same way, but typing in the same commands repeatedly is tedious and error-prone. Since computers don't get bored (that we know of), we should create a way to do a complete analysis with a single command, and then figure out how to repeat that step once for each file. These operations are the subjects of the next two lessons.
+Our work so far has convinced us that something's wrong with our first data file.
+We would like to check the other 11 the same way, but typing in the same commands repeatedly is tedious and error-prone.
+Since computers don't get bored (that we know of), we should create a way to do a complete analysis with a single command, and then figure out how to repeat that step once for each file.
+These operations are the subjects of the next two lessons.

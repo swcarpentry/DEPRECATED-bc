@@ -3,112 +3,98 @@ layout: lesson
 root: ../..
 ---
 
-```{r, echo=FALSE}
-opts_chunk$set(results="markup", fig.path="figure/01-starting-with-data-")
+```{r, include = FALSE}
+source("chunk_options.R")
+opts_chunk$set(fig.path = "figure/01-starting-with-data-")
 ```
-# Analyzing Patient Data
+
+## Analyzing Patient Data
 
 We are studying inflammation in patients who have been given a new treatment for arthritis,
 and need to analyze the first dozen data sets. 
-The data sets are stored in `.csv` each row holds information for a single patient, and the columns represent successive days. 
+The data sets are stored in [comma-separated values](../../gloss.html#comma-separeted-values) (CSV) format: each row holds information for a single patient, and the columns represent successive days. 
 The first few rows of our first file look like this:
 
-	0,0,1,3,1,2,4,7,8,3,3,3,10,5,7,4,7,7,12,18,6,13,11,11,7,7,4,6,8,8,4,4,5,7,3,4,2,3,0,0
-	0,1,2,1,2,1,3,2,2,6,10,11,5,9,4,4,7,16,8,6,18,4,12,5,12,7,11,5,11,3,3,5,4,4,5,5,1,1,0,1
-	0,1,1,3,3,2,6,2,5,9,5,7,4,5,4,15,5,11,9,10,19,14,12,17,7,12,11,7,4,2,10,5,4,2,2,3,2,2,1,1
-	0,0,2,0,4,2,2,1,6,7,10,7,9,13,8,8,15,10,10,7,17,4,4,7,6,15,6,4,9,11,3,5,6,3,3,4,2,3,2,1
-	0,1,1,3,3,1,3,5,2,4,4,7,6,5,3,10,8,10,6,17,9,14,9,7,13,9,12,6,7,7,9,6,3,2,2,4,2,0,1,1`
+```{r echo = FALSE}
+tmp <- read.csv("inflammation-01.csv", header = FALSE, nrows = 5)
+write.table(tmp, quote = FALSE, sep = ",", row.names = FALSE, col.names = FALSE)
+rm(tmp)
+```
 
-### We want to:
+We want to:
 
 * load that data into memory,
 * calculate the average inflammation per day across all patients, and
 * plot the result.
+
 To do all that, we'll have to learn a little bit about programming.
 
-### Objectives
-* Explain what a library is, and what libraries are used for.
-* Load an R library and use the things it contains.
+#### Objectives
+
 * Read tabular data from a file into a program.
 * Assign values to variables.
-* Learn about data types
 * Select individual values and subsections from data.
-* Perform operations on arrays of data.
+* Perform operations on a data frame of data.
 * Display simple graphs.
 
-## Loading Data
+### Loading Data
 
-Words are useful, but what's more useful are the sentences and stories we use them to build. 
-Similarly, while a lot of powerful tools are built into languages like R, even more lives in the libraries they are used to build.
-Importing a library is like getting a piece of lab equipment out of a storage locker and setting it up on the bench. 
-Once it's done, we can ask the library to do things for us.
-
-To load our inflammation data, we need to locate our data.
-We will use `setwd()` and `read.csv()`. These are built-in functions in R. Let's check out the help screen.
-
-* download the inflammation file
-* put it in your working directory for these exercises
-
-Change the current working directory to the location of the CSV file, e.g.
+To load our inflammation data, first we need to locate our data.
+We can change the current working directory to the location of the CSV files using the function `setwd`.
+For example, if the CSV files are located in a directory named `swc` in our home directory, we would change the working directory using the following command:
 
 ```{r, eval=FALSE}
-setwd("pathname")
-```
-then load the data into R
-```{r}
-read.csv("data/inflammation-01.csv", header = FALSE)
+setwd("~/swc")
 ```
 
-The expression `read.csv()` is a function call that asks R to run the function `read.csv()` that belongs to base R. 
+Just like in the Unix Shell, we type the command and then press `Enter` (or `return`).
+Alternatively you can change the working directory using the RStudio GUI using the menu option `Session` -> `Set Working Directory` -> `Choose Directory...`
 
-`read.csv()` has many arguments including the name of the file we want to read, and the delimiter that separates values on a line. 
+Now we could load the data into R using `read.csv`:
 
-When we are finished typing and press `Control+Enter` on Windows or `Cmd + Return` on Mac, the console runs our command. 
-Since we haven't told it to do anything else with the function's output, the console displays it.
-In this case, that output is the data we just loaded. 
+```{r, results="hide"}
+read.csv(file = "inflammation-01.csv", header = FALSE)
+```
 
-Our call to `read.csv()` read the file, but didn't save the data as an object. 
-To do that, we need to assign the data frame to a variable. 
-A variable is just a name for a value, such as `x`, `current_temperature`, or `subject_id`. 
+The expression `read.csv(...)` is a [function call](../../gloss.html#function-call) that asks R to run the function `read.csv`. 
+
+`read.csv` has two [arguments](../../gloss.html#argument): the name of the file we want to read, and whether the first line of the file contains names for the columns of data.
+The filename needs to be a character string (or [string](../../gloss.html#string) for short), so we put it in quotes.
+Assigning the second argument, `header`, to be `FALSE` indicates that the data file does not have column headers.
+We'll talk more about the value `FALSE`, and its converse `TRUE`, in lesson 04.
+
+The utility of a function is that it will perform its given action on whatever value is passed to the named argument(s).
+For example, in this case if we provided the name of a different file to the argument `file`, `read.csv` would read it instead.
+We'll learn more of the details about functions and their arguments in the next lesson.
+
+Since we didn't tell it to do anything else with the function's output, the console will display the full contents of the file `inflammation-01.csv`.
+Try it out.
+
+`read.csv` read the file, but didn't save the data in memory.
+To do that, we need to assign the data frame to a variable.
+A variable is just a name for a value, such as `x`, `current_temperature`, or `subject_id`.
 We can create a new variable simply by assigning a value to it using `<-`
 
 ```{r}
 weight_kg <- 55
 ```
 
-Once a variable has a value, we can print it:
+Once a variable has a value, we can print it by typing the name of the variable and hitting `Enter` (or `return`).
+In general, R will print to the console any object returned by a function or operation *unless* we assign it to a variable.
 
 ```{r}
 weight_kg
 ```
 
-and do arithmetic with it:
+We can do arithmetic with the variable:
 
 ```{r}
+# weight in pounds:
 2.2 * weight_kg
 ```
 
-We can use the function `paste()` to strings made up from different objects, if we separate them with commas.
-
-```{r}
-paste("weight in pounds:", 2.2 * weight_kg)
-```
-
-To write lines of text to the screen, we can use `cat()` or `writeLines()`
-
-
-```{r}
-string <- paste("weight in pounds:", 2.2 * weight_kg)
-cat(string)
-cat(string, "\n")
-writeLines(string)
-```
-
-In normal use however, R will print to the console an object returned by a function or operation *unless* we assign it to a variable. Remember, to view a variable just type the name of the variable and hit return
-
-```{r}
-string
-```
+> **Tip:** We can add comments to our code using the `#` character.
+It is useful to document our code in this way so that others (and us the next time we read it) have an easier time following what the code is doing.
 
 We can also change an object's value by assigning it a new value:
 
@@ -119,9 +105,12 @@ weight_kg
 ```
 
 If we imagine the variable as a sticky note with a name written on it, 
-assignment is like putting the sticky note on a particular value
+assignment is like putting the sticky note on a particular value:
+
+<img src="../python/img/python-sticky-note-variables-01.svg" alt="Variables as Sticky Notes" />
+
 This means that assigning a value to one object does not change the values of other variables. 
-For example, let's store the subject's weight in pounds in a variable
+For example, let's store the subject's weight in pounds in a variable:
 
 ```{r}
 weight_lb <- 2.2 * weight_kg
@@ -130,6 +119,8 @@ weight_kg
 # ...and in pounds
 weight_lb
 ```
+
+<img src="../python/img/python-sticky-note-variables-02.svg" alt="Creating Another Variable" />
 
 and then change `weight_kg`:
 
@@ -141,108 +132,56 @@ weight_kg
 weight_lb
 ```
 
-__Updating a Variable__
+<img src="../python/img/python-sticky-note-variables-03.svg" alt="Updating a Variable" />
 
 Since `weight_lb` doesn't "remember" where its value came from, it isn't automatically updated when `weight_kg` changes. 
 This is different from the way spreadsheets work.
 
-__Challenges__
-
-Draw diagrams showing what variables refer to what values after each statement in the following program:
-
-```{r}	
-mass <- 47.5
-age  <- 122
-mass <- mass * 2.0
-age  <- age - 20
-```
-
-We can also add to variable that are vectors, and update them by making them longer. 
-For example, if we are creating a vector of patient weights, we could update that vector using `c()`. `c()` takes any number of vectors as arguments, and combines or *concatenates* them, in the order supplied, into a single vector.
-
-```{r}
-weights <- 100
-weights <- c(weights, 80)
-```
-
-What happens here is that we take the original vector weights, and we are adding the second item to the end of the first one. We can do this over and over again to build a vector or a dataset. As we program, this may be useful to autoupdate results that we are collecting or calculating.
-
 Now that we know how to assign things to variables, let's re-run `read.csv` and save its result:
 
 ```{r}
-dat <- read.csv('data/inflammation-01.csv', header = FALSE)
+dat <- read.csv(file = "inflammation-01.csv", header = FALSE)
 ```
 
-This statement doesn't produce any output because assignment doesn't display anything. If we want to check that our data has been loaded, we can print the variable's value:
-
-```{r}
-dat
-```
-
-For large data sets it is convenient to use the `head()` to display the first few rows of data
+This statement doesn't produce any output because assignment doesn't display anything.
+If we want to check that our data has been loaded, we can print the variable's value.
+However, for large data sets it is convenient to use the function `head` to display only the first few rows of data.
 
 ```{r}
 head(dat)
 ```
 
-__BREAK__
-* Make sure everyone has imported the data
-* How many rows and columns there are
-* What kind of data type is it?
+#### Challenge
 
-## Manipulating Data
+Draw diagrams showing what variables refer to what values after each statement in the following program:
+
+	mass <- 47.5
+	age <- 122
+	mass <- mass * 2.0
+	age <- age - 20
+
+### Manipulating Data
 
 Now that our data is in memory, we can start doing things with it. 
 First, let's ask what type of thing `dat` *is*:
 
 ```{r}
 class(dat)
-str(dat)
 ```
 
 The output tells us that data currently is a data frame in R. 
-This is similar to a spreadsheet in MS Excel, that many of us are familiar with using.
+This is similar to a spreadsheet in MS Excel that many of us are familiar with using.
+Data frames are very useful for storing data because you can have a continuous variable, e.g. rainfall, in one column and a categorical variable, e.g. month, in another.
 
-### data frames
-<!-- FIXME: Repeats verbatim the 00-first-timers/.Rmd content. Keep? -->
-The *de facto* data structure for most tabular data and what we use for statistics.
-
-Data frames can have additional attributes such as `rownames()`, which can be useful for annotating data, like `subject_id` or `sample_id`. But most of the time they are not used.
-
-Some additional information on data frames:
-
-* Usually created by `read.csv()` and `read.table()`.
-* Can convert to matrix with `data.matrix()` (preferred) or `as.matrix()`
-* Coercion will be forced and not always what you expect.
-* Can also create with `data.frame()` function.
-* Find the number of rows and columns with `nrow(dat)` and `ncol(dat)`, respectively.
-* Rownames are usually 1, 2, ..., n.
-
-#### Useful data frame functions
-
-* `head()` - shown first 6 rows
-* `tail()` - show last 6 rows
-* `dim()` - returns the dimensions
-* `nrow()` - number of rows
-* `ncol()` - number of columns
-* `str()` - structure of each column
-* `names()` - shows the `names` attribute for a data frame, which gives the column names.
-
-`str` output tells us the dimensions and the data types (int is integer) of each column.
-
-We can see what its shape is like this:
+We can see the dimensions, or [shape](../../gloss.html#shape), of the data frame like this:
 
 ```{r}
 dim(dat)
-nrow(dat)
-ncol(dat)
 ```
 
-This tells us that data has `r nrow(dat)` rows and `r ncol(dat)` columns.
+This tells us that our data frame, `dat`, has `r nrow(dat)` rows and `r ncol(dat)` columns.
 
-### Indexing
-
-If we want to get a single value from the data frame, we must provide an row and column indices for the value we want in square brackets:
+If we want to get a single value from the data frame, we can provide an [index](../../gloss.html#index) in square brackets, just as we do in math:
 
 ```{r}
 # first value in dat
@@ -251,222 +190,187 @@ dat[1, 1]
 dat[30, 20]
 ```
 
-R indexes starting at 1. Programming languages like Fortran, MATLAB, and R start counting at 1, because that's what human beings have done for thousands of years. 
-Languages in the C family (including C++, Java, Perl, and Python) count from 0 because that's simpler for computers to do. 
-
-An index like `[30, 20]` selects a single element of data frame, but we can select whole sections as well. 
+An index like `[30, 20]` selects a single element of a data frame, but we can select whole sections as well. 
 For example, we can select the first ten days (columns) of values for the first four patients (rows) like this:
 
 ```{r}
 dat[1:4, 1:10]
 ```
 
-The notation `1:4` means, "Start at index 1 and go to index 4." 
-We don't start slices at 0:
+The [slice](../../gloss.html#slice) `1:4` means, "Start at index 1 and go to index 4."
+
+The slice does not need to start at 1, e.g. the line below selects rows 5 through 10:
 
 ```{r}
-dat[5:10, 0:10]
+dat[5:10, 1:10]
 ```
 
-and we don't have to take all the values in the slice, we can use `c()` to select certain values or groups of values:
+And we don't have to take all the values in the slice---if we provide a [stride](../../gloss.html#stride), we can select evenly spaced values.
+We can accomplish this with the function `seq`.
+The notation `1:10` is shorthand for creating a vector of numbers from 1 to 10 and it can also be created using `seq`:
 
 ```{r}
-dat[c(1:10, 20:30), c(1:10, 20:30)]
+1:10
+seq(from = 1, to = 10, by = 1)
 ```
 
-Here we have taken rows and columns 1 through 10 and 20 through 30.
-
 ```{r}
-dat[seq(1, 12, 3), seq(1, 20, 3)]
+dat[seq(from = 1, to = 10, by = 3), seq(from = 1, to = 10, by = 2)]
 ```
 
-Here we have used the built-in function `seq()` to take regularly spaced rows and columns.
-For example, we have taken rows 1, 4, 7, and 10, and columns 1, 4, 7, 10, 13, 16, and 19. 
-(Again, we always include the lower bound, but stop when we reach or cross the upper bound.).
-Remember, `1:10` is shorthand for `seq(from = 1, to = 10, by = 1)`.
+Here we have taken rows 1, 4, 7, and 10, and columns 1, 3, 5, 7, and 9.
 
-If we want to know the average inflammation for all patients on all days, we cannot directly take the mean of a data frame. But we can take it from a matrix.
-
-### Matrix
-<!-- FIXME: Repeats verbatim the 00-first-timers/.Rmd content. Keep? -->
-Matrices are a special vector in R. They are not a separate type of object but simply an atomic vector with dimensions; the number of rows and columns.
+We can use the function `c`, which stands for **c**ombine, to select non-contiguous values:
 
 ```{r}
-m <- matrix(nrow = 2, ncol = 2)
-m
-dim(m)
+dat[c(3, 8, 37, 56), c(10, 14, 29)]
 ```
 
-Matrices are filled column-wise.
+We also don't have to provide a slice for either the rows or the columns.
+If we don't include a slice for the rows, R returns all the rows; if we don't include a slice for the columns, R returns all the columns.
+If we don't provide a slice for either rows or columns, e.g. `dat[, ]`, R returns the full data frame.
 
 ```{r}
-m <- matrix(1:6, nrow = 2, ncol = 3)
+# All columns from row 5
+dat[5, ]
+# All rows from column 16
+dat[, 16]
 ```
 
-Other ways to construct a matrix
+Now let's perform some common mathematical operations to learn about our inflammation data.
+When analyzing data we often want to look at partial statistics, such as the maximum value per patient or the average value per day. 
+One way to do this is to select the data we want to create a new temporary data frame, and then perform the calculation on this subset:
 
 ```{r}
-m      <- 1:10
-dim(m) <- c(2, 5)
-```
-
-This takes a vector and transform into a matrix with 2 rows and 5 columns.
-
-Another way is to bind columns or rows using `cbind()` and `rbind()`.
-
-```{r}
-x <- 1:3
-y <- 10:12
-cbind(x, y)
-rbind(x, y)
-```
-
-You can also use the `byrow` argument to specify how the matrix is filled. From R's own documentation:
-
-```{r}
-mdat <- matrix(c(1,2,3, 11,12,13), nrow = 2, ncol = 3, byrow = TRUE)
-mdat
-```
-
-Lets convert our data frame to a matrix, but give it a new name:
-
-```{r}
-mat <- data.matrix(dat)
-```
-
-And then take the mean of all the values:
-
-```{r}
-mean(mat)
-```
-
-There are lots of useful built-in commands that we can use in R:
-
-```{r}
-paste('maximum inflammation:', max(mat))
-paste('minimum inflammation:', min(mat))
-paste('standard deviation:', sd(mat))
-```
-
-When analyzing data, though, we often want to look at partial statistics, such as the maximum value per patient or the average value per day. 
-One way to do this is to select the data we want to create a new temporary array, then ask it to do the calculation:
-
-```{r}
-patient_1 <- dat[1, ] # first row, all of the columns
-max(patient_1)        # max inflammation for patient 1
+# first row, all of the columns
+patient_1 <- dat[1, ]
+# max inflammation for patient 1
+max(patient_1)
 ```
 
 We don't actually need to store the row in a variable of its own. 
-Instead, we can combine the selection and the method call:
+Instead, we can combine the selection and the function call:
 
 ```{r}
-max(dat[2,])          # max inflammation for patient 2
+# max inflammation for patient 2
+max(dat[2, ])
 ```
 
-__EXERCISES__
-
-1. If `dat` holds our data frame of patient data, what does `dat[3:3, 4:4]` produce? 
-What about `dat[3:3, 4:1]`? Explain the results to the person sitting next to you
-
-
-## Functions - Operations Across Axes
-
-What if we need the maximum inflammation for all patients, or the average for each day? 
-As the diagram below shows, we want to perform the operation across an axis:
-
-<!-- FIXME: needs I presume the rBlocks code here to produce the figure? -->
-
-To support this, in R we can use the `apply()` function:
-
-```{r, eval=FALSE}
-help(apply) # r ?apply
-```
-
-`apply()` allows us to repeat a function on all of the rows (`MARGIN = 1`), columns (`2`), or both(`1:2`) of a matrix (or higher dimensions of an array).
-
-If each row is a patient, and we want to know each patient's average inflammation, we will need to iterate our method across all of the rows. 
-	
-```{r}
-avg_inflammation <- apply(dat, 2, mean)
-```
-
-Some operations, such as the column-wise means have more efficient alternatives. For example `rowMeans()` and `colMeans()`.
-```{r}
-colMeans(dat)
-```
-
-### Challenge  
-1. Find the maximum and minimum values for inflammation at each day (rows are patients, and columns are days).
-2. Save these values to a varible.
-3. What is the length of your new variable?
-
-```{r, echo=FALSE}
-min_inflammation <- apply(dat, 2, min)
-max_inflammation <- apply(dat, 2, max)
-```
-
-We can also create a vector of our study days (the number of columns in data)
+R also has functions for other commons calculations, e.g. finding the minimum, mean, median, and standard deviation of the data:
 
 ```{r}
-tempo <- 1:40
-# r
-tempo <- 1:ncol(dat)
+# minimum inflammation on day 7
+min(dat[, 7])
+# mean inflammation on day 7
+mean(dat[, 7])
+# median inflammation on day 7
+median(dat[, 7])
+# standard deviation of inflammation on day 7
+sd(dat[, 7])
 ```
 
-Notice that the object was named `tempo` instead of `time`. `time` is a R built-in function, and as good practice avoid giving existing function names to your objects. 
+What if we need the maximum inflammation for all patients, or the average for each day?
+As the diagram below shows, we want to perform the operation across a margin of the data frame:
 
-Now that we have all this summary information, we can put it back together into a data frame that we can use for further analysis and plotting, provided they are the same length.
+<img src="figure/r-operations-across-axes.svg" alt="Operations Across Axes" />
+
+To support this, we can use the `apply` function.
+
+> **Tip:** To learn about a function in R, e.g. `apply`, we can read its help documention by running `help(apply)` or `?apply`.
+
+`apply` allows us to repeat a function on all of the rows (`MARGIN = 1`) or columns (`MARGIN = 2`) of a data frame.
+
+Thus, to obtain the average inflammation of each patient we will need to calculate the mean of all of the rows (`MARGIN = 1`) of the data frame.
 
 ```{r}
-d.summary <- data.frame(tempo, avg_inflammation, min_inflammation, max_inflammation)
+avg_patient_inflammation <- apply(dat, 1, mean)
 ```
 
-## Plotting  
-The mathematician Richard Hamming once said
+And to obtain the average inflammation of each day we will need to calculate the mean of all of the columns (`MARGIN = 2`) of the data frame.
 
-> The purpose of computing is insight, not numbers
-
-and the best way to develop insight is often to visualize data. Visualization deserves an entire lecture (or course) of its own, but we can explore a few features of R's base plotting package. 
-
-Lets use the average inflammation data that we saved and plot it over the study time. 
-
-```{r, plot-avg-inflammation}
-plot(tempo, avg_inflammation)
+```{r}
+avg_day_inflammation <- apply(dat, 2, mean)
 ```
 
-The result is roughly a linear rise and fall, which is suspicious: based on other studies, we expect a sharper rise and slower fall. Let's have a look at two other statistics:
+Since the second argument to `apply` is `MARGIN`, the above command is equivalent to `apply(dat, MARGIN = 2, mean)`.
+We'll learn why this is so in the next lesson.
 
-```{r, plot-max-inflammation}
-plot(tempo, max_inflammation)
+> **Tip:** Some common operations have more efficient alternatives.
+For example, you can calculate the row-wise or column-wise means with `rowMeans` and `colMeans`, respectively.
+
+#### Challenge
+
+A subsection of a data frame is called a [slice](../../gloss.html#slice).
+We can take slices of character vectors as well:
+
+```{r}
+element <- c("o", "x", "y", "g", "e", "n")
+# first three characters
+element[1:3]
+# last three characters
+element[4:6]
 ```
 
-```{r, plot-min-inflammation}
-plot(tempo, min_inflammation)
+1.  If the first four characters are selected using the slice `element[1:4]`, how can we obtain the first four characters in reverse order?
+    
+1.  What is `element[-1]`?
+    What is `element[-4]`?
+    Given those answers,
+    explain what `element[-1:-4]` does.
+
+1.  Use a slice of `element` to create a new character vector that spells the word "eon", e.g. `c("e", "o", "n")`.
+
+### Plotting
+
+The mathematician Richard Hamming once said, "The purpose of computing is insight, not numbers," and the best way to develop insight is often to visualize data.
+Visualization deserves an entire lecture (or course) of its own, but we can explore a few of R's plotting features. 
+
+Let's take a look at the average inflammation over time.
+Recall that we already calculated these values above using `apply(dat, 2, mean)` and saved them in the variable `avg_day_inflammation`.
+Plotting the values is done with the function `plot`.
+
+```{r plot-avg-inflammation}
+plot(avg_day_inflammation)
 ```
+
+Above, we gave the function `plot` a vector of numbers corresponding to the average inflammation per day across all patients.
+`plot` created a scatter plot where the y-axis is the average inflammation level and the x-axis is the order, or index, of the values in the vector, which in this case correspond to the 40 days of treatment.
+The result is roughly a linear rise and fall, which is suspicious: based on other studies, we expect a sharper rise and slower fall.
+Let's have a look at two other statistics: the maximum and minimum inflammation per day.
+
+```{r plot-max-inflammation}
+max_day_inflammation <- apply(dat, 2, max)
+plot(max_day_inflammation)
+```
+
+```{r plot-min-inflammation}
+min_day_inflammation <- apply(dat, 2, min)
+plot(min_day_inflammation)
+```
+
 The maximum value rises and falls perfectly smoothly, while the minimum seems to be a step function. Neither result seems particularly likely, so either there's a mistake in our calculations or something is wrong with our data.
 
-__EXERCISES__
+#### Challenge
 
-1. Create a plot showing the standard deviation of the inflammation data 
+Create a plot showing the standard deviation of the inflammation data 
 for each day across all patients.
 
-## Key Points
+#### Key Points
 
-* Import a package into your workspace using `library("pkgname")`.
-* The key data types in R?
 * Use `variable <- value` to assign a value to a variable in order to record it in memory.
 * Objects are created on demand whenever a value is assigned to them.
-* Use `print(something)` (or just `something`) to display `something`.
-* The expression `dim()` gives the dimensions of a data frame or matrix.
-* Use `object[x, y]` to select a single element from an array.
-* Object indices start at 1.
+* The function `dim` gives the dimensions of a data frame.
+* Use `object[x, y]` to select a single element from a data frame.
 * Use `from:to` to specify a sequence that includes the indices from `from` to `to`.
+* All the indexing and slicing that works on data frames also works on vectors.
 * Use `#` to add comments to programs.
-* Use `mean()`, `max()`, `min()` and `sd()` to calculate simple statistics.
-* Update vectors using `c()`
-<!-- * Write a simple for loop -->
-* Use base R to create simple visualizations.
+* Use `mean`, `max`, `min` and `sd` to calculate simple statistics.
+* Use `apply` to calculate statistics across the rows or columns of a data frame.
+* Use `plot` to create simple visualizations.
 
-## Next Steps
+#### Next Steps
 
-Our work so far has convinced us that something's wrong with our first data file. We would like to check the other 11 the same way, but typing in the same commands repeatedly is tedious and error-prone. Since computers don't get bored (that we know of), we should create a way to do a complete analysis with a single command, and then figure out how to repeat that step once for each file. These operations are the subjects of the next two lessons.
+Our work so far has convinced us that something's wrong with our first data file.
+We would like to check the other 11 the same way, but typing in the same commands repeatedly is tedious and error-prone.
+Since computers don't get bored (that we know of), we should create a way to do a complete analysis with a single command, and then figure out how to repeat that step once for each file.
+These operations are the subjects of the next two lessons.

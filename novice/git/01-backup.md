@@ -28,7 +28,7 @@ version control is much better for this than this:
   <p>"Piled Higher and Deeper" by Jorge Cham, http://www.phdcomics.com</p>
 </div>
 
-#### Setting Up
+### Setting Up
 
 The first time we use Git on a new machine,
 we need to configure a few things.
@@ -59,7 +59,7 @@ we're telling Git:
 The four commands above only need to be run once:
 the flag `--global` tells Git to use the settings for every project on this machine.
 
-#### Creating a Repository
+### Creating a Repository
 
 Once Git is configured,
 we can start using it.
@@ -119,7 +119,7 @@ nothing to commit (create/copy files and use "git add" to track)
 ~~~
 {:class="out"}
 
-#### Tracking Changes to Files
+### Tracking Changes to Files
 
 Let's create a file called `mars.txt` that contains some notes
 about the Red Planet's suitability as a base.
@@ -281,7 +281,7 @@ and the log message Git was given when the revision was created.
 > so that our filesystem doesn't become cluttered
 > (and so that we can't accidentally edit or delete an old version).
 
-#### Changing a File
+### Changing a File
 
 Now suppose Dracula adds more information to the file.
 (Again, we'll edit with `nano` and then `cat` the file to show its contents;
@@ -348,8 +348,8 @@ it is actually a series of commands for tools like editors and `patch`
 telling them how to reconstruct one file given the other.
 If we can break it down into pieces:
 
-1.  The first line tells us that Git is using the Unix `diff` command
-    to compare the old and new versions of the file.
+1.  The first line tells us that Git is producing output similar to the Unix `diff` command
+    comparing the old and new versions of the file.
 2.  The second line tells exactly which [revisions](../../gloss.html#revision) of the file
     Git is comparing;
     `df0654a` and `315bf3a` are unique computer-generated labels for those revisions.
@@ -534,7 +534,14 @@ Date:   Thu Aug 22 09:51:46 2013 -0400
 ~~~
 {:class="out"}
 
-#### Exploring History
+To recap, when we want to add changes to our repository,
+we first need to add the changed files to the staging area
+(`git add`) and then commit the staged changes to the
+repository (`git commit`):
+
+<img src="img/git-committing.svg" alt="The Git Commit Workflow" />
+
+### Exploring History
 
 If we want to see what we changed when,
 we use `git diff` again,
@@ -627,7 +634,7 @@ index df0654a..b36abfd 100644
 ~~~
 {:class="out"}
 
-#### Recovering Old Versions
+### Recovering Old Versions
 
 All right:
 we can save changes to files and see what we've changed---how
@@ -695,7 +702,14 @@ It's important to remember that
 we must use the revision number that identifies the state of the repository
 *before* the change we're trying to undo.
 A common mistake is to use the revision number of
-the commit in which we made the change we're trying to get rid of:
+the commit in which we made the change we're trying to get rid of.
+In the example below, we want retrieve the state from before the most
+recent commit (`HEAD~1`), which is revision `f22b25e`:
+
+<img src="img/git-checkout.svg" alt="Git Checkout" />
+
+The following diagram illustrates what the history of a file might look
+like (moving back from `HEAD`, the most recently committed version):
 
 <img src="img/git-when-revisions-updated.svg" alt="When Git Updates Revision Numbers" />
 
@@ -725,7 +739,7 @@ If the introduction and conclusion are stored in separate files,
 on the other hand,
 moving backward and forward in time becomes much easier.
 
-#### Ignoring Things
+### Ignoring Things
 
 What if we have files that we do not want Git to track for us,
 like backup files created by our editor

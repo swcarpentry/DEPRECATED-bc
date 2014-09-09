@@ -104,23 +104,38 @@ def test_check_registration_closed():
 def test_check_registration_fail():
     assert not validator.check_registration("close")
 
-def test_check_instructor():
-    assert validator.check_instructor(["John Doe", "Jane Doe"])
+def test_check_instructors():
+    assert validator.check_instructors(["John Doe", "Jane Doe"])
 
 def test_check_instructor_only_one():
-    assert validator.check_instructor(["John Doe"])
+    assert validator.check_instructors(["John Doe"])
 
 def test_check_instructor_empty():
-    assert not validator.check_instructor([])
+    assert not validator.check_instructors([])
 
 def test_check_instructor_string():
-    assert not validator.check_instructor("John Doe")
+    assert not validator.check_instructors("John Doe")
+
+def test_check_helpers():
+    assert validator.check_helpers(["John Doe", "Jane Doe"])
+
+def test_check_instructor_only_one():
+    assert validator.check_helpers(["John Doe"])
+
+def test_check_instructor_empty():
+    assert validator.check_helpers([])
+
+def test_check_instructor_string():
+    assert not validator.check_helpers("John Doe")
 
 def test_check_email():
     assert validator.check_email("user@box.com")
 
 def test_check_email_obfuscate():
     assert not validator.check_email("user AT box DOT com")
+
+def test_check_email_not_default():
+    assert not validator.check_email('admin@software-carpentry.org')
 
 def test_check_eventbrite_9_digits():
     assert validator.check_eventbrite('1' * 9)
@@ -151,7 +166,8 @@ enddate: 2020-06-18
 latlng: 41.7901128,-87.6007318
 registration: restricted
 instructor: ["Grace Hopper", "Alan Turing"]
-contact: admin@software-carpentry.org
+helper: [ ]
+contact: alan@turing.com
 ---"""
 
     assert validator.check_file(make_file(header_sample))
@@ -169,7 +185,8 @@ startdate: 2020-06-17
 latlng: 41.7901128,-87.6007318
 registration: restricted
 instructor: ["Grace Hopper", "Alan Turing"]
-contact: admin@software-carpentry.org
+contact: alan@turing.com
+helper: [ "John von Neumann" ]
 ---"""
 
     assert validator.check_file(make_file(header_sample))

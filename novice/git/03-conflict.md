@@ -113,7 +113,11 @@ $ git commit -m "Adding a line in the temporary copy"
 ~~~
 {:class="out"}
 
-but Git won't let us push it to GitHub:
+giving us the following local repository state:
+
+<img src="img/git-after-second-conflicting-change.svg" alt="After Making Second (Conflicting) Change" />
+
+However, Git won't let us push this change in the temporary repository to GitHub:
 
 ~~~
 $ git push origin master
@@ -133,7 +137,7 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 Git detects that the changes made in one copy overlap with those made in the other
 and stops us from trampling on our previous work.
 What we have to do is pull the changes from GitHub,
-[merge](../../gloss.html#repository-merge) them into the copy we're currently working in,
+[merge](../../gloss.html#merge) them into the copy we're currently working in,
 and then push that.
 Let's start by pulling:
 
@@ -229,11 +233,11 @@ $ git commit -m "Merging changes from GitHub"
 ~~~
 {:class="out"}
 
-Our repositories now look like this:
+Our repositories now look like this after locally merging in the changes:
 
-<img src="img/git-after-second-conflicting-change.svg" alt="After Making Second (Conflicting) Change" />
+<img src="img/git-after-merging.svg" alt="After Merging Changes Locally" />
 
-so we push our changes to GitHub:
+so we push our merged changes to GitHub:
 
 ~~~
 $ git push origin master
@@ -252,7 +256,7 @@ To https://github.com/vlad/planets.git
 
 to get this:
 
-<img src="img/git-after-merging.svg" alt="After Merging Changes Locally" />
+<img src="img/git-after-pushing-merge.svg" alt="After Pushing The Merged Changes To GitHub" />
 
 Git keeps track of what we've merged with what,
 so we don't have to fix things by hand again
@@ -291,7 +295,7 @@ We removed the conflict on this line
 ~~~
 {:class="out"}
 
-We don't need to merge again because GitHub knows someone has already done that.
+We don't need to merge again because Git knows someone has already done that.
 
 Version control's ability to merge conflicting changes
 is another reason users tend to divide their programs and papers into multiple files

@@ -56,7 +56,7 @@ but the remote repository on GitHub doesn't contain any files yet:
 <img src="img/git-freshly-made-github-repo.svg" alt="Freshly-Made GitHub Repository" />
 
 The next step is to connect the two repositories.
-We do this by making the GitHub repository a [remote](../../gloss.html#repository-remote)
+We do this by making the GitHub repository a [remote](../../gloss.html#remote-repository)
 for the local repository.
 The home page of the repository on GitHub includes
 the string we need to identify it:
@@ -117,6 +117,21 @@ Branch master set up to track remote branch master from origin.
 ~~~
 {:class="out"}
 
+> #### Password Managers
+>
+> If your operating system has a password manager configured, `git push` will
+> try to use it when it needs your username and password. If you want to type
+> your username and password at the terminal instead of using
+> a password manager, type
+>
+> ~~~
+> $ unset SSH_ASKPASS
+> ~~~
+> {:class="in"}
+>
+> You may want to add this command at the end of your `~/.bashrc` to make it the
+> default behavior.
+
 Our local and remote repositories are now in this state:
 
 <img src="img/github-repo-after-first-push.svg" alt="GitHub Repository After First Push" />
@@ -152,7 +167,7 @@ To do this,
 (Note the absolute path:
 don't make `tmp` a subdirectory of the existing repository).
 Instead of creating a new repository here with `git init`,
-we will [clone](../../gloss.html#repository-clone) the existing repository from GitHub:
+we will [clone](../../gloss.html#clone) the existing repository from GitHub:
 
 ~~~
 $ cd /tmp
