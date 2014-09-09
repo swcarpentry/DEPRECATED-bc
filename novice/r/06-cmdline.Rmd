@@ -293,3 +293,49 @@ We will not cover this package in this lesson but when you start writing program
   + Separately, modify the program so that if no parameters are given (i.e., no action is specified and no filenames are given), it prints a message explaining how it should be used.
 
   + Separately, modify the program so that if no action is given it displays the means of the data.
+
+### Handling Standard Input
+
+The next thing our program has to do is read data from standard input if no filenames are given so that we can put it in a pipeline, redirect input to it, and so on.
+Let's experiment in another script:
+
+```{r echo=FALSE, engine='bash'}
+cat count-stdin.R
+```
+
+This little program reads lines from the program's standard input using `file("stdin")`.
+This allows us to do almost anything with it that we could do to a regular file.
+In this example, we passed it as an argument to the function `readLines`, which stores each line as an element in a vector.
+Let's try running it from the Unix Shell as if it were a regular command-line program:
+
+```{r engine='bash'}
+Rscript count-stdin.R < small-01.csv
+```
+
+A common mistake is to try to run something that reads from standard input like this:
+
+```{r eval=FALSE, engine='bash'}
+Rscript count-stdin.R small-01.csv
+```
+
+i.e., to forget the `<` character that redirect the file to standard input.
+In this case, there's nothing in standard input, so the program waits at the start of the loop for someone to type something on the keyboard.
+We can type some input, but R keeps running because it doesn't know when the standard input has ended.
+If you ran this, you can stop R by typing `ctrl`+`z`.
+
+We now need to rewrite the program so that it loads data from `file("stdin")` if no filenames are provided.
+Luckily, `read.csv` can handle either a filename or an open file as its first parameter, so we don't actually need to change `process`.
+That leaves `main`, which we'll update and save as `readings-06.R`:
+
+```{r echo=FALSE, engine='bash'}
+cat readings-06.R
+```
+
+Let's try it out.
+Instead of calculating the mean inflammation of every patient, we'll only calculate the mean for the first 10 patients (rows):
+
+```{r engine='bash'}
+head inflammation-01.csv | Rscript readings-06.R --mean
+```
+
+And now we're done: the program now does everything we set out to do.

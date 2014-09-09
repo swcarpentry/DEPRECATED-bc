@@ -439,3 +439,94 @@ We will not cover this package in this lesson but when you start writing program
   + Separately, modify the program so that if no parameters are given (i.e., no action is specified and no filenames are given), it prints a message explaining how it should be used.
 
   + Separately, modify the program so that if no action is given it displays the means of the data.
+
+### Handling Standard Input
+
+The next thing our program has to do is read data from standard input if no filenames are given so that we can put it in a pipeline, redirect input to it, and so on.
+Let's experiment in another script:
+
+
+<div class='out'><pre class='out'><code>count <- 0
+lines <- readLines(con = file("stdin"))
+for (line in lines) {
+  count <- count + 1
+}
+
+print("lines in standard input:")
+print(count)
+</code></pre></div>
+
+This little program reads lines from the program's standard input using `file("stdin")`.
+This allows us to do almost anything with it that we could do to a regular file.
+In this example, we passed it as an argument to the function `readLines`, which stores each line as an element in a vector.
+Let's try running it from the Unix Shell as if it were a regular command-line program:
+
+
+<pre class='in'><code>Rscript count-stdin.R < small-01.csv</code></pre>
+
+
+
+
+<div class='out'><pre class='out'><code>[1] "lines in standard input:"
+[1] 2
+</code></pre></div>
+
+A common mistake is to try to run something that reads from standard input like this:
+
+
+<pre class='in'><code>Rscript count-stdin.R small-01.csv</code></pre>
+
+i.e., to forget the `<` character that redirect the file to standard input.
+In this case, there's nothing in standard input, so the program waits at the start of the loop for someone to type something on the keyboard.
+We can type some input, but R keeps running because it doesn't know when the standard input has ended.
+If you ran this, you can stop R by typing `ctrl`+`z`.
+
+We now need to rewrite the program so that it loads data from `file("stdin")` if no filenames are provided.
+Luckily, `read.csv` can handle either a filename or an open file as its first parameter, so we don't actually need to change `process`.
+That leaves `main`, which we'll update and save as `readings-06.R`:
+
+
+<div class='out'><pre class='out'><code>main <- function() {
+  args <- commandArgs(trailingOnly = TRUE)
+  action <- args[1]
+  filenames <- args[-1]
+  stopifnot(action %in% c("--min", "--mean", "--max"))
+  
+  if (length(filenames) == 0) {
+    process(file("stdin"), action)
+  } else {  
+    for (f in filenames) {
+      process(f, action)
+    }
+  }
+}
+
+process <- function(filename, action) {
+  dat <- read.csv(file = filename, header = FALSE)
+  
+  if (action == "--min") {
+    values <- apply(dat, 1, min)
+  } else if (action == "--mean") {
+    values <- apply(dat, 1, mean)
+  } else if (action == "--max") {
+    values <- apply(dat, 1, max)
+  }
+  print(values)
+}
+
+main()
+</code></pre></div>
+
+Let's try it out.
+Instead of calculating the mean inflammation of every patient, we'll only calculate the mean for the first 10 patients (rows):
+
+
+<pre class='in'><code>head inflammation-01.csv | Rscript readings-06.R --mean</code></pre>
+
+
+
+
+<div class='out'><pre class='out'><code> [1] 5.450 5.425 6.100 5.900 5.550 6.225 5.975 6.650 6.625 6.525
+</code></pre></div>
+
+And now we're done: the program now does everything we set out to do.
