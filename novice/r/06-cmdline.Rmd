@@ -283,3 +283,13 @@ We will not cover this package in this lesson but when you start writing program
 [argparse-r]: http://cran.r-project.org/web/packages/argparse/index.html
 [argparse-py]: http://docs.python.org/dev/library/argparse.html
 [vignette]: http://cran.r-project.org/web/packages/argparse/vignettes/argparse.pdf
+
+#### Challenges
+
+  + Rewrite this program so that it uses `-n`, `-m`, and `-x` instead of `--min`, `--mean`, and `--max` respectively.
+    Is the code easier to read?
+    Is the program easier to understand?
+
+  + Separately, modify the program so that if no parameters are given (i.e., no action is specified and no filenames are given), it prints a message explaining how it should be used.
+
+  + Separately, modify the program so that if no action is given it displays the means of the data.
