@@ -333,10 +333,10 @@ You will want to switch to this more formal method of writing documentation when
 [01]: 01-starting-with-data.html
 
 ```{r, include=FALSE}
-analyze <- function(fname) {
+analyze <- function(filename) {
   # Plots the average, min, and max inflammation over time.
   # Input is character string of a csv file.
-  dat <- read.csv(file = fname, header = FALSE)
+  dat <- read.csv(file = filename, header = FALSE)
   avg_day_inflammation <- apply(dat, 2, mean)
   plot(avg_day_inflammation)
   max_day_inflammation <- apply(dat, 2, min)
