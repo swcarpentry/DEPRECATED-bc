@@ -81,6 +81,9 @@ cat print-args.R
 ```
 
 The function `commandArgs` extracts all the command line arguments and returns them as a vector.
+The function `cat`, similar to the `cat` of the Unix Shell, outputs the contents of the variable.
+Since we did not specify a filename for writing, `cat` sends the output to [standard output](../../gloss.html#standard-output), which we can then pipe to other Unix functions.
+Because we set the argument `sep` to `"\n"`, which is the symbol to start a new line, each element of the vector is printed on its own line.
 Let's see what happens when we run this program in the Unix Shell:
 
 ```{r engine='bash'}
@@ -312,6 +315,8 @@ Let's try running it from the Unix Shell as if it were a regular command-line pr
 Rscript count-stdin.R < small-01.csv
 ```
 
+Note that because we did not specify `sep = "\n"` when calling `cat`, the output is written on the same line.
+
 A common mistake is to try to run something that reads from standard input like this:
 
 ```{r eval=FALSE, engine='bash'}
@@ -352,4 +357,5 @@ And now we're done: the program now does everything we set out to do.
 *   Use `commandArgs(trailingOnly = TRUE)` to obtain a vector of the command-line arguments that a program was run with.
 *   Avoid silent failures.
 *   Use `file("stdin")` to connect to a program's standard input.
+*   Use `cat(vec, sep = "\n")` to write the elements of `vec` to standard output, one per line.
 </div>

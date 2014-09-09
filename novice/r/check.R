@@ -15,10 +15,10 @@ main <- function() {
     new_file <- read.csv(filename, header = FALSE)
     new_dim <- dim(new_file)
     if (new_dim[1] != first_dim[1] | new_dim[2] != first_dim[2]) {
-      return("Not all the data files have the same dimensions.")
+      cat("Not all the data files have the same dimensions.")
     }
   }
-  return("All the data files have the same dimensions.")
+  cat("All the data files have the same dimensions.")
 }
 
 main()

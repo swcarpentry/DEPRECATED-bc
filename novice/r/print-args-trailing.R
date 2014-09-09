@@ -1,2 +1,2 @@
 args <- commandArgs(trailingOnly = TRUE)
-args
+cat(args, sep = "\n")

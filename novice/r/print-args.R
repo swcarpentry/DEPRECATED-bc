@@ -1,2 +1,2 @@
 args <- commandArgs()
-args
+cat(args, sep = "\n")

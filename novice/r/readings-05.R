@@ -19,7 +19,7 @@ process <- function(filename, action) {
   } else if (action == "--max") {
     values <- apply(dat, 1, max)
   }
-  print(values)
+  cat(values, sep = "\n")
 }
 
 main()

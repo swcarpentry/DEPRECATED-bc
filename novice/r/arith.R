@@ -15,10 +15,10 @@ main <- function() {
   num2 <- as.integer(args[3])
   if (operation == "+") {
     answer <- num1 + num2
-    return(answer)
+    cat(answer)
   } else if (operation == "-") {
     answer <- num1 - num2
-    return(answer)
+    cat(answer)
   } else {
     stop("Invalid input. Use + for addition or - for subtraction.")
   }

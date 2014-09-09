@@ -4,5 +4,5 @@ for (line in lines) {
   count <- count + 1
 }
 
-print("lines in standard input:")
-print(count)
+cat("lines in standard input: ")
+cat(count)

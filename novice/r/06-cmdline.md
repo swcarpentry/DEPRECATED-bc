@@ -93,10 +93,13 @@ Now let's create another script that does something more interesting. Write the 
 
 
 <div class='out'><pre class='out'><code>args <- commandArgs()
-args
+cat(args, sep = "\n")
 </code></pre></div>
 
 The function `commandArgs` extracts all the command line arguments and returns them as a vector.
+The function `cat`, similar to the `cat` of the Unix Shell, outputs the contents of the variable.
+Since we did not specify a filename for writing, `cat` sends the output to [standard output](../../gloss.html#standard-output), which we can then pipe to other Unix functions.
+Because we set the argument `sep` to `"\n"`, which is the symbol to start a new line, each element of the vector is printed on its own line.
 Let's see what happens when we run this program in the Unix Shell:
 
 
@@ -105,8 +108,11 @@ Let's see what happens when we run this program in the Unix Shell:
 
 
 
-<div class='out'><pre class='out'><code>[1] "/usr/lib/R/bin/exec/R" "--slave"               "--no-restore"         
-[4] "--file=print-args.R"   "--args"               
+<div class='out'><pre class='out'><code>/usr/lib/R/bin/exec/R
+--slave
+--no-restore
+--file=print-args.R
+--args
 </code></pre></div>
 
 From this output, we learn that `Rscript` is just a convenience command for running R scripts.
@@ -127,8 +133,11 @@ Thus running a file with Rscript is an easier way to run the following:
 
 
 
-<div class='out'><pre class='out'><code>[1] "/usr/lib/R/bin/exec/R" "--slave"               "--no-restore"         
-[4] "--file=print-args.R"   "--args"               
+<div class='out'><pre class='out'><code>/usr/lib/R/bin/exec/R
+--slave
+--no-restore
+--file=print-args.R
+--args
 </code></pre></div>
 
 If we run it with a few arguments, however:
@@ -139,9 +148,14 @@ If we run it with a few arguments, however:
 
 
 
-<div class='out'><pre class='out'><code>[1] "/usr/lib/R/bin/exec/R" "--slave"               "--no-restore"         
-[4] "--file=print-args.R"   "--args"                "first"                
-[7] "second"                "third"                
+<div class='out'><pre class='out'><code>/usr/lib/R/bin/exec/R
+--slave
+--no-restore
+--file=print-args.R
+--args
+first
+second
+third
 </code></pre></div>
 
 then `commandArgs` adds each of those arguments to the vector it returns.
@@ -150,7 +164,7 @@ Let's update `print-args.R` and save it as `print-args-trailing.R`:
 
 
 <div class='out'><pre class='out'><code>args <- commandArgs(trailingOnly = TRUE)
-args
+cat(args, sep = "\n")
 </code></pre></div>
 
 And then run `print-args-trailing` from the Unix Shell:
@@ -161,7 +175,9 @@ And then run `print-args-trailing` from the Unix Shell:
 
 
 
-<div class='out'><pre class='out'><code>[1] "first"  "second" "third" 
+<div class='out'><pre class='out'><code>first
+second
+third
 </code></pre></div>
 
 Now `commandArgs` returns only the arguments that we listed after `print-args-trailing.R`.
@@ -177,7 +193,7 @@ Write the following code in a file called `readings-01.R`:
   filename <- args[1]
   dat <- read.csv(file = filename, header = FALSE)
   mean_per_patient <- apply(dat, 1, mean)
-  return(mean_per_patient)
+  cat(mean_per_patient, sep = "\n")
 }
 </code></pre></div>
 
@@ -197,7 +213,7 @@ Let's add a call to `main` and save it as `readings-02.R`:
   filename <- args[1]
   dat <- read.csv(file = filename, header = FALSE)
   mean_per_patient <- apply(dat, 1, mean)
-  return(mean_per_patient)
+  cat(mean_per_patient, sep = "\n")
 }
 
 main()
@@ -209,11 +225,66 @@ main()
 
 
 
-<div class='out'><pre class='out'><code> [1] 5.450 5.425 6.100 5.900 5.550 6.225 5.975 6.650 6.625 6.525 6.775 5.800
-[13] 6.225 5.750 5.225 6.300 6.550 5.700 5.850 6.550 5.775 5.825 6.175 6.100
-[25] 5.800 6.425 6.050 6.025 6.175 6.550 6.175 6.350 6.725 6.125 7.075 5.725
-[37] 5.925 6.150 6.075 5.750 5.975 5.725 6.300 5.900 6.750 5.925 7.225 6.150
-[49] 5.950 6.275 5.700 6.100 6.825 5.975 6.725 5.700 6.250 6.400 7.050 5.900
+<div class='out'><pre class='out'><code>5.45
+5.425
+6.1
+5.9
+5.55
+6.225
+5.975
+6.65
+6.625
+6.525
+6.775
+5.8
+6.225
+5.75
+5.225
+6.3
+6.55
+5.7
+5.85
+6.55
+5.775
+5.825
+6.175
+6.1
+5.8
+6.425
+6.05
+6.025
+6.175
+6.55
+6.175
+6.35
+6.725
+6.125
+7.075
+5.725
+5.925
+6.15
+6.075
+5.75
+5.975
+5.725
+6.3
+5.9
+6.75
+5.925
+7.225
+6.15
+5.95
+6.275
+5.7
+6.1
+6.825
+5.975
+6.725
+5.7
+6.25
+6.4
+7.05
+5.9
 </code></pre></div>
 
 #### Challenges
@@ -226,7 +297,7 @@ main()
 
 
 
-<div class='out'><pre class='out'><code>[1] 3
+<div class='out'><pre class='out'><code>3
 </code></pre></div>
 
 
@@ -235,7 +306,7 @@ main()
 
 
 
-<div class='out'><pre class='out'><code>[1] -1
+<div class='out'><pre class='out'><code>-1
 </code></pre></div>
 
 
@@ -252,10 +323,18 @@ main()
 
 
 
-<div class='out'><pre class='out'><code> [1] "inflammation-01.csv" "inflammation-02.csv" "inflammation-03.csv"
- [4] "inflammation-04.csv" "inflammation-05.csv" "inflammation-06.csv"
- [7] "inflammation-07.csv" "inflammation-08.csv" "inflammation-09.csv"
-[10] "inflammation-10.csv" "inflammation-11.csv" "inflammation-12.csv"
+<div class='out'><pre class='out'><code>inflammation-01.csv
+inflammation-02.csv
+inflammation-03.csv
+inflammation-04.csv
+inflammation-05.csv
+inflammation-06.csv
+inflammation-07.csv
+inflammation-08.csv
+inflammation-09.csv
+inflammation-10.csv
+inflammation-11.csv
+inflammation-12.csv
 </code></pre></div>
 
 
@@ -293,7 +372,8 @@ small-03.csv
 
 
 
-<div class='out'><pre class='out'><code>[1] 0.3333333 1.0000000
+<div class='out'><pre class='out'><code>0.3333333
+1
 </code></pre></div>
 
 Using small data files as input also allows us to check our results more easily: here, for example, we can see that our program is calculating the mean correctly for each line, whereas we were really taking it on faith before.
@@ -312,7 +392,7 @@ Here's our changed program, which we'll save as `readings-03.R`:
   for (filename in args) {
     dat <- read.csv(file = filename, header = FALSE)
     mean_per_patient <- apply(dat, 1, mean)
-    print(mean_per_patient)
+    cat(mean_per_patient, sep = "\n")
   }
 }
 
@@ -327,8 +407,10 @@ and here it is in action:
 
 
 
-<div class='out'><pre class='out'><code>[1] 0.3333333 1.0000000
-[1] 13.66667 11.00000
+<div class='out'><pre class='out'><code>0.3333333
+1
+13.66667
+11
 </code></pre></div>
 
 **Note**: at this point, we have created three versions of our script called `readings-01.R`, `readings-02.R`, and `readings-03.R`.
@@ -365,7 +447,7 @@ These always appear before the names of the files, so let's save the following i
     } else if (action == "--max") {
       values <- apply(dat, 1, max)
     }
-    print(values)
+    cat(values, sep = "\n")
   }
 }
 
@@ -380,7 +462,8 @@ And we can confirm this works by running it from the Unix Shell:
 
 
 
-<div class='out'><pre class='out'><code>[1] 1 2
+<div class='out'><pre class='out'><code>1
+2
 </code></pre></div>
 
 but there are several things wrong with it:
@@ -415,7 +498,7 @@ process <- function(filename, action) {
   } else if (action == "--max") {
     values <- apply(dat, 1, max)
   }
-  print(values)
+  cat(values, sep = "\n")
 }
 
 main()
@@ -452,8 +535,8 @@ for (line in lines) {
   count <- count + 1
 }
 
-print("lines in standard input:")
-print(count)
+cat("lines in standard input: ")
+cat(count)
 </code></pre></div>
 
 This little program reads lines from the program's standard input using `file("stdin")`.
@@ -467,9 +550,10 @@ Let's try running it from the Unix Shell as if it were a regular command-line pr
 
 
 
-<div class='out'><pre class='out'><code>[1] "lines in standard input:"
-[1] 2
+<div class='out'><pre class='out'><code>lines in standard input: 2
 </code></pre></div>
+
+Note that because we did not specify `sep = "\n"` when calling `cat`, the output is written on the same line.
 
 A common mistake is to try to run something that reads from standard input like this:
 
@@ -511,7 +595,7 @@ process <- function(filename, action) {
   } else if (action == "--max") {
     values <- apply(dat, 1, max)
   }
-  print(values)
+  cat(values, sep = "\n")
 }
 
 main()
@@ -526,7 +610,16 @@ Instead of calculating the mean inflammation of every patient, we'll only calcul
 
 
 
-<div class='out'><pre class='out'><code> [1] 5.450 5.425 6.100 5.900 5.550 6.225 5.975 6.650 6.625 6.525
+<div class='out'><pre class='out'><code>5.45
+5.425
+6.1
+5.9
+5.55
+6.225
+5.975
+6.65
+6.625
+6.525
 </code></pre></div>
 
 And now we're done: the program now does everything we set out to do.
@@ -543,4 +636,5 @@ And now we're done: the program now does everything we set out to do.
 *   Use `commandArgs(trailingOnly = TRUE)` to obtain a vector of the command-line arguments that a program was run with.
 *   Avoid silent failures.
 *   Use `file("stdin")` to connect to a program's standard input.
+*   Use `cat(vec, sep = "\n")` to write the elements of `vec` to standard output, one per line.
 </div>

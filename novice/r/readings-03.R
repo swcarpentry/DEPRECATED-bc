@@ -3,7 +3,7 @@ main <- function() {
   for (filename in args) {
     dat <- read.csv(file = filename, header = FALSE)
     mean_per_patient <- apply(dat, 1, mean)
-    print(mean_per_patient)
+    cat(mean_per_patient, sep = "\n")
   }
 }
 
