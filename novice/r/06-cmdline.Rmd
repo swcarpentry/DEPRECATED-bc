@@ -33,7 +33,7 @@ $ head -4 inflammation-01.csv | Rscript readings.R --min
 or the maximum inflammations in several files one after another:
 
 ~~~
-$ Rscript readings.py --max inflammation-*.csv
+$ Rscript readings.R --max inflammation-*.csv
 ~~~
 
 Our overall requirements are:
@@ -55,7 +55,7 @@ We'll tackle these questions in turn below.
 
 ### Command-Line Arguments
 
-Using the text editor of your choice, save the following line of code in a text file called `session-info.R `:
+Using the text editor of your choice, save the following line of code in a text file called `session-info.R`:
 
 ```{r echo=FALSE, engine='bash'}
 cat session-info.R
@@ -95,7 +95,7 @@ From the R help file:
 *  `--slave`: Make R run as quietly as possible
 *  `--no-restore`:  Don't restore anything that was created during the R session
 *  `--file`: Run this file
-*  `--args`: Pass these argments to the file being run
+*  `--args`: Pass these arguments to the file being run
 
 Thus running a file with Rscript is an easier way to run the following:
 
@@ -125,7 +125,7 @@ Rscript print-args-trailing.R first second third
 
 Now `commandArgs` returns only the arguments that we listed after `print-args-trailing.R`.
 
-With this in hand, let's build a version of `readings.py` that always prints the per-patient (per-row) mean of a single data file.
+With this in hand, let's build a version of `readings.R` that always prints the per-patient (per-row) mean of a single data file.
 The first step is to write a function that outlines our implementation, and a placeholder for the function that does the actual work.
 By convention this function is usually called `main`, though we can call it whatever we want.
 Write the following code in a file called `readings-01.R`:
@@ -212,7 +212,7 @@ If we specify the files on the command line, the filenames will be returned by `
 We'll need to handle an unknown number of filenames, since our program could be run for any number of files.
 
 The solution is to loop over the vector returned by `commandArgs(trailingOnly = TRUE)`.
-Here's our changed program:
+Here's our changed program, which we'll save as `readings-03.R`:
 
 ```{r echo=FALSE, engine='bash'}
 cat readings-03.R
@@ -261,7 +261,7 @@ And we can confirm this works by running it from the Unix Shell:
 Rscript readings-04.R --max small-01.csv
 ```
 
-but there are seveal things wrong with it:
+but there are several things wrong with it:
 
 1.  `main` is too large to read comfortably.
 
@@ -297,7 +297,7 @@ We will not cover this package in this lesson but when you start writing program
 ### Handling Standard Input
 
 The next thing our program has to do is read data from standard input if no filenames are given so that we can put it in a pipeline, redirect input to it, and so on.
-Let's experiment in another script:
+Let's experiment in another script, which we'll save as `count-stdin.R`:
 
 ```{r echo=FALSE, engine='bash'}
 cat count-stdin.R
