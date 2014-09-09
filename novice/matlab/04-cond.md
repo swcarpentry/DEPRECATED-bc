@@ -73,9 +73,9 @@ simple to write a function that returns the sign of a number:
 
 
 ~~~
-% function sign.m
+% function sign_of.m
 
-function out = sign(num)
+function out = sign_of(num)
     
     if num > 0
         out = 1;
@@ -428,4 +428,19 @@ colorbar();
 {:class="out"}
 
 
-<!--FIXME: Add section on colormaps -->
+### Colormaps
+
+
+#### Challenges
+
+1. Why does the `make_heatmap` function return an array instead
+of displaying it immediately? Do you think this is a good
+design choice?
+
+### Next Steps
+
+<!--FIXME: add next steps here-->
+
+Before we're ready to publish our `make_heatmap` function, we need
+to learn how to test whether our code is doing what we need it to do.
+

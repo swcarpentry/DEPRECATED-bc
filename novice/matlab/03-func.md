@@ -325,3 +325,20 @@ previous lesson, i.e., `run_analysis('inflammation-01.csv')`
 should produce the corresponding graphs for the first
 data set. Be sure to give your function help text.
 
+<div class="keypoints" markdown="1">
+#### Key Points
+
+* Define a function in a file called `function_name.m`. 
+* The first line of a function is the definition line and 
+is most generally written as 
+`function [out1, out2 ..] = function_name(in1, in2 ...)`
+* The body of a function must end with the keyword `end`.
+* Use `help function_name` to get information on how to use a function.
+* Unbroken comment lines below the function definition line are displayed
+as help text.
+
+</div>
+
+### Next Steps
+
+<!--FIXME: need next steps here -->
