@@ -210,10 +210,56 @@ adding changesets
 adding manifests
 adding file changes
 added 1 changesets with 1 changes to 1 files
+(run 'hg update' to get a working copy)
 ~~~
 {:class="out"}
 
-which gives us this:
+If we look at our repository history now with the `hg log --graph` command we can see that the `@` character marks the revision that our working copy of the files is at and the revision that we pulled from Bitbucket is above that,
+meaning it has not yet been applied to our working files:
+
+~~~
+$ hg log --graph
+~~~
+{:class="in"}
+~~~
+o  changeset:   3:2e9c23a9090d
+|  user:        Vlad Dracula <vlad@tran.sylvan.ia>
+|  date:        Mon Apr 14 16:56:42 2014 -0400
+|  summary:     Some notes about Pluto
+|
+@  changeset:   2:43da31fb96ec
+|  user:        Vlad Dracula <vlad@tran.sylvan.ia>
+|  date:        Mon Apr 14 16:37:12 2014 -0400
+|  summary:     Thoughts about the climate
+|
+o  changeset:   1:9b3b65e50b8c
+|  user:        Vlad Dracula <vlad@tran.sylvan.ia>
+|  date:        Mon Apr 14 15:52:43 2014 -0400
+|  summary:     Concerns about Mars's moons on my furry friend
+|
+o  changeset:   0:72ab25fa99a1
+   user:        Vlad Dracula <vlad@tran.sylvan.ia>
+   date:        Mon Apr 14 14:41:58 2014 -0400
+   summary:     Starting to think about Mars
+~~~
+{:class="out"}
+
+To apply those changes we use `hg update`
+(as Mercurial helpfully suggested at the end of the `hg pull` process):
+
+~~~
+$ hg update
+~~~
+{:class="in"}
+~~~
+1 files updated, 0 files merged, 0 files removed, 0 files unresolved
+~~~
+{:class="out"}
+
+You can use `hg log --graph` again to that the `@` has been moved to changeset 3 which tells us that our working copy is up to date.
+
+Here is what our 2 local repositories and our Bitbucket repository look like now,
+showing how the `pluto.txt` file has been copied from Bitbucket to our `planets/` repository clone:
 
 <img src="img/hg-after-pulling-to-local-repo.svg" alt="After Pulling Change to Local Repository" />
 

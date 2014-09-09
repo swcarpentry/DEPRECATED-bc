@@ -1,4 +1,4 @@
-# with-macro.mk
+# with-variables.mk
 
 STYLE_DIR=c:/papers/
 

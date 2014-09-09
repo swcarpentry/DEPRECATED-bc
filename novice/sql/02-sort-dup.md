@@ -6,23 +6,20 @@ root: ../..
 ## Sorting and Removing Duplicates
 
 
-<div class="objectives">
-<h4 id="objectives">Objectives</h4>
-<ul>
-<li>Write queries that display results in a particular order.</li>
-<li>Write queries that eliminate duplicate values from data.</li>
-</ul>
+<div class="objectives" markdown="1">
+#### Objectives
+
+*   Write queries that display results in a particular order.
+*   Write queries that eliminate duplicate values from data.
 </div>
 
 
-<div>
-<p>Data is often redundant,
+Data is often redundant,
 so queries often return redundant information.
 For example,
 if we select the quantitites that have been measured
-from the <code>survey</code> table,
-we get this:</p>
-</div>
+from the `survey` table,
+we get this:
 
 
 <pre class="in"><code>%load_ext sqlitemagic</code></pre>
@@ -56,12 +53,10 @@ select quant from Survey;</code></pre>
 </table></div>
 
 
-<div>
-<p>We can eliminate the redundant output
+We can eliminate the redundant output
 to make the result more readable
-by adding the <code>distinct</code> keyword
-to our query:</p>
-</div>
+by adding the `distinct` keyword
+to our query:
 
 
 <pre class="in"><code>%%sqlite survey.db
@@ -74,11 +69,9 @@ select distinct quant from Survey;</code></pre>
 </table></div>
 
 
-<div>
-<p>If we select more than one column&mdash;for example,
+If we select more than one column&mdash;for example,
 both the survey site ID and the quantity measured&mdash;then
-the distinct pairs of values are returned:</p>
-</div>
+the distinct pairs of values are returned:
 
 
 <pre class="in"><code>%%sqlite survey.db
@@ -107,32 +100,25 @@ select distinct taken, quant from Survey;</code></pre>
 </table></div>
 
 
-<div>
-<p>Notice in both cases that duplicates are removed
-even if they didn&#39;t appear to be adjacent in the database.
+Notice in both cases that duplicates are removed
+even if they didn't appear to be adjacent in the database.
 Again,
-it&#39;s important to remember that rows aren&#39;t actually ordered:
-they&#39;re just displayed that way.</p>
-</div>
+it's important to remember that rows aren't actually ordered:
+they're just displayed that way.
 
 
-<div>
-<h4 id="challenges">Challenges</h4>
-<ol>
-<li>Write a query that selects distinct dates from the <code>Site</code> table.</li>
-</ol>
-</div>
+#### Challenges
+
+1.  Write a query that selects distinct dates from the `Site` table.
 
 
-<div>
-<p>As we mentioned earlier,
+As we mentioned earlier,
 database records are not stored in any particular order.
-This means that query results aren&#39;t necessarily sorted,
+This means that query results aren't necessarily sorted,
 and even if they are,
 we often want to sort them in a different way,
 e.g., by the name of the project instead of by the name of the scientist.
-We can do this in SQL by adding an <code>order by</code> clause to our query:</p>
-</div>
+We can do this in SQL by adding an `order by` clause to our query:
 
 
 <pre class="in"><code>%%sqlite survey.db
@@ -147,13 +133,11 @@ select * from Person order by ident;</code></pre>
 </table></div>
 
 
-<div>
-<p>By default,
+By default,
 results are sorted in ascending order
 (i.e.,
 from least to greatest).
-We can sort in the opposite order using <code>desc</code> (for &quot;descending&quot;):</p>
-</div>
+We can sort in the opposite order using `desc` (for "descending"):
 
 
 <pre class="in"><code>%%sqlite survey.db
@@ -168,15 +152,14 @@ select * from person order by ident desc;</code></pre>
 </table></div>
 
 
-<div>
-<p>(And if we want to make it clear that we&#39;re sorting in ascending order,
-we can use <code>asc</code> instead of <code>desc</code>.)</p>
-<p>We can also sort on several fields at once.
+(And if we want to make it clear that we're sorting in ascending order,
+we can use `asc` instead of `desc`.)
+  
+We can also sort on several fields at once.
 For example,
-this query sorts results first in ascending order by <code>taken</code>,
-and then in descending order by <code>person</code>
-within each group of equal <code>taken</code> values:</p>
-</div>
+this query sorts results first in ascending order by `taken`,
+and then in descending order by `person`
+within each group of equal `taken` values:
 
 
 <pre class="in"><code>%%sqlite survey.db
@@ -207,9 +190,7 @@ select taken, person from Survey order by taken asc, person desc;</code></pre>
 </table></div>
 
 
-<div>
-<p>This is easier to understand if we also remove duplicates:</p>
-</div>
+This is easier to understand if we also remove duplicates:
 
 
 <pre class="in"><code>%%sqlite survey.db
@@ -232,25 +213,20 @@ select distinct taken, person from Survey order by taken asc, person desc;</code
 </table></div>
 
 
-<div>
-<h4 id="challenges">Challenges</h4>
-<ol>
-<li><p>Write a query that returns the distinct dates in the <code>Visited</code> table.</p>
-</li>
-<li><p>Write a query that displays the full names of the scientists in the <code>Person</code> table, ordered by family name.</p>
-</li>
-</ol>
-</div>
+#### Challenges
+
+1.  Write a query that returns the distinct dates in the `Visited` table.
+
+2.  Write a query that displays the full names of the scientists in the `Person` table, ordered by family name.
 
 
-<div class="keypoints">
-<h4 id="key-points">Key Points</h4>
-<ul>
-<li>The records in a database table are not intrinsically ordered:
-if we want to display them in some order,
-we must specify that explicitly.</li>
-<li>The values in a database are not guaranteed to be unique:
-if we want to eliminate duplicates,
-we must specify that explicitly as well.</li>
-</ul>
+<div class="keypoints" markdown="1">
+#### Key Points
+
+*   The records in a database table are not intrinsically ordered:
+    if we want to display them in some order,
+    we must specify that explicitly.
+*   The values in a database are not guaranteed to be unique:
+    if we want to eliminate duplicates,
+    we must specify that explicitly as well.
 </div>

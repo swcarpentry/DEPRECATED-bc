@@ -1,9 +1,21 @@
 ---
 layout: lesson
 root: ../..
-title: Macros
+title: Variables
 level: intermediate
 ---
+This chapter describes yet another way to make Makefiles rules more
+generic. Make *variables* can contain be used to specify any part of a
+rule (the target, the prerequisites, the commands to run, parts of
+file names, etc.). They can also be specified externally when invoking
+`make`, adapting the rules without modifying the Makefile.
+
+Objectives
+----------
+* show the general syntax for using Makefile variables
+* show how variables can be defined in the Makefile
+* show how variables can be specified when invoking `make`
+
 Just when we thought we were done writing our Makefile,
 our supervisor reminded us that all papers must conform to the university's new style rules.
 That means that `paper.pdf` has one more dependency: the official university style file `euphoric.wps`.
@@ -20,17 +32,29 @@ How should we handle this difference?
 If we start with the Makefile we've written so far,
 the brute-force approach is to just add the style files to our commands:
 
-    paper.pdf : paper.wdp figure-1.svg figure-2.svg
-            wdp2pdf --style c:/papers/euphoric.wps $<
+~~~
+paper.pdf : paper.wdp figure-1.svg figure-2.svg
+        wdp2pdf --style c:/papers/euphoric.wps $<
+~~~
+{:class="in"}
 
-    figure-%.svg : summary-%.dat
-            sgr -N -r -s c:/papers/euphoric.fig $@ $^
+~~~
+figure-%.svg : summary-%.dat
+        sgr -N -r -s c:/papers/euphoric.fig $@ $^
+~~~
+{:class="in"}
 
-    summary-%.dat : data-%-*.dat
-            stats.py $@ $^
+~~~
+summary-%.dat : data-%-*.dat
+        stats.py $@ $^
+~~~
+{:class="in"}
 
-    data-*-*.dat : stats.py
-            touch $@
+~~~
+data-*-*.dat : stats.py
+        touch $@
+~~~
+{:class="in"}
 
 There's some redundancy here, though: we are specifying the same directory twice.
 And notice that we haven't explicitly listed `euphoric.wps` or `euphoric.fig`
@@ -60,68 +84,76 @@ We probably don't actually want to do that, since it would mean that the next ti
 its Makefile would be overwritten.
 
 The third option&mdash;the right one&mdash;is to refactor our Makefile to make the problem go away entirely.
-We can do this by defining a [macro](../../gloss.html#macro), just as we would define a constant or variable in a program.
-Here's our Makefile with a macro defined and used:
+We can do this by defining a [variable](../../gloss.html#variable), just as we would define a constant or variable in a program.
+Here's our Makefile with a variable defined and used:
 
-    # with-macro.mk
+~~~
+# with-macro.mk
+STYLE_DIR=c:/papers/
 
-    STYLE_DIR=c:/papers/
+paper.pdf : paper.wdp figure-1.svg figure-2.svg
+        wdp2pdf --style ${STYLE_DIR}/euphoric.wps $<
 
-    paper.pdf : paper.wdp figure-1.svg figure-2.svg
-            wdp2pdf --style ${STYLE_DIR}/euphoric.wps $<
+figure-%.svg : summary-%.dat
+        sgr -N -r -s ${STYLE_DIR}/euphoric.fig $@ $^
 
-    figure-%.svg : summary-%.dat
-            sgr -N -r -s ${STYLE_DIR}/euphoric.fig $@ $^
+summary-%.dat : data-%-*.dat
+        stats.py $@ $^
 
-    summary-%.dat : data-%-*.dat
-            stats.py $@ $^
-
-    data-*-*.dat : stats.py
-            touch $@
+data-*-*.dat : stats.py
+        touch $@
+~~~
+{:class="in"}
 
 The definition looks like definitions in most programming languages:
-the macro is called `STYLE_DIR`, and its value is `c:/papers/`.
-To use the macro, we put a dollar sign in front of it (just as we would do in the shell) and wrap its name in curly brackets.
-This tells Make to insert the macro's value, so that these two directory paths are what we want on our laptop.
+the variable is called `STYLE_DIR`, and its value is `c:/papers/`.
+To use the variable, we put a dollar sign in front of it (just as we would do in the shell) and wrap its name in curly or round brackets.
+This tells Make to insert the variable's value, so that these two directory paths are what we want on our laptop.
 
 This is certainly a step forward:
 now, when we want to move our Makefile from one machine to another, we only have to change one definition in one place.
 However, while we no longer have to worry about consistency,
 we're still making changes to a file that's under version control that we *don't* want written back to the repository.
 
-> #### Parenthesizing Macros in Make
+> #### Parenthesizing Variables in Make
 >
-> We have to put curly brackets or parentheses around a macro's name when we use it&mdash;we can't just write `$MACRO`.
-> If we do, Make will interpret it as `$M` (a reference to the macro `M`) followed by "ACRO".
-> Since we probably don't have a macro called `M`, `$M` will expand to the empty string,
-> so `$MACRO` without parentheses will just be "ACRO".
+> We have to put curly brackets or parentheses around a variable's name when we use it&mdash;we can't just write `$VARIABLE`.
+> If we do, `make` will interpret it as `$V` (a reference to the variable `V`) followed by "ARIABLE".
+> Since we probably don't have a variable called `V`, `$V` will expand to the empty string,
+> so `$VARIABLE` without parentheses will just be "ARIABLE".
 > Why?
-> To make a long story short, it's another wart left over from its history.
+> To make a long story short, it's another wart left over from history.
 > Almost everyone trips over it occasionally, and as with other bugs, it can be very hard to track down.
 
-It's common practice to use macros to define all the flags that tools need,
+Using variables for program parameters
+--------------------------------------
+
+It's common practice to use variables to define all the flags that tools need,
 so that if a tool is invoked in two or more actions,
 it's passed a consistent set of flags.
 Here, for example, we're defining `STYLE_DIR` to point to the directory holding our style files,
-then using that definition in two other macros:
+then using that definition in two other variables:
 
-    # with-lots-of-macros.mk
+~~~
+# with-lots-of-macros.mk
 
-    STYLE_DIR=c:/papers/
-    WDP2PDF_FLAGS=--style ${STYLE_DIR}/euphoric.wps
-    SGR_FLAGS=-N -r -s ${STYLE_DIR}/euphoric.fig
+STYLE_DIR=c:/papers/
+WDP2PDF_FLAGS=--style ${STYLE_DIR}/euphoric.wps
+SGR_FLAGS=-N -r -s ${STYLE_DIR}/euphoric.fig
 
-    paper.pdf : paper.wdp figure-1.svg figure-2.svg
-            wdp2pdf ${WDP2PDF_FLAGS} $<
+paper.pdf : paper.wdp figure-1.svg figure-2.svg
+        wdp2pdf ${WDP2PDF_FLAGS} $<
 
-    figure-%.svg : summary-%.dat
-            sgr ${SGR_FLAGS} $@ $^
+figure-%.svg : summary-%.dat
+        sgr ${SGR_FLAGS} $@ $^
 
-    summary-%.dat : data-%-*.dat
-            stats.py $@ $^
+summary-%.dat : data-%-*.dat
+        stats.py $@ $^
 
-    data-*-*.dat : stats.py
-            touch $@
+data-*-*.dat : stats.py
+        touch $@
+~~~
+{:class="in"}
 
 The first, `WPD2PDF_FLAGS`,
 is the single flag and argument we want to pass to the tool that turns our word processor file into a PDF.
@@ -129,33 +161,57 @@ The second, `SGR_FLAGS`, combines `STYLE_DIR` with a couple of other flags
 to build the arguments for the tool that turns data files into SVG diagrams.
 
 We are now ready to solve our original problem.
-Let's move the definition of `STYLE_DIR`&mdash;the macro that changes from machine to machine&mdash;out of our main Makefile,
+Let's move the definition of `STYLE_DIR`&mdash;the variable that changes from machine to machine&mdash;out of our main Makefile,
 and into a Makefile of its own called `config.mk`:
 
-    # config.mk
+~~~
+# config.mk
+~~~
+{:class="in"}
 
-    STYLE_DIR=c:/papers/
+~~~
+STYLE_DIR=c:/papers/
+~~~
+{:class="in"}
 
 We can then include that file in our main Makefile using Make's `include` command.
-Our other macros and commands can then use the definition of `STYLE_DIR` just as if it had been defined in the main Makefile:
+Our other variables and commands can then use the definition of `STYLE_DIR` just as if it had been defined in the main Makefile:
 
-    # with-include.mk
-    include config.mk
+~~~
+# with-include.mk
+include config.mk
+~~~
+{:class="in"}
 
-    WDP2PDF_FLAGS=--style ${STYLE_DIR}/euphoric.wps
-    SGR_FLAGS=-N -r -s ${STYLE_DIR}/euphoric.fig
+~~~
+WDP2PDF_FLAGS=--style ${STYLE_DIR}/euphoric.wps
+SGR_FLAGS=-N -r -s ${STYLE_DIR}/euphoric.fig
+~~~
+{:class="in"}
 
-    paper.pdf : paper.wdp figure-1.svg figure-2.svg
-            wdp2pdf ${WDP2PDF_FLAGS} $<
+~~~
+paper.pdf : paper.wdp figure-1.svg figure-2.svg
+        wdp2pdf ${WDP2PDF_FLAGS} $<
+~~~
+{:class="in"}
 
-    figure-%.svg : summary-%.dat
-            sgr ${SGR_FLAGS} $@ $^
+~~~
+figure-%.svg : summary-%.dat
+        sgr ${SGR_FLAGS} $@ $^
+~~~
+{:class="in"}
 
-    summary-%.dat : data-%-*.dat
-            stats.py $@ $^
+~~~
+summary-%.dat : data-%-*.dat
+        stats.py $@ $^
+~~~
+{:class="in"}
 
-    data-*-*.dat : stats.py
-            touch $@
+~~~
+data-*-*.dat : stats.py
+        touch $@
+~~~
+{:class="in"}
 
 Once we've tested this to make sure it works, we can copy `config.mk` to create two files that we'll put in version control.
 The first, `config-home.mk`, defines `STYLE_DIR` for use on our laptop.
@@ -163,8 +219,6 @@ The second, `config-lab.mk`, defines it for use in the lab.
 These two files are only changed when they need to be (i.e., when the style files move, or their names change).
 We then copy one or the other on the machine we're using to create the file `config.mk`
 that our main Makefile actually includes.
-
-FIXME: only need to do this once per machine when things change
 
 For example, here's what we have in the `paper` directory on our home machine when we do a fresh checkout from version control.
 Along with our data files and the word processor file, we have our main Makefile and the two machine-specific configuration makefiles.
@@ -176,12 +230,15 @@ and has the right definition of `STYLE_DIR`.
 We can also solve this problem by defining `STYLE_DIR` on the command line each time we run Make.
 To do this, we set the variable on the command line when invoking `make`:
 
-    $ make STYLE_DIR=/lib/styles -f Makefile
+~~~
+$ make STYLE_DIR=/lib/styles -f Makefile
+~~~
+{:class="in"}
 
-This is almost always a bad idea, though.
+This is often a bad idea, though.
 We have to remember to type the definition each time,
-and we have to type it *correctly* each time.
-This isn't too bad with just one definition, but is infeasible when there are half a dozen.
-There's also no record in the Makefile itself of the flag,
+and we have to type it *correctly* each time, or rely on shell history to retrieve the
+right invocation.
+The biggest problem is that it leaves no record in the Makefile itself of the settings used,
 which makes life harder for other people who want to re-create our paper:
 how do they know what to type?

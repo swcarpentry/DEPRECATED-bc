@@ -1,4 +1,4 @@
-# with-lots-of-macros.mk
+# with-lots-of-variables.mk
 
 STYLE_DIR=c:/papers/
 WDP2PDF_FLAGS=--style ${STYLE_DIR}/euphoric.wps

@@ -5,7 +5,8 @@
 # http://yihui.name/knitr/options#chunk_options
 
 library("knitr")
-opts_chunk$set(tidy = FALSE, results = "markup", comment = NA)
+opts_chunk$set(tidy = FALSE, results = "markup", comment = NA,
+               fig.align = "center")
 
 # The hooks below add html tags to the code chunks and their output so that they
 # are properly formatted when the site is built with jekyll.
