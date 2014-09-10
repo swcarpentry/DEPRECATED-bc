@@ -104,6 +104,7 @@ analyze2 <- function(filenames) {
         if (f == 1) {
            out <- res
         } else {
+            # The loop is slowed by this call to cbind that grows the object
             out <- cbind(out, res)
         }
     }

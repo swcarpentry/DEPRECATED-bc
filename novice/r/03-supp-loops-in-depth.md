@@ -106,6 +106,7 @@ As an example, we'll create a new version of `analyze` that will return the mean
         if (f == 1) {
            out <- res
         } else {
+            # The loop is slowed by this call to cbind that grows the object
             out <- cbind(out, res)
         }
     }
@@ -142,7 +143,7 @@ system.time(avg3 <- analyze3(filenames))</code></pre>
 
 
 <div class='out'><pre class='out'><code>   user  system elapsed 
-  0.052   0.000   0.053 
+  0.044   0.004   0.046 
 </code></pre></div>
 
 In this simple example there is little difference in the compute time of `analyze2` and `analyze3`.
