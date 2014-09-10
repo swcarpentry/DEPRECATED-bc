@@ -23,14 +23,15 @@ It is also the name of a very useful command-line program.
 `grep` finds and prints lines in files that match a pattern.
 For our examples,
 we will use a file that contains three haikus taken from a
-1998 competition in *Salon* magazine:
+1998 competition in *Salon* magazine. For this set of examples 
+we're going to be working in the writing subdirectory:
 
-<div class="in" markdown="1">
 ~~~
+$ cd
+$ cd writing
 $ cat haiku.txt
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 The Tao that is seen
 Is not the true Tao, until
@@ -44,7 +45,7 @@ Yesterday it worked
 Today it is not working
 Software is like that.
 ~~~
-</div>
+{:class="out"}
 
 > #### Forever, or Five Years
 >
@@ -54,18 +55,16 @@ Software is like that.
 
 Let's find lines that contain the word "not":
 
-<div class="in" markdown="1">
 ~~~
 $ grep not haiku.txt
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 Is not the true Tao, until
 "My Thesis" not found
 Today it is not working
 ~~~
-</div>
+{:class="out"}
 
 Here, `not` is the pattern we're searching for.
 It's pretty simple:
@@ -75,17 +74,15 @@ The output is the three lines in the file that contain the letters "not".
 
 Let's try a different pattern: "day".
 
-<div class="in" markdown="1">
 ~~~
 $ grep day haiku.txt
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 Yesterday it worked
 Today it is not working
 ~~~
-</div>
+{:class="out"}
 
 This time,
 the output is lines containing the words "Yesterday" and "Today",
@@ -94,28 +91,25 @@ If we give `grep` the `-w` flag,
 it restricts matches to word boundaries,
 so that only lines with the word "day" will be printed:
 
-<div class="in" markdown="1">
 ~~~
 $ grep -w day haiku.txt
 ~~~
-</div>
+{:class="in"}
 
 In this case, there aren't any, so `grep`'s output is empty.
 
 Another useful option is `-n`, which numbers the lines that match:
 
-<div class="in" markdown="1">
 ~~~
 $ grep -n it haiku.txt
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 5:With searching comes loss
 9:Yesterday it worked
 10:Today it is not working
 ~~~
-</div>
+{:class="out"}
 
 Here, we can see that lines 5, 9, and 10 contain the letters "it".
 
@@ -125,12 +119,10 @@ since `-i` makes matching case-insensitive and `-v` inverts the match,
 using them both only prints lines that *don't* match the pattern
 in any mix of upper and lower case:
 
-<div class="in" markdown="1">
 ~~~
 $ grep -i -v the haiku.txt
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 You bring fresh toner.
 
@@ -140,7 +132,7 @@ Yesterday it worked
 Today it is not working
 Software is like that.
 ~~~
-</div>
+{:class="out"}
 
 `grep` has lots of other options.
 To find out what they are, we can type `man grep`.
@@ -148,12 +140,10 @@ To find out what they are, we can type `man grep`.
 it prints a description of a command and its options,
 and (if you're lucky) provides a few examples of how to use it:
 
-<div class="in" markdown="1">
 ~~~
 $ man grep
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 GREP(1)                                                                                              GREP(1)
 
@@ -189,7 +179,7 @@ Interpret PATTERN as a list of fixed strings, separated by newlines, any of  whi
 matched.  (-F is specified by POSIX.)
 ...        ...        ...
 ~~~
-</div>
+{:class="out"}
 
 > #### Wildcards
 >
@@ -221,29 +211,26 @@ to show how the simplest ones work, we'll use the directory tree shown below.
 
 <img src="img/find-file-tree.svg" alt="File Tree for Find Example" />
 
-Vlad's home directory contains one file called `notes.txt` and four subdirectories:
+Nelle's `writing` directory contains one file called `haiku.txt` and four subdirectories:
 `thesis` (which is sadly empty),
 `data` (which contains two files `one.txt` and `two.txt`),
 a `tools` directory that contains the programs `format` and `stats`,
 and an empty subdirectory called `old`.
 
 For our first command,
-let's run `find . -type d -print`.
+let's run `find . -type d`.
 As always,
 the `.` on its own means the current working directory,
 which is where we want our search to start;
-`-type d` means "things that are directories",
-and (unsurprisingly) `-print` means "print what's found".
+`-type d` means "things that are directories".
 Sure enough,
 `find`'s output is the names of the five directories in our little tree
 (including `.`):
 
-<div class="in" markdown="1">
 ~~~
-$ find . -type d -print
+$ find . -type d
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 ./
 ./data
@@ -251,25 +238,25 @@ $ find . -type d -print
 ./tools
 ./tools/old
 ~~~
-</div>
+{:class="out"}
 
 If we change `-type d` to `-type f`,
 we get a listing of all the files instead:
 
-<div class="in" markdown="1">
 ~~~
-$ find . -type f -print
+$ find . -type f
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
+./haiku.txt
+./tools/stats
+./tools/old/oldtool
+./tools/format
+./thesis/empty-draft.md
 ./data/one.txt
 ./data/two.txt
-./notes.txt
-./tools/format
-./tools/stats
 ~~~
-</div>
+{:class="out"}
 
 `find` automatically goes into subdirectories,
 their subdirectories,
@@ -277,74 +264,52 @@ and so on to find everything that matches the pattern we've given it.
 If we don't want it to,
 we can use `-maxdepth` to restrict the depth of search:
 
-<div class="in" markdown="1">
 ~~~
-$ find . -maxdepth 1 -type f -print
+$ find . -maxdepth 1 -type f
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
-./notes.txt
+./haiku.txt
 ~~~
-</div>
+{:class="out"}
 
 The opposite of `-maxdepth` is `-mindepth`,
 which tells `find` to only report things that are at or below a certain depth.
 `-mindepth 2` therefore finds all the files that are two or more levels below us:
 
-<div class="in" markdown="1">
 ~~~
-$ find . -mindepth 2 -type f -print
+$ find . -mindepth 2 -type f
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 ./data/one.txt
 ./data/two.txt
 ./tools/format
 ./tools/stats
 ~~~
-</div>
-
-Another option is `-empty`,
-which restricts matches to empty files and directories:
-
-<div class="in" markdown="1">
-~~~
-$ find . -empty -print
-~~~
-</div>
-<div class="out" markdown="1">
-~~~
-./thesis
-./tools/old
-~~~
-</div>
+{:class="out"}
 
 Now let's try matching by name:
 
-<div class="in" markdown="1">
 ~~~
-$ find . -name *.txt -print
+$ find . -name *.txt
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
-./notes.txt
+./haiku.txt
 ~~~
-</div>
+{:class="out"}
 
 We expected it to find all the text files,
-but it only prints out `./notes.txt`.
+but it only prints out `./haiku.txt`.
 The problem is that the shell expands wildcard characters like `*` *before* commands run.
-Since `*.txt` in the current directory expands to `notes.txt`,
+Since `*.txt` in the current directory expands to `haiku.txt`,
 the command we actually ran was:
 
-<div class="in" markdown="1">
 ~~~
-$ find . -name notes.txt -print
+$ find . -name haiku.txt
 ~~~
-</div>
+{:class="in"}
 
 `find` did what we asked; we just asked for the wrong thing.
 
@@ -352,20 +317,18 @@ To get what we want,
 let's do what we did with `grep`:
 put `*.txt` in single quotes to prevent the shell from expanding the `*` wildcard.
 This way,
-`find` actually gets the pattern `*.txt`, not the expanded filename `notes.txt`:
+`find` actually gets the pattern `*.txt`, not the expanded filename `haiku.txt`:
 
-<div class="in" markdown="1">
 ~~~
-$ find . -name '*.txt' -print
+$ find . -name '*.txt'
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
 ./data/one.txt
 ./data/two.txt
-./notes.txt
+./haiku.txt
 ~~~
-</div>
+{:class="out"}
 
 > #### Listing vs. Finding
 >
@@ -379,36 +342,33 @@ the command line's power lies in combining tools.
 We've seen how to do that with pipes;
 let's look at another technique.
 As we just saw,
-`find . -name '*.txt' -print` gives us a list of all text files in or below the current directory.
+`find . -name '*.txt'` gives us a list of all text files in or below the current directory.
 How can we combine that with `wc -l` to count the lines in all those files?
 
 The simplest way is to put the `find` command inside `$()`:
 
-<div class="in" markdown="1">
 ~~~
-$ wc -l $(find . -name '*.txt' -print)
+$ wc -l $(find . -name '*.txt')
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
-70  ./data/one.txt
-420  ./data/two.txt
-30  ./notes.txt
-520  total
+11 ./haiku.txt
+300 ./data/two.txt
+70 ./data/one.txt
+381 total
 ~~~
-</div>
+{:class="out"}
 
 When the shell executes this command,
 the first thing it does is run whatever is inside the `$()`.
 It then replaces the `$()` expression with that command's output.
-Since the output of `find` is the three filenames `./data/one.txt`, `./data/two.txt`, and `./notes.txt`,
+Since the output of `find` is the three filenames `./data/one.txt`, `./data/two.txt`, and `./haiku.txt`,
 the shell constructs the command:
 
-<div class="in" markdown="1">
 ~~~
-$ wc -l ./data/one.txt ./data/two.txt ./notes.txt
+$ wc -l ./data/one.txt ./data/two.txt ./haiku.txt
 ~~~
-</div>
+{:class="in"}
 
 which is what we wanted.
 This expansion is exactly what the shell does when it expands wildcards like `*` and `?`,
@@ -418,18 +378,16 @@ It's very common to use `find` and `grep` together.
 The first finds files that match a pattern;
 the second looks for lines inside those files that match another pattern.
 Here, for example, we can find PDB files that contain iron atoms
-by looking for the string "FE" in all the `.pdb` files below the current directory:
+by looking for the string "FE" in all the `.pdb` files above the current directory:
 
-<div class="in" markdown="1">
 ~~~
-$ grep FE $(find . -name '*.pdb' -print)
+$ grep FE $(find .. -name '*.pdb')
 ~~~
-</div>
-<div class="out" markdown="1">
+{:class="in"}
 ~~~
-./human/heme.pdb:ATOM  25  FE  1  -0.924  0.535  -0.518
+../data/pdb/heme.pdb:ATOM     25 FE           1      -0.924   0.535  -0.518
 ~~~
-</div>
+{:class="out"}
 
 > #### Binary Files
 >
@@ -455,7 +413,7 @@ $ grep FE $(find . -name '*.pdb' -print)
 > modern programming languages, Python included, have borrowed a lot of
 > ideas from it, and imitation is also the sincerest form of praise.
 
-#### Conclusion
+### Conclusion
 
 The Unix shell is older than most of the people who use it. It has
 survived so long because it is one of the most productive programming
@@ -477,30 +435,28 @@ about them."
 
 </div>
 
-<div class="challenges" markdown="1">
+<div class="challenge" markdown="1">
+Write a short explanatory comment for the following shell script:
 
-#### Challenges
+<div class="file" markdown="1">
+~~~
+find . -name '*.dat' | wc -l | sort -n
+~~~
+</div>
+</div>
 
-1.  Write a short explanatory comment for the following shell script:
+<div class="challenge" markdown="1">
+The `-v` flag to `grep` inverts pattern matching, so that only lines
+which do *not* match the pattern are printed. Given that, which of
+the following commands will find all files in `/data` whose names
+end in `ose.dat` (e.g., `sucrose.dat` or `maltose.dat`), but do
+*not* contain the word `temp`?
 
-    <div class="file" markdown="1">
-    ~~~
-    find . -name '*.dat' -print | wc -l | sort -n
-    ~~~
-    </div>
+1. `find /data -name '*.dat' | grep ose | grep -v temp`
 
-2.  The `-v` flag to `grep` inverts pattern matching, so that only lines
-    which do *not* match the pattern are printed. Given that, which of
-    the following commands will find all files in `/data` whose names
-    end in `ose.dat` (e.g., `sucrose.dat` or `maltose.dat`), but do
-    *not* contain the word `temp`?
+2. `find /data -name ose.dat | grep -v temp`
 
-    1. `find /data -name '*.dat' -print | grep ose | grep -v temp`
+3. `grep -v temp $(find /data -name '*ose.dat')`
 
-    2. `find /data -name ose.dat -print | grep -v temp`
-
-    3. `grep -v temp $(find /data -name '*ose.dat' -print)`
-
-    4. None of the above.
-
+4. None of the above.
 </div>

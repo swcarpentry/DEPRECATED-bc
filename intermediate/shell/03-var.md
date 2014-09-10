@@ -5,11 +5,9 @@ title: Variables
 level: intermediate
 ---
 <div class="objectives" markdown="1">
-## Objectives
+#### Objectives
 *   FIXME
 </div>
-
-## Lesson
 
 The shell is just a program, and like other programs, it has variables.
 Those variables control its execution, and by changing their values, you
@@ -248,12 +246,8 @@ As you can see, aliases can save us a lot of typing, and hence a lot of
 typing mistakes.
 
 <div class="keypoints" markdown="1">
-## Key Points
+
+#### Key Points
 *   FIXME
-</div>
 
-<div class="challenges" markdown="1">
-## Challenges
-
-1.  FIXME
 </div>

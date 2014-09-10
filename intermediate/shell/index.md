@@ -12,6 +12,7 @@ Topics
 2.  [Working Remotely](02-ssh.html)
 3.  [Variables](03-var.html)
 4.  [Job Control](04-job.html)
+5.  [Filename Expansion](05-expansion.html)
 
 See Also
 --------
