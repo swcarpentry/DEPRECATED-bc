@@ -364,8 +364,7 @@ colorbar();
 ~~~
 
 This is better, but we might want to widen the band around the mean
-that gets 
-
+that gets that color.
 
 But to do that, we'll have to go back to our 
 code and change some numerical values (`1.9` and `0.9` in the 
@@ -408,6 +407,11 @@ colorbar();
 ~~~
 {:class="in"}
 
+~~~
+
+~~~
+{:class="out"}
+
 That seems right, so let's widen the band:
 
 ~~~
@@ -416,7 +420,6 @@ imagesc(heatmap);
 colorbar();
 ~~~
 {:class="in"}
-
 
 ~~~
 
