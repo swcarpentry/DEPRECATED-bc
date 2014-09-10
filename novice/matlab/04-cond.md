@@ -411,25 +411,21 @@ colorbar();
 That seems right, so let's widen the band:
 
 ~~~
-
-~~~
-{:class="out"}
-
-~~~
 heatmap = make_heatmap(patient_data, 0.6, 1.4);
 imagesc(heatmap);
 colorbar();
 ~~~
 {:class="in"}
 
+
 ~~~
 
 ~~~
 {:class="out"}
 
-
 ### Colormaps
 
+<!-- FIXME: add a section on colormaps -->
 
 #### Challenges
 
@@ -443,4 +439,3 @@ design choice?
 
 Before we're ready to publish our `make_heatmap` function, we need
 to learn how to test whether our code is doing what we need it to do.
-
