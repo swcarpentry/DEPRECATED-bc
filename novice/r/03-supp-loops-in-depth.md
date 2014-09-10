@@ -46,7 +46,7 @@ you could loop over the pairs adding each in turn, but that would be very ineffi
 
 <pre class='in'><code>res <- numeric(length = length(a))
 for (i in seq_along(a)) {
-    res[i] <- a[i] + b[i]
+  res[i] <- a[i] + b[i]
 }
 res</code></pre>
 
@@ -100,17 +100,17 @@ As an example, we'll create a new version of `analyze` that will return the mean
 
 
 <pre class='in'><code>analyze2 <- function(filenames) {
-    for (f in seq_along(filenames)) {
-        fdata <- read.csv(filenames[f], header = FALSE)
-        res <- apply(fdata, 2, mean)
-        if (f == 1) {
-           out <- res
-        } else {
-            # The loop is slowed by this call to cbind that grows the object
-            out <- cbind(out, res)
-        }
+  for (f in seq_along(filenames)) {
+    fdata <- read.csv(filenames[f], header = FALSE)
+    res <- apply(fdata, 2, mean)
+    if (f == 1) {
+      out <- res
+    } else {
+      # The loop is slowed by this call to cbind that grows the object
+      out <- cbind(out, res)
     }
-    out
+  }
+  return(out)
 }
 
 system.time(avg2 <- analyze2(filenames))</code></pre>
@@ -130,12 +130,12 @@ This time there is no copying/growing for R to deal with.
 
 
 <pre class='in'><code>analyze3 <- function(filenames) {
-    out <- matrix(ncol = length(filenames), nrow = 40) ## assuming 40 here from files 
-    for (f in seq_along(filenames)) {
-        fdata <- read.csv(filenames[f], header = FALSE)
-        out[, f] <- apply(fdata, 2, mean)
-    }
-    out
+  out <- matrix(ncol = length(filenames), nrow = 40) ## assuming 40 here from files 
+  for (f in seq_along(filenames)) {
+    fdata <- read.csv(filenames[f], header = FALSE)
+    out[, f] <- apply(fdata, 2, mean)
+  }
+  return(out)
 }
 
 system.time(avg3 <- analyze3(filenames))</code></pre>
@@ -143,7 +143,7 @@ system.time(avg3 <- analyze3(filenames))</code></pre>
 
 
 <div class='out'><pre class='out'><code>   user  system elapsed 
-  0.044   0.004   0.046 
+  0.056   0.004   0.057 
 </code></pre></div>
 
 In this simple example there is little difference in the compute time of `analyze2` and `analyze3`.
