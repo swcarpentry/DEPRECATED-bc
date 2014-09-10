@@ -24,7 +24,7 @@ analyze <- function(filename) {
   min_day_inflammation <- apply(dat, 2, min)
   plot(min_day_inflammation)
 }
-      
+
 analyze("inflammation-01.csv")
 ```
 
@@ -107,7 +107,7 @@ The general form of a loop is:
 
 ```{r, eval=FALSE}
 for (variable in collection) {
-    do things with variable
+  do things with variable
 }
 ```
 
@@ -124,7 +124,7 @@ Here's another loop that repeatedly updates a variable:
 len <- 0
 vowels <- c("a", "e", "i", "o", "u")
 for (v in vowels) {
-    len <- len + 1
+  len <- len + 1
 }
 # Number of vowels
 len
@@ -257,8 +257,8 @@ Let's test it by analyzing the first three files in the vector:
 filenames <- list.files(pattern = "csv")
 filenames <- filenames[1:3]
 for (f in filenames) {
-    print(f)
-    analyze(f)
+  print(f)
+  analyze(f)
 }
 ```
 

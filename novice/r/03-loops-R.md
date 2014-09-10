@@ -21,7 +21,7 @@ We have created a function called `analyze` that creates graphs of the minimum, 
   min_day_inflammation <- apply(dat, 2, min)
   plot(min_day_inflammation)
 }
-      
+
 analyze("inflammation-01.csv")</code></pre>
 
 <img src="figure/03-loops-R-inflammation-011.png" title="plot of chunk inflammation-01" alt="plot of chunk inflammation-01" style="display: block; margin: auto;" /><img src="figure/03-loops-R-inflammation-012.png" title="plot of chunk inflammation-01" alt="plot of chunk inflammation-01" style="display: block; margin: auto;" /><img src="figure/03-loops-R-inflammation-013.png" title="plot of chunk inflammation-01" alt="plot of chunk inflammation-01" style="display: block; margin: auto;" />
@@ -149,7 +149,7 @@ The general form of a loop is:
 
 
 <pre class='in'><code>for (variable in collection) {
-    do things with variable
+  do things with variable
 }</code></pre>
 
 We can name the [loop variable](../../gloss.html#loop-variable) anything we like (with a few [restrictions][], e.g. the name of the variable cannot start with a digit).
@@ -165,7 +165,7 @@ Here's another loop that repeatedly updates a variable:
 <pre class='in'><code>len <- 0
 vowels <- c("a", "e", "i", "o", "u")
 for (v in vowels) {
-    len <- len + 1
+  len <- len + 1
 }
 # Number of vowels
 len</code></pre>
@@ -336,8 +336,8 @@ Let's test it by analyzing the first three files in the vector:
 <pre class='in'><code>filenames <- list.files(pattern = "csv")
 filenames <- filenames[1:3]
 for (f in filenames) {
-    print(f)
-    analyze(f)
+  print(f)
+  analyze(f)
 }</code></pre>
 
 
