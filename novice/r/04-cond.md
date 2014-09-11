@@ -11,6 +11,14 @@ Our previous lessons have shown us how to manipulate data, define our own functi
 However, the programs we have written so far always do the same things, regardless of what data they're given.
 We want programs to make choices based on the values they are manipulating.
 
+<div class="objectives" markdown="1">
+#### Objectives
+
+*   Save plot(s) in a pdf file.
+*   Write conditional statements including `if` and `else` branches.
+*   Correctly evaluate expressions containing `&` ("and") and `|` ("or").
+</div>
+
 ### Saving plots to a file
 
 So far, we have built a function `analyze` to plot summary statistics of the inflammation data:
@@ -309,4 +317,15 @@ Now if we need to make any changes to our analysis, we can edit the `analyze` fu
   Find the relevant argument to `plot` by reading the documentation (`?plot`), update `analyze`, and then recreate all the figures with `analyze_all`.
 
 
+</div>
+
+<div class="keypoints" markdown="1">
+#### Key Points
+
+*   Save a plot in a pdf file using `pdf("name.pdf")` and stop writing to the pdf file with `dev.off()`.
+*   Use `if (condition)` to start a conditional statement, `else if (condition)` to provide additional tests, and `else` to provide a default.
+*   The bodies of the branches of conditional statements must be surrounded by curly braces `{ }`.
+*   Use `==` to test for equality.
+*   `X & Y` is only true if both X and Y are true.
+*   `X | Y` is true if either X or Y, or both, are true.
 </div>
