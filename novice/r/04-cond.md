@@ -329,3 +329,9 @@ Now if we need to make any changes to our analysis, we can edit the `analyze` fu
 *   `X & Y` is only true if both X and Y are true.
 *   `X | Y` is true if either X or Y, or both, are true.
 </div>
+
+#### Next Steps
+
+We have now seen the basics of interactively building R code.
+The last thing we need to learn is how to build command-line programs that we can use in pipelines and shell scripts, so that we can integrate our tools with other people's work.
+This will be the subject of our next and final lesson.
