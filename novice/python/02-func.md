@@ -813,6 +813,21 @@ That's why we don't have to provide `fname=` for the filename,
 but *do* have to provide `delimiter=` for the second parameter.
 
 
+One final note about functions - in python, you don't have to return anything
+if you don't want to.
+
+For example:
+
+
+<pre class="in"><code>def say_hello(name):
+    print &#39;Hello&#39;, name
+    
+say_hello(&#39;Sally&#39;)</code></pre>
+
+<div class="out"><pre class='out'><code>Hello Sally
+</code></pre></div>
+
+
 <div class="challenges" markdown="1">
 #### Challenges
 
