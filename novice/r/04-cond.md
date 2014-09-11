@@ -58,3 +58,109 @@ After we are done generating the plots to be saved in the pdf file, we stop R fr
 We can update the `analyze` function so that it always saves the plots in a pdf.
 But that would make it more difficult to interactively test out new changes.
 It would be ideal if `analyze` would either save or not save the plots based on its input.
+
+### Conditionals
+
+In order to update our function to decide between saving or not, we need to write code that automatically decides between multiple options.
+The tool R gives us for doing this is called a [conditional statement](../../gloss.html#conditional-statement), and looks like this:
+
+
+<pre class='in'><code>num <- 37
+if (num > 100) {
+  print("greater")
+} else {
+  print("not greater")
+}</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] "not greater"
+</code></pre></div>
+
+The second line of this code uses the keyword `if` to tell Python that we want to make a choice.
+If the test that follows it is true, the body of the `if` (i.e., the lines indented underneath it) are executed.
+If the test is false, the body of the `else` is executed instead.
+Only one or the other is ever executed:
+
+<img src="../python/img/python-flowchart-conditional.svg" alt="Executing a Conditional" />
+
+Conditional statements don't have to include an `else`.
+If there isn't one, R simply does nothing if the test is false:
+
+
+<pre class='in'><code>num <- 53
+if (num > 100) {
+  print("num is greater than 100")
+}</code></pre>
+
+We can also chain several tests together when there are more than two options.
+This makes it simple to write a function that returns the sign of a number:
+
+
+<pre class='in'><code>sign <- function(num) {
+  if (num > 0) {
+    return(1)
+  } else if (num == 0) {
+    return(0)
+  } else {
+    return(-1)
+  }
+}
+
+sign(-3)</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] -1
+</code></pre></div>
+
+
+
+<pre class='in'><code>sign(0)</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 0
+</code></pre></div>
+
+
+
+<pre class='in'><code>sign(2/3)</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] 1
+</code></pre></div>
+
+We can also combine tests.
+An ampersand, `&`, symbolizes "and".
+A vertical bar, `|`, symbolizes "or".
+`&` is only true if both parts are true:
+
+
+<pre class='in'><code>if (1 > 0 & -1 > 0) {
+    print("both parts are true")
+} else {
+  print("at least one part is not true")
+}</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] "at least one part is not true"
+</code></pre></div>
+
+while `|` is true if either part is true:
+
+
+<pre class='in'><code>if (1 > 0 | -1 > 0) {
+    print("at least one part is true")
+} else {
+  print("neither part is true")
+}</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] "at least one part is true"
+</code></pre></div>
+
+In this case, "either" means "either or both", not "either one or the other but not both".
