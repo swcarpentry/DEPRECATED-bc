@@ -54,6 +54,7 @@ MOST_SRC = \
 	 novice/git/index.md $(sort $(wildcard novice/git/??-*.md)) \
 	 novice/hg/index.md $(sort $(wildcard novice/hg/??-*.md)) \
 	 novice/python/index.md $(sort $(wildcard novice/python/??-*.md)) \
+	 novice/matlab/index.md $(sort $(wildcard novice/matlab/??-*.md)) \
 	 novice/sql/index.md $(sort $(wildcard novice/sql/??-*.md)) \
 	 novice/extras/index.md $(sort $(wildcard novice/extras/??-*.md)) \
 	 novice/teaching/index.md  $(sort $(wildcard novice/teaching/??-*.md)) \
@@ -66,6 +67,8 @@ MOST_SRC = \
 # All source pages (including things not in the book).
 ALL_SRC = \
 	contents.md \
+	setup.md \
+        $(wildcard intermediate/regex/*.md) \
 	$(wildcard intermediate/python/*.md) \
 	$(wildcard intermediate/doit/*.md) \
 	$(wildcard slides/*.html) \
@@ -183,7 +186,12 @@ tidy :
 ipynb :
 	make -f ipynb.mk
 
+## rmd      : convert R Markdown files to Markdown.
+#  This uses an auxiliary Makefile 'rmd.mk'.
+rmd :
+	make -f rmd.mk
+
 ## ---------------------------------------
 
 
-.PHONY: all book check clean commands contribs epub fixme gloss install ipynb site tidy
+.PHONY: all book check clean commands contribs epub fixme gloss install ipynb site tidy rmd

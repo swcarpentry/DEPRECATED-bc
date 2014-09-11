@@ -185,10 +185,8 @@ identifies the revision we've just downloaded.)
 
 It is now up to us to edit this file to remove these markers
 and reconcile the changes.
-We can do anything we want:
-keep the change in this branch,
-keep the change made in the other,
-write something new to replace both,
+We can do anything we want: keep the change made in the local repository, keep
+the change made in the remote repository, write something new to replace both,
 or get rid of the change entirely.
 Let's replace both so that the file looks like this:
 
@@ -295,7 +293,7 @@ We removed the conflict on this line
 ~~~
 {:class="out"}
 
-We don't need to merge again because GitHub knows someone has already done that.
+We don't need to merge again because Git knows someone has already done that.
 
 Version control's ability to merge conflicting changes
 is another reason users tend to divide their programs and papers into multiple files

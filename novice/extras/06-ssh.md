@@ -31,7 +31,7 @@ That shell runs those commands on our behalf,
 just as a local shell would,
 then sends back output for our computer to display.
 
-The tool we use to log in remotely is the [secure shell)(../../gloss.html#secure-shell),
+The tool we use to log in remotely is the [secure shell](../../gloss.html#secure-shell),
 or SSH.
 In particular, the command `ssh username@computer`
 runs SSH and connects to the remote computer we have specified.
