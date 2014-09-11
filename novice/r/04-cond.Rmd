@@ -178,3 +178,113 @@ plot_dist(dat[, 10], threshold = 10)  # day (column) 10
 plot_dist(dat[1:5, 10], threshold = 10)  # samples (rows) 1-5 on day (column) 10
 ```
 </div>
+
+### Saving automatically generated figures
+
+Now that we know how to have R make decisions based on input values, let's update `analyze`:
+
+```{r analyze-save}
+analyze <- function(filename, output = NULL) {
+  # Plots the average, min, and max inflammation over time.
+  # Input:
+  #    filename: character string of a csv file
+  #    output: character string of pdf file for saving
+  if (!is.null(output)) {
+    pdf(output)
+  }
+  dat <- read.csv(file = filename, header = FALSE)
+  avg_day_inflammation <- apply(dat, 2, mean)
+  plot(avg_day_inflammation)
+  max_day_inflammation <- apply(dat, 2, max)
+  plot(max_day_inflammation)
+  min_day_inflammation <- apply(dat, 2, min)
+  plot(min_day_inflammation)
+  if (!is.null(output)) {
+    dev.off()
+  }
+}
+```
+
+We added an argument, `output`, that by default is set to `NULL`.
+An `if` statement at the beginning checks the argument `output` to decide whether or not to save the plots to a pdf.
+Let's break it down.
+The function `is.null` returns `TRUE` if a variable is `NULL` and `FALSE` otherwise.
+The exclamation mark, `!`, stands for "not".
+Therefore the line in the `if` block is only executed if `output` is "not null".
+
+```{r}
+output <- NULL
+is.null(output)
+!is.null(output)
+```
+
+Now we can use `analyze` both interactively:
+
+```{r inflammation-01}
+analyze("inflammation-01.csv")
+```
+
+and to save plots:
+
+```{r results='hide'}
+analyze("inflammation-01.csv", output = "inflammation-01.pdf")
+```
+
+This now works well when we want to process one data file at a time, but how can we specify the output file in `analyze_all`?
+We need to substitute the filename ending "csv" with "pdf", which we can do using the function `sub`:
+
+```{r}
+f <- "inflammation-01.csv"
+sub("csv", "pdf", f)
+```
+
+Now let's update `analyze_all`:
+
+```{r analyze_all-save}
+analyze_all <- function(pattern) {
+  # Runs the function analyze for each file in the current working directory
+  # that contains the given pattern.
+  filenames <- list.files(pattern = pattern)
+  for (f in filenames) {
+    pdf_name <- sub("csv", "pdf", f)
+    analyze(f, output = pdf_name)
+  }
+}
+```
+
+Now we can save all of the results with just one line of code:
+
+```{r}
+analyze_all("csv")
+```
+
+Now if we need to make any changes to our analysis, we can edit the `analyze` function and quickly regenerate all the figures with `analzye_all`.
+
+<div class="challenges" markdown="1">
+#### Challenges
+
+  + One of your collaborators asks if you can recreate the figures with lines instead of points.
+  Find the relevant argument to `plot` by reading the documentation (`?plot`), update `analyze`, and then recreate all the figures with `analyze_all`.
+
+```{r analyze-save-line, echo=FALSE}
+analyze <- function(filename, output = NULL) {
+  # Plots the average, min, and max inflammation over time.
+  # Input:
+  #    filename: character string of a csv file
+  #    output: character string of pdf file for saving
+  if (!is.null(output)) {
+    pdf(output)
+  }
+  dat <- read.csv(file = filename, header = FALSE)
+  avg_day_inflammation <- apply(dat, 2, mean)
+  plot(avg_day_inflammation, type = "l")
+  max_day_inflammation <- apply(dat, 2, max)
+  plot(max_day_inflammation, type = "l")
+  min_day_inflammation <- apply(dat, 2, min)
+  plot(min_day_inflammation, type = "l")
+  if (!is.null(output)) {
+    dev.off()
+  }
+}
+```
+</div>
