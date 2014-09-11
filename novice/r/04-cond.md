@@ -77,12 +77,32 @@ if (num > 100) {
 <div class='out'><pre class='out'><code>[1] "not greater"
 </code></pre></div>
 
-The second line of this code uses the keyword `if` to tell Python that we want to make a choice.
+The second line of this code uses the keyword `if` to tell R that we want to make a choice.
 If the test that follows it is true, the body of the `if` (i.e., the lines indented underneath it) are executed.
 If the test is false, the body of the `else` is executed instead.
 Only one or the other is ever executed:
 
 <img src="../python/img/python-flowchart-conditional.svg" alt="Executing a Conditional" />
+
+In the example above, the test `num > 100` returns the value `FALSE`, which is why the code inside the `if` block was skipped and the code inside the `else` statment was run instead.
+
+
+<pre class='in'><code>num > 100</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] FALSE
+</code></pre></div>
+
+And as you likely guessed, the opposite of `FALSE` is `TRUE`.
+
+
+<pre class='in'><code>num < 100</code></pre>
+
+
+
+<div class='out'><pre class='out'><code>[1] TRUE
+</code></pre></div>
 
 Conditional statements don't have to include an `else`.
 If there isn't one, R simply does nothing if the test is false:
@@ -131,6 +151,10 @@ sign(-3)</code></pre>
 
 <div class='out'><pre class='out'><code>[1] 1
 </code></pre></div>
+
+Note that the test for equality uses two equal signs, `==`.
+
+> **Tip:** Other tests include greater than or equal to (`>=`), less than or equal to (`<=`), and not equal to (`!=`).
 
 We can also combine tests.
 An ampersand, `&`, symbolizes "and".
