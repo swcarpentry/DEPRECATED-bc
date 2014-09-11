@@ -95,6 +95,13 @@ We close with material on licensing because:
     CVS and Subversion are now seen as legacy systems,
     and Mercurial isn't nearly as widely used in the sciences right now.
 
+*   The last challenge in the git conflicts lesson asks learners what happens
+    if there is a conflict in an image file. Some learners may try this out
+    in their repositories and it will not be obvious how to resolve the 
+    conflict. They can use `git checkout --ours /path/to/image` to keep the
+    local version of the image, or `git checkout --theirs /path/to/image` to
+    keep the remote version.
+
 #### Text Editor
 
 We suggest instructors and students use `nano` as the text editor for this lessons because:
