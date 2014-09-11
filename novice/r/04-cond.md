@@ -188,3 +188,22 @@ while `|` is true if either part is true:
 </code></pre></div>
 
 In this case, "either" means "either or both", not "either one or the other but not both".
+
+<div class="challenges" markdown="1">
+#### Challenges
+
+  + Write a function, `plot_dist`, that plots a boxplot if the length of the vector is greater than a specified threshold and a stripchart otherwise.
+  To do this you'll use the R functions `boxplot` and `stripchart`.
+
+
+
+
+<pre class='in'><code>dat <- read.csv("inflammation-01.csv", header = FALSE)
+plot_dist(dat[, 10], threshold = 10)  # day (column) 10</code></pre>
+
+<img src="figure/04-cond-conditional-challenge1.png" title="plot of chunk conditional-challenge" alt="plot of chunk conditional-challenge" style="display: block; margin: auto;" />
+
+<pre class='in'><code>plot_dist(dat[1:5, 10], threshold = 10)  # samples (rows) 1-5 on day (column) 10</code></pre>
+
+<img src="figure/04-cond-conditional-challenge2.png" title="plot of chunk conditional-challenge" alt="plot of chunk conditional-challenge" style="display: block; margin: auto;" />
+</div>

@@ -5,6 +5,7 @@ root: ../..
 
 ```{r, include = FALSE}
 source("chunk_options.R")
+opts_chunk$set(fig.path = "figure/04-cond-")
 ```
 
 ## Making Choices
@@ -154,3 +155,26 @@ if (1 > 0 | -1 > 0) {
 ```
 
 In this case, "either" means "either or both", not "either one or the other but not both".
+
+<div class="challenges" markdown="1">
+#### Challenges
+
+  + Write a function, `plot_dist`, that plots a boxplot if the length of the vector is greater than a specified threshold and a stripchart otherwise.
+  To do this you'll use the R functions `boxplot` and `stripchart`.
+
+```{r echo=FALSE}
+plot_dist <- function(x, threshold) {
+  if (length(x) > threshold) {
+    boxplot(x)
+  } else {
+    stripchart(x)
+  }
+}
+```
+
+```{r conditional-challenge}
+dat <- read.csv("inflammation-01.csv", header = FALSE)
+plot_dist(dat[, 10], threshold = 10)  # day (column) 10
+plot_dist(dat[1:5, 10], threshold = 10)  # samples (rows) 1-5 on day (column) 10
+```
+</div>
