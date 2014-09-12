@@ -1,3 +1,20 @@
+Allyship Tips
+=============
+
+By Kara Woo and Matt Davis:
+
+* Listen. When people talk about their lives and experiences, take them seriously. They are the experts.
+* Do your homework; don’t expect others to educate you. Some people may be happy to do this, but you are not entitled to it. Many, many people have written on diversity issues — it’s not hard to find information.
+* Learn to call out bias and unfairness when you see it, whether it is intentional or not (but also be wary of monopolizing conversations).
+* Support victims of harassment by believing them, and do not blame them or try to minimize their experiences by telling them to 'just ignore' their harassers.
+* Elevate the voices of members of marginalized groups.
+* Be conscious of your own language and actions and the ways they might reinforce systems of oppression and privilege.
+* Don’t center your own feelings. If you get called out or feel wounded by someone else’s tone, go back to point #1.
+* Remember that “ally” isn’t a static identity, nor is it a label you get to claim for yourself. Allyship is a process, and you’re not an ally just because you say you are. Do the hard work of being an ally, and don’t expect to be thanked or acknowledged every time (or even most of the time).
+
+References
+==========
+
 Meghan Duffy:
 
 Stereotype threat: a summary of the problem http://dynamicecology.wordpress.com/2014/04/28/stereotype-threat-a-summary-of-the-problem/
