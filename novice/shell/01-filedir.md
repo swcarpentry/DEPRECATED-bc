@@ -53,7 +53,7 @@ Once you have Nelle's files and directories, change to Nelle's home directory to
 begin, by typing in the `cd` command:
 
 ~~~
-$ cd filesystem/user/nelle
+$ cd filesystem/users/nelle
 ~~~
 {:class="in"}
 
