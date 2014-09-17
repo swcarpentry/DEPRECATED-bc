@@ -38,8 +38,10 @@ we are always grateful for contributions and corrections.
 3. [Motivation and Demotivation](03-motivation.html)
 4. [Assessment and Reverse Instructional Design](04-assessment.html)
 5. [Collaborative Lesson Development](05-collab.html)
-6. [Wrapping Up](06-conclusion.html)
-7. [Reading](07-reading.html)
+6. [Pedagogical Content Knowledge and Cognitive Load](06-pck.html)
+7. [In the Classroom](07-classroom.html)
+8. [Next Steps](08-onward.html)
+9. [Readings](09-reading.html)
 
 ## Links
 

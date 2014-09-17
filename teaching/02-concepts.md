@@ -65,4 +65,3 @@ or define the term "lexical scoping".
 Coming at it from another direction,
 if someone has a robust mental model of a notional machine,
 they can debug problems systematically rather than simply making random changes until it appears to work.
-

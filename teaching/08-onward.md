@@ -1,7 +1,7 @@
 ---
 layout: lesson
 root: ..
-title: Wrapping Up
+title: Next Steps
 ---
 This training course only a shadow of what it needs to be.
 If you'd like to help us make it better,
