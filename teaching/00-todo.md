@@ -31,3 +31,14 @@ suggests a change to the materials for the next session). In both
 cases, they need a clear and concise rationale for why the materials
 and bootcamp structure (e.g. live coding, sticky notes) are the way
 they are.
+
+The main method for breaking up the content during the skype call is
+via polling the audience. You could scatter some polls throughout the
+teaching notes, a bit like challenges are scattered throughout the
+novice materials (e.g. the question about the difference between
+phonic and whole language approaches to teaching kids to read was a
+nice poll that could be added to the notes).
+
+You often get asked during the skype call for references to back up
+what you're saying. Those will definitely need to be in the notes, as
+new instructors won't be as familiar with educational literature.
