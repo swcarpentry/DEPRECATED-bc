@@ -99,11 +99,7 @@ Create shortcut `..` using `alias` to simplify going up one directory.
 
 <div class="challenge" markdown="1">
 
-If you entered the command `alias ll='ls -Shl . |more'` in a terminal. What would you expect the output from `ll ..` to show?
-
-1. Directory listing of the current directory
-2. Directory listing of the directory one level up from the current directory
-3. An error
+You entered the command `alias ll='ls -Shl |more'` in a terminal. The output from `ll ..` is not the parent directory, why not?
 
 </div>
 
