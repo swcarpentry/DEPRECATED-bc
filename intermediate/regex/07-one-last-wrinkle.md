@@ -24,6 +24,8 @@ def get_date(record):
         return m.group(3), m.group(1), m.group(2)
 
     return None
+~~~
+{:class="in"}
 
 We can make it easier to add new patterns to this function by making it
 more declarative. The trick is to combine the regular expressions and
@@ -45,6 +47,7 @@ def get_fields(record):
 
     return None
 ~~~
+{:class="in"}
 
 Each entry in the list `patterns` has two parts: a regular expression,
 and then the indices of the group that will contain the year, month,
@@ -85,13 +88,12 @@ from each document.
 Let's have a closer look at our input:
 
 ~~~
-    Granger's work on graphs \cite{dd-gr2007,gr2009},
-    particularly ones obeying Snape's Inequality
-    \cite{ snape87 } (but see \cite{quirrell89}),
-    has opened up new lines of research.  However,
-    studies at Unseen University \cite{stibbons2002,
-    stibbons2008} highlight several dangers.
-    ⋮    ⋮    ⋮
+Granger's work on graphs \cite{dd-gr2007,gr2009},
+particularly ones obeying Snape's Inequality
+\cite{ snape87 } (but see \cite{quirrell89}),
+has opened up new lines of research.  However,
+studies at Unseen University \cite{stibbons2002,
+stibbons2008} highlight several dangers.
 ~~~
 
 Citations in LaTeX are written using `\cite{…}`, with cross-reference
@@ -291,7 +293,7 @@ Granger's work on graphs \cite{dd-gr2007,gr2009},
 particularly ones obeying Snape's Inequality
 \cite{ snape87 } (but see \cite{quirrell89}),
 has opened up new lines of research.  However,
-studies at Unseen University \cite{stibbons2002,                                                                                                       
+studies at Unseen University \cite{stibbons2002,
 stibbons2008} highlight several dangers.'''
 
     print get_citations(test)
@@ -326,6 +328,7 @@ def get_citations(text):
 
     return result
 ~~~
+{:class="in"}
 
 We can use one more trick from the regular expression library to make
 this function more efficient. Instead of turning the regular expression
@@ -333,7 +336,6 @@ into a finite state machine over and over again, we can compile the
 regular expression and save the resulting object:
 
 ~~~
-
 p_cite = re.compile('cite{\\s*\\b([^}]+)\\b\\s*}')
 p_split = re.compile('\\s*,\\s*')
 
@@ -350,6 +352,7 @@ def get_citations(text):
 
     return result
 ~~~
+{:class="in"}
 
 That object has methods with the same names as the functions we've been
 using from the library, like `search` and `findall`, but if we're using
@@ -370,7 +373,7 @@ Granger's work on graphs \cite{dd-gr2007,gr2009},
 particularly ones obeying Snape's Inequality
 \cite{ snape87 } (but see \cite{quirrell89}),
 has opened up new lines of research.  However,
-studies at Unseen University \cite{stibbons2002,                                                                                                       
+studies at Unseen University \cite{stibbons2002,
 stibbons2008} highlight several dangers.'''
 
     print get_citations(test)
@@ -399,6 +402,7 @@ p_cite = '''
 '''
 matcher = re.compile(p_cite, re.VERBOSE)
 ~~~
+{:class="in"}
 
 Documenting patterns like this makes them much easier to fix and extend.
 
