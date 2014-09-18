@@ -46,15 +46,16 @@ Gives full information on the files (`-l`), sorted by file size (`-S`), displaye
 
 This is a lot of typing and switches are often forgotten.
 
+<div style="page-break-after: always;"></div>
+
 #### Creating an alias saves typing and saves remembering all the switches we use often
 
 An alias is created using the shell command `alias`. The usage is simple:
 
 
-~~~
-$ alias name='command'
-~~~
-{:class="in"}
+![image of alias command structure](img/alias-command-structure.svg?raw=true)
+
+<div style="page-break-after: always;"></div>
 
 For example:
 
