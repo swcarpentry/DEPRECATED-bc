@@ -14,7 +14,7 @@ slashes, and use month names instead of numbers. What's more, some of
 the month names are three characters long, while others are four, and
 the days are either one or two digits.
 
-## Using simple string operations gets tedious quickly
+### Using simple string operations gets tedious quickly
 
 Before looking at how to use regular expressions to extract data from
 Notebook 2, let's see how we would do it with simple string
@@ -35,7 +35,7 @@ Having to explicitly define the literal string usually isn't a big help,
 what we want is someway of defining the general pattern.
 This is where operators in regular expressions come in handy. 
 
-## Operators specify patterns that simplify regular expressions
+### Operators specify patterns that simplify regular expressions
 
 Operators are the bread and butter of regular expressions.
 They are simply characters that specify other patterns of characters
@@ -57,7 +57,7 @@ Perhaps surprisingly, the answer is `3`.
 The regex won't compile because the `.` and `*` are operators that don't mean the same as they do in GUI search boxes
 and are a source of gotcha's when building regular expressions.
 
-## Using operators
+### Using operators
 
 Our first attempt to parse this data will rely on the `*` operator.
 It is a [postfix](../../gloss.html#postfix-operator) operator,
@@ -484,10 +484,6 @@ next pattern. Writing our code this way make it easier to understand
 than using a single monster pattern, and easier to extend if we have to
 handle more data formats.
 
-## More operators
-
-Let's have a look at some different operators that can come in useful in different contexts.
-
 ### Anchors
 
 It is possible to 'anchor' the pattern to a particular part of the
@@ -503,13 +499,10 @@ m = re.search('(^Davison.*)', 'Davison/May 22, 2010/1721.3')
 print m.group(1)
 ~~~
 {:class="in"}
-
-gives us:
-
 ~~~
 Davison/May 22, 2010/1721.3
 ~~~
-{:class="in"}
+{:class="out"}
 
 Whereas,
 
@@ -518,9 +511,6 @@ m = re.search('(^Baker.*)', 'Davison/May 22, 2010/1721.3')
 print m
 ~~~
 {:class="in"}
-
-gives: 
-
 ~~~
 None
 ~~~
@@ -551,18 +541,18 @@ print m.group(1)
 
 A common thing in regular expressions are metacharacters. These are special pairs of characters that denote classes of characters and help make regular expressions more readable. There is no special syntax for using them, they're just like single characters so here's a table.
 
-    | Metacharacter | Represents         |
-    |:-------------:|:-------------------|
-    |    \t         |  a tab             |
-    |    \s         |  any space         |
-    |    \w         | any word character |
-    |               | ie [aA-zZ0-9_]     |
-    |    \d         | any digit [0-9]    |
-    |    \W         | any non-word char  |
-    |    \D         | any non-digit char |
+<table>
+<tr><th>Metacharacter</th><th>Represents</th></tr>
+<tr><td><code>\t</code></td><td>a tab</td></tr>
+<tr><td><code>\s</code></td><td>any space</td></tr>
+<tr><td><code>\w</code></td><td>any word character (it is the same as <code>[aA-zZ0-9_]</code>)</td></tr>
+<tr><td><code>\d</code></td><td>any digit (it is the same as <code>[0-9]</code>)</td></tr>
+<tr><td><code>\W</code></td><td>any non-word char</td></tr>
+<tr><td><code>\D</code></td><td>any non-digit char</td></tr>
+</table>
 
 <div class="keypoints" markdown="1">
-### Key Points
+#### Key Points
 * Operators specify patterns that simplify regular expressions
 * Operators are simply characters that specify other more general patterns
 * Metacharacters are special pairs of characters that denote classes of characters
@@ -570,7 +560,7 @@ A common thing in regular expressions are metacharacters. These are special pair
 </div>
 
 <div class="challenge" markdown="1">
-### Review
+#### Review
 
 So now we have enough knowledge to try a quick quiz. What does this pattern match `(wo.+d)` return, when applied to this string `How much wood, would a woodchuck chuck?`, that is to say what does this print out:
 
