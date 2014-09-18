@@ -335,7 +335,7 @@ When we run this pattern against our test data, three records match:
 ~~~
 show_matches(pattern, tests)
 ~~~
-{:class_in}
+{:class="in"}
 
 ~~~
 ** Davison/May , 2010/1721.3
@@ -347,7 +347,7 @@ show_matches(pattern, tests)
    /May 22, 2010/1721.3
    Davison/May 22, 2010/
 ~~~
-{:class_out}
+{:class="out"}
 
 The second and third matches make sense: `May 2` and `May 22` are both
 valid. But why does `May` with no date at all match this pattern? Let's
