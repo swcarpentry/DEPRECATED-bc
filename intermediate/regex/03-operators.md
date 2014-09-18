@@ -104,11 +104,15 @@ match = re.search('(.*)/(.*)/(.*)',
 print '[' + match.group(1) + ']'
 print '[' + match.group(2) + ']'
 print '[' + match.group(3) + ']'
+~~~
+{:class="in"}
+
+~~~
 []
 []
 []
 ~~~
-{:class="in"}
+{:class="out"}
 
 We don't want our pattern to match invalid records like this (remember,
 "Fail early, fail often"). However, `'.*'` can match the empty string
