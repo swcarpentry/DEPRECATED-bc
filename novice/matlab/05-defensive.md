@@ -580,10 +580,3 @@ not more.
 </div>
 
 
-#### Next Steps
-
-We have now seen the basics of building and testing Python code in the IPython Notebook.
-The last thing we need to learn is how to build command-line programs
-that we can use in pipelines and shell scripts,
-so that we can integrate our tools with other people's work.
-This will be the subject of our next and final lesson.
