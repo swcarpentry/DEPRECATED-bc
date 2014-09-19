@@ -158,7 +158,9 @@ Rscript readings-02.R inflammation-01.csv
 
 #### Challenges
 
-  + Write a command-line program that does addition and subtraction:
+  + Write a command-line program that does addition and subtraction.
+  **Hint:** Everything argument read from the command-line is interpreted as a character [string](../../gloss.html#string).
+  You can convert from a string to a number using the function `as.numeric`.
 
 ```{r, engine='bash'}
 Rscript arith.R 1 + 2

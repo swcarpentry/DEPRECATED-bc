@@ -289,7 +289,9 @@ main()
 
 #### Challenges
 
-  + Write a command-line program that does addition and subtraction:
+  + Write a command-line program that does addition and subtraction.
+  **Hint:** Everything argument read from the command-line is interpreted as a character [string](../../gloss.html#string).
+  You can convert from a string to a number using the function `as.numeric`.
 
 
 <pre class='in'><code>Rscript arith.R 1 + 2</code></pre>
@@ -324,17 +326,29 @@ main()
 
 
 <div class='out'><pre class='out'><code>inflammation-01.csv
+inflammation-01.pdf
 inflammation-02.csv
+inflammation-02.pdf
 inflammation-03.csv
+inflammation-03.pdf
 inflammation-04.csv
+inflammation-04.pdf
 inflammation-05.csv
+inflammation-05.pdf
 inflammation-06.csv
+inflammation-06.pdf
 inflammation-07.csv
+inflammation-07.pdf
 inflammation-08.csv
+inflammation-08.pdf
 inflammation-09.csv
+inflammation-09.pdf
 inflammation-10.csv
+inflammation-10.pdf
 inflammation-11.csv
+inflammation-11.pdf
 inflammation-12.csv
+inflammation-12.pdf
 </code></pre></div>
 
 
