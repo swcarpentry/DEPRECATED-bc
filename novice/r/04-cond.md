@@ -78,11 +78,17 @@ if (num > 100) {
   print("greater")
 } else {
   print("not greater")
-}</code></pre>
+}
+print("done")</code></pre>
 
 
 
 <div class='out'><pre class='out'><code>[1] "not greater"
+</code></pre></div>
+
+
+
+<div class='out'><pre class='out'><code>[1] "done"
 </code></pre></div>
 
 The second line of this code uses the keyword `if` to tell R that we want to make a choice.

@@ -78,13 +78,14 @@ It would be ideal if `analyze` would either save or not save the plots based on 
 In order to update our function to decide between saving or not, we need to write code that automatically decides between multiple options.
 The tool R gives us for doing this is called a [conditional statement](../../gloss.html#conditional-statement), and looks like this:
 
-```{r}
+```{r, results='hold'}
 num <- 37
 if (num > 100) {
   print("greater")
 } else {
   print("not greater")
 }
+print("done")
 ```
 
 The second line of this code uses the keyword `if` to tell R that we want to make a choice.
