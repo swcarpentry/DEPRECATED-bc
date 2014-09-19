@@ -535,8 +535,6 @@ We will not cover this package in this lesson but when you start writing program
 
   + Separately, modify the program so that if no parameters are given (i.e., no action is specified and no filenames are given), it prints a message explaining how it should be used.
 
-  + Separately, modify the program so that if no action is given it displays the means of the data.
-
 ### Handling Standard Input
 
 The next thing our program has to do is read data from standard input if no filenames are given so that we can put it in a pipeline, redirect input to it, and so on.
