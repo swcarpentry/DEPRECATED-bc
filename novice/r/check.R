@@ -18,7 +18,6 @@ main <- function() {
       cat("Not all the data files have the same dimensions.")
     }
   }
-  cat("All the data files have the same dimensions.")
 }
 
 main()
