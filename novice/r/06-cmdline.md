@@ -533,7 +533,9 @@ We will not cover this package in this lesson but when you start writing program
     Is the code easier to read?
     Is the program easier to understand?
 
-  + Separately, modify the program so that if no parameters are given (i.e., no action is specified and no filenames are given), it prints a message explaining how it should be used.
+  + Separately, modify the program so that if no action is specified (or an incorrect action is given), it prints a message explaining how it should be used.
+
+
 
 ### Handling Standard Input
 
