@@ -1,8 +1,4 @@
-count <- 0
 lines <- readLines(con = file("stdin"))
-for (line in lines) {
-  count <- count + 1
-}
-
+count <- length(lines)
 cat("lines in standard input: ")
-cat(count)
+cat(count, sep = "\n")

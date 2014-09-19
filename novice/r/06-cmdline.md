@@ -541,14 +541,10 @@ The next thing our program has to do is read data from standard input if no file
 Let's experiment in another script, which we'll save as `count-stdin.R`:
 
 
-<div class='out'><pre class='out'><code>count <- 0
-lines <- readLines(con = file("stdin"))
-for (line in lines) {
-  count <- count + 1
-}
-
+<div class='out'><pre class='out'><code>lines <- readLines(con = file("stdin"))
+count <- length(lines)
 cat("lines in standard input: ")
-cat(count)
+cat(count, sep = "\n")
 </code></pre></div>
 
 This little program reads lines from the program's standard input using `file("stdin")`.
