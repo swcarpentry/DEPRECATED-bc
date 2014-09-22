@@ -15,12 +15,15 @@
       then hitting Return
       to return to the shell.
     </p>
+{% if page.lessons contains 'Bash' %}
     <h4>The Bash Shell</h4>
     <p>
       Bash is a commonly-used shell. Using a shell gives you
       more power to do more tasks more quickly with your
       computer.
     </p>
+{% endif %}
+{% if page.lessons contains 'Git' %}
     <h4>Git</h4>
     <p>
       Git is a state-of-the-art version control system. It
@@ -28,8 +31,10 @@
       options for easily updating a shared or public version of
       your code on <a href="https://github.com/">github.com</a>.
     </p>
+{% endif %}
   </div>
   <div class="span6">
+{% if page.lessons contains 'Python' %}
     <h4>Python</h4>
     <p>
       Python is becoming very popular in scientific computing,
@@ -39,6 +44,8 @@
       Installing all the scientific packages for Python individually can be a bit difficult,
       so we recommend an all-in-one installer.
     </p>
+{% endif %}
+{% if page.lessons contains 'R' %}
     <h4>R</h4>
     <p>
       <a href="http://www.r-project.org">R</a> is a programming language that is especially powerful for
@@ -46,12 +53,15 @@
       use <a href="http://www.rstudio.com/">RStudio</a>, an interactive
       development environment (IDE).
     </p>
+{% endif %}
+{% if page.lessons contains 'SQL' %}
     <h4>SQL</h4>
     <p>
       SQL is a specialized programming language used with databases.
       We use a simple database manager called <a href="http://www.sqlite.org/">SQLite</a>,
       either directly or through a browser plugin.
     </p>
+{% endif %}
   </div>
 </div>
 
@@ -59,10 +69,11 @@
 
 <div class="row-fluid">
   <div class="span6">
+{% if page.lessons contains 'Python' %}
     <h4>Python</h4>
     <ul>
       <li>
-        Download and install  <a href="http://continuum.io/anacondace.html">Anaconda CE</a>.
+        Download and install  <a href="https://store.continuum.io/cshop/anaconda/">Anaconda</a>.
       </li>
       <li>
         Use all of the defaults for installation
@@ -70,6 +81,8 @@
         make sure to check <strong>Make Anaconda the default Python</strong>.
       </li>
     </ul>
+{% endif %}
+{% if page.lessons contains 'Git' %}
     <h4>Git Bash</h4>
     <p>
       Install Git for Windows by download and running
@@ -91,6 +104,7 @@
         Double click on the file to run it.
       </li>
     </ul>
+{% endif %}
   </div>
   <div class="span6">
     <h4>Editor</h4>
@@ -106,6 +120,7 @@
       (or have other tools like Git launch it for you).
       Please ask your instructor to help you do this.
     </p>
+{% if page.lessons contains 'R' %}
     <h4>R</h4>
     <p>
       Install R by downloading and running
@@ -114,6 +129,8 @@
       Also, please install the
       <a href="http://www.rstudio.com/ide/download/desktop">RStudio IDE</a>.
     </p>
+{% endif %}
+{% if page.lessons contains 'SQL' %}
     <h4>SQLite</h4>
     <p>
       Download the <a href="http://files.software-carpentry.org/sqlite3.exe">sqlite3 program</a>
@@ -121,6 +138,7 @@
       Alternatively,
       you may install the Firefox SQLite browser plugin described <a href="#firefox-sqlite">below</a>.
     </p>
+{% endif %}
   </div>
 </div>
 
@@ -128,6 +146,7 @@
 
 <div class="row-fluid">
   <div class="span6">
+{% if page.lessons contains 'Bash' %}
     <h4>Bash</h4>
     <p>
       The default shell in all versions of Mac OS X is bash,
@@ -136,6 +155,7 @@
       in <code>/Applications/Utilities</code>).  You may want
       to keep Terminal in your dock for this workshop.
     </p>
+{% endif %}
     <h4>Editor</h4>
     <p>
       We recommend
@@ -144,21 +164,25 @@
       In a pinch, you can use <code>nano</code>,
       which should be pre-installed.
     </p>
+{% if page.lessons contains 'Git' %}
     <h4>Git</h4>
     <p>
-      Install Git for Mac by downloading and running
-      <a href="http://git-scm.com/downloads">the installer</a>.  For older
-      versions of OS X (10.5-10.7) use the most recent available
-      installer <a href="https://code.google.com/p/git-osx-installer/downloads/list">available
+
+      <strong>For OS X 10.8 and higher</strong>, install Git for Mac by downloading and running
+	  <a href="http://git-scm.com/downloads">the installer</a>.
+      <strong>For older versions of OS X (10.5-10.7)</strong> use the most recent available
+      installer for your OS <a href="https://code.google.com/p/git-osx-installer/downloads/list">available
       here</a>. Use the Leopard installer for 10.5 and the Snow Leopard
       installer for 10.6-10.7.
     </p>
+{% endif %}
   </div>
   <div class="span6">
+{% if page.lessons contains 'Python' %}
     <h4>Python</h4>
     <ul>
       <li>
-        Download and install  <a href="http://continuum.io/anacondace.html">Anaconda CE</a>.
+        Download and install  <a href="https://store.continuum.io/cshop/anaconda/">Anaconda</a>.
       </li>
       <li>
         Use all of the defaults for installation
@@ -166,6 +190,8 @@
         make sure to check <strong>Make Anaconda the default Python</strong>.
       </li>
     </ul>
+{% endif %}
+{% if page.lessons contains 'R' %}
     <h4>R</h4>
     <p>
       Install R by downloading and running
@@ -174,12 +200,15 @@
       Also, please install the
       <a href="http://www.rstudio.com/ide/download/desktop">RStudio IDE</a>.
     </p>
+{% endif %}
+{% if page.lessons contains 'SQL' %}
     <h4>SQLite</h4>
     <p>
       <code>sqlite3</code> comes pre-installed on Mac OS X.
       Alternatively,
       you may install the Firefox SQLite browser plugin described <a href="#firefox-sqlite">below</a>.
     </p>
+{% endif %}
   </div>
 </div>
 
@@ -187,6 +216,7 @@
 
 <div class="row-fluid">
   <div class="span6">
+{% if page.lessons contains 'Bash' %}
     <h4>Bash</h4>
     <p>
       The default shell is usually <code>bash</code>,
@@ -194,35 +224,43 @@
       you can run it by opening a terminal and typing <code>bash</code>.
       There is no need to install anything.
     </p>
+{% endif %}
+{% if page.lessons contains 'Git' %}
     <h4>Git</h4>
     <p>
       If Git is not already available on your machine you can try
       to install it via your distro's package manager
       (e.g. <code>apt-get</code> or <code>yum</code>).
     </p>
+{% endif %}
     <h4>Editor</h4>
     <p>
       <a href="http://kate-editor.org/">Kate</a> is one option for Linux users.
       In a pinch, you can use <code>nano</code>,
       which should be pre-installed.
     </p>
+{% if page.lessons contains 'R' %}
     <h4>R</h4>
     <p>
       You can download the binary files for your distribution
       from <a href="http://cran.r-project.org/index.html">CRAN</a>. Or
       you can use your package manager, e.g. for Debian/Ubuntu
-      run <code>apt-get install r-base</code> or <code>yum install R</code>. 
+      run <code>apt-get install r-base</code> or <code>yum install R</code>.
       Also, please install the
       <a href="http://www.rstudio.com/ide/download/desktop">RStudio IDE</a>.
     </p>
+{% endif %}
+{% if page.lessons contains 'SQL' %}
     <h4>SQLite</h4>
     <p>
       <code>sqlite3</code> comes pre-installed on Linux.
       Alternatively,
       you may install the Firefox SQLite browser plugin described <a href="#firefox-sqlite">below</a>.
     </p>
+{% endif %}
   </div>
   <div class="span6">
+{% if page.lessons contains 'Python' %}
     <h4>Python</h4>
     <p>
       We recommend the all-in-one scientific Python installer
@@ -257,6 +295,7 @@
         distribution the default Python).
       </li>
     </ol>
+{% endif %}
   </div>
 </div>
 
@@ -264,6 +303,7 @@
 
 <div class="row-fluid">
   <div class="span6">
+{% if page.lessons contains 'SQL' %}
     <h4 id="firefox-sqlite">Firefox SQLite Plugin</h4>
     <p>
       Instead of using <code>sqlite3</code> from the command line,
@@ -291,8 +331,10 @@
 	Select "SQLite Manager" from the "Tools" menu.
       </li>
     </ul>
+{% endif %}
   </div>
   <div class="span6">
+{% if page.lessons contains 'VM' %}
     <h4>Virtual Machine</h4>
     <p>
       Some instructors prefer to have learners use a virtual machine (VM)
@@ -315,5 +357,6 @@
 	and loading the <code>.ova</code> file.
       </li>
     </ol>
+{% endif %}
   </div>
 </div>
