@@ -235,6 +235,14 @@ If we just run `git commit` without the `-m` option,
 Git will launch `nano` (or whatever other editor we configured at the start)
 so that we can write a longer message.
 
+<div class="objectives" markdown="1">
+#### Good comments:
+*   Describe <b>the</b> unique feature of the revision
+*   Are Seven words or fewer
+*   Contain active verbs in the present tense
+</div>
+
+
 If we run `git status` now:
 
 ~~~
