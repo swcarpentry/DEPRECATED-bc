@@ -236,11 +236,10 @@ Git will launch `nano` (or whatever other editor we configured at the start)
 so that we can write a longer message.
 
 <div class="objectives" markdown="1">
-
-#### Tips for making good commit comments
-*   Use 7 words or fewer
-*   Use active verbs, and no past tense
-*   Describe a unique feature of the change
+#### Good comments:
+*   Describe <b>the</b> unique feature of the revision
+*   Are Seven words or fewer
+*   Contain active verbs in the present tense
 </div>
 
 
