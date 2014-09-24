@@ -165,9 +165,42 @@ print -dpng "patient_data-01.png"
 
 
 #### The Colon Operator
+<!-- FIXME: Maybe this should be in a box? -->
+
+You can use the `:` (colon) operator to generate
+sequences in MATLAB:
+
+~~~
+4:10
+~~~
+{:class="in"}
+
+~~~
+ans =
+
+    4    5    6    7    8    9   10
+~~~
+{:class="out"}
 
 
+~~~
+2.5:0.25:5
+~~~
+{:class="in"}
 
+~~~
+ans =
+
+ Columns 1 through 8:
+
+    2.5000    2.7500    3.0000    3.2500    3.5000    3.7500    4.0000    4.2500
+
+ Columns 9 through 11:
+
+    4.5000    4.7500    5.0000
+
+~~~
+{:class="out"}
 
 ### Analyzing Multiple Datasets
 
@@ -513,6 +546,8 @@ as the first, and their minima show the same staircase structure.
 
 * Use a for loop: `for variable = collection`, to process the elements
   of a collection (a MATLAB array), one at a time.
+
+* Use the `:` (colon) operator to generate sequences.
 
 * Use the `length` command to determine the length of a MATLAB array.
 
