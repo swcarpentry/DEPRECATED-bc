@@ -22,7 +22,6 @@ num = 37;
 
 if num > 100
     disp('greater');
-
 else
     disp('not greater');
 end
@@ -31,20 +30,18 @@ disp('done');
 ~~~
 {:class="in"}
 
-
 ~~~
 not greater
 done
 ~~~
 {:class="out"}
 
-
 The second line of this code uses the keyword `if` to tell MATLAB
 that we want to make a choice. If the test that follows is true,
-the body of the `if` (i.e., the lines before `else`) is executed. 
-If the test is false, the body of the `else` (i.e., the lines
-before `end`) is executed instead. Only one or the other is ever
-executed.
+the body of the `if` (i.e., the lines between `if` and `else`) are 
+executed. If the test is false, the body of the `else` (i.e., 
+the lines between `else` and `end`) are executed instead. Only one 
+or the other is ever executed.
 
 Conditional statements don't have to have an `else` block. If there
 isn't one, MATLAB simply doesn't do anything if the test is false:
@@ -134,35 +131,50 @@ In this case, "either" means "either or both", not
 
 1. `1` and `0` aren't the only values
 in MATLAB that are true or false. In fact, *any* value
-can be used in an `if` or `elif`. After reading and
+can be used in an `if` or `elseif`. After reading and
 running the code below, explain what the rule is for
 which values that are considered true and which are
 considered false.
 
+1.
 ~~~
-    1. 
     if 
         disp('empty string is true')
     end
+~~~
 
-    2.
+2.
+~~~
     if 'foo'
         disp('non empty string is true')
     end
+~~~
 
-    3.
+3.
+~~~
     if []
         disp ('empty array is true')
     end
+~~~
 
-    4.
+4.
+~~~
     if [22.5, 1.0]
         disp ('non empty array is true')
     end
+~~~
 
-    5.
+5.
+~~~
     if [0, 0]
         disp ('array of zeros is true')
+    end
+~~~
+
+6.
+~~~
+    if true
+        disp('true is true')
     end
 ~~~
 
