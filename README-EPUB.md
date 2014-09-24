@@ -9,9 +9,8 @@ lessons and others ebook formats (e.g. `mobi` and `azw`).
 - [Jekyll](http://jekyllrb.com/)
 - [Pandoc](http://johnmacfarlane.net/pandoc/)
 
-  We recommend use pandoc >= 1.13 due a [issue with
-  tables](https://github.com/jgm/pandoc/issues/1341). The build process won't
-  fail if you use an older version but will hard to read tables.
+  This **requeres** pandoc >= 1.13.1 due a
+  [issue to handle `div`s](https://github.com/jgm/pandoc/issues/1465).
 - [Calibre](http://calibre-ebook.com/)
 
   Only need to build the `mobi` and `azw` formats.
