@@ -1,0 +1,111 @@
+<h3>Overview</h3>
+
+<div class="row-fluid">
+  <div class="span6">
+    {% include setup/overview-editor.html %}
+{% if page.lessons contains 'Bash' %}
+    {% include setup/overview-bash.html %}
+{% endif %}
+{% if page.lessons contains 'Git' %}
+    {% include setup/overview-git.html %}
+{% endif %}
+  </div>
+  <div class="span6">
+{% if page.lessons contains 'Python' %}
+{% endif %}
+    {% include setup/overview-python.html %}
+{% if page.lessons contains 'R' %}
+    {% include setup/overview-r.html %}
+{% endif %}
+{% if page.lessons contains 'SQL' %}
+    {% include setup/overview-sql.html %}
+{% endif %}
+  </div>
+</div>
+
+<h3>Windows</h3>
+
+<div class="row-fluid">
+  <div class="span6">
+{% if page.lessons contains 'Python' %}
+    {% include setup/windows-python.html %}
+{% endif %}
+{% if page.lessons contains 'Git' %}
+    {% include setup/windows-git.html %}
+{% endif %}
+  </div>
+  <div class="span6">
+    {% include setup/windows-git.html %}
+{% if page.lessons contains 'R' %}
+    {% include setup/windows-r.html %}
+{% endif %}
+{% if page.lessons contains 'SQL' %}
+    {% include setup/windows-sql.html %}
+{% endif %}
+  </div>
+</div>
+
+<h3>Mac OS X</h3>
+
+<div class="row-fluid">
+  <div class="span6">
+{% if page.lessons contains 'Bash' %}
+    {% include setup/macosx-bash.html %}
+{% endif %}
+    {% include setup/macosx-editor.html %}
+{% if page.lessons contains 'Git' %}
+    {% include setup/macosx-git.html %}
+{% endif %}
+  </div>
+  <div class="span6">
+{% if page.lessons contains 'Python' %}
+    {% include setup/macosx-python.html %}
+{% endif %}
+{% if page.lessons contains 'R' %}
+    {% include setup/macosx-r.html %}
+{% endif %}
+{% if page.lessons contains 'SQL' %}
+    {% include setup/macosx-sql.html %}
+{% endif %}
+  </div>
+</div>
+
+<h3>Linux</h3>
+
+<div class="row-fluid">
+  <div class="span6">
+{% if page.lessons contains 'Bash' %}
+    {% include setup/linux-bash.html %}
+{% endif %}
+{% if page.lessons contains 'Git' %}
+    {% include setup/linux-git.html %}
+{% endif %}
+    {% include setup/linux-editor.html %}
+{% if page.lessons contains 'R' %}
+    {% include setup/linux-r.html %}
+{% endif %}
+{% if page.lessons contains 'SQL' %}
+    {% include setup/linux-sql.html %}
+{% endif %}
+  </div>
+  <div class="span6">
+{% if page.lessons contains 'Python' %}
+    {% include setup/linux-python.html %}
+{% endif %}
+  </div>
+</div>
+
+<h3>Miscellaneous</h3>
+
+<div class="row-fluid">
+  <div class="span6">
+{% if page.lessons contains 'SQL' %}
+    {% include setup/firefox-sql.html %}
+{% endif %}
+  </div>
+  <div class="span6">
+{% if page.lessons contains 'VM' %}
+    {% include setup/general-vm.html %}
+{% endif %}
+  </div>
+</div>
