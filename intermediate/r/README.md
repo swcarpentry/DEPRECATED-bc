@@ -5,9 +5,9 @@ title: Programming with R
 level: intermediate
 ---
 
-This README is meant for Software Carpentry instructors planning to teach a intermediate level R bootcamp. Do not commit this readme as-is without editing.
+This README is meant for Software Carpentry instructors planning to teach a intermediate level R workshop. Do not commit this readme as-is without editing.
 
-This `master` set is based on material from a [2-day bootcamp](https://github.com/swcarpentry/2013-10-09-canberra) ([@karthik](https://github.com/karthik)) ran in Canberra, Australia in October 2013. The material is meant to cover the full range of topics typically covered in a regular Python bootcamp. 
+This `master` set is based on material from a [2-day workshop](https://github.com/swcarpentry/2013-10-09-canberra) ([@karthik](https://github.com/karthik)) ran in Canberra, Australia in October 2013. The material is meant to cover the full range of topics typically covered in a regular Python workshop. 
 
 Shell and Git are intentionally missing from this set. Please consult other lesson folders for those topics.
 
