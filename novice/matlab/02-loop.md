@@ -226,7 +226,7 @@ There's a better approach:
 
 ~~~
 for letter = 1:4
-    disp word(letter)
+    disp(word(letter))
 end
 ~~~
 {:class="in"}
@@ -336,8 +336,8 @@ disp(['Number of vowels: ', num2str(len)])
 
 It's worth tracing the execution of this little program step by step.
 Since there are five characters in "aeiou", the loop body will be
-executed five times. The first time around, `len` is zero - the
-value assigned to it before the loop. The loop body adds 1 to the old
+executed five times. When we enter the loop, `len` is zero - the
+value assigned to it beforehand. The first time through, the loop body adds 1 to the old
 value of `len`, producing 1, and updates `len` to refer to that new
 value.
 The next time around, `vowel` is `e`, and `len` is 1, so `len` is
