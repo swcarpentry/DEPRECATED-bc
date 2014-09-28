@@ -536,8 +536,22 @@ Date:   Thu Aug 22 09:51:46 2013 -0400
 
 > #### Log Options
 >
-> `git log` has many options that are quite useful. You can combine some to get
-> a "better" view of the history of your project.
+> To avoid that `git log` cover all your terminal screen you can use the
+> `--oneline` option:
+>
+> ~~~
+> $ git log --oneline
+> ~~~
+> {:class="in"}
+> ~~~
+> * 005937f Thoughts about the climate
+> * 34961b1 Concerns about Mars's moons on my furry friend
+> * f22b25e Starting to think about Mars
+> ~~~
+> {:class="out"}
+>
+> You can also combine the `--oneline` options with others. One useful
+> combination is
 >
 > ~~~
 > $ git log --oneline --graph --all --decorate
