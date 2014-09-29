@@ -59,6 +59,25 @@ we're telling Git:
 The four commands above only need to be run once:
 the flag `--global` tells Git to use the settings for every project on this machine.
 
+> #### Proxy
+>
+> In some networks you need to use a proxy. If this is the case you may also
+> need to tell Git about the proxy:
+>
+> ~~~
+> $ git config --global http.proxy proxy-url
+> $ git config --global https.proxy proxy-url
+> ~~~
+> {:class="in"}
+>
+> To disable the proxy, use
+>
+> ~~~
+> $ git config --global --unset http.proxy
+> $ git config --global --unset https.proxy
+> ~~~
+> {:class="in"}
+
 ### Creating a Repository
 
 Once Git is configured,
@@ -534,6 +553,13 @@ Date:   Thu Aug 22 09:51:46 2013 -0400
 ~~~
 {:class="out"}
 
+To recap, when we want to add changes to our repository,
+we first need to add the changed files to the staging area
+(`git add`) and then commit the staged changes to the
+repository (`git commit`):
+
+<img src="img/git-committing.svg" alt="The Git Commit Workflow" />
+
 ### Exploring History
 
 If we want to see what we changed when,
@@ -695,7 +721,14 @@ It's important to remember that
 we must use the revision number that identifies the state of the repository
 *before* the change we're trying to undo.
 A common mistake is to use the revision number of
-the commit in which we made the change we're trying to get rid of:
+the commit in which we made the change we're trying to get rid of.
+In the example below, we want retrieve the state from before the most
+recent commit (`HEAD~1`), which is revision `f22b25e`:
+
+<img src="img/git-checkout.svg" alt="Git Checkout" />
+
+The following diagram illustrates what the history of a file might look
+like (moving back from `HEAD`, the most recently committed version):
 
 <img src="img/git-when-revisions-updated.svg" alt="When Git Updates Revision Numbers" />
 

@@ -1,9 +1,11 @@
 Software Carpentry Bootcamps
 ============================
 
-This repository's `gh-pages` branch is the starting point for a bootcamp website:
-it contains a template for your bootcamp's home page
-and the shared lesson materials we have developed.
+The `bc` repository is the starting point for creating your own bootcamp website:
+it contains a template for your bootcamp's home page,
+and also hosts the shared lesson materials we have developed.
+Most material is written in Markdown,
+but our Python and SQL lessons are written as IPython Notebooks.
 The sections below explain:
 
 *   how GitHub turns a repository into a web site,
@@ -110,8 +112,8 @@ rather than Git itself.
     that looks for specially-formatted commands embedded in the file.
 
 6.  Commands can be embedded in the body of a page.
-    One is `{% include somefile.html %}`,
-    which tells Jekyll to copy the contents of `somefile.html` into the file being translated;
+    One is {% raw %}{% include something.html %}{% endraw %},
+    which tells Jekyll to copy the contents of `something.html` into the file being translated;
     this is used to create standard headers and footers for pages.
     Another is `{{variable}}`:
     when Jekyll see this,
@@ -130,7 +132,7 @@ rather than Git itself.
     `{{page.venue}}` is replaced by "Euphoric State University"
     (or whatever value the variable has).
 
-8.  If a page uses `{% include something.html %}` to include a snippet of HTML,
+8.  If a page uses {% raw %}{% include something.html %}{% endraw %} to include a snippet of HTML,
     Jekyll looks in a directory called `_includes` to find `something.html`.
     It always looks there,
     and nowhere else,
@@ -224,6 +226,10 @@ To create a website for a new bootcamp:
     to check `index.html` for problems
     by running the command `make check`.
 
+8.  Change `lessons` variable in `index.html` so that it reflects the lessons that the bootcamp will cover.
+    This controls which setup instructions are displayed,
+    and described in more detail in the section on [variables](#variables).
+
 8.  Edit `_includes/setup.html` to provide software installation instructions for bootcamp attendees.
     This is described in more detail in the section on [website content](#website-content).
 
@@ -306,6 +312,7 @@ Your bootcamp's `index.html` page
 *must* define the following values in its YAML header:
 
 *   `layout` must be `bootcamp`.
+
 *   `root` is the path to the repository's root directory.
     This is '.' if the page is in the root directory
     (which `index.html` is).
@@ -313,32 +320,50 @@ Your bootcamp's `index.html` page
     `root` is '..' if the page is one directory down,
     '../..' if it is two levels down,
     and so on.
+
 *   `venue` is the name of the institution or group hosting the bootcamp.
+
 *   `address` is the bootcamp's street address.
+
 *   `country` must be a hyphenated country name like 'United-States'.
     This is used to look up flags for display in the main web site;
     see the `assets/flags` directory in the `site` repo for a full list of valid names.
+
 *   `latlng` is the latitude and longitude of the bootcamp site
     (so we can put a pin on our map).
+
 *   `humandate` is the human-friendly dates for the bootcamp (e.g., Jul 3-4, 2015).
     Please use three- or four-letter month names and abbreviations
     (e.g., `Dec` instead of `December`).
+
 *   `startdate` is the bootcamp's starting date in YYYY-MM-DD format.
+
 *   `enddate` is the bootcamp's ending date in the same format.
     If your bootcamp is only one day long,
     the `enddate` field can be deleted.
+
 *   `registration` is `open` (if anyone is allowed to sign up)
     or `restricted` (if only some people are allowed to take part).
     Please do *not* put HTML or links in here to explain
     who's allowed to enrol or how to go about doing it;
     that should go in the main body of your page.
+
 *   `instructor` is a comma-separated list of instructor names.
     This must be enclosed in square brackets,
     as in `["Alan Turing","Grace Hopper"]`
+
 *   `helper` is a comma-separated list of helper names.
     This must be enclosed in square brackets,
     as in `["John von Neumann"]`
+
 *   `contact` is the contact email address to use for your bootcamp.
+
+*   `lessons` is a list of the lessons actually being taught.
+    The values in this list control which sections of the setup instructions are displayed:
+    if `'Python'` is in the list,
+    for example,
+    the Python setup instructions are displayed for all three platforms,
+    while they are omitted if it is not.
 
 The header may optionally define the following:
 
@@ -365,13 +390,8 @@ reorganize, rewrite, or delete the material as you think best.
 *   `javascript.html`: JQuery and Bootstrap Javascript.
 *   `setup.html`: common setup instructions.
 
-You normally won't need to worry about the first four ---
-they're included in the right places by our standard layouts ---
-but you will probably want to edit the fifth.
-In particular,
-if you are teaching a Python bootcamp,
-you should delete the instructions for installing R,
-and vice versa.
+You normally won't need to edit these,
+as they're included in the right places by our standard layouts.
 
 Lesson Material
 ---------------
@@ -464,7 +484,6 @@ FAQ
 *   *Where can I get help?*
     <br/>
     Mail us at [admin@software-carpentry.org](mailto:admin@software-carpentry.org),
-    come chat with us on [our IRC channel](irc://moznet/sciencelab),
     or join our [discussion list](http://software-carpentry.org/contrib/discuss.html)
     and ask for help there.
 

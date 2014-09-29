@@ -13,6 +13,7 @@ registration: restricted
 instructor: ["Grace Hopper", "Alan Turing"]
 helper: ["John von Neumann"]
 contact: admin@software-carpentry.org
+lessons: ['R', 'Python', 'SQL', 'Git', 'Bash', 'VM']
 ---
 <!--
     Edit the values in the parameter block above to be appropriate for your bootcamp.
@@ -33,9 +34,18 @@ contact: admin@software-carpentry.org
 
 <!--
     This block includes the Eventbrite registration widget if 'eventbrite' has been set in the header.
+
+    Maybe you need to change height value:
+
+    - for one room use 206px,
+    - for one waitlist room use 152px,
+    - for two room use 254px,
+    - for one waitlist room and one room use 253px,
+    - for two waitlist room use 197px.
 -->
 {% if page.eventbrite %}
-<iframe src="//www.eventbrite.com/tickets-external?eid={{page.eventbrite}}&ref=etckt" frameborder="0" width="100%" scrolling="auto"></iframe>
+<iframe
+  src="//www.eventbrite.com/tickets-external?eid={{page.eventbrite}}&ref=etckt" frameborder="0" width="100%" height="206px" scrolling="auto"></iframe>
 {% endif %}
 
 <h2>General Information</h2>
@@ -80,7 +90,8 @@ contact: admin@software-carpentry.org
 <p>
   <strong>Requirements:</strong>
   Participants must bring a laptop with a few specific software packages installed
-  (listed below).
+  (listed below). They are also required to abide by Software Carpentry's
+  <a href="http://software-carpentry.org/conduct.html">Code of Conduct</a>.
 </p>
 
 <!--

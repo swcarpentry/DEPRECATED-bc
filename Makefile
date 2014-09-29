@@ -67,6 +67,7 @@ MOST_SRC = \
 # All source pages (including things not in the book).
 ALL_SRC = \
 	contents.md \
+	setup.md \
         $(wildcard intermediate/regex/*.md) \
 	$(wildcard intermediate/python/*.md) \
 	$(wildcard intermediate/doit/*.md) \

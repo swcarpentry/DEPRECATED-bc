@@ -12,10 +12,11 @@ you are agreeing that Software Carpentry may redistribute your work under
 [these licenses](LICENSE.md).
 
 Before beginning anything major,
-read the [README.md](README.md) file in this directory.
-It explains how this repository is used to create websites for bootcamps.
-We also recommend that you open an issue in the `swcarpentry/bc` Issue Tracker
-to get feedback on your ideas and coordinate with other developers.
+please read the [README.md](README.md) file in this directory,
+which explains how this repository is used to create websites for bootcamps.
+We also recommend that you look through [open issues](https://github.com/swcarpentry/bc/issues)
+and [pull requests](https://github.com/swcarpentry/bc/pulls) to see what other people could use help with,
+and then open an issue of your own to get feedback on your ideas and coordinate with other developers.
 
 **Table of Contents**
 
@@ -147,12 +148,16 @@ as well as Issues and Pull Requests made by others.
 
 See the list below for descriptions of some common labels:
 
-*   work in progress - the pull request is not ready to be merged
-*   getting-started - the task is suited for a newcomer, e.g. someone in instructor training
-*   novice - concerns the novice set of teaching material
-*   intermediate - concerns the intermediate set of teaching material
-*   tools - concerns the tools used to build and manage lesson material
-*   question - asking for help or getting feedback on an idea
+*   bug: something's wrong and needs to be fixed
+*   discussion: this issue is being used as a mini-mailing list to discuss something of specialized interest
+*   enhancement: identifies improvements to existing material (rather than bug fixes)
+*   getting-started: the task is suited for a newcomer, e.g. someone in instructor training
+*   intermediate: concerns the intermediate set of teaching material
+*   lessons: anything related to lessons that doesn't fit into a more specific category
+*   novice: concerns the novice set of teaching material
+*   question: asking for help or getting feedback on an idea
+*   tools: concerns the tools used to build and manage lesson material
+*   work in progress: the pull request is not ready to be merged
 
 FAQ
 ---
