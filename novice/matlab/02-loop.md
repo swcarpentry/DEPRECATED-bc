@@ -391,11 +391,25 @@ Let `b` be the base of the number and `x` the exponent. Write a loop to compute 
 ~~~
 disp(1:3:11)
 1 4 7 10
+
+disp(11:-3:1)
+11 8 5 2
 ~~~
 
-Using this, write a loop to print the letters of "abracadabra" in reverse order. (Hint: strides can be negative) 
+Using this, write a loop to print the letters of "aluminum" in reverse order, one letter per line.
 
-**Extra Challenge**: do this without a loop, using only indexing and the colon operator.
+~~~
+m
+u
+n
+i
+m
+u
+l
+a
+~~~ 
+
+**Extra Challenge**: Reverse a string without a loop, using only indexing and the colon operator.
 
 ### Processing Multiple Files
 
