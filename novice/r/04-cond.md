@@ -15,7 +15,7 @@ We want programs to make choices based on the values they are manipulating.
 #### Objectives
 
 *   Save plot(s) in a pdf file.
-*   Write conditional statements including `if` and `else` branches.
+*   Write conditional statements with `if` and `else`.
 *   Correctly evaluate expressions containing `&` ("and") and `|` ("or").
 </div>
 
@@ -91,8 +91,8 @@ print("done")</code></pre>
 <div class='out'><pre class='out'><code>[1] "done"
 </code></pre></div>
 
-The second line of this code uses the keyword `if` to tell R that we want to make a choice.
-If the test that follows it is true, the body of the `if` (i.e., the lines indented underneath it) are executed.
+The second line of this code uses an `if` statement to tell R that we want to make a choice.
+If the following test is true, the body of the `if` (i.e., the lines indented underneath it) are executed.
 If the test is false, the body of the `else` is executed instead.
 Only one or the other is ever executed:
 
@@ -330,7 +330,7 @@ Now if we need to make any changes to our analysis, we can edit the `analyze` fu
 
 *   Save a plot in a pdf file using `pdf("name.pdf")` and stop writing to the pdf file with `dev.off()`.
 *   Use `if (condition)` to start a conditional statement, `else if (condition)` to provide additional tests, and `else` to provide a default.
-*   The bodies of the branches of conditional statements must be surrounded by curly braces `{ }`.
+*   The bodies of conditional statements must be surrounded by curly braces `{ }`.
 *   Use `==` to test for equality.
 *   `X & Y` is only true if both X and Y are true.
 *   `X | Y` is true if either X or Y, or both, are true.
