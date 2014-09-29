@@ -376,6 +376,7 @@ alumin
 aluminu
 aluminum
 ~~~
+{:class="out"}
 
 1. Matlab uses the caret (`^`) to perform exponentiation:
 
@@ -408,6 +409,7 @@ u
 l
 a
 ~~~ 
+{:class="out"}
 
 **Extra Challenge**: Reverse the string `abracadabra` without a loop, using only indexing and the colon operator.
 
@@ -545,6 +547,58 @@ analyze
 
 Sure enough, the maxima of these data sets show exactly the same ramp
 as the first, and their minima show the same staircase structure.
+
+#### Challenges
+1. In cases where our file names don't follow such a regular pattern, we might want to process all files that end with a given extension, say `.csv`. At the command line we could get this list of files by using a [wildcard](../../gloss.html#wildcard):
+
+~~~
+ls *.csv
+~~~
+
+Thankfully, Matlab also has `ls`, though it returns a single long string:
+
+~~~
+filestr = ls('*.csv')
+~~~
+{:class="in"}
+
+~~~
+inflammation-01.csv inflammation-04.csv inflammation-07.csv inflammation-10.csv
+inflammation-02.csv inflammation-05.csv inflammation-08.csv inflammation-11.csv
+inflammation-03.csv inflammation-06.csv inflammation-09.csv inflammation-12.csv
+~~~
+{:class="out"}
+
+To turn this string into an array we can loop over (actually, a [Cell Array](http://www.mathworks.com/help/matlab/cell-arrays.html)), we need to "split" the string at each occurrence of whitespace:
+
+~~~
+file_string = ls('*.csv');
+file_list = strsplit(file_string)
+~~~
+{:class="in"}
+
+~~~
+file_list = 
+
+  Columns 1 through 3
+
+    'inflammation-01.csv'    'inflammation-04.csv'    'inflammation-07.csv'
+
+  Columns 4 through 6
+
+    'inflammation-10.csv'    'inflammation-02.csv'    'inflammation-05.csv'
+
+  Columns 7 through 9
+
+    'inflammation-08.csv'    'inflammation-11.csv'    'inflammation-03.csv'
+
+  Columns 10 through 13
+
+    'inflammation-06.csv'    'inflammation-09.csv'    'inflammation-12.csv'    ''
+~~~
+{:class="out"}
+
+Using this trick, rewrite the `analyze` script to analyze all `csv` files in the current directory. Be careful of the empty string `''` at the end of `file_list`!
 
 <div class="keypoints" markdown="1">
 #### Key Points
