@@ -240,6 +240,18 @@ weight_kg
 ~~~
 {:class="out"}
 
+#### Challenges
+
+1.  Draw diagrams showing what variables refer to what values after each statement in the following program:
+
+~~~
+mass = 47.5
+age = 122
+mass = mass * 2.0
+age = age - 20
+~~~
+{:class="in"}
+
 
 ### MATLAB Arrays
 
@@ -488,6 +500,27 @@ ans =
    15   52   11   56
 ~~~
 {:class="out"}
+
+#### Challenges
+
+A subsection of an array is called a [slice](../../gloss.html#slice). We can take slices of character strings as well:
+
+~~~
+element = 'oxygen';
+disp(['first three characters: ', element(1:3)])
+disp(['last three characters: ', element(4:6)])
+~~~
+{:class="in"}
+
+~~~
+first three characters: oxy
+last three characters: gen
+~~~
+{:class="out"}
+
+1. What is the value of `element(4:end)`? What about `element(1:2:end)`? Or `element(2:end - 1)`? 
+
+1. What is `element(:)`? Does this surprise you? What is `size(element)` vs `size(element(:))`? For the matrix `M` above, what is `M(:)`? What seems to be happening when we use the single colon operator for slicing?
 
 ### Computing With Arrays
 
@@ -810,6 +843,11 @@ smoothly, while the minimum seems to be a step function. Neither result
 seems particularly likely, so either there 's a mistake in our 
 calculations or something is wrong with our data.
 
+#### Challenges
+
+1. Why do our graphs stop just short of 0 at their left edge? Why are the vertical lines in our plot of the minimum inflammation per day not perfectly vertical?
+
+1. Create a plot showing the standard deviation of the inflammation data for each day across all patients.
 
 ### Wrapping up
 
