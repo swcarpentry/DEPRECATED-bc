@@ -409,7 +409,7 @@ l
 a
 ~~~ 
 
-**Extra Challenge**: Reverse a string without a loop, using only indexing and the colon operator.
+**Extra Challenge**: Reverse the string `abracadabra` without a loop, using only indexing and the colon operator.
 
 ### Processing Multiple Files
 
