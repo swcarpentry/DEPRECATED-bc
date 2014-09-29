@@ -845,7 +845,7 @@ calculations or something is wrong with our data.
 
 #### Challenges
 
-1. Why do our graphs stop just short of 0 at their left edge? Why are the vertical lines in our plot of the minimum inflammation per day not perfectly vertical?
+1. Why do our graphs stop just short of 0 at their left edge? If we only measure data once per day, why does the plot show smooth transitions between data points rather than abrupt jumps?
 
 1. Create a plot showing the standard deviation of the inflammation data for each day across all patients.
 
