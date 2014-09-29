@@ -169,7 +169,7 @@ final = fahr_to_celcius(original);
 {:class="in"}
 
 The diagram below shows what memory looks like after the
-first line has beene executed:
+first line has been executed:
 
 <!-- FIXME: Writeup about Call Stacks -->
 
