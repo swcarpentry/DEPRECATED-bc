@@ -117,7 +117,7 @@ By default, Git will prompt you to launch. Type `Y` and hit `Enter`. <br>
 If you don't want to be prompted each time you use this command, simply add a `-y` to the end of the command: <br>
 `git difftool -y`.<br>
 
-<img src="img/git-difftool.svg" alt="Using Diffmerge to view file changes" />
+<img src="img/git-difftool.png" alt="Using Diffmerge to view file changes" />
 <br>
 If you run `git difftool` in a repository which contains changes to multiple files, _DiffMerge_ will be
 opened for one file at a time. Once you close the window for the first file, then Git will run
@@ -152,7 +152,7 @@ index 8bbfbcd,2267d7b..0000000
 Review the [conflicts lesson](03-conflict.html) for help interpreting the diff above.<br>
 Ok, let's use `git mergetool` to see how it displays the conflict above.<br>
 
-<img src="img/git-mergetool.svg" alt="Using Diffmerge to view merge conflicts" />
+<img src="img/git-mergetool.png" alt="Using Diffmerge to view merge conflicts" />
 
 Wait a second, this image shows 3 different panes. The diff above shows two changes, how can there
 be 3 panes?
@@ -164,7 +164,7 @@ A brief summary is contained below.
 <table>
 <caption align="bottom"><b><i>Left Pane</i></b></caption>
 <tr><td>
-<img src="img/git-mergetool-local.svg" alt="Local changes" />
+<img src="img/git-mergetool-local.png" alt="Local changes" />
 </td></tr>
 </table>
 
@@ -175,7 +175,7 @@ Notice how the line which contains the changes is marked and color-coded.
 <table>
 <caption align="bottom"><b><i>Center Pane</i></b></caption>
 <tr><td>
-<img src="img/git-mergetool-base.svg" alt="Unaltered version" />
+<img src="img/git-mergetool-base.png" alt="Unaltered version" />
 </td></tr>
 </table>
 
@@ -185,7 +185,7 @@ which would be the `HEAD~1` commit in this example.
 <table>
 <caption align="bottom"><b><i>Right Pane</i></b></caption>
 <tr><td>
-<img src="img/git-mergetool-remote.svg" alt="Remote changes" />
+<img src="img/git-mergetool-remote.png" alt="Remote changes" />
 </td></tr>
 </table>
 
