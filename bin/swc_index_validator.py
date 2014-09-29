@@ -28,7 +28,7 @@ import re
 import yaml
 from collections import Counter
 
-__version__ = '0.4'
+__version__ = '0.5'
 
 REGISTRATIONS = set('closed open restricted'.split())
 
@@ -39,11 +39,17 @@ DEFAULT_CONTACT_EMAIL = 'admin@software-carpentry.org'
 HUMANTIME_PATTERN = r'((0?\d|1[0-1]):[0-5]\d(am|pm)(-|to)(0?\d|1[0-1]):[0-5]\d(am|pm))|((0?\d|1\d|2[0-3]):[0-5]\d(-|to)(0?\d|1\d|2[0-3]):[0-5]\d)'
 EVENTBRITE_PATTERN = r'\d{9,10}'
 
+USAGE = 'Usage: swc_index_validator.py [-r] [filename]'
+
 ERROR = 'ERROR:\t{0}\n'
 SUB_ERROR = '\t{0}\n'
 
+SETTINGS = {'redirect' : False}
+
 def check_layout(layout):
     '''Checks whether layout equals "bootcamp".'''
+    if SETTINGS['redirect']:
+        return layout == 'redirect'
     return layout == 'bootcamp'
 
 def check_root(root):
@@ -112,7 +118,9 @@ def check_instructors(instructors):
     return isinstance(instructors, list) and len(instructors) > 0
 
 def check_lessons(lessons):
-    ''' Checks whether lessons list is of format ['Python','SQL','Git','Bash',...] '''
+    ''' Checks whether lessons list is of format ['Python','SQL','Git','Bash',...]'''
+    if SETTINGS['redirect']:
+        return True
     return isinstance(lessons, list) and len(lessons) > 0 and set(lessons).issubset(LESSONS)
 
 def check_helpers(helpers):
@@ -127,6 +135,12 @@ def check_email(email):
 def check_eventbrite(eventbrite):
     '''A valid EventBrite key is 9 or more digits.'''
     return bool(re.match(EVENTBRITE_PATTERN, eventbrite))
+
+def check_redirect(redirect):
+    '''Check that a URL has been provided.'''
+    if not SETTINGS['redirect']:
+        return True
+    return len(redirect) > 0
 
 def check_pass(value):
     '''A test that always passes, used for things like addresses.'''
@@ -148,8 +162,8 @@ HANDLERS = {
     'lessons':       (True,  check_lessons, 'invalid lesson'),
     'contact' :      (True,  check_email, 'contact email invalid or still set to "{0}".'.format(DEFAULT_CONTACT_EMAIL)),
     'eventbrite' :   (False, check_eventbrite, 'Eventbrite key appears invalid.'),
-    'venue' :        (False, check_pass, ''),
-    'address' :      (False, check_pass, '')
+    'venue' :        (False, check_pass, 'venue name not specified'),
+    'address' :      (False, check_pass, 'address not specified')
 }
 
 # REQUIRED is all required categories.
@@ -224,7 +238,7 @@ def check_file(index_fh):
         if category in header_data:
             is_valid &= check_validity(header_data[category], handler_function, error_message)
         elif required:
-            sys.stderr.write(ERROR.format('index file is missing mandatory key "%s".'))
+            sys.stderr.write(ERROR.format('index file is missing mandatory key "{0}".'.format(category)))
             is_valid &= False
 
     # Do we have double categories?
@@ -239,13 +253,27 @@ def check_file(index_fh):
 
 if __name__ == '__main__':
     args = sys.argv
-    if len(args) > 2:
-        sys.stderr.write('Usage: "python swc_index_validator.py" or "python swc_index_validator.py path/to/index.html"\n')
-        sys.exit(0)
-    elif len(args) == 1:
+    if len(args) == 1:
         filename = '../index.html'
+    elif len(args) == 2:
+        if args[1] == '-r':
+            SETTINGS['redirect'] = True
+            filename = '../index.html'
+        else:
+            filename = args[1]
+    elif len(args) == 3:
+        if args[1] == '-r':
+            SETTINGS['redirect'] = True
+            filename = args[2]
+        else:
+            sys.stderr.write(USAGE)
+            sys.exit(1)
+
+    if SETTINGS['redirect']:
+        HANDLERS['redirect'] = (True, check_redirect, 'redirection URL missing')
+        REQUIRED.add('redirect')
     else:
-        filename = args[1]
+        HANDLERS['redirect'] = (False, None, None)
 
     sys.stderr.write('Testing file "{0}".\n'.format(filename))
 

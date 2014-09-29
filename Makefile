@@ -133,6 +133,9 @@ site : $(INDEX)
 check :
 	@python bin/swc_index_validator.py ./index.html
 
+## redirect : check that a redirection index.html page is properly formatted.
+	@python bin/swc_index_validator.py -r ./index.html
+
 ## clean    : clean up all generated files.
 clean : tidy
 	rm -rf $(SITE)
