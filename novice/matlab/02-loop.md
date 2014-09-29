@@ -362,6 +362,41 @@ u
 
 After the loop, `vowel` refers to the last value in `aeiou`, i.e., `u`.
 
+#### Challenges
+
+1. Write a loop that spells the word "aluminum," adding one letter at a time: 
+ 
+~~~
+a
+al
+alu
+alum
+alumi
+alumin
+aluminu
+aluminum
+~~~
+
+1. Matlab uses the caret (`^`) to perform exponentiation:
+
+~~~
+disp(5^3)
+125
+~~~
+
+Let `b` be the base of the number and `x` the exponent. Write a loop to compute `b^x`. Check your result for `b = 4` and `x = 5`.
+
+3. In Matlab, the colon operator (`:`) accepts a [stride](../../gloss.html#stride) or skip argument between the start and stop:
+
+~~~
+disp(1:3:11)
+1 4 7 10
+~~~
+
+Using this, write a loop to print the letters of "abracadabra" in reverse order. (Hint: strides can be negative) 
+
+**Extra Challenge**: do this without a loop, using only indexing and the colon operator.
+
 ### Processing Multiple Files
 
 We now have almost everything we need to process
