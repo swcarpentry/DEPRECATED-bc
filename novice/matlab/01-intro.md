@@ -520,7 +520,7 @@ last three characters: gen
 
 1. What is the value of `element(4:end)`? What about `element(1:2:end)`? Or `element(2:end - 1)`? 
 
-1. For any size array, Matlab allows us to index with a single colon operator (`:`). This can have surprising effects. For instance, what is `element(1:4)`? What about `element(:)`? What is `size(element)` vs `size(element(:))`? For the matrix `M` above, what is `M(:)`? What seems to be happening when we use the single colon operator for slicing?
+1. For any size array, Matlab allows us to index with a single colon operator (`:`). This can have surprising effects. For instance, compare `element` with `element(:)`. What is `size(element)` versus `size(element(:))`? Finally, try using the single colon on the matrix `M` above: `M(:)`. What seems to be happening when we use the single colon operator for slicing?
 
 ### Computing With Arrays
 
