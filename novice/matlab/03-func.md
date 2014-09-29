@@ -155,6 +155,22 @@ here---typically half a dozen to a few dozen lines---but
 they shouldn't ever be much longer than that,
 or the next person who reads it won't be able to understand what's going on.
 
+#### Challenges 
+
+1. In Matlab, we concatenate strings by putting them into an array: `['abra', 'cad', 'abra']` is `'abracadabra'`. Write a function called `fence` that takes two parameters, `original` and `wrapper` and appends `wrapper` before and after `original`:
+
+~~~
+disp(fence('name', '*'))
+*name*
+~~~
+
+1. If the variable `s` refers to a string, then `s(1)` is the string's first character and `s(end)` is its last. Write a function called `outer` that returns a string made up of just the first and last characters of its input: 
+
+~~~
+disp(outer('helium'))
+hm
+~~~
+
 ### The Call Stack
 
 
@@ -187,6 +203,7 @@ dataset around a particular value:
 ~~~
 function out = center(data, desired)
     out = (data - mean(data)) + desired
+end
 ~~~
 {:class="in"}
 
@@ -286,6 +303,7 @@ function out = center(data, desired)
     %   DATA centered around the value.
 
     out = (data  - mean(data)) + desired;
+end
 ~~~
 {:class="in"}
 
@@ -307,3 +325,8 @@ Returns a new array containing the values in
 DATA centered around the value.
 ~~~
 {:class="out"}
+
+#### Challenges
+1. Write a function called `rescale` that takes an array as input and returns an array of the same shape with its values scaled to lie in the range 0.0 to 1.0. (If L and H are the lowest and highest values in the input array, respectively, then the function should map a value v to (v - L)/(H - L).) Be sure to give the function a comment block explaining its use.
+
+1. Run `help linspace` to see how to use this function to generate regularly-spaced values. Use arrays like this to test your `rescale` function.
