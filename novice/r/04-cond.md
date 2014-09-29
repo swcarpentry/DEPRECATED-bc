@@ -92,7 +92,7 @@ print("done")</code></pre>
 </code></pre></div>
 
 The second line of this code uses an `if` statement to tell R that we want to make a choice.
-If the following test is true, the body of the `if` (i.e., the lines indented underneath it) are executed.
+If the following test is true, the body of the `if` (i.e., the lines in the curly braces underneath it) are executed.
 If the test is false, the body of the `else` is executed instead.
 Only one or the other is ever executed:
 
