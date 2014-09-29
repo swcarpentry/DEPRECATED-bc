@@ -52,6 +52,7 @@ disp('before conditional...')
 
 if num > 100:
     print '53 is greater than 100'
+end
 
 disp('...after conditional')
 ~~~
@@ -67,7 +68,6 @@ before conditional...
 
 We can also chain several tests together using `elseif`. This makes it
 simple to write a function that returns the sign of a number:
-
 
 ~~~
 % function sign_of.m
@@ -312,7 +312,6 @@ heatmap = zeros(height, width);
 
 for y = 1:height
     for x = 1:width
-
         if patient_data(y, x) > mean(patient_data(:))
             heatmap(y, x) = 1;
         elseif patient_data(y, x) < mean(patient_data(:))
