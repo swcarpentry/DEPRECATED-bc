@@ -28,7 +28,7 @@ import re
 import yaml
 from collections import Counter
 
-__version__ = '0.4'
+__version__ = '0.5'
 
 REGISTRATIONS = set('closed open restricted'.split())
 
@@ -38,6 +38,9 @@ EMAIL_PATTERN = r'[^@]+@[^@]+\.[^@]+'
 DEFAULT_CONTACT_EMAIL = 'admin@software-carpentry.org'
 HUMANTIME_PATTERN = r'((0?\d|1[0-1]):[0-5]\d(am|pm)(-|to)(0?\d|1[0-1]):[0-5]\d(am|pm))|((0?\d|1\d|2[0-3]):[0-5]\d(-|to)(0?\d|1\d|2[0-3]):[0-5]\d)'
 EVENTBRITE_PATTERN = r'\d{9,10}'
+REDIRECT_PATTERN = r'http[s]?://'
+
+USAGE = 'Usage: swc_index_validator.py [filename]'
 
 ERROR = 'ERROR:\t{0}\n'
 SUB_ERROR = '\t{0}\n'
@@ -112,7 +115,7 @@ def check_instructors(instructors):
     return isinstance(instructors, list) and len(instructors) > 0
 
 def check_lessons(lessons):
-    ''' Checks whether lessons list is of format ['Python','SQL','Git','Bash',...] '''
+    ''' Checks whether lessons list is of format ['Python','SQL','Git','Bash',...]'''
     return isinstance(lessons, list) and len(lessons) > 0 and set(lessons).issubset(LESSONS)
 
 def check_helpers(helpers):
@@ -127,6 +130,10 @@ def check_email(email):
 def check_eventbrite(eventbrite):
     '''A valid EventBrite key is 9 or more digits.'''
     return bool(re.match(EVENTBRITE_PATTERN, eventbrite))
+
+def check_redirect(redirect):
+    '''Check that a URL has been provided.'''
+    return bool(re.match(REDIRECT_PATTERN, redirect))
 
 def check_pass(value):
     '''A test that always passes, used for things like addresses.'''
@@ -148,8 +155,9 @@ HANDLERS = {
     'lessons':       (True,  check_lessons, 'invalid lesson'),
     'contact' :      (True,  check_email, 'contact email invalid or still set to "{0}".'.format(DEFAULT_CONTACT_EMAIL)),
     'eventbrite' :   (False, check_eventbrite, 'Eventbrite key appears invalid.'),
-    'venue' :        (False, check_pass, ''),
-    'address' :      (False, check_pass, '')
+    'redirect' :     (False, check_redirect, 'Redirect address appears invalid.'),
+    'venue' :        (False, check_pass, 'venue name not specified'),
+    'address' :      (False, check_pass, 'address not specified')
 }
 
 # REQUIRED is all required categories.
@@ -224,7 +232,7 @@ def check_file(index_fh):
         if category in header_data:
             is_valid &= check_validity(header_data[category], handler_function, error_message)
         elif required:
-            sys.stderr.write(ERROR.format('index file is missing mandatory key "%s".'))
+            sys.stderr.write(ERROR.format('index file is missing mandatory key "{0}".'.format(category)))
             is_valid &= False
 
     # Do we have double categories?
