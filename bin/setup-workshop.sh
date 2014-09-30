@@ -39,9 +39,9 @@ function check_pwd {
 
 function create_repo {
     url=https://api.github.com/user/repos
-    ghpages=https://${OWNER}.github.io/${BOOTCAMPID}
+    ghpages=https://${OWNER}.github.io/${WORKSHOPID}
     curl -f -u "${OWNER}:${PASSWORD}" -i \
-        -d "{\"name\":\"${BOOTCAMPID}\",\"description\":\"${DESCRIPTION}\",\"homepage\":\"${ghpages}\"${REPO_DEFAULTS}}" \
+        -d "{\"name\":\"${WORKSHOPID}\",\"description\":\"${DESCRIPTION}\",\"homepage\":\"${ghpages}\"${REPO_DEFAULTS}}" \
         ${url}
     if test $? -ne 0
     then
@@ -53,7 +53,7 @@ function create_repo {
 function set_team {
     for instructor in ${INSTRUCTORS};
     do
-        url=https://api.github.com/repos/${OWNER}/${BOOTCAMPID}/collaborators/${instructor}
+        url=https://api.github.com/repos/${OWNER}/${WORKSHOPID}/collaborators/${instructor}
         curl -f -u "${OWNER}:${PASSWORD}" -i -X PUT -d "{}" \
             ${url}
         if test $? -ne 0
@@ -68,7 +68,7 @@ function clone_and_push {
         https://github.com/swcarpentry/bc.git ${REPOSITORYPATH}
     cd ${REPOSITORYPATH}
     git remote add origin \
-        ${BOOTCAMPURL/https:\/\//https:\/\/${OWNER}@}.git
+        ${WORKSHOPURL/https:\/\//https:\/\/${OWNER}@}.git
     # This is only supported by git >= 1.7.9
     #
     # More information: http://stackoverflow.com/a/5343146/1802726
@@ -77,7 +77,7 @@ function clone_and_push {
     #
     # git push \
     #      --force-with-lease=gh-pages:gh-pages \
-    #     --repo=${BOOTCAMPURL/https:\/\//https:\/\/${OWNER}:${PASSWORD}@}.git
+    #     --repo=${WORKSHOPURL/https:\/\//https:\/\/${OWNER}:${PASSWORD}@}.git
     #
     # Try to use "[Here
     # string](http://www.gnu.org/software/bash/manual/bashref.html#Here-Strings)"
@@ -90,7 +90,7 @@ function clone_and_push {
 function end_message {
     echo "LOG:"
     echo ""
-    echo "1. Repository create at ${BOOTCAMPURL}"
+    echo "1. Repository create at ${WORKSHOPURL}"
     echo "2. Repository cloned at ${REPOSITORYPATH}"
     echo ""
     echo "TODO:"
@@ -118,11 +118,11 @@ then
 fi
 
 # Setup environments variables
-BOOTCAMPID=$1
+WORKSHOPID=$1
 REPOSITORYPATH=./$1
 DESCRIPTION="$2"
 OWNER=$3
-BOOTCAMPURL=https://github.com/${OWNER}/${BOOTCAMPID}
+WORKSHOPURL=https://github.com/${OWNER}/${WORKSHOPID}
 INSTRUCTORS=${@:4}
 REPO_DEFAULTS=,\"has_issues\":false,\"has_wiki\":false,\"has_downloads\":false
 

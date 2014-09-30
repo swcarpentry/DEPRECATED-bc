@@ -1,4 +1,4 @@
-Software Carpentry Bootcamps
+Software Carpentry Workshops
 ============================
 
 The `bc` repository is the starting point for creating your own workshop website:
@@ -18,8 +18,8 @@ To contribute corrections or additions to this repository, see the
 [contribution guidelines](CONTRIBUTING.md).
 You may also want to view these videos:
 
-*   [Setting Up a Software Carpentry Bootcamp Repository](https://vimeo.com/87241285)
-*   [Adding Lesson Material to the Software Carpentry Bootcamp Repository](https://vimeo.com/92273942)
+*   [Setting Up a Software Carpentry Workshop Repository](https://vimeo.com/87241285)
+*   [Adding Lesson Material to the Software Carpentry Workshop Repository](https://vimeo.com/92273942)
 
 **Note:**
 If you are teaching Git in your workshop,

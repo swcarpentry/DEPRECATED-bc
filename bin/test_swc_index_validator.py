@@ -1,7 +1,7 @@
 """
 Test suite for ``validate_index.py``
 
-Bootcamp metadata is stored in yaml header and PyYaml
+Workshop metadata is stored in yaml header and PyYaml
 strip all the strings.
 """
 
