@@ -130,66 +130,66 @@ In this case, "either" means "either or both", not
 ### Challenges
 
 1. `1` and `0` aren't the only values
-in MATLAB that are true or false. In fact, *any* value
-can be used in an `if` or `elseif`. After reading and
-running the code below, explain what the rule is for
-which values that are considered true and which are
-considered false.
+   in MATLAB that are true or false. In fact, *any* value
+   can be used in an `if` or `elseif`. After reading and
+   running the code below, explain what the rule is for
+   which values that are considered true and which are
+   considered false.
 
-1.
+   1.
 
-~~~
-if
-    disp('empty string is true')
-end
-~~~
+   ~~~
+   if
+       disp('empty string is true')
+   end
+   ~~~
 
-2.
+   2.
 
-~~~
-if 'foo'
-    disp('non empty string is true')
-end
-~~~
+   ~~~
+   if 'foo'
+       disp('non empty string is true')
+   end
+   ~~~
 
-3.
+   3.
 
-~~~
-if []
-    disp ('empty array is true')
-end
-~~~
+   ~~~
+   if []
+       disp ('empty array is true')
+   end
+   ~~~
 
-4.
+   4.
 
-~~~
-if [22.5, 1.0]
-    disp ('non empty array is true')
-end
-~~~
+   ~~~
+   if [22.5, 1.0]
+       disp ('non empty array is true')
+   end
+   ~~~
 
-5.
+   5.
 
-~~~
-if [0, 0]
-    disp ('array of zeros is true')
-end
-~~~
+   ~~~
+   if [0, 0]
+       disp ('array of zeros is true')
+   end
+   ~~~
 
-6.
+   6.
 
-~~~
-if true
-    disp('true is true')
-end
-~~~
+   ~~~
+   if true
+       disp('true is true')
+   end
+   ~~~
 
 
 2. Write a function called `near` that returns `1`
-when its first parameter is within 10% of its second
-and `0` otherwise. Compare your implementation with
-your partner's: do you return the same answer for
-all possible pairs of numbers?
+   when its first parameter is within 10% of its second
+   and `0` otherwise. Compare your implementation with
+   your partner's: do you return the same answer for
+   all possible pairs of numbers?
 
 
 ### Nesting
