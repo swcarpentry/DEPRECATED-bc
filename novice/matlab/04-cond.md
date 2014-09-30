@@ -139,49 +139,49 @@ considered false.
 1.
 
 ~~~
-    if
-        disp('empty string is true')
-    end
+if
+    disp('empty string is true')
+end
 ~~~
 
 2.
 
 ~~~
-    if 'foo'
-        disp('non empty string is true')
-    end
+if 'foo'
+    disp('non empty string is true')
+end
 ~~~
 
 3.
 
 ~~~
-    if []
-        disp ('empty array is true')
-    end
+if []
+    disp ('empty array is true')
+end
 ~~~
 
 4.
 
 ~~~
-    if [22.5, 1.0]
-        disp ('non empty array is true')
-    end
+if [22.5, 1.0]
+    disp ('non empty array is true')
+end
 ~~~
 
 5.
 
 ~~~
-    if [0, 0]
-        disp ('array of zeros is true')
-    end
+if [0, 0]
+    disp ('array of zeros is true')
+end
 ~~~
 
 6.
 
 ~~~
-    if true
-        disp('true is true')
-    end
+if true
+    disp('true is true')
+end
 ~~~
 
 
@@ -233,22 +233,29 @@ for n = numbers
     else
         neg_total = neg_total + n;
     end
-
-    disp(['sum of positive values: ', num2str(pos_total)]);
-    disp(['sum of negative values: ', num2str(neg_total)]);
 end
+
+disp(['sum of positive values: ', num2str(pos_total)]);
+disp(['sum of negative values: ', num2str(neg_total)]);
 ~~~
 {:class="in"}
 
 
+~~~
+sum of positive values: 26
+sum of negative values: -6
+~~~
 
 We can even put one loop inside another:
 
+~~~
 for consonant = 'bcd'
     for vowel = 'ae'
         disp (strcat(consonant, vowel));
     end
 end
+~~~
+{:class="in"}
 
 ~~~
 ba
