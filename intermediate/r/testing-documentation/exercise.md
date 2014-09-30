@@ -1,7 +1,7 @@
 
 # Testing exercise
 
-1. Add tests for the functions you've created in this bootcamp.
+1. Add tests for the functions you've created in this workshop.
 2. create a folder called `inst/tests` in the package root
 3. save tests into a single R script with the word `test` in the title or split them over multiple test. 
 4. Group tests where necessary.

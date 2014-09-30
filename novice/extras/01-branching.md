@@ -249,7 +249,7 @@ Our repository is now in this state:
 `master` and `moons` have both moved on from their original common state,
 but in different ways.
 They could continue independent existence indefinitely,
-but at some point we'll probably want to [merge](../../gloss.html#repository-merge) our changes.
+but at some point we'll probably want to [merge](../../gloss.html#merge) our changes.
 Let's do that now:
 
 ~~~

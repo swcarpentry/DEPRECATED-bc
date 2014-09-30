@@ -73,6 +73,9 @@ See also: [case sensitive](#case-sensitive).
 
 **<a name="catch-exception">catch</a>** (an exception):
 To handle an [exception](#exception) that has been [raised](#raise-exception)
+
+**<a name="catch-exception">catch</a>** (an exception):
+To handle an [exception](#exception) that has been [raised](#raise-exception)
 somewhere else in a program.
 
 **<a name="change-set">change set</a>**:
@@ -301,6 +304,12 @@ or [while loop](#while-loop).
 
 **<a name="loop-variable">loop variable</a>**:
 The variable that keeps track of the progress of the loop.
+
+**<a name="macro">macro</a>**:
+In [Makefiles](#makefile), [variables](#variable) are often referred to as macros because they are expanded when read.
+
+**<a name="makefile">makefile</a>**:
+An input file to the `make` program. It tells `make` what to do.
 
 **<a name="member">member</a>**:
 A variable contained within an [object](#object).

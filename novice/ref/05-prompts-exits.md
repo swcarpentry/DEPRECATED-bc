@@ -3,119 +3,117 @@ layout: lesson
 root: ../..
 title: Recognising prompts and how to exit
 ---
+When working at the command line, you might not recognise your
+prompt.  On this page you will find tips to discover where you are and how to
+exit if you are not where you want to be.
 
-#### I don't recognise my prompt...where am I?
+### Shell
 
-If the top of your shell window shows...
+- If your shell prompt is `$` you are at `bash`.
 
-    GNU nano
+  <img src="img/bash.png" />
 
-...you are in the `nano` text editor.
+  To exit from `bash` type `exit` and press `ENTER`.
 
-If your shell window shows...
+- If your shell prompt is `>` you may have typed `'` or `"`, to specify a
+  string, as part of a shell command but have not typed another `'` or `"` to
+  close the string.
 
-    ~
-    ~
-    ~    
-    ~
-    "filename.txt" ...
+  <img src="img/bash-unclosed.png" />
 
-...you are in the `vi` text editor.
+  To interrupt the current command press `CTRL-C`.
 
-If the bottom of your shell window shows...
+- If the bottom-left of your shell window shows `--More--` you are viewing
+  a file using `more`.
 
-    filename.txt  (Fundamental) ----
+  <img src="img/more.png" />
 
-...you are in the `emacs` or `xemacs` text editor.
+  To exit from `more` press `q`.
 
-If the bottom of your shell window shows...
+- If the bottom-left of your shell window shows `filename`, `:` or `(END)` you
+  are viewing a file using `less`.
 
-    XEmacs: filename.txt  (Fundamental) ----
+  <img src="img/less.png" />
 
-...you are in the `xemacs` text editor.
+  To exit from `less` press `q`.
 
-If your shell prompt is...
+- If the bottom-left of your shell window shows `Manual page` you are
+  viewing a `man` page.
 
-    >>>
+  <img src="img/man.png" />
 
-... you are in `python`.
+  To exit from `man` press `q`.
 
-If your shell prompt is...
+- If the top of your shell window shows "GNU nano" you are in the `nano` text editor.
 
-    In [123]:
+  <img src="img/nano.png" />
 
-...you are in `ipython`.
+  To exit from `nano` press `CTRL-X`. If you have unsaved changes, you will be
+  asked to save these - press `y` to save, or `n` to quit without saving.
 
-If your shell prompt is...
+- If your shell window shows `~` at the beginning of each lines you are in the `vi`
+  text editor.
 
-    >
+  <img src="img/vim.png" />
 
-...you may have typed `'` or `"`, to specify a string, as part of a shell command but have not typed another `'` or `"` to close the string.
+  To exit from `vi` type `:q!` to exit without saving. If this text just appears
+  on screen then press `ESC` then type `:q!`.
 
-If the bottom-left of your shell window shows...
+- If the bottom of your shell window shows `(Fundamental) ----`
+  you are in the `emacs` or `xemacs` text editor.
 
-    --More--(...%)
+  <img src="img/emacs.png" />
 
-...you are viewing a file using `more`.
+  To exit from `emacs` or `xemacs` press `CTRL-X CTRL-C`. If you have unsaved
+  changes, you will be asked to save these - press `y` to save, or `n` then type
+  `yes` to quit without saving.
 
-If the bottom-left of your shell window shows...
+  > #### Calling GUI from console
+  >
+  > Emacs has a graphical user interface mode. When you call it from the prompt,
+  > the prompt will stop responding to your commands until you close Emacs.
+  >
+  > <img src="img/emacs-gui.png" />
 
-    filename.txt
+### Python
 
-...you may be viewing a file using `less`.
+- If your shell prompt is `>>>` you are in `python`.
 
-If the bottom-left of your shell window shows...
+  <img src="img/python.png" />
 
-    (END)
+  To exit from `python` type `exit()` or `CTRL-D`.
 
-...you may be viewing a file using `less`.
+- If your shell prompt is `...` you have an unclosed environment inside
+  `python`.
 
-If the bottom-left of your shell window shows...
+  <img src="img/python-unclosed.png" />
 
-    :
+  To interrupt the environment type `CTRL-C`.
 
-...you may be viewing a file using `less` or viewing a `man` page.
+- If your shell prompt is `In [123]:` you are in `ipython`.
 
-If the bottom-left of your shell window shows...
+  <img src="img/ipython.png" />
 
-    Manual page...
+  To exit from `ipython` type `exit()`, or `CTRL-D` then press `y`.
 
-...you are viewing  a `man` page.
+- If your shell prompt is `...:` you have an unclosed environment inside
+  `ipython`.
 
-#### How do I exit from...
+  <img src="img/ipython-unclosed.png" />
 
-`nano`:
+  To interrupt the environment type `CTRL-C`.
 
-* Press `CTRL-X`
-* If you have unsaved changes, you will be asked to save these - press `y` to save, or `n` to quit without saving.
+### R
 
-`vi`:
+- If your shell prompt is `>` you are in `R`.
 
-* Type `:q!` to exit without saving.
-* If this text just appears on screen then press `ESC` then type `:q!`
+  <img src="img/r.png" />
 
-`emacs` or `xemacs`:
+  To exit from `R` type `q()`. It will ask if you want to save the workspace and
+  you should type `y` for yes and `n` for no.
 
-* Press `CTRL-X CTRL-C`
-* If you have unsaved changes, you will be asked to save these - press `y` to save, or `n` then type `yes` to quit without saving.
+- If your shell prompt is `+` you have a unclosed environment inside `R`.
 
-`python`:
+  <img src="img/r-unclosed.png" />
 
-* Type `exit()` or `CTRL-D`
-
-`ipython`:
-
-* Type `exit()`, or `CTRL-D` then press `y`
-
-`man` page:
-
-* Press `q`
-
-`more` or `less`:
-
-* Press `q`
-
-An open string in a shell, denoted by a `>` prompt:
-
-* If you can see on screen what the character you used to open the strin g was (`'` or `""`) then type the same character again to close the string.
-* Or, press `CTRL-C`
+  To interrupt the environment type `CTRL-C`.

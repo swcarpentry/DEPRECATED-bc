@@ -1,5 +1,5 @@
 ---
-layout: bootcamp
+layout: workshop
 root: .
 venue: Euphoric State University
 address: 123 College Street, Euphoria
@@ -13,29 +13,40 @@ registration: restricted
 instructor: ["Grace Hopper", "Alan Turing"]
 helper: ["John von Neumann"]
 contact: admin@software-carpentry.org
+redirect: http://www.3rd.party.workshop.home.page.com
+lessons: ['R', 'Python', 'SQL', 'Git', 'Bash', 'VM']
 ---
 <!--
-    Edit the values in the parameter block above to be appropriate for your bootcamp.
+    Edit the values in the parameter block above to be appropriate for your workshop.
     Please use three-letter month names for the 'humandate' field.
 -->
 
 <!-- Remove the block below. -->
 <div align="center">
   <p><strong><em>
-      This page is a template for bootcamp home pages.
+      This page is a template for workshop home pages.
       <br/>
       Please see
       <a href="//github.com/swcarpentry/bc">github.com/swcarpentry/bc</a>
       for instructions on how to create
-      a repository for your bootcamp.
+      a repository for your workshop.
   </em></strong></p>
 </div>
 
 <!--
     This block includes the Eventbrite registration widget if 'eventbrite' has been set in the header.
+
+    Maybe you need to change height value:
+
+    - for one room use 206px,
+    - for one waitlist room use 152px,
+    - for two room use 254px,
+    - for one waitlist room and one room use 253px,
+    - for two waitlist room use 197px.
 -->
 {% if page.eventbrite %}
-<iframe src="//www.eventbrite.com/tickets-external?eid={{page.eventbrite}}&ref=etckt" frameborder="0" width="100%" scrolling="auto"></iframe>
+<iframe
+  src="//www.eventbrite.com/tickets-external?eid={{page.eventbrite}}&ref=etckt" frameborder="0" width="100%" height="206px" scrolling="auto"></iframe>
 {% endif %}
 
 <h2>General Information</h2>
@@ -45,29 +56,13 @@ contact: admin@software-carpentry.org
   is to help scientists and engineers become more productive
   by teaching them basic lab skills for computing
   like program design, version control, data management, and task automation.
-  This two-day hands-on bootcamp will cover basic concepts and tools;
+  This two-day hands-on workshop will cover basic concepts and tools;
   participants will be encouraged to help one another
   and to apply what they have learned to their own research problems.
 </p>
 
-<!-- This block displays the instructors' names if they are available. -->
-{% if page.instructor %}
-<p>
-  <strong>Instructors:</strong>
-  {{page.instructor | join: ', ' %}}
-</p>
-{% endif %}
-
-<!-- This block displays the helpers' names if they are available. -->
-{% if page.helper %}
-<p>
-  <strong>Helpers:</strong>
-  {{page.helper | join: ', ' %}}
-</p>
-{% endif %}
-
 <!--
-    Modify this block to reflect the target audience for your bootcamp.
+    Modify this block to reflect the target audience for your workshop.
     In particular, if it is only open to people from a particular institution,
     or if specialized prerequisite knowledge is required, please mention that.
 -->
@@ -96,7 +91,8 @@ contact: admin@software-carpentry.org
 <p>
   <strong>Requirements:</strong>
   Participants must bring a laptop with a few specific software packages installed
-  (listed below).
+  (listed below). They are also required to abide by Software Carpentry's
+  <a href="http://software-carpentry.org/conduct.html">Code of Conduct</a>.
 </p>
 
 <!--
@@ -117,7 +113,7 @@ contact: admin@software-carpentry.org
 <hr/>
 
 <!--
-    Edit this block to show the schedule for your bootcamp.
+    Edit this block to show the schedule for your workshop.
 -->
 <h2>Schedule</h2>
 
@@ -215,18 +211,18 @@ contact: admin@software-carpentry.org
 <hr/>
 
 <!--
-    Edit the setup instructions in _includes/setup.html to reflect your bootcamp.
-    (In particular, most bootcamps teach either Python or R, not both.)
+    Edit the setup instructions in _includes/setup.html to reflect your workshop.
+    (In particular, most workshops teach either Python or R, not both.)
 -->
 
 <h2>Setup</h2>
 
 <p>
-  To participate in a Software Carpentry bootcamp, 
+  To participate in a Software Carpentry workshop, 
   you will need working copies of the software described below.
   Please make sure to install everything
   (or at least to download the installers)
-  <em>before</em> the start of your bootcamp.
+  <em>before</em> the start of your workshop.
 </p>
 
 {% include setup.html %}

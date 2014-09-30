@@ -21,7 +21,7 @@ most programmers take a slightly more roundabout route to merging.
 When the project starts,
 Dracula creates a repository on GitHub
 in exactly the same way as [we created the `planets` repository](../git/02-collab.html)
-and then [clones](../../gloss.html#repository-clone) it to his desktop:
+and then [clones](../../gloss.html#clone) it to his desktop:
 
 ~~~
 $ git clone https://github.com/vlad/undersea.git
@@ -52,7 +52,7 @@ Dracula can now push and pull changes just as before.
 
 Wolfman doesn't clone Dracula's GitHub repository directly.
 Instead,
-he [forks](../../gloss.html#repository-fork) it,
+he [forks](../../gloss.html#fork) it,
 i.e., clones it on GitHub. He does this using the GitHub web interface:
 
 <img src="img/git-fork-ui.png" alt="The Fork Button" />
@@ -76,6 +76,21 @@ which notifies Dracula that Wolfman wants to merge some changes into Dracula's r
 
 <img src="img/git-forking-03.svg" alt="After Creating Pull Request" />
 
+To create a pull request on GitHub,
+Wolfman clicks on the green button near the branch selector.
+
+<img src="img/github-pr-compare.png" alt="Compare changes for Pull Request" />
+
+This will open the compare interface.
+After checking that everything is OK,
+Wolfman clicks on the big green "Create pull request" button,
+
+<img src="img/github-pr-changes.png" alt="Show changes for Pull Request" />
+
+and provides more information about the change:
+
+<img src="img/github-pr-create.png" alt="Create a new Pull Request" />
+
 A pull request is a merge waiting to happen.
 When Dracula views it online,
 he can see and comment on the changes Wolfman wants to make.
@@ -88,7 +103,36 @@ this function is too long,
 that one contains a bug,
 there's a special case that isn't being handled anywhere,
 and so on.
-Wolfman can then update his code,
+
+Now suppose you are Dracula,
+and you want to add a comment to Wolfman's pull request.
+This is the initial page for a pull request:
+
+<img src="img/github-pr-initial.png" alt="After clicking on Pull Request" />
+
+You go to the "Files changed" tab,
+and we can see which files Wolfman changed,
+and what he removed or added to them.
+In this case, there is only one change to a single word:
+
+<img src="img/github-pr-files-changed.png" alt="Pull Request Files changed tab" />
+
+Move your mouse over the lines.
+Notice the blue icon
+<img src="img/github-pr-comment-icon.png" alt="Pull Request line comment indicator" />
+on the left.
+It indicates you can add a comment on that line.
+
+Click on a line to add a comment,
+and when you finish it you click on the green "Comment on this line" button:
+
+<img src="img/github-pr-comment-box.png" alt="Edit a Pull Request inline comment" />
+
+Dracula submitted a comment for Wolfman,
+<img src="img/github-pr-comment-submitted.png" alt="A comment in a Pull Request" />
+
+and now Wolfman can post new comments,
+update his code,
 commit locally,
 and push those changes to GitHub to update the pull request.
 

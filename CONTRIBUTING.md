@@ -12,19 +12,46 @@ you are agreeing that Software Carpentry may redistribute your work under
 [these licenses](LICENSE.md).
 
 Before beginning anything major,
-read the [README.md](README.md) file in this directory.
-It explains how this repository is used to create websites for bootcamps.
-We also recommend that you open an issue in the `swcarpentry/bc` Issue Tracker
-to get feedback on your ideas and coordinate with other developers.
+please read the [README.md](README.md) file in this directory,
+which explains how this repository is used to create websites for workshops.
+We also recommend that you look through [open issues](https://github.com/swcarpentry/bc/issues)
+and [pull requests](https://github.com/swcarpentry/bc/pulls) to see what other people could use help with,
+and then open an issue of your own to get feedback on your ideas and coordinate with other developers.
 
 **Table of Contents**
 
-*   [Working With GitHub](#working-with-github)
+*   [Topic Maintainers](#topic-maintainers)
+*   [Working With GitHub](#working-with-github)  
 *   [Locations](#locations)
 *   [Formats](#formats)
-*   [Sample Files](#sample-files)
 *   [Previewing](#previewing)
+*   [Sample Files](#sample-files)
+*   [Labels](#labels)
 *   [FAQ](#faq)
+
+Topic Maintainers
+-----------------
+
+The following people are responsible for managing development of specific topics.
+They are *not* those lessons' primary authors;
+instead,
+their job is to make sure pull requests are reviewed,
+to decide whether and when to merge changes,
+and to decide what's in or out of scope for any topic.
+If a topic is maintained in an external repository,
+the topic name links to that repository.
+
+*   Bash: Gabriel Devenyi (@gdevenyi) and Christina Koch (@ChristinaLK)
+*   Git: Matt Davis (@jiffyclub) and Jessica Hamrick (@jhamrick)
+*   Python: Azalee Bostroem (@abostroem) and Trevor Bekolay (@tbekolay)
+*   SQL: Abigail Cabunoc (@acabunoc) and Sheldon McKay (@mckays630)
+*   R: John Blischak (@jdblischak) and Denis Haine (@dhaine)
+*   Mercurial: Doug Latornell (@douglatornell)
+*   MATLAB: Ashwin Srinath (@ashwinsrnth) and Isabell Kiral-Kornek (@IsaKiko)
+*   Build system: Raniere Silva (@r-gaia-cs) and Rémi Emonet (@twitwi)
+*   [Windows installer][windows-installer]:
+    W. Trevor King (@wking) and Ethan White (@ethanwhite)
+*   [Installation-test scripts][installation-test]: W. Trevor King (@wking)
 
 Working With GitHub
 -------------------
@@ -50,6 +77,12 @@ The GitHub workflow looks like this:
 4.  Make your changes, commit them, and push them to your repository on GitHub.
 
 5.  Send a pull request to the `master` branch of `[swcarpentry/bc](http://github.com/swcarpentry/bc)`.
+
+If it is easier for you to send them to us some other way,
+please mail us at
+[admin@software-carpentry.org](mailto:admin@software-carpentry.org).
+Given a choice between you creating content or wrestling with Git,
+we'd rather have you doing the former.
 
 Locations
 ---------
@@ -90,6 +123,40 @@ The following list contains more detailed instructions for different formats:
     (e.g., R programmers don't have to install the IPython Notebook).
     **Please check with us if you plan to do this.**
 
+Previewing
+----------
+
+To preview changes before committing,
+run the command `make site`.
+This runs Jekyll with the same flags that GitHub uses when things are committed to the `gh-pages` branch
+and puts the results in a directory called `_site`.
+
+You should also run `make check` before pushing changes to your `index.html` home page
+to your repository.
+If you don't have Make installed,
+you can run the same checks using:
+
+~~~
+python bin/swc_index_validator.py ./index.html
+~~~
+
+This checks that the workshop's instructors are listed,
+that a contact email address has been set up,
+and so on.
+
+Other useful commands in the main Makefile are:
+
+*   `make commands` (or just `make` on its own): list available commands.
+*   `make clean`: remove editor backup files and the `_site` directory.
+*   `make fixme`: list uses of the word `FIXME` in source files.
+
+The commands to convert IPython Notebooks to Markdown
+are stored in a separate Makefile called `ipynb.mk`
+to simplify maintenance
+and ensure that the main Makefile only does what Jekyll on GitHub will do.
+To re-do conversion of notebooks to Markdown files,
+use `make ipynb`.
+
 Sample Files
 ------------
 
@@ -105,27 +172,31 @@ to ensure that the generated HTML pages have the right style.
 If you are creating a new lesson,
 please copy one of these files to use as a starting point.
 
-Previewing
-----------
+Labels
+------
 
-To preview changes before committing,
-run the command `make site`.
-This runs Jekyll with the same flags that GitHub uses when things are committed to the `gh-pages` branch.
-Jekyll's output is stored in a directory called `_site`.
+We use labels to categorize new Issues and Pull Requests. If you are searching
+for Issues to help resolve or Pull Requests to review, you can filter with these
+labels to help find subjects you are interested in. For example, if you are
+interested in improving the novice Python lessons, you can filter with the
+labels "Python" and "novice".
 
-Other useful commands in the main `Makefile` are:
+If you have "Contributor" status for `swcarpentry/bc`, please help organize
+everything by adding informative labels to Issues and Pull Requests you create
+as well as Issues and Pull Requests made by others.
 
-*   `make commands` (or just `make` on its own): list available commands.
-*   `make check`: check that the repository's `index.html` file is properly formatted.
-*   `make clean`: remove editor backup files and the `_site` directory.
-*   `make fixme`: list uses of the word `FIXME` in source files.
+See the list below for descriptions of some common labels:
 
-The commands to convert IPython Notebooks to Markdown
-are stored in a separate `Makefile` called `ipynb.mk`
-to simplify maintenance
-and ensure that the main `Makefile` only does what Jekyll on GitHub will do.
-To re-do conversion of notebooks to Markdown files,
-use `make ipynb`.
+*   bug: something's wrong and needs to be fixed
+*   discussion: this issue is being used as a mini-mailing list to discuss something of specialized interest
+*   enhancement: identifies improvements to existing material (rather than bug fixes)
+*   getting-started: the task is suited for a newcomer, e.g. someone in instructor training
+*   intermediate: concerns the intermediate set of teaching material
+*   lessons: anything related to lessons that doesn't fit into a more specific category
+*   novice: concerns the novice set of teaching material
+*   question: asking for help or getting feedback on an idea
+*   tools: concerns the tools used to build and manage lesson material
+*   work in progress: the pull request is not ready to be merged
 
 FAQ
 ---
@@ -135,8 +206,11 @@ FAQ
     come chat with us on [our IRC channel](irc://moznet/sciencelab),
     or join our [discussion list](http://software-carpentry.org/pages/discuss.html)
     and ask for help there.
+
 *   *Is there a list of open issues to tackle?*
     The [open issues for the bc repository](https://github.com/swcarpentry/bc/issues)
     and also the [related projects](http://www.software-carpentry.org/pages/create.html#related)
     listed on the create page are a good starting point.
 
+[windows-installer]: https://github.com/swcarpentry/windows-installer
+[installation-test]: http://git.tremily.us/?p=swc-setup-installation-test.git
