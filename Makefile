@@ -1,5 +1,5 @@
 #======================================================================
-# Default Makefile for Software Carpentry bootcamps.  Use 'make' on
+# Default Makefile for Software Carpentry workshops.  Use 'make' on
 # its own to see a list of targets.
 #
 # To add new lessons, add their Markdown files to the MOST_SRC target.

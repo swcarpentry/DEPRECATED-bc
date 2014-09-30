@@ -80,7 +80,7 @@ The tables below show the database we will use in our examples:
 <table>
 <tr>
 <td valign="top">
-**Person**: people who took readings.
+<strong>Person</strong>: people who took readings.
 
 <table>
   <tr> <th>ident</th> <th>personal</th> <th>family</th> </tr>
@@ -91,7 +91,7 @@ The tables below show the database we will use in our examples:
   <tr> <td>danforth</td> <td>Frank</td> <td>Danforth</td> </tr>
 </table>
 
-**Site**: locations where readings were taken.
+<strong>Site</strong>: locations where readings were taken.
 
 <table>
   <tr> <th>name</th> <th>lat</th> <th>long</th> </tr>
@@ -100,7 +100,7 @@ The tables below show the database we will use in our examples:
   <tr> <td>MSK-4</td> <td>-48.87</td> <td>-123.4</td> </tr>
 </table>
 
-**Visited**: when readings were taken at specific sites.
+<strong>Visited</strong>: when readings were taken at specific sites.
 
 <table>
   <tr> <th>ident</th> <th>site</th> <th>dated</th> </tr>
@@ -115,7 +115,7 @@ The tables below show the database we will use in our examples:
 </table>
 </td>
 <td valign="top">
-**Survey**: the actual readings.
+<strong>Survey</strong>: the actual readings.
 
 <table>
   <tr> <th>taken</th> <th>person</th> <th>quant</th> <th>reading</th> </tr>

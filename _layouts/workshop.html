@@ -9,6 +9,9 @@
     <meta name="date" content="{{page.humandate}}" />
     <meta name="startdate" content="{{page.startdate}}" />
     <meta name="enddate" content="{{page.enddate}}" />
+    {% if page.redirect %}
+    <meta http-equiv="refresh" content="0; url={{page.redirect}}" />
+    {% endif %}
   </head>
   <body>
     <div class="container">
