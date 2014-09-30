@@ -166,7 +166,6 @@ see [this wiki page](https://github.com/swcarpentry/bc/wiki/Configuration-Proble
 
 #### Pitfalls
 
-
 Instructing at a workshop isn't trivial.
 The most important thing is to remember that
 no lesson plan survives contact with the audience.
