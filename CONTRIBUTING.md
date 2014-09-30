@@ -37,6 +37,8 @@ instead,
 their job is to make sure pull requests are reviewed,
 to decide whether and when to merge changes,
 and to decide what's in or out of scope for any topic.
+If a topic is maintained in an external repository,
+the topic name links to that repository.
 
 *   Bash: Gabriel Devenyi (@gdevenyi) and Christina Koch (@ChristinaLK)
 *   Git: Matt Davis (@jiffyclub) and Jessica Hamrick (@jhamrick)
@@ -46,7 +48,9 @@ and to decide what's in or out of scope for any topic.
 *   Mercurial: Doug Latornell (@douglatornell)
 *   MATLAB: Ashwin Srinath (@ashwinsrnth) and Isabell Kiral-Kornek (@IsaKiko)
 *   Build system: Raniere Silva (@r-gaia-cs) and Rémi Emonet (@twitwi)
-*   Windows installer: W. Trevor King (@wking) and Ethan White (@ethanwhite)
+*   [Windows installer][windows-installer]:
+    W. Trevor King (@wking) and Ethan White (@ethanwhite)
+*   [Installation-test scripts][installation-test]: W. Trevor King (@wking)
 
 Working With GitHub
 -------------------
@@ -189,3 +193,6 @@ FAQ
     come chat with us on [our IRC channel](irc://moznet/sciencelab),
     or join our [discussion list](http://software-carpentry.org/pages/discuss.html)
     and ask for help there.
+
+[windows-installer]: https://github.com/swcarpentry/windows-installer
+[installation-test]: http://git.tremily.us/?p=swc-setup-installation-test.git
