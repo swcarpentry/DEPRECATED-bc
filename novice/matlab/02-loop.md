@@ -266,7 +266,7 @@ There's a better approach:
 
 ~~~
 for letter = 1:4
-    disp word(letter)
+    disp(word(letter))
 end
 ~~~
 {:class="in"}
@@ -376,8 +376,8 @@ disp(['Number of vowels: ', num2str(len)])
 
 It's worth tracing the execution of this little program step by step.
 Since there are five characters in "aeiou", the loop body will be
-executed five times. The first time around, `len` is zero - the
-value assigned to it before the loop. The loop body adds 1 to the old
+executed five times. When we enter the loop, `len` is zero - the
+value assigned to it beforehand. The first time through, the loop body adds 1 to the old
 value of `len`, producing 1, and updates `len` to refer to that new
 value.
 The next time around, `vowel` is `e`, and `len` is 1, so `len` is
@@ -401,6 +401,50 @@ u
 {:class="out"}
 
 After the loop, `vowel` refers to the last value in `aeiou`, i.e., `u`.
+
+#### Challenges
+
+1. Write a loop that spells the word "aluminum," adding one letter at a time: 
+ 
+        a
+        al
+        alu
+        alum
+        alumi
+        alumin
+        aluminu
+        aluminum
+
+1. Matlab uses the caret (`^`) to perform exponentiation:
+
+        disp(5^3)
+        125
+
+    Let `b` be the base of the number and `x` the exponent. Write a loop to compute `b^x`. Check your result for `b = 4` and `x = 5`.
+
+1. In Matlab, the colon operator (`:`) accepts a [stride](../../gloss.html#stride) or skip argument between the start and stop:
+
+        disp(1:3:11)
+        1 4 7 10
+
+        disp(11:-3:1)
+        11 8 5 2
+
+    Using this, write a loop to print the letters of "aluminum" in reverse order, one letter per line.
+
+~~~
+m
+u
+n
+i
+m
+u
+l
+a
+~~~ 
+{:class="out"}
+
+**Extra Challenge**: Reverse the string `abracadabra` without a loop, using only indexing and the colon operator.
 
 ### Processing Multiple Files
 
@@ -536,6 +580,56 @@ analyze
 
 Sure enough, the maxima of these data sets show exactly the same ramp
 as the first, and their minima show the same staircase structure.
+
+#### Challenges
+1. In cases where our file names don't follow such a regular pattern, we might want to process all files that end with a given extension, say `.csv`. At the command line we could get this list of files by using a [wildcard](../../gloss.html#wildcard):
+
+        ls *.csv
+
+Thankfully, Matlab also has `ls`, though it returns a single long string:
+
+~~~
+filestr = ls('*.csv')
+~~~
+{:class="in"}
+
+~~~
+inflammation-01.csv inflammation-04.csv inflammation-07.csv inflammation-10.csv
+inflammation-02.csv inflammation-05.csv inflammation-08.csv inflammation-11.csv
+inflammation-03.csv inflammation-06.csv inflammation-09.csv inflammation-12.csv
+~~~
+{:class="out"}
+
+To turn this string into an array we can loop over (actually, a [Cell Array](http://www.mathworks.com/help/matlab/cell-arrays.html)), we need to "split" the string at each occurrence of whitespace:
+
+~~~
+file_string = ls('*.csv');
+file_list = strsplit(file_string)
+~~~
+{:class="in"}
+
+~~~
+file_list = 
+
+  Columns 1 through 3
+
+    'inflammation-01.csv'    'inflammation-04.csv'    'inflammation-07.csv'
+
+  Columns 4 through 6
+
+    'inflammation-10.csv'    'inflammation-02.csv'    'inflammation-05.csv'
+
+  Columns 7 through 9
+
+    'inflammation-08.csv'    'inflammation-11.csv'    'inflammation-03.csv'
+
+  Columns 10 through 13
+
+    'inflammation-06.csv'    'inflammation-09.csv'    'inflammation-12.csv'    ''
+~~~
+{:class="out"}
+
+    Using this trick, rewrite the `analyze` script to analyze all `csv` files in the current directory. Be careful of the empty string `''` at the end of `file_list`!
 
 <div class="keypoints" markdown="1">
 #### Key Points
