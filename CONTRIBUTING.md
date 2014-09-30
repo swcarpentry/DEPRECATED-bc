@@ -38,15 +38,15 @@ their job is to make sure pull requests are reviewed,
 to decide whether and when to merge changes,
 and to decide what's in or out of scope for any topic.
 
-*   Bash: Gabriel Devenyi and Christina Koch
-*   Git: Matt Davis and Jessica Hamrick
-*   Python: Azalee Bostroem and Trevor Bekolay
-*   SQL: Abigail Cabunoc and Sheldon McKay
-*   R: John Blischak and Denis Haine
-*   Mercurial: Doug Latornell
-*   MATLAB: Ashwin Srinath and Isabell Kiral-Kornek
-*   Build system: Raniere Silva and Rémi Emonet
-*   Windows installer: W. Trevor King and Ethan White
+*   Bash: Gabriel Devenyi (@gdevenyi) and Christina Koch (@ChristinaLK)
+*   Git: Matt Davis (@jiffyclub) and Jessica Hamrick (@jhamrick)
+*   Python: Azalee Bostroem (@abostroem) and Trevor Bekolay (@tbekolay)
+*   SQL: Abigail Cabunoc (@acabunoc) and Sheldon McKay (@mckays630)
+*   R: John Blischak (@jdblischak) and Denis Haine (@dhaine)
+*   Mercurial: Doug Latornell (@douglatornell)
+*   MATLAB: Ashwin Srinath (@ashwinsrnth) and Isabell Kiral-Kornek
+*   Build system: Raniere Silva (@r-gaia-cs) and Rémi Emonet (@twitwi)
+*   Windows installer: W. Trevor King (@wking) and Ethan White (@ethanwhite)
 
 Working With GitHub
 -------------------
