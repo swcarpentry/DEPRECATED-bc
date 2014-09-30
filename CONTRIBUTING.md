@@ -20,12 +20,33 @@ and then open an issue of your own to get feedback on your ideas and coordinate 
 
 **Table of Contents**
 
+*   [Topic Maintainers](#topic-maintainers)
 *   [Working With GitHub](#working-with-github)  
 *   [Previewing](#previewing)
 *   [Locations and Formats](#locations-and-formats)
 *   [Sample Files](#sample-files)
 *   [Labels](#labels)
 *   [FAQ](#faq)
+
+Topic Maintainers
+-----------------
+
+The following people are responsible for managing development of specific topics.
+They are *not* those lessons' primary authors;
+instead,
+their job is to make sure pull requests are reviewed,
+to decide whether and when to merge changes,
+and to decide what's in or out of scope for any topic.
+
+*   Bash: Gabriel Devenyi (@gdevenyi) and Christina Koch (@ChristinaLK)
+*   Git: Matt Davis (@jiffyclub) and Jessica Hamrick (@jhamrick)
+*   Python: Azalee Bostroem (@abostroem) and Trevor Bekolay (@tbekolay)
+*   SQL: Abigail Cabunoc (@acabunoc) and Sheldon McKay (@mckays630)
+*   R: John Blischak (@jdblischak) and Denis Haine (@dhaine)
+*   Mercurial: Doug Latornell (@douglatornell)
+*   MATLAB: Ashwin Srinath (@ashwinsrnth) and Isabell Kiral-Kornek (@IsaKiko)
+*   Build system: Raniere Silva (@r-gaia-cs) and Rémi Emonet (@twitwi)
+*   Windows installer: W. Trevor King (@wking) and Ethan White (@ethanwhite)
 
 Working With GitHub
 -------------------
