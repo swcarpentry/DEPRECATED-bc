@@ -231,12 +231,12 @@ More info: [http://www.rstudio.com/ide/docs/using/projects](http://www.rstudio.c
 
 Let's make one to use for the rest of this workshop. Do this: `Projects menu --> Create project.... New Project`. The directory name you choose here will be the project name. Call it whatever you want (or follow me for convenience).
 
-You can create a directory and, therefore RStudio project, called `tgac-bootcamp`.
+You can create a directory and, therefore RStudio project, called `tgac-workshop`.
 
 <!-- https://github.com/yihui/knitr/issues/277 -->
 
 ```{r, eval = FALSE}
-setwd("~/swcarpentry-bootcamp/")
+setwd("~/swcarpentry-workshop/")
 getwd()
 ```
 

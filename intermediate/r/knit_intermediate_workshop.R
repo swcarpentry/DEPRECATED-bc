@@ -1,6 +1,6 @@
 #!/usr/bin/Rscript
 
-# Knits all the files for the SWC intermediate R bootcamp
+# Knits all the files for the SWC intermediate R workshop
 
 # Should be executed from within the directory: bc/intermediate/r
 

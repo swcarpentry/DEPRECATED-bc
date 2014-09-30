@@ -1,19 +1,19 @@
 #!/bin/bash
 
-## Setup new bootcamp
+## Setup new workshop
 ##
 ## This script follow the steps in https://vimeo.com/87241285.
 ##
 ## Usage:
 ##
-##     $ ./setup-bootcamp.sh bootcamp_id description owner [instructor [instructor ...]]
+##     $ ./setup-workshop.sh workshop_id description owner [instructor [instructor ...]]
 ##
 ## Parameters:
 ##
-## - `bootcamp_id`: is the identifier provide by Software Carpentry for the
-##   bootcamp that you will be running. It will be used for the name of the Git
+## - `workshop_id`: is the identifier provide by Software Carpentry for the
+##   workshop that you will be running. It will be used for the name of the Git
 ##   repository and is a name like YYYY-MM-DD-site, e.g., `2014-03-31-esu`.
-## - `description`: is the description of the bootcamp that you will be running.
+## - `description`: is the description of the workshop that you will be running.
 ##   It should be multi-word and must be enclose with single or double quotes.
 ## - `owner`: this is your GitHub username.
 ## - `instructors`: this is the GitHub username of folks that will be teaching

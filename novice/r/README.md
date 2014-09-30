@@ -29,7 +29,7 @@ FIXME: to be written.
 
 ## 05, 06 & 7
 * Apparnetly we need to expand on those. I am not sure how much we want to cover for these topics (defensive programming, testing, version control, knitr), but we recently developed some advanced material that could be used for examples:
-[Sydney bootcamps](http://nicercode.github.io/2014-02-18-UTS/lessons/)
+[Sydney workshops](http://nicercode.github.io/2014-02-18-UTS/lessons/)
 
 ## Simple formatting changes
 * I think we need to be consistent with the use of dataframe(s) or data frame(s). I have standardized for the second
@@ -43,5 +43,5 @@ FIXME: to be written.
 
 * We may have to think of other examples to get people engaged, particularly when dealing with functions. Something that is more realistic to users. Althought the audience can vary a lot, R users in general are after some stats. Giving examples of stats functinos may be an idea.
 
-* The same idea apply for the plotting file. There are many plotting situations that we could use that would be much more within the context of a regular biologists, statistician, whatever. Again, based on a more advanced material Rich FitzJohn and Daniel Falster produced for the Sydney bootcamps: [Plotting lesson](http://nicercode.github.io/2014-02-18-UTS/lessons/10-functions/)
+* The same idea apply for the plotting file. There are many plotting situations that we could use that would be much more within the context of a regular biologists, statistician, whatever. Again, based on a more advanced material Rich FitzJohn and Daniel Falster produced for the Sydney workshops: [Plotting lesson](http://nicercode.github.io/2014-02-18-UTS/lessons/10-functions/)
 

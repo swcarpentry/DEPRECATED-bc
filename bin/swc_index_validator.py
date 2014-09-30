@@ -15,7 +15,7 @@ Checks for:
     7. instructor and helper lists should be valid Python/Ruby lists
     8. Template header should not exist
     9. humandate should have three-letter month and four-letter year
-    10. layout should be 'bootcamp'
+    10. layout should be 'workshop'
     11. root must be '.'
     12. humantime should have 'am' or 'pm' or both
     13. address, venue should be non-empty
@@ -43,8 +43,8 @@ ERROR = 'ERROR:\t{0}\n'
 SUB_ERROR = '\t{0}\n'
 
 def check_layout(layout):
-    '''Checks whether layout equals "bootcamp".'''
-    return layout == 'bootcamp'
+    '''Checks whether layout equals "workshop".'''
+    return layout == 'workshop'
 
 def check_root(root):
     '''Checks root - can only be "."'''
@@ -134,7 +134,7 @@ def check_pass(value):
 
 
 HANDLERS = {
-    'layout' :       (True,  check_layout, 'layout isn\'t "bootcamp".'),
+    'layout' :       (True,  check_layout, 'layout isn\'t "workshop".'),
     'root' :         (True,  check_root, 'root can only be ".".'), 
     'country' :      (True,  check_country, 'country invalid. Please check whether there are spaces inside the country-name.'),
     'humandate' :    (True,  check_humandate, 'humandate invalid. Please use three-letter months like "Jan" and four-letter years like "2025".'),
@@ -198,7 +198,7 @@ def get_header(index_fh):
             header.append(line)
             this_categories.append(line.split(":")[0].strip())
 
-        if "This page is a template for bootcamp home pages." in line:
+        if "This page is a template for workshop home pages." in line:
             sys.stderr.write('WARN:\tYou seem to still have the template header in your index.html. Please remove that.\n')
             sys.stderr.write('\tLook for: "<!-- Remove the block below. -->" in the index.html.\n')
             break # we can stop here - for now, just check header and template header
