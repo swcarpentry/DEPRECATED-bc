@@ -12,12 +12,32 @@ second or third) time.
 
 For instance, the summary of the first lesson (01-intro.md) might be:
 
-*   Learning consists of more than "just" conveying facts and techniques: it's just as important to create linkages between concepts.
-    *   Example: our introduction to the Unix shell seems light on facts (it only introduces 15 commands in two and a half hours), because the main goal is to help learners construct the mental model and notional machine that these commands fit into.
-*   People learn best when they care about the topic and believe they can master it, so we teach the things that are quick to master and immediately useful first
-    *   Example: the Python lessons start with reading data with numpy and plotting with matplotlib, not print hello world and a lecture on the fundamental data types associated with Python programming
-*   Programming is a skill that will improve with practice, not an intrinsic talent that you either have or don't have
-    *   We code live in front of our learners instead of using slides, so that they can see us make mistakes (i.e. we demonstrate that we aren't innately talented)
+*   Learning consists of more than "just" conveying facts and
+    techniques: it's just as important to create linkages between
+    concepts.
+
+    *   Example: our introduction to the Unix shell seems light on
+        facts (it only introduces 15 commands in two and a half
+        hours), because the main goal is to help learners construct
+        the mental model and notional machine that these commands fit
+        into.
+
+*   People learn best when they care about the topic and believe they
+    can master it, so we teach the things that are quick to master and
+    immediately useful first
+
+    *   Example: the Python lessons start with reading data with numpy
+        and plotting with matplotlib, not print hello world and a
+        lecture on the fundamental data types associated with Python
+        programming
+
+*   Programming is a skill that will improve with practice, not an
+    intrinsic talent that you either have or don't have
+
+    *   We code live in front of our learners instead of using slides,
+        so that they can see us make mistakes (i.e. we demonstrate
+        that we aren't innately talented)
+
     *   We get them to attend in groups
 
 The other great thing about these summaries is that they give the

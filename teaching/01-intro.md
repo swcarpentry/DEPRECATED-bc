@@ -12,6 +12,22 @@ and the philosophical question of what we actually mean by "learning"
 (which turns out to be pretty complicated once you start looking beyond
 the standardized Western classroom).
 
+> ### What We Leave Out
+> 
+> This training takes a narrow "cognitivist" perspective on education.
+> We can afford to do that because most of our learners are privileged:
+> well-fed, physically safe, already well-educated, highly motivated, etc.
+> There are many other perspectives ---
+> see [this site](http://www.learning-theories.com/) for summaries ---
+> and it's worth exploring them for insights like this:
+>
+> "If poor inner-city children consistently outscored children
+> from wealthy suburban homes on standardized tests,
+> is anyone naive enough to believe that we would still insist on using these tests
+>  as indicators of success?"
+> 
+> --- Kenneth Wesson, in Littky and Grabelle's *The Big Picture*
+
 What we know about educational psychology constrains teaching,
 but doesn't dictate it.
 In particular,
@@ -157,6 +173,61 @@ because their brain has learned that the 'X' pattern contains five pieces.
 > ~~~
 >
 > but a novice's pattern-forming will be disrupted by the "superficial" difference.
+
+Another sign of our brains' limitations is the fact that
+all sports teams have about half a dozen members.
+Larger "teams" alwyas break down into sub-groups:
+the forwards and backs in rugby,
+the infield and outfield in baseball,
+and so on.
+A squad with half a dozen members has also been
+the basic unit of pretty much every military organization
+throughout recorded history
+because our short-term memory can't keep track of any more people than that.
+
+The main implication of this is that we should teach in very small chunks.
+Ideally,
+learners should only have to digest a handful of new ideas at once.
+Those ideas should immediately be reinforced through practice
+to help transfer them from short-term to long-term memory.
+This is very different from the hour-long lecture format
+that is commonly used for "intellectual" subjects,
+but is instantly familiar from music lessons and other "performance" subjects.
+The former may give instructors (the illusion of) more control,
+but the latter produces better results.
+
+> #### Live Coding
+>
+> Software Carpentry workshops don't use slides to teach programming.
+> Instead,
+> we use live coding,
+> i.e.,
+> we share our screen and type code in right in front of the class.
+> This has several benefits:
+>
+> 1. *It encourages us to break things up into smaller chunks.*
+>    If learners are typing along with instructors,
+>    it's easy for the latter to say "now try this" at frequent intervals.
+>
+> 2. *It slows us down.*
+>    It's all too easy to race ahead of learners when flipping through slides;
+>    if the instructor has to type things in herself,
+>    she's less likely to do that.
+>
+> 3. *Learners get to see how we use programming tools.*
+>    It's hard for a slide to show tab completion
+>    or the way we locate a function's definition.
+>
+> 4. *Learners get to see how we recover from mistakes.*
+>    We're often told that one of the most useful parts of a workshop is
+>    seeing how instructors get out of the holes they've dug for themselves,
+>    since static tutorials (in books, slides, or online)
+>    usually show only the "happy path".
+>
+> 5. *It gives learners permission to make mistakes themselves.*
+>    If learners see an instructor making mistakes,
+>    they're likely to be more forviging of their own,
+>    and less likely to become discouraged.
 
 ## Stages of Cognitive Development
 
