@@ -15,7 +15,7 @@ title: Creating Things
 
 We now know how to explore files and directories,
 but how do we create them in the first place?
-Let's go back to Nelle's home directory,
+Let's go back to Nelle's home directory (`cd ~` or `cd /users/nelle`),
 `/users/nelle`,
 and use `ls -F` to see what it contains:
 
