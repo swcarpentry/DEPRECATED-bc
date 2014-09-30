@@ -1,7 +1,7 @@
 """
 Test suite for ``validate_index.py``
 
-Bootcamp metadata is stored in yaml header and PyYaml
+Workshop metadata is stored in yaml header and PyYaml
 strip all the strings.
 """
 
@@ -18,7 +18,7 @@ def make_file(text):
 
 
 def test_check_layout():
-    assert validator.check_layout("bootcamp")
+    assert validator.check_layout("workshop")
 
 def test_check_layout_fail():
     assert not validator.check_layout("lesson")
@@ -154,7 +154,7 @@ def test_check_not_eventbrite_non_digits():
 
 def test_check_with_enddate():
     header_sample = """---
-layout: bootcamp
+layout: workshop
 root: .
 venue: Euphoric State University
 address: 123 College Street, Euphoria
@@ -174,7 +174,7 @@ contact: alan@turing.com
 
 def test_check_without_enddate():
     header_sample = """---
-layout: bootcamp
+layout: workshop
 root: .
 venue: Euphoric State University
 address: 123 College Street, Euphoria

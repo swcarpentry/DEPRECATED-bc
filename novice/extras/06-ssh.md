@@ -3,6 +3,17 @@ layout: lesson
 root: ../..
 title: Working Remotely
 ---
+<div class="objectives" markdown="1">
+
+#### Objectives
+*   Explain what is SSH
+*   Explain what an SSH key is
+*   Generate your own SSH key pair
+*   Add your SSH key to an remote server
+*   Learn how to use your SSH key
+
+</div>
+
 Let's take a closer look at what happens when we use the shell
 on a desktop or laptop computer.
 The first step is to log in
@@ -177,12 +188,130 @@ Since those arguments are a legal command,
 the remote shell runs `ls results` for us
 and sends the output back to our local shell for display.
 
-> #### All Those Passwords
->
-> Typing our password over and over again is annoying,
-> especially if the commands we want to run remotely are in a loop.
-> To remove the need to do this,
-> we can create an [SSH key](../../gloss.html#ssh-key)
-> to tell the remote machine
-> that it should always trust us.
-> We discuss SSH keys in our intermediate lessons.
+### SSH Keys
+
+Typing our password over and over again is annoying,
+especially if the commands we want to run remotely are in a loop.
+To remove the need to do this,
+we can create an [SSH key](../../gloss.html#ssh-key)
+to tell the remote machine
+that it should always trust us.
+
+SSH keys come in pairs, a public key that gets shared with services like GitHub,
+and a private key that is stored only on your computer. If the keys match,
+you're granted access.
+
+The cryptography behind SSH keys ensures that no one can reverse engineer your
+private key from the public one.
+
+The first step in using SSH authorization is to generate your own key pair.
+
+You might already have an SSH key pair on your machine. You can check to see if
+one exists by moving to your `.ssh` directory and listing the contents.
+
+~~~
+$ cd ~/.ssh
+$ ls
+~~~
+{:class="in"}
+
+If you see `id_rsa.pub`, you already have a key pair and don't need to create a
+new one.
+
+If you don't see `id_rsa.pub`, use the following command to generate a new key
+pair. Make sure to replace `your@email.com` with your own email address.
+
+~~~
+$ ssh-keygen -t rsa -C "your@email.com"
+~~~
+{:class="in"}
+
+When asked where to save the new key, hit enter to accept the default location.
+
+~~~
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/username/.ssh/id_rsa):
+~~~
+{:class="out"}
+
+You will then be asked to provide an optional passphrase. This can be used to
+make your key even more secure, but if what you want is avoiding type your
+password every time you can skip it by hitting enter twice.
+
+~~~
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+~~~
+{:class="out"}
+
+When the key generation is complete, you should see the following confirmation:
+
+~~~
+Your identification has been saved in /Users/username/.ssh/id_rsa.
+Your public key has been saved in /Users/username/.ssh/id_rsa.pub.
+The key fingerprint is:
+01:0f:f4:3b:ca:85:d6:17:a1:7d:f0:68:9d:f0:a2:db your@email.com
+The key's randomart image is:
++--[ RSA 2048]----+
+|                 |
+|                 |
+|        . E +    |
+|       . o = .   |
+|      . S =   o  |
+|       o.O . o   |
+|       o .+ .    |
+|      . o+..     |
+|       .+=o      |
++-----------------+
+~~~
+{:class="out"}
+
+The random art image is an alternate way to match keys but we won't be needing this.
+
+Now you need to send your public key to the server you want to connect. Display
+the contents of your new public key file with `cat`:
+
+~~~
+$ cat ~/.ssh/id_rsa.pub
+~~~
+{:class="in"}
+~~~
+ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA879BJGYlPTLIuc9/R5MYiN4yc/YiCLcdBpSdzgK9Dt0Bkfe3rSz5cPm4wmehdE7GkVFXrBJ2YHqPLuM1yx1AUxIebpwlIl9f/aUHOts9eVnVh4NztPy0iSU/Sv0b2ODQQvcy2vYcujlorscl8JjAgfWsO3W4iGEe6QwBpVomcME8IU35v5VbylM9ORQa6wvZMVrPECBvwItTY8cPWH3MGZiK/74eHbSLKA4PY3gM4GHI450Nie16yggEg2aTQfWA1rry9JYWEoHS9pJ1dnLqZU3k/8OWgqJrilwSoC5rGjgp93iu0H8T6+mEHGRQe84Nk1y5lESSWIbn6P636Bl3uQ== your@email.com
+~~~
+{:class="out"}
+
+Copy the contents of the output. Login to the server you want to connect using
+your SSH keys.
+
+~~~
+$ ssh vlad@moon.euphoric.edu
+Password: ********
+~~~
+{:class="in"}
+
+Paste the content that you copy at the end of `~/.ssh/authorized_keys`.
+
+~~~
+    moon> nano ~/.ssh/authorized_keys`.
+~~~
+{:class="in"}
+
+After append the content, logout of the remote machine and try login again. If
+you setup your SSH key correctly you won't need to type your password.
+
+~~~
+    moon> exit
+~~~
+{:class="in"}
+~~~
+$ ssh vlad@moon.euphoric.edu
+~~~
+{:class="in"}
+
+<div class="keypoints" markdown="1">
+
+#### Key Points
+*  SSH is a secure alternative to username/password authorization
+*  SSH keys are generated in public/private pairs. Your public key can be shared
+   with others. The private keys stays on your machine only.
+</div>

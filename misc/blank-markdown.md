@@ -16,6 +16,12 @@ title: Title of Lesson
 
 </div>
 
+### First section
+
+Our sections start at `<h3>` or `###` (in Markdown).
+
+### Second section
+
 Write paragraphs of text here.
 When you need to show input, output, and errors,
 put a triple tilde `~~~` before and after like this:

@@ -12,28 +12,29 @@ faced with the following problems:
 **Problem 1**
 
 So far, we've typed in commands one-by-one on the command line
-to get MATLAB to do things for us. But what if we want to repeat 
-our analysis? Sure, it's only a handful of commands, 
+to get MATLAB to do things for us. But what if we want to repeat
+our analysis? Sure, it's only a handful of commands,
 and typing them in shouldn't take
 us more than a few minutes. But if we forget a step or make a mistake,
 we'll waste time rewriting commands. Also, we'll quickly find ourselves
 doing more complex analyses, and we'll need our results to
-be more easily reproducible. 
+be more easily reproducible.
 
 **Problem 2**
 
 We also have to do this analysis for every one of our dozen
 datasets. And we need a better way than typing out commands
 for each one, because we'll find ourselves writing a lot
-of duplicate code. Remember, code that is repeated in 
-two or more places will eventually be wrong in at least one. 
+of duplicate code. Remember, code that is repeated in
+two or more places will eventually be wrong in at least one.
 If we  make changes in the way we analyze our datasets,
 we have to introduce that change in every copy of our code.
 
 There's a common theme in the two problems presented above---duplicate code.
 In problem 1, we're rewriting code every time we want
-to perform an analysis. In problem 2, we're rewriting code for
-several analyses that differ only slightly from each other. 
+to perform the same analysis several times. In problem 2,
+we're rewriting code
+every time we want to perform several similar analyses.
 To avoid writing all this duplicate code, we have to teach MATLAB to
 
 * Remember our commands
@@ -62,11 +63,11 @@ To avoid writing all this duplicate code, we have to teach MATLAB to
 ### Writing Scripts
 
 In addition to running MATLAB commands one-by-one on the
-command line, we can 
+command line, we can
 also write several commands in a _script_. A MATLAB script
-is just a text file with a `.m` extension. We've written 
+is just a text file with a `.m` extension. We've written
 commands to load data from a `.csv` file and
-displays some statistics about that data. Let's 
+displays some statistics about that data. Let's
 put those commands in a script called `analyze.m`:
 
 ~~~
@@ -82,8 +83,8 @@ disp(['Standard deviation: ', num2str(std(patient_data(:)))]);
 
 Before we can use it, we need to make sure that this file is
 visible to MATLAB. MATLAB doesn't know about all the files on your
-computer, but it keeps an eye on several directories. 
-The most convenient of these directories is generally the 
+computer, but it keeps an eye on several directories.
+The most convenient of these directories is generally the
 "working directory", or "current directory". To find out the
 working directory, use the `pwd` command:
 
@@ -92,7 +93,7 @@ pwd
 ~~~
 {:class="in"}
 
-As you might have guessed, `pwd` stands for "print working directory". 
+As you might have guessed, `pwd` stands for "print working directory".
 
 Once you have a script saved in a location that MATLAB knows about,
 you can get MATLAB to run those commands by typing in the name
@@ -132,7 +133,7 @@ print -dpng "average.png"
 ~~~
 {:class="in"}
 
-Let's extend our `analyze` script with commands to 
+Let's extend our `analyze` script with commands to
 create and save plots:
 
 ~~~
@@ -162,6 +163,45 @@ ylabel("min")
 print -dpng "patient_data-01.png"
 ~~~
 
+
+#### The Colon Operator
+<!-- FIXME: Maybe this should be in a box? -->
+
+You can use the `:` (colon) operator to generate
+sequences in MATLAB:
+
+~~~
+4:10
+~~~
+{:class="in"}
+
+~~~
+ans =
+
+    4    5    6    7    8    9   10
+~~~
+{:class="out"}
+
+
+~~~
+2.5:0.25:5
+~~~
+{:class="in"}
+
+~~~
+ans =
+
+ Columns 1 through 8:
+
+    2.5000    2.7500    3.0000    3.2500    3.5000    3.7500    4.0000    4.2500
+
+ Columns 9 through 11:
+
+    4.5000    4.7500    5.0000
+
+~~~
+{:class="out"}
+
 ### Analyzing Multiple Datasets
 
 We have a dozen data sets right now, and more on the way. We want
@@ -172,7 +212,7 @@ get the computer to repeat things.
 
 ### for loops
 
-Suppose we want to print each character in the word "lead" on 
+Suppose we want to print each character in the word "lead" on
 a line of its own. One way is to use four `disp` statements:
 
 ~~~
@@ -199,8 +239,8 @@ But that's a bad approach for two reasons:
 in a string that's hundreds of letters long, we'd be better
 off typing them in.
 
-2. It's fragile: if we change `word` to a longer string, 
-it only 
+2. It's fragile: if we change `word` to a longer string,
+it only
 prints part of the data, and if we change it to
 a shorter one,
 it produces an error, because we're asking for characters
@@ -240,7 +280,7 @@ d
 {:class="out"}
 
 This improved version uses a [for loop](../../gloss.html#for-loop) to
-repeat an operation---in this case, printing---once for each element in 
+repeat an operation---in this case, printing---once for each element in
 an array.
 
 The general form of a for loop is:
@@ -251,7 +291,7 @@ for variable = collection
 end
 ~~~
 
-The for loop executes the commands in the 
+The for loop executes the commands in the
 [loop body](../../gloss.html#loop-body)
 for every value in the array `collection`. This
 value is called the [loop variable](../../gloss.html#loop-variable),
@@ -260,11 +300,11 @@ the name `letter`.
 
 We have to terminate the loop body with the `end` keyword, and
 we can have as many commands as we like in the loop body. But we
-have to remember that they will all 
+have to remember that they will all
 be repeated as many times as
 there are values in `collection`.
 
-Our for loop has made our code more scalable, and less fragile. 
+Our for loop has made our code more scalable, and less fragile.
 There's still one little thing about it that should bother us.
 For our loop to deal appropriately with shorter or longer words,
 we have to change the first line of our loop by hand:
@@ -291,7 +331,7 @@ Although this works, it's not the best way to write our loop:
 * We might update `word` and forget to modify the loop to reflect that
   change.
 
-* We might make a mistake while counting the number of letters in 
+* We might make a mistake while counting the number of letters in
   `word`.
 
 Fortunately, MATLAB provides us with a convenient function to
@@ -320,7 +360,7 @@ m
 {:class="out"}
 
 This is much more robust code, as it can deal indentically with
-words of arbitrary length. Here's another loop that repeatedly 
+words of arbitrary length. Here's another loop that repeatedly
 updates the variable `len`:
 
 ~~~
@@ -366,38 +406,31 @@ After the loop, `vowel` refers to the last value in `aeiou`, i.e., `u`.
 
 1. Write a loop that spells the word "aluminum," adding one letter at a time: 
  
-~~~
-a
-al
-alu
-alum
-alumi
-alumin
-aluminu
-aluminum
-~~~
-{:class="out"}
+        a
+        al
+        alu
+        alum
+        alumi
+        alumin
+        aluminu
+        aluminum
 
 1. Matlab uses the caret (`^`) to perform exponentiation:
 
-~~~
-disp(5^3)
-125
-~~~
+        disp(5^3)
+        125
 
-Let `b` be the base of the number and `x` the exponent. Write a loop to compute `b^x`. Check your result for `b = 4` and `x = 5`.
+    Let `b` be the base of the number and `x` the exponent. Write a loop to compute `b^x`. Check your result for `b = 4` and `x = 5`.
 
-3. In Matlab, the colon operator (`:`) accepts a [stride](../../gloss.html#stride) or skip argument between the start and stop:
+1. In Matlab, the colon operator (`:`) accepts a [stride](../../gloss.html#stride) or skip argument between the start and stop:
 
-~~~
-disp(1:3:11)
-1 4 7 10
+        disp(1:3:11)
+        1 4 7 10
 
-disp(11:-3:1)
-11 8 5 2
-~~~
+        disp(11:-3:1)
+        11 8 5 2
 
-Using this, write a loop to print the letters of "aluminum" in reverse order, one letter per line.
+    Using this, write a loop to print the letters of "aluminum" in reverse order, one letter per line.
 
 ~~~
 m
@@ -417,7 +450,7 @@ a
 
 We now have almost everything we need to process
 multiple data files with our `analyze` script. You'll notice that our
-data files are named `inflammation-01.csv`, `inflammation-02.csv`, etc. 
+data files are named `inflammation-01.csv`, `inflammation-02.csv`, etc.
 Let's write a loop that tries to print the names of each one of
 our files:
 
@@ -447,12 +480,12 @@ inflammation-12.csv
 
 This is close, but not quite right.
 The `sprintf` function is useful when we want to
-generate MATLAB strings based on a _template_. In our case, 
+generate MATLAB strings based on a _template_. In our case,
 that template is the string `inflammation-%d.csv`. `sprintf`
 generates a new string from our template by replacing the `%d` with
 the data referred to by our second argument, `i`.
 
-Again, let's trace the execution of our loop: in the beginning of our 
+Again, let's trace the execution of our loop: in the beginning of our
 loop, `i` starts by referring to
 the value 1. So, when MATLAB executes the command
 
@@ -462,13 +495,13 @@ file_name = sprintf('inflammation-%d.csv', i);
 
 it substitutes the `%d` in the template `inflammation-%d.csv`, with the
 value of `i`, i.e., 1. The resulting string is `inflammation-1.csv`,
-which is assigned to the variable `file_name`. The `disp` command 
+which is assigned to the variable `file_name`. The `disp` command
 prints that string to screen. The second time around, `sprintf`
-generates the string `inflammation-2.csv`, which is assigned to the 
+generates the string `inflammation-2.csv`, which is assigned to the
 variable `file_name`, and printed to screen. And
-so on, till `i` finally refers to the value 12. 
+so on, till `i` finally refers to the value 12.
 
-Remember that there's a mistake. Our files are actually 
+Remember that there's a mistake. Our files are actually
 named `inflammation-01.csv`, `inflammation-02.csv`, etc. To get it
 right, we have to modify our template:
 
@@ -507,7 +540,7 @@ We're now ready to modify `analyze.m` to process multiple data files:
 % script analyze.m
 
 for i = 1:3
-    
+
     % Generate strings for file and image names:
     file_name = sprintf('inflammation-%02d.csv', i);
     img_name = sprintf ('patient_data-%02d.svg', i);
@@ -551,9 +584,7 @@ as the first, and their minima show the same staircase structure.
 #### Challenges
 1. In cases where our file names don't follow such a regular pattern, we might want to process all files that end with a given extension, say `.csv`. At the command line we could get this list of files by using a [wildcard](../../gloss.html#wildcard):
 
-~~~
-ls *.csv
-~~~
+        ls *.csv
 
 Thankfully, Matlab also has `ls`, though it returns a single long string:
 
@@ -598,7 +629,7 @@ file_list =
 ~~~
 {:class="out"}
 
-Using this trick, rewrite the `analyze` script to analyze all `csv` files in the current directory. Be careful of the empty string `''` at the end of `file_list`!
+    Using this trick, rewrite the `analyze` script to analyze all `csv` files in the current directory. Be careful of the empty string `''` at the end of `file_list`!
 
 <div class="keypoints" markdown="1">
 #### Key Points
@@ -609,6 +640,8 @@ Using this trick, rewrite the `analyze` script to analyze all `csv` files in the
 
 * Use a for loop: `for variable = collection`, to process the elements
   of a collection (a MATLAB array), one at a time.
+
+* Use the `:` (colon) operator to generate sequences.
 
 * Use the `length` command to determine the length of a MATLAB array.
 

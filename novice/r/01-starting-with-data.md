@@ -297,42 +297,6 @@ The slice does not need to start at 1, e.g. the line below selects rows 5 throug
 9   0  0  0  3  1  5  6  5  5   8
 10  0  1  1  2  1  3  5  3  5   8
 </code></pre></div>
-
-And we don't have to take all the values in the slice---if we provide a [stride](../../gloss.html#stride), we can select evenly spaced values.
-We can accomplish this with the function `seq`.
-The notation `1:10` is shorthand for creating a vector of numbers from 1 to 10 and it can also be created using `seq`:
-
-
-<pre class='in'><code>1:10</code></pre>
-
-
-
-<div class='out'><pre class='out'><code> [1]  1  2  3  4  5  6  7  8  9 10
-</code></pre></div>
-
-
-
-<pre class='in'><code>seq(from = 1, to = 10, by = 1)</code></pre>
-
-
-
-<div class='out'><pre class='out'><code> [1]  1  2  3  4  5  6  7  8  9 10
-</code></pre></div>
-
-
-<pre class='in'><code>dat[seq(from = 1, to = 10, by = 3), seq(from = 1, to = 10, by = 2)]</code></pre>
-
-
-
-<div class='out'><pre class='out'><code>   V1 V3 V5 V7 V9
-1   0  1  1  4  8
-4   0  2  4  2  6
-7   0  2  4  2  5
-10  0  1  1  5  5
-</code></pre></div>
-
-Here we have taken rows 1, 4, 7, and 10, and columns 1, 3, 5, 7, and 9.
-
 We can use the function `c`, which stands for **c**ombine, to select non-contiguous values:
 
 

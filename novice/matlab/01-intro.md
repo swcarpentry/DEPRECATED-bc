@@ -12,7 +12,7 @@ The data sets are stored in
 [Comma Separated Values (CSV)](../../gloss.html#comma-separated-values) format:
 each row holds information for a single patient,
 and the columns represent successive days.
-The first few rows of our first file, 
+The first few rows of our first file,
 `inflammation-01.csv`, look like this:
 
 ~~~
@@ -45,13 +45,13 @@ To do all that, we'll have to learn a little bit about programming.
 ### Loading Data
 
 Reading data from files and writing data to them
-are essential tasks in scientific computing, 
-and admittedly, something that we'd rather not spend a lot of time 
+are essential tasks in scientific computing,
+and admittedly, something that we'd rather not spend a lot of time
 thinking about. Fortunately, MATLAB comes with a number of high-level
-tools to do these things 
+tools to do these things
 efficiently, sparing us the grisly detail.
 
-To load the data from our CSV file into MATLAB, type following 
+To load the data from our CSV file into MATLAB, type following
 command into the MATLAB shell, and press `Enter`:
 
 ~~~
@@ -71,17 +71,18 @@ csvread('inflammation-01.csv');
 ~~~
 {:class="in"}
 
-The expression `csvread(...)` is a 
-[function call](../../gloss.html#function-call). 
+The expression `csvread(...)` is a
+[function call](../../gloss.html#function-call).
 Functions generally need [parameters](../../gloss.html#parameter)
 to run.
 In the case of the `csvread` function, we need to provide a single
-parameter: the name of the file we want to read data from. This 
-parameter needs to be a character string or 
+parameter: the name of the file we want to read data from. This
+parameter needs to be a character string or
 [string](../../gloss.html#string), so we put it in quotes.
 
-Our call to `csvread` read our file, and printed the data inside 
-to the screen. But we still have no way to modify those values
+Our call to `csvread` read our file, and printed the data inside
+to the screen. And adding a semicolon rendered it even less useful---
+we have no way to modify those values
 or compute with them. To do that, we need to assign the array to a
 [variable](../../gloss.html#variable).
 
@@ -90,9 +91,9 @@ patient_data = csvread('inflammation-01.csv');
 ~~~
 {:class="in"}
 
-A variable is just a name for a piece of data or *value*. 
-Variable names must begin with a letter, and can contain 
-numbers or underscores. Examples of valid variable names are 
+A variable is just a name for a piece of data or *value*.
+Variable names must begin with a letter, and can contain
+numbers or underscores. Examples of valid variable names are
 `x`, `f_0` or `current_temperature`.
 
 We can create a new variable simply by assigning a value to it using
@@ -128,17 +129,17 @@ Weight in pounds: 121.0
 ~~~
 {:class="out"}
 
-The `disp` function takes a single parameter -- the value to print. To 
+The `disp` function takes a single parameter -- the value to print. To
 print more than one value on a single line, we could print an *array*
-of values. All values in this array need to be the same type. So, if 
+of values. All values in this array need to be the same type. So, if
 we want to print a string and a numerical value together, we *have* to
 convert that numerical value to a string with the `num2str` function.
 
 
 ### Understanding Assignment
 
-If we imagine the variable as a sticky note with a name written on 
-it, assignment is like putting the sticky note on a particular value: 
+If we imagine the variable as a sticky note with a name written on
+it, assignment is like putting the sticky note on a particular value:
 
 
 <div>
@@ -147,7 +148,7 @@ it, assignment is like putting the sticky note on a particular value:
 
 
 
-Assigning a value to one variable does not change the values of other 
+Assigning a value to one variable does not change the values of other
 variables.
 For example,
 
@@ -176,7 +177,7 @@ of both:
 
 ~~~
 weight_kg = 100;
-disp(['Weight in kg: ', num2str(weight_kg); 'Weight in pounds: ', 
+disp(['Weight in kg: ', num2str(weight_kg); 'Weight in pounds: ',
 num2str(weight_lb)]);
 ~~~
 {:class="in"}
@@ -265,18 +266,18 @@ size(patient_data)
 
 ~~~
 ans =
-    
+
     60 40
 ~~~
 {:class="out"}
 
-The output tells us that the variable `patient_data` 
+The output tells us that the variable `patient_data`
 refers to a table of values
 that has 60 rows and 40 columns.
 
 MATLAB stores *all* data in the form of arrays. For example:
 
-* Numbers, or *scalars* are arrays of zero dimensions, as are single 
+* Numbers, or *scalars* are arrays of zero dimensions, as are single
 characters,
 * Lists of numbers, or *vectors* are arrays of one dimension,
 * Tables of numbers, or *matrices* are arrays of two dimensions,
@@ -284,8 +285,8 @@ characters,
 of characters".
 
 Normally, MATLAB arrays can't store elements of different data types. For
-instance, a MATLAB array can't store both a `float` and a `char`. To do that, 
-you have to use a [Cell Array](http://www.mathworks.com/help/matlab/cell-arrays.html). 
+instance, a MATLAB array can't store both a `float` and a `char`. To do that,
+you have to use a [Cell Array](http://www.mathworks.com/help/matlab/cell-arrays.html).
 
 We can use the `class` function to find out what kind of data lives
 inside an array:
@@ -300,9 +301,9 @@ ans = double
 ~~~
 {:class="out"}
 
-This output tells us that `patient_data` refers to an array of 
+This output tells us that `patient_data` refers to an array of
 double precision floating-point numbers. This is the default numeric
-data type in MATLAB. If you want to store other numeric data types, 
+data type in MATLAB. If you want to store other numeric data types,
 you need to tell MATLAB explicitly. For example, the command,
 
 ~~~
@@ -359,8 +360,8 @@ ans = 38
 Indices are provided as (row, column). So the index `(5, 6)` selects the element
 on the fifth row and sixth column.
 
-An index like `(5, 6)` selects a single element of 
-an array, but we can also access sections of the matrix, or [slices](../../gloss.html#slice). 
+An index like `(5, 6)` selects a single element of
+an array, but we can also access sections of the matrix, or [slices](../../gloss.html#slice).
 To access a row of values:
 
 <div>
@@ -382,11 +383,11 @@ ans =
 ~~~
 {:class="out"}
 
-Providing `:` as the index for a dimension selects *all* elements 
+Providing `:` as the index for a dimension selects *all* elements
 along that dimension.
 So, the index `(5, :)` selects
-the elements on row `5`, and *all* columns---effectively, the entire row. 
-We can also 
+the elements on row `5`, and *all* columns---effectively, the entire row.
+We can also
 select multiple rows,
 
 <div>
@@ -525,7 +526,7 @@ last three characters: gen
 ### Computing With Arrays
 
 Now that we know how to access data we want to compute with, we're
-ready to analyze `patient_data`. MATLAB knows how to perform common mathematical 
+ready to analyze `patient_data`. MATLAB knows how to perform common mathematical
 operations on arrays.
 If we want to find the average inflammation for all patients on all days,
 we can just ask for the mean of the array:
@@ -540,7 +541,7 @@ ans = 6.1487
 ~~~
 {:class="out"}
 
-We couldn't just do `mean(patient_data)` becase, that 
+We couldn't just do `mean(patient_data)` becase, that
 would compute the mean of *each column* in our table, and return an array
 of mean values. The expression `patient_data(:)` *flattens* the table into a
 one-dimensional array.
@@ -606,7 +607,7 @@ Standard deviation: 4.6148
 
 When analyzing data, though, we often want to look at partial statistics,
 such as the maximum value per patient or the average value per day.
-One way to do this is to assign the data we want to a new temporary 
+One way to do this is to assign the data we want to a new temporary
 array, then ask it to do the calculation:
 
 ~~~
@@ -643,8 +644,8 @@ axis:
   <img src="img/matlab-operations-across-axes.svg" alt="Operations Across Axes" />
 </div>
 
-To support this, MATLAB allows us to specify the *dimension* we 
-want to work on. If we ask for the average across the dimension 1, 
+To support this, MATLAB allows us to specify the *dimension* we
+want to work on. If we ask for the average across the dimension 1,
 we get:
 
 ~~~
@@ -683,7 +684,7 @@ size(mean(patient_data, 1))
 {:class="in"}
 
 ~~~
-ans = 
+ans =
     1    40
 ~~~
 {:class="out"}
@@ -765,7 +766,7 @@ ans =
 {:class="out"}
 
 which is the average inflammation per patient across
-all days. 
+all days.
 
 
 ### Plotting
@@ -773,7 +774,7 @@ all days.
 The mathematician Richard Hamming once said,
 "The purpose of computing is insight, not numbers," and the best
 way to develop insight is often to visualize data. Visualization
-deserves an entire lecture (or course) of its own, but we can 
+deserves an entire lecture (or course) of its own, but we can
 explore a few features of MATLAB here.
 
 Let's display a heat map of our data:
@@ -804,7 +805,7 @@ plot(ave_inflammation);
 <img src="img/01-intro_2.png" style="height:350px">
 </div>
 
-Here, we have put the average per day across all patients in the 
+Here, we have put the average per day across all patients in the
 variable `ave_inflammation`, then used the `plot` function to display
 a line graph of those values.
 The result is roughly a linear rise and fall,
@@ -835,12 +836,12 @@ title("Minimum inflammation per day");
 
 Like `mean()`, the functions
 `max()` and `min()` can also operate across a specified dimension of
-the matrix. However, the syntax is slightly different. To see why, 
+the matrix. However, the syntax is slightly different. To see why,
 run a `help` on each of these functions.
 
 From the figures, we see that the maximum value rises and falls perfectly
 smoothly, while the minimum seems to be a step function. Neither result
-seems particularly likely, so either there 's a mistake in our 
+seems particularly likely, so either there 's a mistake in our
 calculations or something is wrong with our data.
 
 #### Challenges
@@ -851,7 +852,7 @@ calculations or something is wrong with our data.
 
 ### Wrapping up
 
-It's common to put multiple figures "side-by-side" in a single 
+It's common to put multiple figures "side-by-side" in a single
 window for presentation and convenience. Here's how to use
 the `subplot` function to do this:
 
@@ -881,7 +882,7 @@ matrices, characters, strings, or a number of other things, but they are
 * The "size" of an array is the number of elements it has in each
 dimension.
 * Use `variable = value` to assign a value to a variable. The "value"
-is always an array in MATLAB, and can contain different kinds 
+is always an array in MATLAB, and can contain different kinds
 of data, like integers, floats or characters.
 * Use the `disp()` function to print things to screen. If you want
 to print many things on the same line, print an array of things.
@@ -892,8 +893,8 @@ from `low` to `high`.
 * `mean()`, `max()` and `min()` can be used to calculate simple
 statistics about an array, or along specified dimensions of that
 array.
-* The `imagesc()` function produces a heat map 
-from a matrix (2-D array), and the `plot()` function can 
+* The `imagesc()` function produces a heat map
+from a matrix (2-D array), and the `plot()` function can
 be used to produce a line graph from a vector (1-D array).
 
 </div>
@@ -904,6 +905,6 @@ first data file. We would like to check the other 11 the same way,
 but typing in the same commands repeatedly is tedious and error-prone.
 Since computers don't get bored (that we know of), we should create a
 way to do a complete analysis with a single command, and then figure out
-how to repeat that step once for each file. These operations are the 
+how to repeat that step once for each file. These operations are the
 subjects of the next two lessons.
 

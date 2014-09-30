@@ -204,22 +204,6 @@ The slice does not need to start at 1, e.g. the line below selects rows 5 throug
 ```{r}
 dat[5:10, 1:10]
 ```
-
-And we don't have to take all the values in the slice---if we provide a [stride](../../gloss.html#stride), we can select evenly spaced values.
-We can accomplish this with the function `seq`.
-The notation `1:10` is shorthand for creating a vector of numbers from 1 to 10 and it can also be created using `seq`:
-
-```{r}
-1:10
-seq(from = 1, to = 10, by = 1)
-```
-
-```{r}
-dat[seq(from = 1, to = 10, by = 3), seq(from = 1, to = 10, by = 2)]
-```
-
-Here we have taken rows 1, 4, 7, and 10, and columns 1, 3, 5, 7, and 9.
-
 We can use the function `c`, which stands for **c**ombine, to select non-contiguous values:
 
 ```{r}
