@@ -1,5 +1,5 @@
 # Produce PDFs from all Markdown files in a directory
-# Modified from the original for this bootcamp
+# Modified from the original for this workshop
 # Lincoln Mullen | http://lincolnmullen.com | lincoln@lincolnmullen.com
 
 # List files to be made by finding all *.md files and appending .pdf

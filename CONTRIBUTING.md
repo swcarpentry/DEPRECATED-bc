@@ -13,7 +13,7 @@ you are agreeing that Software Carpentry may redistribute your work under
 
 Before beginning anything major,
 please read the [README.md](README.md) file in this directory,
-which explains how this repository is used to create websites for bootcamps.
+which explains how this repository is used to create websites for workshops.
 We also recommend that you look through [open issues](https://github.com/swcarpentry/bc/issues)
 and [pull requests](https://github.com/swcarpentry/bc/pulls) to see what other people could use help with,
 and then open an issue of your own to get feedback on your ideas and coordinate with other developers.
@@ -87,7 +87,7 @@ you can run the same checks using:
 python bin/swc_index_validator.py ./index.html
 ~~~
 
-This checks that the bootcamp's instructors are listed,
+This checks that the workshop's instructors are listed,
 that a contact email address has been set up,
 and so on.
 

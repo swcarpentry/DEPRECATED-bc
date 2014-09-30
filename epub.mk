@@ -21,7 +21,7 @@ commands :
 epub: $(EPUB)
 
 $(EPUB) : $(EPUB_SOURCE) $(CSS)
-	pandoc -f html -t epub -o $@ \
+	pandoc -f html-native_divs -t epub -o $@ \
 	    --standalone \
 	    --epub-stylesheet=$(CSS) \
 	    --epub-metadata=_epub/metadata.xml \
