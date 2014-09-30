@@ -157,7 +157,7 @@ or the next person who reads it won't be able to understand what's going on.
 #### Challenges
 
 1. You can use the `strcat` function to  concatenate two strings,
-i.e., strcat('a', 'b') = 'ab'. Write a function called `fence` 
+i.e., `strcat('a', 'b') = 'ab'`. Write a function called `fence` 
 that takes two parameters: `original` and `wrapper`, and returns
 a new string that has the wrapper character at the beginning
 and at the end.
