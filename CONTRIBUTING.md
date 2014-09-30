@@ -44,7 +44,7 @@ and to decide what's in or out of scope for any topic.
 *   SQL: Abigail Cabunoc (@acabunoc) and Sheldon McKay (@mckays630)
 *   R: John Blischak (@jdblischak) and Denis Haine (@dhaine)
 *   Mercurial: Doug Latornell (@douglatornell)
-*   MATLAB: Ashwin Srinath (@ashwinsrnth) and Isabell Kiral-Kornek
+*   MATLAB: Ashwin Srinath (@ashwinsrnth) and Isabell Kiral-Kornek (@IsaKiko)
 *   Build system: Raniere Silva (@r-gaia-cs) and Rémi Emonet (@twitwi)
 *   Windows installer: W. Trevor King (@wking) and Ethan White (@ethanwhite)
 
