@@ -46,6 +46,7 @@ and to decide what's in or out of scope for any topic.
 *   Mercurial: Doug Latornell
 *   MATLAB: Ashwin Srinath and Isabell Kiral-Kornek
 *   Build system: Raniere Silva and Rémi Emonet
+*   Windows installer: W. Trevor King and Ethan White
 
 Working With GitHub
 -------------------
