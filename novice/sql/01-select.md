@@ -43,7 +43,7 @@ and these lessons will show how to do that.
 ### A Few Definitions
 
 
-A database is a method to store information for future retrieval. In this lesson, we use a common type of database called [relational database](../../gloss.html#relational-database) as an example. A relational database is a way to store and manipulate information that is arranged as [tables](../../gloss.html#table). Each table has columns (also known as [fields](../../gloss.html#field)) which describe the data, and rows (also known as [records](../../gloss.html#record)) which contain the data.
+A database is a method to store information for future retrieval. In this lesson, we use a common type of database called [relational database](../../gloss.html#relational-database) as an example. A relational database stores and manipulates information that is arranged as [tables](../../gloss.html#table). Each table has columns (also known as [fields](../../gloss.html#field)) which describe the data, and rows (also known as [records](../../gloss.html#record)) which contain the data.
   
 When we are using a spreadsheet,
 we put formulas into cells to calculate new values based on old ones.
