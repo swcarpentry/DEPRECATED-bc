@@ -21,16 +21,22 @@ a bunch of commands saved in a file is usually called a [shell script](../../glo
 but make no mistake:
 these are actually small programs.
 
-Let's start by putting the following line in the file `middle.sh`:
+Let's start by going back to `molecules/` and putting the following line in the file `middle.sh`:
+
+~~~
+$ cd molecules
+$ nano middle.sh
+~~~
+{:class="in"}
 
 <div class="file" markdown="1">
 ~~~
-head -20 cholesterol.pdb | tail -5
+head -15 octane.pdb | tail -5
 ~~~
 </div>
 
 This is a variation on the pipe we constructed earlier:
-it selects lines 16-20 of the file `cholesterol.pdb`.
+it selects lines 11-15 of the file `octane.pdb`.
 Remember, we are *not* running it as a command just yet:
 we are putting the commands in a file.
 
@@ -43,11 +49,11 @@ $ bash middle.sh
 ~~~
 {:class="in"}
 ~~~
-ATOM     14  C           1      -1.463  -0.666   1.001  1.00  0.00
-ATOM     15  C           1       0.762  -0.929   0.295  1.00  0.00
-ATOM     16  C           1       0.771  -0.937   1.840  1.00  0.00
-ATOM     17  C           1      -0.664  -0.610   2.293  1.00  0.00
-ATOM     18  C           1      -4.705   2.108  -0.396  1.00  0.00
+ATOM      9  H           1      -4.502   0.681   0.785  1.00  0.00
+ATOM     10  H           1      -5.254  -0.243  -0.537  1.00  0.00
+ATOM     11  H           1      -4.357   1.252  -0.895  1.00  0.00
+ATOM     12  H           1      -3.009  -0.741  -1.467  1.00  0.00
+ATOM     13  H           1      -3.172  -1.337   0.206  1.00  0.00
 ~~~
 {:class="out"}
 
@@ -70,7 +76,7 @@ What if we want to select lines from an arbitrary file?
 We could edit `middle.sh` each time to change the filename,
 but that would probably take longer than just retyping the command.
 Instead,
-let's edit `middle.sh` and replace `cholesterol.pdb` with a special variable called `$1`:
+let's edit `middle.sh` and replace `octane.pdb` with a special variable called `$1`:
 
 ~~~
 $ cat middle.sh
@@ -86,30 +92,30 @@ Inside a shell script,
 We can now run our script like this:
 
 ~~~
-$ bash middle.sh cholesterol.pdb
+$ bash middle.sh octane.pdb
 ~~~
 {:class="in"}
 ~~~
-ATOM     14  C           1      -1.463  -0.666   1.001  1.00  0.00
-ATOM     15  C           1       0.762  -0.929   0.295  1.00  0.00
-ATOM     16  C           1       0.771  -0.937   1.840  1.00  0.00
-ATOM     17  C           1      -0.664  -0.610   2.293  1.00  0.00
-ATOM     18  C           1      -4.705   2.108  -0.396  1.00  0.00
+ATOM      9  H           1      -4.502   0.681   0.785  1.00  0.00
+ATOM     10  H           1      -5.254  -0.243  -0.537  1.00  0.00
+ATOM     11  H           1      -4.357   1.252  -0.895  1.00  0.00
+ATOM     12  H           1      -3.009  -0.741  -1.467  1.00  0.00
+ATOM     13  H           1      -3.172  -1.337   0.206  1.00  0.00
 ~~~
 {:class="out"}
 
 or on a different file like this:
 
 ~~~
-$ bash middle.sh vitamin-a.pdb
+$ bash middle.sh pentane.pdb
 ~~~
 {:class="in"}
 ~~~
-ATOM     14  C           1       1.788  -0.987  -0.861
-ATOM     15  C           1       2.994  -0.265  -0.829
-ATOM     16  C           1       4.237  -0.901  -1.024
-ATOM     17  C           1       5.406  -0.117  -1.087
-ATOM     18  C           1      -0.696  -2.628  -0.641
+ATOM      9  H           1       1.324   0.350  -1.332  1.00  0.00
+ATOM     10  H           1       1.271   1.378   0.122  1.00  0.00
+ATOM     11  H           1      -0.074  -0.384   1.288  1.00  0.00
+ATOM     12  H           1      -0.048  -1.362  -0.205  1.00  0.00
+ATOM     13  H           1      -1.183   0.500  -1.412  1.00  0.00
 ~~~
 {:class="out"}
 
@@ -126,15 +132,15 @@ head $2 $1 | tail $3
 ~~~
 {:class="out"}
 ~~~
-$ bash middle.sh vitamin-a.pdb -20 -5
+$ bash middle.sh pentane.pdb -20 -5
 ~~~
 {:class="in"}
 ~~~
-ATOM     14  C           1       1.788  -0.987  -0.861
-ATOM     15  C           1       2.994  -0.265  -0.829
-ATOM     16  C           1       4.237  -0.901  -1.024
-ATOM     17  C           1       5.406  -0.117  -1.087
-ATOM     18  C           1      -0.696  -2.628  -0.641
+ATOM     14  H           1      -1.259   1.420   0.112  1.00  0.00
+ATOM     15  H           1      -2.608  -0.407   1.130  1.00  0.00
+ATOM     16  H           1      -2.540  -1.303  -0.404  1.00  0.00
+ATOM     17  H           1      -3.393   0.254  -0.321  1.00  0.00
+TER      18              1
 ~~~
 {:class="out"}
 
@@ -187,16 +193,18 @@ wc -l $* | sort -n
 ~~~
 {:class="out"}
 ~~~
-$ bash sorted.sh *.dat backup/*.dat
+$ bash sorted.sh *.pdb ../creatures/*.dat
 ~~~
 {:class="in"}
 ~~~
-      29 chloratin.dat
-      89 backup/chloratin.dat
-      91 sphagnoi.dat
-     156 sphag2.dat
-     172 backup/sphag-merged.dat
-     182 girmanis.dat
+9 methane.pdb
+12 ethane.pdb
+15 propane.pdb
+20 cubane.pdb
+21 pentane.pdb
+30 octane.pdb
+163 ../creatures/basilisk.dat
+163 ../creatures/unicorn.dat
 ~~~
 {:class="out"}
 
@@ -303,7 +311,7 @@ what they discover about their data and their workflow with one call to `history
 and a bit of editing to clean up the output
 and save it as a shell script.
 
-#### Nelle's Pipeline: Creating a Script
+### Nelle's Pipeline: Creating a Script
 
 An off-hand comment from her supervisor has made Nelle realize that
 she should have provided a couple of extra parameters to `goostats` when she processed her files.
@@ -382,84 +390,75 @@ Of course, this introduces another tradeoff between flexibility and complexity.
 
 </div>
 
-<div class="challenges" markdown="1">
+<div class="challenge" markdown="1">
+Leah has several hundred data files, each of which is formatted like this:
 
-#### Challenges
+~~~
+2013-11-05,deer,5
+2013-11-05,rabbit,22
+2013-11-05,raccoon,7
+2013-11-06,rabbit,19
+2013-11-06,deer,2
+2013-11-06,fox,1
+2013-11-07,rabbit,18
+2013-11-07,bear,1
+~~~
 
-1.  Leah has several hundred data files, each of which is formatted like this:
+Write a shell script called `species.sh` that takes any number of
+filenames as command-line parameters, and uses `cut`, `sort`, and
+`uniq` to print a list of the unique species appearing in each of
+those files separately.
+</div>
 
-    ~~~
-    2013-11-05,deer,5
-    2013-11-05,rabbit,22
-    2013-11-05,raccoon,7
-    2013-11-06,rabbit,19
-    2013-11-06,deer,2
-    2013-11-06,fox,1
-    2013-11-07,rabbit,18
-    2013-11-07,bear,1
-    ~~~
+<div class="challenge" markdown="1">
+Write a shell script called `longest.sh` that takes the name of a
+directory and a filename extension as its parameters, and prints
+out the name of the file with the most lines in that directory
+with that extension. For example:
 
-    Write a shell script called `species.sh` that takes any number of
-    filenames as command-line parameters, and uses `cut`, `sort`, and
-    `uniq` to print a list of the unique species appearing in each of
-    those files separately.
+~~~
+$ bash longest.sh /tmp/data pdb
+~~~
 
-2.  Write a shell script called `longest.sh` that takes the name of a
-    directory and a filename extension as its parameters, and prints
-    out the name of the file with the most lines in that directory
-    with that extension. For example:
+would print the name of the `.pdb` file in `/tmp/data` that has
+the most lines.
+</div>
 
-    ~~~
-    $ bash longest.sh /tmp/data pdb
-    ~~~
+<div class="challenge" markdown="1">
+If you run the command:
 
-    would print the name of the `.pdb` file in `/tmp/data` that has
-    the most lines.
+~~~
+history | tail -5 > recent.sh
+~~~
 
-3.  If you run the command:
+the last command in the file is the `history` command itself, i.e.,
+the shell has added `history` to the command log before actually
+running it. In fact, the shell *always* adds commands to the log
+before running them. Why do you think it does this?
+</div>
 
-    ~~~
-    history | tail -5 > recent.sh
-    ~~~
+<div class="challenge" markdown="1">
+Joel's `data` directory contains three files: `fructose.dat`,
+`glucose.dat`, and `sucrose.dat`. Explain what a script called
+`example.sh` would do when run as `bash example.sh *.dat` if it
+contained the following lines:
 
-    the last command in the file is the `history` command itself, i.e.,
-    the shell has added `history` to the command log before actually
-    running it. In fact, the shell *always* adds commands to the log
-    before running them. Why do you think it does this?
-
-4.  Joel's `data` directory contains three files: `fructose.dat`,
-    `glucose.dat`, and `sucrose.dat`. Explain what a script called
-    `example.sh` would do when run as `bash example.sh *.dat` if it
-    contained the following lines:
-
-<table>
-  <tr>
-    <td valign="top">1.</td>
-    <td valign="top">
-<pre>
+~~~
+# Script 1
 echo *.*
-</pre>
-    </td>
-  </tr>
-  <tr>
-    <td valign="top">2.</td>
-    <td valign="top">
-<pre>
+~~~
+
+~~~
+# Script 2
 for filename in $1 $2 $3
 do
     cat $filename
 done
-</pre>
-    </td>
-  </tr>
-  <tr>
-    <td valign="top">3.</td>
-    <td valign="top">
-<pre>
+~~~
+
+~~~
+# Script 3
 echo $*.dat
-</pre>
-    </td>
-  </tr>
-</table>
+~~~
 
 </div>

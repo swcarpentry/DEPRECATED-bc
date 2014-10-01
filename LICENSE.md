@@ -62,6 +62,12 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+### Other Material
+
+Our [code of conduct](CODE_OF_CONDUCT.html) is taken from
+[this site](https://github.com/Bantik/contributor_covenant/blob/master/LICENSE),
+and is made available under the same MIT License as our software.
+
 ### Trademark
 
 "Software Carpentry" and the Software Carpentry logo are registered

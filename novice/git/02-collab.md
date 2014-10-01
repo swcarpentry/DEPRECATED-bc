@@ -56,7 +56,7 @@ but the remote repository on GitHub doesn't contain any files yet:
 <img src="img/git-freshly-made-github-repo.svg" alt="Freshly-Made GitHub Repository" />
 
 The next step is to connect the two repositories.
-We do this by making the GitHub repository a [remote](../../gloss.html#repository-remote)
+We do this by making the GitHub repository a [remote](../../gloss.html#remote-repository)
 for the local repository.
 The home page of the repository on GitHub includes
 the string we need to identify it:
@@ -64,8 +64,19 @@ the string we need to identify it:
 <img src="img/github-find-repo-string.png" alt="Where to Find Repository URL on GitHub" />
 
 Click on the 'HTTPS' link to change the [protocol](../../gloss.html#protocol) from SSH to HTTPS.
-It's slightly less convenient for day-to-day use,
-but much less work for beginners to set up:
+
+> #### HTTPS vs SSH
+>
+> We use HTTPS here because it does not require additional configuration.
+> After the workshop you may want to set up SSH access, which is a bit more
+> secure, by following one of the great tutorials from
+> [GitHub](https://help.github.com/articles/generating-ssh-keys),
+> [Atlassian/BitBucket](https://confluence.atlassian.com/display/BITBUCKET/Set+up+SSH+for+Git)
+> and [GitLab](https://about.gitlab.com/2014/03/04/add-ssh-key-screencast/)
+> (this one has a screencast).
+>
+> If want to know more about SSH we invite you to check [our small lesson
+> about it](../extras/06-ssh.html).
 
 <img src="img/github-change-repo-string.png" alt="Changing the Repository URL on GitHub" />
 
@@ -117,6 +128,42 @@ Branch master set up to track remote branch master from origin.
 ~~~
 {:class="out"}
 
+> ##### Proxy
+>
+> If the network you are connected to uses a proxy there is an chance that your last
+> command failed with "Could not resolve hostname" as the error message. To
+> solve this issue you need to tell Git about the proxy:
+>
+> ~~~
+> $ git config --global http.proxy http://user:password@proxy.url
+> $ git config --global https.proxy http://user:password@proxy.url
+> ~~~
+> {:class="in"}
+>
+> When you connect to another network that doesn't use a proxy you will need to
+> tell Git to disable the proxy using
+>
+> ~~~
+> $ git config --global --unset http.proxy
+> $ git config --global --unset https.proxy
+> ~~~
+> {:class="in"}
+
+> #### Password Managers
+>
+> If your operating system has a password manager configured, `git push` will
+> try to use it when it needs your username and password. If you want to type
+> your username and password at the terminal instead of using
+> a password manager, type
+>
+> ~~~
+> $ unset SSH_ASKPASS
+> ~~~
+> {:class="in"}
+>
+> You may want to add this command at the end of your `~/.bashrc` to make it the
+> default behavior.
+
 Our local and remote repositories are now in this state:
 
 <img src="img/github-repo-after-first-push.svg" alt="GitHub Repository After First Push" />
@@ -146,30 +193,41 @@ If someone else had pushed some changes to the repository on GitHub,
 though,
 this command would download them to our local repository.
 
-We can simulate working with a collaborator using another copy of the repository on our local machine.
-To do this,
-`cd` to the directory `/tmp`.
-(Note the absolute path:
-don't make `tmp` a subdirectory of the existing repository).
-Instead of creating a new repository here with `git init`,
-we will [clone](../../gloss.html#repository-clone) the existing repository from GitHub:
+For the next step, get into pairs.
+Pick one of your repositories on Github to use for collaboration.
+
+> #### Practicing by yourself
+>
+> If you're working through this lesson on your own, you can carry on by opening
+> a second terminal window, and switching to another directory (e.g. `/tmp`).
+> This window will represent your partner, working on another computer. You
+> won't need to give anyone access on Github, because both 'partners' are you.
+
+The partner whose repository is being used needs to give the other person access.
+On Github, click the settings button on the right,
+then select Collaborators, and enter your partner's username.
+
+<img src="img/github-add-collaborators.png" alt="Adding collaborators on Github" />
+
+The other partner should `cd` to another directory
+(so `ls` doesn't show a `planets` folder),
+and then make a copy of this repository on your own computer:
 
 ~~~
-$ cd /tmp
 $ git clone https://github.com/vlad/planets.git
 ~~~
 {:class="in"}
 
+Replace 'vlad' with your partner's username (the one who owns the repository).
+
 `git clone` creates a fresh local copy of a remote repository.
-(We did it in `/tmp` or some other directory so that we don't overwrite our existing `planets` directory.)
-Our computer now has two copies of the repository:
 
-<img src="img/git-after-duplicate-clone.svg" alt="After Creating Duplicate Clone of Repository" />
+<img src="img/github-collaboration.svg" alt="After Creating Clone of Repository" />
 
-Let's make a change in the copy in `/tmp/planets`:
+The new collaborator can now make a change in their copy of the repository:
 
 ~~~
-$ cd /tmp/planets
+$ cd planets
 $ nano pluto.txt
 $ cat pluto.txt
 ~~~
@@ -213,14 +271,9 @@ when we clone a repository.
 (This is why `origin` was a sensible choice earlier
 when we were setting up remotes by hand.)
 
-Our three repositories now look like this:
-
-<img src="img/git-after-change-to-duplicate-repo.svg" alt="After Pushing Change from Duplicate Repository" />
-
 We can now download changes into the original repository on our machine:
 
 ~~~
-$ cd ~/planets
 $ git pull origin master
 ~~~
 {:class="in"}
@@ -239,20 +292,6 @@ Fast-forward
 ~~~
 {:class="out"}
 
-which gives us this:
-
-<img src="img/git-after-pulling-to-local-repo.svg" alt="After Pulling Change to Local Repository" />
-
-In practice,
-we would probably never have two copies of the same remote repository
-on our laptop at once.
-Instead,
-one of those copies would be on our laptop,
-and the other on a lab machine,
-or on someone else's computer.
-Pushing and pulling changes gives us a reliable way
-to share work between different people and machines.
-
 <div class="keypoints" markdown="1">
 
 #### Key Points
@@ -264,15 +303,11 @@ to share work between different people and machines.
 
 </div>
 
-<div class="challenges" markdown="1">
-
-#### Challenges
-
-1.  Create a repository on GitHub,
-    clone it,
-    add a file,
-    push those changes to GitHub,
-    and then look at the [timestamp](../../gloss.html#timestamp) of the change on GitHub.
-    How does GitHub record times, and why?
-
+<div class="challenge" markdown="1">
+Create a repository on GitHub,
+clone it,
+add a file,
+push those changes to GitHub,
+and then look at the [timestamp](../../gloss.html#timestamp) of the change on GitHub.
+How does GitHub record times, and why?
 </div>

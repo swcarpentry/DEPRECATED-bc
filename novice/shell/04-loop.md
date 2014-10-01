@@ -17,7 +17,7 @@ title: Loops
 
 Wildcards and tab completion are two ways to reduce typing (and typing mistakes).
 Another is to tell the shell to do something over and over again.
-Suppose we have several hundred genome data files named `basilisk.dat`, `unicorn.dat`, and so on.
+Suppose we have several hundred genome data files named `basilisk.dat`, `unicorn.dat`, and so on. In this example, we'll use the `creatures` directory which only has two example files, but the principles can be applied to many many more files at once.
 When new files arrive,
 we'd like to rename the existing ones to `original-basilisk.dat` and `original-unicorn.dat`.
 We can't use:
@@ -198,7 +198,7 @@ the `head` and `tail` combination selects lines 81-100 from whatever file is bei
 > and won't be asked to read the file `red dragon.dat`.
 > 
 > We can make our script a little bit more robust
-> by [quoting](../../gloss.html#shell-quoting) our use of the variable:
+> by [quoting](../../gloss.html#quoting) our use of the variable:
 > 
 > ~~~
 > for filename in *.dat
@@ -264,7 +264,7 @@ mv unicorn.dat original-unicorn.dat
 > isn't foolproof, but it's a handy way to see what's going to happen when
 > you're still learning how loops work.
 
-#### Nelle's Pipeline: Processing Files
+### Nelle's Pipeline: Processing Files
 
 Nelle is now ready to process her data files.
 Since she's still learning how to use the shell,
@@ -411,71 +411,73 @@ so she decides to get some coffee and catch up on her reading.
 
 </div>
 
-<div class="challenges" markdown="1">
+<div class="challenge" markdown="1">
+Suppose that `ls` initially displays:
 
-#### Challenges
+~~~
+fructose.dat    glucose.dat   sucrose.dat
+~~~
 
-1.  Suppose that `ls` initially displays:
+What is the output of:
 
-    ~~~
-    fructose.dat    glucose.dat   sucrose.dat
-    ~~~
+~~~
+for datafile in *.dat
+do
+    ls *.dat
+done
+~~~
+</div>
 
-    What is the output of:
+<div class="challenge" markdown="1">
+In the same directory, what is the effect of this loop?
 
-    ~~~
-    for datafile in *.dat
+~~~
+for sugar in *.dat
+do
+    echo $sugar
+    cat $sugar > xylose.dat
+done
+~~~
+
+1.  Prints `fructose.dat`, `glucose.dat`, and `sucrose.dat`, and
+    copies `sucrose.dat` to create `xylose.dat`.
+2.  Prints `fructose.dat`, `glucose.dat`, and `sucrose.dat`, and
+    concatenates all three files to create `xylose.dat`.
+3.  Prints `fructose.dat`, `glucose.dat`, `sucrose.dat`, and
+    `xylose.dat`, and copies `sucrose.dat` to create `xylose.dat`.
+4.  None of the above.
+</div>
+
+<div class="challenge" markdown="1">
+The `expr` does simple arithmetic using command-line parameters:
+
+~~~
+$ expr 3 + 5
+8
+$ expr 30 / 5 - 2
+4
+~~~
+
+Given this, what is the output of:
+
+~~~
+for left in 2 3
+do
+    for right in $left
     do
-        ls *.dat
+        expr $left + $right
     done
-    ~~~
+done
+~~~
+</div>
 
-2.  In the same directory, what is the effect of this loop?
+<div class="challenge" markdown="1">
+Describe in words what the following loop does.
 
-    ~~~
-    for sugar in *.dat
-    do
-        echo $sugar
-        cat $sugar > xylose.dat
-    done
-    ~~~
-
-    1.  Prints `fructose.dat`, `glucose.dat`, and `sucrose.dat`, and
-        copies `sucrose.dat` to create `xylose.dat`.
-    2.  Prints `fructose.dat`, `glucose.dat`, and `sucrose.dat`, and
-        concatenates all three files to create `xylose.dat`.
-    3.  Prints `fructose.dat`, `glucose.dat`, `sucrose.dat`, and
-        `xylose.dat`, and copies `sucrose.dat` to create `xylose.dat`.
-    4.  None of the above.
-
-3.  The `expr` does simple arithmetic using command-line parameters:
-
-    ~~~
-    $ expr 3 + 5
-    8
-    $ expr 30 / 5 - 2
-    4
-    ~~~
-
-    Given this, what is the output of:
-
-    ~~~
-    for left in 2 3
-    do
-        for right in $left
-        do
-            expr $left + $right
-        done
-    done
-    ~~~
-
-4.  Describe in words what the following loop does.
-
-    ~~~
-    for how in frog11 prcb redig
-    do
-        $how -limit 0.01 NENE01729B.txt
-    done
-    ~~~
-
+~~~
+for how in frog11 prcb redig
+do
+    $how -limit 0.01 NENE01729B.txt
+done
+~~~
 </div>

@@ -2,8 +2,7 @@ markdown        : kramdown
 kramdown        :
   entity_output : as_input # &mdash; is output as &mdash;
   smart_quotes  : [39, 39, 34, 34] # decimal for left/right single/double quotes
-pygments        : true
-exclude         : [branding]
+exclude         : [branding, "*.Rmd"]
 contact         : "admin@software-carpentry.org"
 github_url      : "https://github.com/swcarpentry"
 irc_url         : "irc://moznet/sciencelab"

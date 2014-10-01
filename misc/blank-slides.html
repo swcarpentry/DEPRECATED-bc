@@ -1,0 +1,99 @@
+---
+layout: slides
+title: Creating Software Carpentry Slides
+root: ..
+---
+<section>
+  <h1>{{page.title}}</h1>
+  <p class="fragment">This is a basic slide.</p>
+  <p class="fragment">It's meant for one column of text or bullet points or whatever.</p>
+  <ul>
+    <li class="fragment">Bullet points or other such notes can be added as a list.</li>
+    <li class="fragment">List items take up less horiztonal space than regular text.</li>
+    <li class="fragment">But this can be modified pretty easily.</li>
+  </ul>
+</section>
+
+<section class="twocolumn">
+  <h1>Two Columns</h1>
+  <div class="leftside">
+    <p>This is a two-column slide. It has a class of "twocolumn", and it's made of two divs, one with a class of "leftside" and one with a class of "rightside."</p>
+  </div>
+  <div class="rightside">
+    <ul>
+      <li>Feel free to put bullet points in here too.</li>
+    </ul>
+    <p>You could also put in an image, if you wish:</p>
+    <img src="http://fillmurray.com/200/200/" alt="Bill Murray"/>
+  </div>
+</section>
+
+<section class="twocolumn">
+  <h1>1/2-Image, 1/2-Text</h1>
+  <div class="leftside">
+    <img src="http://fillmurray.com/400/400/" alt="Bill Murray"/>  </div>
+  <div class="rightside">
+    <ul>
+      <li class="fragment">This could include bullet points.</li>
+      <li class="fragment">It could just as well be text...</li>
+      <li class="fragment">Or another image, or a snippet of code.</li>
+    </ul>    
+  </div>
+</section>
+
+<section class="twocolumn">
+  <h1>Code and Bullet-List</h1>
+  <div class="leftside code">
+  <xmp>
+  <section>
+    <h1>This is the Title Slide</h1>
+    <h2>This Could be a Subtitle</h2>
+  </section>
+  <section>
+    <h1>Basic Slide</h1>
+    <p class="fragment">This is a basic slide.</p>
+    <p class="fragment">It's meant for one column of text or bullet points or whatever.</p>
+    <ul>
+      <li class="fragment">Bullet points or other such notes can be added as a list.</li>
+      <li class="fragment">List items take up less horiztonal space than regular text.</li>
+      <li class="fragment">But this can be modified pretty easily.</li>
+    </ul>
+  </section>
+  </xmp>
+  </div>
+  <div class="rightside code">
+    <ul>
+      <li>Code on the left will be displayed just as it's written within the xmp tags.</li>
+      <li>Unfortunately, the code cannot be styled to wrap within the xmp element.</li>
+      <li>To get text to wrap in the code display, you could use &ltpre&gt tags instead of &ltxmp&gt tags, but these would require you to type out "& l t" and "& g t" instead of the "<" and ">" symbols in the code.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h1>Full Image</h1>
+  <img src="http://www.fillmurray.com/1000/500/" alt="Bill Murray"/>
+  <blockquote>A full image, with this caption underneath. The caption is added with the tag blockquote, and its text is styled to be much smaller than regular text.</blockquote>
+</section>
+
+<section>
+  <h1>Video</h1>
+  <video width="55%" height="auto" autoplay loop muted>
+    <source src="http://alexperala.com/old/media/sea.mp4" type="video/mp4">
+    <source src="http://alexperala.com/old/media/sea.ogv" type="video/ogg">
+    <source src="http://alexperala.com/old/media/sea.webm" type="video/webm">
+    Sorry, your browser does not support html video.
+  </video>
+  <blockquote>Video works just as well.</blockquote>
+</section>
+
+<section>
+  <h1>Conclusion</h1>
+  <p>Thank you for your time and attention. Please feel free to follow up with me directly:</p>
+  <ul class="closer">
+    <li><h4>Name</h4></li>
+    <li><a href="mailto:speaker@email.com"><h4>email address</h4></a></li>
+    <li><a href="http://twitter.com/"><h4>twitter handle</h4></a></li>
+    <li><a href="http://speakerswebsite.com"><h4>website</h4></a></li>
+  </ul>
+</section>

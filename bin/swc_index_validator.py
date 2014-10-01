@@ -12,10 +12,10 @@ Checks for:
     4. Latitute/longitude should be 2 floating point numbers separated by comma
     5. startdate should be a valid date; if enddate is present, it should be valid as well
     6. country should be a string with no spaces
-    7. instructor list should be a valid Python/Ruby list
+    7. instructor and helper lists should be valid Python/Ruby lists
     8. Template header should not exist
     9. humandate should have three-letter month and four-letter year
-    10. layout should be 'bootcamp'
+    10. layout should be 'workshop'
     11. root must be '.'
     12. humantime should have 'am' or 'pm' or both
     13. address, venue should be non-empty
@@ -28,20 +28,26 @@ import re
 import yaml
 from collections import Counter
 
-__version__ = '0.4'
+__version__ = '0.5'
 
-REGISTRATIONS = set(['open', 'restricted', 'closed'])
+REGISTRATIONS = set('closed open restricted'.split())
+
+LESSONS = set('Bash Git Mercurial Python R SQL Shell VM'.split())
 
 EMAIL_PATTERN = r'[^@]+@[^@]+\.[^@]+'
+DEFAULT_CONTACT_EMAIL = 'admin@software-carpentry.org'
 HUMANTIME_PATTERN = r'((0?\d|1[0-1]):[0-5]\d(am|pm)(-|to)(0?\d|1[0-1]):[0-5]\d(am|pm))|((0?\d|1\d|2[0-3]):[0-5]\d(-|to)(0?\d|1\d|2[0-3]):[0-5]\d)'
 EVENTBRITE_PATTERN = r'\d{9,10}'
+REDIRECT_PATTERN = r'http[s]?://'
+
+USAGE = 'Usage: swc_index_validator.py [filename]'
 
 ERROR = 'ERROR:\t{0}\n'
 SUB_ERROR = '\t{0}\n'
 
 def check_layout(layout):
-    '''Checks whether layout equals "bootcamp".'''
-    return layout == 'bootcamp'
+    '''Checks whether layout equals "workshop".'''
+    return layout == 'workshop'
 
 def check_root(root):
     '''Checks root - can only be "."'''
@@ -103,38 +109,55 @@ def check_registration(registration):
     '''Legal registrations are defined in REGISTRATIONS'''
     return registration in REGISTRATIONS
 
-def check_instructor(instructor):
-    '''Checks whether instructor list is of format ['First instructor', 'Second instructor', ...']'''
+def check_instructors(instructors):
+    '''Checks whether instructor list is of format ['First name', 'Second name', ...']'''
     # yaml automatically loads list-like strings as lists
-    return isinstance(instructor, list) and len(instructor) > 0
+    return isinstance(instructors, list) and len(instructors) > 0
+
+def check_lessons(lessons):
+    ''' Checks whether lessons list is of format ['Python','SQL','Git','Bash',...]'''
+    return isinstance(lessons, list) and len(lessons) > 0 and set(lessons).issubset(LESSONS)
+
+def check_helpers(helpers):
+    '''Checks whether helpers list is of format ['First name', 'Second name', ...']'''
+    # yaml automatically loads list-like strings as lists
+    return isinstance(helpers, list) and len(helpers) >= 0
 
 def check_email(email):
     '''A valid email has letters, then an @, followed by letters, followed by a dot, followed by letters.'''
-    return bool(re.match(EMAIL_PATTERN, email))
+    return bool(re.match(EMAIL_PATTERN, email)) and email != DEFAULT_CONTACT_EMAIL
 
 def check_eventbrite(eventbrite):
     '''A valid EventBrite key is 9 or more digits.'''
     return bool(re.match(EVENTBRITE_PATTERN, eventbrite))
 
+def check_redirect(redirect):
+    '''Check that a URL has been provided.'''
+    return bool(re.match(REDIRECT_PATTERN, redirect))
+
 def check_pass(value):
     '''A test that always passes, used for things like addresses.'''
     return True
 
+
 HANDLERS = {
-    'layout' :       (True, check_layout, 'Layout isn\'t "bootcamp".'),
-    'root' :         (True, check_root, 'root can only be ".".'), 
-    'country' :      (True, check_country, 'Country invalid. Please check whether there are spaces inside the country-name.'),
-    'humandate' :    (True, check_humandate, 'Category "humandate" invalid. Please use a three-letter month like "Jan" and four-letter year like "2025".'),
-    'humantime' :    (True, check_humantime, '"humantime" doesn\'t include numbers.'),
-    'startdate' :    (True, check_date, '"startdate" invalid. Must be of format year-month-day, i.e., 2014-01-31.'),
-    'enddate' :      (False, check_date, '"enddate" invalid. Must be of format year-month-day, i.e., 2014-01-31.'),
-    'latlng' :       (True, check_latitude_longitude, 'Lat/long invalid. Check whether it\'s two floating point numbers, separated by a comma.'),
-    'registration' : (True, check_registration, 'registration can only be {0}.'.format(REGISTRATIONS)), 
-    'instructor' :   (True, check_instructor, 'Instructor string isn\'t a valid list of format ["First instructor", "Second instructor",..].'),
-    'contact' :      (True, check_email, 'Email invalid.'),
+    'layout' :       (True,  check_layout, 'layout isn\'t "workshop".'),
+    'root' :         (True,  check_root, 'root can only be ".".'), 
+    'country' :      (True,  check_country, 'country invalid. Please check whether there are spaces inside the country-name.'),
+    'humandate' :    (True,  check_humandate, 'humandate invalid. Please use three-letter months like "Jan" and four-letter years like "2025".'),
+    'humantime' :    (True,  check_humantime, 'humantime doesn\'t include numbers.'),
+    'startdate' :    (True,  check_date, 'startdate invalid. Must be of format year-month-day, i.e., 2014-01-31.'),
+    'enddate' :      (False, check_date, 'enddate invalid. Must be of format year-month-day, i.e., 2014-01-31.'),
+    'latlng' :       (True,  check_latitude_longitude, 'latlng invalid. Check that it is two floating point numbers, separated by a comma.'),
+    'registration' : (True,  check_registration, 'registration can only be {0}.'.format(REGISTRATIONS)), 
+    'instructor' :   (True,  check_instructors, 'instructor list isn\'t a valid list of format ["First instructor", "Second instructor",..].'),
+    'helper' :       (True,  check_helpers, 'helper list isn\'t a valid list of format ["First helper", "Second helper",..].'),
+    'lessons':       (True,  check_lessons, 'invalid lesson'),
+    'contact' :      (True,  check_email, 'contact email invalid or still set to "{0}".'.format(DEFAULT_CONTACT_EMAIL)),
     'eventbrite' :   (False, check_eventbrite, 'Eventbrite key appears invalid.'),
-    'venue' :        (False, check_pass, ''),
-    'address' :      (False, check_pass, '')
+    'redirect' :     (False, check_redirect, 'Redirect address appears invalid.'),
+    'venue' :        (False, check_pass, 'venue name not specified'),
+    'address' :      (False, check_pass, 'address not specified')
 }
 
 # REQUIRED is all required categories.
@@ -183,7 +206,7 @@ def get_header(index_fh):
             header.append(line)
             this_categories.append(line.split(":")[0].strip())
 
-        if "This page is a template for bootcamp home pages." in line:
+        if "This page is a template for workshop home pages." in line:
             sys.stderr.write('WARN:\tYou seem to still have the template header in your index.html. Please remove that.\n')
             sys.stderr.write('\tLook for: "<!-- Remove the block below. -->" in the index.html.\n')
             break # we can stop here - for now, just check header and template header
@@ -209,7 +232,7 @@ def check_file(index_fh):
         if category in header_data:
             is_valid &= check_validity(header_data[category], handler_function, error_message)
         elif required:
-            sys.stderr.write(ERROR.format('index file is missing mandatory key "%s".'))
+            sys.stderr.write(ERROR.format('index file is missing mandatory key "{0}".'.format(category)))
             is_valid &= False
 
     # Do we have double categories?
