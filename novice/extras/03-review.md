@@ -70,7 +70,7 @@ This makes your changes easier to review,
 easier integrate into the project,
 and less likely to cause bugs.
 
-Reviewing code be complex.
+Reviewing code can be complex.
 There are a number of tools that can assist in the task:
 software linters are tools to verify that code complies with a style guide,
 and automatic tests can ensure no old bugs have resurfaced.
@@ -106,7 +106,7 @@ When Dracula likes the changes
 and wants to merge them into his project
 he can do so with the click of a button:
 
-<img src="img/github-merge-ui.png" alt="Mergeing a Pull Request" />
+<img src="img/github-merge-ui.png" alt="Merging a Pull Request" />
 
 Once the changes in a particular branch have been accepted
 and merged into `master` (or some other branch),
