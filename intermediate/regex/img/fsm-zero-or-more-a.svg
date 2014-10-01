@@ -10,11 +10,11 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="461.02127"
-   height="223.95084"
+   height="258.87109"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="fsm-zero-or-more-lower-case-a.svg">
+   sodipodi:docname="fsm-zero-or-more-a.svg">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -24,12 +24,12 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
      inkscape:cx="283.50112"
-     inkscape:cy="103.27871"
+     inkscape:cy="138.19897"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1600"
-     inkscape:window-height="825"
+     inkscape:window-width="1920"
+     inkscape:window-height="1005"
      inkscape:window-x="-9"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
@@ -247,14 +247,14 @@
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#0000a0;fill-opacity:1;stroke:none;font-family:Consolas;-inkscape-font-specification:Consolas"
-       x="278.22003"
-       y="911.4397"
+       x="284.64859"
+       y="975.7254"
        id="text4425"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4427"
-         x="278.22003"
-         y="911.4397">a</tspan></text>
+         x="284.64859"
+         y="975.7254">a</tspan></text>
     <path
        sodipodi:type="arc"
        style="fill:#0000a0;fill-opacity:1;stroke:#0000a0;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
