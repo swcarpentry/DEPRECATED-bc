@@ -94,7 +94,7 @@ safety.txt    setup*     waiver.txt
 {:class="out"}
 
 > #### Necessary But Not Sufficient
-> 
+>
 > The fact that something is marked as executable
 > doesn't actually mean it contains a program of some kind.
 > We could easily mark this HTML file as executable
@@ -126,8 +126,8 @@ On the right side, we have the files'  names.
 Next to them,
 moving left,
 are the times and dates they were last modified.
-Backup systems and other tools use this information in a variety of ways, 
-but you can use it to tell when you (or anyone else with permission) 
+Backup systems and other tools use this information in a variety of ways,
+but you can use it to tell when you (or anyone else with permission)
 last changed a file.
 
 Next to the modification time is the file's size in bytes
@@ -165,7 +165,7 @@ $ ls -l final.grd
 ~~~
 {:class="out"}
 
-Whoops: everyone in the world can read it&mdash;and what's worse, 
+Whoops: everyone in the world can read it&mdash;and what's worse,
 modify it!
 (They could also try to run the grades file as a program,
 which would almost certainly not work.)
@@ -177,7 +177,7 @@ $ chmod u=rw final.grd
 ~~~
 {:class="in"}
 
-The 'u' signals that we're changing the privileges 
+The 'u' signals that we're changing the privileges
 of the user (i.e., the file's owner),
 and `rw` is the new set of permissions.
 A quick `ls -l` shows us that it worked,

@@ -10,13 +10,14 @@ We have gathered several of them here.
 <div class="toc" markdown="1">
 
 1.  [Branching in Git](01-branching.html)
-2.  [Code Review](02-review.html)
-3.  [Manual Pages](03-man.html)
-4.  [Permissions](04-permissions.html)
-5.  [Shell Variables](05-shellvar.html)
-6.  [Working Remotely](06-ssh.html)
-7.  [Exceptions](07-exceptions.html)
-8.  [Numbers](08-numbers.html)
-9.  [Why I Teach](09-why.html)
+2.  [Forking a Repository](02-forking.html)
+3.  [Code Review](03-review.html)
+4.  [Manual Pages](04-man.html)
+5.  [Permissions](05-permissions.html)
+6.  [Shell Variables](06-shellvar.html)
+7.  [Working Remotely](07-ssh.html)
+8.  [Exceptions](08-exceptions.html)
+9.  [Numbers](09-numbers.html)
+10. [Why I Teach](10-why.html)
 
 </div>
