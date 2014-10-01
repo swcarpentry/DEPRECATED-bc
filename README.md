@@ -47,14 +47,14 @@ and so on.
 
 **Table of Contents**
 
-*   [Background](#background)  
-*   [Getting Started](#getting-started)  
-*   [Previewing the Site](#previewing-the-site)  
-*   [Variables](#variables)  
-*   [Website Content](#website-content)  
-*   [Lesson Material](#lesson-material)  
-*   [Building Things](#building-things)  
-*   [Site Map](#site-map)  
+*   [Background](#background)
+*   [Getting Started](#getting-started)
+*   [Previewing the Site](#previewing-the-site)
+*   [Variables](#variables)
+*   [Website Content](#website-content)
+*   [Lesson Material](#lesson-material)
+*   [Building Things](#building-things)
+*   [Site Map](#site-map)
 *   [FAQ](#faq)
 
 Background
@@ -108,7 +108,7 @@ rather than Git itself.
 
     then GitHub doesn't just copy the file over verbatim.
     Instead,
-    it runs the file through a translator called Jekyll
+    it runs the file through a translator called [Jekyll](https://en.wikipedia.org/wiki/Jekyll_%28software%29)
     that looks for specially-formatted commands embedded in the file.
 
 6.  Commands can be embedded in the body of a page.
@@ -116,7 +116,7 @@ rather than Git itself.
     which tells Jekyll to copy the contents of `something.html` into the file being translated;
     this is used to create standard headers and footers for pages.
     Another is `{{variable}}`:
-    when Jekyll see this,
+    when Jekyll sees this,
     it replaces it with the value of `variable`.
     This is used to insert things like a contact email address and the URL for our Twitter account.
 
@@ -403,7 +403,7 @@ Lesson Material
     in directories under `intermediate`.
 3.  Our old lesson material
     is in the `lessons` directory.
-    We plan to retire it in Spring 2014,
+    We plan to retire it in Spring 2014.
 
 As explained [below](#building-things),
 you can use `make` to compile this material in the way that GitHub does
@@ -455,7 +455,7 @@ The most important files and directories are **highlighted**.
 *   _layouts/ - Jekyll page layouts.
 *   **_site/** - output directory (created when building the site locally).
 *   _templates/ - template files for conversion of IPython Notebooks to Markdown.
-    Templates for other conversion systems (e.g., Pandoc) should go here too.
+    Templates for other conversion systems (e.g., Pandoc) should go here, too.
 *   bib.md - bibliography.
 *   bin/ - miscellaneous tools used in building the site.
 *   book.md - generated when compiling the website locally.
@@ -535,7 +535,7 @@ FAQ
     Uninstall pygments.rb 0.5.1 or 0.5.2, install 0.5.0.  For example, here's how you would
     uninstall pygments 0.5.2 and restore version 0.5.0:
 
-    ~~~    
+    ~~~
     $ gem uninstall pygments.rb --version "=0.5.2"
     $ gem install pygments.rb --version "=0.5.0"
     ~~~
@@ -544,7 +544,7 @@ FAQ
     <br/>
     The output of `make check` looks like this:
 
-    ~~~    
+    ~~~
     WARNING: Unrecognized alias: 'output', it will probably have no effect.[TerminalIPythonApp] File not found: u'nbconvert'
     cp tmp/python/novice/01-numpy.html _site/python/novice/01-numpy.html
     cp: cannot stat ‘tmp/python/novice/01-numpy.html’: No such file or directory

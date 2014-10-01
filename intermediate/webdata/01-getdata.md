@@ -6,17 +6,11 @@ root: ../..
 ## Working With Climate Data
 
 
-<div class="">
-<p>To pull everything together, we'll analyze some climate data to find out whether some parts of the world are getting drier faster than others.</p>
-</div>
-
-
 <div class="objectives">
 <h4 id="objectives">Objectives</h4>
 <ul>
 <li>Write Python programs to download data sets using simple REST APIs.</li>
 <li>Explain what CSV is, and read CSV data sets.</li>
-<li>Write simple tests for functions.</li>
 </ul>
 </div>
 
@@ -767,6 +761,8 @@ plt.show()</pre>
 
 <div class="out">
 <pre>
+<img src="../../intermediate/webdata/01-getdata_files/intermediate/webdata/01-getdata_55_0.png">
+
 </pre>
 </div>
 
@@ -793,7 +789,9 @@ plt.show()</pre>
 </div>
 
 <div class="out">
-<pre></pre>
+<pre>
+<img src="../../intermediate/webdata/01-getdata_files/intermediate/webdata/01-getdata_59_0.png">
+</pre>
 </div>
 
 
