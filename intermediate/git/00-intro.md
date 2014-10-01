@@ -5,8 +5,6 @@ title: Introducing Distributed Version Control, and Introducing Yourself to Git
 level: intermediate
 ---
 
-## Introducing Distributed Version Control
-
 Barbara Biologist and Candace Cosmologist have been hired by Universal Missions
 (a space services spinoff from Euphoric State University)
 to figure out where the company should send its next planetary lander.
@@ -70,7 +68,7 @@ the most important thing to learn is not the details of their more obscure comma
 but the fundamentals of how they work,
 and the workflow that they encourage.
 
-## Introducing Yourself to Git
+### Introducing Yourself to Git
 
 The first time you use Git on a new machine,
 you need to run commands to configure a few things.

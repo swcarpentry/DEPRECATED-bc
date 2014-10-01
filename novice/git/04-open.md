@@ -6,7 +6,7 @@ title: Open Science
 <div class="objectives" markdown="1">
 
 #### Objectives
-*   Explain how the GNU Public License (GPL) differs from most other open licenses.
+*   Explain how the GNU General Public License (GPL) differs from most other open licenses.
 *   Explain the four kinds of restrictions that can be combined in a Creative Commons license.
 *   Correctly add licensing and citation information to a project repository.
 *   Outline options for hosting code and data and the pros and cons of each.
@@ -79,14 +79,14 @@ However,
 people who want to work this way need to make some decisions
 about what exactly "open" means in practice.
 
-#### Licensing
+### Licensing
 
 The first question is licensing.
 Broadly speaking,
 there are two kinds of open license for software,
 and half a dozen for data and publications.
 For software,
-people can choose between the [GNU Public License](http://opensource.org/licenses/GPL-3.0) (GPL) on the one hand,
+people can choose between the [GNU General Public License](http://opensource.org/licenses/GPL-3.0) (GPL) on the one hand,
 and licenses like the [MIT](http://opensource.org/licenses/MIT)
 and [BSD](http://opensource.org/licenses/BSD-2-Clause) licenses on the other.
 All of these licenses allow unrestricted sharing and modification of programs,
@@ -144,11 +144,10 @@ without needing to cite the original
 or restrict further re-use.
 The table below shows how the six Creative Commons licenses and PD relate to one another:
 
+<!--- Replace the caption with colspan when it was supported by pandoc:
+https://github.com/jgm/pandoc/issues/1340 -->
 <table border="1">
-  <tr>
-    <td></td>
-    <td colspan="7" align="center">Licenses that can be used for derivative work or adaptation</td>
-  </tr>
+  <caption>Licenses that can be used for derivative work or adaptation</caption>
   <tr>
     <td>Original work</td> <td>by</td> <td>by-nc</td> <td>by-nc-nd</td> <td>by-nc-sa</td> <td>by-nd</td> <td>by-sa</td> <td>pd</td>
   </tr>
@@ -202,7 +201,7 @@ Greg Wilson: "Software Carpentry: Lessons Learned". arXiv:1307.5448, July 2013.
 ~~~
 </div>
 
-#### Hosting
+### Hosting
 
 The second big question for groups that want to open up their work
 is where to host their code and data.

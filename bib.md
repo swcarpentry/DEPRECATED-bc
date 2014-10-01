@@ -3,7 +3,7 @@ layout: lesson
 root: .
 title: Recommended Reading
 ---
-## Books
+### Books
 
 Susan A. Ambrose, Michael W. Bridges, Michele DiPietro, Marsha C. Lovett, and Marie K. Norman: *[How Learning Works: Seven Research-Based Principles for Smart Teaching](http://www.amazon.com/How-Learning-Works-Research-Based-Principles/dp/0470484101/)*. Jossey-Bass, 2010, 978-0470484104.
 :   The best single-volume guide to evidence-based practices in education around.
@@ -23,7 +23,7 @@ Andy Oram and Greg Wilson (eds): *Making Software: What Really Works, and Why We
 Deborah S. Ray and Eric J. Ray: *Unix and Linux: Visual QuickStart Guide*. Peachpit Press, 0321636783, 2009.
 :   A gentle introduction to Unix, with many examples.
 
-## Papers
+### Papers
 
 Paul F. Dubois: "Maintaining Correctness in Scientific Programs". *Computing in Science & Engineering*, May–June 2005.
 :   Shows how several good programming practices fit together to create defense in depth, so that errors missed by one will be caught by another.

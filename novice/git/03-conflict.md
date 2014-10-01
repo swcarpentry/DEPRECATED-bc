@@ -22,8 +22,7 @@ by giving us tools to [resolve](../../gloss.html#resolve) overlapping changes.
 To see how we can resolve conflicts,
 we must first create one.
 The file `mars.txt` currently looks like this
-in both local copies of our `planets` repository
-(the one in our home directory and the one in `/tmp`):
+in both partners' copies of our `planets` repository:
 
 ~~~
 $ cat mars.txt
@@ -36,7 +35,7 @@ But the Mummy will appreciate the lack of humidity
 ~~~
 {:class="out"}
 
-Let's add a line to the copy under our home directory:
+Let's add a line to **one partner's copy** only:
 
 ~~~
 $ nano mars.txt
@@ -47,7 +46,7 @@ $ cat mars.txt
 Cold and dry, but everything is my favorite color
 The two moons may be a problem for Wolfman
 But the Mummy will appreciate the lack of humidity
-This line added to our home copy
+This line added to Sarah's copy
 ~~~
 {:class="out"}
 
@@ -78,12 +77,8 @@ To https://github.com/vlad/planets
 ~~~
 {:class="out"}
 
-Our repositories are now in this state:
-
-<img src="img/git-after-first-conflicting-change.svg" alt="After Making First Change" />
-
-Now let's switch to the copy under `/tmp`
-and make a different change there
+Now let's have the other partner
+make a different change to their copy
 *without* updating from GitHub:
 
 ~~~
@@ -96,7 +91,7 @@ $ cat mars.txt
 Cold and dry, but everything is my favorite color
 The two moons may be a problem for Wolfman
 But the Mummy will appreciate the lack of humidity
-We added a different line in the temporary copy
+We added a different line in the other copy
 ~~~
 {:class="out"}
 
@@ -104,11 +99,11 @@ We can commit the change locally:
 
 ~~~
 $ git add mars.txt
-$ git commit -m "Adding a line in the temporary copy"
+$ git commit -m "Adding a line in my copy"
 ~~~
 {:class="in"}
 ~~~
-[master 07ebc69] Adding a line in the temporary copy
+[master 07ebc69] Adding a line in my copy
  1 file changed, 1 insertion(+)
 ~~~
 {:class="out"}
@@ -130,10 +125,12 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 ~~~
 {:class="out"}
 
+<img src="img/conflict.svg" alt="The conflicting changes" />
+
 Git detects that the changes made in one copy overlap with those made in the other
 and stops us from trampling on our previous work.
 What we have to do is pull the changes from GitHub,
-[merge](../../gloss.html#repository-merge) them into the copy we're currently working in,
+[merge](../../gloss.html#merge) them into the copy we're currently working in,
 and then push that.
 Let's start by pulling:
 
@@ -166,9 +163,9 @@ Cold and dry, but everything is my favorite color
 The two moons may be a problem for Wolfman
 But the Mummy will appreciate the lack of humidity
 <<<<<<< HEAD
-We added a different line in the temporary copy
+We added a different line in the other copy
 =======
-This line added to our home copy
+This line added to Sarah's copy
 >>>>>>> dabb4c8c450e8475aee9b14b4383acc99f42af1d
 ~~~
 {:class="out"}
@@ -181,10 +178,8 @@ identifies the revision we've just downloaded.)
 
 It is now up to us to edit this file to remove these markers
 and reconcile the changes.
-We can do anything we want:
-keep the change in this branch,
-keep the change made in the other,
-write something new to replace both,
+We can do anything we want: keep the change made in the local repository, keep
+the change made in the remote repository, write something new to replace both,
 or get rid of the change entirely.
 Let's replace both so that the file looks like this:
 
@@ -229,11 +224,7 @@ $ git commit -m "Merging changes from GitHub"
 ~~~
 {:class="out"}
 
-Our repositories now look like this:
-
-<img src="img/git-after-second-conflicting-change.svg" alt="After Making Second (Conflicting) Change" />
-
-so we push our changes to GitHub:
+Now we can push our changes to GitHub:
 
 ~~~
 $ git push origin master
@@ -250,16 +241,11 @@ To https://github.com/vlad/planets.git
 ~~~
 {:class="out"}
 
-to get this:
-
-<img src="img/git-after-merging.svg" alt="After Merging Changes Locally" />
-
 Git keeps track of what we've merged with what,
 so we don't have to fix things by hand again
-if we switch back to the repository in our home directory and pull from GitHub:
+when the collaborator who made the first change pulls again:
 
 ~~~
-$ cd ~/planets
 $ git pull origin master
 ~~~
 {:class="in"}
@@ -291,7 +277,7 @@ We removed the conflict on this line
 ~~~
 {:class="out"}
 
-We don't need to merge again because GitHub knows someone has already done that.
+We don't need to merge again because Git knows someone has already done that.
 
 Version control's ability to merge conflicting changes
 is another reason users tend to divide their programs and papers into multiple files
