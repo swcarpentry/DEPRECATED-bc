@@ -190,6 +190,6 @@ alias backup=/bin/zback -v --nostir -R 20000 $HOME $BACKUP_DIR
 
 As you can see,
 aliases can save us a lot of typing, and hence a lot of typing mistakes.
-You can find interesting suggestions for other aliases 
-and other bash tricks by searching for "sample bashrc" 
+You can find interesting suggestions for other aliases
+and other bash tricks by searching for "sample bashrc"
 in your favorite search engine.

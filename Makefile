@@ -72,6 +72,7 @@ ALL_SRC = \
         $(wildcard intermediate/regex/*.md) \
 	$(wildcard intermediate/python/*.md) \
 	$(wildcard intermediate/doit/*.md) \
+	$(wildcard intermediate/webdata/*.md) \
 	$(wildcard slides/*.html) \
 	$(MOST_SRC)
 
