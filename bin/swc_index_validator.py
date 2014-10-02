@@ -203,8 +203,10 @@ def get_header(index_fh):
             header_counter += 1
             continue
         if header_counter != 2:
-            header.append(line)
-            this_categories.append(line.split(":")[0].strip())
+            # Work around PyYAML Ticket #114
+            if not line.startswith('#'):
+                header.append(line)
+                this_categories.append(line.split(":")[0].strip())
 
         if "This page is a template for workshop home pages." in line:
             sys.stderr.write('WARN:\tYou seem to still have the template header in your index.html. Please remove that.\n')
