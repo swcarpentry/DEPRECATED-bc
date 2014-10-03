@@ -195,16 +195,16 @@ plot_dist(dat[1:5, 10], threshold = 10)  # samples (rows) 1-5 on day (column) 10
 ```
 
   + One of your collaborators prefers to see the distributions of the larger vectors as a histogram instead of as a boxplot.  Edit the function   
-  `plot_dist` to create a boxplot if the length of the vector is greater than a specified threshold and if a boolean parameter is set to `TRUE`. If the 
-  vector is longer than the threshold and a boolean parameter is set to `FALSE` then create a histogram.  If the length of the vector is shorter than the 
-  threshold then create a stripchart. To do this you'll need to add a new parameter to the function, combine some logical operators, and use the `hist` 
-  command in R.
+  `plot_dist` to create a boxplot if the length of the vector is greater than a specified threshold and if a boolean argument is set to `TRUE`. If the 
+  vector is longer than the threshold and a boolean argument is set to `FALSE` then create a histogram.  If the length of the vector is shorter than the 
+  threshold then create a stripchart. To do this you'll need to add a new argument, which has a default value of `TRUE`, to the function, combine some 
+  logical operators, and use the `hist` command in R.  
 
 ```{r echo=FALSE}
-plot_dist <- function(x, threshold, boxplot = TRUE) {
-  if (length(x) > threshold & boxplot) {
+plot_dist <- function(x, threshold, use_boxplot = TRUE) {
+  if (length(x) > threshold & use_boxplot) {
     boxplot(x)
-  } else if (length(x) > threshold & !boxplot) {
+  } else if (length(x) > threshold & !use_boxplot) {
     hist(x)
   } else {
     stripchart(x)
@@ -214,8 +214,8 @@ plot_dist <- function(x, threshold, boxplot = TRUE) {
 
 ```{r conditional-challenge-hist}
 dat <- read.csv("inflammation-01.csv", header = FALSE)
-plot_dist(dat[, 10], threshold = 10, boxplot = TRUE)  # day (column) 10 - create boxplot
-plot_dist(dat[, 10], threshold = 10, boxplot = FALSE)  # day (column) 10 - create histogram
+plot_dist(dat[, 10], threshold = 10, use_boxplot = TRUE)  # day (column) 10 - create boxplot
+plot_dist(dat[, 10], threshold = 10, use_boxplot = FALSE)  # day (column) 10 - create histogram
 plot_dist(dat[1:5, 10], threshold = 10)  # samples (rows) 1-5 on day (column) 10
 ```
 </div>
