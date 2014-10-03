@@ -157,23 +157,51 @@ or the next person who reads it won't be able to understand what's going on.
 
 #### Challenges 
 
-1. In Matlab, we concatenate strings by putting them into an array or using the `strcat` function:
+1. In Matlab, we concatenate strings by putting them into an array or using the
+   `strcat` function:
 
-        disp(['abra', 'cad', 'abra'])
-        abracadabra 
+   ~~~
+   disp(['abra', 'cad', 'abra'])
+   ~~~
+   {:class="in"}
+   ~~~
+   abracadabra 
+   ~~~
+   {:class="out"}
 
-        disp(strcat('a', 'b'))
-        ab
+   ~~~
+   disp(strcat('a', 'b'))
+   ~~~
+   {:class="in"}
+   ~~~
+   ab
+   ~~~
+   {:class="out"}
 
-    Write a function called `fence` that takes two parameters, `original` and `wrapper` and appends `wrapper` before and after `original`:
+   Write a function called `fence` that takes two parameters, `original` and
+   `wrapper` and appends `wrapper` before and after `original`:
 
-        disp(fence('name', '*'))
-        *name*
+   ~~~
+   disp(fence('name', '*'))
+   ~~~
+   {:class="in"}
+   ~~~
+   *name*
+   ~~~
+   {:class="out"}
 
-1. If the variable `s` refers to a string, then `s(1)` is the string's first character and `s(end)` is its last. Write a function called `outer` that returns a string made up of just the first and last characters of its input: 
+1. If the variable `s` refers to a string, then `s(1)` is the string's first
+   character and `s(end)` is its last. Write a function called `outer` that returns
+   a string made up of just the first and last characters of its input: 
 
-        disp(outer('helium'))
-        hm
+   ~~~
+   disp(outer('helium'))
+   ~~~
+   {:class="in"}
+   ~~~
+   hm
+   ~~~
+   {:class="out"}
 
 ### The Call Stack
 
@@ -331,15 +359,21 @@ DATA centered around the value.
 {:class="out"}
 
 #### Challenges
-1. Write a function called `rescale` that takes an array as input and returns an array of the same shape with its values scaled to lie in the range 0.0 to 1.0. (If L and H are the lowest and highest values in the input array, respectively, then the function should map a value v to (v - L)/(H - L).) Be sure to give the function a comment block explaining its use.
 
-1. Run `help linspace` to see how to use this function to generate regularly-spaced values. Use arrays like this to test your `rescale` function.
+1. Write a function called `rescale` that takes an array as input and returns an
+   array of the same shape with its values scaled to lie in the range 0.0 to 1.0.
+   (If L and H are the lowest and highest values in the input array, respectively,
+   then the function should map a value v to (v - L)/(H - L).) Be sure to give the
+   function a comment block explaining its use.
+
+1. Run `help linspace` to see how to use this function to generate
+   regularly-spaced values. Use arrays like this to test your `rescale` function.
 
 1. Write a function `run_analysis` that accepts a filename
-as parameter, and displays the three graphs produced in the
-previous lesson, i.e., `run_analysis('inflammation-01.csv')`
-should produce the corresponding graphs for the first
-data set. Be sure to give your function help text.
+   as parameter, and displays the three graphs produced in the
+   previous lesson, i.e., `run_analysis('inflammation-01.csv')`
+   should produce the corresponding graphs for the first
+   data set. Be sure to give your function help text.
 
 <div class="keypoints" markdown="1">
 #### Key Points
