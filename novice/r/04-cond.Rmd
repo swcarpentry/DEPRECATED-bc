@@ -193,6 +193,27 @@ dat <- read.csv("inflammation-01.csv", header = FALSE)
 plot_dist(dat[, 10], threshold = 10)  # day (column) 10
 plot_dist(dat[1:5, 10], threshold = 10)  # samples (rows) 1-5 on day (column) 10
 ```
+
+  + One of your collaborators prefers to see the distributions of the larger vectors as a histogram instead of as a boxplot.  In order to choose between a histogram and a boxplot we will edit the function `plot_dist` and add an additional argument `use_boxplot`.  By defualt we will set `use_boxplot` to `TRUE` which will create a boxplot when the vector is longer than `threshold`.  When `use_boxplot` is set to `FALSE`, `plot_dist` will instead plot a histogram for the larger vectors.  As before, if the length of the vector is shorter than `threshold`, `plot_dist` will create a stripchart.  A histogram is made with the `hist` command in R.  
+
+```{r echo=FALSE}
+plot_dist <- function(x, threshold, use_boxplot = TRUE) {
+  if (length(x) > threshold & use_boxplot) {
+    boxplot(x)
+  } else if (length(x) > threshold & !use_boxplot) {
+    hist(x)
+  } else {
+    stripchart(x)
+  }
+}
+```
+
+```{r conditional-challenge-hist}
+dat <- read.csv("inflammation-01.csv", header = FALSE)
+plot_dist(dat[, 10], threshold = 10, use_boxplot = TRUE)  # day (column) 10 - create boxplot
+plot_dist(dat[, 10], threshold = 10, use_boxplot = FALSE)  # day (column) 10 - create histogram
+plot_dist(dat[1:5, 10], threshold = 10)  # samples (rows) 1-5 on day (column) 10
+```
 </div>
 
 ### Saving automatically generated figures
