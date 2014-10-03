@@ -11,13 +11,13 @@ see [this wiki page](https://github.com/swcarpentry/bc/wiki/Configuration-Proble
 
 #### Teaching Notes
 
-*   For bootcamps that extend over more than two days
+*   For workshops that extend over more than two days
     (e.g., four afternoons spread over two weeks),
     it's a good idea to email the learners at the end of each day with a summary of what was taught
     (with links to the relevant online notes).
     This allows absent learners to catch up before the next session,
     and is also a great opporunity to present the lessons of the day
-    in the context of the entire bootcamp.
+    in the context of the entire workshop.
 
 *   Point learners at [http://software-carpentry.org/v5/](http://software-carpentry.org/v5/),
     which is the permanent home of the current learning materials,
@@ -40,9 +40,9 @@ see [this wiki page](https://github.com/swcarpentry/bc/wiki/Configuration-Proble
     (b) has at least one badged instructor on the teaching roster,
     but are happy to discuss specifics.
 
-*   Plan for the first 30-60 minutes of the bootcamp to be spent on installation and setup,
+*   Plan for the first 30-60 minutes of the workshop to be spent on installation and setup,
     because it's going to happen anyway.
-    Running a pre-bootcamp "help desk" doesn't really affect this:
+    Running a pre-workshop "help desk" doesn't really affect this:
     the people who are most likely to have installation problems
     probably won't show up.
     (We fantasize occasionally about turning people away if they haven't installed software,
@@ -66,9 +66,9 @@ see [this wiki page](https://github.com/swcarpentry/bc/wiki/Configuration-Proble
     It only takes a couple of minutes to sort through these,
     and it's a quick way to find out how things are actually going.
 
-*   At the very end of the bootcamp,
+*   At the very end of the workshop,
     ask learners to alternately give one good point or one bad one
-    about the entire bootcamp. 
+    about the entire workshop. 
     Write these down on the whiteboard as they come in,
     and do not allow repeats
     (i.e., every point has to be new).
@@ -95,7 +95,7 @@ see [this wiki page](https://github.com/swcarpentry/bc/wiki/Configuration-Proble
     to take notes in the Etherpad as well.
     This reduces the effort per learner,
     gives you a chance to see what they think you're saying,
-    and provides a record after the bootcamp of what was actually taught.
+    and provides a record after the workshop of what was actually taught.
 
 *   When the co-instructor isn't teaching,
     she can answer questions on the Etherpad
@@ -105,11 +105,11 @@ see [this wiki page](https://github.com/swcarpentry/bc/wiki/Configuration-Proble
     It's less disruptive to the "live" instructor than interjecting with these points,
     but allows the attendees to get the shared expertise from both instructors.
 
-*   For bootcamps that extend over more than two days (e.g. four afternoons spread over two weeks),
+*   For workshops that extend over more than two days (e.g. four afternoons spread over two weeks),
     it's a good idea to email the learners at the end of each day with a summary of what was taught
     (with links to the relevant online notes).
     Not only does this allow absent learners to catch up before the next session,
-    it's also a great opporunity to present the lessons of the day in the context of the entire bootcamp.
+    it's also a great opporunity to present the lessons of the day in the context of the entire workshop.
 
 *   The long-form notes are intended as a script for instructors
     and as self-study material for learners.
@@ -120,7 +120,7 @@ see [this wiki page](https://github.com/swcarpentry/bc/wiki/Configuration-Proble
     and makes it easier for you to improvise in response to their questions.
 
 *   Point learners at the online versions of the long-form notes
-    (either on your bootcamp's home page
+    (either on your workshop's home page
     or at [http://software-carpentry.org/v5/](http://software-carpentry.org/v5/)
     *after* the lesson is done:
     if you do it before the lesson,
@@ -135,7 +135,7 @@ see [this wiki page](https://github.com/swcarpentry/bc/wiki/Configuration-Proble
     or because they have a whiteboard or flipchart handy.
 
 *   There are (at least) three ways to get data files to learners at the start of a lesson:
-    1.  Create a zip file, add it to your bootcamp's repository, and put a link to it in your bootcamp's `index.html` page
+    1.  Create a zip file, add it to your workshop's repository, and put a link to it in your workshop's `index.html` page
         so that they can click, download, and unzip.
         This uses something everyone already understands,
         but does assume they know how to navigate from their download directory to their working (lesson) directory,
@@ -166,8 +166,7 @@ see [this wiki page](https://github.com/swcarpentry/bc/wiki/Configuration-Proble
 
 #### Pitfalls
 
-
-Instructing at a bootcamp isn't trivial.
+Instructing at a workshop isn't trivial.
 The most important thing is to remember that
 no lesson plan survives contact with the audience.
 Whether it's the network going down
@@ -180,7 +179,7 @@ learners' questions, puzzled looks, and sighs of impatience.
 **Allow enough time for setup.**
 
 In almost all cases,
-learners want to use their own laptops during bootcamps
+learners want to use their own laptops during workshops
 so that they leave with a working environment set up.
 Even if you ask attendees to prepare beforehand,
 and give them detailed instructions,
@@ -189,7 +188,7 @@ or will have run into problems that they're not yet able to fix.
 You should therefore schedule at least 20 minutes for
 <em>checking the learners' machines</em>
 at the beginning of the first day.
-Some bootcamps start early on the first day to allow time to
+Some workshops start early on the first day to allow time to
 troubleshoot setup problems.
 
 **Don't ignore your learners.**
@@ -256,7 +255,7 @@ The feedback you get from learners on sticky notes or through
 surveys is pointless if you don't pay attention to it 
 (or worse, if you explain it away).
 There's no point collecting feedback 
-during and after each bootcamp 
+during and after each workshop 
 if you don't change what and how you teach to reflect it.
 
 **Tell learners "why".**  
@@ -291,7 +290,7 @@ Does campus security know you're using the room over the weekend?
 
 **Don't let your learners ignore each other.**
 
-Software Carpentry bootcamps are a great networking opportunity
+Software Carpentry workshops are a great networking opportunity
 for our learners (and for us, too).
 Get to know your learners by name,
 have them work in pairs, and get them to mix up the pairs

@@ -18,7 +18,7 @@ so that we can repeat several operations with a single command.
 * Explain a Matlab function file
 * Define a function that takes parameters
 * Test and debug a function.
-* Explain what a call stack is, and trace changes to the call stack as 
+* Explain what a call stack is, and trace changes to the call stack as
     functions ar ecalled.
 * Set default values for function parameters.
 * Explain why we should divide programs into small, single-purpose functions.
@@ -37,12 +37,12 @@ end
 ~~~
 {:class="in"}
 
-A Matlab function *must* be saved in a text file with a `.m` extension. 
+A Matlab function *must* be saved in a text file with a `.m` extension.
 The name of that file must be the same as the function defined
 inside it. So, you will need to save the above code in a file called
 `fahr_to_kelvin.m`.
 
-<!-- FIXME: 00-basics lesson should talk about .m files, and 
+<!-- FIXME: 00-basics lesson should talk about .m files, and
     the variable `ans` -->
 
 <!-- FIXME: Nothing about Comments? -->
@@ -56,19 +56,19 @@ The first line of our function:
 function ktemp = fahr_to_kelvin(ftemp)
 ~~~
 
-is called the *function definition*, and it declares that we're 
-writing a function named `fahr_to_kelvin`, that accepts a single parameter, 
-`ftemp`, and outputs a  single value, `ktemp`.  Anything following the 
+is called the *function definition*, and it declares that we're
+writing a function named `fahr_to_kelvin`, that accepts a single parameter,
+`ftemp`, and outputs a  single value, `ktemp`.  Anything following the
 function definition line is called the *body* of the
 function. The keyword `end` marks the end of the function body, and the
 function won't know about any code after `end`.
 
 Just as we saw with scripts, functions must be _visible_ to MATLAB, i.e.,
-a file containing a function has to be placed in a directory that 
+a file containing a function has to be placed in a directory that
 MATLAB knows  about. The most convenient of those directories is the
-current working directory. 
+current working directory.
 
-We can call our function from the command line 
+We can call our function from the command line
 like any other MATLAB function:
 
 ~~~
@@ -97,13 +97,14 @@ output values.
 ### Composing Functions
 
 Now that we've seen how to turn Fahrenheit to Kelvin, it's easy to turn
-Kelvin to Celsius. 
+Kelvin to Celsius.
 
 ~~~
 % file kelvin_to_celsius.m
 
 function ctemp = kelvin_to_celsius(ktemp)
     ctemp = ktemp - 273.15;
+end
 ~~~
 {:class="in"}
 
@@ -149,15 +150,63 @@ ans = -273.15
 This is our first taste of how larger programs are built:
 we define basic operations,
 then combine them in ever-large chunks to get the effect we want.
-Real-life functions will usually be larger than the ones shown 
+Real-life functions will usually be larger than the ones shown
 here---typically half a dozen to a few dozen lines---but
 they shouldn't ever be much longer than that,
 or the next person who reads it won't be able to understand what's going on.
 
+#### Challenges 
+
+1. In Matlab, we concatenate strings by putting them into an array or using the
+   `strcat` function:
+
+   ~~~
+   disp(['abra', 'cad', 'abra'])
+   ~~~
+   {:class="in"}
+   ~~~
+   abracadabra 
+   ~~~
+   {:class="out"}
+
+   ~~~
+   disp(strcat('a', 'b'))
+   ~~~
+   {:class="in"}
+   ~~~
+   ab
+   ~~~
+   {:class="out"}
+
+   Write a function called `fence` that takes two parameters, `original` and
+   `wrapper` and appends `wrapper` before and after `original`:
+
+   ~~~
+   disp(fence('name', '*'))
+   ~~~
+   {:class="in"}
+   ~~~
+   *name*
+   ~~~
+   {:class="out"}
+
+1. If the variable `s` refers to a string, then `s(1)` is the string's first
+   character and `s(end)` is its last. Write a function called `outer` that returns
+   a string made up of just the first and last characters of its input: 
+
+   ~~~
+   disp(outer('helium'))
+   ~~~
+   {:class="in"}
+   ~~~
+   hm
+   ~~~
+   {:class="out"}
+
 ### The Call Stack
 
 
-Let's take a closer look at what happens when we call 
+Let's take a closer look at what happens when we call
 `fahr_to_celcius(32.0)`.
 To make things clearer, we'll start by putting the initial value 32.0
 in a variable and store the final result in one as well:
@@ -169,7 +218,7 @@ final = fahr_to_celcius(original);
 {:class="in"}
 
 The diagram below shows what memory looks like after the
-first line has beene executed:
+first line has been executed:
 
 <!-- FIXME: Writeup about Call Stacks -->
 
@@ -178,14 +227,15 @@ first line has beene executed:
 ### Testing and Documentation
 
 Once we start putting things in functions so that we can
-re-use them, we need to start testing that those functions are 
+re-use them, we need to start testing that those functions are
 working correctly.
-To see how to do this, let's write a function to center a 
+To see how to do this, let's write a function to center a
 dataset around a particular value:
 
 ~~~
 function out = center(data, desired)
     out = (data - mean(data)) + desired
+end
 ~~~
 {:class="in"}
 
@@ -279,12 +329,13 @@ how to use it.
 function out = center(data, desired)
     %   Center data around a desired value.
     %
-    %       center(DATA, DESIRED) 
+    %       center(DATA, DESIRED)
     %
     %   Returns a new array containing the values in
     %   DATA centered around the value.
 
     out = (data  - mean(data)) + desired;
+end
 ~~~
 {:class="in"}
 
@@ -300,9 +351,45 @@ help center
 ~~~
 Center data around a desired value.
 
-    center(DATA, DESIRED) 
+    center(DATA, DESIRED)
 
 Returns a new array containing the values in
 DATA centered around the value.
 ~~~
 {:class="out"}
+
+#### Challenges
+
+1. Write a function called `rescale` that takes an array as input and returns an
+   array of the same shape with its values scaled to lie in the range 0.0 to 1.0.
+   (If L and H are the lowest and highest values in the input array, respectively,
+   then the function should map a value v to (v - L)/(H - L).) Be sure to give the
+   function a comment block explaining its use.
+
+1. Run `help linspace` to see how to use this function to generate
+   regularly-spaced values. Use arrays like this to test your `rescale` function.
+
+1. Write a function `run_analysis` that accepts a filename
+   as parameter, and displays the three graphs produced in the
+   previous lesson, i.e., `run_analysis('inflammation-01.csv')`
+   should produce the corresponding graphs for the first
+   data set. Be sure to give your function help text.
+
+<div class="keypoints" markdown="1">
+#### Key Points
+
+* Define a function in a file called `function_name.m`.
+* The first line of a function is the definition line and
+is most generally written as
+`function [out1, out2 ..] = function_name(in1, in2 ...)`
+* The body of a function must end with the keyword `end`.
+* Use `help function_name` to get information on how to use a function.
+* Unbroken comment lines below the function definition line are displayed
+as help text.
+
+</div>
+
+### Next Steps
+
+<!--FIXME: need next steps here -->
+

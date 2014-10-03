@@ -145,16 +145,16 @@ $ hg heads
 ~~~
 {:class="in"}
 ~~~
-changeset:   6:9f82bc5a1e80
+changeset:   6:721158ca243d
 user:        Vlad Dracula <vlad@tran.sylvan.ia>
-date:        Tues Apr 15 12:40:33 2014 -0400
+date:        Sun May 18 12:40:33 2014 -0400
 summary:     Adding a line in our home copy
 
-changeset:   5:7e1a537895e5
+changeset:   5:9f82bc5a1e80
 tag:         tip
 parent:      4:2e9c23a9090d
 user:        Vlad Dracula <vlad@tran.sylvan.ia>
-date:        Tues Apr 15 12:41:10 2014 -0400
+date:        Sun May 18 12:41:10 2014 -0400
 summary:     Adding a line in the temporary copy
 ~~~
 {:class="out"}
@@ -195,7 +195,7 @@ o  changeset:   3:4f37bac61e73
 
 With the graph, we can see more details at a glance. The `@` marker
 shows the commit we're currently standing on, `5:9f82bc5a1e80`. We
-have just pulled changeset `6:7e1a537895e5`, which added a head to our
+have just pulled changeset `6:721158ca243d`, which added a head to our
 clone, because it was also based off `4:2e9c23a9090d`. Herein lies the
 potential conflict, since two different changesets branched off from
 the same starting commit.
@@ -204,16 +204,19 @@ It is important to note something about revision numbers here (the `5`
 and the `6` before the `:`). The same commits may have different
 revision numbers in different clones. These revision numbers are
 assigned in the order that a clone acquires new commits. On the other
-hand, the identifiers (`9f82bc5a1e80` and `7e1a537895e5` in this case)
+hand, the identifiers (`9f82bc5a1e80` and `721158ca243d` in this case)
 uniquely identify the changeset no matter in which clone it is. When
 we communicate with other people, it is important to use identifiers.
 When we work alone, however, we may use revision numbers as a
 convenience that is local to a clone.
 
-Let us now proceed to resolve this situation by merging the two heads:
+Let us now proceed to resolve this situation by merging the two heads.
+To do that we'll use the [`kdiff3`](http://kdiff3.sourceforge.net/)
+merge tool which gives us an interface that makes it easier to
+understand what it happening.
 
 ~~~
-$ hg merge
+$ hg merge --tool=kdiff3
 ~~~
 {:class="in"}
 ~~~
@@ -221,24 +224,22 @@ merging mars.txt
 ~~~
 {:class="out"}
 
-Mercurial will now open a merge tool. On Windows this defaults to
-kdiff3 and will look like this:
+It may take a few seconds for Mercurial to pass the necessary information
+to `kdiff3`, but soon you should see a window that looks like this:
 
 <img src="img/hg-kdiff3-conflict-windows.png" alt="Kdiff3 on Windows" />
-
-On Mac OS X...
 
 The pane labelled `base` refers to how this file looked like at
 revision `4`, where our conflicting revisions `5` and `6` are based
 on. Since we were standing on `5` when we started the merge, that is
 the pane labelled `local`. We're attempting to merge this with
-revision `6`, which is labelled `other`. The merge tool, kdiff3 (...
-or on Mac OS X ...) has buttons for moving from one conflict to
+revision `6`, which is labelled `other`. kdiff3
+has buttons for moving from one conflict to
 another. In this case, there is only one conflict. At each conflict we
 can select either the `local` or the `other` change or to write
 something completely different in the result at the bottom.
 
-It is now up to us to edit this file to remove these markers and
+It is now up to us to edit this file to
 reconcile the changes. We can do anything we want: keep the change in
 this branch, keep the change made in the other, write something new to
 replace both, or get rid of the change entirely. Let's resolve the
@@ -246,10 +247,8 @@ conflict so it looks like this:
 
 <img src="img/hg-kdiff3-conflict-windows-resolved.png" alt="Resolving on Windows" />
 
-Or this, on Mac OS X...
-
 Once we've finished merging, let us inspect the working directory
-before we finalise the merge:
+before we finalize the merge:
 
 ~~~
 $ hg summary

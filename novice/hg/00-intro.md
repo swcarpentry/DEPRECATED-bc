@@ -3,6 +3,13 @@ layout: lesson
 root: ../..
 title: Introducing Version Control
 ---
+<div class="objectives" markdown="1">
+
+#### Objectives
+* Explain when and why you should use version control
+
+</div>
+
 Wolfman and Dracula have been hired by Universal Missions
 (a space services spin-off of Euphoric State University)
 to figure out where the company should send its next planetary lander.
