@@ -22,7 +22,7 @@ She has 300 samples in all, and now needs to:
     that will measure the relative abundance of 300 different proteins.
     The machine's output for a single sample is
     a file with one line for each protein.
-2.  Calculate statistics for each of the proteins separately
+2.  Calculate statistics (mean, center, spread, shape, unusual features, etc.) for each of the proteins separately
     using a program her supervisor wrote called `goostat`.
 3.  Compare the statistics for each protein
     with corresponding statistics for each other protein
