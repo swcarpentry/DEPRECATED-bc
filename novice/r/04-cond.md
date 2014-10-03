@@ -229,20 +229,20 @@ plot_dist(dat[, 10], threshold = 10)  # day (column) 10</code></pre>
 <img src="figure/04-cond-conditional-challenge2.png" title="plot of chunk conditional-challenge" alt="plot of chunk conditional-challenge" style="display: block; margin: auto;" />
 
   + One of your collaborators prefers to see the distributions of the larger vectors as a histogram instead of as a boxplot.  Edit the function   
-  `plot_dist` to create a boxplot if the length of the vector is greater than a specified threshold and if a boolean parameter is set to `TRUE`. If the 
-  vector is longer than the threshold and a boolean parameter is set to `FALSE` then create a histogram.  If the length of the vector is shorter than the 
-  threshold then create a stripchart. To do this you'll need to add a new parameter to the function, combine some logical operators, and use the `hist` 
-  command in R.
+  `plot_dist` to create a boxplot if the length of the vector is greater than a specified threshold and if a boolean argument is set to `TRUE`. If the 
+  vector is longer than the threshold and a boolean argument is set to `FALSE` then create a histogram.  If the length of the vector is shorter than the 
+  threshold then create a stripchart. To do this you'll need to add a new argument, which has a default value of `TRUE`, to the function, combine some 
+  logical operators, and use the `hist` command in R.  
 
 
 
 
 <pre class='in'><code>dat <- read.csv("inflammation-01.csv", header = FALSE)
-plot_dist(dat[, 10], threshold = 10, boxplot = TRUE)  # day (column) 10 - create boxplot</code></pre>
+plot_dist(dat[, 10], threshold = 10, use_boxplot = TRUE)  # day (column) 10 - create boxplot</code></pre>
 
 <img src="figure/04-cond-conditional-challenge-hist1.png" title="plot of chunk conditional-challenge-hist" alt="plot of chunk conditional-challenge-hist" style="display: block; margin: auto;" />
 
-<pre class='in'><code>plot_dist(dat[, 10], threshold = 10, boxplot = FALSE)  # day (column) 10 - create histogram</code></pre>
+<pre class='in'><code>plot_dist(dat[, 10], threshold = 10, use_boxplot = FALSE)  # day (column) 10 - create histogram</code></pre>
 
 <img src="figure/04-cond-conditional-challenge-hist2.png" title="plot of chunk conditional-challenge-hist" alt="plot of chunk conditional-challenge-hist" style="display: block; margin: auto;" />
 
