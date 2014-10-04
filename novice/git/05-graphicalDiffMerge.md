@@ -45,8 +45,8 @@ To install _DiffMerge_ for Windows, OS X, or Linux go to [http://https://sourceg
 
 ### Integration
 
-To configure Git to use _DiffMerge_, we have to update our `.gitconfig`. 
-To do this we simply have to enter a few commands into our command line. 
+To configure Git to use _DiffMerge_, we have to update our `.gitconfig` (similar to when we first used `.gitconfig` when we initially set up Git). 
+To do this we simply have to enter a few commands into our command line. Be careful to enter the commands correctly, especially when a command is longer than a single line. 
 The exact commands depend on which system you are working on and can be found at 
 
 For Mac: [https://sourcegear.com/diffmerge/webhelp/sec__git__mac.html](https://sourcegear.com/diffmerge/webhelp/sec__git__mac.html)
@@ -104,7 +104,7 @@ index b36abfd..0e383e3 100644
 ~~~
 {:class="in"}
 
-Now let's use `git difftool` to see how this looks in _DiffMerge_.
+`git diff` is useful, but it isn't always clear exactly what we have changed. For a more visual depiction of what `git diff` is doing let's now use `git difftool` to see how this looks in _DiffMerge_.
 
 ~~~
 $ git difftool
@@ -115,15 +115,20 @@ Launch 'diffmerge' [Y/n]:
 
 By default, Git will prompt you to launch. Type `Y` and hit `Enter`. <br>
 If you don't want to be prompted each time you use this command, simply add a `-y` to the end of the command: <br>
-`git difftool -y`.<br>
+`git difftool -y`.<br> 
 
-<img src="img/git-difftool.png" alt="Using Diffmerge to view file changes" />
-<br>
 If you run `git difftool` in a repository which contains changes to multiple files, _DiffMerge_ will be
 opened for one file at a time. Once you close the window for the first file, then Git will run
 _DiffMerge_ for the next changed file.<br>
 This is why it is a good idea to pass the `-y` flag, otherwise you will be prompted at the command line each time
 Git tries to open _DiffMerge_ on the next file.<br>
+
+<img src="img/git-difftool.png" alt="Using Diffmerge to view file changes" />
+<br>
+
+Here we see the current version of the `mars.txt` file on the right and the previous version of the same file on the left. Text that differs in the two versions is highlighted in both panels. This provides the same information as `git diff`, but allows us to compare the documents side by side with convenient way to denote the differences between files. 
+
+
 
 
 ### Resolving Conflicts
@@ -170,7 +175,7 @@ A brief summary is contained below.
 
 The left pane shows the local (i.e. your repo) changes which could not be automatically merged.<br>
 In this example, this is your local `HEAD` commit.
-Notice how the line which contains the changes is marked and color-coded. 
+Notice how the affected line is highlighted in yellow, with the specific conflict highlighted in green. The purple highlighting denotes the most recent text that was committed, but couldn't be merged.  
 
 <table>
 <caption align="bottom"><b><i>Center Pane</i></b></caption>
@@ -190,7 +195,7 @@ which would be the `HEAD~1` commit in this example.
 </table>
 
 The right pane shows the remote _(i.e. the changes you tried to merge into your repo)_ changes which could not be
-automatically merged.
+automatically merged. Here the purple highlighting denotes the difference between your _BASE_ file (see above) and the remote's vesion of the file. 
 <p/>
 _DiffMerge_ allows you to pull changes from the left or right to your unchanged version in the middle. 
 This is very helpful for complex conflicts.
