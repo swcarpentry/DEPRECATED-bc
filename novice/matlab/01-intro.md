@@ -612,7 +612,7 @@ array, then ask it to do the calculation:
 
 ~~~
 patient_1 = patient_data(1, :)
-disp(["Maximum inflation for patient 1: ", max(patient_1));
+disp(['Maximum inflation for patient 1: ', max(patient_1));
 ~~~
 {:class="in"}
 
@@ -816,7 +816,7 @@ inflammation per day across all patients.
 
 ~~~
 plot(max(patient_data, [], 1));
-title("Maximum inflammation per day");
+title('Maximum inflammation per day');
 ~~~
 {:class="in"}
 
@@ -826,7 +826,7 @@ title("Maximum inflammation per day");
 
 ~~~
 plot(min(patient_data, [], 1));
-title("Minimum inflammation per day");
+title('Minimum inflammation per day');
 ~~~
 {:class="in"}
 
