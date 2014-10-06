@@ -304,6 +304,13 @@ ul.checklist {
   list-style-image: url('/img/checkbox.png');
 }
 
+/* Team table */
+@media screen and (max-width: 600px) {
+    .team {
+        display: block;
+    }
+}
+
 /* Printing */
 @media print {
   h1 {
