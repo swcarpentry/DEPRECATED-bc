@@ -596,6 +596,19 @@ analyze
 {:class="in"}
 
 
+<div>
+<img src="img/02-loop_1.png" style="width:500px; height:400px">
+</div>
+
+<div>
+<img src="img/02-loop_2.png" style="width:500px; height:400px">
+</div>
+
+<div>
+<img src="img/02-loop_3.png" style="width:500px; height:400px">
+</div>
+
+
 Sure enough, the maxima of these data sets show exactly the same ramp
 as the first, and their minima show the same staircase structure.
 
