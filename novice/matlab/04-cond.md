@@ -384,6 +384,7 @@ end
 imagesc(heatmap);
 colorbar();
 colormap winter
+axis equal
 ~~~
 
 <div>
@@ -432,6 +433,7 @@ heatmap = make_heatmap(patient_data, 0.9, 1.1);
 imagesc(heatmap);
 colorbar();
 colormap winter
+axis equal
 ~~~
 {:class="in"}
 
@@ -446,6 +448,7 @@ heatmap = make_heatmap(patient_data, 0.8, 1.2);
 imagesc(heatmap);
 colorbar();
 colormap winter
+axis equal
 ~~~
 {:class="in"}
 
@@ -458,14 +461,13 @@ heatmap = make_heatmap(patient_data, 0.6, 1.4);
 imagesc(heatmap);
 colorbar();
 colormap winter
+axis equal
 ~~~
 {:class="in"}
 
 <div>
 <img src="img/04-cond_4.png" style="height:350px">
 </div>
-
-### Colormaps
 
 <!-- FIXME: add a section on colormaps -->
 <!-- is this required? -->
