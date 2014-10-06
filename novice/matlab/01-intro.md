@@ -784,7 +784,7 @@ imagesc(patient_data)
 ~~~
 {:class="in"}
 
-<div class="out">
+<div>
 <img src="img/01-intro_1.png" style="height:350px">
 </div>
 
@@ -801,7 +801,7 @@ plot(ave_inflammation);
 ~~~
 {:class="in"}
 
-<div class="out">
+<div>
 <img src="img/01-intro_2.png" style="height:350px">
 </div>
 
@@ -820,7 +820,7 @@ title('Maximum inflammation per day');
 ~~~
 {:class="in"}
 
-<div class="out">
+<div>
 <img src="img/01-intro_3.png" style="height:350px">
 </div>
 
@@ -830,7 +830,7 @@ title('Minimum inflammation per day');
 ~~~
 {:class="in"}
 
-<div class="out">
+<div>
 <img src="img/01-intro_4.png" style="height:350px">
 </div>
 
@@ -867,8 +867,8 @@ ylabel('min')
 ~~~
 {:class="in"}
 
-<div class="out">
-<img src="img/01-intro_5.png" style="width:750px; height:350px">
+<div>
+<img src="img/01-intro_5.png" style="width:800px; height:300px">
 </div>
 
 
