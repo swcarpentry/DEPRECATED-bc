@@ -862,7 +862,7 @@ plot(max(patient_data, [], 1));
 ylabel('max')
 
 subplot(1, 2, 2);
-plot(min(patient_data, [], 2));
+plot(min(patient_data, [], 1));
 ylabel('min')
 ~~~
 {:class="in"}
