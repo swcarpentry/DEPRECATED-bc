@@ -307,7 +307,7 @@ colorbar();
 ~~~
 {:class="in"}
 
-<div class="out">
+<div>
 <img src="img/01-intro_1.png" style="height:350px">
 </div>
 
@@ -333,6 +333,10 @@ imagesc(heatmap);
 colorbar();
 ~~~
 
+<div>
+<img src="img/04-cond_1.png" style="height:350px">
+</div>
+
 This is slightly better, but there are still a few things
 wrong with it:
 
@@ -347,10 +351,10 @@ wrong with it:
 
 Here's how we can improve it:
 
-1. We can pick better colors, and create our own
+1. We can pick better colors, and use a
 [colormap](../../gloss.html#colormap)
 
-2. Instead of hecking if values are exactly equal to the mean,
+2. Instead of checking if values are exactly equal to the mean,
 we can check if they are close to it.
 
 3. We can calculate the mean once, before the loop, and use
@@ -369,7 +373,7 @@ for y = 1:height
 
         if patient_data(y, x) > 1.9*center
             heatmap(y, x) = 1;
-        elseif patient_data(y, x) < 0.9*mean(patient_data(:))
+        elseif patient_data(y, x) < 0.9*center
             heatmap(y, x) = -1;
         else
             heatmap(y, x) = 0;
@@ -379,7 +383,12 @@ end
 
 imagesc(heatmap);
 colorbar();
+colormap winter
 ~~~
+
+<div>
+<img src="img/04-cond_2.png" style="height:350px">
+</div>
 
 This is better, but we might want to widen the band around the mean
 that gets that color.
@@ -404,7 +413,7 @@ function heatmap = make_heatmap(data, low_band, high_band)
         for x = 1:width
             if patient_data(y, x) > high_band*center
                 heatmap(y, x) = 1;
-            elseif patient_data(y, x) < low_band*mean(patient_data(:))
+            elseif patient_data(y, x) < low_band*center
                 heatmap(y, x) = -1;
             else
                 heatmap(y, x) = 0;
@@ -419,30 +428,42 @@ To test this function, we can run it with the settings we just
 used:
 
 ~~~
-heatmap = make_heatmap(patient_data, 0.8, 1.2);
+heatmap = make_heatmap(patient_data, 0.9, 1.1);
 imagesc(heatmap);
 colorbar();
+colormap winter
 ~~~
 {:class="in"}
 
-~~~
+<div>
+<img src="img/04-cond_2.png" style="height:350px">
+</div>
+
+That seems right, so let's try wider bands:
 
 ~~~
-{:class="out"}
+heatmap = make_heatmap(patient_data, 0.8, 1.2);
+imagesc(heatmap);
+colorbar();
+colormap winter
+~~~
+{:class="in"}
 
-That seems right, so let's widen the band:
+<div>
+<img src="img/04-cond_3.png" style="height:350px">
+</div>
 
 ~~~
 heatmap = make_heatmap(patient_data, 0.6, 1.4);
 imagesc(heatmap);
 colorbar();
+colormap winter
 ~~~
 {:class="in"}
 
-~~~
-
-~~~
-{:class="out"}
+<div>
+<img src="img/04-cond_4.png" style="height:350px">
+</div>
 
 ### Colormaps
 
