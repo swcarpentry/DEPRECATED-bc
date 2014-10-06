@@ -403,8 +403,8 @@ After the loop, `vowel` refers to the last value in `aeiou`, i.e., `u`.
 
 #### Challenges
 
-1. Write a loop that spells the word "aluminum," adding one letter at a time: 
- 
+1. Write a loop that spells the word "aluminum," adding one letter at a time:
+
    ~~~
    a
    al
@@ -460,7 +460,7 @@ After the loop, `vowel` refers to the last value in `aeiou`, i.e., `u`.
    u
    l
    a
-   ~~~ 
+   ~~~
    {:class="out"}
 
 **Extra Challenge**: Reverse the string `abracadabra` without a loop, using only indexing and the colon operator.
@@ -562,26 +562,26 @@ for i = 1:3
 
     % Generate strings for file and image names:
     file_name = sprintf('inflammation-%02d.csv', i);
-    img_name = sprintf ('patient_data-%02d.svg', i);
+    img_name = sprintf ('patient_data-%02d.png', i);
 
     patient_data = csvread(file_name);
     ave_inflammation = mean(patient_data, 1);
 
     figure()
 
-    subplot(1, 3, 1);
+    subplot(2, 2, 1);
     plot(ave_inflammation);
     ylabel('average')
 
-    subplot(1, 3, 2);
+    subplot(2, 2, 2);
     plot(max(patient_data, [], 1));
     ylabel('max')
 
-    subplot(1, 3, 3);
+    subplot(2, 2, 3);
     plot(min(patient_data, [], 1));
     ylabel('min')
 
-    print(img_name);
+    print('-dpng', img_name);
     close();
 
 end
@@ -595,7 +595,6 @@ analyze
 ~~~
 {:class="in"}
 
-<!-- FIXME: put the plots here -->
 
 Sure enough, the maxima of these data sets show exactly the same ramp
 as the first, and their minima show the same staircase structure.
@@ -613,46 +612,46 @@ as the first, and their minima show the same staircase structure.
    {:class="in"}
 
    Thankfully, Matlab also has `ls`, though it returns a single long string:
-   
+
    ~~~
    filestr = ls('*.csv')
    ~~~
    {:class="in"}
-   
+
    ~~~
    inflammation-01.csv inflammation-04.csv inflammation-07.csv inflammation-10.csv
    inflammation-02.csv inflammation-05.csv inflammation-08.csv inflammation-11.csv
    inflammation-03.csv inflammation-06.csv inflammation-09.csv inflammation-12.csv
    ~~~
    {:class="out"}
-   
-   To turn this string into an array we can loop over (actually, a 
+
+   To turn this string into an array we can loop over (actually, a
    [Cell Array](http://www.mathworks.com/help/matlab/cell-arrays.html)),
    we need to "split" the string at each occurrence of whitespace:
-   
+
    ~~~
    file_string = ls('*.csv');
    file_list = strsplit(file_string)
    ~~~
    {:class="in"}
-   
+
    ~~~
-   file_list = 
-   
+   file_list =
+
      Columns 1 through 3
-   
+
        'inflammation-01.csv'    'inflammation-04.csv'    'inflammation-07.csv'
-   
+
      Columns 4 through 6
-   
+
        'inflammation-10.csv'    'inflammation-02.csv'    'inflammation-05.csv'
-   
+
      Columns 7 through 9
-   
+
        'inflammation-08.csv'    'inflammation-11.csv'    'inflammation-03.csv'
-   
+
      Columns 10 through 13
-   
+
        'inflammation-06.csv'    'inflammation-09.csv'    'inflammation-12.csv'    ''
    ~~~
    {:class="out"}
