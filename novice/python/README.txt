@@ -1,10 +1,7 @@
 # Time estimates for instructors
 
 * n = 5
-* min = 4 hours
 * median = 4.5 hours
-* mean = 4.9 hours
-* max = 6 hours
 
 # Resources
 
