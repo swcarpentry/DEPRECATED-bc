@@ -4,7 +4,6 @@ root: ../..
 title: Reusing Code
 ---
 
-
 We've written MATLAB commands to compute statistics about our
 data and generate some plots to visualize the results. We're now
 faced with the following problems:
@@ -75,7 +74,7 @@ put those commands in a script called `analyze.m`:
 
 patient_data = csvread('inflammation-01.csv');
 
-disp([Analyzing "inflammation-01.csv: "])
+disp(['Analyzing "inflammation-01.csv": '])
 disp(['Maximum inflammation: ', num2str(max(patient_data(:)))]);
 disp(['Minimum inflammation: ', num2str(min(patient_data(:)))]);
 disp(['Standard deviation: ', num2str(std(patient_data(:)))]);
@@ -119,7 +118,7 @@ We've also written commands to create plots:
 ave_inflammation = mean(patient_data, 1);
 
 plot(ave_inflammation);
-ylabel("average")
+ylabel('average')
 ~~~
 {:class="in"}
 
@@ -149,15 +148,15 @@ ave_inflammation = mean(patient_data, 1);
 
 subplot(1, 3, 1);
 plot(ave_inflammation);
-ylabel("average")
+ylabel('average')
 
 subplot(1, 3, 2);
 plot(max(patient_data, [], 1));
-ylabel("max")
+ylabel('max')
 
 subplot(1, 3, 3);
 plot(min(patient_data, [], 1));
-ylabel("min")
+ylabel('min')
 
 % save plot to disk as svg image:
 print -dpng "patient_data-01.png"
