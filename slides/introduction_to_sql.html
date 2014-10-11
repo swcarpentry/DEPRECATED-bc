@@ -1,0 +1,560 @@
+---
+layout: slides
+title: "Introduction to SQL"
+root: ..
+datetime: September 2014
+website: http://software-carpentry.org
+table_inline_style: "font-size: 50%; width: 100%; float: left;"
+---
+
+<!-- 
+
+#######################################
+# R Script that was used in the production of this file:
+#######################################
+
+data_to_use <- read.csv("/path/to/Example_Data_for_SQL_Examples.csv")
+
+#View(data_to_use)
+
+library(sqldf)
+
+consent_forms <- sqldf("
+	SELECT
+		Name,
+		Participation_Date,
+		Birthdate,
+		Contact_Info
+	FROM data_to_use
+	LIMIT 10
+")
+
+participant_data <- sqldf("
+	SELECT
+		ID,
+		Participation_Date_1 as 'Participation_Date',
+		Birthdate_1 as 'Birthdate',
+		Drug,
+		Researcher_Initials
+	FROM data_to_use
+	LIMIT 10
+")
+
+#View(table1)
+#View(table2)
+
+affected_participants <- sqldf("
+	SELECT
+		ID,
+		Participation_Date,
+		Drug
+	FROM participant_data
+	WHERE Drug = 'Compound A'
+")
+
+
+join_example_initial <- sqldf("
+	SELECT 
+		Name,
+		consent_forms.Participation_Date,
+		consent_forms.Birthdate,
+		participant_data.Participation_Date,
+		participant_data.Birthdate,
+		participant_data.ID
+	FROM consent_forms
+	JOIN participant_data
+		ON 
+			consent_forms.Participation_Date = participant_data.Participation_Date
+			AND consent_forms.Birthdate = participant_data.Birthdate
+	LIMIT 10
+")
+
+
+join_example_filtered <- sqldf("
+	SELECT 
+		participant_data.ID,		
+		consent_forms.Name,
+		consent_forms.Contact_Info,
+		consent_forms.Participation_Date,
+		participant_data.Drug,
+		participant_data.Researcher_Initials
+	FROM consent_forms
+	JOIN participant_data
+		ON 
+			consent_forms.Participation_Date = participant_data.Participation_Date
+			AND consent_forms.Birthdate = participant_data.Birthdate
+	LIMIT 10
+")
+
+library(knitr)
+
+output_file <- "/path/to/Example_Data_for_SQL_Examples_OUTPUT.mkd"
+
+output_format <- "html"
+
+output <- kable(consent_forms, format=output_format, align='c', table.attr='id=\"mytable\" style=\"{{page.table_inline_style}}\"')
+write(c("\n\nConsent Forms \n\n",output), file=output_file, append=TRUE)
+
+output <- kable(participant_data, format=output_format, align='c', table.attr='id=\"mytable\" style=\"{{page.table_inline_style}}\"')
+write(c("\n\nParticipant Data \n\n",output), file=output_file, append=TRUE)
+
+output <- kable(affected_participants, format=output_format, align='c', table.attr='id=\"mytable\" style=\"{{page.table_inline_style}}\"')
+write(c("\n\nAffected Participants \n\n",output), file=output_file, append=TRUE)
+
+output <- kable(join_example_initial, format=output_format, align='c', table.attr='id=\"mytable\" style=\"{{page.table_inline_style}}\"')
+write(c("\n\nJoin Example Initial \n\n",output), file=output_file, append=TRUE)
+
+output <- kable(join_example_filtered, format=output_format, align='c', table.attr='id=\"mytable\" style=\"{{page.table_inline_style}}\"')
+write(c("\n\nJoin Example Filtered \n\n",output), file=output_file, append=TRUE)
+
+#######################################
+# End of R Script
+#######################################
+
+
+
+#######################################
+# CSV data that were used in the production of this file:
+#######################################
+
+"Name","Participation_Date","Birthdate","Contact_Info","ID","Participation_Date","Birthdate","Drug","Researcher_Initials","Researcher_ID","Researcher_ID","Researcher_Initials"
+"Liam","2000-08-01","1985-07-29","...",1,"2000-08-01","1983-06-10","Compound C","AJ",1,1,"AJ"
+"Charlotte","2000-08-01","1983-06-10","...",2,"2000-08-03","1983-08-08","Compound A","AS",2,2,"AS"
+"Noah","2000-08-01","1994-07-02","...",3,"2000-08-01","1985-07-29","Compound C","AJ",3,3,"AJ"
+"Amelia","2000-08-02","1980-03-07","...",4,"2000-08-03","1989-09-13","Compound A","BN",4,4,"BN"
+"Oliver","2000-08-03","1983-08-08","...",5,"2000-08-03","1992-07-30","Compound A","LA",5,5,"LA"
+"Ava","2000-08-01","1992-04-22","...",6,"2000-08-02","1988-01-11","Compound C","CC",6,6,"CC"
+"Aidan","2000-08-03","1992-07-30","...",7,"2000-08-01","1994-07-02","Compound C","BN",7,7,"BN"
+"Violet","2000-08-02","1988-01-11","...",8,"2000-08-03","1980-03-22","Compound B","AJ",1,8,"BB"
+"Ben","2000-08-03","1980-03-22","...",9,"2000-08-02","1980-03-07","Compound A","AJ",2,,
+"Sophia","2000-08-03","1989-09-13","...",10,"2000-08-01","1992-04-22","Compound A","BB",8,,
+
+#######################################
+# End of CSV data
+#######################################
+
+-->
+
+
+<section>
+  <h1>{{page.title}}</h1>
+  <img src="{{page.root}}/img/software-carpentry-banner.png" alt="Software Carpentry logo" />
+  <aside class="notes">
+    <p>Hello, and welcome to our section on SQL.</p>
+    <p>In this section, we're going to be talking about <b>how you use and interact with your data.</b></p>
+    <p>Often, researchers might manually move data around, or save different calculations of the same data in different spreadsheets or in different places within the same spreadsheet.
+    <p>In these cases, researchers are using spreadsheets, when they often really <b>want to be</b> using "databases."</p>
+  </aside>
+</section>
+
+
+<section>
+    <h1>What is Structured Query Language?</h1>
+
+    <ul>
+        <li>Is the primary language for "relational" databases</li>
+        <li class="fragment">Allows searching ("querying") tables of data</li>
+        <li class="fragment">Can help to automate searches and calculations often performed in spreadsheets</li>
+        <li class="fragment">Easy to read and write</li>
+    </ul>
+    
+    <aside class="notes">
+    <p>SQL stands for "Structured Query Languge."<br />
+    [Click] It is a syntax for searching through and making calculations from spreadsheets of data (here called "tables").</p>
+    <p>[Click] This makes data more reusable, and your workflow more reproducible. Changes you make to data can all be written out, step-by-step.</p>
+    <p>[Click] Compared to many other languages, SQL is easy to read and write. It's also ubiquitous — It's usable with plugins for many languages, including R [sqldf] and Python [pandasql]. It even works with an add-on for Firefox [SQLite Manager plugin].</p>
+    </aside>
+    
+</section>
+
+
+<section>
+    <div style="width:75%; margin: 10% auto auto auto;" class="fragment shrink">
+        <h4>Shuffled Consent Forms</h4>
+        <table id="mytable" style="{{page.table_inline_style}}">
+         <thead>
+          <tr>
+           <th align="center"> Name </th>
+           <th align="center"> Participation_Date </th>
+           <th align="center"> Birthdate </th>
+           <th align="center"> Contact_Info </th>
+          </tr>
+         </thead>
+        <tbody>
+          <tr>
+           <td align="center"> Liam </td>
+           <td align="center"> 2000-08-01 </td>
+           <td align="center"> 1985-07-29 </td>
+           <td align="center"> ... </td>
+          </tr>
+          <tr>
+           <td align="center"> Charlotte </td>
+           <td align="center"> 2000-08-01 </td>
+           <td align="center"> 1983-06-10 </td>
+           <td align="center"> ... </td>
+          </tr>
+          <tr>
+           <td align="center"> Noah </td>
+           <td align="center"> 2000-08-01 </td>
+           <td align="center"> 1994-07-02 </td>
+           <td align="center"> ... </td>
+          </tr>
+          <tr>
+           <td align="center"> Amelia </td>
+           <td align="center"> 2000-08-02 </td>
+           <td align="center"> 1980-03-07 </td>
+           <td align="center"> ... </td>
+          </tr>
+          <tr>
+           <td align="center"> Oliver </td>
+           <td align="center"> 2000-08-03 </td>
+           <td align="center"> 1983-08-08 </td>
+           <td align="center"> ... </td>
+          </tr>
+          <tr>
+           <td align="center"> Ava </td>
+           <td align="center"> 2000-08-01 </td>
+           <td align="center"> 1992-04-22 </td>
+           <td align="center"> ... </td>
+          </tr>
+          <tr>
+           <td align="center"> Aidan </td>
+           <td align="center"> 2000-08-03 </td>
+           <td align="center"> 1992-07-30 </td>
+           <td align="center"> ... </td>
+          </tr>
+          <tr>
+           <td align="center"> Violet </td>
+           <td align="center"> 2000-08-02 </td>
+           <td align="center"> 1988-01-11 </td>
+           <td align="center"> ... </td>
+          </tr>
+          <tr>
+           <td align="center"> Ben </td>
+           <td align="center"> 2000-08-03 </td>
+           <td align="center"> 1980-03-22 </td>
+           <td align="center"> ... </td>
+          </tr>
+          <tr>
+           <td align="center"> Sophia </td>
+           <td align="center"> 2000-08-03 </td>
+           <td align="center"> 1989-09-13 </td>
+           <td align="center"> ... </td>
+          </tr>
+        </tbody>
+        </table>
+    </div>
+    <div style="width:75%; position:absolute; top:10%; right:10%; background: white; padding: .5em;" class="fragment fade-in">
+        <h4>Participant Data</h4> 
+        <table id="mytable" style="{{page.table_inline_style}}">
+         <thead>
+          <tr>
+           <th align="center"> ID </th>
+           <th align="center"> Participation_Date </th>
+           <th align="center"> Birthdate </th>
+           <th align="center"> Drug </th>
+           <th align="center"> Researcher_Initials </th>
+          </tr>
+         </thead>
+        <tbody>
+          <tr>
+           <td align="center"> 1 </td>
+           <td align="center"> 2000-08-01 </td>
+           <td align="center"> 1983-06-10 </td>
+           <td align="center"> Compound C </td>
+           <td align="center"> AJ </td>
+          </tr>
+          <tr>
+           <td align="center"> 2 </td>
+           <td align="center"> 2000-08-03 </td>
+           <td align="center"> 1983-08-08 </td>
+           <td align="center"> Compound A </td>
+           <td align="center"> AS </td>
+          </tr>
+          <tr>
+           <td align="center"> 3 </td>
+           <td align="center"> 2000-08-01 </td>
+           <td align="center"> 1985-07-29 </td>
+           <td align="center"> Compound C </td>
+           <td align="center"> AJ </td>
+          </tr>
+          <tr>
+           <td align="center"> 4 </td>
+           <td align="center"> 2000-08-03 </td>
+           <td align="center"> 1989-09-13 </td>
+           <td align="center"> Compound A </td>
+           <td align="center"> BN </td>
+          </tr>
+          <tr>
+           <td align="center"> 5 </td>
+           <td align="center"> 2000-08-03 </td>
+           <td align="center"> 1992-07-30 </td>
+           <td align="center"> Compound A </td>
+           <td align="center"> LA </td>
+          </tr>
+          <tr>
+           <td align="center"> 6 </td>
+           <td align="center"> 2000-08-02 </td>
+           <td align="center"> 1988-01-11 </td>
+           <td align="center"> Compound C </td>
+           <td align="center"> CC </td>
+          </tr>
+          <tr>
+           <td align="center"> 7 </td>
+           <td align="center"> 2000-08-01 </td>
+           <td align="center"> 1994-07-02 </td>
+           <td align="center"> Compound C </td>
+           <td align="center"> BN </td>
+          </tr>
+          <tr>
+           <td align="center"> 8 </td>
+           <td align="center"> 2000-08-03 </td>
+           <td align="center"> 1980-03-22 </td>
+           <td align="center"> Compound B </td>
+           <td align="center"> AJ </td>
+          </tr>
+          <tr>
+           <td align="center"> 9 </td>
+           <td align="center"> 2000-08-02 </td>
+           <td align="center"> 1980-03-07 </td>
+           <td align="center"> Compound A </td>
+           <td align="center"> AJ </td>
+          </tr>
+          <tr>
+           <td align="center"> 10 </td>
+           <td align="center"> 2000-08-01 </td>
+           <td align="center"> 1992-04-22 </td>
+           <td align="center"> Compound A </td>
+           <td align="center"> BB </td>
+          </tr>
+        </tbody>
+        </table>
+    </div>
+    <aside class="notes">
+    <p>Let's say that you have data from a study of a new medication. You have two spreadsheets. First, a (shuffled) list of consent forms. These have each person's real name and contact info. Second, a spreadsheet of participation data. These are supposed to be anonymized and separated from the consent forms.</p>
+    <p>But what if you realize that everyone who's taken "Compound A" is likely to become very sick? Perhaps you need to identify everyone who has taken Compound A, and re-identify their data!</p>
+    </aside>
+</section>
+
+<section>
+    <div style="width:55%; float:left;">
+        <h4>Affected Participants</h4>
+        <table id="mytable" style="{{page.table_inline_style}}">
+         <thead>
+          <tr>
+           <th align="center"> ID </th>
+           <th align="center"> Participation_Date </th>
+           <th align="center"> Drug </th>
+          </tr>
+         </thead>
+        <tbody>
+          <tr>
+           <td align="center"> 2 </td>
+           <td align="center"> 2000-08-03 </td>
+           <td align="center"> Compound A </td>
+          </tr>
+          <tr>
+           <td align="center"> 4 </td>
+           <td align="center"> 2000-08-03 </td>
+           <td align="center"> Compound A </td>
+          </tr>
+          <tr>
+           <td align="center"> 5 </td>
+           <td align="center"> 2000-08-03 </td>
+           <td align="center"> Compound A </td>
+          </tr>
+          <tr>
+           <td align="center"> 9 </td>
+           <td align="center"> 2000-08-02 </td>
+           <td align="center"> Compound A </td>
+          </tr>
+          <tr>
+           <td align="center"> 10 </td>
+           <td align="center"> 2000-08-01 </td>
+           <td align="center"> Compound A </td>
+          </tr>
+        </tbody>
+        </table>
+    </div>
+    <div style="width:55%; position:absolute; top:10%; right:0%;">
+        <code><pre style="padding:.5em;" class="fragment">
+<span class="fragment highlight-current-red">SELECT
+    ID,
+    Participation_Date,
+    Drug</span>
+<span class="fragment highlight-current-red">FROM participant_data</span>
+<span class="fragment highlight-current-red">WHERE Drug = 'Compound A'</span></pre></code>
+    </div>
+    
+    <aside class="notes">
+    <p>What you need, to start: a list of everyone who's taken Compound A.</p>
+    <p>A spreadsheet program like Excel <i>could</i> allow you to do this, but it might take several searches, manual copying and pasting, etc.</p>
+    <p>In SQL, it only takes 3 lines to filter / search through this list: SELECT the columns you want, from where, under what conditions. Easy to read, even at a glance!</p>
+    </aside>
+    
+</section>
+
+
+<section>
+    <div style="width:100%; float:left;">
+        <h4>Joined Tables</h4>
+        <table id="mytable" style="{{page.table_inline_style}}">
+         <thead>
+          <tr>
+           <th align="center"> ID </th>
+           <th align="center"> Name </th>
+           <th align="center"> Contact_Info </th>
+           <th align="center"> Participation_Date </th>
+           <th align="center"> Drug </th>
+           <th align="center"> Researcher_Initials </th>
+          </tr>
+         </thead>
+        <tbody>
+          <tr>
+           <td align="center"> 3 </td>
+           <td align="center"> Liam </td>
+           <td align="center"> ... </td>
+           <td align="center"> 2000-08-01 </td>
+           <td align="center"> Compound C </td>
+           <td align="center"> AJ </td>
+          </tr>
+          <tr>
+           <td align="center"> 1 </td>
+           <td align="center"> Charlotte </td>
+           <td align="center"> ... </td>
+           <td align="center"> 2000-08-01 </td>
+           <td align="center"> Compound C </td>
+           <td align="center"> AJ </td>
+          </tr>
+          <tr>
+           <td align="center"> 7 </td>
+           <td align="center"> Noah </td>
+           <td align="center"> ... </td>
+           <td align="center"> 2000-08-01 </td>
+           <td align="center"> Compound C </td>
+           <td align="center"> BN </td>
+          </tr>
+          <tr>
+           <td align="center"> 9 </td>
+           <td align="center"> Amelia </td>
+           <td align="center"> ... </td>
+           <td align="center"> 2000-08-02 </td>
+           <td align="center"> Compound A </td>
+           <td align="center"> AJ </td>
+          </tr>
+          <tr>
+           <td align="center"> 2 </td>
+           <td align="center"> Oliver </td>
+           <td align="center"> ... </td>
+           <td align="center"> 2000-08-03 </td>
+           <td align="center"> Compound A </td>
+           <td align="center"> AS </td>
+          </tr>
+          <tr>
+           <td align="center"> 10 </td>
+           <td align="center"> Ava </td>
+           <td align="center"> ... </td>
+           <td align="center"> 2000-08-01 </td>
+           <td align="center"> Compound A </td>
+           <td align="center"> BB </td>
+          </tr>
+          <tr>
+           <td align="center"> 5 </td>
+           <td align="center"> Aidan </td>
+           <td align="center"> ... </td>
+           <td align="center"> 2000-08-03 </td>
+           <td align="center"> Compound A </td>
+           <td align="center"> LA </td>
+          </tr>
+          <tr>
+           <td align="center"> 6 </td>
+           <td align="center"> Violet </td>
+           <td align="center"> ... </td>
+           <td align="center"> 2000-08-02 </td>
+           <td align="center"> Compound C </td>
+           <td align="center"> CC </td>
+          </tr>
+          <tr>
+           <td align="center"> 8 </td>
+           <td align="center"> Ben </td>
+           <td align="center"> ... </td>
+           <td align="center"> 2000-08-03 </td>
+           <td align="center"> Compound B </td>
+           <td align="center"> AJ </td>
+          </tr>
+          <tr>
+           <td align="center"> 4 </td>
+           <td align="center"> Sophia </td>
+           <td align="center"> ... </td>
+           <td align="center"> 2000-08-03 </td>
+           <td align="center"> Compound A </td>
+           <td align="center"> BN </td>
+          </tr>
+        </tbody>
+        </table>
+    </div>
+    <div style="width:75%; position:absolute; top:10%; right:10%;" class="fragment">
+        <code><pre style="padding:1em;">
+<span class="fragment highlight-current-red">SELECT
+  participant_data.ID,		
+  consent_forms.Name,
+  consent_forms.Contact_Info,
+  consent_forms.Participation_Date,
+  participant_data.Drug,
+  participant_data.Researcher_Initials</span>
+<span class="fragment highlight-current-red">FROM consent_forms</span>
+<span class="fragment highlight-current-red">JOIN participant_data</span>
+<span class="fragment highlight-red">ON 
+  consent_forms.Participation_Date = participant_data.Participation_Date</span>
+<span class="fragment highlight-red">  AND consent_forms.Birthdate = participant_data.Birthdate</span></pre></code>
+    </div>  
+      
+    <aside class="notes">
+    <p>Eventually, you would want to link the Consent Form table with the Participant data table, allowing you to see the name of everyone who took Compound A.</p>
+    <p>As before, this <i>could</i> be done manually with a spreadsheet program. But look at how easy it is with SQL!</p>
+    <p>SELECT the columns you want, from where. JOIN (i.e., mash the second table onto the side of the first table) under certain extra conditions. Easy to read!</p>
+    </aside>
+</section>
+
+<section>
+  <h1>Syllabus</h1>
+  <ul>
+    <li>
+      Reading and sorting data
+    </li>
+    <li class="fragment">Filtering with <b>WHERE</b> statements</li>
+    <li class="fragment">
+        Data calculations:
+        <ol>
+            <li>Calculating new values on the fly</li>
+            <li>Handling missing values</li>
+            <li>Combining values using aggregation</li>
+        </ol>
+    </li>
+    <li class="fragment">Combining information from multiple tables using <b>JOIN</b></li>
+
+    <aside class="notes">
+    <p>As we saw in the example, we'll start with sorting and <br />
+    [Click] searching through tables of data — a process that you've likely tried to do with spreadsheet programs.</p>
+    <p>[Click] We'll then talk about doing calculations on data in a way that doesn't change the data themselves. You can keep your data in one format and in one place but still use it in many different ways.</p>
+    <p>[Click] This involves several ways of "joining" data from one table as new columns of data on another table.</p>
+    </aside>
+</section>
+
+
+<section>
+  <h1>Syllabus, cont.</h1>
+  <ul>
+    <li>
+      Creating, modifying, and deleting data
+    </li>
+    <li class="fragment">Programming with databases</li>
+    <li class="fragment"><a href="/novice/ref/04-sql.html">SQL Reference</a></li>
+  </ul>
+  
+    <aside class="notes">
+        <p>Finally, we'll look at ways to actually modify a dataset, <br />
+        [Click] and to automate all of these processes.</p>
+        <p>[Click] Throughout this lesson, you might benefit from having our SQL reference handy. [The link is above, in the slide text.]</p>
+    </aside>
+</section>
