@@ -21,7 +21,7 @@ so that you can share you work with them easily, and to use that language *well*
 <div class="toc" markdown="1">
 
 1.  [Analyzing Patient Data](01-intro.html)
-2.  [Analyzing Multiple Data Sets](02-loop.html)
+2.  [Reusing Code](02-loop.html)
 3.  [Creating Functions](03-func.html)
 4.  [Making Choices](04-cond.html)
 
