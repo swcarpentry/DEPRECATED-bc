@@ -612,7 +612,7 @@ array, then ask it to do the calculation:
 
 ~~~
 patient_1 = patient_data(1, :)
-disp(["Maximum inflation for patient 1: ", max(patient_1));
+disp(['Maximum inflation for patient 1: ', max(patient_1));
 ~~~
 {:class="in"}
 
@@ -784,7 +784,7 @@ imagesc(patient_data)
 ~~~
 {:class="in"}
 
-<div class="out">
+<div>
 <img src="img/01-intro_1.png" style="height:350px">
 </div>
 
@@ -801,7 +801,7 @@ plot(ave_inflammation);
 ~~~
 {:class="in"}
 
-<div class="out">
+<div>
 <img src="img/01-intro_2.png" style="height:350px">
 </div>
 
@@ -816,21 +816,21 @@ inflammation per day across all patients.
 
 ~~~
 plot(max(patient_data, [], 1));
-title("Maximum inflammation per day");
+title('Maximum inflammation per day');
 ~~~
 {:class="in"}
 
-<div class="out">
+<div>
 <img src="img/01-intro_3.png" style="height:350px">
 </div>
 
 ~~~
 plot(min(patient_data, [], 1));
-title("Minimum inflammation per day");
+title('Minimum inflammation per day');
 ~~~
 {:class="in"}
 
-<div class="out">
+<div>
 <img src="img/01-intro_4.png" style="height:350px">
 </div>
 
@@ -862,13 +862,13 @@ plot(max(patient_data, [], 1));
 ylabel('max')
 
 subplot(1, 2, 2);
-plot(min(patient_data, [], 2));
+plot(min(patient_data, [], 1));
 ylabel('min')
 ~~~
 {:class="in"}
 
-<div class="out">
-<img src="img/01-intro_5.png" style="width:750px; height:350px">
+<div>
+<img src="img/01-intro_5.png" style="width:800px; height:300px">
 </div>
 
 
