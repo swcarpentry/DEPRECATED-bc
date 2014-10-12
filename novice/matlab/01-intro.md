@@ -34,6 +34,7 @@ To do all that, we'll have to learn a little bit about programming.
 
 <div class="objectives" markdown="1">
 #### Objectives
+* Get to know the MATLAB environment.
 * Learn about MATLAB arrays.
 * Read tabular data from a file into a program.
 * Assign values to variables.
@@ -41,6 +42,17 @@ To do all that, we'll have to learn a little bit about programming.
 * Perform operations on arrays of data.
 * Display simple graphs.
 </div>
+
+### MATLAB GUI
+
+Before we can strt programming, we need to know a little about the MATLAB interface. 
+Using the default setup, the matlab desktop contains several important sections:
+
+* The **Current Folder** is the directory that we are in at the moment. Since we normally don't want to save all our functions and files in one folder, we need to tell Matlab where to find our files. We point Matlab in the right direction by setting thep path to contain all folders that we want to work in. This is done in > Home > Set Path: Include all folders and subfolders you want to be in the path. In "Current Folder", these folders should stop being transparent now.
+* In the **Command Window** or shell we can run and debug our code. Everything that's typed into the command window is executed immediately.
+* The **Workspace** contains all variable names and assigned values that we currently work with. As long as they pop up in the workspace, they are universally available, which is why it's good to keep it clean to not accidentally overwriting a variable of function that you later use (can be cleaned up typing clear all).
+* **Search Documentation** on the top right of your screen lets you search for functions. Suggestions for functions that would do what you want to do will pop up. Clicking on them will open the documentation.
+
 
 ### Loading Data
 
@@ -50,6 +62,9 @@ and admittedly, something that we'd rather not spend a lot of time
 thinking about. Fortunately, MATLAB comes with a number of high-level
 tools to do these things
 efficiently, sparing us the grisly detail.
+
+If we know what our data looks like (in this case, we have comma-separated values) and we're unsure about what command we want to use, we can search the documentary. Type `read csv` into the documentation toolbar. MATLAB suggests using `csvread`.
+If we have a closer look at the documentation, MATLAB also tells us, which in- and output arguments this function has.
 
 To load the data from our CSV file into MATLAB, type following
 command into the MATLAB shell, and press `Enter`:
