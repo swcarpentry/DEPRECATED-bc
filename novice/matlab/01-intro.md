@@ -6,9 +6,7 @@ title: Analyzing Patient Data
 
 
 
-We are studying inflammation in patients who have been given a new treatment for arthritis.
-We have a dozen datasets that need analysis, stored as `.csv` files - but MATLAB doesn't know about these files yet. The first thing we need to do is set MATLAB's [working directory](../../gloss.html#current-working-directory) to the directory containing the files. To do this, we go to the `Home` tab, click on `Set Path`, and then on `Add with Subfolders...`. We navigate to the directory containing our files and add it to the path to tell MATLAB where to look for our files.
-
+We are studying inflammation in patients who have been given a new treatment for arthritis, and need to analyze the first dozen data sets.
 The data sets are stored in
 [Comma Separated Values (CSV)](../../gloss.html#comma-separated-values) format:
 each row holds information for a single patient,
@@ -45,6 +43,8 @@ To do all that, we'll have to learn a little bit about programming.
 </div>
 
 ### MATLAB GUI
+
+We have a dozen datasets that need analysis, stored as `.csv` files - but MATLAB doesn't know about these files yet. The first thing we need to do is set MATLAB's [working directory](../../gloss.html#current-working-directory) to the directory containing the files. To do this, we go to the `Home` tab, click on `Set Path`, and then on `Add with Subfolders...`. We navigate to the directory containing our files and add it to the path to tell MATLAB where to look for our files.
 
 Before we can start programming, we need to know a little about the MATLAB interface. 
 Using the default setup, the MATLAB desktop contains several important sections:
