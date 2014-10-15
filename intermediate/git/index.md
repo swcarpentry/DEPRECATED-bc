@@ -18,8 +18,7 @@ can and should be stored in a version control system.
 
 Topics
 ------
-* [Introducing Distributed Version Control, and Introducing
-Yourself to Git](00-intro.html)
+* [Introducing Distributed Version Control, and Introducing Yourself to Git](00-intro.html)
 * [Conversational Git](01-conversational-git.html)
 * [The Git Development Workflow](02-developing.html)
 * [Collaborating with Git and GitHub](03-collaborating.html)

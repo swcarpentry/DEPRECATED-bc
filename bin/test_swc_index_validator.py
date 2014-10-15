@@ -1,7 +1,7 @@
 """
 Test suite for ``validate_index.py``
 
-Bootcamp metadata is stored in yaml header and PyYaml
+Workshop metadata is stored in yaml header and PyYaml
 strip all the strings.
 """
 
@@ -18,7 +18,7 @@ def make_file(text):
 
 
 def test_check_layout():
-    assert validator.check_layout("bootcamp")
+    assert validator.check_layout("workshop")
 
 def test_check_layout_fail():
     assert not validator.check_layout("lesson")
@@ -104,23 +104,38 @@ def test_check_registration_closed():
 def test_check_registration_fail():
     assert not validator.check_registration("close")
 
-def test_check_instructor():
-    assert validator.check_instructor(["John Doe", "Jane Doe"])
+def test_check_instructors():
+    assert validator.check_instructors(["John Doe", "Jane Doe"])
 
 def test_check_instructor_only_one():
-    assert validator.check_instructor(["John Doe"])
+    assert validator.check_instructors(["John Doe"])
 
 def test_check_instructor_empty():
-    assert not validator.check_instructor([])
+    assert not validator.check_instructors([])
 
 def test_check_instructor_string():
-    assert not validator.check_instructor("John Doe")
+    assert not validator.check_instructors("John Doe")
+
+def test_check_helpers():
+    assert validator.check_helpers(["John Doe", "Jane Doe"])
+
+def test_check_instructor_only_one():
+    assert validator.check_helpers(["John Doe"])
+
+def test_check_instructor_empty():
+    assert validator.check_helpers([])
+
+def test_check_instructor_string():
+    assert not validator.check_helpers("John Doe")
 
 def test_check_email():
     assert validator.check_email("user@box.com")
 
 def test_check_email_obfuscate():
     assert not validator.check_email("user AT box DOT com")
+
+def test_check_email_not_default():
+    assert not validator.check_email('admin@software-carpentry.org')
 
 def test_check_eventbrite_9_digits():
     assert validator.check_eventbrite('1' * 9)
@@ -139,7 +154,7 @@ def test_check_not_eventbrite_non_digits():
 
 def test_check_with_enddate():
     header_sample = """---
-layout: bootcamp
+layout: workshop
 root: .
 venue: Euphoric State University
 address: 123 College Street, Euphoria
@@ -151,14 +166,15 @@ enddate: 2020-06-18
 latlng: 41.7901128,-87.6007318
 registration: restricted
 instructor: ["Grace Hopper", "Alan Turing"]
-contact: admin@software-carpentry.org
+helper: [ ]
+contact: alan@turing.com
 ---"""
 
     assert validator.check_file(make_file(header_sample))
 
 def test_check_without_enddate():
     header_sample = """---
-layout: bootcamp
+layout: workshop
 root: .
 venue: Euphoric State University
 address: 123 College Street, Euphoria
@@ -169,7 +185,8 @@ startdate: 2020-06-17
 latlng: 41.7901128,-87.6007318
 registration: restricted
 instructor: ["Grace Hopper", "Alan Turing"]
-contact: admin@software-carpentry.org
+contact: alan@turing.com
+helper: [ "John von Neumann" ]
 ---"""
 
     assert validator.check_file(make_file(header_sample))

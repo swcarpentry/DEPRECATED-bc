@@ -1,5 +1,5 @@
 #======================================================================
-# Default Makefile for Software Carpentry bootcamps.  Use 'make' on
+# Default Makefile for Software Carpentry workshops.  Use 'make' on
 # its own to see a list of targets.
 #
 # To add new lessons, add their Markdown files to the MOST_SRC target.
@@ -52,10 +52,13 @@ MOST_SRC = \
 	 team.md \
 	 novice/shell/index.md $(sort $(wildcard novice/shell/??-*.md)) \
 	 novice/git/index.md $(sort $(wildcard novice/git/??-*.md)) \
+	 novice/hg/index.md $(sort $(wildcard novice/hg/??-*.md)) \
 	 novice/python/index.md $(sort $(wildcard novice/python/??-*.md)) \
+	 novice/matlab/index.md $(sort $(wildcard novice/matlab/??-*.md)) \
 	 novice/sql/index.md $(sort $(wildcard novice/sql/??-*.md)) \
 	 novice/extras/index.md $(sort $(wildcard novice/extras/??-*.md)) \
 	 novice/teaching/index.md  $(sort $(wildcard novice/teaching/??-*.md)) \
+	 teaching/index.md $(sort $(wildcard teaching/??-*.md)) \
 	 novice/ref/index.md  $(sort $(wildcard novice/ref/??-*.md)) \
 	 bib.md \
 	 gloss.md \
@@ -65,24 +68,32 @@ MOST_SRC = \
 # All source pages (including things not in the book).
 ALL_SRC = \
 	contents.md \
+	setup.md \
+        $(wildcard intermediate/regex/*.md) \
 	$(wildcard intermediate/python/*.md) \
 	$(wildcard intermediate/doit/*.md) \
+	$(wildcard intermediate/webdata/*.md) \
+	$(wildcard slides/*.html) \
 	$(MOST_SRC)
 
 # Other files that the site depends on.
 EXTRAS = \
        $(wildcard css/*.css) \
-       $(wildcard css/*/*.css)
+       $(wildcard css/*/*.css) \
+       $(wildcard _layouts/*.html)
 
 # Principal target files
 INDEX = $(SITE)/index.html
+
+# All in one HTML target
+BOOK_HTML = $(SITE)/book.html
 
 # Convert from Markdown to HTML.  This builds *all* the pages (Jekyll
 # only does batch mode), and erases the SITE directory first, so
 # having the output index.html file depend on all the page source
 # Markdown files triggers the desired build once and only once.
 $(INDEX) : ./index.html $(ALL_SRC) $(CONFIG) $(EXTRAS)
-	 jekyll -t build -d $(SITE)
+	 jekyll build -t -d $(SITE)
 
 #----------------------------------------------------------------------
 # Create all-in-one book version of notes.
@@ -94,8 +105,16 @@ BOOK_MD = ./book.md
 # Build the temporary input for the book by concatenating relevant
 # sections of Markdown files and then patching glossary references and
 # image paths.
+#
+# Need to fix anchors to glossary references since it now will be in the same
+# file as the lessons.
 $(BOOK_MD) : $(MOST_SRC) bin/make-book.py
-	   python bin/make-book.py $(MOST_SRC) > $@
+	python bin/make-book.py $(MOST_SRC) > $@
+	sed -i.bak 's/\.\.\/\.\.\/gloss.html#/#g:/g' $@
+	rm book.md.bak
+
+$(BOOK_HTML): $(BOOK_MD)
+	make -B site
 
 #----------------------------------------------------------------------
 # Targets.
@@ -105,7 +124,7 @@ $(BOOK_MD) : $(MOST_SRC) bin/make-book.py
 
 ## commands : show all commands.
 commands :
-	 @grep -E '^##' Makefile | sed -e 's/##//g'
+	@grep -E '^##' Makefile | sed -e 's/##//g'
 
 ## ---------------------------------------
 
@@ -125,8 +144,11 @@ clean : tidy
 ## book     : build the site including the all-in-one book.
 #  To do this, we simply create the book Markdown file then build
 #  with Jekyll as usual.
-book : $(BOOK_MD)
-	make site
+book : $(BOOK_HTML)
+
+## epub     : build epub version of lessons (this is experimental)
+epub : book
+	make -f epub.mk epub
 
 ## install  : install on the server.
 install : $(INDEX)
@@ -166,4 +188,12 @@ tidy :
 ipynb :
 	make -f ipynb.mk
 
+## rmd      : convert R Markdown files to Markdown.
+#  This uses an auxiliary Makefile 'rmd.mk'.
+rmd :
+	make -f rmd.mk
+
 ## ---------------------------------------
+
+
+.PHONY: all book check clean commands contribs epub fixme gloss install ipynb site tidy rmd

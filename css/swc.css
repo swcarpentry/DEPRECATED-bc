@@ -256,25 +256,25 @@ table.outlined {
     border-collapse: collapse;
 }
 
-/* Container for content in the bootcamp index page */
-div.bootcamps {
+/* Container for content in the workshop index page */
+div.workshops {
     text-align: center;
 }
 
-/* Link items (to bootcamp pages) in the bootcamps tables */
-table.bootcamps td.link {
+/* Link items (to workshop pages) in the workshops tables */
+table.workshops td.link {
     width: 50%;
     text-align: left;
 }
 
-/* Spacer items (i.e. ellipsis) on the bootcamps tables */
-table.bootcamps td.spacer {
+/* Spacer items (i.e. ellipsis) on the workshops tables */
+table.workshops td.spacer {
    max-width: 100%;
    text-align: center;
 }
 
-/* Date columns on the bootcamps tables */
-table.bootcamps td.date {
+/* Date columns on the workshops tables */
+table.workshops td.date {
     width: 50%;
     text-align: right;
 }
@@ -302,4 +302,40 @@ table.bootcamps td.date {
 /* list with checkbox as bullet */
 ul.checklist {
   list-style-image: url('/img/checkbox.png');
+}
+
+/* Printing */
+@media print {
+  h1 {
+    font-size: 16pt;
+    line-height: 18pt;
+  }
+
+  h2,h3,h4,h5,h6 {
+    font-size: 12pt;
+    line-height: 13pt;
+  }
+
+  p,ul,ol,li,pre,code {
+    font-size: 8pt;
+    line-height: 9pt;
+  }
+
+  code {
+    padding: 0px;
+    border: 0px;
+    background: none;
+  }
+
+  #github-ribbon {
+    display: none;
+  }
+
+  .banner {
+    display: none;
+  }
+
+  .footer {
+    display: none;
+  }
 }
