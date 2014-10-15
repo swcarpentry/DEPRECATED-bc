@@ -246,11 +246,6 @@ sum of negative values: -6
 ~~~
 {:class="out"}
 
-~~~
-sum of positive values: 26
-sum of negative values: -6
-~~~
-
 We can even put one loop inside another:
 
 ~~~
