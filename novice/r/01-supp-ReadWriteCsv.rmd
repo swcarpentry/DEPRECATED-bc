@@ -26,7 +26,7 @@ Let's start by opening a .csv file containing information on the speeds at which
 
 ```{r readData}
 #First, set a working directory (see lesson 'Analyzing Patient Data' for more info)
-setwd('~/swc')
+#setwd('~/swc')
 
 #Import the data and look at the first six rows
 carSpeeds <- read.csv(file='carSpeeds-01.csv')
@@ -144,12 +144,15 @@ After altering our cars dataset by replacing 'Blue' with 'Green' in the `$Color`
 write.csv(carSpeeds, file='CarSpeeds_Cleaned.csv')
 ```
 
-Now let's open the .csv and see what it looks like:
+If you open the file, you'll see that it has header names, because the data had headers within R, but that there are numbers in the first column.
 
-<img src="../novice/r/figure/CSV_WithRowNums.png" alt="csv written without row.names argument" />
-
-Notice that the file has header names, because the data had headers within R. But why are there numbers in the first column? 
-
+```{r rowNamesTable}
+#    Color   Speed       State
+#1    Blue      32   NewMexico
+#2     Red      45     Arizona
+#3    Blue      35    Colorado
+#4   White      34     Arizona
+```
 
 #### The row.names argument
 This argument allows us to set the names of the rows in the output data file. R's default for this argument is `TRUE`, and since it does not know what else to name the rows for the cars data set, it resorts to using row numbers. To correct this, we can set `row.names` to `FALSE`:
@@ -158,7 +161,15 @@ This argument allows us to set the names of the rows in the output data file. R'
 write.csv(carSpeeds, file='CarSpeeds_Cleaned.csv', row.names=FALSE)
 ```
 
-<img src="../novice/r/figure/CSV_WithoutRowNums.png" alt="csv written with row.names argument" />
+Now we see: 
+
+```{r noRowNamesTable}
+# Color   Speed       State
+#  Blue      32   NewMexico
+#   Red      45     Arizona
+#  Blue      35    Colorado
+# White      34     Arizona
+```
 
 > **Tip:** there is also a `col.names` argument, which can be used to set the column names for a data set without headers. If the data set already has headers (e.g., we used the headers = TRUE argument when importing the data) then a `col.names` argument will be ignored.
 
@@ -181,8 +192,15 @@ Now we'll set `NA` to -9999 when we write the new .csv file:
 write.csv(carSpeeds, file='CarSpeeds_Cleaned.csv', row.names=FALSE, na= '-9999')
 ```
 
-<img src="../novice/r/figure/CSV_WithoutSpecialNA.png" alt="csv written with -9999 as NA" />
+And we see:
 
+```{r naTable}
+#Color   Speed       State
+#  Blue      32   NewMexico
+#   Red      45     Arizona
+#  Blue   -9999    Colorado
+# White      34     Arizona
+```
 
 #### Key Points
 
