@@ -5,15 +5,15 @@ title: Making Choices
 ---
 
 Our previous lessons have shown us how to manipulate
-data, define our own functions, and repeat things. 
+data, define our own functions, and repeat things.
 However, the programs we have written so far always do
 the same things, regardless of what data they're given.
 We want programs to make choices based on the values
-they are manipulating. 
+they are manipulating.
 
 ### Conditionals
 
-The tool that MATLAB gives us for doing this is called 
+The tool that MATLAB gives us for doing this is called
 a [conditional statement](../../gloss.html#conditional-statement),
 and it looks like this:
 
@@ -38,9 +38,9 @@ done
 
 The second line of this code uses the keyword `if` to tell MATLAB
 that we want to make a choice. If the test that follows is true,
-the body of the `if` (i.e., the lines between `if` and `else`) are 
-executed. If the test is false, the body of the `else` (i.e., 
-the lines between `else` and `end`) are executed instead. Only one 
+the body of the `if` (i.e., the lines between `if` and `else`) are
+executed. If the test is false, the body of the `else` (i.e.,
+the lines between `else` and `end`) are executed instead. Only one
 or the other is ever executed.
 
 Conditional statements don't have to have an `else` block. If there
@@ -52,6 +52,7 @@ disp('before conditional...')
 
 if num > 100:
     print '53 is greater than 100'
+end
 
 disp('...after conditional')
 ~~~
@@ -68,12 +69,11 @@ before conditional...
 We can also chain several tests together using `elseif`. This makes it
 simple to write a function that returns the sign of a number:
 
-
 ~~~
 % function sign_of.m
 
 function out = sign_of(num)
-    
+
     if num > 0
         out = 1;
 
@@ -86,7 +86,7 @@ end
 ~~~
 
 One important thing to notice in the code above is that we use
-a double equals sign `==` to test for equality rather than a 
+a double equals sign `==` to test for equality rather than a
 single equals sign. This is because the latter is used to mean
 assignment. In our test, we want to check for the equality of `num`
 and `0`, not *assign* 0 to `num`. This convention was inherited
@@ -124,78 +124,78 @@ at least one part is true
 ~~~
 {:class="out"}
 
-In this case, "either" means "either or both", not 
+In this case, "either" means "either or both", not
 "either one or the other but not both".
 
 ### Challenges
 
 1. `1` and `0` aren't the only values
-in MATLAB that are true or false. In fact, *any* value
-can be used in an `if` or `elseif`. After reading and
-running the code below, explain what the rule is for
-which values that are considered true and which are
-considered false.
+   in MATLAB that are true or false. In fact, *any* value
+   can be used in an `if` or `elseif`. After reading and
+   running the code below, explain what the rule is for
+   which values that are considered true and which are
+   considered false.
 
-1.
+   1.
 
-~~~
-if 
-    disp('empty string is true')
-end
-~~~
+   ~~~
+   if
+       disp('empty string is true')
+   end
+   ~~~
 
-2.
+   2.
 
-~~~
-if 'foo'
-    disp('non empty string is true')
-end
-~~~
+   ~~~
+   if 'foo'
+       disp('non empty string is true')
+   end
+   ~~~
 
-3.
+   3.
 
-~~~
-if []
-    disp ('empty array is true')
-end
-~~~
+   ~~~
+   if []
+       disp ('empty array is true')
+   end
+   ~~~
 
-4.
+   4.
 
-~~~
-if [22.5, 1.0]
-    disp ('non empty array is true')
-end
-~~~
+   ~~~
+   if [22.5, 1.0]
+       disp ('non empty array is true')
+   end
+   ~~~
 
-5.
+   5.
 
-~~~
-if [0, 0]
-    disp ('array of zeros is true')
-end
-~~~
+   ~~~
+   if [0, 0]
+       disp ('array of zeros is true')
+   end
+   ~~~
 
-6.
+   6.
 
-~~~
-if true
-    disp('true is true')
-end
-~~~
+   ~~~
+   if true
+       disp('true is true')
+   end
+   ~~~
 
 
-2. Write a function called `near` that returns `1` 
-when its first parameter is within 10% of its second
-and `0` otherwise. Compare your implementation with
-your partner's: do you return the same answer for
-all possible pairs of numbers?
+2. Write a function called `near` that returns `1`
+   when its first parameter is within 10% of its second
+   and `0` otherwise. Compare your implementation with
+   your partner's: do you return the same answer for
+   all possible pairs of numbers?
 
 
 ### Nesting
 
 Another thing to realize is that `if` statements can
-be combined with loops just as easily as they can be 
+be combined with loops just as easily as they can be
 combined with functions. For example, if we want
 to sum the positive numbers in a list, we can write
 this:
@@ -205,7 +205,7 @@ numbers = [-5, 3, 2, -1, 9, 6];
 total = 0;
 
 for n = numbers
-    if n >= 0 
+    if n >= 0
         total = total + n;
     end
 end
@@ -216,7 +216,7 @@ disp(['sum of positive values: ', num2str(total)])
 
 
 ~~~
-sum of positive values: 20 
+sum of positive values: 20
 ~~~
 {:class="out"}
 
@@ -246,6 +246,10 @@ sum of negative values: -6
 ~~~
 {:class="out"}
 
+~~~
+sum of positive values: 26
+sum of negative values: -6
+~~~
 
 We can even put one loop inside another:
 
@@ -275,7 +279,6 @@ the output? Why? Write down the output you might expect from
 changing the order of the loops, then rewrite the code to test
 your hypothesis.
 
-
 2. MATLAB (and most other languges in the C family) provides
 [in-place operators](../../gloss.html#in-place-operator) that
 work like this:
@@ -289,7 +292,6 @@ x *= 3;
 Rewrite the code that sums the positive and negative values
 in an array using these in-place operators. Do you think that
 the result is more or less readable than the original?
-
 
 ### Creating a Heat Map
 
@@ -310,15 +312,11 @@ colorbar();
 ~~~
 {:class="in"}
 
-<!--FIXME: add output image -->
-~~~
-
-~~~
-{:class="out"}
-
+<div>
+<img src="img/01-intro_1.png" style="height:350px">
+</div>
 
 Let's write some code to give us a plot that's a little more useful:
-
 
 ~~~
 [height, width] = size(patient_data);
@@ -326,7 +324,6 @@ heatmap = zeros(height, width);
 
 for y = 1:height
     for x = 1:width
-
         if patient_data(y, x) > mean(patient_data(:))
             heatmap(y, x) = 1;
         elseif patient_data(y, x) < mean(patient_data(:))
@@ -341,7 +338,11 @@ imagesc(heatmap);
 colorbar();
 ~~~
 
-This is slightly better, but there are still a few things 
+<div>
+<img src="img/04-cond_1.png" style="height:350px">
+</div>
+
+This is slightly better, but there are still a few things
 wrong with it:
 
 1. Red against blue is pretty hard on the eyes.
@@ -355,13 +356,13 @@ wrong with it:
 
 Here's how we can improve it:
 
-1. We can pick better colors, and create our own 
+1. We can pick better colors, and use a
 [colormap](../../gloss.html#colormap)
 
-2. Instead of hecking if values are exactly equal to the mean,
+2. Instead of checking if values are exactly equal to the mean,
 we can check if they are close to it.
 
-3. We can calculate the mean once, before the loop, and use 
+3. We can calculate the mean once, before the loop, and use
 that value over and over. The cost of computing the mean is much
 more than retrieving its value from memory.
 
@@ -377,7 +378,7 @@ for y = 1:height
 
         if patient_data(y, x) > 1.9*center
             heatmap(y, x) = 1;
-        elseif patient_data(y, x) < 0.9*mean(patient_data(:))
+        elseif patient_data(y, x) < 0.9*center
             heatmap(y, x) = -1;
         else
             heatmap(y, x) = 0;
@@ -387,13 +388,19 @@ end
 
 imagesc(heatmap);
 colorbar();
+colormap winter
+axis equal
 ~~~
+
+<div>
+<img src="img/04-cond_2.png" style="height:350px">
+</div>
 
 This is better, but we might want to widen the band around the mean
 that gets that color.
 
-But to do that, we'll have to go back to our 
-code and change some numerical values (`1.9` and `0.9` in the 
+But to do that, we'll have to go back to our
+code and change some numerical values (`1.9` and `0.9` in the
 code above). This is almost certainly a bad idea. Let's write a
 function to make things easier:
 
@@ -401,7 +408,7 @@ function to make things easier:
 % make_heatmap.m
 
 function heatmap = make_heatmap(data, low_band, high_band)
-    
+
     % Make a 3-colored heatmap from
     % a 2D array of data.
 
@@ -412,7 +419,7 @@ function heatmap = make_heatmap(data, low_band, high_band)
         for x = 1:width
             if patient_data(y, x) > high_band*center
                 heatmap(y, x) = 1;
-            elseif patient_data(y, x) < low_band*mean(patient_data(:))
+            elseif patient_data(y, x) < low_band*center
                 heatmap(y, x) = -1;
             else
                 heatmap(y, x) = 0;
@@ -423,38 +430,52 @@ function heatmap = make_heatmap(data, low_band, high_band)
 end
 ~~~
 
-To test this function, we can run it with the settings we just 
+To test this function, we can run it with the settings we just
 used:
+
+~~~
+heatmap = make_heatmap(patient_data, 0.9, 1.1);
+imagesc(heatmap);
+colorbar();
+colormap winter
+axis equal
+~~~
+{:class="in"}
+
+<div>
+<img src="img/04-cond_2.png" style="height:350px">
+</div>
+
+That seems right, so let's try wider bands:
 
 ~~~
 heatmap = make_heatmap(patient_data, 0.8, 1.2);
 imagesc(heatmap);
 colorbar();
+colormap winter
+axis equal
 ~~~
 {:class="in"}
 
-~~~
-
-~~~
-{:class="out"}
-
-That seems right, so let's widen the band:
+<div>
+<img src="img/04-cond_3.png" style="height:350px">
+</div>
 
 ~~~
 heatmap = make_heatmap(patient_data, 0.6, 1.4);
 imagesc(heatmap);
 colorbar();
+colormap winter
+axis equal
 ~~~
 {:class="in"}
 
-~~~
-
-~~~
-{:class="out"}
-
-### Colormaps
+<div>
+<img src="img/04-cond_4.png" style="height:350px">
+</div>
 
 <!-- FIXME: add a section on colormaps -->
+<!-- is this required? -->
 
 #### Challenges
 

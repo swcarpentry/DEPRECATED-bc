@@ -1,5 +1,5 @@
 
-function out = sign(num) 
+function out = sign(num)
     if num > 0
         out = 1;
 

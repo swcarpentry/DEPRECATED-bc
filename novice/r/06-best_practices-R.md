@@ -23,8 +23,20 @@ library(reshape)
 library(vegan)
 ```
 
+3. Set your working directory before `source()`ing a script, or start `R` inside your project folder:
 
-3. Set your working directory. Avoid changing the working directory once a script is underway. Use `setwd()` first . Do it at the beginning of a R session. Better yet, start R inside a project folder.
+One should exercise caution when using `setwd()`. Changing directories in your script can limit reproducibility:
+
+* `setwd()` will throw an error if the directory you're trying to change to doesn't exit, or the user doesn't have the correct permissions to access it. This becomes a problem when sharing scripts between users who have organized their directories differently.
+* If/when your script terminates with an error, you might leave the user in a different directory to where they started, and if they call the script again this will cause further problems. If you must use `setwd()`, it is best to put it at the top of the script to avoid this problem.
+
+The following error message indicates that R has failed to set the working directory you specified:
+
+```
+Error in setwd("~/path/to/working/directory") : cannot change working directory
+```
+
+Consider using the convention that the user running the script should begin in the relevant directory on their machine and then use relative file paths (see below). 
 
 4. Use `#` or `#-` to set off sections of your code so you can easily scroll through it and find things.
 

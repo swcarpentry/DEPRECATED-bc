@@ -4,4 +4,4 @@ root: ../..
 title: Make Reference
 level: Intermediate
 ---
-FIXME
+*   [Gnu Make Manual](https://www.gnu.org/software/make/manual/)

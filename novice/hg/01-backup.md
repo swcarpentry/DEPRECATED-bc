@@ -35,7 +35,9 @@ The first time we use Mercurial on a new machine,
 we need to configure a few things.
 
 Dracula sets up his new Windows laptop by using his editor to create
-a new file called `%USERPROFILE%\Mercurial.ini` containing the following
+a new file called `%USERPROFILE%\Mercurial.ini`
+(that's spelled `$USERPROFILE/Mercurial.ini` if you are in `gitbash`)
+containing the following
 lines:
 
 ~~~
@@ -45,6 +47,9 @@ editor = nano
 
 [extensions]
 color =
+
+[color]
+mode = win32
 ~~~
 
 Wolfman has both a Mac laptop and a Linux one and he uses his editor

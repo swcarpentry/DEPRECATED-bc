@@ -1,5 +1,5 @@
 #======================================================================
-# Default Makefile for Software Carpentry bootcamps.  Use 'make' on
+# Default Makefile for Software Carpentry workshops.  Use 'make' on
 # its own to see a list of targets.
 #
 # To add new lessons, add their Markdown files to the MOST_SRC target.
@@ -58,6 +58,7 @@ MOST_SRC = \
 	 novice/sql/index.md $(sort $(wildcard novice/sql/??-*.md)) \
 	 novice/extras/index.md $(sort $(wildcard novice/extras/??-*.md)) \
 	 novice/teaching/index.md  $(sort $(wildcard novice/teaching/??-*.md)) \
+	 teaching/index.md $(sort $(wildcard teaching/??-*.md)) \
 	 novice/ref/index.md  $(sort $(wildcard novice/ref/??-*.md)) \
 	 bib.md \
 	 gloss.md \
@@ -67,9 +68,11 @@ MOST_SRC = \
 # All source pages (including things not in the book).
 ALL_SRC = \
 	contents.md \
+	setup.md \
         $(wildcard intermediate/regex/*.md) \
 	$(wildcard intermediate/python/*.md) \
 	$(wildcard intermediate/doit/*.md) \
+	$(wildcard intermediate/webdata/*.md) \
 	$(wildcard slides/*.html) \
 	$(MOST_SRC)
 
