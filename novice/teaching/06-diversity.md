@@ -113,3 +113,19 @@ http://www.hopejahrensurecanwrite.com/2013/10/23/3-ways-to-be-an-ally/
 Several:
 
 https://medium.com/@nkkl/ride-like-a-girl-1d5524e25d3a
+
+----------------------------------------
+
+Tracy Teal:
+
+This is a great document by Meg Urry (Israel Munson Professor of Physics and Astronomy and the Director of the Yale Center for Astronomy and Astrophysics) with a survey of empirical evidence for gender bias and conformation to gender schema: http://www.equal.ethz.ch/news/women_in_science/summary_urry
+
+and a general science summary: http://www.equal.ethz.ch/news/women_in_science
+
+----------------------------------------
+
+April Wright:
+
+I also found this doc by the Anita Borg Institute: http://anitaborg.org/insights-tools/research/climbing-the-technical-ladder/
+
+The document itself is worth less to me than the bibliography. Focusing more on industry brings in a new set of resources. I found the pieces by JD Yoder and TW McDonald on 'tokenism' (a term I don't love) and supporting women leaders in masculine-coded activities especially interesting.
