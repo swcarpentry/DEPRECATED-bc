@@ -1,12 +1,9 @@
----
-title: "HDF5 in R"
-author: "Edmund Hart"
-date: "August 10, 2014"
-output:
-  html_document:
-    theme: united
----
-*Goals*
+```{r, include = FALSE}
+source("../chunk_options.R")
+```
+
+**Goals**
+
 1. Teach students about HDF5, a common data format used by many disciplines (also the backbone of NetCDF4)
 2. Show students a real use case manipulating big data sets using indexing, loops, and `dplyr`
 3. Reinforce to students in a variety of data munging type tasks such as understanding data types, string parsing, and working with dates
