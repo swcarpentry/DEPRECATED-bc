@@ -238,6 +238,8 @@ write.csv(carSpeeds, file='CarSpeeds_Cleaned.csv')</code></pre>
 
 If you open the file, you'll see that it has header names, because the data had headers within R, but that there are numbers in the first column.
 
+<img src="figure/CSV_WithRowNums.png" alt="csv written without row.names argument" />
+
 
 <pre class='in'><code>#    Color   Speed       State
 #1    Blue      32   NewMexico
@@ -252,6 +254,8 @@ This argument allows us to set the names of the rows in the output data file. R'
 <pre class='in'><code>write.csv(carSpeeds, file='CarSpeeds_Cleaned.csv', row.names=FALSE)</code></pre>
 
 Now we see: 
+
+<img src="figure/CSV_WithoutRowNums.png" alt="csv written with row.names argument" />
 
 
 <pre class='in'><code># Color   Speed       State
@@ -293,6 +297,8 @@ Now we'll set `NA` to -9999 when we write the new .csv file:
 write.csv(carSpeeds, file='CarSpeeds_Cleaned.csv', row.names=FALSE, na= '-9999')</code></pre>
 
 And we see:
+
+<img src="figure/CSV_WithSpecialNA.png" alt="csv written with -9999 as NA" />
 
 
 <pre class='in'><code>#Color   Speed       State
