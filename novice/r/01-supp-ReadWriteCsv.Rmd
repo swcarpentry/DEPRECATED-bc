@@ -24,10 +24,12 @@ The most common way that scientists store data is in Excel spreadsheets. While t
 
 Let's start by opening a .csv file containing information on the speeds at which cars of different colors were clocked in 45 mph zones in the four-corners states (`CarSpeeds.csv`). We will use the built in `read.csv(...)` [function call](../../gloss.html#function-call), which reads the data in as a data frame, and assign the data frame to a variable (using `<-`) so that it is stored in R's memory. Then we will explore some of the basic arguments that can be supplied to the function.
 
-```{r readData}
+```{r setwd, eval=FALSE}
 #First, set a working directory (see lesson 'Analyzing Patient Data' for more info)
-#setwd('~/swc')
+setwd('~/swc')
+```
 
+```{r readData}
 #Import the data and look at the first six rows
 carSpeeds <- read.csv(file='carSpeeds-01.csv')
 head(carSpeeds) 

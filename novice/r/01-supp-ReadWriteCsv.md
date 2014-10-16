@@ -23,9 +23,10 @@ Let's start by opening a .csv file containing information on the speeds at which
 
 
 <pre class='in'><code>#First, set a working directory (see lesson 'Analyzing Patient Data' for more info)
-#setwd('~/swc')
+setwd('~/swc')</code></pre>
 
-#Import the data and look at the first six rows
+
+<pre class='in'><code>#Import the data and look at the first six rows
 carSpeeds <- read.csv(file='carSpeeds-01.csv')
 head(carSpeeds) </code></pre>
 
@@ -89,19 +90,19 @@ carSpeeds$Color</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>  [1] "Green" "1"     "Green" "5"     "4"     "Green" "Green" "2"    
-  [9] "5"     "4"     "4"     "5"     "Green" "Green" "2"     "4"    
- [17] "Green" "Green" "5"     "Green" "Green" "Green" "4"     "Green"
- [25] "4"     "4"     "4"     "4"     "5"     "Green" "4"     "5"    
- [33] "2"     "4"     "2"     "2"     "Green" "4"     "2"     "4"    
- [41] "2"     "2"     "4"     "4"     "5"     "2"     "Green" "4"    
- [49] "4"     "2"     "2"     "4"     "5"     "4"     "Green" "Green"
- [57] "2"     "Green" "5"     "2"     "4"     "Green" "Green" "5"    
- [65] "2"     "4"     "4"     "2"     "Green" "5"     "Green" "4"    
+<div class='out'><pre class='out'><code>  [1] "Green" "4"     "Green" "5"     "3"     "Green" "Green" "1"    
+  [9] "5"     "3"     "3"     "5"     "Green" "Green" "1"     "3"    
+ [17] "Green" "Green" "5"     "Green" "Green" "Green" "3"     "Green"
+ [25] "3"     "3"     "3"     "3"     "5"     "Green" "3"     "5"    
+ [33] "1"     "3"     "1"     "1"     "Green" "3"     "1"     "3"    
+ [41] "1"     "1"     "3"     "3"     "5"     "1"     "Green" "3"    
+ [49] "3"     "1"     "1"     "3"     "5"     "3"     "Green" "Green"
+ [57] "1"     "Green" "5"     "1"     "3"     "Green" "Green" "5"    
+ [65] "1"     "3"     "3"     "1"     "Green" "5"     "Green" "3"    
  [73] "5"     "5"     "Green" "Green" "Green" "Green" "Green" "5"    
- [81] "2"     "Green" "5"     "2"     "2"     "4"     "4"     "5"    
- [89] "5"     "5"     "5"     "4"     "4"     "4"     "5"     "2"    
- [97] "5"     "2"     "2"     "5"    
+ [81] "1"     "Green" "5"     "1"     "1"     "3"     "3"     "5"    
+ [89] "5"     "5"     "5"     "3"     "3"     "3"     "5"     "1"    
+ [97] "5"     "1"     "1"     "5"    
 </code></pre></div>
 
 What happened?!? It looks like 'Blue'  was replaced with 'Green', but every other color was turned into a number (as a character string, given the quote marks before and after). This is because the colors of the cars were loaded as factors, and the factor level was reported following replacement.
@@ -204,8 +205,8 @@ tapply(carSpeeds$Speed, carSpeeds$Color, mean)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>  Red Black  Blue   Red White 
-45.00 38.48 39.07 38.57 38.36 
+<div class='out'><pre class='out'><code>   Black     Blue      Red      Red    White 
+38.47619 39.07143 38.57143 45.00000 38.36364 
 </code></pre></div>
 
 Oops, we see two values for red cars.
@@ -219,8 +220,8 @@ tapply(carSpeeds$Speed, carSpeeds$Color, mean)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>Black  Blue   Red White 
-38.48 39.07 38.79 38.36 
+<div class='out'><pre class='out'><code>   Black     Blue      Red    White 
+38.47619 39.07143 38.79310 38.36364 
 </code></pre></div>
 
 That's better!
