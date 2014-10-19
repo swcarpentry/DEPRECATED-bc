@@ -425,7 +425,7 @@ After the loop, `vowel` refers to the last value in `aeiou`, i.e., `u`.
    ~~~
    {:class="out"}
 
-2. Matlab uses the caret (`^`) to perform exponentiation:
+1. Matlab uses the caret (`^`) to perform exponentiation:
 
    ~~~
    disp(5^3)
@@ -438,7 +438,7 @@ After the loop, `vowel` refers to the last value in `aeiou`, i.e., `u`.
 
    Let `b` be the base of the number and `x` the exponent. Write a loop to compute `b^x`. Check your result for `b = 4` and `x = 5`.
 
-3. In Matlab, the colon operator (`:`) accepts a [stride](../../gloss.html#stride) or skip argument between the start and stop:
+1. In Matlab, the colon operator (`:`) accepts a [stride](../../gloss.html#stride) or skip argument between the start and stop:
 
    ~~~
    disp(1:3:11)
