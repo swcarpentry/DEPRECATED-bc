@@ -96,7 +96,7 @@ We can also combine tests, using `&&` (and) and `||` (or). `&&`
 is true if both tests are true:
 
 ~~~
-if ((i > 0) && (-1 > 0))
+if ((j > 0) && (-1 > 0))
     disp('both parts are true');
 else
     disp('one part is not true');

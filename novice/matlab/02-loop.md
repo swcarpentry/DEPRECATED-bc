@@ -482,7 +482,7 @@ Let's write a loop that tries to print the names of each one of
 our files:
 
 ~~~
-for i = 1:12
+for idx = 1:12
     file_name = sprintf('inflammation-%d.csv', i);
     disp(file_name);
 end
@@ -533,7 +533,7 @@ named `inflammation-01.csv`, `inflammation-02.csv`, etc. To get it
 right, we have to modify our template:
 
 ~~~
-for i = 1:12
+for idx = 1:12
     file_name = sprintf('inflammation-%02d.csv', i);
     disp(file_name);
 end
@@ -566,7 +566,7 @@ We're now ready to modify `analyze.m` to process multiple data files:
 ~~~
 % script analyze.m
 
-for i = 1:3
+for idx = 1:3
 
     % Generate strings for file and image names:
     file_name = sprintf('inflammation-%02d.csv', i);
