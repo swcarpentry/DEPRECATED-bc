@@ -133,7 +133,7 @@ print -dpng "average.png"
 {:class="in"}
 
 You might have noticed that we described what we want 
-out code to do using the `%`-sign.
+our code to do using the `%`-sign.
 This is another plus of writing scripts: you can comment
 your code to make it easier to understand when you come
 back to it after a while. 
