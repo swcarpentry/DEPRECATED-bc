@@ -132,6 +132,12 @@ print -dpng "average.png"
 ~~~
 {:class="in"}
 
+You might have noticed that we described what we want 
+out code to do using the `%`-sign.
+This is another plus of writing scripts: you can comment
+your code to make it easier to understand when you come
+back to it after a while. 
+
 Let's extend our `analyze` script with commands to
 create and save plots:
 
@@ -158,7 +164,7 @@ subplot(1, 3, 3);
 plot(min(patient_data, [], 1));
 ylabel('min')
 
-% save plot to disk as svg image:
+% save plot to disk as png image:
 print -dpng "patient_data-01.png"
 ~~~
 
@@ -246,7 +252,7 @@ it produces an error, because we're asking for characters
 that don't exist.
 
 ~~~
-word = 'tin'
+word = 'tin';
 
 disp(word(1));
 disp(word(2));
@@ -264,6 +270,8 @@ error: A(I): index out of bounds; value 4 out of bound 3
 There's a better approach:
 
 ~~~
+word = 'lead';
+
 for letter = 1:4
     disp(word(letter))
 end
@@ -279,8 +287,8 @@ d
 {:class="out"}
 
 This improved version uses a [for loop](../../gloss.html#for-loop) to
-repeat an operation---in this case, printing---once for each element in
-an array.
+repeat an operation---in this case, printing to the screen---once for 
+each element in an array.
 
 The general form of a for loop is:
 
@@ -337,7 +345,7 @@ Fortunately, MATLAB provides us with a convenient function to
 write a better loop:
 
 ~~~
-word = 'aluminium'
+word = 'aluminium';
 
 for letter = 1:length(word)
     disp(word(letter));
@@ -358,7 +366,7 @@ m
 ~~~
 {:class="out"}
 
-This is much more robust code, as it can deal indentically with
+This is much more robust code, as it can deal identically with
 words of arbitrary length. Here's another loop that repeatedly
 updates the variable `len`:
 
@@ -417,7 +425,7 @@ After the loop, `vowel` refers to the last value in `aeiou`, i.e., `u`.
    ~~~
    {:class="out"}
 
-1. Matlab uses the caret (`^`) to perform exponentiation:
+2. Matlab uses the caret (`^`) to perform exponentiation:
 
    ~~~
    disp(5^3)
@@ -430,7 +438,7 @@ After the loop, `vowel` refers to the last value in `aeiou`, i.e., `u`.
 
    Let `b` be the base of the number and `x` the exponent. Write a loop to compute `b^x`. Check your result for `b = 4` and `x = 5`.
 
-1. In Matlab, the colon operator (`:`) accepts a [stride](../../gloss.html#stride) or skip argument between the start and stop:
+3. In Matlab, the colon operator (`:`) accepts a [stride](../../gloss.html#stride) or skip argument between the start and stop:
 
    ~~~
    disp(1:3:11)
