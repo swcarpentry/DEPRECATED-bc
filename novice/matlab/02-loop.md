@@ -483,7 +483,7 @@ our files:
 
 ~~~
 for idx = 1:12
-    file_name = sprintf('inflammation-%d.csv', i);
+    file_name = sprintf('inflammation-%d.csv', idx);
     disp(file_name);
 end
 ~~~
@@ -517,7 +517,7 @@ loop, `i` starts by referring to
 the value 1. So, when MATLAB executes the command
 
 ~~~
-file_name = sprintf('inflammation-%d.csv', i);
+file_name = sprintf('inflammation-%d.csv', idx);
 ~~~
 
 it substitutes the `%d` in the template `inflammation-%d.csv`, with the
@@ -534,7 +534,7 @@ right, we have to modify our template:
 
 ~~~
 for idx = 1:12
-    file_name = sprintf('inflammation-%02d.csv', i);
+    file_name = sprintf('inflammation-%02d.csv', idx);
     disp(file_name);
 end
 ~~~
@@ -569,8 +569,8 @@ We're now ready to modify `analyze.m` to process multiple data files:
 for idx = 1:3
 
     % Generate strings for file and image names:
-    file_name = sprintf('inflammation-%02d.csv', i);
-    img_name = sprintf ('patient_data-%02d.png', i);
+    file_name = sprintf('inflammation-%02d.csv', idx);
+    img_name = sprintf ('patient_data-%02d.png', idx);
 
     patient_data = csvread(file_name);
     ave_inflammation = mean(patient_data, 1);
