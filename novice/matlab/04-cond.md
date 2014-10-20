@@ -467,14 +467,33 @@ axis equal
 <img src="img/04-cond_4.png" style="height:350px">
 </div>
 
-<!-- FIXME: add a section on colormaps -->
-<!-- is this required? -->
-
 #### Challenges
 
 1. Why does the `make_heatmap` function return an array instead
 of displaying it immediately? Do you think this is a good
 design choice?
+
+<div class="keypoints" markdown="1">
+#### Key Points
+
+* Use `if condition` to start a conditional statement,
+`elseif condition` to provide additional tests, and
+`else` to provide a default.
+
+* Use `==` to test for equality.
+
+* `X && Y` is true only if both X and Y are true.
+
+* `X || Y` is true if either X or Y is true.
+
+* Zero, the empty array, and the empty string are all
+considered false.
+
+* Nest loops to operate on multidimensional data.
+
+* Put code whose parameters change frequently in a function,
+then call it with different parameter values to
+customize its behaviour.
 
 ### Next Steps
 
