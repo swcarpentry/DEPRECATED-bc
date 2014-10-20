@@ -150,13 +150,6 @@ If you open the file, you'll see that it has header names, because the data had 
 
 <img src="figure/CSV_WithRowNums.png" alt="csv written without row.names argument" />
 
-```{r rowNamesTable}
-#    Color   Speed       State
-#1    Blue      32   NewMexico
-#2     Red      45     Arizona
-#3    Blue      35    Colorado
-#4   White      34     Arizona
-```
 
 #### The row.names argument
 This argument allows us to set the names of the rows in the output data file. R's default for this argument is `TRUE`, and since it does not know what else to name the rows for the cars data set, it resorts to using row numbers. To correct this, we can set `row.names` to `FALSE`:
@@ -168,14 +161,6 @@ write.csv(carSpeeds, file='CarSpeeds_Cleaned.csv', row.names=FALSE)
 Now we see: 
 
 <img src="figure/CSV_WithoutRowNums.png" alt="csv written with row.names argument" />
-
-```{r noRowNamesTable}
-# Color   Speed       State
-#  Blue      32   NewMexico
-#   Red      45     Arizona
-#  Blue      35    Colorado
-# White      34     Arizona
-```
 
 > **Tip:** there is also a `col.names` argument, which can be used to set the column names for a data set without headers. If the data set already has headers (e.g., we used the headers = TRUE argument when importing the data) then a `col.names` argument will be ignored.
 
@@ -202,13 +187,6 @@ And we see:
 
 <img src="figure/CSV_WithSpecialNA.png" alt="csv written with -9999 as NA" />
 
-```{r naTable}
-#Color   Speed       State
-#  Blue      32   NewMexico
-#   Red      45     Arizona
-#  Blue   -9999    Colorado
-# White      34     Arizona
-```
 
 #### Key Points
 
