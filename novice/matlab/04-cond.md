@@ -403,10 +403,9 @@ function to make things easier:
 % make_heatmap.m
 
 function heatmap = make_heatmap(data, low_band, high_band)
-
     % Make a 3-colored heatmap from
     % a 2D array of data.
-
+    
     heatmap = zeros(height, width);
     center = mean(patient_data(:));
 
@@ -421,7 +420,6 @@ function heatmap = make_heatmap(data, low_band, high_band)
             end
         end
     end
-
 end
 ~~~
 
@@ -480,7 +478,7 @@ design choice?
 
 ### Next Steps
 
-<!--FIXME: add next steps here-->
-
-Before we're ready to publish our `make_heatmap` function, we need
-to learn how to test whether our code is doing what we need it to do.
+Before we are ready to publish our `make_heatmap` function, we
+need to be sure of its correctness. To do that, we need to learn
+how to *test* our code, and that will be the subject of our
+next lesson.
