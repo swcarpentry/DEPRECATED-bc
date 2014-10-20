@@ -60,6 +60,9 @@ The filename needs to be a character string (or [string](../../gloss.html#string
 Assigning the second argument, `header`, to be `FALSE` indicates that the data file does not have column headers.
 We'll talk more about the value `FALSE`, and its converse `TRUE`, in lesson 04.
 
+> **Tip:** `read.csv` actually has many more arguments that you may find useful when importing your own data in the future.
+You can learn more about these options in this supplementary [lesson](01-supp-ReadWriteCsv.html).
+
 The utility of a function is that it will perform its given action on whatever value is passed to the named argument(s).
 For example, in this case if we provided the name of a different file to the argument `file`, `read.csv` would read it instead.
 We'll learn more of the details about functions and their arguments in the next lesson.
