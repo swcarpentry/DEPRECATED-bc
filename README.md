@@ -484,7 +484,7 @@ FAQ
 *   *Where can I get help?*
     <br/>
     Mail us at [admin@software-carpentry.org](mailto:admin@software-carpentry.org),
-    or join our [discussion list](http://software-carpentry.org/contrib/discuss.html)
+    or join our [discussion list](http://lists.software-carpentry.org/mailman/listinfo/discuss_lists.software-carpentry.org)
     and ask for help there.
 
 *   *Why does the workshop repository have to be created from scratch? Why not fork `bc` on GitHub?*
