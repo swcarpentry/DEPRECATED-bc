@@ -43,7 +43,7 @@ head(carSpeeds) </code></pre>
 
 > **Tip:** The default delimiter of the read.csv() function is a comma, but you can use other delimiters by supplying the 'sep' argument to the function (e.g., typing `sep = ';'` allows a semi-colon separated file to be correctly imported -see ?read.csv() for more information on this and other options for working with different file types).
 
-The call above will import the data, but we have not taken advantages of several handy arguments that can be helpful in loading the data in the format we want. Let's explore some of these arguments.
+The call above will import the data, but we have not taken advantage of several handy arguments that can be helpful in loading the data in the format we want. Let's explore some of these arguments.
 
 
 #### The header argument
@@ -186,27 +186,24 @@ carSpeeds$State</code></pre>
 </code></pre></div>
 
 #### Challenge:
-Suppose we forgot to use the `stringsAsFactors` or `as.is` arguments when importing our dataset, and now we have done a few things to the data and don't want to re-import. Write code for replacing 'Blue' with 'Green' in the `$Color` column of the cars dataset.
+Suppose we want to keep the colors of cars as factors for some other operations we want to perform. Write code for replacing 'Blue' with 'Green' in the `$Color` column of the cars dataset without importing the data with `stringsAsFactors=FALSE`.
 
 
-<pre class='in'><code>carSpeeds <- read.csv(file='carSpeeds-01.csv')
-#Replace 'Blue' with 'Green' in cars$Color without re-importing the data set</code></pre>
 
 
 #### The strip.white argument
-It is not uncommon for mistakes to have been made when the data were recorded, for example a space (whitespace) may have been inserted before a data value. By default this whitespace will be kept in the R environment, such that ' Red' will be recognized as a different value than 'Red'. In order to avoid this type of error, use the `strip.white` argument. Let's see how this works by producing a summary of the average speeds of cars of each color in the dataset:
+It is not uncommon for mistakes to have been made when the data were recorded, for example a space (whitespace) may have been inserted before a data value. By default this whitespace will be kept in the R environment, such that ' Red' will be recognized as a different value than 'Red'. In order to avoid this type of error, use the `strip.white` argument. Let's see how this works by checking for the unique values in the `$Color` column of our dataset:
 
 Here, the data recorder added a space before the color of the car in one of the cells:
 
 
-<pre class='in'><code>#We use the tapply() function, in which we provide the variable we want summarized, the grouping variable, and the type of summary we want
+<pre class='in'><code>#We use the built in unique() function to extract the unique colors in our dataset
  
-tapply(carSpeeds$Speed, carSpeeds$Color, mean)</code></pre>
+unique(carSpeeds$Speed, carSpeeds$Color, mean)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>  Red Black  Blue   Red White 
-45.00 38.48 39.07 38.57 38.36 
+<div class='out'><pre class='out'><code>Error: 'fromLast' must be TRUE or FALSE
 </code></pre></div>
 
 Oops, we see two values for red cars.
@@ -216,12 +213,11 @@ Let's try again, this time importing the data using the `strip.white` argument. 
 
 <pre class='in'><code>carSpeeds<-read.csv(file='carSpeeds-01.csv',stringsAsFactors=FALSE,strip.white=TRUE,sep=',')
  
-tapply(carSpeeds$Speed, carSpeeds$Color, mean)</code></pre>
+unique(carSpeeds$Color)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>Black  Blue   Red White 
-38.48 39.07 38.79 38.36 
+<div class='out'><pre class='out'><code>[1] "Blue"  "Red"   "White" "Black"
 </code></pre></div>
 
 That's better!
