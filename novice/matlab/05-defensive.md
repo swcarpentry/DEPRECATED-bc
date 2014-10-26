@@ -47,12 +47,12 @@ and the most common way to do it is to add [assertions](../../gloss.html#asserti
 so that it checks itself as it runs.
 An assertion is simply a statement that something must be true at a certain point in a program.
 When MATLAB sees one,
-it checks that the assertion's condition.
+it checks the assertion's condition.
 If it's true,
 MATLAB does nothing,
 but if it's false,
 MATLAB halts the program immediately
-and prints and error message.
+and prints an error message.
 For example,
 this piece of code halts as soon as the loop encounters a value that isn't positive:
 
@@ -136,7 +136,7 @@ end
 The first three preconditions catch invalid inputs.
 
 ~~~
-normlize_rectangle([0, 0, 1])
+normalize_rectangle([0, 0, 1])
 ~~~
 {:class="in"}
 
@@ -418,7 +418,7 @@ scientists tend to do the following:
  Data analysts frequently use simple visualizations to check both
  the science they're doing
  and the correctness of their code
- (just as we did in the [opening lesson](01-numpy.html) of this tutorial).
+ (just as we did in the [opening lesson](01-intro.html) of this tutorial).
  This should only be used for debugging as a last resort,
  though,
  since it's very hard to compare two visualizations automatically.
@@ -481,7 +481,8 @@ Replacing random chunks of code is unlikely to do much good.
 if you got it wrong the first time,
 you'll probably get it wrong the second and third as well.)
 Good programmers therefore
-[change one thing at a time, for a reason](../../rules.html#change-one-thing-at-a-time)
+[change one thing at a time](../../rules.html#change-one-thing-at-a-time),
+for a reason.
 They are either trying to gather more information
 ("is the bug still there if we change the order of the loops?")
 or test a fix
