@@ -240,11 +240,11 @@ disp(['sum of negative values: ', num2str(neg_total)]);
 ~~~
 {:class="in"}
 
-
 ~~~
 sum of positive values: 26
 sum of negative values: -6
 ~~~
+{:class="out"}
 
 We can even put one loop inside another:
 
