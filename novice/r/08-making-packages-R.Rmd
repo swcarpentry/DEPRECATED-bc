@@ -5,7 +5,7 @@ root: ../..
 
 
 ```{r, include = FALSE}
-source("chunk_options.R")
+source("chunk-options.R")
 ```
 
 Making packages in R
