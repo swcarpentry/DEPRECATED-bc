@@ -5,7 +5,6 @@ root: ../..
 
 ```{r, include = FALSE}
 source('chunk_options.R')
-library(knitr)
 ```
 
 
@@ -31,7 +30,7 @@ setwd('~/swc')
 
 ```{r readData}
 #Import the data and look at the first six rows
-carSpeeds <- read.csv(file='carSpeeds-01.csv')
+carSpeeds <- read.csv(file='car-speeds.csv')
 head(carSpeeds) 
 ```
 
@@ -49,7 +48,7 @@ The default for `read.csv(...)` is to set the `header` argument to `TRUE`. This 
 carSpeeds[1,]
 
 #The first row of the data if the header argument is set to FALSE:
-carSpeeds <- read.csv(file='carSpeeds-01.csv', header=FALSE)
+carSpeeds <- read.csv(file='car-speeds.csv', header=FALSE)
 
 carSpeeds[1,]
 ```
@@ -64,7 +63,7 @@ This is perhaps the most important argument in `read.csv()`, particularly if you
 #Here we will use R's ifelse function, in which we provide the test phrase, the outcome if the result of the test is 'TRUE', and the outcome if the result is 'FALSE'. We will also assign the results to the Color column, using '<-'
 
 #First - reload the data with a header
-carSpeeds <- read.csv(file='carSpeeds-01.csv')
+carSpeeds <- read.csv(file='car-speeds.csv')
 
 carSpeeds$Color<- ifelse(carSpeeds$Color=='Blue', 'Green', carSpeeds$Color)
 carSpeeds$Color
@@ -75,7 +74,7 @@ What happened?!? It looks like 'Blue'  was replaced with 'Green', but every othe
 Now, let's load the dataset using `stringsAsFactors=FALSE`, and see what happens when we try to replace 'Blue' with 'Green' in the `$Color` column:
 
 ```{r StringsAsFactorFALSE}
-carSpeeds <- read.csv(file='carSpeeds-01.csv', stringsAsFactors=FALSE)
+carSpeeds <- read.csv(file='car-speeds.csv', stringsAsFactors=FALSE)
 
 carSpeeds$Color<- ifelse(carSpeeds$Color=='Blue', 'Green', carSpeeds$Color)
 carSpeeds$Color
@@ -88,7 +87,7 @@ That's better!
 This is an extension of the `stringsAsFactors` argument, but gives you control over individual columns. For example, if we want the colors of cars imported as strings, but we want the names of the states imported as factors, we would load the data set as:
 
 ```{r as.is1}
-carSpeeds <- read.csv(file='carSpeeds-01.csv', as.is = 1) 
+carSpeeds <- read.csv(file='car-speeds.csv', as.is = 1) 
 
 #Note, the 1 applies as.is to the first column only
 ```
@@ -107,7 +106,7 @@ carSpeeds$State
 Suppose we want to keep the colors of cars as factors for some other operations we want to perform. Write code for replacing 'Blue' with 'Green' in the `$Color` column of the cars dataset without importing the data with `stringsAsFactors=FALSE`.
 
 ```{r Challenge, include=FALSE}
-carSpeeds <- read.csv(file='carSpeeds-01.csv')
+carSpeeds <- read.csv(file='car-speeds.csv')
 
 #Replace 'Blue' with 'Green' in cars$Color without using the stringsAsFactors or as.is arguments
 carSpeeds$Color<- ifelse(as.character(carSpeeds$Color)=='Blue', 'Green', as.character(carSpeeds$Color))
@@ -125,7 +124,7 @@ Here, the data recorder added a space before the color of the car in one of the 
 ```{r strip.whiteFALSE}
 #We use the built in unique() function to extract the unique colors in our dataset
  
-unique(carSpeeds$Speed, carSpeeds$Color, mean)
+unique(carSpeeds$Color)
 ```
 
 Oops, we see two values for red cars.
@@ -133,7 +132,7 @@ Oops, we see two values for red cars.
 Let's try again, this time importing the data using the `strip.white` argument. NOTE - this argument must be accompanied by the `sep` argument, by which we indicate the type of delimiter in the file (the comma for most .csv files)
 
 ```{r strip.whiteTRUE}
-carSpeeds<-read.csv(file='carSpeeds-01.csv',stringsAsFactors=FALSE,strip.white=TRUE,sep=',')
+carSpeeds<-read.csv(file='car-speeds.csv',stringsAsFactors=FALSE,strip.white=TRUE,sep=',')
  
 unique(carSpeeds$Color)
 ```
@@ -148,7 +147,7 @@ After altering our cars dataset by replacing 'Blue' with 'Green' in the `$Color`
 ```{r writeData}
 #Export the data. The write.csv() function requires a minimum of two arguments, the data to be saved and the name of the output file.
 
-write.csv(carSpeeds, file='CarSpeeds_Cleaned.csv')
+write.csv(carSpeeds, file='car-speeds-cleaned.csv')
 ```
 
 If you open the file, you'll see that it has header names, because the data had headers within R, but that there are numbers in the first column.
@@ -160,7 +159,7 @@ If you open the file, you'll see that it has header names, because the data had 
 This argument allows us to set the names of the rows in the output data file. R's default for this argument is `TRUE`, and since it does not know what else to name the rows for the cars data set, it resorts to using row numbers. To correct this, we can set `row.names` to `FALSE`:
 
 ```{r row.namesFALSE}
-write.csv(carSpeeds, file='CarSpeeds_Cleaned.csv', row.names=FALSE)
+write.csv(carSpeeds, file='car-speeds-cleaned.csv', row.names=FALSE)
 ```
 
 Now we see: 
@@ -178,14 +177,14 @@ There are times when we want to specify certain values for `NA`s in the data set
 carSpeeds$Speed[3]<-NA
 head(carSpeeds)
 
-write.csv(carSpeeds, file='CarSpeeds_Cleaned.csv', row.names=FALSE)
+write.csv(carSpeeds, file='car-speeds-cleaned.csv', row.names=FALSE)
 ```
 
 Now we'll set `NA` to -9999 when we write the new .csv file:
 
 ```{r naUserSelected}
 #Note - the na argument requires a string input
-write.csv(carSpeeds, file='CarSpeeds_Cleaned.csv', row.names=FALSE, na= '-9999')
+write.csv(carSpeeds, file='car-speeds-cleaned.csv', row.names=FALSE, na= '-9999')
 ```
 
 And we see:

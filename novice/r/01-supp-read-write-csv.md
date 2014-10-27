@@ -27,7 +27,7 @@ setwd('~/swc')</code></pre>
 
 
 <pre class='in'><code>#Import the data and look at the first six rows
-carSpeeds <- read.csv(file='carSpeeds-01.csv')
+carSpeeds <- read.csv(file='car-speeds.csv')
 head(carSpeeds) </code></pre>
 
 
@@ -63,7 +63,7 @@ carSpeeds[1,]</code></pre>
 
 
 <pre class='in'><code>#The first row of the data if the header argument is set to FALSE:
-carSpeeds <- read.csv(file='carSpeeds-01.csv', header=FALSE)
+carSpeeds <- read.csv(file='car-speeds.csv', header=FALSE)
 
 carSpeeds[1,]</code></pre>
 
@@ -83,7 +83,7 @@ This is perhaps the most important argument in `read.csv()`, particularly if you
 <pre class='in'><code>#Here we will use R's ifelse function, in which we provide the test phrase, the outcome if the result of the test is 'TRUE', and the outcome if the result is 'FALSE'. We will also assign the results to the Color column, using '<-'
 
 #First - reload the data with a header
-carSpeeds <- read.csv(file='carSpeeds-01.csv')
+carSpeeds <- read.csv(file='car-speeds.csv')
 
 carSpeeds$Color<- ifelse(carSpeeds$Color=='Blue', 'Green', carSpeeds$Color)
 carSpeeds$Color</code></pre>
@@ -110,7 +110,7 @@ What happened?!? It looks like 'Blue'  was replaced with 'Green', but every othe
 Now, let's load the dataset using `stringsAsFactors=FALSE`, and see what happens when we try to replace 'Blue' with 'Green' in the `$Color` column:
 
 
-<pre class='in'><code>carSpeeds <- read.csv(file='carSpeeds-01.csv', stringsAsFactors=FALSE)
+<pre class='in'><code>carSpeeds <- read.csv(file='car-speeds.csv', stringsAsFactors=FALSE)
 
 carSpeeds$Color<- ifelse(carSpeeds$Color=='Blue', 'Green', carSpeeds$Color)
 carSpeeds$Color</code></pre>
@@ -139,7 +139,7 @@ That's better!
 This is an extension of the `stringsAsFactors` argument, but gives you control over individual columns. For example, if we want the colors of cars imported as strings, but we want the names of the states imported as factors, we would load the data set as:
 
 
-<pre class='in'><code>carSpeeds <- read.csv(file='carSpeeds-01.csv', as.is = 1) 
+<pre class='in'><code>carSpeeds <- read.csv(file='car-speeds.csv', as.is = 1) 
 
 #Note, the 1 applies as.is to the first column only</code></pre>
 
@@ -199,11 +199,12 @@ Here, the data recorder added a space before the color of the car in one of the 
 
 <pre class='in'><code>#We use the built in unique() function to extract the unique colors in our dataset
  
-unique(carSpeeds$Speed, carSpeeds$Color, mean)</code></pre>
+unique(carSpeeds$Color)</code></pre>
 
 
 
-<div class='out'><pre class='out'><code>Error: 'fromLast' must be TRUE or FALSE
+<div class='out'><pre class='out'><code>[1] Green  Red  White Red   Black
+Levels:  Red Black Green Red White
 </code></pre></div>
 
 Oops, we see two values for red cars.
@@ -211,7 +212,7 @@ Oops, we see two values for red cars.
 Let's try again, this time importing the data using the `strip.white` argument. NOTE - this argument must be accompanied by the `sep` argument, by which we indicate the type of delimiter in the file (the comma for most .csv files)
 
 
-<pre class='in'><code>carSpeeds<-read.csv(file='carSpeeds-01.csv',stringsAsFactors=FALSE,strip.white=TRUE,sep=',')
+<pre class='in'><code>carSpeeds<-read.csv(file='car-speeds.csv',stringsAsFactors=FALSE,strip.white=TRUE,sep=',')
  
 unique(carSpeeds$Color)</code></pre>
 
@@ -230,7 +231,7 @@ After altering our cars dataset by replacing 'Blue' with 'Green' in the `$Color`
 
 <pre class='in'><code>#Export the data. The write.csv() function requires a minimum of two arguments, the data to be saved and the name of the output file.
 
-write.csv(carSpeeds, file='CarSpeeds_Cleaned.csv')</code></pre>
+write.csv(carSpeeds, file='car-speeds-cleaned.csv')</code></pre>
 
 If you open the file, you'll see that it has header names, because the data had headers within R, but that there are numbers in the first column.
 
@@ -241,7 +242,7 @@ If you open the file, you'll see that it has header names, because the data had 
 This argument allows us to set the names of the rows in the output data file. R's default for this argument is `TRUE`, and since it does not know what else to name the rows for the cars data set, it resorts to using row numbers. To correct this, we can set `row.names` to `FALSE`:
 
 
-<pre class='in'><code>write.csv(carSpeeds, file='CarSpeeds_Cleaned.csv', row.names=FALSE)</code></pre>
+<pre class='in'><code>write.csv(carSpeeds, file='car-speeds-cleaned.csv', row.names=FALSE)</code></pre>
 
 Now we see: 
 
@@ -271,13 +272,13 @@ head(carSpeeds)</code></pre>
 
 
 
-<pre class='in'><code>write.csv(carSpeeds, file='CarSpeeds_Cleaned.csv', row.names=FALSE)</code></pre>
+<pre class='in'><code>write.csv(carSpeeds, file='car-speeds-cleaned.csv', row.names=FALSE)</code></pre>
 
 Now we'll set `NA` to -9999 when we write the new .csv file:
 
 
 <pre class='in'><code>#Note - the na argument requires a string input
-write.csv(carSpeeds, file='CarSpeeds_Cleaned.csv', row.names=FALSE, na= '-9999')</code></pre>
+write.csv(carSpeeds, file='car-speeds-cleaned.csv', row.names=FALSE, na= '-9999')</code></pre>
 
 And we see:
 
