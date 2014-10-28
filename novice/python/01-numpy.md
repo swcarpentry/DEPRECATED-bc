@@ -591,9 +591,14 @@ Next,
 we will import the `pyplot` module from `matplotlib`
 and use two of its functions to create and display a heat map of our data:
 
+When using imshow to display images `matplotlib` default to interpolating points
+between the real datapoints. While that makes sense for some images we don't really
+want to do this for our data since every point represents a discrete measurement.
+We tell `matplotlib` not to interpolate by setting `interpolation='none'`
+
 
 <pre class="in"><code>from matplotlib import pyplot
-pyplot.imshow(data)
+pyplot.imshow(data, interpolation=&#39;none&#39;)
 pyplot.show()</code></pre>
 
 <div class="out">
