@@ -20,7 +20,7 @@ all : rmd
 #----------------------------------------------------------------------
 
 # Chunk options for knitr
-CHUNK_OPTS = novice/r/chunk_options.R
+CHUNK_OPTS = novice/r/chunk-options.R
 
 # R Markdown files.  Add patterns here to convert files stored in
 # other locations.
