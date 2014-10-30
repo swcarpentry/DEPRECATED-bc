@@ -405,7 +405,7 @@ function to make things easier:
 function heatmap = make_heatmap(data, low_band, high_band)
     % Make a 3-colored heatmap from
     % a 2D array of data.
-    
+
     heatmap = zeros(height, width);
     center = mean(patient_data(:));
 
