@@ -80,7 +80,8 @@ ALL_SRC = \
 EXTRAS = \
        $(wildcard css/*.css) \
        $(wildcard css/*/*.css) \
-       $(wildcard _layouts/*.html)
+       $(wildcard _layouts/*.html) \
+       $(wildcard _includes/*.html)
 
 # Principal target files
 INDEX = $(SITE)/index.html
