@@ -311,5 +311,5 @@ Which of the following statements is true?
 1. caro (the owner) can read, write, and execute myfile.php
 2. caro (the owner) cannot write to myfile.php
 3. members of caro (a group) can read, write, and execute myfile.php
-4. members of caro (a group) cannot write to myfile.php
+4. members of zoo (a group) cannot execute myfile.php
 </div>
