@@ -1,3 +1,8 @@
+# Time estimates for instructors
+
+* n = 5
+* median = 4.5 hours
+
 # Resources
 
 *   `inflammation-*.csv`: data files used in notebooks.
