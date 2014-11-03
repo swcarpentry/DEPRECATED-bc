@@ -5,7 +5,7 @@ source("../chunk_options.R")
 # Diagnostic functions in R
 
 **Super helpful functions**  
-* `str()` - Compactly display the internal structure of an R object. Perhaps the most uesful diagnostic function in R.
+* `str()` - Compactly display the internal structure of an R object. Perhaps the most useful diagnostic function in R.
 * `class()` *Retrieves the internal class of an object*
 * `mode()` *Get or set the type or storage mode of an object.*
 * `length()` *Retrieve or set the dimension of an object.*  
