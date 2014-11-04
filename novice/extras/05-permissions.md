@@ -298,3 +298,18 @@ but it's also more complex to administer and understand on small systems.
 *nothing* is easy to administer or understand.)
 Some modern variants of Unix support ACLs as well as the older read-write-execute permissions,
 but hardly anyone uses them.
+
+<div class="challenge" markdown="1">
+If `ls -l myfile.php` returns the following details:
+
+~~~
+-rwxr-xr-- 1 caro zoo  2312  2014-10-25 18:30 myfile.php
+~~~
+
+Which of the following statements is true?
+
+1. caro (the owner) can read, write, and execute myfile.php
+2. caro (the owner) cannot write to myfile.php
+3. members of caro (a group) can read, write, and execute myfile.php
+4. members of zoo (a group) cannot execute myfile.php
+</div>
