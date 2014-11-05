@@ -60,7 +60,9 @@ Clearly this is not the desired behavior for this data set, but it may be useful
 This is perhaps the most important argument in `read.csv()`, particularly if you are working with categorical data. This is because the default behavior of R is to convert character [string](../../gloss.html#string)s into factors, which may make it difficult to do such things as replace values. For example, let's say we find out that the data collector was color blind, and accidentally recorded green cars as being blue. In order to correct the data set, let's replace 'Blue' with 'Green' in the `$Color` column:
 
 ```{r stringsAsFactorsTRUE}
-#Here we will use R's ifelse function, in which we provide the test phrase, the outcome if the result of the test is 'TRUE', and the outcome if the result is 'FALSE'. We will also assign the results to the Color column, using '<-'
+#Here we will use R's ifelse function, in which we provide the test phrase, the outcome if the 
+# result of the test is 'TRUE', and the outcome if the result is 'FALSE'. We will also assign 
+# the results to the Color column, using '<-'
 
 #First - reload the data with a header
 carSpeeds <- read.csv(file='car-speeds.csv')
