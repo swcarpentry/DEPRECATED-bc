@@ -58,7 +58,7 @@ Calling our own function is no different from calling any other function:
 print &#39;boiling point of water:&#39;, fahr_to_kelvin(212)</code></pre>
 
 <div class="out"><pre class='out'><code>freezing point of water: 273.15
-boiling point of water: 273.15
+boiling point of water: 373.15
 </code></pre></div>
 
 
