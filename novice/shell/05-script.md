@@ -65,7 +65,7 @@ our script's output is exactly what we would get if we ran that pipeline directl
 > We usually call programs like Microsoft Word or LibreOffice Writer "text
 > editors", but we need to be a bit more careful when it comes to
 > programming. By default, Microsoft Word uses `.docx` files to store not
-> only text, but also formatting information about fonts, headings, and so
+> only text, but includes formatting information about fonts, headings, and so
 > on. This extra information isn't stored as characters, and doesn't mean
 > anything to tools like `head`: they expect input files to contain
 > nothing but the letters, digits, and punctuation on a standard computer
@@ -283,7 +283,7 @@ we have a completely accurate record of how we created that figure.
 
 > #### Unnumbering
 >
-> Nelle could also use `colrm` (short for "column removal") to remove the
+> Nelle could use `colrm` (short for "column removal") to remove the
 > serial numbers on her previous commands.
 > Its parameters are the range of characters to strip from its input:
 >
@@ -343,7 +343,7 @@ $ bash do-stats.sh *[AB].txt
 ~~~
 {:class="in"}
 
-She can also do this:
+She could do this:
 
 ~~~
 $ bash do-stats.sh *[AB].txt | wc -l

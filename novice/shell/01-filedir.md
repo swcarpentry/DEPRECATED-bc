@@ -19,7 +19,7 @@ The part of the operating system responsible for managing files and directories
 is called the [file system](../../gloss.html#filesystem).
 It organizes our data into files,
 which hold information,
-and directories (also called "folders"),
+and directories (alternatively called "folders"),
 which hold files or other directories.
 
 Several commands are frequently used to create, inspect, rename, and delete files and directories.
@@ -365,7 +365,7 @@ data/       notes.txt
 it forces `ls` to show us file and directory names that begin with `.`,
 such as `..` (which, if we're in `/users/nelle`, refers to the `/users` directory).
 As you can see,
-it also displays another special directory that's just called `.`,
+it displays another special directory that's just called `.`,
 which means "the current working directory".
 It may seem redundant to have a name for it,
 but we'll see some uses for it soon.
@@ -455,7 +455,7 @@ and we will see it in many other tools as we go on.
 #### Key Points
 *   The file system is responsible for managing information on the disk.
 *   Information is stored in files, which are stored in directories (folders).
-*   Directories can also store other directories, which forms a directory tree.
+*   Directories can store other directories, which forms a directory tree.
 *   `/` on its own is the root directory of the whole filesystem.
 *   A relative path specifies a location starting from the current location.
 *   An absolute path specifies a location from the root of the filesystem.

@@ -61,7 +61,7 @@ $ wc *.pdb
 > On the other hand, `p*.pdb` only matches `pentane.pdb` and
 > `propane.pdb`, because the 'p' at the front only matches itself.
 > 
-> `?` is also a wildcard, but it only matches a single character. This
+> `?` is another wildcard, but it only matches a single character. This
 > means that `p?.pdb` matches `pi.pdb` or `p5.pdb`, but not `propane.pdb`.
 > We can use any number of wildcards at a time: for example, `p*.p?*`
 > matches anything that starts with a 'p' and ends with '.', 'p', and at
@@ -96,7 +96,7 @@ $ wc -l *.pdb
 ~~~
 {:class="out"}
 
-We can also use `-w` to get only the number of words,
+We can use `-w` to get only the number of words,
 or `-c` to get only the number of characters.
 
 Which of these files is shortest?
@@ -148,7 +148,7 @@ $ cat lengths
 {:class="out"}
 
 Now let's use the `sort` command to sort its contents.
-We will also use the -n flag to specify that the sort is 
+We will use the -n flag to specify that the sort is 
 numerical instead of alphabetical.
 This does *not* change the file;
 instead, it sends the sorted result to the screen:
@@ -238,7 +238,7 @@ in memory to hold the program's software and its current state.
 Every process has an input channel called [standard input](../../gloss.html#standard-input).
 (By this point, you may be surprised that the name is so memorable, but don't worry:
 most Unix programmers call it "stdin".
-Every process also has a default output channel called [standard output](../../gloss.html#standard-output)
+Every process has a default output channel called [standard output](../../gloss.html#standard-output)
 (or "stdout").
 
 The shell is actually just another program.
