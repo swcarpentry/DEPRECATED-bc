@@ -19,8 +19,11 @@ both because that is more frequent than adding information,
 and because most other operations only make sense
 once queries are understood.
 If we want to create and modify data,
-we need to know two other pairs of commands.
-  
+we need to know two other sets of commands.
+
+### Creating and Removing Tables
+
+
 The first pair are `create table` and `drop table`.
 While they are written as two words,
 they are actually single commands.
@@ -86,10 +89,14 @@ Once again,
 exactly what constraints are avialable
 and what they're called
 depends on which database manager we are using.
-  
+
+### Adding, Removing, and Updating Data
+
+
 Once tables have been created,
-we can add and remove records using our other pair of commands,
-`insert` and `delete`.
+we can add, change, and remove records using our other set of commands,
+`insert`, `update`, and `delete`.
+
 The simplest form of `insert` statement lists values in order:
 
 ~~~
@@ -104,6 +111,21 @@ We can also insert values into one table directly from another:
 create table JustLatLong(lat text, long text);
 insert into JustLatLong select lat, long from site;
 ~~~
+
+Modifying existing records is done using the `update` statement.
+To do this we tell the database which table we want to update,
+what we want to change the values to for any or all of the fields,
+and under what conditions we should update the values.
+
+For example, if we made a mistake when entering the lat and long values
+of the last `insert` statement above:
+
+~~~
+update Site set lat=-47.87, long=-122.40 where name='MSK-4'
+~~~
+
+Be care to not forget the `where` clause or the update statement will
+modify *all* of the records in the database.
 
 Deleting records can be a bit trickier,
 because we have to ensure that the database remains internally consistent.
