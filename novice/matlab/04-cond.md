@@ -478,7 +478,8 @@ design choice?
 
 * Use `if condition` to start a conditional statement,
 `elseif condition` to provide additional tests, and
-`else` to provide a default.
+`else` to provide a default. As with loops, end the
+conditional statement with the `end` keyword.
 
 * Use `==` to test for equality.
 
