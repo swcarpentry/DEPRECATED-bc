@@ -119,3 +119,13 @@ they can work together after the bootcamp to implement what they've learned.
 ## Media-First Computation
 
 FIXME: Guzdial and Ericson's work
+
+## Exercise
+
+Bill Mills:
+I really like the 3-minute motivational pitch we just did with the online course. A live adaptation:
+
+- Write a 3 min motivational pitch independently
+- Randomly call some people to give their pitches to the class, to support a discussion
+- Adapt pitches based on the fruits of that discussion
+- Give revised pitches to each other in pairs so everyone gets some practice / feedback. 
