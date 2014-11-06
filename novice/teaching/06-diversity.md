@@ -146,3 +146,15 @@ April Wright:
 I also found this doc by the Anita Borg Institute: http://anitaborg.org/insights-tools/research/climbing-the-technical-ladder/
 
 The document itself is worth less to me than the bibliography. Focusing more on industry brings in a new set of resources. I found the pieces by JD Yoder and TW McDonald on 'tokenism' (a term I don't love) and supporting women leaders in masculine-coded activities especially interesting.
+
+----------------------------------------
+
+Jeramia Ory:
+
+For those of you on twitter, @Doctor_PMS is leading a journal club every (other?) Friday on diversity issues in STEM. This week’s topic was Planet Money’s story covering the steady decline in women in computer science since the 80’s:
+
+http://www.npr.org/blogs/money/2014/10/21/357629765/when-women-stopped-coding
+
+The accompanying #DiversityJC hashtag is a good read. It has ideas and frustrations regarding how we can be inclusive with people who have never coded before. It’s a good fit for Software Carpentry teaching in general as well as our broader efforts to include everyone. 
+
+https://twitter.com/search?q=%23DiversityJC
