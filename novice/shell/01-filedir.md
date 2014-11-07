@@ -344,7 +344,7 @@ Most systems will even bring you back to your home if you simply call `cd`
 without any additional argument:
 
 ~~~
-$ cd ~
+$ cd
 ~~~
 {:class="in"}
 
@@ -584,9 +584,9 @@ What does the command `ls` do when used with the -s and -h arguments?
 
 <div class="challenge" markdown="1">
 Starting from `/users/nelle`, if you type in `cd data/experiment1/`,
-what will `pwd` print if you type
+which of the following are true?
 
-1. `cd ..`
-2. `cd`
-3. `cd -`
+1. Typing `cd ..` will bring me to `/users/nelle/data`
+2. Typing `cd -` and `cd` will bring me to `/users/nelle/`
+3. I need to type `cd ../..` to get back to `/users/nelle/`
 </div>
