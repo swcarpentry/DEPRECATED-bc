@@ -65,12 +65,12 @@ More specifically, when we type `whoami` the shell:
 Next,
 let's find out where we are by running a command called `pwd`
 (which stands for "print working directory").
-At any moment,
+Unless we explicitly specify something else,
 our [current working directory](../../gloss.html#current-working-directory)
-is our current default directory,
 i.e.,
-the directory that the computer assumes we want to run commands in
-unless we explicitly specify something else.
+the directory that the computer assumes we want to run commands in,
+is our current default directory (often called our "home").
+
 Here,
 the computer's response is `/users/nelle`,
 which is Nelle's [home directory](../../gloss.html#home-directory):
@@ -132,6 +132,19 @@ which is why `nelle` is the last part of the directory's name.
 > When it appears at the front of a file or directory name,
 > it refers to the root directory. When it appears *inside* a name,
 > it's just a separator.
+
+A very useful shortcut for your home directory is '~'.
+In fact, Nelle will most likely this the following prompt
+when she first starts a shell:
+
+~~~
+nelle@nellesbox:~$ 
+~~~
+{:class="in"}
+
+This prompt gives her username (`nelle`),
+the name of the machine she is logged on (`nellesbox`),
+and the current working directory (`~`, which is `/users/nelle`).
 
 Let's see what's in Nelle's home directory by running `ls`,
 which stands for "listing":
@@ -320,7 +333,25 @@ $ cd /users/nelle
 ~~~
 {:class="in"}
 
-but it's almost always simpler to use `cd ..` to go up one level:
+Note that we can shorten this command using the shortcut for your home:
+
+~~~
+$ cd ~
+~~~
+{:class="in"}
+
+Most systems will even bring you back to your home if you simply call `cd`
+without any additional argument:
+
+~~~
+$ cd ~
+~~~
+{:class="in"}
+
+This is extremely useful if you are far away from home,
+and feel the need to get back in just a few keystrokes.
+
+That being said, it is almost always simpler to use `cd ..` to go up one level:
 
 ~~~
 $ pwd
