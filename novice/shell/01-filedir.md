@@ -24,7 +24,7 @@ which hold files or other directories.
 
 Several commands are frequently used to create, inspect, rename, and delete files and directories.
 To start exploring them,
-let's open a shell window:
+let's open a shell window (which is often called a terminal for historical reasons):
 
 ~~~
 $
@@ -33,7 +33,12 @@ $
 
 The dollar sign is a [prompt](../../gloss.html#prompt),
 which shows us that the shell is waiting for input;
-your shell may show something more elaborate.
+your shell may show something more elaborate, for example:
+
+~~~
+username@machine:directory$ 
+~~~
+{:class="in"}
 
 Type the command `whoami`,
 then press the Enter key (sometimes marked Return) to send the command to the shell.
