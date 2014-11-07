@@ -382,6 +382,43 @@ $ pwd
 ~~~
 {:class="out"}
 
+But what if you change directories, and want to go back to the previous one?
+For example, you are working in `/users/nelle/data/experiment1/results/`,
+then go to `/users/nelle/projects/goopaper/manuscript/`,
+and realise that you need to look at the results again?
+
+This can be done with ` cd -`:
+
+~~~
+$ pwd
+~~~
+{:class="in"}
+~~~
+/users/nelle/data/experiment1/results/
+~~~
+{:class="out"}
+~~~
+$ cd ~/projects/goopaper/manuscript/
+$ pwd
+~~~
+{:class="in"}
+~~~
+/users/nelle/projects/goopaper/manuscript/
+~~~
+{:class="out"}
+~~~
+$ cd -
+~~~
+{:class="in"}
+~~~
+/users/nelle/data/experiment1/results/
+$
+~~~
+{:class="out"}
+
+As a nice side-effect,
+`cd -` will print out the name of the directory to which it brought you back.
+
 The special directory `..` doesn't usually show up when we run `ls`.
 If we want to display it, we can give `ls` the `-a` flag:
 
@@ -543,4 +580,13 @@ What does the command `cd` without a directory name do?
 
 <div class="challenge" markdown="1">
 What does the command `ls` do when used with the -s and -h arguments?
+</div>
+
+<div class="challenge" markdown="1">
+Starting from `/users/nelle`, if you type in `cd data/experiment1/`,
+what will `pwd` print if you type
+
+1. `cd ..`
+2. `cd`
+3. `cd -`
 </div>
