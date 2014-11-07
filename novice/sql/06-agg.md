@@ -39,7 +39,7 @@ select dated from Visited;</code></pre>
 
 
 but to combine them,
-wee must use an [aggregation function](../../gloss.html#aggregation-function)
+we must use an [aggregation function](../../gloss.html#aggregation-function)
 such as `min` or `max`.
 Each of these functions takes a set of records as input,
 and produces a single record as output:
