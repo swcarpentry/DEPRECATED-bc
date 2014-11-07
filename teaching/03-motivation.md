@@ -65,6 +65,34 @@ but most GUI editors save things to the user's desktop or home directory.
 If people need to run shell commands on the files they've edited,
 a substantial fraction won't be able to navigate to the right directory without help.
 
+###Techniques for Motivating Content
+As discussed above, it's crucial that students believe in the value of the material,
+and their ability to master it. But, reciting impressive technical specifications of
+a tool often falls flat with beginners, and unsubstantiated cheerleading
+becomes transparent quickly.
+Here are some simple techniques to build authentic and compelling motivation:
+
+ - **Relate the material to learners' existing practice**. One of the most compelling
+ pitches for git I ever heard was from someone in the social sciences,
+ who explained how git was a tool for *editing manuscripts*.
+ The students had long ago internalized the value and importance of editing text;
+ this pitch painted version control as simply a tool for helping them continue their
+ existing practice in the world of code.
+ - **Tell a personal story** of how you use the tool or idea. By painting a human
+ picture of using this material, you make it more relatable and thus less intimidating.
+ What's more, if you can help your students relate to your real experiences using the
+ material, you start to build a sense of *community* around using and learning these ideas.
+ And if you have an authentic story to tell about struggling to learn these concepts
+ the first time - tell it. Understanding that even the instructor struggled at first
+ lets students know that their own struggles are normal, and nothing to be discouraged by.
+ - Don't be afraid to step back and call out the **big ideas**. Sure, git is great for
+ managing changes; but this lets us *experiment fearlessly*, since we know we can always
+ retreat to a previous commit. Sure, scripting can be a powerful convenience tool;
+ but it also lets us *build ambitiously*, since building small, unix-style programs
+ give us a rock-solid foundation to build on. The rest of the lesson can focus on the
+ technical details; when motivating material, take a moment to call out the exciting
+ spirit and opportunities it affords in a way that's compelling beyond the technical.
+
 ## Mindset, Stereotype Threat, and Diversity
 
 Carol Dweck and others have found that if you tell people that ability at some task is intrinsic
