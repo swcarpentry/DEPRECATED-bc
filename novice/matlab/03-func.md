@@ -391,5 +391,17 @@ as help text.
 
 ### Next Steps
 
-<!--FIXME: need next steps here -->
+We have now solved our original problem: we can analyze 
+any number of data files with a single command.
+More importantly, we have met two of the most important
+ideas in programming:
 
+1. Use arrays to store related values, and loops to
+repeat operations on them.
+
+2. Use functions to make code easier to re-use and
+easier to understand.
+
+We have one more big idea to introduce, and then we will
+be able to construct a better 'heat map', like the one
+we initially used to display our first data set.
