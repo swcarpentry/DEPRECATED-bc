@@ -193,3 +193,17 @@ aliases can save us a lot of typing, and hence a lot of typing mistakes.
 You can find interesting suggestions for other aliases
 and other bash tricks by searching for "sample bashrc"
 in your favorite search engine.
+
+If you decide that an alias is no longer needed or you want to temporarily disable it in a shell,
+you can use the `unalias` command to disassociate the shortcut. So, for the `backup` command, using
+`unalias` will remove this shortcut for the current shell. 
+
+<div class="file" markdown="1">
+~~~
+unalias backup
+~~~
+</div>
+
+Note that if the `alias` is defined in the bashrc or shell profiles then when a new shell
+is started, the `alias` shortcut will return.
+

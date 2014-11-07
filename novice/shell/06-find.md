@@ -18,7 +18,7 @@ young people use "Google" as a verb,
 while crusty old Unix programmers use "grep".
 The word is a contraction of "global/regular expression/print",
 a common sequence of operations in early Unix text editors.
-It is also the name of a very useful command-line program.
+And it is the name of a very useful command-line program.
 
 `grep` finds and prints lines in files that match a pattern.
 For our examples,
@@ -411,7 +411,7 @@ $ grep FE $(find .. -name '*.pdb')
 > their limits, and to use a programming language such as Python instead.
 > When the time comes to do this, don't be too hard on the shell: many
 > modern programming languages, Python included, have borrowed a lot of
-> ideas from it, and imitation is also the sincerest form of praise.
+> ideas from it, and imitation is the sincerest form of flattery.
 
 ### Conclusion
 

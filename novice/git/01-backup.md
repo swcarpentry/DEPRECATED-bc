@@ -43,7 +43,7 @@ $ git config --global core.editor "nano"
 {:class="in"}
 
 (Please use your own name and email address instead of Dracula's,
-and please make sure you choose an editor that's actually on your system,
+and please make sure you choose an editor that is installed on your system,
 such as `notepad` on Windows.)
 
 Git commands are written `git verb`,
@@ -61,7 +61,7 @@ the flag `--global` tells Git to use the settings for every project on this mach
 
 > #### Proxy
 >
-> In some networks you need to use a proxy. If this is the case you may also
+> In some networks you need to use a proxy. If this is the case you may
 > need to tell Git about the proxy:
 >
 > ~~~
@@ -606,7 +606,7 @@ so `HEAD~1` (pronounced "head minus one")
 means "the previous revision",
 while `HEAD~123` goes back 123 revisions from where we are now.
 
-We can also refer to revisions using
+We can refer to revisions using
 those long strings of digits and letters
 that `git log` displays.
 These are unique IDs for the changes,
@@ -753,7 +753,7 @@ The fact that files can be reverted one by one
 tends to change the way people organize their work.
 If everything is in one large document,
 it's hard (but not impossible) to undo changes to the introduction
-without also undoing changes made later to the conclusion.
+without undoing changes made later to the conclusion.
 If the introduction and conclusion are stored in separate files,
 on the other hand,
 moving backward and forward in time becomes much easier.
@@ -865,7 +865,7 @@ fatal: no files added
 
 If we really want to override our ignore settings,
 we can use `git add -f` to force Git to add something.
-We can also always see the status of ignored files if we want:
+We can always see the status of ignored files if we want:
 
 ~~~
 $ git status --ignored

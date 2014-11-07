@@ -27,7 +27,7 @@ Normal practice today looks something like this:
 *   A scientist collects some data and stores it on a machine
     that is occasionally backed up by her department.
 *   She then writes or modifies a few small programs
-    (which also reside on her machine)
+    (which reside on her machine)
     to analyze that data.
 *   Once she has some results,
     she writes them up and submits her paper.
@@ -36,7 +36,7 @@ Normal practice today looks something like this:
 *   Time passes.
 *   The journal sends her reviews written anonymously by a handful of other people in her field.
     She revises her paper to satisfy them,
-    during which time she might also modify the scripts she wrote earlier,
+    during which time she might modify the scripts she wrote earlier,
     and resubmits.
 *   More time passes.
 *   The paper is eventually published.
@@ -58,8 +58,8 @@ the process looks like this:
     she pushes changes to her scripts
     (and possibly some output files)
     to that repository.
-    She also uses the repository for her paper;
-    that repository is then the hub for collaboration with her colleagues.
+    Additionally, she uses the repository for her paper;
+    that repository becomes the hub for collaboration with her colleagues.
 *   When she's happy with the state of her paper,
     she posts a version to [arXiv](http://arxiv.org/)
     or some other preprint server
@@ -97,7 +97,7 @@ must make *their* code freely available as well.
 
 Proponents of the GPL argue that this requirement is needed
 to ensure that people who are benefiting from freely-available code
-are also contributing back to the community.
+are contributing back to the community.
 Opponents counter that many open source projects have had long and successful lives
 without this condition,
 and that the GPL makes it more difficult to combine code from different sources.
@@ -180,7 +180,7 @@ in order to encourage the widest possible re-use.
 Again,
 the most important thing is for the `LICENSE` file in the root directory of your project
 to state clearly what your license is.
-You may also want to include a file called `CITATION` or `CITATION.txt`
+You may want to include a file called `CITATION` or `CITATION.txt`
 that describes how to reference your project;
 the one for Software Carpentry states:
 
@@ -230,13 +230,13 @@ The third option is to use a public hosting service like [GitHub](http://github.
 [Google Code](http://code.google.com),
 or [SourceForge](http://sourceforge.net).
 All of these allow people to create repositories through a web interface,
-and also provide mailing lists,
+and can provide mailing lists,
 ways to keep track of who's doing what,
 and so on.
 They all benefit from economies of scale and network effects:
 it's easier to run one large service well
 than to run many smaller services to the same standard,
-and it's also easier for people to collaborate if they're using the same service,
+and it's easier for people to collaborate if they're using the same service,
 not least because it gives them fewer passwords to remember.
 
 However,
@@ -250,7 +250,7 @@ they may have to pay.
 Sharing might seem like the only valid choice for science,
 but many institutions may not allow researchers to do this,
 either because they want to protect future patent applications
-or simply because what's new is often also frightening.
+or simply because what's new is often frightening.
 
 <div class="keypoints" markdown="1">
 

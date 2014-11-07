@@ -281,7 +281,7 @@ quotes.txt
 {:class="out"}
 
 Just for the sake of inconsistency,
-`mv` also works on directories&mdash;there is no separate `mvdir` command.
+`mv` works on directories&mdash;there is no separate `mvdir` command.
 
 Let's move `quotes.txt` into the current working directory.
 We use `mv` once again,
