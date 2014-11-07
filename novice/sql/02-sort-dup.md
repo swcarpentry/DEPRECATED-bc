@@ -104,7 +104,8 @@ Notice in both cases that duplicates are removed
 even if they didn't appear to be adjacent in the database.
 Again,
 it's important to remember that rows aren't actually ordered:
-they're just displayed that way.This means that query results aren't necessarily sorted,
+they're just displayed that way.
+This means that query results aren't necessarily sorted,
 and even if they are,
 we often want to sort them in a different way,
 e.g., by the name of the project instead of by the name of the scientist.
