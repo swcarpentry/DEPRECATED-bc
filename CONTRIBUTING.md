@@ -69,14 +69,14 @@ The GitHub workflow looks like this:
 
 2.  Clone that repository to your own machine.
 
-3.  Create a branch from `master` for your changes.
+3.  Create a branch from `gh-pages` for your changes.
     Give your branch a meaningful name,
     such as `fixing-typos-in-novice-shell-lesson`
     or `adding-tutorial-on-visualization`.
 
 4.  Make your changes, commit them, and push them to your repository on GitHub.
 
-5.  Send a pull request to the `master` branch of `[swcarpentry/bc](http://github.com/swcarpentry/bc)`.
+5.  Send a pull request to the `gh-pages` branch of `[swcarpentry/bc](http://github.com/swcarpentry/bc)`.
 
 If it is easier for you to send them to us some other way,
 please mail us at
