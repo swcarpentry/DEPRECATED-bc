@@ -148,14 +148,13 @@ $ kill %1
 ~~~
 
 The `kill` command is a useful tool to stop runaway jobs that are eating resources on your machine. Imagine you've written a bash script called `control.sh` that launches a bunch of long jobs in the background:
-<div class="file" markdown="1">
+
 ~~~
 #!/usr/bin/bash
 bash run_process1.sh &
 bash run_process2.sh &
 bash run_process3.sh &
 ~~~
-</div>
 
 Then you launch the `control.sh` script:
 
@@ -169,12 +168,12 @@ To kill `run_process2.sh`, we need to find its process id (PID). We can do this 
 ~~~
 $ ps | grep run_process2 
 ~~~
-{:class="in"}
+
 ~~~
 2152   2143   2143   con  1000  13:19:07   bash run_process2.sh
 2276   2152   2276   con  1000  14:53:48   grep run_process2.sh
 ~~~
-{:class="out"}
+
 
 The first line in the output is the running `run_process2.sh` script. The second line in the output is the `grep` search we've just run. Remember the first column is the PID we need to kill the job. So, now we just type:
 
