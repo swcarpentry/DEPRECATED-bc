@@ -147,6 +147,43 @@ $ jobs
 $ kill %1
 ~~~
 
+The `kill` command is a useful tool to stop runaway jobs that are eating resources on your machine. Imagine you've written a bash script called `control.sh` that launches a bunch of long jobs in the background:
+<div class="file" markdown="1">
+~~~
+#!/usr/bin/bash
+bash run_process1.sh &
+bash run_process2.sh &
+bash run_process3.sh &
+~~~
+</div>
+
+Then you launch the `control.sh` script:
+
+~~~
+$ bash control.sh
+~~~
+
+After a few minutes, you become aware that `run_process2.sh` is not behaving as it should and is using far too much memory. We can combine the `ps`, `grep` and `kill` to terminate `run_process2.sh` without ending all of `control.sh`. Remember `ps` tells you what processes are running. `grep` allows you to search for matching text and `kill` terminates the process.
+
+To kill `run_process2.sh`, we need to find its process id (PID). We can do this by piping `ps` into `grep`:
+~~~
+$ ps | grep run_process2 
+~~~
+{:class="in"}
+~~~
+2152   2143   2143   con  1000  13:19:07   bash run_process2.sh
+2276   2152   2276   con  1000  14:53:48   grep run_process2.sh
+~~~
+{:class="out"}
+
+The first line in the output is the running `run_process2.sh` script. The second line in the output is the `grep` search we've just run. Remember the first column is the PID we need to kill the job. So, now we just type:
+
+~~~
+$ kill  2152
+~~~
+
+That will terminate `run_process2.sh`, but will leave `run_process1.sh` and `run_process3.sh` running, allowing us to fix the problem in the `run_process2.sh` script, without having to restart everything.
+
 Job control was important when users only had one terminal window at a
 time. It's less important now: if we want to run another program, it's
 easy enough to open another window and run it there. However, these
