@@ -50,3 +50,5 @@ and because of a hosting site called [GitHub](http://github.com).
 No matter which version control system you use,
 the most important thing to learn is not the details of their more obscure commands,
 but the workflow that they encourage.
+
+[Next Lesson : A Better Kind of Backup](01-backup.html)
