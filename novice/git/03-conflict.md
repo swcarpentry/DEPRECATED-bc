@@ -311,3 +311,5 @@ What does Git do
 when there is a conflict in an image or some other non-textual file
 that is stored in version control?
 </div>
+
+[Next Lesson : Open Science](04-open.html)

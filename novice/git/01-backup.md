@@ -927,3 +927,5 @@ git init     # make the beta sub-directory a Git repository
 
 Why is it a bad idea to do this?
 </div>
+
+[Next Lesson : Collaborating](02-collab.html)

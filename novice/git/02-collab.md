@@ -311,3 +311,5 @@ push those changes to GitHub,
 and then look at the [timestamp](../../gloss.html#timestamp) of the change on GitHub.
 How does GitHub record times, and why?
 </div>
+
+[Next Lesson : Conflicts](03-conflict.html)
