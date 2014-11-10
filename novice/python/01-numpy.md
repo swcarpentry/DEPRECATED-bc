@@ -657,6 +657,8 @@ or something is wrong with our data.
     Why are the vertical lines in our plot of the minimum inflammation per day not perfectly vertical?
 
 2.  Create a plot showing the standard deviation of the inflammation data for each day across all patients.
+
+3.  You may have noticed that the heatmap in the first figure above is somewhat blurry. This is due to matplotlib interpolating additional points between the original datapoints. It would be nice to disable this interpolation. We can do this by specifying the interpolation in a similar way to how we specified ```axis=0``` or ```axis=1``` to ```data.mean``` above. Here we want to specify ```interpolation='none'``` when calling ```imshow```.
 </div>
 
 ### Wrapping Up
