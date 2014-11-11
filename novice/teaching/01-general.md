@@ -156,6 +156,10 @@ see [this wiki page](https://github.com/swcarpentry/bc/wiki/Configuration-Proble
     because they have to watch you type
     then type it all in again themselves.
 
+* Repeat questions loudly and clearly to make sure that everybody
+  hears and understands them before proceeding with answering them.
+
+
 #### Pitfalls
 
 Instructing at a workshop isn't trivial.
