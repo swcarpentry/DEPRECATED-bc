@@ -15,24 +15,6 @@ title: Open Science
 
 </div>
 
-<!-- 
-
-<blockquote>
-The opposite of "open" isn't "closed".
-The opposite of "open" is "broken".
-<br/>
-&mdash; John Wilbanks
-</blockquote>
-
-I find this quote is needlessly provocative. Students may feel attacked or insulted even
-before the lesson begins.  
--->
-
-<!--
-The previous vignette on how open science might work
-covered a lot of workflow, cultural, and technical areas that are
-beyond the scope of this lesson. 
--->
 
 Knowing how to effectively publish and distribute open source software 
 and open data is becoming as important to scientific research as publishing
@@ -40,10 +22,6 @@ papers -- indeed, it is already required by many of the most prestigious
 journals. In this lesson we focus on the two key components to publishing
 data or source code: licensing and repositories. 
 
-<!--
-Some disclaimer that the purpose of this lesson is not to tell people what
-they must do, but rather, how to do it. 
--->
 
 ## Open Source Software ## 
 
@@ -151,9 +129,6 @@ proceeding.  Many projects host their daily development on public hosting
 services while also distributing releases through a system such as this.
 
 
-<!-- Python folks, I know you don't have anything like CRAN but
-fill something in here anyway--> 
-
 It has been common practice for researchers to host software they develop
 on computer servers managed by their lab, department, or institution.
 Experience has shown that software and other resources hosted in this
@@ -165,7 +140,6 @@ sections of journals are also not ideal mechanisms to distribute
 software, for many of the same reasons. It is best to simply link from
 your publication or personal website to the permanent software repository.
 
-<!-- Open source projects such as [Gitlab](https://about.gitlab.com/)
 make it easy to run a Github-like environment on a private server but
 may not be as well suited for long-term hosting as the larger dedicated
 hosting services.  -->
@@ -183,7 +157,6 @@ to facilitate this.
 
 ## Open Data ##
 
-<!-- Some disclaimer that this is descriptive rather than perscriptive,
 Learners should know how to publish open data effectively, whether
 or not they choose to do so in any particular circumstance. -->
 
@@ -239,7 +212,6 @@ are one good place to start.
 
 Data repositories provide many advantages, including: 
 
-<!-- This is rather long and rambly, maybe drop?-->
 
 - **Permanent identifiers:** Though widely touted as making your data
 'citable', permanent identifiers are designed to avoid link rot that
