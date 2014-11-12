@@ -147,41 +147,28 @@ $ jobs
 $ kill %1
 ~~~
 
-The `kill` command is a useful tool to stop runaway jobs that are eating resources on your machine. Imagine you've written a bash script called `control.sh` that launches a bunch of long jobs in the background:
+The `kill` command is a useful tool to stop runaway jobs that are eating resources on your machine. Combining it with the PIDs (identified using `ps` ) described previously allows you to stop processes that you have launched which are not behaving as they should be. Similar to above, the `kill` command is followed by the PID:
 
 ~~~
-#!/usr/bin/bash
-bash run_process1.sh &
-bash run_process2.sh &
-bash run_process3.sh &
-~~~
+$ ps
 
-Then you launch the `control.sh` script:
-
-~~~
-$ bash control.sh
-~~~
-
-After a few minutes, you become aware that `run_process2.sh` is not behaving as it should and is using far too much memory. We can combine the `ps`, `grep` and `kill` to terminate `run_process2.sh` without ending all of `control.sh`. Remember `ps` tells you what processes are running. `grep` allows you to search for matching text and `kill` terminates the process.
-
-To kill `run_process2.sh`, we need to find its process id (PID). We can do this by piping `ps` into `grep`:
-~~~
-$ ps | grep run_process2 
+PID    PPID   PGID   TTY   UID     STIME   COMMAND
+2152      1   2152   con  1000  13:19:07   /usr/bin/bash
+2276   2152   2276   con  1000  14:53:48   /usr/bin/ps
+2289   2282	  2289   con  1000  14:40:35   /usr/bin/some_script
 ~~~
 
 ~~~
-2152   2143   2143   con  1000  13:19:07   bash run_process2.sh
-2276   2152   2276   con  1000  14:53:48   grep run_process2.sh
+$ kill 2289
 ~~~
 
-
-The first line in the output is the running `run_process2.sh` script. The second line in the output is the `grep` search we've just run. Remember the first column is the PID we need to kill the job. So, now we just type:
+There is also a version of `kill` that allows you to kill processes by name. `pkill` is used in a similar way to `kill`, but the `pkill` command is followed by the name of the script that is running.
 
 ~~~
-$ kill  2152
+$ pkill some_script
 ~~~
 
-That will terminate `run_process2.sh`, but will leave `run_process1.sh` and `run_process3.sh` running, allowing us to fix the problem in the `run_process2.sh` script, without having to restart everything.
+It is worth noting that `pkill` will kill any process that matches the pattern that follows it, so the above example would also kill a process named `some_script_to_be_left_running`. Therefore, it can sometimes be worth using the command `pgrep -l some_script` to see which processes are going to be identified (and thus killed) by the `pkill` command. The `-l` flag tells `pgrep` to output the process name in addition to its PID.
 
 Job control was important when users only had one terminal window at a
 time. It's less important now: if we want to run another program, it's
