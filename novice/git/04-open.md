@@ -43,8 +43,8 @@ licenses allow unrestricted sharing and modification of programs, but
 copyleft licenses are [infective](../../gloss.html#infective-license):
 anyone who distributes a modified version of the code (or anything
 that includes GPL'd code) must make *their* code freely available as
-well. Lacking this clause, code under permissive licenses can be more
-immediately used in commercial software.
+well. Code under permissive licenses has no such clause, and as such can 
+be more [easily re-used in commercial software](http://nipy.sourceforge.net/nipy/devel/faq/johns_bsd_pitch.html). 
 
 #### How to apply a license ####
 
