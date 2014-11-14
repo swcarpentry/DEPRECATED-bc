@@ -177,12 +177,11 @@ A vector is a collection of elements that are most commonly `character`, `logica
 You can create an empty vector with `vector()`. (By default the mode is `logical`. You can be more explicit as shown in the examples below.) It is more common to use direct constructors such as `character()`, `numeric()`, etc.
 
 ```{r}
-x <- vector()
-# with a length and type
-vector("character", length = 10)
-character(5) ## character vector of length 5
-numeric(5)
-logical(5)
+vector() # An empty vector with of type 'logical' (the default)
+vector("character", length = 5) # a vector of type 'character' with 5 elements
+character(5) # the same thing, but using the constructor directly
+numeric(5)   # a numeric vector with 5 elements
+logical(5)   # a logical vector with 5 elements
 ```
 
 Various examples:
