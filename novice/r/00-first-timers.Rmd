@@ -189,7 +189,6 @@ Various examples:
 ```{r}
 x <- c(1, 2, 3)
 x
-length(x)
 ```
 
 `x` is a numeric vector. These are the most common kind. They are numeric objects and are treated as double precision real numbers. To explicitly create integers, add an `L` to each (or *coerce* to the integer type using `as.integer()`.
