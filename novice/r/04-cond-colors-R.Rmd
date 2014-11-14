@@ -68,7 +68,7 @@ Lets try to index using __logical vectors__. Here we use a set a true/false stat
 
 ```{r}
 grid3 <- block_grid(5, type = "vector")
-grid3[c(T, F, T, F, T)] = "darkred"
+grid3[c(TRUE, FALSE, TRUE, FALSE, TRUE)] <- "darkred"
 grid3
 ```
 
