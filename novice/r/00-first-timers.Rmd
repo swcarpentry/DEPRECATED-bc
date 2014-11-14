@@ -12,20 +12,20 @@ source("chunk-options.R")
 * Draw concept map of where we are headed towards best scientific practices, and reproducibility.
 * Its really important that you know what you did. More journals/grants/etc. are also making it important for them to know what you did.
 * A lot of scientific code is *not* reproducible.
-* If you keep a lab notebook, why are we not as careful with our code? 
-* We edit each others manuscripts, but we don't edit each other's code. 
+* If you keep a lab notebook, why are we not as careful with our code?
+* We edit each others manuscripts, but we don't edit each other's code.
 * If you write your code with "future you" in mind, you will save yourself and others a lot of time.
 
 # Very basics of R
 
-R is a versatile, open source programming language that was specifically designed for data analysis. As such R is extremely useful both for statistics and data science. Inspired by the programming language S.  
+R is a versatile, open source programming language that was specifically designed for data analysis. As such R is extremely useful both for statistics and data science. Inspired by the programming language S.
 
-* Open source software under GPL.  
-* Superior (if not just comparable) to commercial alternatives. R has over 5,000 user contributed packages at this time. It's widely used both in academia and industry.  
-* Available on all platforms.  
-* Not just for statistics, but also general purpose programming.  
-* Is (sort of) object oriented and functional.  
-* Large and growing community of peers.  
+* Open source software under GPL.
+* Superior (if not just comparable) to commercial alternatives. R has over 5,000 user contributed packages at this time. It's widely used both in academia and industry.
+* Available on all platforms.
+* Not just for statistics, but also general purpose programming.
+* Is (sort of) object oriented and functional.
+* Large and growing community of peers.
 
 Some of the same commands we learned from the command line can be used in R.
 List objects in your current environment
@@ -34,7 +34,7 @@ List objects in your current environment
 ls()
 ```
 
-Remove objects from your current environment.  
+Remove objects from your current environment.
 
 ```{r}
 x <- 5
@@ -47,9 +47,9 @@ Remove all objects from your current environment. Typing `x` on the console will
 rm(list = ls())
 ```
 
-Notice that we have _nested_ one function inside of another.  
+Notice that we have _nested_ one function inside of another.
 
-Use `#` signs to comment. Comment liberally in your R scripts. Anything to the right of a `#` is ignored by R.  
+Use `#` signs to comment. Comment liberally in your R scripts. Anything to the right of a `#` is ignored by R.
 
 ### Assignment operator
 
@@ -75,16 +75,16 @@ update.packages(ask = FALSE)
 
 ## Introduction to R and RStudio
 
-Let's start by learning about our tool.  
+Let's start by learning about our tool.
 
-_Point out the different windows in RStudio._ 
+_Point out the different windows in RStudio._
 * Console, Scripts, Environments, Plots
-* Avoid using shortcuts. 
+* Avoid using shortcuts.
 * Code and workflow is more reproducible if we can document everything that we do.
 * Our end goal is not just to "do stuff" but to do it in a way that anyone can easily and exactly replicate our workflow and results.
 
 You can get output from R simply by typing in math
-	
+
 ```{r}
 3 + 5
 12/7
@@ -132,9 +132,9 @@ By *atomic*, we mean the vector only holds data of a single type.
 
 R provides many functions to examine features of vectors and other objects, for example
 
-* `typeof()` - what is it?  
-* `length()` - how long is it? What about two dimensional objects?  
-* `attributes()` - does it have any metadata?  
+* `typeof()` - what is it?
+* `length()` - how long is it? What about two dimensional objects?
+* `attributes()` - does it have any metadata?
 
 ```{r}
 # Example
@@ -199,7 +199,7 @@ length(x)
 x1 <- c(1L, 2L, 3L)
 ```
 
-You can also have logical vectors. 
+You can also have logical vectors.
 
 ```{r}
 y <- c(TRUE, TRUE, FALSE, FALSE)
@@ -211,7 +211,7 @@ Finally you can have character vectors:
 z <- c("Sarah", "Tracy", "Jon")
 ```
 
-**Examine your vector**  
+**Examine your vector**
 
 ```{r}
 typeof(z)
@@ -281,9 +281,9 @@ R will create a resulting vector that is the least common denominator. The coerc
 Guess what the following do without running them first
 
 ```{r}
-xx <- c(1.7, "a") 
-xx <- c(TRUE, 2) 
-xx <- c("a", TRUE) 
+xx <- c(1.7, "a")
+xx <- c(TRUE, 2)
+xx <- c("a", TRUE)
 ```
 
 This is called implicit coercion. You can also coerce vectors explicitly using the `as.<class_name>`. Example
@@ -476,7 +476,7 @@ letters[2]
 
 ### Functions
 
-A function is an R object that takes inputs to perform a task. 
+A function is an R object that takes inputs to perform a task.
 Functions take in information and may return desired outputs.
 
 `output <- name_of_function(inputs)`
@@ -488,8 +488,8 @@ y <- sum(x)
 
 ### Help
 
-All functions come with a help screen. 
-It is critical that you learn to read the help screens since they provide important information on what the function does, 
+All functions come with a help screen.
+It is critical that you learn to read the help screens since they provide important information on what the function does,
 how it works, and usually sample examples at the very bottom.
 
 ### Get new functions
