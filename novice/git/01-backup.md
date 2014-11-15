@@ -654,7 +654,8 @@ index df0654a..b36abfd 100644
 
 That's the right answer,
 but typing 40-character strings is annoying,
-so Git lets us use just the first few:
+so Git lets us use just the first few as long as they are
+unique:
 
 ~~~
 $ git diff f22b25e mars.txt
