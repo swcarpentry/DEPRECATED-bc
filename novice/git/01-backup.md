@@ -653,7 +653,7 @@ index df0654a..b36abfd 100644
 {:class="out"}
 
 That's the right answer,
-but typing random 40-character strings is annoying,
+but typing 40-character strings is annoying,
 so Git lets us use just the first few:
 
 ~~~
