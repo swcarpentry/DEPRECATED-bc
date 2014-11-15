@@ -58,6 +58,22 @@ we're telling Git:
 
 The four commands above only need to be run once:
 the flag `--global` tells Git to use the settings for every project on this machine.
+These settings are saved in the file `~/.gitconfig`. You can inspect and also modify them there directly.
+
+~~~
+$ cat ~/.gitconfig
+~~~
+{:class="in"}
+~~~
+[user]
+	name = Vlad Dracula
+	email = vlad@tran.sylvan.ia
+[color]
+	ui = auto
+[core]
+	editor = nano
+~~~
+{:class="out"}
 
 > #### Proxy
 >
