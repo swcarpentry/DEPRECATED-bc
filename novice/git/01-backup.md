@@ -269,6 +269,9 @@ to record a comment that will help us remember later on what we did and why.
 If we just run `git commit` without the `-m` option,
 Git will launch `nano` (or whatever other editor we configured at the start)
 so that we can write a longer message.
+For longer messages it is a good practice to summarize the commit
+in one line followed by a blank line followed by a more detailed description
+or explanation of the change.
 
 If we run `git status` now:
 
