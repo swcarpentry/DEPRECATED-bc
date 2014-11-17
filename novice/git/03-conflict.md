@@ -284,7 +284,7 @@ is another reason users tend to divide their programs and papers into multiple f
 instead of storing everything in one large file.
 There's another benefit too:
 whenever there are repeated conflicts in a particular file,
-the version control system is essentially trying to tell its users
+the version control system is essentially telling its users
 that they ought to clarify who's responsible for what,
 or find a way to divide the work up differently.
 
