@@ -80,7 +80,9 @@ Our GitHub workflow looks like this:
 
 2.  Clone that repository to your own machine.
 
-    ``` git clone git@github.com:<your-username>/bc.git ```
+~~~
+$ git clone git@github.com:<your-username>/bc.git
+~~~
 
 
 3.  Create a branch from `gh-pages` for your changes.
@@ -88,16 +90,18 @@ Our GitHub workflow looks like this:
     such as `fixing-typos-in-novice-shell-lesson`
     or `adding-tutorial-on-visualization`.
 
-   ``` git checkout -b <meaningful-branchname>```
+~~~
+$ git checkout -b <meaningful-branchname>
+~~~
 
 4.  Make your changes, commit them, and push them to your repository on GitHub.
 
-    ```
-    # edit file
-    git add <filename>
-    git commit -m "informative commit message"
-    git push origin <meaningful-branchname>
-    ```
+~~~
+$ # edit file
+$ git add <filename>
+$ git commit -m "informative commit message"
+$ git push origin <meaningful-branchname>
+~~~
 
 5.  Then send a pull request to the `gh-pages` branch of `[swcarpentry/bc](http://github.com/swcarpentry/bc)`.
 
