@@ -268,6 +268,19 @@ select * from Person;</code></pre>
 
     What style do you find easiest to read, and why?
 
+3.  Match each instance in the first column with each concept in the second column. I.e. _blank_ is an instance of _blank_:
+
+    <table>
+      <tr> <th>instance</th> <th>concept</th> </tr>
+      <tr> <td>Survey</td> <td>SQL query</td></tr>
+      <tr> <td>lake Anderson Lake</td> <td>database row</td></tr>
+      <tr> <td>reading</td> <td>database manager (DBMS)</td></tr>
+      <tr> <td>PostgreSQL</td> <td>record</td></tr>
+      <tr> <td>619 dyer rad 9.82</td> <td>column</td></tr>
+      <tr> <td>ident</td> <td>field</td></tr>
+      <tr> <td>select personal, family from Person;</td> <td>table</td> </tr>
+    </table>
+
 
 <div class="keypoints" markdown="1">
 #### Key Points
