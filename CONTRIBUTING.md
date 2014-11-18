@@ -105,11 +105,6 @@ Our GitHub workflow looks like this:
 please create pull requests against the `gh-pages` branch
 rather than the `master` branch.
 
-If it is easier for you to send them to us some other way,
-please mail us at
-[admin@software-carpentry.org](mailto:admin@software-carpentry.org).
-Given a choice between you creating content or wrestling with Git,
-we'd rather have you doing the former.
 
 Locations
 ---------
