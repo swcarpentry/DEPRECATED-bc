@@ -155,7 +155,13 @@ you can run the same checks using:
 python bin/swc_index_validator.py ./index.html
 ~~~
 
-This checks that the workshop's instructors are listed,
+This requires that you have the PyYAML package installed, which you can do using `pip`:
+
+~~~
+$ pip install PyYAML
+~~~
+
+Running `make check` checks that the workshop's instructors are listed,
 that a contact email address has been set up,
 and so on.
 
