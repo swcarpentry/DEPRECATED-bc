@@ -76,18 +76,30 @@ we'd rather have you doing the former.
 
 Our GitHub workflow looks like this:
 
-1.  Fork the `swcarpentry/bc` repository on GitHub.
+1.  [Fork the `swcarpentry/bc` repository on GitHub.](https://github.com/swcarpentry/bc/fork)
 
 2.  Clone that repository to your own machine.
 
+    ``` git clone git@github.com:<your-username>/bc.git ```
+
+
 3.  Create a branch from `gh-pages` for your changes.
-    Give your branch a meaningful name,
+    Give your branch a `<meaningful-name>`,
     such as `fixing-typos-in-novice-shell-lesson`
     or `adding-tutorial-on-visualization`.
 
+   ``` git checkout -b <meaningful-name>```
+
 4.  Make your changes, commit them, and push them to your repository on GitHub.
 
-5.  Send a pull request to the `gh-pages` branch of `[swcarpentry/bc](http://github.com/swcarpentry/bc)`.
+    ```
+    # edit file
+    git add <filename>
+    git commit -m "informative commit message"
+    git push origin <meaningful-branchname>
+    ```
+
+5.  Then send a pull request to the `gh-pages` branch of `[swcarpentry/bc](http://github.com/swcarpentry/bc)`.
 
 **Note**: as noted at the top of this page,
 please create pull requests against the `gh-pages` branch
