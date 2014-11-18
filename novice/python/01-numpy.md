@@ -33,7 +33,7 @@ To do all that, we'll have to learn a little bit about programming.
 #### Objectives
 
 *   Explain what a library is, and what libraries are used for.
-*   Load a Python library and use the things it contains.
+*   Load a Python library and use the methods it contains.
 *   Read tabular data from a file into a program.
 *   Assign values to variables.
 *   Select individual values and subsections from data.
