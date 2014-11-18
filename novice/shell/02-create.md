@@ -79,6 +79,7 @@ called `draft.txt`:
 $ cd thesis
 $ touch draft.txt
 ~~~
+{:class="in"}
 
 If we check the directory contents now, 
 
@@ -93,8 +94,21 @@ draft.txt
 
 we find our newly created empty file. 
 
-To perform more complex editing tasks we need to use a text editor. 
-To run a text editor called Nano to edit `draft.txt` we use can 
+If instead we had wanted to add in a simple string, possibly as a placeholder, 
+this can be easily achieved using a simple but powerful technique known 
+as output redirection. Let's create a file called notes.txt that contains a simple 
+message:
+
+~~~
+$ echo "Dont forget to add some content to dratf.txt" > notes.txt
+~~~
+{:class="in"}
+
+Here we've redirected the output of the echo command into our target file. 
+
+
+Often we need to perform more complex editing tasks; for that we need a text editor. 
+To run a simple console based text editor called Nano to edit `draft.txt` we can 
 launch an interactive editor session using the command:
 
 ~~~
