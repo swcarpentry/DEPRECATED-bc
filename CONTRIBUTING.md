@@ -84,11 +84,11 @@ Our GitHub workflow looks like this:
 
 
 3.  Create a branch from `gh-pages` for your changes.
-    Give your branch a `<meaningful-name>`,
+    Give your branch a `<meaningful-branchname>`,
     such as `fixing-typos-in-novice-shell-lesson`
     or `adding-tutorial-on-visualization`.
 
-   ``` git checkout -b <meaningful-name>```
+   ``` git checkout -b <meaningful-branchname>```
 
 4.  Make your changes, commit them, and push them to your repository on GitHub.
 
