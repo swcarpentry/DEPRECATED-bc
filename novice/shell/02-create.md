@@ -71,11 +71,33 @@ $ ls -F thesis
 ~~~
 {:class="in"}
 
-Let's change our working directory to `thesis` using `cd`,
-then run a text editor called Nano to create a file called `draft.txt`:
+One of the simplest ways to create an empty file is via the `touch` command. 
+Change the working directory to `thesis` using `cd`, then create an empty file 
+called `draft.txt`:
 
 ~~~
 $ cd thesis
+$ touch draft.txt
+~~~
+
+If we check the directory contents now, 
+
+~~~
+$ ls -F . 
+~~~
+{:class="in"}
+~~~
+draft.txt
+~~~
+{:class="out"}
+
+we find our newly created empty file. 
+
+To perform more complex editing tasks we need to use a text editor. 
+To run a text editor called Nano to edit `draft.txt` we use can 
+launch an interactive editor session using the command:
+
+~~~
 $ nano draft.txt
 ~~~
 {:class="in"}
