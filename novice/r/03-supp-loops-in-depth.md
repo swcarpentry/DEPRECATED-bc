@@ -80,7 +80,19 @@ a + b</code></pre>
 <div class='out'><pre class='out'><code> [1]  2  4  6  8 10  7  9 11 13 15
 </code></pre></div>
 
-The elements of `a` and `b` are added together starting from the first element of both vectors. When R reaches the end of the shorter vector `b`, it starts again at the first element of `b` and contines until it reaches the last element of the longest vector `a`.
+The elements of `a` and `b` are added together starting from the first element of both vectors. When R reaches the end of the shorter vector `b`, it starts again at the first element of `b` and contines until it reaches the last element of the longest vector `a`.  This behaviour may seem crazy at first glance, but it is very useful when you want to perform the same operation on every element of a vector. For example, say we want to multiply every element of our vector `a` by 5:
+
+
+<pre class='in'><code>a <- 1:10
+b <- 5
+a * b</code></pre>
+
+
+
+<div class='out'><pre class='out'><code> [1]  5 10 15 20 25 30 35 40 45 50
+</code></pre></div>
+
+Remember there are no scalars in R, so `b` is actually a vector of length 1; in order to add its value to every element of `a`, it is *recycled* to match the length of `a`.
 
 When the length of the longer object is a multiple of the shorter object length (as in our example above), the recycling occurs silently. When the longer object length is not a multiple of the shorter object length, a warning is given:
 
@@ -152,7 +164,7 @@ system.time(avg2 <- analyze2(filenames))</code></pre>
 
 
 <div class='out'><pre class='out'><code>   user  system elapsed 
-   0.05    0.00    0.04 
+   0.06    0.00    0.10 
 </code></pre></div>
 
 Note how we add a new column to `out` at each iteration?
@@ -177,7 +189,7 @@ system.time(avg3 <- analyze3(filenames))</code></pre>
 
 
 <div class='out'><pre class='out'><code>   user  system elapsed 
-   0.03    0.00    0.03 
+   0.05    0.00    0.05 
 </code></pre></div>
 
 In this simple example there is little difference in the compute time of `analyze2` and `analyze3`.
