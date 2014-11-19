@@ -567,6 +567,8 @@ last three characters: gen
     If `data` holds our array of patient data,
     what does `data[3:3, 4:4]` produce?
     What about `data[3:3, :]`?
+    
+1.  In a dataset with shape (5,2) what is the output of the following expression: `data.mean(axis=1).shape`?
 </div>
 
 ### Plotting
