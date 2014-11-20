@@ -228,6 +228,10 @@ $ rmdir thesis
 > them, and so on. It's very handy, but can do a lot of damage if used
 > without care.
 
+Now, one key thing to observe that we went outside of the directory to delete it. 
+How about deleting the directory from inside the directory? What would be 
+the situation? To see, let's recreate the directory again.
+
 Let's create that directory and file one more time.
 (Note that this time we're running `nano` with the path `thesis/draft.txt`,
 rather than going into the `thesis` directory and running `nano` on `draft.txt` there.)
