@@ -232,6 +232,47 @@ Now, one key thing to observe that we went outside of the directory to delete it
 How about deleting the directory from inside the directory? What would be 
 the situation? To see, let's recreate the directory again.
 
+~~~
+$ mkdir thesis
+$ cd thesis
+$ pwd
+~~~
+{:class="in"}
+~~~
+/users/nelle/thesis
+~~~
+{:class="out"}
+~~~
+$ rmdir .
+~~~
+{:class="in"}
+~~~
+rmdir: failed to remove '.': Invalid argument
+~~~
+{:class="out"}
+
+Try one more time with slight following modification.
+
+~~~
+$ rmdir /users/nelle/thesis
+~~~
+{:class="in"}
+
+
+It works looking from outside, but if you type say `ls`
+
+~~~
+$ ls
+~~~
+{:class="in"}
+~~~
+ls: cannot open directory .: Stale NFS file handle
+~~~
+{:class="out"}
+
+Now, the terminal becomes useless. So, always beware of your current location 
+before applying any command.
+
 Let's create that directory and file one more time.
 (Note that this time we're running `nano` with the path `thesis/draft.txt`,
 rather than going into the `thesis` directory and running `nano` on `draft.txt` there.)
