@@ -18,6 +18,7 @@ We have gathered several of them here.
 7.  [Working Remotely](07-ssh.html)
 8.  [Exceptions](08-exceptions.html)
 9.  [Numbers](09-numbers.html)
-10. [Why I Teach](10-why.html)
+10. [File Transfer](10-file_transfer.html)
+11. [Why I Teach](11-why.html)
 
 </div>
