@@ -7,6 +7,8 @@ There are other ways to interact with remote files other than git.
 In fact, if we wish to download files from the shell we can use
 Wget, cURL, and ftp.
 
+#### Wget
+
 Wget is a simple tool developed for the GNU Project that downloads files with the HTTP, HTTPS and FTP protocols. It is widely used by unix users and is available with most Linux distributions.
 
 To download this lesson from the web via http with the URL http://software-carpentry.org/v5/novice/extras/10-file_transfer.html we can simply type:
