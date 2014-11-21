@@ -64,6 +64,7 @@ get: Not connected
 ~~~
 (:class="out"}
 
+Please refer to the man page to experiment with other protocols, such as FTP (e.g. man wget, man curl, man lftp).
 
 Sources:
 
