@@ -18,7 +18,7 @@ $ wget http://software-carpentry.org/v5/novice/extras/10-file_transfer.html
 ~~~
 {:class="in"}
 
-To prodoce output similar to:
+To produce output similar to:
 ~~~
 --2014-11-21 09:41:31--  http://software-carpentry.org/v5/novice/extras/10-file_transfer.html
 Resolving software-carpentry.org (software-carpentry.org)... 174.136.14.108
