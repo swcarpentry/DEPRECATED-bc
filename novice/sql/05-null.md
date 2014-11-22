@@ -147,10 +147,10 @@ select * from Visited where dated is not NULL;</code></pre>
 </table></div>
 
 
-Null values cause headaches wherever they appear.
+Null values can cause headaches wherever they appear.
 For example,
 suppose we want to find all the salinity measurements
-that weren't taken by Dyer.
+that weren't taken by Lake.
 It's natural to write the query like this:
 
 
@@ -191,6 +191,8 @@ We still have to decide whether this is the right thing to do or not.
 If we want to be absolutely sure that
 we aren't including any measurements by Lake in our results,
 we need to exclude all the records for which we don't know who did the work.
+
+In contrast to arithmetic or Boolean operators, aggregation functions that combine multiple values, such as `min`, `max` or `avg`, *ignore* `null` values. In the majority of cases, this is a desirable output: for example, unknown values are thus not affecting our data when we are averaging it. Aggregation functions will be addressed in more detail in [the next section](06-agg.html).
 
 
 #### Challenges
