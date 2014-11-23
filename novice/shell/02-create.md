@@ -362,7 +362,7 @@ thesis/quotations.txt
 
 #### Key Points
 *   Unix documentation uses '^A' to mean "control-A".
-*   The shell does not have a trash bin: once something is deleted, it's really gone.
+*   The shell does not have a trash bin that you can recover files from: once something is deleted, it's really gone.
 *   Nano is a very simple text editor&mdash;please use something else for real work.
 
 </div>
