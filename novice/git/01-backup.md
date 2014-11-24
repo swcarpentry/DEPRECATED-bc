@@ -90,7 +90,7 @@ $ cd planets
 ~~~
 {:class="in"}
 
-and tell Git to make it a [repository](../../gloss.html#repository)&mdash;a place where
+and tell Git to make it a [repository](../../gloss.md#repository)&mdash;a place where
 Git can store old versions of our files:
 
 ~~~
