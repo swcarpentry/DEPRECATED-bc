@@ -244,7 +244,7 @@ $ git commit -m "Starting to think about Mars"
 When we run `git commit`,
 Git takes everything we have told it to save by using `git add`
 and stores a copy permanently inside the special `.git` directory.
-This permanent copy is called a [revision](../../gloss.html#revision)
+This permanent copy is called a [revision](../../gloss.md#revision)
 and its short identifier is `f22b25e`.
 (Your revision may have another identifier.)
 
