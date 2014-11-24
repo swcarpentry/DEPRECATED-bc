@@ -313,7 +313,7 @@ does not.
 > on the other hand,
 > are mutable:
 > both can be modified after they have been created.
-><br/>
+>
 > In practice, allowing variables to change value after they've been created (in other
 > words, allowing mutable variables) can lead to hard-to-understand programs, because
 > readers may have to mentally trace through many lines of code in order to figure out 
