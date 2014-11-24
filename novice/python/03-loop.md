@@ -142,6 +142,14 @@ more robust as well:
 
 <pre class="in"><code>print_characters(&#39;oxygen&#39;)</code></pre>
 
+<div class="out"><pre class='out'><code>o
+x
+y
+g
+e
+n
+</code></pre></div>
+
 
 The improved version of `print_characters` uses a [for loop](../../gloss.html#for-loop)
 to repeat an operation---in this case, printing---once for each thing in a collection.
@@ -294,8 +302,8 @@ does not.
 
 > #### Ch-Ch-Ch-Changes
 >
-> Data that can be changed is called [mutable](../../gloss.html#mutable),
-> while data that cannot be is called [immutable](../../gloss.html#immutable).
+> Variables whose value can be changed after they have been created are called [mutable](../../gloss.html#mutable),
+> while variables whose value cannot be changed are called [immutable](../../gloss.html#immutable).
 > Like strings,
 > numbers are immutable:
 > there's no way to make the number 0 have the value 1 or vice versa
@@ -306,13 +314,13 @@ does not.
 > are mutable:
 > both can be modified after they have been created.
 >
-> Programs that modify data in place can be harder to understand than ones that don't
-> because readers may have to mentally sum up many lines of code
-> in order to figure out what the value of something actually is.
-> On the other hand,
-> programs that modify data in place instead of creating copies that are almost identical to the original
-> every time they want to make a small change
-> are much more efficient.
+> In practice, allowing variables to change value after they've been created (in other
+> words, allowing mutable variables) can lead to hard-to-understand programs, because
+> readers may have to mentally trace through many lines of code in order to figure out 
+> what the value of something actually is. On the other hand, programs that use mutable
+> variables can be much more efficient than programs that use only immutable variables, 
+> because there is no need to create copies of variables for every desired change in
+> value.
 
 There are many ways to change the contents of in lists besides assigning to elements:
 
@@ -329,12 +337,33 @@ print &#39;odds after removing the first element:&#39;, odds</code></pre>
 print &#39;odds after reversing:&#39;, odds</code></pre>
 
 
+<pre class="in"><code>odds.sort()
+print &#39;values of odds in sorted order:&#39;, odds</code></pre>
+
+
 <div class="challenges" markdown="1">
 #### Challenges
 
 1.  Write a function called `total` that calculates the sum of the values in a list.
     (Python has a built-in function called `sum` that does this for you.
     Please don't use it for this exercise.)
+    
+2.  Another common looping structure is the `while` loop. Just like `for` loops, `while`
+    loops are used to repeatedly execute the same block of code. Unlike `for` loops though,
+    `while` loops continue to repeat as long as some condition is met. For example, this
+    while loop will calculate all the powers of 2 less than 100:
+    
+    ~~~python
+    n = 1
+    while n <= 100: # will execute the indented block until n > 100, then will move on
+        print n
+        n = n**2
+    ~~~
+    
+    Write a `while` loop that iterates over the values in a list, overwriting each value 
+    with its squared value. For instance, if the target list contained [1, 2, 3, 4, 5]
+    before the loop, then it should contain [1, 4, 9, 16, 25] afterward.
+  
 </div>
 
 ### Processing Multiple Files
