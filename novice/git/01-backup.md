@@ -424,7 +424,7 @@ but *not* commit the work we're doing on the conclusion
 To allow for this,
 Git has a special staging area
 where it keeps track of things that have been added to
-the current [change set](../../gloss.html#change-set)
+the current [change set](../../gloss.md#change-set)
 but not yet committed.
 `git add` puts things in this area,
 and `git commit` then copies them to long-term storage (as a commit):
