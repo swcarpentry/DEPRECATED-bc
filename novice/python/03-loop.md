@@ -338,7 +338,7 @@ print &#39;odds after reversing:&#39;, odds</code></pre>
 
 
 <pre class="in"><code>odds.sort()
-print &#39;values of odds in sorted order:&#39;, odds</code></pre>
+print &#39;odds after being sorted in increasing order:&#39;, odds</code></pre>
 
 
 <div class="challenges" markdown="1">
