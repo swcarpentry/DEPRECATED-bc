@@ -369,7 +369,7 @@ If we can break it down into pieces:
 
 1.  The first line tells us that Git is producing output similar to the Unix `diff` command
     comparing the old and new versions of the file.
-2.  The second line tells exactly which [revisions](../../gloss.html#revision) of the file
+2.  The second line tells exactly which [revisions](../../gloss.md#revision) of the file
     Git is comparing;
     `df0654a` and `315bf3a` are unique computer-generated labels for those revisions.
 3.  The remaining lines show us the actual differences
