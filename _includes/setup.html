@@ -2,6 +2,14 @@
 
 <div class="row-fluid">
   <div class="span6">
+{% if page.lessons contains 'Bash' %}
+    <h4>The Bash Shell</h4>
+    <p>
+      Bash is a commonly-used shell. Using a shell gives you
+      more power to do more tasks more quickly with your
+      computer.
+    </p>
+{% endif %}
     <h4>Editor</h4>
     <p>
       When you're writing code, it's nice to have a text
@@ -15,14 +23,6 @@
       then hitting Return
       to return to the shell.
     </p>
-{% if page.lessons contains 'Bash' %}
-    <h4>The Bash Shell</h4>
-    <p>
-      Bash is a commonly-used shell. Using a shell gives you
-      more power to do more tasks more quickly with your
-      computer.
-    </p>
-{% endif %}
 {% if page.lessons contains 'Git' %}
     <h4>Git</h4>
     <p>
@@ -69,26 +69,28 @@
 
 <div class="row-fluid">
   <div class="span6">
-{% if page.lessons contains 'Python' %}
-    <h4>Python</h4>
-    <ul>
-      <li>
-        Download and install  <a href="https://store.continuum.io/cshop/anaconda/">Anaconda</a>.
-      </li>
-      <li>
-        Use all of the defaults for installation
-        <em>except</em>
-        make sure to check <strong>Make Anaconda the default Python</strong>.
-      </li>
-    </ul>
-{% endif %}
-{% if page.lessons contains 'Git' %}
-    <h4>Git Bash</h4>
+{% if page.lessons contains 'Bash' %}
+  <h4>Git Bash</h4>
     <p>
       Install Git for Windows by download and running
       <a href="http://msysgit.github.io/">the installer</a>.
       This will provide you with both Git and Bash in the Git Bash program.
     </p>
+{% endif %}
+    <h4>Editor</h4>
+    <p>
+      <code>nano</code> is the editor installed by the Software Carpentry Installer,
+      it is a basic editor integrated into the lesson material.
+    </p>
+    <p>
+      <a href="http://notepad-plus-plus.org/">Notepad++</a> is a
+      popular free code editor for Windows.
+      Be aware that you must add its installation directory to your system path
+      in order to launch it from the command line
+      (or have other tools like Git launch it for you).
+      Please ask your instructor to help you do this.
+    </p>
+{% if page.lessons contains 'Git' %}
     <h4>Software Carpentry Installer</h4>
     <p>This installer requires an active internet connection</p>
     <p>After installing Python and Git Bash:</p>
@@ -107,19 +109,19 @@
 {% endif %}
   </div>
   <div class="span6">
-    <h4>Editor</h4>
-    <p>
-      <code>nano</code> is the editor installed by the Software Carpentry Installer,
-      it is a basic editor integrated into the lesson material.
-    </p>
-    <p>
-      <a href="http://notepad-plus-plus.org/">Notepad++</a> is a
-      popular free code editor for Windows.
-      Be aware that you must add its installation directory to your system path
-      in order to launch it from the command line
-      (or have other tools like Git launch it for you).
-      Please ask your instructor to help you do this.
-    </p>
+{% if page.lessons contains 'Python' %}
+    <h4>Python</h4>
+    <ul>
+      <li>
+        Download and install  <a href="https://store.continuum.io/cshop/anaconda/">Anaconda</a>.
+      </li>
+      <li>
+        Use all of the defaults for installation
+        <em>except</em>
+        make sure to check <strong>Make Anaconda the default Python</strong>.
+      </li>
+    </ul>
+{% endif %}
 {% if page.lessons contains 'R' %}
     <h4>R</h4>
     <p>
@@ -231,37 +233,18 @@
       There is no need to install anything.
     </p>
 {% endif %}
-{% if page.lessons contains 'Git' %}
-    <h4>Git</h4>
-    <p>
-      If Git is not already available on your machine you can try
-      to install it via your distro's package manager
-      (e.g. <code>apt-get</code> or <code>yum</code>).
-    </p>
-{% endif %}
     <h4>Editor</h4>
     <p>
       <a href="http://kate-editor.org/">Kate</a> is one option for Linux users.
       In a pinch, you can use <code>nano</code>,
       which should be pre-installed.
     </p>
-{% if page.lessons contains 'R' %}
-    <h4>R</h4>
+{% if page.lessons contains 'Git' %}
+    <h4>Git</h4>
     <p>
-      You can download the binary files for your distribution
-      from <a href="http://cran.r-project.org/index.html">CRAN</a>. Or
-      you can use your package manager, e.g. for Debian/Ubuntu
-      run <code>apt-get install r-base</code> or <code>yum install R</code>.
-      Also, please install the
-      <a href="http://www.rstudio.com/ide/download/desktop">RStudio IDE</a>.
-    </p>
-{% endif %}
-{% if page.lessons contains 'SQL' %}
-    <h4>SQLite</h4>
-    <p>
-      <code>sqlite3</code> comes pre-installed on Linux.
-      Alternatively,
-      you may install the Firefox SQLite browser plugin described <a href="#firefox-sqlite">below</a>.
+      If Git is not already available on your machine you can try
+      to install it via your distro's package manager
+      (e.g. <code>apt-get</code> or <code>yum</code>).
     </p>
 {% endif %}
   </div>
@@ -301,6 +284,25 @@
         distribution the default Python).
       </li>
     </ol>
+{% endif %}
+{% if page.lessons contains 'R' %}
+    <h4>R</h4>
+    <p>
+      You can download the binary files for your distribution
+      from <a href="http://cran.r-project.org/index.html">CRAN</a>. Or
+      you can use your package manager, e.g. for Debian/Ubuntu
+      run <code>apt-get install r-base</code> or <code>yum install R</code>.
+      Also, please install the
+      <a href="http://www.rstudio.com/ide/download/desktop">RStudio IDE</a>.
+    </p>
+{% endif %}
+{% if page.lessons contains 'SQL' %}
+    <h4>SQLite</h4>
+    <p>
+      <code>sqlite3</code> comes pre-installed on Linux.
+      Alternatively,
+      you may install the Firefox SQLite browser plugin described <a href="#firefox-sqlite">below</a>.
+    </p>
 {% endif %}
   </div>
 </div>
