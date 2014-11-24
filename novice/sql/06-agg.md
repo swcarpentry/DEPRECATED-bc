@@ -1,41 +1,30 @@
----
-layout: lesson
-root: ../..
----
 
 ## Aggregation
 
-
-<div class="objectives" markdown="1">
 #### Objectives
 
 *   Define "aggregation" and give examples of its use.
 *   Write queries that compute aggregated values.
 *   Trace the execution of a query that performs aggregation.
 *   Explain how missing data is handled during aggregation.
-</div>
-
 
 We now want to calculate ranges and averages for our data.
 We know how to select all of the dates from the `Visited` table:
 
+In[1]:
 
-<pre class="in"><code>%load_ext sqlitemagic</code></pre>
+```
+%load_ext sqlitemagic
+```
+
+In[2]:
+
+```
+%%sqlite survey.db
+select dated from Visited;
+```
 
 
-<pre class="in"><code>%%sqlite survey.db
-select dated from Visited;</code></pre>
-
-<div class="out"><table>
-<tr><td>1927-02-08</td></tr>
-<tr><td>1927-02-10</td></tr>
-<tr><td>1939-01-07</td></tr>
-<tr><td>1930-01-12</td></tr>
-<tr><td>1930-02-26</td></tr>
-<tr><td>None</td></tr>
-<tr><td>1932-01-14</td></tr>
-<tr><td>1932-03-22</td></tr>
-</table></div>
 
 
 but to combine them,
@@ -44,161 +33,175 @@ such as `min` or `max`.
 Each of these functions takes a set of records as input,
 and produces a single record as output:
 
+In[3]:
 
-<pre class="in"><code>%%sqlite survey.db
-select min(dated) from Visited;</code></pre>
-
-<div class="out"><table>
-<tr><td>1927-02-08</td></tr>
-</table></div>
-
-
-<img src="img/sql-aggregation.svg" alt="SQL Aggregation" />
+```
+%%sqlite survey.db
+select min(dated) from Visited;
+```
 
 
-<pre class="in"><code>%%sqlite survey.db
-select max(dated) from Visited;</code></pre>
 
-<div class="out"><table>
-<tr><td>1939-01-07</td></tr>
-</table></div>
+
+<img src="files/img/sql-aggregation.svg" alt="SQL Aggregation" />
+
+In[4]:
+
+```
+%%sqlite survey.db
+select max(dated) from Visited;
+```
+
+
 
 
 `min` and `max` are just two of
 the aggregation functions built into SQL.
 Three others are `avg`,
-`count`,
-and `sum`:
+`sum`,
+and `count`:
+
+In[5]:
+
+```
+%%sqlite survey.db
+select avg(reading) from Survey where quant='sal';
+```
 
 
-<pre class="in"><code>%%sqlite survey.db
-select avg(reading) from Survey where quant=&#39;sal&#39;;</code></pre>
-
-<div class="out"><table>
-<tr><td>7.20333333333</td></tr>
-</table></div>
 
 
-<pre class="in"><code>%%sqlite survey.db
-select count(reading) from Survey where quant=&#39;sal&#39;;</code></pre>
+In[6]:
 
-<div class="out"><table>
-<tr><td>9</td></tr>
-</table></div>
+```
+%%sqlite survey.db
+select sum(reading) from Survey where quant='sal';
+```
 
 
-<pre class="in"><code>%%sqlite survey.db
-select sum(reading) from Survey where quant=&#39;sal&#39;;</code></pre>
 
-<div class="out"><table>
-<tr><td>64.83</td></tr>
-</table></div>
+
+In[7]:
+
+```
+%%sqlite survey.db
+select count(reading) from Survey where quant='sal';
+```
+
+
 
 
 We used `count(reading)` here,
-but we could just as easily have counted `quant`
-or any other field in the table,
-or even used `count(*)`,
-since the function doesn't care about the values themselves,
-just how many values there are.
+but since the function doesn't care about the values themselves,
+just how many values there are, we could just as easily have
+used count(`quant`). In practice, it's common
+to use `count(*)` to count all rows.
+
 
 SQL lets us do several aggregations at once.
 We can,
 for example,
 find the range of sensible salinity measurements:
 
+In[8]:
 
-<pre class="in"><code>%%sqlite survey.db
-select min(reading), max(reading) from Survey where quant=&#39;sal&#39; and reading&lt;=1.0;</code></pre>
-
-<div class="out"><table>
-<tr><td>0.05</td><td>0.21</td></tr>
-</table></div>
-
-
-We can also combine aggregated results with raw results,
-although the output might surprise you:
+```
+%%sqlite survey.db
+select min(reading), max(reading) from Survey where quant='sal' and reading<=1.0;
+```
 
 
-<pre class="in"><code>%%sqlite survey.db
-select person, count(*) from Survey where quant=&#39;sal&#39; and reading&lt;=1.0;</code></pre>
 
-<div class="out"><table>
-<tr><td>lake</td><td>7</td></tr>
-</table></div>
-
-
-Why does Lake's name appear rather than Roerich's or Dyer's?
-The answer is that when it has to aggregate a field,
-but isn't told how to,
-the database manager chooses an actual value from the input set.
-It might use the first one processed,
-the last one,
-or something else entirely.
 
 Another important fact is that when there are no values to aggregate,
 aggregation's result is "don't know"
-rather than zero or some other arbitrary value:
+rather than zero or some other arbitrary value. (Note that count returns a
+reasonable value.)
+
+In[9]:
+
+```
+%%sqlite survey.db
+select count(reading), max(reading), sum(reading), avg(reading) from Survey where quant='missing';
+```
 
 
-<pre class="in"><code>%%sqlite survey.db
-select person, max(reading), sum(reading) from Survey where quant=&#39;missing&#39;;</code></pre>
-
-<div class="out"><table>
-<tr><td>None</td><td>None</td><td>None</td></tr>
-</table></div>
 
 
 One final important feature of aggregation functions is that
-they are inconsistent with the rest of SQL in a very useful way.
-If we add two values,
-and one of them is null,
-the result is null.
-By extension,
-if we use `sum` to add all the values in a set,
-and any of those values are null,
-the result should also be null.
-It's much more useful,
-though,
-for aggregation functions to ignore null values
-and only combine those that are non-null.
-This behavior lets us write our queries as:
+they ignore nulls. Note the full results below followed by the aggregated
+counts.
+
+In[10]:
+
+```
+%%sqlite survey.db
+select ident, dated from Visited;
+```
 
 
-<pre class="in"><code>%%sqlite survey.db
-select min(dated) from Visited;</code></pre>
-
-<div class="out"><table>
-<tr><td>1927-02-08</td></tr>
-</table></div>
 
 
-instead of always having to filter explicitly:
+In[11]:
+
+```
+%%sqlite survey.db
+select count(ident), count(dated) from Visited;
+```
 
 
-<pre class="in"><code>%%sqlite survey.db
-select min(dated) from Visited where dated is not null;</code></pre>
-
-<div class="out"><table>
-<tr><td>1927-02-08</td></tr>
-</table></div>
 
 
-Aggregating all records at once doesn't always make sense.
-For example,
-suppose Gina suspects that there is a systematic bias in her data,
-and that some scientists' radiation readings are higher than others.
-We know that this doesn't work:
+In constrast to non-aggregate functions/operations
+(sometimes called scalar functions) where any null in the input results in a
+null,
+aggregate functions simply ignore nulls. While inconsistent with scalar
+functions,
+this behavior actually makes aggregate functions simpler and more useful.
+
+The select list of our queries above contained only aggergate functions.
+SQLite allows us to combine aggregated results with raw results,
+but *be careful*: the results can be suprising.
+
+In[12]:
+
+```
+%%sqlite survey.db
+select person, count(*) from Survey where quant='sal' and reading<=1.0;
+```
 
 
-<pre class="in"><code>%%sqlite survey.db
+
+
+Is this what you expected?
+
+The aggregate function `count(*)` in the select list cues the database manager
+that you want to summarize all the results into a single row; but you also asked
+for a `person`. Which person should it choose to represent all the original
+rows?
+In this example, why does Lake's name appear rather than Roerich's or Dyer's?
+The answer is that different database managers handle this differently: SQLite
+arbitrarily chooses a value from the original results; some database managers
+present a null, and some database managers return an error. Fortunately, there
+are several techniques to meaningfully combine aggregate results and column
+values. Consider this example:
+
+*Gina suspects that there is a systematic bias in her data, and that some
+scientists' radiation readings are higher than others.
+She would like to see the counts and averages for each scientist individually.*
+
+From above, we know that this won't answer Gina's question:
+
+In[13]:
+
+```
+%%sqlite survey.db
 select person, count(reading), round(avg(reading), 2)
 from  Survey
-where quant=&#39;rad&#39;;</code></pre>
+where quant='rad';
+```
 
-<div class="out"><table>
-<tr><td>roe</td><td>8</td><td>6.56</td></tr>
-</table></div>
+
 
 
 because the database manager selects a single arbitrary scientist's name
@@ -206,16 +209,17 @@ rather than aggregating separately for each scientist.
 Since there are only five scientists,
 she could write five queries of the form:
 
+In[14]:
 
-<pre class="in"><code>%%sqlite survey.db
+```
+%%sqlite survey.db
 select person, count(reading), round(avg(reading), 2)
 from  Survey
-where quant=&#39;rad&#39;
-and   person=&#39;dyer&#39;;</code></pre>
+where quant='rad'
+and   person='dyer';
+```
 
-<div class="out"><table>
-<tr><td>dyer</td><td>2</td><td>8.81</td></tr>
-</table></div>
+
 
 
 but this would be tedious,
@@ -226,29 +230,24 @@ What we need to do is
 tell the database manager to aggregate the hours for each scientist separately
 using a `group by` clause:
 
+In[15]:
 
-<pre class="in"><code>%%sqlite survey.db
+```
+%%sqlite survey.db
 select   person, count(reading), round(avg(reading), 2)
 from     Survey
-where    quant=&#39;rad&#39;
-group by person;</code></pre>
+where    quant='rad'
+group by person;
+```
 
-<div class="out"><table>
-<tr><td>dyer</td><td>2</td><td>8.81</td></tr>
-<tr><td>lake</td><td>2</td><td>1.82</td></tr>
-<tr><td>pb</td><td>3</td><td>6.66</td></tr>
-<tr><td>roe</td><td>1</td><td>11.25</td></tr>
-</table></div>
+
 
 
 `group by` does exactly what its name implies:
 groups all the records with the same value for the specified field together
 so that aggregation can process each batch separately.
 Since all the records in each batch have the same value for `person`,
-it no longer matters that the database manager
-is picking an arbitrary one to display
-alongside the aggregated `reading` values.
-
+the database manager uses that value alongside the aggregated `reading` values.
 
 Just as we can sort by multiple criteria at once,
 we can also group by multiple criteria.
@@ -256,25 +255,16 @@ To get the average reading by scientist and quantity measured,
 for example,
 we just add another field to the `group by` clause:
 
+In[16]:
 
-<pre class="in"><code>%%sqlite survey.db
+```
+%%sqlite survey.db
 select   person, quant, count(reading), round(avg(reading), 2)
 from     Survey
-group by person, quant;</code></pre>
+group by person, quant;
+```
 
-<div class="out"><table>
-<tr><td>None</td><td>sal</td><td>1</td><td>0.06</td></tr>
-<tr><td>None</td><td>temp</td><td>1</td><td>-26.0</td></tr>
-<tr><td>dyer</td><td>rad</td><td>2</td><td>8.81</td></tr>
-<tr><td>dyer</td><td>sal</td><td>2</td><td>0.11</td></tr>
-<tr><td>lake</td><td>rad</td><td>2</td><td>1.82</td></tr>
-<tr><td>lake</td><td>sal</td><td>4</td><td>0.11</td></tr>
-<tr><td>lake</td><td>temp</td><td>1</td><td>-16.0</td></tr>
-<tr><td>pb</td><td>rad</td><td>3</td><td>6.66</td></tr>
-<tr><td>pb</td><td>temp</td><td>2</td><td>-20.0</td></tr>
-<tr><td>roe</td><td>rad</td><td>1</td><td>11.25</td></tr>
-<tr><td>roe</td><td>sal</td><td>2</td><td>32.05</td></tr>
-</table></div>
+
 
 
 Note that we have added `person` to the list of fields displayed,
@@ -283,25 +273,18 @@ since the results wouldn't make much sense otherwise.
 Let's go one step further and remove all the entries
 where we don't know who took the measurement:
 
+In[17]:
 
-<pre class="in"><code>%%sqlite survey.db
+```
+%%sqlite survey.db
 select   person, quant, count(reading), round(avg(reading), 2)
 from     Survey
 where    person is not null
 group by person, quant
-order by person, quant;</code></pre>
+order by person, quant;
+```
 
-<div class="out"><table>
-<tr><td>dyer</td><td>rad</td><td>2</td><td>8.81</td></tr>
-<tr><td>dyer</td><td>sal</td><td>2</td><td>0.11</td></tr>
-<tr><td>lake</td><td>rad</td><td>2</td><td>1.82</td></tr>
-<tr><td>lake</td><td>sal</td><td>4</td><td>0.11</td></tr>
-<tr><td>lake</td><td>temp</td><td>1</td><td>-16.0</td></tr>
-<tr><td>pb</td><td>rad</td><td>3</td><td>6.66</td></tr>
-<tr><td>pb</td><td>temp</td><td>2</td><td>-20.0</td></tr>
-<tr><td>roe</td><td>rad</td><td>1</td><td>11.25</td></tr>
-<tr><td>roe</td><td>sal</td><td>2</td><td>32.05</td></tr>
-</table></div>
+
 
 
 Looking more closely,
@@ -324,18 +307,24 @@ this query:
     (it doesn't matter which ones,
     since they're all equal).
 
-
 #### Challenges
 
 1.  How many temperature readings did Frank Pabodie record,
     and what was their average value?
 
-2.  The average of a set of values is the sum of the values
+2. The query:
+       select count(1), count(name) from Survey
+    returned the row:
+       21 | 19
+    How many rows are in the Survey table?
+    Can you explain why the counts don't match?
+
+3.  The average of a set of values is the sum of the values
     divided by the number of values.
     Does this mean that the `avg` function returns 2.0 or 3.0
     when given the values 1.0, `null`, and 5.0?
 
-3.  We want to calculate the difference between
+4.  We want to calculate the difference between
     each individual radiation reading
     and the average of all the radiation readings.
     We write the query:
@@ -346,7 +335,7 @@ this query:
 
     What does this actually produce, and why?
 
-4.  The function `group_concat(field, separator)`
+5.  The function `group_concat(field, separator)`
     concatenates all the values in a field
     using the specified separator character
     (or ',' if the separator isn't specified).
@@ -354,16 +343,14 @@ this query:
     such as:
 
     ~~~
-    William Dyer, Frank Pabodie, Anderson Lake, Valentina Roerich, Frank Danforth
+    William Dyer, Frank Pabodie, Anderson Lake, Valentina Roerich, Frank
+Danforth
     ~~~
 
     Can you find a way to order the list by surname?
 
-
-<div class="keypoints" markdown="1">
 #### Key Points
 
 *   An aggregation function combines many values to produce a single new value.
 *   Aggregation functions ignore `null` values.
 *   Aggregation happens after filtering.
-</div>
