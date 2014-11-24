@@ -355,7 +355,7 @@ print &#39;odds after being sorted in increasing order:&#39;, odds</code></pre>
     
     ~~~python
     n = 1
-    while n <= 100: # will execute the indented block until n > 100, then will move on
+    while n < 100: # will execute the indented block until n >= 100, then will move on
         print n
         n = n**2
     ~~~
