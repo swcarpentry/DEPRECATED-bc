@@ -24,6 +24,7 @@ title: Shell Reference
 *   `touch path` creates an empty file if it doesn't already exist.
 *   `wc` counts lines, words, and characters in its inputs.
 *   `whoami` shows the user's current identity.
+*   `nano` allows simple editing of text within files (use another program like Emacs or Vim for more complex work)
 
 #### Paths
 
