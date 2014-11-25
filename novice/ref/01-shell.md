@@ -36,7 +36,7 @@ title: Shell Reference
 
 #### Combining Commands
 
-*   `command > file` redirects a command's output to a file.
+*   `command > file` redirects a command's output to a file, `command < file` redirects input.
 *   `first | second` connects the output of the first command to the input of the second.
 *   A `for` loop repeats commands once for every thing in a list:
 
@@ -44,6 +44,10 @@ title: Shell Reference
         do
             ...commands refering to $variable...
         done
+
+*   Use semicolons to group multi-line commands on the same line:
+
+	for variable in name_1 name_2 name_3; do; ...commands refering to $variable...; done
 
 *   Use `$name` to expand a variable (i.e., get its value).
 *   `bash filename` runs commands saved in `filename`.
