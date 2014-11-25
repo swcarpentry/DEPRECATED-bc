@@ -6,7 +6,7 @@ it deals with surface current data
 and is therefore also relevant for weather and climate scientists.  
 
 Please contact the author (Damien Irving; irving.damien@gmail.com) if you use this lesson at a workshop,
-and he is trying to keep a record of how often it is being used.
+as he is trying to keep a record of how often it is being used.
 (Also feel free to send feedback to Damien.)
 
  
