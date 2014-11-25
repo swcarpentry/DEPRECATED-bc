@@ -39,7 +39,7 @@ end
 
 A Matlab function *must* be saved in a text file with a `.m` extension.
 The name of that file must be the same as the function defined
-inside it. So, you will need to save the above code in a file called
+inside it. The name must start with a letter and cannot contain spaces. So, you will need to save the above code in a file called
 `fahr_to_kelvin.m`.
 
 <!-- FIXME: 00-basics lesson should talk about .m files, and
