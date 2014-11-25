@@ -20,7 +20,7 @@ so that we can repeat several operations with a single command.
 #### Objectives
 
 *   Define a function that takes parameters.
-*   Return a value from a function.
+*   Perform actions and return a value from a function.
 *   Test and debug a function.
 *   Explain what a call stack is, and trace changes to the call stack as functions are called.
 *   Set default values for function parameters.
@@ -30,12 +30,12 @@ so that we can repeat several operations with a single command.
 ### Defining a Function
 
 
-Let's start by defining a function `fahr_to_kelvin` that converts temperatures from Fahrenheit to Kelvin:
+Let's start by defining a function simple function `add` that adds two
+numbers and returns the sum:
 
 
-<pre class="in"><code>def fahr_to_kelvin(temp):
-    return ((temp - 32) * (5/9)) + 273.15</code></pre>
-
+<pre class="in"><code>def add(a, b):
+    return a + b</code></pre>
 
 The definition opens with the word `def`,
 which is followed by the name of the function
@@ -45,13 +45,70 @@ statements that are executed when it runs&mdash;is indented below the definition
 typically by four spaces.
 
 When we call the function,
-the values we pass to it are assigned to those variables
+the argument values we pass to it are assigned to the parameters
 so that we can use them inside the function.
 Inside the function,
 we use a [return statement](../../gloss.html#return-statement) to send a result back to whoever asked for it.
 
-Let's try running our function.
-Calling our own function is no different from calling any other function:
+Calling our own function is no different from calling any built-in function:
+
+<pre class="in"><code>print &#39;The sum of 5 and 3 is:&#39;, add(5,3)
+</code></pre>
+
+<div class="out"><pre class='out'><code>The sum of 5 and 3 is: 8
+</code></pre></div>
+
+The arguments `5` and `3` are implicitly assigned to
+the parameters `a` and `b` within the function, before the
+sum is computed and returned.
+
+The `return` statement in our previous example was a number, but in
+general, any python object, including lists and arrays, can be
+returned. If a function does not explictly return a value, the special
+python value `None` is returned. This default behaviour is useful for
+functions that simply perform an action, without returning any value.
+
+
+#### Challenges
+
+1. Consider the following function definition:
+
+    ~~~python
+    def subtract(a, b):
+       c = a - b
+       print c
+    ~~~
+
+    What does the function call `subtract(5,3)` return?
+
+       a) 2
+
+       b) -2
+
+       c) None
+
+       d) False
+
+2. What will the following python statement display?
+
+    ~~~python
+    print subtract(5, 3)
+    ~~~
+
+
+
+
+### A more complex function
+
+
+Let's write a function that does something a little
+more useful. Here's a function `fahr_to_kelvin` that converts temperatures from Fahrenheit to Kelvin:
+
+
+<pre class="in"><code>def fahr_to_kelvin(temp):
+    return ((temp - 32) * (5/9)) + 273.15</code></pre>
+
+Let's try running our function:
 
 
 <pre class="in"><code>print &#39;freezing point of water:&#39;, fahr_to_kelvin(32)
@@ -66,6 +123,7 @@ We've successfully called the function that we defined,
 and we have access to the value that we returned.
 Unfortunately, the value returned doesn't look right.
 What went wrong?
+
 
 ### Debugging a Function
 
