@@ -15,11 +15,11 @@ so that we can repeat several operations with a single command.
 
 <div class="objectives" markdown="1">
 #### Objectives
-* Explain a Matlab function file
-* Define a function that takes parameters
+* Explain a Matlab function file.
+* Define a function that takes parameters.
 * Test and debug a function.
 * Explain what a call stack is, and trace changes to the call stack as
-    functions ar ecalled.
+    functions are called.
 * Set default values for function parameters.
 * Explain why we should divide programs into small, single-purpose functions.
 </div>
@@ -242,7 +242,7 @@ end
 We could test this on our actual data, but since we
 don't know what the values ought to be,
 it will be hard to tell if the result was correct,
-Instead, let's use to create a matrix of 0's, and then center that
+Instead, let's create a matrix of 0's, and then center that
 around 3:
 
 ~~~
@@ -259,7 +259,7 @@ ans =
 ~~~
 {:class="out"}
 
-That looks right, let's try center on our real data:
+That looks right, so let's try out `center` function on our real data:
 
 ~~~
 data = csvread('inflammation-01.csv');
@@ -299,7 +299,7 @@ disp([min(centered(:)), mean(centered(:)), max(centered(:))])
 
 <!-- FIXME: challenge -->
 
-That seems almost right, the original mean
+That seems almost right: the original mean
 was about 6.1, so the lower bound from zero is now about -6.1.
 The mean of the centered data isn't quite zero--we'll explore
 why not in the challenges--but it's pretty close. We can even
@@ -319,7 +319,7 @@ std(data(:)) - std(centered)
 
 
 The difference is very small. It's still possible that our function
-is wrong, but it seems unlikely enough that we should probable
+is wrong, but it seems unlikely enough that we should probably
 get back to doing our analysis. We have one more task first, though:
 we should write some [documentation](../../gloss.html#documentation)
 for our function to remind ourselves later what it's for and
