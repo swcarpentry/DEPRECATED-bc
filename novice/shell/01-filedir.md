@@ -67,7 +67,7 @@ i.e.,
 the directory that the computer assumes we want to run commands in
 unless we explicitly specify something else.
 Here,
-the computer's response is `/users/nelle`,
+the computer's response is `/Users/nelle`,
 which is Nelle's [home directory](../../gloss.html#home-directory):
 
 ~~~
@@ -75,7 +75,7 @@ $ pwd
 ~~~
 {:class="in"}
 ~~~
-/users/nelle
+/Users/nelle
 ~~~
 {:class="out"}
 
@@ -97,28 +97,28 @@ let's have a look at how the file system as a whole is organized.
 At the top is the [root directory](../../gloss.html#root-directory)
 that holds everything else.
 We refer to it using a slash character `/` on its own;
-this is the leading slash in `/users/nelle`.
+this is the leading slash in `/Users/nelle`.
 
 Inside that directory are several other directories:
 `bin` (which is where some built-in programs are stored),
 `data` (for miscellaneous data files),
-`users` (where users' personal directories are located),
+`Users` (where users' personal directories are located),
 `tmp` (for temporary files that don't need to be stored long-term),
 and so on:
 
 <img src="img/filesystem.svg" alt="The Filesystem" />
 
-We know that our current working directory `/users/nelle` is stored inside `/users`
-because `/users` is the first part of its name.
+We know that our current working directory `/Users/nelle` is stored inside `/Users`
+because `/Users` is the first part of its name.
 Similarly,
-we know that `/users` is stored inside the root directory `/`
+we know that `/Users` is stored inside the root directory `/`
 because its name begins with `/`.
 
-Underneath `/users`,
+Underneath `/Users`,
 we find one directory for each user with an account on this machine.
-The Mummy's files are stored in `/users/imhotep`,
-Wolfman's in `/users/larry`,
-and ours in `/users/nelle`,
+The Mummy's files are stored in `/Users/imhotep`,
+Wolfman's in `/Users/larry`,
+and ours in `/Users/nelle`,
 which is why `nelle` is the last part of the directory's name.
 
 <img src="img/home-directories.svg" alt="Home Directories" />
@@ -161,7 +161,7 @@ Desktop/    notes.txt            writing/
 {:class="out"}
 
 Here,
-we can see that `/users/nelle` contains seven [sub-directories](../../gloss.html#sub-directory).
+we can see that `/Users/nelle` contains seven [sub-directories](../../gloss.html#sub-directory).
 The names that don't have trailing slashes,
 like `notes.txt`, `pizza.cfg`, and `solar.pdf`,
 are plain old files.
@@ -249,7 +249,7 @@ no matter where we are when we run the command.
 
 What if we want to change our current working directory?
 Before we do this,
-`pwd` shows us that we're in `/users/nelle`,
+`pwd` shows us that we're in `/Users/nelle`,
 and `ls` without any arguments shows us that directory's contents:
 
 ~~~
@@ -257,7 +257,7 @@ $ pwd
 ~~~
 {:class="in"}
 ~~~
-/users/nelle
+/Users/nelle
 ~~~
 {:class="out"}
 ~~~
@@ -283,9 +283,9 @@ $ cd data
 {:class="in"}
 
 `cd` doesn't print anything,
-but if we run `pwd` after it, we can see that we are now in `/users/nelle/data`.
+but if we run `pwd` after it, we can see that we are now in `/Users/nelle/data`.
 If we run `ls` without arguments now,
-it lists the contents of `/users/nelle/data`,
+it lists the contents of `/Users/nelle/data`,
 because that's where we now are:
 
 ~~~
@@ -293,7 +293,7 @@ $ pwd
 ~~~
 {:class="in"}
 ~~~
-/users/nelle/data
+/Users/nelle/data
 ~~~
 {:class="out"}
 ~~~
@@ -311,7 +311,7 @@ how do we go up?
 We could use an absolute path:
 
 ~~~
-$ cd /users/nelle
+$ cd /Users/nelle
 ~~~
 {:class="in"}
 
@@ -322,7 +322,7 @@ $ pwd
 ~~~
 {:class="in"}
 ~~~
-/users/nelle/data
+/Users/nelle/data
 ~~~
 {:class="out"}
 ~~~
@@ -335,14 +335,14 @@ $ cd ..
 or more succinctly,
 the [parent](../../gloss.html#parent-directory) of the current directory.
 Sure enough,
-if we run `pwd` after running `cd ..`, we're back in `/users/nelle`:
+if we run `pwd` after running `cd ..`, we're back in `/Users/nelle`:
 
 ~~~
 $ pwd
 ~~~
 {:class="in"}
 ~~~
-/users/nelle
+/Users/nelle
 ~~~
 {:class="out"}
 
@@ -363,7 +363,7 @@ data/       notes.txt
 
 `-a` stands for "show all";
 it forces `ls` to show us file and directory names that begin with `.`,
-such as `..` (which, if we're in `/users/nelle`, refers to the `/users` directory).
+such as `..` (which, if we're in `/Users/nelle`, refers to the `/Users` directory).
 As you can see,
 it also displays another special directory that's just called `.`,
 which means "the current working directory".
@@ -473,7 +473,7 @@ and we will see it in many other tools as we go on.
 <img src="img/filesystem-challenge.svg" alt="Filesystem for Challenge Questions" />
 
 <div class="challenge" markdown="1">
-If `pwd` displays `/users/thing`, what will `ls ../backup` display?
+If `pwd` displays `/Users/thing`, what will `ls ../backup` display?
 
 1.  `../backup: No such file or directory`
 2.  `2012-12-01 2013-01-08 2013-01-27`
@@ -482,7 +482,7 @@ If `pwd` displays `/users/thing`, what will `ls ../backup` display?
 </div>
 
 <div class="challenge" markdown="1">
-If `pwd` displays `/users/backup`,
+If `pwd` displays `/Users/backup`,
 and `-r` tells `ls` to display things in reverse order,
 what command will display:
 
@@ -492,7 +492,7 @@ pnas-sub/ pnas-final/ original/
 
 1.  `ls pwd`
 2.  `ls -r -F`
-3.  `ls -r -F /users/backup`
+3.  `ls -r -F /Users/backup`
 4.  Either \#2 or \#3 above, but not \#1.
 </div>
 
