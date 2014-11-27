@@ -1,7 +1,7 @@
 ---
 layout: lesson
 root: ../..
-title: Numbers
+title: File Transfer
 ---
 There are other ways to interact with remote files other than git.
 In fact, if we wish to download files from the shell we can use
