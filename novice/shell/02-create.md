@@ -78,7 +78,6 @@ then run a text editor called Nano to create a file called `draft.txt`:
 $ cd thesis
 $ nano draft.txt
 ~~~
-
 {:class="in"}
 
 Alternatively, we could use the unix touch command to create an empty file called draft.txt and immediately return to the shell. This would skip opening a text editor.
@@ -87,7 +86,6 @@ Alternatively, we could use the unix touch command to create an empty file calle
 $ cd thesis
 $ touch draft.txt
 ~~~
-
 {:class="in"}
 
 > #### Which Editor?
