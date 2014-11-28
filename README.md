@@ -519,6 +519,20 @@ FAQ
     making the site from scratch takes approximately 24 seconds,
     half of which is spent converting IPython Notebooks.
 
+*   *What do I do if I see a `TypeError` when I run `make site`?*
+    <br/>
+    The error message may look something like this:
+
+    ~~~
+    /usr/lib/ruby/1.9.1/time.rb:265:in `_parse': can't convert nil into String (TypeError)
+    ~~~
+        
+    This is a problem with using an [old version of Jekyll](https://github.com/swcarpentry/bc/issues/848).  For example, the Ubuntu Jekyll package is old.  This can be resolved by uninstalling Jekyll and using Ruby (assuming it is installed) to install the latest Jekyll:
+
+    ~~~
+    $ gem install jekyll
+    ~~~
+
 *   *What do I do if I see a `invalid byte sequence in ...` error when I run `make check`?*
     <br/>
     Declare the `en_US.UTF-8` locale in your shell:
