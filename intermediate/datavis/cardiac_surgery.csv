@@ -1,0 +1,60 @@
+Facility ID,Hospital Name,Detailed Region,Region,Procedure,Year of Hospital Discharge,Number of Cases,Number of Deaths,Observed Mortality Rate,Expected Mortality Rate,Risk-Adjusted Mortality Rate,Lower Limit of Confidence Interval,Upper Limit of Confidence Interval,Comparison Results
+0001,Albany Medical Center,Capital District,Capital District,All PCI,2011,1090,16,1.47,0.79,1.80,1.03,2.92,Rate significantly higher than Statewide Rate
+0116,Arnot Ogden Med Ctr,Western NY - Rochester,Western NY - Rochester,All PCI,2011,496,3,0.60,1.02,0.57,0.12,1.68,Rate not different than Statewide Rate
+1438,Bellevue Hospital Ctr,Manhattan,NY Metro - NYC,All PCI,2011,479,10,2.09,1.21,1.68,0.80,3.08,Rate not different than Statewide Rate
+1439,Beth Israel Med Ctr,Manhattan,NY Metro - NYC,All PCI,2011,1538,13,0.85,0.78,1.06,0.56,1.81,Rate not different than Statewide Rate
+1178,Bronx-Lebanon-Cncourse,Bronx,NY Metro - NYC,All PCI,2011,67,2,2.99,1.48,1.96,0.22,7.08,Rate not different than Statewide Rate
+1286,Brookdale Hosp Med Ctr,Kings,NY Metro - NYC,All PCI,2011,209,3,1.44,1.35,1.03,0.21,3.02,Rate not different than Statewide Rate
+0207,Buffalo General Hosp,Western NY - Buffalo,Western NY - Buffalo,All PCI,2011,1214,14,1.15,0.84,1.33,0.73,2.24,Rate not different than Statewide Rate
+0977,Cayuga Med Ctr Ithaca,Central NY,Central NY,All PCI,2011,159,2,1.26,1.47,0.83,0.09,3.00,Rate not different than Statewide Rate
+0135,Champ.Valley Phys Hosp,Capital District,Capital District,All PCI,2011,748,7,0.94,1.07,0.85,0.34,1.75,Rate not different than Statewide Rate
+0636,Crouse Hospital,Central NY,Central NY,All PCI,2011,379,6,1.58,1.20,1.28,0.47,2.79,Rate not different than Statewide Rate
+0829,Ellis Hospital,Capital District,Capital District,All PCI,2011,509,5,0.98,0.90,1.06,0.34,2.46,Rate not different than Statewide Rate
+1626,Elmhurst Hospital Ctr,Queens,NY Metro - NYC,All PCI,2011,448,4,0.89,1.09,0.79,0.21,2.04,Rate not different than Statewide Rate
+0210,Erie County Med Ctr,Western NY - Buffalo,Western NY - Buffalo,All PCI,2011,159,3,1.89,1.81,1.01,0.20,2.96,Rate not different than Statewide Rate
+0599,Faxton - St. Lukes,Central NY,Central NY,All PCI,2011,275,4,1.45,0.71,1.98,0.53,5.06,Rate not different than Statewide Rate
+1005,Glens Falls Hospital,Capital District,Capital District,All PCI,2011,231,1,0.43,0.68,0.62,0.01,3.44,Rate not different than Statewide Rate
+0779,Good Sam - Suffern,NY Metro - New Rochelle,NY Metro - New Rochelle,All PCI,2011,606,5,0.83,1.17,0.68,0.22,1.59,Rate not different than Statewide Rate
+0925,Good Sam - West Islip,NY Metro - Long Island,NY Metro - Long Island,All PCI,2011,663,4,0.60,0.54,1.09,0.29,2.79,Rate not different than Statewide Rate
+0913,Huntington Hospital,NY Metro - Long Island,NY Metro - Long Island,All PCI,2011,256,2,0.78,0.82,0.92,0.10,3.32,Rate not different than Statewide Rate
+1629,Jamaica Hosp Med Ctr,Queens,NY Metro - NYC,All PCI,2011,220,11,5.00,1.71,2.84,1.42,5.08,Rate significantly higher than Statewide Rate
+1450,Lenox Hill Hospital,Manhattan,NY Metro - NYC,All PCI,2011,1812,12,0.66,0.72,0.89,0.46,1.55,Rate not different than Statewide Rate
+1630,Long Island Jewish MC,Queens,NY Metro - NYC,All PCI,2011,1848,10,0.54,0.78,0.68,0.32,1.24,Rate not different than Statewide Rate
+1304,Lutheran Medical Ctr,Kings,NY Metro - NYC,All PCI,2011,323,5,1.55,1.49,1.00,0.32,2.34,Rate not different than Statewide Rate
+0746,M I Bassett Hospital,Capital District,Capital District,All PCI,2011,330,3,0.91,0.91,0.97,0.19,2.83,Rate not different than Statewide Rate
+1305,Maimonides Medical Ctr,Kings,NY Metro - NYC,All PCI,2011,1076,13,1.21,1.51,0.77,0.41,1.32,Rate not different than Statewide Rate
+0213,Mercy Hospital,Western NY - Buffalo,Western NY - Buffalo,All PCI,2011,693,8,1.15,0.94,1.19,0.51,2.34,Rate not different than Statewide Rate
+0215,Millard Fillmore Hosp,Western NY - Buffalo,Western NY - Buffalo,All PCI,2011,643,5,0.78,0.85,0.88,0.28,2.06,Rate not different than Statewide Rate
+1169,Montefiore - Moses,Bronx,NY Metro - NYC,All PCI,2011,628,2,0.32,0.83,0.37,0.04,1.34,Rate not different than Statewide Rate
+3058,Montefiore - Weiler,Bronx,NY Metro - NYC,All PCI,2011,533,10,1.88,1.32,1.38,0.66,2.53,Rate not different than Statewide Rate
+1456,Mount Sinai Hospital,Manhattan,NY Metro - NYC,All PCI,2011,4676,27,0.58,0.71,0.79,0.52,1.14,Rate not different than Statewide Rate
+1637,NY Hospital - Queens,Queens,NY Metro - NYC,All PCI,2011,676,5,0.74,0.86,0.83,0.27,1.94,Rate not different than Statewide Rate
+1306,NY Methodist Hospital,Kings,NY Metro - NYC,All PCI,2011,1480,11,0.74,0.66,1.08,0.54,1.94,Rate not different than Statewide Rate
+1464,NYP- Columbia Presby.,Manhattan,NY Metro - NYC,All PCI,2011,3010,19,0.63,0.99,0.62,0.37,0.96,Rate significantly lower than Statewide Rate
+1458,NYP- Weill Cornell,Manhattan,NY Metro - NYC,All PCI,2011,1359,21,1.55,1.26,1.18,0.73,1.81,Rate not different than Statewide Rate
+1463,NYU Hospitals Center,Manhattan,NY Metro - NYC,All PCI,2011,1116,8,0.72,0.62,1.11,0.48,2.19,Rate not different than Statewide Rate
+0541,North Shore Univ Hosp,NY Metro - Long Island,NY Metro - Long Island,All PCI,2011,1592,10,0.63,1.17,0.52,0.25,0.95,Rate significantly lower than Statewide Rate
+0699,Orange Regional Med Ctr,NY Metro - New Rochelle,NY Metro - New Rochelle,All PCI,2011,539,2,0.37,0.84,0.43,0.05,1.54,Rate not different than Statewide Rate
+0411,Rochester General Hosp,Western NY - Rochester,Western NY - Rochester,All PCI,2011,1608,15,0.93,0.91,1.00,0.56,1.64,Rate not different than Statewide Rate
+0527,South Nassau Com. Hosp,NY Metro - Long Island,NY Metro - Long Island,All PCI,2011,565,7,1.24,1.20,1.00,0.40,2.06,Rate not different than Statewide Rate
+0924,Southside Hospital,NY Metro - Long Island,NY Metro - Long Island,All PCI,2011,559,4,0.72,0.65,1.07,0.29,2.75,Rate not different than Statewide Rate
+1176,St. Barnabas Hospital,Bronx,NY Metro - NYC,All PCI,2011,51,1,1.96,0.73,2.62,0.03,14.57,Rate not different than Statewide Rate
+0943,St. Catherine of Siena,NY Metro - Long Island,NY Metro - Long Island,All PCI,2011,253,2,0.79,0.88,0.87,0.10,3.14,Rate not different than Statewide Rate
+0598,St. Elizabeth Med Ctr,Central NY,Central NY,All PCI,2011,886,8,0.90,0.89,0.99,0.42,1.94,Rate not different than Statewide Rate
+0563,St. Francis Hospital,NY Metro - Long Island,NY Metro - Long Island,All PCI,2011,2641,27,1.02,1.02,0.97,0.64,1.41,Rate not different than Statewide Rate
+0630,St. Josephs Hospital,Central NY,Central NY,All PCI,2011,2195,20,0.91,0.94,0.94,0.57,1.45,Rate not different than Statewide Rate
+0694,St. Lukes Crnwll-Newbrg,NY Metro - New Rochelle,NY Metro - New Rochelle,All PCI,2011,325,5,1.54,1.04,1.44,0.46,3.35,Rate not different than Statewide Rate
+1469,St. Lukes at St. Lukes,Manhattan,NY Metro - NYC,All PCI,2011,514,10,1.95,1.39,1.35,0.65,2.49,Rate not different than Statewide Rate
+0005,St. Peters Hospital,Capital District,Capital District,All PCI,2011,782,9,1.15,1.14,0.98,0.45,1.87,Rate not different than Statewide Rate
+1740,Staten Island Univ Hosp,Staten Island,NY Metro - NYC,All PCI,2011,986,11,1.12,1.06,1.02,0.51,1.82,Rate not different than Statewide Rate
+0413,Strong Memorial Hosp,Western NY - Rochester,Western NY - Rochester,All PCI,2011,893,8,0.90,1.12,0.78,0.33,1.53,Rate not different than Statewide Rate
+0058,UHS - Wilson Med Ctr,Central NY,Central NY,All PCI,2011,745,8,1.07,1.17,0.89,0.38,1.75,Rate not different than Statewide Rate
+0471,Unity Hospital,Western NY - Rochester,Western NY - Rochester,All PCI,2011,238,4,1.68,1.41,1.16,0.31,2.96,Rate not different than Statewide Rate
+1302,Univ. Brooklyn @ LICH,Kings,NY Metro - NYC,All PCI,2011,195,2,1.03,1.69,0.59,0.07,2.12,Rate not different than Statewide Rate
+1320,Univ. Hosp-Brooklyn,Kings,NY Metro - NYC,All PCI,2011,433,6,1.39,0.95,1.42,0.52,3.08,Rate not different than Statewide Rate
+0245,Univ. Hosp-Stony Brook,NY Metro - Long Island,NY Metro - Long Island,All PCI,2011,1479,23,1.56,1.23,1.22,0.77,1.84,Rate not different than Statewide Rate
+0635,Univ. Hosp-Upstate,Central NY,Central NY,All PCI,2011,273,5,1.83,1.68,1.06,0.34,2.47,Rate not different than Statewide Rate
+0181,Vassar Bros. Med Ctr,NY Metro - New Rochelle,NY Metro - New Rochelle,All PCI,2011,663,7,1.06,1.08,0.95,0.38,1.96,Rate not different than Statewide Rate
+1139,Westchester Med Ctr,NY Metro - New Rochelle,NY Metro - New Rochelle,All PCI,2011,727,10,1.38,1.21,1.10,0.53,2.02,Rate not different than Statewide Rate
+1045,White Plains Hospital,NY Metro - New Rochelle,NY Metro - New Rochelle,All PCI,2011,241,4,1.66,1.06,1.52,0.41,3.90,Rate not different than Statewide Rate
+0511,Winthrop Univ. Hosp,NY Metro - Long Island,NY Metro - Long Island,All PCI,2011,905,5,0.55,0.95,0.56,0.18,1.31,Rate not different than Statewide Rate
