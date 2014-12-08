@@ -222,7 +222,13 @@ Replace 'vlad' with your partner's username (the one who owns the repository).
 
 `git clone` creates a fresh local copy of a remote repository.
 
-<img src="img/github-collaboration.svg" alt="After Creating Clone of Repository" />
+<object type="image/svg+xml" data="img/github-collaboration.svg"
+        alt="After Creating Clone of Repository">
+<pre>
+  Sarah's computer    &lt;---&gt; GitHub &lt;---&gt; Fred's computer
+  /home/sarah/planets                    /home/fred/planets
+</pre>
+</object>
 
 The new collaborator can now make a change in their copy of the repository:
 
