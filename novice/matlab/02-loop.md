@@ -128,7 +128,7 @@ images on disk:
 
 ~~~
 % save plot to disk as png image:
-print -dpng "average.png"
+print -dpng 'average.png'
 ~~~
 {:class="in"}
 
