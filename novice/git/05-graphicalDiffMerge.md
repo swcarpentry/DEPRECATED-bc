@@ -14,7 +14,7 @@ title: Diff and Merge with Graphical Tools
 ### Intro
 
 Git allows you to integrate 3rd party tools for various tasks. You may have already changed Git's default editor to _nano_.<br>
-In this lesson, we will configure Git to use a tool called <a href="https://sourcegear.com/diffmerge/">DiffMerge</a> to help us 
+In this lesson, we will configure Git to use a tool called [DiffMerge](https://sourcegear.com/diffmerge/) to help us 
 view file changes and resolve merge conflicts.
 
 The Git commands we will be using are `git difftool` and `git mergetool`. 
@@ -76,7 +76,7 @@ $ git difftool --help
 ~~~
 {:class="in"}
 
-From our previous lesson, we have the file `mars.txt`.
+From the [conflicts lesson](03-conflict.html), we have the file `mars.txt`.
 
 ~~~
 Cold and dry, but everything is my favorite color
