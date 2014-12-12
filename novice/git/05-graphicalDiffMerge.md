@@ -216,6 +216,7 @@ The purple highlighting denotes the most recent text that was committed, but cou
 
 The center pane shows the _BASE_ file. This is what your file looked like _*before*_ the commit which has the conflict,
 which would be the `HEAD~1` commit in this example. 
+Refer to the [Exploring History](01-backup.html#exploring-history) section from lesson 1 to review the `HEAD~1` syntax.
 
 <table>
 <caption align="bottom"><b><i>Right Pane</i></b></caption>
@@ -259,8 +260,8 @@ Untracked files:
 ~~~
 {:class="in"}
 
-You have already seen the output above from the [conflicts lesson](03-conflict), with one exception.
-There is a new untracked file, `mars.txt.orig`. When you use teh `git mergetool` command, git creates a copy of the conflicted file (with all of the conflict markers) and appends `.orig`. It is perfectly safe to remove this file. 
+You have already seen the output above from the [conflicts lesson](03-conflict.html), with one exception.
+There is a new untracked file, `mars.txt.orig`. When you use the `git mergetool` command, git creates a copy of the conflicted file (with all of the conflict markers) and appends `.orig`. It is perfectly safe to remove this file. 
 
 It is possible to configure git to stop generating these backup files, but that will be left as an exercise for the reader! Hint: `git mergetool --help`
 
