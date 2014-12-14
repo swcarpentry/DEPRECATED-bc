@@ -473,6 +473,10 @@ and we will see it in many other tools as we go on.
 <img src="img/filesystem-challenge.svg" alt="Filesystem for Challenge Questions" />
 
 <div class="challenge" markdown="1">
+What is the absolute path to the home directory for your account on your computer? How did you find it?
+</div>
+
+<div class="challenge" markdown="1">
 If `pwd` displays `/users/thing`, what will `ls ../backup` display?
 
 1.  `../backup: No such file or directory`
