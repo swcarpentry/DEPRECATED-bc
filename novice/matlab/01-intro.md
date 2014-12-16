@@ -559,7 +559,7 @@ ans = 6.1487
 ~~~
 {:class="out"}
 
-We couldn't just do `mean(patient_data)` becase, that
+We couldn't just do `mean(patient_data)` because, that
 would compute the mean of *each column* in our table, and return an array
 of mean values. The expression `patient_data(:)` *flattens* the table into a
 one-dimensional array.
