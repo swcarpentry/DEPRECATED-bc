@@ -4,7 +4,7 @@ Software Carpentry Workshops
 > **Note**
 >
 > We are currently reorganizing our repositories.
-> We hope to complete work by the end of November 2014,
+> We hope to complete work by the end of December 2014,
 > but in the interim:
 >
 > 1. Please check with us before creating pull requests against this repository ---
