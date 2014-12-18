@@ -1,18 +1,4 @@
-Software Carpentry Workshops
-============================
-
-> **Note**
->
-> We are currently reorganizing our repositories.
-> We had hoped to complete work by the end of November 2014,
-> but are running late --- the current goal is to be finished
-> by the end of 2014.
-> In the interim:
->
-> 1. Please check with us before creating pull requests against this repository ---
->    we may point you at a new one.
-> 2. If you *do* create pull requests against this repository,
->    please use the `gh-pages` branch rather than the `master` branch.
+# NOTE: This repository is now frozen - please do not submit pull requests against it, as we are moving its content to other repositories.  We will publish their locations and submission guidelines before the end of December 2014; in the meanwhile, please contact Greg Wilson (gvwilson@software-carpentry.org) if you have an improvement, correction, or bug report.
 
 The `bc` repository is the starting point for creating your own workshop website:
 it contains a template for your workshop's home page,
