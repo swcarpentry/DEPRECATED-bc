@@ -577,6 +577,9 @@ The mathematician Richard Hamming once said,
 and the best way to develop insight is often to visualize data.
 Visualization deserves an entire lecture (or course) of its own,
 but we can explore a few features of Python's `matplotlib` here. While there is no "official" plotting library, this package is the de facto standard.
+
+Although matplotlib will suit our purposes for this lesson, [Seaborn](http://web.stanford.edu/~mwaskom/software/seaborn/) is an improvement on top of matplotlib that provides better color palettes and more refined plots among other features.
+
 First,
 let's tell the IPython Notebook that we want our plots displayed inline,
 rather than in a separate viewing window:

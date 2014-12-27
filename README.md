@@ -300,7 +300,7 @@ If you don't have `make` in your machine,
 you can build the preview with:
 
 ~~~
-$ jekyll -t build -d _site
+$ jekyll build -t -d _site
 ~~~
 
 Variables
