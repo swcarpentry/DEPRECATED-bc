@@ -242,14 +242,20 @@ To create a website for a new workshop:
     $ git push origin gh-pages
     ~~~
 
-As soon as your repo has been pushed to GitHub, GitHub will render your pages
-at the url:
+    As soon as your repo has been pushed to GitHub, GitHub will render your pages
+    at the url:
 
-~~~
-http://{your-github-username}.github.io/YYYY-MM-DD-site/
-~~~
+    ~~~
+    http://{your-github-username}.github.io/YYYY-MM-DD-site/
+    ~~~
 
-You may update your workshop's website whenever you want.
+    You may update your workshop's website whenever you want.
+
+12. Once your workshop website is ready, add the link to it to the main
+    [Software Carpentry website](http://www.software-carpentry.org). In order
+    to do that, follow 
+    [these instructions](https://github.com/swcarpentry/site/blob/master/README.md)
+    (section *Adding a Workshop*).
 
 Previewing the Site
 -------------------
