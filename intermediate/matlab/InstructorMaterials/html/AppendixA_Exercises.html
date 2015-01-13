@@ -1,0 +1,328 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Appendix A - Exercises.</title><meta name="generator" content="MATLAB 8.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2014-03-20"><meta name="DC.source" content="AppendixA_Exercises.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Appendix A - Exercises.</h1><!--introduction--><p>Authors: Ken Deeley, <a href="mailto:ken.deeley@mathworks.co.uk">ken.deeley@mathworks.co.uk</a> Juan Martinez, <a href="mailto:juan.martinez@mathworks.co.uk">juan.martinez@mathworks.co.uk</a></p><p>This appendix contains several hands-on exercises designed to provide practice with the concepts covered during each chapter of the course. Full worked solutions are available for each exercise. These materials are stored in the "Exercises" folder of the main course directory.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">The MATLAB Language and Desktop Environment.</a></li><li><a href="#2">The MATLAB Language and Desktop Environment.</a></li><li><a href="#3">Algorithm Design in MATLAB.</a></li><li><a href="#4">Algorithm Design in MATLAB.</a></li><li><a href="#5">Test and Verification of MATLAB Code.</a></li><li><a href="#6">Test and Verification of MATLAB Code.</a></li><li><a href="#7">Test and Verification of MATLAB Code.</a></li><li><a href="#8">Debugging and Improving Performance.</a></li></ul></div><h2>The MATLAB Language and Desktop Environment.<a name="1"></a></h2><p>Exercise - Gas Prices Solution - Ex01_GasPrices.m</p><div><ul><li>Create a new script, and use the readtable function to import the data   from gasprices.csv into a table in your Workspace. Hint: You will need   to specify the Delimiter and Headerlines options &#8211; see the   documentation for the readtable function.</li></ul></div><div><ul><li>Extract the data for Japan from the table into a separate numeric   variable, using the dot syntax (.). Compute the mean and standard   deviation of the Japanese prices.</li></ul></div><div><ul><li>Extract the data for Europe into a numeric array, and compute the mean   European price for each year. Hint: check the documentation for the   mean function.</li></ul></div><div><ul><li>Compute the European return series from the prices using the following   formula:</li></ul></div><pre>     R(t) = log( P(t+1)/P(t) )</pre><pre class="language-matlab">Here, P(t) represents <span class="string">a</span> <span class="string">single</span> <span class="string">price</span> <span class="string">series.</span> <span class="string">There</span> <span class="string">are</span> <span class="string">four</span> <span class="string">price</span>
+series <span class="string">in</span> <span class="string">the</span> <span class="string">European</span> <span class="string">data.</span>
+</pre><div><ul><li>Compute the correlation coefficients of the four European return   series. Hint: See the documentation for the corrcoef function. Display   the resulting correlation matrix using the imagesc function.</li></ul></div><h2>The MATLAB Language and Desktop Environment.<a name="2"></a></h2><p>Exercise - Australian Marriages Solution - Ex02_AusMarriages</p><div><ul><li>Create a new script, and use the readtable function to import the data   from AusMarriages.dat into a table in your Workspace. Hint: You will   need to specify the Delimiter option &#8211; see the documentation for the   readtable function. This data file is tab-delimited ('\t').</li></ul></div><div><ul><li>Insert an additional variable dn in the table containing the numerical   representations of the dates. Hint: MATLAB uses serial date numbers to   represent date and time information. Check the documentation for the   datenum function (note that the date format for this data is   dd/mm/yyyy).</li></ul></div><div><ul><li>Plot the number of marriages as a function of time. Format the x-axis   tick labels using the datetick function.</li></ul></div><div><ul><li>Create a 1x25 row vector v of equal values 1/25. Hint: use ones.</li></ul></div><div><ul><li>Use the conv function (with the 'same' option) and the vector from   step 4 to smooth the marriage data.</li></ul></div><div><ul><li>Overlay the smoothed data on the original plot, using a different   colour. Hint: Use hold on.</li></ul></div><h2>Algorithm Design in MATLAB.<a name="3"></a></h2><p>Exercise - Pacific Sea Surface Temperatures Solution - Ex03_SeaSurfaceTemperatures, SST_grid_sol</p><div><ul><li>Create a new script, and load the data from Ex03_SST.mat into the   Workspace.</li></ul></div><div><ul><li>Visualise the first set of temperature data (corresponding to the first   column of the variable sst) using: a 2D scatter plot, specifying the   colours using the temperature data; a 3D scatter plot, using black   points as markers.</li></ul></div><div><ul><li>Create equally-spaced vectors of points ranging from min(lon) to   max(lon) and min(lat) to max(lat), respectively. Next, create grids   lonGrid and latGrid of lattice points using meshgrid.</li></ul></div><div><ul><li>Create a variable tempGrid by interpolating the first set of   temperature data over the lattice of points created in the previous   step. Hint: use griddata.</li></ul></div><div><ul><li>Visualise the resulting interpolated values using the surf function.</li></ul></div><div><ul><li>Write a function SST_grid taking the longitude, latitude and a set of   temperature measurements as its three input arguments. The function   should return lonGrid, latGrid and tempGrid as output arguments.   Therefore, the first line of your function will be:</li></ul></div><p>[lonGrid, latGrid, tempGrid] = SST_grid(lon, lat, seaTemp)</p><div><ul><li>In your script, invoke your function for each different set of sea   surface temperature measurements (i.e. the different columns of the   sst variable), and visualise the results in a 4x6 subplot array.   Hint: use a for-loop and the subplot function.</li></ul></div><h2>Algorithm Design in MATLAB.<a name="4"></a></h2><p>Exercise - House Prices to Median Earnings Solution - Ex04_PricesToWages, plotPrices_sol, houseUI_complete</p><div><ul><li>Create a new script, and load the data from Ex04_House.mat into the   Workspace.</li></ul></div><div><ul><li>Open and view the data table in the Variable Editor. Extract the region   names from the table as a cell array of strings, by accessing the   Properties metadata of the table. Hint: At the command line, enter   &gt;&gt; pricesToWages.Properties</li></ul></div><div><ul><li>Use the strcmp function and the cell array from the previous step to   identify the row of the table containing the data for Manchester.   Extract the data from this row, and plot this data as a function of   year (note that the years range from 1997 to 2012).</li></ul></div><div><ul><li>Write a function plotPrices with the following specifications:</li></ul></div><pre class="language-matlab">plotPrices <span class="string">accepts</span> <span class="string">a</span> <span class="string">row</span> <span class="string">number</span> <span class="string">as</span> <span class="string">its</span> <span class="string">only</span> <span class="string">input</span> <span class="string">argument</span>;
+plotPrices <span class="string">plots</span> <span class="string">the</span> <span class="string">price</span> <span class="string">information</span> <span class="string">from</span> <span class="string">the</span> <span class="string">corresponding</span> <span class="string">row</span> <span class="string">of</span>
+the <span class="string">table</span> <span class="string">as</span> <span class="string">a</span> <span class="string">function</span> <span class="string">of</span> <span class="string">year.</span>
+</pre><pre class="language-matlab">Note <span class="string">that</span> <span class="string">since</span> <span class="string">functions</span> <span class="string">have</span> <span class="string">their</span> <span class="string">own</span> <span class="string">private</span> <span class="string">workspace</span>, you <span class="string">will</span>
+need <span class="string">to</span> <span class="string">load</span> <span class="string">the</span> <span class="string">required</span> <span class="string">data</span> <span class="string">inside</span> <span class="string">the</span> <span class="string">function.</span>
+</pre><div><ul><li>Bonus: open the houseUI function file and modify the popup menu   callback so that the plot is updated when the user selects a region   of interest.</li></ul></div><h2>Test and Verification of MATLAB Code.<a name="5"></a></h2><p>Exercise - String Subset Replacement Solution - test_repblank_sol</p><div><ul><li>Open the script app_repblank and run the code. The objective of this   exercise is to write unit tests for the repblank function. Open the   repblank function and read the help to understand the function's   specifications and requirements.</li></ul></div><div><ul><li>Open the main test function test_repblank. This main test function   currently has four local test function stubs.</li></ul></div><div><ul><li>Write code in the test_OneBlank local test function to verify that   repblank exhibits correct behaviour when the input string contains one   blank character (i.e. one space). Hint: use verifyEqual.</li></ul></div><div><ul><li>Write code in the test_ManyBlank local test function to verify that   repblank exhibits correct behaviour when the input string contains   multiple consecutive blank values.</li></ul></div><div><ul><li>Write code in the test_FirstBlank local test function to verify that   repblank exhibits correct behaviour when the input string contains   leading spaces.</li></ul></div><div><ul><li>Write code in the test_LastBlank local test function to verify that   repblank exhibits correct behaviour when the input string contains   trailing spaces.</li></ul></div><div><ul><li>Run all tests using the runtests command and ensure that all tests   pass.</li></ul></div><div><ul><li>Bonus: write another local test function to verify that repblank   throws an error when called with a string consisting entirely of   blanks. Hint: use verifyError with an appropriate error identifier.   Ensure that all tests still pass as before.</li></ul></div><h2>Test and Verification of MATLAB Code.<a name="6"></a></h2><p>Exercise - Levenshtein String Distances Solution - test_strdist_sol</p><div><ul><li>Open the script app_strdist and run the code. The objective of this   exercise is to write unit tests for the strdist function. Open the   strdist function and read the help to understand the function's   specifications and requirements.</li></ul></div><div><ul><li>Open the main test function test_strdist. This main test function   currently has a setupOnce method, a teardownOnce method and three   local test function stubs.</li></ul></div><div><ul><li>Write code in the setupOnce method which adds the test data folder   STRDIST_Test_Data to the path, and then initialises the TestData   structure contained in the testCase object by loading the MAT-file   words.mat.</li></ul></div><div><ul><li>Write code in the teardownOnce method which removes the test data   folder STRDIST_Test_Data from the path.</li></ul></div><div><ul><li>Write code in the test_OneWord local test function to verify that   strdist exhibits correct behaviour when called with only the first   word from the words.mat MAT-file. (In this case, the expected answer   is 0.)</li></ul></div><div><ul><li>Write code in the test_ThreeWords local test function to verify that   strdist exhibits correct behaviour when called with the first three   words from the words.mat MAT-file. (In this case, the expected answer   is the row vector [7, 5, 7].)</li></ul></div><div><ul><li>Write code in the test_DimensionsOutput local test function to verify   that strdist returns a solution of the correct dimensions when called   with the first four words from the words.mat MAT-file. (In this case,   the expected answer is the row vector [1, 6].)</li></ul></div><h2>Test and Verification of MATLAB Code.<a name="7"></a></h2><p>Exercise - Counting Word Frequencies Solution - test_getwords_sol</p><div><ul><li>Open the script app_getwords and run the code. The objective of this   exercise is to write unit tests for the getwords function. Open the   getwords function and read the help to understand the function's   specifications and requirements.</li></ul></div><div><ul><li>Open the main test function test_getwords. This main test function   currently has a setupOnce method, a teardownOnce method and three   local test function stubs.</li></ul></div><div><ul><li>Write code in the setupOnce method which adds the test data folder   Literature to the path.</li></ul></div><div><ul><li>Write code in the teardownOnce method which removes the test data   folder Literature from the path.</li></ul></div><div><ul><li>Write code in the test_IncorrectFilename local test function to verify   that getwords exhibits correct behaviour when called with a   non-existent file. Hint: use verifyError. In this case, the expected   error ID is getwords:noFile.</li></ul></div><div><ul><li>Write code in the test_AllWords local test function to verify that the   first output of getwords has the correct size when the function is   called on the file 'sherlock_holmes.txt'. In this case, the expected   size of W is [207, 1]. Hint: use verifySize.</li></ul></div><div><ul><li>Write code in the test_MaxFreq local test function to verify that   getwords correctly returns the frequency of the most common word in   'sherlock_holmes.txt'. The most common word in 'sherlock_holmes.txt'   occurs with frequency 10.  Hint: use verifyEqual.</li></ul></div><h2>Debugging and Improving Performance.<a name="8"></a></h2><p>Exercise - Debugging and Improving Existing Code Solution - analyzerEx_sol, analyzerEx_sol_vectorised</p><div><ul><li>In this exercise, you will debug an existing code file. Open the   function analyzerEx in the Editor and inspect the Code Analyzer   warning messages.</li></ul></div><div><ul><li>Fix each of the Code Analyzer warnings, and call the function to   ensure that the results are as expected.</li></ul></div><div><ul><li>Bonus: Improve the code by vectorising the double for-loop.   Hint: look up the repmat function, or use matrix multiplication or the   cumsum function.</li></ul></div><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Appendix A - Exercises.
+%
+% Authors:
+% Ken Deeley, ken.deeley@mathworks.co.uk
+% Juan Martinez, juan.martinez@mathworks.co.uk
+%
+% This appendix contains several hands-on exercises designed to provide
+% practice with the concepts covered during each chapter of the course.
+% Full worked solutions are available for each exercise. These materials
+% are stored in the "Exercises" folder of the main course directory.
+
+%% The MATLAB Language and Desktop Environment.
+% Exercise - Gas Prices 
+% Solution - Ex01_GasPrices.m 
+%
+% * Create a new script, and use the readtable function to import the data 
+%   from gasprices.csv into a table in your Workspace. Hint: You will need 
+%   to specify the Delimiter and Headerlines options – see the 
+%   documentation for the readtable function.
+%
+% * Extract the data for Japan from the table into a separate numeric 
+%   variable, using the dot syntax (.). Compute the mean and standard 
+%   deviation of the Japanese prices.
+%
+% * Extract the data for Europe into a numeric array, and compute the mean
+%   European price for each year. Hint: check the documentation for the 
+%   mean function.
+%
+% * Compute the European return series from the prices using the following 
+%   formula:
+%
+%       R(t) = log( P(t+1)/P(t) )
+%
+%   Here, P(t) represents a single price series. There are four price 
+%   series in the European data.
+%
+% * Compute the correlation coefficients of the four European return 
+%   series. Hint: See the documentation for the corrcoef function. Display 
+%   the resulting correlation matrix using the imagesc function.
+
+%% The MATLAB Language and Desktop Environment.
+% Exercise - Australian Marriages 
+% Solution - Ex02_AusMarriages 
+%
+% * Create a new script, and use the readtable function to import the data
+%   from AusMarriages.dat into a table in your Workspace. Hint: You will 
+%   need to specify the Delimiter option – see the documentation for the 
+%   readtable function. This data file is tab-delimited ('\t').
+%
+% * Insert an additional variable dn in the table containing the numerical 
+%   representations of the dates. Hint: MATLAB uses serial date numbers to
+%   represent date and time information. Check the documentation for the 
+%   datenum function (note that the date format for this data is 
+%   dd/mm/yyyy).
+%
+% * Plot the number of marriages as a function of time. Format the x-axis 
+%   tick labels using the datetick function.
+%
+% * Create a 1x25 row vector v of equal values 1/25. Hint: use ones.
+%
+% * Use the conv function (with the 'same' option) and the vector from 
+%   step 4 to smooth the marriage data.
+%
+% * Overlay the smoothed data on the original plot, using a different 
+%   colour. Hint: Use hold on.
+
+%% Algorithm Design in MATLAB.
+% Exercise - Pacific Sea Surface Temperatures 
+% Solution - Ex03_SeaSurfaceTemperatures, SST_grid_sol
+%
+% * Create a new script, and load the data from Ex03_SST.mat into the 
+%   Workspace.
+%
+% * Visualise the first set of temperature data (corresponding to the first
+%   column of the variable sst) using: a 2D scatter plot, specifying the 
+%   colours using the temperature data; a 3D scatter plot, using black 
+%   points as markers.
+%
+% * Create equally-spaced vectors of points ranging from min(lon) to 
+%   max(lon) and min(lat) to max(lat), respectively. Next, create grids 
+%   lonGrid and latGrid of lattice points using meshgrid.
+%
+% * Create a variable tempGrid by interpolating the first set of 
+%   temperature data over the lattice of points created in the previous 
+%   step. Hint: use griddata.
+%
+% * Visualise the resulting interpolated values using the surf function.
+%
+% * Write a function SST_grid taking the longitude, latitude and a set of 
+%   temperature measurements as its three input arguments. The function 
+%   should return lonGrid, latGrid and tempGrid as output arguments. 
+%   Therefore, the first line of your function will be:
+%
+% [lonGrid, latGrid, tempGrid] = SST_grid(lon, lat, seaTemp)
+%
+% * In your script, invoke your function for each different set of sea 
+%   surface temperature measurements (i.e. the different columns of the 
+%   sst variable), and visualise the results in a 4x6 subplot array. 
+%   Hint: use a for-loop and the subplot function.
+
+%% Algorithm Design in MATLAB.
+% Exercise - House Prices to Median Earnings
+% Solution - Ex04_PricesToWages, plotPrices_sol, houseUI_complete
+%
+% * Create a new script, and load the data from Ex04_House.mat into the 
+%   Workspace.
+%
+% * Open and view the data table in the Variable Editor. Extract the region
+%   names from the table as a cell array of strings, by accessing the 
+%   Properties metadata of the table. Hint: At the command line, enter 
+%   >> pricesToWages.Properties
+%
+% * Use the strcmp function and the cell array from the previous step to 
+%   identify the row of the table containing the data for Manchester. 
+%   Extract the data from this row, and plot this data as a function of 
+%   year (note that the years range from 1997 to 2012).
+%
+% * Write a function plotPrices with the following specifications:
+%
+%   plotPrices accepts a row number as its only input argument;
+%   plotPrices plots the price information from the corresponding row of 
+%   the table as a function of year.
+%
+%   Note that since functions have their own private workspace, you will 
+%   need to load the required data inside the function.
+%
+% * Bonus: open the houseUI function file and modify the popup menu 
+%   callback so that the plot is updated when the user selects a region 
+%   of interest.
+
+%% Test and Verification of MATLAB Code.
+% Exercise - String Subset Replacement 
+% Solution - test_repblank_sol
+%
+% * Open the script app_repblank and run the code. The objective of this 
+%   exercise is to write unit tests for the repblank function. Open the 
+%   repblank function and read the help to understand the function's 
+%   specifications and requirements.
+%
+% * Open the main test function test_repblank. This main test function 
+%   currently has four local test function stubs.
+%
+% * Write code in the test_OneBlank local test function to verify that 
+%   repblank exhibits correct behaviour when the input string contains one 
+%   blank character (i.e. one space). Hint: use verifyEqual.
+%
+% * Write code in the test_ManyBlank local test function to verify that 
+%   repblank exhibits correct behaviour when the input string contains 
+%   multiple consecutive blank values.
+%
+% * Write code in the test_FirstBlank local test function to verify that 
+%   repblank exhibits correct behaviour when the input string contains 
+%   leading spaces.
+%
+% * Write code in the test_LastBlank local test function to verify that 
+%   repblank exhibits correct behaviour when the input string contains 
+%   trailing spaces.
+%
+% * Run all tests using the runtests command and ensure that all tests 
+%   pass.
+%
+% * Bonus: write another local test function to verify that repblank 
+%   throws an error when called with a string consisting entirely of 
+%   blanks. Hint: use verifyError with an appropriate error identifier.
+%   Ensure that all tests still pass as before.
+
+%% Test and Verification of MATLAB Code.
+% Exercise - Levenshtein String Distances
+% Solution - test_strdist_sol
+%
+% * Open the script app_strdist and run the code. The objective of this 
+%   exercise is to write unit tests for the strdist function. Open the 
+%   strdist function and read the help to understand the function's 
+%   specifications and requirements.  
+%
+% * Open the main test function test_strdist. This main test function 
+%   currently has a setupOnce method, a teardownOnce method and three 
+%   local test function stubs.
+%
+% * Write code in the setupOnce method which adds the test data folder 
+%   STRDIST_Test_Data to the path, and then initialises the TestData 
+%   structure contained in the testCase object by loading the MAT-file 
+%   words.mat.
+%
+% * Write code in the teardownOnce method which removes the test data 
+%   folder STRDIST_Test_Data from the path.
+%
+% * Write code in the test_OneWord local test function to verify that 
+%   strdist exhibits correct behaviour when called with only the first 
+%   word from the words.mat MAT-file. (In this case, the expected answer 
+%   is 0.)
+%
+% * Write code in the test_ThreeWords local test function to verify that 
+%   strdist exhibits correct behaviour when called with the first three 
+%   words from the words.mat MAT-file. (In this case, the expected answer 
+%   is the row vector [7, 5, 7].)
+%
+% * Write code in the test_DimensionsOutput local test function to verify
+%   that strdist returns a solution of the correct dimensions when called 
+%   with the first four words from the words.mat MAT-file. (In this case, 
+%   the expected answer is the row vector [1, 6].) 
+
+%% Test and Verification of MATLAB Code.
+% Exercise - Counting Word Frequencies
+% Solution - test_getwords_sol
+%
+% * Open the script app_getwords and run the code. The objective of this 
+%   exercise is to write unit tests for the getwords function. Open the
+%   getwords function and read the help to understand the function's 
+%   specifications and requirements.  
+%
+% * Open the main test function test_getwords. This main test function 
+%   currently has a setupOnce method, a teardownOnce method and three 
+%   local test function stubs.
+%
+% * Write code in the setupOnce method which adds the test data folder 
+%   Literature to the path.
+%
+% * Write code in the teardownOnce method which removes the test data 
+%   folder Literature from the path.
+%
+% * Write code in the test_IncorrectFilename local test function to verify 
+%   that getwords exhibits correct behaviour when called with a 
+%   non-existent file. Hint: use verifyError. In this case, the expected 
+%   error ID is getwords:noFile.
+%
+% * Write code in the test_AllWords local test function to verify that the 
+%   first output of getwords has the correct size when the function is 
+%   called on the file 'sherlock_holmes.txt'. In this case, the expected 
+%   size of W is [207, 1]. Hint: use verifySize.
+%
+% * Write code in the test_MaxFreq local test function to verify that 
+%   getwords correctly returns the frequency of the most common word in 
+%   'sherlock_holmes.txt'. The most common word in 'sherlock_holmes.txt' 
+%   occurs with frequency 10.  Hint: use verifyEqual.
+
+%% Debugging and Improving Performance.
+% Exercise - Debugging and Improving Existing Code
+% Solution - analyzerEx_sol, analyzerEx_sol_vectorised
+%
+% * In this exercise, you will debug an existing code file. Open the 
+%   function analyzerEx in the Editor and inspect the Code Analyzer 
+%   warning messages.
+%
+% * Fix each of the Code Analyzer warnings, and call the function to 
+%   ensure that the results are as expected.
+%
+% * Bonus: Improve the code by vectorising the double for-loop. 
+%   Hint: look up the repmat function, or use matrix multiplication or the
+%   cumsum function.
+##### SOURCE END #####
+--></body></html>
