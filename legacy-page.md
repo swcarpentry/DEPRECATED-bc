@@ -1,4 +1,8 @@
-
+---
+layout: lesson
+root: .
+title: Legacy Instructions
+---
 The `bc` repository was the starting point for creating a workshop website from Fall 2013 to late 2014.
 It contains a template for your workshop's home page,
 and also hosts the shared lesson materials we have developed.
