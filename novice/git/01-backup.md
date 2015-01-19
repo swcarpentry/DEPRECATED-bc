@@ -58,6 +58,22 @@ we're telling Git:
 
 The four commands above only need to be run once:
 the flag `--global` tells Git to use the settings for every project on this machine.
+These settings are saved in the file `~/.gitconfig`. You can inspect and also modify them there directly.
+
+~~~
+$ cat ~/.gitconfig
+~~~
+{:class="in"}
+~~~
+[user]
+	name = Vlad Dracula
+	email = vlad@tran.sylvan.ia
+[color]
+	ui = auto
+[core]
+	editor = nano
+~~~
+{:class="out"}
 
 > #### Proxy
 >
@@ -253,6 +269,9 @@ to record a comment that will help us remember later on what we did and why.
 If we just run `git commit` without the `-m` option,
 Git will launch `nano` (or whatever other editor we configured at the start)
 so that we can write a longer message.
+For longer messages it is a good practice to summarize the commit
+in one line followed by a blank line followed by a more detailed description
+or explanation of the change.
 
 If we run `git status` now:
 
@@ -634,8 +653,9 @@ index df0654a..b36abfd 100644
 {:class="out"}
 
 That's the right answer,
-but typing random 40-character strings is annoying,
-so Git lets us use just the first few:
+but typing 40-character strings is annoying,
+so Git lets us use just the first few as long as they are
+unique:
 
 ~~~
 $ git diff f22b25e mars.txt
