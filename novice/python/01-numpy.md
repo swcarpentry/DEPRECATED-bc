@@ -562,11 +562,36 @@ last three characters: gen
     Given those answers,
     explain what `element[1:-1]` does.
 
-1.  The expression `element[3:3]` produces an [empty string](../../gloss.html#empty-string),
-    i.e., a string that contains no characters.
-    If `data` holds our array of patient data,
-    what does `data[3:3, 4:4]` produce?
-    What about `data[3:3, :]`?
+1.  For the NumPy array displayed by `print integer_data`
+
+    `[[ 0  2  4  6  8 10 12 14 16 18]
+     [ 1  3  5  7  9 11 13 15 17 19]
+     [ 2  4  6  8 10 12 14 16 18 20]
+     [ 3  5  7  9 11 13 15 17 19 21]
+     [ 4  6  8 10 12 14 16 18 20 22]
+     [ 5  7  9 11 13 15 17 19 21 23]
+     [ 6  8 10 12 14 16 18 20 22 24]
+     [ 7  9 11 13 15 17 19 21 23 25]
+     [ 8 10 12 14 16 18 20 22 24 26]
+     [ 9 11 13 15 17 19 21 23 25 27]]`
+
+    what does `print integer_data[2:4, 3:5]` produce?
+    
+    1. `[[ 8 10 12]
+        [ 9 11 13]
+        [10 12 14]]`
+            
+    1. `[[ 5  7]
+        [ 6  8]]`
+            
+    1. `[[ 7  9]
+        [ 8 10]]`
+            
+    1. `[[ 8 10]
+        [ 9 11]]`
+            
+    1. `[[12 14]
+        [13 15]]`
 </div>
 
 ### Plotting
