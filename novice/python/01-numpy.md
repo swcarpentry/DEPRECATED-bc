@@ -8,7 +8,7 @@ root: ../..
 
 We are studying inflammation in patients who have been given a new treatment for arthritis,
 and need to analyze the first dozen data sets.
-The data sets are stored in [comma-separated values](../../gloss.html#comma-separeted-values) (CSV) format:
+The data sets are stored in [comma-separated values](../../gloss.html#csv) (CSV) format:
 each row holds information for a single patient,
 and the columns represent successive days.
 The first few rows of our first file look like this:
@@ -597,7 +597,7 @@ pyplot.imshow(data)
 pyplot.show()</code></pre>
 
 <div class="out">
-<img src="../../novice/python/01-numpy_files/novice/python/01-numpy_71_0.png">
+<img src="../../novice/python/01-numpy_files/novice/python/01-numpy_79_0.png">
 </div>
 
 
@@ -612,7 +612,7 @@ pyplot.plot(ave_inflammation)
 pyplot.show()</code></pre>
 
 <div class="out">
-<img src="../../novice/python/01-numpy_files/novice/python/01-numpy_73_0.png">
+<img src="../../novice/python/01-numpy_files/novice/python/01-numpy_81_0.png">
 </div>
 
 
@@ -636,10 +636,10 @@ pyplot.show()</code></pre>
 
 <div class="out"><pre class='out'><code>maximum inflammation per day
 </code></pre>
-<img src="../../novice/python/01-numpy_files/novice/python/01-numpy_75_1.png">
+<img src="../../novice/python/01-numpy_files/novice/python/01-numpy_83_1.png">
 <pre class='out'><code>minimum inflammation per day
 </code></pre>
-<img src="../../novice/python/01-numpy_files/novice/python/01-numpy_75_3.png">
+<img src="../../novice/python/01-numpy_files/novice/python/01-numpy_83_3.png">
 </div>
 
 
@@ -690,7 +690,7 @@ plt.tight_layout()
 plt.show()</code></pre>
 
 <div class="out">
-<img src="../../novice/python/01-numpy_files/novice/python/01-numpy_80_0.png">
+<img src="../../novice/python/01-numpy_files/novice/python/01-numpy_88_0.png">
 </div>
 
 
