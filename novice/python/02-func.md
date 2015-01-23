@@ -38,8 +38,10 @@ Let's start by defining a function `fahr_to_kelvin` that converts temperatures f
 
 
 The definition opens with the word `def`,
-which is followed by the name of the function
-and a parenthesized list of parameter names.
+which is followed by the name of the function,
+a parenthesized list of parameter names
+(our tiny function above has just one),
+and ends with a colon (`:`).
 The [body](../../gloss.html#function-body) of the function&mdash;the
 statements that are executed when it runs&mdash;is indented below the definition line,
 typically by four spaces.
