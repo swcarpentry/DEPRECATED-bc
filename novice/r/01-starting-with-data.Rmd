@@ -224,6 +224,17 @@ dat[5, ]
 dat[, 16]
 ```
 
+We can manage easily the rows and lines of our matrix `dat`. If we wish to exclude a row or a column from `dat`, we can use the `-` symbol.
+
+```{r}
+# Exclude the 5th row
+dat[-5,]
+# Exclude the 2nd column
+dat[,-2]
+# Exclude both the 5th row and the 2nd column
+dat[-5,-2]
+```
+
 Now let's perform some common mathematical operations to learn about our inflammation data.
 When analyzing data we often want to look at partial statistics, such as the maximum value per patient or the average value per day. 
 One way to do this is to select the data we want to create a new temporary data frame, and then perform the calculation on this subset:
