@@ -12,20 +12,20 @@ source("chunk-options.R")
 * Draw concept map of where we are headed towards best scientific practices, and reproducibility.
 * Its really important that you know what you did. More journals/grants/etc. are also making it important for them to know what you did.
 * A lot of scientific code is *not* reproducible.
-* If you keep a lab notebook, why are we not as careful with our code? 
-* We edit each others manuscripts, but we don't edit each other's code. 
+* If you keep a lab notebook, why are we not as careful with our code?
+* We edit each others manuscripts, but we don't edit each other's code.
 * If you write your code with "future you" in mind, you will save yourself and others a lot of time.
 
 # Very basics of R
 
-R is a versatile, open source programming language that was specifically designed for data analysis. As such R is extremely useful both for statistics and data science. Inspired by the programming language S.  
+R is a versatile, open source programming language that was specifically designed for data analysis. As such R is extremely useful both for statistics and data science. Inspired by the programming language S.
 
-* Open source software under GPL.  
-* Superior (if not just comparable) to commercial alternatives. R has over 5,000 user contributed packages at this time. It's widely used both in academia and industry.  
-* Available on all platforms.  
-* Not just for statistics, but also general purpose programming.  
-* Is (sort of) object oriented and functional.  
-* Large and growing community of peers.  
+* Open source software under GPL.
+* Superior (if not just comparable) to commercial alternatives. R has over 5,000 user contributed packages at this time. It's widely used both in academia and industry.
+* Available on all platforms.
+* Not just for statistics, but also general purpose programming.
+* Is (sort of) object oriented and functional.
+* Large and growing community of peers.
 
 Some of the same commands we learned from the command line can be used in R.
 List objects in your current environment
@@ -34,7 +34,7 @@ List objects in your current environment
 ls()
 ```
 
-Remove objects from your current environment.  
+Remove objects from your current environment.
 
 ```{r}
 x <- 5
@@ -47,9 +47,9 @@ Remove all objects from your current environment. Typing `x` on the console will
 rm(list = ls())
 ```
 
-Notice that we have _nested_ one function inside of another.  
+Notice that we have _nested_ one function inside of another.
 
-Use `#` signs to comment. Comment liberally in your R scripts. Anything to the right of a `#` is ignored by R.  
+Use `#` signs to comment. Comment liberally in your R scripts. Anything to the right of a `#` is ignored by R.
 
 ### Assignment operator
 
@@ -75,16 +75,16 @@ update.packages(ask = FALSE)
 
 ## Introduction to R and RStudio
 
-Let's start by learning about our tool.  
+Let's start by learning about our tool.
 
-_Point out the different windows in RStudio._ 
+_Point out the different windows in RStudio._
 * Console, Scripts, Environments, Plots
-* Avoid using shortcuts. 
+* Avoid using shortcuts.
 * Code and workflow is more reproducible if we can document everything that we do.
 * Our end goal is not just to "do stuff" but to do it in a way that anyone can easily and exactly replicate our workflow and results.
 
 You can get output from R simply by typing in math
-	
+
 ```{r}
 3 + 5
 12/7
@@ -132,9 +132,9 @@ By *atomic*, we mean the vector only holds data of a single type.
 
 R provides many functions to examine features of vectors and other objects, for example
 
-* `typeof()` - what is it?  
-* `length()` - how long is it? What about two dimensional objects?  
-* `attributes()` - does it have any metadata?  
+* `typeof()` - what is it?
+* `length()` - how long is it? What about two dimensional objects?
+* `attributes()` - does it have any metadata?
 
 ```{r}
 # Example
@@ -160,58 +160,64 @@ R has many __data structures__. These include
 * data frame
 * factors
 
-### Vectors
+### Atomic vectors
 
-A vector is the most common and basic data structure in R and is pretty much the workhorse of R. Technically, vectors can be one of two types:
+A vector is the most common and basic data structure in R and is pretty much the
+workhorse of R. Technically, vectors can be one of several types, including:
 
 * atomic vectors
 * lists
 
-although the term "vector" most commonly refers to the atomic types not to lists.
+although the term "vector" most commonly refers to the atomic types not to
+lists, and it is how we use it here.
 
 
-#### Atomic Vectors
+#### The different vector modes
 
-A vector is a collection of elements that are most commonly `character`, `logical`, `integer` or `numeric`.
+A vector is a collection of elements that are most commonly of mode `character`, `logical`, `integer` or `numeric`.
 
 You can create an empty vector with `vector()`. (By default the mode is `logical`. You can be more explicit as shown in the examples below.) It is more common to use direct constructors such as `character()`, `numeric()`, etc.
 
 ```{r}
-x <- vector()
-# with a length and type
-vector("character", length = 10)
-character(5) ## character vector of length 5
-numeric(5)
-logical(5)
+vector() # An empty 'logical' (the default) vector
+vector("character", length = 5) # a vector of mode 'character' with 5 elements
+character(5) # the same thing, but using the constructor directly
+numeric(5)   # a numeric vector with 5 elements
+logical(5)   # a logical vector with 5 elements
 ```
 
-Various examples:
+You can also create vectors by directly specifying its content. R will then
+guess the appropriate mode of storage for the vector. For instance:
 
 ```{r}
 x <- c(1, 2, 3)
-x
-length(x)
 ```
 
-`x` is a numeric vector. These are the most common kind. They are numeric objects and are treated as double precision real numbers. To explicitly create integers, add an `L` to each (or *coerce* to the integer type using `as.integer()`.
+will create a vector `x` of mode `numeric`. These are the most common kind, and
+are treated as double precision real numbers. If you wanted to explicitly create
+integers, you need to add an `L` to each element (or *coerce* to the integer
+type using `as.integer()`).
 
 ```{r}
 x1 <- c(1L, 2L, 3L)
 ```
 
-You can also have logical vectors. 
+Using `TRUE` and `FALSE` will create a vector of mode `logical`:
 
 ```{r}
 y <- c(TRUE, TRUE, FALSE, FALSE)
 ```
 
-Finally you can have character vectors:
+while using quoted text will create a vector of mode `character`:
 
 ```{r}
 z <- c("Sarah", "Tracy", "Jon")
 ```
 
-**Examine your vector**  
+#### Examining vectors
+
+The functions `typeof()`, `length()`, `class()` and `str()` provide useful
+information about your vectors and R objects in general.
 
 ```{r}
 typeof(z)
@@ -220,24 +226,20 @@ class(z)
 str(z)
 ```
 
-Question: Do you see a property that's common to all these vectors above?
+**Question:** Do you see a property that's common to all these vectors above?
 
-**Add elements**
+#### Adding elements to a vector
+
+The function `c()` can also be used to add elements to a vector
 
 ```{r}
 z <- c(z, "Annette")
 z
+z <- c("Greg", z)
+z
 ```
 
-More examples of vectors
-
-```{r}
-x <- c(0.5, 0.7)
-x <- c(TRUE, FALSE)
-x <- c("a", "b", "c", "d", "e")
-x <- 9:100
-x <- c(1+0i, 2+4i)
-```
+#### Vectors from sequence of numbers
 
 You can also create vectors as a sequence of numbers
 
@@ -246,6 +248,33 @@ series <- 1:10
 seq(10)
 seq(from = 1, to = 10, by = 0.1)
 ```
+
+#### Missing data
+
+R supports missing data in vectors. They are represented as `NA` (Not Available)
+and can be used for all the vector types covered in this lesson:
+
+```{r}
+x <- c(0.5, NA, 0.7)
+x <- c(TRUE, FALSE, NA)
+x <- c("a", NA, "c", "d", "e")
+x <- c(1+5i, 2-3i, NA)
+```
+
+The function `is.na()` indicates the elements of the vectors that represent
+missing data, and the function `anyNA()` returns `TRUE` if the vector contains
+any missing values:
+
+```{r}
+x <- c("a", NA, "c", "d", NA)
+y <- c("a", "b", "c", "d", "e")
+is.na(x)
+is.na(y)
+anyNA(x)
+anyNA(y)
+```
+
+#### Other special values
 
 `Inf` is infinity. You can have either positive or negative infinity.
 
@@ -258,6 +287,30 @@ seq(from = 1, to = 10, by = 0.1)
 ```{r}
 0/0
 ```
+
+#### What happens when you mix types inside a vector?
+
+R will create a resulting vector with a mode that can most easily accommodate
+all the elements it contains. This conversion between modes of storage is called
+"coercion". When R converts the mode of storage based on its content, it is
+referred to as "implicit coercion". For instance, can you guess what the
+following do (without running them first)?
+
+```{r}
+xx <- c(1.7, "a")
+xx <- c(TRUE, 2)
+xx <- c("a", TRUE)
+```
+
+You can also control how vectors are coerced explicitly using the `as.<class_name>`:
+
+```{r}
+as.numeric("1")
+as.character(1:2)
+```
+
+#### Object attributes
+<!-- This is currently out of place -->
 
 Objects can have __attributes__. Attribues are part of the object. These include:
 
@@ -274,24 +327,7 @@ length(1:10)
 nchar("Software Carpentry")
 ```
 
-**What happens when you mix types?**
 
-R will create a resulting vector that is the least common denominator. The coercion will move towards the one that's easiest to __coerce__ to.
-
-Guess what the following do without running them first
-
-```{r}
-xx <- c(1.7, "a") 
-xx <- c(TRUE, 2) 
-xx <- c("a", TRUE) 
-```
-
-This is called implicit coercion. You can also coerce vectors explicitly using the `as.<class_name>`. Example
-
-```{r}
-as.numeric("1")
-as.character(1:2)
-```
 
 ### Matrix
 
@@ -476,7 +512,7 @@ letters[2]
 
 ### Functions
 
-A function is an R object that takes inputs to perform a task. 
+A function is an R object that takes inputs to perform a task.
 Functions take in information and may return desired outputs.
 
 `output <- name_of_function(inputs)`
@@ -488,8 +524,8 @@ y <- sum(x)
 
 ### Help
 
-All functions come with a help screen. 
-It is critical that you learn to read the help screens since they provide important information on what the function does, 
+All functions come with a help screen.
+It is critical that you learn to read the help screens since they provide important information on what the function does,
 how it works, and usually sample examples at the very bottom.
 
 ### Get new functions
