@@ -107,10 +107,6 @@ it's important to remember that rows aren't actually ordered:
 they're just displayed that way.
 
 
-#### Challenges
-
-1.  Write a query that selects distinct dates from the `Site` table.
-
 
 As we mentioned earlier,
 database records are not stored in any particular order.
