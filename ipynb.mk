@@ -20,6 +20,7 @@ all : ipynb
 #----------------------------------------------------------------------
 
 # Templates.
+# This template uses IPython.nbconvert.filters.string2url which requires IPython's version >= 1.1.0
 IPYNB_TPL = _templates/ipynb.tpl
 
 # IPython Notebooks.  Add patterns here to convert notebooks stored in
