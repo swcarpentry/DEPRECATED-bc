@@ -150,6 +150,7 @@ Options we have explored include:
 Cygwin was the preferred option until mid-2013,
 but once we started teaching Git,
 msysGit proved to work better.
+One caveat is that ``man`` is not included in Git Bash, so avoid showing the manual pages and stick to pointing people at the internet for documentation.
 Desktop virtual machines and cloud-based VMs work well for technically sophisticated learners,
 and can reduce installation and configuration at the start of the workshop,
 but:
