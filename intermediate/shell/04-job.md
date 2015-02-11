@@ -147,6 +147,29 @@ $ jobs
 $ kill %1
 ~~~
 
+The `kill` command is a useful tool to stop runaway jobs that are eating resources on your machine. Combining it with the PIDs (identified using `ps` ) described previously allows you to stop processes that you have launched which are not behaving as they should be. Similar to above, the `kill` command is followed by the PID:
+
+~~~
+$ ps
+
+PID    PPID   PGID   TTY   UID     STIME   COMMAND
+2152      1   2152   con  1000  13:19:07   /usr/bin/bash
+2276   2152   2276   con  1000  14:53:48   /usr/bin/ps
+2289   2282	  2289   con  1000  14:40:35   /usr/bin/some_script
+~~~
+
+~~~
+$ kill 2289
+~~~
+
+There is also a version of `kill` that allows you to kill processes by name. `pkill` is used in a similar way to `kill`, but the `pkill` command is followed by the name of the script that is running.
+
+~~~
+$ pkill some_script
+~~~
+
+It is worth noting that `pkill` will kill any process that matches the pattern that follows it, so the above example would also kill a process named `some_script_to_be_left_running`. Therefore, it can sometimes be worth using the command `pgrep -l some_script` to see which processes are going to be identified (and thus killed) by the `pkill` command. The `-l` flag tells `pgrep` to output the process name in addition to its PID.
+
 Job control was important when users only had one terminal window at a
 time. It's less important now: if we want to run another program, it's
 easy enough to open another window and run it there. However, these
