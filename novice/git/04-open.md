@@ -6,182 +6,80 @@ title: Open Science
 <div class="objectives" markdown="1">
 
 #### Objectives
-*   Explain how the GNU General Public License (GPL) differs from most other open licenses.
-*   Explain the four kinds of restrictions that can be combined in a Creative Commons license.
-*   Correctly add licensing and citation information to a project repository.
-*   Outline options for hosting code and data and the pros and cons of each.
+* Learn how to distribute open source software:
+  - Choosing an appropriate open source license
+  - Choosing an appropriate hosting repository
+* Learn how to distribute open data:
+  - Understand licensing concerns for data and metadata
+  - Choosing an appropriate data repository
 
 </div>
 
-<blockquote>
-The opposite of "open" isn't "closed".
-The opposite of "open" is "broken".
-<br/>
-&mdash; John Wilbanks
-</blockquote>
 
-Free sharing of information might be the ideal in science,
-but the reality is often more complicated.
-Normal practice today looks something like this:
+Knowing how to effectively publish and distribute open source software 
+and open data is becoming as important to scientific research as publishing
+papers -- indeed, it is already required by many of the most prestigious
+journals. In this lesson we focus on the two key components to publishing
+data or source code: licensing and repositories. 
 
-*   A scientist collects some data and stores it on a machine
-    that is occasionally backed up by her department.
-*   She then writes or modifies a few small programs
-    (which also reside on her machine)
-    to analyze that data.
-*   Once she has some results,
-    she writes them up and submits her paper.
-    She might include her data---a growing number of journals require this---but
-    she probably doesn't include her code.
-*   Time passes.
-*   The journal sends her reviews written anonymously by a handful of other people in her field.
-    She revises her paper to satisfy them,
-    during which time she might also modify the scripts she wrote earlier,
-    and resubmits.
-*   More time passes.
-*   The paper is eventually published.
-    It might include a link to an online copy of her data,
-    but the paper itself will be behind a paywall:
-    only people who have personal or institutional access
-    will be able to read it.
 
-For a growing number of scientists,
-though,
-the process looks like this:
+## Open Source Software ## 
 
-*   The data that the scientist collects is stored in an open access repository
-    like [figshare](http://figshare.com/) or [Dryad](http://datadryad.org/)
-    as soon as it's collected,
-    and given its own DOI.
-*   The scientist creates a new repository on GitHub to hold her work.
-*   As she does her analysis,
-    she pushes changes to her scripts
-    (and possibly some output files)
-    to that repository.
-    She also uses the repository for her paper;
-    that repository is then the hub for collaboration with her colleagues.
-*   When she's happy with the state of her paper,
-    she posts a version to [arXiv](http://arxiv.org/)
-    or some other preprint server
-    to invite feedback from peers.
-*   Based on that feedback,
-    she may post several revisions
-    before finally submitting her paper to a journal.
-*   The published paper includes links to her preprint
-    and to her code and data repositories,
-    which  makes it much easier for other scientists
-    to use her work as starting point for their own research.
+### Licensing Software ###
 
-This open model accelerates discovery:
-the more open work is,
-the more widely it is cited and re-used.
-However,
-people who want to work this way need to make some decisions
-about what exactly "open" means in practice.
+Open source licenses assist the creator of a creative work in waiving
+some of the rights and privileges which they are automatically granted
+under [_copyright_ law](http://en.wikipedia.org/wiki/Copyright).
 
-### Licensing
 
-The first question is licensing.
-Broadly speaking,
-there are two kinds of open license for software,
-and half a dozen for data and publications.
-For software,
-people can choose between the [GNU General Public License](http://opensource.org/licenses/GPL-3.0) (GPL) on the one hand,
-and licenses like the [MIT](http://opensource.org/licenses/MIT)
-and [BSD](http://opensource.org/licenses/BSD-2-Clause) licenses on the other.
-All of these licenses allow unrestricted sharing and modification of programs,
-but the GPL is [infective](../../gloss.html#infective-license):
-anyone who distributes a modified version of the code
-(or anything that includes GPL'd code)
-must make *their* code freely available as well.
+Broadly speaking, there are two kinds of open license for
+software: [copyleft](http://en.wikipedia.org/wiki/Copyleft)
+licenses such as the [GNU General Public
+Licenses](http://opensource.org/licenses/GPL-3.0) (GPL),  and
+[permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence)
+licenses such as the [MIT](http://opensource.org/licenses/MIT) and
+[BSD](http://opensource.org/licenses/BSD-2-Clause) licenses.  All of these
+licenses allow unrestricted sharing and modification of programs, but
+copyleft licenses are [infective](../../gloss.html#infective-license):
+anyone who distributes a modified version of the code (or anything
+that includes GPL'd code) must make *their* code freely available as
+well. Code under permissive licenses has no such clause, and as such can 
+be more [easily re-used in commercial software](http://nipy.sourceforge.net/nipy/devel/faq/johns_bsd_pitch.html). 
 
-Proponents of the GPL argue that this requirement is needed
-to ensure that people who are benefiting from freely-available code
-are also contributing back to the community.
-Opponents counter that many open source projects have had long and successful lives
-without this condition,
-and that the GPL makes it more difficult to combine code from different sources.
-At the end of the day,
-what matters most is that:
+#### How to apply a license ####
 
-1.   every project have a file in its home directory
-     called something like `LICENSE` or `LICENSE.txt`
-     that clearly states what the license is, and
-2.   people use existing licenses rather than writing new ones.
+Before releasing open source software you should confirm with your 
+employer that you are the current copyright holder (in academic settings,
+faculty tend to control their own copyrights while the copyrights of work
+done by staff often belong to the university).
 
-The second point is as important as the first:
-most scientists are not lawyers,
-so wording that may seem sensible to a layperson
-may have unintended gaps or consequences.
-The [Open Source Initiative](http://opensource.org/)
-maintains a list of open source licenses,
-and [tl;drLegal](http://www.tldrlegal.com/) explains many of them in plain English.
+Software licenses are typically applied by including a plain-text file
+with name such as `LICENSE` or `COPYING` in the project directory.
+Some projects will place the full text of the license in comments at
+the top of every source file, while others may only declare the choice
+of license by an abbreviation and/or a link to the license terms. 
 
-When it comes to data, publications, and the like,
-scientists have many more options to choose from.
-The good news is that an organization called [Creative Commons](http://creativecommons.org/)
-has prepared a set of licenses using combinations of four basic restrictions:
+The legal text for most open source licenses can be found from the [Open
+Source Initiative](http://opensource.org/), which maintains a list of
+open source licenses which have gone through their approval process.
+[tl;drLegal](http://www.tldrlegal.com/) explains many of them in plain
+English.  
 
-*   Attribution: derived works must give the original author credit for their work.
-*   No Derivatives: people may copy the work, but must pass it along unchanged.
-*   Share Alike: derivative works must license their work under the same terms as the original.
-*   Noncommercial: free use is allowed, but commercial use is not.
+When selecting a license, be sure that your choice is consistent with
+the terms of any software you may be reusing or modifying (usually by 
+adopting the license already in use). Note that many licenses have 
+multiple versions which are not necessarily compatible, so be sure to
+be explicit. 
 
-These four restrictions are abbreviated "BY", "ND", "SA", and "NC" respectively,
-so "CC-BY-ND" means,
-"People can re-use the work both for free and commercially,
-but cannot make changes and must cite the original."
-These [short descriptions](http://creativecommons.org/licenses/)
-summarize the six CC licenses in plain language,
-and include links to their full legal formulations.
 
-There is one other important license that doesn't fit into this categorization.
-Scientists (and other people) can choose to put material in the public domain,
-which is often abbreviated "PD".
-In this case,
-anyone can do anything they want with it,
-without needing to cite the original
-or restrict further re-use.
-The table below shows how the six Creative Commons licenses and PD relate to one another:
+------------------
 
-<!--- Replace the caption with colspan when it was supported by pandoc:
-https://github.com/jgm/pandoc/issues/1340 -->
-<table border="1">
-  <caption>Licenses that can be used for derivative work or adaptation</caption>
-  <tr>
-    <td>Original work</td> <td>by</td> <td>by-nc</td> <td>by-nc-nd</td> <td>by-nc-sa</td> <td>by-nd</td> <td>by-sa</td> <td>pd</td>
-  </tr>
-  <tr>
-    <td>by</td>       <td>X</td> <td>X</td> <td>X</td> <td>X</td> <td>X</td> <td>X</td> <td> </td>
-  </tr>
-  <tr>
-    <td>by-nc</td>    <td> </td> <td>X</td> <td>X</td> <td>X</td> <td> </td> <td> </td> <td> </td>
-  </tr>
-  <tr>
-    <td>by-nc-nd</td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td>
-  </tr>
-  <tr>
-    <td>by-nc-sa</td> <td> </td> <td> </td> <td> </td> <td>X</td> <td> </td> <td> </td> <td> </td>
-  </tr>
-  <tr>
-    <td>by-nd</td>    <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td>
-  </tr>
-  <tr>
-    <td>by-sa</td>    <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td>X</td> <td> </td>
-  </tr>
-  <tr>
-    <td>pd</td>       <td>X</td> <td>X</td> <td>X</td> <td>X</td> <td>X</td> <td>X</td> <td>X</td>
-  </tr>
-</table>
-
-[Software Carpentry](http://software-carpentry.org/license.html)
-uses CC-BY for its lessons and the MIT License for its code
-in order to encourage the widest possible re-use.
-Again,
-the most important thing is for the `LICENSE` file in the root directory of your project
-to state clearly what your license is.
-You may also want to include a file called `CITATION` or `CITATION.txt`
-that describes how to reference your project;
+[Software Carpentry](http://software-carpentry.org/license.html) uses
+CC-BY for its lessons and the MIT License for its code in order to
+encourage the widest possible re-use.  Again, the most important thing
+is for the `LICENSE` file in the root directory of your project to state
+clearly what your license is.  You may also want to include a file called
+`CITATION` or `CITATION.txt` that describes how to reference your project;
 the one for Software Carpentry states:
 
 <div class="file" markdown="1">
@@ -201,74 +99,187 @@ Greg Wilson: "Software Carpentry: Lessons Learned". arXiv:1307.5448, July 2013.
 ~~~
 </div>
 
-### Hosting
+### Hosting & Distributing Software ###
 
-The second big question for groups that want to open up their work
-is where to host their code and data.
-One option is for the lab, the department, or the university to provide a server,
-manage accounts and backups,
-and so on.
-The main benefit of this is that it clarifies who owns what,
-which is particularly important if any of the material is sensitive
-(i.e.,
-relates to experiments involving human subjects
-or may be used in a patent application).
-The main drawbacks are the cost of providing the service and its longevity:
-a scientist who has spent ten years collecting data
-would like to be sure that data will still be available ten years from now,
-but that's well beyond the lifespan of most of the grants that fund academic infrastructure.
+Open Source research software is best distributed through the use of a
+dedicated code repository or academic data archive.  Most (but not all)
+code repositories are built around the use of a version control system
+such as `git` or `subversion`, which creates some barrier to entry
+(fortunately you've just completed the `git` SWC lessons!)
 
-Another option is to purchase a domain
-and pay an Internet service provider (ISP) to host it.
-This gives the individual or group more control,
-and sidesteps problems that can arise when moving from one institution to another,
-but requires more time and effort to set up than either
-the option above or the option below.
+Public hosting services such as [GitHub](http://github.com),
+[BitBucket](http://bitbucket.org), [Google Code](http://code.google.com),
+or [SourceForge](http://sourceforge.net) are feature rich,
+user friendly and widely adopted options. All provide free
+hosting for open-source projects (and usually a limited number
+of free private projects as well).  See other recommendations
+for code repositories from the [Journal for Open Research
+Software](http://openresearchsoftware.metajnl.com/about/editorialPolicies#custom-0).
 
-The third option is to use a public hosting service like [GitHub](http://github.com),
-[BitBucket](http://bitbucket.org),
-[Google Code](http://code.google.com),
-or [SourceForge](http://sourceforge.net).
-All of these allow people to create repositories through a web interface,
-and also provide mailing lists,
-ways to keep track of who's doing what,
-and so on.
-They all benefit from economies of scale and network effects:
-it's easier to run one large service well
-than to run many smaller services to the same standard,
-and it's also easier for people to collaborate if they're using the same service,
-not least because it gives them fewer passwords to remember.
+Researchers may also choose to distribute software through dedicated
+language repositories such as CRAN (R). These language-specific
+repositories host only code that is ready for use and will usually make
+it easier for other users to install your software. These repositories
+also archive versions as they are released, but typically do not
+require using version management software. These repositories often
+have stricter criteria than the public hosting services described
+above, so be sure to consult the appropriate policies (e.g. [CRAN
+policies](cran.r-project.org/web/packages/policies.html)) before
+proceeding.  Many projects host their daily development on public hosting
+services while also distributing releases through a system such as this.
 
-However,
-all of these services place some constraints on people's work.
-In particular,
-most give users a choice:
-if they're willing to share their work with others,
-it will be hosted for free,
-but if they want privacy,
-they may have to pay.
-Sharing might seem like the only valid choice for science,
-but many institutions may not allow researchers to do this,
-either because they want to protect future patent applications
-or simply because what's new is often also frightening.
+
+It has been common practice for researchers to host software they develop
+on computer servers managed by their lab, department, or institution.
+Experience has shown that software and other resources hosted in this
+fashion has a much higher rate of link rot, where changes to websites,
+changing jobs, or other factors make it unlikely that these resources are
+still available years later.  These options also typically lack many of
+the features dedicated software repositories provide. Online supplement
+sections of journals are also not ideal mechanisms to distribute
+software, for many of the same reasons. It is best to simply link from
+your publication or personal website to the permanent software repository.
+
+make it easy to run a Github-like environment on a private server but
+may not be as well suited for long-term hosting as the larger dedicated
+hosting services.  -->
+
+Some scientific data archives will also host software.  Because
+these archives are backed by long-term redundant archiving
+(e.g. [CLOCKSS](http://clockss.org/)) and permanent identifiers
+(e.g. [DOIs](http://en.wikipedia.org/wiki/Digital_object_identifier)),
+they offer a more long-term archival storage solution (see Archiving
+Data, below).  The data repositories [zenodo](https://zenodo.org) and
+[figshare](http://figshare.com) currently have automated [integration
+with Github](http://collaborate.mozillascience.org/projects/codemeta)
+to facilitate this.
+
+
+## Open Data ##
+
+Learners should know how to publish open data effectively, whether
+or not they choose to do so in any particular circumstance. -->
+
+### Licensing Data ###
+
+Unlike software or other creative works, data are considered facts and
+generally not subject to copyright.  Many academic data repositories
+underscore this by requiring a public-domain declaration such as
+[Creative Commons Zero](https://creativecommons.org/about/cc0) (or CC0,
+not technically a license) for all data that they host (see [Panton
+Principles](http://pantonprinciples.org) of open data.) Even when placing
+data or other work in the public domain it is preferable to use a standard
+declaration such as CC0, since writing an internationally valid legal
+document is a task best left to the relevant experts. 
+
+Data formats, descriptions, or databases are considered creative works
+and are frequently accompanied by a copyright statement. Creative Commons
+provides a suite of licenses to waive various aspects of copyright in
+order to facilitate open reuse.  The most permissive of these is the
+_Attribution_ or CC-BY license. Alternatives may restrict commercial use
+(NC: non-commercial), restrict derivative products (ND: no-derivatives),
+or include the copyleft clause (SA: share-alike) similar to the GPL. Different
+licenses offer any combination of the latter three clauses on top of the 
+default BY clause.
+
+It is worth noting that only the CC-BY license
+is considered compatible with the widely recognized Budapest Open Access
+Initiative [definition](en.wikipedia.org/wiki/Budapest_Open_Access_Initiative).
+Several studies have shown that researchers choose the more restrictive
+variations by default and are unaware of the limitations this may
+place on uses they condone, such as education.
+
+
+### Archiving & Distributing Data ###
+
+Many journals now require authors to deposit all data supporting published
+results into a scientific data repository. As with software repositories,
+data repositories are better suited for sharing data than hosting on one's own
+website or in a journal's supplemental online materials.
+
+Scientific data repositories may be divided into two types: those
+accepting only published data accompanying a scientific article
+(e.g. [Dryad](http://datadryad.org), and those that also accept data
+that is not (or not yet) associated with any particular publication
+([Zenodo](http://zenodo.org), [figshare](http://figshare.com)). Some
+repositories focus on narrow subject areas or data types, while others
+are more general purpose.  Consult the policies of your journals,
+discipline-specific literature on data archiving, and the policies of the
+data archives themselves in finding a good match. The [recommendations
+from _Nature_](http://www.nature.com/sdata/data-policies/repositories)
+are one good place to start.
+
+
+Data repositories provide many advantages, including: 
+
+
+- **Permanent identifiers:** Though widely touted as making your data
+'citable', permanent identifiers are designed to avoid link rot that
+results from changing URLs (hence the name). The [Digital Object
+Identifier](http://en.wikipedia.org/wiki/Digital_object_identifier),
+or DOI is the best known because of its association with scientific
+publications.[^1]   An object with a DOI number can be found by entering
+the number into a central registry, [http://doi.org](http://doi.org),
+regardless of the URL address currently hosting it. Repositories must pay
+a small fee for each DOI. If a repository fails to update the records
+allowing the DOI to resolve to the correct resource, the DOI provider
+may refuse to sell them additional DOIs.
+
+- **Metadata & data discovery**: Data repositories collect basic metadata
+such as author and subject information. This facilitates search and
+discovery of relevant datasets. DOI-based repositories submit much
+of this information in a standardized format to the central registry
+at DataCite, which allows tools and researchers to search across all
+DataCite repositories at once.
+
+- **Data management** Data repositories are well equipped to
+provide redundant and reliable access to data over the long
+term. Data can be updated or corrected while maintaining links
+to the original versions. Looks great on [Data management
+plans](http://www.nsf.gov/eng/general/dmp.jsp).
+
+[^1]: Technically Data DOIs are different than scientific publication
+DOIs, in that the former are administered by DataCite and the latter by
+CrossRef, and as such include slightly different metadata and protocols.
+
+#### Special cases ####
+
+Data security concerns are not a good reason to be lazy about data archiving.
+Sensitive data (e.g. human experimental subjects) should always be
+dealt with as such, following appropriate anonymization and/or security
+protocols defined before the data is collected. Many repositories have
+explicit mechanisms in place to to handle sensitive data appropriately.
+Storing sensitive data on personal machines without clear security policies in 
+place may be inappropriate.
+
+Rapidly updated, streaming, or very large datasets (usually >2-10
+GB) still pose challenges for most general purpose scientific data
+repositories.
 
 <div class="keypoints" markdown="1">
 
-#### Key Points
-*   Open scientific work is more useful and more highly cited than closed.
-*   People who incorporate GPL'd software into theirs must make theirs open;
-    most other open licenses do not require this.
-*   The Creative Commons family of licenses allow people to mix and match
-    requirements and restrictions on attribution,
-    creation of derivative works,
-    further sharing,
-    and commercialization.
-*   People who are not lawyers should not try to write licenses from scratch.
-*   Projects can be hosted on university servers,
-    on personal domains,
-    or on public forges.
-*   Rules regarding intellectual property and storage of sensitive information apply
-    no matter where code and data are hosted.
+## Key Points ##
+
+* Open source licenses include both permissive (BSD, MIT) and copyleft
+(GPL) style licenses. Anyone distributing software with code taken from
+or modified from code under a GPL style-license must make their derivative
+source code available under the same terms.
+
+* Open data should be placed in the public domain using the CC0
+declaration (copyright not being applicable to facts).
+
+* Dedicated software repositories such as [GitHub](http://github.com),
+[BitBucket](http://bitbucket.org), [Google Code](http://code.google.com),
+or [SourceForge](http://sourceforge.net) are preferable to self hosting software.
+
+- Other creative works, including data descriptions and publications, can
+use Creative Commons licenses to facilitate reuse. The most permissive
+license, CC-BY, corresponds with community definitions of Open Access,
+while others are more restrictive.
+
+- Dedicated scientific data repositories, such as those integrated with
+DataCite (e.g. any that provide DOIs), are the preferable mechanism for
+data archiving.
 
 </div>
 
