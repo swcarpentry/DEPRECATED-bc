@@ -15,8 +15,7 @@ Regular expressions are implemented using [finite state
 machines](glossary.html#finite-state-machine). Here's a very simple FSM
 that matches exactly one lower case 'a':
 
-![FSM matching a single lower case
-'a'](../img/regexp/fsm-single-lower-case-a.png)
+<img src="img/fsm-single-lower-case-a.svg" alt="FSM matching a single lower case 'a'" />
 
 Matching starts with the incoming arrow on the left, which takes us to
 the first state in our finite state machine. The only way to get from
@@ -30,8 +29,7 @@ Now that we have an FSM that matches the very simple regular expression
 Here's a finite state machine that matches one or more occurrences of
 the letter 'a':
 
-![FSM matching one or more letter
-'a'](../img/regexp/fsm-one-or-more-a.png)
+<img src="img/fsm-one-or-more-a.svg" alt="FSM matching one or more letter 'a'" />
 
 The first arc labelled 'a' gets us from the initial state to an end
 state, but we don't have to stop there: the curved arc at the top allows
@@ -44,8 +42,7 @@ others is the same as one or more occurences of 'a'.
 
 Here's another FSM that matches against the letter 'a' or nothing:
 
-![FSM matching one letter 'a' or
-nothing](../img/regexp/fsm-one-a-or-nothing.png)
+<img src="img/fsm-one-a-or-nothing.svg" alt="FSM matching one letter 'a' or nothing" />
 
 The top arc isn't marked, so that transition is free: we can go from the
 first state to the second state without consuming any of our input. This
@@ -56,22 +53,20 @@ This regular expression looks like the one that matches 'a' one or more
 times, except there is an extra arc to get us from the first state to
 the second without consuming any input:
 
-![FSM matching zero or more letter
-'a'](../img/regexp/fsm-zero-or-more-a.png)
+<img src="img/fsm-zero-or-more-a.svg" alt="FSM matching zero or more letter 'a'" />
 
 It is therefore equivalent to the pattern `'a*'`, i.e., it matches
 nothing at all (taking that free transition from the first state to the
 second) or one or more occurrences of 'a'. We can simplify this
 considerably like this:
 
-![FSM matching zero or more letter
-'a'](../img/regexp/fsm-simpler-zero-or-more-a.png)
+<img src="img/fsm-simpler-zero-or-more-a.svg" alt="FSM matching zero or more letter 'a'" />
 
 The simple FSMs we have seen so far are enough to implement most of the
 regular expressions in the previous sections. For example, look at this
 finite state machine:
 
-![A more complex FSM](../img/regexp/fsm-complex.png)
+<img src="img/fsm-complex.svg" alt="A more complex FSM" />
 
 We can either take the top route or the bottom. The top route is `a+`;
 the bottom route is a 'b', followed by either a 'c' or a 'd', so this
