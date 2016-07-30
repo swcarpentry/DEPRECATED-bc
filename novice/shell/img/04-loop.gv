@@ -1,0 +1,10 @@
+graph G {
+  rankdir=LR;
+  subgraph cluster_0 {
+    color=blue;
+    for -- variable -- in -- values -- do -- body -- done;
+    variable [shape=square];
+    values [shape=square];
+    body [shape=square, label="echo $path;\ncp $path backup-$path;\n..."];
+  }
+}

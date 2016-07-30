@@ -1,0 +1,30 @@
+graph G {
+  label="path wildcards";
+  subgraph cluster_0 {
+    label="primitives";
+    "a";
+    "*";
+    "?";
+    "[ab]";
+  }
+  subgraph cluster_1 {
+    label="examples";
+    "???.txt";
+    "*.txt";
+    "ar[cr]*";
+
+    "arc.txt" [shape=square];
+    "are.txt" [shape=square];
+    "arrow.txt" [shape=square];
+    "arc.png" [shape=square];
+
+    "???.txt" -- "arc.txt";
+    "???.txt" -- "are.txt";
+    "*.txt" -- "arc.txt";
+    "*.txt" -- "are.txt";
+    "*.txt" -- "arrow.txt";
+    "ar[cr]*" -- "arc.txt";
+    "ar[cr]*" -- "arrow.txt";
+    "ar[cr]*" -- "arc.png";
+  }
+}

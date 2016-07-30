@@ -1,0 +1,9 @@
+digraph G {
+  local [shape=rect, label="local repository"];
+  otherlocal [shape=rect, label="collaborator's local repository"];
+  remote [shape=rect, label="remote repository"];
+  remote -> local [label="clone"];
+  remote -> local [label="pull"];
+  local -> remote [label="push"];
+  remote -> otherlocal [label="clone"];
+}

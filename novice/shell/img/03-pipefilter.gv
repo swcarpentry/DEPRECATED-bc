@@ -1,0 +1,22 @@
+graph G {
+  label = "small pieces, loosely joined:\n head -5 < animals.txt | tail -3 | sort -r > final.txt";
+  subgraph cluster_0 {
+    label = "filters";
+    color=blue;
+    wc;
+    sort;
+    head;
+  }
+  subgraph cluster_1 {
+    label = "redirection";
+    color=green;
+    to [label="to > file"];
+    from [label="from < file"];
+    pipe [label="pipe | filter | filter"];
+  }
+  stdin -- from;
+  stdout -- to;
+  stdin -- pipe -- stdout;
+  keyboard -- stdin [label="default"];
+  stdout -- screen [label="default"];
+}

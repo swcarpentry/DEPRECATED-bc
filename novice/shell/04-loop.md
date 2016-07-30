@@ -411,6 +411,12 @@ so she decides to get some coffee and catch up on her reading.
 
 </div>
 
+#### Concept Map
+
+<img src="img/04-loop.gv.svg" alt="Loop Concept Map" />
+
+#### Challenges
+
 <div class="challenge" markdown="1">
 Suppose that `ls` initially displays:
 

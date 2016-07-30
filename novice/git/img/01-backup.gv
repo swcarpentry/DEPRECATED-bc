@@ -1,0 +1,13 @@
+graph G {
+  repository [style=bold];
+  commit [style=bold];
+  git -- repository;
+  repository -- commit;
+  commit -- "commit message";
+  commit -- identifier;
+  repository -- "staging area" -- "working files";
+  repository -- log -- commit;
+  git -- "git diff";
+  git -- "git checkout";
+  repository -- ".gitignore";
+}

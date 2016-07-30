@@ -1,0 +1,9 @@
+graph G {
+  man;
+  subgraph cluster_1 {
+    label = "filters";
+    color = blue;
+    grep;
+  }
+  grep -- "$(...)" -- find;
+}

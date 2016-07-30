@@ -297,6 +297,12 @@ or find a way to divide the work up differently.
 
 </div>
 
+#### Concept Map
+
+<img src="img/03-conflict.gv.svg" alt="Conflict Concept Map" />
+
+#### Challenges
+
 <div class="challenge" markdown="1">
 Clone the repository created by your instructor.
 Add a new file to it,

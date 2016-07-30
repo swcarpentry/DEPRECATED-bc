@@ -1,0 +1,12 @@
+graph g{
+  filesystem -- directory;
+  filesystem -- file;
+  directory -- path;
+  file -- path;
+  directory -- root;
+  path -- absolute;
+  path -- relative;
+  absolute -- root;
+  relative -- "working directory";
+  directory -- "working directory";
+}
