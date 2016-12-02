@@ -24,6 +24,7 @@ title: Shell Reference
 *   `touch path` creates an empty file if it doesn't already exist.
 *   `wc` counts lines, words, and characters in its inputs.
 *   `whoami` shows the user's current identity.
+*   `nano` allows simple editing of text within files (use another program like Emacs or Vim for more complex work)
 
 #### Paths
 
@@ -36,7 +37,7 @@ title: Shell Reference
 
 #### Combining Commands
 
-*   `command > file` redirects a command's output to a file.
+*   `command > file` redirects a command's output to a file, `command < file` redirects input.
 *   `first | second` connects the output of the first command to the input of the second.
 *   A `for` loop repeats commands once for every thing in a list:
 
@@ -45,9 +46,17 @@ title: Shell Reference
             ...commands refering to $variable...
         done
 
+*   Use semicolons to group multi-line commands on the same line:
+
+	for variable in name_1 name_2 name_3; do; ...commands refering to $variable...; done
+
 *   Use `$name` to expand a variable (i.e., get its value).
-*   `history` displays recent commands, and `!number` to repeat a command by number.
 *   `bash filename` runs commands saved in `filename`.
 *   `$*` refers to all of a shell script's command-line parameters.
 *   `$1`, `$2`, etc., refer to specified command-line parameters.
 *   `$(command)` inserts a command's output in place.
+
+#### Shortcuts
+*   `history` displays recent commands, and `!number` to repeat a command by number.
+*   Use tab to automatically complete directory and file names.
+*   Use the up arrow to redisplay a previous command.
