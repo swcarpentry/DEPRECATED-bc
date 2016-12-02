@@ -78,6 +78,7 @@ then run a text editor called Nano to create a file called `draft.txt`:
 $ cd thesis
 $ nano draft.txt
 ~~~
+
 {:class="in"}
 
 > #### Which Editor?
