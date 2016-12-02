@@ -109,7 +109,7 @@ they're just displayed that way.
 
 #### Challenges
 
-1.  Write a query that selects distinct dates from the `Site` table.
+1.  Write a query that selects distinct sites from the `Visited` table.
 
 
 As we mentioned earlier,
@@ -154,7 +154,7 @@ select * from person order by ident desc;</code></pre>
 
 (And if we want to make it clear that we're sorting in ascending order,
 we can use `asc` instead of `desc`.)
-  
+
 We can also sort on several fields at once.
 For example,
 this query sorts results first in ascending order by `taken`,
