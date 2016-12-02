@@ -11,14 +11,6 @@ see [this wiki page](https://github.com/swcarpentry/bc/wiki/Configuration-Proble
 
 #### Teaching Notes
 
-*   For workshops that extend over more than two days
-    (e.g., four afternoons spread over two weeks),
-    it's a good idea to email the learners at the end of each day with a summary of what was taught
-    (with links to the relevant online notes).
-    This allows absent learners to catch up before the next session,
-    and is also a great opporunity to present the lessons of the day
-    in the context of the entire workshop.
-
 *   Point learners at [http://software-carpentry.org/v5/](http://software-carpentry.org/v5/),
     which is the permanent home of the current learning materials,
     and at [http://software-carpentry.org/v4/](http://software-carpentry.org/v4/),
@@ -109,7 +101,7 @@ see [this wiki page](https://github.com/swcarpentry/bc/wiki/Configuration-Proble
     it's a good idea to email the learners at the end of each day with a summary of what was taught
     (with links to the relevant online notes).
     Not only does this allow absent learners to catch up before the next session,
-    it's also a great opporunity to present the lessons of the day in the context of the entire workshop.
+    it's also a great opportunity to present the lessons of the day in the context of the entire workshop.
 
 *   The long-form notes are intended as a script for instructors
     and as self-study material for learners.

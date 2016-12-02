@@ -96,7 +96,7 @@ We can also combine tests, using `&&` (and) and `||` (or). `&&`
 is true if both tests are true:
 
 ~~~
-if ((i > 0) && (-1 > 0))
+if ((1 > 0) && (-1 > 0))
     disp('both parts are true');
 else
     disp('one part is not true');
@@ -240,11 +240,11 @@ disp(['sum of negative values: ', num2str(neg_total)]);
 ~~~
 {:class="in"}
 
-
 ~~~
 sum of positive values: 26
 sum of negative values: -6
 ~~~
+{:class="out"}
 
 We can even put one loop inside another:
 
@@ -403,7 +403,6 @@ function to make things easier:
 % make_heatmap.m
 
 function heatmap = make_heatmap(data, low_band, high_band)
-
     % Make a 3-colored heatmap from
     % a 2D array of data.
 
@@ -421,7 +420,6 @@ function heatmap = make_heatmap(data, low_band, high_band)
             end
         end
     end
-
 end
 ~~~
 
@@ -469,18 +467,38 @@ axis equal
 <img src="img/04-cond_4.png" style="height:350px">
 </div>
 
-<!-- FIXME: add a section on colormaps -->
-<!-- is this required? -->
-
 #### Challenges
 
 1. Why does the `make_heatmap` function return an array instead
 of displaying it immediately? Do you think this is a good
 design choice?
 
+<div class="keypoints" markdown="1">
+#### Key Points
+
+* Use `if condition` to start a conditional statement,
+`elseif condition` to provide additional tests, and
+`else` to provide a default. As with loops, end the
+conditional statement with the `end` keyword.
+
+* Use `==` to test for equality.
+
+* `X && Y` is true only if both X and Y are true.
+
+* `X || Y` is true if either X or Y is true.
+
+* Zero, the empty array, and the empty string are all
+considered false.
+
+* Nest loops to operate on multidimensional data.
+
+* Put code whose parameters change frequently in a function,
+then call it with different parameter values to
+customize its behaviour.
+
 ### Next Steps
 
-<!--FIXME: add next steps here-->
-
-Before we're ready to publish our `make_heatmap` function, we need
-to learn how to test whether our code is doing what we need it to do.
+Before we are ready to publish our `make_heatmap` function, we
+need to be sure of its correctness. To do that, we need to learn
+how to *test* our code, and that will be the subject of our
+next lesson.

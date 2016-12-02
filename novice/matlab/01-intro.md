@@ -6,8 +6,7 @@ title: Analyzing Patient Data
 
 
 
-We are studying inflammation in patients who have been given a new treatment for arthritis,
-and need to analyze the first dozen data sets.
+We are studying inflammation in patients who have been given a new treatment for arthritis, and need to analyze the first dozen data sets.
 The data sets are stored in
 [Comma Separated Values (CSV)](../../gloss.html#comma-separated-values) format:
 each row holds information for a single patient,
@@ -34,6 +33,7 @@ To do all that, we'll have to learn a little bit about programming.
 
 <div class="objectives" markdown="1">
 #### Objectives
+* Get to know the MATLAB environment.
 * Learn about MATLAB arrays.
 * Read tabular data from a file into a program.
 * Assign values to variables.
@@ -41,6 +41,18 @@ To do all that, we'll have to learn a little bit about programming.
 * Perform operations on arrays of data.
 * Display simple graphs.
 </div>
+
+### MATLAB GUI
+
+We have a dozen datasets that need analysis, stored as `.csv` files - but MATLAB doesn't know about these files yet. The first thing we need to do is set MATLAB's [working directory](../../gloss.html#current-working-directory) to the directory containing the files. To do this, we go to the `Home` tab, click on `Set Path`, and then on `Add with Subfolders...`. We navigate to the directory containing our files and add it to the path to tell MATLAB where to look for our files.
+
+Before we can start programming, we need to know a little about the MATLAB interface. 
+Using the default setup, the MATLAB desktop contains several important sections:
+
+* In the **Command Window** or shell we can run and debug our code. Everything that's typed into the command window is executed immediately.
+* Alternatively, we can open the **Editor**, write our code and run it all at once. The upside of this is that we can save our code and run it again in the same way at a later stage. 
+* **Search Documentation** on the top right of your screen lets you search for functions. Suggestions for functions that would do what you want to do will pop up. Clicking on them will open the documentation.
+
 
 ### Loading Data
 
@@ -50,6 +62,9 @@ and admittedly, something that we'd rather not spend a lot of time
 thinking about. Fortunately, MATLAB comes with a number of high-level
 tools to do these things
 efficiently, sparing us the grisly detail.
+
+If we know what our data looks like (in this case, we have comma-separated values) and we're unsure about what command we want to use, we can search the documentation. Type `read csv` into the documentation toolbar. MATLAB suggests using `csvread`.
+If we have a closer look at the documentation, MATLAB also tells us, which in- and output arguments this function has.
 
 To load the data from our CSV file into MATLAB, type following
 command into the MATLAB shell, and press `Enter`:
@@ -240,6 +255,9 @@ weight_kg
 
 ~~~
 {:class="out"}
+
+Alternatively, we can look at the **Workspace**. The workspace contains all variable names and assigned values that we currently work with. As long as they pop up in the workspace, they are universally available, which is why it's good to keep it clean to not accidentally overwriting a variable of function that you later use. It can be cleaned up typing `clear all`.
+
 
 #### Challenges
 

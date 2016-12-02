@@ -1,6 +1,17 @@
 Software Carpentry Workshops
 ============================
 
+> **Note**
+>
+> We are currently reorganizing our repositories.
+> We hope to complete work by the end of November 2014,
+> but in the interim:
+>
+> 1. Please check with us before creating pull requests against this repository ---
+>    we may point you at a new one.
+> 2. If you *do* create pull requests against this repository,
+>    please use the `gh-pages` branch rather than the `master` branch.
+
 The `bc` repository is the starting point for creating your own workshop website:
 it contains a template for your workshop's home page,
 and also hosts the shared lesson materials we have developed.
@@ -484,7 +495,7 @@ FAQ
 *   *Where can I get help?*
     <br/>
     Mail us at [admin@software-carpentry.org](mailto:admin@software-carpentry.org),
-    or join our [discussion list](http://software-carpentry.org/contrib/discuss.html)
+    or join our [discussion list](http://lists.software-carpentry.org/mailman/listinfo/discuss_lists.software-carpentry.org)
     and ask for help there.
 
 *   *Why does the workshop repository have to be created from scratch? Why not fork `bc` on GitHub?*
@@ -507,6 +518,20 @@ FAQ
     On a MacBook Air with pandoc 1.11.1 and Jekyll 1.3.0,
     making the site from scratch takes approximately 24 seconds,
     half of which is spent converting IPython Notebooks.
+
+*   *What do I do if I see a `TypeError` when I run `make site`?*
+    <br/>
+    The error message may look something like this:
+
+    ~~~
+    /usr/lib/ruby/1.9.1/time.rb:265:in `_parse': can't convert nil into String (TypeError)
+    ~~~
+        
+    This is a problem with using an [old version of Jekyll](https://github.com/swcarpentry/bc/issues/848).  For example, the Ubuntu Jekyll package is old.  This can be resolved by uninstalling Jekyll and using Ruby (assuming it is installed) to install the latest Jekyll:
+
+    ~~~
+    $ gem install jekyll
+    ~~~
 
 *   *What do I do if I see a `invalid byte sequence in ...` error when I run `make check`?*
     <br/>

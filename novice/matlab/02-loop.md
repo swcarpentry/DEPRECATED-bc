@@ -132,6 +132,12 @@ print -dpng "average.png"
 ~~~
 {:class="in"}
 
+You might have noticed that we described what we want 
+our code to do using the `%`-sign.
+This is another plus of writing scripts: you can comment
+your code to make it easier to understand when you come
+back to it after a while. 
+
 Let's extend our `analyze` script with commands to
 create and save plots:
 
@@ -158,7 +164,7 @@ subplot(1, 3, 3);
 plot(min(patient_data, [], 1));
 ylabel('min')
 
-% save plot to disk as svg image:
+% save plot to disk as png image:
 print -dpng "patient_data-01.png"
 ~~~
 
@@ -173,7 +179,6 @@ sequences in MATLAB:
 4:10
 ~~~
 {:class="in"}
-
 ~~~
 ans =
 
@@ -194,7 +199,6 @@ ans =
 
     2.5000    2.7500    3.0000    3.2500    3.5000    3.7500    4.0000    4.2500
 
- Columns 9 through 11:
 
     4.5000    4.7500    5.0000
 
@@ -246,7 +250,7 @@ it produces an error, because we're asking for characters
 that don't exist.
 
 ~~~
-word = 'tin'
+word = 'tin';
 
 disp(word(1));
 disp(word(2));
@@ -264,6 +268,8 @@ error: A(I): index out of bounds; value 4 out of bound 3
 There's a better approach:
 
 ~~~
+word = 'lead';
+
 for letter = 1:4
     disp(word(letter))
 end
@@ -279,8 +285,8 @@ d
 {:class="out"}
 
 This improved version uses a [for loop](../../gloss.html#for-loop) to
-repeat an operation---in this case, printing---once for each element in
-an array.
+repeat an operation---in this case, printing to the screen---once for 
+each element in an array.
 
 The general form of a for loop is:
 
@@ -337,7 +343,7 @@ Fortunately, MATLAB provides us with a convenient function to
 write a better loop:
 
 ~~~
-word = 'aluminium'
+word = 'aluminium';
 
 for letter = 1:length(word)
     disp(word(letter));
@@ -358,7 +364,7 @@ m
 ~~~
 {:class="out"}
 
-This is much more robust code, as it can deal indentically with
+This is much more robust code, as it can deal identically with
 words of arbitrary length. Here's another loop that repeatedly
 updates the variable `len`:
 
@@ -474,8 +480,8 @@ Let's write a loop that tries to print the names of each one of
 our files:
 
 ~~~
-for i = 1:12
-    file_name = sprintf('inflammation-%d.csv', i);
+for idx = 1:12
+    file_name = sprintf('inflammation-%d.csv', idx);
     disp(file_name);
 end
 ~~~
@@ -509,7 +515,7 @@ loop, `i` starts by referring to
 the value 1. So, when MATLAB executes the command
 
 ~~~
-file_name = sprintf('inflammation-%d.csv', i);
+file_name = sprintf('inflammation-%d.csv', idx);
 ~~~
 
 it substitutes the `%d` in the template `inflammation-%d.csv`, with the
@@ -525,8 +531,8 @@ named `inflammation-01.csv`, `inflammation-02.csv`, etc. To get it
 right, we have to modify our template:
 
 ~~~
-for i = 1:12
-    file_name = sprintf('inflammation-%02d.csv', i);
+for idx = 1:12
+    file_name = sprintf('inflammation-%02d.csv', idx);
     disp(file_name);
 end
 ~~~
@@ -558,11 +564,11 @@ We're now ready to modify `analyze.m` to process multiple data files:
 ~~~
 % script analyze.m
 
-for i = 1:3
+for idx = 1:3
 
     % Generate strings for file and image names:
-    file_name = sprintf('inflammation-%02d.csv', i);
-    img_name = sprintf ('patient_data-%02d.png', i);
+    file_name = sprintf('inflammation-%02d.csv', idx);
+    img_name = sprintf ('patient_data-%02d.png', idx);
 
     patient_data = csvread(file_name);
     ave_inflammation = mean(patient_data, 1);

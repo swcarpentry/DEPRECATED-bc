@@ -4,7 +4,7 @@ root: ../..
 ---
 
 ```{r, include = FALSE}
-source("chunk_options.R")
+source("chunk-options.R")
 ```
 
 # Some best practices for using R and designing programs

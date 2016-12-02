@@ -4,7 +4,7 @@ root: ../..
 ---
 
 ```{r, include = FALSE}
-source("chunk_options.R")
+source("chunk-options.R")
 ```
 
 # Making Choices
@@ -68,7 +68,7 @@ Lets try to index using __logical vectors__. Here we use a set a true/false stat
 
 ```{r}
 grid3 <- block_grid(5, type = "vector")
-grid3[c(T, F, T, F, T)] = "darkred"
+grid3[c(TRUE, FALSE, TRUE, FALSE, TRUE)] <- "darkred"
 grid3
 ```
 
@@ -447,7 +447,8 @@ h
 We'll probably want to experiment a bit more before publishing, but writing a function has made experimenting easy. We can make it even easier by re-defining our function one more time to give the parameters default values. While we're at it, let's put the low and high bands at the front, since they're more likely to change than our color choices:
                         
 ```{r}
-make_heatmap <- function(values, low_band=0.5, high_band=1.5, low_color="gray60", mid_color="chartreuse", high_color="darkgreen") {
+make_heatmap <- function(values, low_band=0.5, high_band=1.5,
+                         low_color="gray60", mid_color="chartreuse", high_color="darkgreen") {
     height <- nrow(values)
 	width  <- ncol(values)
 	result <- block_grid(height, width, type="matrix")

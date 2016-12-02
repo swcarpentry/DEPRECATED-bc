@@ -4,7 +4,7 @@ root: ../..
 ---
 
 ```{r, include = FALSE}
-source("chunk_options.R")
+source("chunk-options.R")
 opts_chunk$set(fig.path = "figure/02-func-R-")
 ```
 

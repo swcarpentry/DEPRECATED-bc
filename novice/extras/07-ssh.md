@@ -6,8 +6,8 @@ title: Working Remotely
 <div class="objectives" markdown="1">
 
 #### Objectives
-*   Explain what is SSH
-*   Explain what an SSH key is
+*   Learn SSH and SCP to work remotely
+*   Learn what an SSH key is
 *   Generate your own SSH key pair
 *   Add your SSH key to an remote server
 *   Learn how to use your SSH key
@@ -171,7 +171,7 @@ Instead of logging in and then typing `ls`,
 we could do this:
 
 ~~~
-$ ssh vlad@backupserver "ls results"
+$ ssh vlad@backupserver "ls results*"
 Password: ********
 ~~~
 {:class="in"}

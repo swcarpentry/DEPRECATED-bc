@@ -1,0 +1,167 @@
+---
+layout: slides
+title: "Software Carpentry: Version Control with Git"
+root: ..
+datetime: August 2014
+website: http://software-carpentry.org
+---
+<!-- Working on the CSS?
++++ b/reveal.js/css/theme/swc_slides.css
+@@ -234,6 +234,8 @@ xmp {
+   bottom:0;
+   background: #d6d6d6;
+   z-index:2;
++  margin-top: 20px;
++  top: 100px;
+ }
+ -->
+
+<section>
+  <h2>&nbsp;</h2>
+  <img src="{{page.root}}/img/software-carpentry-large.png" alt="Software Carpentry logo" />
+  <h1>Version Control with Git</h1>
+  <aside class="notes">
+    Over the next hour, we will introduce you to version control with Git.
+    Version control is:
+    <ol>
+        <li> A record of what you and your collaborators have done,
+        <li> A way to see what's changed, and
+        <li> A way to "blame" people for what they did.
+    </ol>
+    The sense of humor is also very corny...
+  </aside>
+</section>
+
+<section>
+  <h1>What It Is</h1>
+  <ul>
+    <li> A way to store and synchronize code (or any files).
+    <li class="fragment">
+        Documents collections of changes <em>upon your request</em>.
+    <li class="fragment">
+        Keeps your work safe and up-to-date <em>across machines</em>!
+  </ul>
+
+  <aside class="notes">
+      The important thing is the general concept of version control, but we are
+      using Git because it has become the standard among open-source developers,
+      and strong hosting options are available (GitHub and BitBucket).
+  </aside>
+</section>
+
+<section>
+  <h1>A common approach...</h1>
+  <img src='phd101212s-versions.gif'
+       longdesc="used with permission (obtained by @davclark), from http://www.phdcomics.com/comics/archive/phd101212s.gif">
+  <aside class="notes">
+      Currently, the image doesn't always format properly. Sorry about that.
+      @gvwilson said he may be able to fix it?
+  </aside>
+</section>
+
+<section>
+  <h1>Other problems we can solve</h1>
+  <ul>
+    <li> Imagine multiple copies of important code and data across machines:
+    <ul>
+        <li> Which copy has “the fix”
+        <li> Sharing with yourself can be hard, but 
+        <li> sharing with others is downright treacherous
+    </ul>
+
+    <li class="fragment"> What if there’s a conflict?
+</section>
+
+<section>
+  <h1>Perfectly reasonable (but actually harder)</h1>
+    <p style="text-align: center">
+        Cloud storage<br>
+        +<br>
+        well-considered naming schemes<br>
+        =<br>
+        Maybe good enough?
+    </p>
+    <p class="fragment" style="text-align: center">
+        How do you manage files now?<br>
+        NB: you are still getting work done, right?
+    </p>
+  <aside class="notes">
+      Have a serious, brief discussion with students. Some of them will be using
+      good practices. Every time someone mentions something useful, explain how
+      Git ensures or automates it.
+  </aside>
+</section>
+
+<section>
+  <h1>Why Git?</h1>
+  <img src='visual-git-basic-usage.svg'>
+  <small>
+    From <a href="http://marklodato.github.io/visual-git-guide/">
+    http://marklodato.github.io/visual-git-guide/</a>, licensed under a
+    <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">Creative
+    Commons Attribution-Noncommercial-Share Alike 3.0 United States License</a>.
+  </small>
+  <aside class="notes">
+      This provides the highest level overview of the structure of Git on one
+      machine.
+  </aside>
+</section>
+
+<section>
+    <h1>Git solves a lot of problems at once</h1>
+    <ul>
+      <li> A record of what you and your collaborators have done
+      <li class="fragment"> A way to see what’s changed
+      <li class="fragment"> A way to “blame” people for what they did
+    </ul>
+    <aside class="notes">
+        Note the odd humor again in "blame"
+    </aside>
+</section>
+
+<section>
+  <h1>Informative commit messages</h1>
+  <img src='git_commit.png'>
+  <small>
+    From <a href="http://xkcd.com/1296/">http://xkcd.com/1296/</a>, licensed
+    under a <a href="http://creativecommons.org/licenses/by-nc/2.5/">Creative
+    Commons Attribution-NonCommercial 2.5 License</a>
+  </small>
+  <aside class="notes">
+      There are two points here: if you don't explain what you're doing, you
+      won't know later. But also, don't let your desire not to write a commit
+      message stop you from making a snapshot of your work!
+  </aside>
+</section>
+
+<section>
+    <h1>Sharing history</h1>
+    <ul>
+      <li> The history is a permanent record of what happened (across copies of
+           the repository)
+      <li class="fragment"> Put another way: the history is what we copy when we
+           copy a repository
+  </ul>
+</section>
+
+
+<section>
+  <h1>Syllabus</h1>
+      <ol>
+        <li>Working directly with remote repositories
+        <li>Making "clones"
+        <li>Adding and committing your work
+        <li>Looking at history with diff and log
+        <li>Pushing your work back to a remote
+        <li>Pulling updates from a remote
+      </ol>
+  <aside class="notes">
+    We will only explore the basics in this lesson.  Our real goal is to teach
+    you how version control works and how best to use it.  While many of our
+    images were from web comics, one was from a very useful guide:
+
+        http://marklodato.github.io/visual-git-guide/
+
+    which is good both as a tutorial and as a reference.
+  </aside>
+</section>

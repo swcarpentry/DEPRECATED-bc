@@ -1,6 +1,17 @@
 Contributing New Material
 =========================
 
+> **Note**
+>
+> We are currently reorganizing our repositories.
+> We hope to complete work by the end of November 2014,
+> but in the interim:
+>
+> 1. Please check with us before creating pull requests against this repository ---
+>    we may point you at a new one.
+> 2. If you *do* create pull requests against this repository,
+>    please use the `gh-pages` branch rather than the `master` branch.
+
 Software Carpentry is an open source project,
 and we welcome contributions of all kinds:
 new and improved lessons,
@@ -63,7 +74,7 @@ please mail us at
 Given a choice between you creating content or wrestling with Git,
 we'd rather have you doing the former.
 
-The GitHub workflow looks like this:
+Our GitHub workflow looks like this:
 
 1.  Fork the `swcarpentry/bc` repository on GitHub.
 
@@ -77,6 +88,10 @@ The GitHub workflow looks like this:
 4.  Make your changes, commit them, and push them to your repository on GitHub.
 
 5.  Send a pull request to the `gh-pages` branch of `[swcarpentry/bc](http://github.com/swcarpentry/bc)`.
+
+**Note**: as noted at the top of this page,
+please create pull requests against the `gh-pages` branch
+rather than the `master` branch.
 
 If it is easier for you to send them to us some other way,
 please mail us at
@@ -204,7 +219,7 @@ FAQ
 *   *Where can I get help?*
     Mail us at [admin@software-carpentry.org](mailto:admin@software-carpentry.org),
     come chat with us on [our IRC channel](irc://moznet/sciencelab),
-    or join our [discussion list](http://software-carpentry.org/pages/discuss.html)
+    or join our [discussion list](http://lists.software-carpentry.org/mailman/listinfo/discuss_lists.software-carpentry.org)
     and ask for help there.
 
 *   *Is there a list of open issues to tackle?*
