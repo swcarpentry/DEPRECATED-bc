@@ -229,33 +229,23 @@ The third option is to use a public hosting service like [GitHub](http://github.
 [BitBucket](http://bitbucket.org),
 [Google Code](http://code.google.com),
 or [SourceForge](http://sourceforge.net).
-All of these allow people to create repositories through a web interface,
-and also provide mailing lists,
-ways to keep track of who's doing what,
-and so on.
+Each of these services have a web interface that allows people to create, view, and review their code repositories,
+as well as issue tracking, wiki pages, email notifications, and other ways to communicate with collaborators, users, and others who have access to the repository.
 They all benefit from economies of scale and network effects:
 it's easier to run one large service well
 than to run many smaller services to the same standard,
-and it's also easier for people to collaborate if they're using the same service,
-not least because it gives them fewer passwords to remember.
+and it's also easier for people to collaborate if the repository is easier to find,
+especially if they are already using the same service.
 
-However,
-all of these services place some constraints on people's work.
-In particular,
-most give users a choice:
-if they're willing to share their work with others,
-it will be hosted for free,
-but if they want privacy,
-they may have to pay.
-Sharing might seem like the only valid choice for science,
-but many institutions may not allow researchers to do this,
-either because they want to protect future patent applications
-or simply because what's new is often also frightening.
+Most of these services are free for public repositories, but put limitations on private repositories; however it is worth noting that many web-based software services and other software provide more services for free or reduced cost for projects that are academic, open source, and / or small.
+Sharing might appear to be the preferred choice for publicly funded software,
+but some institutions may place restrictions on making code public,
+often with the intent of protecting patentable intellectual property.
 
 <div class="keypoints" markdown="1">
 
 #### Key Points
-*   Open scientific work is more useful and more highly cited than closed.
+*   Making data, code, and publications open access makes it more useful, increases ciations, and opens opportunities for collaboration.
 *   People who incorporate GPL'd software into theirs must make theirs open;
     most other open licenses do not require this.
 *   The Creative Commons family of licenses allow people to mix and match
