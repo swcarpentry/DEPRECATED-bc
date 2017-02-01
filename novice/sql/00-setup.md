@@ -91,7 +91,7 @@ Enter SQL statements terminated with a &#34;;&#34;
 sqlite&gt;  </code></pre>
 
 
-Let us check the list the names and files of attached databases with the command ".databases", as shown in the following output:
+Let us check the list of names and files of attached databases with the command ".databases", as shown in the following output:
 
 
 <pre class="in"><code>sqlite&gt; .databases

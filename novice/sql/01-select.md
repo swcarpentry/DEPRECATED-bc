@@ -27,7 +27,7 @@ Text files are easiest to create,
 and work well with version control,
 but then we would then have to build search and analysis tools ourselves.
 Spreadsheets are good for doing simple analysis,
-they don't handle large or complex data sets very well.
+but they don't handle large or complex data sets very well.
 We would therefore like to put this data in a database,
 and these lessons will show how to do that.
 

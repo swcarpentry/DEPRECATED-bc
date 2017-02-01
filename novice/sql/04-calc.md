@@ -158,8 +158,8 @@ Some major site identifiers are two letters long and some are three.
 The "in string" function `instr(X, Y)`
 returns the 1-based index of the first occurrence of string Y in string X,
 or 0 if Y does not exist in X.
-The substring function `substr(X, I)`
-returns the substring of X starting at index I.
+The substring function `substr(X, I, J)`
+returns the substring of X starting at index I and ending at index J.
 Use these two functions to produce a list of unique major site identifiers.
 (For this data,
 the list should contain only "DR" and "MSK").

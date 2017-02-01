@@ -9,7 +9,7 @@ root: ../..
 <div class="objectives" markdown="1">
 #### Objectives
 
-*   Write queries that creates tables.
+*   Write queries that create tables.
 *   Write queries to insert, modify, and delete records.
 </div>
 

@@ -105,15 +105,6 @@ even if they didn't appear to be adjacent in the database.
 Again,
 it's important to remember that rows aren't actually ordered:
 they're just displayed that way.
-
-
-#### Challenges
-
-1.  Write a query that selects distinct dates from the `Site` table.
-
-
-As we mentioned earlier,
-database records are not stored in any particular order.
 This means that query results aren't necessarily sorted,
 and even if they are,
 we often want to sort them in a different way,

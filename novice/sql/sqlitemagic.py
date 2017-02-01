@@ -17,6 +17,8 @@ Grace|Hopper
 # for the license.
 # Inspired by https://github.com/tkf/ipython-sqlitemagic.
 
+from __future__ import print_function
+
 import sqlite3
 from IPython.core.magic import Magics, magics_class, cell_magic
 from IPython.display import display, HTML
@@ -33,9 +35,9 @@ class SqliteMagic(Magics):
             cursor.execute(query)
             results = cursor.fetchall()
             display(HTML(self.tablify(results)))
-        except Exception, e:
+        except Exception as e:
             import sys
-            print >> sys.stderr, "exception", e
+            print("exception", e, file=sys.stderr)
         cursor.close()
         connection.close()
 
