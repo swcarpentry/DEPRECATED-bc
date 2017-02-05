@@ -553,6 +553,48 @@ Date:   Thu Aug 22 09:51:46 2013 -0400
 ~~~
 {:class="out"}
 
+> #### Log Options
+>
+> To avoid that `git log` cover all your terminal screen you can use the
+> `--oneline` option:
+>
+> ~~~
+> $ git log --oneline
+> ~~~
+> {:class="in"}
+> ~~~
+> * 005937f Thoughts about the climate
+> * 34961b1 Concerns about Mars's moons on my furry friend
+> * f22b25e Starting to think about Mars
+> ~~~
+> {:class="out"}
+>
+> You can also combine the `--oneline` options with others. One useful
+> combination is
+>
+> ~~~
+> $ git log --oneline --graph --all --decorate
+> ~~~
+> {:class="in"}
+> ~~~
+> * 005937f Thoughts about the climate (HEAD, master)
+> * 34961b1 Concerns about Mars's moons on my furry friend
+> * f22b25e Starting to think about Mars
+> ~~~
+> {:class="out"}
+>
+> You can also limit the number of commits to be printed:
+>
+> ~~~
+> $ git log --oneline --graph --all --decorate -2
+> ~~~
+> {:class="in"}
+> ~~~
+> * 005937f Thoughts about the climate (HEAD, master)
+> * 34961b1 Concerns about Mars's moons on my furry friend
+> ~~~
+> {:class="out"}
+
 To recap, when we want to add changes to our repository,
 we first need to add the changed files to the staging area
 (`git add`) and then commit the staged changes to the
