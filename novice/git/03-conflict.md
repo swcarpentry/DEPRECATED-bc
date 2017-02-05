@@ -284,7 +284,7 @@ is another reason users tend to divide their programs and papers into multiple f
 instead of storing everything in one large file.
 There's another benefit too:
 whenever there are repeated conflicts in a particular file,
-the version control system is essentially trying to tell its users
+the version control system is essentially telling its users
 that they ought to clarify who's responsible for what,
 or find a way to divide the work up differently.
 
@@ -310,4 +310,11 @@ then resolve it.
 What does Git do
 when there is a conflict in an image or some other non-textual file
 that is stored in version control?
+</div>
+
+<div class="challenge" markdown="1">
+What does Git do when three people make changes at the same time?
+How do you resolve conflicts in that situation? Have a third person
+make changes to your `mars.txt` file at the same time and try to
+incorporate everyone's changes into the final version.
 </div>
