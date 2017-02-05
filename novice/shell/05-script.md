@@ -6,6 +6,8 @@ title: Shell Scripts
 <div class="objectives" markdown="1">
 
 #### Objectives
+*   Introduce 2 ways to simplify complex commands
+*   Write a shell alias to run a command with complex switches
 *   Write a shell script that runs a command or series of commands for a fixed set of files.
 *   Run a shell script from the command line.
 *   Write a shell script that operates on a set of files defined by the user on the command line.
@@ -14,12 +16,97 @@ title: Shell Scripts
 </div>
 
 We are finally ready to see what makes the shell such a powerful programming environment.
-We are going to take the commands we repeat frequently and save them in files
-so that we can re-run all those operations again later by typing a single command.
+We are going to take the commands we repeat frequently and make them simpler to remember
+There are 2 ways to do do this, aliases and shell scripts.
 For historical reasons,
 a bunch of commands saved in a file is usually called a [shell script](../../gloss.html#shell-script),
 but make no mistake:
 these are actually small programs.
+
+## The alias command
+
+Lets start with the simple ls command:
+
+~~~
+$ ls .
+~~~
+{:class="in"}
+
+This lists the files and directories in the current folder.
+
+There are many switches to the `ls` commad which can be found by examining the man page.
+
+For example:
+
+~~~
+$ ls -Shl . |more
+~~~
+
+Gives full information on the files (`-l`), sorted by file size (`-S`), displayed in human readable format (`-h`). If the output is longer than one page the display is paused at the end of each page.
+
+This is a lot of typing and switches are often forgotten.
+
+<div style="page-break-after: always;"></div>
+
+#### Creating an alias saves typing and saves remembering all the switches we use often
+
+An alias is created using the shell command `alias`. The usage is simple:
+
+
+![image of alias command structure](img/alias-command-structure.svg?raw=true)
+
+<div style="page-break-after: always;"></div>
+
+For example:
+
+~~~
+$ alias ll='ls -Shl . |more'
+~~~
+{:class="in"}
+
+<!---
+Not sure this is the best example as the |more breaks ll from accepting more arguments. See sencond alias challenge. Possibly better to use a simpler command e.g. ls -Fa (which is also used in lesson 1 or 2)
+-->
+
+This will create an alias called `ll` which is a shortcut to the command above.
+
+#### Alias is very useful when we want to simplify writing commonly used commands. 
+
+Another example: we can create alias for previously used command `history | tail -5`:
+
+
+~~~
+$ alias lh='history | tail -5'
+~~~
+{:class="in"}
+
+From now if we put in terminal where `alias` was set `lh`, we can see last 5 commands we have used.
+
+<div class="keypoints" markdown="1">
+
+#### Key Points
+
+*	`alias` command with no parameters lists all aliases that are set.
+*	`alias` can be used only in terminal where it was set. 
+*	`alias` commands are limited to one line
+ 
+</div>
+
+<div class="challenge" markdown="1">
+
+Create shortcut `..` using `alias` to simplify going up one directory.
+
+</div>
+
+<div class="challenge" markdown="1">
+
+You entered the command `alias ll='ls -Shl |more'` in a terminal. The output from `ll ..` is not the parent directory, why not?
+
+</div>
+
+## Shell Scripts
+[shell scripts](../../gloss.html#shell-script) allow us to save more complicated command sequences than alias.
+
 
 Let's start by going back to `molecules/` and putting the following line in the file `middle.sh`:
 
@@ -379,6 +466,7 @@ she could modify her script to check for command-line parameters,
 and use `*[AB].txt` if none were provided.
 Of course, this introduces another tradeoff between flexibility and complexity.
 
+
 <div class="keypoints" markdown="1">
 
 #### Key Points
@@ -409,6 +497,7 @@ filenames as command-line parameters, and uses `cut`, `sort`, and
 `uniq` to print a list of the unique species appearing in each of
 those files separately.
 </div>
+
 
 <div class="challenge" markdown="1">
 Write a shell script called `longest.sh` that takes the name of a
