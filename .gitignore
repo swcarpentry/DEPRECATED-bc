@@ -6,3 +6,4 @@ _site
 book.md
 */*/*_files/*/*/*.text
 */*/*_files/*/*/*.html
+bootcamps_saved.yml
