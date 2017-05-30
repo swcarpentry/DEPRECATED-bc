@@ -1,14 +1,7 @@
 
-## ----, echo=FALSE, message=FALSE, eval=FALSE-----------------------------
-## # Set eval=TRUE to hide all results and figures.
-## # This sets defaults. Can change this manually in individual chunks.
-## # Must load knitr so opts_chunk is in search path.
-## library(knitr)
-## opts_chunk$set(results="hide", fig.show="hide", fig.keep="none")
-
-
 ## ----, echo=FALSE, message=FALSE, eval=TRUE------------------------------
 library(knitr)
+# opts_chunk$set(results="hide", fig.show="hide", fig.keep="none")
 opts_chunk$set(message=FALSE)
 
 
@@ -26,7 +19,7 @@ with(iris, plot(Sepal.Length, Petal.Length))
 ## install.packages("ggplot2")
 
 
-## ----loadggplot2, message=FALSE------------------------------------------
+## ----loadggplot2---------------------------------------------------------
 library(ggplot2)
 
 
@@ -72,22 +65,6 @@ qplot(carat, price, data = diamonds, facets = clarity ~ color, col = cut)
 ggplot(diamonds, aes(carat, price)) + geom_point()
 
 
-## ----gghexbin------------------------------------------------------------
-ggplot(diamonds, aes(carat, price)) + geom_hex()
-
-
-## ----gghexbin2-----------------------------------------------------------
-ggplot(diamonds, aes(carat, price)) + geom_point(alpha=1/5)
-
-
-## ----smoothgam-----------------------------------------------------------
-ggplot(diamonds, aes(carat, price)) + geom_point() + geom_smooth()
-
-
-## ----smoothlinear--------------------------------------------------------
-ggplot(diamonds, aes(carat, price)) + geom_point() + geom_smooth(method="lm")
-
-
 ## ----ggclarcol-----------------------------------------------------------
 # Using the qplot convenience function:
 # qplot(carat, price, data = diamonds, col = clarity) 
@@ -100,6 +77,77 @@ ggplot(diamonds, aes(carat, price, col=clarity)) + geom_point()
 # qplot(carat, price, data = diamonds, facets = clarity ~ color)   
 # Using ggplot:
 ggplot(diamonds, aes(carat, price)) + geom_point() + facet_grid(clarity ~ color)
+
+
+## ----ggalpha-------------------------------------------------------------
+ggplot(diamonds, aes(carat, price)) + geom_point(alpha=1/5)
+
+
+## ----gghexbin------------------------------------------------------------
+ggplot(diamonds, aes(carat, price)) + geom_hex()
+
+
+## ----density2d-----------------------------------------------------------
+ggplot(diamonds, aes(carat, price)) + stat_density2d()
+
+
+## ----stripplot-----------------------------------------------------------
+ggplot(iris, aes(Species, Sepal.Length)) + geom_point()
+
+
+## ----jitter--------------------------------------------------------------
+ggplot(iris, aes(Species, Sepal.Length)) + geom_jitter()
+ggplot(iris, aes(Species, Sepal.Length)) + geom_jitter(aes(shape=Species), size=3)
+ggplot(iris, aes(Species, Sepal.Length)) + geom_jitter(aes(shape=Species, colour=Species), size=3)
+
+
+## ----boxplot-------------------------------------------------------------
+ggplot(iris, aes(Species, Sepal.Length)) + geom_boxplot()
+
+
+## ----violinplot----------------------------------------------------------
+ggplot(iris, aes(Species, Sepal.Length)) + geom_violin()
+
+
+## ----violinpoints--------------------------------------------------------
+ggplot(iris, aes(Species, Sepal.Length)) + geom_violin(alpha=.5) + geom_jitter(aes(shape=Species, colour=Species), size=3)
+
+
+## ----irisloess-----------------------------------------------------------
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color=Species)) + geom_point() + geom_smooth()
+
+
+## ----irislm--------------------------------------------------------------
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color=Species)) + geom_point() + geom_smooth(method="lm")
+
+
+## ----irisfacet-----------------------------------------------------------
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color=Species)) + geom_point() + facet_wrap(~Species) + geom_smooth(method="lm")
+
+
+## ------------------------------------------------------------------------
+library(plyr)
+str(baseball)
+head(baseball)
+
+
+## ----hrpoints------------------------------------------------------------
+ggplot(baseball, aes(year, hr)) + geom_point()
+
+
+## ----baseballmean--------------------------------------------------------
+ggplot(baseball, aes(year, hr)) + stat_summary(fun.y=mean, geom="line")
+
+
+## ----baseballmeansd------------------------------------------------------
+mystats <- function(x) {
+  data.frame(ymin=mean(x)-sd(x), ymax=mean(x)+sd(x))
+}
+ggplot(baseball, aes(year, hr)) + stat_summary(fun.y=mean, geom="line") + stat_summary(fun.data="mystats", geom="ribbon", alpha=.2, fill="steelblue")
+
+
+## ----pricehisto----------------------------------------------------------
+ggplot(diamonds, aes(price)) + geom_histogram(binwidth=200)
 
 
 ## ----ggfillhisto---------------------------------------------------------
